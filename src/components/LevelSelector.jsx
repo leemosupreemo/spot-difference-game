@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Clock, Trophy, Play, CheckCircle, Sparkles } from 'lucide-react';
+import { Trophy, Play, CheckCircle, Sparkles } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function LevelSelector({
@@ -27,10 +27,6 @@ export default function LevelSelector({
           >
             <Sparkles size={16} /> Generate Procedural Stage
           </button>
-
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            {levels.length} Photo Stage Pairs Available
-          </span>
         </div>
       </div>
 
@@ -40,7 +36,7 @@ export default function LevelSelector({
         gap: '20px'
       }}>
         {levels.map((lvl) => {
-          const stats = levelStats[lvl.id] || { stars: 0, bestTime: null, completed: false };
+          const stats = levelStats[lvl.id] || { completed: false };
           const isSelected = lvl.id === currentLevelId;
 
           return (
@@ -92,34 +88,7 @@ export default function LevelSelector({
                 {lvl.title}
               </h3>
 
-              {lvl.difficultyMetric && (
-                <span style={{ fontSize: '0.7rem', color: 'var(--accent-gold)', display: 'block', marginBottom: '8px', fontFamily: 'var(--font-mono)' }}>
-                  Diff Area: {lvl.difficultyMetric}
-                </span>
-              )}
-
-              {/* Stats Bar */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                {/* Star rating */}
-                <div style={{ display: 'flex', gap: '3px' }}>
-                  {[1, 2, 3].map(starNum => (
-                    <Star
-                      key={starNum}
-                      size={16}
-                      className={starNum <= stats.stars ? 'star-icon' : 'star-icon empty'}
-                      fill={starNum <= stats.stars ? 'var(--accent-gold)' : 'none'}
-                    />
-                  ))}
-                </div>
-
-                {/* Best Time */}
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', fontFamily: 'var(--font-mono)' }}>
-                  <Clock size={13} color="var(--accent-cyan)" />
-                  {stats.bestTime ? `${(stats.bestTime / 1000).toFixed(2)}s` : '--'}
-                </div>
-              </div>
-
-              {/* Play / Completed Status */}
+              {/* Status */}
               <div style={{
                 marginTop: '12px',
                 display: 'flex',
