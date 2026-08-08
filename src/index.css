@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+:root {
+  --bg-dark: #090a10;
+  --bg-card: rgba(18, 22, 36, 0.75);
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --accent-cyan: #00f0ff;
+  --accent-pink: #ff007f;
+  --accent-gold: #ffb703;
+  --accent-green: #00ff87;
+  --text-main: #f0f4f8;
+  --text-muted: #94a3b8;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --font-main: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(255, 0, 127, 0.15) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(0, 240, 255, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(18, 9, 36, 0.8) 0px, transparent 100%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Glassmorphic Container Card */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
+}
+
+.glass-btn:active {
+  transform: translateY(0);
+}
+
+.glass-btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), #0072ff);
+  color: #000;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.4);
+}
+
+.glass-btn-primary:hover {
+  background: linear-gradient(135deg, #33f3ff, #1a82ff);
+  box-shadow: 0 6px 25px rgba(0, 240, 255, 0.6);
+}
+
+/* Side-by-side Image Container */
+.game-viewport {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media (max-width: 850px) {
+  .game-viewport {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+.canvas-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid var(--border-glass);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  cursor: crosshair;
+  background: #000;
+  transition: border-color 0.3s ease;
+}
+
+.canvas-card:hover {
+  border-color: var(--accent-cyan);
+}
+
+.canvas-element {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+}
+
+/* Target & Hit Markers */
+.hit-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-green);
+  box-shadow: 0 0 15px var(--accent-green), inset 0 0 10px var(--accent-green);
+  animation: hitPulse 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 255, 135, 0.15);
+}
+
+.hit-marker-number {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 0 0 5px #000;
+}
+
+@keyframes hitPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Miss Ripple Indicator */
+.miss-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-pink);
+  box-shadow: 0 0 12px var(--accent-pink);
+  animation: missShake 0.4s ease-out forwards;
+  pointer-events: none;
+  background: rgba(255, 0, 127, 0.2);
+}
+
+@keyframes missShake {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+  25% { transform: translate(-45%, -50%) scale(1.1); }
+  50% { transform: translate(-55%, -50%) scale(1); }
+  75% { transform: translate(-48%, -50%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
+}
+
+/* Hint Radar Ring */
+.hint-radar {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px dashed var(--accent-gold);
+  animation: radarExpand 1.5s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes radarExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    opacity: 1;
+    box-shadow: 0 0 5px var(--accent-gold);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6) rotate(180deg);
+    opacity: 0;
+    box-shadow: 0 0 25px var(--accent-gold);
+  }
+}
+
+/* Synchronized Magnifier Lens */
+.magnifier-lens {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.6), inset 0 0 15px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background-color: #000;
+}
+
+/* Millisecond Timer Display */
+.timer-badge {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  letter-spacing: 1px;
+}
+
+.timer-badge.warning {
+  color: var(--accent-gold);
+}
+
+.timer-badge.danger {
+  color: var(--accent-pink);
+  animation: pulseDanger 0.6s infinite alternate;
+}
+
+@keyframes pulseDanger {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(1.08); opacity: 0.8; }
+}
+
+/* Floating Speed Bonus Popup */
+.speed-popup {
+  position: absolute;
+  font-family: var(--font-main);
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+  text-shadow: 0 0 10px rgba(255, 183, 3, 0.8);
+  pointer-events: none;
+  animation: floatUp 1s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  z-index: 20;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(0.8); }
+  50% { transform: translateY(-25px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-50px) scale(1); }
+}
+
+/* Stars counter & icons */
+.star-icon {
+  color: var(--accent-gold);
+  filter: drop-shadow(0 0 4px var(--accent-gold));
+}
+
+.star-icon.empty {
+  color: rgba(255, 255, 255, 0.2);
+  filter: none;
+}
