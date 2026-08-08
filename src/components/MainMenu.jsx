@@ -10,7 +10,8 @@ export default function MainMenu({
   setSelectedDifficulty,
   onStartGame,
   onOpenProgress,
-  onOpenDebug
+  onOpenDebug,
+  debugMode
 }) {
   const themeIcons = {
     find_the_sniper: '🎯',
@@ -236,8 +237,8 @@ export default function MainMenu({
           <Trophy size={18} /> View Speed Records & Progress
         </button>
 
-        {/* DEV DEBUG LEVEL GENERATOR PIPELINE */}
-        {onOpenDebug && (
+        {/* DEV DEBUG LEVEL GENERATOR PIPELINE (Hidden behind debug flag) */}
+        {debugMode && onOpenDebug && (
           <button
             className="glass-btn"
             onClick={() => {
@@ -249,7 +250,8 @@ export default function MainMenu({
               fontSize: '0.82rem',
               justifyContent: 'center',
               borderRadius: '12px',
-              opacity: 0.8
+              borderColor: 'var(--accent-pink)',
+              color: 'var(--accent-pink)'
             }}
           >
             🛠️ Dev Debug Level Generator Pipeline

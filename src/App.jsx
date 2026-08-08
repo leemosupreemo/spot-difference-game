@@ -40,6 +40,29 @@ export default function App() {
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [debugModalOpen, setDebugModalOpen] = useState(false);
 
+  // Debug Flag (Hidden by default; enabled via URL ?debug=1 or secret logo tap)
+  const [debugMode, setDebugMode] = useState(() => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('debug') === '1' || urlParams.get('debug') === 'true') return true;
+      return localStorage.getItem('diff_hunter_debug') === 'true';
+    } catch (e) {
+      return false;
+    }
+  });
+
+  const toggleDebugMode = useCallback(() => {
+    setDebugMode(prev => {
+      const next = !prev;
+      try {
+        localStorage.setItem('diff_hunter_debug', String(next));
+      } catch (e) {}
+      if (next) sounds.playWin();
+      else sounds.playTap();
+      return next;
+    });
+  }, []);
+
   // Categorized Progress Stats (Easy, Medium, Hard)
   const [difficultyStats, setDifficultyStats] = useState(() => {
     try {
@@ -249,6 +272,8 @@ export default function App() {
             if (view === 'game') startLevel(currentLevelId);
             else setView('menu');
           }}
+          onToggleDebug={toggleDebugMode}
+          debugMode={debugMode}
         />
       )}
 
@@ -262,6 +287,7 @@ export default function App() {
           onStartGame={handleStartGame}
           onOpenProgress={() => setView('stats')}
           onOpenDebug={() => setDebugModalOpen(true)}
+          debugMode={debugMode}
         />
       ) : view === 'stats' ? (
         <ProgressModal
