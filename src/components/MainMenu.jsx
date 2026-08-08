@@ -1,168 +1,202 @@
-import React from 'react';
-import { Eye, Play, Award, Zap, ShieldAlert, Sparkles, CheckCircle2, Trophy, Flame } from 'lucide-react';
+import React, { useState } from 'react';
+import { Play, Award, Zap, Sparkles, CheckCircle2, Trophy, Flame, Layers } from 'lucide-react';
 import { sounds } from '../utils/audio';
+import { SCENE_THEMES } from '../utils/proceduralGenerator';
 
 export default function MainMenu({
+  selectedTheme,
+  setSelectedTheme,
   selectedDifficulty,
   setSelectedDifficulty,
   onStartGame,
-  onOpenProgress,
-  onOpenCreator
+  onOpenProgress
 }) {
+  const themeIcons = {
+    find_the_sniper: '🎯',
+    lego_kingdom: '🧱',
+    dense_landscape: '🌲',
+    antique_shop: '🔮',
+    cyber_arcade: '🌆'
+  };
+
   const difficulties = [
     {
       id: 'Easy',
       name: 'EASY',
       color: 'var(--accent-green)',
       icon: '🟢',
-      diffType: '1 Larger Difference',
-      sceneNoise: 'Moderate Visual Detail',
       targetSize: 'Generous Target Radius',
-      multiplier: '1.0x Score',
-      desc: 'Larger change area on a moderately clear scene. Perfect for warmups.'
+      desc: 'Larger change area on a clean scene.'
     },
     {
       id: 'Medium',
       name: 'MEDIUM',
       color: 'var(--accent-gold)',
       icon: '🟡',
-      diffType: '1 Subtle Difference',
-      sceneNoise: 'Dense Object Clutter',
       targetSize: 'Standard Target Radius',
-      multiplier: '1.5x Score',
-      desc: 'Subtle single difference hidden in dense object scenes.'
+      desc: 'Subtle single difference in dense object clutter.'
     },
     {
       id: 'Hard',
       name: 'HARD / SNIPER',
       color: 'var(--accent-pink)',
       icon: '🔴',
-      diffType: '1 Micro Difference',
-      sceneNoise: 'Extreme Visual Noise',
-      targetSize: 'Pixel-Tight Target Radius',
-      multiplier: '2.5x Score',
-      desc: 'Micro-tiny difference hidden inside hyper-cluttered grounds & camouflage!'
+      targetSize: 'Pixel-Tight Radius',
+      desc: 'Micro difference hidden inside hyper-cluttered noise!'
     }
   ];
 
   return (
     <div style={{
-      maxWidth: '900px',
-      margin: '35px auto',
+      maxWidth: '950px',
+      margin: '10px auto 40px auto',
       padding: '0 20px',
       textAlign: 'center',
       animation: 'hitPulse 0.4s ease-out'
     }}>
-      
-      {/* Main Logo & Title Header */}
-      <div style={{ marginBottom: '28px' }}>
-        <div style={{
-          width: '76px',
-          height: '76px',
-          borderRadius: '24px',
-          background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-pink))',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          margin: '0 auto 16px auto',
-          boxShadow: '0 0 30px rgba(0, 240, 255, 0.5)'
-        }}>
-          <Eye size={42} color="#000" strokeWidth={2.5} />
+
+      {/* Section 1: SELECT LEVEL PACK */}
+      <div style={{ marginBottom: '32px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '16px' }}>
+          <Layers size={22} color="var(--accent-cyan)" />
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            1. SELECT LEVEL PACK
+          </h2>
         </div>
 
-        <h1 style={{
-          fontSize: '2.6rem',
-          fontWeight: 900,
-          letterSpacing: '-0.5px',
-          background: 'linear-gradient(90deg, #fff, var(--accent-cyan), var(--accent-gold))',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          marginBottom: '6px'
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: '16px'
         }}>
-          DIFF HUNTER
-        </h1>
-        <p style={{ fontSize: '1rem', color: 'var(--text-muted)', maxWidth: '520px', margin: '0 auto' }}>
-          Select your difficulty below. Each stage features <strong>1 single difference</strong>—difficulty determines image clutter & change scale!
-        </p>
+          {SCENE_THEMES.map(theme => {
+            const isSelected = selectedTheme === theme.id;
+            return (
+              <div
+                key={theme.id}
+                onClick={() => {
+                  sounds.playTap();
+                  setSelectedTheme(theme.id);
+                }}
+                className="glass-panel"
+                style={{
+                  padding: '20px 18px',
+                  borderRadius: '18px',
+                  cursor: 'pointer',
+                  border: isSelected ? '2.5px solid var(--accent-cyan)' : '1px solid var(--border-glass)',
+                  boxShadow: isSelected ? '0 0 25px rgba(0, 240, 255, 0.45)' : 'none',
+                  transform: isSelected ? 'scale(1.03)' : 'none',
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                  textAlign: 'left',
+                  position: 'relative'
+                }}
+              >
+                {isSelected && (
+                  <div style={{
+                    position: 'absolute',
+                    top: 12,
+                    right: 12,
+                    background: 'var(--accent-cyan)',
+                    borderRadius: '50%',
+                    width: '24px',
+                    height: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <CheckCircle2 size={16} color="#000" strokeWidth={3} />
+                  </div>
+                )}
+
+                <div style={{ fontSize: '2.2rem', marginBottom: '10px' }}>
+                  {themeIcons[theme.id] || '📷'}
+                </div>
+
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: isSelected ? '#fff' : 'var(--text-main)', marginBottom: '4px', lineHeight: 1.2 }}>
+                  {theme.title}
+                </h3>
+
+                <span style={{ fontSize: '0.78rem', color: 'var(--accent-gold)', fontWeight: 700, textTransform: 'uppercase' }}>
+                  {theme.category}
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* 3 Difficulty Selection Cards */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '18px',
-        marginBottom: '32px'
-      }}>
-        {difficulties.map(diff => {
-          const isSelected = selectedDifficulty === diff.id;
-          return (
-            <div
-              key={diff.id}
-              onClick={() => {
-                sounds.playTap();
-                setSelectedDifficulty(diff.id);
-              }}
-              className="glass-panel"
-              style={{
-                padding: '22px 18px',
-                borderRadius: '20px',
-                cursor: 'pointer',
-                border: isSelected ? `2px solid ${diff.color}` : '1px solid var(--border-glass)',
-                boxShadow: isSelected ? `0 0 25px ${diff.color}55` : 'none',
-                transform: isSelected ? 'translateY(-4px)' : 'none',
-                transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-                textAlign: 'left',
-                position: 'relative'
-              }}
-            >
-              {isSelected && (
-                <div style={{
-                  position: 'absolute',
-                  top: 14,
-                  right: 14,
-                  background: diff.color,
-                  borderRadius: '50%',
-                  width: '24px',
-                  height: '24px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <CheckCircle2 size={16} color="#000" strokeWidth={3} />
+      {/* Section 2: SELECT DIFFICULTY */}
+      <div style={{ marginBottom: '32px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '16px' }}>
+          <Flame size={22} color="var(--accent-pink)" />
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            2. SELECT DIFFICULTY
+          </h2>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '16px'
+        }}>
+          {difficulties.map(diff => {
+            const isSelected = selectedDifficulty === diff.id;
+            return (
+              <div
+                key={diff.id}
+                onClick={() => {
+                  sounds.playTap();
+                  setSelectedDifficulty(diff.id);
+                }}
+                className="glass-panel"
+                style={{
+                  padding: '20px 18px',
+                  borderRadius: '18px',
+                  cursor: 'pointer',
+                  border: isSelected ? `2.5px solid ${diff.color}` : '1px solid var(--border-glass)',
+                  boxShadow: isSelected ? `0 0 25px ${diff.color}44` : 'none',
+                  transform: isSelected ? 'scale(1.03)' : 'none',
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                  textAlign: 'left',
+                  position: 'relative'
+                }}
+              >
+                {isSelected && (
+                  <div style={{
+                    position: 'absolute',
+                    top: 12,
+                    right: 12,
+                    background: diff.color,
+                    borderRadius: '50%',
+                    width: '24px',
+                    height: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <CheckCircle2 size={16} color="#000" strokeWidth={3} />
+                  </div>
+                )}
+
+                <div style={{ fontSize: '1.6rem', marginBottom: '8px' }}>
+                  {diff.icon}
                 </div>
-              )}
 
-              <div style={{ fontSize: '1.7rem', marginBottom: '8px' }}>
-                {diff.icon}
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: diff.color, marginBottom: '4px' }}>
+                  {diff.name}
+                </h3>
+
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
+                  {diff.desc}
+                </p>
               </div>
-
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: diff.color, marginBottom: '6px' }}>
-                {diff.name}
-              </h3>
-
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '14px', lineHeight: 1.4 }}>
-                {diff.desc}
-              </p>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', fontSize: '0.78rem', fontWeight: 700 }}>
-                <span style={{ color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Flame size={14} color={diff.color} /> {diff.diffType}
-                </span>
-                <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Zap size={14} color="var(--accent-cyan)" /> {diff.sceneNoise}
-                </span>
-                <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Sparkles size={14} color="var(--accent-gold)" /> {diff.multiplier}
-                </span>
-              </div>
-
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       {/* Primary Actions */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '400px', margin: '0 auto' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', maxWidth: '440px', margin: '0 auto' }}>
         
         {/* START GAME BUTTON */}
         <button
@@ -172,14 +206,14 @@ export default function MainMenu({
             onStartGame();
           }}
           style={{
-            padding: '16px 28px',
-            fontSize: '1.2rem',
+            padding: '18px 32px',
+            fontSize: '1.3rem',
             justifyContent: 'center',
-            borderRadius: '16px',
-            boxShadow: '0 6px 30px rgba(0, 240, 255, 0.5)'
+            borderRadius: '18px',
+            boxShadow: '0 6px 35px rgba(0, 240, 255, 0.55)'
           }}
         >
-          <Play size={22} fill="#000" /> START SPEEDRUN
+          <Play size={24} fill="#000" /> START SPEEDRUN
         </button>
 
         {/* PROGRESS & STATS BUTTON */}
@@ -190,32 +224,15 @@ export default function MainMenu({
             onOpenProgress();
           }}
           style={{
-            padding: '12px 22px',
-            fontSize: '0.95rem',
+            padding: '13px 24px',
+            fontSize: '1rem',
             justifyContent: 'center',
             borderColor: 'var(--accent-gold)',
             color: 'var(--accent-gold)',
             borderRadius: '14px'
           }}
         >
-          <Trophy size={18} /> View Progress & Speed Records
-        </button>
-
-        {/* CUSTOM LEVEL MAKER BUTTON */}
-        <button
-          className="glass-btn"
-          onClick={() => {
-            sounds.playTap();
-            onOpenCreator();
-          }}
-          style={{
-            padding: '10px 18px',
-            fontSize: '0.85rem',
-            justifyContent: 'center',
-            borderRadius: '14px'
-          }}
-        >
-          <Sparkles size={16} /> Custom Level Maker
+          <Trophy size={18} /> View Speed Records & Progress
         </button>
 
       </div>

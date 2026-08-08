@@ -1,13 +1,12 @@
 import React from 'react';
-import { Volume2, VolumeX, Eye, Award, Info, RefreshCw } from 'lucide-react';
+import { Volume2, VolumeX, Eye, Award, Info } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function Header({
   muted,
   setMuted,
   onOpenLeaderboard,
-  onOpenHelp,
-  onRestartLevel
+  onOpenHelp
 }) {
   const toggleSound = () => {
     const isMuted = sounds.toggleMute();
@@ -15,10 +14,17 @@ export default function Header({
   };
 
   return (
-    <header className="glass-panel" style={{ padding: '14px 24px', margin: '14px 20px 20px 20px' }}>
+    <header className="glass-panel" style={{
+      paddingTop: 'calc(env(safe-area-inset-top, 0px) + 14px)',
+      paddingBottom: '14px',
+      paddingLeft: '24px',
+      paddingRight: '24px',
+      margin: '0 20px 20px 20px',
+      borderRadius: '0 0 20px 20px'
+    }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
         
-        {/* Logo */}
+        {/* Top Header Title & Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
             background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-pink))',
@@ -43,29 +49,22 @@ export default function Header({
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <button
             className="glass-btn"
-            onClick={onRestartLevel}
-            title="Restart Level"
-            style={{ padding: '10px' }}
-          >
-            <RefreshCw size={18} />
-          </button>
-
-          <button
-            className="glass-btn"
             onClick={onOpenLeaderboard}
             title="Progress & Records"
-            style={{ padding: '10px' }}
+            style={{ padding: '10px 14px' }}
           >
             <Award size={18} color="var(--accent-gold)" />
+            <span style={{ fontSize: '0.85rem' }}>Stats</span>
           </button>
 
           <button
             className="glass-btn"
             onClick={onOpenHelp}
             title="How to Play"
-            style={{ padding: '10px' }}
+            style={{ padding: '10px 14px' }}
           >
             <Info size={18} />
+            <span style={{ fontSize: '0.85rem' }}>Help</span>
           </button>
 
           <button

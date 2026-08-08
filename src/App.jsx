@@ -104,10 +104,21 @@ export default function App() {
     return () => clearInterval(timerRef.current);
   }, [timerRunning, elapsedTime, view]);
 
+  const [selectedTheme, setSelectedTheme] = useState('find_the_sniper');
+
   // Handle Game Launch from Main Menu
   const handleStartGame = () => {
+    const newLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
+    setLevels(prev => [...prev, newLevel]);
+    setCurrentLevelId(newLevel.id);
+    setFoundDiffs([]);
+    setMissCount(0);
+    setHintsLeft(1);
+    setActiveHintId(null);
+    setElapsedTime(0);
+    setTimerRunning(true);
+    setVictoryModalOpen(false);
     setView('game');
-    startLevel(currentLevelId);
   };
 
   // Difference Found Handler
@@ -240,11 +251,12 @@ export default function App() {
       {/* Main Navigation Routing */}
       {view === 'menu' ? (
         <MainMenu
+          selectedTheme={selectedTheme}
+          setSelectedTheme={setSelectedTheme}
           selectedDifficulty={selectedDifficulty}
           setSelectedDifficulty={setSelectedDifficulty}
           onStartGame={handleStartGame}
           onOpenProgress={() => setProgressModalOpen(true)}
-          onOpenCreator={() => setView('creator')}
         />
       ) : view === 'creator' ? (
         <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />
