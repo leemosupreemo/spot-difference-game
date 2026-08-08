@@ -1,5 +1,5 @@
 import React from 'react';
-import { Timer, Lightbulb, Search, CheckCircle, Zap } from 'lucide-react';
+import { Timer, Lightbulb, Search, Zap } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function TimerDisplay({
@@ -36,46 +36,46 @@ export default function TimerDisplay({
   };
 
   return (
-    <div className="glass-panel" style={{ padding: '12px 20px', margin: '14px auto', maxWidth: '1300px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+    <div className="glass-panel" style={{ padding: '10px 18px', margin: '10px auto 14px auto', maxWidth: '1300px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
         
-        {/* Timer Badge (Starts immediately when pair appears) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Clock & PTS Score (Positioned Right Next to Each Other) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Live Millisecond Clock */}
           <div style={{
             background: 'rgba(0, 240, 255, 0.1)',
-            border: '1px solid rgba(0, 240, 255, 0.3)',
+            border: '1px solid rgba(0, 240, 255, 0.35)',
             borderRadius: '14px',
             padding: '6px 16px',
             display: 'flex',
             alignItems: 'center',
-            gap: '10px'
+            gap: '8px'
           }}>
             <Timer size={22} color="var(--accent-cyan)" />
-            <div className="timer-badge" style={{ fontSize: '1.7rem' }}>
+            <div className="timer-badge" style={{ fontSize: '1.6rem' }}>
               {formatTime(elapsedTime)}
             </div>
           </div>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            SPOT THE 1 DIFFERENCE!
-          </span>
-        </div>
 
-        {/* Score & Game Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          {/* Score Badge */}
+          {/* PTS Score Badge Directly Adjacent */}
           <div style={{
-            background: 'rgba(255, 183, 3, 0.1)',
-            border: '1px solid rgba(255, 183, 3, 0.3)',
-            borderRadius: '12px',
-            padding: '6px 14px',
-            textAlign: 'right'
+            background: 'rgba(255, 183, 3, 0.12)',
+            border: '1px solid rgba(255, 183, 3, 0.35)',
+            borderRadius: '14px',
+            padding: '6px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
           }}>
-            <span style={{ fontSize: '0.65rem', color: 'var(--accent-gold)', fontWeight: 700, display: 'block' }}>SCORE</span>
-            <span style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)' }}>
-              {score} PTS
+            <Zap size={18} color="var(--accent-gold)" />
+            <span style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--accent-gold)', fontFamily: 'var(--font-mono)' }}>
+              {score} <span style={{ fontSize: '0.85rem', color: '#fff', fontWeight: 700 }}>PTS</span>
             </span>
           </div>
+        </div>
 
+        {/* Game Controls (Hint & Zoom) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           {/* Hint Button */}
           <button
             className={`glass-btn ${hintsLeft > 0 ? '' : 'disabled'}`}
@@ -84,11 +84,12 @@ export default function TimerDisplay({
             style={{
               borderColor: hintsLeft > 0 ? 'var(--accent-gold)' : 'transparent',
               color: hintsLeft > 0 ? 'var(--accent-gold)' : 'var(--text-muted)',
-              opacity: hintsLeft > 0 ? 1 : 0.4
+              opacity: hintsLeft > 0 ? 1 : 0.4,
+              padding: '8px 14px'
             }}
           >
             <Lightbulb size={18} />
-            <span>Hint ({hintsLeft})</span>
+            <span style={{ fontSize: '0.88rem' }}>Hint ({hintsLeft})</span>
           </button>
 
           {/* Magnifier Toggle */}
@@ -96,9 +97,10 @@ export default function TimerDisplay({
             className={`glass-btn ${magnifierEnabled ? 'glass-btn-primary' : ''}`}
             onClick={toggleMagnifier}
             title="Toggle Magnifier Lens"
+            style={{ padding: '8px 14px' }}
           >
             <Search size={18} />
-            <span>Zoom</span>
+            <span style={{ fontSize: '0.88rem' }}>Zoom</span>
           </button>
         </div>
 
