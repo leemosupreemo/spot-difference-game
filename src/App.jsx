@@ -9,6 +9,7 @@ import VictoryModal from './components/VictoryModal';
 import ProgressModal from './components/ProgressModal';
 import HelpModal from './components/HelpModal';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
+import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGenerator';
 import { sounds } from './utils/audio';
 
 export default function App() {
@@ -222,6 +223,14 @@ export default function App() {
     startLevel(customLevel.id);
   };
 
+  // Generate Procedural Pair On The Fly
+  const handleGenerateProceduralPair = () => {
+    const randomTheme = SCENE_THEMES[Math.floor(Math.random() * SCENE_THEMES.length)].id;
+    const newLevel = generateProceduralLevelPair(randomTheme, selectedDifficulty, Date.now());
+    setLevels(prev => [...prev, newLevel]);
+    startLevel(newLevel.id);
+  };
+
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '50px' }}>
       
@@ -307,6 +316,7 @@ export default function App() {
             currentLevelId={currentLevelId}
             onSelectLevel={(id) => startLevel(id)}
             levelStats={difficultyStats[selectedDifficulty]?.sets || {}}
+            onGenerateProceduralPair={handleGenerateProceduralPair}
           />
         </main>
       )}

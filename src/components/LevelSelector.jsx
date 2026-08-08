@@ -1,22 +1,37 @@
-import React, { useEffect, useRef } from 'react';
-import { Star, Clock, Trophy, Play, CheckCircle } from 'lucide-react';
+import React from 'react';
+import { Star, Clock, Trophy, Play, CheckCircle, Sparkles } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function LevelSelector({
   levels,
   currentLevelId,
   onSelectLevel,
-  levelStats
+  levelStats,
+  onGenerateProceduralPair
 }) {
   return (
     <div style={{ maxWidth: '1300px', margin: '30px auto' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '16px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Trophy size={20} color="var(--accent-gold)" /> SELECT LEVEL PACK
         </h2>
-        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-          {levels.length} Photo Stage Pairs Available
-        </span>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <button
+            className="glass-btn glass-btn-primary"
+            onClick={() => {
+              sounds.playWin();
+              onGenerateProceduralPair();
+            }}
+            style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+          >
+            <Sparkles size={16} /> Generate Procedural Stage
+          </button>
+
+          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            {levels.length} Photo Stage Pairs Available
+          </span>
+        </div>
       </div>
 
       <div style={{
@@ -73,9 +88,15 @@ export default function LevelSelector({
               </div>
 
               {/* Title */}
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '8px', color: '#fff' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '4px', color: '#fff' }}>
                 {lvl.title}
               </h3>
+
+              {lvl.difficultyMetric && (
+                <span style={{ fontSize: '0.7rem', color: 'var(--accent-gold)', display: 'block', marginBottom: '8px', fontFamily: 'var(--font-mono)' }}>
+                  Diff Area: {lvl.difficultyMetric}
+                </span>
+              )}
 
               {/* Stats Bar */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
