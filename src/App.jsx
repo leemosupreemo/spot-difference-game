@@ -227,11 +227,6 @@ export default function App() {
       
       {/* Header Bar */}
       <Header
-        activeMode={activeMode}
-        setActiveMode={(mode) => {
-          setActiveMode(mode);
-          if (view === 'menu') setView('game');
-        }}
         muted={muted}
         setMuted={setMuted}
         onOpenLeaderboard={() => setProgressModalOpen(true)}
