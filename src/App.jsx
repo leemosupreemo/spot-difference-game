@@ -8,6 +8,7 @@ import CustomLevelMaker from './components/CustomLevelMaker';
 import VictoryModal from './components/VictoryModal';
 import ProgressModal from './components/ProgressModal';
 import HelpModal from './components/HelpModal';
+import DebugLevelGeneratorModal from './components/DebugLevelGeneratorModal';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
 import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGenerator';
 import { sounds } from './utils/audio';
@@ -37,6 +38,7 @@ export default function App() {
   const [victoryModalOpen, setVictoryModalOpen] = useState(false);
   const [progressModalOpen, setProgressModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
+  const [debugModalOpen, setDebugModalOpen] = useState(false);
 
   // Categorized Progress Stats (Easy, Medium, Hard)
   const [difficultyStats, setDifficultyStats] = useState(() => {
@@ -257,6 +259,7 @@ export default function App() {
           setSelectedDifficulty={setSelectedDifficulty}
           onStartGame={handleStartGame}
           onOpenProgress={() => setProgressModalOpen(true)}
+          onOpenDebug={() => setDebugModalOpen(true)}
         />
       ) : view === 'creator' ? (
         <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />
@@ -341,6 +344,17 @@ export default function App() {
       <HelpModal
         isOpen={helpModalOpen}
         onClose={() => setHelpModalOpen(false)}
+      />
+
+      <DebugLevelGeneratorModal
+        isOpen={debugModalOpen}
+        onClose={() => setDebugModalOpen(false)}
+        onInjectLevels={(pack) => {
+          setLevels(prev => [...prev, ...pack]);
+          setCurrentLevelId(pack[0].id);
+          startLevel(pack[0].id);
+          setView('game');
+        }}
       />
 
     </div>
