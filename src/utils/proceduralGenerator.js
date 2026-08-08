@@ -2,30 +2,30 @@
 // Implements: Base Image -> Controlled Mutation -> Answer Bounding Box -> Difficulty Rating
 
 export const SCENE_THEMES = [
+  { id: 'lego_kingdom', title: 'Lego Micro Kingdom', category: 'Toys & Bricks' },
+  { id: 'dense_landscape', title: 'Alpine Meadow & Forest', category: 'Landscape' },
   { id: 'antique_shop', title: 'Magical Antique Shop', category: 'Fantasy' },
   { id: 'cyber_arcade', title: 'Cyberpunk Arcade Alley', category: 'Cyberpunk' },
-  { id: 'cat_cafe', title: 'Cozy Cat Cafe', category: 'Cozy' },
-  { id: 'pirate_deck', title: 'Pirate Captain Ship Deck', category: 'Adventure' },
-  { id: 'wizard_lab', title: 'Wizard Alchemy Laboratory', category: 'Magic' }
+  { id: 'cat_cafe', title: 'Cozy Cat Cafe', category: 'Cozy' }
 ];
 
 export const MUTATION_TYPES = [
-  'COLOR_SHIFT',     // Change object color (e.g., Red Potion -> Blue Potion)
+  'COLOR_SHIFT',     // Change object color (e.g. Red Lego Brick -> Blue Lego Brick)
   'REMOVE_OBJECT',    // Erase a small object and inpaint background
   'FLIP_OBJECT',      // Horizontal/Vertical flip
   'SHIFT_POSITION',   // Translate object by N pixels
-  'ADD_DETAIL'        // Add extra button, star, or stripe on top of object
+  'ADD_DETAIL'        // Add extra stud, star, or stripe on top of object
 ];
 
 /**
  * Generates an Image Pair (Base vs Modified) with controlled, programmatic mutations.
- * Returns level object compatible with Diff Hunter game engine.
+ * Enforces: Image B is 100% pixel-identical to Image A EXCEPT for controlled target mutations.
  */
-export function generateProceduralLevelPair(themeId = 'antique_shop', targetDifficulty = 'Medium', seed = Date.now()) {
+export function generateProceduralLevelPair(themeId = 'lego_kingdom', targetDifficulty = 'Medium', seed = Date.now()) {
   const width = 800;
   const height = 600;
 
-  // Create temporary offscreen canvases
+  // Offscreen canvases for Base (A) and Modified (B)
   const canvasA = document.createElement('canvas');
   canvasA.width = width;
   canvasA.height = height;
@@ -43,181 +43,172 @@ export function generateProceduralLevelPair(themeId = 'antique_shop', targetDiff
     return currentSeed / 233280;
   };
 
-  const randomRange = (min, max) => min + random() * (max - min);
   const randomChoice = (arr) => arr[Math.floor(random() * arr.length)];
 
-  // Define discrete objects with bounding boxes
+  // Track discrete objects with coordinates & bounding boxes
   const objects = [];
 
   // -------------------------------------------------------------
-  // STEP 1: RENDER BASE SCENE & TRACK DISCRETE OBJECTS
+  // STEP 1: RENDER RICH DENSE SCENE & REGISTER CANDIDATE OBJECTS
   // -------------------------------------------------------------
-  if (themeId === 'antique_shop' || themeId === 'wizard_lab') {
-    // Background Wall & Shelves
-    const wallGrad = ctxA.createLinearGradient(0, 0, 0, height);
-    wallGrad.addColorStop(0, '#12002b');
-    wallGrad.addColorStop(1, '#2d0854');
-    ctxA.fillStyle = wallGrad;
+  if (themeId === 'lego_kingdom') {
+    // Lego Base Plate Grid
+    ctxA.fillStyle = '#2b2b36';
     ctxA.fillRect(0, 0, width, height);
 
-    // Draw Shelves
-    ctxA.fillStyle = '#4a2810';
-    ctxA.fillRect(0, 180, width, 14);
-    ctxA.fillRect(0, 380, width, 14);
+    // Green Lego Plate Floor
+    ctxA.fillStyle = '#2e7d32';
+    ctxA.fillRect(0, height * 0.5, width, height * 0.5);
 
-    // Discrete Objects Generator on Shelves
-    // 1. Potion Bottles
-    for (let x = 40; x < width - 60; x += 90) {
-      const pWidth = 24;
-      const pHeight = 36;
-      const py = (x % 180 === 0 ? 180 : 380) - pHeight;
-      const pColor = randomChoice(['#ff0055', '#00f0ff', '#ffea00', '#00ff87', '#9d4edd']);
-      
-      objects.push({
-        id: `potion_${x}`,
-        type: 'POTION',
-        x,
-        y: py,
-        w: pWidth,
-        h: pHeight,
-        color: pColor,
-        draw: (ctx, color, mutated = false, mutationType = '') => {
-          ctx.fillStyle = '#e0e0e0';
-          ctx.fillRect(x + 8, py - 6, 8, 6); // Cork
+    // Draw Lego Stud Grid Floor
+    ctxA.fillStyle = '#1b5e20';
+    for (let gx = 10; gx < width; gx += 20) {
+      for (let gy = height * 0.5 + 10; gy < height; gy += 20) {
+        ctxA.beginPath();
+        ctxA.arc(gx, gy, 4, 0, Math.PI * 2);
+        ctxA.fill();
+      }
+    }
 
-          ctx.fillStyle = color;
-          ctx.beginPath();
-          ctx.ellipse(x + 12, py + 22, 12, 14, 0, 0, Math.PI * 2);
-          ctx.fill();
+    // Dense Lego Castle / Town Wall Bricks
+    const brickColors = ['#e53935', '#1e88e5', '#fdd835', '#43a047', '#fb8c00', '#8e24aa'];
+    const brickW = 32;
+    const brickH = 16;
 
-          ctx.fillRect(x + 7, py + 4, 10, 14);
+    for (let bx = 40; bx < width - 60; bx += 36) {
+      for (let by = 100; by < height * 0.5 - 20; by += 20) {
+        const bColor = randomChoice(brickColors);
+        const objId = `lego_${bx}_${by}`;
 
-          // Extra detail if mutated
-          if (mutated && mutationType === 'ADD_DETAIL') {
-            ctx.fillStyle = '#ffffff';
+        objects.push({
+          id: objId,
+          type: 'LEGO_BRICK',
+          x: bx,
+          y: by,
+          w: brickW,
+          h: brickH,
+          color: bColor,
+          draw: (ctx, color, mutated = false, mutationType = '') => {
+            // Main Lego Brick
+            ctx.fillStyle = color;
+            ctx.fillRect(bx, by, brickW, brickH);
+            ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(bx, by, brickW, brickH);
+
+            // Studs on top of Lego Brick
+            ctx.fillStyle = color;
+            ctx.fillRect(bx + 4, by - 4, 6, 4);
+            ctx.fillRect(bx + 20, by - 4, 6, 4);
+
+            // Mutation Add Detail (Extra Stud / Sticker)
+            if (mutated && mutationType === 'ADD_DETAIL') {
+              ctx.fillStyle = '#ffffff';
+              ctx.beginPath();
+              ctx.arc(bx + 16, by + 8, 4, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        });
+      }
+    }
+  } else if (themeId === 'dense_landscape') {
+    // Sky & Mountain Landscape Background
+    const skyGrad = ctxA.createLinearGradient(0, 0, 0, height);
+    skyGrad.addColorStop(0, '#023e8a');
+    skyGrad.addColorStop(0.5, '#0077b6');
+    skyGrad.addColorStop(1, '#90e0ef');
+    ctxA.fillStyle = skyGrad;
+    ctxA.fillRect(0, 0, width, height);
+
+    // Mountain Peaks
+    ctxA.fillStyle = '#4a5568';
+    ctxA.beginPath();
+    ctxA.moveTo(0, height * 0.6);
+    ctxA.lineTo(width * 0.25, height * 0.2);
+    ctxA.lineTo(width * 0.5, height * 0.6);
+    ctxA.lineTo(width * 0.75, height * 0.15);
+    ctxA.lineTo(width, height * 0.6);
+    ctxA.lineTo(width, height);
+    ctxA.lineTo(0, height);
+    ctxA.fill();
+
+    // Snowcaps
+    ctxA.fillStyle = '#ffffff';
+    ctxA.beginPath();
+    ctxA.moveTo(width * 0.25, height * 0.2);
+    ctxA.lineTo(width * 0.2, height * 0.3);
+    ctxA.lineTo(width * 0.3, height * 0.3);
+    ctxA.fill();
+
+    // Dense Forest Pine Trees
+    for (let tx = 30; tx < width - 40; tx += 45) {
+      for (let ty = height * 0.55; ty < height - 60; ty += 50) {
+        const treeColor = randomChoice(['#1b4332', '#2d6a4f', '#40916c', '#52b788']);
+        objects.push({
+          id: `tree_${tx}_${ty}`,
+          type: 'PINE_TREE',
+          x: tx,
+          y: ty,
+          w: 24,
+          h: 40,
+          color: treeColor,
+          draw: (ctx, color, mutated = false, mutationType = '') => {
+            // Trunk
+            ctx.fillStyle = '#582f0e';
+            ctx.fillRect(tx + 9, ty + 25, 6, 15);
+
+            // Foliage Triangles
+            ctx.fillStyle = color;
             ctx.beginPath();
-            ctx.arc(x + 12, py + 22, 4, 0, Math.PI * 2);
+            ctx.moveTo(tx + 12, ty);
+            ctx.lineTo(tx, ty + 25);
+            ctx.lineTo(tx + 24, ty + 25);
             ctx.fill();
+
+            if (mutated && mutationType === 'ADD_DETAIL') {
+              // Star on top of tree
+              ctx.fillStyle = '#ffea00';
+              ctx.beginPath();
+              ctx.arc(tx + 12, ty - 3, 4, 0, Math.PI * 2);
+              ctx.fill();
+            }
           }
-        }
-      });
-    }
-
-    // 2. Spellbooks & Scrolls
-    for (let x = 80; x < width - 100; x += 130) {
-      const bWidth = 22;
-      const bHeight = 44;
-      const by = 180 - bHeight;
-      const bColor = randomChoice(['#8b0000', '#1b4332', '#212529', '#ffb703']);
-
-      objects.push({
-        id: `book_${x}`,
-        type: 'BOOK',
-        x,
-        y: by,
-        w: bWidth,
-        h: bHeight,
-        color: bColor,
-        draw: (ctx, color, mutated = false, mutationType = '') => {
-          ctx.fillStyle = color;
-          ctx.fillRect(x, by, bWidth, bHeight);
-
-          ctx.fillStyle = '#ffea00';
-          ctx.fillRect(x + 4, by + 10, bWidth - 8, 4);
-          ctx.fillRect(x + 4, by + 24, bWidth - 8, 4);
-
-          if (mutated && mutationType === 'ADD_DETAIL') {
-            ctx.fillStyle = '#00f0ff';
-            ctx.fillRect(x + 8, by + 15, 6, 6);
-          }
-        }
-      });
-    }
-
-    // 3. Hanging Candles & Stars
-    for (let x = 100; x < width - 100; x += 150) {
-      const cy = 40;
-      objects.push({
-        id: `candle_${x}`,
-        type: 'CANDLE',
-        x,
-        y: cy,
-        w: 20,
-        h: 50,
-        color: '#ffea00',
-        draw: (ctx, color, mutated = false, mutationType = '') => {
-          ctx.strokeStyle = '#888';
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.moveTo(x + 10, 0);
-          ctx.lineTo(x + 10, cy);
-          ctx.stroke();
-
-          ctx.fillStyle = '#fff';
-          ctx.fillRect(x + 4, cy, 12, 30);
-
-          // Flame
-          ctx.fillStyle = color;
-          ctx.beginPath();
-          ctx.ellipse(x + 10, cy - 6, 6, 9, 0, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      });
+        });
+      }
     }
   } else {
-    // Cyberpunk / Cafe / Deck Default Base Scene
-    ctxA.fillStyle = '#0b091a';
+    // Default Fantasy Antique Shop Fallback
+    ctxA.fillStyle = '#12002b';
     ctxA.fillRect(0, 0, width, height);
 
-    // Grid Lines
-    ctxA.strokeStyle = 'rgba(0, 240, 255, 0.15)';
-    for (let i = 0; i < width; i += 40) {
-      ctxA.beginPath(); ctxA.moveTo(i, 0); ctxA.lineTo(i, height); ctxA.stroke();
-    }
-    for (let i = 0; i < height; i += 40) {
-      ctxA.beginPath(); ctxA.moveTo(0, i); ctxA.lineTo(width, i); ctxA.stroke();
-    }
-
-    // Discrete Arcade Cabinets / Vending Items
-    for (let x = 60; x < width - 80; x += 120) {
-      const cColor = randomChoice(['#ff007f', '#00f0ff', '#ffea00', '#00ff87']);
+    for (let x = 60; x < width - 80; x += 100) {
       objects.push({
-        id: `arcade_${x}`,
-        type: 'ARCADE',
+        id: `antique_${x}`,
+        type: 'ANTIQUE',
         x,
-        y: 200,
-        w: 50,
-        h: 120,
-        color: cColor,
-        draw: (ctx, color, mutated = false, mutationType = '') => {
-          ctx.fillStyle = '#1a1a2e';
-          ctx.fillRect(x, 200, 50, 120);
-
-          // Screen
+        y: 250,
+        w: 30,
+        h: 40,
+        color: '#ffb703',
+        draw: (ctx, color) => {
           ctx.fillStyle = color;
-          ctx.fillRect(x + 6, 210, 38, 40);
-
-          // Controls
-          ctx.fillStyle = '#ff0055';
-          ctx.beginPath();
-          ctx.arc(x + 16, 265, 4, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.fillStyle = '#00f0ff';
-          ctx.fillRect(x + 28, 262, 10, 6);
+          ctx.fillRect(x, 250, 30, 40);
         }
       });
     }
   }
 
-  // Draw Base Scene A
+  // Draw All Base Objects on Canvas A
   objects.forEach(obj => obj.draw(ctxA, obj.color, false, ''));
 
-  // Copy Canvas A to Canvas B
+  // -------------------------------------------------------------
+  // STEP 2: COPY CANVAS A -> CANVAS B (PIXEL PERFECT 1:1 CLONE)
+  // -------------------------------------------------------------
   ctxB.drawImage(canvasA, 0, 0);
 
   // -------------------------------------------------------------
-  // STEP 2: SELECT CANDIDATE OBJECTS & APPLY CONTROLLED MUTATIONS
+  // STEP 3: CONTROLLED MUTATION ON CANVAS B ONLY AT TARGET BOUNDING BOX
   // -------------------------------------------------------------
   const diffCount = targetDifficulty === 'Easy' ? 3 : targetDifficulty === 'Medium' ? 5 : 7;
   const candidateObjects = [...objects].sort(() => random() - 0.5).slice(0, diffCount);
@@ -227,78 +218,61 @@ export function generateProceduralLevelPair(themeId = 'antique_shop', targetDiff
   candidateObjects.forEach((targetObj, index) => {
     const mutation = randomChoice(MUTATION_TYPES);
     let mutatedColor = targetObj.color;
-    let mutatedX = targetObj.x;
-    let mutatedY = targetObj.y;
 
-    // Erase object region on Canvas B (inpaint background)
+    // Erase object bounding box area on Canvas B
     ctxB.save();
-    ctxB.clearRect(targetObj.x - 4, targetObj.y - 8, targetObj.w + 8, targetObj.h + 16);
-    // Fill in background patch
-    const patch = ctxA.getImageData(targetObj.x - 4, targetObj.y - 8, 1, 1).data;
+    ctxB.clearRect(targetObj.x - 2, targetObj.y - 4, targetObj.w + 4, targetObj.h + 8);
+    
+    // Inpaint / Copy surrounding background patch
+    const patch = ctxA.getImageData(Math.max(0, targetObj.x - 4), Math.max(0, targetObj.y - 4), 1, 1).data;
     ctxB.fillStyle = `rgb(${patch[0]}, ${patch[1]}, ${patch[2]})`;
-    ctxB.fillRect(targetObj.x - 4, targetObj.y - 8, targetObj.w + 8, targetObj.h + 16);
+    ctxB.fillRect(targetObj.x - 2, targetObj.y - 4, targetObj.w + 4, targetObj.h + 8);
     ctxB.restore();
 
     let description = '';
 
     if (mutation === 'REMOVE_OBJECT') {
-      description = `Removed ${targetObj.type.toLowerCase()} at (${Math.round((targetObj.x/width)*100)}%, ${Math.round((targetObj.y/height)*100)}%)`;
-      // Don't re-draw object on Canvas B
+      description = `Removed ${targetObj.type.toLowerCase().replace('_', ' ')} at (${Math.round((targetObj.x/width)*100)}%, ${Math.round((targetObj.y/height)*100)}%)`;
     } else if (mutation === 'COLOR_SHIFT') {
-      const palette = ['#ff0055', '#00f0ff', '#ffea00', '#00ff87', '#9d4edd', '#ffffff'].filter(c => c !== targetObj.color);
+      const palette = ['#e53935', '#1e88e5', '#fdd835', '#43a047', '#ff007f', '#00f0ff'].filter(c => c !== targetObj.color);
       mutatedColor = randomChoice(palette);
       targetObj.draw(ctxB, mutatedColor, true, 'COLOR_SHIFT');
-      description = `Changed ${targetObj.type.toLowerCase()} color from ${targetObj.color} to ${mutatedColor}`;
-    } else if (mutation === 'SHIFT_POSITION') {
-      mutatedX = targetObj.x + Math.round(randomRange(8, 15));
-      const movedObj = { ...targetObj, x: mutatedX };
-      movedObj.draw(ctxB, targetObj.color, true, 'SHIFT_POSITION');
-      description = `Shifted ${targetObj.type.toLowerCase()} position rightwards`;
+      description = `Recolored ${targetObj.type.toLowerCase().replace('_', ' ')}`;
     } else {
-      // ADD_DETAIL or FLIP
       targetObj.draw(ctxB, targetObj.color, true, 'ADD_DETAIL');
-      description = `Added subtle detail highlight on ${targetObj.type.toLowerCase()}`;
+      description = `Added micro detail on ${targetObj.type.toLowerCase().replace('_', ' ')}`;
     }
 
-    // Calculate answer bounding box & normalized percentage coordinate
     const centerXPercent = Math.round(((targetObj.x + targetObj.w / 2) / width) * 100);
     const centerYPercent = Math.round(((targetObj.y + targetObj.h / 2) / height) * 100);
-    const radiusPercent = Math.round((Math.max(targetObj.w, targetObj.h) / width) * 100 * 1.2);
+    const radiusPercent = Math.max(4, Math.round((Math.max(targetObj.w, targetObj.h) / width) * 100 * 1.1));
 
     diffs.push({
       id: index + 1,
       x: centerXPercent,
       y: centerYPercent,
-      radius: Math.max(5, radiusPercent),
+      radius: radiusPercent,
       mutationType: mutation,
       description,
       hint: `Look closely near (${centerXPercent}%, ${centerYPercent}%) for a ${mutation.toLowerCase().replace('_', ' ')}`
     });
   });
 
-  // -------------------------------------------------------------
-  // STEP 3: DIFFICULTY CALCULATION (diff_area / total_image_area)
-  // -------------------------------------------------------------
+  // Calculate Empirical Area Ratio Metric
   const totalImageArea = width * height;
   const totalDiffArea = candidateObjects.reduce((acc, obj) => acc + (obj.w * obj.h), 0);
-  const areaRatio = totalDiffArea / totalImageArea;
+  const areaRatio = (totalDiffArea / totalImageArea) * 100;
 
-  let computedDifficulty = 'Medium';
-  if (areaRatio > 0.015) computedDifficulty = 'Easy';
-  else if (areaRatio < 0.005) computedDifficulty = 'Hard';
-
-  // Return level package
   return {
     id: `procedural_${themeId}_${seed}`,
-    title: `${SCENE_THEMES.find(t => t.id === themeId)?.title || 'Procedural Pair'} #${Math.floor(seed % 1000)}`,
+    title: `${SCENE_THEMES.find(t => t.id === themeId)?.title || 'Procedural Scene'} #${Math.floor(seed % 1000)}`,
     category: SCENE_THEMES.find(t => t.id === themeId)?.category || 'Procedural',
-    difficulty: targetDifficulty || computedDifficulty,
-    difficultyMetric: (areaRatio * 100).toFixed(3) + '%',
+    difficulty: targetDifficulty,
+    difficultyMetric: areaRatio.toFixed(3) + '% area ratio',
     totalDifferences: diffs.length,
     bgGradient: ['#0b091a', '#1e1035'],
     accentColor: '#00f0ff',
     diffs,
-    // Custom Canvas Render Function for Level Engine
     render: (ctx, w, h, isModified) => {
       const sourceCanvas = isModified ? canvasB : canvasA;
       ctx.drawImage(sourceCanvas, 0, 0, w, h);
