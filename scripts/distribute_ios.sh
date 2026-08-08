@@ -20,16 +20,20 @@ ARCHIVE_PATH="$RUN_DIR/DiffHunter.xcarchive"
 EXPORT_PATH="$RUN_DIR/export"
 DEVELOPMENT_TEAM="${DEVELOPMENT_TEAM:-3J93523B6Q}"
 
+FIREBASE_APP_ID="1:396835359318:ios:a87d550b51f279818389f7"
+FIREBASE_PROJECT="thirteen-a5760"
+FIREBASE_GROUPS="internal-testers"
+RELEASE_NOTES="Diff Hunter iOS Speedrun Game Build (${TIMESTAMP})"
+
 usage() {
   cat <<'EOF'
 Usage: scripts/distribute_ios.sh [options]
 
-Builds and packages the Diff Hunter iOS app into an IPA artifact.
+Builds, packages, and uploads Diff Hunter iOS app to Firebase App Distribution.
 
 Options:
-  --scheme <scheme>                    Xcode scheme. Default: App
-  --configuration <configuration>      Xcode configuration. Default: Release
-  --build-root <path>                  Root output directory. Default: build/distribution
+  --groups <groups>                    Comma-separated tester groups. Default: internal-testers
+  --release-notes <text>               Inline release notes.
   -h, --help                           Show this help.
 EOF
 }
@@ -43,11 +47,12 @@ require_cmd() {
 }
 
 require_cmd xcodebuild
+require_cmd firebase
 require_cmd npm
 require_cmd npx
 
 echo "----------------------------------------------------"
-echo "🚀 DIFF HUNTER - IOS BUILD & DISTRIBUTION PIPELINE"
+echo "🚀 DIFF HUNTER - IOS FIREBASE DISTRIBUTION PIPELINE"
 echo "----------------------------------------------------"
 
 echo "📦 1. Building Vite web bundle and syncing Capacitor iOS native project..."
@@ -99,13 +104,40 @@ fi
 
 ipa_path="$(find "$EXPORT_PATH" -maxdepth 1 -name '*.ipa' -print -quit || true)"
 
-if [[ -n "$ipa_path" ]]; then
+if [[ -z "$ipa_path" ]]; then
+  echo "❌ No IPA found in $EXPORT_PATH"
+  exit 1
+fi
+
+echo "✅ IPA package created at: $ipa_path"
+
+echo "🚀 5. Uploading and distributing to Firebase App Distribution..."
+export FIREBASE_CLI_NO_ANALYTICS=1
+
+dist_cmd=(
+  firebase appdistribution:distribute "$ipa_path"
+  --app "$FIREBASE_APP_ID"
+  --project "$FIREBASE_PROJECT"
+  --groups "$FIREBASE_GROUPS"
+  --release-notes "$RELEASE_NOTES"
+  --non-interactive
+)
+
+if CI=1 "${dist_cmd[@]}" < /dev/null; then
   echo "----------------------------------------------------"
-  echo "🎉 IOS DISTRIBUTION IPA CREATED SUCCESSFULLY!"
-  echo "📱 IPA File Location: $ipa_path"
+  echo "🎉 FIREBASE APP DISTRIBUTION SUCCEEDED!"
+  echo "📱 App uploaded to Firebase App Distribution."
+  echo "📩 Check your email / Firebase Tester app to install on your phone!"
   echo "----------------------------------------------------"
 else
-  echo "✅ App exported to: $EXPORT_PATH"
+  echo "⚠️ Initial upload attempt failed, retrying once..."
+  sleep 5
+  if CI=1 "${dist_cmd[@]}" < /dev/null; then
+    echo "🎉 FIREBASE APP DISTRIBUTION SUCCEEDED!"
+  else
+    echo "❌ Firebase distribution failed."
+    exit 1
+  fi
 fi
 
 exit 0
