@@ -309,7 +309,7 @@ export default function App() {
             mode={activeMode}
           />
 
-          {/* Interactive Dual Viewport */}
+          {/* Interactive Dual Viewport (IMAGES ONLY) */}
           <GameCanvas
             level={currentLevel}
             foundDiffs={foundDiffs}
@@ -317,15 +317,6 @@ export default function App() {
             onMissTap={handleMissTap}
             activeHintId={activeHintId}
             magnifierEnabled={magnifierEnabled}
-          />
-
-          {/* Stage Selector Grid */}
-          <LevelSelector
-            levels={levels}
-            currentLevelId={currentLevelId}
-            onSelectLevel={(id) => startLevel(id)}
-            levelStats={difficultyStats[selectedDifficulty]?.sets || {}}
-            onGenerateProceduralPair={handleGenerateProceduralPair}
           />
         </main>
       )}
