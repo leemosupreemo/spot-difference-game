@@ -2,11 +2,11 @@
 // Implements: Base Image -> Controlled Mutation -> Answer Bounding Box -> Difficulty Rating
 
 export const SCENE_THEMES = [
+  { id: 'find_the_sniper', title: 'Find The Sniper: Camouflage', category: 'Extreme Hunter' },
   { id: 'lego_kingdom', title: 'Lego Micro Kingdom', category: 'Toys & Bricks' },
   { id: 'dense_landscape', title: 'Alpine Meadow & Forest', category: 'Landscape' },
   { id: 'antique_shop', title: 'Magical Antique Shop', category: 'Fantasy' },
-  { id: 'cyber_arcade', title: 'Cyberpunk Arcade Alley', category: 'Cyberpunk' },
-  { id: 'cat_cafe', title: 'Cozy Cat Cafe', category: 'Cozy' }
+  { id: 'cyber_arcade', title: 'Cyberpunk Arcade Alley', category: 'Cyberpunk' }
 ];
 
 export const MUTATION_TYPES = [
@@ -21,7 +21,7 @@ export const MUTATION_TYPES = [
  * Generates an Image Pair (Base vs Modified) with controlled, programmatic mutations.
  * Enforces: Image B is 100% pixel-identical to Image A EXCEPT for controlled target mutations.
  */
-export function generateProceduralLevelPair(themeId = 'lego_kingdom', targetDifficulty = 'Medium', seed = Date.now()) {
+export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetDifficulty = 'Medium', seed = Date.now()) {
   const width = 800;
   const height = 600;
 
@@ -51,7 +51,117 @@ export function generateProceduralLevelPair(themeId = 'lego_kingdom', targetDiff
   // -------------------------------------------------------------
   // STEP 1: RENDER RICH DENSE SCENE & REGISTER CANDIDATE OBJECTS
   // -------------------------------------------------------------
-  if (themeId === 'lego_kingdom') {
+  if (themeId === 'find_the_sniper') {
+    // Dense Autumn Leaf & Gravel Texture Floor
+    ctxA.fillStyle = '#2b1b17';
+    ctxA.fillRect(0, 0, width, height);
+
+    // Draw 800 dense autumn leaves & gravel pebbles (high visual noise)
+    const leafColors = ['#d94e1f', '#b83b1d', '#9e2a2b', '#e07a5f', '#f4a261', '#e9c46a', '#3a5a40'];
+    for (let i = 0; i < 600; i++) {
+      const lx = random() * width;
+      const ly = random() * height;
+      const lSize = 6 + random() * 10;
+      ctxA.fillStyle = randomChoice(leafColors);
+      ctxA.beginPath();
+      ctxA.ellipse(lx, ly, lSize, lSize / 2, random() * Math.PI, 0, Math.PI * 2);
+      ctxA.fill();
+    }
+
+    // Camouflaged Target Sniper Objects
+    // 1. Camouflaged Calico Cat
+    const catX = width * 0.42;
+    const catY = height * 0.58;
+    objects.push({
+      id: 'sniper_cat',
+      type: 'CAMOUFLAGED_CAT',
+      x: catX,
+      y: catY,
+      w: 22,
+      h: 16,
+      color: '#e07a5f',
+      draw: (ctx, color, mutated = false, mutationType = '') => {
+        // Cat Body blending with autumn leaf colors
+        ctx.fillStyle = mutated && mutationType === 'COLOR_SHIFT' ? '#2b1b17' : '#d94e1f';
+        ctx.beginPath();
+        ctx.ellipse(catX + 11, catY + 8, 11, 7, -Math.PI / 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cat Ears
+        ctx.fillStyle = '#f4a261';
+        ctx.beginPath();
+        ctx.moveTo(catX + 3, catY + 2);
+        ctx.lineTo(catX + 7, catY - 3);
+        ctx.lineTo(catX + 9, catY + 4);
+        ctx.fill();
+      }
+    });
+
+    // 2. Hidden Owl in Tree Trunk
+    const owlX = width * 0.78;
+    const owlY = height * 0.25;
+    objects.push({
+      id: 'sniper_owl',
+      type: 'HIDDEN_OWL',
+      x: owlX,
+      y: owlY,
+      w: 20,
+      h: 24,
+      color: '#9e2a2b',
+      draw: (ctx, color, mutated = false, mutationType = '') => {
+        ctx.fillStyle = mutated && mutationType === 'COLOR_SHIFT' ? '#2b1b17' : '#9e2a2b';
+        ctx.beginPath();
+        ctx.ellipse(owlX + 10, owlY + 12, 10, 12, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Owl Eyes
+        ctx.fillStyle = '#ffea00';
+        ctx.beginPath();
+        ctx.arc(owlX + 6, owlY + 8, 3, 0, Math.PI * 2);
+        ctx.arc(owlX + 14, owlY + 8, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+
+    // 3. Dropped Gold Ring in Gravel
+    const ringX = width * 0.18;
+    const ringY = height * 0.72;
+    objects.push({
+      id: 'sniper_ring',
+      type: 'DROPPED_GOLD_RING',
+      x: ringX,
+      y: ringY,
+      w: 12,
+      h: 12,
+      color: '#ffea00',
+      draw: (ctx, color, mutated = false, mutationType = '') => {
+        ctx.strokeStyle = mutated && mutationType === 'COLOR_SHIFT' ? '#888' : '#ffea00';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(ringX + 6, ringY + 6, 5, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    });
+
+    // 4. Camouflaged Moss Frog
+    const frogX = width * 0.62;
+    const frogY = height * 0.82;
+    objects.push({
+      id: 'sniper_frog',
+      type: 'CAMOUFLAGED_FROG',
+      x: frogX,
+      y: frogY,
+      w: 18,
+      h: 14,
+      color: '#3a5a40',
+      draw: (ctx, color, mutated = false, mutationType = '') => {
+        ctx.fillStyle = mutated && mutationType === 'COLOR_SHIFT' ? '#2b1b17' : '#3a5a40';
+        ctx.beginPath();
+        ctx.ellipse(frogX + 9, frogY + 7, 9, 6, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+  } else if (themeId === 'lego_kingdom') {
     // Lego Base Plate Grid
     ctxA.fillStyle = '#2b2b36';
     ctxA.fillRect(0, 0, width, height);
@@ -89,19 +199,16 @@ export function generateProceduralLevelPair(themeId = 'lego_kingdom', targetDiff
           h: brickH,
           color: bColor,
           draw: (ctx, color, mutated = false, mutationType = '') => {
-            // Main Lego Brick
             ctx.fillStyle = color;
             ctx.fillRect(bx, by, brickW, brickH);
             ctx.strokeStyle = 'rgba(0,0,0,0.3)';
             ctx.lineWidth = 1;
             ctx.strokeRect(bx, by, brickW, brickH);
 
-            // Studs on top of Lego Brick
             ctx.fillStyle = color;
             ctx.fillRect(bx + 4, by - 4, 6, 4);
             ctx.fillRect(bx + 20, by - 4, 6, 4);
 
-            // Mutation Add Detail (Extra Stud / Sticker)
             if (mutated && mutationType === 'ADD_DETAIL') {
               ctx.fillStyle = '#ffffff';
               ctx.beginPath();
@@ -112,80 +219,15 @@ export function generateProceduralLevelPair(themeId = 'lego_kingdom', targetDiff
         });
       }
     }
-  } else if (themeId === 'dense_landscape') {
-    // Sky & Mountain Landscape Background
-    const skyGrad = ctxA.createLinearGradient(0, 0, 0, height);
-    skyGrad.addColorStop(0, '#023e8a');
-    skyGrad.addColorStop(0.5, '#0077b6');
-    skyGrad.addColorStop(1, '#90e0ef');
-    ctxA.fillStyle = skyGrad;
-    ctxA.fillRect(0, 0, width, height);
-
-    // Mountain Peaks
-    ctxA.fillStyle = '#4a5568';
-    ctxA.beginPath();
-    ctxA.moveTo(0, height * 0.6);
-    ctxA.lineTo(width * 0.25, height * 0.2);
-    ctxA.lineTo(width * 0.5, height * 0.6);
-    ctxA.lineTo(width * 0.75, height * 0.15);
-    ctxA.lineTo(width, height * 0.6);
-    ctxA.lineTo(width, height);
-    ctxA.lineTo(0, height);
-    ctxA.fill();
-
-    // Snowcaps
-    ctxA.fillStyle = '#ffffff';
-    ctxA.beginPath();
-    ctxA.moveTo(width * 0.25, height * 0.2);
-    ctxA.lineTo(width * 0.2, height * 0.3);
-    ctxA.lineTo(width * 0.3, height * 0.3);
-    ctxA.fill();
-
-    // Dense Forest Pine Trees
-    for (let tx = 30; tx < width - 40; tx += 45) {
-      for (let ty = height * 0.55; ty < height - 60; ty += 50) {
-        const treeColor = randomChoice(['#1b4332', '#2d6a4f', '#40916c', '#52b788']);
-        objects.push({
-          id: `tree_${tx}_${ty}`,
-          type: 'PINE_TREE',
-          x: tx,
-          y: ty,
-          w: 24,
-          h: 40,
-          color: treeColor,
-          draw: (ctx, color, mutated = false, mutationType = '') => {
-            // Trunk
-            ctx.fillStyle = '#582f0e';
-            ctx.fillRect(tx + 9, ty + 25, 6, 15);
-
-            // Foliage Triangles
-            ctx.fillStyle = color;
-            ctx.beginPath();
-            ctx.moveTo(tx + 12, ty);
-            ctx.lineTo(tx, ty + 25);
-            ctx.lineTo(tx + 24, ty + 25);
-            ctx.fill();
-
-            if (mutated && mutationType === 'ADD_DETAIL') {
-              // Star on top of tree
-              ctx.fillStyle = '#ffea00';
-              ctx.beginPath();
-              ctx.arc(tx + 12, ty - 3, 4, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-        });
-      }
-    }
   } else {
-    // Default Fantasy Antique Shop Fallback
+    // Default Fallback
     ctxA.fillStyle = '#12002b';
     ctxA.fillRect(0, 0, width, height);
 
     for (let x = 60; x < width - 80; x += 100) {
       objects.push({
-        id: `antique_${x}`,
-        type: 'ANTIQUE',
+        id: `object_${x}`,
+        type: 'OBJECT',
         x,
         y: 250,
         w: 30,
@@ -211,7 +253,7 @@ export function generateProceduralLevelPair(themeId = 'lego_kingdom', targetDiff
   // STEP 3: CONTROLLED MUTATION ON CANVAS B ONLY AT TARGET BOUNDING BOX
   // -------------------------------------------------------------
   const diffCount = targetDifficulty === 'Easy' ? 3 : targetDifficulty === 'Medium' ? 5 : 7;
-  const candidateObjects = [...objects].sort(() => random() - 0.5).slice(0, diffCount);
+  const candidateObjects = [...objects].sort(() => random() - 0.5).slice(0, Math.min(diffCount, objects.length));
 
   const diffs = [];
 
