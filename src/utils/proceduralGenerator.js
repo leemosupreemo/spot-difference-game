@@ -249,11 +249,9 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   // -------------------------------------------------------------
   ctxB.drawImage(canvasA, 0, 0);
 
-  // -------------------------------------------------------------
-  // STEP 3: CONTROLLED MUTATION ON CANVAS B ONLY AT TARGET BOUNDING BOX
-  // -------------------------------------------------------------
-  const diffCount = targetDifficulty === 'Easy' ? 3 : targetDifficulty === 'Medium' ? 5 : 7;
-  const candidateObjects = [...objects].sort(() => random() - 0.5).slice(0, Math.min(diffCount, objects.length));
+  // STEP 3: CONTROLLED SINGLE MUTATION ON CANVAS B ONLY AT TARGET BOUNDING BOX
+  const diffCount = 1;
+  const candidateObjects = [...objects].sort(() => random() - 0.5).slice(0, 1);
 
   const diffs = [];
 

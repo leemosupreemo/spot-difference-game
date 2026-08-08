@@ -58,33 +58,24 @@ export default function App() {
 
   const rawLevel = levels.find(l => l.id === currentLevelId) || levels[0];
 
-  // Adjust level differences and target radiuses according to selected difficulty
+  // Enforce 1 single difference per image pair with hit radius scaled by difficulty
   const currentLevel = React.useMemo(() => {
-    let diffList = [...rawLevel.diffs];
+    const singleDiff = rawLevel.diffs[0] || { id: 1, x: 50, y: 50, radius: 6, hint: 'Spot the difference!' };
     let radiusMultiplier = 1.0;
 
     if (selectedDifficulty === 'Easy') {
-      diffList = diffList.slice(0, 3);
-      radiusMultiplier = 1.35;
+      radiusMultiplier = 1.4;
     } else if (selectedDifficulty === 'Medium') {
-      diffList = diffList.slice(0, 5);
       radiusMultiplier = 1.0;
     } else if (selectedDifficulty === 'Hard') {
-      // Add extra micro diffs for hard mode
-      if (diffList.length < 7) {
-        diffList.push(
-          { id: 6, x: 45, y: 15, radius: 4, hint: 'Check high top canopy micro-spot' },
-          { id: 7, x: 92, y: 88, radius: 4, hint: 'Check bottom corner edge detail' }
-        );
-      }
-      radiusMultiplier = 0.8;
+      radiusMultiplier = 0.7;
     }
 
     return {
       ...rawLevel,
       difficulty: selectedDifficulty,
-      totalDifferences: diffList.length,
-      diffs: diffList.map(d => ({ ...d, radius: Math.round(d.radius * radiusMultiplier) }))
+      totalDifferences: 1,
+      diffs: [{ ...singleDiff, radius: Math.round(singleDiff.radius * radiusMultiplier) }]
     };
   }, [rawLevel, selectedDifficulty]);
 

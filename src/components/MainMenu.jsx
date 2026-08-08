@@ -15,30 +15,30 @@ export default function MainMenu({
       name: 'EASY',
       color: 'var(--accent-green)',
       icon: '🟢',
-      diffCount: '3 Differences',
+      diffCount: '1 Single Difference',
       targetSize: 'Generous Hit Area',
       multiplier: '1.0x Score',
-      desc: 'Relaxed speed hunting, ideal for warmups & beginners.'
+      desc: 'Relaxed single difference speed hunting, ideal for warmups.'
     },
     {
       id: 'Medium',
       name: 'MEDIUM',
       color: 'var(--accent-gold)',
       icon: '🟡',
-      diffCount: '5 Differences',
+      diffCount: '1 Single Difference',
       targetSize: 'Balanced Precision',
       multiplier: '1.5x Score',
-      desc: 'Standard speedrun mode with tricky hidden details.'
+      desc: 'Standard speedrun mode with hidden single details.'
     },
     {
       id: 'Hard',
       name: 'HARD',
       color: 'var(--accent-pink)',
       icon: '🔴',
-      diffCount: '7 Differences',
-      targetSize: 'Pixel-Tight Precision',
+      diffCount: '1 Single Difference',
+      targetSize: 'Micro Pixel Precision',
       multiplier: '2.5x Score',
-      desc: 'Extreme speed test! 2s miss penalties and micro-differences.'
+      desc: 'Extreme speed test! Micro single difference and 3s miss penalty.'
     }
   ];
 
