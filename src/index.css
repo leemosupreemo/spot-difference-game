@@ -87,33 +87,33 @@ body {
   box-shadow: 0 6px 25px rgba(0, 240, 255, 0.6);
 }
 
-/* Side-by-side Image Container */
+/* Side-by-side Image Container - ALWAYS HORIZONTAL (2 COLUMNS) REGARDLESS OF SCREEN ORIENTATION */
 .game-viewport {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 12px;
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
   position: relative;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 600px) {
   .game-viewport {
-    grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 6px;
   }
 }
 
 .canvas-card {
   position: relative;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
   border: 2px solid var(--border-glass);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   cursor: crosshair;
   background: #000;
   transition: border-color 0.3s ease;
+  width: 100%;
 }
 
 .canvas-card:hover {
