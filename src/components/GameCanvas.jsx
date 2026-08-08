@@ -52,15 +52,20 @@ export default function GameCanvas({
     };
   }, [drawCanvases, level]);
 
-  // Handle click on either canvas
-  const handleCanvasClick = (e, containerRef) => {
+  // Handle click or touch on EITHER canvas (Original or Variant)
+  const handleCanvasTap = (e, containerRef) => {
     if (!containerRef.current || !level) return;
 
     const rect = containerRef.current.getBoundingClientRect();
-    const clickXPercent = ((e.clientX - rect.left) / rect.width) * 100;
-    const clickYPercent = ((e.clientY - rect.top) / rect.height) * 100;
+    const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX;
+    const clientY = e.clientY ?? e.changedTouches?.[0]?.clientY;
 
-    // Check hit against level diffs
+    if (clientX === undefined || clientY === undefined) return;
+
+    const clickXPercent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+    const clickYPercent = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
+
+    // Check hit against level diffs (works on Original or Variant)
     let hitFound = false;
 
     level.diffs.forEach(diff => {
@@ -134,7 +139,10 @@ export default function GameCanvas({
         <div
           ref={containerRefLeft}
           className="canvas-card"
-          onClick={(e) => handleCanvasClick(e, containerRefLeft)}
+          onClick={(e) => handleCanvasTap(e, containerRefLeft)}
+          onTouchEnd={(e) => {
+            handleCanvasTap(e, containerRefLeft);
+          }}
           onMouseMove={(e) => handleMouseMove(e, containerRefLeft)}
           onMouseLeave={handleMouseLeave}
         >
@@ -214,7 +222,10 @@ export default function GameCanvas({
         <div
           ref={containerRefRight}
           className="canvas-card"
-          onClick={(e) => handleCanvasClick(e, containerRefRight)}
+          onClick={(e) => handleCanvasTap(e, containerRefRight)}
+          onTouchEnd={(e) => {
+            handleCanvasTap(e, containerRefRight);
+          }}
           onMouseMove={(e) => handleMouseMove(e, containerRefRight)}
           onMouseLeave={handleMouseLeave}
         >
