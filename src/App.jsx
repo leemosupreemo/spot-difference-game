@@ -239,16 +239,18 @@ export default function App() {
     <div style={{ minHeight: '100vh', paddingBottom: '50px' }}>
       
       {/* Header Bar */}
-      <Header
-        muted={muted}
-        setMuted={setMuted}
-        onOpenLeaderboard={() => setProgressModalOpen(true)}
-        onOpenHelp={() => setHelpModalOpen(true)}
-        onRestartLevel={() => {
-          if (view === 'game') startLevel(currentLevelId);
-          else setView('menu');
-        }}
-      />
+      {view !== 'stats' && (
+        <Header
+          muted={muted}
+          setMuted={setMuted}
+          onOpenLeaderboard={() => setView('stats')}
+          onOpenHelp={() => setHelpModalOpen(true)}
+          onRestartLevel={() => {
+            if (view === 'game') startLevel(currentLevelId);
+            else setView('menu');
+          }}
+        />
+      )}
 
       {/* Main Navigation Routing */}
       {view === 'menu' ? (
@@ -258,8 +260,14 @@ export default function App() {
           selectedDifficulty={selectedDifficulty}
           setSelectedDifficulty={setSelectedDifficulty}
           onStartGame={handleStartGame}
-          onOpenProgress={() => setProgressModalOpen(true)}
+          onOpenProgress={() => setView('stats')}
           onOpenDebug={() => setDebugModalOpen(true)}
+        />
+      ) : view === 'stats' ? (
+        <ProgressModal
+          isOpen={true}
+          onClose={() => setView('menu')}
+          difficultyStats={difficultyStats}
         />
       ) : view === 'creator' ? (
         <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />
