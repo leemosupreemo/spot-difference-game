@@ -19,7 +19,7 @@ export const MUTATION_TYPES = [
 
 /**
  * Generates an Image Pair (Base vs Modified) with controlled, programmatic mutations.
- * Enforces: Image B is 100% pixel-identical to Image A EXCEPT for controlled target mutations.
+ * Difficulty scales SCENE VISUAL CLUTTER (150 -> 900 elements) and TARGET AREA SIZE (Large -> Micro).
  */
 export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetDifficulty = 'Medium', seed = Date.now()) {
   const width = 800;
@@ -45,6 +45,9 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
 
   const randomChoice = (arr) => arr[Math.floor(random() * arr.length)];
 
+  // Scale background clutter & visual noise by difficulty
+  const noiseCount = targetDifficulty === 'Easy' ? 150 : targetDifficulty === 'Medium' ? 450 : 950;
+
   // Track discrete objects with coordinates & bounding boxes
   const objects = [];
 
@@ -56,12 +59,12 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
     ctxA.fillStyle = '#2b1b17';
     ctxA.fillRect(0, 0, width, height);
 
-    // Draw 800 dense autumn leaves & gravel pebbles (high visual noise)
+    // Draw dense autumn leaves & gravel pebbles (density scaled by difficulty)
     const leafColors = ['#d94e1f', '#b83b1d', '#9e2a2b', '#e07a5f', '#f4a261', '#e9c46a', '#3a5a40'];
-    for (let i = 0; i < 600; i++) {
+    for (let i = 0; i < noiseCount; i++) {
       const lx = random() * width;
       const ly = random() * height;
-      const lSize = 6 + random() * 10;
+      const lSize = 4 + random() * 8;
       ctxA.fillStyle = randomChoice(leafColors);
       ctxA.beginPath();
       ctxA.ellipse(lx, ly, lSize, lSize / 2, random() * Math.PI, 0, Math.PI * 2);
@@ -69,40 +72,40 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
     }
 
     // Camouflaged Target Sniper Objects
-    // 1. Camouflaged Calico Cat
+    // 1. Large Object (Easy)
     const catX = width * 0.42;
     const catY = height * 0.58;
     objects.push({
       id: 'sniper_cat',
       type: 'CAMOUFLAGED_CAT',
+      sizeCategory: 'Large',
       x: catX,
       y: catY,
-      w: 22,
-      h: 16,
+      w: 36,
+      h: 26,
       color: '#e07a5f',
       draw: (ctx, color, mutated = false, mutationType = '') => {
-        // Cat Body blending with autumn leaf colors
         ctx.fillStyle = mutated && mutationType === 'COLOR_SHIFT' ? '#2b1b17' : '#d94e1f';
         ctx.beginPath();
-        ctx.ellipse(catX + 11, catY + 8, 11, 7, -Math.PI / 6, 0, Math.PI * 2);
+        ctx.ellipse(catX + 18, catY + 13, 18, 11, -Math.PI / 6, 0, Math.PI * 2);
         ctx.fill();
 
-        // Cat Ears
         ctx.fillStyle = '#f4a261';
         ctx.beginPath();
-        ctx.moveTo(catX + 3, catY + 2);
-        ctx.lineTo(catX + 7, catY - 3);
-        ctx.lineTo(catX + 9, catY + 4);
+        ctx.moveTo(catX + 4, catY + 3);
+        ctx.lineTo(catX + 11, catY - 5);
+        ctx.lineTo(catX + 14, catY + 6);
         ctx.fill();
       }
     });
 
-    // 2. Hidden Owl in Tree Trunk
+    // 2. Medium Object (Medium)
     const owlX = width * 0.78;
     const owlY = height * 0.25;
     objects.push({
       id: 'sniper_owl',
       type: 'HIDDEN_OWL',
+      sizeCategory: 'Medium',
       x: owlX,
       y: owlY,
       w: 20,
@@ -114,7 +117,6 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
         ctx.ellipse(owlX + 10, owlY + 12, 10, 12, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Owl Eyes
         ctx.fillStyle = '#ffea00';
         ctx.beginPath();
         ctx.arc(owlX + 6, owlY + 8, 3, 0, Math.PI * 2);
@@ -123,42 +125,24 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
       }
     });
 
-    // 3. Dropped Gold Ring in Gravel
+    // 3. Micro Object (Hard / Extreme)
     const ringX = width * 0.18;
     const ringY = height * 0.72;
     objects.push({
       id: 'sniper_ring',
       type: 'DROPPED_GOLD_RING',
+      sizeCategory: 'Micro',
       x: ringX,
       y: ringY,
-      w: 12,
-      h: 12,
+      w: 8,
+      h: 8,
       color: '#ffea00',
       draw: (ctx, color, mutated = false, mutationType = '') => {
         ctx.strokeStyle = mutated && mutationType === 'COLOR_SHIFT' ? '#888' : '#ffea00';
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.arc(ringX + 6, ringY + 6, 5, 0, Math.PI * 2);
+        ctx.arc(ringX + 4, ringY + 4, 3, 0, Math.PI * 2);
         ctx.stroke();
-      }
-    });
-
-    // 4. Camouflaged Moss Frog
-    const frogX = width * 0.62;
-    const frogY = height * 0.82;
-    objects.push({
-      id: 'sniper_frog',
-      type: 'CAMOUFLAGED_FROG',
-      x: frogX,
-      y: frogY,
-      w: 18,
-      h: 14,
-      color: '#3a5a40',
-      draw: (ctx, color, mutated = false, mutationType = '') => {
-        ctx.fillStyle = mutated && mutationType === 'COLOR_SHIFT' ? '#2b1b17' : '#3a5a40';
-        ctx.beginPath();
-        ctx.ellipse(frogX + 9, frogY + 7, 9, 6, 0, 0, Math.PI * 2);
-        ctx.fill();
       }
     });
   } else if (themeId === 'lego_kingdom') {
@@ -166,33 +150,32 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
     ctxA.fillStyle = '#2b2b36';
     ctxA.fillRect(0, 0, width, height);
 
-    // Green Lego Plate Floor
     ctxA.fillStyle = '#2e7d32';
-    ctxA.fillRect(0, height * 0.5, width, height * 0.5);
+    ctxA.fillRect(0, height * 0.45, width, height * 0.55);
 
     // Draw Lego Stud Grid Floor
     ctxA.fillStyle = '#1b5e20';
-    for (let gx = 10; gx < width; gx += 20) {
-      for (let gy = height * 0.5 + 10; gy < height; gy += 20) {
+    for (let gx = 8; gx < width; gx += 16) {
+      for (let gy = height * 0.45 + 8; gy < height; gy += 16) {
         ctxA.beginPath();
-        ctxA.arc(gx, gy, 4, 0, Math.PI * 2);
+        ctxA.arc(gx, gy, 3, 0, Math.PI * 2);
         ctxA.fill();
       }
     }
 
-    // Dense Lego Castle / Town Wall Bricks
     const brickColors = ['#e53935', '#1e88e5', '#fdd835', '#43a047', '#fb8c00', '#8e24aa'];
-    const brickW = 32;
-    const brickH = 16;
+    const brickW = targetDifficulty === 'Easy' ? 44 : targetDifficulty === 'Medium' ? 28 : 14;
+    const brickH = targetDifficulty === 'Easy' ? 22 : targetDifficulty === 'Medium' ? 14 : 8;
 
-    for (let bx = 40; bx < width - 60; bx += 36) {
-      for (let by = 100; by < height * 0.5 - 20; by += 20) {
+    for (let bx = 30; bx < width - 40; bx += (brickW + 4)) {
+      for (let by = 90; by < height * 0.45 - 15; by += (brickH + 4)) {
         const bColor = randomChoice(brickColors);
         const objId = `lego_${bx}_${by}`;
 
         objects.push({
           id: objId,
           type: 'LEGO_BRICK',
+          sizeCategory: targetDifficulty === 'Easy' ? 'Large' : targetDifficulty === 'Medium' ? 'Medium' : 'Micro',
           x: bx,
           y: by,
           w: brickW,
@@ -205,14 +188,10 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
             ctx.lineWidth = 1;
             ctx.strokeRect(bx, by, brickW, brickH);
 
-            ctx.fillStyle = color;
-            ctx.fillRect(bx + 4, by - 4, 6, 4);
-            ctx.fillRect(bx + 20, by - 4, 6, 4);
-
             if (mutated && mutationType === 'ADD_DETAIL') {
               ctx.fillStyle = '#ffffff';
               ctx.beginPath();
-              ctx.arc(bx + 16, by + 8, 4, 0, Math.PI * 2);
+              ctx.arc(bx + brickW / 2, by + brickH / 2, 3, 0, Math.PI * 2);
               ctx.fill();
             }
           }
@@ -228,6 +207,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
       objects.push({
         id: `object_${x}`,
         type: 'OBJECT',
+        sizeCategory: 'Medium',
         x,
         y: 250,
         w: 30,
@@ -249,9 +229,18 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   // -------------------------------------------------------------
   ctxB.drawImage(canvasA, 0, 0);
 
-  // STEP 3: CONTROLLED SINGLE MUTATION ON CANVAS B ONLY AT TARGET BOUNDING BOX
-  const diffCount = 1;
-  const candidateObjects = [...objects].sort(() => random() - 0.5).slice(0, 1);
+  // -------------------------------------------------------------
+  // STEP 3: CONTROLLED SINGLE MUTATION SELECTED BY TARGET DIFFICULTY SIZE
+  // -------------------------------------------------------------
+  const filteredCandidates = objects.filter(o => {
+    if (targetDifficulty === 'Easy') return o.sizeCategory === 'Large' || o.w >= 24;
+    if (targetDifficulty === 'Hard') return o.sizeCategory === 'Micro' || o.w <= 16;
+    return true;
+  });
+
+  const candidateObjects = (filteredCandidates.length > 0 ? filteredCandidates : objects)
+    .sort(() => random() - 0.5)
+    .slice(0, 1);
 
   const diffs = [];
 
@@ -285,7 +274,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
 
     const centerXPercent = Math.round(((targetObj.x + targetObj.w / 2) / width) * 100);
     const centerYPercent = Math.round(((targetObj.y + targetObj.h / 2) / height) * 100);
-    const radiusPercent = Math.max(4, Math.round((Math.max(targetObj.w, targetObj.h) / width) * 100 * 1.1));
+    const radiusPercent = Math.max(3, Math.round((Math.max(targetObj.w, targetObj.h) / width) * 100 * 1.1));
 
     diffs.push({
       id: index + 1,
@@ -309,7 +298,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
     category: SCENE_THEMES.find(t => t.id === themeId)?.category || 'Procedural',
     difficulty: targetDifficulty,
     difficultyMetric: areaRatio.toFixed(3) + '% area ratio',
-    totalDifferences: diffs.length,
+    totalDifferences: 1,
     bgGradient: ['#0b091a', '#1e1035'],
     accentColor: '#00f0ff',
     diffs,

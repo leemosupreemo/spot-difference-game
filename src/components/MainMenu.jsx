@@ -1,5 +1,5 @@
 import React from 'react';
-import { Eye, Play, Award, Zap, ShieldAlert, Sparkles, CheckCircle2, Trophy } from 'lucide-react';
+import { Eye, Play, Award, Zap, ShieldAlert, Sparkles, CheckCircle2, Trophy, Flame } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function MainMenu({
@@ -15,44 +15,47 @@ export default function MainMenu({
       name: 'EASY',
       color: 'var(--accent-green)',
       icon: '🟢',
-      diffCount: '1 Single Difference',
-      targetSize: 'Generous Hit Area',
+      diffType: '1 Larger Difference',
+      sceneNoise: 'Moderate Visual Detail',
+      targetSize: 'Generous Target Radius',
       multiplier: '1.0x Score',
-      desc: 'Relaxed single difference speed hunting, ideal for warmups.'
+      desc: 'Larger change area on a moderately clear scene. Perfect for warmups.'
     },
     {
       id: 'Medium',
       name: 'MEDIUM',
       color: 'var(--accent-gold)',
       icon: '🟡',
-      diffCount: '1 Single Difference',
-      targetSize: 'Balanced Precision',
+      diffType: '1 Subtle Difference',
+      sceneNoise: 'Dense Object Clutter',
+      targetSize: 'Standard Target Radius',
       multiplier: '1.5x Score',
-      desc: 'Standard speedrun mode with hidden single details.'
+      desc: 'Subtle single difference hidden in dense object scenes.'
     },
     {
       id: 'Hard',
-      name: 'HARD',
+      name: 'HARD / SNIPER',
       color: 'var(--accent-pink)',
       icon: '🔴',
-      diffCount: '1 Single Difference',
-      targetSize: 'Micro Pixel Precision',
+      diffType: '1 Micro Difference',
+      sceneNoise: 'Extreme Visual Noise',
+      targetSize: 'Pixel-Tight Target Radius',
       multiplier: '2.5x Score',
-      desc: 'Extreme speed test! Micro single difference and 3s miss penalty.'
+      desc: 'Micro-tiny difference hidden inside hyper-cluttered grounds & camouflage!'
     }
   ];
 
   return (
     <div style={{
       maxWidth: '900px',
-      margin: '40px auto',
+      margin: '35px auto',
       padding: '0 20px',
       textAlign: 'center',
       animation: 'hitPulse 0.4s ease-out'
     }}>
       
       {/* Main Logo & Title Header */}
-      <div style={{ marginBottom: '32px' }}>
+      <div style={{ marginBottom: '28px' }}>
         <div style={{
           width: '76px',
           height: '76px',
@@ -61,25 +64,25 @@ export default function MainMenu({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 20px auto',
+          margin: '0 auto 16px auto',
           boxShadow: '0 0 30px rgba(0, 240, 255, 0.5)'
         }}>
           <Eye size={42} color="#000" strokeWidth={2.5} />
         </div>
 
         <h1 style={{
-          fontSize: '2.8rem',
+          fontSize: '2.6rem',
           fontWeight: 900,
           letterSpacing: '-0.5px',
           background: 'linear-gradient(90deg, #fff, var(--accent-cyan), var(--accent-gold))',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
-          marginBottom: '8px'
+          marginBottom: '6px'
         }}>
           DIFF HUNTER
         </h1>
-        <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', maxWidth: '500px', margin: '0 auto' }}>
-          Select your difficulty and hit <strong>Start Game</strong>. The millisecond timer starts the exact moment your first pair appears!
+        <p style={{ fontSize: '1rem', color: 'var(--text-muted)', maxWidth: '520px', margin: '0 auto' }}>
+          Select your difficulty below. Each stage features <strong>1 single difference</strong>—difficulty determines image clutter & change scale!
         </p>
       </div>
 
@@ -87,8 +90,8 @@ export default function MainMenu({
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '20px',
-        marginBottom: '36px'
+        gap: '18px',
+        marginBottom: '32px'
       }}>
         {difficulties.map(diff => {
           const isSelected = selectedDifficulty === diff.id;
@@ -101,7 +104,7 @@ export default function MainMenu({
               }}
               className="glass-panel"
               style={{
-                padding: '24px 20px',
+                padding: '22px 18px',
                 borderRadius: '20px',
                 cursor: 'pointer',
                 border: isSelected ? `2px solid ${diff.color}` : '1px solid var(--border-glass)',
@@ -129,21 +132,24 @@ export default function MainMenu({
                 </div>
               )}
 
-              <div style={{ fontSize: '1.8rem', marginBottom: '10px' }}>
+              <div style={{ fontSize: '1.7rem', marginBottom: '8px' }}>
                 {diff.icon}
               </div>
 
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: diff.color, marginBottom: '6px' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: diff.color, marginBottom: '6px' }}>
                 {diff.name}
               </h3>
 
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '16px', lineHeight: 1.4 }}>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '14px', lineHeight: 1.4 }}>
                 {diff.desc}
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.8rem', fontWeight: 700 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', fontSize: '0.78rem', fontWeight: 700 }}>
                 <span style={{ color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Zap size={14} color={diff.color} /> {diff.diffCount}
+                  <Flame size={14} color={diff.color} /> {diff.diffType}
+                </span>
+                <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Zap size={14} color="var(--accent-cyan)" /> {diff.sceneNoise}
                 </span>
                 <span style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Sparkles size={14} color="var(--accent-gold)" /> {diff.multiplier}
@@ -155,8 +161,8 @@ export default function MainMenu({
         })}
       </div>
 
-      {/* Primary Actions Grid */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', maxWidth: '420px', margin: '0 auto' }}>
+      {/* Primary Actions */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxWidth: '400px', margin: '0 auto' }}>
         
         {/* START GAME BUTTON */}
         <button
@@ -167,13 +173,13 @@ export default function MainMenu({
           }}
           style={{
             padding: '16px 28px',
-            fontSize: '1.25rem',
+            fontSize: '1.2rem',
             justifyContent: 'center',
             borderRadius: '16px',
             boxShadow: '0 6px 30px rgba(0, 240, 255, 0.5)'
           }}
         >
-          <Play size={24} fill="#000" /> START GAME NOW
+          <Play size={22} fill="#000" /> START SPEEDRUN
         </button>
 
         {/* PROGRESS & STATS BUTTON */}
@@ -184,15 +190,15 @@ export default function MainMenu({
             onOpenProgress();
           }}
           style={{
-            padding: '14px 24px',
-            fontSize: '1rem',
+            padding: '12px 22px',
+            fontSize: '0.95rem',
             justifyContent: 'center',
             borderColor: 'var(--accent-gold)',
             color: 'var(--accent-gold)',
             borderRadius: '14px'
           }}
         >
-          <Trophy size={20} /> View Progress & Speed Records
+          <Trophy size={18} /> View Progress & Speed Records
         </button>
 
         {/* CUSTOM LEVEL MAKER BUTTON */}
@@ -203,13 +209,13 @@ export default function MainMenu({
             onOpenCreator();
           }}
           style={{
-            padding: '12px 20px',
-            fontSize: '0.9rem',
+            padding: '10px 18px',
+            fontSize: '0.85rem',
             justifyContent: 'center',
             borderRadius: '14px'
           }}
         >
-          <Sparkles size={18} /> Custom Level Maker
+          <Sparkles size={16} /> Custom Level Maker
         </button>
 
       </div>
