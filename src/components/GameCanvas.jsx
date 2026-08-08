@@ -44,7 +44,13 @@ export default function GameCanvas({
 
   useEffect(() => {
     drawCanvases();
-  }, [drawCanvases]);
+    const t1 = setTimeout(drawCanvases, 50);
+    const t2 = setTimeout(drawCanvases, 200);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [drawCanvases, level]);
 
   // Handle click on either canvas
   const handleCanvasClick = (e, containerRef) => {
