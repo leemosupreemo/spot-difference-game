@@ -1,0 +1,94 @@
+[
+  {
+    "id": "photo_antique_market",
+    "title": "Cluttered Antique Flea Market",
+    "category": "Real Photo",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42,
+        "y": 65,
+        "radius": 4,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (42%, 65%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_forest_foliage",
+    "title": "Autumn Camouflage Forest Litter",
+    "category": "Nature Hunter",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 68,
+        "y": 34,
+        "radius": 3,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (68%, 34%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_lego_minifigs",
+    "title": "Micro Toy Brick City Clutter",
+    "category": "Toys",
+    "difficulty": "Medium",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25,
+        "y": 78,
+        "radius": 4,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (25%, 78%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_cyber_neon",
+    "title": "Shinjuku Neon Signs & Wiring",
+    "category": "Cyberpunk",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55,
+        "y": 22,
+        "radius": 3,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (55%, 22%)"
+      }
+    ]
+  }
+]
