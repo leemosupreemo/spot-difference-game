@@ -149,17 +149,17 @@ export default function VictoryModal({
           <button
             className="glass-btn"
             onClick={() => { sounds.playTap(); onRestart(); }}
-            style={{ flex: 1, justifyContent: 'center' }}
+            style={{ flex: 1, justifyContent: 'center', fontSize: '1.15rem', fontWeight: 800, padding: '14px' }}
           >
-            <RotateCcw size={18} /> Retry
+            <RotateCcw size={20} /> Retry
           </button>
 
           <button
             className="glass-btn glass-btn-primary"
             onClick={() => { sounds.playTap(); onNextLevel(); }}
-            style={{ flex: 1.4, justifyContent: 'center' }}
+            style={{ flex: 1.4, justifyContent: 'center', fontSize: '1.25rem', fontWeight: 900, padding: '14px' }}
           >
-            Next Pair <ArrowRight size={18} />
+            Next Pair <ArrowRight size={20} />
           </button>
         </div>
 

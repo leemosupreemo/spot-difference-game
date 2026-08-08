@@ -80,9 +80,9 @@ export default function HelpModal({ isOpen, onClose }) {
         <button
           className="glass-btn glass-btn-primary"
           onClick={() => { sounds.playTap(); onClose(); }}
-          style={{ width: '100%', justifyContent: 'center' }}
+          style={{ width: '100%', justifyContent: 'center', fontSize: '1.25rem', fontWeight: 900, padding: '16px', borderRadius: '16px' }}
         >
-          Got It! Let's Hunt Diffs
+          Got It!
         </button>
 
       </div>
