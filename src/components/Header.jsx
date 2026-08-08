@@ -15,65 +15,63 @@ export default function Header({
 
   return (
     <header className="glass-panel" style={{
-      paddingTop: 'calc(env(safe-area-inset-top, 0px) + 14px)',
-      paddingBottom: '14px',
-      paddingLeft: '24px',
-      paddingRight: '24px',
-      margin: '0 20px 20px 20px',
-      borderRadius: '0 0 20px 20px'
+      padding: '12px 18px',
+      margin: '0 auto 16px auto',
+      maxWidth: '1300px',
+      borderRadius: '16px'
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
         
         {/* Top Header Title & Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
             background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-pink))',
-            padding: '8px',
-            borderRadius: '12px',
+            padding: '6px',
+            borderRadius: '10px',
             display: 'flex',
-            boxShadow: '0 0 15px rgba(0, 240, 255, 0.4)'
+            boxShadow: '0 0 12px rgba(0, 240, 255, 0.4)'
           }}>
-            <Eye size={24} color="#000" strokeWidth={2.5} />
+            <Eye size={20} color="#000" strokeWidth={2.5} />
           </div>
           <div>
-            <h1 style={{ fontSize: '1.4rem', fontWeight: 800, background: 'linear-gradient(90deg, #fff, var(--accent-cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            <h1 style={{ fontSize: '1.2rem', fontWeight: 800, lineHeight: 1.1, background: 'linear-gradient(90deg, #fff, var(--accent-cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               DIFF HUNTER
             </h1>
-            <span style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', fontWeight: 600, letterSpacing: '0.5px' }}>
-              SPOT THE DIFFERENCE SPEEDRUN
+            <span style={{ fontSize: '0.68rem', color: 'var(--accent-gold)', fontWeight: 700, letterSpacing: '0.5px' }}>
+              SPEEDRUN
             </span>
           </div>
         </div>
 
         {/* Action Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button
             className="glass-btn"
             onClick={onOpenLeaderboard}
             title="Progress & Records"
-            style={{ padding: '10px 14px' }}
+            style={{ padding: '8px 12px', fontSize: '0.8rem' }}
           >
-            <Award size={18} color="var(--accent-gold)" />
-            <span style={{ fontSize: '0.85rem' }}>Stats</span>
+            <Award size={16} color="var(--accent-gold)" />
+            <span>Stats</span>
           </button>
 
           <button
             className="glass-btn"
             onClick={onOpenHelp}
             title="How to Play"
-            style={{ padding: '10px 14px' }}
+            style={{ padding: '8px 12px', fontSize: '0.8rem' }}
           >
-            <Info size={18} />
-            <span style={{ fontSize: '0.85rem' }}>Help</span>
+            <Info size={16} />
+            <span>Help</span>
           </button>
 
           <button
             className="glass-btn"
             onClick={toggleSound}
             title={muted ? "Unmute Sound" : "Mute Sound"}
-            style={{ padding: '10px' }}
+            style={{ padding: '8px 10px' }}
           >
-            {muted ? <VolumeX size={18} color="var(--accent-pink)" /> : <Volume2 size={18} color="var(--accent-cyan)" />}
+            {muted ? <VolumeX size={16} color="var(--accent-pink)" /> : <Volume2 size={16} color="var(--accent-cyan)" />}
           </button>
         </div>
 

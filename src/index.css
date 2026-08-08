@@ -36,6 +36,10 @@ body {
   font-family: var(--font-main);
   min-height: 100vh;
   overflow-x: hidden;
+  padding-top: max(env(safe-area-inset-top), 24px);
+  padding-bottom: max(env(safe-area-inset-bottom), 16px);
+  padding-left: max(env(safe-area-inset-left), 8px);
+  padding-right: max(env(safe-area-inset-right), 8px);
 }
 
 /* Glassmorphic Container Card */
