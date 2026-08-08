@@ -1,4 +1,5 @@
-// Web Audio API Sound Synthesizer for Spot the Difference Game
+// Web Audio API & Native Capacitor Haptic Controller for Mobile (iOS & Android)
+import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 
 class SoundController {
   constructor() {
@@ -27,8 +28,26 @@ class SoundController {
     return this.muted;
   }
 
+  // Mobile Light Haptic Feedback
+  triggerHaptic(type = 'light') {
+    try {
+      if (type === 'success') {
+        Haptics.impact({ style: ImpactStyle.Medium });
+      } else if (type === 'error') {
+        Haptics.notification({ type: NotificationType.Error });
+      } else if (type === 'win') {
+        Haptics.notification({ type: NotificationType.Success });
+      } else {
+        Haptics.impact({ style: ImpactStyle.Light });
+      }
+    } catch (e) {
+      // Fallback on non-mobile web
+    }
+  }
+
   // Soft click/tap sound
   playTap() {
+    this.triggerHaptic('light');
     if (this.muted) return;
     this.init();
     if (!this.ctx) return;
@@ -56,6 +75,7 @@ class SoundController {
 
   // Harmonic success chime when difference is found
   playSuccess() {
+    this.triggerHaptic('success');
     if (this.muted) return;
     this.init();
     if (!this.ctx) return;
@@ -88,6 +108,7 @@ class SoundController {
 
   // Error buzz sound for missed tap
   playError() {
+    this.triggerHaptic('error');
     if (this.muted) return;
     this.init();
     if (!this.ctx) return;
@@ -116,6 +137,7 @@ class SoundController {
 
   // Magic hint sparkle sound
   playHint() {
+    this.triggerHaptic('light');
     if (this.muted) return;
     this.init();
     if (!this.ctx) return;
@@ -147,6 +169,7 @@ class SoundController {
 
   // Level complete fanfare
   playWin() {
+    this.triggerHaptic('win');
     if (this.muted) return;
     this.init();
     if (!this.ctx) return;
