@@ -179,15 +179,15 @@ export default function MainMenu({
                   </div>
                 )}
 
-                <div style={{ fontSize: '1.6rem', marginBottom: '8px' }}>
+                <div style={{ fontSize: '2.8rem', marginBottom: '10px' }}>
                   {diff.icon}
                 </div>
 
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: diff.color, marginBottom: '4px' }}>
+                <h3 style={{ fontSize: '2.4rem', fontWeight: 900, color: diff.color, marginBottom: '8px', letterSpacing: '-0.5px' }}>
                   {diff.name}
                 </h3>
 
-                <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
+                <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.45, fontWeight: 600 }}>
                   {diff.desc}
                 </p>
               </div>

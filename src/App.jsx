@@ -284,15 +284,16 @@ export default function App() {
             </button>
 
             <span style={{
-              fontSize: '0.8rem',
-              fontWeight: 800,
-              padding: '4px 14px',
-              borderRadius: '12px',
-              background: selectedDifficulty === 'Easy' ? 'rgba(0,255,135,0.15)' : selectedDifficulty === 'Medium' ? 'rgba(255,183,3,0.15)' : 'rgba(255,0,127,0.15)',
+              fontSize: '1.2rem',
+              fontWeight: 900,
+              padding: '6px 18px',
+              borderRadius: '14px',
+              background: selectedDifficulty === 'Easy' ? 'rgba(0,255,135,0.2)' : selectedDifficulty === 'Medium' ? 'rgba(255,183,3,0.2)' : 'rgba(255,0,127,0.2)',
               color: selectedDifficulty === 'Easy' ? 'var(--accent-green)' : selectedDifficulty === 'Medium' ? 'var(--accent-gold)' : 'var(--accent-pink)',
-              border: '1px solid rgba(255,255,255,0.1)'
+              border: '1.5px solid rgba(255,255,255,0.2)',
+              letterSpacing: '0.5px'
             }}>
-              DIFFICULTY: {selectedDifficulty.toUpperCase()} ({currentLevel.totalDifferences} Diffs)
+              {selectedDifficulty.toUpperCase()} MODE
             </span>
           </div>
 
