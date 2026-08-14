@@ -2,11 +2,8 @@
 // Generates Clean 1:1 Base Image -> Guaranteed Single Visible Mutation -> DataURL Cache
 
 export const SCENE_THEMES = [
-  { id: 'find_the_sniper', title: 'Find The Sniper: Camouflage', category: 'Extreme Hunter' },
-  { id: 'lego_kingdom', title: 'Lego Micro Kingdom', category: 'Toys & Bricks' },
-  { id: 'dense_landscape', title: 'Alpine Meadow & Forest', category: 'Landscape' },
-  { id: 'antique_shop', title: 'Magical Antique Shop', category: 'Fantasy' },
-  { id: 'cyber_arcade', title: 'Cyberpunk Arcade Alley', category: 'Cyberpunk' }
+  { id: 'find_the_sniper', title: 'Photography', category: 'Photographic' },
+  { id: 'abstract_animated', title: 'Fantastical', category: 'Illustrated' }
 ];
 
 export const MUTATION_TYPES = [

@@ -109,19 +109,25 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
   };
 
   return (
-    <div style={{
-      position: 'fixed',
-      inset: 0,
-      background: 'rgba(5, 6, 12, 0.88)',
-      backdropFilter: 'blur(16px)',
-      WebkitBackdropFilter: 'blur(16px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 100,
-      padding: '20px'
-    }}>
-      <div className="glass-panel" style={{
+    <div
+      onClick={() => { sounds.playTap(); onClose(); }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(5, 6, 12, 0.88)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 100,
+        padding: '20px'
+      }}
+    >
+      <div
+        className="glass-panel"
+        onClick={(e) => e.stopPropagation()}
+        style={{
         maxWidth: '780px',
         width: '100%',
         maxHeight: '90vh',
@@ -130,7 +136,7 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
         padding: '28px',
         border: '1px solid rgba(0, 240, 255, 0.4)',
         boxShadow: '0 0 40px rgba(0, 240, 255, 0.25)',
-        animation: 'hitPulse 0.3s ease-out'
+        animation: 'pageFadeIn 0.12s ease-out'
       }}>
         
         {/* Header */}

@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { sounds } from '../utils/audio';
 import { Search, CheckCircle2, AlertCircle } from 'lucide-react';
+import { logApp, auditDOMState } from '../utils/logger';
+import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 
 export default function GameCanvas({
   level,
@@ -8,7 +10,8 @@ export default function GameCanvas({
   onDiffFound,
   onMissTap,
   activeHintId,
-  magnifierEnabled
+  magnifierEnabled,
+  debugMode = false
 }) {
   const canvasRefLeft = useRef(null);
   const canvasRefRight = useRef(null);
@@ -18,6 +21,11 @@ export default function GameCanvas({
   const [misses, setMisses] = useState([]);
   const [speedPopups, setSpeedPopups] = useState([]);
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100, visible: false });
+
+  useEffect(() => {
+    logApp('INFO', `[GameCanvasMounted] Level: ${level?.id} Title: ${level?.title}`);
+    auditDOMState(`GameCanvasMounted_${level?.id || 'unknown'}`);
+  }, [level?.id]);
 
   // Render original and modified canvases
   const drawCanvases = useCallback(() => {
@@ -44,17 +52,31 @@ export default function GameCanvas({
 
   useEffect(() => {
     drawCanvases();
-    const t1 = setTimeout(drawCanvases, 50);
-    const t2 = setTimeout(drawCanvases, 200);
+    const t1 = setTimeout(() => {
+      drawCanvases();
+      auditDOMState('DrawCanvases_50ms');
+    }, 50);
+    const t2 = setTimeout(() => {
+      drawCanvases();
+      auditDOMState('DrawCanvases_200ms');
+    }, 200);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
     };
   }, [drawCanvases, level]);
 
+  const lastTapTimeRef = useRef(0);
+
   // Handle click or touch on EITHER canvas (Original or Variant)
   const handleCanvasTap = (e, containerRef) => {
     if (!containerRef.current || !level) return;
+
+    const now = Date.now();
+    if (now - lastTapTimeRef.current < 250) {
+      return; // Ignore duplicate synthetic touch/click within 250ms
+    }
+    lastTapTimeRef.current = now;
 
     const rect = containerRef.current.getBoundingClientRect();
     const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX;
@@ -111,23 +133,32 @@ export default function GameCanvas({
     }
   };
 
-  // Mouse move for synchronized magnifier lens
-  const handleMouseMove = (e, containerRef) => {
+  // Handle mouse and touch dragging for synchronized magnifying lens
+  const handlePointerMove = (e, containerRef) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const clientX = e.clientX ?? e.touches?.[0]?.clientX ?? e.changedTouches?.[0]?.clientX;
+    const clientY = e.clientY ?? e.touches?.[0]?.clientY ?? e.changedTouches?.[0]?.clientY;
 
-    if (x >= 0 && x <= 100 && y >= 0 && y <= 100) {
-      setCursorPos({ x, y, visible: true });
-    } else {
-      setCursorPos(prev => ({ ...prev, visible: false }));
-    }
+    if (clientX === undefined || clientY === undefined) return;
+
+    const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
+
+    setCursorPos({ x, y, visible: true });
   };
 
   const handleMouseLeave = () => {
     setCursorPos(prev => ({ ...prev, visible: false }));
   };
+
+  const leftBgUrl = level?.baseImage
+    ? resolveAssetUrl(level.baseImage)
+    : canvasRefLeft.current?.toDataURL();
+
+  const rightBgUrl = level?.variantImage
+    ? resolveAssetUrl(level.variantImage)
+    : canvasRefRight.current?.toDataURL();
 
   return (
     <div style={{ width: '100%' }}>
@@ -143,20 +174,29 @@ export default function GameCanvas({
           onTouchEnd={(e) => {
             handleCanvasTap(e, containerRefLeft);
           }}
-          onMouseMove={(e) => handleMouseMove(e, containerRefLeft)}
+          onMouseMove={(e) => handlePointerMove(e, containerRefLeft)}
+          onTouchMove={(e) => handlePointerMove(e, containerRefLeft)}
           onMouseLeave={handleMouseLeave}
+          onTouchCancel={handleMouseLeave}
         >
-          <div style={{
-            position: 'absolute', top: 12, left: 12, zIndex: 5,
-            background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)',
-            padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem',
-            fontWeight: 700, letterSpacing: '0.5px', color: 'var(--accent-cyan)',
-            border: '1px solid rgba(0, 240, 255, 0.3)'
-          }}>
-            ORIGINAL
-          </div>
-
           <canvas ref={canvasRefLeft} className="canvas-element" />
+          {level?.baseImage && (
+            <img
+              src={resolveAssetUrl(level.baseImage)}
+              alt={level.title || 'Original Scene'}
+              className="canvas-element"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: 1,
+                borderRadius: 'inherit'
+              }}
+            />
+          )}
 
           {/* Render Found Differences Markers */}
           {level.diffs.map(diff => {
@@ -172,16 +212,21 @@ export default function GameCanvas({
             );
           })}
 
-          {/* Hint Radar Overlay */}
-          {activeHintId && (
-            <div
-              className="hint-radar"
-              style={{
-                left: `${level.diffs.find(d => d.id === activeHintId)?.x}%`,
-                top: `${level.diffs.find(d => d.id === activeHintId)?.y}%`
-              }}
-            />
-          )}
+          {/* Hint Radar Overlay (Exact Difference Pinpoint - ONLY WHEN HINT BUTTON TAPPED) */}
+          {activeHintId && level?.diffs?.map(diff => {
+            if (foundDiffs.includes(diff.id) || activeHintId !== diff.id) return null;
+            return (
+              <div
+                key={`left-hint-radar-${diff.id}`}
+                className="hint-radar"
+                style={{
+                  left: `${diff.x}%`,
+                  top: `${diff.y}%`,
+                  zIndex: 8
+                }}
+              />
+            );
+          })}
 
           {/* Temporary Miss Markers */}
           {misses.map(miss => (
@@ -210,9 +255,10 @@ export default function GameCanvas({
               style={{
                 left: `${cursorPos.x}%`,
                 top: `${cursorPos.y}%`,
-                backgroundImage: `url(${canvasRefLeft.current?.toDataURL()})`,
+                backgroundImage: `url(${leftBgUrl})`,
                 backgroundPosition: `${cursorPos.x}% ${cursorPos.y}%`,
-                backgroundSize: '250%'
+                backgroundSize: '250%',
+                zIndex: 10
               }}
             />
           )}
@@ -226,20 +272,29 @@ export default function GameCanvas({
           onTouchEnd={(e) => {
             handleCanvasTap(e, containerRefRight);
           }}
-          onMouseMove={(e) => handleMouseMove(e, containerRefRight)}
+          onMouseMove={(e) => handlePointerMove(e, containerRefRight)}
+          onTouchMove={(e) => handlePointerMove(e, containerRefRight)}
           onMouseLeave={handleMouseLeave}
+          onTouchCancel={handleMouseLeave}
         >
-          <div style={{
-            position: 'absolute', top: 12, left: 12, zIndex: 5,
-            background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)',
-            padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem',
-            fontWeight: 700, letterSpacing: '0.5px', color: 'var(--accent-pink)',
-            border: '1px solid rgba(255, 0, 127, 0.3)'
-          }}>
-            MODIFIED
-          </div>
-
           <canvas ref={canvasRefRight} className="canvas-element" />
+          {level?.variantImage && (
+            <img
+              src={resolveAssetUrl(level.variantImage)}
+              alt={level.title || 'Modified Scene'}
+              className="canvas-element"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: 1,
+                borderRadius: 'inherit'
+              }}
+            />
+          )}
 
           {/* Render Found Differences Markers */}
           {level.diffs.map(diff => {
@@ -255,16 +310,21 @@ export default function GameCanvas({
             );
           })}
 
-          {/* Hint Radar Overlay */}
-          {activeHintId && (
-            <div
-              className="hint-radar"
-              style={{
-                left: `${level.diffs.find(d => d.id === activeHintId)?.x}%`,
-                top: `${level.diffs.find(d => d.id === activeHintId)?.y}%`
-              }}
-            />
-          )}
+          {/* Hint Radar Overlay (Exact Difference Pinpoint - ONLY WHEN HINT BUTTON TAPPED) */}
+          {activeHintId && level?.diffs?.map(diff => {
+            if (foundDiffs.includes(diff.id) || activeHintId !== diff.id) return null;
+            return (
+              <div
+                key={`right-hint-radar-${diff.id}`}
+                className="hint-radar"
+                style={{
+                  left: `${diff.x}%`,
+                  top: `${diff.y}%`,
+                  zIndex: 8
+                }}
+              />
+            );
+          })}
 
           {/* Temporary Miss Markers */}
           {misses.map(miss => (
@@ -293,9 +353,10 @@ export default function GameCanvas({
               style={{
                 left: `${cursorPos.x}%`,
                 top: `${cursorPos.y}%`,
-                backgroundImage: `url(${canvasRefRight.current?.toDataURL()})`,
+                backgroundImage: `url(${rightBgUrl})`,
                 backgroundPosition: `${cursorPos.x}% ${cursorPos.y}%`,
-                backgroundSize: '250%'
+                backgroundSize: '250%',
+                zIndex: 10
               }}
             />
           )}

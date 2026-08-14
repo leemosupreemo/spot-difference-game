@@ -6,18 +6,24 @@ export default function HelpModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      inset: 0,
-      zIndex: 100,
-      background: 'rgba(0,0,0,0.85)',
-      backdropFilter: 'blur(12px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
-    }}>
-      <div className="glass-panel" style={{
+    <div
+      onClick={() => { sounds.playTap(); onClose(); }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 100,
+        background: 'rgba(0,0,0,0.85)',
+        backdropFilter: 'blur(12px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px'
+      }}
+    >
+      <div
+        className="glass-panel"
+        onClick={(e) => e.stopPropagation()}
+        style={{
         maxWidth: '500px',
         width: '100%',
         padding: '28px',

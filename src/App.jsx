@@ -6,17 +6,23 @@ import TimerDisplay from './components/TimerDisplay';
 import LevelSelector from './components/LevelSelector';
 import CustomLevelMaker from './components/CustomLevelMaker';
 import VictoryModal from './components/VictoryModal';
+import GameOverModal from './components/GameOverModal';
 import ProgressModal from './components/ProgressModal';
 import HelpModal from './components/HelpModal';
 import DebugLevelGeneratorModal from './components/DebugLevelGeneratorModal';
+import DebugCuratorBar from './components/DebugCuratorBar';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
 import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGenerator';
+import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel } from './utils/photoPairLevelLoader';
 import { sounds } from './utils/audio';
+import { calculateSpeedPoints } from './utils/scoring';
+import { saveLeaderboardStats } from './services/playerProgress';
+import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, getLevelStatus } from './utils/curationStore';
 
 export default function App() {
   const [levels, setLevels] = useState(INITIAL_LEVELS);
   const [currentLevelId, setCurrentLevelId] = useState(INITIAL_LEVELS[0].id);
-  const [view, setView] = useState('menu'); // 'menu' | 'game' | 'creator'
+  const [view, setView] = useState('menu'); // 'menu' | 'game' | 'creator' | 'stats'
   const [selectedDifficulty, setSelectedDifficulty] = useState('Medium'); // 'Easy' | 'Medium' | 'Hard'
   const [activeMode, setActiveMode] = useState('classic'); // 'classic' | 'blitz' | 'zen'
   
@@ -36,6 +42,7 @@ export default function App() {
 
   // Modals
   const [victoryModalOpen, setVictoryModalOpen] = useState(false);
+  const [gameOverModalOpen, setGameOverModalOpen] = useState(false);
   const [progressModalOpen, setProgressModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [debugModalOpen, setDebugModalOpen] = useState(false);
@@ -51,6 +58,35 @@ export default function App() {
     }
   });
 
+  const [debugSourceMode, setDebugSourceMode] = useState('premade'); // 'premade' | 'procedural'
+  const visitedDebugLevelIdsRef = useRef(new Set());
+
+  // Curated Image Decisions Store State
+  const [curatedStatusMap, setCuratedStatusMap] = useState(() => getCuratedStatusMap());
+
+  const handleSetCuratedStatus = (levelId, status, meta) => {
+    const updated = setLevelCuratedStatus(levelId, status, meta);
+    setCuratedStatusMap({ ...updated });
+  };
+
+  const handleSetCuratedCategory = (levelId, packId) => {
+    const updated = setLevelCurationMeta(levelId, { packId });
+    setCuratedStatusMap({ ...updated });
+  };
+
+  const handleResetAllCurated = () => {
+    const updated = resetCuratedStatusMap();
+    setCuratedStatusMap({ ...updated });
+  };
+
+  const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap) => {
+    const allEntries = getAllPhotoPairEntries();
+    return allEntries.filter(entry => {
+      const statusVal = getLevelStatus(mapToUse[entry.id])?.status;
+      return !statusVal; // Only return levels pending review (unlabeled)
+    });
+  };
+
   const toggleDebugMode = useCallback(() => {
     setDebugMode(prev => {
       const next = !prev;
@@ -62,6 +98,61 @@ export default function App() {
       return next;
     });
   }, []);
+
+  const handleNextPair = async () => {
+    sounds.playTap();
+
+    if (debugMode && debugSourceMode === 'procedural') {
+      const procLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
+      setLevels([procLevel]);
+      startLevel(procLevel.id);
+      return;
+    }
+
+    if (currentLevelId) {
+      visitedDebugLevelIdsRef.current.add(currentLevelId);
+    }
+
+    if (debugMode) {
+      const unlabeledEntries = getUnlabeledPremadeLevels();
+      const unvisitedUnlabeled = unlabeledEntries.filter(entry => !visitedDebugLevelIdsRef.current.has(entry.id));
+
+      const candidateEntries = unvisitedUnlabeled.length > 0
+        ? unvisitedUnlabeled
+        : unlabeledEntries.length > 0
+          ? unlabeledEntries
+          : getAllPhotoPairEntries();
+
+      if (candidateEntries.length > 0) {
+        const nextBatch = candidateEntries.map(createPhotoPairLevel);
+        setLevels(nextBatch);
+        startLevel(nextBatch[0].id);
+        return;
+      }
+    }
+
+    const currentIndex = levels.findIndex(l => l.id === currentLevelId);
+    if (currentIndex >= 0 && currentIndex < levels.length - 1) {
+      startLevel(levels[currentIndex + 1].id);
+    } else {
+      await handleStartGame();
+    }
+  };
+
+  const handleToggleDebugSourceMode = (newMode) => {
+    setDebugSourceMode(newMode);
+    if (newMode === 'procedural') {
+      const procLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
+      setLevels([procLevel]);
+      startLevel(procLevel.id);
+    } else {
+      const unlabeledEntries = getUnlabeledPremadeLevels();
+      const candidateEntries = unlabeledEntries.length > 0 ? unlabeledEntries : getAllPhotoPairEntries();
+      const debugLevels = candidateEntries.map(createPhotoPairLevel);
+      setLevels(debugLevels);
+      startLevel(debugLevels[0].id);
+    }
+  };
 
   // Categorized Progress Stats (Easy, Medium, Hard)
   const [difficultyStats, setDifficultyStats] = useState(() => {
@@ -85,7 +176,7 @@ export default function App() {
 
   // Enforce 1 single difference per image pair with hit radius scaled by difficulty
   const currentLevel = React.useMemo(() => {
-    const singleDiff = rawLevel.diffs[0] || { id: 1, x: 50, y: 50, radius: 6, hint: 'Spot the difference!' };
+    const singleDiff = rawLevel?.diffs?.[0] || { id: 1, x: 50, y: 50, radius: 6, hint: 'Spot the difference!' };
     let radiusMultiplier = 1.0;
 
     if (selectedDifficulty === 'Easy') {
@@ -131,18 +222,40 @@ export default function App() {
 
   const [selectedTheme, setSelectedTheme] = useState('find_the_sniper');
 
-  // Handle Game Launch from Main Menu
-  const handleStartGame = () => {
+  // Handle Game Launch from Main Menu (Loads Real-World Photo Pairs!)
+  const handleStartGame = async () => {
+    try {
+      if (debugMode && debugSourceMode === 'premade') {
+        const unlabeledEntries = getUnlabeledPremadeLevels();
+        const candidateEntries = unlabeledEntries.length > 0 ? unlabeledEntries : getAllPhotoPairEntries();
+        if (candidateEntries.length > 0) {
+          const debugLevels = candidateEntries.map(createPhotoPairLevel);
+          setLevels(debugLevels);
+          startLevel(debugLevels[0].id);
+          setView('game');
+          return;
+        }
+      }
+
+      const stageList = await buildPhotoPairStage({
+        packId: selectedTheme,
+        difficulty: selectedDifficulty,
+        count: 5,
+        seed: Date.now()
+      });
+      if (stageList && stageList.length > 0) {
+        setLevels(stageList);
+        startLevel(stageList[0].id);
+        setView('game');
+        return;
+      }
+    } catch (err) {
+      console.error('Failed to build photo stage:', err);
+    }
+
     const newLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
-    setLevels(prev => [...prev, newLevel]);
-    setCurrentLevelId(newLevel.id);
-    setFoundDiffs([]);
-    setMissCount(0);
-    setHintsLeft(1);
-    setActiveHintId(null);
-    setElapsedTime(0);
-    setTimerRunning(true);
-    setVictoryModalOpen(false);
+    setLevels([newLevel]);
+    startLevel(newLevel.id);
     setView('game');
   };
 
@@ -153,10 +266,8 @@ export default function App() {
     const updatedFound = [...foundDiffs, diffId];
     setFoundDiffs(updatedFound);
 
-    // Score multiplier by difficulty
-    const diffMultiplier = selectedDifficulty === 'Hard' ? 2.5 : selectedDifficulty === 'Medium' ? 1.5 : 1.0;
-    const speedBonus = Math.round(Math.max(100, 500 - Math.floor(elapsedTime / 100)) * diffMultiplier);
-    setScore(prev => prev + speedBonus);
+    const pointsEarned = calculateSpeedPoints(elapsedTime);
+    setScore(prev => prev + pointsEarned);
 
     if (activeHintId === diffId) {
       setActiveHintId(null);
@@ -204,6 +315,7 @@ export default function App() {
 
         try {
           localStorage.setItem('diff_hunter_categorized_stats', JSON.stringify(newStats));
+          saveLeaderboardStats(newStats);
         } catch (e) {}
 
         return newStats;
@@ -216,9 +328,19 @@ export default function App() {
     }
   };
 
-  // Handle Miss Tap
+  // Handle Miss Tap (3 Strikes -> Game Over)
   const handleMissTap = () => {
-    setMissCount(prev => prev + 1);
+    if (gameOverModalOpen) return;
+    setMissCount(prev => {
+      const next = prev + 1;
+      if (next >= 3) {
+        try { sounds.playLose(); } catch (_) {}
+        setTimerRunning(false);
+        setGameOverModalOpen(true);
+      }
+      return next;
+    });
+
     const penaltyMs = selectedDifficulty === 'Hard' ? 3000 : 2000;
     if (activeMode !== 'zen') {
       setElapsedTime(prev => prev + penaltyMs);
@@ -236,13 +358,6 @@ export default function App() {
     }
   };
 
-  // Next Level Handler
-  const handleNextLevel = () => {
-    const currentIndex = levels.findIndex(l => l.id === currentLevelId);
-    const nextIndex = (currentIndex + 1) % levels.length;
-    startLevel(levels[nextIndex].id);
-  };
-
   // Custom Level Saved
   const handleSaveCustomLevel = (customLevel) => {
     setLevels(prev => [...prev, customLevel]);
@@ -250,32 +365,17 @@ export default function App() {
     startLevel(customLevel.id);
   };
 
-  // Generate Procedural Pair On The Fly
-  const handleGenerateProceduralPair = () => {
-    const randomTheme = SCENE_THEMES[Math.floor(Math.random() * SCENE_THEMES.length)].id;
-    const newLevel = generateProceduralLevelPair(randomTheme, selectedDifficulty, Date.now());
-    setLevels(prev => [...prev, newLevel]);
-    startLevel(newLevel.id);
-  };
-
   return (
-    <div style={{ minHeight: '100vh', paddingBottom: '50px' }}>
-      
-      {/* Header Bar */}
-      {view !== 'stats' && (
-        <Header
-          muted={muted}
-          setMuted={setMuted}
-          onOpenLeaderboard={() => setView('stats')}
-          onOpenHelp={() => setHelpModalOpen(true)}
-          onRestartLevel={() => {
-            if (view === 'game') startLevel(currentLevelId);
-            else setView('menu');
-          }}
-          onToggleDebug={toggleDebugMode}
-          debugMode={debugMode}
-        />
-      )}
+    <div className="app-container">
+      {/* Universal Top Header */}
+      <Header
+        onOpenProgress={() => setView('stats')}
+        onOpenHelp={() => setHelpModalOpen(true)}
+        muted={muted}
+        setMuted={setMuted}
+        onLogoClick={toggleDebugMode}
+        debugMode={debugMode}
+      />
 
       {/* Main Navigation Routing */}
       {view === 'menu' ? (
@@ -298,42 +398,60 @@ export default function App() {
       ) : view === 'creator' ? (
         <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />
       ) : (
-        <main>
+        <main className="page-fade-in">
+          {/* Debug Curator Bar */}
+          {debugMode && (
+            <DebugCuratorBar
+              currentLevel={currentLevel}
+              curatedStatusMap={curatedStatusMap}
+              onSetStatus={handleSetCuratedStatus}
+              onSetCategory={handleSetCuratedCategory}
+              onResetAll={handleResetAllCurated}
+              onNextPair={handleNextPair}
+              debugSourceMode={debugSourceMode}
+              onToggleSourceMode={handleToggleDebugSourceMode}
+            />
+          )}
+
           {/* Top Return to Menu Bar */}
           <div style={{ maxWidth: '1300px', margin: '0 auto 10px auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <button
               className="glass-btn"
               onClick={() => { sounds.playTap(); setView('menu'); }}
-              style={{ fontSize: '0.85rem' }}
+              style={{
+                padding: '10px 16px',
+                fontSize: '0.92rem',
+                fontWeight: 800,
+                borderRadius: '12px'
+              }}
             >
               ← Main Menu
             </button>
 
             <span style={{
-              fontSize: '1.2rem',
-              fontWeight: 900,
-              padding: '6px 18px',
-              borderRadius: '14px',
-              background: selectedDifficulty === 'Easy' ? 'rgba(0,255,135,0.2)' : selectedDifficulty === 'Medium' ? 'rgba(255,183,3,0.2)' : 'rgba(255,0,127,0.2)',
-              color: selectedDifficulty === 'Easy' ? 'var(--accent-green)' : selectedDifficulty === 'Medium' ? 'var(--accent-gold)' : 'var(--accent-pink)',
+              fontSize: '0.9rem',
+              fontWeight: 800,
+              color: selectedDifficulty === 'Hard' ? 'var(--accent-pink)' : selectedDifficulty === 'Medium' ? 'var(--accent-gold)' : 'var(--accent-green)',
+              background: 'rgba(0,0,0,0.4)',
+              padding: '6px 14px',
+              borderRadius: '20px',
               border: '1.5px solid rgba(255,255,255,0.2)',
               letterSpacing: '0.5px'
             }}>
-              {selectedDifficulty.toUpperCase()} MODE
+              {selectedDifficulty.toUpperCase()}
             </span>
           </div>
 
-          {/* Live Millisecond Timer Display */}
+          {/* Clean Unified Game Timer & Controls Bar */}
           <TimerDisplay
             elapsedTime={elapsedTime}
-            totalDiffs={currentLevel.totalDifferences}
-            foundCount={foundDiffs.length}
             hintsLeft={hintsLeft}
             onUseHint={handleUseHint}
             magnifierEnabled={magnifierEnabled}
             setMagnifierEnabled={setMagnifierEnabled}
             score={score}
             mode={activeMode}
+            missCount={missCount}
           />
 
           {/* Interactive Dual Viewport (IMAGES ONLY) */}
@@ -344,6 +462,7 @@ export default function App() {
             onMissTap={handleMissTap}
             activeHintId={activeHintId}
             magnifierEnabled={magnifierEnabled}
+            debugMode={debugMode}
           />
         </main>
       )}
@@ -351,20 +470,26 @@ export default function App() {
       {/* Modals */}
       <VictoryModal
         isOpen={victoryModalOpen}
-        levelTitle={currentLevel.title}
+        level={currentLevel}
         elapsedTime={elapsedTime}
-        missCount={missCount}
         score={score}
-        stars={1 + (elapsedTime < 25000 ? 1 : 0) + (missCount === 0 ? 1 : 0)}
-        onNextLevel={handleNextLevel}
-        onRestart={() => startLevel(currentLevelId)}
+        onNextLevel={handleNextPair}
         onClose={() => setVictoryModalOpen(false)}
       />
 
-      <ProgressModal
-        isOpen={progressModalOpen}
-        onClose={() => setProgressModalOpen(false)}
-        difficultyStats={difficultyStats}
+      <GameOverModal
+        isOpen={gameOverModalOpen}
+        onClose={() => {
+          setGameOverModalOpen(false);
+          setView('menu');
+        }}
+        onRestart={() => {
+          setGameOverModalOpen(false);
+          handleStartGame();
+        }}
+        elapsedTime={elapsedTime}
+        missCount={missCount}
+        levelTitle={currentLevel?.title || 'Stage Set'}
       />
 
       <HelpModal
@@ -372,17 +497,12 @@ export default function App() {
         onClose={() => setHelpModalOpen(false)}
       />
 
-      <DebugLevelGeneratorModal
-        isOpen={debugModalOpen}
-        onClose={() => setDebugModalOpen(false)}
-        onInjectLevels={(pack) => {
-          setLevels(prev => [...prev, ...pack]);
-          setCurrentLevelId(pack[0].id);
-          startLevel(pack[0].id);
-          setView('game');
-        }}
-      />
-
+      {debugModalOpen && (
+        <DebugLevelGeneratorModal
+          isOpen={debugModalOpen}
+          onClose={() => setDebugModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

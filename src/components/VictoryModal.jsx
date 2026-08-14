@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Trophy, Star, Clock, Zap, ArrowRight, RotateCcw, Award } from 'lucide-react';
+import { Trophy, Star, Clock, Zap, ArrowRight, RotateCcw, X } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function VictoryModal({
@@ -44,55 +44,87 @@ export default function VictoryModal({
   const accuracy = Math.max(0, Math.round(100 - missCount * 15));
 
   return (
-    <div style={{
-      position: 'fixed',
-      inset: 0,
-      zIndex: 100,
-      background: 'rgba(0,0,0,0.85)',
-      backdropFilter: 'blur(12px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
-    }}>
-      <div className="glass-panel" style={{
-        maxWidth: '480px',
-        width: '100%',
-        padding: '32px',
+    <div
+      onClick={() => { sounds.playTap(); onClose(); }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 100,
+        background: 'rgba(0,0,0,0.85)',
+        backdropFilter: 'blur(12px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '12px'
+      }}
+    >
+      <div
+        className="glass-panel"
+        onClick={(e) => e.stopPropagation()}
+        style={{
+        maxWidth: '440px',
+        width: '94%',
+        maxHeight: '94vh',
+        overflowY: 'auto',
+        padding: '18px 20px',
         textAlign: 'center',
         border: '2px solid var(--accent-cyan)',
-        boxShadow: '0 0 40px rgba(0, 240, 255, 0.4)',
-        animation: 'hitPulse 0.4s ease-out'
+        boxShadow: '0 0 40px rgba(0, 240, 255, 0.45)',
+        borderRadius: '20px',
+        position: 'relative',
+        animation: 'pageFadeIn 0.12s ease-out'
       }}>
         
-        {/* Trophy Icon */}
+        {/* Top Right Close "X" Button */}
+        <button
+          onClick={() => { sounds.playTap(); onClose(); }}
+          style={{
+            position: 'absolute',
+            top: 12,
+            right: 12,
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid var(--border-glass)',
+            color: 'var(--text-muted)',
+            borderRadius: '50%',
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer'
+          }}
+        >
+          <X size={18} />
+        </button>
+
+        {/* Compact Trophy Icon */}
         <div style={{
-          width: '70px',
-          height: '70px',
+          width: '48px',
+          height: '48px',
           borderRadius: '50%',
           background: 'linear-gradient(135deg, var(--accent-gold), #ff8800)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 16px auto',
-          boxShadow: '0 0 25px var(--accent-gold)'
+          margin: '0 auto 8px auto',
+          boxShadow: '0 0 20px var(--accent-gold)'
         }}>
-          <Trophy size={36} color="#000" />
+          <Trophy size={26} color="#000" />
         </div>
 
-        <h2 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '6px', background: 'linear-gradient(90deg, #fff, var(--accent-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '2px', background: 'linear-gradient(90deg, #fff, var(--accent-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           STAGE CLEAR!
         </h2>
-        <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', marginBottom: '20px' }}>
+        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
           {levelTitle}
         </p>
 
         {/* Stars Earned */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '12px' }}>
           {[1, 2, 3].map(starNum => (
             <Star
               key={starNum}
-              size={36}
+              size={26}
               className={starNum <= stars ? 'star-icon' : 'star-icon empty'}
               fill={starNum <= stars ? 'var(--accent-gold)' : 'none'}
               style={{ transition: `all 0.3s ease ${starNum * 0.15}s` }}
@@ -104,62 +136,62 @@ export default function VictoryModal({
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '12px',
+          gap: '10px',
           background: 'rgba(0,0,0,0.4)',
-          padding: '16px',
+          padding: '12px 14px',
           borderRadius: '14px',
-          marginBottom: '24px',
+          marginBottom: '16px',
           textAlign: 'left'
         }}>
           <div>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Clock size={14} color="var(--accent-cyan)" /> TIME TAKEN
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Clock size={12} color="var(--accent-cyan)" /> TIME TAKEN
             </span>
-            <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)' }}>
               {seconds}s
             </span>
           </div>
 
           <div>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Zap size={14} color="var(--accent-gold)" /> TOTAL SCORE
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Zap size={12} color="var(--accent-gold)" /> TOTAL PTS
             </span>
-            <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-gold)', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--accent-gold)', fontFamily: 'var(--font-mono)' }}>
               {score} PTS
             </span>
           </div>
 
           <div>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>ACCURACY</span>
-            <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-green)' }}>
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>ACCURACY</span>
+            <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--accent-green)' }}>
               {accuracy}%
             </span>
           </div>
 
           <div>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>MISSES</span>
-            <span style={{ fontSize: '1.1rem', fontWeight: 700, color: missCount > 0 ? 'var(--accent-pink)' : 'var(--text-muted)' }}>
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>MISSES</span>
+            <span style={{ fontSize: '1rem', fontWeight: 700, color: missCount > 0 ? 'var(--accent-pink)' : 'var(--text-muted)' }}>
               {missCount}
             </span>
           </div>
         </div>
 
         {/* Buttons */}
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
           <button
             className="glass-btn"
             onClick={() => { sounds.playTap(); onRestart(); }}
-            style={{ flex: 1, justifyContent: 'center', fontSize: '1.15rem', fontWeight: 800, padding: '14px' }}
+            style={{ flex: 1, justifyContent: 'center', fontSize: '1rem', fontWeight: 800, padding: '10px 14px', borderRadius: '12px' }}
           >
-            <RotateCcw size={20} /> Retry
+            <RotateCcw size={18} /> Retry
           </button>
 
           <button
             className="glass-btn glass-btn-primary"
             onClick={() => { sounds.playTap(); onNextLevel(); }}
-            style={{ flex: 1.4, justifyContent: 'center', fontSize: '1.25rem', fontWeight: 900, padding: '14px' }}
+            style={{ flex: 1.4, justifyContent: 'center', fontSize: '1.05rem', fontWeight: 900, padding: '10px 16px', borderRadius: '12px' }}
           >
-            Next Pair <ArrowRight size={20} />
+            Next Pair <ArrowRight size={18} />
           </button>
         </div>
 

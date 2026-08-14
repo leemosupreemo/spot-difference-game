@@ -156,6 +156,19 @@ body {
   text-shadow: 0 0 5px #000;
 }
 
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-fade-in {
+  animation: pageFadeIn 0.12s ease-out forwards;
+}
+
 @keyframes hitPulse {
   0% {
     transform: translate(-50%, -50%) scale(0.2);
@@ -196,24 +209,25 @@ body {
 .hint-radar {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  border: 2px dashed var(--accent-gold);
+  border: 3px dashed var(--accent-gold);
   animation: radarExpand 1.5s infinite linear;
   pointer-events: none;
+  z-index: 8;
 }
 
 @keyframes radarExpand {
   0% {
     transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
     opacity: 1;
-    box-shadow: 0 0 5px var(--accent-gold);
+    box-shadow: 0 0 10px var(--accent-gold);
   }
   100% {
     transform: translate(-50%, -50%) scale(1.6) rotate(180deg);
     opacity: 0;
-    box-shadow: 0 0 25px var(--accent-gold);
+    box-shadow: 0 0 30px var(--accent-gold);
   }
 }
 

@@ -1,0 +1,1647 @@
+[
+  {
+    "baseSceneId": "base_scene_blocks_001",
+    "category": "blocks",
+    "totalObjects": 30,
+    "baseSceneObjects": [
+      {
+        "id": "obj_0_0",
+        "asset": "brick_2x2_blue",
+        "x": 15,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_1",
+        "asset": "brick_2x4_red",
+        "x": 29,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_2",
+        "asset": "brick_1x2_yellow",
+        "x": 43,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_3",
+        "asset": "slope_green",
+        "x": 57,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_4",
+        "asset": "tile_white",
+        "x": 71,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_5",
+        "asset": "brick_2x2_blue",
+        "x": 85,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_0",
+        "asset": "brick_2x4_red",
+        "x": 15,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_1",
+        "asset": "brick_1x2_yellow",
+        "x": 29,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_2",
+        "asset": "slope_green",
+        "x": 43,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_3",
+        "asset": "tile_white",
+        "x": 57,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_4",
+        "asset": "brick_2x2_blue",
+        "x": 71,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_5",
+        "asset": "brick_2x4_red",
+        "x": 85,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_0",
+        "asset": "brick_1x2_yellow",
+        "x": 15,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_1",
+        "asset": "slope_green",
+        "x": 29,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_2",
+        "asset": "tile_white",
+        "x": 43,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_3",
+        "asset": "brick_2x2_blue",
+        "x": 57,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_4",
+        "asset": "brick_2x4_red",
+        "x": 71,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_5",
+        "asset": "brick_1x2_yellow",
+        "x": 85,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_0",
+        "asset": "slope_green",
+        "x": 15,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_1",
+        "asset": "tile_white",
+        "x": 29,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_2",
+        "asset": "brick_2x2_blue",
+        "x": 43,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_3",
+        "asset": "brick_2x4_red",
+        "x": 57,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_4",
+        "asset": "brick_1x2_yellow",
+        "x": 71,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_5",
+        "asset": "slope_green",
+        "x": 85,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_0",
+        "asset": "tile_white",
+        "x": 15,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_1",
+        "asset": "brick_2x2_blue",
+        "x": 29,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_2",
+        "asset": "brick_2x4_red",
+        "x": 43,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_3",
+        "asset": "brick_1x2_yellow",
+        "x": 57,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_4",
+        "asset": "slope_green",
+        "x": 71,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_5",
+        "asset": "tile_white",
+        "x": 85,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      }
+    ],
+    "mutations": [
+      {
+        "puzzleId": "base_scene_blocks_001_var_1",
+        "targetObject": "obj_0_3",
+        "mutationType": "COLOR_SHIFT",
+        "mutationName": "Color Shift",
+        "bounding_box": [
+          57,
+          15,
+          67,
+          27
+        ],
+        "center": {
+          "x": 62,
+          "y": 21
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.9,
+        "differenceDescription": "Target obj_0_3 (Color Shift)"
+      },
+      {
+        "puzzleId": "base_scene_blocks_001_var_2",
+        "targetObject": "obj_1_4",
+        "mutationType": "REMOVE_OBJECT",
+        "mutationName": "Object Removal",
+        "bounding_box": [
+          71,
+          31,
+          81,
+          43
+        ],
+        "center": {
+          "x": 76,
+          "y": 37
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.5,
+        "differenceDescription": "Target obj_1_4 (Object Removal)"
+      },
+      {
+        "puzzleId": "base_scene_blocks_001_var_3",
+        "targetObject": "obj_2_5",
+        "mutationType": "ROTATE",
+        "mutationName": "Rotation 90°",
+        "bounding_box": [
+          85,
+          47,
+          95,
+          59
+        ],
+        "center": {
+          "x": 90,
+          "y": 53
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 1,
+        "differenceDescription": "Target obj_2_5 (Rotation 90°)"
+      },
+      {
+        "puzzleId": "base_scene_blocks_001_var_4",
+        "targetObject": "obj_4_0",
+        "mutationType": "SCALE_CHANGE",
+        "mutationName": "Scale Reduction",
+        "bounding_box": [
+          15,
+          79,
+          25,
+          91
+        ],
+        "center": {
+          "x": 20,
+          "y": 85
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 1,
+        "differenceDescription": "Target obj_4_0 (Scale Reduction)"
+      }
+    ]
+  },
+  {
+    "baseSceneId": "base_scene_candy_002",
+    "category": "candy",
+    "totalObjects": 30,
+    "baseSceneObjects": [
+      {
+        "id": "obj_0_0",
+        "asset": "gummy_bear_green",
+        "x": 15,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_1",
+        "asset": "lollipop_pink",
+        "x": 29,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_2",
+        "asset": "wrapped_blue",
+        "x": 43,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_3",
+        "asset": "chocolate_brown",
+        "x": 57,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_4",
+        "asset": "jelly_purple",
+        "x": 71,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_5",
+        "asset": "gummy_bear_green",
+        "x": 85,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_0",
+        "asset": "lollipop_pink",
+        "x": 15,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_1",
+        "asset": "wrapped_blue",
+        "x": 29,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_2",
+        "asset": "chocolate_brown",
+        "x": 43,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_3",
+        "asset": "jelly_purple",
+        "x": 57,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_4",
+        "asset": "gummy_bear_green",
+        "x": 71,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_5",
+        "asset": "lollipop_pink",
+        "x": 85,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_0",
+        "asset": "wrapped_blue",
+        "x": 15,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_1",
+        "asset": "chocolate_brown",
+        "x": 29,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_2",
+        "asset": "jelly_purple",
+        "x": 43,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_3",
+        "asset": "gummy_bear_green",
+        "x": 57,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_4",
+        "asset": "lollipop_pink",
+        "x": 71,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_5",
+        "asset": "wrapped_blue",
+        "x": 85,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_0",
+        "asset": "chocolate_brown",
+        "x": 15,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_1",
+        "asset": "jelly_purple",
+        "x": 29,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_2",
+        "asset": "gummy_bear_green",
+        "x": 43,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_3",
+        "asset": "lollipop_pink",
+        "x": 57,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_4",
+        "asset": "wrapped_blue",
+        "x": 71,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_5",
+        "asset": "chocolate_brown",
+        "x": 85,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_0",
+        "asset": "jelly_purple",
+        "x": 15,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_1",
+        "asset": "gummy_bear_green",
+        "x": 29,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_2",
+        "asset": "lollipop_pink",
+        "x": 43,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_3",
+        "asset": "wrapped_blue",
+        "x": 57,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_4",
+        "asset": "chocolate_brown",
+        "x": 71,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_5",
+        "asset": "jelly_purple",
+        "x": 85,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      }
+    ],
+    "mutations": [
+      {
+        "puzzleId": "base_scene_candy_002_var_1",
+        "targetObject": "obj_1_0",
+        "mutationType": "COLOR_SHIFT",
+        "mutationName": "Color Shift",
+        "bounding_box": [
+          15,
+          31,
+          25,
+          43
+        ],
+        "center": {
+          "x": 20,
+          "y": 37
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.9,
+        "differenceDescription": "Target obj_1_0 (Color Shift)"
+      },
+      {
+        "puzzleId": "base_scene_candy_002_var_2",
+        "targetObject": "obj_2_1",
+        "mutationType": "REMOVE_OBJECT",
+        "mutationName": "Object Removal",
+        "bounding_box": [
+          29,
+          47,
+          39,
+          59
+        ],
+        "center": {
+          "x": 34,
+          "y": 53
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.5,
+        "differenceDescription": "Target obj_2_1 (Object Removal)"
+      },
+      {
+        "puzzleId": "base_scene_candy_002_var_3",
+        "targetObject": "obj_3_2",
+        "mutationType": "ROTATE",
+        "mutationName": "Rotation 90°",
+        "bounding_box": [
+          43,
+          63,
+          53,
+          75
+        ],
+        "center": {
+          "x": 48,
+          "y": 69
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 1,
+        "differenceDescription": "Target obj_3_2 (Rotation 90°)"
+      },
+      {
+        "puzzleId": "base_scene_candy_002_var_4",
+        "targetObject": "obj_4_3",
+        "mutationType": "SCALE_CHANGE",
+        "mutationName": "Scale Reduction",
+        "bounding_box": [
+          57,
+          79,
+          67,
+          91
+        ],
+        "center": {
+          "x": 62,
+          "y": 85
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 1,
+        "differenceDescription": "Target obj_4_3 (Scale Reduction)"
+      }
+    ]
+  },
+  {
+    "baseSceneId": "base_scene_fruit_003",
+    "category": "fruit",
+    "totalObjects": 30,
+    "baseSceneObjects": [
+      {
+        "id": "obj_0_0",
+        "asset": "apple_red",
+        "x": 15,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_1",
+        "asset": "lemon_yellow",
+        "x": 29,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_2",
+        "asset": "strawberry_red",
+        "x": 43,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_3",
+        "asset": "orange_citrus",
+        "x": 57,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_4",
+        "asset": "grape_purple",
+        "x": 71,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_5",
+        "asset": "apple_red",
+        "x": 85,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_0",
+        "asset": "lemon_yellow",
+        "x": 15,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_1",
+        "asset": "strawberry_red",
+        "x": 29,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_2",
+        "asset": "orange_citrus",
+        "x": 43,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_3",
+        "asset": "grape_purple",
+        "x": 57,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_4",
+        "asset": "apple_red",
+        "x": 71,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_5",
+        "asset": "lemon_yellow",
+        "x": 85,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_0",
+        "asset": "strawberry_red",
+        "x": 15,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_1",
+        "asset": "orange_citrus",
+        "x": 29,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_2",
+        "asset": "grape_purple",
+        "x": 43,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_3",
+        "asset": "apple_red",
+        "x": 57,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_4",
+        "asset": "lemon_yellow",
+        "x": 71,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_5",
+        "asset": "strawberry_red",
+        "x": 85,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_0",
+        "asset": "orange_citrus",
+        "x": 15,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_1",
+        "asset": "grape_purple",
+        "x": 29,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_2",
+        "asset": "apple_red",
+        "x": 43,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_3",
+        "asset": "lemon_yellow",
+        "x": 57,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_4",
+        "asset": "strawberry_red",
+        "x": 71,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_5",
+        "asset": "orange_citrus",
+        "x": 85,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_0",
+        "asset": "grape_purple",
+        "x": 15,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_1",
+        "asset": "apple_red",
+        "x": 29,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_2",
+        "asset": "lemon_yellow",
+        "x": 43,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_3",
+        "asset": "strawberry_red",
+        "x": 57,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_4",
+        "asset": "orange_citrus",
+        "x": 71,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_5",
+        "asset": "grape_purple",
+        "x": 85,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      }
+    ],
+    "mutations": [
+      {
+        "puzzleId": "base_scene_fruit_003_var_1",
+        "targetObject": "obj_1_3",
+        "mutationType": "COLOR_SHIFT",
+        "mutationName": "Color Shift",
+        "bounding_box": [
+          57,
+          31,
+          67,
+          43
+        ],
+        "center": {
+          "x": 62,
+          "y": 37
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.9,
+        "differenceDescription": "Target obj_1_3 (Color Shift)"
+      },
+      {
+        "puzzleId": "base_scene_fruit_003_var_2",
+        "targetObject": "obj_2_4",
+        "mutationType": "REMOVE_OBJECT",
+        "mutationName": "Object Removal",
+        "bounding_box": [
+          71,
+          47,
+          81,
+          59
+        ],
+        "center": {
+          "x": 76,
+          "y": 53
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.5,
+        "differenceDescription": "Target obj_2_4 (Object Removal)"
+      },
+      {
+        "puzzleId": "base_scene_fruit_003_var_3",
+        "targetObject": "obj_3_5",
+        "mutationType": "ROTATE",
+        "mutationName": "Rotation 90°",
+        "bounding_box": [
+          85,
+          63,
+          95,
+          75
+        ],
+        "center": {
+          "x": 90,
+          "y": 69
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 1,
+        "differenceDescription": "Target obj_3_5 (Rotation 90°)"
+      },
+      {
+        "puzzleId": "base_scene_fruit_003_var_4",
+        "targetObject": "obj_0_0",
+        "mutationType": "SCALE_CHANGE",
+        "mutationName": "Scale Reduction",
+        "bounding_box": [
+          15,
+          15,
+          25,
+          27
+        ],
+        "center": {
+          "x": 20,
+          "y": 21
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 1,
+        "differenceDescription": "Target obj_0_0 (Scale Reduction)"
+      }
+    ]
+  },
+  {
+    "baseSceneId": "base_scene_blocks_004",
+    "category": "blocks",
+    "totalObjects": 30,
+    "baseSceneObjects": [
+      {
+        "id": "obj_0_0",
+        "asset": "brick_2x2_blue",
+        "x": 15,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_1",
+        "asset": "brick_2x4_red",
+        "x": 29,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_2",
+        "asset": "brick_1x2_yellow",
+        "x": 43,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_3",
+        "asset": "slope_green",
+        "x": 57,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_4",
+        "asset": "tile_white",
+        "x": 71,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_5",
+        "asset": "brick_2x2_blue",
+        "x": 85,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_0",
+        "asset": "brick_2x4_red",
+        "x": 15,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_1",
+        "asset": "brick_1x2_yellow",
+        "x": 29,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_2",
+        "asset": "slope_green",
+        "x": 43,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_3",
+        "asset": "tile_white",
+        "x": 57,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_4",
+        "asset": "brick_2x2_blue",
+        "x": 71,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_5",
+        "asset": "brick_2x4_red",
+        "x": 85,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_0",
+        "asset": "brick_1x2_yellow",
+        "x": 15,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_1",
+        "asset": "slope_green",
+        "x": 29,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_2",
+        "asset": "tile_white",
+        "x": 43,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_3",
+        "asset": "brick_2x2_blue",
+        "x": 57,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_4",
+        "asset": "brick_2x4_red",
+        "x": 71,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_5",
+        "asset": "brick_1x2_yellow",
+        "x": 85,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_0",
+        "asset": "slope_green",
+        "x": 15,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_1",
+        "asset": "tile_white",
+        "x": 29,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_2",
+        "asset": "brick_2x2_blue",
+        "x": 43,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_3",
+        "asset": "brick_2x4_red",
+        "x": 57,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_4",
+        "asset": "brick_1x2_yellow",
+        "x": 71,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_5",
+        "asset": "slope_green",
+        "x": 85,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_0",
+        "asset": "tile_white",
+        "x": 15,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_1",
+        "asset": "brick_2x2_blue",
+        "x": 29,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_2",
+        "asset": "brick_2x4_red",
+        "x": 43,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_3",
+        "asset": "brick_1x2_yellow",
+        "x": 57,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_4",
+        "asset": "slope_green",
+        "x": 71,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_5",
+        "asset": "tile_white",
+        "x": 85,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      }
+    ],
+    "mutations": [
+      {
+        "puzzleId": "base_scene_blocks_004_var_1",
+        "targetObject": "obj_2_0",
+        "mutationType": "COLOR_SHIFT",
+        "mutationName": "Color Shift",
+        "bounding_box": [
+          15,
+          47,
+          25,
+          59
+        ],
+        "center": {
+          "x": 20,
+          "y": 53
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.9,
+        "differenceDescription": "Target obj_2_0 (Color Shift)"
+      },
+      {
+        "puzzleId": "base_scene_blocks_004_var_2",
+        "targetObject": "obj_3_1",
+        "mutationType": "REMOVE_OBJECT",
+        "mutationName": "Object Removal",
+        "bounding_box": [
+          29,
+          63,
+          39,
+          75
+        ],
+        "center": {
+          "x": 34,
+          "y": 69
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.5,
+        "differenceDescription": "Target obj_3_1 (Object Removal)"
+      },
+      {
+        "puzzleId": "base_scene_blocks_004_var_3",
+        "targetObject": "obj_4_2",
+        "mutationType": "ROTATE",
+        "mutationName": "Rotation 90°",
+        "bounding_box": [
+          43,
+          79,
+          53,
+          91
+        ],
+        "center": {
+          "x": 48,
+          "y": 85
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 1,
+        "differenceDescription": "Target obj_4_2 (Rotation 90°)"
+      },
+      {
+        "puzzleId": "base_scene_blocks_004_var_4",
+        "targetObject": "obj_0_3",
+        "mutationType": "SCALE_CHANGE",
+        "mutationName": "Scale Reduction",
+        "bounding_box": [
+          57,
+          15,
+          67,
+          27
+        ],
+        "center": {
+          "x": 62,
+          "y": 21
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.9,
+        "differenceDescription": "Target obj_0_3 (Scale Reduction)"
+      }
+    ]
+  },
+  {
+    "baseSceneId": "base_scene_candy_005",
+    "category": "candy",
+    "totalObjects": 30,
+    "baseSceneObjects": [
+      {
+        "id": "obj_0_0",
+        "asset": "gummy_bear_green",
+        "x": 15,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_1",
+        "asset": "lollipop_pink",
+        "x": 29,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_2",
+        "asset": "wrapped_blue",
+        "x": 43,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_3",
+        "asset": "chocolate_brown",
+        "x": 57,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_4",
+        "asset": "jelly_purple",
+        "x": 71,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_0_5",
+        "asset": "gummy_bear_green",
+        "x": 85,
+        "y": 15,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_0",
+        "asset": "lollipop_pink",
+        "x": 15,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_1",
+        "asset": "wrapped_blue",
+        "x": 29,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_2",
+        "asset": "chocolate_brown",
+        "x": 43,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_3",
+        "asset": "jelly_purple",
+        "x": 57,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_4",
+        "asset": "gummy_bear_green",
+        "x": 71,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_1_5",
+        "asset": "lollipop_pink",
+        "x": 85,
+        "y": 31,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_0",
+        "asset": "wrapped_blue",
+        "x": 15,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_1",
+        "asset": "chocolate_brown",
+        "x": 29,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_2",
+        "asset": "jelly_purple",
+        "x": 43,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_3",
+        "asset": "gummy_bear_green",
+        "x": 57,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_4",
+        "asset": "lollipop_pink",
+        "x": 71,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_2_5",
+        "asset": "wrapped_blue",
+        "x": 85,
+        "y": 47,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_0",
+        "asset": "chocolate_brown",
+        "x": 15,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_1",
+        "asset": "jelly_purple",
+        "x": 29,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_2",
+        "asset": "gummy_bear_green",
+        "x": 43,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_3",
+        "asset": "lollipop_pink",
+        "x": 57,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_4",
+        "asset": "wrapped_blue",
+        "x": 71,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_3_5",
+        "asset": "chocolate_brown",
+        "x": 85,
+        "y": 63,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_0",
+        "asset": "jelly_purple",
+        "x": 15,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_1",
+        "asset": "gummy_bear_green",
+        "x": 29,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_2",
+        "asset": "lollipop_pink",
+        "x": 43,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_3",
+        "asset": "wrapped_blue",
+        "x": 57,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_4",
+        "asset": "chocolate_brown",
+        "x": 71,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      },
+      {
+        "id": "obj_4_5",
+        "asset": "jelly_purple",
+        "x": 85,
+        "y": 79,
+        "w": 10,
+        "h": 12
+      }
+    ],
+    "mutations": [
+      {
+        "puzzleId": "base_scene_candy_005_var_1",
+        "targetObject": "obj_2_3",
+        "mutationType": "COLOR_SHIFT",
+        "mutationName": "Color Shift",
+        "bounding_box": [
+          57,
+          47,
+          67,
+          59
+        ],
+        "center": {
+          "x": 62,
+          "y": 53
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.9,
+        "differenceDescription": "Target obj_2_3 (Color Shift)"
+      },
+      {
+        "puzzleId": "base_scene_candy_005_var_2",
+        "targetObject": "obj_3_4",
+        "mutationType": "REMOVE_OBJECT",
+        "mutationName": "Object Removal",
+        "bounding_box": [
+          71,
+          63,
+          81,
+          75
+        ],
+        "center": {
+          "x": 76,
+          "y": 69
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.5,
+        "differenceDescription": "Target obj_3_4 (Object Removal)"
+      },
+      {
+        "puzzleId": "base_scene_candy_005_var_3",
+        "targetObject": "obj_4_5",
+        "mutationType": "ROTATE",
+        "mutationName": "Rotation 90°",
+        "bounding_box": [
+          85,
+          79,
+          95,
+          91
+        ],
+        "center": {
+          "x": 90,
+          "y": 85
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 1.1,
+        "differenceDescription": "Target obj_4_5 (Rotation 90°)"
+      },
+      {
+        "puzzleId": "base_scene_candy_005_var_4",
+        "targetObject": "obj_1_0",
+        "mutationType": "SCALE_CHANGE",
+        "mutationName": "Scale Reduction",
+        "bounding_box": [
+          15,
+          31,
+          25,
+          43
+        ],
+        "center": {
+          "x": 20,
+          "y": 37
+        },
+        "radius": 8,
+        "difficulty": "Easy",
+        "difficultyScore": 0.9,
+        "differenceDescription": "Target obj_1_0 (Scale Reduction)"
+      }
+    ]
+  }
+]

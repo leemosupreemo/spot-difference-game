@@ -1,0 +1,138 @@
+[
+  {
+    "id": "ssim_freq_puzzle_1",
+    "puzzleId": "ssim_freq_puzzle_1",
+    "title": "Cluttered Antique Flea Market",
+    "category": "Real Photo",
+    "photoUrl": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      37,
+      60,
+      47,
+      70
+    ],
+    "center": {
+      "x": 42,
+      "y": 65
+    },
+    "radius": 6,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42,
+        "y": 65,
+        "radius": 6
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_2",
+    "puzzleId": "ssim_freq_puzzle_2",
+    "title": "Autumn Camouflage Forest Litter",
+    "category": "Nature Hunter",
+    "photoUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      63,
+      29,
+      73,
+      39
+    ],
+    "center": {
+      "x": 68,
+      "y": 34
+    },
+    "radius": 5,
+    "mutationType": "ADD_DETAIL",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 68,
+        "y": 34,
+        "radius": 5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_3",
+    "puzzleId": "ssim_freq_puzzle_3",
+    "title": "Micro Toy Brick City Clutter",
+    "category": "Toys",
+    "photoUrl": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      20,
+      73,
+      30,
+      83
+    ],
+    "center": {
+      "x": 25,
+      "y": 78
+    },
+    "radius": 6,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25,
+        "y": 78,
+        "radius": 6
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_4",
+    "puzzleId": "ssim_freq_puzzle_4",
+    "title": "Shinjuku Neon Signs & Wiring",
+    "category": "Cyberpunk",
+    "photoUrl": "https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      50,
+      17,
+      60,
+      27
+    ],
+    "center": {
+      "x": 55,
+      "y": 22
+    },
+    "radius": 5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55,
+        "y": 22,
+        "radius": 5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  }
+]

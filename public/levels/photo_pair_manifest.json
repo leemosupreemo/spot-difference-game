@@ -1,0 +1,5776 @@
+[
+  {
+    "baseImage": "levels/photo-pairs/kitchen/easy_kitchen_001/base.jpg",
+    "category": "Kitchen Clutter",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Compare the small cup near the center-right counter.",
+        "id": 1,
+        "radius": 9.5,
+        "x": 58.2,
+        "y": 54.4
+      }
+    ],
+    "id": "easy_kitchen_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Kitchen Counter Cup",
+    "variantImage": "levels/photo-pairs/kitchen/easy_kitchen_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/crafts/easy_craft_001/base.jpg",
+    "category": "Craft Clutter",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Look around the toy car on the left half of the desk.",
+        "id": 1,
+        "radius": 10,
+        "x": 34.4,
+        "y": 50.4
+      }
+    ],
+    "id": "easy_craft_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Craft Desk Toy Car",
+    "variantImage": "levels/photo-pairs/crafts/easy_craft_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/nursery/medium_nursery_001/base.jpg",
+    "category": "Greenhouse Clutter",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Scan the plant tags in the upper-right tray.",
+        "id": 1,
+        "radius": 6.5,
+        "x": 73,
+        "y": 31
+      }
+    ],
+    "id": "medium_nursery_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Nursery Plant Tag",
+    "variantImage": "levels/photo-pairs/nursery/medium_nursery_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/workbench/medium_workbench_001/base.jpg",
+    "category": "Workshop Clutter",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Inspect the small screwdriver handle near the right-middle tools.",
+        "id": 1,
+        "radius": 6.5,
+        "x": 68.7,
+        "y": 45.3
+      }
+    ],
+    "id": "medium_workbench_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Workbench Screwdriver",
+    "variantImage": "levels/photo-pairs/workbench/medium_workbench_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/camouflage/hard_forest_001/base.jpg",
+    "category": "Extreme Hunter",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Look for the camouflaged tiny figure near center-right.",
+        "id": 1,
+        "radius": 5.2,
+        "x": 60.3,
+        "y": 54.4
+      }
+    ],
+    "id": "hard_forest_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Forest Floor Camouflage",
+    "variantImage": "levels/photo-pairs/camouflage/hard_forest_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/pattern-rug/easy_rug_pick_001/base.jpg",
+    "category": "Pattern Clutter",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Look for the added yellow pick among the repeated rug shapes.",
+        "id": 1,
+        "radius": 8,
+        "x": 58.8,
+        "y": 43.4
+      }
+    ],
+    "id": "easy_rug_pick_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Patterned Rug Guitar Pick",
+    "variantImage": "levels/photo-pairs/pattern-rug/easy_rug_pick_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/base.jpg",
+    "category": "Workshop Clutter",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small silver screw between the right-side hardware.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 67,
+        "y": 48.3
+      }
+    ],
+    "id": "medium_screw_tray_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Screw Tray Missing Screw",
+    "variantImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/base.jpg",
+    "category": "Pattern Clutter",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Inspect the shifted orange tile fragment left of center.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 35.7,
+        "y": 53.8
+      }
+    ],
+    "id": "medium_tile_piece_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Mosaic Tile Shift",
+    "variantImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/gravel/hard_gravel_key_001/base.jpg",
+    "category": "Extreme Hunter",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Search the lower-center gravel for a tiny added key.",
+        "id": 1,
+        "radius": 4.4,
+        "x": 60.3,
+        "y": 61.2
+      }
+    ],
+    "id": "hard_gravel_key_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Gravel Hidden Key",
+    "variantImage": "levels/photo-pairs/gravel/hard_gravel_key_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/camouflage/hard_camo_patch_001/base.jpg",
+    "category": "Extreme Hunter",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Find the removed leaf piece in the center-right camouflage.",
+        "id": 1,
+        "radius": 4.2,
+        "x": 62.7,
+        "y": 56.8
+      }
+    ],
+    "id": "hard_camo_patch_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Camouflage Leaf Piece",
+    "variantImage": "levels/photo-pairs/camouflage/hard_camo_patch_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/wire-tangle/hard_wire_clip_001/base.jpg",
+    "category": "Workshop Clutter",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Compare the angle of the small clip in the lower-right wire tangle.",
+        "id": 1,
+        "radius": 4.4,
+        "x": 73.8,
+        "y": 57.4
+      }
+    ],
+    "id": "hard_wire_clip_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Wire Tangle Clip",
+    "variantImage": "levels/photo-pairs/wire-tangle/hard_wire_clip_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/seed-tray/hard_seed_tag_001/base.jpg",
+    "category": "Greenhouse Clutter",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Scan the upper-right seed tray for a missing tab on a plant label.",
+        "id": 1,
+        "radius": 4.5,
+        "x": 70.8,
+        "y": 32.8
+      }
+    ],
+    "id": "hard_seed_tag_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Seed Tray Plant Tag",
+    "variantImage": "levels/photo-pairs/seed-tray/hard_seed_tag_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Look just left of the blue screwdriver near the top edge.",
+        "id": 1,
+        "radius": 10.6,
+        "x": 62.8,
+        "y": 7.6
+      }
+    ],
+    "id": "photo_workbench_hardware_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Workbench Hardware Ring",
+    "variantImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Check the small detached succulent just left of the twine bundle.",
+        "id": 1,
+        "radius": 7.2,
+        "x": 70.4,
+        "y": 40.2
+      }
+    ],
+    "id": "photo_potting_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Potting Table Succulent",
+    "variantImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 6.7,
+        "x": 35.1,
+        "y": 61.6
+      }
+    ],
+    "id": "photo_watchmaker_bench_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Watchmaker Bench Gear",
+    "variantImage": "levels/photo-pairs/photo-watchmaker-bench/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 7.1,
+        "x": 16.7,
+        "y": 76
+      }
+    ],
+    "id": "photo_bakers_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Bakers Table Cutter",
+    "variantImage": "levels/photo-pairs/photo-bakers-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 5.1,
+        "x": 50.1,
+        "y": 57.6
+      }
+    ],
+    "id": "photo_electronics_bench_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Electronics Bench Resistor",
+    "variantImage": "levels/photo-pairs/photo-electronics-bench/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 18.5,
+        "x": 52.8,
+        "y": 73.5
+      }
+    ],
+    "id": "photo_art_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Artist Table Paint Tube",
+    "variantImage": "levels/photo-pairs/photo-art-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 7.8,
+        "x": 45.7,
+        "y": 30.5
+      }
+    ],
+    "id": "photo_camping_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Camping Table Carabiner",
+    "variantImage": "levels/photo-pairs/photo-camping-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 12.9,
+        "x": 37.9,
+        "y": 34.6
+      }
+    ],
+    "id": "photo_antique_desk_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Antique Desk Key",
+    "variantImage": "levels/photo-pairs/photo-antique-desk/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-jewelry-bench/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 7.1,
+        "x": 42.3,
+        "y": 94.4
+      }
+    ],
+    "id": "photo_jewelry_bench_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Jewelry Bench Bead",
+    "variantImage": "levels/photo-pairs/photo-jewelry-bench/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 64.1,
+        "y": 55.6
+      }
+    ],
+    "id": "photo_board_game_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Board Game Piece",
+    "variantImage": "levels/photo-pairs/photo-board-game/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 10.5,
+        "x": 59.6,
+        "y": 73.8
+      }
+    ],
+    "id": "photo_woodworking_bench_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Woodworking Bench Screw",
+    "variantImage": "levels/photo-pairs/photo-woodworking-bench/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-spice-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 9.9,
+        "x": 39.6,
+        "y": 16.1
+      }
+    ],
+    "id": "photo_spice_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Spice Table Herb",
+    "variantImage": "levels/photo-pairs/photo-spice-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-coffee-station/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 9.5,
+        "x": 37.2,
+        "y": 70.4
+      }
+    ],
+    "id": "photo_coffee_station_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Coffee Station Scoop",
+    "variantImage": "levels/photo-pairs/photo-coffee-station/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-fishing-tackle/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 10.7,
+        "x": 62.6,
+        "y": 52.3
+      }
+    ],
+    "id": "photo_fishing_tackle_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Fishing Tackle Float",
+    "variantImage": "levels/photo-pairs/photo-fishing-tackle/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-classroom-lab/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 6.9,
+        "x": 38.8,
+        "y": 77.8
+      }
+    ],
+    "id": "photo_classroom_lab_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Classroom Lab Stopper",
+    "variantImage": "levels/photo-pairs/photo-classroom-lab/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 10.6,
+        "x": 62.8,
+        "y": 73.1
+      }
+    ],
+    "id": "photo_repair_drawer_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Repair Drawer Washer",
+    "variantImage": "levels/photo-pairs/photo-repair-drawer/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-florist-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 15,
+        "y": 66.8
+      }
+    ],
+    "id": "photo_florist_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Florist Table Flower",
+    "variantImage": "levels/photo-pairs/photo-florist-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 7.7,
+        "x": 38.5,
+        "y": 67.9
+      }
+    ],
+    "id": "photo_camera_gear_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Camera Gear Lens Cap",
+    "variantImage": "levels/photo-pairs/photo-camera-gear/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 8.6,
+        "x": 48.7,
+        "y": 29.4
+      }
+    ],
+    "id": "photo_pottery_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Pottery Table Sponge",
+    "variantImage": "levels/photo-pairs/photo-pottery-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 8.4,
+        "x": 34.4,
+        "y": 91.3
+      }
+    ],
+    "id": "photo_bicycle_repair_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Bicycle Repair Bolt",
+    "variantImage": "levels/photo-pairs/photo-bicycle-repair/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 5.3,
+        "x": 74.9,
+        "y": 83.7
+      }
+    ],
+    "id": "photo_woodworking_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Woodworking Screw",
+    "variantImage": "levels/photo-pairs/photo-woodworking-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 11.6,
+        "x": 81.9,
+        "y": 26.5
+      }
+    ],
+    "id": "photo_artist_supply_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Artist Supply Paint",
+    "variantImage": "levels/photo-pairs/photo-artist-supply/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 13.7,
+        "x": 61,
+        "y": 32.9
+      }
+    ],
+    "id": "photo_camping_gear_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Camping Gear Carabiner",
+    "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-pantry-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 4.5,
+        "x": 89.4,
+        "y": 64.9
+      }
+    ],
+    "id": "photo_pantry_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Pantry Table Spice",
+    "variantImage": "levels/photo-pairs/photo-pantry-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 7.1,
+        "x": 63,
+        "y": 93.5
+      }
+    ],
+    "id": "photo_sewing_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Sewing Table Button",
+    "variantImage": "levels/photo-pairs/photo-sewing-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 5.5,
+        "x": 47.4,
+        "y": 12.6
+      }
+    ],
+    "id": "photo_map_restoration_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Map Restoration Clip",
+    "variantImage": "levels/photo-pairs/photo-map-restoration/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 11,
+        "x": 34.8,
+        "y": 50.5
+      }
+    ],
+    "id": "photo_garden_potting_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Garden Potting Pot",
+    "variantImage": "levels/photo-pairs/photo-garden-potting/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 5.7,
+        "x": 20.2,
+        "y": 59.2
+      }
+    ],
+    "id": "photo_game_night_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Game Night Token",
+    "variantImage": "levels/photo-pairs/photo-game-night/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-electronics-repair/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 5.3,
+        "x": 88.8,
+        "y": 31.3
+      }
+    ],
+    "id": "photo_electronics_repair_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Electronics Repair Capacitor",
+    "variantImage": "levels/photo-pairs/photo-electronics-repair/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-baker-table/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 7.8,
+        "x": 72.1,
+        "y": 35.3
+      }
+    ],
+    "id": "photo_baker_table_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Baker Table Cutter",
+    "variantImage": "levels/photo-pairs/photo-baker-table/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 5,
+        "x": 89.7,
+        "y": 65.6
+      }
+    ],
+    "id": "photo_watch_repair_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Watch Repair Gear",
+    "variantImage": "levels/photo-pairs/photo-watch-repair/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-coffee-roaster/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the small object in this area.",
+        "id": 1,
+        "radius": 4.5,
+        "x": 30.5,
+        "y": 74.8
+      }
+    ],
+    "id": "photo_coffee_roaster_001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Coffee Roaster Scoop",
+    "variantImage": "levels/photo-pairs/photo-coffee-roaster/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/abstract-token-field/abstract_token_field_001/base.jpg",
+    "category": "Illustrated",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Compare the upright turquoise capsule just below center.",
+        "id": 1,
+        "radius": 7.9,
+        "x": 40.1,
+        "y": 66.7
+      }
+    ],
+    "id": "abstract_token_field_001",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Floating Token Field",
+    "variantImage": "levels/photo-pairs/abstract-token-field/abstract_token_field_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/base.jpg",
+    "category": "Illustrated",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Inspect the small purple connector slightly right of center.",
+        "id": 1,
+        "radius": 7.5,
+        "x": 56.6,
+        "y": 40.4
+      }
+    ],
+    "id": "abstract_mechanical_maze_001",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Mechanical Tile Maze",
+    "variantImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (62%, 81%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 62.2,
+        "y": 81.9
+      }
+    ],
+    "id": "mass_abstract_001",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #1",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_002/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (45%, 38%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 46.4,
+        "y": 39.1
+      }
+    ],
+    "id": "mass_abstract_002",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #2",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_002/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_003/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (29%, 60%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 29,
+        "y": 63.7
+      }
+    ],
+    "id": "mass_abstract_003",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #3",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_003/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_004/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (76%, 18%) carefully.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 76,
+        "y": 19.2
+      }
+    ],
+    "id": "mass_abstract_004",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #4",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_004/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_005/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (60%, 40%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 62,
+        "y": 39.8
+      }
+    ],
+    "id": "mass_abstract_005",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #5",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_005/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_006/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (43%, 62%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 43.7,
+        "y": 63.3
+      }
+    ],
+    "id": "mass_abstract_006",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #6",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_006/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_007/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (27%, 20%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 26.9,
+        "y": 20.6
+      }
+    ],
+    "id": "mass_abstract_007",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #7",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_007/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_008/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (74%, 42%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 74.6,
+        "y": 45.1
+      }
+    ],
+    "id": "mass_abstract_008",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #8",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_008/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_009/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (58%, 64%) carefully.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 57.6,
+        "y": 64.6
+      }
+    ],
+    "id": "mass_abstract_009",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #9",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_009/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_010/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (41%, 22%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 43.6,
+        "y": 21.2
+      }
+    ],
+    "id": "mass_abstract_010",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #10",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_010/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_011/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (25%, 43%) carefully.",
+        "id": 1,
+        "radius": 5.2,
+        "x": 25.9,
+        "y": 44.9
+      }
+    ],
+    "id": "mass_abstract_011",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #11",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_011/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_012/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (72%, 65%) carefully.",
+        "id": 1,
+        "radius": 5.7,
+        "x": 73.3,
+        "y": 66
+      }
+    ],
+    "id": "mass_abstract_012",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #12",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_012/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_013/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (56%, 23%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 56.1,
+        "y": 23.6
+      }
+    ],
+    "id": "mass_abstract_013",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #13",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_013/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_014/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (39%, 45%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 39.1,
+        "y": 46
+      }
+    ],
+    "id": "mass_abstract_014",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #14",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_014/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_015/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (23%, 67%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 25.2,
+        "y": 66.6
+      }
+    ],
+    "id": "mass_abstract_015",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #15",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_015/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_016/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (70%, 25%) carefully.",
+        "id": 1,
+        "radius": 5.5,
+        "x": 70.9,
+        "y": 26.2
+      }
+    ],
+    "id": "mass_abstract_016",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #16",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_016/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_017/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (54%, 47%) carefully.",
+        "id": 1,
+        "radius": 5.7,
+        "x": 54.1,
+        "y": 47.4
+      }
+    ],
+    "id": "mass_abstract_017",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #17",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_017/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_018/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (37%, 69%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 37.7,
+        "y": 72
+      }
+    ],
+    "id": "mass_abstract_018",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #18",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_018/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_019/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (21%, 26%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 20.7,
+        "y": 27.4
+      }
+    ],
+    "id": "mass_abstract_019",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #19",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_019/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_020/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (68%, 48%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 70.7,
+        "y": 48
+      }
+    ],
+    "id": "mass_abstract_020",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #20",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_020/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_021/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (52%, 70%) carefully.",
+        "id": 1,
+        "radius": 5.1,
+        "x": 52.4,
+        "y": 70.6
+      }
+    ],
+    "id": "mass_abstract_021",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #21",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_021/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_022/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (35%, 28%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 36.6,
+        "y": 28.8
+      }
+    ],
+    "id": "mass_abstract_022",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #22",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_022/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_023/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (19%, 50%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 19.3,
+        "y": 50.5
+      }
+    ],
+    "id": "mass_abstract_023",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #23",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_023/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_024/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (66%, 72%) carefully.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 66.3,
+        "y": 72.8
+      }
+    ],
+    "id": "mass_abstract_024",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #24",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_024/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_025/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (50%, 30%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 52.3,
+        "y": 29.4
+      }
+    ],
+    "id": "mass_abstract_025",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #25",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_025/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_026/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (33%, 52%) carefully.",
+        "id": 1,
+        "radius": 5.5,
+        "x": 33.9,
+        "y": 52.8
+      }
+    ],
+    "id": "mass_abstract_026",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #26",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_026/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_027/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (81%, 74%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 82.2,
+        "y": 74.1
+      }
+    ],
+    "id": "mass_abstract_027",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #27",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_027/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_028/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (64%, 31%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 64.8,
+        "y": 31.9
+      }
+    ],
+    "id": "mass_abstract_028",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #28",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_028/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_029/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (48%, 53%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 47.8,
+        "y": 54.3
+      }
+    ],
+    "id": "mass_abstract_029",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #29",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_029/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_030/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (31%, 75%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 33.9,
+        "y": 74.8
+      }
+    ],
+    "id": "mass_abstract_030",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #30",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_030/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_031/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (79%, 33%) carefully.",
+        "id": 1,
+        "radius": 5.5,
+        "x": 79.5,
+        "y": 34.2
+      }
+    ],
+    "id": "mass_abstract_031",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #31",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_031/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_032/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (62%, 55%) carefully.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 62.8,
+        "y": 55.5
+      }
+    ],
+    "id": "mass_abstract_032",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #32",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_032/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_033/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (46%, 77%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 46.4,
+        "y": 80.2
+      }
+    ],
+    "id": "mass_abstract_033",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #33",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_033/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_034/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (29%, 35%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 29.4,
+        "y": 35.7
+      }
+    ],
+    "id": "mass_abstract_034",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #34",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_034/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_035/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (77%, 57%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 79.4,
+        "y": 56.2
+      }
+    ],
+    "id": "mass_abstract_035",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #35",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_035/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_036/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (60%, 78%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 61.1,
+        "y": 79.7
+      }
+    ],
+    "id": "mass_abstract_036",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #36",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_036/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_037/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (44%, 36%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 45.3,
+        "y": 37
+      }
+    ],
+    "id": "mass_abstract_037",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #37",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_037/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_038/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (28%, 58%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 28,
+        "y": 58.7
+      }
+    ],
+    "id": "mass_abstract_038",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #38",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_038/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_039/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (75%, 80%) carefully.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 75,
+        "y": 81.1
+      }
+    ],
+    "id": "mass_abstract_039",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #39",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_039/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_040/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (59%, 38%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 61,
+        "y": 37.6
+      }
+    ],
+    "id": "mass_abstract_040",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #40",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_040/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_041/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (42%, 60%) carefully.",
+        "id": 1,
+        "radius": 5.5,
+        "x": 42.6,
+        "y": 61
+      }
+    ],
+    "id": "mass_abstract_041",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #41",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_041/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_042/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (26%, 18%) carefully.",
+        "id": 1,
+        "radius": 5.7,
+        "x": 25.9,
+        "y": 18.4
+      }
+    ],
+    "id": "mass_abstract_042",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #42",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_042/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_043/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (73%, 40%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 73.5,
+        "y": 40.1
+      }
+    ],
+    "id": "mass_abstract_043",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #43",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_043/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_044/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (57%, 62%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 56.5,
+        "y": 62.5
+      }
+    ],
+    "id": "mass_abstract_044",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #44",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_044/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_045/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (40%, 19%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 42.6,
+        "y": 19.1
+      }
+    ],
+    "id": "mass_abstract_045",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #45",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_045/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_046/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (24%, 41%) carefully.",
+        "id": 1,
+        "radius": 5.2,
+        "x": 24.3,
+        "y": 42.2
+      }
+    ],
+    "id": "mass_abstract_046",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #46",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_046/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_047/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (71%, 63%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 72.4,
+        "y": 63.7
+      }
+    ],
+    "id": "mass_abstract_047",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #47",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_047/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_048/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (55%, 21%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 55.1,
+        "y": 24.4
+      }
+    ],
+    "id": "mass_abstract_048",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #48",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_048/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_049/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (38%, 43%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 38.1,
+        "y": 43.9
+      }
+    ],
+    "id": "mass_abstract_049",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #49",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_049/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_050/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (22%, 65%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 24.1,
+        "y": 64.5
+      }
+    ],
+    "id": "mass_abstract_050",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #50",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_050/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_051/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (69%, 23%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 69.8,
+        "y": 23.8
+      }
+    ],
+    "id": "mass_abstract_051",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #51",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_051/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_052/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (53%, 45%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 54,
+        "y": 45.2
+      }
+    ],
+    "id": "mass_abstract_052",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #52",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_052/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_053/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (36%, 66%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 36.7,
+        "y": 69.8
+      }
+    ],
+    "id": "mass_abstract_053",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #53",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_053/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_054/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (20%, 24%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 19.7,
+        "y": 25.3
+      }
+    ],
+    "id": "mass_abstract_054",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #54",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_054/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_055/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (67%, 46%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 69.7,
+        "y": 45.9
+      }
+    ],
+    "id": "mass_abstract_055",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #55",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_055/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_056/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (51%, 68%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 51.4,
+        "y": 69.4
+      }
+    ],
+    "id": "mass_abstract_056",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #56",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_056/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_057/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (34%, 26%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 35.6,
+        "y": 26.6
+      }
+    ],
+    "id": "mass_abstract_057",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #57",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_057/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_058/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (18%, 48%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 18.2,
+        "y": 51.2
+      }
+    ],
+    "id": "mass_abstract_058",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #58",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_058/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_059/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (65%, 70%) carefully.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 65.2,
+        "y": 70.7
+      }
+    ],
+    "id": "mass_abstract_059",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #59",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_059/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_060/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (49%, 28%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 51.3,
+        "y": 27.3
+      }
+    ],
+    "id": "mass_abstract_060",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #60",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_060/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_061/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (32%, 50%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 33,
+        "y": 50.7
+      }
+    ],
+    "id": "mass_abstract_061",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #61",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_061/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_062/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (80%, 71%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 81.2,
+        "y": 72
+      }
+    ],
+    "id": "mass_abstract_062",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #62",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_062/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_063/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (63%, 29%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 63.8,
+        "y": 32.6
+      }
+    ],
+    "id": "mass_abstract_063",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #63",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_063/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_064/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (47%, 51%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 46.8,
+        "y": 52.1
+      }
+    ],
+    "id": "mass_abstract_064",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #64",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_064/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_065/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (30%, 73%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 32.8,
+        "y": 72.7
+      }
+    ],
+    "id": "mass_abstract_065",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #65",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_065/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_066/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (78%, 31%) carefully.",
+        "id": 1,
+        "radius": 5.2,
+        "x": 78.4,
+        "y": 31.9
+      }
+    ],
+    "id": "mass_abstract_066",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #66",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_066/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_067/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (61%, 53%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 62.8,
+        "y": 53.5
+      }
+    ],
+    "id": "mass_abstract_067",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #67",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_067/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_068/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (45%, 75%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 45.4,
+        "y": 75.1
+      }
+    ],
+    "id": "mass_abstract_068",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #68",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_068/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_069/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (28%, 33%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 28.4,
+        "y": 33.5
+      }
+    ],
+    "id": "mass_abstract_069",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #69",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_069/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_070/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (76%, 54%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 78.4,
+        "y": 54.1
+      }
+    ],
+    "id": "mass_abstract_070",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #70",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_070/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_071/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (59%, 76%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 60.1,
+        "y": 77.6
+      }
+    ],
+    "id": "mass_abstract_071",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #71",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_071/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_072/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (43%, 34%) carefully.",
+        "id": 1,
+        "radius": 5.7,
+        "x": 44.5,
+        "y": 34.9
+      }
+    ],
+    "id": "mass_abstract_072",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #72",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_072/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_073/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (26%, 56%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 26.9,
+        "y": 56.5
+      }
+    ],
+    "id": "mass_abstract_073",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #73",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_073/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_074/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (74%, 78%) carefully.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 73.9,
+        "y": 78.9
+      }
+    ],
+    "id": "mass_abstract_074",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #74",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_074/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_075/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (58%, 36%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 60,
+        "y": 35.5
+      }
+    ],
+    "id": "mass_abstract_075",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #75",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_075/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_076/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (41%, 58%) carefully.",
+        "id": 1,
+        "radius": 5.2,
+        "x": 41.7,
+        "y": 59.2
+      }
+    ],
+    "id": "mass_abstract_076",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #76",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_076/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_077/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (25%, 80%) carefully.",
+        "id": 1,
+        "radius": 5.7,
+        "x": 26.1,
+        "y": 80.3
+      }
+    ],
+    "id": "mass_abstract_077",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #77",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_077/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_078/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (72%, 38%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 72.5,
+        "y": 38
+      }
+    ],
+    "id": "mass_abstract_078",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #78",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_078/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_079/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (56%, 59%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 55.5,
+        "y": 60.3
+      }
+    ],
+    "id": "mass_abstract_079",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #79",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_079/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_080/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (39%, 81%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 41.5,
+        "y": 80.9
+      }
+    ],
+    "id": "mass_abstract_080",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #80",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_080/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_081/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (23%, 39%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 23.2,
+        "y": 40.4
+      }
+    ],
+    "id": "mass_abstract_081",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #81",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_081/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_082/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (70%, 61%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 70.5,
+        "y": 61.6
+      }
+    ],
+    "id": "mass_abstract_082",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #82",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_082/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_083/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (54%, 19%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 54.1,
+        "y": 22.3
+      }
+    ],
+    "id": "mass_abstract_083",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #83",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_083/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_084/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (37%, 41%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 37.1,
+        "y": 41.7
+      }
+    ],
+    "id": "mass_abstract_084",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #84",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_084/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_085/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (21%, 63%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 23.1,
+        "y": 62.3
+      }
+    ],
+    "id": "mass_abstract_085",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #85",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_085/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_086/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (68%, 21%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 68.7,
+        "y": 21.8
+      }
+    ],
+    "id": "mass_abstract_086",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #86",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_086/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_087/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (52%, 42%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 53,
+        "y": 43.1
+      }
+    ],
+    "id": "mass_abstract_087",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #87",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_087/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_088/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (35%, 64%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 35.6,
+        "y": 67.7
+      }
+    ],
+    "id": "mass_abstract_088",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #88",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_088/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_089/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (19%, 22%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 18.6,
+        "y": 23.1
+      }
+    ],
+    "id": "mass_abstract_089",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #89",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_089/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_090/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (66%, 44%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 68.7,
+        "y": 43.7
+      }
+    ],
+    "id": "mass_abstract_090",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #90",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_090/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_091/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (50%, 66%) carefully.",
+        "id": 1,
+        "radius": 5.4,
+        "x": 50.4,
+        "y": 67.2
+      }
+    ],
+    "id": "mass_abstract_091",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #91",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_091/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_092/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (33%, 24%) carefully.",
+        "id": 1,
+        "radius": 5.7,
+        "x": 33.6,
+        "y": 24.5
+      }
+    ],
+    "id": "mass_abstract_092",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #92",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_092/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_093/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (81%, 46%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 81.2,
+        "y": 49.1
+      }
+    ],
+    "id": "mass_abstract_093",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #93",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_093/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_094/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (64%, 68%) carefully.",
+        "id": 1,
+        "radius": 5.8,
+        "x": 64.2,
+        "y": 68.6
+      }
+    ],
+    "id": "mass_abstract_094",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #94",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_094/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_095/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (48%, 25%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 50.2,
+        "y": 25.1
+      }
+    ],
+    "id": "mass_abstract_095",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #95",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_095/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_096/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (31%, 47%) carefully.",
+        "id": 1,
+        "radius": 5.2,
+        "x": 31.9,
+        "y": 48.3
+      }
+    ],
+    "id": "mass_abstract_096",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #96",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_096/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_097/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (79%, 69%) carefully.",
+        "id": 1,
+        "radius": 5.7,
+        "x": 79.2,
+        "y": 69.9
+      }
+    ],
+    "id": "mass_abstract_097",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #97",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_097/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_098/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "hint": "Examine the region around (62%, 27%) carefully.",
+        "id": 1,
+        "radius": 5.6,
+        "x": 62.8,
+        "y": 30.5
+      }
+    ],
+    "id": "mass_abstract_098",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #98",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_098/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_099/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "hint": "Examine the region around (46%, 49%) carefully.",
+        "id": 1,
+        "radius": 5.9,
+        "x": 45.8,
+        "y": 50
+      }
+    ],
+    "id": "mass_abstract_099",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #99",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_099/variant.jpg"
+  },
+  {
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_100/base.jpg",
+    "category": "Generated Illustrated Abstract",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "hint": "Examine the region around (29%, 71%) carefully.",
+        "id": 1,
+        "radius": 4,
+        "x": 31.8,
+        "y": 70.5
+      }
+    ],
+    "id": "mass_abstract_100",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "title": "Generated Illustrated Abstract #100",
+    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_100/variant.jpg"
+  },
+  {
+    "id": "mass_photo_101",
+    "title": "Photographic Detail 101",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_101/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 16,
+        "y": 18,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_102",
+    "title": "Photographic Detail 102",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_102/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45,
+        "y": 55,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_103",
+    "title": "Photographic Detail 103",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_103/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74,
+        "y": 27,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_104",
+    "title": "Photographic Detail 104",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_104/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34,
+        "y": 64,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_105",
+    "title": "Photographic Detail 105",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_105/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 63,
+        "y": 36,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_106",
+    "title": "Photographic Detail 106",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_106/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 23,
+        "y": 73,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_107",
+    "title": "Photographic Detail 107",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_107/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52,
+        "y": 45,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_108",
+    "title": "Photographic Detail 108",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_108/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 81,
+        "y": 82,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_109",
+    "title": "Photographic Detail 109",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-jewelry-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_109/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 41,
+        "y": 54,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_110",
+    "title": "Photographic Detail 110",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_110/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 70,
+        "y": 26,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_111",
+    "title": "Photographic Detail 111",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_111/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30,
+        "y": 63,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_112",
+    "title": "Photographic Detail 112",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-spice-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_112/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59,
+        "y": 35,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_113",
+    "title": "Photographic Detail 113",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-coffee-station/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_113/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 19,
+        "y": 72,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_114",
+    "title": "Photographic Detail 114",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-fishing-tackle/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_114/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48,
+        "y": 44,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_115",
+    "title": "Photographic Detail 115",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-classroom-lab/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_115/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 77,
+        "y": 81,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_116",
+    "title": "Photographic Detail 116",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_116/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 37,
+        "y": 53,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_117",
+    "title": "Photographic Detail 117",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-florist-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_117/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66,
+        "y": 25,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_118",
+    "title": "Photographic Detail 118",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_118/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 26,
+        "y": 62,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_119",
+    "title": "Photographic Detail 119",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_119/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55,
+        "y": 34,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_120",
+    "title": "Photographic Detail 120",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_120/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 84,
+        "y": 71,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_121",
+    "title": "Photographic Detail 121",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_121/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 43,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_122",
+    "title": "Photographic Detail 122",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_122/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73,
+        "y": 80,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_123",
+    "title": "Photographic Detail 123",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_123/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33,
+        "y": 52,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_124",
+    "title": "Photographic Detail 124",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-pantry-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_124/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62,
+        "y": 24,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_125",
+    "title": "Photographic Detail 125",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_125/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 22,
+        "y": 61,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_101",
+    "title": "Illustrated Abstract Detail 101",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_101/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 17,
+        "y": 19,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_102",
+    "title": "Illustrated Abstract Detail 102",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_002/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_102/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48,
+        "y": 60,
+        "radius": 5.7,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_103",
+    "title": "Illustrated Abstract Detail 103",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_003/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_103/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 79,
+        "y": 38,
+        "radius": 4.1,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_104",
+    "title": "Illustrated Abstract Detail 104",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_004/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_104/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43,
+        "y": 79,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_105",
+    "title": "Illustrated Abstract Detail 105",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_005/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_105/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74,
+        "y": 57,
+        "radius": 5.7,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_106",
+    "title": "Illustrated Abstract Detail 106",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_006/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_106/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 38,
+        "y": 35,
+        "radius": 4.1,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_107",
+    "title": "Illustrated Abstract Detail 107",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_007/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_107/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69,
+        "y": 76,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_108",
+    "title": "Illustrated Abstract Detail 108",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_008/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_108/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33,
+        "y": 54,
+        "radius": 5.7,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_109",
+    "title": "Illustrated Abstract Detail 109",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_009/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_109/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 64,
+        "y": 32,
+        "radius": 4.1,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_110",
+    "title": "Illustrated Abstract Detail 110",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_010/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_110/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 28,
+        "y": 73,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_111",
+    "title": "Illustrated Abstract Detail 111",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_011/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_111/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59,
+        "y": 51,
+        "radius": 5.7,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_112",
+    "title": "Illustrated Abstract Detail 112",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_012/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_112/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 23,
+        "y": 29,
+        "radius": 4.1,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_113",
+    "title": "Illustrated Abstract Detail 113",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_013/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_113/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54,
+        "y": 70,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_114",
+    "title": "Illustrated Abstract Detail 114",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_014/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_114/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 18,
+        "y": 48,
+        "radius": 5.7,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_115",
+    "title": "Illustrated Abstract Detail 115",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_015/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_115/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49,
+        "y": 26,
+        "radius": 4.1,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_116",
+    "title": "Illustrated Abstract Detail 116",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_016/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_116/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 80,
+        "y": 67,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_117",
+    "title": "Illustrated Abstract Detail 117",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_017/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_117/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 45,
+        "radius": 5.7,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_118",
+    "title": "Illustrated Abstract Detail 118",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_018/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_118/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 75,
+        "y": 23,
+        "radius": 4.1,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_119",
+    "title": "Illustrated Abstract Detail 119",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_019/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_119/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 39,
+        "y": 64,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_120",
+    "title": "Illustrated Abstract Detail 120",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_020/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_120/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 70,
+        "y": 42,
+        "radius": 5.7,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_121",
+    "title": "Illustrated Abstract Detail 121",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_021/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_121/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34,
+        "y": 20,
+        "radius": 4.1,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_122",
+    "title": "Illustrated Abstract Detail 122",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_022/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_122/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 65,
+        "y": 61,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_123",
+    "title": "Illustrated Abstract Detail 123",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_023/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_123/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29,
+        "y": 39,
+        "radius": 5.7,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_124",
+    "title": "Illustrated Abstract Detail 124",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_024/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_124/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 60,
+        "y": 80,
+        "radius": 4.1,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_abstract_125",
+    "title": "Illustrated Abstract Detail 125",
+    "pack": "Abstract Animated",
+    "packId": "abstract_animated",
+    "category": "Illustrated Abstract",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_025/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-abstract-extra/mass_abstract_125/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 24,
+        "y": 58,
+        "radius": 7.2,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_001",
+    "title": "Photographic Detail 001",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_001/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 16,
+        "y": 18,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_002",
+    "title": "Photographic Detail 002",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_002/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45,
+        "y": 55,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_003",
+    "title": "Photographic Detail 003",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_003/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74,
+        "y": 27,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_004",
+    "title": "Photographic Detail 004",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_004/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34,
+        "y": 64,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_005",
+    "title": "Photographic Detail 005",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_005/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 63,
+        "y": 36,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_006",
+    "title": "Photographic Detail 006",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_006/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 23,
+        "y": 73,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_007",
+    "title": "Photographic Detail 007",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_007/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52,
+        "y": 45,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_008",
+    "title": "Photographic Detail 008",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_008/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 81,
+        "y": 82,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_009",
+    "title": "Photographic Detail 009",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-jewelry-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_009/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 41,
+        "y": 54,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_010",
+    "title": "Photographic Detail 010",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_010/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 70,
+        "y": 26,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_011",
+    "title": "Photographic Detail 011",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_011/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30,
+        "y": 63,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_012",
+    "title": "Photographic Detail 012",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-spice-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_012/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59,
+        "y": 35,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_013",
+    "title": "Photographic Detail 013",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-coffee-station/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_013/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 19,
+        "y": 72,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_014",
+    "title": "Photographic Detail 014",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-fishing-tackle/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_014/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48,
+        "y": 44,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_015",
+    "title": "Photographic Detail 015",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-classroom-lab/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_015/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 77,
+        "y": 81,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_016",
+    "title": "Photographic Detail 016",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_016/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 37,
+        "y": 53,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_017",
+    "title": "Photographic Detail 017",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-florist-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_017/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66,
+        "y": 25,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_018",
+    "title": "Photographic Detail 018",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_018/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 26,
+        "y": 62,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_019",
+    "title": "Photographic Detail 019",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_019/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55,
+        "y": 34,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_020",
+    "title": "Photographic Detail 020",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_020/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 84,
+        "y": 71,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_021",
+    "title": "Photographic Detail 021",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_021/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 43,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_022",
+    "title": "Photographic Detail 022",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_022/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73,
+        "y": 80,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_023",
+    "title": "Photographic Detail 023",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_023/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33,
+        "y": 52,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_024",
+    "title": "Photographic Detail 024",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-pantry-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_024/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62,
+        "y": 24,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_025",
+    "title": "Photographic Detail 025",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_025/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 22,
+        "y": 61,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_026",
+    "title": "Photographic Detail 026",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_026/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51,
+        "y": 33,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_027",
+    "title": "Photographic Detail 027",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_027/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 80,
+        "y": 70,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_028",
+    "title": "Photographic Detail 028",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_028/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 40,
+        "y": 42,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_029",
+    "title": "Photographic Detail 029",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-electronics-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_029/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69,
+        "y": 79,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_030",
+    "title": "Photographic Detail 030",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-baker-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_030/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29,
+        "y": 51,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_031",
+    "title": "Photographic Detail 031",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_031/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58,
+        "y": 23,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_032",
+    "title": "Photographic Detail 032",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-coffee-roaster/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_032/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 18,
+        "y": 60,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_033",
+    "title": "Photographic Detail 033",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_033/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47,
+        "y": 32,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_034",
+    "title": "Photographic Detail 034",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_034/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76,
+        "y": 69,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_035",
+    "title": "Photographic Detail 035",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_035/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36,
+        "y": 41,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_036",
+    "title": "Photographic Detail 036",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_036/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 65,
+        "y": 78,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_037",
+    "title": "Photographic Detail 037",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_037/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25,
+        "y": 50,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_038",
+    "title": "Photographic Detail 038",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_038/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54,
+        "y": 22,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_039",
+    "title": "Photographic Detail 039",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_039/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 83,
+        "y": 59,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_040",
+    "title": "Photographic Detail 040",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_040/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43,
+        "y": 31,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_041",
+    "title": "Photographic Detail 041",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-jewelry-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_041/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 72,
+        "y": 68,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_042",
+    "title": "Photographic Detail 042",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_042/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32,
+        "y": 40,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_043",
+    "title": "Photographic Detail 043",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_043/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61,
+        "y": 77,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_044",
+    "title": "Photographic Detail 044",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-spice-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_044/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 21,
+        "y": 49,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_045",
+    "title": "Photographic Detail 045",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-coffee-station/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_045/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 21,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_046",
+    "title": "Photographic Detail 046",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-fishing-tackle/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_046/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 79,
+        "y": 58,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_047",
+    "title": "Photographic Detail 047",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-classroom-lab/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_047/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 39,
+        "y": 30,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_048",
+    "title": "Photographic Detail 048",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_048/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 68,
+        "y": 67,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_049",
+    "title": "Photographic Detail 049",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-florist-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_049/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 28,
+        "y": 39,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_050",
+    "title": "Photographic Detail 050",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_050/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 57,
+        "y": 76,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_051",
+    "title": "Photographic Detail 051",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_051/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 17,
+        "y": 48,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_052",
+    "title": "Photographic Detail 052",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_052/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46,
+        "y": 20,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_053",
+    "title": "Photographic Detail 053",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_053/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 75,
+        "y": 57,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_054",
+    "title": "Photographic Detail 054",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_054/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 35,
+        "y": 29,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_055",
+    "title": "Photographic Detail 055",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_055/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 64,
+        "y": 66,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_056",
+    "title": "Photographic Detail 056",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-pantry-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_056/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 24,
+        "y": 38,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_057",
+    "title": "Photographic Detail 057",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_057/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53,
+        "y": 75,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_058",
+    "title": "Photographic Detail 058",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_058/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 82,
+        "y": 47,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_059",
+    "title": "Photographic Detail 059",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_059/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42,
+        "y": 19,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_060",
+    "title": "Photographic Detail 060",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_060/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71,
+        "y": 56,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_061",
+    "title": "Photographic Detail 061",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-electronics-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_061/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31,
+        "y": 28,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_062",
+    "title": "Photographic Detail 062",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-baker-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_062/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 60,
+        "y": 65,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_063",
+    "title": "Photographic Detail 063",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_063/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 20,
+        "y": 37,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_064",
+    "title": "Photographic Detail 064",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-coffee-roaster/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_064/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49,
+        "y": 74,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_065",
+    "title": "Photographic Detail 065",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_065/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 78,
+        "y": 46,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_066",
+    "title": "Photographic Detail 066",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_066/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 38,
+        "y": 18,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_067",
+    "title": "Photographic Detail 067",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_067/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 67,
+        "y": 55,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_068",
+    "title": "Photographic Detail 068",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_068/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 27,
+        "y": 27,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_069",
+    "title": "Photographic Detail 069",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_069/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56,
+        "y": 64,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_070",
+    "title": "Photographic Detail 070",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_070/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 16,
+        "y": 36,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_071",
+    "title": "Photographic Detail 071",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_071/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45,
+        "y": 73,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_072",
+    "title": "Photographic Detail 072",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_072/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74,
+        "y": 45,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_073",
+    "title": "Photographic Detail 073",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-jewelry-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_073/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34,
+        "y": 82,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_074",
+    "title": "Photographic Detail 074",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_074/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 63,
+        "y": 54,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_075",
+    "title": "Photographic Detail 075",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_075/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 23,
+        "y": 26,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_076",
+    "title": "Photographic Detail 076",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-spice-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_076/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52,
+        "y": 63,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_077",
+    "title": "Photographic Detail 077",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-coffee-station/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_077/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 81,
+        "y": 35,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_078",
+    "title": "Photographic Detail 078",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-fishing-tackle/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_078/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 41,
+        "y": 72,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_079",
+    "title": "Photographic Detail 079",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-classroom-lab/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_079/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 70,
+        "y": 44,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_080",
+    "title": "Photographic Detail 080",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_080/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30,
+        "y": 81,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_081",
+    "title": "Photographic Detail 081",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-florist-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_081/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59,
+        "y": 53,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_082",
+    "title": "Photographic Detail 082",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_082/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 19,
+        "y": 25,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_083",
+    "title": "Photographic Detail 083",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_083/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48,
+        "y": 62,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_084",
+    "title": "Photographic Detail 084",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_084/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 77,
+        "y": 34,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_085",
+    "title": "Photographic Detail 085",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_085/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 37,
+        "y": 71,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_086",
+    "title": "Photographic Detail 086",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_086/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66,
+        "y": 43,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_087",
+    "title": "Photographic Detail 087",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_087/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 26,
+        "y": 80,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_088",
+    "title": "Photographic Detail 088",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-pantry-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_088/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55,
+        "y": 52,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_089",
+    "title": "Photographic Detail 089",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_089/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 84,
+        "y": 24,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_090",
+    "title": "Photographic Detail 090",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_090/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 61,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_091",
+    "title": "Photographic Detail 091",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_091/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73,
+        "y": 33,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_092",
+    "title": "Photographic Detail 092",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_092/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33,
+        "y": 70,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_093",
+    "title": "Photographic Detail 093",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-electronics-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_093/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62,
+        "y": 42,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_094",
+    "title": "Photographic Detail 094",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-baker-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_094/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 22,
+        "y": 79,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_095",
+    "title": "Photographic Detail 095",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_095/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51,
+        "y": 51,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_096",
+    "title": "Photographic Detail 096",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-coffee-roaster/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_096/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 80,
+        "y": 23,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_097",
+    "title": "Photographic Detail 097",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_097/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 40,
+        "y": 60,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_098",
+    "title": "Photographic Detail 098",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_098/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69,
+        "y": 32,
+        "radius": 5.5,
+        "difficulty": "Medium",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_099",
+    "title": "Photographic Detail 099",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_099/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29,
+        "y": 69,
+        "radius": 4,
+        "difficulty": "Hard",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  },
+  {
+    "id": "mass_photo_100",
+    "title": "Photographic Detail 100",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Photographic Detail",
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
+    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_100/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58,
+        "y": 41,
+        "radius": 7,
+        "difficulty": "Easy",
+        "hint": "Compare the small color detail in this area."
+      }
+    ]
+  }
+]
