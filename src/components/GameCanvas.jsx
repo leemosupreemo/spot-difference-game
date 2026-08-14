@@ -169,13 +169,13 @@ export default function GameCanvas({
       sounds.playError();
       onMissTap();
 
-      // Show temporary miss marker
+      // Show temporary miss red circle & floating -1 heart popup
       const missId = Date.now() + Math.random();
       const newMiss = { id: missId, x: clickXPercent, y: clickYPercent };
       setMisses(prev => [...prev, newMiss]);
       setTimeout(() => {
         setMisses(prev => prev.filter(m => m.id !== missId));
-      }, 500);
+      }, 1800);
     }
   };
 
@@ -256,13 +256,20 @@ export default function GameCanvas({
             );
           })}
 
-          {/* Temporary Miss Markers */}
+          {/* Temporary Miss Red Circle Markers & Floating -1 Heart Popups */}
           {misses.map(miss => (
-            <div
-              key={`left-miss-${miss.id}`}
-              className="miss-marker"
-              style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
-            />
+            <React.Fragment key={`left-miss-group-${miss.id}`}>
+              <div
+                className="miss-marker"
+                style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
+              />
+              <div
+                className="miss-heart-popup"
+                style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
+              >
+                -1 ❤️
+              </div>
+            </React.Fragment>
           ))}
 
           {/* Speed Bonus Floating Popups */}
@@ -351,13 +358,20 @@ export default function GameCanvas({
             );
           })}
 
-          {/* Temporary Miss Markers */}
+          {/* Temporary Miss Red Circle Markers & Floating -1 Heart Popups */}
           {misses.map(miss => (
-            <div
-              key={`right-miss-${miss.id}`}
-              className="miss-marker"
-              style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
-            />
+            <React.Fragment key={`right-miss-group-${miss.id}`}>
+              <div
+                className="miss-marker"
+                style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
+              />
+              <div
+                className="miss-heart-popup"
+                style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
+              >
+                -1 ❤️
+              </div>
+            </React.Fragment>
           ))}
 
           {/* Speed Bonus Floating Popups */}
