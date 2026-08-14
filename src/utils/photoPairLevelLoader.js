@@ -33,8 +33,15 @@ function shuffleEntries(entries, seed) {
   return shuffled;
 }
 
+import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
+
 export function getAllPhotoPairEntries() {
-  return loadManifest();
+  const entries = loadManifest();
+  const statusMap = getCuratedStatusMap();
+  return entries.filter(entry => {
+    const statusVal = getLevelStatus(statusMap[entry.id])?.status;
+    return statusVal !== 'dismissed';
+  });
 }
 
 function loadManifest() {
@@ -102,9 +109,15 @@ export async function buildPhotoPairStage({
 } = {}) {
   logApp('INFO', `[BuildStage] Pack: ${packId} Difficulty: ${difficulty} Seed: ${seed}`);
   try {
-    const entries = loadManifest();
-    if (entries && entries.length > 0) {
-      const candidates = selectPhotoPairEntries(entries, { packId, difficulty, count, seed });
+    const allEntries = loadManifest();
+    const statusMap = getCuratedStatusMap();
+    const activeEntries = allEntries.filter(entry => {
+      const statusVal = getLevelStatus(statusMap[entry.id])?.status;
+      return statusVal !== 'dismissed';
+    });
+
+    if (activeEntries && activeEntries.length > 0) {
+      const candidates = selectPhotoPairEntries(activeEntries, { packId, difficulty, count, seed });
       const stage = [];
 
       for (const entry of candidates) {

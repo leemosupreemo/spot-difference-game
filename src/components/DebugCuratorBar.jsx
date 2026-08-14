@@ -10,6 +10,7 @@ export default function DebugCuratorBar({
   onSetStatus,
   onSetCategory,
   onResetAll,
+  onPruneDismissed,
   onNextPair,
   debugSourceMode = 'premade',
   onToggleSourceMode
@@ -250,6 +251,17 @@ export default function DebugCuratorBar({
           >
             <Download size={14} /> Export
           </button>
+
+          {onPruneDismissed && (
+            <button
+              onClick={() => { sounds.playTap(); onPruneDismissed(); }}
+              className="glass-btn"
+              style={{ padding: '5px 10px', fontSize: '0.78rem', borderRadius: '8px', color: 'var(--accent-pink)', borderColor: 'rgba(255, 0, 127, 0.4)' }}
+              title="Prune off all dismissed images and keep all approved & pending ones"
+            >
+              ✂️ Prune Dismissed
+            </button>
+          )}
 
           <button
             onClick={onResetAll}

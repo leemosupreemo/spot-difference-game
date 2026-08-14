@@ -17,7 +17,7 @@ import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel } fro
 import { sounds } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { saveLeaderboardStats } from './services/playerProgress';
-import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, getLevelStatus } from './utils/curationStore';
+import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
 
 export default function App() {
   const [levels, setLevels] = useState(INITIAL_LEVELS);
@@ -62,11 +62,18 @@ export default function App() {
   const visitedDebugLevelIdsRef = useRef(new Set());
 
   // Curated Image Decisions Store State
-  const [curatedStatusMap, setCuratedStatusMap] = useState(() => getCuratedStatusMap());
+  const [curatedStatusMap, setCuratedStatusMap] = useState(() => {
+    const raw = getCuratedStatusMap();
+    const pruned = pruneDismissedStatuses(raw);
+    saveCuratedStatusMap(pruned);
+    return pruned;
+  });
 
   const handleSetCuratedStatus = (levelId, status, meta) => {
     const updated = setLevelCuratedStatus(levelId, status, meta);
-    setCuratedStatusMap({ ...updated });
+    const pruned = pruneDismissedStatuses(updated);
+    saveCuratedStatusMap(pruned);
+    setCuratedStatusMap({ ...pruned });
   };
 
   const handleSetCuratedCategory = (levelId, packId) => {
@@ -77,6 +84,13 @@ export default function App() {
   const handleResetAllCurated = () => {
     const updated = resetCuratedStatusMap();
     setCuratedStatusMap({ ...updated });
+  };
+
+  const handlePruneDismissed = () => {
+    const current = getCuratedStatusMap();
+    const pruned = pruneDismissedStatuses(current);
+    saveCuratedStatusMap(pruned);
+    setCuratedStatusMap({ ...pruned });
   };
 
   const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap) => {
@@ -445,6 +459,7 @@ export default function App() {
               onSetStatus={handleSetCuratedStatus}
               onSetCategory={handleSetCuratedCategory}
               onResetAll={handleResetAllCurated}
+              onPruneDismissed={handlePruneDismissed}
               onNextPair={handleNextPair}
               debugSourceMode={debugSourceMode}
               onToggleSourceMode={handleToggleDebugSourceMode}
