@@ -6,10 +6,10 @@ import { sounds } from '../utils/audio';
 export default function VictoryModal({
   isOpen,
   levelTitle,
-  elapsedTime,
-  missCount,
-  score,
-  stars,
+  elapsedTime = 0,
+  missCount = 0,
+  score = 0,
+  stars = 3,
   onNextLevel,
   onRestart,
   onClose
@@ -41,7 +41,10 @@ export default function VictoryModal({
   if (!isOpen) return null;
 
   const seconds = (elapsedTime / 1000).toFixed(2);
-  const accuracy = Math.max(0, Math.round(100 - missCount * 15));
+  const safeMisses = Number.isFinite(missCount) ? missCount : 0;
+  const accuracy = Math.max(0, Math.min(100, Math.round(100 - safeMisses * 15)));
+  const calculatedStars = safeMisses === 0 ? 3 : safeMisses === 1 ? 2 : 1;
+  const displayStars = stars ?? calculatedStars;
 
   return (
     <div
@@ -125,8 +128,8 @@ export default function VictoryModal({
             <Star
               key={starNum}
               size={26}
-              className={starNum <= stars ? 'star-icon' : 'star-icon empty'}
-              fill={starNum <= stars ? 'var(--accent-gold)' : 'none'}
+              className={starNum <= displayStars ? 'star-icon' : 'star-icon empty'}
+              fill={starNum <= displayStars ? 'var(--accent-gold)' : 'none'}
               style={{ transition: `all 0.3s ease ${starNum * 0.15}s` }}
             />
           ))}
@@ -170,8 +173,8 @@ export default function VictoryModal({
 
           <div>
             <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>MISSES</span>
-            <span style={{ fontSize: '1rem', fontWeight: 700, color: missCount > 0 ? 'var(--accent-pink)' : 'var(--text-muted)' }}>
-              {missCount}
+            <span style={{ fontSize: '1rem', fontWeight: 700, color: safeMisses > 0 ? 'var(--accent-pink)' : 'var(--text-muted)' }}>
+              {safeMisses}
             </span>
           </div>
         </div>

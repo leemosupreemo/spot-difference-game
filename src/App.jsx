@@ -220,16 +220,25 @@ export default function App() {
     return () => clearInterval(timerRef.current);
   }, [timerRunning, elapsedTime, view]);
 
-  const [selectedTheme, setSelectedTheme] = useState('find_the_sniper');
+  // Stage Set Progression State (5 Images = 1 Single Stage)
+  const [currentStageIndex, setCurrentStageIndex] = useState(0);
+  const stageTimesRef = useRef([]);
+  const [stageToastMessage, setStageToastMessage] = useState(null);
+  const [totalStageTimeMs, setTotalStageTimeMs] = useState(0);
 
   // Handle Game Launch from Main Menu (Loads Real-World Photo Pairs!)
   const handleStartGame = async () => {
+    setCurrentStageIndex(0);
+    stageTimesRef.current = [];
+    setTotalStageTimeMs(0);
+    setScore(0);
+
     try {
       if (debugMode && debugSourceMode === 'premade') {
         const unlabeledEntries = getUnlabeledPremadeLevels();
         const candidateEntries = unlabeledEntries.length > 0 ? unlabeledEntries : getAllPhotoPairEntries();
         if (candidateEntries.length > 0) {
-          const debugLevels = candidateEntries.map(createPhotoPairLevel);
+          const debugLevels = candidateEntries.slice(0, 5).map(createPhotoPairLevel);
           setLevels(debugLevels);
           startLevel(debugLevels[0].id);
           setView('game');
@@ -253,9 +262,9 @@ export default function App() {
       console.error('Failed to build photo stage:', err);
     }
 
-    const newLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
-    setLevels([newLevel]);
-    startLevel(newLevel.id);
+    const procLevels = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now() + i));
+    setLevels(procLevels);
+    startLevel(procLevels[0].id);
     setView('game');
   };
 
@@ -273,59 +282,85 @@ export default function App() {
       setActiveHintId(null);
     }
 
-    // Check Stage Victory
+    // Single difference found on current image!
     if (updatedFound.length >= currentLevel.totalDifferences) {
       setTimerRunning(false);
-      
-      // Compute Categorized Stats (First Time vs Repeat PB)
-      setDifficultyStats(prev => {
-        const diffCategory = selectedDifficulty;
-        const categoryData = prev[diffCategory] || { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} };
-        const setData = categoryData.sets[currentLevel.id] || { title: currentLevel.title, firstTime: null, fastestRepeat: null, clears: 0 };
+      stageTimesRef.current[currentStageIndex] = elapsedTime;
 
-        const isFirstTime = !setData.firstTime;
-        const newFirstTime = isFirstTime ? elapsedTime : setData.firstTime;
-        const newFastestRepeat = !setData.fastestRepeat || elapsedTime < setData.fastestRepeat ? elapsedTime : setData.fastestRepeat;
+      const nextIndex = currentStageIndex + 1;
+      const totalStageImages = levels.length > 0 ? levels.length : 5;
 
-        const updatedSetData = {
-          title: currentLevel.title || 'Stage Set',
-          packId: currentLevel.packId || selectedTheme || 'find_the_sniper',
-          firstTime: newFirstTime,
-          fastestRepeat: newFastestRepeat,
-          clears: setData.clears + 1
-        };
+      if (nextIndex < totalStageImages) {
+        // IMAGES 1..4 CLEARED! Show Toast and advance automatically after 1.2s!
+        setStageToastMessage(`IMAGE ${nextIndex} OF ${totalStageImages} CLEARED! 🎯`);
 
-        const updatedSets = { ...categoryData.sets, [currentLevel.id]: updatedSetData };
-        const setsClearedCount = Object.keys(updatedSets).length;
-
-        // Overall fastest first-time and repeat across all sets in this difficulty
-        const allFirstTimes = Object.values(updatedSets).map(s => s.firstTime).filter(Boolean);
-        const allRepeats = Object.values(updatedSets).map(s => s.fastestRepeat).filter(Boolean);
-        const overallFirstTime = allFirstTimes.length > 0 ? Math.min(...allFirstTimes) : null;
-        const overallRepeat = allRepeats.length > 0 ? Math.min(...allRepeats) : null;
-
-        const newStats = {
-          ...prev,
-          [diffCategory]: {
-            setsCleared: setsClearedCount,
-            fastestFirstTimeOverall: overallFirstTime,
-            fastestRepeatOverall: overallRepeat,
-            sets: updatedSets
+        setTimeout(() => {
+          setStageToastMessage(null);
+          setCurrentStageIndex(nextIndex);
+          const nextLevel = levels[nextIndex];
+          if (nextLevel) {
+            setCurrentLevelId(nextLevel.id);
+            setFoundDiffs([]);
+            setHintsLeft(selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2);
+            setActiveHintId(null);
+            setElapsedTime(0);
+            setTimerRunning(true);
           }
-        };
+        }, 1200);
+      } else {
+        // ALL 5 IMAGES CLEARED! FULL STAGE CLEAR!
+        const cumulativeTime = stageTimesRef.current.reduce((sum, t) => sum + (t || 0), 0);
+        setTotalStageTimeMs(cumulativeTime);
 
-        try {
-          localStorage.setItem('diff_hunter_categorized_stats', JSON.stringify(newStats));
-          saveLeaderboardStats(newStats);
-        } catch (e) {}
+        // Compute Categorized Stats for full 5-image stage
+        setDifficultyStats(prev => {
+          const diffCategory = selectedDifficulty;
+          const categoryData = prev[diffCategory] || { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} };
+          const stageKey = `stage_${selectedTheme}_${Date.now()}`;
+          const setData = categoryData.sets[stageKey] || { title: `Stage Set`, firstTime: null, fastestRepeat: null, clears: 0 };
 
-        return newStats;
-      });
+          const isFirstTime = !setData.firstTime;
+          const newFirstTime = isFirstTime ? cumulativeTime : setData.firstTime;
+          const newFastestRepeat = !setData.fastestRepeat || cumulativeTime < setData.fastestRepeat ? cumulativeTime : setData.fastestRepeat;
 
-      // Show Victory Modal
-      setTimeout(() => {
-        setVictoryModalOpen(true);
-      }, 500);
+          const updatedSetData = {
+            title: `5-Image Stage (${selectedTheme === 'find_the_sniper' ? 'Photography' : 'Fantastical'})`,
+            packId: selectedTheme,
+            firstTime: newFirstTime,
+            fastestRepeat: newFastestRepeat,
+            clears: setData.clears + 1
+          };
+
+          const updatedSets = { ...categoryData.sets, [stageKey]: updatedSetData };
+          const setsClearedCount = Object.keys(updatedSets).length;
+
+          const allFirstTimes = Object.values(updatedSets).map(s => s.firstTime).filter(Boolean);
+          const allRepeats = Object.values(updatedSets).map(s => s.fastestRepeat).filter(Boolean);
+          const overallFirstTime = allFirstTimes.length > 0 ? Math.min(...allFirstTimes) : null;
+          const overallRepeat = allRepeats.length > 0 ? Math.min(...allRepeats) : null;
+
+          const newStats = {
+            ...prev,
+            [diffCategory]: {
+              setsCleared: setsClearedCount,
+              fastestFirstTimeOverall: overallFirstTime,
+              fastestRepeatOverall: overallRepeat,
+              sets: updatedSets
+            }
+          };
+
+          try {
+            localStorage.setItem('diff_hunter_categorized_stats', JSON.stringify(newStats));
+            saveLeaderboardStats(newStats);
+          } catch (e) {}
+
+          return newStats;
+        });
+
+        setTimeout(() => {
+          setVictoryModalOpen(true);
+        }, 500);
+      }
     }
   };
 
@@ -431,19 +466,55 @@ export default function App() {
               ← Main Menu
             </button>
 
-            <span style={{
-              fontSize: '0.9rem',
-              fontWeight: 800,
-              color: selectedDifficulty === 'Hard' ? 'var(--accent-pink)' : selectedDifficulty === 'Medium' ? 'var(--accent-gold)' : 'var(--accent-green)',
-              background: 'rgba(0,0,0,0.4)',
-              padding: '6px 14px',
-              borderRadius: '20px',
-              border: '1.5px solid rgba(255,255,255,0.2)',
-              letterSpacing: '0.5px'
-            }}>
-              {selectedDifficulty.toUpperCase()}
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{
+                fontSize: '0.9rem',
+                fontWeight: 900,
+                color: 'var(--accent-cyan)',
+                background: 'rgba(0, 240, 255, 0.12)',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                border: '1.5px solid rgba(0, 240, 255, 0.4)',
+                letterSpacing: '0.5px'
+              }}>
+                IMAGE {currentStageIndex + 1} OF 5
+              </span>
+
+              <span style={{
+                fontSize: '0.9rem',
+                fontWeight: 800,
+                color: selectedDifficulty === 'Hard' ? 'var(--accent-pink)' : selectedDifficulty === 'Medium' ? 'var(--accent-gold)' : 'var(--accent-green)',
+                background: 'rgba(0,0,0,0.4)',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                border: '1.5px solid rgba(255,255,255,0.2)',
+                letterSpacing: '0.5px'
+              }}>
+                {selectedDifficulty.toUpperCase()}
+              </span>
+            </div>
           </div>
+
+          {/* Floating Stage Transition Toast */}
+          {stageToastMessage && (
+            <div style={{
+              position: 'fixed',
+              top: '80px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              zIndex: 90,
+              background: 'linear-gradient(135deg, var(--accent-green), #00b0ff)',
+              color: '#000',
+              fontWeight: 900,
+              fontSize: '1.2rem',
+              padding: '12px 28px',
+              borderRadius: '30px',
+              boxShadow: '0 0 30px rgba(0, 255, 135, 0.8)',
+              animation: 'pageFadeIn 0.2s ease-out'
+            }}>
+              {stageToastMessage}
+            </div>
+          )}
 
           {/* Clean Unified Game Timer & Controls Bar */}
           <TimerDisplay
@@ -475,9 +546,10 @@ export default function App() {
       <VictoryModal
         isOpen={victoryModalOpen}
         level={currentLevel}
-        elapsedTime={elapsedTime}
+        elapsedTime={totalStageTimeMs || elapsedTime}
         score={score}
-        onNextLevel={handleNextPair}
+        onNextLevel={handleStartGame}
+        onRestart={handleStartGame}
         onClose={() => setVictoryModalOpen(false)}
       />
 

@@ -159,7 +159,7 @@ export default function GameCanvas({
         setSpeedPopups(prev => [...prev, newPopup]);
         setTimeout(() => {
           setSpeedPopups(prev => prev.filter(p => p.id !== newPopup.id));
-        }, 1000);
+        }, 2200);
 
         onDiffFound(diff.id);
       }
