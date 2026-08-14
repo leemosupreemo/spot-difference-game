@@ -28,7 +28,7 @@ export default function MainMenu({
       margin: '0 auto 20px auto',
       padding: '0 16px',
       textAlign: 'center',
-      animation: 'pageFadeIn 0.12s ease-out'
+      animation: 'pageFadeIn 0.15s ease-out'
     }}>
       {/* Single Screen 2-Column Responsive Grid (Equal Heights!) */}
       <div style={{

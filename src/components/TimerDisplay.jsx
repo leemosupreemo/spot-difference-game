@@ -1,5 +1,5 @@
 import React from 'react';
-import { Timer, Lightbulb, Search, Zap } from 'lucide-react';
+import { Timer, Lightbulb, Search, Zap, Heart } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { calculateSpeedPoints } from '../utils/scoring';
 
@@ -15,6 +15,7 @@ export default function TimerDisplay({
   missCount = 0
 }) {
   const potentialPoints = calculateSpeedPoints(elapsedTime);
+  const livesRemaining = Math.max(0, 3 - missCount);
 
   // Format elapsed milliseconds as MM:SS.ms
   const formatTime = (ms) => {
@@ -82,20 +83,34 @@ export default function TimerDisplay({
 
 
 
-          {/* 3-Strike Fails Badge */}
+          {/* 3-Heart LIVES Badge */}
           <div style={{
-            background: missCount >= 2 ? 'rgba(255, 0, 127, 0.2)' : 'rgba(255, 255, 255, 0.06)',
-            border: missCount >= 2 ? '1px solid var(--accent-pink)' : '1px solid var(--border-glass)',
+            background: livesRemaining <= 1 ? 'rgba(255, 0, 127, 0.2)' : 'rgba(255, 255, 255, 0.06)',
+            border: livesRemaining <= 1 ? '1px solid var(--accent-pink)' : '1px solid var(--border-glass)',
             borderRadius: '14px',
             padding: '6px 14px',
             display: 'flex',
             alignItems: 'center',
-            gap: '6px'
+            gap: '8px'
           }}>
-            <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--text-muted)' }}>FAILS:</span>
-            <span style={{ fontSize: '1.3rem', fontWeight: 900, color: missCount >= 2 ? 'var(--accent-pink)' : '#fff', fontFamily: 'var(--font-mono)' }}>
-              {missCount} / 3
-            </span>
+            <span style={{ fontSize: '0.82rem', fontWeight: 900, color: 'var(--accent-pink)', letterSpacing: '0.5px' }}>LIVES</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              {[1, 2, 3].map(i => {
+                const active = i <= livesRemaining;
+                return (
+                  <Heart
+                    key={i}
+                    size={18}
+                    fill={active ? 'var(--accent-pink)' : 'transparent'}
+                    color={active ? 'var(--accent-pink)' : 'rgba(255, 255, 255, 0.25)'}
+                    style={{
+                      filter: active ? 'drop-shadow(0 0 6px rgba(255, 0, 127, 0.8))' : 'none',
+                      transition: 'all 0.2s ease'
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
 

@@ -288,7 +288,8 @@ export default function App() {
         const newFastestRepeat = !setData.fastestRepeat || elapsedTime < setData.fastestRepeat ? elapsedTime : setData.fastestRepeat;
 
         const updatedSetData = {
-          title: currentLevel.title,
+          title: currentLevel.title || 'Stage Set',
+          packId: currentLevel.packId || selectedTheme || 'find_the_sniper',
           firstTime: newFirstTime,
           fastestRepeat: newFastestRepeat,
           clears: setData.clears + 1
@@ -369,6 +370,7 @@ export default function App() {
     <div className="app-container">
       {/* Universal Top Header */}
       <Header
+        onOpenLeaderboard={() => setView('stats')}
         onOpenProgress={() => setView('stats')}
         onOpenHelp={() => setHelpModalOpen(true)}
         muted={muted}
@@ -378,27 +380,28 @@ export default function App() {
       />
 
       {/* Main Navigation Routing */}
-      {view === 'menu' ? (
-        <MainMenu
-          selectedTheme={selectedTheme}
-          setSelectedTheme={setSelectedTheme}
-          selectedDifficulty={selectedDifficulty}
-          setSelectedDifficulty={setSelectedDifficulty}
-          onStartGame={handleStartGame}
-          onOpenProgress={() => setView('stats')}
-          onOpenDebug={() => setDebugModalOpen(true)}
-          debugMode={debugMode}
-        />
-      ) : view === 'stats' ? (
-        <ProgressModal
-          isOpen={true}
-          onClose={() => setView('menu')}
-          difficultyStats={difficultyStats}
-        />
-      ) : view === 'creator' ? (
-        <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />
-      ) : (
-        <main className="page-fade-in">
+      <div key={view} className="page-fade-in">
+        {view === 'menu' ? (
+          <MainMenu
+            selectedTheme={selectedTheme}
+            setSelectedTheme={setSelectedTheme}
+            selectedDifficulty={selectedDifficulty}
+            setSelectedDifficulty={setSelectedDifficulty}
+            onStartGame={handleStartGame}
+            onOpenProgress={() => setView('stats')}
+            onOpenDebug={() => setDebugModalOpen(true)}
+            debugMode={debugMode}
+          />
+        ) : view === 'stats' ? (
+          <ProgressModal
+            isOpen={true}
+            onClose={() => setView('menu')}
+            difficultyStats={difficultyStats}
+          />
+        ) : view === 'creator' ? (
+          <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />
+        ) : (
+          <main>
           {/* Debug Curator Bar */}
           {debugMode && (
             <DebugCuratorBar
@@ -466,6 +469,7 @@ export default function App() {
           />
         </main>
       )}
+      </div>
 
       {/* Modals */}
       <VictoryModal

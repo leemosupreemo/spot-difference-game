@@ -166,7 +166,8 @@ body {
 }
 
 .page-fade-in {
-  animation: pageFadeIn 0.12s ease-out forwards;
+  animation: pageFadeIn 0.15s ease-out forwards;
+  will-change: opacity;
 }
 
 @keyframes hitPulse {

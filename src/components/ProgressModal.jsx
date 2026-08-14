@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Trophy, CheckCircle2, ArrowLeft, Flame, Globe, Award } from 'lucide-react';
+import { Trophy, CheckCircle2, ArrowLeft, Flame, Globe, Award, Camera, Sparkles } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { fetchLeaderboards } from '../services/playerProgress';
 
 export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
   const [mainView, setMainView] = useState('leaderboards'); // 'leaderboards' | 'progress'
   const [selectedTab, setSelectedTab] = useState('Easy'); // Easy | Medium | Hard
+  const [selectedLeaderboardPack, setSelectedLeaderboardPack] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
   const [leaderboardData, setLeaderboardData] = useState(null);
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
 
@@ -60,7 +61,7 @@ export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
     return { clears, bestFirstTime, bestRepeatTime, setCompletedCount };
   };
 
-  const topLeaderboardEntries = leaderboardData?.byPackRepeat?.find_the_sniper || [];
+  const topLeaderboardEntries = leaderboardData?.byPackRepeat?.[selectedLeaderboardPack] || [];
 
   return (
     <div style={{
@@ -80,7 +81,7 @@ export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
       paddingLeft: '20px',
       paddingRight: '20px',
       boxSizing: 'border-box',
-      animation: 'hitPulse 0.3s ease-out'
+      animation: 'pageFadeIn 0.15s ease-out'
     }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         
@@ -142,10 +143,47 @@ export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
         {mainView === 'leaderboards' ? (
           /* GLOBAL LEADERBOARDS VIEW */
           <div className="glass-panel" style={{ padding: '24px', borderRadius: '24px', height: '420px', boxSizing: 'border-box', overflowY: 'auto' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                <Award size={20} color="var(--accent-gold)" /> TOP SPEEDRUNNERS
-              </h3>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                  <Award size={20} color="var(--accent-gold)" /> TOP SPEEDRUNNERS
+                </h3>
+
+                {/* Category Filter Pills */}
+                <div style={{ display: 'flex', gap: '6px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '10px', border: '1px solid var(--border-glass)' }}>
+                  <button
+                    onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('find_the_sniper'); }}
+                    style={{
+                      padding: '4px 10px',
+                      fontSize: '0.78rem',
+                      fontWeight: 800,
+                      borderRadius: '8px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      background: selectedLeaderboardPack === 'find_the_sniper' ? 'var(--accent-cyan)' : 'transparent',
+                      color: selectedLeaderboardPack === 'find_the_sniper' ? '#000' : 'var(--text-muted)'
+                    }}
+                  >
+                    📷 Photography
+                  </button>
+                  <button
+                    onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('abstract_animated'); }}
+                    style={{
+                      padding: '4px 10px',
+                      fontSize: '0.78rem',
+                      fontWeight: 800,
+                      borderRadius: '8px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      background: selectedLeaderboardPack === 'abstract_animated' ? '#d9b3ff' : 'transparent',
+                      color: selectedLeaderboardPack === 'abstract_animated' ? '#000' : 'var(--text-muted)'
+                    }}
+                  >
+                    ✨ Fantastical
+                  </button>
+                </div>
+              </div>
+
               <span style={{ fontSize: '0.75rem', fontWeight: 800, color: leaderboardData?.isCloud ? 'var(--accent-green)' : 'var(--accent-cyan)', background: 'rgba(255,255,255,0.06)', padding: '4px 10px', borderRadius: '10px', border: '1px solid var(--border-glass)' }}>
                 {leaderboardData?.isCloud ? '☁️ FIRESTORE CONNECTED' : '⚡ LIVE LEADERBOARD'}
               </span>
@@ -168,9 +206,10 @@ export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
                   <tbody>
                     {topLeaderboardEntries.map((entry, index) => {
                       const isMe = entry.isCurrentPlayer;
-                      const avgTimeMs = entry.effectiveTime || entry.avgRepeatTimeByPack?.find_the_sniper || entry.avgTimesByPack?.find_the_sniper;
+                      const avgTimeMs = entry.effectiveTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
                       const timeStr = avgTimeMs ? `${(avgTimeMs / 1000).toFixed(2)}s` : '--';
                       const displayName = isMe ? 'YOU (THIS DEVICE)' : (entry.playerName || `SPEEDRUNNER #${index + 1}`);
+                      const setsCount = entry.totalSetsCleared ?? (isMe ? (leaderboardData?.localPlayer?.totalSetsCleared || 0) : 1);
 
                       return (
                         <tr
@@ -187,7 +226,7 @@ export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
                             {displayName}
                           </td>
                           <td style={{ padding: '14px 18px', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-                            {entry.totalSetsCleared || 1} Sets
+                            {setsCount} Sets
                           </td>
                           <td style={{ padding: '14px 18px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
                             {timeStr}

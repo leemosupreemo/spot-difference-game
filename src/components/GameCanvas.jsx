@@ -22,6 +22,9 @@ export default function GameCanvas({
   const [speedPopups, setSpeedPopups] = useState([]);
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100, visible: false });
 
+  // Pointer/Touch gesture tracking (Ignores drag & long press)
+  const pointerStartRef = useRef({ x: 0, y: 0, time: 0, isDrag: false });
+
   useEffect(() => {
     logApp('INFO', `[GameCanvasMounted] Level: ${level?.id} Title: ${level?.title}`);
     auditDOMState(`GameCanvasMounted_${level?.id || 'unknown'}`);
@@ -66,24 +69,67 @@ export default function GameCanvas({
     };
   }, [drawCanvases, level]);
 
-  const lastTapTimeRef = useRef(0);
+  // Handle pointer down (touch/mouse start)
+  const handlePointerDown = (e) => {
+    const clientX = e.clientX ?? e.touches?.[0]?.clientX;
+    const clientY = e.clientY ?? e.touches?.[0]?.clientY;
+    if (clientX === undefined || clientY === undefined) return;
 
-  // Handle click or touch on EITHER canvas (Original or Variant)
-  const handleCanvasTap = (e, containerRef) => {
-    if (!containerRef.current || !level) return;
+    pointerStartRef.current = {
+      x: clientX,
+      y: clientY,
+      time: Date.now(),
+      isDrag: false
+    };
+  };
 
-    const now = Date.now();
-    if (now - lastTapTimeRef.current < 250) {
-      return; // Ignore duplicate synthetic touch/click within 250ms
-    }
-    lastTapTimeRef.current = now;
-
+  // Handle mouse and touch dragging for synchronized magnifying lens
+  const handlePointerMove = (e, containerRef) => {
+    if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX;
-    const clientY = e.clientY ?? e.changedTouches?.[0]?.clientY;
+    const clientX = e.clientX ?? e.touches?.[0]?.clientX ?? e.changedTouches?.[0]?.clientX;
+    const clientY = e.clientY ?? e.touches?.[0]?.clientY ?? e.changedTouches?.[0]?.clientY;
 
     if (clientX === undefined || clientY === undefined) return;
 
+    // Measure travel distance from pointer down location
+    const dx = clientX - pointerStartRef.current.x;
+    const dy = clientY - pointerStartRef.current.y;
+    const distance = Math.hypot(dx, dy);
+
+    if (distance > 10) {
+      pointerStartRef.current.isDrag = true;
+    }
+
+    const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
+
+    setCursorPos({ x, y, visible: true });
+  };
+
+  // Handle pointer up (only intentional quick taps trigger guesses)
+  const handlePointerUp = (e, containerRef) => {
+    if (!containerRef.current || !level) return;
+
+    const start = pointerStartRef.current;
+    const duration = Date.now() - start.time;
+
+    // IGNORE drag gestures (>10px movement) or long hold presses (>350ms duration)
+    if (start.isDrag || duration > 350) {
+      return;
+    }
+
+    const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX;
+    const clientY = e.clientY ?? e.changedTouches?.[0]?.clientY;
+    if (clientX === undefined || clientY === undefined) return;
+
+    const dx = clientX - start.x;
+    const dy = clientY - start.y;
+    if (Math.hypot(dx, dy) > 10) {
+      return; // Extra safety check against drag movement
+    }
+
+    const rect = containerRef.current.getBoundingClientRect();
     const clickXPercent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
     const clickYPercent = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
 
@@ -93,9 +139,9 @@ export default function GameCanvas({
     level.diffs.forEach(diff => {
       if (foundDiffs.includes(diff.id)) return; // Already found
 
-      const dx = clickXPercent - diff.x;
-      const dy = clickYPercent - diff.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+      const dX = clickXPercent - diff.x;
+      const dY = clickYPercent - diff.y;
+      const distance = Math.sqrt(dX * dX + dY * dY);
 
       if (distance <= diff.radius) {
         hitFound = true;
@@ -133,21 +179,6 @@ export default function GameCanvas({
     }
   };
 
-  // Handle mouse and touch dragging for synchronized magnifying lens
-  const handlePointerMove = (e, containerRef) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const clientX = e.clientX ?? e.touches?.[0]?.clientX ?? e.changedTouches?.[0]?.clientX;
-    const clientY = e.clientY ?? e.touches?.[0]?.clientY ?? e.changedTouches?.[0]?.clientY;
-
-    if (clientX === undefined || clientY === undefined) return;
-
-    const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
-    const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
-
-    setCursorPos({ x, y, visible: true });
-  };
-
   const handleMouseLeave = () => {
     setCursorPos(prev => ({ ...prev, visible: false }));
   };
@@ -170,14 +201,11 @@ export default function GameCanvas({
         <div
           ref={containerRefLeft}
           className="canvas-card"
-          onClick={(e) => handleCanvasTap(e, containerRefLeft)}
-          onTouchEnd={(e) => {
-            handleCanvasTap(e, containerRefLeft);
-          }}
-          onMouseMove={(e) => handlePointerMove(e, containerRefLeft)}
-          onTouchMove={(e) => handlePointerMove(e, containerRefLeft)}
-          onMouseLeave={handleMouseLeave}
-          onTouchCancel={handleMouseLeave}
+          onPointerDown={handlePointerDown}
+          onPointerMove={(e) => handlePointerMove(e, containerRefLeft)}
+          onPointerUp={(e) => handlePointerUp(e, containerRefLeft)}
+          onPointerLeave={handleMouseLeave}
+          onPointerCancel={handleMouseLeave}
         >
           <canvas ref={canvasRefLeft} className="canvas-element" />
           {level?.baseImage && (
@@ -268,14 +296,11 @@ export default function GameCanvas({
         <div
           ref={containerRefRight}
           className="canvas-card"
-          onClick={(e) => handleCanvasTap(e, containerRefRight)}
-          onTouchEnd={(e) => {
-            handleCanvasTap(e, containerRefRight);
-          }}
-          onMouseMove={(e) => handlePointerMove(e, containerRefRight)}
-          onTouchMove={(e) => handlePointerMove(e, containerRefRight)}
-          onMouseLeave={handleMouseLeave}
-          onTouchCancel={handleMouseLeave}
+          onPointerDown={handlePointerDown}
+          onPointerMove={(e) => handlePointerMove(e, containerRefRight)}
+          onPointerUp={(e) => handlePointerUp(e, containerRefRight)}
+          onPointerLeave={handleMouseLeave}
+          onPointerCancel={handleMouseLeave}
         >
           <canvas ref={canvasRefRight} className="canvas-element" />
           {level?.variantImage && (

@@ -109,10 +109,10 @@ export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime,
 
           <div style={{ padding: '2px 4px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>
-              MISSED TAPS
+              LIVES REMAINING
             </span>
             <span style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--accent-pink)', fontFamily: 'var(--font-mono)' }}>
-              {missCount} / 3
+              0 / 3 ❤️
             </span>
           </div>
         </div>

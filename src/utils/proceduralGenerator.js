@@ -14,7 +14,7 @@ export const MUTATION_TYPES = [
 
 /**
  * Generates a 1:1 Image Pair (Base vs Modified) with guaranteed single visible difference.
- * Calibrated clutter density (250 - 1,400 items) and fair target hit radiuses (5% - 12%).
+ * Calibrated clutter density and fair target hit radiuses.
  */
 export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetDifficulty = 'Medium', seed = Date.now()) {
   const width = 800;
@@ -47,7 +47,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   const objects = [];
 
   // -------------------------------------------------------------
-  // STEP 1: RENDER BASE BACKGROUND & SCENE OBJECTS
+  // STEP 1: RENDER BASE BACKGROUND ON CANVAS A
   // -------------------------------------------------------------
   if (themeId === 'find_the_sniper') {
     ctxA.fillStyle = '#1c120c';
@@ -97,155 +97,21 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
       }
     }
 
-  } else if (themeId === 'lego_kingdom') {
-    ctxA.fillStyle = '#1b5e20';
-    ctxA.fillRect(0, 0, width, height);
-
-    // Lego Stud Grid Floor
-    ctxA.fillStyle = '#2e7d32';
-    for (let gx = 8; gx < width; gx += 16) {
-      for (let gy = 8; gy < height; gy += 16) {
-        ctxA.beginPath();
-        ctxA.arc(gx, gy, 3, 0, Math.PI * 2);
-        ctxA.fill();
-      }
-    }
-
-    const brickColors = ['#e53935', '#1e88e5', '#fdd835', '#fb8c00', '#8e24aa', '#ff007f'];
-    
-    for (let bx = 30; bx < width - 30; bx += 32) {
-      for (let by = 30; by < height - 30; by += 32) {
-        if (random() > 0.5) continue;
-        const bColor = randomChoice(brickColors);
-        const objId = `lego_${bx}_${by}`;
-        const brickW = targetDifficulty === 'Easy' ? 22 : targetDifficulty === 'Medium' ? 16 : 12;
-        const brickH = targetDifficulty === 'Easy' ? 18 : targetDifficulty === 'Medium' ? 14 : 10;
-
-        objects.push({
-          id: objId,
-          type: 'LEGO_BRICK',
-          x: bx, y: by, w: brickW, h: brickH, color: bColor,
-          draw: (ctx, drawColor, isMutated, mType) => {
-            let finalColor = drawColor;
-            if (isMutated && mType === 'COLOR_SHIFT') {
-              finalColor = drawColor === '#00f0ff' ? '#ff007f' : '#00f0ff';
-            }
-            ctx.fillStyle = finalColor;
-            ctx.fillRect(bx, by, brickW, brickH);
-            ctx.strokeStyle = 'rgba(0,0,0,0.4)';
-            ctx.strokeRect(bx, by, brickW, brickH);
-
-            if (isMutated && mType === 'ADD_DETAIL') {
-              ctx.fillStyle = '#ffffff';
-              ctx.beginPath();
-              ctx.arc(bx + brickW / 2, by + brickH / 2, 3, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-        });
-      }
-    }
-
-  } else if (themeId === 'dense_landscape') {
-    const skyGrad = ctxA.createLinearGradient(0, 0, 0, height);
-    skyGrad.addColorStop(0, '#1b263b');
-    skyGrad.addColorStop(1, '#415a77');
-    ctxA.fillStyle = skyGrad;
-    ctxA.fillRect(0, 0, width, height);
-
-    const flowerColors = ['#ff007f', '#ffea00', '#00f0ff', '#ffb703', '#ffffff'];
-    for (let i = 0; i < noiseCount; i++) {
-      const fx = random() * width;
-      const fy = random() * height;
-      const fRadius = 2 + random() * 4;
-      ctxA.fillStyle = randomChoice(flowerColors);
-      ctxA.beginPath();
-      ctxA.arc(fx, fy, fRadius, 0, Math.PI * 2);
-      ctxA.fill();
-    }
-
-    for (let gx = 35; gx < width - 35; gx += 40) {
-      for (let gy = 35; gy < height - 35; gy += 40) {
-        if (random() > 0.45) continue;
-        const color = randomChoice(flowerColors);
-        const objId = `meadow_${gx}_${gy}`;
-        const itemW = targetDifficulty === 'Easy' ? 18 : targetDifficulty === 'Medium' ? 14 : 10;
-        const itemH = targetDifficulty === 'Easy' ? 18 : targetDifficulty === 'Medium' ? 14 : 10;
-
-        objects.push({
-          id: objId,
-          type: 'MEADOW_ITEM',
-          x: gx, y: gy, w: itemW, h: itemH, color,
-          draw: (ctx, drawColor, isMutated, mType) => {
-            let finalColor = drawColor;
-            if (isMutated && mType === 'COLOR_SHIFT') {
-              finalColor = drawColor === '#ffea00' ? '#ff007f' : '#ffea00';
-            }
-            ctx.fillStyle = finalColor;
-            ctx.beginPath();
-            ctx.arc(gx + itemW / 2, gy + itemH / 2, itemW / 2, 0, Math.PI * 2);
-            ctx.fill();
-
-            if (isMutated && mType === 'ADD_DETAIL') {
-              ctx.fillStyle = '#00f0ff';
-              ctx.fillRect(gx + itemW / 4, gy + itemH / 4, itemW / 2, itemH / 2);
-            }
-          }
-        });
-      }
-    }
-
-  } else if (themeId === 'antique_shop') {
-    ctxA.fillStyle = '#140c07';
-    ctxA.fillRect(0, 0, width, height);
-
-    ctxA.fillStyle = '#2d1810';
-    for (let sy = 70; sy < height; sy += 80) {
-      ctxA.fillRect(0, sy, width, 10);
-    }
-
-    const itemColors = ['#00e676', '#ff1744', '#ffea00', '#d500f9', '#00b0ff'];
-
-    for (let sy = 70; sy < height - 40; sy += 80) {
-      for (let sx = 30; sx < width - 30; sx += 35) {
-        if (random() > 0.45) continue;
-        const color = randomChoice(itemColors);
-        const objId = `antique_${sx}_${sy}`;
-        const itemW = targetDifficulty === 'Easy' ? 18 : targetDifficulty === 'Medium' ? 14 : 10;
-        const itemH = targetDifficulty === 'Easy' ? 28 : targetDifficulty === 'Medium' ? 22 : 16;
-
-        objects.push({
-          id: objId,
-          type: 'POTION_VIAL',
-          x: sx, y: sy - itemH, w: itemW, h: itemH, color,
-          draw: (ctx, drawColor, isMutated, mType) => {
-            let finalColor = drawColor;
-            if (isMutated && mType === 'COLOR_SHIFT') {
-              finalColor = drawColor === '#00b0ff' ? '#ff1744' : '#00b0ff';
-            }
-            ctx.fillStyle = finalColor;
-            ctx.fillRect(sx, sy - itemH, itemW, itemH);
-            ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-            ctx.strokeRect(sx, sy - itemH, itemW, itemH);
-
-            if (isMutated && mType === 'ADD_DETAIL') {
-              ctx.fillStyle = '#ffea00';
-              ctx.beginPath();
-              ctx.arc(sx + itemW / 2, sy - itemH / 2, 3, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-        });
-      }
-    }
-
   } else {
-    ctxA.fillStyle = '#030308';
+    // Fantastical / Cyber Grid Theme
+    ctxA.fillStyle = '#0a0814';
     ctxA.fillRect(0, 0, width, height);
 
-    ctxA.strokeStyle = '#00f0ff';
-    ctxA.lineWidth = 0.5;
-    for (let y = 15; y < height; y += 20) {
+    // Cyber background grid lines
+    ctxA.strokeStyle = 'rgba(0, 240, 255, 0.15)';
+    ctxA.lineWidth = 1;
+    for (let x = 0; x < width; x += 30) {
+      ctxA.beginPath();
+      ctxA.moveTo(x, 0);
+      ctxA.lineTo(x, height);
+      ctxA.stroke();
+    }
+    for (let y = 0; y < height; y += 30) {
       ctxA.beginPath();
       ctxA.moveTo(0, y);
       ctxA.lineTo(width, y);
@@ -254,13 +120,13 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
 
     const neonColors = ['#ff007f', '#00f0ff', '#ffb703', '#00ff87', '#d500f9'];
 
-    for (let cx = 25; cx < width - 25; cx += 32) {
-      for (let cy = 25; cy < height - 25; cy += 32) {
+    for (let cx = 35; cx < width - 35; cx += 40) {
+      for (let cy = 35; cy < height - 35; cy += 40) {
         if (random() > 0.45) continue;
         const color = randomChoice(neonColors);
         const objId = `cyber_${cx}_${cy}`;
-        const itemW = targetDifficulty === 'Easy' ? 18 : targetDifficulty === 'Medium' ? 14 : 10;
-        const itemH = targetDifficulty === 'Easy' ? 18 : targetDifficulty === 'Medium' ? 14 : 10;
+        const itemW = targetDifficulty === 'Easy' ? 20 : targetDifficulty === 'Medium' ? 15 : 11;
+        const itemH = targetDifficulty === 'Easy' ? 20 : targetDifficulty === 'Medium' ? 15 : 11;
 
         objects.push({
           id: objId,
@@ -285,7 +151,12 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   }
 
   // -------------------------------------------------------------
-  // STEP 2: CHOOSE EXACT 1 TARGET OBJECT FOR MUTATION
+  // STEP 2: COPY CANVAS A BACKGROUND TO CANVAS B (100% IDENTICAL BASE)
+  // -------------------------------------------------------------
+  ctxB.drawImage(canvasA, 0, 0);
+
+  // -------------------------------------------------------------
+  // STEP 3: CHOOSE EXACT 1 TARGET OBJECT FOR MUTATION
   // -------------------------------------------------------------
   const targetObj = objects.length > 0 ? randomChoice(objects) : {
     id: 'fallback_target',
@@ -303,11 +174,14 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   objects.forEach(obj => obj.draw(ctxA, obj.color, false, ''));
 
   // Draw ALL objects on Canvas B
-  // If REMOVE_OBJECT: skip targetObj on Canvas B
+  // If REMOVE_OBJECT: skip targetObj on Canvas B (restoring identical background)
   // If COLOR_SHIFT / ADD_DETAIL: draw targetObj with mutated flag on Canvas B
   objects.forEach(obj => {
     if (obj.id === targetObj.id) {
-      if (mutation !== 'REMOVE_OBJECT') {
+      if (mutation === 'REMOVE_OBJECT') {
+        // Redraw background patch on canvas B to remove target object cleanly
+        ctxB.drawImage(canvasA, obj.x - 2, obj.y - 2, obj.w + 4, obj.h + 4, obj.x - 2, obj.y - 2, obj.w + 4, obj.h + 4);
+      } else {
         obj.draw(ctxB, obj.color, true, mutation);
       }
     } else {

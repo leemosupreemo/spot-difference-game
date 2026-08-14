@@ -285,33 +285,36 @@ export async function saveLeaderboardStats(difficultyStats) {
 }
 
 export async function fetchLeaderboards(localDifficultyStats = {}) {
-  const localPayload = computeLeaderboardPayload(localDifficultyStats, getSavedPlayerName());
-  const localPlayerEntry = {
-    uid: 'local_player',
-    ...localPayload,
-    isCurrentPlayer: true
-  };
+  const fetchPromise = (async () => {
+    const localPayload = computeLeaderboardPayload(localDifficultyStats, getSavedPlayerName());
+    const localPlayerEntry = {
+      uid: 'local_player',
+      ...localPayload,
+      isCurrentPlayer: true
+    };
 
-  const firestoreEntries = [];
-  const player = await getPlayer();
+    const firestoreEntries = [];
+    let isCloud = false;
 
-  if (player) {
     try {
-      const snap = await getDocs(collection(player.db, 'leaderboards'));
-      snap.forEach(docSnap => {
-        const data = docSnap.data();
-        const isMe = data.uid === player.uid;
-        firestoreEntries.push({
-          ...data,
-          isCurrentPlayer: isMe
+      const player = await getPlayer();
+      if (player) {
+        isCloud = true;
+        const snap = await getDocs(collection(player.db, 'leaderboards'));
+        snap.forEach(docSnap => {
+          const data = docSnap.data();
+          const isMe = data.uid === player.uid;
+          firestoreEntries.push({
+            ...data,
+            isCurrentPlayer: isMe
+          });
         });
-      });
+      }
     } catch (e) {
       console.warn('Could not fetch Firestore leaderboards:', e);
     }
-  }
 
-  const allEntriesMap = new Map();
+    const allEntriesMap = new Map();
 
   const fallbackEntries = [
     {
@@ -386,27 +389,100 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
     const key = mode === 'first' ? 'avgFirstTimeByPack' : 'avgRepeatTimeByPack';
     return combinedList
       .map(p => {
-        const time = p[key]?.[packId] || p.avgTimesByPack?.[packId] || (p.isCurrentPlayer ? 10800 : 13500);
+        let time = p[key]?.[packId];
+        if (!time && p.avgTimesByPack?.[packId]) {
+          time = p.avgTimesByPack[packId];
+        }
+        if (!time && p.isCurrentPlayer) {
+          time = p.avgRepeatTimeByPack?.[packId] || p.overallBestRepeatTime || p.overallBestFirstTime || null;
+        }
+        if (!time && !p.isCurrentPlayer) {
+          time = packId === 'abstract_animated' ? 14200 : 12500;
+        }
         return {
           ...p,
           effectiveTime: time
         };
       })
-      .sort((a, b) => a.effectiveTime - b.effectiveTime)
+      .sort((a, b) => {
+        if (!a.effectiveTime) return 1;
+        if (!b.effectiveTime) return -1;
+        return a.effectiveTime - b.effectiveTime;
+      })
       .slice(0, 10);
   };
 
-  return {
-    isCloud: !!player,
-    byPackFirst: {
-      find_the_sniper: getTop5ForPack('find_the_sniper', 'first'),
-      abstract_animated: getTop5ForPack('abstract_animated', 'first')
-    },
-    byPackRepeat: {
-      find_the_sniper: getTop5ForPack('find_the_sniper', 'repeat'),
-      abstract_animated: getTop5ForPack('abstract_animated', 'repeat')
-    },
-    localPlayer: localPlayerEntry
-  };
+    return {
+      isCloud,
+      byPackFirst: {
+        find_the_sniper: getTop5ForPack('find_the_sniper', 'first'),
+        abstract_animated: getTop5ForPack('abstract_animated', 'first')
+      },
+      byPackRepeat: {
+        find_the_sniper: getTop5ForPack('find_the_sniper', 'repeat'),
+        abstract_animated: getTop5ForPack('abstract_animated', 'repeat')
+      },
+      localPlayer: localPlayerEntry
+    };
+  })();
+
+  const timeoutPromise = new Promise(resolve => {
+    setTimeout(() => {
+      const localPayload = computeLeaderboardPayload(localDifficultyStats, getSavedPlayerName());
+      const localPlayerEntry = {
+        uid: 'local_player',
+        ...localPayload,
+        isCurrentPlayer: true
+      };
+
+      const fallbackEntries = [
+        {
+          uid: 'demo_1',
+          playerName: 'PixelSniper_Pro',
+          avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 },
+          totalSetsCleared: 24,
+          isCurrentPlayer: false
+        },
+        {
+          uid: 'demo_2',
+          playerName: 'VortexEagle',
+          avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 },
+          totalSetsCleared: 18,
+          isCurrentPlayer: false
+        },
+        {
+          uid: 'demo_3',
+          playerName: 'ChronoMaster',
+          avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 },
+          totalSetsCleared: 15,
+          isCurrentPlayer: false
+        }
+      ];
+
+      const getFallbackListForPack = (packId) => {
+        return [localPlayerEntry, ...fallbackEntries].map(p => ({
+          ...p,
+          effectiveTime: p.isCurrentPlayer 
+            ? (p.avgRepeatTimeByPack?.[packId] || p.overallBestRepeatTime || p.overallBestFirstTime || (packId === 'abstract_animated' ? 12800 : 10800))
+            : (p.avgRepeatTimeByPack?.[packId] || (packId === 'abstract_animated' ? 14500 : 12500))
+        })).sort((a, b) => a.effectiveTime - b.effectiveTime);
+      };
+
+      resolve({
+        isCloud: false,
+        byPackFirst: {
+          find_the_sniper: getFallbackListForPack('find_the_sniper'),
+          abstract_animated: getFallbackListForPack('abstract_animated')
+        },
+        byPackRepeat: {
+          find_the_sniper: getFallbackListForPack('find_the_sniper'),
+          abstract_animated: getFallbackListForPack('abstract_animated')
+        },
+        localPlayer: localPlayerEntry
+      });
+    }, 2500);
+  });
+
+  return Promise.race([fetchPromise, timeoutPromise]);
 }
 
