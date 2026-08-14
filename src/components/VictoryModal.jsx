@@ -43,8 +43,9 @@ export default function VictoryModal({
   const seconds = (elapsedTime / 1000).toFixed(2);
   const safeMisses = Number.isFinite(missCount) ? missCount : 0;
   const accuracy = Math.max(0, Math.min(100, Math.round(100 - safeMisses * 15)));
-  const calculatedStars = safeMisses === 0 ? 3 : safeMisses === 1 ? 2 : 1;
-  const displayStars = stars ?? calculatedStars;
+
+  // Calculate Stars based on Points Obtained across stage (Score >= 1000 -> 3 Stars, Score >= 500 -> 2 Stars, Score > 0 -> 1 Star)
+  const displayStars = score >= 1000 ? 3 : score >= 500 ? 2 : 1;
 
   return (
     <div
@@ -122,17 +123,32 @@ export default function VictoryModal({
           {levelTitle}
         </p>
 
-        {/* Stars Earned */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '12px' }}>
-          {[1, 2, 3].map(starNum => (
-            <Star
-              key={starNum}
-              size={26}
-              className={starNum <= displayStars ? 'star-icon' : 'star-icon empty'}
-              fill={starNum <= displayStars ? 'var(--accent-gold)' : 'none'}
-              style={{ transition: `all 0.3s ease ${starNum * 0.15}s` }}
-            />
-          ))}
+        {/* Stars Earned (Populating based on Points Obtained) */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '14px' }}>
+          {[1, 2, 3].map(starNum => {
+            const active = starNum <= displayStars;
+            return (
+              <div
+                key={starNum}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transform: active ? 'scale(1.15)' : 'scale(0.88)',
+                  transition: `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${starNum * 0.15}s`
+                }}
+              >
+                <Star
+                  size={36}
+                  fill={active ? 'var(--accent-gold)' : 'none'}
+                  color={active ? 'var(--accent-gold)' : 'rgba(255, 255, 255, 0.25)'}
+                  style={{
+                    filter: active ? 'drop-shadow(0 0 14px rgba(255, 183, 3, 0.95))' : 'none'
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
 
         {/* Performance Breakdown Grid */}
