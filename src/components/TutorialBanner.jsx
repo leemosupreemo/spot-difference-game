@@ -135,11 +135,11 @@ export default function TutorialBanner() {
                 left: `${DEMO_TARGET.x}%`,
                 top: `${DEMO_TARGET.y}%`,
                 transform: 'translate(-50%, -50%)',
-                width: '54px',
-                height: '54px',
+                width: '84px',
+                height: '84px',
                 borderRadius: '50%',
-                border: '2.5px dashed var(--accent-cyan)',
-                boxShadow: '0 0 15px rgba(0, 240, 255, 0.6)',
+                border: '3px dashed var(--accent-cyan)',
+                boxShadow: '0 0 20px rgba(0, 240, 255, 0.7)',
                 pointerEvents: 'none',
                 animation: 'hitPulse 0.4s ease-out'
               }} />
@@ -183,27 +183,26 @@ export default function TutorialBanner() {
               }}
             />
 
-            {/* Glowing Difference Target Ripple & Checkmark */}
+            {/* Glowing Difference Target Outline (Clean Hollow Ring) */}
             {foundSuccess && (
               <div style={{
                 position: 'absolute',
                 left: `${DEMO_TARGET.x}%`,
                 top: `${DEMO_TARGET.y}%`,
                 transform: 'translate(-50%, -50%)',
-                width: '56px',
-                height: '56px',
+                width: '84px',
+                height: '84px',
                 borderRadius: '50%',
-                border: '3px solid var(--accent-green)',
-                boxShadow: '0 0 22px var(--accent-green), inset 0 0 14px var(--accent-green)',
-                background: 'rgba(0, 255, 135, 0.35)',
+                border: '3.5px solid var(--accent-green)',
+                boxShadow: '0 0 22px var(--accent-green)',
+                background: 'transparent',
+                pointerEvents: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 animation: 'hitPulse 0.35s ease-out',
                 zIndex: 6
-              }}>
-                <CheckCircle2 size={24} color="#fff" strokeWidth={3} />
-              </div>
+              }} />
             )}
 
             {/* Pointer Hand Flashing in Briefly During Tap and then Disappearing */}
