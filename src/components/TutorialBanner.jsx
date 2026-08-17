@@ -6,7 +6,7 @@ import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 // Dedicated tutorial photo pair (excluded from game rotation)
 const DEMO_BASE_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/base.jpg';
 const DEMO_VARIANT_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/variant.jpg';
-const DEMO_TARGET = { x: 61.0, y: 54.4, radius: 9.5 };
+const DEMO_TARGET = { x: 55.2, y: 54.4, radius: 9.5 };
 
 export default function TutorialBanner() {
   const [isZoomed, setIsZoomed] = useState(false);
