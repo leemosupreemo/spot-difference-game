@@ -166,6 +166,13 @@ export default function GameCanvas({
     });
 
     if (!hitFound) {
+      if (magnifierEnabled) {
+        // In Zoom inspection mode: just move the magnifying lens without taking damage
+        sounds.playTap();
+        setCursorPos({ x: clickXPercent, y: clickYPercent, visible: true });
+        return;
+      }
+
       sounds.playError();
       onMissTap();
 

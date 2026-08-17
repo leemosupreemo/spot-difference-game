@@ -78,18 +78,18 @@ export default function App() {
   };
 
   // Curated Image Decisions Store State
-  const [curatedStatusMap, setCuratedStatusMap] = useState(() => {
-    const raw = getCuratedStatusMap();
-    const pruned = pruneDismissedStatuses(raw);
-    saveCuratedStatusMap(pruned);
-    return pruned;
-  });
+  const [curatedStatusMap, setCuratedStatusMap] = useState(() => getCuratedStatusMap());
 
   const handleSetCuratedStatus = (levelId, status, meta) => {
     const updated = setLevelCuratedStatus(levelId, status, meta);
-    const pruned = pruneDismissedStatuses(updated);
-    saveCuratedStatusMap(pruned);
-    setCuratedStatusMap({ ...pruned });
+    setCuratedStatusMap({ ...updated });
+
+    // Auto-advance to next image pair when approving or dismissing in debug mode
+    if (status === 'dismissed' || status === 'approved') {
+      setTimeout(() => {
+        handleNextPair();
+      }, 120);
+    }
   };
 
   const handleSetCuratedCategory = (levelId, packId) => {
