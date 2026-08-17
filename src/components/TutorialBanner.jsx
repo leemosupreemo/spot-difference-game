@@ -145,21 +145,6 @@ export default function TutorialBanner() {
               }} />
             )}
 
-            <span style={{
-              position: 'absolute',
-              bottom: '5px',
-              left: '6px',
-              fontSize: '0.66rem',
-              fontWeight: 900,
-              color: 'rgba(255, 255, 255, 0.95)',
-              background: 'rgba(0,0,0,0.75)',
-              padding: '2px 7px',
-              borderRadius: '5px',
-              letterSpacing: '0.5px',
-              zIndex: 5
-            }}>
-              ORIGINAL {isZoomed && '🔍'}
-            </span>
           </div>
 
           <span style={{ fontSize: '0.95rem', color: 'var(--accent-cyan)', fontWeight: 900, userSelect: 'none' }}>
@@ -239,21 +224,6 @@ export default function TutorialBanner() {
               </div>
             )}
 
-            <span style={{
-              position: 'absolute',
-              bottom: '5px',
-              left: '6px',
-              fontSize: '0.66rem',
-              fontWeight: 900,
-              color: 'var(--accent-pink)',
-              background: 'rgba(0,0,0,0.75)',
-              padding: '2px 7px',
-              borderRadius: '5px',
-              letterSpacing: '0.5px',
-              zIndex: 5
-            }}>
-              MODIFIED {isZoomed ? '✨ (DIFFERENCE!)' : ''}
-            </span>
           </div>
 
         </div>
