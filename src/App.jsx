@@ -69,6 +69,7 @@ export default function App() {
     }
   });
   const visitedDebugLevelIdsRef = useRef(new Set());
+  const debugHistoryStackRef = useRef([]);
 
   const handleToggleSkipKept = (val) => {
     setSkipKeptLevels(val);
@@ -146,15 +147,16 @@ export default function App() {
   const handleNextPair = async () => {
     sounds.playTap();
 
+    if (currentLevelId) {
+      debugHistoryStackRef.current.push(currentLevelId);
+      visitedDebugLevelIdsRef.current.add(currentLevelId);
+    }
+
     if (debugMode && debugSourceMode === 'procedural') {
       const procLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
       setLevels([procLevel]);
       startLevel(procLevel.id);
       return;
-    }
-
-    if (currentLevelId) {
-      visitedDebugLevelIdsRef.current.add(currentLevelId);
     }
 
     if (debugMode) {
@@ -185,6 +187,27 @@ export default function App() {
       startLevel(levels[currentIndex + 1].id);
     } else {
       await handleStartGame();
+    }
+  };
+
+  const handlePrevPair = () => {
+    sounds.playTap();
+
+    if (debugHistoryStackRef.current.length > 0) {
+      const prevId = debugHistoryStackRef.current.pop();
+      const allEntries = getAllPhotoPairEntries();
+      const prevEntry = allEntries.find(e => e.id === prevId);
+      if (prevEntry) {
+        const prevLevel = createPhotoPairLevel(prevEntry);
+        setLevels([prevLevel]);
+        startLevel(prevLevel.id);
+        return;
+      }
+    }
+
+    const currentIndex = levels.findIndex(l => l.id === currentLevelId);
+    if (currentIndex > 0) {
+      startLevel(levels[currentIndex - 1].id);
     }
   };
 
@@ -503,6 +526,7 @@ export default function App() {
               onResetAll={handleResetAllCurated}
               onPruneDismissed={handlePruneDismissed}
               onNextPair={handleNextPair}
+              onPrevPair={handlePrevPair}
               debugSourceMode={debugSourceMode}
               onToggleSourceMode={handleToggleDebugSourceMode}
               skipKeptLevels={skipKeptLevels}

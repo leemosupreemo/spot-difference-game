@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ThumbsUp, ThumbsDown, RotateCcw, Download, ChevronRight, CheckCircle2, XCircle, HelpCircle, AlertTriangle, Camera, Sparkles } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, RotateCcw, Download, ChevronRight, ChevronLeft, CheckCircle2, XCircle, HelpCircle, AlertTriangle, Camera, Sparkles } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { getLevelStatus } from '../utils/curationStore';
 import CuratedExportModal from './CuratedExportModal';
@@ -12,6 +12,7 @@ export default function DebugCuratorBar({
   onResetAll,
   onPruneDismissed,
   onNextPair,
+  onPrevPair,
   debugSourceMode = 'premade',
   onToggleSourceMode,
   skipKeptLevels = true,
@@ -333,6 +334,17 @@ export default function DebugCuratorBar({
             >
               <RotateCcw size={14} /> Reset all
             </button>
+
+            {onPrevPair && (
+              <button
+                onClick={onPrevPair}
+                className="glass-btn"
+                style={{ padding: '5px 12px', fontSize: '0.78rem', borderRadius: '8px' }}
+                title="Previous image"
+              >
+                <ChevronLeft size={14} /> Prev
+              </button>
+            )}
 
             {onNextPair && (
               <button
