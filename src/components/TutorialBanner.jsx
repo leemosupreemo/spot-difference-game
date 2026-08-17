@@ -6,7 +6,7 @@ export default function TutorialBanner() {
   const [step, setStep] = useState(0); // 0: idle, 1: tapping, 2: found, 3: reset
   const [interactiveFound, setInteractiveFound] = useState(false);
 
-  // Auto-playing loop demonstration (runs every 4.5s)
+  // Auto-playing loop demonstration (runs every 4.2s)
   useEffect(() => {
     let timer1, timer2, timer3, timer4;
 
@@ -14,12 +14,10 @@ export default function TutorialBanner() {
       setStep(0);
       setInteractiveFound(false);
 
-      timer1 = setTimeout(() => setStep(1), 1200); // Hand moves in & taps
-      timer2 = setTimeout(() => {
-        setStep(2); // Spot found + pulse
-      }, 1900);
-      timer3 = setTimeout(() => setStep(3), 3800); // Fade out
-      timer4 = setTimeout(runLoop, 4500); // Repeat
+      timer1 = setTimeout(() => setStep(1), 1100); // Hand glides in
+      timer2 = setTimeout(() => setStep(2), 1700); // Spot found + pulse
+      timer3 = setTimeout(() => setStep(3), 3600); // Fade out
+      timer4 = setTimeout(runLoop, 4200); // Repeat
     };
 
     runLoop();
@@ -45,135 +43,150 @@ export default function TutorialBanner() {
 
   return (
     <div className="glass-panel" style={{
-      padding: '12px 16px',
-      borderRadius: '16px',
+      padding: '14px 16px',
+      borderRadius: '18px',
       marginBottom: '14px',
-      background: 'linear-gradient(135deg, rgba(18, 22, 36, 0.85), rgba(9, 10, 16, 0.95))',
-      border: '1px solid rgba(0, 240, 255, 0.25)',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)'
+      background: 'linear-gradient(135deg, rgba(16, 20, 32, 0.9), rgba(8, 10, 16, 0.98))',
+      border: '1px solid rgba(0, 240, 255, 0.3)',
+      boxShadow: '0 4px 24px rgba(0, 0, 0, 0.5)'
     }}>
       <div style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: '12px'
+        gap: '14px'
       }}>
         
-        {/* Left: Interactive Demo Graphic */}
+        {/* Left / Center Hero: Large & Wide Side-by-Side Graphic Demonstration */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
-          flex: '1 1 300px',
+          flex: '1 1 420px',
           justifyContent: 'center'
         }}>
           
-          {/* Mini Image 1 (Left - Original) */}
+          {/* Card 1: Original Image */}
           <div style={{
             position: 'relative',
-            width: '130px',
-            height: '92px',
-            borderRadius: '10px',
+            width: '100%',
+            maxWidth: '205px',
+            aspectRatio: '16 / 10',
+            borderRadius: '12px',
             overflow: 'hidden',
-            border: '1.5px solid rgba(255,255,255,0.15)',
-            background: 'linear-gradient(135deg, #1e1b4b, #0f172a)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+            border: '1.5px solid rgba(255, 255, 255, 0.16)',
+            background: 'linear-gradient(135deg, #151928, #0a0d16)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.6)'
           }}>
-            {/* Visual SVG Scene: Desk with mug, pencil, notepad */}
-            <svg viewBox="0 0 130 92" style={{ width: '100%', height: '100%', display: 'block' }}>
-              <rect width="130" height="92" fill="#141828" />
-              {/* Desk wood stripes */}
-              <line x1="0" y1="46" x2="130" y2="46" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-              <line x1="0" y1="70" x2="130" y2="70" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-              {/* Notepad */}
-              <rect x="14" y="20" width="38" height="50" rx="3" fill="#f8fafc" opacity="0.9" />
-              <line x1="20" y1="30" x2="44" y2="30" stroke="#94a3b8" strokeWidth="2" />
-              <line x1="20" y1="40" x2="40" y2="40" stroke="#94a3b8" strokeWidth="2" />
-              <line x1="20" y1="50" x2="44" y2="50" stroke="#94a3b8" strokeWidth="2" />
-              {/* Coffee Cup (Teal in original) */}
-              <circle cx="85" cy="46" r="16" fill="#00f0ff" />
-              <circle cx="85" cy="46" r="12" fill="#0f172a" />
-              {/* Coffee Cup Handle */}
-              <path d="M 101 40 C 108 40, 108 52, 101 52" fill="none" stroke="#00f0ff" strokeWidth="3" />
-              {/* Pencil */}
-              <line x1="62" y1="20" x2="62" y2="70" stroke="#ffb703" strokeWidth="4" strokeLinecap="round" />
+            {/* Visual SVG Scene: Cozy Desk & Workspace Clutter */}
+            <svg viewBox="0 0 200 125" style={{ width: '100%', height: '100%', display: 'block' }}>
+              <rect width="200" height="125" fill="#111420" />
+              {/* Background desk gradient and texture lines */}
+              <line x1="0" y1="62" x2="200" y2="62" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+              <line x1="0" y1="95" x2="200" y2="95" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+              
+              {/* Notepad on left */}
+              <rect x="20" y="24" width="55" height="76" rx="4" fill="#f1f5f9" opacity="0.9" />
+              <line x1="28" y1="40" x2="65" y2="40" stroke="#94a3b8" strokeWidth="2.5" />
+              <line x1="28" y1="54" x2="58" y2="54" stroke="#94a3b8" strokeWidth="2.5" />
+              <line x1="28" y1="68" x2="65" y2="68" stroke="#94a3b8" strokeWidth="2.5" />
+              <line x1="28" y1="82" x2="50" y2="82" stroke="#94a3b8" strokeWidth="2.5" />
+              
+              {/* Golden Brass Compass on desk */}
+              <circle cx="102" cy="74" r="18" fill="none" stroke="#ffb703" strokeWidth="3" />
+              <line x1="102" y1="60" x2="102" y2="88" stroke="#ffb703" strokeWidth="2" />
+              <line x1="88" y1="74" x2="116" y2="74" stroke="#ffb703" strokeWidth="2" />
+              <circle cx="102" cy="74" r="3" fill="#ffb703" />
+
+              {/* Coffee Mug on right (Cyan in Original) */}
+              <circle cx="152" cy="62" r="22" fill="#00f0ff" />
+              <circle cx="152" cy="62" r="17" fill="#0c101c" />
+              <path d="M 174 53 C 185 53, 185 71, 174 71" fill="none" stroke="#00f0ff" strokeWidth="3.5" strokeLinecap="round" />
             </svg>
 
             <span style={{
               position: 'absolute',
-              bottom: '4px',
+              bottom: '5px',
               left: '6px',
-              fontSize: '0.62rem',
+              fontSize: '0.66rem',
               fontWeight: 900,
-              color: 'var(--text-muted)',
-              background: 'rgba(0,0,0,0.6)',
-              padding: '1px 6px',
-              borderRadius: '4px',
-              letterSpacing: '0.4px'
+              color: 'rgba(255, 255, 255, 0.7)',
+              background: 'rgba(0,0,0,0.7)',
+              padding: '2px 7px',
+              borderRadius: '5px',
+              letterSpacing: '0.5px'
             }}>
               ORIGINAL
             </span>
           </div>
 
-          <span style={{ fontSize: '1rem', color: 'var(--accent-cyan)', fontWeight: 900 }}>VS</span>
+          <span style={{ fontSize: '0.95rem', color: 'var(--accent-cyan)', fontWeight: 900, userSelect: 'none' }}>
+            VS
+          </span>
 
-          {/* Mini Image 2 (Right - Modified with Difference) */}
+          {/* Card 2: Modified Image (Interactive Tap Target) */}
           <div
             onClick={handleManualTap}
             style={{
               position: 'relative',
-              width: '130px',
-              height: '92px',
-              borderRadius: '10px',
+              width: '100%',
+              maxWidth: '205px',
+              aspectRatio: '16 / 10',
+              borderRadius: '12px',
               overflow: 'hidden',
-              border: isFound ? '1.5px solid var(--accent-green)' : '1.5px solid rgba(0, 240, 255, 0.4)',
-              background: 'linear-gradient(135deg, #1e1b4b, #0f172a)',
-              boxShadow: isFound ? '0 0 15px rgba(0, 255, 135, 0.4)' : '0 4px 12px rgba(0,0,0,0.5)',
+              border: isFound ? '1.5px solid var(--accent-green)' : '1.5px solid rgba(0, 240, 255, 0.45)',
+              background: 'linear-gradient(135deg, #151928, #0a0d16)',
+              boxShadow: isFound ? '0 0 20px rgba(0, 255, 135, 0.4)' : '0 4px 16px rgba(0,0,0,0.6)',
               cursor: 'pointer',
-              transition: 'border-color 0.2s ease'
+              transition: 'all 0.2s ease'
             }}
             title="Tap the difference to try it!"
           >
-            {/* Visual SVG Scene: Coffee cup recolored to Pink difference! */}
-            <svg viewBox="0 0 130 92" style={{ width: '100%', height: '100%', display: 'block' }}>
-              <rect width="130" height="92" fill="#141828" />
-              <line x1="0" y1="46" x2="130" y2="46" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-              <line x1="0" y1="70" x2="130" y2="70" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-              {/* Notepad */}
-              <rect x="14" y="20" width="38" height="50" rx="3" fill="#f8fafc" opacity="0.9" />
-              <line x1="20" y1="30" x2="44" y2="30" stroke="#94a3b8" strokeWidth="2" />
-              <line x1="20" y1="40" x2="40" y2="40" stroke="#94a3b8" strokeWidth="2" />
-              <line x1="20" y1="50" x2="44" y2="50" stroke="#94a3b8" strokeWidth="2" />
+            {/* Visual SVG Scene: Difference on Coffee Mug (Pink recolor) */}
+            <svg viewBox="0 0 200 125" style={{ width: '100%', height: '100%', display: 'block' }}>
+              <rect width="200" height="125" fill="#111420" />
+              <line x1="0" y1="62" x2="200" y2="62" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+              <line x1="0" y1="95" x2="200" y2="95" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
               
-              {/* THE DIFFERENCE: Coffee Cup recolored to Neon Pink (#ff007f)! */}
-              <circle cx="85" cy="46" r="16" fill="#ff007f" />
-              <circle cx="85" cy="46" r="12" fill="#0f172a" />
-              <path d="M 101 40 C 108 40, 108 52, 101 52" fill="none" stroke="#ff007f" strokeWidth="3" />
+              {/* Notepad on left */}
+              <rect x="20" y="24" width="55" height="76" rx="4" fill="#f1f5f9" opacity="0.9" />
+              <line x1="28" y1="40" x2="65" y2="40" stroke="#94a3b8" strokeWidth="2.5" />
+              <line x1="28" y1="54" x2="58" y2="54" stroke="#94a3b8" strokeWidth="2.5" />
+              <line x1="28" y1="68" x2="65" y2="68" stroke="#94a3b8" strokeWidth="2.5" />
+              <line x1="28" y1="82" x2="50" y2="82" stroke="#94a3b8" strokeWidth="2.5" />
+              
+              {/* Golden Brass Compass on desk */}
+              <circle cx="102" cy="74" r="18" fill="none" stroke="#ffb703" strokeWidth="3" />
+              <line x1="102" y1="60" x2="102" y2="88" stroke="#ffb703" strokeWidth="2" />
+              <line x1="88" y1="74" x2="116" y2="74" stroke="#ffb703" strokeWidth="2" />
+              <circle cx="102" cy="74" r="3" fill="#ffb703" />
 
-              {/* Pencil */}
-              <line x1="62" y1="20" x2="62" y2="70" stroke="#ffb703" strokeWidth="4" strokeLinecap="round" />
+              {/* THE DIFFERENCE: Coffee Mug recolored to Neon Pink (#ff007f)! */}
+              <circle cx="152" cy="62" r="22" fill="#ff007f" />
+              <circle cx="152" cy="62" r="17" fill="#0c101c" />
+              <path d="M 174 53 C 185 53, 185 71, 174 71" fill="none" stroke="#ff007f" strokeWidth="3.5" strokeLinecap="round" />
             </svg>
 
-            {/* Difference Highlight Ripple / Hit Marker when found */}
+            {/* Glowing Difference Target Ripple & Checkmark */}
             {isFound && (
               <div style={{
                 position: 'absolute',
-                left: '65%',
+                left: '76%',
                 top: '50%',
                 transform: 'translate(-50%, -50%)',
-                width: '38px',
-                height: '38px',
+                width: '46px',
+                height: '46px',
                 borderRadius: '50%',
-                border: '2.5px solid var(--accent-green)',
-                boxShadow: '0 0 15px var(--accent-green), inset 0 0 10px var(--accent-green)',
-                background: 'rgba(0, 255, 135, 0.3)',
+                border: '3px solid var(--accent-green)',
+                boxShadow: '0 0 20px var(--accent-green), inset 0 0 12px var(--accent-green)',
+                background: 'rgba(0, 255, 135, 0.35)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                animation: 'hitPulse 0.4s ease-out'
+                animation: 'hitPulse 0.35s ease-out'
               }}>
-                <CheckCircle2 size={16} color="#fff" strokeWidth={3} />
+                <CheckCircle2 size={20} color="#fff" strokeWidth={3} />
               </div>
             )}
 
@@ -181,30 +194,30 @@ export default function TutorialBanner() {
             {!interactiveFound && (step === 1 || step === 2) && (
               <div style={{
                 position: 'absolute',
-                left: '65%',
+                left: '76%',
                 top: '50%',
-                transform: step === 1 ? 'translate(-30%, -30%) scale(1.1)' : 'translate(-50%, -50%) scale(0.95)',
+                transform: step === 1 ? 'translate(-25%, -25%) scale(1.15)' : 'translate(-50%, -50%) scale(0.95)',
                 color: '#fff',
-                filter: 'drop-shadow(0 0 8px #000)',
+                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.9))',
                 transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                 pointerEvents: 'none',
                 zIndex: 10
               }}>
-                <Hand size={22} fill="var(--accent-gold)" color="#000" />
+                <Hand size={26} fill="var(--accent-gold)" color="#000" />
               </div>
             )}
 
             <span style={{
               position: 'absolute',
-              bottom: '4px',
+              bottom: '5px',
               left: '6px',
-              fontSize: '0.62rem',
+              fontSize: '0.66rem',
               fontWeight: 900,
               color: 'var(--accent-pink)',
-              background: 'rgba(0,0,0,0.6)',
-              padding: '1px 6px',
-              borderRadius: '4px',
-              letterSpacing: '0.4px'
+              background: 'rgba(0,0,0,0.7)',
+              padding: '2px 7px',
+              borderRadius: '5px',
+              letterSpacing: '0.5px'
             }}>
               MODIFIED (DIFFERENCE!)
             </span>
@@ -212,20 +225,27 @@ export default function TutorialBanner() {
 
         </div>
 
-        {/* Right: Explanatory Copy & Quick Tips */}
-        <div style={{ flex: '2 1 280px', textAlign: 'left' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+        {/* Right Side: Simple, Compact Text & Badges */}
+        <div style={{
+          flex: '0 1 250px',
+          textAlign: 'left',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          gap: '6px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Sparkles size={16} color="var(--accent-gold)" />
-            <h4 style={{ fontSize: '0.92rem', fontWeight: 900, color: '#fff', margin: 0, letterSpacing: '0.3px' }}>
-              HOW IT WORKS: SPOT & TAP THE 1 DIFFERENCE
+            <h4 style={{ fontSize: '0.95rem', fontWeight: 900, color: '#fff', margin: 0, letterSpacing: '0.4px' }}>
+              SPOT & TAP
             </h4>
           </div>
 
-          <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.4, margin: '0 0 8px 0' }}>
-            Compare both images side-by-side. Spot the subtle change (recolored cup above), and <strong style={{ color: 'var(--accent-cyan)' }}>tap that location on either image</strong> to lock it in!
+          <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', lineHeight: 1.35, margin: 0 }}>
+            Compare both images. <strong style={{ color: 'var(--accent-cyan)' }}>Tap the 1 difference</strong> as fast as you can!
           </p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px', flexWrap: 'wrap' }}>
             <span style={{
               fontSize: '0.72rem',
               fontWeight: 800,
@@ -238,7 +258,7 @@ export default function TutorialBanner() {
               alignItems: 'center',
               gap: '4px'
             }}>
-              <Zap size={12} /> Faster Tap = Higher Score
+              <Zap size={12} /> Faster = More Points
             </span>
 
             <span style={{
@@ -250,19 +270,7 @@ export default function TutorialBanner() {
               borderRadius: '6px',
               border: '1px solid rgba(255, 0, 127, 0.3)'
             }}>
-              ❤️ 3 Lives per Stage
-            </span>
-
-            <span style={{
-              fontSize: '0.72rem',
-              fontWeight: 800,
-              color: 'var(--accent-green)',
-              background: 'rgba(0, 255, 135, 0.12)',
-              padding: '3px 8px',
-              borderRadius: '6px',
-              border: '1px solid rgba(0, 255, 135, 0.3)'
-            }}>
-              🎯 5 Pairs to Clear
+              ❤️ 3 Lives
             </span>
           </div>
         </div>
