@@ -330,7 +330,7 @@ export default function GameCanvas({
                 top: `${cursorPos.y}%`,
                 backgroundImage: `url(${leftBgUrl})`,
                 backgroundPosition: `${cursorPos.x}% ${cursorPos.y}%`,
-                backgroundSize: '250%',
+                backgroundSize: '500%',
                 zIndex: 10
               }}
             />
@@ -433,7 +433,7 @@ export default function GameCanvas({
                 top: `${cursorPos.y}%`,
                 backgroundImage: `url(${rightBgUrl})`,
                 backgroundPosition: `${cursorPos.x}% ${cursorPos.y}%`,
-                backgroundSize: '250%',
+                backgroundSize: '500%',
                 zIndex: 10
               }}
             />
