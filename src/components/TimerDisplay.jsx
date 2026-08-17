@@ -106,20 +106,7 @@ export default function TimerDisplay({
               </div>
             </div>
 
-            {/* Stage Progress Badge */}
-            <span style={{
-              fontSize: '0.82rem',
-              fontWeight: 900,
-              color: 'var(--accent-cyan)',
-              background: 'rgba(0, 240, 255, 0.12)',
-              padding: '5px 11px',
-              borderRadius: '12px',
-              border: '1px solid rgba(0, 240, 255, 0.4)',
-              letterSpacing: '0.4px',
-              lineHeight: 1.2
-            }}>
-              IMAGE {currentStageIndex + 1} OF {totalStageImages}
-            </span>
+
 
             {/* Difficulty Badge */}
             <span style={{
