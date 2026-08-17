@@ -287,7 +287,22 @@ export default function DebugCuratorBar({
           {/* Right: Summary Counts & Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>
-              👍 <span style={{ color: 'var(--accent-green)' }}>{approvedTotal}</span> | ⚠️ <span style={{ color: 'var(--accent-gold)' }}>{wrongDiffTotal}</span> | 👎 <span style={{ color: 'var(--accent-pink)' }}>{dismissedTotal}</span>
+              👍 <span style={{ color: 'var(--accent-green)' }}>{approvedTotal}</span> | ⚠️ <span style={{ color: 'var(--accent-gold)' }}>{wrongDiffTotal}</span> | <button
+                onClick={() => { sounds.playTap(); onPruneDismissed && onPruneDismissed(); }}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--accent-pink)',
+                  fontWeight: 800,
+                  fontSize: '0.75rem',
+                  cursor: 'pointer',
+                  padding: 0,
+                  textDecoration: 'underline dotted'
+                }}
+                title="Tap to reset dismissed counter to 0"
+              >
+                👎 {dismissedTotal}
+              </button>
             </div>
 
             <button
@@ -304,9 +319,9 @@ export default function DebugCuratorBar({
                 onClick={() => { sounds.playTap(); onPruneDismissed(); }}
                 className="glass-btn"
                 style={{ padding: '5px 10px', fontSize: '0.78rem', borderRadius: '8px', color: 'var(--accent-pink)', borderColor: 'rgba(255, 0, 127, 0.4)' }}
-                title="Prune off all dismissed images and keep all approved & pending ones"
+                title="Reset dismissed counter to 0"
               >
-                ✂️ Prune Dismissed
+                ✂️ Reset Dismissed
               </button>
             )}
 
