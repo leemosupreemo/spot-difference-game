@@ -321,13 +321,14 @@ export default function GameCanvas({
             </div>
           ))}
 
-          {/* Synchronized Magnifier Lens */}
+          {/* Synchronized Magnifier Lens (Offset above touch point so finger sits at bottom edge) */}
           {magnifierEnabled && cursorPos.visible && leftBgUrl && (
             <div
               className="magnifier-lens"
               style={{
                 left: `${cursorPos.x}%`,
                 top: `${cursorPos.y}%`,
+                transform: cursorPos.y > 22 ? 'translate(-50%, calc(-100% - 16px))' : 'translate(-50%, 20px)',
                 backgroundImage: `url(${leftBgUrl})`,
                 backgroundPosition: `${cursorPos.x}% ${cursorPos.y}%`,
                 backgroundSize: '500%',
@@ -424,13 +425,14 @@ export default function GameCanvas({
             </div>
           ))}
 
-          {/* Synchronized Magnifier Lens */}
+          {/* Synchronized Magnifier Lens (Offset above touch point so finger sits at bottom edge) */}
           {magnifierEnabled && cursorPos.visible && rightBgUrl && (
             <div
               className="magnifier-lens"
               style={{
                 left: `${cursorPos.x}%`,
                 top: `${cursorPos.y}%`,
+                transform: cursorPos.y > 22 ? 'translate(-50%, calc(-100% - 16px))' : 'translate(-50%, 20px)',
                 backgroundImage: `url(${rightBgUrl})`,
                 backgroundPosition: `${cursorPos.x}% ${cursorPos.y}%`,
                 backgroundSize: '500%',
