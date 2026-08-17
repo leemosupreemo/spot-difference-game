@@ -192,7 +192,13 @@ export default function GameCanvas({
     : canvasRefRight.current?.toDataURL();
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{
+      width: '100%',
+      maxWidth: '1300px',
+      margin: '0 auto',
+      padding: '0 16px',
+      boxSizing: 'border-box'
+    }}>
       
       {/* Side-by-Side Canvas Viewport */}
       <div className="game-viewport">

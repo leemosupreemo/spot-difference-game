@@ -464,6 +464,7 @@ export default function App() {
         muted={muted}
         setMuted={setMuted}
         onLogoClick={toggleDebugMode}
+        onToggleDebug={toggleDebugMode}
         debugMode={debugMode}
       />
 
@@ -586,6 +587,8 @@ export default function App() {
       <HelpModal
         isOpen={helpModalOpen}
         onClose={() => setHelpModalOpen(false)}
+        debugMode={debugMode}
+        onToggleDebug={toggleDebugMode}
       />
 
       {debugModalOpen && (
