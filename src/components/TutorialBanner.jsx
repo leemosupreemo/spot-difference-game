@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, CheckCircle2, Zap, Hand, ZoomIn } from 'lucide-react';
+import { Sparkles, CheckCircle2, Zap, Hand } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 
@@ -9,45 +9,71 @@ const DEMO_VARIANT_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/variant.
 const DEMO_TARGET = { x: 58.2, y: 54.4, radius: 9.5 };
 
 export default function TutorialBanner() {
-  const [step, setStep] = useState(0); // 0: full view, 1: tapping, 2: zoomed-in difference, 3: zoom out
-  const [interactiveFound, setInteractiveFound] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [showHand, setShowHand] = useState(false);
+  const [handTapping, setHandTapping] = useState(false);
+  const [foundSuccess, setFoundSuccess] = useState(false);
 
-  // Auto-playing loop demonstration (runs every 5.2s)
+  // Auto-playing loop demonstration (runs every 5.4s)
   useEffect(() => {
-    let timer1, timer2, timer3, timer4;
+    let t1, t2, t3, t4, t5;
 
     const runLoop = () => {
-      setStep(0);
-      setInteractiveFound(false);
+      // 0. Full view start
+      setIsZoomed(false);
+      setShowHand(false);
+      setHandTapping(false);
+      setFoundSuccess(false);
 
-      timer1 = setTimeout(() => setStep(1), 1200); // Hand glides in
-      timer2 = setTimeout(() => setStep(2), 1800); // Taps + ZOOMS IN on difference in both images!
-      timer3 = setTimeout(() => setStep(3), 4400); // Smooth zoom-out
-      timer4 = setTimeout(runLoop, 5200); // Repeat loop
+      // 1. Hand flashes in
+      t1 = setTimeout(() => {
+        setShowHand(true);
+        setHandTapping(false);
+      }, 1100);
+
+      // 2. Hand taps down
+      t2 = setTimeout(() => {
+        setHandTapping(true);
+        setFoundSuccess(true);
+        setIsZoomed(true); // ZOOMS IN CLOSE!
+      }, 1550);
+
+      // 3. Hand disappears immediately after tap (brief flash!)
+      t3 = setTimeout(() => {
+        setShowHand(false);
+      }, 1900);
+
+      // 4. Zoom back out to full scene
+      t4 = setTimeout(() => {
+        setIsZoomed(false);
+        setFoundSuccess(false);
+      }, 4500);
+
+      // 5. Repeat loop
+      t5 = setTimeout(runLoop, 5400);
     };
 
     runLoop();
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      clearTimeout(timer4);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
     };
   }, []);
 
   const handleManualTap = () => {
     sounds.playSuccess();
-    setInteractiveFound(true);
-    setStep(2);
+    setFoundSuccess(true);
+    setIsZoomed(true);
+    setShowHand(false);
     setTimeout(() => {
-      setInteractiveFound(false);
-      setStep(3);
-    }, 2800);
+      setIsZoomed(false);
+      setFoundSuccess(false);
+    }, 3000);
   };
-
-  const isFound = interactiveFound || step === 2;
-  const isZoomed = isFound; // Zoom in both images when difference is tapped
 
   return (
     <div className="glass-panel" style={{
@@ -66,7 +92,7 @@ export default function TutorialBanner() {
         gap: '14px'
       }}>
         
-        {/* Left / Center Hero: Synchronized Zoom-In Photographic Demonstration */}
+        {/* Left / Center Hero: Deep Synchronized Zoom-In Demonstration */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -75,7 +101,7 @@ export default function TutorialBanner() {
           justifyContent: 'center'
         }}>
           
-          {/* Card 1: Original Photo (Zooms in to difference coordinate) */}
+          {/* Card 1: Original Photo (Deep Zoom 3.8x on difference) */}
           <div style={{
             position: 'relative',
             width: '100%',
@@ -83,10 +109,10 @@ export default function TutorialBanner() {
             aspectRatio: '16 / 10',
             borderRadius: '12px',
             overflow: 'hidden',
-            border: isZoomed ? '1.5px solid rgba(0, 240, 255, 0.6)' : '1.5px solid rgba(255, 255, 255, 0.18)',
+            border: isZoomed ? '1.5px solid rgba(0, 240, 255, 0.7)' : '1.5px solid rgba(255, 255, 255, 0.18)',
             background: '#0a0d16',
-            boxShadow: isZoomed ? '0 0 16px rgba(0, 240, 255, 0.3)' : '0 4px 16px rgba(0,0,0,0.6)',
-            transition: 'border-color 0.3s ease, box-shadow 0.3s ease'
+            boxShadow: isZoomed ? '0 0 18px rgba(0, 240, 255, 0.35)' : '0 4px 16px rgba(0,0,0,0.6)',
+            transition: 'border-color 0.35s ease, box-shadow 0.35s ease'
           }}>
             <img
               src={resolveAssetUrl(DEMO_BASE_IMAGE)}
@@ -97,8 +123,8 @@ export default function TutorialBanner() {
                 objectFit: 'cover',
                 display: 'block',
                 transformOrigin: `${DEMO_TARGET.x}% ${DEMO_TARGET.y}%`,
-                transform: isZoomed ? 'scale(2.4)' : 'scale(1)',
-                transition: 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)'
+                transform: isZoomed ? 'scale(3.8)' : 'scale(1)',
+                transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
               }}
             />
 
@@ -109,11 +135,11 @@ export default function TutorialBanner() {
                 left: `${DEMO_TARGET.x}%`,
                 top: `${DEMO_TARGET.y}%`,
                 transform: 'translate(-50%, -50%)',
-                width: '42px',
-                height: '42px',
+                width: '54px',
+                height: '54px',
                 borderRadius: '50%',
-                border: '2px dashed var(--accent-cyan)',
-                boxShadow: '0 0 12px rgba(0, 240, 255, 0.5)',
+                border: '2.5px dashed var(--accent-cyan)',
+                boxShadow: '0 0 15px rgba(0, 240, 255, 0.6)',
                 pointerEvents: 'none',
                 animation: 'hitPulse 0.4s ease-out'
               }} />
@@ -125,7 +151,7 @@ export default function TutorialBanner() {
               left: '6px',
               fontSize: '0.66rem',
               fontWeight: 900,
-              color: 'rgba(255, 255, 255, 0.9)',
+              color: 'rgba(255, 255, 255, 0.95)',
               background: 'rgba(0,0,0,0.75)',
               padding: '2px 7px',
               borderRadius: '5px',
@@ -140,7 +166,7 @@ export default function TutorialBanner() {
             VS
           </span>
 
-          {/* Card 2: Modified Photo (Zooms in to difference coordinate & highlights hit) */}
+          {/* Card 2: Modified Photo (Deep Zoom 3.8x + Hit Indicator) */}
           <div
             onClick={handleManualTap}
             style={{
@@ -150,11 +176,11 @@ export default function TutorialBanner() {
               aspectRatio: '16 / 10',
               borderRadius: '12px',
               overflow: 'hidden',
-              border: isFound ? '1.5px solid var(--accent-green)' : '1.5px solid rgba(0, 240, 255, 0.45)',
+              border: foundSuccess ? '1.5px solid var(--accent-green)' : '1.5px solid rgba(0, 240, 255, 0.45)',
               background: '#0a0d16',
-              boxShadow: isFound ? '0 0 20px rgba(0, 255, 135, 0.45)' : '0 4px 16px rgba(0,0,0,0.6)',
+              boxShadow: foundSuccess ? '0 0 22px rgba(0, 255, 135, 0.5)' : '0 4px 16px rgba(0,0,0,0.6)',
               cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.35s ease'
             }}
             title="Tap the difference to try it!"
           >
@@ -167,23 +193,23 @@ export default function TutorialBanner() {
                 objectFit: 'cover',
                 display: 'block',
                 transformOrigin: `${DEMO_TARGET.x}% ${DEMO_TARGET.y}%`,
-                transform: isZoomed ? 'scale(2.4)' : 'scale(1)',
-                transition: 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)'
+                transform: isZoomed ? 'scale(3.8)' : 'scale(1)',
+                transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
               }}
             />
 
             {/* Glowing Difference Target Ripple & Checkmark */}
-            {isFound && (
+            {foundSuccess && (
               <div style={{
                 position: 'absolute',
                 left: `${DEMO_TARGET.x}%`,
                 top: `${DEMO_TARGET.y}%`,
                 transform: 'translate(-50%, -50%)',
-                width: '46px',
-                height: '46px',
+                width: '56px',
+                height: '56px',
                 borderRadius: '50%',
                 border: '3px solid var(--accent-green)',
-                boxShadow: '0 0 20px var(--accent-green), inset 0 0 12px var(--accent-green)',
+                boxShadow: '0 0 22px var(--accent-green), inset 0 0 14px var(--accent-green)',
                 background: 'rgba(0, 255, 135, 0.35)',
                 display: 'flex',
                 alignItems: 'center',
@@ -191,24 +217,25 @@ export default function TutorialBanner() {
                 animation: 'hitPulse 0.35s ease-out',
                 zIndex: 6
               }}>
-                <CheckCircle2 size={20} color="#fff" strokeWidth={3} />
+                <CheckCircle2 size={24} color="#fff" strokeWidth={3} />
               </div>
             )}
 
-            {/* Animated Pointer Hand Gliding in and Tapping */}
-            {!interactiveFound && (step === 1 || step === 2) && (
+            {/* Pointer Hand Flashing in Briefly During Tap and then Disappearing */}
+            {showHand && (
               <div style={{
                 position: 'absolute',
                 left: `${DEMO_TARGET.x}%`,
                 top: `${DEMO_TARGET.y}%`,
-                transform: step === 1 ? 'translate(-25%, -25%) scale(1.15)' : 'translate(-50%, -50%) scale(0.95)',
+                transform: handTapping ? 'translate(-50%, -50%) scale(0.9)' : 'translate(-20%, -20%) scale(1.15)',
                 color: '#fff',
-                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.9))',
-                transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.95))',
+                transition: 'transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease',
                 pointerEvents: 'none',
-                zIndex: 10
+                zIndex: 10,
+                opacity: showHand ? 1 : 0
               }}>
-                <Hand size={26} fill="var(--accent-gold)" color="#000" />
+                <Hand size={28} fill="var(--accent-gold)" color="#000" />
               </div>
             )}
 
@@ -225,7 +252,7 @@ export default function TutorialBanner() {
               letterSpacing: '0.5px',
               zIndex: 5
             }}>
-              MODIFIED {isZoomed ? '✨ (FOUND!)' : ''}
+              MODIFIED {isZoomed ? '✨ (DIFFERENCE!)' : ''}
             </span>
           </div>
 
