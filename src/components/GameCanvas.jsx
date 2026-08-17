@@ -226,6 +226,7 @@ export default function GameCanvas({
               src={resolveAssetUrl(level.baseImage)}
               alt={level.title || 'Original Scene'}
               className="canvas-element"
+              draggable={false}
               style={{
                 position: 'absolute',
                 top: 0,
@@ -234,7 +235,11 @@ export default function GameCanvas({
                 height: '100%',
                 objectFit: 'cover',
                 zIndex: 1,
-                borderRadius: 'inherit'
+                borderRadius: 'inherit',
+                pointerEvents: 'none',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                WebkitTouchCallout: 'none'
               }}
             />
           )}
@@ -328,6 +333,7 @@ export default function GameCanvas({
               src={resolveAssetUrl(level.variantImage)}
               alt={level.title || 'Modified Scene'}
               className="canvas-element"
+              draggable={false}
               style={{
                 position: 'absolute',
                 top: 0,
@@ -336,7 +342,11 @@ export default function GameCanvas({
                 height: '100%',
                 objectFit: 'cover',
                 zIndex: 1,
-                borderRadius: 'inherit'
+                borderRadius: 'inherit',
+                pointerEvents: 'none',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                WebkitTouchCallout: 'none'
               }}
             />
           )}
