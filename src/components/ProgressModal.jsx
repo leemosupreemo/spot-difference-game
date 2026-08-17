@@ -146,7 +146,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
 
           {loadingLeaderboard ? (
             <p style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '40px 0' }}>
-              Fetching Cloud Speedrunners...
+              Fetching Leaderboard...
             </p>
           ) : (
             <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
