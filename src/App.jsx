@@ -505,6 +505,8 @@ export default function App() {
               onToggleSourceMode={handleToggleDebugSourceMode}
               skipKeptLevels={skipKeptLevels}
               onToggleSkipKept={handleToggleSkipKept}
+              currentStageIndex={currentStageIndex}
+              totalStageImages={levels.length || 5}
             />
           )}
 
