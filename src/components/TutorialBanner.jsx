@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, CheckCircle2, Zap, Hand } from 'lucide-react';
+import { Sparkles, CheckCircle2, Zap, Hand, ZoomIn } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 
-// Use actual real photographic image pair for demonstration
+// Dedicated tutorial photo pair (excluded from game rotation)
 const DEMO_BASE_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/base.jpg';
 const DEMO_VARIANT_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/variant.jpg';
 const DEMO_TARGET = { x: 58.2, y: 54.4, radius: 9.5 };
 
 export default function TutorialBanner() {
-  const [step, setStep] = useState(0); // 0: idle, 1: tapping, 2: found, 3: reset
+  const [step, setStep] = useState(0); // 0: full view, 1: tapping, 2: zoomed-in difference, 3: zoom out
   const [interactiveFound, setInteractiveFound] = useState(false);
 
-  // Auto-playing loop demonstration (runs every 4.5s)
+  // Auto-playing loop demonstration (runs every 5.2s)
   useEffect(() => {
     let timer1, timer2, timer3, timer4;
 
@@ -21,9 +21,9 @@ export default function TutorialBanner() {
       setInteractiveFound(false);
 
       timer1 = setTimeout(() => setStep(1), 1200); // Hand glides in
-      timer2 = setTimeout(() => setStep(2), 1800); // Spot found + pulse
-      timer3 = setTimeout(() => setStep(3), 3700); // Fade out
-      timer4 = setTimeout(runLoop, 4400); // Repeat
+      timer2 = setTimeout(() => setStep(2), 1800); // Taps + ZOOMS IN on difference in both images!
+      timer3 = setTimeout(() => setStep(3), 4400); // Smooth zoom-out
+      timer4 = setTimeout(runLoop, 5200); // Repeat loop
     };
 
     runLoop();
@@ -42,10 +42,12 @@ export default function TutorialBanner() {
     setStep(2);
     setTimeout(() => {
       setInteractiveFound(false);
-    }, 2500);
+      setStep(3);
+    }, 2800);
   };
 
   const isFound = interactiveFound || step === 2;
+  const isZoomed = isFound; // Zoom in both images when difference is tapped
 
   return (
     <div className="glass-panel" style={{
@@ -64,7 +66,7 @@ export default function TutorialBanner() {
         gap: '14px'
       }}>
         
-        {/* Left / Center Hero: Real Photographic Side-by-Side Graphic Demonstration */}
+        {/* Left / Center Hero: Synchronized Zoom-In Photographic Demonstration */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -73,7 +75,7 @@ export default function TutorialBanner() {
           justifyContent: 'center'
         }}>
           
-          {/* Card 1: Actual Original Photo */}
+          {/* Card 1: Original Photo (Zooms in to difference coordinate) */}
           <div style={{
             position: 'relative',
             width: '100%',
@@ -81,9 +83,10 @@ export default function TutorialBanner() {
             aspectRatio: '16 / 10',
             borderRadius: '12px',
             overflow: 'hidden',
-            border: '1.5px solid rgba(255, 255, 255, 0.18)',
+            border: isZoomed ? '1.5px solid rgba(0, 240, 255, 0.6)' : '1.5px solid rgba(255, 255, 255, 0.18)',
             background: '#0a0d16',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.6)'
+            boxShadow: isZoomed ? '0 0 16px rgba(0, 240, 255, 0.3)' : '0 4px 16px rgba(0,0,0,0.6)',
+            transition: 'border-color 0.3s ease, box-shadow 0.3s ease'
           }}>
             <img
               src={resolveAssetUrl(DEMO_BASE_IMAGE)}
@@ -92,9 +95,29 @@ export default function TutorialBanner() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                display: 'block'
+                display: 'block',
+                transformOrigin: `${DEMO_TARGET.x}% ${DEMO_TARGET.y}%`,
+                transform: isZoomed ? 'scale(2.4)' : 'scale(1)',
+                transition: 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)'
               }}
             />
+
+            {/* Magnified Target Comparison Ring in Original */}
+            {isZoomed && (
+              <div style={{
+                position: 'absolute',
+                left: `${DEMO_TARGET.x}%`,
+                top: `${DEMO_TARGET.y}%`,
+                transform: 'translate(-50%, -50%)',
+                width: '42px',
+                height: '42px',
+                borderRadius: '50%',
+                border: '2px dashed var(--accent-cyan)',
+                boxShadow: '0 0 12px rgba(0, 240, 255, 0.5)',
+                pointerEvents: 'none',
+                animation: 'hitPulse 0.4s ease-out'
+              }} />
+            )}
 
             <span style={{
               position: 'absolute',
@@ -103,12 +126,13 @@ export default function TutorialBanner() {
               fontSize: '0.66rem',
               fontWeight: 900,
               color: 'rgba(255, 255, 255, 0.9)',
-              background: 'rgba(0,0,0,0.7)',
+              background: 'rgba(0,0,0,0.75)',
               padding: '2px 7px',
               borderRadius: '5px',
-              letterSpacing: '0.5px'
+              letterSpacing: '0.5px',
+              zIndex: 5
             }}>
-              ORIGINAL
+              ORIGINAL {isZoomed && '🔍'}
             </span>
           </div>
 
@@ -116,7 +140,7 @@ export default function TutorialBanner() {
             VS
           </span>
 
-          {/* Card 2: Actual Modified Photo (Interactive Tap Target) */}
+          {/* Card 2: Modified Photo (Zooms in to difference coordinate & highlights hit) */}
           <div
             onClick={handleManualTap}
             style={{
@@ -130,7 +154,7 @@ export default function TutorialBanner() {
               background: '#0a0d16',
               boxShadow: isFound ? '0 0 20px rgba(0, 255, 135, 0.45)' : '0 4px 16px rgba(0,0,0,0.6)',
               cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              transition: 'all 0.3s ease'
             }}
             title="Tap the difference to try it!"
           >
@@ -141,7 +165,10 @@ export default function TutorialBanner() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                display: 'block'
+                display: 'block',
+                transformOrigin: `${DEMO_TARGET.x}% ${DEMO_TARGET.y}%`,
+                transform: isZoomed ? 'scale(2.4)' : 'scale(1)',
+                transition: 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)'
               }}
             />
 
@@ -161,7 +188,8 @@ export default function TutorialBanner() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                animation: 'hitPulse 0.35s ease-out'
+                animation: 'hitPulse 0.35s ease-out',
+                zIndex: 6
               }}>
                 <CheckCircle2 size={20} color="#fff" strokeWidth={3} />
               </div>
@@ -191,12 +219,13 @@ export default function TutorialBanner() {
               fontSize: '0.66rem',
               fontWeight: 900,
               color: 'var(--accent-pink)',
-              background: 'rgba(0,0,0,0.7)',
+              background: 'rgba(0,0,0,0.75)',
               padding: '2px 7px',
               borderRadius: '5px',
-              letterSpacing: '0.5px'
+              letterSpacing: '0.5px',
+              zIndex: 5
             }}>
-              MODIFIED (DIFFERENCE!)
+              MODIFIED {isZoomed ? '✨ (FOUND!)' : ''}
             </span>
           </div>
 
