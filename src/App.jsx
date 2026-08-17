@@ -109,12 +109,14 @@ export default function App() {
     setCuratedStatusMap({ ...pruned });
   };
 
+  const isKeptStatus = (statusVal) => statusVal === 'approved' || statusVal === 'wrong_difficulty';
+
   const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
     const allEntries = getAllPhotoPairEntries();
     return allEntries.filter(entry => {
       const statusVal = getLevelStatus(mapToUse[entry.id])?.status;
       if (statusVal === 'dismissed') return false;
-      if (skipKept && statusVal === 'approved') return false;
+      if (skipKept && isKeptStatus(statusVal)) return false;
       return !statusVal; // Only return levels pending review (unlabeled)
     });
   };
@@ -124,7 +126,7 @@ export default function App() {
     return allEntries.filter(entry => {
       const statusVal = getLevelStatus(mapToUse[entry.id])?.status;
       if (statusVal === 'dismissed') return false;
-      if (skipKept && statusVal === 'approved') return false;
+      if (skipKept && isKeptStatus(statusVal)) return false;
       return true;
     });
   };
