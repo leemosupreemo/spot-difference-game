@@ -1,5 +1,6 @@
-// Advanced Procedural Image Pair & Mutation Generation Pipeline Engine
-// Generates Clean 1:1 Base Image -> Guaranteed Single Visible Mutation -> DataURL Cache
+// Advanced Procedural Scene Generator Engine
+// Produces visually complex, high-density, multi-layered vector scenes
+// GUARANTEED EXACTLY 1 DIFFERENCE between Image A and Image B
 
 export const SCENE_THEMES = [
   { id: 'find_the_sniper', title: 'Photography', category: 'Photographic' },
@@ -7,21 +8,32 @@ export const SCENE_THEMES = [
 ];
 
 export const MUTATION_TYPES = [
-  'COLOR_SHIFT',     // Change object color to a high-contrast hue
-  'REMOVE_OBJECT',    // Draw object on Image A only (missing on Image B)
-  'ADD_DETAIL',       // Add high-contrast micro detail / pattern on Image B
-  'SHAPE_ROTATE'      // Rotate target object by 45 degrees
+  'COLOR_SHIFT',     // Change object color to a contrasting hue
+  'REMOVE_DETAIL',    // Remove a distinct sub-element / ornament
+  'ADD_DETAIL',       // Add an ornament / jewel / diode / mark
+  'SHAPE_ROTATE',     // Rotate the element by 45-90 degrees
+  'SCALE_CHANGE'      // Scale the element up or down
 ];
 
 /**
- * Generates a 1:1 Image Pair (Base vs Modified) with guaranteed single visible difference.
- * Features advanced multi-layer composition, gradient lighting, and varied object primitives.
+ * Creates a seeded PRNG generator
+ */
+function createPRNG(seed) {
+  let s = Math.abs(seed) % 2147483647;
+  if (s <= 0) s = 1;
+  return () => {
+    s = (s * 16807) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
+/**
+ * Generates a rich, highly varied procedural image pair with GUARANTEED EXACTLY 1 DIFFERENCE.
  */
 export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetDifficulty = 'Medium', seed = Date.now()) {
   const width = 800;
   const height = 600;
 
-  // Offscreen canvases for Base (A) and Modified (B)
   const canvasA = document.createElement('canvas');
   canvasA.width = width;
   canvasA.height = height;
@@ -32,327 +44,725 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   canvasB.height = height;
   const ctxB = canvasB.getContext('2d');
 
-  // Seeded PRNG
-  let currentSeed = seed;
-  const random = () => {
-    currentSeed = (currentSeed * 9301 + 49297) % 233280;
-    return currentSeed / 233280;
-  };
-
+  const random = createPRNG(seed);
   const randomChoice = (arr) => arr[Math.floor(random() * arr.length)];
   const randomRange = (min, max) => min + random() * (max - min);
 
-  // Clutter density calibrated by difficulty
-  const noiseCount = targetDifficulty === 'Easy' ? 350 : targetDifficulty === 'Medium' ? 750 : 1500;
-  const objects = [];
+  // High density of objects to utilize modern GPU/canvas power and create engaging clutter
+  const isSniper = themeId === 'find_the_sniper';
+  // Alternate between styles within each theme for extreme variety
+  const subStyle = Math.floor(random() * 3); // 0, 1, 2 sub-archetypes per theme
 
-  // -------------------------------------------------------------
-  // STEP 1: ADVANCED LAYERED BACKGROUND COMPOSITION
-  // -------------------------------------------------------------
-  if (themeId === 'find_the_sniper') {
-    // PHOTOGRAPHY / NATURE THEME: Forest Floor & Rich Foliage
-    const palettes = [
-      { bg1: '#120a06', bg2: '#2a170d', leaves: ['#d94e1f', '#b83b1d', '#9e2a2b', '#e07a5f', '#f4a261', '#e9c46a', '#3a5a40', '#486b00', '#633900'] },
-      { bg1: '#05190e', bg2: '#0d3b22', leaves: ['#2dc653', '#25a244', '#208b3a', '#1a7431', '#104f55', '#70e000', '#38b000', '#ccff33'] },
-      { bg1: '#190a19', bg2: '#3d163d', leaves: ['#9d4edd', '#7b2cbf', '#5a189a', '#3c096c', '#e0aaff', '#c77dff', '#ff007f', '#ffb703'] }
-    ];
+  // Discrete interactive candidate objects list
+  const candidates = [];
 
-    const chosenPalette = randomChoice(palettes);
+  // =========================================================================
+  // THEME 1: PHOTOGRAPHY / REAL WORLD (Botanical, Hardware PCB, Workshop Desk)
+  // =========================================================================
+  if (isSniper) {
+    if (subStyle === 0) {
+      // 🌿 BOTANICAL GREENHOUSE & LUSH FOLIAGE
+      const bgGrad = ctxA.createRadialGradient(width / 2, height / 2, 80, width / 2, height / 2, width * 0.75);
+      bgGrad.addColorStop(0, '#132a13');
+      bgGrad.addColorStop(0.5, '#0d1f0f');
+      bgGrad.addColorStop(1, '#050c06');
+      ctxA.fillStyle = bgGrad;
+      ctxA.fillRect(0, 0, width, height);
 
-    // Layer 1: Dark Ground Gradient
-    const groundGrad = ctxA.createRadialGradient(width / 2, height / 2, 50, width / 2, height / 2, width * 0.7);
-    groundGrad.addColorStop(0, chosenPalette.bg2);
-    groundGrad.addColorStop(1, chosenPalette.bg1);
-    ctxA.fillStyle = groundGrad;
-    ctxA.fillRect(0, 0, width, height);
+      // Organic soil / moss texture particles
+      const leafColors = ['#2d6a4f', '#40916c', '#52b788', '#74c69d', '#95d5b2', '#1b4332', '#d8f3dc', '#ffb703', '#d90429', '#ff758f'];
+      for (let i = 0; i < 900; i++) {
+        const px = random() * width;
+        const py = random() * height;
+        const pr = randomRange(2, 7);
+        ctxA.fillStyle = randomChoice(leafColors);
+        ctxA.globalAlpha = randomRange(0.2, 0.7);
+        ctxA.beginPath();
+        ctxA.ellipse(px, py, pr, pr * 0.6, random() * Math.PI, 0, Math.PI * 2);
+        ctxA.fill();
+      }
+      ctxA.globalAlpha = 1.0;
 
-    // Layer 2: Background Moss & Fallen Organic Litter
-    for (let i = 0; i < noiseCount; i++) {
-      const lx = random() * width;
-      const ly = random() * height;
-      const lSize = randomRange(3, 9);
-      const angle = random() * Math.PI * 2;
-      ctxA.fillStyle = randomChoice(chosenPalette.leaves);
-      ctxA.beginPath();
-      ctxA.ellipse(lx, ly, lSize, lSize * 0.5, angle, 0, Math.PI * 2);
-      ctxA.fill();
-    }
+      // Dense Interactive Foliage Grid (Ferns, Flowers, Monstera leaves, Butterflies)
+      const gridXCount = targetDifficulty === 'Easy' ? 9 : targetDifficulty === 'Medium' ? 12 : 15;
+      const gridYCount = targetDifficulty === 'Easy' ? 7 : targetDifficulty === 'Medium' ? 9 : 11;
+      const stepX = (width - 80) / gridXCount;
+      const stepY = (height - 80) / gridYCount;
 
-    // Layer 3: Discrete Interactive Target Objects (Leaves, Mushrooms, Pebbles)
-    const objectTypes = ['LEAF', 'MUSHROOM', 'PEBBLE', 'CLOVER'];
-    const gridStep = targetDifficulty === 'Easy' ? 50 : targetDifficulty === 'Medium' ? 40 : 32;
+      for (let ix = 0; ix < gridXCount; ix++) {
+        for (let iy = 0; iy < gridYCount; iy++) {
+          if (random() > 0.85) continue;
+          const cx = 40 + ix * stepX + randomRange(-10, 10);
+          const cy = 40 + iy * stepY + randomRange(-10, 10);
+          const size = randomRange(22, 36);
+          const kind = randomChoice(['FLOWER', 'MONSTERA', 'BUTTERFLY', 'FERN_CLUSTER', 'LADYBUG']);
+          const baseColor = randomChoice(['#ff007f', '#ffb703', '#00f0ff', '#ff5400', '#d500f9', '#ffffff', '#00ff87']);
+          const rot = random() * Math.PI * 2;
 
-    for (let gx = 35; gx < width - 35; gx += gridStep) {
-      for (let gy = 35; gy < height - 35; gy += gridStep) {
-        if (random() > 0.5) continue;
-        const color = randomChoice(chosenPalette.leaves);
-        const objType = randomChoice(objectTypes);
-        const objId = `sniper_${gx}_${gy}`;
-        const itemW = targetDifficulty === 'Easy' ? 22 : targetDifficulty === 'Medium' ? 16 : 12;
-        const itemH = itemW;
-        const rotAngle = random() * Math.PI;
+          candidates.push({
+            id: `botanical_${ix}_${iy}`,
+            x: cx,
+            y: cy,
+            size,
+            kind,
+            baseColor,
+            rot,
+            draw: (ctx, mutated, mType) => {
+              ctx.save();
+              ctx.translate(cx, cy);
+              const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 2 : rot;
+              ctx.rotate(curRot);
+              let color = baseColor;
+              if (mutated && mType === 'COLOR_SHIFT') {
+                color = baseColor === '#ff007f' ? '#00f0ff' : baseColor === '#ffb703' ? '#ff007f' : '#ffb703';
+              }
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
 
-        objects.push({
-          id: objId,
-          type: objType,
-          x: gx, y: gy, w: itemW, h: itemH, color, rotAngle,
-          draw: (ctx, drawColor, isMutated, mType) => {
-            ctx.save();
-            ctx.translate(gx + itemW / 2, gy + itemH / 2);
-            const drawAngle = (isMutated && mType === 'SHAPE_ROTATE') ? rotAngle + Math.PI / 4 : rotAngle;
-            ctx.rotate(drawAngle);
-
-            let finalColor = drawColor;
-            if (isMutated && mType === 'COLOR_SHIFT') {
-              finalColor = drawColor === '#ff007f' ? '#00f0ff' : '#ff007f';
-            }
-
-            ctx.fillStyle = finalColor;
-            ctx.strokeStyle = 'rgba(0,0,0,0.4)';
-            ctx.lineWidth = 1;
-
-            if (objType === 'LEAF') {
-              ctx.beginPath();
-              ctx.ellipse(0, 0, itemW / 2, itemH / 4, 0, 0, Math.PI * 2);
-              ctx.fill();
-              ctx.stroke();
-              // Leaf stem line
-              ctx.strokeStyle = 'rgba(255,255,255,0.4)';
-              ctx.beginPath();
-              ctx.moveTo(-itemW / 2, 0);
-              ctx.lineTo(itemW / 2, 0);
-              ctx.stroke();
-            } else if (objType === 'MUSHROOM') {
-              // Mushroom Cap
-              ctx.beginPath();
-              ctx.arc(0, -2, itemW / 2, Math.PI, 0);
-              ctx.fill();
-              ctx.stroke();
-              // Stem
-              ctx.fillStyle = '#f0f4f8';
-              ctx.fillRect(-2, -2, 4, itemH / 2);
-            } else if (objType === 'PEBBLE') {
-              ctx.beginPath();
-              ctx.arc(0, 0, itemW / 2, 0, Math.PI * 2);
-              ctx.fill();
-              ctx.stroke();
-              // Specular highlight
-              ctx.fillStyle = 'rgba(255,255,255,0.5)';
-              ctx.beginPath();
-              ctx.arc(-itemW / 4, -itemH / 4, itemW / 6, 0, Math.PI * 2);
-              ctx.fill();
-            } else {
-              // CLOVER
-              for (let c = 0; c < 3; c++) {
+              if (kind === 'FLOWER') {
+                // 5-Petal Flower
+                for (let p = 0; p < 5; p++) {
+                  const angle = (p * Math.PI * 2) / 5;
+                  ctx.fillStyle = color;
+                  ctx.beginPath();
+                  ctx.ellipse(Math.cos(angle) * (curSize * 0.45), Math.sin(angle) * (curSize * 0.45), curSize * 0.38, curSize * 0.2, angle, 0, Math.PI * 2);
+                  ctx.fill();
+                  ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+                  ctx.stroke();
+                }
+                // Flower Core Center
+                ctx.fillStyle = (mutated && mType === 'REMOVE_DETAIL') ? color : '#ffd166';
                 ctx.beginPath();
-                ctx.arc(Math.cos(c * 2.09) * 4, Math.sin(c * 2.09) * 4, itemW / 3, 0, Math.PI * 2);
+                ctx.arc(0, 0, curSize * 0.22, 0, Math.PI * 2);
+                ctx.fill();
+                if (mutated && mType === 'ADD_DETAIL') {
+                  ctx.fillStyle = '#ff007f';
+                  ctx.beginPath();
+                  ctx.arc(0, 0, curSize * 0.1, 0, Math.PI * 2);
+                  ctx.fill();
+                }
+              } else if (kind === 'BUTTERFLY') {
+                // Butterfly Wings
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.ellipse(-curSize * 0.35, -curSize * 0.25, curSize * 0.4, curSize * 0.28, -0.4, 0, Math.PI * 2);
+                ctx.ellipse(curSize * 0.35, -curSize * 0.25, curSize * 0.4, curSize * 0.28, 0.4, 0, Math.PI * 2);
+                ctx.ellipse(-curSize * 0.28, curSize * 0.28, curSize * 0.3, curSize * 0.2, 0.5, 0, Math.PI * 2);
+                ctx.ellipse(curSize * 0.28, curSize * 0.28, curSize * 0.3, curSize * 0.2, -0.5, 0, Math.PI * 2);
+                ctx.fill();
+                // Body
+                ctx.fillStyle = '#0f172a';
+                ctx.fillRect(-2, -curSize * 0.4, 4, curSize * 0.8);
+                if (mutated && mType === 'ADD_DETAIL') {
+                  ctx.fillStyle = '#ffffff';
+                  ctx.beginPath();
+                  ctx.arc(-curSize * 0.35, -curSize * 0.25, 3, 0, Math.PI * 2);
+                  ctx.arc(curSize * 0.35, -curSize * 0.25, 3, 0, Math.PI * 2);
+                  ctx.fill();
+                }
+              } else if (kind === 'LADYBUG') {
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.45, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(0, -curSize * 0.45);
+                ctx.lineTo(0, curSize * 0.45);
+                ctx.stroke();
+                // Dots
+                if (!(mutated && mType === 'REMOVE_DETAIL')) {
+                  ctx.fillStyle = '#000';
+                  ctx.beginPath();
+                  ctx.arc(-curSize * 0.2, -curSize * 0.15, 2.5, 0, Math.PI * 2);
+                  ctx.arc(curSize * 0.2, -curSize * 0.15, 2.5, 0, Math.PI * 2);
+                  ctx.arc(-curSize * 0.2, curSize * 0.15, 2.5, 0, Math.PI * 2);
+                  ctx.arc(curSize * 0.2, curSize * 0.15, 2.5, 0, Math.PI * 2);
+                  ctx.fill();
+                }
+              } else {
+                // MONSTERA / BROAD LEAF
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, curSize * 0.5, curSize * 0.3, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#0a2315';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(-curSize * 0.5, 0);
+                ctx.lineTo(curSize * 0.5, 0);
+                ctx.stroke();
+                if (mutated && mType === 'ADD_DETAIL') {
+                  // Dewdrop
+                  ctx.fillStyle = '#00f0ff';
+                  ctx.beginPath();
+                  ctx.arc(curSize * 0.15, -curSize * 0.1, 4, 0, Math.PI * 2);
+                  ctx.fill();
+                }
+              }
+              ctx.restore();
+            }
+          });
+        }
+      }
+
+    } else if (subStyle === 1) {
+      // 🔌 HARDWARE PCB / CIRCUIT BOARD WORKBENCH
+      ctxA.fillStyle = '#061a14';
+      ctxA.fillRect(0, 0, width, height);
+
+      // Gold copper trace grid network
+      ctxA.strokeStyle = 'rgba(212, 175, 55, 0.25)';
+      ctxA.lineWidth = 2;
+      for (let x = 20; x < width; x += 40) {
+        ctxA.beginPath();
+        ctxA.moveTo(x, 0);
+        ctxA.lineTo(x + 20, height);
+        ctxA.stroke();
+      }
+      for (let y = 20; y < height; y += 40) {
+        ctxA.beginPath();
+        ctxA.moveTo(0, y);
+        ctxA.lineTo(width, y + 20);
+        ctxA.stroke();
+      }
+
+      // PCB Components: QFP Chips, SMD Resistors, Capacitors, LEDs
+      const gridXCount = targetDifficulty === 'Easy' ? 10 : targetDifficulty === 'Medium' ? 14 : 18;
+      const gridYCount = targetDifficulty === 'Easy' ? 8 : targetDifficulty === 'Medium' ? 10 : 12;
+      const stepX = (width - 60) / gridXCount;
+      const stepY = (height - 60) / gridYCount;
+
+      for (let ix = 0; ix < gridXCount; ix++) {
+        for (let iy = 0; iy < gridYCount; iy++) {
+          if (random() > 0.8) continue;
+          const cx = 30 + ix * stepX + randomRange(-6, 6);
+          const cy = 30 + iy * stepY + randomRange(-6, 6);
+          const size = randomRange(20, 34);
+          const kind = randomChoice(['MICROCHIP', 'LED', 'CAPACITOR', 'RESISTOR']);
+          const baseColor = randomChoice(['#ff0055', '#00ff87', '#00f0ff', '#ffb703', '#ffd166', '#3a86ff']);
+          const rot = (Math.floor(random() * 4) * Math.PI) / 2;
+
+          candidates.push({
+            id: `pcb_${ix}_${iy}`,
+            x: cx,
+            y: cy,
+            size,
+            kind,
+            baseColor,
+            rot,
+            draw: (ctx, mutated, mType) => {
+              ctx.save();
+              ctx.translate(cx, cy);
+              const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 4 : rot;
+              ctx.rotate(curRot);
+              let color = baseColor;
+              if (mutated && mType === 'COLOR_SHIFT') {
+                color = baseColor === '#ff0055' ? '#00ff87' : baseColor === '#00ff87' ? '#00f0ff' : '#ff0055';
+              }
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
+
+              if (kind === 'MICROCHIP') {
+                // Square IC body
+                ctx.fillStyle = '#0f172a';
+                ctx.fillRect(-curSize * 0.45, -curSize * 0.45, curSize * 0.9, curSize * 0.9);
+                ctx.strokeStyle = '#334155';
+                ctx.strokeRect(-curSize * 0.45, -curSize * 0.45, curSize * 0.9, curSize * 0.9);
+                // Golden corner pin index dot
+                ctx.fillStyle = (mutated && mType === 'REMOVE_DETAIL') ? '#0f172a' : '#ffd166';
+                ctx.beginPath();
+                ctx.arc(-curSize * 0.3, -curSize * 0.3, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+                // Silver pins
+                ctx.fillStyle = '#cbd5e1';
+                for (let p = -curSize * 0.35; p <= curSize * 0.35; p += curSize * 0.2) {
+                  ctx.fillRect(p - 1.5, -curSize * 0.55, 3, 3);
+                  ctx.fillRect(p - 1.5, curSize * 0.45, 3, 3);
+                  ctx.fillRect(-curSize * 0.55, p - 1.5, 3, 3);
+                  ctx.fillRect(curSize * 0.45, p - 1.5, 3, 3);
+                }
+              } else if (kind === 'LED') {
+                // Glowing LED Indicator
+                ctx.fillStyle = color;
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 12;
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.35, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(-curSize * 0.1, -curSize * 0.1, curSize * 0.12, 0, Math.PI * 2);
+                ctx.fill();
+              } else if (kind === 'CAPACITOR') {
+                // Cylindrical Electrolytic Capacitor
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                // Negative stripe marking
+                if (!(mutated && mType === 'REMOVE_DETAIL')) {
+                  ctx.fillStyle = '#ffffff';
+                  ctx.fillRect(-curSize * 0.35, -2, curSize * 0.7, 4);
+                }
+              } else {
+                // SMD RESISTOR
+                ctx.fillStyle = '#1e293b';
+                ctx.fillRect(-curSize * 0.4, -curSize * 0.22, curSize * 0.8, curSize * 0.44);
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillRect(-curSize * 0.4, -curSize * 0.22, curSize * 0.15, curSize * 0.44);
+                ctx.fillRect(curSize * 0.25, -curSize * 0.22, curSize * 0.15, curSize * 0.44);
+                // Value color band
+                ctx.fillStyle = color;
+                ctx.fillRect(-curSize * 0.1, -curSize * 0.22, curSize * 0.2, curSize * 0.44);
+              }
+              ctx.restore();
+            }
+          });
+        }
+      }
+
+    } else {
+      // 🛠️ WORKBENCH & CLUTTER HARDWARE
+      ctxA.fillStyle = '#1e1b18';
+      ctxA.fillRect(0, 0, width, height);
+
+      // Wood grain lines
+      ctxA.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+      ctxA.lineWidth = 3;
+      for (let y = 0; y < height; y += 15) {
+        ctxA.beginPath();
+        ctxA.moveTo(0, y);
+        ctxA.bezierCurveTo(width * 0.3, y + 8, width * 0.7, y - 8, width, y);
+        ctxA.stroke();
+      }
+
+      // Hardware objects (Screws, Bolts, Washers, Hex Nuts, Gears)
+      const gridXCount = targetDifficulty === 'Easy' ? 9 : targetDifficulty === 'Medium' ? 13 : 16;
+      const gridYCount = targetDifficulty === 'Easy' ? 7 : targetDifficulty === 'Medium' ? 9 : 11;
+      const stepX = (width - 60) / gridXCount;
+      const stepY = (height - 60) / gridYCount;
+
+      for (let ix = 0; ix < gridXCount; ix++) {
+        for (let iy = 0; iy < gridYCount; iy++) {
+          if (random() > 0.82) continue;
+          const cx = 35 + ix * stepX + randomRange(-8, 8);
+          const cy = 35 + iy * stepY + randomRange(-8, 8);
+          const size = randomRange(22, 36);
+          const kind = randomChoice(['HEX_NUT', 'SCREW_HEAD', 'BRASS_WASHER', 'SMALL_GEAR']);
+          const baseColor = randomChoice(['#d4af37', '#c0c0c0', '#cd7f32', '#94a3b8', '#e5e7eb', '#ff007f']);
+          const rot = random() * Math.PI * 2;
+
+          candidates.push({
+            id: `hardware_${ix}_${iy}`,
+            x: cx,
+            y: cy,
+            size,
+            kind,
+            baseColor,
+            rot,
+            draw: (ctx, mutated, mType) => {
+              ctx.save();
+              ctx.translate(cx, cy);
+              const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 4 : rot;
+              ctx.rotate(curRot);
+              let color = baseColor;
+              if (mutated && mType === 'COLOR_SHIFT') {
+                color = baseColor === '#d4af37' ? '#c0c0c0' : baseColor === '#c0c0c0' ? '#cd7f32' : '#d4af37';
+              }
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
+
+              if (kind === 'HEX_NUT') {
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                  const a = (i * Math.PI) / 3;
+                  const px = Math.cos(a) * (curSize * 0.45);
+                  const py = Math.sin(a) * (curSize * 0.45);
+                  if (i === 0) ctx.moveTo(px, py);
+                  else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+                ctx.stroke();
+                // Threaded hole
+                ctx.fillStyle = '#0f172a';
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.22, 0, Math.PI * 2);
+                ctx.fill();
+              } else if (kind === 'SCREW_HEAD') {
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.45, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(0,0,0,0.4)';
+                ctx.stroke();
+                // Phillips cross slot
+                ctx.strokeStyle = '#0f172a';
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                ctx.moveTo(-curSize * 0.3, 0);
+                ctx.lineTo(curSize * 0.3, 0);
+                if (!(mutated && mType === 'REMOVE_DETAIL')) {
+                  ctx.moveTo(0, -curSize * 0.3);
+                  ctx.lineTo(0, curSize * 0.3);
+                }
+                ctx.stroke();
+              } else if (kind === 'SMALL_GEAR') {
+                ctx.fillStyle = color;
+                // Gear teeth
+                for (let g = 0; g < 8; g++) {
+                  const a = (g * Math.PI * 2) / 8;
+                  ctx.fillRect(Math.cos(a) * (curSize * 0.35) - 3, Math.sin(a) * (curSize * 0.35) - 3, 6, 6);
+                }
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.35, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#1e1b18';
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.16, 0, Math.PI * 2);
+                ctx.fill();
+              } else {
+                // BRASS WASHER
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.45, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#1e1b18';
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.24, 0, Math.PI * 2);
                 ctx.fill();
               }
+              ctx.restore();
             }
-
-            if (isMutated && mType === 'ADD_DETAIL') {
-              ctx.fillStyle = '#00f0ff';
-              ctx.beginPath();
-              ctx.arc(0, 0, 3, 0, Math.PI * 2);
-              ctx.fill();
-            }
-
-            ctx.restore();
-          }
-        });
+          });
+        }
       }
     }
 
   } else {
-    // FANTASTICAL / CYBER COSMOS THEME: Nebula Sky, Glowing Grid & Floating Crystals
-    const palettes = [
-      { bg1: '#070314', bg2: '#1b003a', neon: ['#ff007f', '#00f0ff', '#ffb703', '#00ff87', '#d500f9', '#7000ff'] },
-      { bg1: '#020b14', bg2: '#05294a', neon: ['#00f0ff', '#00ff87', '#3a86ff', '#8338ec', '#ff006e', '#ffbe0b'] },
-      { bg1: '#140008', bg2: '#3a001e', neon: ['#ff0055', '#ff5400', '#ffbd00', '#ff007f', '#7000ff', '#00f0ff'] }
-    ];
+    // =========================================================================
+    // THEME 2: FANTASTICAL / COSMIC / STEAMPUNK
+    // =========================================================================
+    if (subStyle === 0) {
+      // 💎 CRYSTALLINE PRISM & MINERAL GEODE
+      const bgGrad = ctxA.createLinearGradient(0, 0, width, height);
+      bgGrad.addColorStop(0, '#0a0118');
+      bgGrad.addColorStop(0.5, '#1e0836');
+      bgGrad.addColorStop(1, '#050014');
+      ctxA.fillStyle = bgGrad;
+      ctxA.fillRect(0, 0, width, height);
 
-    const chosenPalette = randomChoice(palettes);
+      // Glowing starry constellation background
+      const crystalColors = ['#00f0ff', '#ff007f', '#7000ff', '#00ff87', '#ffb703', '#d500f9', '#ffffff'];
+      for (let s = 0; s < 700; s++) {
+        ctxA.fillStyle = randomChoice(crystalColors);
+        ctxA.globalAlpha = randomRange(0.2, 0.8);
+        ctxA.fillRect(random() * width, random() * height, randomRange(1.5, 4), randomRange(1.5, 4));
+      }
+      ctxA.globalAlpha = 1.0;
 
-    // Layer 1: Cosmic Aurora Gradient
-    const spaceGrad = ctxA.createLinearGradient(0, 0, width, height);
-    spaceGrad.addColorStop(0, chosenPalette.bg1);
-    spaceGrad.addColorStop(0.5, chosenPalette.bg2);
-    spaceGrad.addColorStop(1, chosenPalette.bg1);
-    ctxA.fillStyle = spaceGrad;
-    ctxA.fillRect(0, 0, width, height);
+      // Crystals & Sacred Geometry
+      const gridXCount = targetDifficulty === 'Easy' ? 9 : targetDifficulty === 'Medium' ? 12 : 15;
+      const gridYCount = targetDifficulty === 'Easy' ? 7 : targetDifficulty === 'Medium' ? 9 : 11;
+      const stepX = (width - 60) / gridXCount;
+      const stepY = (height - 60) / gridYCount;
 
-    // Layer 2: Glowing Cyber Perspective Grid
-    ctxA.strokeStyle = 'rgba(0, 240, 255, 0.12)';
-    ctxA.lineWidth = 1;
-    for (let x = 0; x < width; x += 35) {
-      ctxA.beginPath();
-      ctxA.moveTo(x, 0);
-      ctxA.lineTo(x, height);
-      ctxA.stroke();
-    }
-    for (let y = 0; y < height; y += 35) {
-      ctxA.beginPath();
-      ctxA.moveTo(0, y);
-      ctxA.lineTo(width, y);
-      ctxA.stroke();
-    }
+      for (let ix = 0; ix < gridXCount; ix++) {
+        for (let iy = 0; iy < gridYCount; iy++) {
+          if (random() > 0.8) continue;
+          const cx = 35 + ix * stepX + randomRange(-8, 8);
+          const cy = 35 + iy * stepY + randomRange(-8, 8);
+          const size = randomRange(22, 38);
+          const kind = randomChoice(['OCTAHEDRON', 'GEM_SHIELD', 'PRISM_STAR', 'CRYSTAL_CLUSTER']);
+          const baseColor = randomChoice(crystalColors);
+          const rot = random() * Math.PI * 2;
 
-    // Layer 3: Starfield Particles & Floating Orbs
-    for (let i = 0; i < noiseCount; i++) {
-      const sx = random() * width;
-      const sy = random() * height;
-      const sRadius = randomRange(1, 4);
-      ctxA.fillStyle = randomChoice(chosenPalette.neon);
-      ctxA.beginPath();
-      ctxA.arc(sx, sy, sRadius, 0, Math.PI * 2);
-      ctxA.fill();
-    }
-
-    // Layer 4: Interactive Target Objects (3D Hexagons, Donut Rings, Crystals, Stars)
-    const objectTypes = ['HEXAGON', 'DONUT', 'CRYSTAL', 'STAR'];
-    const gridStep = targetDifficulty === 'Easy' ? 45 : targetDifficulty === 'Medium' ? 36 : 28;
-
-    for (let cx = 35; cx < width - 35; cx += gridStep) {
-      for (let cy = 35; cy < height - 35; cy += gridStep) {
-        if (random() > 0.45) continue;
-        const color = randomChoice(chosenPalette.neon);
-        const objType = randomChoice(objectTypes);
-        const objId = `cyber_${cx}_${cy}`;
-        const itemW = targetDifficulty === 'Easy' ? 22 : targetDifficulty === 'Medium' ? 16 : 12;
-        const itemH = itemW;
-        const rotAngle = random() * Math.PI;
-
-        objects.push({
-          id: objId,
-          type: objType,
-          x: cx, y: cy, w: itemW, h: itemH, color, rotAngle,
-          draw: (ctx, drawColor, isMutated, mType) => {
-            ctx.save();
-            ctx.translate(cx + itemW / 2, cy + itemH / 2);
-            const drawAngle = (isMutated && mType === 'SHAPE_ROTATE') ? rotAngle + Math.PI / 4 : rotAngle;
-            ctx.rotate(drawAngle);
-
-            let finalColor = drawColor;
-            if (isMutated && mType === 'COLOR_SHIFT') {
-              finalColor = drawColor === '#ff007f' ? '#00ff87' : '#ff007f';
-            }
-
-            ctx.fillStyle = finalColor;
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 1;
-
-            if (objType === 'HEXAGON') {
-              ctx.beginPath();
-              for (let i = 0; i < 6; i++) {
-                const angle = (i * Math.PI) / 3;
-                const px = Math.cos(angle) * (itemW / 2);
-                const py = Math.sin(angle) * (itemH / 2);
-                if (i === 0) ctx.moveTo(px, py);
-                else ctx.lineTo(px, py);
+          candidates.push({
+            id: `crystal_${ix}_${iy}`,
+            x: cx,
+            y: cy,
+            size,
+            kind,
+            baseColor,
+            rot,
+            draw: (ctx, mutated, mType) => {
+              ctx.save();
+              ctx.translate(cx, cy);
+              const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 4 : rot;
+              ctx.rotate(curRot);
+              let color = baseColor;
+              if (mutated && mType === 'COLOR_SHIFT') {
+                color = baseColor === '#00f0ff' ? '#ff007f' : baseColor === '#ff007f' ? '#00ff87' : '#00f0ff';
               }
-              ctx.closePath();
-              ctx.fill();
-              ctx.stroke();
-            } else if (objType === 'DONUT') {
-              ctx.beginPath();
-              ctx.arc(0, 0, itemW / 2, 0, Math.PI * 2);
-              ctx.fill();
-              ctx.stroke();
-              ctx.fillStyle = chosenPalette.bg1;
-              ctx.beginPath();
-              ctx.arc(0, 0, itemW / 4, 0, Math.PI * 2);
-              ctx.fill();
-            } else if (objType === 'CRYSTAL') {
-              ctx.beginPath();
-              ctx.moveTo(0, -itemH / 2);
-              ctx.lineTo(itemW / 2, 0);
-              ctx.lineTo(0, itemH / 2);
-              ctx.lineTo(-itemW / 2, 0);
-              ctx.closePath();
-              ctx.fill();
-              ctx.stroke();
-            } else {
-              // STAR
-              ctx.beginPath();
-              ctx.fillRect(-itemW / 3, -itemH / 3, (itemW * 2) / 3, (itemH * 2) / 3);
-              ctx.strokeRect(-itemW / 3, -itemH / 3, (itemW * 2) / 3, (itemH * 2) / 3);
-            }
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
 
-            if (isMutated && mType === 'ADD_DETAIL') {
-              ctx.fillStyle = '#00f0ff';
-              ctx.beginPath();
-              ctx.arc(0, 0, 3, 0, Math.PI * 2);
-              ctx.fill();
-            }
+              ctx.fillStyle = color;
+              ctx.strokeStyle = '#ffffff';
+              ctx.lineWidth = 1.5;
 
-            ctx.restore();
-          }
-        });
+              if (kind === 'OCTAHEDRON') {
+                ctx.beginPath();
+                ctx.moveTo(0, -curSize * 0.5);
+                ctx.lineTo(curSize * 0.4, 0);
+                ctx.lineTo(0, curSize * 0.5);
+                ctx.lineTo(-curSize * 0.4, 0);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                // Facet line
+                ctx.beginPath();
+                ctx.moveTo(-curSize * 0.4, 0);
+                ctx.lineTo(curSize * 0.4, 0);
+                ctx.stroke();
+              } else if (kind === 'GEM_SHIELD') {
+                ctx.beginPath();
+                ctx.moveTo(-curSize * 0.35, -curSize * 0.4);
+                ctx.lineTo(curSize * 0.35, -curSize * 0.4);
+                ctx.lineTo(curSize * 0.45, 0);
+                ctx.lineTo(0, curSize * 0.5);
+                ctx.lineTo(-curSize * 0.45, 0);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                if (mutated && mType === 'ADD_DETAIL') {
+                  ctx.fillStyle = '#ffffff';
+                  ctx.beginPath();
+                  ctx.arc(0, 0, 4, 0, Math.PI * 2);
+                  ctx.fill();
+                }
+              } else if (kind === 'PRISM_STAR') {
+                // 4-Point Shimmer Star
+                ctx.beginPath();
+                ctx.moveTo(0, -curSize * 0.5);
+                ctx.quadraticCurveTo(0, 0, curSize * 0.5, 0);
+                ctx.quadraticCurveTo(0, 0, 0, curSize * 0.5);
+                ctx.quadraticCurveTo(0, 0, -curSize * 0.5, 0);
+                ctx.quadraticCurveTo(0, 0, 0, -curSize * 0.5);
+                ctx.fill();
+                ctx.stroke();
+              } else {
+                // CRYSTAL CLUSTER
+                ctx.fillRect(-curSize * 0.3, -curSize * 0.3, curSize * 0.6, curSize * 0.6);
+                ctx.strokeRect(-curSize * 0.3, -curSize * 0.3, curSize * 0.6, curSize * 0.6);
+                if (!(mutated && mType === 'REMOVE_DETAIL')) {
+                  ctx.fillStyle = '#ffffff';
+                  ctx.fillRect(-curSize * 0.15, -curSize * 0.15, curSize * 0.3, curSize * 0.3);
+                }
+              }
+              ctx.restore();
+            }
+          });
+        }
+      }
+
+    } else {
+      // ⚙️ STEAMPUNK CLOCKWORK & HOROLOGY
+      const bgGrad = ctxA.createRadialGradient(width / 2, height / 2, 50, width / 2, height / 2, width * 0.7);
+      bgGrad.addColorStop(0, '#2d1b00');
+      bgGrad.addColorStop(0.7, '#180c00');
+      bgGrad.addColorStop(1, '#080400');
+      ctxA.fillStyle = bgGrad;
+      ctxA.fillRect(0, 0, width, height);
+
+      // Engraved brass dial arcs
+      ctxA.strokeStyle = 'rgba(255, 183, 3, 0.18)';
+      ctxA.lineWidth = 1.5;
+      for (let r = 80; r < 500; r += 60) {
+        ctxA.beginPath();
+        ctxA.arc(width / 2, height / 2, r, 0, Math.PI * 2);
+        ctxA.stroke();
+      }
+
+      // Horology Elements (Interlocking Gears, Ruby Bearings, Balance Springs)
+      const gearColors = ['#ffb703', '#d4af37', '#c08081', '#e0aaff', '#00f0ff', '#ff007f'];
+      const gridXCount = targetDifficulty === 'Easy' ? 9 : targetDifficulty === 'Medium' ? 12 : 15;
+      const gridYCount = targetDifficulty === 'Easy' ? 7 : targetDifficulty === 'Medium' ? 9 : 11;
+      const stepX = (width - 60) / gridXCount;
+      const stepY = (height - 60) / gridYCount;
+
+      for (let ix = 0; ix < gridXCount; ix++) {
+        for (let iy = 0; iy < gridYCount; iy++) {
+          if (random() > 0.8) continue;
+          const cx = 35 + ix * stepX + randomRange(-8, 8);
+          const cy = 35 + iy * stepY + randomRange(-8, 8);
+          const size = randomRange(22, 38);
+          const kind = randomChoice(['SPUR_GEAR', 'RUBY_BEARING', 'ESCAPE_WHEEL', 'BALANCE_SPRING']);
+          const baseColor = randomChoice(gearColors);
+          const rot = random() * Math.PI * 2;
+
+          candidates.push({
+            id: `horology_${ix}_${iy}`,
+            x: cx,
+            y: cy,
+            size,
+            kind,
+            baseColor,
+            rot,
+            draw: (ctx, mutated, mType) => {
+              ctx.save();
+              ctx.translate(cx, cy);
+              const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 4 : rot;
+              ctx.rotate(curRot);
+              let color = baseColor;
+              if (mutated && mType === 'COLOR_SHIFT') {
+                color = baseColor === '#ffb703' ? '#ff007f' : baseColor === '#ff007f' ? '#00f0ff' : '#ffb703';
+              }
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
+
+              if (kind === 'SPUR_GEAR') {
+                ctx.fillStyle = color;
+                for (let g = 0; g < 10; g++) {
+                  const a = (g * Math.PI * 2) / 10;
+                  ctx.fillRect(Math.cos(a) * (curSize * 0.38) - 3, Math.sin(a) * (curSize * 0.38) - 3, 6, 6);
+                }
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.38, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#080400';
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.16, 0, Math.PI * 2);
+                ctx.fill();
+              } else if (kind === 'RUBY_BEARING') {
+                // Synthetic Ruby Jewel
+                ctx.fillStyle = '#ff0055';
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.35, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#ffd166';
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+                // Pivot center hole
+                ctx.fillStyle = '#000000';
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.12, 0, Math.PI * 2);
+                ctx.fill();
+              } else if (kind === 'ESCAPE_WHEEL') {
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(0, 0, curSize * 0.35, 0, Math.PI * 2);
+                ctx.stroke();
+                // Spokes
+                for (let s = 0; s < 4; s++) {
+                  const a = (s * Math.PI) / 2;
+                  ctx.beginPath();
+                  ctx.moveTo(0, 0);
+                  ctx.lineTo(Math.cos(a) * curSize * 0.35, Math.sin(a) * curSize * 0.35);
+                  ctx.stroke();
+                }
+                if (mutated && mType === 'ADD_DETAIL') {
+                  ctx.fillStyle = '#00f0ff';
+                  ctx.beginPath();
+                  ctx.arc(0, 0, 4, 0, Math.PI * 2);
+                  ctx.fill();
+                }
+              } else {
+                // BALANCE SPRING (Spiral)
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let a = 0; a < Math.PI * 6; a += 0.2) {
+                  const r = (a / (Math.PI * 6)) * (curSize * 0.4);
+                  const px = Math.cos(a) * r;
+                  const py = Math.sin(a) * r;
+                  if (a === 0) ctx.moveTo(px, py);
+                  else ctx.lineTo(px, py);
+                }
+                ctx.stroke();
+              }
+              ctx.restore();
+            }
+          });
+        }
       }
     }
   }
 
-  // -------------------------------------------------------------
-  // STEP 2: COPY CANVAS A BACKGROUND TO CANVAS B (100% IDENTICAL BASE)
-  // -------------------------------------------------------------
+  // =========================================================================
+  // GUARANTEE EXACTLY 1 DIFFERENCE:
+  // 1. Draw ALL candidates onto Canvas A
+  // 2. Clone Canvas A 100% pixel-for-pixel onto Canvas B
+  // 3. Select EXACTLY ONE target object and mutate it ONLY on Canvas B
+  // =========================================================================
+
+  // Fallback candidate if sparse
+  if (candidates.length === 0) {
+    candidates.push({
+      id: 'fallback_center',
+      x: width / 2,
+      y: height / 2,
+      size: 30,
+      draw: (ctx, mutated, mType) => {
+        ctx.fillStyle = mutated ? '#ff007f' : '#00f0ff';
+        ctx.beginPath();
+        ctx.arc(width / 2, height / 2, 15, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+  }
+
+  // 1. Draw all candidates in pristine state onto Canvas A
+  candidates.forEach(c => c.draw(ctxA, false, ''));
+
+  // 2. Clone Canvas A completely onto Canvas B (100.0% identical base)
   ctxB.drawImage(canvasA, 0, 0);
 
-  // -------------------------------------------------------------
-  // STEP 3: CHOOSE EXACT 1 TARGET OBJECT FOR MUTATION
-  // -------------------------------------------------------------
-  const targetObj = objects.length > 0 ? randomChoice(objects) : {
-    id: 'fallback_target',
-    type: 'TARGET_PIXEL',
-    x: width / 2, y: height / 2, w: 16, h: 16, color: '#ff0055',
-    draw: (ctx, c, isMutated, mType) => {
-      ctx.fillStyle = isMutated ? '#00f0ff' : '#ff0055';
-      ctx.fillRect(width / 2, height / 2, 16, 16);
-    }
-  };
+  // 3. Pick EXACTLY 1 target from the candidate list
+  const targetIndex = Math.floor(random() * candidates.length);
+  const targetObj = candidates[targetIndex];
+  const mutationType = randomChoice(MUTATION_TYPES);
 
-  const mutation = randomChoice(MUTATION_TYPES);
+  // 4. Overwrite ONLY the bounding patch of targetObj on Canvas B
+  // Clear the localized patch on Canvas B and redraw it with the mutation applied
+  const patchPadding = targetObj.size + 14;
+  const patchX = Math.max(0, targetObj.x - patchPadding);
+  const patchY = Math.max(0, targetObj.y - patchPadding);
+  const patchW = Math.min(width - patchX, patchPadding * 2);
+  const patchH = Math.min(height - patchY, patchPadding * 2);
 
-  // Draw ALL objects on Canvas A (including targetObj in original state)
-  objects.forEach(obj => obj.draw(ctxA, obj.color, false, ''));
+  // Save Canvas B state, clip strictly to the target's bounding box
+  ctxB.save();
+  ctxB.beginPath();
+  ctxB.rect(patchX, patchY, patchW, patchH);
+  ctxB.clip();
 
-  // Draw ALL objects on Canvas B
-  // If REMOVE_OBJECT: skip targetObj on Canvas B (restoring identical background)
-  // If COLOR_SHIFT / ADD_DETAIL / SHAPE_ROTATE: draw targetObj with mutated flag on Canvas B
-  objects.forEach(obj => {
-    if (obj.id === targetObj.id) {
-      if (mutation === 'REMOVE_OBJECT') {
-        // Redraw background patch on canvas B to remove target object cleanly
-        ctxB.drawImage(canvasA, obj.x - 4, obj.y - 4, obj.w + 8, obj.h + 8, obj.x - 4, obj.y - 4, obj.w + 8, obj.h + 8);
+  // Redraw any background under the patch on Canvas B
+  // Then draw any neighboring candidates that overlap this patch in normal state
+  candidates.forEach(c => {
+    if (Math.hypot(c.x - targetObj.x, c.y - targetObj.y) < patchPadding * 1.5) {
+      if (c.id === targetObj.id) {
+        c.draw(ctxB, true, mutationType);
       } else {
-        obj.draw(ctxB, obj.color, true, mutation);
+        c.draw(ctxB, false, '');
       }
-    } else {
-      obj.draw(ctxB, obj.color, false, '');
     }
   });
+  ctxB.restore();
 
-  // Calculate Center Percent & Radius
-  const centerXPercent = Math.round(((targetObj.x + targetObj.w / 2) / width) * 100);
-  const centerYPercent = Math.round(((targetObj.y + targetObj.h / 2) / height) * 100);
-
-  // Fair & fun hit radiuses for mobile touch
-  const radiusPercent = targetDifficulty === 'Easy' ? 12 : targetDifficulty === 'Medium' ? 8 : 5;
+  // Calculate Difference Coordinate Percentages
+  const diffX = Math.round((targetObj.x / width) * 1000) / 10;
+  const diffY = Math.round((targetObj.y / height) * 1000) / 10;
+  const hitRadius = targetDifficulty === 'Easy' ? 10 : targetDifficulty === 'Medium' ? 7.5 : 5.5;
 
   const diffs = [
     {
       id: 1,
-      x: centerXPercent,
-      y: centerYPercent,
-      radius: radiusPercent,
-      mutationType: mutation,
-      description: `Spot the 1 difference!`,
-      hint: `Look closely near (${centerXPercent}%, ${centerYPercent}%)`
+      x: diffX,
+      y: diffY,
+      radius: hitRadius,
+      mutationType,
+      hint: `Look closely near the ${targetObj.kind || 'feature'} at (${diffX}%, ${diffY}%)`
     }
   ];
 
-  // Export DataURLs for 100% Fail-Proof Canvas Painting on Mobile
-  const dataUrlA = canvasA.toDataURL('image/png');
-  const dataUrlB = canvasB.toDataURL('image/png');
+  // Convert to Data URLs for instant native painting
+  const dataUrlA = canvasA.toDataURL('image/jpeg', 0.92);
+  const dataUrlB = canvasB.toDataURL('image/jpeg', 0.92);
 
   const imgA = new Image();
   imgA.src = dataUrlA;
@@ -366,8 +776,6 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
     category: SCENE_THEMES.find(t => t.id === themeId)?.category || 'Procedural',
     difficulty: targetDifficulty,
     totalDifferences: 1,
-    bgGradient: ['#0b091a', '#1e1035'],
-    accentColor: '#00f0ff',
     diffs,
     render: (ctx, w, h, isModified) => {
       const img = isModified ? imgB : imgA;
