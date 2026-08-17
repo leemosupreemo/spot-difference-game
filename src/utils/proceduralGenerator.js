@@ -40,6 +40,52 @@ function createPRNG(seed) {
   };
 }
 
+function createSafeCanvas(width, height) {
+  if (typeof document !== 'undefined' && document.createElement) {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    return canvas;
+  }
+  const noop = () => {};
+  const mockCtx = {
+    createRadialGradient: () => ({ addColorStop: noop }),
+    createLinearGradient: () => ({ addColorStop: noop }),
+    fillRect: noop,
+    strokeRect: noop,
+    drawImage: noop,
+    save: noop,
+    restore: noop,
+    translate: noop,
+    rotate: noop,
+    beginPath: noop,
+    closePath: noop,
+    moveTo: noop,
+    lineTo: noop,
+    bezierCurveTo: noop,
+    arc: noop,
+    ellipse: noop,
+    quadraticCurveTo: noop,
+    fill: noop,
+    stroke: noop
+  };
+  return {
+    width,
+    height,
+    getContext: () => mockCtx,
+    toDataURL: () => 'data:image/jpeg;base64,mock'
+  };
+}
+
+function createSafeImage(src) {
+  if (typeof Image !== 'undefined') {
+    const img = new Image();
+    img.src = src;
+    return img;
+  }
+  return { src, complete: true, naturalWidth: 800, naturalHeight: 600 };
+}
+
 /**
  * Generates an impressionistic or organic procedural scene pair with guaranteed single high-contrast difference.
  */
@@ -47,14 +93,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   const width = 800;
   const height = 600;
 
-  const canvasA = document.createElement('canvas');
-  canvasA.width = width;
-  canvasA.height = height;
+  const canvasA = createSafeCanvas(width, height);
   const ctxA = canvasA.getContext('2d');
 
-  const canvasB = document.createElement('canvas');
-  canvasB.width = width;
-  canvasB.height = height;
+  const canvasB = createSafeCanvas(width, height);
   const ctxB = canvasB.getContext('2d');
 
   const random = createPRNG(seed);
@@ -998,11 +1040,8 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   const dataUrlA = canvasA.toDataURL('image/jpeg', 0.94);
   const dataUrlB = canvasB.toDataURL('image/jpeg', 0.94);
 
-  const imgA = new Image();
-  imgA.src = dataUrlA;
-
-  const imgB = new Image();
-  imgB.src = dataUrlB;
+  const imgA = createSafeImage(dataUrlA);
+  const imgB = createSafeImage(dataUrlB);
 
   return {
     id: `procedural_${themeId}_${seed}`,

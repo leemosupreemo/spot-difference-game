@@ -23,11 +23,15 @@ export default function VictoryModal({
       const defaults = { origin: { y: 0.7 } };
 
       function fire(particleRatio, opts) {
-        confetti({
-          ...defaults,
-          ...opts,
-          particleCount: Math.floor(count * particleRatio)
-        });
+        try {
+          confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio)
+          });
+        } catch (error) {
+          console.warn('Victory celebration unavailable:', error);
+        }
       }
 
       fire(0.25, { spread: 26, startVelocity: 55 });

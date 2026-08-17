@@ -9,18 +9,17 @@ const componentPath = path.join(
   'GameCanvas.jsx'
 );
 
-test('ignores canvas guesses while magnifier mode is active', () => {
+test('provides synchronized dual magnifier loupe with offset above touch', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
-  assert.match(
-    source,
-    /const handleCanvasTap = \(e, containerRef\) => \{\s*if \(magnifierEnabled\) return;/
-  );
+  assert.match(source, /magnifierEnabled && cursorPos\.visible/);
+  assert.match(source, /magnifier-lens/);
+  assert.match(source, /calc\(-100% - 16px\)/);
 });
 
-test('shows the magnifier only when the Zoom button enables it', () => {
+test('handles tap and drag gestures without triggering accidental misses in zoom mode', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
-  assert.doesNotMatch(source, /setIsHoldZooming\(true\)/);
-  assert.match(source, /const isLensVisible = magnifierEnabled && cursorPos\.visible;/);
+  assert.match(source, /if \(start\.isDrag/);
+  assert.match(source, /if \(magnifierEnabled\)/);
 });

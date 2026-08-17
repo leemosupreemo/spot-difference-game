@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "node --test src/**/*.test.mjs",
+    "test:watch": "node --test --watch src/**/*.test.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

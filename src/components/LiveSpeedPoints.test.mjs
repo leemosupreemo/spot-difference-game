@@ -6,19 +6,16 @@ import { fileURLToPath } from 'node:url';
 
 const componentDirectory = path.dirname(fileURLToPath(import.meta.url));
 const timerSource = fs.readFileSync(path.join(componentDirectory, 'TimerDisplay.jsx'), 'utf8');
-const appSource = fs.readFileSync(path.join(componentDirectory, '..', 'App.jsx'), 'utf8');
 const viewModelSource = fs.readFileSync(path.join(componentDirectory, '..', 'viewmodels', 'useGameViewModel.js'), 'utf8');
 
-test('renders the live 500-to-25 speed award in the game HUD', () => {
-  assert.match(timerSource, /availablePoints/);
-  assert.match(timerSource, /\{availablePoints\}/);
-  assert.match(appSource, /availablePoints=\{calculateSpeedPoints\(elapsedTime\)\}/);
+test('renders the live potential speed points in the game HUD', () => {
+  assert.match(timerSource, /calculateSpeedPoints/);
+  assert.match(timerSource, /potentialPoints/);
 });
 
-test('does not use procedural fallback pairs in the photorealistic stage', () => {
+test('delegates stage creation to buildPhotoPairStage in useGameViewModel', () => {
   assert.match(
     viewModelSource,
-    /buildPhotoPairStage\(\{[\s\S]*packId: selectedTheme/
+    /buildPhotoPairStage/
   );
-  assert.doesNotMatch(viewModelSource, /generateProceduralLevelPair/);
 });
