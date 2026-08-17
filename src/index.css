@@ -281,11 +281,11 @@ body {
 /* Synchronized Magnifier Lens */
 .magnifier-lens {
   position: absolute;
-  width: 160px;
-  height: 160px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   border: 3px solid var(--accent-cyan);
-  box-shadow: 0 0 24px rgba(0, 240, 255, 0.65), inset 0 0 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.65), inset 0 0 12px rgba(0, 0, 0, 0.5);
   pointer-events: none;
   overflow: hidden;
   transform: translate(-50%, -50%);
