@@ -319,10 +319,10 @@ export default function DebugCuratorBar({
               <button
                 onClick={() => { sounds.playTap(); onPruneDismissed(); }}
                 className="glass-btn"
-                style={{ padding: '5px 10px', fontSize: '0.78rem', borderRadius: '8px', color: 'var(--accent-pink)', borderColor: 'rgba(255, 0, 127, 0.4)' }}
-                title="Reset dismissed counter to 0"
+                style={{ padding: '5px 10px', fontSize: '0.78rem', borderRadius: '8px', color: 'var(--accent-pink)', borderColor: 'rgba(255, 0, 127, 0.5)', fontWeight: 700 }}
+                title="Remove / Prune all dismissed images and keep approved levels"
               >
-                ✂️ Reset Dismissed
+                ✂️ Prune Dismissed
               </button>
             )}
 
