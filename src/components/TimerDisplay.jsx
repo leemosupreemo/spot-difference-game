@@ -5,14 +5,14 @@ import { calculateSpeedPoints } from '../utils/scoring';
 
 export default function TimerDisplay({
   elapsedTime,
-  foundCount,
   hintsLeft,
   onUseHint,
   magnifierEnabled,
   setMagnifierEnabled,
-  score,
-  mode,
-  missCount = 0
+  missCount = 0,
+  currentStageIndex = 0,
+  totalStageImages = 5,
+  selectedDifficulty = 'Medium'
 }) {
   const potentialPoints = calculateSpeedPoints(elapsedTime);
   const livesRemaining = Math.max(0, 3 - missCount);
@@ -40,71 +40,117 @@ export default function TimerDisplay({
     setMagnifierEnabled(!magnifierEnabled);
   };
 
-  return (
-    <div className="glass-panel" style={{ padding: '10px 18px', margin: '10px auto 14px auto', maxWidth: '1300px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-        
-        {/* Clock, Total Score, Live Speed Bonus & Fails Badge */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {/* Live Millisecond Clock */}
-          <div style={{
-            background: 'rgba(0, 240, 255, 0.1)',
-            border: '1px solid rgba(0, 240, 255, 0.35)',
-            borderRadius: '14px',
-            padding: '6px 16px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
-          }}>
-            <Timer size={22} color="var(--accent-cyan)" />
-            <div className="timer-badge" style={{ fontSize: '1.6rem' }}>
-              {formatTime(elapsedTime)}
-            </div>
-          </div>
+  const difficultyColor =
+    selectedDifficulty === 'Hard'
+      ? 'var(--accent-pink)'
+      : selectedDifficulty === 'Medium'
+      ? 'var(--accent-gold)'
+      : 'var(--accent-green)';
 
-          {/* Live Speed Bonus Badge (Counts down 500 -> 25 PTS) */}
+  return (
+    <div className="glass-panel" style={{
+      padding: '8px 14px',
+      margin: '0 auto 12px auto',
+      maxWidth: '1300px',
+      borderRadius: '16px'
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+        
+        {/* Left Side: Combined Timer + Points, Stage Index, Difficulty, and Lives */}
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+          
+          {/* Combined Timer & Live Score Badge */}
           <div style={{
-            background: 'rgba(255, 183, 3, 0.15)',
-            border: '1px solid rgba(255, 183, 3, 0.5)',
-            borderRadius: '14px',
-            padding: '6px 14px',
+            background: 'rgba(0, 240, 255, 0.08)',
+            border: '1px solid rgba(0, 240, 255, 0.35)',
+            borderRadius: '12px',
+            padding: '5px 12px',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px'
+            gap: '10px'
           }}>
-            <Zap size={18} color="var(--accent-gold)" />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '0.65rem', fontWeight: 900, color: 'var(--accent-gold)', letterSpacing: '0.5px' }}>SCORE</span>
-              <span style={{ fontSize: '1.3rem', fontWeight: 900, color: '#fff', fontFamily: 'var(--font-mono)', lineHeight: 1 }}>
-                +{potentialPoints} <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>PTS</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Timer size={18} color="var(--accent-cyan)" />
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '1.25rem',
+                fontWeight: 700,
+                color: 'var(--accent-cyan)',
+                textShadow: '0 0 8px rgba(0, 240, 255, 0.4)',
+                lineHeight: 1
+              }}>
+                {formatTime(elapsedTime)}
+              </span>
+            </div>
+
+            <div style={{ width: '1px', height: '18px', background: 'rgba(255, 255, 255, 0.2)' }} />
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Zap size={15} color="var(--accent-gold)" />
+              <span style={{
+                fontSize: '1.05rem',
+                fontWeight: 900,
+                color: 'var(--accent-gold)',
+                fontFamily: 'var(--font-mono)',
+                lineHeight: 1
+              }}>
+                +{potentialPoints} <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>PTS</span>
               </span>
             </div>
           </div>
 
+          {/* Stage Progress Badge */}
+          <span style={{
+            fontSize: '0.82rem',
+            fontWeight: 900,
+            color: 'var(--accent-cyan)',
+            background: 'rgba(0, 240, 255, 0.12)',
+            padding: '5px 11px',
+            borderRadius: '12px',
+            border: '1px solid rgba(0, 240, 255, 0.4)',
+            letterSpacing: '0.4px',
+            lineHeight: 1.2
+          }}>
+            IMAGE {currentStageIndex + 1} OF {totalStageImages}
+          </span>
 
+          {/* Difficulty Badge */}
+          <span style={{
+            fontSize: '0.82rem',
+            fontWeight: 800,
+            color: difficultyColor,
+            background: 'rgba(0, 0, 0, 0.45)',
+            padding: '5px 11px',
+            borderRadius: '12px',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            letterSpacing: '0.4px',
+            lineHeight: 1.2
+          }}>
+            {selectedDifficulty.toUpperCase()}
+          </span>
 
           {/* 3-Heart LIVES Badge */}
           <div style={{
-            background: livesRemaining <= 1 ? 'rgba(255, 0, 127, 0.2)' : 'rgba(255, 255, 255, 0.06)',
+            background: livesRemaining <= 1 ? 'rgba(255, 0, 127, 0.2)' : 'rgba(255, 255, 255, 0.05)',
             border: livesRemaining <= 1 ? '1px solid var(--accent-pink)' : '1px solid var(--border-glass)',
-            borderRadius: '14px',
-            padding: '6px 14px',
+            borderRadius: '12px',
+            padding: '5px 10px',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px'
+            gap: '6px'
           }}>
-            <span style={{ fontSize: '0.82rem', fontWeight: 900, color: 'var(--accent-pink)', letterSpacing: '0.5px' }}>LIVES</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--accent-pink)', letterSpacing: '0.4px' }}>LIVES</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
               {[1, 2, 3].map(i => {
                 const active = i <= livesRemaining;
                 return (
                   <Heart
                     key={i}
-                    size={18}
+                    size={16}
                     fill={active ? 'var(--accent-pink)' : 'transparent'}
                     color={active ? 'var(--accent-pink)' : 'rgba(255, 255, 255, 0.25)'}
                     style={{
-                      filter: active ? 'drop-shadow(0 0 6px rgba(255, 0, 127, 0.8))' : 'none',
+                      filter: active ? 'drop-shadow(0 0 5px rgba(255, 0, 127, 0.8))' : 'none',
                       transition: 'all 0.2s ease'
                     }}
                   />
@@ -114,8 +160,8 @@ export default function TimerDisplay({
           </div>
         </div>
 
-        {/* Game Controls (Hint & Zoom) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Right Side: Game Controls (Hint & Zoom) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {/* Hint Button */}
           <button
             className={`glass-btn ${hintsLeft > 0 ? '' : 'disabled'}`}
@@ -125,16 +171,16 @@ export default function TimerDisplay({
               borderColor: hintsLeft > 0 ? 'var(--accent-gold)' : 'transparent',
               color: hintsLeft > 0 ? 'var(--accent-gold)' : 'var(--text-muted)',
               opacity: hintsLeft > 0 ? 1 : 0.4,
-              padding: '10px 16px',
-              borderRadius: '12px',
-              fontSize: '0.92rem',
+              padding: '7px 13px',
+              borderRadius: '10px',
+              fontSize: '0.88rem',
               fontWeight: 800,
               display: 'flex',
               alignItems: 'center',
-              gap: '7px'
+              gap: '6px'
             }}
           >
-            <Lightbulb size={19} />
+            <Lightbulb size={17} />
             <span>Hint ({hintsLeft})</span>
           </button>
 
@@ -144,16 +190,16 @@ export default function TimerDisplay({
             onClick={toggleMagnifier}
             title="Toggle Magnifier Lens"
             style={{
-              padding: '10px 16px',
-              borderRadius: '12px',
-              fontSize: '0.92rem',
+              padding: '7px 13px',
+              borderRadius: '10px',
+              fontSize: '0.88rem',
               fontWeight: 800,
               display: 'flex',
               alignItems: 'center',
-              gap: '7px'
+              gap: '6px'
             }}
           >
-            <Search size={19} />
+            <Search size={17} />
             <span>Zoom</span>
           </button>
         </div>

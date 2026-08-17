@@ -420,6 +420,8 @@ export default function App() {
     <div className="app-container">
       {/* Universal Top Header */}
       <Header
+        view={view}
+        onBack={() => setView('menu')}
         onOpenLeaderboard={() => setView('stats')}
         onOpenProgress={() => setView('stats')}
         onOpenHelp={() => setHelpModalOpen(true)}
@@ -467,50 +469,6 @@ export default function App() {
             />
           )}
 
-          {/* Top Return to Menu Bar */}
-          <div style={{ maxWidth: '1300px', margin: '0 auto 10px auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <button
-              className="glass-btn"
-              onClick={() => { sounds.playTap(); setView('menu'); }}
-              style={{
-                padding: '10px 16px',
-                fontSize: '0.92rem',
-                fontWeight: 800,
-                borderRadius: '12px'
-              }}
-            >
-              ← Main Menu
-            </button>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{
-                fontSize: '0.9rem',
-                fontWeight: 900,
-                color: 'var(--accent-cyan)',
-                background: 'rgba(0, 240, 255, 0.12)',
-                padding: '6px 14px',
-                borderRadius: '20px',
-                border: '1.5px solid rgba(0, 240, 255, 0.4)',
-                letterSpacing: '0.5px'
-              }}>
-                IMAGE {currentStageIndex + 1} OF 5
-              </span>
-
-              <span style={{
-                fontSize: '0.9rem',
-                fontWeight: 800,
-                color: selectedDifficulty === 'Hard' ? 'var(--accent-pink)' : selectedDifficulty === 'Medium' ? 'var(--accent-gold)' : 'var(--accent-green)',
-                background: 'rgba(0,0,0,0.4)',
-                padding: '6px 14px',
-                borderRadius: '20px',
-                border: '1.5px solid rgba(255,255,255,0.2)',
-                letterSpacing: '0.5px'
-              }}>
-                {selectedDifficulty.toUpperCase()}
-              </span>
-            </div>
-          </div>
-
           {/* Floating Stage Transition Toast */}
           {stageToastMessage && (
             <div style={{
@@ -542,6 +500,9 @@ export default function App() {
             score={score}
             mode={activeMode}
             missCount={missCount}
+            currentStageIndex={currentStageIndex}
+            totalStageImages={levels.length || 5}
+            selectedDifficulty={selectedDifficulty}
           />
 
           {/* Interactive Dual Viewport (IMAGES ONLY) */}

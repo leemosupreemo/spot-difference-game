@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Trophy, CheckCircle2, ArrowLeft, Flame, Globe, Award, Camera, Sparkles } from 'lucide-react';
+import { CheckCircle2, Flame, Globe, Award } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { fetchLeaderboards } from '../services/playerProgress';
 
-export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
+export default function ProgressModal({ isOpen, onClose: _onClose, difficultyStats }) {
   const [mainView, setMainView] = useState('leaderboards'); // 'leaderboards' | 'progress'
   const [selectedTab, setSelectedTab] = useState('Easy'); // Easy | Medium | Hard
   const [selectedLeaderboardPack, setSelectedLeaderboardPack] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
@@ -65,146 +65,108 @@ export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
 
   return (
     <div style={{
-      minHeight: '100vh',
       width: '100%',
-      background: 'var(--bg-dark)',
-      backgroundImage: `
-        radial-gradient(at 10% 20%, rgba(255, 0, 127, 0.15) 0px, transparent 50%),
-        radial-gradient(at 90% 80%, rgba(0, 240, 255, 0.12) 0px, transparent 50%),
-        radial-gradient(at 50% 50%, rgba(18, 9, 36, 0.8) 0px, transparent 100%)
-      `,
-      backgroundAttachment: 'fixed',
-      color: 'var(--text-main)',
-      fontFamily: 'var(--font-main)',
-      paddingTop: 'max(env(safe-area-inset-top), 20px)',
-      paddingBottom: 'max(env(safe-area-inset-bottom), 40px)',
-      paddingLeft: '20px',
-      paddingRight: '20px',
+      maxWidth: '900px',
+      margin: '0 auto',
+      padding: '0 16px',
       boxSizing: 'border-box',
       animation: 'pageFadeIn 0.15s ease-out'
     }}>
-      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-        
-        {/* Full Screen Top Exit Navigation Bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-          <button
-            onClick={() => {
-              sounds.playTap();
-              onClose();
-            }}
-            className="glass-btn glass-btn-primary"
-            style={{
-              padding: '10px 20px',
-              fontSize: '1rem',
-              borderRadius: '14px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px'
-            }}
-          >
-            <ArrowLeft size={20} /> Back to Menu
-          </button>
+      {/* Main View Mode Selector (Leaderboards vs Progress) */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '12px',
+        background: 'rgba(0,0,0,0.5)',
+        padding: '6px',
+        borderRadius: '16px',
+        marginBottom: '16px',
+        border: '1px solid var(--border-glass)'
+      }}>
+        <button
+          onClick={() => { sounds.playTap(); setMainView('leaderboards'); }}
+          className={`glass-btn ${mainView === 'leaderboards' ? 'glass-btn-primary' : ''}`}
+          style={{ justifyContent: 'center', padding: '10px', fontSize: '0.95rem', fontWeight: 800, borderRadius: '12px' }}
+        >
+          <Globe size={18} /> Global Leaderboards
+        </button>
+        <button
+          onClick={() => { sounds.playTap(); setMainView('progress'); }}
+          className={`glass-btn ${mainView === 'progress' ? 'glass-btn-primary' : ''}`}
+          style={{ justifyContent: 'center', padding: '10px', fontSize: '0.95rem', fontWeight: 800, borderRadius: '12px' }}
+        >
+          <CheckCircle2 size={18} /> My Progress
+        </button>
+      </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Trophy size={26} color="var(--accent-gold)" />
-            <h1 style={{ fontSize: '1.4rem', fontWeight: 900, background: 'linear-gradient(90deg, #fff, var(--accent-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0 }}>
-              LEADERBOARD & RECORDS
-            </h1>
-          </div>
-        </div>
+      {mainView === 'leaderboards' ? (
+        /* GLOBAL LEADERBOARDS VIEW */
+        <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box', overflowY: 'auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+              <Award size={20} color="var(--accent-gold)" /> LIVE LEADERBOARD
+            </h3>
 
-        {/* Main View Mode Selector (Leaderboards vs Progress) */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '12px',
-          background: 'rgba(0,0,0,0.5)',
-          padding: '6px',
-          borderRadius: '16px',
-          marginBottom: '20px',
-          border: '1px solid var(--border-glass)'
-        }}>
-          <button
-            onClick={() => { sounds.playTap(); setMainView('leaderboards'); }}
-            className={`glass-btn ${mainView === 'leaderboards' ? 'glass-btn-primary' : ''}`}
-            style={{ justifyContent: 'center', padding: '12px', fontSize: '1rem', fontWeight: 800, borderRadius: '12px' }}
-          >
-            <Globe size={18} /> Global Leaderboards
-          </button>
-          <button
-            onClick={() => { sounds.playTap(); setMainView('progress'); }}
-            className={`glass-btn ${mainView === 'progress' ? 'glass-btn-primary' : ''}`}
-            style={{ justifyContent: 'center', padding: '12px', fontSize: '1rem', fontWeight: 800, borderRadius: '12px' }}
-          >
-            <CheckCircle2 size={18} /> My Progress
-          </button>
-        </div>
-
-        {mainView === 'leaderboards' ? (
-          /* GLOBAL LEADERBOARDS VIEW */
-          <div className="glass-panel" style={{ padding: '24px', borderRadius: '24px', height: '420px', boxSizing: 'border-box', overflowY: 'auto' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                  <Award size={20} color="var(--accent-gold)" /> TOP SPEEDRUNNERS
-                </h3>
-
-                {/* Category Filter Pills */}
-                <div style={{ display: 'flex', gap: '6px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '10px', border: '1px solid var(--border-glass)' }}>
-                  <button
-                    onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('find_the_sniper'); }}
-                    style={{
-                      padding: '4px 10px',
-                      fontSize: '0.78rem',
-                      fontWeight: 800,
-                      borderRadius: '8px',
-                      border: 'none',
-                      cursor: 'pointer',
-                      background: selectedLeaderboardPack === 'find_the_sniper' ? 'var(--accent-cyan)' : 'transparent',
-                      color: selectedLeaderboardPack === 'find_the_sniper' ? '#000' : 'var(--text-muted)'
-                    }}
-                  >
-                    📷 Photography
-                  </button>
-                  <button
-                    onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('abstract_animated'); }}
-                    style={{
-                      padding: '4px 10px',
-                      fontSize: '0.78rem',
-                      fontWeight: 800,
-                      borderRadius: '8px',
-                      border: 'none',
-                      cursor: 'pointer',
-                      background: selectedLeaderboardPack === 'abstract_animated' ? '#d9b3ff' : 'transparent',
-                      color: selectedLeaderboardPack === 'abstract_animated' ? '#000' : 'var(--text-muted)'
-                    }}
-                  >
-                    ✨ Fantastical
-                  </button>
-                </div>
-              </div>
-
-              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: leaderboardData?.isCloud ? 'var(--accent-green)' : 'var(--accent-cyan)', background: 'rgba(255,255,255,0.06)', padding: '4px 10px', borderRadius: '10px', border: '1px solid var(--border-glass)' }}>
-                {leaderboardData?.isCloud ? '☁️ FIRESTORE CONNECTED' : '⚡ LIVE LEADERBOARD'}
-              </span>
+            {/* Category Filter Pills */}
+            <div style={{ display: 'flex', gap: '6px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '10px', border: '1px solid var(--border-glass)' }}>
+              <button
+                onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('find_the_sniper'); }}
+                style={{
+                  padding: '5px 12px',
+                  fontSize: '0.8rem',
+                  fontWeight: 800,
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  background: selectedLeaderboardPack === 'find_the_sniper' ? 'var(--accent-cyan)' : 'transparent',
+                  color: selectedLeaderboardPack === 'find_the_sniper' ? '#000' : 'var(--text-muted)',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                📷 Photography
+              </button>
+              <button
+                onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('abstract_animated'); }}
+                style={{
+                  padding: '5px 12px',
+                  fontSize: '0.8rem',
+                  fontWeight: 800,
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  background: selectedLeaderboardPack === 'abstract_animated' ? '#d9b3ff' : 'transparent',
+                  color: selectedLeaderboardPack === 'abstract_animated' ? '#000' : 'var(--text-muted)',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                ✨ Fantastical
+              </button>
             </div>
+          </div>
 
-            {loadingLeaderboard ? (
-              <p style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '40px 0' }}>
-                Fetching Cloud Speedrunners...
-              </p>
-            ) : (
-              <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem' }}>
-                  <thead>
-                    <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
-                      <th style={{ padding: '14px 18px' }}>RANK</th>
-                      <th style={{ padding: '14px 18px', textAlign: 'center' }}>SETS CLEARED</th>
-                      <th style={{ padding: '14px 18px', textAlign: 'right' }}>AVG FASTEST TIME</th>
+          {loadingLeaderboard ? (
+            <p style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '40px 0' }}>
+              Fetching Cloud Speedrunners...
+            </p>
+          ) : (
+            <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.92rem' }}>
+                <thead>
+                  <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
+                    <th style={{ padding: '12px 16px' }}>RANK</th>
+                    <th style={{ padding: '12px 16px', textAlign: 'center' }}>SETS CLEARED</th>
+                    <th style={{ padding: '12px 16px', textAlign: 'right' }}>AVG FASTEST TIME</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {topLeaderboardEntries.length === 0 ? (
+                    <tr>
+                      <td colSpan={3} style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
+                        No records yet. Complete a stage set to submit your score!
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {topLeaderboardEntries.map((entry, index) => {
+                  ) : (
+                    topLeaderboardEntries.map((entry, index) => {
                       const isMe = entry.isCurrentPlayer;
                       const avgTimeMs = entry.effectiveTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
                       const timeStr = avgTimeMs ? `${(avgTimeMs / 1000).toFixed(2)}s` : '--';
@@ -213,124 +175,121 @@ export default function ProgressModal({ isOpen, onClose, difficultyStats }) {
 
                       return (
                         <tr
-                          key={entry.uid}
+                          key={entry.uid || index}
                           style={{
                             background: isMe ? 'rgba(0, 240, 255, 0.15)' : 'transparent',
                             borderBottom: '1px solid rgba(255,255,255,0.05)'
                           }}
                         >
-                          <td style={{ padding: '14px 18px', fontWeight: 800, color: isMe ? 'var(--accent-cyan)' : '#fff' }}>
+                          <td style={{ padding: '12px 16px', fontWeight: 800, color: isMe ? 'var(--accent-cyan)' : '#fff' }}>
                             <span style={{ color: index === 0 ? 'var(--accent-gold)' : index === 1 ? '#c0c0c0' : index === 2 ? '#cd7f32' : 'var(--text-muted)', marginRight: '10px' }}>
                               #{index + 1}
                             </span>
                             {displayName}
                           </td>
-                          <td style={{ padding: '14px 18px', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+                          <td style={{ padding: '12px 16px', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
                             {setsCount} Sets
                           </td>
-                          <td style={{ padding: '14px 18px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
+                          <td style={{ padding: '12px 16px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
                             {timeStr}
                           </td>
                         </tr>
                       );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        ) : (
-          /* MY PROGRESS VIEW */
-          <div className="glass-panel" style={{ padding: '24px', borderRadius: '24px', height: '420px', boxSizing: 'border-box', overflowY: 'auto' }}>
-            {/* Difficulty Tab Selector */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '12px',
-              background: 'rgba(0,0,0,0.5)',
-              padding: '6px',
-              borderRadius: '18px',
-              marginBottom: '20px',
-              border: '1px solid var(--border-glass)',
-              height: '56px',
-              boxSizing: 'border-box'
-            }}>
-              {['Easy', 'Medium', 'Hard'].map((diff) => {
-                const isSelected = selectedTab === diff;
-                const colors = { Easy: 'var(--accent-green)', Medium: 'var(--accent-gold)', Hard: 'var(--accent-pink)' };
-                return (
-                  <button
-                    key={diff}
-                    onClick={() => { sounds.playTap(); setSelectedTab(diff); }}
-                    className="glass-btn"
-                    style={{
-                      justifyContent: 'center',
-                      height: '44px',
-                      padding: '0 12px',
-                      fontSize: '0.92rem',
-                      fontWeight: 800,
-                      borderRadius: '12px',
-                      background: isSelected ? colors[diff] : 'rgba(255, 255, 255, 0.05)',
-                      color: isSelected ? '#000' : 'var(--text-main)',
-                      border: `1.5px solid ${isSelected ? colors[diff] : 'var(--border-glass)'}`,
-                      boxShadow: 'none',
-                      transform: 'none',
-                      boxSizing: 'border-box'
-                    }}
-                  >
-                    {diff === 'Easy' && '🟢 '}
-                    {diff === 'Medium' && '🟡 '}
-                    {diff === 'Hard' && '🔴 '}
-                    {diff.toUpperCase()}
-                  </button>
-                );
-              })}
-            </div>
-
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '16px', color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Flame size={18} color="var(--accent-pink)" /> {selectedTab.toUpperCase()} PROGRESS
-            </h3>
-
-            <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
-                <thead>
-                  <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
-                    <th style={{ padding: '12px 14px' }}>CATEGORY</th>
-                    <th style={{ padding: '12px 14px', textAlign: 'center' }}>CLEARED</th>
-                    <th style={{ padding: '12px 14px', textAlign: 'center' }}>BEST 1ST TRY</th>
-                    <th style={{ padding: '12px 14px', textAlign: 'right' }}>BEST REPEAT TRY</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {categoriesList.map(cat => {
-                    const stats = getCategoryStats(cat.id);
-                    const firstStr = stats.bestFirstTime ? `${(stats.bestFirstTime / 1000).toFixed(2)}s` : '--';
-                    const repeatStr = stats.bestRepeatTime ? `${(stats.bestRepeatTime / 1000).toFixed(2)}s` : '--';
-
-                    return (
-                      <tr key={cat.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                        <td style={{ padding: '14px', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span>{cat.icon}</span> {cat.title}
-                        </td>
-                        <td style={{ padding: '14px', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-                          {stats.clears}
-                        </td>
-                        <td style={{ padding: '14px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-gold)', fontWeight: 800 }}>
-                          {firstStr}
-                        </td>
-                        <td style={{ padding: '14px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontWeight: 800 }}>
-                          {repeatStr}
-                        </td>
-                      </tr>
-                    );
-                  })}
+                    })
+                  )}
                 </tbody>
               </table>
             </div>
+          )}
+        </div>
+      ) : (
+        /* MY PROGRESS VIEW */
+        <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box', overflowY: 'auto' }}>
+          {/* Difficulty Tab Selector */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '10px',
+            background: 'rgba(0,0,0,0.5)',
+            padding: '5px',
+            borderRadius: '16px',
+            marginBottom: '16px',
+            border: '1px solid var(--border-glass)',
+            boxSizing: 'border-box'
+          }}>
+            {['Easy', 'Medium', 'Hard'].map((diff) => {
+              const isSelected = selectedTab === diff;
+              const colors = { Easy: 'var(--accent-green)', Medium: 'var(--accent-gold)', Hard: 'var(--accent-pink)' };
+              return (
+                <button
+                  key={diff}
+                  onClick={() => { sounds.playTap(); setSelectedTab(diff); }}
+                  className="glass-btn"
+                  style={{
+                    justifyContent: 'center',
+                    padding: '8px 12px',
+                    fontSize: '0.9rem',
+                    fontWeight: 800,
+                    borderRadius: '10px',
+                    background: isSelected ? colors[diff] : 'rgba(255, 255, 255, 0.05)',
+                    color: isSelected ? '#000' : 'var(--text-main)',
+                    border: `1.5px solid ${isSelected ? colors[diff] : 'var(--border-glass)'}`,
+                    boxShadow: 'none',
+                    transform: 'none',
+                    boxSizing: 'border-box'
+                  }}
+                >
+                  {diff === 'Easy' && '🟢 '}
+                  {diff === 'Medium' && '🟡 '}
+                  {diff === 'Hard' && '🔴 '}
+                  {diff.toUpperCase()}
+                </button>
+              );
+            })}
           </div>
-        )}
 
-      </div>
+          <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '14px', color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Flame size={18} color="var(--accent-pink)" /> {selectedTab.toUpperCase()} PROGRESS
+          </h3>
+
+          <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+              <thead>
+                <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
+                  <th style={{ padding: '12px 14px' }}>CATEGORY</th>
+                  <th style={{ padding: '12px 14px', textAlign: 'center' }}>CLEARED</th>
+                  <th style={{ padding: '12px 14px', textAlign: 'center' }}>BEST 1ST TRY</th>
+                  <th style={{ padding: '12px 14px', textAlign: 'right' }}>BEST REPEAT TRY</th>
+                </tr>
+              </thead>
+              <tbody>
+                {categoriesList.map(cat => {
+                  const stats = getCategoryStats(cat.id);
+                  const firstStr = stats.bestFirstTime ? `${(stats.bestFirstTime / 1000).toFixed(2)}s` : '--';
+                  const repeatStr = stats.bestRepeatTime ? `${(stats.bestRepeatTime / 1000).toFixed(2)}s` : '--';
+
+                  return (
+                    <tr key={cat.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                      <td style={{ padding: '12px 14px', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span>{cat.icon}</span> {cat.title}
+                      </td>
+                      <td style={{ padding: '12px 14px', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+                        {stats.clears}
+                      </td>
+                      <td style={{ padding: '12px 14px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-gold)', fontWeight: 800 }}>
+                        {firstStr}
+                      </td>
+                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontWeight: 800 }}>
+                        {repeatStr}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
