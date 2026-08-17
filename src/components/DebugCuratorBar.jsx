@@ -13,7 +13,9 @@ export default function DebugCuratorBar({
   onPruneDismissed,
   onNextPair,
   debugSourceMode = 'premade',
-  onToggleSourceMode
+  onToggleSourceMode,
+  skipKeptLevels = true,
+  onToggleSkipKept
 }) {
   const [isExportOpen, setIsExportOpen] = useState(false);
 
@@ -106,6 +108,26 @@ export default function DebugCuratorBar({
               ⚡ PROCEDURAL
             </button>
           </div>
+
+          {/* Skip Kept Toggle */}
+          {onToggleSkipKept && (
+            <button
+              onClick={() => { sounds.playTap(); onToggleSkipKept(!skipKeptLevels); }}
+              className="glass-btn"
+              style={{
+                padding: '4px 9px',
+                fontSize: '0.75rem',
+                fontWeight: 800,
+                borderRadius: '8px',
+                background: skipKeptLevels ? 'rgba(0, 255, 135, 0.18)' : 'rgba(255, 255, 255, 0.05)',
+                color: skipKeptLevels ? 'var(--accent-green)' : 'var(--text-muted)',
+                border: `1px solid ${skipKeptLevels ? 'rgba(0, 255, 135, 0.4)' : 'var(--border-glass)'}`
+              }}
+              title="Toggle whether to skip images already marked 'Keep'"
+            >
+              {skipKeptLevels ? '⏩ Skip Kept: ON' : '⏸️ Skip Kept: OFF'}
+            </button>
+          )}
 
           {/* Current Status Pill */}
           <div style={{

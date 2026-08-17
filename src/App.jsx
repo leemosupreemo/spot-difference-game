@@ -60,7 +60,22 @@ export default function App() {
   });
 
   const [debugSourceMode, setDebugSourceMode] = useState('premade'); // 'premade' | 'procedural'
+  const [skipKeptLevels, setSkipKeptLevels] = useState(() => {
+    try {
+      const saved = localStorage.getItem('diff_hunter_skip_kept');
+      return saved !== null ? saved === 'true' : true;
+    } catch (e) {
+      return true;
+    }
+  });
   const visitedDebugLevelIdsRef = useRef(new Set());
+
+  const handleToggleSkipKept = (val) => {
+    setSkipKeptLevels(val);
+    try {
+      localStorage.setItem('diff_hunter_skip_kept', String(val));
+    } catch (e) {}
+  };
 
   // Curated Image Decisions Store State
   const [curatedStatusMap, setCuratedStatusMap] = useState(() => {
@@ -94,11 +109,23 @@ export default function App() {
     setCuratedStatusMap({ ...pruned });
   };
 
-  const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap) => {
+  const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
     const allEntries = getAllPhotoPairEntries();
     return allEntries.filter(entry => {
       const statusVal = getLevelStatus(mapToUse[entry.id])?.status;
+      if (statusVal === 'dismissed') return false;
+      if (skipKept && statusVal === 'approved') return false;
       return !statusVal; // Only return levels pending review (unlabeled)
+    });
+  };
+
+  const getDebugCandidateEntries = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
+    const allEntries = getAllPhotoPairEntries();
+    return allEntries.filter(entry => {
+      const statusVal = getLevelStatus(mapToUse[entry.id])?.status;
+      if (statusVal === 'dismissed') return false;
+      if (skipKept && statusVal === 'approved') return false;
+      return true;
     });
   };
 
@@ -129,14 +156,19 @@ export default function App() {
     }
 
     if (debugMode) {
-      const unlabeledEntries = getUnlabeledPremadeLevels();
-      const unvisitedUnlabeled = unlabeledEntries.filter(entry => !visitedDebugLevelIdsRef.current.has(entry.id));
+      const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
+      const unvisitedUnreviewed = unreviewed.filter(entry => !visitedDebugLevelIdsRef.current.has(entry.id));
 
-      const candidateEntries = unvisitedUnlabeled.length > 0
-        ? unvisitedUnlabeled
-        : unlabeledEntries.length > 0
-          ? unlabeledEntries
-          : getAllPhotoPairEntries();
+      const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+      const unvisitedFallback = fallbackPool.filter(entry => !visitedDebugLevelIdsRef.current.has(entry.id));
+
+      const candidateEntries = unvisitedUnreviewed.length > 0
+        ? unvisitedUnreviewed
+        : unreviewed.length > 0
+          ? unreviewed
+          : unvisitedFallback.length > 0
+            ? unvisitedFallback
+            : fallbackPool;
 
       if (candidateEntries.length > 0) {
         const nextBatch = candidateEntries.map(createPhotoPairLevel);
@@ -161,11 +193,14 @@ export default function App() {
       setLevels([procLevel]);
       startLevel(procLevel.id);
     } else {
-      const unlabeledEntries = getUnlabeledPremadeLevels();
-      const candidateEntries = unlabeledEntries.length > 0 ? unlabeledEntries : getAllPhotoPairEntries();
-      const debugLevels = candidateEntries.map(createPhotoPairLevel);
-      setLevels(debugLevels);
-      startLevel(debugLevels[0].id);
+      const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
+      const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+      const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
+      if (candidateEntries.length > 0) {
+        const debugLevels = candidateEntries.map(createPhotoPairLevel);
+        setLevels(debugLevels);
+        startLevel(debugLevels[0].id);
+      }
     }
   };
 
@@ -250,8 +285,9 @@ export default function App() {
 
     try {
       if (debugMode && debugSourceMode === 'premade') {
-        const unlabeledEntries = getUnlabeledPremadeLevels();
-        const candidateEntries = unlabeledEntries.length > 0 ? unlabeledEntries : getAllPhotoPairEntries();
+        const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
+        const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+        const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
         if (candidateEntries.length > 0) {
           const debugLevels = candidateEntries.slice(0, 5).map(createPhotoPairLevel);
           setLevels(debugLevels);
@@ -466,6 +502,8 @@ export default function App() {
               onNextPair={handleNextPair}
               debugSourceMode={debugSourceMode}
               onToggleSourceMode={handleToggleDebugSourceMode}
+              skipKeptLevels={skipKeptLevels}
+              onToggleSkipKept={handleToggleSkipKept}
             />
           )}
 
