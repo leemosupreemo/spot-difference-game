@@ -24,6 +24,7 @@ export default function App() {
   const [currentLevelId, setCurrentLevelId] = useState(INITIAL_LEVELS[0].id);
   const [view, setView] = useState('menu'); // 'menu' | 'game' | 'creator' | 'stats'
   const [selectedDifficulty, setSelectedDifficulty] = useState('Medium'); // 'Easy' | 'Medium' | 'Hard'
+  const [selectedTheme, setSelectedTheme] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
   const [activeMode, setActiveMode] = useState('classic'); // 'classic' | 'blitz' | 'zen'
   
   // Gameplay State
