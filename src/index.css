@@ -130,6 +130,7 @@ body {
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
   outline: none !important;
+  touch-action: none;
 }
 
 @media (hover: hover) and (pointer: fine) {

@@ -20,15 +20,29 @@ export default function GameCanvas({
 
   const [misses, setMisses] = useState([]);
   const [speedPopups, setSpeedPopups] = useState([]);
-  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100, visible: false });
+  const [cursorPos, setCursorPos] = useState({ x: 50, y: 50, visible: false });
+  const [canvasUrls, setCanvasUrls] = useState({ left: '', right: '' });
 
-  // Pointer/Touch gesture tracking (Ignores drag & long press)
+  // Pointer/Touch gesture tracking
   const pointerStartRef = useRef({ x: 0, y: 0, time: 0, isDrag: false });
 
   useEffect(() => {
     logApp('INFO', `[GameCanvasMounted] Level: ${level?.id} Title: ${level?.title}`);
     auditDOMState(`GameCanvasMounted_${level?.id || 'unknown'}`);
   }, [level?.id]);
+
+  // When magnifier is enabled, ensure lens is immediately visible
+  useEffect(() => {
+    if (magnifierEnabled) {
+      setCursorPos(prev => ({
+        x: prev.x >= 0 ? prev.x : 50,
+        y: prev.y >= 0 ? prev.y : 50,
+        visible: true
+      }));
+    } else {
+      setCursorPos(prev => ({ ...prev, visible: false }));
+    }
+  }, [magnifierEnabled]);
 
   // Render original and modified canvases
   const drawCanvases = useCallback(() => {
@@ -51,6 +65,12 @@ export default function GameCanvas({
       canvasRefRight.current.height = height;
       level.render(ctxRight, width, height, true);
     }
+
+    try {
+      const leftUrl = level.baseImage ? resolveAssetUrl(level.baseImage) : canvasRefLeft.current?.toDataURL('image/jpeg', 0.95);
+      const rightUrl = level.variantImage ? resolveAssetUrl(level.variantImage) : canvasRefRight.current?.toDataURL('image/jpeg', 0.95);
+      setCanvasUrls({ left: leftUrl || '', right: rightUrl || '' });
+    } catch (e) {}
   }, [level]);
 
   useEffect(() => {
@@ -61,8 +81,9 @@ export default function GameCanvas({
     }, 50);
     const t2 = setTimeout(() => {
       drawCanvases();
-      auditDOMState('DrawCanvases_200ms');
-    }, 200);
+      auditDOMState('DrawCanvases_150ms');
+    }, 150);
+
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -70,7 +91,9 @@ export default function GameCanvas({
   }, [drawCanvases, level]);
 
   // Handle pointer down (touch/mouse start)
-  const handlePointerDown = (e) => {
+  const handlePointerDown = (e, containerRef) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
     const clientX = e.clientX ?? e.touches?.[0]?.clientX;
     const clientY = e.clientY ?? e.touches?.[0]?.clientY;
     if (clientX === undefined || clientY === undefined) return;
@@ -81,6 +104,12 @@ export default function GameCanvas({
       time: Date.now(),
       isDrag: false
     };
+
+    if (magnifierEnabled) {
+      const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
+      setCursorPos({ x, y, visible: true });
+    }
   };
 
   // Handle mouse and touch dragging for synchronized magnifying lens
@@ -92,19 +121,17 @@ export default function GameCanvas({
 
     if (clientX === undefined || clientY === undefined) return;
 
-    // Measure travel distance from pointer down location
     const dx = clientX - pointerStartRef.current.x;
     const dy = clientY - pointerStartRef.current.y;
-    const distance = Math.hypot(dx, dy);
-
-    if (distance > 10) {
+    if (Math.hypot(dx, dy) > 8) {
       pointerStartRef.current.isDrag = true;
     }
 
-    const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
-    const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
-
-    setCursorPos({ x, y, visible: true });
+    if (magnifierEnabled) {
+      const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
+      setCursorPos({ x, y, visible: true });
+    }
   };
 
   // Handle pointer up (only intentional quick taps trigger guesses)
@@ -114,30 +141,28 @@ export default function GameCanvas({
     const start = pointerStartRef.current;
     const duration = Date.now() - start.time;
 
-    // IGNORE drag gestures (>10px movement) or long hold presses (>350ms duration)
-    if (start.isDrag || duration > 350) {
-      return;
-    }
-
     const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX;
     const clientY = e.clientY ?? e.changedTouches?.[0]?.clientY;
     if (clientX === undefined || clientY === undefined) return;
-
-    const dx = clientX - start.x;
-    const dy = clientY - start.y;
-    if (Math.hypot(dx, dy) > 10) {
-      return; // Extra safety check against drag movement
-    }
 
     const rect = containerRef.current.getBoundingClientRect();
     const clickXPercent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
     const clickYPercent = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
 
+    if (magnifierEnabled) {
+      setCursorPos({ x: clickXPercent, y: clickYPercent, visible: true });
+    }
+
+    // If dragging or long-pressing in Zoom mode: treat as pan inspection without penalty
+    if (start.isDrag || duration > 400) {
+      return;
+    }
+
     // Check hit against level diffs (works on Original or Variant)
     let hitFound = false;
 
     level.diffs.forEach(diff => {
-      if (foundDiffs.includes(diff.id)) return; // Already found
+      if (foundDiffs.includes(diff.id)) return;
 
       const dX = clickXPercent - diff.x;
       const dY = clickYPercent - diff.y;
@@ -147,7 +172,6 @@ export default function GameCanvas({
         hitFound = true;
         sounds.playSuccess();
 
-        // Speed bonus calculation
         const now = Date.now();
         const bonusAmount = 300;
         const newPopup = {
@@ -167,9 +191,8 @@ export default function GameCanvas({
 
     if (!hitFound) {
       if (magnifierEnabled) {
-        // In Zoom inspection mode: just move the magnifying lens without taking damage
+        // In Zoom inspection mode: move lens safely without miss penalty
         sounds.playTap();
-        setCursorPos({ x: clickXPercent, y: clickYPercent, visible: true });
         return;
       }
 
@@ -187,16 +210,13 @@ export default function GameCanvas({
   };
 
   const handleMouseLeave = () => {
-    setCursorPos(prev => ({ ...prev, visible: false }));
+    if (!magnifierEnabled) {
+      setCursorPos(prev => ({ ...prev, visible: false }));
+    }
   };
 
-  const leftBgUrl = level?.baseImage
-    ? resolveAssetUrl(level.baseImage)
-    : canvasRefLeft.current?.toDataURL();
-
-  const rightBgUrl = level?.variantImage
-    ? resolveAssetUrl(level.variantImage)
-    : canvasRefRight.current?.toDataURL();
+  const leftBgUrl = canvasUrls.left || (level?.baseImage ? resolveAssetUrl(level.baseImage) : '');
+  const rightBgUrl = canvasUrls.right || (level?.variantImage ? resolveAssetUrl(level.variantImage) : '');
 
   return (
     <div style={{
@@ -214,7 +234,7 @@ export default function GameCanvas({
         <div
           ref={containerRefLeft}
           className="canvas-card"
-          onPointerDown={handlePointerDown}
+          onPointerDown={(e) => handlePointerDown(e, containerRefLeft)}
           onPointerMove={(e) => handlePointerMove(e, containerRefLeft)}
           onPointerUp={(e) => handlePointerUp(e, containerRefLeft)}
           onPointerLeave={handleMouseLeave}
@@ -302,7 +322,7 @@ export default function GameCanvas({
           ))}
 
           {/* Synchronized Magnifier Lens */}
-          {magnifierEnabled && cursorPos.visible && (
+          {magnifierEnabled && cursorPos.visible && leftBgUrl && (
             <div
               className="magnifier-lens"
               style={{
@@ -321,7 +341,7 @@ export default function GameCanvas({
         <div
           ref={containerRefRight}
           className="canvas-card"
-          onPointerDown={handlePointerDown}
+          onPointerDown={(e) => handlePointerDown(e, containerRefRight)}
           onPointerMove={(e) => handlePointerMove(e, containerRefRight)}
           onPointerUp={(e) => handlePointerUp(e, containerRefRight)}
           onPointerLeave={handleMouseLeave}
@@ -387,10 +407,6 @@ export default function GameCanvas({
               <div
                 className="miss-marker"
                 style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
-              />
-              <div
-                className="miss-heart-popup"
-                style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
               >
                 -1 ❤️
               </div>
@@ -409,7 +425,7 @@ export default function GameCanvas({
           ))}
 
           {/* Synchronized Magnifier Lens */}
-          {magnifierEnabled && cursorPos.visible && (
+          {magnifierEnabled && cursorPos.visible && rightBgUrl && (
             <div
               className="magnifier-lens"
               style={{
