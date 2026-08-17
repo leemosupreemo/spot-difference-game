@@ -250,28 +250,37 @@ export default function TutorialBanner() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px', flexWrap: 'wrap' }}>
             <span style={{
-              fontSize: '0.72rem',
+              fontSize: '0.74rem',
               fontWeight: 800,
               color: 'var(--accent-gold)',
               background: 'rgba(255, 183, 3, 0.12)',
-              padding: '3px 8px',
-              borderRadius: '6px',
+              padding: '0 9px',
+              height: '28px',
+              borderRadius: '7px',
               border: '1px solid rgba(255, 183, 3, 0.3)',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '4px'
+              justifyContent: 'center',
+              gap: '4px',
+              boxSizing: 'border-box'
             }}>
-              <Zap size={12} /> Faster = More Points
+              <Zap size={13} /> Faster = More Points
             </span>
 
             <span style={{
-              fontSize: '0.72rem',
+              fontSize: '0.74rem',
               fontWeight: 800,
               color: 'var(--accent-pink)',
               background: 'rgba(255, 0, 127, 0.12)',
-              padding: '3px 8px',
-              borderRadius: '6px',
-              border: '1px solid rgba(255, 0, 127, 0.3)'
+              padding: '0 9px',
+              height: '28px',
+              borderRadius: '7px',
+              border: '1px solid rgba(255, 0, 127, 0.3)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '4px',
+              boxSizing: 'border-box'
             }}>
               ❤️ 3 Lives
             </span>

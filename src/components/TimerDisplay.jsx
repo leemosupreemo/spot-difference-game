@@ -71,7 +71,9 @@ export default function TimerDisplay({
               background: 'rgba(0, 240, 255, 0.08)',
               border: '1px solid rgba(0, 240, 255, 0.35)',
               borderRadius: '12px',
-              padding: '5px 12px',
+              padding: '0 12px',
+              height: '36px',
+              boxSizing: 'border-box',
               display: 'flex',
               alignItems: 'center',
               gap: '10px'
@@ -106,19 +108,22 @@ export default function TimerDisplay({
               </div>
             </div>
 
-
-
             {/* Difficulty Badge */}
             <span style={{
               fontSize: '0.82rem',
               fontWeight: 800,
               color: difficultyColor,
               background: 'rgba(0, 0, 0, 0.45)',
-              padding: '5px 11px',
+              padding: '0 11px',
+              height: '36px',
+              boxSizing: 'border-box',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               borderRadius: '12px',
               border: '1px solid rgba(255, 255, 255, 0.18)',
               letterSpacing: '0.4px',
-              lineHeight: 1.2
+              lineHeight: 1
             }}>
               {selectedDifficulty.toUpperCase()}
             </span>
@@ -128,7 +133,9 @@ export default function TimerDisplay({
               background: livesRemaining <= 1 ? 'rgba(255, 0, 127, 0.2)' : 'rgba(255, 255, 255, 0.05)',
               border: livesRemaining <= 1 ? '1px solid var(--accent-pink)' : '1px solid var(--border-glass)',
               borderRadius: '12px',
-              padding: '5px 10px',
+              padding: '0 10px',
+              height: '36px',
+              boxSizing: 'border-box',
               display: 'flex',
               alignItems: 'center',
               gap: '6px'
