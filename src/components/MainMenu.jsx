@@ -3,6 +3,7 @@ import { Play, Flame, Layers, CheckCircle2 } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { SCENE_THEMES } from '../utils/proceduralGenerator';
 import { logApp, auditDOMState } from '../utils/logger';
+import TutorialBanner from './TutorialBanner';
 
 export default function MainMenu({
   selectedTheme,
@@ -30,6 +31,9 @@ export default function MainMenu({
       textAlign: 'center',
       animation: 'pageFadeIn 0.15s ease-out'
     }}>
+      {/* Top Interactive Tutorial Graphic Banner */}
+      <TutorialBanner />
+
       {/* Single Screen 2-Column Responsive Grid (Equal Heights!) */}
       <div style={{
         display: 'grid',
