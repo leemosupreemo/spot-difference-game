@@ -1,6 +1,6 @@
 // Advanced Procedural Scene Generator Engine
 // Produces visually complex, high-density, multi-layered vector scenes
-// GUARANTEED EXACTLY 1 DIFFERENCE between Image A and Image B
+// GUARANTEED EXACTLY 1 VISIBLE DIFFERENCE between Image A and Image B
 
 export const SCENE_THEMES = [
   { id: 'find_the_sniper', title: 'Photography', category: 'Photographic' },
@@ -8,8 +8,8 @@ export const SCENE_THEMES = [
 ];
 
 export const MUTATION_TYPES = [
-  'COLOR_SHIFT',     // Change object color to a contrasting hue
-  'REMOVE_DETAIL',    // Remove a distinct sub-element / ornament
+  'COLOR_SHIFT',     // Change object color to a contrasting neon/bold hue
+  'REMOVE_DETAIL',    // Remove a distinct sub-element / ornament / center
   'ADD_DETAIL',       // Add an ornament / jewel / diode / mark
   'SHAPE_ROTATE',     // Rotate the element by 45-90 degrees
   'SCALE_CHANGE'      // Scale the element up or down
@@ -48,16 +48,14 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   const randomChoice = (arr) => arr[Math.floor(random() * arr.length)];
   const randomRange = (min, max) => min + random() * (max - min);
 
-  // High density of objects to utilize modern GPU/canvas power and create engaging clutter
   const isSniper = themeId === 'find_the_sniper';
-  // Alternate between styles within each theme for extreme variety
   const subStyle = Math.floor(random() * 3); // 0, 1, 2 sub-archetypes per theme
 
   // Discrete interactive candidate objects list
   const candidates = [];
 
   // =========================================================================
-  // THEME 1: PHOTOGRAPHY / REAL WORLD (Botanical, Hardware PCB, Workshop Desk)
+  // STEP 1: RENDER BASE BACKGROUND ONTO CANVAS A
   // =========================================================================
   if (isSniper) {
     if (subStyle === 0) {
@@ -116,7 +114,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
               if (mutated && mType === 'COLOR_SHIFT') {
                 color = baseColor === '#ff007f' ? '#00f0ff' : baseColor === '#ffb703' ? '#ff007f' : '#ffb703';
               }
-              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.6 : size;
 
               if (kind === 'FLOWER') {
                 // 5-Petal Flower
@@ -260,7 +258,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
               if (mutated && mType === 'COLOR_SHIFT') {
                 color = baseColor === '#ff0055' ? '#00ff87' : baseColor === '#00ff87' ? '#00f0ff' : '#ff0055';
               }
-              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.6 : size;
 
               if (kind === 'MICROCHIP') {
                 // Square IC body
@@ -373,7 +371,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
               if (mutated && mType === 'COLOR_SHIFT') {
                 color = baseColor === '#d4af37' ? '#c0c0c0' : baseColor === '#c0c0c0' ? '#cd7f32' : '#d4af37';
               }
-              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.6 : size;
 
               if (kind === 'HEX_NUT') {
                 ctx.fillStyle = color;
@@ -499,7 +497,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
               if (mutated && mType === 'COLOR_SHIFT') {
                 color = baseColor === '#00f0ff' ? '#ff007f' : baseColor === '#ff007f' ? '#00ff87' : '#00f0ff';
               }
-              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.6 : size;
 
               ctx.fillStyle = color;
               ctx.strokeStyle = '#ffffff';
@@ -612,7 +610,7 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
               if (mutated && mType === 'COLOR_SHIFT') {
                 color = baseColor === '#ffb703' ? '#ff007f' : baseColor === '#ff007f' ? '#00f0ff' : '#ffb703';
               }
-              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.5 : size;
+              const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.6 : size;
 
               if (kind === 'SPUR_GEAR') {
                 ctx.fillStyle = color;
@@ -684,13 +682,11 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   }
 
   // =========================================================================
-  // GUARANTEE EXACTLY 1 DIFFERENCE:
-  // 1. Draw ALL candidates onto Canvas A
-  // 2. Clone Canvas A 100% pixel-for-pixel onto Canvas B
-  // 3. Select EXACTLY ONE target object and mutate it ONLY on Canvas B
+  // STEP 2: CLONE BACKGROUND 100.0% ONTO CANVAS B
   // =========================================================================
+  ctxB.drawImage(canvasA, 0, 0);
 
-  // Fallback candidate if sparse
+  // Fallback candidate if none populated
   if (candidates.length === 0) {
     candidates.push({
       id: 'fallback_center',
@@ -706,48 +702,33 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
     });
   }
 
-  // 1. Draw all candidates in pristine state onto Canvas A
-  candidates.forEach(c => c.draw(ctxA, false, ''));
-
-  // 2. Clone Canvas A completely onto Canvas B (100.0% identical base)
-  ctxB.drawImage(canvasA, 0, 0);
-
-  // 3. Pick EXACTLY 1 target from the candidate list
+  // =========================================================================
+  // STEP 3: PICK EXACTLY 1 TARGET OBJECT FOR MUTATION
+  // =========================================================================
   const targetIndex = Math.floor(random() * candidates.length);
   const targetObj = candidates[targetIndex];
-  const mutationType = randomChoice(MUTATION_TYPES);
+  // Ensure the mutation is bold and easily discernible
+  const mutationType = randomChoice(['COLOR_SHIFT', 'SCALE_CHANGE', 'SHAPE_ROTATE', 'ADD_DETAIL', 'REMOVE_DETAIL']);
 
-  // 4. Overwrite ONLY the bounding patch of targetObj on Canvas B
-  // Clear the localized patch on Canvas B and redraw it with the mutation applied
-  const patchPadding = targetObj.size + 14;
-  const patchX = Math.max(0, targetObj.x - patchPadding);
-  const patchY = Math.max(0, targetObj.y - patchPadding);
-  const patchW = Math.min(width - patchX, patchPadding * 2);
-  const patchH = Math.min(height - patchY, patchPadding * 2);
-
-  // Save Canvas B state, clip strictly to the target's bounding box
-  ctxB.save();
-  ctxB.beginPath();
-  ctxB.rect(patchX, patchY, patchW, patchH);
-  ctxB.clip();
-
-  // Redraw any background under the patch on Canvas B
-  // Then draw any neighboring candidates that overlap this patch in normal state
+  // =========================================================================
+  // STEP 4: DRAW ALL OBJECTS CLEANLY ONTO BOTH CANVASES
+  // Non-target objects are drawn identically.
+  // ONLY targetObj receives the mutated state on Canvas B.
+  // =========================================================================
   candidates.forEach(c => {
-    if (Math.hypot(c.x - targetObj.x, c.y - targetObj.y) < patchPadding * 1.5) {
-      if (c.id === targetObj.id) {
-        c.draw(ctxB, true, mutationType);
-      } else {
-        c.draw(ctxB, false, '');
-      }
+    if (c.id === targetObj.id) {
+      c.draw(ctxA, false, '');
+      c.draw(ctxB, true, mutationType);
+    } else {
+      c.draw(ctxA, false, '');
+      c.draw(ctxB, false, '');
     }
   });
-  ctxB.restore();
 
   // Calculate Difference Coordinate Percentages
   const diffX = Math.round((targetObj.x / width) * 1000) / 10;
   const diffY = Math.round((targetObj.y / height) * 1000) / 10;
-  const hitRadius = targetDifficulty === 'Easy' ? 10 : targetDifficulty === 'Medium' ? 7.5 : 5.5;
+  const hitRadius = targetDifficulty === 'Easy' ? 10 : targetDifficulty === 'Medium' ? 8 : 6;
 
   const diffs = [
     {
@@ -761,8 +742,8 @@ export function generateProceduralLevelPair(themeId = 'find_the_sniper', targetD
   ];
 
   // Convert to Data URLs for instant native painting
-  const dataUrlA = canvasA.toDataURL('image/jpeg', 0.92);
-  const dataUrlB = canvasB.toDataURL('image/jpeg', 0.92);
+  const dataUrlA = canvasA.toDataURL('image/jpeg', 0.94);
+  const dataUrlB = canvasB.toDataURL('image/jpeg', 0.94);
 
   const imgA = new Image();
   imgA.src = dataUrlA;
