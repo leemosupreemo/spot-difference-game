@@ -216,5 +216,622 @@
     "ai_macro_typewriter_repair_001",
     "ai_macro_barista_coffee_001",
     "ai_macro_washi_paper_001"
-  ]
+  ],
+  "rawStatusMap": {
+    "easy_kitchen_001": {
+      "status": "approved"
+    },
+    "medium_nursery_001": {
+      "status": "approved"
+    },
+    "medium_workbench_001": {
+      "status": "approved"
+    },
+    "hard_forest_001": {
+      "status": "approved"
+    },
+    "easy_rug_pick_001": {
+      "status": "approved"
+    },
+    "photo_workbench_hardware_001": {
+      "status": "approved"
+    },
+    "photo_potting_table_001": {
+      "status": "approved"
+    },
+    "photo_watchmaker_bench_001": {
+      "status": "approved"
+    },
+    "photo_electronics_bench_001": {
+      "status": "approved"
+    },
+    "photo_antique_desk_001": {
+      "status": "approved"
+    },
+    "photo_woodworking_bench_001": {
+      "status": "approved"
+    },
+    "photo_coffee_station_001": {
+      "status": "approved"
+    },
+    "photo_repair_drawer_001": {
+      "status": "approved"
+    },
+    "photo_bicycle_repair_001": {
+      "status": "approved"
+    },
+    "photo_woodworking_table_001": {
+      "status": "approved"
+    },
+    "mass_abstract_001": {
+      "status": "approved"
+    },
+    "photo_watch_repair_001": {
+      "status": "approved"
+    },
+    "ai_botanist_herbarium_001": {
+      "status": "approved"
+    },
+    "procedural_find_the_sniper_1787100456449": {
+      "status": "approved"
+    },
+    "ai_macro_watchmaker_001": {
+      "status": "approved"
+    },
+    "ai_macro_botanist_001": {
+      "status": "approved"
+    },
+    "ai_macro_machinist_001": {
+      "status": "approved"
+    },
+    "ai_macro_electronics_001": {
+      "status": "approved"
+    },
+    "ai_macro_woodcarver_001": {
+      "status": "approved"
+    },
+    "ai_macro_chef_knife_001": {
+      "status": "approved"
+    },
+    "ai_macro_cartography_001": {
+      "status": "approved"
+    },
+    "ai_macro_camera_optics_001": {
+      "status": "approved"
+    },
+    "ai_macro_tea_ceremony_001": {
+      "status": "approved"
+    },
+    "ai_macro_vintage_radio_001": {
+      "status": "approved"
+    },
+    "easy_craft_001": {
+      "status": "wrong_difficulty"
+    },
+    "medium_screw_tray_001": {
+      "status": "wrong_difficulty"
+    },
+    "medium_tile_piece_001": {
+      "status": "wrong_difficulty"
+    },
+    "hard_wire_clip_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_bakers_table_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_art_table_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_camping_table_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_board_game_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_spice_table_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_fishing_tackle_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_camera_gear_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_pottery_table_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_artist_supply_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_camping_gear_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_sewing_table_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_map_restoration_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_garden_potting_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_game_night_001": {
+      "status": "wrong_difficulty"
+    },
+    "abstract_token_field_001": {
+      "status": "wrong_difficulty"
+    },
+    "abstract_mechanical_maze_001": {
+      "status": "wrong_difficulty"
+    },
+    "mass_abstract_002": {
+      "status": "wrong_difficulty"
+    },
+    "mass_photo_102": {
+      "status": "wrong_difficulty"
+    },
+    "ai_bakery_counter_001": {
+      "status": "wrong_difficulty"
+    },
+    "ai_greenhouse_potting_001": {
+      "status": "wrong_difficulty"
+    },
+    "ai_watchmaker_bench_001": {
+      "status": "wrong_difficulty"
+    },
+    "ai_artist_easel_001": {
+      "status": "wrong_difficulty"
+    },
+    "ai_coffee_bar_001": {
+      "status": "wrong_difficulty"
+    },
+    "procedural_find_the_sniper_1786998835444": {
+      "status": "wrong_difficulty"
+    },
+    "ai_antique_study_001": {
+      "status": "wrong_difficulty"
+    },
+    "ai_cartography_desk_001": {
+      "status": "wrong_difficulty"
+    },
+    "ai_locksmith_bench_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_repair_hardware_002": {
+      "status": "wrong_difficulty"
+    },
+    "photo_strategy_pieces_002": {
+      "status": "wrong_difficulty"
+    },
+    "procedural_find_the_sniper_1787102156032": {
+      "status": "wrong_difficulty"
+    },
+    "procedural_find_the_sniper_1787102175345": {
+      "status": "wrong_difficulty"
+    },
+    "procedural_find_the_sniper_1787103751623": {
+      "status": "wrong_difficulty"
+    },
+    "ai_macro_spice_bazaar_001": {
+      "status": "wrong_difficulty"
+    },
+    "ai_macro_sewing_notions_001": {
+      "status": "wrong_difficulty"
+    },
+    "photo_florist_table_001": {
+      "status": "dismissed"
+    },
+    "mass_photo_043": {
+      "status": "dismissed"
+    },
+    "mass_photo_044": {
+      "status": "dismissed"
+    },
+    "mass_photo_045": {
+      "status": "dismissed"
+    },
+    "mass_photo_046": {
+      "status": "dismissed"
+    },
+    "mass_photo_047": {
+      "status": "dismissed"
+    },
+    "mass_photo_048": {
+      "status": "dismissed"
+    },
+    "mass_photo_049": {
+      "status": "dismissed"
+    },
+    "mass_photo_050": {
+      "status": "dismissed"
+    },
+    "mass_photo_051": {
+      "status": "dismissed"
+    },
+    "mass_photo_052": {
+      "status": "dismissed"
+    },
+    "mass_photo_053": {
+      "status": "dismissed"
+    },
+    "mass_photo_054": {
+      "status": "dismissed"
+    },
+    "mass_photo_055": {
+      "status": "dismissed"
+    },
+    "mass_photo_056": {
+      "status": "dismissed"
+    },
+    "mass_photo_057": {
+      "status": "dismissed"
+    },
+    "mass_photo_058": {
+      "status": "dismissed"
+    },
+    "mass_photo_059": {
+      "status": "dismissed"
+    },
+    "mass_photo_060": {
+      "status": "dismissed"
+    },
+    "mass_photo_061": {
+      "status": "dismissed"
+    },
+    "mass_photo_063": {
+      "status": "dismissed"
+    },
+    "mass_photo_065": {
+      "status": "dismissed"
+    },
+    "mass_photo_066": {
+      "status": "dismissed"
+    },
+    "mass_photo_067": {
+      "status": "dismissed"
+    },
+    "mass_photo_068": {
+      "status": "dismissed"
+    },
+    "mass_photo_069": {
+      "status": "dismissed"
+    },
+    "mass_photo_070": {
+      "status": "dismissed"
+    },
+    "mass_photo_071": {
+      "status": "dismissed"
+    },
+    "mass_photo_072": {
+      "status": "dismissed"
+    },
+    "mass_photo_073": {
+      "status": "dismissed"
+    },
+    "mass_photo_074": {
+      "status": "dismissed"
+    },
+    "mass_photo_075": {
+      "status": "dismissed"
+    },
+    "mass_photo_076": {
+      "status": "dismissed"
+    },
+    "mass_photo_077": {
+      "status": "dismissed"
+    },
+    "mass_photo_078": {
+      "status": "dismissed"
+    },
+    "mass_photo_079": {
+      "status": "dismissed"
+    },
+    "mass_photo_080": {
+      "status": "dismissed"
+    },
+    "mass_photo_081": {
+      "status": "dismissed"
+    },
+    "mass_photo_082": {
+      "status": "dismissed"
+    },
+    "mass_photo_083": {
+      "status": "dismissed"
+    },
+    "mass_photo_084": {
+      "status": "dismissed"
+    },
+    "mass_photo_085": {
+      "status": "dismissed"
+    },
+    "mass_photo_086": {
+      "status": "dismissed"
+    },
+    "mass_photo_087": {
+      "status": "dismissed"
+    },
+    "mass_photo_088": {
+      "status": "dismissed"
+    },
+    "mass_photo_089": {
+      "status": "dismissed"
+    },
+    "mass_photo_090": {
+      "status": "dismissed"
+    },
+    "mass_photo_091": {
+      "status": "dismissed"
+    },
+    "mass_photo_092": {
+      "status": "dismissed"
+    },
+    "mass_photo_093": {
+      "status": "dismissed"
+    },
+    "mass_photo_095": {
+      "status": "dismissed"
+    },
+    "mass_photo_097": {
+      "status": "dismissed"
+    },
+    "mass_photo_098": {
+      "status": "dismissed"
+    },
+    "mass_photo_099": {
+      "status": "dismissed"
+    },
+    "mass_photo_100": {
+      "status": "dismissed"
+    },
+    "ai_leather_bench_001": {
+      "status": "dismissed"
+    },
+    "ai_camera_repair_001": {
+      "status": "dismissed"
+    },
+    "ai_bookbinding_tools_001": {
+      "status": "dismissed"
+    },
+    "ai_electronics_workbench_001": {
+      "status": "dismissed"
+    },
+    "photo_watch_gears_002": {
+      "status": "dismissed"
+    },
+    "photo_camera_optics_002": {
+      "status": "dismissed"
+    },
+    "photo_sewing_notions_002": {
+      "status": "dismissed"
+    },
+    "photo_woodcraft_clamp_002": {
+      "status": "dismissed"
+    },
+    "photo_angler_tackle_002": {
+      "status": "dismissed"
+    },
+    "ai_chef_spice_bench_001": {
+      "status": "dismissed"
+    },
+    "photo_botanical_press_002": {
+      "status": "dismissed"
+    },
+    "hard_authored_001": {
+      "status": "dismissed"
+    },
+    "hard_authored_002": {
+      "status": "dismissed"
+    },
+    "hard_authored_003": {
+      "status": "dismissed"
+    },
+    "hard_authored_004": {
+      "status": "dismissed"
+    },
+    "hard_authored_005": {
+      "status": "dismissed"
+    },
+    "hard_authored_006": {
+      "status": "dismissed"
+    },
+    "hard_authored_007": {
+      "status": "dismissed"
+    },
+    "hard_authored_008": {
+      "status": "dismissed"
+    },
+    "hard_authored_009": {
+      "status": "dismissed"
+    },
+    "hard_authored_010": {
+      "status": "dismissed"
+    },
+    "hard_authored_011": {
+      "status": "dismissed"
+    },
+    "hard_authored_012": {
+      "status": "dismissed"
+    },
+    "hard_authored_013": {
+      "status": "dismissed"
+    },
+    "hard_authored_014": {
+      "status": "dismissed"
+    },
+    "hard_authored_015": {
+      "status": "dismissed"
+    },
+    "hard_authored_016": {
+      "status": "dismissed"
+    },
+    "hard_authored_017": {
+      "status": "dismissed"
+    },
+    "hard_authored_018": {
+      "status": "dismissed"
+    },
+    "hard_authored_019": {
+      "status": "dismissed"
+    },
+    "hard_authored_020": {
+      "status": "dismissed"
+    },
+    "hard_authored_021": {
+      "status": "dismissed"
+    },
+    "hard_authored_022": {
+      "status": "dismissed"
+    },
+    "hard_authored_023": {
+      "status": "dismissed"
+    },
+    "hard_authored_024": {
+      "status": "dismissed"
+    },
+    "hard_authored_025": {
+      "status": "dismissed"
+    },
+    "hard_authored_026": {
+      "status": "dismissed"
+    },
+    "hard_authored_027": {
+      "status": "dismissed"
+    },
+    "hard_authored_028": {
+      "status": "dismissed"
+    },
+    "hard_authored_029": {
+      "status": "dismissed"
+    },
+    "hard_authored_030": {
+      "status": "dismissed"
+    },
+    "procedural_find_the_sniper_1787100470684": {
+      "status": "dismissed"
+    },
+    "stock_photo_spice_bazaar_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_parisian_bookstore_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_tokyo_ramen_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_alpine_wildflowers_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_ceramic_studio_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_venice_canal_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_coral_reef_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_watchmaker_desk_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_glasshouse_flora_001": {
+      "status": "dismissed"
+    },
+    "stock_photo_autumn_maple_garden_001": {
+      "status": "dismissed"
+    },
+    "fresh_photo_espresso_bar_001": {
+      "status": "dismissed"
+    },
+    "fresh_photo_botanical_cactus_001": {
+      "status": "dismissed"
+    },
+    "fresh_photo_vintage_leathercraft_001": {
+      "status": "dismissed"
+    },
+    "fresh_photo_artisan_bakery_001": {
+      "status": "dismissed"
+    },
+    "fresh_photo_vintage_camera_001": {
+      "status": "dismissed"
+    },
+    "fresh_photo_tea_ceremony_001": {
+      "status": "dismissed"
+    },
+    "fresh_photo_alpine_peaks_001": {
+      "status": "dismissed"
+    },
+    "fresh_photo_antique_astronomy_001": {
+      "status": "dismissed"
+    },
+    "complex_photo_001": {
+      "status": "dismissed"
+    },
+    "complex_photo_002": {
+      "status": "dismissed"
+    },
+    "complex_photo_003": {
+      "status": "dismissed"
+    },
+    "complex_photo_004": {
+      "status": "dismissed"
+    },
+    "complex_photo_005": {
+      "status": "dismissed"
+    },
+    "complex_photo_006": {
+      "status": "dismissed"
+    },
+    "complex_photo_007": {
+      "status": "dismissed"
+    },
+    "complex_photo_008": {
+      "status": "dismissed"
+    },
+    "complex_photo_009": {
+      "status": "dismissed"
+    },
+    "complex_photo_010": {
+      "status": "dismissed"
+    },
+    "ai_macro_leathercraft_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_watchmaker_002": {
+      "status": "dismissed"
+    },
+    "ai_macro_locksmith_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_calligraphy_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_cobbler_tools_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_jewelry_smith_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_fishing_fly_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_pottery_tools_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_bakers_prep_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_mineral_study_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_typewriter_repair_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_barista_coffee_001": {
+      "status": "dismissed"
+    },
+    "ai_macro_washi_paper_001": {
+      "status": "dismissed"
+    }
+  }
 }

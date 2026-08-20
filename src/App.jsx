@@ -217,10 +217,34 @@ export default function App() {
       try {
         localStorage.setItem('diff_hunter_debug', String(next));
       } catch (e) {}
-      if (next) sounds.playWin();
-      else sounds.playTap();
+      if (next) {
+        sounds.playWin();
+        const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
+        const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+        const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
+        if (candidateEntries.length > 0) {
+          const debugLevels = candidateEntries.map(createPhotoPairLevel);
+          setLevels(debugLevels);
+          setCurrentLevelId(debugLevels[0].id);
+        }
+      } else {
+        sounds.playTap();
+      }
       return next;
     });
+  }, [curatedStatusMap, skipKeptLevels]);
+
+  useEffect(() => {
+    if (debugMode && debugSourceMode === 'premade') {
+      const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
+      const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+      const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
+      if (candidateEntries.length > 0) {
+        const debugLevels = candidateEntries.map(createPhotoPairLevel);
+        setLevels(debugLevels);
+        setCurrentLevelId(debugLevels[0].id);
+      }
+    }
   }, []);
 
   const handleNextPair = async () => {
