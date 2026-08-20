@@ -726,7 +726,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
   // A. CUBIST FACET SHARDS & GEOMETRIC PLANES (60px - 110px) - 14 objects
   for (let c = 0; c < 14; c++) {
-    const cx = randomRange(50, width - 50);
+    const cx = randomRange(60, width - 60);
     const cy = randomRange(60, height - 60);
     const size = randomRange(60, 110);
     const baseColor = randomChoice(palette);
@@ -735,15 +735,17 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
     candidates.push({
       id: `cubist_facet_${c}`,
-      x: cx, y: cy, size, kind: 'CUBIST_POLYGONAL_FACET', baseColor, rot, supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT'],
+      x: cx, y: cy, size, kind: 'Cubist Geometric Shard', baseColor, rot,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
       draw: (ctx, mutated, mType) => {
         ctx.save();
         ctx.translate(cx, cy);
-        const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 3 : rot;
+        const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 2 : rot;
         ctx.rotate(curRot);
         applyObjectPopStyle(ctx, true);
         let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.6 : size;
+        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.7 : size;
 
         // Multi-faceted angular geometric shard
         ctx.beginPath();
@@ -755,21 +757,25 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         ctx.closePath();
         applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.45, ry: s * 0.45, sig, lineWidth: 2.5 });
 
-        // Subtle Notch/Spike Addition or Facet Line Removal
+        // Base has a prominent white diagonal accent line
         if (!(mutated && mType === 'REMOVE_DETAIL')) {
           ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 2.0;
+          ctx.lineWidth = 3.0;
           ctx.beginPath();
-          ctx.moveTo(-s * 0.45, -s * 0.3);
-          ctx.lineTo(s * 0.2, s * 0.45);
+          ctx.moveTo(-s * 0.4, -s * 0.25);
+          ctx.lineTo(s * 0.18, s * 0.4);
           ctx.stroke();
         }
 
+        // Add detail adds a bold golden emblem
         if (mutated && mType === 'ADD_DETAIL') {
           ctx.fillStyle = '#ffd166';
           ctx.beginPath();
-          ctx.arc(s * 0.1, -s * 0.5, 8, 0, Math.PI * 2);
+          ctx.arc(s * 0.1, -s * 0.45, 12, 0, Math.PI * 2);
           ctx.fill();
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 2.0;
+          ctx.stroke();
         }
         ctx.restore();
       }
@@ -787,7 +793,9 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
     candidates.push({
       id: `abstract_form_${k}`,
-      x: cx, y: cy, size, kind: isRibbon ? 'ABSTRACT_BEZIER_RIBBON' : 'KANDINSKY_CONCENTRIC_DISK', baseColor, supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT'],
+      x: cx, y: cy, size, kind: isRibbon ? 'Flowing Curve Ribbon' : 'Concentric Abstract Disk', baseColor,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
       draw: (ctx, mutated, mType) => {
         ctx.save();
         ctx.translate(cx, cy);
@@ -795,32 +803,43 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         ctx.rotate(rot);
         applyObjectPopStyle(ctx, true);
         let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.7 : size;
+        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.75 : size;
 
         if (isRibbon) {
           ctx.strokeStyle = color;
-          ctx.lineWidth = (mutated && mType === 'ADD_DETAIL') ? 14 : 8;
+          ctx.lineWidth = (mutated && mType === 'REMOVE_DETAIL') ? 4 : 10;
           ctx.beginPath();
           ctx.moveTo(-s * 0.45, -s * 0.2);
           ctx.bezierCurveTo(-s * 0.15, -s * 0.5, s * 0.15, s * 0.5, s * 0.45, 0);
           ctx.stroke();
+
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#ff007f';
+            ctx.beginPath();
+            ctx.arc(0, 0, 14, 0, Math.PI * 2);
+            ctx.fill();
+          }
         } else {
           ctx.beginPath();
           ctx.arc(0, 0, s * 0.38, 0, Math.PI * 2);
-          applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.38, ry: s * 0.38, sig, lineWidth: 2 });
+          applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.38, ry: s * 0.38, sig, lineWidth: 2.5 });
 
+          // Prominent center core
           if (!(mutated && mType === 'REMOVE_DETAIL')) {
             ctx.fillStyle = '#ffffff';
             ctx.beginPath();
-            ctx.arc(0, 0, s * 0.15, 0, Math.PI * 2);
+            ctx.arc(0, 0, s * 0.18, 0, Math.PI * 2);
             ctx.fill();
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
           }
 
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.strokeStyle = '#ffd166';
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 4;
             ctx.beginPath();
-            ctx.arc(0, 0, s * 0.48, 0, Math.PI * 2);
+            ctx.arc(0, 0, s * 0.52, 0, Math.PI * 2);
             ctx.stroke();
           }
         }
@@ -829,19 +848,21 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
     });
   }
 
-  // C. IMPRESSIONIST DAPPLED FLORA & ORGANIC FIGURATIVE FORMS (35px - 75px) - 20 objects
+  // C. IMPRESSIONIST DAPPLED FLORA & ORGANIC FIGURATIVE FORMS (40px - 85px) - 20 objects
   for (let f = 0; f < 20; f++) {
-    const cx = randomRange(50, width - 50);
+    const cx = randomRange(60, width - 60);
     const cy = randomRange(60, height - 60);
-    const size = randomRange(35, 75);
+    const size = randomRange(40, 85);
     const baseColor = randomChoice(palette);
-    const kind = randomChoice(['DAPPLED_ROSETTE', 'SWIMMING_KOI', 'HOVERING_DRAGONFLY', 'FOREST_OWL', 'MUSHROOM_CLUSTER']);
+    const kind = randomChoice(['Organic Botanical Petal', 'Stylized Silhouette Motif', 'Impressionist Floral Bloom', 'Winged Creature Form']);
     const sig = makeWobbleSignature(random);
     const poseRot = random() * Math.PI * 2;
 
     candidates.push({
       id: `impressionist_flora_${f}`,
-      x: cx, y: cy, size, kind, baseColor, poseRot, supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT'],
+      x: cx, y: cy, size, kind, baseColor, poseRot,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
       draw: (ctx, mutated, mType) => {
         ctx.save();
         ctx.translate(cx, cy);
@@ -854,10 +875,21 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         wobblePath(ctx, 0, 0, curSize * 0.45, curSize * 0.3, 0, sig.jitter);
         applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffffff', cx: 0, cy: 0, rx: curSize * 0.45, ry: curSize * 0.3, sig, lineWidth: 2 });
 
-        if (mutated && mType === 'ADD_DETAIL') {
+        // Base has a distinct secondary golden eye / core
+        if (!(mutated && mType === 'REMOVE_DETAIL')) {
           ctx.fillStyle = '#ffd166';
           ctx.beginPath();
-          ctx.arc(curSize * 0.28, -curSize * 0.18, 6, 0, Math.PI * 2);
+          ctx.arc(curSize * 0.2, -curSize * 0.1, 8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
+
+        if (mutated && mType === 'ADD_DETAIL') {
+          ctx.fillStyle = '#00f0ff';
+          ctx.beginPath();
+          ctx.arc(-curSize * 0.2, curSize * 0.1, 10, 0, Math.PI * 2);
           ctx.fill();
         }
         ctx.restore();
@@ -865,41 +897,56 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
     });
   }
 
-  // D. COMPACT GEOMETRIC ACCENTS & MOTIFS (18px - 38px) - 25 objects
-  for (let a = 0; a < 25; a++) {
-    const cx = randomRange(35, width - 35);
-    const cy = randomRange(35, height - 35);
-    const size = randomRange(18, 38);
+  // D. COMPACT GEOMETRIC ACCENTS & MOTIFS (25px - 45px) - 20 objects
+  for (let a = 0; a < 20; a++) {
+    const cx = randomRange(45, width - 45);
+    const cy = randomRange(45, height - 45);
+    const size = randomRange(25, 45);
     const baseColor = randomChoice(palette);
-    const kind = randomChoice(['TRIANGULAR_SHARD', 'GOLDEN_ROSETTE', 'STARBURST_SPIKE', 'CHECKER_CHIP', 'GLYPH_TILE']);
+    const kind = 'Geometric Star Accent';
     const sig = makeWobbleSignature(random);
+    const baseRot = random() * Math.PI;
 
     candidates.push({
       id: `compact_accent_${a}`,
-      x: cx, y: cy, size, kind, baseColor, supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT'],
+      x: cx, y: cy, size, kind, baseColor,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
       draw: (ctx, mutated, mType) => {
         ctx.save();
         ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
+        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 4 : baseRot;
         ctx.rotate(rot);
         applyObjectPopStyle(ctx, true);
         let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
+        const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.85 : size;
 
-        ctx.beginPath();
-        ctx.arc(0, 0, curSize * 0.4, 0, Math.PI * 2);
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffffff', cx: 0, cy: 0, rx: curSize * 0.4, ry: curSize * 0.4, sig, lineWidth: 1.5 });
+        // Distinct starburst / cross shape
+        ctx.fillStyle = color;
+        ctx.fillRect(-curSize * 0.45, -curSize * 0.15, curSize * 0.9, curSize * 0.3);
+        ctx.fillRect(-curSize * 0.15, -curSize * 0.45, curSize * 0.3, curSize * 0.9);
+
+        // Center dot
+        if (!(mutated && mType === 'REMOVE_DETAIL')) {
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(0, 0, curSize * 0.15, 0, Math.PI * 2);
+          ctx.fill();
+        }
 
         if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(-2, -curSize * 0.55, 4, curSize * 1.1);
+          ctx.strokeStyle = '#ffd166';
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.arc(0, 0, curSize * 0.55, 0, Math.PI * 2);
+          ctx.stroke();
         }
         ctx.restore();
       }
     });
   }
 
-  // E. MICRO ATMOSPHERIC COLOR PARTICLES, SPARKLES & SHARDS (4px - 14px) - 30 objects
+  // E. MICRO ATMOSPHERIC COLOR PARTICLES, SPARKLES & SHARDS (4px - 14px) - 30 background objects (NOT target eligible)
   for (let p = 0; p < 30; p++) {
     const px = randomRange(25, width - 25);
     const py = randomRange(25, height - 25);
@@ -908,25 +955,18 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
     candidates.push({
       id: `micro_sparkle_${p}`,
-      x: px, y: py, size: pSize, kind: 'MICRO_COLOR_SHARD', baseColor, supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL'],
-      draw: (ctx, mutated, mType) => {
+      x: px, y: py, size: pSize, kind: 'Atmospheric Micro Shard', baseColor,
+      isTargetEligible: false, // Never pick micro particles as the game difference!
+      supportedMutations: [],
+      draw: (ctx) => {
         ctx.save();
         ctx.translate(px, py);
-        const rad = (mutated && mType === 'SCALE_CHANGE') ? pSize * 2.2 : pSize;
-        ctx.fillStyle = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : baseColor;
+        ctx.fillStyle = baseColor;
         ctx.shadowColor = baseColor;
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 6;
         ctx.beginPath();
-        ctx.arc(0, 0, rad * 0.4, 0, Math.PI * 2);
+        ctx.arc(0, 0, pSize * 0.4, 0, Math.PI * 2);
         ctx.fill();
-
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          ctx.arc(0, 0, rad * 0.8, 0, Math.PI * 2);
-          ctx.stroke();
-        }
         ctx.restore();
       }
     });
@@ -938,14 +978,14 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   ctxB.drawImage(canvasA, 0, 0);
 
   // =========================================================================
-  // STEP 4: PICK EXACTLY 1 HIGH-CONTRAST CANDIDATE FOR MUTATION
+  // STEP 4: PICK EXACTLY 1 HIGH-CONTRAST, HIGH-SALIENT TARGET FOR MUTATION
   // =========================================================================
-  const targetIndex = Math.floor(random() * candidates.length);
-  const targetObj = candidates[targetIndex];
+  const eligibleCandidates = candidates.filter(c => c.isTargetEligible && c.size >= 30);
+  const targetIndex = Math.floor(random() * eligibleCandidates.length);
+  const targetObj = eligibleCandidates[targetIndex] || candidates[0];
 
-  // Favor subtle shape additions, removals, and rotations over pure color shift
-  const shapeFavoredPool = ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'SCALE_CHANGE', 'COLOR_SHIFT'];
-  const mutationType = randomChoice(shapeFavoredPool);
+  // Pick mutation from the target's supported pool
+  const mutationType = randomChoice(targetObj.supportedMutations || ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL']);
 
   // =========================================================================
   // STEP 5: RENDER ALL OBJECTS ONTO BOTH CANVASES
@@ -964,6 +1004,13 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   const diffY = Math.round((targetObj.y / height) * 1000) / 10;
   const hitRadius = targetDifficulty === 'Easy' ? 10 : targetDifficulty === 'Medium' ? 8 : 6;
 
+  let hintAction = 'Look closely at';
+  if (mutationType === 'COLOR_SHIFT') hintAction = 'Notice the vibrant color change on';
+  else if (mutationType === 'REMOVE_DETAIL') hintAction = 'Spot the missing detail on';
+  else if (mutationType === 'ADD_DETAIL') hintAction = 'Check the added ornament on';
+  else if (mutationType === 'SHAPE_ROTATE') hintAction = 'Observe the rotated angle of';
+  else if (mutationType === 'SCALE_CHANGE') hintAction = 'Notice the size difference of';
+
   const diffs = [
     {
       id: 1,
@@ -971,7 +1018,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
       y: diffY,
       radius: hitRadius,
       mutationType,
-      hint: `Look closely near the ${targetObj.kind || 'feature'} at (${diffX}%, ${diffY}%)`
+      hint: `${hintAction} the ${targetObj.kind || 'feature'} near (${diffX}%, ${diffY}%)`
     }
   ];
 
