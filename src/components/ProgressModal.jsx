@@ -151,9 +151,20 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
           </div>
 
           {loadingLeaderboard ? (
-            <p style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '40px 0' }}>
-              Fetching Leaderboard...
-            </p>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '14px',
+              padding: '48px 0',
+              color: 'var(--text-muted)'
+            }}>
+              <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: 600, letterSpacing: '0.3px' }}>
+                Fetching Leaderboard...
+              </p>
+              <div className="loading-spinner" />
+            </div>
           ) : (
             <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.92rem' }}>
