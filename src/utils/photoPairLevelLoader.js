@@ -157,6 +157,8 @@ export function selectPhotoPairEntries(entries, {
     ...otherCategorized
   ];
 
+  logApp('INFO', `[SelectEntries] Pack:${packId} Diff:${difficulty} | UnreviewedNew:${unreviewedBrandNew.length} UnreviewedOther:${unreviewedOther.length} ApprMatch:${approvedMatching.length} ApprOther:${approvedOther.length} | Top4: ${prioritized.slice(0, 4).map(p => p.id).join(', ')}`);
+
   return prioritized.slice(0, count);
 }
 
@@ -169,7 +171,7 @@ export async function buildPhotoPairStage({
   imageFactory = null,
   curatedStatusMap = null
 } = {}) {
-  logApp('INFO', `[BuildStage] Pack: ${packId} Difficulty: ${difficulty} Seed: ${seed}`);
+  logApp('INFO', `[BuildStageStart] Pack: ${packId} Difficulty: ${difficulty} Seed: ${seed}`);
   try {
     let allEntries = null;
     if (fetchImpl) {
@@ -188,6 +190,8 @@ export async function buildPhotoPairStage({
       const statusVal = getLevelStatus(statusMap[entry.id])?.status;
       return statusVal !== 'dismissed';
     });
+
+    logApp('INFO', `[BuildStage] Total active manifest entries: ${activeEntries.length} (from ${allEntries.length} raw entries)`);
 
     if (activeEntries && activeEntries.length > 0) {
       const candidates = selectPhotoPairEntries(activeEntries, { packId, difficulty, count: activeEntries.length, seed, statusMap });
@@ -211,6 +215,7 @@ export async function buildPhotoPairStage({
             });
             stage.push(createPhotoPairLevel(entry, { base: baseImg, variant: varImg }));
           } catch (e) {
+            logApp('WARN', `[BuildStage] Failed to preload images for ${entry.id}: ${e?.message}`);
             continue;
           }
         } else {
@@ -223,7 +228,7 @@ export async function buildPhotoPairStage({
         stage.push(generateProceduralLevelPair(packId, difficulty, procSeed));
       }
 
-      logApp('INFO', `[BuildStageComplete] Premade levels included: ${stage.filter(s => s.baseImage).length} Total stage: ${stage.length}`);
+      logApp('INFO', `[BuildStageComplete] Stage built successfully: ${stage.map((s, idx) => `[${idx+1}]${s.id}`).join(' → ')}`);
       return stage;
     }
   } catch (err) {

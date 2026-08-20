@@ -9,6 +9,7 @@ import VictoryModal from './components/VictoryModal';
 import GameOverModal from './components/GameOverModal';
 import ProgressModal from './components/ProgressModal';
 import HelpModal from './components/HelpModal';
+import DiagnosticsModal from './components/DiagnosticsModal';
 import DebugLevelGeneratorModal from './components/DebugLevelGeneratorModal';
 import DebugCuratorBar from './components/DebugCuratorBar';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
@@ -16,6 +17,7 @@ import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGen
 import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
 import { sounds } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
+import { logApp } from './utils/logger';
 import { saveLeaderboardStats } from './services/playerProgress';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
 
@@ -46,6 +48,7 @@ export default function App() {
   const [gameOverModalOpen, setGameOverModalOpen] = useState(false);
   const [progressModalOpen, setProgressModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
+  const [diagnosticsModalOpen, setDiagnosticsModalOpen] = useState(false);
   const [debugModalOpen, setDebugModalOpen] = useState(false);
 
   // Debug Flag (Hidden by default; enabled via URL ?debug=1 or secret logo tap)
@@ -375,6 +378,7 @@ export default function App() {
 
   // Start Level Timer Immediately upon pair load
   const startLevel = useCallback((levelId) => {
+    logApp('INFO', `[StartLevel] Level: ${levelId} (Difficulty: ${selectedDifficulty})`);
     setCurrentLevelId(levelId);
     setFoundDiffs([]);
     setMissCount(0);
@@ -406,6 +410,7 @@ export default function App() {
 
   // Handle Game Launch from Main Menu (Loads Real-World Photo Pairs!)
   const handleStartGame = async () => {
+    logApp('INFO', `[StartGameClicked] Theme: ${selectedTheme}, Diff: ${selectedDifficulty}, DebugMode: ${debugMode}`);
     setCurrentStageIndex(0);
     stageTimesRef.current = [];
     setTotalStageTimeMs(0);
@@ -416,8 +421,10 @@ export default function App() {
         const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
         const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
         const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
+        logApp('INFO', `[StartGame:DebugPremade] Unreviewed: ${unreviewed.length}, FallbackPool: ${fallbackPool.length}`);
         if (candidateEntries.length > 0) {
           const debugLevels = candidateEntries.slice(0, 5).map(createPhotoPairLevel);
+          logApp('INFO', `[StartGame:DebugPremade] Launching 5 debug levels: ${debugLevels.map(l => l.id).join(', ')}`);
           setLevels(debugLevels);
           startLevel(debugLevels[0].id);
           setView('game');
@@ -433,16 +440,18 @@ export default function App() {
         curatedStatusMap
       });
       if (stageList && stageList.length > 0) {
+        logApp('INFO', `[StartGame:StageBuilt] Launching 5 photo levels: ${stageList.map(l => l.id).join(', ')}`);
         setLevels(stageList);
         startLevel(stageList[0].id);
         setView('game');
         return;
       }
     } catch (err) {
-      console.error('Failed to build photo stage:', err);
+      logApp('ERROR', `[StartGame:Error] ${err?.message || err}`);
     }
 
     const procLevels = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now() + i));
+    logApp('INFO', `[StartGame:ProceduralFallback] Launching 5 procedural levels: ${procLevels.map(l => l.id).join(', ')}`);
     setLevels(procLevels);
     startLevel(procLevels[0].id);
     setView('game');
@@ -599,6 +608,7 @@ export default function App() {
         onOpenLeaderboard={() => setView('stats')}
         onOpenProgress={() => setView('stats')}
         onOpenHelp={() => setHelpModalOpen(true)}
+        onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
         muted={muted}
         setMuted={setMuted}
         onLogoClick={toggleDebugMode}
@@ -640,6 +650,7 @@ export default function App() {
               onPruneDismissed={handlePruneDismissed}
               onNextPair={handleNextPair}
               onPrevPair={handlePrevPair}
+              onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
               debugSourceMode={debugSourceMode}
               onToggleSourceMode={handleToggleDebugSourceMode}
               skipKeptLevels={skipKeptLevels}
@@ -731,6 +742,17 @@ export default function App() {
         onClose={() => setHelpModalOpen(false)}
         debugMode={debugMode}
         onToggleDebug={toggleDebugMode}
+      />
+
+      <DiagnosticsModal
+        isOpen={diagnosticsModalOpen}
+        onClose={() => setDiagnosticsModalOpen(false)}
+        currentLevel={currentLevel}
+        selectedTheme={selectedTheme}
+        selectedDifficulty={selectedDifficulty}
+        activeMode={activeMode}
+        debugMode={debugMode}
+        levels={levels}
       />
 
       {debugModalOpen && (

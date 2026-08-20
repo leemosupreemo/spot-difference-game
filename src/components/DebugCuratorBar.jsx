@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ThumbsUp, ThumbsDown, RotateCcw, Download, ChevronRight, ChevronLeft, CheckCircle2, XCircle, HelpCircle, AlertTriangle, Camera, Sparkles } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, RotateCcw, Download, ChevronRight, ChevronLeft, CheckCircle2, XCircle, HelpCircle, AlertTriangle, Camera, Sparkles, Terminal } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { getLevelStatus } from '../utils/curationStore';
 import CuratedExportModal from './CuratedExportModal';
@@ -13,6 +13,7 @@ export default function DebugCuratorBar({
   onPruneDismissed,
   onNextPair,
   onPrevPair,
+  onOpenDiagnostics,
   debugSourceMode = 'premade',
   onToggleSourceMode,
   skipKeptLevels = true,
@@ -305,6 +306,17 @@ export default function DebugCuratorBar({
                 👎 {dismissedTotal}
               </button>
             </div>
+
+            {onOpenDiagnostics && (
+              <button
+                onClick={() => { sounds.playTap(); onOpenDiagnostics(); }}
+                className="glass-btn"
+                style={{ padding: '5px 10px', fontSize: '0.78rem', borderRadius: '8px', color: 'var(--accent-cyan)', borderColor: 'rgba(0, 240, 255, 0.4)' }}
+                title="View live diagnostics, candidate queue, and logs"
+              >
+                <Terminal size={14} /> Logs
+              </button>
+            )}
 
             <button
               onClick={() => setIsExportOpen(true)}

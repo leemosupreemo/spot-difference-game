@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, Eye, Award, Info, ArrowLeft, Wrench } from 'lucide-react';
+import { Volume2, VolumeX, Eye, Award, Info, ArrowLeft, Wrench, Terminal } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function Header({
@@ -10,6 +10,7 @@ export default function Header({
   onOpenLeaderboard,
   onOpenProgress,
   onOpenHelp,
+  onOpenDiagnostics,
   onLogoClick,
   onToggleDebug,
   debugMode
@@ -122,6 +123,28 @@ export default function Header({
 
           {/* Action Controls */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {/* Live Diagnostics & System Logs Button */}
+            <button
+              className="glass-btn"
+              onClick={() => {
+                sounds.playTap();
+                if (onOpenDiagnostics) onOpenDiagnostics();
+              }}
+              title="Live Diagnostics & System Logs"
+              style={{
+                padding: '8px 10px',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--accent-cyan)',
+                borderColor: 'rgba(0, 240, 255, 0.4)',
+                background: 'rgba(0, 240, 255, 0.1)'
+              }}
+            >
+              <Terminal size={17} />
+            </button>
+
             {/* Quick Debug Toggle in Header */}
             <button
               className="glass-btn"
