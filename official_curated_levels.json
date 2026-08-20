@@ -1,10 +1,10 @@
 {
-  "exportedAt": "2026-08-19T22:22:55.733Z",
+  "exportedAt": "2026-08-20T02:36:39.297Z",
   "summary": {
     "totalCurated": 207,
-    "approvedCount": 32,
-    "dismissedCount": 136,
-    "wrongDifficultyCount": 37
+    "approvedCount": 29,
+    "dismissedCount": 138,
+    "wrongDifficultyCount": 38
   },
   "approvedLevelIds": [
     "easy_kitchen_001",
@@ -31,14 +31,11 @@
     "ai_macro_machinist_001",
     "ai_macro_electronics_001",
     "ai_macro_woodcarver_001",
-    "ai_macro_spice_bazaar_001",
-    "ai_macro_locksmith_001",
     "ai_macro_chef_knife_001",
     "ai_macro_cartography_001",
     "ai_macro_camera_optics_001",
     "ai_macro_tea_ceremony_001",
-    "ai_macro_vintage_radio_001",
-    "ai_macro_sewing_notions_001"
+    "ai_macro_vintage_radio_001"
   ],
   "wrongDifficultyLevelIds": [
     "easy_craft_001",
@@ -77,7 +74,8 @@
     "procedural_find_the_sniper_1787102156032",
     "procedural_find_the_sniper_1787102175345",
     "procedural_find_the_sniper_1787103751623",
-    "ai_macro_jewelry_smith_001"
+    "ai_macro_spice_bazaar_001",
+    "ai_macro_sewing_notions_001"
   ],
   "dismissedLevelIds": [
     "photo_florist_table_001",
@@ -207,8 +205,10 @@
     "complex_photo_010",
     "ai_macro_leathercraft_001",
     "ai_macro_watchmaker_002",
+    "ai_macro_locksmith_001",
     "ai_macro_calligraphy_001",
     "ai_macro_cobbler_tools_001",
+    "ai_macro_jewelry_smith_001",
     "ai_macro_fishing_fly_001",
     "ai_macro_pottery_tools_001",
     "ai_macro_bakers_prep_001",

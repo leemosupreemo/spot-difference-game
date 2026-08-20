@@ -42,27 +42,6 @@
     "variantImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/variant.png"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_locksmith_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
-      {
-        "hint": "Inspect the antique brass key ring with assorted mortise keys.",
-        "id": 1,
-        "radius": 4.2,
-        "x": 62,
-        "y": 46
-      }
-    ],
-    "id": "ai_macro_locksmith_001",
-    "originalImage": "levels/photo-pairs/ai_macro_locksmith_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Master Locksmith Skeleton Keys",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_locksmith_001/variant.png"
-  },
-  {
     "baseImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
     "category": "Photography",
     "difficulty": "Medium",
@@ -103,27 +82,6 @@
     "title": "Vintage Cartographer Sea Chart",
     "totalDifferences": 1,
     "variantImage": "levels/photo-pairs/ai_macro_cartography_001/variant.png"
-  },
-  {
-    "baseImage": "levels/photo-pairs/ai_macro_jewelry_smith_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
-      {
-        "hint": "Find the silver bezel wire ring on the jeweler wooden peg.",
-        "id": 1,
-        "radius": 4.2,
-        "x": 46,
-        "y": 64
-      }
-    ],
-    "id": "ai_macro_jewelry_smith_001",
-    "originalImage": "levels/photo-pairs/ai_macro_jewelry_smith_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Goldsmith Jewelry Bench",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_jewelry_smith_001/variant.png"
   },
   {
     "baseImage": "levels/photo-pairs/ai_macro_camera_optics_001/original.png",
