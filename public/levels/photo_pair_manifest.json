@@ -1,5 +1,105 @@
 [
   {
+    "id": "ai_macro_fountain_pen_001",
+    "title": "Vintage Fountain Pen & Inkwell Bench",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "originalImage": "levels/photo-pairs/ai_macro_fountain_pen_001/original.png",
+    "variantImage": "levels/photo-pairs/ai_macro_fountain_pen_001/variant.png",
+    "baseImage": "levels/photo-pairs/ai_macro_fountain_pen_001/original.png",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.6,
+        "y": 8.5,
+        "radius": 4.5,
+        "hint": "Notice the ink liquid color inside the first glass corked bottle on the top row."
+      }
+    ]
+  },
+  {
+    "id": "ai_macro_astronomy_sextant_001",
+    "title": "Antique Brass Sextant & Celestial Chart",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "originalImage": "levels/photo-pairs/ai_macro_astronomy_sextant_001/original.png",
+    "variantImage": "levels/photo-pairs/ai_macro_astronomy_sextant_001/variant.png",
+    "baseImage": "levels/photo-pairs/ai_macro_astronomy_sextant_001/original.png",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 68.6,
+        "y": 88.5,
+        "radius": 3.8,
+        "hint": "Examine the middle brass knurled screw along the bottom row."
+      }
+    ]
+  },
+  {
+    "id": "ai_macro_luthier_violin_001",
+    "title": "Master Luthier Violin Maker Bench",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "originalImage": "levels/photo-pairs/ai_macro_luthier_violin_001/original.png",
+    "variantImage": "levels/photo-pairs/ai_macro_luthier_violin_001/variant.png",
+    "baseImage": "levels/photo-pairs/ai_macro_luthier_violin_001/original.png",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 14.8,
+        "y": 44,
+        "radius": 4.5,
+        "hint": "Look closely at the carved center pattern on the bottom-most maple violin bridge."
+      }
+    ]
+  },
+  {
+    "id": "ai_macro_miniature_painting_001",
+    "title": "Fantasy Miniature Painter Wet Palette",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "originalImage": "levels/photo-pairs/ai_macro_miniature_painting_001/original.png",
+    "variantImage": "levels/photo-pairs/ai_macro_miniature_painting_001/variant.png",
+    "baseImage": "levels/photo-pairs/ai_macro_miniature_painting_001/original.png",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.8,
+        "y": 40.2,
+        "radius": 3.5,
+        "hint": "Check the acrylic paint droplet color below the Goblin Green paint bottle."
+      }
+    ]
+  },
+  {
+    "id": "ai_macro_espresso_grouphead_001",
+    "title": "Espresso Machine Brass Grouphead Service",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "originalImage": "levels/photo-pairs/ai_macro_espresso_grouphead_001/original.png",
+    "variantImage": "levels/photo-pairs/ai_macro_espresso_grouphead_001/variant.png",
+    "baseImage": "levels/photo-pairs/ai_macro_espresso_grouphead_001/original.png",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.8,
+        "y": 51.6,
+        "radius": 5.5,
+        "hint": "Notice the silicone grouphead gasket ring color in the center of the service mat."
+      }
+    ]
+  },
+  {
     "baseImage": "levels/photo-pairs/ai_macro_woodcarver_001/original.png",
     "category": "Photography",
     "totalDifferences": 1,
