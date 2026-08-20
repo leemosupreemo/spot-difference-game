@@ -1421,25 +1421,25 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   // =========================================================================
   // STEP 4: PICK EXACTLY 1 HIGH-CONTRAST, HIGH-SALIENT TARGET FOR MUTATION
   // =========================================================================
-  const eligibleCandidates = candidates.filter(c => c.isTargetEligible && c.size >= 30);
+  const eligibleCandidates = candidates.filter(c => c.isTargetEligible && c.size >= 40);
   const targetIndex = Math.floor(random() * eligibleCandidates.length);
-  const targetObj = eligibleCandidates[targetIndex] || candidates[0];
+  const targetObj = eligibleCandidates[targetIndex] || candidates.find(c => c.isTargetEligible) || candidates[0];
 
   // Pick mutation from the target's supported pool
   const mutationType = randomChoice(targetObj.supportedMutations || ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL']);
 
   // =========================================================================
-  // STEP 5: RENDER ALL OBJECTS ONTO BOTH CANVASES
+  // STEP 5: RENDER ALL OBJECTS ONTO BOTH CANVASES (TARGET DRAWN LAST ON TOP!)
   // =========================================================================
-  candidates.forEach(c => {
-    if (c.id === targetObj.id) {
-      c.draw(ctxA, false, '');
-      c.draw(ctxB, true, mutationType);
-    } else {
-      c.draw(ctxA, false, '');
-      c.draw(ctxB, false, '');
-    }
+  // Draw all non-target objects first
+  candidates.filter(c => c.id !== targetObj.id).forEach(c => {
+    c.draw(ctxA, false, '');
+    c.draw(ctxB, false, '');
   });
+
+  // Draw target object LAST on top so it is 100% visible and never covered/occluded
+  targetObj.draw(ctxA, false, '');
+  targetObj.draw(ctxB, true, mutationType);
 
   const diffX = Math.round((targetObj.x / width) * 1000) / 10;
   const diffY = Math.round((targetObj.y / height) * 1000) / 10;
@@ -1475,12 +1475,21 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
     category: isPhotoTheme ? 'Photographic' : 'Illustrated',
     difficulty: targetDifficulty,
     totalDifferences: 1,
+    baseImage: dataUrlA,
+    variantImage: dataUrlB,
     diffs,
     render: (ctx, w, h, isModified) => {
+      const srcCanvas = isModified ? canvasB : canvasA;
+      if (srcCanvas && typeof srcCanvas.getContext === 'function') {
+        try {
+          ctx.drawImage(srcCanvas, 0, 0, w, h);
+          return;
+        } catch (_) {}
+      }
       const img = isModified ? imgB : imgA;
-      if (img.complete && img.naturalWidth > 0) {
+      if (img && img.complete && img.naturalWidth > 0) {
         ctx.drawImage(img, 0, 0, w, h);
-      } else {
+      } else if (img) {
         img.onload = () => ctx.drawImage(img, 0, 0, w, h);
       }
     }
