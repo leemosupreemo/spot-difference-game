@@ -67,7 +67,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
     return { clears, totalPoints, avgPointsPerSet, bestFirstTime, bestRepeatTime, setCompletedCount };
   };
 
-  const topLeaderboardEntries = leaderboardData?.byPackRepeat?.[selectedLeaderboardPack] || [];
+  const topLeaderboardEntries = leaderboardData?.byPackFirst?.[selectedLeaderboardPack] || leaderboardData?.byPackRepeat?.[selectedLeaderboardPack] || [];
 
   return (
     <div style={{

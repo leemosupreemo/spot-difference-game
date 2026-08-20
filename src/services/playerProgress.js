@@ -385,19 +385,23 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
 
   const combinedList = Array.from(allEntriesMap.values());
 
-  const getTop5ForPack = (packId, mode = 'repeat') => {
+  const getTop5ForPack = (packId, mode = 'first') => {
     const key = mode === 'first' ? 'avgFirstTimeByPack' : 'avgRepeatTimeByPack';
     return combinedList
       .map(p => {
         let time = p[key]?.[packId];
+        if (!time && mode === 'first' && p.avgFirstTimeByDifficulty) {
+          const diffs = Object.values(p.avgFirstTimeByDifficulty).filter(t => typeof t === 'number' && t > 0);
+          if (diffs.length > 0) time = Math.round(diffs.reduce((a, b) => a + b, 0) / diffs.length);
+        }
         if (!time && p.avgTimesByPack?.[packId]) {
           time = p.avgTimesByPack[packId];
         }
         if (!time && p.isCurrentPlayer) {
-          time = p.avgRepeatTimeByPack?.[packId] || p.overallBestRepeatTime || p.overallBestFirstTime || null;
+          time = mode === 'first' ? (p.avgFirstTimeByPack?.[packId] || p.overallBestFirstTime || null) : (p.avgRepeatTimeByPack?.[packId] || p.overallBestRepeatTime || null);
         }
         if (!time && !p.isCurrentPlayer) {
-          time = packId === 'abstract_animated' ? 14200 : 12500;
+          time = mode === 'first' ? (packId === 'abstract_animated' ? 16500 : 13800) : (packId === 'abstract_animated' ? 14200 : 12500);
         }
         return {
           ...p,
@@ -439,6 +443,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         {
           uid: 'demo_1',
           playerName: 'PixelSniper_Pro',
+          avgFirstTimeByPack: { find_the_sniper: 11200, abstract_animated: 14500 },
           avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 },
           totalSetsCleared: 24,
           isCurrentPlayer: false
@@ -446,6 +451,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         {
           uid: 'demo_2',
           playerName: 'VortexEagle',
+          avgFirstTimeByPack: { find_the_sniper: 12800, abstract_animated: 16200 },
           avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 },
           totalSetsCleared: 18,
           isCurrentPlayer: false
@@ -453,30 +459,41 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         {
           uid: 'demo_3',
           playerName: 'ChronoMaster',
+          avgFirstTimeByPack: { find_the_sniper: 14200, abstract_animated: 18100 },
           avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 },
           totalSetsCleared: 15,
           isCurrentPlayer: false
         }
       ];
 
-      const getFallbackListForPack = (packId) => {
-        return [localPlayerEntry, ...fallbackEntries].map(p => ({
-          ...p,
-          effectiveTime: p.isCurrentPlayer 
-            ? (p.avgRepeatTimeByPack?.[packId] || p.overallBestRepeatTime || p.overallBestFirstTime || (packId === 'abstract_animated' ? 12800 : 10800))
-            : (p.avgRepeatTimeByPack?.[packId] || (packId === 'abstract_animated' ? 14500 : 12500))
-        })).sort((a, b) => a.effectiveTime - b.effectiveTime);
+      const getFallbackListForPack = (packId, mode = 'first') => {
+        const key = mode === 'first' ? 'avgFirstTimeByPack' : 'avgRepeatTimeByPack';
+        return [localPlayerEntry, ...fallbackEntries].map(p => {
+          let time = p[key]?.[packId];
+          if (!time && p.isCurrentPlayer) {
+            time = mode === 'first'
+              ? (p.avgFirstTimeByPack?.[packId] || p.overallBestFirstTime || (packId === 'abstract_animated' ? 15800 : 13200))
+              : (p.avgRepeatTimeByPack?.[packId] || p.overallBestRepeatTime || (packId === 'abstract_animated' ? 12800 : 10800));
+          }
+          if (!time && !p.isCurrentPlayer) {
+            time = mode === 'first' ? (packId === 'abstract_animated' ? 17500 : 14800) : (packId === 'abstract_animated' ? 14500 : 12500);
+          }
+          return {
+            ...p,
+            effectiveTime: time
+          };
+        }).sort((a, b) => a.effectiveTime - b.effectiveTime);
       };
 
       resolve({
         isCloud: false,
         byPackFirst: {
-          find_the_sniper: getFallbackListForPack('find_the_sniper'),
-          abstract_animated: getFallbackListForPack('abstract_animated')
+          find_the_sniper: getFallbackListForPack('find_the_sniper', 'first'),
+          abstract_animated: getFallbackListForPack('abstract_animated', 'first')
         },
         byPackRepeat: {
-          find_the_sniper: getFallbackListForPack('find_the_sniper'),
-          abstract_animated: getFallbackListForPack('abstract_animated')
+          find_the_sniper: getFallbackListForPack('find_the_sniper', 'repeat'),
+          abstract_animated: getFallbackListForPack('abstract_animated', 'repeat')
         },
         localPlayer: localPlayerEntry
       });
