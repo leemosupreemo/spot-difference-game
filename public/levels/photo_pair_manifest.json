@@ -1,1185 +1,1485 @@
 [
   {
-    "baseImage": "levels/photo-pairs/ai_macro_woodcarver_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "difficulty" : "Medium",
+    "category" : "Photography",
+    "diffs" : [
       {
-        "hint": "Check the carved decorative relief piece next to the wooden spoon.",
-        "id": 1,
-        "radius": 4.5,
-        "x": 44.1,
-        "y": 74.2
+        "id" : 1,
+        "y" : 48,
+        "radius" : 3.7999999999999998,
+        "x" : 52.5,
+        "hint" : "Check the gold nib breather hole and engraved imprint."
       }
     ],
-    "id": "ai_macro_woodcarver_001",
-    "originalImage": "levels/photo-pairs/ai_macro_woodcarver_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Artisan Woodcarver Chisel Rack",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_woodcarver_001/variant.png"
+    "id" : "ai_macro_fountain_pen_001",
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "title" : "Vintage Fountain Pen & Nib Restoration",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_fountain_pen_001\/original.png",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_fountain_pen_001\/original.png",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_fountain_pen_001\/variant.png"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_astronomy_brass_001\/variant.png",
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_astronomy_brass_001\/original.png",
+    "title" : "Antique Brass Astrolabe & Celestial Chart",
+    "difficulty" : "Medium",
+    "category" : "Photography",
+    "diffs" : [
       {
-        "hint": "Examine the star anise cluster near the cumin wooden bowl.",
-        "id": 1,
-        "radius": 4.2,
-        "x": 24,
-        "y": 52.5
+        "radius" : 3.7999999999999998,
+        "y" : 55,
+        "id" : 1,
+        "hint" : "Notice the knurled brass locking nut near the vernier arm.",
+        "x" : 47
       }
     ],
-    "id": "ai_macro_spice_bazaar_001",
-    "originalImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Artisan Exotic Spice Board",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/variant.png"
+    "originalImage" : "levels\/photo-pairs\/ai_macro_astronomy_brass_001\/original.png",
+    "id" : "ai_macro_astronomy_brass_001"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "diffs" : [
       {
-        "hint": "Spot the whole garlic clove near the rosemary cutting board.",
-        "id": 1,
-        "radius": 4.2,
-        "x": 56,
-        "y": 48
+        "id" : 1,
+        "radius" : 3.7999999999999998,
+        "hint" : "Look closely at the carved maple bridge blank resting on the workbench.",
+        "x" : 58,
+        "y" : 42
       }
     ],
-    "id": "ai_macro_chef_knife_001",
-    "originalImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Culinary Herb & Prep Station",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_chef_knife_001/variant.png"
+    "title" : "Master Luthier Violin Bench",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_luthier_violin_001\/original.png",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_luthier_violin_001\/original.png",
+    "id" : "ai_macro_luthier_violin_001",
+    "difficulty" : "Medium",
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_luthier_violin_001\/variant.png",
+    "category" : "Photography"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "id" : "ai_macro_miniature_painting_001",
+    "title" : "Fantasy Miniature Painter Wet Palette",
+    "pack" : "Find the Sniper",
+    "category" : "Photography",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Medium",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_miniature_painting_001\/variant.png",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_miniature_painting_001\/original.png",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_miniature_painting_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Check the brass divider caliper near the sea chart compass.",
-        "id": 1,
-        "radius": 4.5,
-        "x": 42,
-        "y": 58
+        "y" : 52,
+        "radius" : 3.7999999999999998,
+        "id" : 1,
+        "hint" : "Examine the pigment droplet cluster on the palette paper.",
+        "x" : 63.5
       }
-    ],
-    "id": "ai_macro_cartography_001",
-    "originalImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Vintage Cartographer Sea Chart",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_cartography_001/variant.png"
+    ]
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_camera_optics_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "title" : "Espresso Machine Brass Grouphead Service",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_espresso_grouphead_001\/variant.png",
+    "packId" : "find_the_sniper",
+    "diffs" : [
       {
-        "hint": "Look at the spanner wrench tool near the aperture ring.",
-        "id": 1,
-        "radius": 4.2,
-        "x": 54,
-        "y": 42
+        "x" : 51,
+        "y" : 46,
+        "hint" : "Check the stainless dispersion screen screw near the portafilter basket.",
+        "radius" : 3.7999999999999998,
+        "id" : 1
       }
     ],
-    "id": "ai_macro_camera_optics_001",
-    "originalImage": "levels/photo-pairs/ai_macro_camera_optics_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Camera Optics Workbench",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_camera_optics_001/variant.png"
+    "pack" : "Find the Sniper",
+    "difficulty" : "Medium",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_espresso_grouphead_001\/original.png",
+    "id" : "ai_macro_espresso_grouphead_001",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_espresso_grouphead_001\/original.png"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/original.png",
-    "category": "Photography",
-    "difficulty": "Hard",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "diffs" : [
       {
-        "hint": "Notice the bamboo tea needle pick resting by the porcelain gaiwan.",
-        "id": 1,
-        "radius": 3.8,
-        "x": 68,
-        "y": 54
+        "x" : 42,
+        "id" : 1,
+        "y" : 58,
+        "hint" : "Look at the individual lead type block sorted in the wooden compartment.",
+        "radius" : 3.7999999999999998
       }
     ],
-    "id": "ai_macro_tea_ceremony_001",
-    "originalImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Traditional Gongfu Tea Board",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/variant.png"
+    "title" : "Vintage Letterpress Movable Type Case",
+    "category" : "Photography",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_letterpress_typesetting_001\/original.png",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_letterpress_typesetting_001\/original.png",
+    "difficulty" : "Medium",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_letterpress_typesetting_001\/variant.png",
+    "id" : "ai_macro_letterpress_typesetting_001"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_vintage_radio_001/original.png",
-    "category": "Photography",
-    "difficulty": "Hard",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_mechanical_keyboard_001\/variant.png",
+    "title" : "Mechanical Keyboard Switch Modding Station",
+    "difficulty" : "Medium",
+    "diffs" : [
       {
-        "hint": "Examine the silver contact pin on the vintage socket.",
-        "id": 1,
-        "radius": 3.8,
-        "x": 52,
-        "y": 62
+        "radius" : 3.7999999999999998,
+        "y" : 45,
+        "id" : 1,
+        "x" : 55,
+        "hint" : "Notice the gold-plated switch spring in the acrylic lube tray."
       }
     ],
-    "id": "ai_macro_vintage_radio_001",
-    "originalImage": "levels/photo-pairs/ai_macro_vintage_radio_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Vacuum Tube Audio Assembly",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_vintage_radio_001/variant.png"
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_mechanical_keyboard_001\/original.png",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_mechanical_keyboard_001\/original.png",
+    "id" : "ai_macro_mechanical_keyboard_001",
+    "category" : "Photography"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
-    "category": "Photography",
-    "difficulty": "Hard",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "diffs" : [
       {
-        "hint": "Find the carved mother-of-pearl button in the sewing tray.",
-        "id": 1,
-        "radius": 3.8,
-        "x": 64,
-        "y": 48
+        "radius" : 3.5,
+        "id" : 1,
+        "x" : 53,
+        "y" : 50,
+        "hint" : "Examine the faceted crystal specimen resting on the inspection card."
       }
     ],
-    "id": "ai_macro_sewing_notions_001",
-    "originalImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Couture Tailor Notions Box",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_sewing_notions_001/variant.png"
+    "variantImage" : "levels\/photo-pairs\/ai_macro_gemologist_loupe_001\/variant.png",
+    "category" : "Photography",
+    "title" : "Gemologist Diamond & Gemstone Loupe",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Hard",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_gemologist_loupe_001\/original.png",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_gemologist_loupe_001\/original.png",
+    "id" : "ai_macro_gemologist_loupe_001"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_watchmaker_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "variantImage" : "levels\/photo-pairs\/ai_macro_sushi_chef_prep_001\/variant.png",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_sushi_chef_prep_001\/original.png",
+    "id" : "ai_macro_sushi_chef_prep_001",
+    "difficulty" : "Hard",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_sushi_chef_prep_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Look inside the small brass cleaning cup in the upper right section.",
-        "id": 1,
-        "radius": 4.8,
-        "x": 65.8,
-        "y": 30.6
+        "hint" : "Check the copper chef tweezers on the cypress wood cutting board.",
+        "x" : 46,
+        "y" : 54,
+        "radius" : 3.5,
+        "id" : 1
       }
     ],
-    "id": "ai_macro_watchmaker_001",
-    "originalImage": "levels/photo-pairs/ai_macro_watchmaker_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Horology Watchmaker Tray",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_watchmaker_001/variant.png"
+    "packId" : "find_the_sniper",
+    "title" : "Edomae Sushi Master Prep Board",
+    "category" : "Photography",
+    "pack" : "Find the Sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "id" : "ai_macro_sailing_rigging_001",
+    "pack" : "Find the Sniper",
+    "difficulty" : "Hard",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_sailing_rigging_001\/original.png",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_sailing_rigging_001\/variant.png",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_sailing_rigging_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Examine the lower left margin of the center poppy illustration card.",
-        "id": 1,
-        "radius": 4.5,
-        "x": 38,
-        "y": 69.5
+        "id" : 1,
+        "x" : 60,
+        "radius" : 3.5,
+        "y" : 48,
+        "hint" : "Look at the stainless steel bow shackle pin attached to the braided line."
       }
     ],
-    "id": "ai_macro_botanist_001",
-    "originalImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Botanist Herbarium Study",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_botanist_001/variant.png"
+    "category" : "Photography",
+    "packId" : "find_the_sniper",
+    "title" : "Yacht Rigging & Stainless Hardware"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_machinist_001/original.png",
-    "category": "Photography",
-    "difficulty": "Hard",
-    "diffs": [
+    "variantImage" : "levels\/photo-pairs\/ai_macro_terrarium_moss_001\/variant.png",
+    "pack" : "Find the Sniper",
+    "difficulty" : "Hard",
+    "diffs" : [
       {
-        "hint": "Count the row of copper ring washers beneath the ball bearings.",
-        "id": 1,
-        "radius": 4.2,
-        "x": 45.6,
-        "y": 73.8
+        "radius" : 3.5,
+        "x" : 49,
+        "hint" : "Check the curved aquascaping pin near the cushion moss clump.",
+        "y" : 56,
+        "id" : 1
       }
     ],
-    "id": "ai_macro_machinist_001",
-    "originalImage": "levels/photo-pairs/ai_macro_machinist_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Machinist Precision Hardware Mat",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_machinist_001/variant.png"
+    "category" : "Photography",
+    "packId" : "find_the_sniper",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_terrarium_moss_001\/original.png",
+    "id" : "ai_macro_terrarium_moss_001",
+    "title" : "Artisan Terrarium Aquascaping Tools",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_terrarium_moss_001\/original.png"
   },
   {
-    "baseImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
-    "category": "Photography",
-    "difficulty": "Hard",
-    "diffs": [
+    "id" : "ai_macro_chronograph_gears_001",
+    "category" : "Photography",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_chronograph_gears_001\/original.png",
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_chronograph_gears_001\/variant.png",
+    "difficulty" : "Hard",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_chronograph_gears_001\/original.png",
+    "title" : "Vintage Chronograph Escapement Movement",
+    "packId" : "find_the_sniper",
+    "diffs" : [
       {
-        "hint": "Check the bat lever color on the miniature toggle switches.",
-        "id": 1,
-        "radius": 4.2,
-        "x": 69.2,
-        "y": 29.8
+        "hint" : "Inspect the ruby jewel bearing pivot on the balance cock plate.",
+        "y" : 46,
+        "x" : 52,
+        "radius" : 3.5,
+        "id" : 1
       }
-    ],
-    "id": "ai_macro_electronics_001",
-    "originalImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Audio Circuit Repair Workbench",
-    "totalDifferences": 1,
-    "variantImage": "levels/photo-pairs/ai_macro_electronics_001/variant.png"
+    ]
   },
   {
-    "baseImage": "levels/photo-pairs/crafts/easy_craft_001/base.jpg",
-    "category": "Craft Clutter",
-    "difficulty": "Easy",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_leather_pricking_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Look around the toy car on the left half of the desk.",
-        "id": 1,
-        "radius": 10,
-        "x": 34.4,
-        "y": 50.4
+        "radius" : 3.5,
+        "y" : 52,
+        "hint" : "Notice the brass rivet head seated on the vegetable-tanned leather piece.",
+        "id" : 1,
+        "x" : 45
       }
     ],
-    "id": "easy_craft_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Craft Desk Toy Car",
-    "variantImage": "levels/photo-pairs/crafts/easy_craft_001/variant.jpg"
+    "packId" : "find_the_sniper",
+    "title" : "Leathercraft French Pricking Irons",
+    "category" : "Photography",
+    "difficulty" : "Hard",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_leather_pricking_001\/variant.png",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_leather_pricking_001\/original.png",
+    "id" : "ai_macro_leather_pricking_001"
   },
   {
-    "baseImage": "levels/photo-pairs/nursery/medium_nursery_001/base.jpg",
-    "category": "Greenhouse Clutter",
-    "difficulty": "Medium",
-    "diffs": [
+    "id" : "ai_macro_bookbinder_marbled_001",
+    "diffs" : [
       {
-        "hint": "Scan the plant tags in the upper-right tray.",
-        "id": 1,
-        "radius": 6.5,
-        "x": 73,
-        "y": 31
+        "radius" : 3.5,
+        "hint" : "Check the decorative brass corner fixture on the bookbinding leather.",
+        "y" : 48,
+        "id" : 1,
+        "x" : 57
       }
     ],
-    "id": "medium_nursery_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Nursery Plant Tag",
-    "variantImage": "levels/photo-pairs/nursery/medium_nursery_001/variant.jpg"
+    "pack" : "Find the Sniper",
+    "title" : "Classical Bookbinder Gold Tooling",
+    "difficulty" : "Hard",
+    "category" : "Photography",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_bookbinder_marbled_001\/original.png",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_bookbinder_marbled_001\/original.png",
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_bookbinder_marbled_001\/variant.png"
   },
   {
-    "baseImage": "levels/photo-pairs/workbench/medium_workbench_001/base.jpg",
-    "category": "Workshop Clutter",
-    "difficulty": "Medium",
-    "diffs": [
+    "title" : "Precision Microcontroller Breadboard",
+    "category" : "Photography",
+    "difficulty" : "Hard",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_oscilloscope_circuit_001\/original.png",
+    "packId" : "find_the_sniper",
+    "pack" : "Find the Sniper",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_oscilloscope_circuit_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Inspect the small screwdriver handle near the right-middle tools.",
-        "id": 1,
-        "radius": 6.5,
-        "x": 68.7,
-        "y": 45.3
+        "x" : 50,
+        "id" : 1,
+        "hint" : "Examine the miniature tantalum capacitor pin on the breadboard rail.",
+        "radius" : 3.5,
+        "y" : 51
       }
     ],
-    "id": "medium_workbench_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Workbench Screwdriver",
-    "variantImage": "levels/photo-pairs/workbench/medium_workbench_001/variant.jpg"
+    "variantImage" : "levels\/photo-pairs\/ai_macro_oscilloscope_circuit_001\/variant.png",
+    "id" : "ai_macro_oscilloscope_circuit_001"
   },
   {
-    "baseImage": "levels/photo-pairs/camouflage/hard_forest_001/base.jpg",
-    "category": "Extreme Hunter",
-    "difficulty": "Hard",
-    "diffs": [
+    "baseImage" : "levels\/photo-pairs\/ai_macro_woodcarver_001\/original.png",
+    "category" : "Photography",
+    "totalDifferences" : 1,
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Medium",
+    "diffs" : [
       {
-        "hint": "Look for the camouflaged tiny figure near center-right.",
-        "id": 1,
-        "radius": 5.2,
-        "x": 60.3,
-        "y": 54.4
+        "y" : 74.200000000000003,
+        "id" : 1,
+        "hint" : "Check the carved decorative relief piece next to the wooden spoon.",
+        "x" : 44.100000000000001,
+        "radius" : 4.5
       }
     ],
-    "id": "hard_forest_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Forest Floor Camouflage",
-    "variantImage": "levels/photo-pairs/camouflage/hard_forest_001/variant.jpg"
+    "variantImage" : "levels\/photo-pairs\/ai_macro_woodcarver_001\/variant.png",
+    "id" : "ai_macro_woodcarver_001",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_woodcarver_001\/original.png",
+    "title" : "Artisan Woodcarver Chisel Rack"
   },
   {
-    "baseImage": "levels/photo-pairs/pattern-rug/easy_rug_pick_001/base.jpg",
-    "category": "Pattern Clutter",
-    "difficulty": "Easy",
-    "diffs": [
+    "packId" : "find_the_sniper",
+    "totalDifferences" : 1,
+    "diffs" : [
       {
-        "hint": "Look for the added yellow pick among the repeated rug shapes.",
-        "id": 1,
-        "radius": 8,
-        "x": 58.8,
-        "y": 43.4
+        "y" : 52.5,
+        "id" : 1,
+        "hint" : "Examine the star anise cluster near the cumin wooden bowl.",
+        "x" : 24,
+        "radius" : 4.2000000000000002
       }
     ],
-    "id": "easy_rug_pick_001",
-    "pack": "Abstract & Animated",
-    "packId": "abstract_animated",
-    "title": "Patterned Rug Guitar Pick",
-    "variantImage": "levels/photo-pairs/pattern-rug/easy_rug_pick_001/variant.jpg"
+    "baseImage" : "levels\/photo-pairs\/ai_macro_spice_bazaar_001\/original.png",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_spice_bazaar_001\/variant.png",
+    "pack" : "Find the Sniper",
+    "title" : "Artisan Exotic Spice Board",
+    "difficulty" : "Medium",
+    "category" : "Photography",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_spice_bazaar_001\/original.png",
+    "id" : "ai_macro_spice_bazaar_001"
   },
   {
-    "baseImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/base.jpg",
-    "category": "Workshop Clutter",
-    "difficulty": "Easy",
-    "diffs": [
+    "variantImage" : "levels\/photo-pairs\/ai_macro_chef_knife_001\/variant.png",
+    "title" : "Culinary Herb & Prep Station",
+    "pack" : "Find the Sniper",
+    "diffs" : [
       {
-        "hint": "Compare the small silver screw between the right-side hardware.",
-        "id": 1,
-        "radius": 5.8,
-        "x": 67,
-        "y": 48.3
+        "y" : 48,
+        "id" : 1,
+        "hint" : "Spot the whole garlic clove near the rosemary cutting board.",
+        "x" : 56,
+        "radius" : 4.2000000000000002
       }
     ],
-    "id": "medium_screw_tray_001",
-    "pack": "Abstract & Animated",
-    "packId": "abstract_animated",
-    "title": "Screw Tray Missing Screw",
-    "variantImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/variant.jpg"
+    "originalImage" : "levels\/photo-pairs\/ai_macro_chef_knife_001\/original.png",
+    "totalDifferences" : 1,
+    "id" : "ai_macro_chef_knife_001",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_chef_knife_001\/original.png",
+    "category" : "Photography",
+    "difficulty" : "Medium",
+    "packId" : "find_the_sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/base.jpg",
-    "category": "Pattern Clutter",
-    "difficulty": "Hard",
-    "diffs": [
+    "category" : "Photography",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_cartography_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Inspect the shifted orange tile fragment left of center.",
-        "id": 1,
-        "radius": 5.9,
-        "x": 35.7,
-        "y": 53.8
+        "y" : 58,
+        "id" : 1,
+        "hint" : "Check the brass divider caliper near the sea chart compass.",
+        "x" : 42,
+        "radius" : 4.5
       }
     ],
-    "id": "medium_tile_piece_001",
-    "pack": "Abstract & Animated",
-    "packId": "abstract_animated",
-    "title": "Mosaic Tile Shift",
-    "variantImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/variant.jpg"
+    "id" : "ai_macro_cartography_001",
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_cartography_001\/original.png",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_cartography_001\/variant.png",
+    "totalDifferences" : 1,
+    "title" : "Vintage Cartographer Sea Chart",
+    "difficulty" : "Medium"
   },
   {
-    "baseImage": "levels/photo-pairs/wire-tangle/hard_wire_clip_001/base.jpg",
-    "category": "Workshop Clutter",
-    "difficulty": "Hard",
-    "diffs": [
+    "diffs" : [
       {
-        "hint": "Compare the angle of the small clip in the lower-right wire tangle.",
-        "id": 1,
-        "radius": 4.4,
-        "x": 73.8,
-        "y": 57.4
+        "y" : 42,
+        "id" : 1,
+        "hint" : "Look at the spanner wrench tool near the aperture ring.",
+        "x" : 54,
+        "radius" : 4.2000000000000002
       }
     ],
-    "id": "hard_wire_clip_001",
-    "pack": "Abstract & Animated",
-    "packId": "abstract_animated",
-    "title": "Wire Tangle Clip",
-    "variantImage": "levels/photo-pairs/wire-tangle/hard_wire_clip_001/variant.jpg"
+    "difficulty" : "Medium",
+    "totalDifferences" : 1,
+    "baseImage" : "levels\/photo-pairs\/ai_macro_camera_optics_001\/original.png",
+    "title" : "Camera Optics Workbench",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_camera_optics_001\/variant.png",
+    "pack" : "Find the Sniper",
+    "category" : "Photography",
+    "packId" : "find_the_sniper",
+    "id" : "ai_macro_camera_optics_001",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_camera_optics_001\/original.png"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "baseImage" : "levels\/photo-pairs\/ai_macro_tea_ceremony_001\/original.png",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_tea_ceremony_001\/variant.png",
+    "id" : "ai_macro_tea_ceremony_001",
+    "pack" : "Find the Sniper",
+    "diffs" : [
       {
-        "hint": "Look just left of the blue screwdriver near the top edge.",
-        "id": 1,
-        "radius": 10.6,
-        "x": 62.8,
-        "y": 7.6
+        "y" : 54,
+        "id" : 1,
+        "hint" : "Notice the bamboo tea needle pick resting by the porcelain gaiwan.",
+        "x" : 68,
+        "radius" : 3.7999999999999998
       }
     ],
-    "id": "photo_workbench_hardware_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Workbench Hardware Ring",
-    "variantImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/variant.jpg"
+    "totalDifferences" : 1,
+    "difficulty" : "Hard",
+    "title" : "Traditional Gongfu Tea Board",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_tea_ceremony_001\/original.png",
+    "packId" : "find_the_sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "totalDifferences" : 1,
+    "diffs" : [
       {
-        "hint": "Check the small detached succulent just left of the twine bundle.",
-        "id": 1,
-        "radius": 7.2,
-        "x": 70.4,
-        "y": 40.2
+        "y" : 62,
+        "id" : 1,
+        "hint" : "Examine the silver contact pin on the vintage socket.",
+        "x" : 52,
+        "radius" : 3.7999999999999998
       }
     ],
-    "id": "photo_potting_table_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Potting Table Succulent",
-    "variantImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/variant.jpg"
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_vintage_radio_001\/variant.png",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_vintage_radio_001\/original.png",
+    "pack" : "Find the Sniper",
+    "title" : "Vacuum Tube Audio Assembly",
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_vintage_radio_001\/original.png",
+    "id" : "ai_macro_vintage_radio_001",
+    "difficulty" : "Hard"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "id" : "ai_macro_sewing_notions_001",
+    "title" : "Couture Tailor Notions Box",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Hard",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_sewing_notions_001\/variant.png",
+    "pack" : "Find the Sniper",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_sewing_notions_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 6.7,
-        "x": 35.1,
-        "y": 61.6
+        "y" : 48,
+        "id" : 1,
+        "hint" : "Find the carved mother-of-pearl button in the sewing tray.",
+        "x" : 64,
+        "radius" : 3.7999999999999998
       }
     ],
-    "id": "photo_watchmaker_bench_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Watchmaker Bench Gear",
-    "variantImage": "levels/photo-pairs/photo-watchmaker-bench/variant.jpg"
+    "originalImage" : "levels\/photo-pairs\/ai_macro_sewing_notions_001\/original.png",
+    "totalDifferences" : 1
   },
   {
-    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "baseImage" : "levels\/photo-pairs\/ai_macro_watchmaker_001\/original.png",
+    "title" : "Horology Watchmaker Tray",
+    "totalDifferences" : 1,
+    "id" : "ai_macro_watchmaker_001",
+    "variantImage" : "levels\/photo-pairs\/ai_macro_watchmaker_001\/variant.png",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 7.1,
-        "x": 16.7,
-        "y": 76
+        "y" : 30.600000000000001,
+        "id" : 1,
+        "hint" : "Look inside the small brass cleaning cup in the upper right section.",
+        "x" : 65.799999999999997,
+        "radius" : 4.7999999999999998
       }
     ],
-    "id": "photo_bakers_table_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Bakers Table Cutter",
-    "variantImage": "levels/photo-pairs/photo-bakers-table/variant.jpg"
+    "pack" : "Find the Sniper",
+    "difficulty" : "Medium",
+    "category" : "Photography",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_watchmaker_001\/original.png",
+    "packId" : "find_the_sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "variantImage" : "levels\/photo-pairs\/ai_macro_botanist_001\/variant.png",
+    "totalDifferences" : 1,
+    "originalImage" : "levels\/photo-pairs\/ai_macro_botanist_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 5.1,
-        "x": 50.1,
-        "y": 57.6
+        "y" : 69.5,
+        "id" : 1,
+        "hint" : "Examine the lower left margin of the center poppy illustration card.",
+        "x" : 38,
+        "radius" : 4.5
       }
     ],
-    "id": "photo_electronics_bench_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Electronics Bench Resistor",
-    "variantImage": "levels/photo-pairs/photo-electronics-bench/variant.jpg"
+    "baseImage" : "levels\/photo-pairs\/ai_macro_botanist_001\/original.png",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Medium",
+    "title" : "Botanist Herbarium Study",
+    "pack" : "Find the Sniper",
+    "category" : "Photography",
+    "id" : "ai_macro_botanist_001"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
-    "category": "Photography",
-    "difficulty": "Hard",
-    "diffs": [
+    "variantImage" : "levels\/photo-pairs\/ai_macro_machinist_001\/variant.png",
+    "totalDifferences" : 1,
+    "id" : "ai_macro_machinist_001",
+    "pack" : "Find the Sniper",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 18.5,
-        "x": 52.8,
-        "y": 73.5
+        "y" : 73.799999999999997,
+        "id" : 1,
+        "hint" : "Count the row of copper ring washers beneath the ball bearings.",
+        "x" : 45.600000000000001,
+        "radius" : 4.2000000000000002
       }
     ],
-    "id": "photo_art_table_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Artist Table Paint Tube",
-    "variantImage": "levels/photo-pairs/photo-art-table/variant.jpg"
+    "difficulty" : "Hard",
+    "title" : "Machinist Precision Hardware Mat",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_machinist_001\/original.png",
+    "category" : "Photography",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_machinist_001\/original.png",
+    "packId" : "find_the_sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "variantImage" : "levels\/photo-pairs\/ai_macro_electronics_001\/variant.png",
+    "originalImage" : "levels\/photo-pairs\/ai_macro_electronics_001\/original.png",
+    "category" : "Photography",
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/ai_macro_electronics_001\/original.png",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 7.8,
-        "x": 45.7,
-        "y": 30.5
+        "y" : 29.800000000000001,
+        "id" : 1,
+        "hint" : "Check the bat lever color on the miniature toggle switches.",
+        "x" : 69.200000000000003,
+        "radius" : 4.2000000000000002
       }
     ],
-    "id": "photo_camping_table_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Camping Table Carabiner",
-    "variantImage": "levels/photo-pairs/photo-camping-table/variant.jpg"
+    "id" : "ai_macro_electronics_001",
+    "pack" : "Find the Sniper",
+    "title" : "Audio Circuit Repair Workbench",
+    "totalDifferences" : 1,
+    "difficulty" : "Hard"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "category" : "Craft Clutter",
+    "variantImage" : "levels\/photo-pairs\/crafts\/easy_craft_001\/variant.jpg",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Easy",
+    "pack" : "Find the Sniper",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 12.9,
-        "x": 37.9,
-        "y": 34.6
+        "y" : 50.399999999999999,
+        "id" : 1,
+        "hint" : "Look around the toy car on the left half of the desk.",
+        "x" : 34.399999999999999,
+        "radius" : 10
       }
     ],
-    "id": "photo_antique_desk_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Antique Desk Key",
-    "variantImage": "levels/photo-pairs/photo-antique-desk/variant.jpg"
+    "baseImage" : "levels\/photo-pairs\/crafts\/easy_craft_001\/base.jpg",
+    "title" : "Craft Desk Toy Car",
+    "id" : "easy_craft_001"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
-    "category": "Photography",
-    "difficulty": "Hard",
-    "diffs": [
+    "title" : "Nursery Plant Tag",
+    "baseImage" : "levels\/photo-pairs\/nursery\/medium_nursery_001\/base.jpg",
+    "variantImage" : "levels\/photo-pairs\/nursery\/medium_nursery_001\/variant.jpg",
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Medium",
+    "id" : "medium_nursery_001",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 5.4,
-        "x": 64.1,
-        "y": 55.6
+        "y" : 31,
+        "id" : 1,
+        "hint" : "Scan the plant tags in the upper-right tray.",
+        "x" : 73,
+        "radius" : 6.5
       }
     ],
-    "id": "photo_board_game_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Board Game Piece",
-    "variantImage": "levels/photo-pairs/photo-board-game/variant.jpg"
+    "category" : "Greenhouse Clutter"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "id" : "medium_workbench_001",
+    "variantImage" : "levels\/photo-pairs\/workbench\/medium_workbench_001\/variant.jpg",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 10.5,
-        "x": 59.6,
-        "y": 73.8
+        "y" : 45.299999999999997,
+        "id" : 1,
+        "hint" : "Inspect the small screwdriver handle near the right-middle tools.",
+        "x" : 68.700000000000003,
+        "radius" : 6.5
       }
     ],
-    "id": "photo_woodworking_bench_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Woodworking Bench Screw",
-    "variantImage": "levels/photo-pairs/photo-woodworking-bench/variant.jpg"
+    "category" : "Workshop Clutter",
+    "packId" : "find_the_sniper",
+    "pack" : "Find the Sniper",
+    "baseImage" : "levels\/photo-pairs\/workbench\/medium_workbench_001\/base.jpg",
+    "difficulty" : "Medium",
+    "title" : "Workbench Screwdriver"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-spice-table/base.jpg",
-    "category": "Photography",
-    "difficulty": "Hard",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 9.9,
-        "x": 39.6,
-        "y": 16.1
+        "y" : 54.399999999999999,
+        "id" : 1,
+        "hint" : "Look for the camouflaged tiny figure near center-right.",
+        "x" : 60.299999999999997,
+        "radius" : 5.2000000000000002
       }
     ],
-    "id": "photo_spice_table_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Spice Table Herb",
-    "variantImage": "levels/photo-pairs/photo-spice-table/variant.jpg"
+    "title" : "Forest Floor Camouflage",
+    "id" : "hard_forest_001",
+    "variantImage" : "levels\/photo-pairs\/camouflage\/hard_forest_001\/variant.jpg",
+    "difficulty" : "Hard",
+    "baseImage" : "levels\/photo-pairs\/camouflage\/hard_forest_001\/base.jpg",
+    "category" : "Extreme Hunter"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-coffee-station/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "baseImage" : "levels\/photo-pairs\/pattern-rug\/easy_rug_pick_001\/base.jpg",
+    "variantImage" : "levels\/photo-pairs\/pattern-rug\/easy_rug_pick_001\/variant.jpg",
+    "title" : "Patterned Rug Guitar Pick",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 9.5,
-        "x": 37.2,
-        "y": 70.4
+        "y" : 43.399999999999999,
+        "id" : 1,
+        "hint" : "Look for the added yellow pick among the repeated rug shapes.",
+        "x" : 58.799999999999997,
+        "radius" : 8
       }
     ],
-    "id": "photo_coffee_station_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Coffee Station Scoop",
-    "variantImage": "levels/photo-pairs/photo-coffee-station/variant.jpg"
+    "pack" : "Abstract & Animated",
+    "difficulty" : "Easy",
+    "id" : "easy_rug_pick_001",
+    "packId" : "abstract_animated",
+    "category" : "Pattern Clutter"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-fishing-tackle/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "difficulty" : "Easy",
+    "category" : "Workshop Clutter",
+    "pack" : "Abstract & Animated",
+    "id" : "medium_screw_tray_001",
+    "title" : "Screw Tray Missing Screw",
+    "baseImage" : "levels\/photo-pairs\/screw-tray\/medium_screw_tray_001\/base.jpg",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 10.7,
-        "x": 62.6,
-        "y": 52.3
+        "y" : 48.299999999999997,
+        "id" : 1,
+        "hint" : "Compare the small silver screw between the right-side hardware.",
+        "x" : 67,
+        "radius" : 5.7999999999999998
       }
     ],
-    "id": "photo_fishing_tackle_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Fishing Tackle Float",
-    "variantImage": "levels/photo-pairs/photo-fishing-tackle/variant.jpg"
+    "variantImage" : "levels\/photo-pairs\/screw-tray\/medium_screw_tray_001\/variant.jpg",
+    "packId" : "abstract_animated"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 10.6,
-        "x": 62.8,
-        "y": 73.1
+        "y" : 53.799999999999997,
+        "id" : 1,
+        "hint" : "Inspect the shifted orange tile fragment left of center.",
+        "x" : 35.700000000000003,
+        "radius" : 5.9000000000000004
       }
     ],
-    "id": "photo_repair_drawer_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Repair Drawer Washer",
-    "variantImage": "levels/photo-pairs/photo-repair-drawer/variant.jpg"
+    "baseImage" : "levels\/photo-pairs\/tile-mosaic\/medium_tile_piece_001\/base.jpg",
+    "title" : "Mosaic Tile Shift",
+    "difficulty" : "Hard",
+    "pack" : "Abstract & Animated",
+    "variantImage" : "levels\/photo-pairs\/tile-mosaic\/medium_tile_piece_001\/variant.jpg",
+    "category" : "Pattern Clutter",
+    "packId" : "abstract_animated",
+    "id" : "medium_tile_piece_001"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "id" : "hard_wire_clip_001",
+    "baseImage" : "levels\/photo-pairs\/wire-tangle\/hard_wire_clip_001\/base.jpg",
+    "category" : "Workshop Clutter",
+    "packId" : "abstract_animated",
+    "variantImage" : "levels\/photo-pairs\/wire-tangle\/hard_wire_clip_001\/variant.jpg",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 7.7,
-        "x": 38.5,
-        "y": 67.9
+        "y" : 57.399999999999999,
+        "id" : 1,
+        "hint" : "Compare the angle of the small clip in the lower-right wire tangle.",
+        "x" : 73.799999999999997,
+        "radius" : 4.4000000000000004
       }
     ],
-    "id": "photo_camera_gear_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Camera Gear Lens Cap",
-    "variantImage": "levels/photo-pairs/photo-camera-gear/variant.jpg"
+    "difficulty" : "Hard",
+    "title" : "Wire Tangle Clip",
+    "pack" : "Abstract & Animated"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "difficulty" : "Medium",
+    "title" : "Workbench Hardware Ring",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 8.6,
-        "x": 48.7,
-        "y": 29.4
+        "y" : 7.5999999999999996,
+        "id" : 1,
+        "hint" : "Look just left of the blue screwdriver near the top edge.",
+        "x" : 62.799999999999997,
+        "radius" : 10.6
       }
     ],
-    "id": "photo_pottery_table_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Pottery Table Sponge",
-    "variantImage": "levels/photo-pairs/photo-pottery-table/variant.jpg"
+    "baseImage" : "levels\/photo-pairs\/photo-workbench-hardware\/photo_workbench_hardware_001\/base.jpg",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/photo-workbench-hardware\/photo_workbench_hardware_001\/variant.jpg",
+    "packId" : "find_the_sniper",
+    "id" : "photo_workbench_hardware_001"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 8.4,
-        "x": 34.4,
-        "y": 91.3
+        "y" : 40.200000000000003,
+        "id" : 1,
+        "hint" : "Check the small detached succulent just left of the twine bundle.",
+        "x" : 70.400000000000006,
+        "radius" : 7.2000000000000002
       }
     ],
-    "id": "photo_bicycle_repair_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Bicycle Repair Bolt",
-    "variantImage": "levels/photo-pairs/photo-bicycle-repair/variant.jpg"
+    "title" : "Potting Table Succulent",
+    "baseImage" : "levels\/photo-pairs\/photo-potting-table\/photo_potting_table_001\/base.jpg",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/photo-potting-table\/photo_potting_table_001\/variant.jpg",
+    "packId" : "find_the_sniper",
+    "pack" : "Find the Sniper",
+    "id" : "photo_potting_table_001",
+    "difficulty" : "Medium"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "packId" : "find_the_sniper",
+    "category" : "Photography",
+    "difficulty" : "Medium",
+    "variantImage" : "levels\/photo-pairs\/photo-watchmaker-bench\/variant.jpg",
+    "baseImage" : "levels\/photo-pairs\/photo-watchmaker-bench\/base.jpg",
+    "pack" : "Find the Sniper",
+    "title" : "Watchmaker Bench Gear",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 5.3,
-        "x": 74.9,
-        "y": 83.7
+        "y" : 61.600000000000001,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 35.100000000000001,
+        "radius" : 6.7000000000000002
       }
     ],
-    "id": "photo_woodworking_table_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Woodworking Screw",
-    "variantImage": "levels/photo-pairs/photo-woodworking-table/variant.jpg"
+    "id" : "photo_watchmaker_bench_001"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "baseImage" : "levels\/photo-pairs\/photo-bakers-table\/base.jpg",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Medium",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 11.6,
-        "x": 81.9,
-        "y": 26.5
+        "y" : 76,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 16.699999999999999,
+        "radius" : 7.0999999999999996
       }
     ],
-    "id": "photo_artist_supply_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Artist Supply Paint",
-    "variantImage": "levels/photo-pairs/photo-artist-supply/variant.jpg"
+    "title" : "Bakers Table Cutter",
+    "pack" : "Find the Sniper",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/photo-bakers-table\/variant.jpg",
+    "id" : "photo_bakers_table_001"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "baseImage" : "levels\/photo-pairs\/photo-electronics-bench\/base.jpg",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 13.7,
-        "x": 61,
-        "y": 32.9
+        "y" : 57.600000000000001,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 50.100000000000001,
+        "radius" : 5.0999999999999996
       }
     ],
-    "id": "photo_camping_gear_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Camping Gear Carabiner",
-    "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg"
+    "difficulty" : "Medium",
+    "pack" : "Find the Sniper",
+    "title" : "Electronics Bench Resistor",
+    "packId" : "find_the_sniper",
+    "id" : "photo_electronics_bench_001",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/photo-electronics-bench\/variant.jpg"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "title" : "Artist Table Paint Tube",
+    "id" : "photo_art_table_001",
+    "variantImage" : "levels\/photo-pairs\/photo-art-table\/variant.jpg",
+    "category" : "Photography",
+    "baseImage" : "levels\/photo-pairs\/photo-art-table\/base.jpg",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 7.1,
-        "x": 63,
-        "y": 93.5
+        "y" : 73.5,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 52.799999999999997,
+        "radius" : 18.5
       }
     ],
-    "id": "photo_sewing_table_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Sewing Table Button",
-    "variantImage": "levels/photo-pairs/photo-sewing-table/variant.jpg"
+    "packId" : "find_the_sniper",
+    "pack" : "Find the Sniper",
+    "difficulty" : "Hard"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "packId" : "find_the_sniper",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 5.5,
-        "x": 47.4,
-        "y": 12.6
+        "y" : 30.5,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 45.700000000000003,
+        "radius" : 7.7999999999999998
       }
     ],
-    "id": "photo_map_restoration_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Map Restoration Clip",
-    "variantImage": "levels/photo-pairs/photo-map-restoration/variant.jpg"
+    "baseImage" : "levels\/photo-pairs\/photo-camping-table\/base.jpg",
+    "pack" : "Find the Sniper",
+    "id" : "photo_camping_table_001",
+    "category" : "Photography",
+    "title" : "Camping Table Carabiner",
+    "variantImage" : "levels\/photo-pairs\/photo-camping-table\/variant.jpg",
+    "difficulty" : "Easy"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 11,
-        "x": 34.8,
-        "y": 50.5
+        "y" : 34.600000000000001,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 37.899999999999999,
+        "radius" : 12.9
       }
     ],
-    "id": "photo_garden_potting_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Garden Potting Pot",
-    "variantImage": "levels/photo-pairs/photo-garden-potting/variant.jpg"
+    "baseImage" : "levels\/photo-pairs\/photo-antique-desk\/base.jpg",
+    "title" : "Antique Desk Key",
+    "variantImage" : "levels\/photo-pairs\/photo-antique-desk\/variant.jpg",
+    "id" : "photo_antique_desk_001",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Medium",
+    "category" : "Photography",
+    "pack" : "Find the Sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
-    "category": "Photography",
-    "difficulty": "Easy",
-    "diffs": [
+    "id" : "photo_board_game_001",
+    "difficulty" : "Hard",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 5.7,
-        "x": 20.2,
-        "y": 59.2
+        "y" : 55.600000000000001,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 64.099999999999994,
+        "radius" : 5.4000000000000004
       }
     ],
-    "id": "photo_game_night_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Game Night Token",
-    "variantImage": "levels/photo-pairs/photo-game-night/variant.jpg"
+    "title" : "Board Game Piece",
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-board-game\/variant.jpg",
+    "category" : "Photography",
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/photo-board-game\/base.jpg"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
+    "packId" : "find_the_sniper",
+    "diffs" : [
       {
-        "hint": "Compare the small object in this area.",
-        "id": 1,
-        "radius": 5,
-        "x": 89.7,
-        "y": 65.6
+        "y" : 73.799999999999997,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 59.600000000000001,
+        "radius" : 10.5
       }
     ],
-    "id": "photo_watch_repair_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Watch Repair Gear",
-    "variantImage": "levels/photo-pairs/photo-watch-repair/variant.jpg"
+    "difficulty" : "Medium",
+    "variantImage" : "levels\/photo-pairs\/photo-woodworking-bench\/variant.jpg",
+    "category" : "Photography",
+    "baseImage" : "levels\/photo-pairs\/photo-woodworking-bench\/base.jpg",
+    "id" : "photo_woodworking_bench_001",
+    "title" : "Woodworking Bench Screw",
+    "pack" : "Find the Sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/abstract-token-field/abstract_token_field_001/base.jpg",
-    "category": "Illustrated",
-    "difficulty": "Easy",
-    "diffs": [
+    "variantImage" : "levels\/photo-pairs\/photo-spice-table\/variant.jpg",
+    "diffs" : [
       {
-        "hint": "Compare the upright turquoise capsule just below center.",
-        "id": 1,
-        "radius": 7.9,
-        "x": 40.1,
-        "y": 66.7
+        "y" : 16.100000000000001,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 39.600000000000001,
+        "radius" : 9.9000000000000004
       }
     ],
-    "id": "abstract_token_field_001",
-    "pack": "Abstract Animated",
-    "packId": "abstract_animated",
-    "title": "Floating Token Field",
-    "variantImage": "levels/photo-pairs/abstract-token-field/abstract_token_field_001/variant.jpg"
+    "difficulty" : "Hard",
+    "title" : "Spice Table Herb",
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/photo-spice-table\/base.jpg",
+    "id" : "photo_spice_table_001",
+    "pack" : "Find the Sniper",
+    "category" : "Photography"
   },
   {
-    "baseImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/base.jpg",
-    "category": "Illustrated",
-    "difficulty": "Hard",
-    "diffs": [
+    "diffs" : [
       {
-        "hint": "Inspect the small purple connector slightly right of center.",
-        "id": 1,
-        "radius": 7.5,
-        "x": 56.6,
-        "y": 40.4
+        "y" : 70.400000000000006,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 37.200000000000003,
+        "radius" : 9.5
       }
     ],
-    "id": "abstract_mechanical_maze_001",
-    "pack": "Abstract Animated",
-    "packId": "abstract_animated",
-    "title": "Mechanical Tile Maze",
-    "variantImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/variant.jpg"
+    "variantImage" : "levels\/photo-pairs\/photo-coffee-station\/variant.jpg",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Medium",
+    "pack" : "Find the Sniper",
+    "baseImage" : "levels\/photo-pairs\/photo-coffee-station\/base.jpg",
+    "title" : "Coffee Station Scoop",
+    "category" : "Photography",
+    "id" : "photo_coffee_station_001"
   },
   {
-    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/base.jpg",
-    "category": "Generated Illustrated Abstract",
-    "difficulty": "Easy",
-    "diffs": [
+    "title" : "Fishing Tackle Float",
+    "pack" : "Find the Sniper",
+    "diffs" : [
       {
-        "hint": "Examine the region around (62%, 81%) carefully.",
-        "id": 1,
-        "radius": 5.4,
-        "x": 62.2,
-        "y": 81.9
+        "y" : 52.299999999999997,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 62.600000000000001,
+        "radius" : 10.699999999999999
       }
     ],
-    "id": "mass_abstract_001",
-    "pack": "Abstract Animated",
-    "packId": "abstract_animated",
-    "title": "Generated Illustrated Abstract #1",
-    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/variant.jpg"
+    "id" : "photo_fishing_tackle_001",
+    "baseImage" : "levels\/photo-pairs\/photo-fishing-tackle\/base.jpg",
+    "category" : "Photography",
+    "difficulty" : "Easy",
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-fishing-tackle\/variant.jpg"
   },
   {
-    "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_002/base.jpg",
-    "category": "Generated Illustrated Abstract",
-    "difficulty": "Easy",
-    "diffs": [
+    "baseImage" : "levels\/photo-pairs\/photo-repair-drawer\/base.jpg",
+    "id" : "photo_repair_drawer_001",
+    "category" : "Photography",
+    "difficulty" : "Medium",
+    "packId" : "find_the_sniper",
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-repair-drawer\/variant.jpg",
+    "title" : "Repair Drawer Washer",
+    "diffs" : [
       {
-        "hint": "Examine the region around (45%, 38%) carefully.",
-        "id": 1,
-        "radius": 5.9,
-        "x": 46.4,
-        "y": 39.1
+        "y" : 73.099999999999994,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 62.799999999999997,
+        "radius" : 10.6
       }
-    ],
-    "id": "mass_abstract_002",
-    "pack": "Abstract Animated",
-    "packId": "abstract_animated",
-    "title": "Generated Illustrated Abstract #2",
-    "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_002/variant.jpg"
+    ]
   },
   {
-    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
-    "category": "Photographic Detail",
-    "difficulty": "Hard",
-    "diffs": [
+    "difficulty" : "Easy",
+    "variantImage" : "levels\/photo-pairs\/photo-camera-gear\/variant.jpg",
+    "baseImage" : "levels\/photo-pairs\/photo-camera-gear\/base.jpg",
+    "packId" : "find_the_sniper",
+    "diffs" : [
       {
-        "hint": "Compare the small color detail in this area.",
-        "id": 1,
-        "radius": 5.5,
-        "x": 45,
-        "y": 55
+        "y" : 67.900000000000006,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 38.5,
+        "radius" : 7.7000000000000002
       }
     ],
-    "id": "mass_photo_102",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Photographic Detail 102",
-    "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_102/variant.jpg"
+    "category" : "Photography",
+    "title" : "Camera Gear Lens Cap",
+    "pack" : "Find the Sniper",
+    "id" : "photo_camera_gear_001"
   },
   {
-    "baseImage": "levels/photo-pairs/ai-bakery-counter/base.jpg",
-    "category": "Bakery Clutter",
-    "difficulty": "Easy",
-    "diffs": [
+    "id" : "photo_pottery_table_001",
+    "title" : "Pottery Table Sponge",
+    "diffs" : [
       {
-        "hint": "Check the silver powdered sugar shaker to the right of the rolling pin.",
-        "id": 1,
-        "radius": 7.5,
-        "x": 83.2,
-        "y": 63.5
+        "y" : 29.399999999999999,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 48.700000000000003,
+        "radius" : 8.5999999999999996
       }
     ],
-    "id": "ai_bakery_counter_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Rustic Bakery Counter",
-    "variantImage": "levels/photo-pairs/ai-bakery-counter/variant.jpg"
+    "difficulty" : "Easy",
+    "pack" : "Find the Sniper",
+    "baseImage" : "levels\/photo-pairs\/photo-pottery-table\/base.jpg",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/photo-pottery-table\/variant.jpg",
+    "packId" : "find_the_sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/ai-greenhouse-potting/base.jpg",
-    "category": "Botanical Garden",
-    "difficulty": "Easy",
-    "diffs": [
+    "id" : "photo_bicycle_repair_001",
+    "diffs" : [
       {
-        "hint": "Look at the metal soil scoop resting on the wooden table.",
-        "id": 1,
-        "radius": 8,
-        "x": 41.7,
-        "y": 75.2
+        "y" : 91.299999999999997,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 34.399999999999999,
+        "radius" : 8.4000000000000004
       }
     ],
-    "id": "ai_greenhouse_potting_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Greenhouse Potting Bench",
-    "variantImage": "levels/photo-pairs/ai-greenhouse-potting/variant.jpg"
+    "baseImage" : "levels\/photo-pairs\/photo-bicycle-repair\/base.jpg",
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-bicycle-repair\/variant.jpg",
+    "difficulty" : "Medium",
+    "category" : "Photography",
+    "title" : "Bicycle Repair Bolt",
+    "packId" : "find_the_sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/ai-watchmaker-bench/base.jpg",
-    "category": "Horology Studio",
-    "difficulty": "Medium",
-    "diffs": [
+    "difficulty" : "Medium",
+    "baseImage" : "levels\/photo-pairs\/photo-woodworking-table\/base.jpg",
+    "pack" : "Find the Sniper",
+    "id" : "photo_woodworking_table_001",
+    "diffs" : [
       {
-        "hint": "Inspect the dark blue velvet pad in the lower-right corner.",
-        "id": 1,
-        "radius": 7.5,
-        "x": 87.2,
-        "y": 67
+        "y" : 83.700000000000003,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 74.900000000000006,
+        "radius" : 5.2999999999999998
       }
     ],
-    "id": "ai_watchmaker_bench_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Master Watchmaker Desk",
-    "variantImage": "levels/photo-pairs/ai-watchmaker-bench/variant.jpg"
+    "packId" : "find_the_sniper",
+    "title" : "Woodworking Screw",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/photo-woodworking-table\/variant.jpg"
   },
   {
-    "baseImage": "levels/photo-pairs/ai-artist-easel/base.jpg",
-    "category": "Fine Art Studio",
-    "difficulty": "Easy",
-    "diffs": [
+    "id" : "photo_artist_supply_001",
+    "category" : "Photography",
+    "baseImage" : "levels\/photo-pairs\/photo-artist-supply\/base.jpg",
+    "title" : "Artist Supply Paint",
+    "diffs" : [
       {
-        "hint": "Scan the bottom-left corner of the table for the cobalt blue paint tube.",
-        "id": 1,
-        "radius": 8,
-        "x": 11,
-        "y": 72
+        "y" : 26.5,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 81.900000000000006,
+        "radius" : 11.6
       }
     ],
-    "id": "ai_artist_easel_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Painter Studio Palette",
-    "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg"
+    "difficulty" : "Easy",
+    "variantImage" : "levels\/photo-pairs\/photo-artist-supply\/variant.jpg",
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/ai-coffee-bar/base.jpg",
-    "category": "Espresso Station",
-    "difficulty": "Easy",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "diffs" : [
       {
-        "hint": "Check the wooden-handled barista brush to the left of the tamper.",
-        "id": 1,
-        "radius": 7.5,
-        "x": 9.7,
-        "y": 58
+        "y" : 32.899999999999999,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 61,
+        "radius" : 13.699999999999999
       }
     ],
-    "id": "ai_coffee_bar_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Artisanal Coffee Bar",
-    "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg"
+    "variantImage" : "levels\/photo-pairs\/photo-camping-gear\/variant.jpg",
+    "baseImage" : "levels\/photo-pairs\/photo-camping-gear\/base.jpg",
+    "category" : "Photography",
+    "id" : "photo_camping_gear_001",
+    "title" : "Camping Gear Carabiner",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Easy"
   },
   {
-    "baseImage": "levels/photo-pairs/ai-antique-study/base.jpg",
-    "category": "Antique Study",
-    "difficulty": "Hard",
-    "diffs": [
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-sewing-table\/variant.jpg",
+    "category" : "Photography",
+    "baseImage" : "levels\/photo-pairs\/photo-sewing-table\/base.jpg",
+    "difficulty" : "Easy",
+    "id" : "photo_sewing_table_001",
+    "title" : "Sewing Table Button",
+    "packId" : "find_the_sniper",
+    "diffs" : [
       {
-        "hint": "Look on the wooden desk surface below the brass desk clock.",
-        "id": 1,
-        "radius": 6.5,
-        "x": 89.3,
-        "y": 59.5
+        "y" : 93.5,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 63,
+        "radius" : 7.0999999999999996
       }
-    ],
-    "id": "ai_antique_study_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Victorian Study Desk",
-    "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg"
+    ]
   },
   {
-    "baseImage": "levels/photo-pairs/ai-botanist-herbarium/base.jpg",
-    "category": "Botanical Garden",
-    "difficulty": "Hard",
-    "diffs": [
+    "difficulty" : "Easy",
+    "baseImage" : "levels\/photo-pairs\/photo-map-restoration\/base.jpg",
+    "id" : "photo_map_restoration_001",
+    "diffs" : [
       {
-        "hint": "Inspect the pressed flower sheet on the right between the two flower stems.",
-        "id": 1,
-        "radius": 5.5,
-        "x": 82.5,
-        "y": 54.5
+        "y" : 12.6,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 47.399999999999999,
+        "radius" : 5.5
       }
     ],
-    "id": "ai_botanist_herbarium_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Botanist Herbarium Desk",
-    "variantImage": "levels/photo-pairs/ai-botanist-herbarium/variant.jpg"
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "title" : "Map Restoration Clip",
+    "category" : "Photography",
+    "variantImage" : "levels\/photo-pairs\/photo-map-restoration\/variant.jpg"
   },
   {
-    "baseImage": "levels/photo-pairs/ai-cartography-desk/base.jpg",
-    "category": "Antique Study",
-    "difficulty": "Hard",
-    "diffs": [
+    "diffs" : [
       {
-        "hint": "Scan the lower-left table area immediately beside the black ink bottle.",
-        "id": 1,
-        "radius": 6,
-        "x": 17.2,
-        "y": 57.1
+        "y" : 50.5,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 34.799999999999997,
+        "radius" : 11
       }
     ],
-    "id": "ai_cartography_desk_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Maritime Cartography Desk",
-    "variantImage": "levels/photo-pairs/ai-cartography-desk/variant.jpg"
+    "difficulty" : "Easy",
+    "category" : "Photography",
+    "baseImage" : "levels\/photo-pairs\/photo-garden-potting\/base.jpg",
+    "variantImage" : "levels\/photo-pairs\/photo-garden-potting\/variant.jpg",
+    "pack" : "Find the Sniper",
+    "title" : "Garden Potting Pot",
+    "packId" : "find_the_sniper",
+    "id" : "photo_garden_potting_001"
   },
   {
-    "baseImage": "levels/photo-pairs/ai-locksmith-bench/base.jpg",
-    "category": "Workshop Clutter",
-    "difficulty": "Hard",
-    "diffs": [
+    "baseImage" : "levels\/photo-pairs\/photo-game-night\/base.jpg",
+    "category" : "Photography",
+    "pack" : "Find the Sniper",
+    "difficulty" : "Easy",
+    "variantImage" : "levels\/photo-pairs\/photo-game-night\/variant.jpg",
+    "packId" : "find_the_sniper",
+    "title" : "Game Night Token",
+    "diffs" : [
       {
-        "hint": "Examine the tiny coil springs below the opened brass lock cylinder.",
-        "id": 1,
-        "radius": 5.5,
-        "x": 47.5,
-        "y": 61
+        "y" : 59.200000000000003,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 20.199999999999999,
+        "radius" : 5.7000000000000002
       }
     ],
-    "id": "ai_locksmith_bench_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Master Locksmith Workbench",
-    "variantImage": "levels/photo-pairs/ai-locksmith-bench/variant.jpg"
+    "id" : "photo_game_night_001"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-repair-hardware-002/base.jpg",
-    "category": "Workshop Clutter",
-    "difficulty": "Hard",
-    "diffs": [
+    "variantImage" : "levels\/photo-pairs\/photo-watch-repair\/variant.jpg",
+    "title" : "Watch Repair Gear",
+    "id" : "photo_watch_repair_001",
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/photo-watch-repair\/base.jpg",
+    "category" : "Photography",
+    "difficulty" : "Medium",
+    "diffs" : [
       {
-        "hint": "Scan the brass washer compartment on the right side of the organizer.",
-        "id": 1,
-        "radius": 5.2,
-        "x": 75,
-        "y": 42
+        "y" : 65.599999999999994,
+        "id" : 1,
+        "hint" : "Compare the small object in this area.",
+        "x" : 89.700000000000003,
+        "radius" : 5
       }
     ],
-    "id": "photo_repair_hardware_002",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Precision Hardware Drawer",
-    "variantImage": "levels/photo-pairs/photo-repair-hardware-002/variant.jpg"
+    "pack" : "Find the Sniper"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-strategy-pieces-002/base.jpg",
-    "category": "Game Night",
-    "difficulty": "Hard",
-    "diffs": [
+    "difficulty" : "Easy",
+    "id" : "abstract_token_field_001",
+    "packId" : "abstract_animated",
+    "diffs" : [
       {
-        "hint": "Inspect the wooden resource token on the lower-right map tile.",
-        "id": 1,
-        "radius": 4,
-        "x": 60.5,
-        "y": 64.8
+        "y" : 66.700000000000003,
+        "id" : 1,
+        "hint" : "Compare the upright turquoise capsule just below center.",
+        "x" : 40.100000000000001,
+        "radius" : 7.9000000000000004
       }
     ],
-    "id": "photo_strategy_pieces_002",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Tabletop Strategy Board",
-    "variantImage": "levels/photo-pairs/photo-strategy-pieces-002/variant.jpg"
+    "pack" : "Abstract Animated",
+    "variantImage" : "levels\/photo-pairs\/abstract-token-field\/abstract_token_field_001\/variant.jpg",
+    "category" : "Illustrated",
+    "title" : "Floating Token Field",
+    "baseImage" : "levels\/photo-pairs\/abstract-token-field\/abstract_token_field_001\/base.jpg"
+  },
+  {
+    "diffs" : [
+      {
+        "y" : 40.399999999999999,
+        "id" : 1,
+        "hint" : "Inspect the small purple connector slightly right of center.",
+        "x" : 56.600000000000001,
+        "radius" : 7.5
+      }
+    ],
+    "variantImage" : "levels\/photo-pairs\/abstract-mechanical-maze\/abstract_mechanical_maze_001\/variant.jpg",
+    "difficulty" : "Hard",
+    "packId" : "abstract_animated",
+    "baseImage" : "levels\/photo-pairs\/abstract-mechanical-maze\/abstract_mechanical_maze_001\/base.jpg",
+    "title" : "Mechanical Tile Maze",
+    "id" : "abstract_mechanical_maze_001",
+    "pack" : "Abstract Animated",
+    "category" : "Illustrated"
+  },
+  {
+    "variantImage" : "levels\/photo-pairs\/mass-abstract\/mass_abstract_001\/variant.jpg",
+    "difficulty" : "Easy",
+    "packId" : "abstract_animated",
+    "baseImage" : "levels\/photo-pairs\/mass-abstract\/mass_abstract_001\/base.jpg",
+    "diffs" : [
+      {
+        "y" : 81.900000000000006,
+        "id" : 1,
+        "hint" : "Examine the region around (62%, 81%) carefully.",
+        "x" : 62.200000000000003,
+        "radius" : 5.4000000000000004
+      }
+    ],
+    "pack" : "Abstract Animated",
+    "id" : "mass_abstract_001",
+    "category" : "Generated Illustrated Abstract",
+    "title" : "Generated Illustrated Abstract #1"
+  },
+  {
+    "pack" : "Abstract Animated",
+    "category" : "Generated Illustrated Abstract",
+    "id" : "mass_abstract_002",
+    "baseImage" : "levels\/photo-pairs\/mass-abstract\/mass_abstract_002\/base.jpg",
+    "variantImage" : "levels\/photo-pairs\/mass-abstract\/mass_abstract_002\/variant.jpg",
+    "title" : "Generated Illustrated Abstract #2",
+    "difficulty" : "Easy",
+    "diffs" : [
+      {
+        "y" : 39.100000000000001,
+        "id" : 1,
+        "hint" : "Examine the region around (45%, 38%) carefully.",
+        "x" : 46.399999999999999,
+        "radius" : 5.9000000000000004
+      }
+    ],
+    "packId" : "abstract_animated"
+  },
+  {
+    "difficulty" : "Hard",
+    "category" : "Photographic Detail",
+    "id" : "mass_photo_102",
+    "title" : "Photographic Detail 102",
+    "baseImage" : "levels\/photo-pairs\/photo-potting-table\/photo_potting_table_001\/base.jpg",
+    "variantImage" : "levels\/photo-pairs\/mass-photo-real\/mass_photo_102\/variant.jpg",
+    "diffs" : [
+      {
+        "y" : 55,
+        "id" : 1,
+        "hint" : "Compare the small color detail in this area.",
+        "x" : 45,
+        "radius" : 5.5
+      }
+    ],
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper"
+  },
+  {
+    "id" : "ai_bakery_counter_001",
+    "difficulty" : "Easy",
+    "diffs" : [
+      {
+        "y" : 63.5,
+        "id" : 1,
+        "hint" : "Check the silver powdered sugar shaker to the right of the rolling pin.",
+        "x" : 83.200000000000003,
+        "radius" : 7.5
+      }
+    ],
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "category" : "Bakery Clutter",
+    "baseImage" : "levels\/photo-pairs\/ai-bakery-counter\/base.jpg",
+    "variantImage" : "levels\/photo-pairs\/ai-bakery-counter\/variant.jpg",
+    "title" : "Rustic Bakery Counter"
+  },
+  {
+    "diffs" : [
+      {
+        "y" : 75.200000000000003,
+        "id" : 1,
+        "hint" : "Look at the metal soil scoop resting on the wooden table.",
+        "x" : 41.700000000000003,
+        "radius" : 8
+      }
+    ],
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/ai-greenhouse-potting\/base.jpg",
+    "pack" : "Find the Sniper",
+    "title" : "Greenhouse Potting Bench",
+    "variantImage" : "levels\/photo-pairs\/ai-greenhouse-potting\/variant.jpg",
+    "difficulty" : "Easy",
+    "category" : "Botanical Garden",
+    "id" : "ai_greenhouse_potting_001"
+  },
+  {
+    "category" : "Horology Studio",
+    "id" : "ai_watchmaker_bench_001",
+    "baseImage" : "levels\/photo-pairs\/ai-watchmaker-bench\/base.jpg",
+    "difficulty" : "Medium",
+    "title" : "Master Watchmaker Desk",
+    "packId" : "find_the_sniper",
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/ai-watchmaker-bench\/variant.jpg",
+    "diffs" : [
+      {
+        "y" : 67,
+        "id" : 1,
+        "hint" : "Inspect the dark blue velvet pad in the lower-right corner.",
+        "x" : 87.200000000000003,
+        "radius" : 7.5
+      }
+    ]
+  },
+  {
+    "pack" : "Find the Sniper",
+    "category" : "Fine Art Studio",
+    "packId" : "find_the_sniper",
+    "title" : "Painter Studio Palette",
+    "baseImage" : "levels\/photo-pairs\/ai-artist-easel\/base.jpg",
+    "id" : "ai_artist_easel_001",
+    "diffs" : [
+      {
+        "y" : 72,
+        "id" : 1,
+        "hint" : "Scan the bottom-left corner of the table for the cobalt blue paint tube.",
+        "x" : 11,
+        "radius" : 8
+      }
+    ],
+    "variantImage" : "levels\/photo-pairs\/ai-artist-easel\/variant.jpg",
+    "difficulty" : "Easy"
+  },
+  {
+    "difficulty" : "Easy",
+    "category" : "Espresso Station",
+    "packId" : "find_the_sniper",
+    "pack" : "Find the Sniper",
+    "id" : "ai_coffee_bar_001",
+    "title" : "Artisanal Coffee Bar",
+    "diffs" : [
+      {
+        "y" : 58,
+        "id" : 1,
+        "hint" : "Check the wooden-handled barista brush to the left of the tamper.",
+        "x" : 9.6999999999999993,
+        "radius" : 7.5
+      }
+    ],
+    "variantImage" : "levels\/photo-pairs\/ai-coffee-bar\/variant.jpg",
+    "baseImage" : "levels\/photo-pairs\/ai-coffee-bar\/base.jpg"
+  },
+  {
+    "id" : "ai_antique_study_001",
+    "difficulty" : "Hard",
+    "packId" : "find_the_sniper",
+    "title" : "Victorian Study Desk",
+    "baseImage" : "levels\/photo-pairs\/ai-antique-study\/base.jpg",
+    "pack" : "Find the Sniper",
+    "category" : "Antique Study",
+    "diffs" : [
+      {
+        "y" : 59.5,
+        "id" : 1,
+        "hint" : "Look on the wooden desk surface below the brass desk clock.",
+        "x" : 89.299999999999997,
+        "radius" : 6.5
+      }
+    ],
+    "variantImage" : "levels\/photo-pairs\/ai-antique-study\/variant.jpg"
+  },
+  {
+    "title" : "Botanist Herbarium Desk",
+    "variantImage" : "levels\/photo-pairs\/ai-botanist-herbarium\/variant.jpg",
+    "baseImage" : "levels\/photo-pairs\/ai-botanist-herbarium\/base.jpg",
+    "category" : "Botanical Garden",
+    "difficulty" : "Hard",
+    "pack" : "Find the Sniper",
+    "diffs" : [
+      {
+        "y" : 54.5,
+        "id" : 1,
+        "hint" : "Inspect the pressed flower sheet on the right between the two flower stems.",
+        "x" : 82.5,
+        "radius" : 5.5
+      }
+    ],
+    "id" : "ai_botanist_herbarium_001",
+    "packId" : "find_the_sniper"
+  },
+  {
+    "pack" : "Find the Sniper",
+    "baseImage" : "levels\/photo-pairs\/ai-cartography-desk\/base.jpg",
+    "packId" : "find_the_sniper",
+    "difficulty" : "Hard",
+    "category" : "Antique Study",
+    "title" : "Maritime Cartography Desk",
+    "diffs" : [
+      {
+        "y" : 57.100000000000001,
+        "id" : 1,
+        "hint" : "Scan the lower-left table area immediately beside the black ink bottle.",
+        "x" : 17.199999999999999,
+        "radius" : 6
+      }
+    ],
+    "variantImage" : "levels\/photo-pairs\/ai-cartography-desk\/variant.jpg",
+    "id" : "ai_cartography_desk_001"
+  },
+  {
+    "category" : "Workshop Clutter",
+    "difficulty" : "Hard",
+    "baseImage" : "levels\/photo-pairs\/ai-locksmith-bench\/base.jpg",
+    "title" : "Master Locksmith Workbench",
+    "diffs" : [
+      {
+        "y" : 61,
+        "id" : 1,
+        "hint" : "Examine the tiny coil springs below the opened brass lock cylinder.",
+        "x" : 47.5,
+        "radius" : 5.5
+      }
+    ],
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/ai-locksmith-bench\/variant.jpg",
+    "pack" : "Find the Sniper",
+    "id" : "ai_locksmith_bench_001"
+  },
+  {
+    "difficulty" : "Hard",
+    "id" : "photo_repair_hardware_002",
+    "packId" : "find_the_sniper",
+    "diffs" : [
+      {
+        "y" : 42,
+        "id" : 1,
+        "hint" : "Scan the brass washer compartment on the right side of the organizer.",
+        "x" : 75,
+        "radius" : 5.2000000000000002
+      }
+    ],
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-repair-hardware-002\/variant.jpg",
+    "baseImage" : "levels\/photo-pairs\/photo-repair-hardware-002\/base.jpg",
+    "title" : "Precision Hardware Drawer",
+    "category" : "Workshop Clutter"
+  },
+  {
+    "category" : "Game Night",
+    "diffs" : [
+      {
+        "y" : 64.799999999999997,
+        "id" : 1,
+        "hint" : "Inspect the wooden resource token on the lower-right map tile.",
+        "x" : 60.5,
+        "radius" : 4
+      }
+    ],
+    "title" : "Tabletop Strategy Board",
+    "packId" : "find_the_sniper",
+    "pack" : "Find the Sniper",
+    "baseImage" : "levels\/photo-pairs\/photo-strategy-pieces-002\/base.jpg",
+    "variantImage" : "levels\/photo-pairs\/photo-strategy-pieces-002\/variant.jpg",
+    "id" : "photo_strategy_pieces_002",
+    "difficulty" : "Hard"
   }
 ]
