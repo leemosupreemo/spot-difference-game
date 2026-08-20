@@ -117,60 +117,43 @@ export function selectPhotoPairEntries(entries, {
 } = {}) {
   const effectiveEntries = applyCuratedPackOverrides(entries, statusMap);
 
-  let matchingEntries = effectiveEntries.filter(entry => {
-    const packMatches = !packId || entry.packId === packId;
-    const difficultyMatches = !difficulty || entry.difficulty === difficulty;
-    const isBrandNew = entry.id?.includes('stock_') || entry.id?.startsWith('ai_macro_');
-    return packMatches && (isBrandNew || difficultyMatches);
-  });
-
-  if (matchingEntries.length < count && packId) {
-    matchingEntries = effectiveEntries.filter(entry => !packId || entry.packId === packId);
-  }
-
-  if (matchingEntries.length === 0) {
-    matchingEntries = effectiveEntries;
-  }
-
-  // Prioritize newly added / unreviewed and approved AI macro images strictly first
-  const brandNewMatching = [];
-  const brandNewOther = [];
-  const unreviewed = [];
-  const approvedAiMacro = [];
-  const approvedPhoto = [];
+  // Separate into unreviewed vs approved categories
+  const unreviewedBrandNew = [];
+  const unreviewedOther = [];
+  const approvedMatching = [];
+  const approvedOther = [];
   const otherCategorized = [];
 
-  for (const entry of matchingEntries) {
+  for (const entry of effectiveEntries) {
+    const packMatches = !packId || entry.packId === packId;
+    if (!packMatches) continue;
+
     const statusVal = getLevelStatus(statusMap[entry.id]);
     const isCategorized = Boolean(statusVal?.status || statusVal?.packId || statusVal?.category || statusVal?.difficulty || statusVal?.suggestedDifficulty);
 
     if (!isCategorized) {
       if (entry.id?.startsWith('ai_macro_') || entry.id?.includes('stock_')) {
-        if (difficulty && entry.difficulty === difficulty) {
-          brandNewMatching.push(entry);
-        } else {
-          brandNewOther.push(entry);
-        }
+        unreviewedBrandNew.push(entry);
       } else {
-        unreviewed.push(entry);
+        unreviewedOther.push(entry);
       }
     } else if (statusVal?.status === 'approved') {
-      if (entry.id?.startsWith('ai_macro_')) {
-        approvedAiMacro.push(entry);
+      const difficultyMatches = !difficulty || entry.difficulty === difficulty;
+      if (difficultyMatches) {
+        approvedMatching.push(entry);
       } else {
-        approvedPhoto.push(entry);
+        approvedOther.push(entry);
       }
-    } else {
+    } else if (statusVal?.status !== 'dismissed') {
       otherCategorized.push(entry);
     }
   }
 
   const prioritized = [
-    ...brandNewMatching,
-    ...brandNewOther,
-    ...unreviewed,
-    ...approvedAiMacro,
-    ...approvedPhoto,
+    ...unreviewedBrandNew,
+    ...unreviewedOther,
+    ...approvedMatching,
+    ...approvedOther,
     ...otherCategorized
   ];
 

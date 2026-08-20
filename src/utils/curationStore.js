@@ -4,14 +4,18 @@
 // 2. 'dismissed' (👎 Dismiss / Exclude)
 // 3. 'wrong_difficulty' (⚠️ Keep, but wrong difficulty)
 
+import officialCuratedData from '../../official_curated_levels.json' with { type: 'json' };
+
 const STORAGE_KEY = 'diff_hunter_curated_status';
+const BASE_OFFICIAL_STATUS_MAP = officialCuratedData?.rawStatusMap || {};
 
 export function getCuratedStatusMap() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : {};
+    const parsed = saved ? JSON.parse(saved) : {};
+    return { ...BASE_OFFICIAL_STATUS_MAP, ...parsed };
   } catch (e) {
-    return {};
+    return { ...BASE_OFFICIAL_STATUS_MAP };
   }
 }
 
