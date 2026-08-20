@@ -405,7 +405,8 @@ export default function App() {
         packId: selectedTheme,
         difficulty: selectedDifficulty,
         count: 5,
-        seed: Date.now()
+        seed: Date.now(),
+        curatedStatusMap
       });
       if (stageList && stageList.length > 0) {
         setLevels(stageList);

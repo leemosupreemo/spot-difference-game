@@ -132,34 +132,46 @@ export function selectPhotoPairEntries(entries, {
     matchingEntries = effectiveEntries;
   }
 
-  // Prioritize newly added stock photos and un-designated images first (matching difficulty prioritized first)
+  // Prioritize newly added / unreviewed and approved AI macro images strictly first
   const brandNewMatching = [];
   const brandNewOther = [];
   const unreviewed = [];
-  const categorized = [];
+  const approvedAiMacro = [];
+  const approvedPhoto = [];
+  const otherCategorized = [];
 
   for (const entry of matchingEntries) {
     const statusVal = getLevelStatus(statusMap[entry.id]);
     const isCategorized = Boolean(statusVal?.status || statusVal?.packId || statusVal?.category || statusVal?.difficulty || statusVal?.suggestedDifficulty);
 
-    if ((entry.id?.includes('stock_') || entry.id?.startsWith('ai_macro_')) && !isCategorized) {
-      if (difficulty && entry.difficulty === difficulty) {
-        brandNewMatching.push(entry);
+    if (!isCategorized) {
+      if (entry.id?.startsWith('ai_macro_') || entry.id?.includes('stock_')) {
+        if (difficulty && entry.difficulty === difficulty) {
+          brandNewMatching.push(entry);
+        } else {
+          brandNewOther.push(entry);
+        }
       } else {
-        brandNewOther.push(entry);
+        unreviewed.push(entry);
       }
-    } else if (isCategorized) {
-      categorized.push(entry);
+    } else if (statusVal?.status === 'approved') {
+      if (entry.id?.startsWith('ai_macro_')) {
+        approvedAiMacro.push(entry);
+      } else {
+        approvedPhoto.push(entry);
+      }
     } else {
-      unreviewed.push(entry);
+      otherCategorized.push(entry);
     }
   }
 
   const prioritized = [
     ...brandNewMatching,
     ...brandNewOther,
-    ...shuffleEntries(unreviewed, seed),
-    ...shuffleEntries(categorized, seed + 1)
+    ...unreviewed,
+    ...approvedAiMacro,
+    ...approvedPhoto,
+    ...otherCategorized
   ];
 
   return prioritized.slice(0, count);
