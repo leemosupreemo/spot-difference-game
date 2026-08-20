@@ -44,7 +44,13 @@ export const PAINT_STYLES = [
   'RETRO_SYNTHWAVE',
   'WOODBLOCK_PRINT',
   'MOSAIC_TILE',
-  'BAUHAUS_FLAT'
+  'BAUHAUS_FLAT',
+  'RISOGRAPH_PRINT',
+  'GOTHIC_FILIGREE',
+  'NEON_CYBERPUNK',
+  'PAPER_CUTOUT_COLLAGE',
+  'CEL_SHADED_ANIME',
+  'TERRAZZO_INLAY'
 ];
 
 function createPRNG(seed) {
@@ -429,6 +435,115 @@ function applyPaintFinish(ctx, style, { color, strokeColor, cx, cy, rx, ry, sig,
     ctx.strokeStyle = '#000000';
     ctx.lineWidth = Math.max(2.5, lineWidth * 1.6);
     ctx.stroke();
+    ctx.restore();
+    return;
+  }
+
+  if (style === 'RISOGRAPH_PRINT') {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.globalAlpha = 0.85;
+    ctx.fill();
+    ctx.strokeStyle = strokeCol;
+    ctx.lineWidth = lineWidth * 1.4;
+    ctx.stroke();
+    ctx.clip();
+    if (sig && sig.dots) {
+      sig.dots.slice(0, 35).forEach(d => {
+        const x = cx + Math.cos(d.a) * d.r * rx;
+        const y = cy + Math.sin(d.a) * d.r * ry;
+        ctx.fillStyle = '#ff007f';
+        ctx.globalAlpha = 0.25;
+        ctx.beginPath();
+        ctx.arc(x + 2, y + 2, d.size * 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+    ctx.restore();
+    return;
+  }
+
+  if (style === 'GOTHIC_FILIGREE') {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = '#ffd166';
+    ctx.lineWidth = lineWidth * 2.2;
+    ctx.stroke();
+    ctx.clip();
+    ctx.strokeStyle = '#fff0a6';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, rx * 0.5, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+    return;
+  }
+
+  if (style === 'NEON_CYBERPUNK') {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 20;
+    ctx.fill();
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = Math.max(2.5, lineWidth * 1.5);
+    ctx.shadowColor = '#ffffff';
+    ctx.shadowBlur = 8;
+    ctx.stroke();
+    ctx.restore();
+    return;
+  }
+
+  if (style === 'PAPER_CUTOUT_COLLAGE') {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 4;
+    ctx.fill();
+    ctx.strokeStyle = shadeHex(color, 0.4);
+    ctx.lineWidth = lineWidth * 1.2;
+    ctx.stroke();
+    ctx.restore();
+    return;
+  }
+
+  if (style === 'CEL_SHADED_ANIME') {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = Math.max(3, lineWidth * 2);
+    ctx.stroke();
+    ctx.clip();
+    ctx.fillStyle = '#ffffff';
+    ctx.globalAlpha = 0.55;
+    ctx.beginPath();
+    ctx.arc(cx - rx * 0.25, cy - ry * 0.25, rx * 0.35, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    return;
+  }
+
+  if (style === 'TERRAZZO_INLAY') {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = '#d4af37';
+    ctx.lineWidth = lineWidth * 1.8;
+    ctx.stroke();
+    ctx.clip();
+    if (sig && sig.dots) {
+      sig.dots.slice(0, 25).forEach((d, idx) => {
+        const x = cx + Math.cos(d.a) * d.r * rx;
+        const y = cy + Math.sin(d.a) * d.r * ry;
+        ctx.fillStyle = idx % 2 === 0 ? '#ffffff' : '#ffd166';
+        ctx.globalAlpha = 0.6;
+        ctx.fillRect(x - d.size, y - d.size, d.size * 2, d.size * 2);
+      });
+    }
     ctx.restore();
     return;
   }
@@ -946,7 +1061,333 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
     });
   }
 
-  // E. MICRO ATMOSPHERIC COLOR PARTICLES, SPARKLES & SHARDS (4px - 14px) - 30 background objects (NOT target eligible)
+  // E. ART DECO CHEVRON FANS & STEPPED SUNBURSTS (45px - 85px) - 10 objects
+  for (let ad = 0; ad < 10; ad++) {
+    const cx = randomRange(55, width - 55);
+    const cy = randomRange(55, height - 55);
+    const size = randomRange(45, 85);
+    const baseColor = randomChoice(palette);
+    const sig = makeWobbleSignature(random);
+    const baseRot = random() * Math.PI * 2;
+
+    candidates.push({
+      id: `art_deco_fan_${ad}`,
+      x: cx, y: cy, size, kind: 'Art Deco Stepped Sunburst Fan', baseColor,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
+      draw: (ctx, mutated, mType) => {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 2 : baseRot;
+        ctx.rotate(rot);
+        applyObjectPopStyle(ctx, true);
+        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
+        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
+
+        // Fan stepped arches
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(0, 0, s * 0.45, Math.PI, 0);
+        ctx.closePath();
+        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffd166', cx: 0, cy: 0, rx: s * 0.45, ry: s * 0.45, sig, lineWidth: 2 });
+
+        // Radiating chevron rays
+        if (!(mutated && mType === 'REMOVE_DETAIL')) {
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2.0;
+          for (let a = Math.PI; a <= Math.PI * 2; a += Math.PI / 4) {
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(Math.cos(a) * s * 0.45, Math.sin(a) * s * 0.45);
+            ctx.stroke();
+          }
+        }
+
+        if (mutated && mType === 'ADD_DETAIL') {
+          ctx.fillStyle = '#ff007f';
+          ctx.beginPath();
+          ctx.arc(0, -s * 0.25, 10, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    });
+  }
+
+  // F. SACRED GEOMETRY METATRON RINGS & POLYHEDRA (50px - 90px) - 10 objects
+  for (let sg = 0; sg < 10; sg++) {
+    const cx = randomRange(60, width - 60);
+    const cy = randomRange(60, height - 60);
+    const size = randomRange(50, 90);
+    const baseColor = randomChoice(palette);
+    const sig = makeWobbleSignature(random);
+    const baseRot = random() * Math.PI;
+
+    candidates.push({
+      id: `sacred_polyhedron_${sg}`,
+      x: cx, y: cy, size, kind: 'Sacred Geometry Hexagonal Prism', baseColor,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
+      draw: (ctx, mutated, mType) => {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 3 : baseRot;
+        ctx.rotate(rot);
+        applyObjectPopStyle(ctx, true);
+        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
+        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.75 : size;
+
+        // Outer hexagon
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const a = (i / 6) * Math.PI * 2;
+          const x = Math.cos(a) * s * 0.45;
+          const y = Math.sin(a) * s * 0.45;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.45, ry: s * 0.45, sig, lineWidth: 2.2 });
+
+        // Internal isometric cube diagonals
+        if (!(mutated && mType === 'REMOVE_DETAIL')) {
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2.0;
+          for (let i = 0; i < 6; i += 2) {
+            const a = (i / 6) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(Math.cos(a) * s * 0.45, Math.sin(a) * s * 0.45);
+            ctx.stroke();
+          }
+        }
+
+        if (mutated && mType === 'ADD_DETAIL') {
+          ctx.strokeStyle = '#00f0ff';
+          ctx.lineWidth = 3.0;
+          ctx.beginPath();
+          ctx.arc(0, 0, s * 0.55, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+    });
+  }
+
+  // G. ISLAMIC ARABESQUE & MOROCCAN 8-POINT STARS (40px - 80px) - 10 objects
+  for (let ia = 0; ia < 10; ia++) {
+    const cx = randomRange(55, width - 55);
+    const cy = randomRange(55, height - 55);
+    const size = randomRange(40, 80);
+    const baseColor = randomChoice(palette);
+    const sig = makeWobbleSignature(random);
+    const baseRot = random() * Math.PI;
+
+    candidates.push({
+      id: `arabesque_star_${ia}`,
+      x: cx, y: cy, size, kind: 'Moroccan Arabesque 8-Point Star', baseColor,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
+      draw: (ctx, mutated, mType) => {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 4 : baseRot;
+        ctx.rotate(rot);
+        applyObjectPopStyle(ctx, true);
+        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
+        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
+
+        // Two overlapping interlocking squares
+        ctx.fillStyle = color;
+        ctx.fillRect(-s * 0.35, -s * 0.35, s * 0.7, s * 0.7);
+        ctx.save();
+        ctx.rotate(Math.PI / 4);
+        ctx.fillRect(-s * 0.35, -s * 0.35, s * 0.7, s * 0.7);
+        ctx.restore();
+
+        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffd166', cx: 0, cy: 0, rx: s * 0.4, ry: s * 0.4, sig, lineWidth: 2 });
+
+        // Center emerald medallion
+        if (!(mutated && mType === 'REMOVE_DETAIL')) {
+          ctx.fillStyle = '#06d6a0';
+          ctx.beginPath();
+          ctx.arc(0, 0, s * 0.16, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
+
+        if (mutated && mType === 'ADD_DETAIL') {
+          ctx.fillStyle = '#ffbe0b';
+          ctx.beginPath();
+          ctx.arc(s * 0.3, -s * 0.3, 8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    });
+  }
+
+  // H. BIOLUMINESCENT MARINE CREATURES & SPIRAL SHELLS (45px - 95px) - 10 objects
+  for (let mc = 0; mc < 10; mc++) {
+    const cx = randomRange(55, width - 55);
+    const cy = randomRange(55, height - 55);
+    const size = randomRange(45, 95);
+    const baseColor = randomChoice(palette);
+    const sig = makeWobbleSignature(random);
+    const baseRot = random() * Math.PI * 2;
+
+    candidates.push({
+      id: `marine_creature_${mc}`,
+      x: cx, y: cy, size, kind: 'Bioluminescent Nautilus Spiral', baseColor,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
+      draw: (ctx, mutated, mType) => {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 2 : baseRot;
+        ctx.rotate(rot);
+        applyObjectPopStyle(ctx, true);
+        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
+        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
+
+        // Spiral nautilus shell
+        ctx.beginPath();
+        ctx.arc(0, 0, s * 0.42, 0, Math.PI * 1.5);
+        ctx.quadraticCurveTo(s * 0.2, s * 0.2, 0, 0);
+        ctx.closePath();
+        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#00f0ff', cx: 0, cy: 0, rx: s * 0.42, ry: s * 0.42, sig, lineWidth: 2 });
+
+        // Shell chamber ribs
+        if (!(mutated && mType === 'REMOVE_DETAIL')) {
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2.0;
+          ctx.beginPath();
+          ctx.moveTo(-s * 0.35, 0);
+          ctx.lineTo(0, -s * 0.35);
+          ctx.stroke();
+        }
+
+        if (mutated && mType === 'ADD_DETAIL') {
+          ctx.fillStyle = '#ff70a6';
+          ctx.beginPath();
+          ctx.arc(s * 0.22, -s * 0.22, 10, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    });
+  }
+
+  // I. HERALDIC ROYAL CRESTS & ALCHEMY CROWNS (40px - 80px) - 10 objects
+  for (let rc = 0; rc < 10; rc++) {
+    const cx = randomRange(55, width - 55);
+    const cy = randomRange(55, height - 55);
+    const size = randomRange(40, 80);
+    const baseColor = randomChoice(palette);
+    const sig = makeWobbleSignature(random);
+    const baseRot = random() * Math.PI;
+
+    candidates.push({
+      id: `heraldic_crest_${rc}`,
+      x: cx, y: cy, size, kind: 'Heraldic Crown Motif', baseColor,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
+      draw: (ctx, mutated, mType) => {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 4 : baseRot;
+        ctx.rotate(rot);
+        applyObjectPopStyle(ctx, true);
+        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
+        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
+
+        // Tri-point crown / shield
+        ctx.beginPath();
+        ctx.moveTo(-s * 0.4, s * 0.2);
+        ctx.lineTo(-s * 0.35, -s * 0.3);
+        ctx.lineTo(-s * 0.12, 0);
+        ctx.lineTo(0, -s * 0.45);
+        ctx.lineTo(s * 0.12, 0);
+        ctx.lineTo(s * 0.35, -s * 0.3);
+        ctx.lineTo(s * 0.4, s * 0.2);
+        ctx.closePath();
+        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.4, ry: s * 0.4, sig, lineWidth: 2.2 });
+
+        // Center pearl jewel
+        if (!(mutated && mType === 'REMOVE_DETAIL')) {
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(0, -s * 0.1, 7, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (mutated && mType === 'ADD_DETAIL') {
+          ctx.fillStyle = '#ffd166';
+          ctx.beginPath();
+          ctx.arc(0, -s * 0.45, 9, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    });
+  }
+
+  // J. ORIGAMI FOLDED ANIMALS & BLOSSOMS (40px - 85px) - 10 objects
+  for (let og = 0; og < 10; og++) {
+    const cx = randomRange(55, width - 55);
+    const cy = randomRange(55, height - 55);
+    const size = randomRange(40, 85);
+    const baseColor = randomChoice(palette);
+    const sig = makeWobbleSignature(random);
+    const baseRot = random() * Math.PI * 2;
+
+    candidates.push({
+      id: `origami_crane_${og}`,
+      x: cx, y: cy, size, kind: 'Origami Folded Crane Blossom', baseColor,
+      isTargetEligible: true,
+      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
+      draw: (ctx, mutated, mType) => {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 2 : baseRot;
+        ctx.rotate(rot);
+        applyObjectPopStyle(ctx, true);
+        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
+        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
+
+        // Origami wing diamond
+        ctx.beginPath();
+        ctx.moveTo(0, -s * 0.45);
+        ctx.lineTo(s * 0.4, 0);
+        ctx.lineTo(0, s * 0.35);
+        ctx.lineTo(-s * 0.4, 0);
+        ctx.closePath();
+        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.4, ry: s * 0.4, sig, lineWidth: 2 });
+
+        // Origami fold crease line
+        if (!(mutated && mType === 'REMOVE_DETAIL')) {
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2.0;
+          ctx.beginPath();
+          ctx.moveTo(0, -s * 0.45);
+          ctx.lineTo(0, s * 0.35);
+          ctx.stroke();
+        }
+
+        if (mutated && mType === 'ADD_DETAIL') {
+          ctx.fillStyle = '#ff0054';
+          ctx.beginPath();
+          ctx.arc(s * 0.25, 0, 9, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    });
+  }
+
+  // K. MICRO ATMOSPHERIC COLOR PARTICLES, SPARKLES & SHARDS (4px - 14px) - 30 background objects (NOT target eligible)
   for (let p = 0; p < 30; p++) {
     const px = randomRange(25, width - 25);
     const py = randomRange(25, height - 25);

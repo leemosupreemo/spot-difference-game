@@ -19,8 +19,8 @@ test('exports the 12 unique artistic and impressionist worlds', () => {
   assert.ok(worldIds.includes('cubist_mondrian_abstract'));
 });
 
-test('exports 10 distinct paint styles and rendering finishes', () => {
-  assert.equal(PAINT_STYLES.length, 10);
+test('exports 16 distinct paint styles and rendering finishes', () => {
+  assert.equal(PAINT_STYLES.length, 16);
   assert.ok(PAINT_STYLES.includes('IMPASTO'));
   assert.ok(PAINT_STYLES.includes('POINTILLIST'));
   assert.ok(PAINT_STYLES.includes('WATERCOLOR'));
@@ -31,6 +31,12 @@ test('exports 10 distinct paint styles and rendering finishes', () => {
   assert.ok(PAINT_STYLES.includes('WOODBLOCK_PRINT'));
   assert.ok(PAINT_STYLES.includes('MOSAIC_TILE'));
   assert.ok(PAINT_STYLES.includes('BAUHAUS_FLAT'));
+  assert.ok(PAINT_STYLES.includes('RISOGRAPH_PRINT'));
+  assert.ok(PAINT_STYLES.includes('GOTHIC_FILIGREE'));
+  assert.ok(PAINT_STYLES.includes('NEON_CYBERPUNK'));
+  assert.ok(PAINT_STYLES.includes('PAPER_CUTOUT_COLLAGE'));
+  assert.ok(PAINT_STYLES.includes('CEL_SHADED_ANIME'));
+  assert.ok(PAINT_STYLES.includes('TERRAZZO_INLAY'));
 });
 
 test('generates procedural level pairs across varied worlds with guaranteed exactly 1 difference', () => {
