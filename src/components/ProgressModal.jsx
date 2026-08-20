@@ -170,9 +170,9 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.92rem' }}>
                 <thead>
                   <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
-                    <th style={{ padding: '12px 16px' }}>RANK</th>
-                    <th style={{ padding: '12px 16px', textAlign: 'center' }}>SETS CLEARED</th>
-                    <th style={{ padding: '12px 16px', textAlign: 'right' }}>AVG FASTEST TIME</th>
+                    <th style={{ padding: '12px 16px' }}>RANK / PLAYER</th>
+                    <th style={{ padding: '12px 16px', textAlign: 'center' }}>AVG 1ST ATTEMPT</th>
+                    <th style={{ padding: '12px 16px', textAlign: 'right' }}>AVG OVERALL</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -185,10 +185,12 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
                   ) : (
                     topLeaderboardEntries.map((entry, index) => {
                       const isMe = entry.isCurrentPlayer;
-                      const avgTimeMs = entry.effectiveTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
-                      const timeStr = avgTimeMs ? `${(avgTimeMs / 1000).toFixed(2)}s` : '--';
+                      const firstTimeMs = entry.avgFirstTimeByPack?.[selectedLeaderboardPack];
+                      const repeatTimeMs = entry.effectiveTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
+
+                      const firstTimeStr = typeof firstTimeMs === 'number' && firstTimeMs > 0 ? `${(firstTimeMs / 1000).toFixed(2)}s` : '--';
+                      const overallTimeStr = typeof repeatTimeMs === 'number' && repeatTimeMs > 0 ? `${(repeatTimeMs / 1000).toFixed(2)}s` : '--';
                       const displayName = isMe ? 'YOU (THIS DEVICE)' : (entry.playerName || `SPEEDRUNNER #${index + 1}`);
-                      const setsCount = entry.totalSetsCleared ?? (isMe ? (leaderboardData?.localPlayer?.totalSetsCleared || 0) : 1);
 
                       return (
                         <tr
@@ -204,11 +206,11 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
                             </span>
                             {displayName}
                           </td>
-                          <td style={{ padding: '12px 16px', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
-                            {setsCount} Sets
+                          <td style={{ padding: '12px 16px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-gold)', fontWeight: 700 }}>
+                            {firstTimeStr}
                           </td>
                           <td style={{ padding: '12px 16px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
-                            {timeStr}
+                            {overallTimeStr}
                           </td>
                         </tr>
                       );
