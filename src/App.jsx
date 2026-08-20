@@ -22,8 +22,33 @@ import { saveLeaderboardStats } from './services/playerProgress';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
 
 export default function App() {
-  const [levels, setLevels] = useState(INITIAL_LEVELS);
-  const [currentLevelId, setCurrentLevelId] = useState(INITIAL_LEVELS[0].id);
+  const [levels, setLevels] = useState(() => {
+    try {
+      const allEntries = getAllPhotoPairEntries();
+      const statusMap = getCuratedStatusMap();
+      const unreviewed = allEntries.filter(entry => {
+        const statusVal = getLevelStatus(statusMap[entry.id])?.status;
+        return !statusVal && statusVal !== 'dismissed';
+      });
+      if (unreviewed.length > 0) return unreviewed.slice(0, 5).map(createPhotoPairLevel);
+      if (allEntries.length > 0) return allEntries.slice(0, 5).map(createPhotoPairLevel);
+    } catch (_) {}
+    return INITIAL_LEVELS;
+  });
+
+  const [currentLevelId, setCurrentLevelId] = useState(() => {
+    try {
+      const allEntries = getAllPhotoPairEntries();
+      const statusMap = getCuratedStatusMap();
+      const unreviewed = allEntries.filter(entry => {
+        const statusVal = getLevelStatus(statusMap[entry.id])?.status;
+        return !statusVal && statusVal !== 'dismissed';
+      });
+      if (unreviewed.length > 0) return unreviewed[0].id;
+      if (allEntries.length > 0) return allEntries[0].id;
+    } catch (_) {}
+    return INITIAL_LEVELS[0].id;
+  });
   const [view, setView] = useState('menu'); // 'menu' | 'game' | 'creator' | 'stats'
   const [selectedDifficulty, setSelectedDifficulty] = useState('Medium'); // 'Easy' | 'Medium' | 'Hard'
   const [selectedTheme, setSelectedTheme] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
@@ -220,22 +245,11 @@ export default function App() {
       try {
         localStorage.setItem('diff_hunter_debug', String(next));
       } catch (e) {}
-      if (next) {
-        sounds.playWin();
-        const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
-        const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-        const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
-        if (candidateEntries.length > 0) {
-          const debugLevels = candidateEntries.map(createPhotoPairLevel);
-          setLevels(debugLevels);
-          setCurrentLevelId(debugLevels[0].id);
-        }
-      } else {
-        sounds.playTap();
-      }
+      if (next) sounds.playWin();
+      else sounds.playTap();
       return next;
     });
-  }, [curatedStatusMap, skipKeptLevels]);
+  }, []);
 
   useEffect(() => {
     if (debugMode && debugSourceMode === 'premade') {
@@ -248,7 +262,7 @@ export default function App() {
         setCurrentLevelId(debugLevels[0].id);
       }
     }
-  }, []);
+  }, [debugMode, debugSourceMode, skipKeptLevels, curatedStatusMap]);
 
   const handleNextPair = async () => {
     sounds.playTap();
