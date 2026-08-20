@@ -8,6 +8,7 @@
     "build": "vite build",
     "test": "node --test src/**/*.test.mjs",
     "test:watch": "node --test --watch src/**/*.test.mjs",
+    "prune:dismissed": "node scripts/prune_dismissed_levels.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

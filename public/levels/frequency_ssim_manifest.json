@@ -134,5 +134,345 @@
     },
     "difficulty": "Easy",
     "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_5",
+    "puzzleId": "ssim_freq_puzzle_5",
+    "title": "Artisan Spice Bazaar",
+    "category": "Real Photo",
+    "photoUrl": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      40,
+      55,
+      50,
+      65
+    ],
+    "center": {
+      "x": 45,
+      "y": 60
+    },
+    "radius": 5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45,
+        "y": 60,
+        "radius": 5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_6",
+    "puzzleId": "ssim_freq_puzzle_6",
+    "title": "Cozy Parisian Bookstore",
+    "category": "Real Photo",
+    "photoUrl": "https://images.unsplash.com/photo-1507842229450-76905959e3f5?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      57,
+      43,
+      67,
+      53
+    ],
+    "center": {
+      "x": 62,
+      "y": 48
+    },
+    "radius": 4.5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62,
+        "y": 48,
+        "radius": 4.5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_7",
+    "puzzleId": "ssim_freq_puzzle_7",
+    "title": "Tokyo Street Ramen Bar",
+    "category": "Real Photo",
+    "photoUrl": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      33,
+      49,
+      43,
+      59
+    ],
+    "center": {
+      "x": 38,
+      "y": 54
+    },
+    "radius": 5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 38,
+        "y": 54,
+        "radius": 5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_8",
+    "puzzleId": "ssim_freq_puzzle_8",
+    "title": "Alpine Meadow Wildflowers",
+    "category": "Nature Hunter",
+    "photoUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      67,
+      63,
+      77,
+      73
+    ],
+    "center": {
+      "x": 72,
+      "y": 68
+    },
+    "radius": 5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 72,
+        "y": 68,
+        "radius": 5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_9",
+    "puzzleId": "ssim_freq_puzzle_9",
+    "title": "Artisan Ceramic Studio",
+    "category": "Real Photo",
+    "photoUrl": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      23,
+      57,
+      33,
+      67
+    ],
+    "center": {
+      "x": 28,
+      "y": 62
+    },
+    "radius": 5.5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 28,
+        "y": 62,
+        "radius": 5.5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_10",
+    "puzzleId": "ssim_freq_puzzle_10",
+    "title": "Venetian Canal Mooring",
+    "category": "Real Photo",
+    "photoUrl": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      53,
+      33,
+      63,
+      43
+    ],
+    "center": {
+      "x": 58,
+      "y": 38
+    },
+    "radius": 4.5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58,
+        "y": 38,
+        "radius": 4.5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_11",
+    "puzzleId": "ssim_freq_puzzle_11",
+    "title": "Tropical Coral Reef",
+    "category": "Nature Hunter",
+    "photoUrl": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      39,
+      41,
+      49,
+      51
+    ],
+    "center": {
+      "x": 44,
+      "y": 46
+    },
+    "radius": 5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 46,
+        "radius": 5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_12",
+    "puzzleId": "ssim_freq_puzzle_12",
+    "title": "Watchmaker Horology Desk",
+    "category": "Real Photo",
+    "photoUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      61,
+      47,
+      71,
+      57
+    ],
+    "center": {
+      "x": 66,
+      "y": 52
+    },
+    "radius": 4,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66,
+        "y": 52,
+        "radius": 4
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_13",
+    "puzzleId": "ssim_freq_puzzle_13",
+    "title": "Botanical Glasshouse Garden",
+    "category": "Nature Hunter",
+    "photoUrl": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      27,
+      30,
+      37,
+      40
+    ],
+    "center": {
+      "x": 32,
+      "y": 35
+    },
+    "radius": 5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32,
+        "y": 35,
+        "radius": 5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
+  },
+  {
+    "id": "ssim_freq_puzzle_14",
+    "puzzleId": "ssim_freq_puzzle_14",
+    "title": "Autumn Japanese Maple Garden",
+    "category": "Nature Hunter",
+    "photoUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=800&auto=format&fit=crop",
+    "bounding_box": [
+      49,
+      53,
+      59,
+      63
+    ],
+    "center": {
+      "x": 54,
+      "y": 58
+    },
+    "radius": 5,
+    "mutationType": "COLOR_SHIFT",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54,
+        "y": 58,
+        "radius": 5
+      }
+    ],
+    "qualityGate": {
+      "backgroundSSIM": 0.9995,
+      "targetSSIM": 0.68,
+      "status": "PASSED_100_PERCENT_STABILITY"
+    },
+    "difficulty": "Easy",
+    "difficultyScore": 3.2
   }
 ]

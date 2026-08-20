@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, CheckCircle2, Zap, Hand } from 'lucide-react';
+import { Sparkles, Zap, Hand } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 
 // Dedicated tutorial photo pair (excluded from game rotation)
 const DEMO_BASE_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/base.jpg';
 const DEMO_VARIANT_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/variant.jpg';
-const DEMO_TARGET = { x: 55.2, y: 54.4, radius: 9.5 };
+const DEMO_TARGET = { x: 59.5, y: 55.5, radius: 9.0 };
 
 export default function TutorialBanner() {
   const [isZoomed, setIsZoomed] = useState(false);
@@ -16,7 +16,7 @@ export default function TutorialBanner() {
 
   // Auto-playing loop demonstration (runs every 5.4s)
   useEffect(() => {
-    let t1, t2, t3, t4, t5;
+    let t1, t2, t3, t4, t5, t6;
 
     const runLoop = () => {
       // 0. Full view start
@@ -25,32 +25,36 @@ export default function TutorialBanner() {
       setHandTapping(false);
       setFoundSuccess(false);
 
-      // 1. Hand flashes in
+      // 1. Hand appears
       t1 = setTimeout(() => {
         setShowHand(true);
         setHandTapping(false);
-      }, 1100);
+      }, 1000);
 
       // 2. Hand taps down
       t2 = setTimeout(() => {
         setHandTapping(true);
-        setFoundSuccess(true);
-        setIsZoomed(true); // ZOOMS IN CLOSE!
-      }, 1550);
+      }, 1350);
 
-      // 3. Hand disappears immediately after tap (brief flash!)
+      // 3. Hand disappears right before zoom starts
       t3 = setTimeout(() => {
         setShowHand(false);
-      }, 1900);
+      }, 1550);
 
-      // 4. Zoom back out to full scene
+      // 4. Zoom in & show success indicator
       t4 = setTimeout(() => {
+        setFoundSuccess(true);
+        setIsZoomed(true);
+      }, 1680);
+
+      // 5. Zoom back out to full scene
+      t5 = setTimeout(() => {
         setIsZoomed(false);
         setFoundSuccess(false);
       }, 4500);
 
-      // 5. Repeat loop
-      t5 = setTimeout(runLoop, 5400);
+      // 6. Repeat loop
+      t6 = setTimeout(runLoop, 5400);
     };
 
     runLoop();
@@ -61,6 +65,7 @@ export default function TutorialBanner() {
       clearTimeout(t3);
       clearTimeout(t4);
       clearTimeout(t5);
+      clearTimeout(t6);
     };
   }, []);
 
@@ -135,8 +140,8 @@ export default function TutorialBanner() {
                 left: `${DEMO_TARGET.x}%`,
                 top: `${DEMO_TARGET.y}%`,
                 transform: 'translate(-50%, -50%)',
-                width: '84px',
-                height: '84px',
+                width: '106px',
+                height: '106px',
                 borderRadius: '50%',
                 border: '3px dashed var(--accent-cyan)',
                 boxShadow: '0 0 20px rgba(0, 240, 255, 0.7)',
@@ -190,8 +195,8 @@ export default function TutorialBanner() {
                 left: `${DEMO_TARGET.x}%`,
                 top: `${DEMO_TARGET.y}%`,
                 transform: 'translate(-50%, -50%)',
-                width: '84px',
-                height: '84px',
+                width: '106px',
+                height: '106px',
                 borderRadius: '50%',
                 border: '3.5px solid var(--accent-green)',
                 boxShadow: '0 0 22px var(--accent-green)',
@@ -211,15 +216,17 @@ export default function TutorialBanner() {
                 position: 'absolute',
                 left: `${DEMO_TARGET.x}%`,
                 top: `${DEMO_TARGET.y}%`,
-                transform: handTapping ? 'translate(-50%, -50%) scale(0.9)' : 'translate(-20%, -20%) scale(1.15)',
+                transform: handTapping ? 'translate(-50%, -50%) scale(0.92)' : 'translate(-50%, -50%) scale(1.05)',
                 color: '#fff',
-                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.95))',
-                transition: 'transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease',
+                background: 'transparent',
+                backgroundColor: 'transparent',
+                filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.9))',
+                transition: 'transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s ease',
                 pointerEvents: 'none',
                 zIndex: 10,
                 opacity: showHand ? 1 : 0
               }}>
-                <Hand size={28} fill="var(--accent-gold)" color="#000" />
+                <Hand size={18} fill="var(--accent-gold)" color="#000" />
               </div>
             )}
 

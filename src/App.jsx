@@ -13,7 +13,7 @@ import DebugLevelGeneratorModal from './components/DebugLevelGeneratorModal';
 import DebugCuratorBar from './components/DebugCuratorBar';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
 import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGenerator';
-import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel } from './utils/photoPairLevelLoader';
+import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
 import { sounds } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { saveLeaderboardStats } from './services/playerProgress';
@@ -103,33 +103,112 @@ export default function App() {
     setCuratedStatusMap({ ...updated });
   };
 
-  const handlePruneDismissed = () => {
+  const handlePruneDismissed = async () => {
     const current = getCuratedStatusMap();
-    const pruned = pruneDismissedStatuses(current);
-    saveCuratedStatusMap(pruned);
-    setCuratedStatusMap({ ...pruned });
+    const dismissedIds = Object.entries(current)
+      .filter(([, val]) => getLevelStatus(val)?.status === 'dismissed')
+      .map(([id]) => id);
+
+    if (dismissedIds.length === 0) {
+      alert('No levels are currently marked as dismissed to delete.');
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Permanently delete ${dismissedIds.length} dismissed level(s) and their image files from disk?\n\nThis will remove the image files from public/levels and update the manifest. This action cannot be undone.`
+    );
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch('/api/curation/prune-dismissed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ levelIds: dismissedIds })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        removeManifestEntriesById(dismissedIds);
+        const pruned = pruneDismissedStatuses(current);
+        saveCuratedStatusMap(pruned);
+        setCuratedStatusMap({ ...pruned });
+
+        sounds.playWin();
+        alert(`Successfully deleted ${dismissedIds.length} level(s) (${result.deletedFiles?.length || 0} image files) from disk and manifest.`);
+
+        if (dismissedIds.includes(currentLevelId)) {
+          handleNextPair();
+        }
+      } else {
+        throw new Error(`Server returned status ${response.status}`);
+      }
+    } catch (err) {
+      console.warn('[PruneDismissed] Server endpoint unavailable or failed:', err);
+      const pruned = pruneDismissedStatuses(current);
+      saveCuratedStatusMap(pruned);
+      setCuratedStatusMap({ ...pruned });
+      alert(
+        `Pruned ${dismissedIds.length} dismissed status(es) from local session.\n\nNote: If running standalone without the Vite dev server, run 'npm run prune:dismissed' in terminal to delete image files from disk.`
+      );
+    }
   };
 
   const isKeptStatus = (statusVal) => statusVal === 'approved' || statusVal === 'wrong_difficulty';
 
+  const isLevelCategorized = (entry, mapToUse = curatedStatusMap) => {
+    const statusObj = getLevelStatus(mapToUse[entry.id]);
+    const statusVal = statusObj?.status;
+    return Boolean(statusVal || statusObj?.packId || statusObj?.category || statusObj?.difficulty || statusObj?.suggestedDifficulty);
+  };
+
   const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
     const allEntries = getAllPhotoPairEntries();
-    return allEntries.filter(entry => {
-      const statusVal = getLevelStatus(mapToUse[entry.id])?.status;
-      if (statusVal === 'dismissed') return false;
-      if (skipKept && isKeptStatus(statusVal)) return false;
-      return !statusVal; // Only return levels pending review (unlabeled)
-    });
+    const brandNew = [];
+    const otherUnlabeled = [];
+
+    for (const entry of allEntries) {
+      const statusObj = getLevelStatus(mapToUse[entry.id]);
+      const statusVal = statusObj?.status;
+      if (statusVal === 'dismissed') continue;
+      if (skipKept && isKeptStatus(statusVal)) continue;
+
+      if (!isLevelCategorized(entry, mapToUse)) {
+        if (entry.id?.includes('stock_') || entry.id?.startsWith('ai_macro_')) {
+          brandNew.push(entry);
+        } else {
+          otherUnlabeled.push(entry);
+        }
+      }
+    }
+
+    return [...brandNew, ...otherUnlabeled];
   };
 
   const getDebugCandidateEntries = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
     const allEntries = getAllPhotoPairEntries();
-    return allEntries.filter(entry => {
-      const statusVal = getLevelStatus(mapToUse[entry.id])?.status;
-      if (statusVal === 'dismissed') return false;
-      if (skipKept && isKeptStatus(statusVal)) return false;
-      return true;
-    });
+    const unreviewedBrandNew = [];
+    const unreviewedOther = [];
+    const categorized = [];
+
+    for (const entry of allEntries) {
+      const statusObj = getLevelStatus(mapToUse[entry.id]);
+      const statusVal = statusObj?.status;
+      if (statusVal === 'dismissed') continue;
+      if (skipKept && isKeptStatus(statusVal)) continue;
+
+      if (!isLevelCategorized(entry, mapToUse)) {
+        if (entry.id?.includes('stock_') || entry.id?.startsWith('ai_macro_')) {
+          unreviewedBrandNew.push(entry);
+        } else {
+          unreviewedOther.push(entry);
+        }
+      } else {
+        categorized.push(entry);
+      }
+    }
+
+    // Non-categorized / brand new image sets prioritized strictly first
+    return [...unreviewedBrandNew, ...unreviewedOther, ...categorized];
   };
 
   const toggleDebugMode = useCallback(() => {
@@ -387,24 +466,28 @@ export default function App() {
         // ALL 5 IMAGES CLEARED! FULL STAGE CLEAR!
         const cumulativeTime = stageTimesRef.current.reduce((sum, t) => sum + (t || 0), 0);
         setTotalStageTimeMs(cumulativeTime);
+        const stageTotalScore = score + pointsEarned;
 
         // Compute Categorized Stats for full 5-image stage
         setDifficultyStats(prev => {
           const diffCategory = selectedDifficulty;
-          const categoryData = prev[diffCategory] || { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} };
+          const categoryData = prev[diffCategory] || { setsCleared: 0, totalPoints: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} };
           const stageKey = `stage_${selectedTheme}_${Date.now()}`;
-          const setData = categoryData.sets[stageKey] || { title: `Stage Set`, firstTime: null, fastestRepeat: null, clears: 0 };
+          const setData = categoryData.sets[stageKey] || { title: `Stage Set`, firstTime: null, fastestRepeat: null, clears: 0, totalPoints: 0 };
 
           const isFirstTime = !setData.firstTime;
           const newFirstTime = isFirstTime ? cumulativeTime : setData.firstTime;
           const newFastestRepeat = !setData.fastestRepeat || cumulativeTime < setData.fastestRepeat ? cumulativeTime : setData.fastestRepeat;
+          const newSetTotalPoints = (setData.totalPoints || 0) + stageTotalScore;
 
           const updatedSetData = {
             title: `5-Image Stage (${selectedTheme === 'find_the_sniper' ? 'Photography' : 'Fantastical'})`,
             packId: selectedTheme,
             firstTime: newFirstTime,
             fastestRepeat: newFastestRepeat,
-            clears: setData.clears + 1
+            clears: setData.clears + 1,
+            totalPoints: newSetTotalPoints,
+            lastScore: stageTotalScore
           };
 
           const updatedSets = { ...categoryData.sets, [stageKey]: updatedSetData };
@@ -415,10 +498,15 @@ export default function App() {
           const overallFirstTime = allFirstTimes.length > 0 ? Math.min(...allFirstTimes) : null;
           const overallRepeat = allRepeats.length > 0 ? Math.min(...allRepeats) : null;
 
+          const categoryTotalPoints = (categoryData.totalPoints || 0) + stageTotalScore;
+          const totalClearsAcrossCategory = Object.values(updatedSets).reduce((sum, s) => sum + (s.clears || 1), 0);
+
           const newStats = {
             ...prev,
             [diffCategory]: {
               setsCleared: setsClearedCount,
+              totalPoints: categoryTotalPoints,
+              avgPointsPerSet: totalClearsAcrossCategory > 0 ? Math.round(categoryTotalPoints / totalClearsAcrossCategory) : 0,
               fastestFirstTimeOverall: overallFirstTime,
               fastestRepeatOverall: overallRepeat,
               sets: updatedSets
@@ -580,6 +668,7 @@ export default function App() {
             onMissTap={handleMissTap}
             activeHintId={activeHintId}
             magnifierEnabled={magnifierEnabled}
+            elapsedTime={elapsedTime}
             debugMode={debugMode}
           />
         </main>

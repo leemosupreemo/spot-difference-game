@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Flame, Globe, Award } from 'lucide-react';
+import { CheckCircle2, Flame, Globe, Award, Zap, Trophy, Target, Timer } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { fetchLeaderboards } from '../services/playerProgress';
 
@@ -25,6 +25,8 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
 
   const currentStats = difficultyStats[selectedTab] || {
     setsCleared: 0,
+    totalPoints: 0,
+    avgPointsPerSet: 0,
     fastestFirstTimeOverall: null,
     fastestRepeatOverall: null,
     sets: {}
@@ -37,6 +39,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
 
   const getCategoryStats = (packId) => {
     let clears = 0;
+    let totalPoints = 0;
     let bestFirstTime = null;
     let bestRepeatTime = null;
     let setCompletedCount = 0;
@@ -44,8 +47,10 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
     Object.values(currentStats.sets || {}).forEach(setObj => {
       const setPack = setObj.packId || 'find_the_sniper';
       if (setPack === packId || (packId === 'find_the_sniper' && (!setObj.packId || setObj.packId === 'find_the_sniper'))) {
-        clears += (setObj.clears || 1);
+        const c = setObj.clears || 1;
+        clears += c;
         setCompletedCount += 1;
+        totalPoints += (setObj.totalPoints || 0);
 
         if (setObj.firstTime && (!bestFirstTime || setObj.firstTime < bestFirstTime)) {
           bestFirstTime = setObj.firstTime;
@@ -58,7 +63,8 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
       }
     });
 
-    return { clears, bestFirstTime, bestRepeatTime, setCompletedCount };
+    const avgPointsPerSet = clears > 0 ? Math.round(totalPoints / clears) : 0;
+    return { clears, totalPoints, avgPointsPerSet, bestFirstTime, bestRepeatTime, setCompletedCount };
   };
 
   const topLeaderboardEntries = leaderboardData?.byPackRepeat?.[selectedLeaderboardPack] || [];
@@ -248,38 +254,127 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
             })}
           </div>
 
+          {/* Summary Stat Cards for Selected Difficulty */}
+          {(() => {
+            const allSets = Object.values(currentStats.sets || {});
+            const totalDiffClears = allSets.reduce((sum, s) => sum + (s.clears || 1), 0) || currentStats.setsCleared || 0;
+            const totalDiffPoints = currentStats.totalPoints || allSets.reduce((sum, s) => sum + (s.totalPoints || 0), 0);
+            const avgPointsOverall = totalDiffClears > 0 ? Math.round(totalDiffPoints / totalDiffClears) : (currentStats.avgPointsPerSet || 0);
+            const bestOverallTimeMs = currentStats.fastestRepeatOverall || currentStats.fastestFirstTimeOverall;
+
+            return (
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                gap: '10px',
+                marginBottom: '16px'
+              }}>
+                <div style={{
+                  background: 'rgba(255, 183, 3, 0.08)',
+                  border: '1px solid rgba(255, 183, 3, 0.3)',
+                  borderRadius: '14px',
+                  padding: '12px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.74rem', fontWeight: 800, color: 'var(--accent-gold)' }}>
+                    <Trophy size={14} /> TOTAL POINTS
+                  </div>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#fff' }}>
+                    {totalDiffPoints.toLocaleString()} <span style={{ fontSize: '0.7rem', color: 'var(--accent-gold)' }}>PTS</span>
+                  </span>
+                </div>
+
+                <div style={{
+                  background: 'rgba(0, 240, 255, 0.08)',
+                  border: '1px solid rgba(0, 240, 255, 0.3)',
+                  borderRadius: '14px',
+                  padding: '12px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.74rem', fontWeight: 800, color: 'var(--accent-cyan)' }}>
+                    <Zap size={14} /> AVG PTS / SET
+                  </div>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#fff' }}>
+                    {avgPointsOverall.toLocaleString()} <span style={{ fontSize: '0.7rem', color: 'var(--accent-cyan)' }}>PTS</span>
+                  </span>
+                </div>
+
+                <div style={{
+                  background: 'rgba(0, 255, 135, 0.08)',
+                  border: '1px solid rgba(0, 255, 135, 0.3)',
+                  borderRadius: '14px',
+                  padding: '12px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.74rem', fontWeight: 800, color: 'var(--accent-green)' }}>
+                    <Target size={14} /> SETS CLEARED
+                  </div>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#fff' }}>
+                    {totalDiffClears} <span style={{ fontSize: '0.7rem', color: 'var(--accent-green)' }}>SETS</span>
+                  </span>
+                </div>
+
+                <div style={{
+                  background: 'rgba(255, 0, 127, 0.08)',
+                  border: '1px solid rgba(255, 0, 127, 0.3)',
+                  borderRadius: '14px',
+                  padding: '12px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.74rem', fontWeight: 800, color: 'var(--accent-pink)' }}>
+                    <Timer size={14} /> BEST TIME
+                  </div>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#fff' }}>
+                    {bestOverallTimeMs ? `${(bestOverallTimeMs / 1000).toFixed(2)}s` : '--'}
+                  </span>
+                </div>
+              </div>
+            );
+          })()}
+
           <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '14px', color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Flame size={18} color="var(--accent-pink)" /> {selectedTab.toUpperCase()} PROGRESS
+            <Flame size={18} color="var(--accent-pink)" /> {selectedTab.toUpperCase()} CATEGORY BREAKDOWN
           </h3>
 
           <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
               <thead>
                 <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
                   <th style={{ padding: '12px 14px' }}>CATEGORY</th>
-                  <th style={{ padding: '12px 14px', textAlign: 'center' }}>CLEARED</th>
-                  <th style={{ padding: '12px 14px', textAlign: 'center' }}>BEST 1ST TRY</th>
-                  <th style={{ padding: '12px 14px', textAlign: 'right' }}>BEST REPEAT TRY</th>
+                  <th style={{ padding: '12px 10px', textAlign: 'center' }}>CLEARED</th>
+                  <th style={{ padding: '12px 10px', textAlign: 'center' }}>TOTAL PTS</th>
+                  <th style={{ padding: '12px 10px', textAlign: 'center' }}>AVG / SET</th>
+                  <th style={{ padding: '12px 14px', textAlign: 'right' }}>BEST TIME</th>
                 </tr>
               </thead>
               <tbody>
                 {categoriesList.map(cat => {
                   const stats = getCategoryStats(cat.id);
-                  const firstStr = stats.bestFirstTime ? `${(stats.bestFirstTime / 1000).toFixed(2)}s` : '--';
-                  const repeatStr = stats.bestRepeatTime ? `${(stats.bestRepeatTime / 1000).toFixed(2)}s` : '--';
+                  const repeatStr = stats.bestRepeatTime ? `${(stats.bestRepeatTime / 1000).toFixed(2)}s` : (stats.bestFirstTime ? `${(stats.bestFirstTime / 1000).toFixed(2)}s` : '--');
 
                   return (
                     <tr key={cat.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                       <td style={{ padding: '12px 14px', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span>{cat.icon}</span> {cat.title}
                       </td>
-                      <td style={{ padding: '12px 14px', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+                      <td style={{ padding: '12px 10px', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
                         {stats.clears}
                       </td>
-                      <td style={{ padding: '12px 14px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-gold)', fontWeight: 800 }}>
-                        {firstStr}
+                      <td style={{ padding: '12px 10px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-gold)', fontWeight: 800 }}>
+                        {stats.totalPoints.toLocaleString()}
                       </td>
-                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontWeight: 800 }}>
+                      <td style={{ padding: '12px 10px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontWeight: 800 }}>
+                        {stats.avgPointsPerSet.toLocaleString()}
+                      </td>
+                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
                         {repeatStr}
                       </td>
                     </tr>

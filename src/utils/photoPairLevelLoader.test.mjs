@@ -51,6 +51,27 @@ test('selects matching entries by pack and difficulty with no duplicates', () =>
   assert.deepEqual(selected.map(item => item.difficulty), ['Hard', 'Hard']);
 });
 
+test('prioritizes new non-designated images first before categorized ones', () => {
+  const unreviewedEntry = { ...entry, id: 'unreviewed_001' };
+  const categorizedEntry = { ...entry, id: 'categorized_001' };
+  const entries = [categorizedEntry, unreviewedEntry];
+  const statusMap = {
+    categorized_001: { status: 'approved', packId: 'find_the_sniper' }
+  };
+
+  const selected = selectPhotoPairEntries(entries, {
+    packId: 'find_the_sniper',
+    difficulty: 'Hard',
+    count: 2,
+    seed: 1,
+    statusMap
+  });
+
+  assert.equal(selected.length, 2);
+  assert.equal(selected[0].id, 'unreviewed_001', 'Non-designated image must come first');
+  assert.equal(selected[1].id, 'categorized_001', 'Categorized image must be deprioritized');
+});
+
 test('uses a curator category designation when selecting a manifest entry', () => {
   const reclassified = applyCuratedPackOverrides([entry], {
     market_001: { status: 'approved', packId: 'abstract_animated', pack: 'Fantastical' }

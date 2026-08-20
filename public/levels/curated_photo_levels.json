@@ -90,5 +90,235 @@
         "hint": "Inspect near area (55%, 22%)"
       }
     ]
+  },
+  {
+    "id": "photo_spice_bazaar",
+    "title": "Artisan Spice Bazaar",
+    "category": "Real Photo",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45,
+        "y": 60,
+        "radius": 4,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (45%, 60%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_parisian_bookstore",
+    "title": "Cozy Parisian Bookstore",
+    "category": "Real Photo",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1507842229450-76905959e3f5?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62,
+        "y": 48,
+        "radius": 4,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (62%, 48%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_tokyo_ramen",
+    "title": "Tokyo Street Ramen Bar",
+    "category": "Real Photo",
+    "difficulty": "Medium",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 38,
+        "y": 54,
+        "radius": 4.5,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (38%, 54%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_alpine_wildflowers",
+    "title": "Alpine Meadow Wildflowers",
+    "category": "Nature Hunter",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 72,
+        "y": 68,
+        "radius": 4,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (72%, 68%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_ceramic_studio",
+    "title": "Artisan Ceramic Studio",
+    "category": "Real Photo",
+    "difficulty": "Medium",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 28,
+        "y": 62,
+        "radius": 4.5,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (28%, 62%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_venice_canal",
+    "title": "Venetian Canal Mooring",
+    "category": "Real Photo",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58,
+        "y": 38,
+        "radius": 4,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (58%, 38%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_coral_reef",
+    "title": "Tropical Coral Reef",
+    "category": "Nature Hunter",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 46,
+        "radius": 4,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (44%, 46%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_watchmaker_desk",
+    "title": "Watchmaker Horology Desk",
+    "category": "Real Photo",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66,
+        "y": 52,
+        "radius": 3.5,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (66%, 52%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_glasshouse_flora",
+    "title": "Botanical Glasshouse Garden",
+    "category": "Nature Hunter",
+    "difficulty": "Medium",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32,
+        "y": 35,
+        "radius": 4.5,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (32%, 35%)"
+      }
+    ]
+  },
+  {
+    "id": "photo_autumn_maple_garden",
+    "title": "Autumn Japanese Maple Garden",
+    "category": "Nature Hunter",
+    "difficulty": "Hard",
+    "totalDifferences": 1,
+    "bgGradient": [
+      "#0b091a",
+      "#1e1035"
+    ],
+    "accentColor": "#00f0ff",
+    "baseImageUrl": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=1200&auto=format&fit=crop",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54,
+        "y": 58,
+        "radius": 4,
+        "description": "Micro patch mutation",
+        "hint": "Inspect near area (54%, 58%)"
+      }
+    ]
   }
 ]

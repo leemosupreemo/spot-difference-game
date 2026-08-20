@@ -8,9 +8,7 @@ import { logApp, auditDOMState } from '../utils/logger.js';
 import {
   getCuratedStatusMap,
   setLevelCurationMeta,
-  pruneDismissedStatuses,
   resetCuratedStatusMap,
-  saveCuratedStatusMap,
   setLevelCuratedStatus
 } from '../utils/curationStore.js';
 
@@ -62,9 +60,7 @@ export function useGameViewModel() {
 
   // Curation State
   const [curatedStatusMap, setCuratedStatusMap] = useState(() => {
-    const cleanedStatuses = pruneDismissedStatuses(getCuratedStatusMap());
-    saveCuratedStatusMap(cleanedStatuses);
-    return cleanedStatuses;
+    return getCuratedStatusMap();
   });
 
   // Categorized Progress Stats
@@ -255,10 +251,12 @@ export function useGameViewModel() {
       } else {
         setTimerRunning(false);
         
+        const stageTotalScore = score + pointsEarned;
+        
         setDifficultyStats(prev => {
           const cat = 'All';
-          const categoryData = prev[cat] || { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, fastestCleanOverall: null, fastestFaultedOverall: null, sets: {} };
-          const setData = categoryData.sets[currentLevel.id] || { title: currentLevel.title, firstTime: null, fastestRepeat: null, bestCleanTime: null, bestFaultedTime: null, clears: 0 };
+          const categoryData = prev[cat] || { setsCleared: 0, totalPoints: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, fastestCleanOverall: null, fastestFaultedOverall: null, sets: {} };
+          const setData = categoryData.sets[currentLevel.id] || { title: currentLevel.title, firstTime: null, fastestRepeat: null, bestCleanTime: null, bestFaultedTime: null, clears: 0, totalPoints: 0 };
 
           const isFirstTime = !setData.firstTime;
           const newFirstTime = isFirstTime ? elapsedTime : setData.firstTime;
@@ -271,6 +269,7 @@ export function useGameViewModel() {
           const newBestFaulted = !isClean
             ? (!setData.bestFaultedTime || elapsedTime < setData.bestFaultedTime ? elapsedTime : setData.bestFaultedTime)
             : setData.bestFaultedTime;
+          const newSetTotalPoints = (setData.totalPoints || 0) + stageTotalScore;
 
           const updatedSetData = {
             title: currentLevel.title,
@@ -279,7 +278,9 @@ export function useGameViewModel() {
             fastestRepeat: newFastestRepeat,
             bestCleanTime: newBestClean,
             bestFaultedTime: newBestFaulted,
-            clears: setData.clears + 1
+            clears: setData.clears + 1,
+            totalPoints: newSetTotalPoints,
+            lastScore: stageTotalScore
           };
 
           const updatedSets = { ...categoryData.sets, [currentLevel.id]: updatedSetData };

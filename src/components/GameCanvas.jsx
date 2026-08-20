@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { sounds } from '../utils/audio';
-import { Search, CheckCircle2, AlertCircle } from 'lucide-react';
 import { logApp, auditDOMState } from '../utils/logger';
 import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
+import { calculateSpeedPoints } from '../utils/scoring';
 
 export default function GameCanvas({
   level,
@@ -11,6 +11,7 @@ export default function GameCanvas({
   onMissTap,
   activeHintId,
   magnifierEnabled,
+  elapsedTime = 0,
   debugMode = false
 }) {
   const canvasRefLeft = useRef(null);
@@ -173,12 +174,12 @@ export default function GameCanvas({
         sounds.playSuccess();
 
         const now = Date.now();
-        const bonusAmount = 300;
+        const pointsEarned = calculateSpeedPoints(elapsedTime);
         const newPopup = {
           id: now + Math.random(),
           x: clickXPercent,
           y: clickYPercent,
-          text: `+${bonusAmount} PTS`
+          text: `+${pointsEarned} PTS`
         };
         setSpeedPopups(prev => [...prev, newPopup]);
         setTimeout(() => {
@@ -272,9 +273,7 @@ export default function GameCanvas({
                 key={`left-hit-${diff.id}`}
                 className="hit-marker"
                 style={{ left: `${diff.x}%`, top: `${diff.y}%` }}
-              >
-                <span className="hit-marker-number">{diff.id}</span>
-              </div>
+              />
             );
           })}
 
@@ -380,9 +379,7 @@ export default function GameCanvas({
                 key={`right-hit-${diff.id}`}
                 className="hit-marker"
                 style={{ left: `${diff.x}%`, top: `${diff.y}%` }}
-              >
-                <span className="hit-marker-number">{diff.id}</span>
-              </div>
+              />
             );
           })}
 

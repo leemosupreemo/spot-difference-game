@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { generateProceduralLevelPair, ART_WORLDS, MUTATION_TYPES } from './proceduralGenerator.js';
+import { generateProceduralLevelPair, ART_WORLDS, MUTATION_TYPES, PAINT_STYLES } from './proceduralGenerator.js';
 
-test('exports the 6 unique organic and impressionist art worlds', () => {
-  assert.equal(ART_WORLDS.length, 6);
+test('exports the 12 unique artistic and impressionist worlds', () => {
+  assert.equal(ART_WORLDS.length, 12);
   const worldIds = ART_WORLDS.map(w => w.id);
   assert.ok(worldIds.includes('monet_waterlilies'));
   assert.ok(worldIds.includes('vangogh_starry'));
@@ -11,10 +11,30 @@ test('exports the 6 unique organic and impressionist art worlds', () => {
   assert.ok(worldIds.includes('ocean_depths'));
   assert.ok(worldIds.includes('tropical_aviary'));
   assert.ok(worldIds.includes('kyoto_garden'));
+  assert.ok(worldIds.includes('synthwave_neon_city'));
+  assert.ok(worldIds.includes('egyptian_gilded_papyrus'));
+  assert.ok(worldIds.includes('cosmic_nebula_stargate'));
+  assert.ok(worldIds.includes('steampunk_clockwork'));
+  assert.ok(worldIds.includes('nordic_aurora_fjord'));
+  assert.ok(worldIds.includes('cubist_mondrian_abstract'));
 });
 
-test('generates a procedural level pair with guaranteed exactly 1 difference', () => {
-  for (let i = 0; i < 20; i++) {
+test('exports 10 distinct paint styles and rendering finishes', () => {
+  assert.equal(PAINT_STYLES.length, 10);
+  assert.ok(PAINT_STYLES.includes('IMPASTO'));
+  assert.ok(PAINT_STYLES.includes('POINTILLIST'));
+  assert.ok(PAINT_STYLES.includes('WATERCOLOR'));
+  assert.ok(PAINT_STYLES.includes('INK_WASH'));
+  assert.ok(PAINT_STYLES.includes('SOFT_PASTEL'));
+  assert.ok(PAINT_STYLES.includes('STAINED_GLASS'));
+  assert.ok(PAINT_STYLES.includes('RETRO_SYNTHWAVE'));
+  assert.ok(PAINT_STYLES.includes('WOODBLOCK_PRINT'));
+  assert.ok(PAINT_STYLES.includes('MOSAIC_TILE'));
+  assert.ok(PAINT_STYLES.includes('BAUHAUS_FLAT'));
+});
+
+test('generates procedural level pairs across varied worlds with guaranteed exactly 1 difference', () => {
+  for (let i = 0; i < 40; i++) {
     const seed = 1000 + i * 777;
     const level = generateProceduralLevelPair('abstract_animated', 'Medium', seed);
 
@@ -37,16 +57,18 @@ test('supports all difficulty levels with proportional hit radii', () => {
   assert.equal(hardLevel.diffs[0].radius, 6);
 });
 
-test('provides valid render method that draws without throwing', () => {
-  const level = generateProceduralLevelPair('abstract_animated', 'Medium', 9999);
-  assert.equal(typeof level.render, 'function');
+test('provides valid render method that draws without throwing across different worlds', () => {
+  for (let i = 0; i < 12; i++) {
+    const level = generateProceduralLevelPair('abstract_animated', 'Medium', 5000 + i * 1337);
+    assert.equal(typeof level.render, 'function');
 
-  const calls = [];
-  const mockCtx = {
-    drawImage: (...args) => calls.push(args)
-  };
+    const calls = [];
+    const mockCtx = {
+      drawImage: (...args) => calls.push(args)
+    };
 
-  level.render(mockCtx, 800, 600, false);
-  level.render(mockCtx, 800, 600, true);
-  assert.equal(calls.length, 2, 'Render should have drawn both base and modified frames');
+    level.render(mockCtx, 800, 600, false);
+    level.render(mockCtx, 800, 600, true);
+    assert.equal(calls.length, 2, `Render should have drawn both base and modified frames for world seed ${i}`);
+  }
 });

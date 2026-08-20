@@ -65,6 +65,13 @@ export function clearPhotoPairManifestCache() {
   cachedManifestEntries = null;
 }
 
+export function removeManifestEntriesById(ids = []) {
+  const idSet = new Set(ids);
+  if (cachedManifestEntries) {
+    cachedManifestEntries = cachedManifestEntries.filter(entry => !idSet.has(entry.id));
+  }
+}
+
 export function applyCuratedPackOverrides(entries, statusMap = {}) {
   return entries.map(entry => {
     const statusVal = getLevelStatus(statusMap[entry.id]);
@@ -105,23 +112,57 @@ export function selectPhotoPairEntries(entries, {
   packId,
   difficulty,
   count = DEFAULT_STAGE_COUNT,
-  seed = Date.now()
+  seed = Date.now(),
+  statusMap = {}
 } = {}) {
-  let matchingEntries = entries.filter(entry => {
+  const effectiveEntries = applyCuratedPackOverrides(entries, statusMap);
+
+  let matchingEntries = effectiveEntries.filter(entry => {
     const packMatches = !packId || entry.packId === packId;
     const difficultyMatches = !difficulty || entry.difficulty === difficulty;
-    return packMatches && difficultyMatches;
+    const isBrandNew = entry.id?.includes('stock_') || entry.id?.startsWith('ai_macro_');
+    return packMatches && (isBrandNew || difficultyMatches);
   });
 
   if (matchingEntries.length < count && packId) {
-    matchingEntries = entries.filter(entry => !packId || entry.packId === packId);
+    matchingEntries = effectiveEntries.filter(entry => !packId || entry.packId === packId);
   }
 
   if (matchingEntries.length === 0) {
-    matchingEntries = entries;
+    matchingEntries = effectiveEntries;
   }
 
-  return shuffleEntries(matchingEntries, seed).slice(0, count);
+  // Prioritize newly added stock photos and un-designated images first (matching difficulty prioritized first)
+  const brandNewMatching = [];
+  const brandNewOther = [];
+  const unreviewed = [];
+  const categorized = [];
+
+  for (const entry of matchingEntries) {
+    const statusVal = getLevelStatus(statusMap[entry.id]);
+    const isCategorized = Boolean(statusVal?.status || statusVal?.packId || statusVal?.category || statusVal?.difficulty || statusVal?.suggestedDifficulty);
+
+    if ((entry.id?.includes('stock_') || entry.id?.startsWith('ai_macro_')) && !isCategorized) {
+      if (difficulty && entry.difficulty === difficulty) {
+        brandNewMatching.push(entry);
+      } else {
+        brandNewOther.push(entry);
+      }
+    } else if (isCategorized) {
+      categorized.push(entry);
+    } else {
+      unreviewed.push(entry);
+    }
+  }
+
+  const prioritized = [
+    ...brandNewMatching,
+    ...brandNewOther,
+    ...shuffleEntries(unreviewed, seed),
+    ...shuffleEntries(categorized, seed + 1)
+  ];
+
+  return prioritized.slice(0, count);
 }
 
 export async function buildPhotoPairStage({
@@ -130,7 +171,8 @@ export async function buildPhotoPairStage({
   count = DEFAULT_STAGE_COUNT,
   seed = Date.now(),
   fetchImpl = null,
-  imageFactory = null
+  imageFactory = null,
+  curatedStatusMap = null
 } = {}) {
   logApp('INFO', `[BuildStage] Pack: ${packId} Difficulty: ${difficulty} Seed: ${seed}`);
   try {
@@ -146,14 +188,14 @@ export async function buildPhotoPairStage({
     if (!allEntries) {
       allEntries = loadManifest();
     }
-    const statusMap = getCuratedStatusMap();
+    const statusMap = curatedStatusMap || getCuratedStatusMap();
     const activeEntries = allEntries.filter(entry => {
       const statusVal = getLevelStatus(statusMap[entry.id])?.status;
       return statusVal !== 'dismissed';
     });
 
     if (activeEntries && activeEntries.length > 0) {
-      const candidates = selectPhotoPairEntries(activeEntries, { packId, difficulty, count: activeEntries.length, seed });
+      const candidates = selectPhotoPairEntries(activeEntries, { packId, difficulty, count: activeEntries.length, seed, statusMap });
       const stage = [];
 
       for (const entry of candidates) {

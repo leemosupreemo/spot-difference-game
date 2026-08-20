@@ -1,0 +1,192 @@
+[
+  {
+    "title" : "Bookbinder Tool Tray",
+    "packId" : "find_the_sniper",
+    "baseImage" : "levels\/photo-pairs\/ai-bookbinding-tools\/base.jpg",
+    "id" : "ai_bookbinding_tools_001",
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/ai-bookbinding-tools\/variant.jpg",
+    "difficulty" : "Hard",
+    "diffs" : [
+      {
+        "x" : 46.200000000000003,
+        "hint" : "Examine the row of wooden-handled carving awls in the center tray compartment.",
+        "id" : 1,
+        "radius" : 9.1999999999999993,
+        "y" : 59
+      }
+    ],
+    "category" : "Craft Studio"
+  },
+  {
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/ai-electronics-lab\/variant.jpg",
+    "category" : "Workshop Clutter",
+    "difficulty" : "Hard",
+    "diffs" : [
+      {
+        "y" : 89,
+        "id" : 1,
+        "x" : 35,
+        "radius" : 8.1999999999999993,
+        "hint" : "Look at the round white solder wire spool resting on the table in the lower left."
+      }
+    ],
+    "id" : "ai_electronics_workbench_001",
+    "title" : "Electronics Lab Station",
+    "pack" : "Find the Sniper",
+    "baseImage" : "levels\/photo-pairs\/ai-electronics-lab\/base.jpg"
+  },
+  {
+    "variantImage" : "levels\/photo-pairs\/photo-repair-hardware-002\/variant.jpg",
+    "difficulty" : "Hard",
+    "diffs" : [
+      {
+        "x" : 75,
+        "radius" : 5.2000000000000002,
+        "y" : 42,
+        "hint" : "Scan the brass washer compartment on the right side of the organizer.",
+        "id" : 1
+      }
+    ],
+    "pack" : "Find the Sniper",
+    "title" : "Precision Hardware Drawer",
+    "id" : "photo_repair_hardware_002",
+    "baseImage" : "levels\/photo-pairs\/photo-repair-hardware-002\/base.jpg",
+    "packId" : "find_the_sniper",
+    "category" : "Workshop Clutter"
+  },
+  {
+    "diffs" : [
+      {
+        "y" : 47.200000000000003,
+        "id" : 1,
+        "hint" : "Inspect the ruby jewel bearing near the center brass gear wheel.",
+        "x" : 40.799999999999997,
+        "radius" : 4.5
+      }
+    ],
+    "category" : "Horology Studio",
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-watch-gears-002\/variant.jpg",
+    "id" : "photo_watch_gears_002",
+    "baseImage" : "levels\/photo-pairs\/photo-watch-gears-002\/base.jpg",
+    "title" : "Watchmaker Ruby Escapement",
+    "pack" : "Find the Sniper",
+    "difficulty" : "Hard"
+  },
+  {
+    "title" : "Analog Optics Station",
+    "category" : "Optical Workshop",
+    "pack" : "Find the Sniper",
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-camera-optics-002\/variant.jpg",
+    "diffs" : [
+      {
+        "id" : 1,
+        "radius" : 4.2000000000000002,
+        "x" : 64.799999999999997,
+        "hint" : "Check the lens calibration markings on the upper right lens barrel.",
+        "y" : 31
+      }
+    ],
+    "difficulty" : "Hard",
+    "id" : "photo_camera_optics_002",
+    "baseImage" : "levels\/photo-pairs\/photo-camera-optics-002\/base.jpg"
+  },
+  {
+    "title" : "Seamstress Notions Table",
+    "id" : "photo_sewing_notions_002",
+    "pack" : "Find the Sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-sewing-notions-002\/variant.jpg",
+    "category" : "Craft Studio",
+    "difficulty" : "Hard",
+    "baseImage" : "levels\/photo-pairs\/photo-sewing-notions-002\/base.jpg",
+    "packId" : "find_the_sniper",
+    "diffs" : [
+      {
+        "radius" : 4.2000000000000002,
+        "x" : 26.5,
+        "id" : 1,
+        "hint" : "Examine the pearl-head pins on the pincushion in the lower left.",
+        "y" : 71
+      }
+    ]
+  },
+  {
+    "difficulty" : "Hard",
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-woodcraft-clamp-002\/variant.jpg",
+    "baseImage" : "levels\/photo-pairs\/photo-woodcraft-clamp-002\/base.jpg",
+    "category" : "Workshop Clutter",
+    "pack" : "Find the Sniper",
+    "title" : "Cabinetmaker Joinery Bench",
+    "id" : "photo_woodcraft_clamp_002",
+    "diffs" : [
+      {
+        "y" : 55,
+        "radius" : 4.2000000000000002,
+        "hint" : "Look closely at the brass adjustment screw on the wooden clamp.",
+        "x" : 81.799999999999997,
+        "id" : 1
+      }
+    ]
+  },
+  {
+    "id" : "photo_angler_tackle_002",
+    "title" : "Deep Sea Tackle Box",
+    "pack" : "Find the Sniper",
+    "difficulty" : "Hard",
+    "variantImage" : "levels\/photo-pairs\/photo-angler-tackle-002\/variant.jpg",
+    "packId" : "find_the_sniper",
+    "category" : "Outdoor Gear",
+    "baseImage" : "levels\/photo-pairs\/photo-angler-tackle-002\/base.jpg",
+    "diffs" : [
+      {
+        "x" : 44.799999999999997,
+        "id" : 1,
+        "radius" : 4.2000000000000002,
+        "y" : 35,
+        "hint" : "Check the metallic lure bead in the middle compartment of the tray."
+      }
+    ]
+  },
+  {
+    "title" : "Botanical Florist Bench",
+    "difficulty" : "Hard",
+    "variantImage" : "levels\/photo-pairs\/photo-botanical-press-002\/variant.jpg",
+    "baseImage" : "levels\/photo-pairs\/photo-botanical-press-002\/base.jpg",
+    "pack" : "Find the Sniper",
+    "id" : "photo_botanical_press_002",
+    "packId" : "find_the_sniper",
+    "category" : "Botanical Garden",
+    "diffs" : [
+      {
+        "x" : 34,
+        "y" : 51,
+        "hint" : "Scan the dried seed capsule resting beside the terracotta pot.",
+        "id" : 1,
+        "radius" : 4.2000000000000002
+      }
+    ]
+  },
+  {
+    "packId" : "find_the_sniper",
+    "variantImage" : "levels\/photo-pairs\/photo-strategy-pieces-002\/variant.jpg",
+    "difficulty" : "Hard",
+    "category" : "Game Night",
+    "baseImage" : "levels\/photo-pairs\/photo-strategy-pieces-002\/base.jpg",
+    "title" : "Tabletop Strategy Board",
+    "id" : "photo_strategy_pieces_002",
+    "diffs" : [
+      {
+        "hint" : "Inspect the wooden resource token on the lower-right map tile.",
+        "y" : 64.799999999999997,
+        "radius" : 4,
+        "x" : 60.5,
+        "id" : 1
+      }
+    ],
+    "pack" : "Find the Sniper"
+  }
+]
