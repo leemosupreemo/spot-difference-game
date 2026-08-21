@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Terminal, Copy, Check, Share2, Trash2, X, RefreshCw, Smartphone, ShieldCheck, Layers } from 'lucide-react';
 import { getAppLogs, clearAppLogs, subscribeAppLogs, logApp } from '../utils/logger';
 import { getCuratedStatusMap, getLevelStatus } from '../utils/curationStore';
@@ -28,21 +28,51 @@ export default function DiagnosticsModal({
     return unsub;
   }, [isOpen]);
 
+  const {
+    manifestEntries,
+    statusMap,
+    totalReviewed,
+    approvedCount,
+    wrongDiffCount,
+    dismissedCount,
+    topCandidates
+  } = useMemo(() => {
+    if (!isOpen) {
+      return {
+        manifestEntries: [],
+        statusMap: {},
+        totalReviewed: 0,
+        approvedCount: 0,
+        wrongDiffCount: 0,
+        dismissedCount: 0,
+        topCandidates: []
+      };
+    }
+    const entries = getAllPhotoPairEntries();
+    const map = getCuratedStatusMap();
+    const totalRev = Object.keys(map).length;
+    const appr = Object.values(map).filter(v => getLevelStatus(v)?.status === 'approved').length;
+    const wrong = Object.values(map).filter(v => getLevelStatus(v)?.status === 'wrong_difficulty').length;
+    const dis = Object.values(map).filter(v => getLevelStatus(v)?.status === 'dismissed').length;
+    const candidates = selectPhotoPairEntries(entries, {
+      packId: selectedTheme,
+      difficulty: selectedDifficulty,
+      count: 6,
+      statusMap: map
+    });
+
+    return {
+      manifestEntries: entries,
+      statusMap: map,
+      totalReviewed: totalRev,
+      approvedCount: appr,
+      wrongDiffCount: wrong,
+      dismissedCount: dis,
+      topCandidates: candidates
+    };
+  }, [isOpen, selectedTheme, selectedDifficulty]);
+
   if (!isOpen) return null;
-
-  const manifestEntries = getAllPhotoPairEntries();
-  const statusMap = getCuratedStatusMap();
-  const totalReviewed = Object.keys(statusMap).length;
-  const approvedCount = Object.values(statusMap).filter(v => getLevelStatus(v)?.status === 'approved').length;
-  const wrongDiffCount = Object.values(statusMap).filter(v => getLevelStatus(v)?.status === 'wrong_difficulty').length;
-  const dismissedCount = Object.values(statusMap).filter(v => getLevelStatus(v)?.status === 'dismissed').length;
-
-  const topCandidates = selectPhotoPairEntries(manifestEntries, {
-    packId: selectedTheme,
-    difficulty: selectedDifficulty,
-    count: 6,
-    statusMap
-  });
 
   const getSystemReport = () => {
     return {

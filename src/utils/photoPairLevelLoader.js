@@ -157,8 +157,6 @@ export function selectPhotoPairEntries(entries, {
     ...otherCategorized
   ];
 
-  logApp('INFO', `[SelectEntries] Pack:${packId} Diff:${difficulty} | UnreviewedNew:${unreviewedBrandNew.length} UnreviewedOther:${unreviewedOther.length} ApprMatch:${approvedMatching.length} ApprOther:${approvedOther.length} | Top4: ${prioritized.slice(0, 4).map(p => p.id).join(', ')}`);
-
   return prioritized.slice(0, count);
 }
 
