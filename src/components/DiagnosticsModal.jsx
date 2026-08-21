@@ -165,17 +165,37 @@ export default function DiagnosticsModal({
     : logs;
 
   return (
-    <div className="modal-overlay" style={{ zIndex: 99999 }}>
-      <div className="glass-panel modal-content" style={{
-        maxWidth: '750px',
-        width: '92vw',
-        maxHeight: '90vh',
+    <div
+      onClick={() => { sounds.playTap(); onClose(); }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 99999,
+        background: 'rgba(0, 0, 0, 0.88)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
-        flexDirection: 'column',
-        padding: '20px',
-        border: '1px solid rgba(0, 240, 255, 0.4)',
-        boxShadow: '0 0 35px rgba(0, 240, 255, 0.25)'
-      }}>
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '16px',
+        boxSizing: 'border-box'
+      }}
+    >
+      <div
+        className="glass-panel"
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          maxWidth: '750px',
+          width: '100%',
+          maxHeight: '88vh',
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '20px',
+          border: '1px solid rgba(0, 240, 255, 0.4)',
+          boxShadow: '0 0 35px rgba(0, 240, 255, 0.25)',
+          position: 'relative'
+        }}
+      >
         
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>
