@@ -16,7 +16,7 @@ function isPositiveRadius(value) {
 
 function isAssetPath(value) {
   return isNonEmptyString(value)
-    && (value.startsWith('/levels/photo-pairs/') || value.startsWith('levels/photo-pairs/'))
+    && (value.startsWith('/levels/') || value.startsWith('levels/'))
     && /\.(avif|jpe?g|png|webp)$/i.test(value);
 }
 
@@ -31,8 +31,8 @@ export function isValidPhotoPairEntry(entry) {
   if (!entry || typeof entry !== 'object') return false;
   if (!isNonEmptyString(entry.id)) return false;
   if (!isNonEmptyString(entry.title)) return false;
-  if (!isNonEmptyString(entry.pack)) return false;
-  if (!isNonEmptyString(entry.packId)) return false;
+  if (!isNonEmptyString(entry.pack || entry.packId || entry.category)) return false;
+  if (!isNonEmptyString(entry.packId || entry.pack || entry.category)) return false;
   if (!DIFFICULTIES.has(entry.difficulty)) return false;
   if (!isAssetPath(entry.baseImage) || !isAssetPath(entry.variantImage)) return false;
   if (!Array.isArray(entry.diffs) || entry.diffs.length !== 1) return false;

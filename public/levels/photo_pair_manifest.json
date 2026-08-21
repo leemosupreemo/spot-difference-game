@@ -1,5 +1,81 @@
 [
   {
+    "id": "ai_macro_watch_escapement_001",
+    "title": "Horology Watch Escapement & Ruby Jewels",
+    "category": "Real Photo",
+    "difficulty": "Medium",
+    "packId": "find_the_sniper",
+    "baseImage": "/levels/ai_macro_watch_escapement_001_base.jpg",
+    "variantImage": "/levels/ai_macro_watch_escapement_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.5,
+        "y": 54.8,
+        "radius": 4.5,
+        "description": "Balance wheel shock cap ruby jewel changed from magenta to emerald green",
+        "hint": "Look at the shock jewel in the center of the balance wheel"
+      }
+    ]
+  },
+  {
+    "id": "ai_macro_cobbler_stitch_001",
+    "title": "Italian Shoemaker Awl & Saddle Stitching",
+    "category": "Real Photo",
+    "difficulty": "Easy",
+    "packId": "find_the_sniper",
+    "baseImage": "/levels/ai_macro_cobbler_stitch_001_base.jpg",
+    "variantImage": "/levels/ai_macro_cobbler_stitch_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48,
+        "y": 54,
+        "radius": 7,
+        "description": "Waxed linen stitching thread changed from cream white to turquoise blue",
+        "hint": "Notice the stitching thread loop hanging from the awl needle"
+      }
+    ]
+  },
+  {
+    "id": "ai_macro_typewriter_keys_001",
+    "title": "Vintage Typewriter Typebars & Inked Ribbon",
+    "category": "Real Photo",
+    "difficulty": "Easy",
+    "packId": "find_the_sniper",
+    "baseImage": "/levels/ai_macro_typewriter_keys_001_base.jpg",
+    "variantImage": "/levels/ai_macro_typewriter_keys_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55,
+        "y": 56,
+        "radius": 8,
+        "description": "Dual-tone typewriter ribbon stripe changed from red to royal blue",
+        "hint": "Look closely at the lower color stripe on the typewriter ribbon"
+      }
+    ]
+  },
+  {
+    "id": "ai_macro_stained_glass_001",
+    "title": "Master Stained Glass Solder & Cathedral Glass",
+    "category": "Real Photo",
+    "difficulty": "Medium",
+    "packId": "find_the_sniper",
+    "baseImage": "/levels/ai_macro_stained_glass_001_base.jpg",
+    "variantImage": "/levels/ai_macro_stained_glass_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.5,
+        "y": 57.5,
+        "radius": 4.5,
+        "description": "Cathedral glass petal to the right of soldering iron changed from ruby red to deep violet purple",
+        "hint": "Check the curved glass petal just to the right of the hot solder joint"
+      }
+    ]
+  },
+  {
     "id": "ai_macro_fountain_pen_001",
     "title": "Vintage Fountain Pen & Inkwell Bench",
     "category": "Photography",
