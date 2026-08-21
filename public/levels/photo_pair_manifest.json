@@ -3,7 +3,7 @@
     "id": "ai_macro_watch_escapement_001",
     "title": "Horology Watch Escapement & Ruby Jewels",
     "category": "Real Photo",
-    "difficulty": "Medium",
+    "difficulty": "Easy",
     "packId": "find_the_sniper",
     "baseImage": "/levels/ai_macro_watch_escapement_001_base.jpg",
     "variantImage": "/levels/ai_macro_watch_escapement_001_variant.jpg",
@@ -15,44 +15,6 @@
         "radius": 4.5,
         "description": "Balance wheel shock cap ruby jewel changed from magenta to emerald green",
         "hint": "Look at the shock jewel in the center of the balance wheel"
-      }
-    ]
-  },
-  {
-    "id": "ai_macro_cobbler_stitch_001",
-    "title": "Italian Shoemaker Awl & Saddle Stitching",
-    "category": "Real Photo",
-    "difficulty": "Easy",
-    "packId": "find_the_sniper",
-    "baseImage": "/levels/ai_macro_cobbler_stitch_001_base.jpg",
-    "variantImage": "/levels/ai_macro_cobbler_stitch_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 48,
-        "y": 54,
-        "radius": 7,
-        "description": "Waxed linen stitching thread changed from cream white to turquoise blue",
-        "hint": "Notice the stitching thread loop hanging from the awl needle"
-      }
-    ]
-  },
-  {
-    "id": "ai_macro_typewriter_keys_001",
-    "title": "Vintage Typewriter Typebars & Inked Ribbon",
-    "category": "Real Photo",
-    "difficulty": "Easy",
-    "packId": "find_the_sniper",
-    "baseImage": "/levels/ai_macro_typewriter_keys_001_base.jpg",
-    "variantImage": "/levels/ai_macro_typewriter_keys_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 55,
-        "y": 56,
-        "radius": 8,
-        "description": "Dual-tone typewriter ribbon stripe changed from red to royal blue",
-        "hint": "Look closely at the lower color stripe on the typewriter ribbon"
       }
     ]
   },
@@ -72,106 +34,6 @@
         "radius": 4.5,
         "description": "Cathedral glass petal to the right of soldering iron changed from ruby red to deep violet purple",
         "hint": "Check the curved glass petal just to the right of the hot solder joint"
-      }
-    ]
-  },
-  {
-    "id": "ai_macro_fountain_pen_001",
-    "title": "Vintage Fountain Pen & Inkwell Bench",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "originalImage": "levels/photo-pairs/ai_macro_fountain_pen_001/original.png",
-    "variantImage": "levels/photo-pairs/ai_macro_fountain_pen_001/variant.png",
-    "baseImage": "levels/photo-pairs/ai_macro_fountain_pen_001/original.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 45.6,
-        "y": 8.5,
-        "radius": 4.5,
-        "hint": "Notice the ink liquid color inside the first glass corked bottle on the top row."
-      }
-    ]
-  },
-  {
-    "id": "ai_macro_astronomy_sextant_001",
-    "title": "Antique Brass Sextant & Celestial Chart",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "originalImage": "levels/photo-pairs/ai_macro_astronomy_sextant_001/original.png",
-    "variantImage": "levels/photo-pairs/ai_macro_astronomy_sextant_001/variant.png",
-    "baseImage": "levels/photo-pairs/ai_macro_astronomy_sextant_001/original.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 68.6,
-        "y": 88.5,
-        "radius": 3.8,
-        "hint": "Examine the middle brass knurled screw along the bottom row."
-      }
-    ]
-  },
-  {
-    "id": "ai_macro_luthier_violin_001",
-    "title": "Master Luthier Violin Maker Bench",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "originalImage": "levels/photo-pairs/ai_macro_luthier_violin_001/original.png",
-    "variantImage": "levels/photo-pairs/ai_macro_luthier_violin_001/variant.png",
-    "baseImage": "levels/photo-pairs/ai_macro_luthier_violin_001/original.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 14.8,
-        "y": 44,
-        "radius": 4.5,
-        "hint": "Look closely at the carved center pattern on the bottom-most maple violin bridge."
-      }
-    ]
-  },
-  {
-    "id": "ai_macro_miniature_painting_001",
-    "title": "Fantasy Miniature Painter Wet Palette",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "originalImage": "levels/photo-pairs/ai_macro_miniature_painting_001/original.png",
-    "variantImage": "levels/photo-pairs/ai_macro_miniature_painting_001/variant.png",
-    "baseImage": "levels/photo-pairs/ai_macro_miniature_painting_001/original.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 54.8,
-        "y": 40.2,
-        "radius": 3.5,
-        "hint": "Check the acrylic paint droplet color below the Goblin Green paint bottle."
-      }
-    ]
-  },
-  {
-    "id": "ai_macro_espresso_grouphead_001",
-    "title": "Espresso Machine Brass Grouphead Service",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "originalImage": "levels/photo-pairs/ai_macro_espresso_grouphead_001/original.png",
-    "variantImage": "levels/photo-pairs/ai_macro_espresso_grouphead_001/variant.png",
-    "baseImage": "levels/photo-pairs/ai_macro_espresso_grouphead_001/original.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 49.8,
-        "y": 51.6,
-        "radius": 5.5,
-        "hint": "Notice the silicone grouphead gasket ring color in the center of the service mat."
       }
     ]
   },
@@ -212,7 +74,7 @@
     "variantImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/variant.png",
     "pack": "Find the Sniper",
     "title": "Artisan Exotic Spice Board",
-    "difficulty": "Medium",
+    "difficulty": "Easy",
     "category": "Photography",
     "originalImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/original.png",
     "id": "ai_macro_spice_bazaar_001"
@@ -326,7 +188,7 @@
     "id": "ai_macro_sewing_notions_001",
     "title": "Couture Tailor Notions Box",
     "packId": "find_the_sniper",
-    "difficulty": "Hard",
+    "difficulty": "Easy",
     "category": "Photography",
     "variantImage": "levels/photo-pairs/ai_macro_sewing_notions_001/variant.png",
     "pack": "Find the Sniper",
@@ -618,7 +480,7 @@
     "difficulty": "Medium"
   },
   {
-    "packId": "find_the_sniper",
+    "packId": "abstract_animated",
     "category": "Photography",
     "difficulty": "Medium",
     "variantImage": "levels/photo-pairs/photo-watchmaker-bench/variant.jpg",
@@ -710,7 +572,7 @@
     "category": "Photography",
     "title": "Camping Table Carabiner",
     "variantImage": "levels/photo-pairs/photo-camping-table/variant.jpg",
-    "difficulty": "Easy"
+    "difficulty": "Medium"
   },
   {
     "diffs": [
@@ -822,7 +684,7 @@
     "id": "photo_fishing_tackle_001",
     "baseImage": "levels/photo-pairs/photo-fishing-tackle/base.jpg",
     "category": "Photography",
-    "difficulty": "Easy",
+    "difficulty": "Medium",
     "packId": "find_the_sniper",
     "variantImage": "levels/photo-pairs/photo-fishing-tackle/variant.jpg"
   },
@@ -1191,7 +1053,7 @@
     "category": "Horology Studio",
     "id": "ai_watchmaker_bench_001",
     "baseImage": "levels/photo-pairs/ai-watchmaker-bench/base.jpg",
-    "difficulty": "Medium",
+    "difficulty": "Easy",
     "title": "Master Watchmaker Desk",
     "packId": "find_the_sniper",
     "pack": "Find the Sniper",
@@ -1246,7 +1108,7 @@
   },
   {
     "id": "ai_antique_study_001",
-    "difficulty": "Hard",
+    "difficulty": "Easy",
     "packId": "find_the_sniper",
     "title": "Victorian Study Desk",
     "baseImage": "levels/photo-pairs/ai-antique-study/base.jpg",
@@ -1286,7 +1148,7 @@
     "pack": "Find the Sniper",
     "baseImage": "levels/photo-pairs/ai-cartography-desk/base.jpg",
     "packId": "find_the_sniper",
-    "difficulty": "Hard",
+    "difficulty": "Easy",
     "category": "Antique Study",
     "title": "Maritime Cartography Desk",
     "diffs": [
