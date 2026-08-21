@@ -181,15 +181,15 @@ export default function DebugCuratorBar({
             </div>
           </div>
 
-          {/* Center: Curation and Difficulty Controls */}
+          {/* Center: Curation Controls */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             {/* Option 1: Thumbs Up (Keep - Good) */}
             <button
               onClick={handleApprove}
               className="glass-btn"
               style={{
-                padding: '6px 12px',
-                fontSize: '0.82rem',
+                padding: '6px 14px',
+                fontSize: '0.84rem',
                 borderRadius: '10px',
                 background: currentStatus === 'approved' ? 'linear-gradient(135deg, #00ff87, #00b862)' : 'rgba(0, 255, 135, 0.15)',
                 color: currentStatus === 'approved' ? '#000' : 'var(--accent-green)',
@@ -201,33 +201,13 @@ export default function DebugCuratorBar({
               <ThumbsUp size={15} /> Keep
             </button>
 
-            {['Easy', 'Medium', 'Hard'].map((difficulty) => (
-              <button
-                key={difficulty}
-                onClick={() => handleDifficulty(difficulty)}
-                className="glass-btn"
-                style={{
-                  padding: '6px 9px',
-                  fontSize: '0.78rem',
-                  borderRadius: '10px',
-                  background: currentStatus === 'wrong_difficulty' && statusObj?.suggestedDifficulty === difficulty ? 'linear-gradient(135deg, #ffb703, #d49600)' : 'rgba(255, 183, 3, 0.15)',
-                  color: currentStatus === 'wrong_difficulty' && statusObj?.suggestedDifficulty === difficulty ? '#000' : 'var(--accent-gold)',
-                  borderColor: 'var(--accent-gold)',
-                  fontWeight: 800
-                }}
-                title={`Keep image and assign ${difficulty} difficulty`}
-              >
-                {difficulty}
-              </button>
-            ))}
-
-            {/* Option 3: Thumbs Down (Dismiss) */}
+            {/* Option 2: Thumbs Down (Dismiss - Extra diffs / bad image) */}
             <button
               onClick={handleDismiss}
               className="glass-btn"
               style={{
-                padding: '6px 12px',
-                fontSize: '0.82rem',
+                padding: '6px 14px',
+                fontSize: '0.84rem',
                 borderRadius: '10px',
                 background: currentStatus === 'dismissed' ? 'linear-gradient(135deg, #ff007f, #b8005c)' : 'rgba(255, 0, 127, 0.15)',
                 color: currentStatus === 'dismissed' ? '#fff' : 'var(--accent-pink)',
