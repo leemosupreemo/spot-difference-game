@@ -74,7 +74,7 @@ test('prioritizes new non-designated images first before categorized ones', () =
 
 test('uses a curator category designation when selecting a manifest entry', () => {
   const reclassified = applyCuratedPackOverrides([entry], {
-    market_001: { status: 'approved', packId: 'abstract_animated', pack: 'Fantastical' }
+    market_001: { status: 'approved', packId: 'abstract_animated', pack: 'Abstract' }
   });
   const selected = selectPhotoPairEntries(reclassified, {
     packId: 'abstract_animated',
@@ -85,7 +85,7 @@ test('uses a curator category designation when selecting a manifest entry', () =
 
   assert.equal(selected.length, 1);
   assert.equal(selected[0].packId, 'abstract_animated');
-  assert.equal(selected[0].pack, 'Fantastical');
+  assert.equal(selected[0].pack, 'Abstract');
 });
 
 test('builds a stage from a fetched manifest and loadable image pairs', async () => {

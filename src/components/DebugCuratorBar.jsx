@@ -280,9 +280,9 @@ export default function DebugCuratorBar({
                 borderColor: '#d9b3ff',
                 fontWeight: 800
               }}
-              title="Designate this pair as Fantastical"
+              title="Designate this pair as Abstract"
             >
-              <Sparkles size={14} /> Fantastical
+              <Sparkles size={14} /> Abstract
             </button>
           </div>
 

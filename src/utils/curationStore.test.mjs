@@ -62,11 +62,11 @@ test('serializes curated data as readable JSON that includes approved ids', () =
 test('adds a category designation without replacing a curation decision', () => {
   const updated = applyLevelCurationMeta({
     photo_one: { status: 'approved', suggestedDifficulty: 'Hard' }
-  }, 'photo_one', { packId: 'abstract_animated', pack: 'Fantastical' });
+  }, 'photo_one', { packId: 'abstract_animated', pack: 'Abstract' });
 
   assert.equal(updated.photo_one.status, 'approved');
   assert.equal(updated.photo_one.suggestedDifficulty, 'Hard');
   assert.equal(updated.photo_one.packId, 'abstract_animated');
-  assert.equal(updated.photo_one.pack, 'Fantastical');
+  assert.equal(updated.photo_one.pack, 'Abstract');
   assert.ok(updated.photo_one.updatedAt);
 });

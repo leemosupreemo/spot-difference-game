@@ -94,7 +94,7 @@ export function useGameViewModel() {
   const handleSetCuratedCategory = useCallback((levelId, packId) => {
     const updated = setLevelCurationMeta(levelId, {
       packId,
-      pack: packId === 'abstract_animated' ? 'Fantastical' : 'Photography'
+      pack: packId === 'abstract_animated' ? 'Abstract' : 'Photography'
     });
     setCuratedStatusMap({ ...updated });
   }, []);

@@ -422,7 +422,7 @@ export default function App() {
   const [stageToastMessage, setStageToastMessage] = useState(null);
   const [totalStageTimeMs, setTotalStageTimeMs] = useState(0);
 
-  // Handle Game Launch from Main Menu (Loads Real-World Photo Pairs!)
+  // Handle Game Launch from Main Menu
   const handleStartGame = async () => {
     logApp('INFO', `[StartGameClicked] Theme: ${selectedTheme}, Diff: ${selectedDifficulty}, DebugMode: ${debugMode}`);
     setCurrentStageIndex(0);
@@ -430,6 +430,17 @@ export default function App() {
     setTotalStageTimeMs(0);
     setScore(0);
 
+    // 1. ABSTRACT CATEGORY: ALWAYS generates procedural art images across 12 distinct art worlds
+    if (selectedTheme === 'abstract_animated' || (debugMode && debugSourceMode === 'procedural')) {
+      const procLevels = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair('abstract_animated', selectedDifficulty, Date.now() + i * 1000));
+      logApp('INFO', `[StartGame:AbstractProcedural] Launching 5 procedural levels: ${procLevels.map(l => l.id).join(', ')}`);
+      setLevels(procLevels);
+      startLevel(procLevels[0].id);
+      setView('game');
+      return;
+    }
+
+    // 2. PHOTOGRAPHY CATEGORY: ALWAYS uses curated premade real-world photo pairs
     try {
       if (debugMode && debugSourceMode === 'premade') {
         const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
@@ -447,14 +458,14 @@ export default function App() {
       }
 
       const stageList = await buildPhotoPairStage({
-        packId: selectedTheme,
+        packId: 'find_the_sniper',
         difficulty: selectedDifficulty,
         count: 5,
         seed: Date.now(),
         curatedStatusMap
       });
       if (stageList && stageList.length > 0) {
-        logApp('INFO', `[StartGame:StageBuilt] Launching 5 photo levels: ${stageList.map(l => l.id).join(', ')}`);
+        logApp('INFO', `[StartGame:PhotoStageBuilt] Launching 5 photo levels: ${stageList.map(l => l.id).join(', ')}`);
         setLevels(stageList);
         startLevel(stageList[0].id);
         setView('game');
@@ -464,10 +475,10 @@ export default function App() {
       logApp('ERROR', `[StartGame:Error] ${err?.message || err}`);
     }
 
-    const procLevels = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now() + i));
-    logApp('INFO', `[StartGame:ProceduralFallback] Launching 5 procedural levels: ${procLevels.map(l => l.id).join(', ')}`);
-    setLevels(procLevels);
-    startLevel(procLevels[0].id);
+    const procFallback = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair('abstract_animated', selectedDifficulty, Date.now() + i));
+    logApp('INFO', `[StartGame:Fallback] Launching 5 fallback levels: ${procFallback.map(l => l.id).join(', ')}`);
+    setLevels(procFallback);
+    startLevel(procFallback[0].id);
     setView('game');
   };
 
@@ -529,7 +540,7 @@ export default function App() {
           const newSetTotalPoints = (setData.totalPoints || 0) + stageTotalScore;
 
           const updatedSetData = {
-            title: `5-Image Stage (${selectedTheme === 'find_the_sniper' ? 'Photography' : 'Fantastical'})`,
+            title: `5-Image Stage (${selectedTheme === 'find_the_sniper' ? 'Photography' : 'Abstract'})`,
             packId: selectedTheme,
             firstTime: newFirstTime,
             fastestRepeat: newFastestRepeat,

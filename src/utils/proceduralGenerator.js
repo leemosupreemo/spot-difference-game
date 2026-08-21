@@ -8,7 +8,7 @@
 
 export const SCENE_THEMES = [
   { id: 'find_the_sniper', title: 'Photography', category: 'Photographic' },
-  { id: 'abstract_animated', title: 'Fantastical', category: 'Illustrated' }
+  { id: 'abstract_animated', title: 'Abstract', category: 'Abstract' }
 ];
 
 export const ART_WORLDS = [

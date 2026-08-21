@@ -14,7 +14,7 @@ export default function MainMenu({
 }) {
   const themeIcons = {
     find_the_sniper: '📷',
-    abstract_animated: '✨'
+    abstract_animated: '🎨'
   };
 
   const difficulties = [

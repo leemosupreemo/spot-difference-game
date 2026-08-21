@@ -17,10 +17,10 @@ test('imports every icon used by the wrong-difficulty status view', () => {
   assert.match(source, /<AlertTriangle size=\{14\}/);
 });
 
-test('provides explicit Photography and Fantastical category controls', () => {
+test('provides explicit Photography and Abstract category controls', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
   assert.match(source, /onSetCategory/);
   assert.match(source, /Photography/);
-  assert.match(source, /Fantastical/);
+  assert.match(source, /Abstract/);
 });

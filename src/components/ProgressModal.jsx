@@ -34,7 +34,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
 
   const categoriesList = [
     { id: 'find_the_sniper', title: 'Photography', icon: '📷' },
-    { id: 'abstract_animated', title: 'Fantastical', icon: '✨' }
+    { id: 'abstract_animated', title: 'Abstract', icon: '🎨' }
   ];
 
   const getCategoryStats = (packId) => {
@@ -145,7 +145,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
                   transition: 'all 0.15s ease'
                 }}
               >
-                ✨ Fantastical
+                🎨 Abstract
               </button>
             </div>
           </div>
