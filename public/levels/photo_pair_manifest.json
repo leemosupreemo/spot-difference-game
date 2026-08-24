@@ -1,5 +1,105 @@
 [
   {
+    "id": "dense_synth_pcb_motherboard_001",
+    "title": "[High-Density Circuit] Analog Audio Synthesizer Logic Board",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_synth_pcb_motherboard_001_base.jpg",
+    "variantImage": "/levels/dense_synth_pcb_motherboard_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.3,
+        "y": 53.5,
+        "radius": 7.5,
+        "description": "Single electrolytic capacitor package removed from dense motherboard component array",
+        "hint": "Scan the dense rows of capacitors and IC chips on the logic board"
+      }
+    ]
+  },
+  {
+    "id": "dense_hardware_organizer_screws_001",
+    "title": "[High-Density Hardware] Machinist Organizer Screw & Fastener Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_hardware_organizer_screws_001_base.jpg",
+    "variantImage": "/levels/dense_hardware_organizer_screws_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47,
+        "y": 46,
+        "radius": 6,
+        "description": "Single brass hex nut removed from cluttered machinist hardware compartment",
+        "hint": "Inspect the dense sorting compartments filled with screws and fasteners"
+      }
+    ]
+  },
+  {
+    "id": "dense_typecase_letterpress_001",
+    "title": "[High-Density Typography] Vintage Letterpress Lead Type Matrix",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_typecase_letterpress_001_base.jpg",
+    "variantImage": "/levels/dense_typecase_letterpress_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.1,
+        "y": 47.4,
+        "radius": 4.5,
+        "description": "Single lead typeface character block removed from typesetter California job case",
+        "hint": "Look closely at the grid of lead metal letterpress typeface blocks"
+      }
+    ]
+  },
+  {
+    "id": "dense_tackle_box_fly_lures_001",
+    "title": "[High-Density Angler] Master Fly Tying Box Feather Lure Array",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_tackle_box_fly_lures_001_base.jpg",
+    "variantImage": "/levels/dense_tackle_box_fly_lures_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36.2,
+        "y": 51.1,
+        "radius": 7.5,
+        "description": "Single hand-tied feather dry fly removed from foam organizer slot",
+        "hint": "Scan the organized rows of colorful feather flies and hooks in the tackle case"
+      }
+    ]
+  },
+  {
+    "id": "dense_botanical_seed_herbarium_001",
+    "title": "[High-Density Botanical] Herbarium Seed Classification Grid",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_botanical_seed_herbarium_001_base.jpg",
+    "variantImage": "/levels/dense_botanical_seed_herbarium_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.1,
+        "y": 45.9,
+        "radius": 4.5,
+        "description": "Single dried botanical seed specimen removed from classification grid",
+        "hint": "Examine the dense grid arrangement of botanical seeds and pods on linen"
+      }
+    ]
+  },
+  {
     "id": "artisan_horology_bench_001",
     "title": "[Artisan Studio] Master Watchmaker Precision Bench",
     "category": "Photography",
