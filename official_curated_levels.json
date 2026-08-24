@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 72,
-    "dismissedCount": 0,
+    "approvedCount": 73,
+    "dismissedCount": 11,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -78,10 +78,23 @@
     "ai_macro_watch_escapement_001",
     "ai_macro_stained_glass_001",
     "hyper_synth_logic_board_002",
-    "artisan_electronics_workbench_001"
+    "artisan_electronics_workbench_001",
+    "semantic_tailor_pincushion_needle_003"
   ],
   "wrongDifficultyLevelIds": [],
-  "dismissedLevelIds": [],
+  "dismissedLevelIds": [
+    "semantic_workshop_screwdriver_grip_001",
+    "semantic_workshop_pliers_sleeve_002",
+    "semantic_tailor_thread_spool_001",
+    "semantic_tailor_red_spool_002",
+    "semantic_electronics_smd_capacitor_001",
+    "semantic_electronics_radial_capacitor_002",
+    "semantic_gemstone_sapphire_facet_001",
+    "semantic_gemstone_ruby_collar_002",
+    "semantic_hardware_wire_insulation_001",
+    "prod_toolpile_screwdriver_handle_001",
+    "semantic_workshop_tape_measure_button_003"
+  ],
   "approvedLevels": [
     {
       "title": "Nursery Plant Tag",
@@ -1946,6 +1959,54 @@
     "artisan_electronics_workbench_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:59:04.048Z"
+    },
+    "semantic_workshop_screwdriver_grip_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:26:31.790Z"
+    },
+    "semantic_workshop_pliers_sleeve_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:26:41.890Z"
+    },
+    "semantic_tailor_thread_spool_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:27:12.282Z"
+    },
+    "semantic_tailor_red_spool_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:27:14.378Z"
+    },
+    "semantic_electronics_smd_capacitor_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:27:23.747Z"
+    },
+    "semantic_electronics_radial_capacitor_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:27:29.192Z"
+    },
+    "semantic_gemstone_sapphire_facet_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:27:33.782Z"
+    },
+    "semantic_gemstone_ruby_collar_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:27:35.876Z"
+    },
+    "semantic_workshop_tape_measure_button_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:28:22.626Z"
+    },
+    "semantic_tailor_pincushion_needle_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:28:27.844Z"
+    },
+    "semantic_hardware_wire_insulation_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:28:10.228Z"
+    },
+    "prod_toolpile_screwdriver_handle_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:28:20.008Z"
     }
   }
 }
