@@ -447,13 +447,10 @@ export default function App() {
     // 2. PHOTOGRAPHY CATEGORY: ALWAYS uses curated premade real-world photo pairs
     try {
       if (debugMode && debugSourceMode === 'premade') {
-        const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
-        const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-        const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
-        logApp('INFO', `[StartGame:DebugPremade] Unreviewed: ${unreviewed.length}, FallbackPool: ${fallbackPool.length}`);
-        if (candidateEntries.length > 0) {
-          const debugLevels = candidateEntries.slice(0, 5).map(createPhotoPairLevel);
-          logApp('INFO', `[StartGame:DebugPremade] Launching 5 debug levels: ${debugLevels.map(l => l.id).join(', ')}`);
+        const allActive = getAllPhotoPairEntries();
+        if (allActive.length > 0) {
+          const debugLevels = allActive.map(createPhotoPairLevel);
+          logApp('INFO', `[StartGame:DebugBigBatch] Launching unified batch of ${debugLevels.length} premade levels`);
           setLevels(debugLevels);
           startLevel(debugLevels[0].id);
           setView('game');
@@ -504,6 +501,21 @@ export default function App() {
     if (updatedFound.length >= currentLevel.totalDifferences) {
       setTimerRunning(false);
       stageTimesRef.current[currentStageIndex] = elapsedTime;
+
+      // In Debug Mode: Unified continuous big batch loop across all levels
+      if (debugMode && debugSourceMode === 'premade') {
+        const allActive = getAllPhotoPairEntries();
+        const curIdx = allActive.findIndex(e => e.id === currentLevelId);
+        const nextIndex = curIdx >= 0 ? (curIdx + 1) % allActive.length : 0;
+        setTimeout(() => {
+          setCurrentStageIndex(nextIndex);
+          const nextEntry = allActive[nextIndex];
+          if (nextEntry) {
+            startLevel(nextEntry.id);
+          }
+        }, 350);
+        return;
+      }
 
       const nextIndex = currentStageIndex + 1;
       const totalStageImages = levels.length > 0 ? levels.length : 5;
@@ -695,8 +707,8 @@ export default function App() {
             score={score}
             mode={activeMode}
             missCount={missCount}
-            currentStageIndex={currentStageIndex}
-            totalStageImages={levels.length || 5}
+            currentStageIndex={debugMode && debugSourceMode === 'premade' ? (getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex}
+            totalStageImages={debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)}
             selectedDifficulty={selectedDifficulty}
           />
 
