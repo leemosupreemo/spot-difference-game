@@ -38,10 +38,21 @@ import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
 export function getAllPhotoPairEntries() {
   const entries = loadManifest();
   const statusMap = getCuratedStatusMap();
-  return entries.filter(entry => {
+  const unrated = [];
+  const rated = [];
+
+  for (const entry of entries) {
     const statusVal = getLevelStatus(statusMap[entry.id])?.status;
-    return statusVal !== 'dismissed';
-  });
+    if (statusVal === 'dismissed') continue;
+
+    if (!statusVal) {
+      unrated.push(entry);
+    } else {
+      rated.push(entry);
+    }
+  }
+
+  return [...unrated, ...rated];
 }
 
 function loadManifest() {

@@ -272,7 +272,11 @@ export default function App() {
       if (allActive.length > 0) {
         const debugLevels = allActive.map(createPhotoPairLevel);
         setLevels(debugLevels);
-        if (!currentLevelId) {
+        const statusMap = getCuratedStatusMap();
+        const firstUnrated = allActive.find(e => !getLevelStatus(statusMap[e.id])?.status);
+        if (firstUnrated && (!currentLevelId || getLevelStatus(statusMap[currentLevelId])?.status)) {
+          setCurrentLevelId(firstUnrated.id);
+        } else if (!currentLevelId) {
           setCurrentLevelId(debugLevels[0].id);
         }
       }
