@@ -20,6 +20,26 @@
     ]
   },
   {
+    "id": "semantic_workshop_pliers_sleeve_002",
+    "title": "[Photo] Workshop Bench Insulated Plier Sleeve",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/semantic_workshop_pliers_sleeve_002_base.jpg",
+    "variantImage": "/levels/semantic_workshop_pliers_sleeve_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 1.1,
+        "y": 48.9,
+        "radius": 4.9,
+        "description": "Single plier handle insulation sleeve shifted from orange to crimson in CIELAB (preserving tool wear)",
+        "hint": "Scan the handles of the gripping pliers near the center"
+      }
+    ]
+  },
+  {
     "id": "semantic_tailor_thread_spool_001",
     "title": "[Photo] Tailor Notions Box Spool Thread Wrap",
     "category": "Photography",
@@ -32,10 +52,150 @@
       {
         "id": 1,
         "x": 53.9,
-        "y": 43.1,
+        "y": 42.8,
         "radius": 4.2,
         "description": "Single wooden thread spool wrap shifted to muted olive green (preserving fiber texture & wood endcaps)",
         "hint": "Check the colored thread spools and notions near the scissors"
+      }
+    ]
+  },
+  {
+    "id": "semantic_tailor_red_spool_002",
+    "title": "[Photo] Tailor Sewing Kit Crimson Thread Wrap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/semantic_tailor_red_spool_002_base.jpg",
+    "variantImage": "/levels/semantic_tailor_red_spool_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.0,
+        "y": 71.2,
+        "radius": 7.1,
+        "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
+        "hint": "Look closely at the rows of sewing thread spools in the box"
+      }
+    ]
+  },
+  {
+    "id": "semantic_electronics_smd_capacitor_001",
+    "title": "[Photo] Electronics PCB Capacitive Package",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/semantic_electronics_smd_capacitor_001_base.jpg",
+    "variantImage": "/levels/semantic_electronics_smd_capacitor_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69.0,
+        "y": 35.6,
+        "radius": 4.2,
+        "description": "Single SMD component package casing shifted in CIELAB (preserving solder joints and PCB traces)",
+        "hint": "Scan the rows of capacitors and components on the circuit board"
+      }
+    ]
+  },
+  {
+    "id": "semantic_electronics_radial_capacitor_002",
+    "title": "[Photo] Logic Board Radial Electrolytic Capacitor",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/semantic_electronics_radial_capacitor_002_base.jpg",
+    "variantImage": "/levels/semantic_electronics_radial_capacitor_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69.0,
+        "y": 35.5,
+        "radius": 4.2,
+        "description": "Single radial capacitor insulating sleeve shifted to teal (preserving markings and lead solder)",
+        "hint": "Inspect the cylindrical components along the power rail"
+      }
+    ]
+  },
+  {
+    "id": "semantic_gemstone_sapphire_facet_001",
+    "title": "[Photo] Gemologist Sorting Tray Faceted Jewel",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/semantic_gemstone_sapphire_facet_001_base.jpg",
+    "variantImage": "/levels/semantic_gemstone_sapphire_facet_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.0,
+        "y": 21.9,
+        "radius": 6.8,
+        "description": "Single faceted gemstone crown shifted to amethyst violet in CIELAB (preserving facet reflections)",
+        "hint": "Scan the sparkling faceted gemstones in the sorting collection"
+      }
+    ]
+  },
+  {
+    "id": "semantic_gemstone_ruby_collar_002",
+    "title": "[Photo] Gemologist Sorting Tray Ruby Accent",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/semantic_gemstone_ruby_collar_002_base.jpg",
+    "variantImage": "/levels/semantic_gemstone_ruby_collar_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.5,
+        "y": 22.0,
+        "radius": 5.9,
+        "description": "Single ruby gemstone facet tone shifted in CIELAB (preserving mineral refraction & specular highlights)",
+        "hint": "Inspect the red and violet gemstones near the center left"
+      }
+    ]
+  },
+  {
+    "id": "semantic_workshop_tape_measure_button_003",
+    "title": "[Photo] Master Workbench Tape Measure Lock Button",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/semantic_workshop_tape_measure_button_003_base.jpg",
+    "variantImage": "/levels/semantic_workshop_tape_measure_button_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32.5,
+        "y": 39.6,
+        "radius": 4.9,
+        "description": "Single tape measure rubber slide lock button shifted to cobalt blue in CIELAB",
+        "hint": "Inspect the measuring tools and small sliders in the tool pile"
+      }
+    ]
+  },
+  {
+    "id": "semantic_tailor_pincushion_needle_003",
+    "title": "[Photo] Tailor Notions Box Pearl Button Accent",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/semantic_tailor_pincushion_needle_003_base.jpg",
+    "variantImage": "/levels/semantic_tailor_pincushion_needle_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.0,
+        "y": 71.2,
+        "radius": 7.1,
+        "description": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
+        "hint": "Look closely at the notions and accessories in the tailor kit"
       }
     ]
   },

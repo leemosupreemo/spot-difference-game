@@ -272,7 +272,7 @@ def execute_semantic_pipeline():
     
     model = FastSAM("FastSAM-s.pt")
     
-    # Semantically grounded candidate proposals
+    # 10 Semantically grounded candidate proposals
     proposals = [
         {
             "id": "semantic_workshop_screwdriver_grip_001",
@@ -281,12 +281,26 @@ def execute_semantic_pipeline():
             "base_image": "public/levels/semantic_workshop_screwdriver_grip_001_base.jpg",
             "target_object": "Screwdriver",
             "target_part": "Rubber grip handle",
-            "target_bbox": [700, 420, 810, 520], # [xmin, ymin, xmax, ymax]
+            "target_bbox": [700, 420, 810, 520],
             "prompt_point": [755, 470],
             "difficulty": "Medium",
             "hue_angle_deg": 65.0, # Amber -> Terracotta/Deep Bronze
             "desc": "Single screwdriver handle rubber grip shifted to deep bronze in CIELAB (preserving 100% molded ridges & wear)",
             "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
+        },
+        {
+            "id": "semantic_workshop_pliers_sleeve_002",
+            "title": "[Photo] Workshop Bench Insulated Plier Sleeve",
+            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/semantic_workshop_pliers_sleeve_002_base.jpg",
+            "target_object": "Pliers",
+            "target_part": "Insulated grip sleeve",
+            "target_bbox": [620, 340, 720, 440],
+            "prompt_point": [670, 390],
+            "difficulty": "Medium",
+            "hue_angle_deg": 55.0, # Amber/Orange -> Crimson Red
+            "desc": "Single plier handle insulation sleeve shifted from orange to crimson in CIELAB (preserving tool wear)",
+            "hint": "Scan the handles of the gripping pliers near the center"
         },
         {
             "id": "semantic_tailor_thread_spool_001",
@@ -303,10 +317,24 @@ def execute_semantic_pipeline():
             "hint": "Check the colored thread spools and notions near the scissors"
         },
         {
-            "id": "semantic_hardware_wire_insulation_001",
+            "id": "semantic_tailor_red_spool_002",
+            "title": "[Photo] Tailor Sewing Kit Crimson Thread Wrap",
+            "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/semantic_tailor_red_spool_002_base.jpg",
+            "target_object": "Thread Spool",
+            "target_part": "Crimson thread wrap fibers",
+            "target_bbox": [880, 440, 980, 540],
+            "prompt_point": [930, 490],
+            "difficulty": "Medium",
+            "hue_angle_deg": 45.0, # Crimson -> Deep Plum
+            "desc": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
+            "hint": "Look closely at the rows of sewing thread spools in the box"
+        },
+        {
+            "id": "semantic_electronics_smd_capacitor_001",
             "title": "[Photo] Electronics PCB Capacitive Package",
             "source_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/semantic_hardware_wire_insulation_001_base.jpg",
+            "base_image": "public/levels/semantic_electronics_smd_capacitor_001_base.jpg",
             "target_object": "SMD Component",
             "target_part": "Ceramic casing",
             "target_bbox": [720, 680, 800, 760],
@@ -315,6 +343,76 @@ def execute_semantic_pipeline():
             "hue_angle_deg": 40.0, # Subtle ceramic shift
             "desc": "Single SMD component package casing shifted in CIELAB (preserving solder joints and PCB traces)",
             "hint": "Scan the rows of capacitors and components on the circuit board"
+        },
+        {
+            "id": "semantic_electronics_radial_capacitor_002",
+            "title": "[Photo] Logic Board Radial Electrolytic Capacitor",
+            "source_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/semantic_electronics_radial_capacitor_002_base.jpg",
+            "target_object": "Capacitor",
+            "target_part": "Aluminum sleeve sleeve wrap",
+            "target_bbox": [820, 640, 910, 730],
+            "prompt_point": [865, 685],
+            "difficulty": "Hard",
+            "hue_angle_deg": 45.0, # Blue sleeve -> Teal sleeve
+            "desc": "Single radial capacitor insulating sleeve shifted to teal (preserving markings and lead solder)",
+            "hint": "Inspect the cylindrical components along the power rail"
+        },
+        {
+            "id": "semantic_gemstone_sapphire_facet_001",
+            "title": "[Photo] Gemologist Sorting Tray Faceted Jewel",
+            "source_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/semantic_gemstone_sapphire_facet_001_base.jpg",
+            "target_object": "Gemstone",
+            "target_part": "Faceted jewel crown",
+            "target_bbox": [750, 480, 860, 580],
+            "prompt_point": [800, 530],
+            "difficulty": "Medium",
+            "hue_angle_deg": 45.0, # Sapphire Blue -> Amethyst Violet
+            "desc": "Single faceted gemstone crown shifted to amethyst violet in CIELAB (preserving facet reflections)",
+            "hint": "Scan the sparkling faceted gemstones in the sorting collection"
+        },
+        {
+            "id": "semantic_gemstone_ruby_collar_002",
+            "title": "[Photo] Gemologist Sorting Tray Ruby Accent",
+            "source_url": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/semantic_gemstone_ruby_collar_002_base.jpg",
+            "target_object": "Gemstone",
+            "target_part": "Ruby gemstone facet",
+            "target_bbox": [460, 470, 560, 570],
+            "prompt_point": [510, 520],
+            "difficulty": "Medium",
+            "hue_angle_deg": 50.0, # Ruby Red -> Emerald Green Accent
+            "desc": "Single ruby gemstone facet tone shifted in CIELAB (preserving mineral refraction & specular highlights)",
+            "hint": "Inspect the red and violet gemstones near the center left"
+        },
+        {
+            "id": "semantic_workshop_tape_measure_button_003",
+            "title": "[Photo] Master Workbench Tape Measure Lock Button",
+            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/semantic_workshop_tape_measure_button_003_base.jpg",
+            "target_object": "Tape Measure",
+            "target_part": "Rubber lock button slider",
+            "target_bbox": [500, 360, 600, 460],
+            "prompt_point": [550, 410],
+            "difficulty": "Medium",
+            "hue_angle_deg": 60.0, # Orange Slider -> Cobalt Blue
+            "desc": "Single tape measure rubber slide lock button shifted to cobalt blue in CIELAB",
+            "hint": "Inspect the measuring tools and small sliders in the tool pile"
+        },
+        {
+            "id": "semantic_tailor_pincushion_needle_003",
+            "title": "[Photo] Tailor Notions Box Pearl Button Accent",
+            "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/semantic_tailor_pincushion_needle_003_base.jpg",
+            "target_object": "Notion",
+            "target_part": "Collar button trim",
+            "target_bbox": [650, 380, 750, 480],
+            "prompt_point": [700, 430],
+            "difficulty": "Medium",
+            "hue_angle_deg": 55.0, # Amber -> Emerald Accent
+            "desc": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
+            "hint": "Look closely at the notions and accessories in the tailor kit"
         }
     ]
 
