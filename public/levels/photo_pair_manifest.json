@@ -1,5 +1,105 @@
 [
   {
+    "id": "real_toolpile_screwdriver_handle_001",
+    "title": "[Real Photo] Master Tool Pile Screwdriver Handle",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/real_toolpile_screwdriver_handle_001_base.jpg",
+    "variantImage": "/levels/real_toolpile_screwdriver_handle_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.9,
+        "y": 46.5,
+        "radius": 7.5,
+        "description": "Single tool handle color shifted from amber-orange to deep ocean blue (preserving all scratches & texture)",
+        "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
+      }
+    ]
+  },
+  {
+    "id": "real_sewing_threads_spool_001",
+    "title": "[Real Photo] Tailor Notions Box Spool Thread",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/real_sewing_threads_spool_001_base.jpg",
+    "variantImage": "/levels/real_sewing_threads_spool_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.2,
+        "y": 46,
+        "radius": 4.6,
+        "description": "Single thread spool wrap shifted from gold-yellow to emerald green",
+        "hint": "Check the colored thread spools and notions near the scissors"
+      }
+    ]
+  },
+  {
+    "id": "real_artist_paint_tube_cap_001",
+    "title": "[Real Photo] Artist Oil Paint Tube Cap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/real_artist_paint_tube_cap_001_base.jpg",
+    "variantImage": "/levels/real_artist_paint_tube_cap_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.2,
+        "y": 62,
+        "radius": 7.5,
+        "description": "Single oil paint tube label & cap shifted from vermilion red to cobalt blue",
+        "hint": "Scan the caps and labels on the oil paint tubes on the table"
+      }
+    ]
+  },
+  {
+    "id": "real_botanical_spice_assortment_001",
+    "title": "[Real Photo] Spice Bazaar Pod Hue Shift",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/real_botanical_spice_assortment_001_base.jpg",
+    "variantImage": "/levels/real_botanical_spice_assortment_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.9,
+        "y": 48.2,
+        "radius": 4.6,
+        "description": "Single dried star seed pod shifted in tone within the linen array",
+        "hint": "Examine the individual dried pods and seeds in the flat lay"
+      }
+    ]
+  },
+  {
+    "id": "real_electronics_wire_insulation_001",
+    "title": "[Real Photo] Electronics Repair Jumper Wire",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/real_electronics_wire_insulation_001_base.jpg",
+    "variantImage": "/levels/real_electronics_wire_insulation_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.1,
+        "y": 45.9,
+        "radius": 4.5,
+        "description": "Single component capacitor casing shifted from turquoise to ruby red",
+        "hint": "Scan the rows of capacitors and components on the circuit board"
+      }
+    ]
+  },
+  {
     "id": "layered_horology_gears_001",
     "title": "[Layered Graph] Horologist 60-Piece Gear & Jewel Tray",
     "category": "Photography",
