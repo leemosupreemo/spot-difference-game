@@ -11,9 +11,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 64.2,
-        "y": 52.8,
-        "radius": 5.5,
+        "x": 65.4,
+        "y": 43,
+        "radius": 8.5,
         "description": "Stitching awl on the workbench",
         "hint": "Look at the wooden tools on the right side of the cutting mat"
       }
@@ -31,9 +31,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 42,
-        "y": 55,
-        "radius": 5,
+        "x": 59.1,
+        "y": 52.4,
+        "radius": 8.5,
         "description": "Component resistor on the circuit board",
         "hint": "Inspect the electronic components on the soldering mat"
       }
@@ -51,9 +51,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.5,
-        "y": 49,
-        "radius": 5.2,
+        "x": 51.8,
+        "y": 46.7,
+        "radius": 8.5,
         "description": "Wooden bean sample probe",
         "hint": "Look near the roaster cooling tray"
       }
@@ -71,9 +71,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 43.5,
-        "y": 56.5,
-        "radius": 5,
+        "x": 59.2,
+        "y": 54.1,
+        "radius": 8.5,
         "description": "Allen hex wrench near chain tool",
         "hint": "Look on the repair stand tray"
       }
@@ -91,9 +91,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 47,
-        "y": 53,
-        "radius": 4.8,
+        "x": 43,
+        "y": 57.3,
+        "radius": 8.5,
         "description": "Brass skeleton key on leather blotter",
         "hint": "Look in the center of the desk blotter"
       }
@@ -111,9 +111,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54,
-        "y": 47,
-        "radius": 5,
+        "x": 51.6,
+        "y": 32.1,
+        "radius": 8.5,
         "description": "Yellow shaping sponge near clay pot",
         "hint": "Look beside the pottery trimming tools"
       }
@@ -131,9 +131,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50,
-        "y": 51,
-        "radius": 4.8,
+        "x": 59,
+        "y": 64.6,
+        "radius": 8.5,
         "description": "Wood screw on cedar workbench",
         "hint": "Look near the wood shavings and hand plane"
       }
@@ -151,9 +151,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.5,
-        "y": 52,
-        "radius": 4.5,
+        "x": 47,
+        "y": 53.3,
+        "radius": 8.5,
         "description": "Brass gear pinion in parts tray",
         "hint": "Inspect the compartments of the watchmaker tray"
       }
@@ -171,9 +171,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 45,
-        "y": 55,
-        "radius": 5.2,
+        "x": 34.8,
+        "y": 66.7,
+        "radius": 8.5,
         "description": "Stainless bench scraper on flour table",
         "hint": "Look on the marble baking counter"
       }
@@ -191,9 +191,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 53.5,
-        "y": 46.5,
-        "radius": 4.8,
+        "x": 58.9,
+        "y": 53.7,
+        "radius": 8.5,
         "description": "Oil paint tube cap on palette",
         "hint": "Look near the brushes and pigment tubes"
       }
@@ -211,9 +211,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50,
-        "y": 50,
-        "radius": 5,
+        "x": 56.7,
+        "y": 41.8,
+        "radius": 8.5,
         "description": "Stained glass color shift on central petal",
         "hint": "Look closely at the central stained glass flower section"
       }
@@ -231,9 +231,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50,
-        "y": 48,
-        "radius": 4.5,
+        "x": 58.2,
+        "y": 54,
+        "radius": 8.5,
         "description": "Ruby shock jewel bearing color",
         "hint": "Inspect the balance wheel bearing jewel in the center"
       }
@@ -251,9 +251,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49,
-        "y": 52,
-        "radius": 5,
+        "x": 49.9,
+        "y": 50.6,
+        "radius": 8.5,
         "description": "Glowing vacuum tube grid filament",
         "hint": "Look inside the glass audio valve"
       }
@@ -271,9 +271,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51,
-        "y": 49,
-        "radius": 4.8,
+        "x": 49.5,
+        "y": 51.6,
+        "radius": 8.5,
         "description": "Bamboo tea tray carved medallion",
         "hint": "Look at the drainage pattern in the center of the wooden tea tray"
       }
@@ -291,9 +291,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52,
-        "y": 48,
-        "radius": 4.8,
+        "x": 50.1,
+        "y": 50.3,
+        "radius": 8.5,
         "description": "Mosaic brass pin on wooden knife handle",
         "hint": "Look at the rivets on the knife handle"
       }
@@ -311,9 +311,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48,
-        "y": 53,
-        "radius": 4.8,
+        "x": 50.1,
+        "y": 50.2,
+        "radius": 8.5,
         "description": "Compass rose fleur-de-lis needle",
         "hint": "Look at the navigation compass rose on the map"
       }
@@ -331,9 +331,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.5,
-        "y": 49.5,
-        "radius": 4.6,
+        "x": 49.8,
+        "y": 50,
+        "radius": 8.5,
         "description": "Aperture index marker alignment",
         "hint": "Inspect the focus ring markings on the brass barrel"
       }
@@ -351,9 +351,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 53,
-        "y": 48.5,
-        "radius": 5,
+        "x": 47.6,
+        "y": 72.2,
+        "radius": 8.5,
         "description": "Chisel brass collar ferrule",
         "hint": "Look at the metal collar on the carving gouge handle"
       }
@@ -371,9 +371,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 47,
-        "y": 52,
-        "radius": 4.8,
+        "x": 49.9,
+        "y": 49.9,
+        "radius": 8.5,
         "description": "Star anise spice pod arrangement",
         "hint": "Look at the whole spices grouped in the center bowl"
       }
@@ -391,9 +391,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.5,
-        "y": 53,
-        "radius": 4.8,
+        "x": 56.7,
+        "y": 42.6,
+        "radius": 8.5,
         "description": "Acrylic paint droplet on the wet palette",
         "hint": "Notice the pigment bead on the wet palette surface"
       }
@@ -411,9 +411,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.5,
-        "y": 49.5,
-        "radius": 4.5,
+        "x": 58.6,
+        "y": 43.6,
+        "radius": 4.2,
         "description": "Tortoiseshell guitar pick on woven rug",
         "hint": "Examine the central medallion of the patterned rug"
       }
@@ -431,9 +431,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48,
-        "y": 50,
-        "radius": 4.8,
+        "x": 65.6,
+        "y": 40,
+        "radius": 8.5,
         "description": "Botanical plant tag in nursery pot",
         "hint": "Look in the potted seedling soil"
       }
@@ -451,9 +451,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51,
-        "y": 52,
-        "radius": 4.6,
+        "x": 66.9,
+        "y": 48.1,
+        "radius": 4.2,
         "description": "Missing machine screw in organizer bin",
         "hint": "Inspect the compartments of the screw sorting tray"
       }
@@ -471,9 +471,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49,
-        "y": 51,
-        "radius": 4.5,
+        "x": 36.6,
+        "y": 53.8,
+        "radius": 4.4,
         "description": "Colored mosaic tile piece position",
         "hint": "Look closely at the geometric tile grid"
       }
@@ -491,9 +491,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 46,
-        "y": 54,
-        "radius": 4.8,
+        "x": 59,
+        "y": 58.7,
+        "radius": 8.5,
         "description": "Feather fly lure in tackle compartment",
         "hint": "Look in the plastic divider trays"
       }
@@ -511,9 +511,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 53,
-        "y": 47,
-        "radius": 5,
+        "x": 56,
+        "y": 52.2,
+        "radius": 8.5,
         "description": "Anodized carabiner clip on paracord",
         "hint": "Look on the canvas gear roll"
       }
@@ -531,9 +531,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 47.5,
-        "y": 51.5,
-        "radius": 4.8,
+        "x": 60.2,
+        "y": 35.1,
+        "radius": 4.2,
         "description": "Carved wooden token on board grid",
         "hint": "Look at the wooden game pieces on the board"
       }
@@ -551,9 +551,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52,
-        "y": 48,
-        "radius": 4.6,
+        "x": 45.4,
+        "y": 32.1,
+        "radius": 8.5,
         "description": "Brass corner weight on parchment map",
         "hint": "Look near the edge of the antique map"
       }
@@ -571,9 +571,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49,
-        "y": 53,
-        "radius": 4.8,
+        "x": 62,
+        "y": 67.6,
+        "radius": 8.5,
         "description": "Mother of pearl button on fabric swatch",
         "hint": "Inspect the vintage sewing supplies tray"
       }
@@ -591,9 +591,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50,
-        "y": 50,
-        "radius": 4.6,
+        "x": 74.8,
+        "y": 57.9,
+        "radius": 4.5,
         "description": "Split lock washer in steel drawer",
         "hint": "Look in the metal hardware compartment"
       }
@@ -611,9 +611,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 64.2,
-        "y": 52.8,
-        "radius": 5.5,
+        "x": 65.4,
+        "y": 43,
+        "radius": 8.5,
         "description": "Stitching awl on the workbench",
         "hint": "Look at the wooden tools on the right side of the cutting mat"
       }
@@ -631,9 +631,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 42,
-        "y": 55,
-        "radius": 5,
+        "x": 59.1,
+        "y": 52.4,
+        "radius": 8.5,
         "description": "Component resistor on the circuit board",
         "hint": "Inspect the electronic components on the soldering mat"
       }
@@ -651,9 +651,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.5,
-        "y": 53,
-        "radius": 4.8,
+        "x": 56.7,
+        "y": 42.6,
+        "radius": 8.5,
         "description": "Acrylic paint droplet on the wet palette",
         "hint": "Notice the pigment bead on the wet palette surface"
       }
@@ -670,9 +670,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 58.5,
-        "y": 54.8,
-        "radius": 4.5,
+        "x": 58.2,
+        "y": 54,
+        "radius": 8.5,
         "description": "Balance wheel shock cap ruby jewel changed from magenta to emerald green",
         "hint": "Look at the shock jewel in the center of the balance wheel"
       }
@@ -689,9 +689,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 58.5,
-        "y": 57.5,
-        "radius": 4.5,
+        "x": 56.7,
+        "y": 41.8,
+        "radius": 8.5,
         "description": "Cathedral glass petal to the right of soldering iron changed from ruby red to deep violet purple",
         "hint": "Check the curved glass petal just to the right of the hot solder joint"
       }
@@ -706,11 +706,11 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 74.2,
+        "y": 72.2,
         "id": 1,
         "hint": "Check the carved decorative relief piece next to the wooden spoon.",
-        "x": 44.1,
-        "radius": 4.5
+        "x": 47.6,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/ai_macro_woodcarver_001/variant.png",
@@ -723,11 +723,11 @@
     "totalDifferences": 1,
     "diffs": [
       {
-        "y": 52.5,
+        "y": 49.9,
         "id": 1,
         "hint": "Examine the star anise cluster near the cumin wooden bowl.",
-        "x": 24,
-        "radius": 4.2
+        "x": 49.9,
+        "radius": 8.5
       }
     ],
     "baseImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/original.png",
@@ -745,11 +745,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 48,
+        "y": 50.3,
         "id": 1,
         "hint": "Spot the whole garlic clove near the rosemary cutting board.",
-        "x": 56,
-        "radius": 4.2
+        "x": 50.1,
+        "radius": 8.5
       }
     ],
     "originalImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
@@ -765,11 +765,11 @@
     "baseImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
     "diffs": [
       {
-        "y": 58,
+        "y": 50.2,
         "id": 1,
         "hint": "Check the brass divider caliper near the sea chart compass.",
-        "x": 42,
-        "radius": 4.5
+        "x": 50.1,
+        "radius": 8.5
       }
     ],
     "id": "ai_macro_cartography_001",
@@ -784,11 +784,11 @@
   {
     "diffs": [
       {
-        "y": 42,
+        "y": 50,
         "id": 1,
         "hint": "Look at the spanner wrench tool near the aperture ring.",
-        "x": 54,
-        "radius": 4.2
+        "x": 49.8,
+        "radius": 8.5
       }
     ],
     "difficulty": "Medium",
@@ -810,11 +810,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 54,
+        "y": 51.6,
         "id": 1,
         "hint": "Notice the bamboo tea needle pick resting by the porcelain gaiwan.",
-        "x": 68,
-        "radius": 3.8
+        "x": 49.5,
+        "radius": 8.5
       }
     ],
     "totalDifferences": 1,
@@ -827,11 +827,11 @@
     "totalDifferences": 1,
     "diffs": [
       {
-        "y": 62,
+        "y": 50.6,
         "id": 1,
         "hint": "Examine the silver contact pin on the vintage socket.",
-        "x": 52,
-        "radius": 3.8
+        "x": 49.9,
+        "radius": 8.5
       }
     ],
     "category": "Photography",
@@ -855,11 +855,11 @@
     "baseImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
     "diffs": [
       {
-        "y": 48,
+        "y": 49.9,
         "id": 1,
         "hint": "Find the carved mother-of-pearl button in the sewing tray.",
-        "x": 64,
-        "radius": 3.8
+        "x": 50.3,
+        "radius": 8.5
       }
     ],
     "originalImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
@@ -873,11 +873,11 @@
     "variantImage": "levels/photo-pairs/ai_macro_watchmaker_001/variant.png",
     "diffs": [
       {
-        "y": 30.6,
+        "y": 49.8,
         "id": 1,
         "hint": "Look inside the small brass cleaning cup in the upper right section.",
-        "x": 65.8,
-        "radius": 4.8
+        "x": 50,
+        "radius": 8.5
       }
     ],
     "pack": "Find the Sniper",
@@ -892,11 +892,11 @@
     "originalImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
     "diffs": [
       {
-        "y": 69.5,
+        "y": 50.2,
         "id": 1,
         "hint": "Examine the lower left margin of the center poppy illustration card.",
-        "x": 38,
-        "radius": 4.5
+        "x": 49.9,
+        "radius": 8.5
       }
     ],
     "baseImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
@@ -914,11 +914,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 73.8,
+        "y": 49.9,
         "id": 1,
         "hint": "Count the row of copper ring washers beneath the ball bearings.",
-        "x": 45.6,
-        "radius": 4.2
+        "x": 50.1,
+        "radius": 8.5
       }
     ],
     "difficulty": "Hard",
@@ -936,11 +936,11 @@
     "baseImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
     "diffs": [
       {
-        "y": 29.8,
+        "y": 49.8,
         "id": 1,
         "hint": "Check the bat lever color on the miniature toggle switches.",
-        "x": 69.2,
-        "radius": 4.2
+        "x": 50,
+        "radius": 8.5
       }
     ],
     "id": "ai_macro_electronics_001",
@@ -957,11 +957,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 50.4,
+        "y": 61.8,
         "id": 1,
         "hint": "Look around the toy car on the left half of the desk.",
-        "x": 34.4,
-        "radius": 10
+        "x": 51.5,
+        "radius": 8.5
       }
     ],
     "baseImage": "levels/photo-pairs/crafts/easy_craft_001/base.jpg",
@@ -978,11 +978,11 @@
     "id": "medium_nursery_001",
     "diffs": [
       {
-        "y": 31,
+        "y": 40,
         "id": 1,
         "hint": "Scan the plant tags in the upper-right tray.",
-        "x": 73,
-        "radius": 6.5
+        "x": 65.6,
+        "radius": 8.5
       }
     ],
     "category": "Greenhouse Clutter"
@@ -992,11 +992,11 @@
     "variantImage": "levels/photo-pairs/workbench/medium_workbench_001/variant.jpg",
     "diffs": [
       {
-        "y": 45.3,
+        "y": 57.8,
         "id": 1,
         "hint": "Inspect the small screwdriver handle near the right-middle tools.",
-        "x": 68.7,
-        "radius": 6.5
+        "x": 50.7,
+        "radius": 8.5
       }
     ],
     "category": "Workshop Clutter",
@@ -1011,11 +1011,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 54.4,
+        "y": 56,
         "id": 1,
         "hint": "Look for the camouflaged tiny figure near center-right.",
-        "x": 60.3,
-        "radius": 5.2
+        "x": 50.6,
+        "radius": 8.5
       }
     ],
     "title": "Forest Floor Camouflage",
@@ -1031,11 +1031,11 @@
     "title": "Patterned Rug Guitar Pick",
     "diffs": [
       {
-        "y": 43.4,
+        "y": 43.6,
         "id": 1,
         "hint": "Look for the added yellow pick among the repeated rug shapes.",
-        "x": 58.8,
-        "radius": 8
+        "x": 58.6,
+        "radius": 4.2
       }
     ],
     "pack": "Abstract & Animated",
@@ -1053,11 +1053,11 @@
     "baseImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/base.jpg",
     "diffs": [
       {
-        "y": 48.3,
+        "y": 48.1,
         "id": 1,
         "hint": "Compare the small silver screw between the right-side hardware.",
-        "x": 67,
-        "radius": 5.8
+        "x": 66.9,
+        "radius": 4.2
       }
     ],
     "variantImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/variant.jpg",
@@ -1069,8 +1069,8 @@
         "y": 53.8,
         "id": 1,
         "hint": "Inspect the shifted orange tile fragment left of center.",
-        "x": 35.7,
-        "radius": 5.9
+        "x": 36.6,
+        "radius": 4.4
       }
     ],
     "baseImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/base.jpg",
@@ -1090,11 +1090,11 @@
     "variantImage": "levels/photo-pairs/wire-tangle/hard_wire_clip_001/variant.jpg",
     "diffs": [
       {
-        "y": 57.4,
+        "y": 57.2,
         "id": 1,
         "hint": "Compare the angle of the small clip in the lower-right wire tangle.",
-        "x": 73.8,
-        "radius": 4.4
+        "x": 73.6,
+        "radius": 4.2
       }
     ],
     "difficulty": "Hard",
@@ -1107,11 +1107,11 @@
     "title": "Workbench Hardware Ring",
     "diffs": [
       {
-        "y": 7.6,
+        "y": 32.1,
         "id": 1,
         "hint": "Look just left of the blue screwdriver near the top edge.",
-        "x": 62.8,
-        "radius": 10.6
+        "x": 63.3,
+        "radius": 8.5
       }
     ],
     "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
@@ -1123,11 +1123,11 @@
   {
     "diffs": [
       {
-        "y": 40.2,
+        "y": 49.2,
         "id": 1,
         "hint": "Check the small detached succulent just left of the twine bundle.",
-        "x": 70.4,
-        "radius": 7.2
+        "x": 61,
+        "radius": 8.5
       }
     ],
     "title": "Potting Table Succulent",
@@ -1149,11 +1149,11 @@
     "title": "Watchmaker Bench Gear",
     "diffs": [
       {
-        "y": 61.6,
+        "y": 53.3,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 35.1,
-        "radius": 6.7
+        "x": 47,
+        "radius": 8.5
       }
     ],
     "id": "photo_watchmaker_bench_001"
@@ -1164,11 +1164,11 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 76,
+        "y": 66.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 16.7,
-        "radius": 7.1
+        "x": 34.8,
+        "radius": 8.5
       }
     ],
     "title": "Bakers Table Cutter",
@@ -1181,11 +1181,11 @@
     "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
     "diffs": [
       {
-        "y": 57.6,
+        "y": 55.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 50.1,
-        "radius": 5.1
+        "x": 46.3,
+        "radius": 8.5
       }
     ],
     "difficulty": "Medium",
@@ -1204,11 +1204,11 @@
     "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
     "diffs": [
       {
-        "y": 73.5,
+        "y": 59.2,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 52.8,
-        "radius": 18.5
+        "x": 54.8,
+        "radius": 8.5
       }
     ],
     "packId": "find_the_sniper",
@@ -1219,11 +1219,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 30.5,
+        "y": 49.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 45.7,
-        "radius": 7.8
+        "x": 55.8,
+        "radius": 8.5
       }
     ],
     "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
@@ -1237,11 +1237,11 @@
   {
     "diffs": [
       {
-        "y": 34.6,
+        "y": 57.3,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 37.9,
-        "radius": 12.9
+        "x": 43,
+        "radius": 8.5
       }
     ],
     "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
@@ -1258,11 +1258,11 @@
     "difficulty": "Hard",
     "diffs": [
       {
-        "y": 55.6,
+        "y": 46.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 64.1,
-        "radius": 5.4
+        "x": 56.3,
+        "radius": 8.5
       }
     ],
     "title": "Board Game Piece",
@@ -1276,11 +1276,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 73.8,
+        "y": 64.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 59.6,
-        "radius": 10.5
+        "x": 59,
+        "radius": 8.5
       }
     ],
     "difficulty": "Medium",
@@ -1295,11 +1295,11 @@
     "variantImage": "levels/photo-pairs/photo-spice-table/variant.jpg",
     "diffs": [
       {
-        "y": 16.1,
+        "y": 38.9,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 39.6,
-        "radius": 9.9
+        "x": 53.6,
+        "radius": 8.5
       }
     ],
     "difficulty": "Hard",
@@ -1313,11 +1313,11 @@
   {
     "diffs": [
       {
-        "y": 70.4,
+        "y": 62.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 37.2,
-        "radius": 9.5
+        "x": 49,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/photo-coffee-station/variant.jpg",
@@ -1334,11 +1334,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 52.3,
+        "y": 58.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 62.6,
-        "radius": 10.7
+        "x": 59,
+        "radius": 8.5
       }
     ],
     "id": "photo_fishing_tackle_001",
@@ -1359,11 +1359,11 @@
     "title": "Repair Drawer Washer",
     "diffs": [
       {
-        "y": 73.1,
+        "y": 56.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 62.8,
-        "radius": 10.6
+        "x": 61.1,
+        "radius": 8.5
       }
     ]
   },
@@ -1374,11 +1374,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 67.9,
+        "y": 66.9,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 38.5,
-        "radius": 7.7
+        "x": 39,
+        "radius": 8.5
       }
     ],
     "category": "Photography",
@@ -1391,11 +1391,11 @@
     "title": "Pottery Table Sponge",
     "diffs": [
       {
-        "y": 29.4,
+        "y": 32.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 48.7,
-        "radius": 8.6
+        "x": 51.6,
+        "radius": 8.5
       }
     ],
     "difficulty": "Easy",
@@ -1409,11 +1409,11 @@
     "id": "photo_bicycle_repair_001",
     "diffs": [
       {
-        "y": 91.3,
+        "y": 54.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 34.4,
-        "radius": 8.4
+        "x": 59.2,
+        "radius": 8.5
       }
     ],
     "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
@@ -1431,11 +1431,11 @@
     "id": "photo_woodworking_table_001",
     "diffs": [
       {
-        "y": 83.7,
+        "y": 61,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 74.9,
-        "radius": 5.3
+        "x": 63.7,
+        "radius": 8.5
       }
     ],
     "packId": "find_the_sniper",
@@ -1450,11 +1450,11 @@
     "title": "Artist Supply Paint",
     "diffs": [
       {
-        "y": 26.5,
+        "y": 53.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 81.9,
-        "radius": 11.6
+        "x": 58.9,
+        "radius": 8.5
       }
     ],
     "difficulty": "Easy",
@@ -1466,11 +1466,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 32.9,
+        "y": 52.2,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 61,
-        "radius": 13.7
+        "x": 56,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg",
@@ -1492,11 +1492,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 93.5,
+        "y": 67.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 63,
-        "radius": 7.1
+        "x": 62,
+        "radius": 8.5
       }
     ]
   },
@@ -1506,11 +1506,11 @@
     "id": "photo_map_restoration_001",
     "diffs": [
       {
-        "y": 12.6,
+        "y": 32.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 47.4,
-        "radius": 5.5
+        "x": 45.4,
+        "radius": 8.5
       }
     ],
     "pack": "Find the Sniper",
@@ -1522,11 +1522,11 @@
   {
     "diffs": [
       {
-        "y": 50.5,
+        "y": 49.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 34.8,
-        "radius": 11
+        "x": 35.8,
+        "radius": 8.5
       }
     ],
     "difficulty": "Easy",
@@ -1548,11 +1548,11 @@
     "title": "Game Night Token",
     "diffs": [
       {
-        "y": 59.2,
+        "y": 49.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 20.2,
-        "radius": 5.7
+        "x": 45.5,
+        "radius": 8.5
       }
     ],
     "id": "photo_game_night_001"
@@ -1567,11 +1567,11 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 65.6,
+        "y": 56.9,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 89.7,
-        "radius": 5
+        "x": 64.9,
+        "radius": 8.5
       }
     ],
     "pack": "Find the Sniper"
@@ -1582,11 +1582,11 @@
     "packId": "abstract_animated",
     "diffs": [
       {
-        "y": 66.7,
+        "y": 46.7,
         "id": 1,
         "hint": "Compare the upright turquoise capsule just below center.",
-        "x": 40.1,
-        "radius": 7.9
+        "x": 48.3,
+        "radius": 8.5
       }
     ],
     "pack": "Abstract Animated",
@@ -1598,11 +1598,11 @@
   {
     "diffs": [
       {
-        "y": 40.4,
+        "y": 47.2,
         "id": 1,
         "hint": "Inspect the small purple connector slightly right of center.",
-        "x": 56.6,
-        "radius": 7.5
+        "x": 59.6,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/variant.jpg",
@@ -1621,11 +1621,11 @@
     "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/base.jpg",
     "diffs": [
       {
-        "y": 81.9,
+        "y": 81.3,
         "id": 1,
         "hint": "Examine the region around (62%, 81%) carefully.",
-        "x": 62.2,
-        "radius": 5.4
+        "x": 61.8,
+        "radius": 4.2
       }
     ],
     "pack": "Abstract Animated",
@@ -1643,11 +1643,11 @@
     "difficulty": "Easy",
     "diffs": [
       {
-        "y": 39.1,
+        "y": 38.9,
         "id": 1,
         "hint": "Examine the region around (45%, 38%) carefully.",
-        "x": 46.4,
-        "radius": 5.9
+        "x": 46.2,
+        "radius": 5
       }
     ],
     "packId": "abstract_animated"
@@ -1661,11 +1661,11 @@
     "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_102/variant.jpg",
     "diffs": [
       {
-        "y": 55,
+        "y": 56,
         "id": 1,
         "hint": "Compare the small color detail in this area.",
-        "x": 45,
-        "radius": 5.5
+        "x": 45.2,
+        "radius": 4.2
       }
     ],
     "pack": "Find the Sniper",
@@ -1676,11 +1676,11 @@
     "difficulty": "Easy",
     "diffs": [
       {
-        "y": 63.5,
+        "y": 65.9,
         "id": 1,
         "hint": "Check the silver powdered sugar shaker to the right of the rolling pin.",
-        "x": 83.2,
-        "radius": 7.5
+        "x": 84.5,
+        "radius": 8.5
       }
     ],
     "pack": "Find the Sniper",
@@ -1693,11 +1693,11 @@
   {
     "diffs": [
       {
-        "y": 75.2,
+        "y": 76,
         "id": 1,
         "hint": "Look at the metal soil scoop resting on the wooden table.",
-        "x": 41.7,
-        "radius": 8
+        "x": 44.8,
+        "radius": 8.5
       }
     ],
     "packId": "find_the_sniper",
@@ -1720,11 +1720,11 @@
     "variantImage": "levels/photo-pairs/ai-watchmaker-bench/variant.jpg",
     "diffs": [
       {
-        "y": 67,
+        "y": 66.2,
         "id": 1,
         "hint": "Inspect the dark blue velvet pad in the lower-right corner.",
-        "x": 87.2,
-        "radius": 7.5
+        "x": 85,
+        "radius": 8.5
       }
     ]
   },
@@ -1737,11 +1737,11 @@
     "id": "ai_artist_easel_001",
     "diffs": [
       {
-        "y": 72,
+        "y": 71.3,
         "id": 1,
         "hint": "Scan the bottom-left corner of the table for the cobalt blue paint tube.",
-        "x": 11,
-        "radius": 8
+        "x": 13.9,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg",
@@ -1756,11 +1756,11 @@
     "title": "Artisanal Coffee Bar",
     "diffs": [
       {
-        "y": 58,
+        "y": 58.3,
         "id": 1,
         "hint": "Check the wooden-handled barista brush to the left of the tamper.",
-        "x": 9.7,
-        "radius": 7.5
+        "x": 10.7,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg",
@@ -1776,11 +1776,11 @@
     "category": "Antique Study",
     "diffs": [
       {
-        "y": 59.5,
+        "y": 57.4,
         "id": 1,
         "hint": "Look on the wooden desk surface below the brass desk clock.",
-        "x": 89.3,
-        "radius": 6.5
+        "x": 81.5,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg"
@@ -1794,11 +1794,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 54.5,
+        "y": 53,
         "id": 1,
         "hint": "Inspect the pressed flower sheet on the right between the two flower stems.",
-        "x": 82.5,
-        "radius": 5.5
+        "x": 70.3,
+        "radius": 8.5
       }
     ],
     "id": "ai_botanist_herbarium_001",
@@ -1813,11 +1813,11 @@
     "title": "Maritime Cartography Desk",
     "diffs": [
       {
-        "y": 57.1,
+        "y": 55.5,
         "id": 1,
         "hint": "Scan the lower-left table area immediately beside the black ink bottle.",
-        "x": 17.2,
-        "radius": 6
+        "x": 20.7,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/ai-cartography-desk/variant.jpg",
@@ -1830,11 +1830,11 @@
     "title": "Master Locksmith Workbench",
     "diffs": [
       {
-        "y": 61,
+        "y": 57,
         "id": 1,
         "hint": "Examine the tiny coil springs below the opened brass lock cylinder.",
-        "x": 47.5,
-        "radius": 5.5
+        "x": 43.7,
+        "radius": 8.5
       }
     ],
     "packId": "find_the_sniper",
@@ -1848,11 +1848,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 42,
+        "y": 57.9,
         "id": 1,
         "hint": "Scan the brass washer compartment on the right side of the organizer.",
-        "x": 75,
-        "radius": 5.2
+        "x": 74.8,
+        "radius": 4.5
       }
     ],
     "pack": "Find the Sniper",
@@ -1865,11 +1865,11 @@
     "category": "Game Night",
     "diffs": [
       {
-        "y": 64.8,
+        "y": 35.1,
         "id": 1,
         "hint": "Inspect the wooden resource token on the lower-right map tile.",
-        "x": 60.5,
-        "radius": 4
+        "x": 60.2,
+        "radius": 4.2
       }
     ],
     "title": "Tabletop Strategy Board",

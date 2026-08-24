@@ -110,14 +110,29 @@ export default function App() {
   const [curatedStatusMap, setCuratedStatusMap] = useState(() => getCuratedStatusMap());
 
   const handleSetCuratedStatus = (levelId, status, meta) => {
+    let nextLevelIdToLoad = null;
+    if (debugMode && (status === 'dismissed' || status === 'approved')) {
+      const allActive = getAllPhotoPairEntries();
+      const currentIndex = allActive.findIndex(e => e.id === levelId);
+      if (currentIndex >= 0 && allActive.length > 1) {
+        if (status === 'dismissed') {
+          const remaining = allActive.filter(e => e.id !== levelId);
+          if (remaining.length > 0) {
+            const nextIndex = currentIndex % remaining.length;
+            nextLevelIdToLoad = remaining[nextIndex].id;
+          }
+        } else {
+          const nextIndex = (currentIndex + 1) % allActive.length;
+          nextLevelIdToLoad = allActive[nextIndex].id;
+        }
+      }
+    }
+
     const updated = setLevelCuratedStatus(levelId, status, meta);
     setCuratedStatusMap({ ...updated });
 
-    // Auto-advance to next image pair when approving or dismissing in debug mode
-    if (status === 'dismissed' || status === 'approved') {
-      setTimeout(() => {
-        handleNextPair();
-      }, 120);
+    if (nextLevelIdToLoad) {
+      startLevel(nextLevelIdToLoad);
     }
   };
 
@@ -257,7 +272,7 @@ export default function App() {
       if (allActive.length > 0) {
         const debugLevels = allActive.map(createPhotoPairLevel);
         setLevels(debugLevels);
-        if (!currentLevelId || !debugLevels.some(l => l.id === currentLevelId)) {
+        if (!currentLevelId) {
           setCurrentLevelId(debugLevels[0].id);
         }
       }
