@@ -1,5 +1,105 @@
 [
   {
+    "id": "hyper_server_logic_board_001",
+    "title": "[Ultra-Complex] High-Density Server Motherboard & Chips",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_server_logic_board_001_base.jpg",
+    "variantImage": "/levels/hyper_server_logic_board_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.9,
+        "y": 45.8,
+        "radius": 4.5,
+        "description": "Single rectangular IC chip package removed from multi-chip logic bus",
+        "hint": "Examine the intricate circuit traces and dense rows of IC packages"
+      }
+    ]
+  },
+  {
+    "id": "hyper_synth_logic_board_002",
+    "title": "[Ultra-Complex] Analog Synthesizer Master Circuit Matrix",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_synth_logic_board_002_base.jpg",
+    "variantImage": "/levels/hyper_synth_logic_board_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.6,
+        "y": 54.3,
+        "radius": 7.5,
+        "description": "Single electrolytic capacitor package removed from dense motherboard component array",
+        "hint": "Scan the dense rows of capacitors and IC chips on the logic board"
+      }
+    ]
+  },
+  {
+    "id": "hyper_botanical_market_table_001",
+    "title": "[Ultra-Complex] Spice Market 70-Item Botanical Flat Lay",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_botanical_market_table_001_base.jpg",
+    "variantImage": "/levels/hyper_botanical_market_table_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.7,
+        "y": 47.7,
+        "radius": 4.5,
+        "description": "Single star anise seed pod removed from crowded spice assortment",
+        "hint": "Search through the dense collection of dried seeds, pods, and nuts"
+      }
+    ]
+  },
+  {
+    "id": "hyper_art_studio_palette_knives_001",
+    "title": "[Ultra-Complex] Painter Studio Clutter Table & Pigments",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_art_studio_palette_knives_001_base.jpg",
+    "variantImage": "/levels/hyper_art_studio_palette_knives_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55.3,
+        "y": 61.9,
+        "radius": 7.5,
+        "description": "Single pigment dollop removed from crowded art supplies table",
+        "hint": "Scan the dozens of colorful paint tubes, palette knives, and brushes"
+      }
+    ]
+  },
+  {
+    "id": "hyper_typesetter_font_case_001",
+    "title": "[Ultra-Complex] 100-Glyph Metal Typecase Matrix",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_typesetter_font_case_001_base.jpg",
+    "variantImage": "/levels/hyper_typesetter_font_case_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.9,
+        "y": 47.6,
+        "radius": 4.5,
+        "description": "Single lead character glyph block removed from dense typesetter grid",
+        "hint": "Inspect the dense matrix of lead type blocks across the job case"
+      }
+    ]
+  },
+  {
     "id": "dense_synth_pcb_motherboard_001",
     "title": "[High-Density Circuit] Analog Audio Synthesizer Logic Board",
     "category": "Photography",
