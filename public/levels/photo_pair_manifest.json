@@ -1,5 +1,205 @@
 [
   {
+    "id": "obj_watchmaker_gold_bridge_001",
+    "title": "[Object-Aware] Swiss Watch Balance Bridge Rose Gold Shift",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_watchmaker_gold_bridge_001_base.jpg",
+    "variantImage": "/levels/obj_watchmaker_gold_bridge_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.9,
+        "y": 48,
+        "radius": 5.5,
+        "description": "Steel balance bridge metallurgical shift to rose gold",
+        "hint": "Inspect the mechanical balance bridge in the movement"
+      }
+    ]
+  },
+  {
+    "id": "obj_electronics_smd_chip_001",
+    "title": "[Object-Aware] Precision Circuit Board SMD Package Shift",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_electronics_smd_chip_001_base.jpg",
+    "variantImage": "/levels/obj_electronics_smd_chip_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.9,
+        "y": 51.9,
+        "radius": 4.2,
+        "description": "Rectangular ceramic capacitor package color shift",
+        "hint": "Scan the surface mount chips on the blue motherboard trace"
+      }
+    ]
+  },
+  {
+    "id": "obj_goldsmith_sapphire_gem_001",
+    "title": "[Object-Aware] Goldsmith Velvet Tray Sapphire Hue Shift",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_goldsmith_sapphire_gem_001_base.jpg",
+    "variantImage": "/levels/obj_goldsmith_sapphire_gem_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.9,
+        "y": 47,
+        "radius": 4.4,
+        "description": "Faceted gemstone facet shifted from emerald green to deep sapphire",
+        "hint": "Look closely at the individual faceted gems in the tray"
+      }
+    ]
+  },
+  {
+    "id": "obj_calligraphy_pen_ferrule_001",
+    "title": "[Object-Aware] Calligraphy Nib Brass Collar Finish",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_calligraphy_pen_ferrule_001_base.jpg",
+    "variantImage": "/levels/obj_calligraphy_pen_ferrule_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.5,
+        "y": 45,
+        "radius": 4.2,
+        "description": "Brass pen holder ferrule shifted from warm brass to dark blued steel",
+        "hint": "Inspect the metal collar holding the pen nib"
+      }
+    ]
+  },
+  {
+    "id": "obj_leathercraft_burr_rivet_001",
+    "title": "[Object-Aware] Saddlery Leather Copper Burr Rivet",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_leathercraft_burr_rivet_001_base.jpg",
+    "variantImage": "/levels/obj_leathercraft_burr_rivet_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.9,
+        "y": 51,
+        "radius": 4.4,
+        "description": "Solid brass saddlery rivet shifted to antique copper",
+        "hint": "Check the metal rivets and hardware on the leather workbench"
+      }
+    ]
+  },
+  {
+    "id": "obj_carpenter_depth_screw_001",
+    "title": "[Object-Aware] Woodworking Plane Depth Adjustment Knob",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_carpenter_depth_screw_001_base.jpg",
+    "variantImage": "/levels/obj_carpenter_depth_screw_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.5,
+        "y": 48,
+        "radius": 4.5,
+        "description": "Cast iron adjustment knob brass finish transition",
+        "hint": "Scan the brass adjustment screws on the woodworking hand plane"
+      }
+    ]
+  },
+  {
+    "id": "obj_botanical_wax_seal_001",
+    "title": "[Object-Aware] Archival Folio Botanical Wax Seal",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_botanical_wax_seal_001_base.jpg",
+    "variantImage": "/levels/obj_botanical_wax_seal_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.9,
+        "y": 58,
+        "radius": 6.5,
+        "description": "Burgundy archival wax seal color shift to emerald green",
+        "hint": "Look at the archival specimen label seals and stamps"
+      }
+    ]
+  },
+  {
+    "id": "obj_camera_shutter_dial_001",
+    "title": "[Object-Aware] Vintage Camera Shutter Speed Dial",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_camera_shutter_dial_001_base.jpg",
+    "variantImage": "/levels/obj_camera_shutter_dial_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55.1,
+        "y": 47.8,
+        "radius": 4.2,
+        "description": "Anodized metal shutter dial red dot index indicator",
+        "hint": "Inspect the shutter speed dial and aperture levers on the lens"
+      }
+    ]
+  },
+  {
+    "id": "obj_tea_binding_knot_001",
+    "title": "[Object-Aware] Bamboo Matcha Whisk Thread Binding",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_tea_binding_knot_001_base.jpg",
+    "variantImage": "/levels/obj_tea_binding_knot_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 52.9,
+        "radius": 4.3,
+        "description": "Ceremonial whisk dark indigo thread weave knot shift",
+        "hint": "Inspect the thread binding wrapped around the bamboo whisk"
+      }
+    ]
+  },
+  {
+    "id": "obj_tailor_shears_pivot_001",
+    "title": "[Object-Aware] Tailor Shears Brass Pivot Bolt",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/obj_tailor_shears_pivot_001_base.jpg",
+    "variantImage": "/levels/obj_tailor_shears_pivot_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.6,
+        "y": 45.8,
+        "radius": 4.2,
+        "description": "Heavy fabric shears brass pivot screw shifted to polished chrome",
+        "hint": "Look at the central pivot screw on the tailor shears"
+      }
+    ]
+  },
+  {
     "id": "fresh_photo_leathercraft_001",
     "title": "Bespoke Leathercraft Saddle Stitch Tooling",
     "category": "Photography",
