@@ -1,25 +1,5 @@
 [
   {
-    "id": "fresh_photo_leathercraft_001",
-    "title": "Bespoke Leathercraft Saddle Stitch Tooling",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_photo_leathercraft_001_base.jpg",
-    "variantImage": "/levels/fresh_photo_leathercraft_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 48.5,
-        "y": 53.6,
-        "radius": 7.8,
-        "description": "Pricking iron punch on cutting mat",
-        "hint": "Examine the leatherworking tools on the mat"
-      }
-    ]
-  },
-  {
     "id": "fresh_photo_botanist_001",
     "title": "Botanical Herbarium Specimen Folio",
     "category": "Photography",
@@ -36,86 +16,6 @@
         "radius": 5.1,
         "description": "Specimen forceps tweezers on paper",
         "hint": "Look near the pressed botanical leaves"
-      }
-    ]
-  },
-  {
-    "id": "method1_photo_woodworking_screw_001",
-    "title": "[Method 1: Workshop Inpainting] Woodworking Bench Steel Screw",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_woodworking_screw_001_base.jpg",
-    "variantImage": "/levels/method1_photo_woodworking_screw_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 59,
-        "y": 64.6,
-        "radius": 8.5,
-        "description": "Wood screw on cedar workbench",
-        "hint": "Look near the wood shavings and hand plane"
-      }
-    ]
-  },
-  {
-    "id": "method1_photo_watchmaker_gear_001",
-    "title": "[Method 1: Workshop Inpainting] Watchmaker Bench Brass Pinion",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_watchmaker_gear_001_base.jpg",
-    "variantImage": "/levels/method1_photo_watchmaker_gear_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 47,
-        "y": 53.3,
-        "radius": 8.5,
-        "description": "Brass gear pinion in parts tray",
-        "hint": "Inspect the compartments of the watchmaker tray"
-      }
-    ]
-  },
-  {
-    "id": "method1_photo_artist_cap_001",
-    "title": "[Method 1: Workshop Inpainting] Artist Studio Paint Tube Cap",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_artist_cap_001_base.jpg",
-    "variantImage": "/levels/method1_photo_artist_cap_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 58.9,
-        "y": 53.7,
-        "radius": 8.5,
-        "description": "Oil paint tube cap on palette",
-        "hint": "Look near the brushes and pigment tubes"
-      }
-    ]
-  },
-  {
-    "id": "method2_macro_stained_glass_001",
-    "title": "[Method 2: Macro Diffusion] Stained Glass Cathedral Petal",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method2_macro_stained_glass_001_base.jpg",
-    "variantImage": "/levels/method2_macro_stained_glass_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.7,
-        "y": 41.8,
-        "radius": 8.5,
-        "description": "Stained glass color shift on central petal",
-        "hint": "Look closely at the central stained glass flower section"
       }
     ]
   },
@@ -376,6 +276,106 @@
         "radius": 4.5,
         "description": "Split lock washer in steel drawer",
         "hint": "Look in the metal hardware compartment"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_leathercraft_001",
+    "title": "Bespoke Leathercraft Saddle Stitch Tooling",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_leathercraft_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_leathercraft_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.5,
+        "y": 53.6,
+        "radius": 7.8,
+        "description": "Pricking iron punch on cutting mat",
+        "hint": "Examine the leatherworking tools on the mat"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_woodworking_screw_001",
+    "title": "[Method 1: Workshop Inpainting] Woodworking Bench Steel Screw",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_woodworking_screw_001_base.jpg",
+    "variantImage": "/levels/method1_photo_woodworking_screw_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59,
+        "y": 64.6,
+        "radius": 8.5,
+        "description": "Wood screw on cedar workbench",
+        "hint": "Look near the wood shavings and hand plane"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_watchmaker_gear_001",
+    "title": "[Method 1: Workshop Inpainting] Watchmaker Bench Brass Pinion",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_watchmaker_gear_001_base.jpg",
+    "variantImage": "/levels/method1_photo_watchmaker_gear_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47,
+        "y": 53.3,
+        "radius": 8.5,
+        "description": "Brass gear pinion in parts tray",
+        "hint": "Inspect the compartments of the watchmaker tray"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_artist_cap_001",
+    "title": "[Method 1: Workshop Inpainting] Artist Studio Paint Tube Cap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_artist_cap_001_base.jpg",
+    "variantImage": "/levels/method1_photo_artist_cap_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.9,
+        "y": 53.7,
+        "radius": 8.5,
+        "description": "Oil paint tube cap on palette",
+        "hint": "Look near the brushes and pigment tubes"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_stained_glass_001",
+    "title": "[Method 2: Macro Diffusion] Stained Glass Cathedral Petal",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_stained_glass_001_base.jpg",
+    "variantImage": "/levels/method2_macro_stained_glass_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.7,
+        "y": 41.8,
+        "radius": 8.5,
+        "description": "Stained glass color shift on central petal",
+        "hint": "Look closely at the central stained glass flower section"
       }
     ]
   },
