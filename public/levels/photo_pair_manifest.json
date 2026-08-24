@@ -1,5 +1,105 @@
 [
   {
+    "id": "artisan_horology_bench_001",
+    "title": "[Artisan Studio] Master Watchmaker Precision Bench",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/artisan_horology_bench_001_base.jpg",
+    "variantImage": "/levels/artisan_horology_bench_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 57.5,
+        "y": 47.5,
+        "radius": 4.5,
+        "description": "Single brass balance bridge component cleanly removed from assembly pad",
+        "hint": "Scan the brass movement components on the central workbench pad"
+      }
+    ]
+  },
+  {
+    "id": "artisan_electronics_workbench_001",
+    "title": "[Artisan Studio] Precision Electronics Repair Workstation",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/artisan_electronics_workbench_001_base.jpg",
+    "variantImage": "/levels/artisan_electronics_workbench_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.8,
+        "y": 51.6,
+        "radius": 4.5,
+        "description": "Discrete blue electrolytic capacitor package removed from PCB header",
+        "hint": "Check the multi-component PCB traces near the center header"
+      }
+    ]
+  },
+  {
+    "id": "artisan_leathercraft_atelier_001",
+    "title": "[Artisan Studio] Bespoke Leathercraft Tooling Atelier",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/artisan_leathercraft_atelier_001_base.jpg",
+    "variantImage": "/levels/artisan_leathercraft_atelier_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.6,
+        "y": 51.3,
+        "radius": 5.8,
+        "description": "Single brass eyelet fastener removed from the tooling bench",
+        "hint": "Scan the scattered hardware and tools on the leather surface"
+      }
+    ]
+  },
+  {
+    "id": "artisan_artist_palette_001",
+    "title": "[Artisan Studio] Fine Art Oil Painting Palette & Easel",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/artisan_artist_palette_001_base.jpg",
+    "variantImage": "/levels/artisan_artist_palette_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 57.4,
+        "y": 63.3,
+        "radius": 7.5,
+        "description": "Single cobalt paint pigment dollop removed from wooden palette rim",
+        "hint": "Inspect the arranged oil paint dollops around the wooden palette edge"
+      }
+    ]
+  },
+  {
+    "id": "artisan_antique_study_001",
+    "title": "[Artisan Studio] Calligrapher Antique Writing Desk & Inkwell",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/artisan_antique_study_001_base.jpg",
+    "variantImage": "/levels/artisan_antique_study_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 39.5,
+        "radius": 6.1,
+        "description": "Single brass nib holder ferrule clip removed from desk organizer",
+        "hint": "Check the pen rests and desktop accessories near the ink bottles"
+      }
+    ]
+  },
+  {
     "id": "fresh_photo_leathercraft_001",
     "title": "Bespoke Leathercraft Saddle Stitch Tooling",
     "category": "Photography",
