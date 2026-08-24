@@ -1,5 +1,105 @@
 [
   {
+    "id": "master_typewriter_glyph_001",
+    "title": "[Challenging Object-Aware] Vintage Typewriter Keycap Glyph Swap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/master_typewriter_glyph_001_base.jpg",
+    "variantImage": "/levels/master_typewriter_glyph_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.3,
+        "y": 48.3,
+        "radius": 4,
+        "description": "Single keycap letter glyph swapped in the central keyboard row",
+        "hint": "Scan the round keycaps in the middle rows"
+      }
+    ]
+  },
+  {
+    "id": "master_luthier_bridge_pin_001",
+    "title": "[Challenging Object-Aware] Acoustic Guitar Bridge Inlay Dot",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/master_luthier_bridge_pin_001_base.jpg",
+    "variantImage": "/levels/master_luthier_bridge_pin_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.6,
+        "y": 53.3,
+        "radius": 4,
+        "description": "Mother-of-pearl inlay dot missing on the 3rd bridge pin",
+        "hint": "Inspect the individual string bridge pins on the wooden bridge"
+      }
+    ]
+  },
+  {
+    "id": "master_horology_balance_ruby_001",
+    "title": "[Challenging Object-Aware] Swiss Watch Balance Cap Jewel",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/master_horology_balance_ruby_001_base.jpg",
+    "variantImage": "/levels/master_horology_balance_ruby_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 50,
+        "radius": 4,
+        "description": "Shock-protection ruby jewel bearing hue on the balance cock",
+        "hint": "Look closely at the jewel bearings set into the brass movement plates"
+      }
+    ]
+  },
+  {
+    "id": "master_botanical_acorn_cap_001",
+    "title": "[Challenging Object-Aware] Herbarium Seed Grid Specimen Cupule",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/master_botanical_acorn_cap_001_base.jpg",
+    "variantImage": "/levels/master_botanical_acorn_cap_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.4,
+        "y": 46.2,
+        "radius": 4,
+        "description": "Single dried acorn cupule specimen in the classification grid",
+        "hint": "Scan the organized rows of botanical specimens"
+      }
+    ]
+  },
+  {
+    "id": "master_espresso_portafilter_basket_001",
+    "title": "[Challenging Object-Aware] Precision Portafilter Ridged Basket",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/master_espresso_portafilter_basket_001_base.jpg",
+    "variantImage": "/levels/master_espresso_portafilter_basket_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.6,
+        "y": 53.1,
+        "radius": 4,
+        "description": "Stainless steel ridge detail on the portafilter basket rim",
+        "hint": "Look closely at the metal edge of the portafilter basket"
+      }
+    ]
+  },
+  {
     "id": "fresh_photo_botanist_001",
     "title": "Botanical Herbarium Specimen Folio",
     "category": "Photography",
