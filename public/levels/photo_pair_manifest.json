@@ -1,5 +1,605 @@
 [
   {
+    "id": "method1_photo_leather_awl_002",
+    "title": "[Method 1: Workshop Inpainting] Leathercraft Workbench Awl",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_leather_awl_002_base.jpg",
+    "variantImage": "/levels/method1_photo_leather_awl_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 64.2,
+        "y": 52.8,
+        "radius": 5.5,
+        "description": "Stitching awl on the workbench",
+        "hint": "Look at the wooden tools on the right side of the cutting mat"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_electronics_resistor_002",
+    "title": "[Method 1: Workshop Inpainting] Circuit Repair Solder Resistor",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_electronics_resistor_002_base.jpg",
+    "variantImage": "/levels/method1_photo_electronics_resistor_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42,
+        "y": 55,
+        "radius": 5,
+        "description": "Component resistor on the circuit board",
+        "hint": "Inspect the electronic components on the soldering mat"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_coffee_roaster_001",
+    "title": "[Method 1: Workshop Inpainting] Coffee Roaster Sample Probe",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_coffee_roaster_001_base.jpg",
+    "variantImage": "/levels/method1_photo_coffee_roaster_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.5,
+        "y": 49,
+        "radius": 5.2,
+        "description": "Wooden bean sample probe",
+        "hint": "Look near the roaster cooling tray"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_bicycle_wrench_001",
+    "title": "[Method 1: Workshop Inpainting] Bicycle Repair Hex Wrench",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_bicycle_wrench_001_base.jpg",
+    "variantImage": "/levels/method1_photo_bicycle_wrench_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.5,
+        "y": 56.5,
+        "radius": 5,
+        "description": "Allen hex wrench near chain tool",
+        "hint": "Look on the repair stand tray"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_antique_desk_key_001",
+    "title": "[Method 1: Workshop Inpainting] Victorian Desk Brass Key",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_antique_desk_key_001_base.jpg",
+    "variantImage": "/levels/method1_photo_antique_desk_key_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47,
+        "y": 53,
+        "radius": 4.8,
+        "description": "Brass skeleton key on leather blotter",
+        "hint": "Look in the center of the desk blotter"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_pottery_sponge_001",
+    "title": "[Method 1: Workshop Inpainting] Pottery Wheel Ceramic Sponge",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_pottery_sponge_001_base.jpg",
+    "variantImage": "/levels/method1_photo_pottery_sponge_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54,
+        "y": 47,
+        "radius": 5,
+        "description": "Yellow shaping sponge near clay pot",
+        "hint": "Look beside the pottery trimming tools"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_woodworking_screw_001",
+    "title": "[Method 1: Workshop Inpainting] Woodworking Bench Steel Screw",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_woodworking_screw_001_base.jpg",
+    "variantImage": "/levels/method1_photo_woodworking_screw_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 51,
+        "radius": 4.8,
+        "description": "Wood screw on cedar workbench",
+        "hint": "Look near the wood shavings and hand plane"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_watchmaker_gear_001",
+    "title": "[Method 1: Workshop Inpainting] Watchmaker Bench Brass Pinion",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_watchmaker_gear_001_base.jpg",
+    "variantImage": "/levels/method1_photo_watchmaker_gear_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.5,
+        "y": 52,
+        "radius": 4.5,
+        "description": "Brass gear pinion in parts tray",
+        "hint": "Inspect the compartments of the watchmaker tray"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_bakers_scraper_001",
+    "title": "[Method 1: Workshop Inpainting] Artisan Bakery Dough Scraper",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_bakers_scraper_001_base.jpg",
+    "variantImage": "/levels/method1_photo_bakers_scraper_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45,
+        "y": 55,
+        "radius": 5.2,
+        "description": "Stainless bench scraper on flour table",
+        "hint": "Look on the marble baking counter"
+      }
+    ]
+  },
+  {
+    "id": "method1_photo_artist_cap_001",
+    "title": "[Method 1: Workshop Inpainting] Artist Studio Paint Tube Cap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_artist_cap_001_base.jpg",
+    "variantImage": "/levels/method1_photo_artist_cap_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.5,
+        "y": 46.5,
+        "radius": 4.8,
+        "description": "Oil paint tube cap on palette",
+        "hint": "Look near the brushes and pigment tubes"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_stained_glass_001",
+    "title": "[Method 2: Macro Diffusion] Stained Glass Cathedral Petal",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_stained_glass_001_base.jpg",
+    "variantImage": "/levels/method2_macro_stained_glass_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 50,
+        "radius": 5,
+        "description": "Stained glass color shift on central petal",
+        "hint": "Look closely at the central stained glass flower section"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_watch_escapement_001",
+    "title": "[Method 2: Macro Diffusion] Horology Escapement Ruby Jewel",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_watch_escapement_001_base.jpg",
+    "variantImage": "/levels/method2_macro_watch_escapement_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 48,
+        "radius": 4.5,
+        "description": "Ruby shock jewel bearing color",
+        "hint": "Inspect the balance wheel bearing jewel in the center"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_vintage_radio_001",
+    "title": "[Method 2: Macro Diffusion] Vacuum Tube Glowing Filament",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_vintage_radio_001_base.jpg",
+    "variantImage": "/levels/method2_macro_vintage_radio_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49,
+        "y": 52,
+        "radius": 5,
+        "description": "Glowing vacuum tube grid filament",
+        "hint": "Look inside the glass audio valve"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_tea_ceremony_001",
+    "title": "[Method 2: Macro Diffusion] Gongfu Tea Tray Engraved Emblem",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_tea_ceremony_001_base.jpg",
+    "variantImage": "/levels/method2_macro_tea_ceremony_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51,
+        "y": 49,
+        "radius": 4.8,
+        "description": "Bamboo tea tray carved medallion",
+        "hint": "Look at the drainage pattern in the center of the wooden tea tray"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_chef_knife_001",
+    "title": "[Method 2: Macro Diffusion] Damascus Chef Knife Handle Pin",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_chef_knife_001_base.jpg",
+    "variantImage": "/levels/method2_macro_chef_knife_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52,
+        "y": 48,
+        "radius": 4.8,
+        "description": "Mosaic brass pin on wooden knife handle",
+        "hint": "Look at the rivets on the knife handle"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_cartography_001",
+    "title": "[Method 2: Macro Diffusion] Antique Sea Chart Compass Pointer",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_cartography_001_base.jpg",
+    "variantImage": "/levels/method2_macro_cartography_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48,
+        "y": 53,
+        "radius": 4.8,
+        "description": "Compass rose fleur-de-lis needle",
+        "hint": "Look at the navigation compass rose on the map"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_camera_optics_001",
+    "title": "[Method 2: Macro Diffusion] Vintage Camera Lens Index Dot",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_camera_optics_001_base.jpg",
+    "variantImage": "/levels/method2_macro_camera_optics_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.5,
+        "y": 49.5,
+        "radius": 4.6,
+        "description": "Aperture index marker alignment",
+        "hint": "Inspect the focus ring markings on the brass barrel"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_woodcarver_001",
+    "title": "[Method 2: Macro Diffusion] Woodcarver Chisel Brass Ferrule",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_woodcarver_001_base.jpg",
+    "variantImage": "/levels/method2_macro_woodcarver_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53,
+        "y": 48.5,
+        "radius": 5,
+        "description": "Chisel brass collar ferrule",
+        "hint": "Look at the metal collar on the carving gouge handle"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_spice_bazaar_001",
+    "title": "[Method 2: Macro Diffusion] Artisan Exotic Star Anise Arrangement",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_spice_bazaar_001_base.jpg",
+    "variantImage": "/levels/method2_macro_spice_bazaar_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47,
+        "y": 52,
+        "radius": 4.8,
+        "description": "Star anise spice pod arrangement",
+        "hint": "Look at the whole spices grouped in the center bowl"
+      }
+    ]
+  },
+  {
+    "id": "method2_macro_miniature_wet_palette_002",
+    "title": "[Method 2: Macro Diffusion] Miniature Wet Palette Paint Droplet",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_miniature_wet_palette_002_base.jpg",
+    "variantImage": "/levels/method2_macro_miniature_wet_palette_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.5,
+        "y": 53,
+        "radius": 4.8,
+        "description": "Acrylic paint droplet on the wet palette",
+        "hint": "Notice the pigment bead on the wet palette surface"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_persian_rug_001",
+    "title": "[Method 3: Authored Physical] Ornate Wool Rug Tortoiseshell Pick",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_persian_rug_001_base.jpg",
+    "variantImage": "/levels/method3_authored_persian_rug_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.5,
+        "y": 49.5,
+        "radius": 4.5,
+        "description": "Tortoiseshell guitar pick on woven rug",
+        "hint": "Examine the central medallion of the patterned rug"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_nursery_greenhouse_001",
+    "title": "[Method 3: Authored Physical] Greenhouse Nursery Identification Tag",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_nursery_greenhouse_001_base.jpg",
+    "variantImage": "/levels/method3_authored_nursery_greenhouse_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48,
+        "y": 50,
+        "radius": 4.8,
+        "description": "Botanical plant tag in nursery pot",
+        "hint": "Look in the potted seedling soil"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_screw_tray_001",
+    "title": "[Method 3: Authored Physical] Hardware Sorting Tray Screw",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_screw_tray_001_base.jpg",
+    "variantImage": "/levels/method3_authored_screw_tray_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51,
+        "y": 52,
+        "radius": 4.6,
+        "description": "Missing machine screw in organizer bin",
+        "hint": "Inspect the compartments of the screw sorting tray"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_mosaic_tile_001",
+    "title": "[Method 3: Authored Physical] Ceramic Mosaic Pattern Tile Shift",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_mosaic_tile_001_base.jpg",
+    "variantImage": "/levels/method3_authored_mosaic_tile_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49,
+        "y": 51,
+        "radius": 4.5,
+        "description": "Colored mosaic tile piece position",
+        "hint": "Look closely at the geometric tile grid"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_tackle_box_001",
+    "title": "[Method 3: Authored Physical] Fishing Tackle Box Feather Lure",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_tackle_box_001_base.jpg",
+    "variantImage": "/levels/method3_authored_tackle_box_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46,
+        "y": 54,
+        "radius": 4.8,
+        "description": "Feather fly lure in tackle compartment",
+        "hint": "Look in the plastic divider trays"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_camping_carabiner_001",
+    "title": "[Method 3: Authored Physical] Tactical Camping Gear Carabiner",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_camping_carabiner_001_base.jpg",
+    "variantImage": "/levels/method3_authored_camping_carabiner_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53,
+        "y": 47,
+        "radius": 5,
+        "description": "Anodized carabiner clip on paracord",
+        "hint": "Look on the canvas gear roll"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_strategy_board_001",
+    "title": "[Method 3: Authored Physical] Tabletop Strategy Board Wooden Pawn",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_strategy_board_001_base.jpg",
+    "variantImage": "/levels/method3_authored_strategy_board_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.5,
+        "y": 51.5,
+        "radius": 4.8,
+        "description": "Carved wooden token on board grid",
+        "hint": "Look at the wooden game pieces on the board"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_map_folio_001",
+    "title": "[Method 3: Authored Physical] Archival Map Restoration Clip",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_map_folio_001_base.jpg",
+    "variantImage": "/levels/method3_authored_map_folio_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52,
+        "y": 48,
+        "radius": 4.6,
+        "description": "Brass corner weight on parchment map",
+        "hint": "Look near the edge of the antique map"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_sewing_basket_001",
+    "title": "[Method 3: Authored Physical] Tailor Sewing Basket Pearl Button",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_sewing_basket_001_base.jpg",
+    "variantImage": "/levels/method3_authored_sewing_basket_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49,
+        "y": 53,
+        "radius": 4.8,
+        "description": "Mother of pearl button on fabric swatch",
+        "hint": "Inspect the vintage sewing supplies tray"
+      }
+    ]
+  },
+  {
+    "id": "method3_authored_hardware_drawer_001",
+    "title": "[Method 3: Authored Physical] Machinist Hardware Drawer Lock Washer",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method3_authored_hardware_drawer_001_base.jpg",
+    "variantImage": "/levels/method3_authored_hardware_drawer_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 50,
+        "radius": 4.6,
+        "description": "Split lock washer in steel drawer",
+        "hint": "Look in the metal hardware compartment"
+      }
+    ]
+  },
+  {
     "id": "method1_photo_leathercraft_001",
     "title": "[Method 1: Workshop Inpainting] Leathercraft Workbench Awl",
     "category": "Photography",
