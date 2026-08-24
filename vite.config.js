@@ -37,4 +37,7 @@ function curationPrunerPlugin() {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), curationPrunerPlugin()],
+  server: {
+    allowedHosts: true,
+  },
 });

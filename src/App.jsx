@@ -216,7 +216,16 @@ export default function App() {
       if (skipKept && isKeptStatus(statusVal)) continue;
 
       if (!isLevelCategorized(entry, mapToUse)) {
-        if (entry.id?.includes('stock_') || entry.id?.startsWith('ai_macro_')) {
+        if (
+          entry.id?.startsWith('sam_') ||
+          entry.id?.startsWith('real_') ||
+          entry.id?.startsWith('layered_') ||
+          entry.id?.startsWith('hyper_') ||
+          entry.id?.startsWith('dense_') ||
+          entry.id?.startsWith('artisan_') ||
+          entry.id?.startsWith('ai_macro_') ||
+          entry.id?.includes('stock_')
+        ) {
           brandNew.push(entry);
         } else {
           otherUnlabeled.push(entry);
@@ -240,7 +249,16 @@ export default function App() {
       if (skipKept && isKeptStatus(statusVal)) continue;
 
       if (!isLevelCategorized(entry, mapToUse)) {
-        if (entry.id?.includes('stock_') || entry.id?.startsWith('ai_macro_')) {
+        if (
+          entry.id?.startsWith('sam_') ||
+          entry.id?.startsWith('real_') ||
+          entry.id?.startsWith('layered_') ||
+          entry.id?.startsWith('hyper_') ||
+          entry.id?.startsWith('dense_') ||
+          entry.id?.startsWith('artisan_') ||
+          entry.id?.startsWith('ai_macro_') ||
+          entry.id?.includes('stock_')
+        ) {
           unreviewedBrandNew.push(entry);
         } else {
           unreviewedOther.push(entry);

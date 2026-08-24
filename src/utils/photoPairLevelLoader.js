@@ -145,7 +145,16 @@ export function selectPhotoPairEntries(entries, {
     const isCategorized = Boolean(statusVal?.status || statusVal?.packId || statusVal?.category || statusVal?.difficulty || statusVal?.suggestedDifficulty);
 
     if (!isCategorized) {
-      if (entry.id?.startsWith('ai_macro_') || entry.id?.includes('stock_')) {
+      if (
+        entry.id?.startsWith('sam_') ||
+        entry.id?.startsWith('real_') ||
+        entry.id?.startsWith('layered_') ||
+        entry.id?.startsWith('hyper_') ||
+        entry.id?.startsWith('dense_') ||
+        entry.id?.startsWith('artisan_') ||
+        entry.id?.startsWith('ai_macro_') ||
+        entry.id?.includes('stock_')
+      ) {
         unreviewedBrandNew.push(entry);
       } else {
         unreviewedOther.push(entry);
