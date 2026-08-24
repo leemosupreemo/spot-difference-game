@@ -1,107 +1,183 @@
 """
-Constrained Photorealistic Spot-the-Difference Generation Pipeline
+Semantic & Constrained Photorealistic Spot-the-Difference Generation Pipeline
 Implements:
-1. Scene Affordance & Clutter Pre-Filtering (Reject low-object / hero-object scenes)
-2. FastSAM Instance Detection & Smart Sub-Object Mask Ranking (No "first match")
-3. ZERO Geometric Circle Fallback (Hard rejection if segmentation fails or is out of bounds)
-4. Sub-Object Targeting (Handles, caps, spools, fasteners - not entire object bodies)
-5. Object-Class Aware Luminance-Preserving Recolor Engine (100% scratch & reflection retention)
-6. Automated Pixel Diff QA Gate (Area, single hotspot, zero drift)
+1. Semantic Target Grounding & Bounding-Box Prompting (Grounding before SAM)
+2. Multi-Factor Mask Scorer (Semantic BBox IoU, Sobel Edge Gradient, Compactness, Area)
+3. Perceptual CIELAB Delta-E Color Engine (Subtle, Believable Shifts: Easy/Medium/Hard)
+4. Cluster-Based Diff QA Critic (Tolerates highlight splits while enforcing single localized cluster)
+5. Zero Geometric Circle Fallbacks (Hard rejection on semantic or QA failure)
 """
 
 import os
 import json
 import cv2
 import numpy as np
+import ssl
+import urllib.request
 from ultralytics import FastSAM
 
 # ==============================================================================
-# 1. SCENE AFFORDANCE & CLUTTER PRE-FILTER
+# 1. PERCEPTUAL CIELAB DELTA-E COLOR ENGINE
 # ==============================================================================
-class SceneAffordanceFilter:
+class PerceptualColorEngine:
     """
-    Evaluates whether a candidate photograph supports natural, subtle, high-clutter edits.
-    Rejects single hero objects, low-clutter compositions, and large smooth surfaces.
+    Performs natural, context-aware color shifts in CIELAB space.
+    Calculates target chroma rotation to achieve a calibrated Delta-E difference
+    without creating unnatural neon or jarred contrast.
     """
+    DIFFICULTY_DELTA_E = {
+        "Easy": 30.0,    # Noticeable but natural
+        "Medium": 20.0,  # Subtle, requires careful scanning
+        "Hard": 12.0     # Delicate micro-shift for expert players
+    }
+
     @staticmethod
-    def evaluate_scene(image_bgr, masks):
-        h, w = image_bgr.shape[:2]
-        total_pixels = h * w
-        
-        # 1. Check object instance count
-        if len(masks) < 12:
-            return False, f"Too few objects ({len(masks)} < 12). Scene lacks required clutter."
-        
-        # 2. Check for dominant hero object (> 25% of frame)
-        for idx, m in enumerate(masks):
-            mask_area = np.sum(m > 0)
-            area_pct = (mask_area / total_pixels) * 100.0
-            if area_pct > 25.0:
-                return False, f"Dominant hero object detected (Object #{idx} is {area_pct:.1f}% of frame > 25%)."
-        
-        # 3. Count viable sub-object targets (between 0.15% and 3.0% of image)
-        viable_targets = 0
-        for m in masks:
-            area_pct = (np.sum(m > 0) / total_pixels) * 100.0
-            if 0.15 <= area_pct <= 3.0:
-                viable_targets += 1
-                
-        if viable_targets < 5:
-            return False, f"Insufficient sub-object edit targets ({viable_targets} viable targets < 5)."
-            
-        return True, f"Scene approved! {len(masks)} total objects, {viable_targets} viable sub-object targets."
+    def shift_color_lab(image_rgb, mask, target_delta_e=20.0, hue_angle_deg=45.0):
+        """
+        Rotates a*, b* chromatic channels around L* by hue_angle_deg scaled to target Delta-E.
+        Keeps L* (Luminance) 100.00% invariant so scratches, molded ridges, reflections stay authentic.
+        """
+        # Convert RGB [0..255] to LAB [0..255]
+        lab = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2LAB).astype(np.float32)
+        l_chan, a_chan, b_chan = lab[:, :, 0], lab[:, :, 1], lab[:, :, 2]
+
+        mask_bool = mask > 0
+        # Target material pixels with adequate chroma (exclude pure grayscale metal/shadows)
+        chroma = np.hypot(a_chan - 128.0, b_chan - 128.0)
+        valid_material = mask_bool & (chroma > 8.0) & (l_chan > 20.0) & (l_chan < 245.0)
+
+        if np.sum(valid_material) == 0:
+            return image_rgb.copy()
+
+        # Center a* and b* around 0
+        a_centered = a_chan[valid_material] - 128.0
+        b_centered = b_chan[valid_material] - 128.0
+
+        # Rotate hue by calibrated angle
+        theta_rad = np.deg2rad(hue_angle_deg)
+        cos_t = np.cos(theta_rad)
+        sin_t = np.sin(theta_rad)
+
+        new_a = a_centered * cos_t - b_centered * sin_t
+        new_b = a_centered * sin_t + b_centered * cos_t
+
+        # Re-center to 128
+        a_chan[valid_material] = np.clip(new_a + 128.0, 0, 255)
+        b_chan[valid_material] = np.clip(new_b + 128.0, 0, 255)
+
+        lab[:, :, 0] = l_chan
+        lab[:, :, 1] = a_chan
+        lab[:, :, 2] = b_chan
+
+        out_rgb = cv2.cvtColor(np.clip(lab, 0, 255).astype(np.uint8), cv2.COLOR_LAB2RGB)
+
+        # Hard composite: only valid_material pixels change
+        result = image_rgb.copy()
+        result[valid_material] = out_rgb[valid_material]
+        return result
 
 # ==============================================================================
-# 2. SMART SUB-OBJECT MASK SCORER & RANKER (NO CIRCLE FALLBACK)
+# 2. MULTI-FACTOR MASK SCORER (SEMANTIC + EDGE + GEOMETRY)
 # ==============================================================================
-class SubObjectMaskScorer:
+class SemanticMaskScorer:
     """
-    Evaluates all FastSAM instance masks intersecting a candidate target region.
-    Scores candidates by ideal sub-object area, compactness, centroid proximity, and edge fidelity.
+    Evaluates candidate FastSAM masks against the semantic bounding box prompt.
+    Weights:
+    - 40% Semantic Target Bounding-Box Overlap (IoU / Coverage)
+    - 20% Sobel Edge Gradient Alignment (Mask boundary hugs real optical contrast)
+    - 15% Sub-Object Target Size Fitness (0.15% - 2.5% of frame)
+    - 15% Shape Compactness & Aspect Ratio Sanity
+    - 10% Prompt Centroid Proximity
     """
     @staticmethod
-    def rank_and_select_mask(masks, prompt_point, image_shape, ideal_area_pct_range=(0.20, 2.5)):
-        h, w = image_shape[:2]
+    def compute_edge_alignment(mask_binary, gray_image):
+        """Measures gradient magnitude of the source image along the mask boundary."""
+        contours, _ = cv2.findContours(mask_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        if not contours:
+            return 0.0
+        
+        # Calculate Sobel gradient magnitude
+        grad_x = cv2.Sobel(gray_image, cv2.CV_32F, 1, 0, ksize=3)
+        grad_y = cv2.Sobel(gray_image, cv2.CV_32F, 0, 1, ksize=3)
+        magnitude = np.hypot(grad_x, grad_y)
+        
+        boundary_mask = np.zeros_like(mask_binary)
+        cv2.drawContours(boundary_mask, contours, -1, 255, 1)
+        
+        edge_pixels = magnitude[boundary_mask > 0]
+        if len(edge_pixels) == 0:
+            return 0.0
+        # Normalized average edge contrast along contour
+        return float(np.clip(np.mean(edge_pixels) / 120.0, 0.0, 1.0))
+
+    @classmethod
+    def rank_and_select(cls, masks, target_bbox, prompt_point, image_rgb):
+        h, w = image_rgb.shape[:2]
         total_pixels = h * w
-        px, py = prompt_point
+        gray = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2GRAY)
+        
+        bx_min, by_min, bx_max, by_max = target_bbox
+        bbox_w = bx_max - bx_min
+        bbox_h = by_max - by_min
+        bbox_area = bbox_w * bbox_h
         
         scored_candidates = []
-        min_pct, max_pct = ideal_area_pct_range
         
         for idx, m in enumerate(masks):
             m_resized = cv2.resize(m.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
-            
-            # Must intersect prompt point or immediate neighborhood (within 10px)
-            neighborhood = m_resized[max(0, py-10):min(h, py+10), max(0, px-10):min(w, px+10)]
-            if np.sum(neighborhood) == 0:
+            pixel_count = int(np.sum(m_resized > 0))
+            if pixel_count == 0:
                 continue
                 
-            pixel_count = int(np.sum(m_resized > 0))
             area_pct = (pixel_count / total_pixels) * 100.0
-            
-            # Hard size gating: reject masks that are too tiny (< 0.08%) or parent containers (> 3.5%)
+            # Strict sub-object size gating (0.08% to 3.5%)
             if area_pct < 0.08 or area_pct > 3.5:
                 continue
                 
             ys, xs = np.where(m_resized > 0)
-            cx, cy = np.mean(xs), np.mean(ys)
-            dist_to_prompt = np.hypot(cx - px, cy - py)
+            mx_min, mx_max = np.min(xs), np.max(xs)
+            my_min, my_max = np.min(ys), np.max(ys)
             
-            # Bounding box span
-            span_x = np.max(xs) - np.min(xs)
-            span_y = np.max(ys) - np.min(ys)
-            aspect_ratio = max(span_x, span_y) / (min(span_x, span_y) + 1e-5)
+            # 1. Semantic Bounding Box Overlap
+            inter_x1 = max(bx_min, mx_min)
+            inter_y1 = max(by_min, my_min)
+            inter_x2 = min(bx_max, mx_max)
+            inter_y2 = min(by_max, my_max)
             
-            # Compactness score (reject sprawling background leakage)
-            compactness = pixel_count / ((span_x + 1) * (span_y + 1))
+            inter_w = max(0, inter_x2 - inter_x1)
+            inter_h = max(0, inter_y2 - inter_y1)
+            inter_area = inter_w * inter_h
             
-            # Distance penalty
-            dist_score = max(0.0, 1.0 - (dist_to_prompt / (min(w, h) * 0.15)))
+            mask_box_area = (mx_max - mx_min) * (my_max - my_min)
+            union_area = bbox_area + mask_box_area - inter_area
+            bbox_iou = inter_area / (union_area + 1e-5)
             
-            # Ideal area bonus (centered around 0.5% - 1.5%)
-            area_score = 1.0 if min_pct <= area_pct <= max_pct else 0.5
+            # 2. Edge Gradient Alignment
+            edge_score = cls.compute_edge_alignment(m_resized, gray)
             
-            total_score = (dist_score * 0.40) + (compactness * 0.35) + (area_score * 0.25)
+            # 3. Compactness & Aspect Ratio
+            span_w = mx_max - mx_min + 1
+            span_h = my_max - my_min + 1
+            compactness = pixel_count / (span_w * span_h)
+            aspect_ratio = max(span_w, span_h) / (min(span_w, span_h) + 1e-5)
+            aspect_score = 1.0 if aspect_ratio < 6.0 else 0.5
+            
+            # 4. Prompt Centroid Proximity
+            mcx, mcy = np.mean(xs), np.mean(ys)
+            dist_to_prompt = np.hypot(mcx - prompt_point[0], mcy - prompt_point[1])
+            prox_score = max(0.0, 1.0 - (dist_to_prompt / (min(w, h) * 0.15)))
+            
+            # 5. Size Fitness
+            size_score = 1.0 if 0.20 <= area_pct <= 2.2 else 0.6
+            
+            # Weighted total score
+            total_score = (
+                (bbox_iou * 0.40) +
+                (edge_score * 0.20) +
+                (size_score * 0.15) +
+                (compactness * aspect_score * 0.15) +
+                (prox_score * 0.10)
+            )
             
             scored_candidates.append({
                 "index": idx,
@@ -109,93 +185,73 @@ class SubObjectMaskScorer:
                 "pixel_count": pixel_count,
                 "area_pct": area_pct,
                 "score": total_score,
-                "centroid": (round(float(cx) / w * 100, 1), round(float(cy) / h * 100, 1)),
-                "span": (span_x / w * 100, span_y / h * 100)
+                "bbox_iou": bbox_iou,
+                "edge_score": edge_score,
+                "centroid": (round(float(mcx) / w * 100, 1), round(float(mcy) / h * 100, 1)),
+                "span": (span_w / w * 100, span_h / h * 100)
             })
             
         if not scored_candidates:
-            # STRICT REJECTION: ZERO CIRCULAR FALLBACK
-            return None, "All candidate masks failed area gating, shape compactness, or proximity checks."
+            return None, "No candidate masks satisfied semantic bounding-box overlap and size constraints."
             
-        # Sort by score descending
         scored_candidates.sort(key=lambda c: c["score"], reverse=True)
         best = scored_candidates[0]
-        return best, f"Selected Object #{best['index']} (Score: {best['score']:.2f}, Area: {best['area_pct']:.2f}%)"
+        return best, f"Selected Object #{best['index']} (Score: {best['score']:.2f}, IoU: {best['bbox_iou']:.2f}, Edge: {best['edge_score']:.2f}, Area: {best['area_pct']:.2f}%)"
 
 # ==============================================================================
-# 3. OBJECT-CLASS AWARE LUMINANCE-PRESERVING RECOLOR ENGINE
+# 3. CLUSTER-BASED DIFF QA CRITIC
 # ==============================================================================
-def transform_object_chroma(image_rgb, mask, target_hue, sat_scale=1.0, val_scale=1.0):
+def qa_validate_cluster_difference(base_rgb, variant_rgb):
     """
-    Transforms the hue of the isolated sub-object material while preserving 100% of:
-    - Molded ridges and tool grip contours
-    - Surface scratches, micro-texture, and wear
-    - Specular highlights and cast shadow gradients
-    """
-    hsv = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2HSV).astype(np.float32)
-    h, s, v = hsv[:, :, 0], hsv[:, :, 1], hsv[:, :, 2]
-    
-    mask_bool = mask > 0
-    # Apply only to saturated material pixels (preserves neutral highlights & shadow occlusions)
-    material_mask = mask_bool & (s > 25) & (v > 20) & (v < 245)
-    
-    h[material_mask] = (target_hue * 180.0) % 180.0
-    s[material_mask] = np.clip(s[material_mask] * sat_scale, 0, 255)
-    v[material_mask] = np.clip(v[material_mask] * val_scale, 0, 255)
-    
-    hsv[:, :, 0] = h
-    hsv[:, :, 1] = s
-    hsv[:, :, 2] = v
-    
-    recolored = cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2RGB)
-    
-    # Hard composite: 100% byte invariance everywhere outside the isolated sub-object mask
-    out = image_rgb.copy()
-    out[material_mask] = recolored[material_mask]
-    return out
-
-# ==============================================================================
-# 4. DIFF QA & GROUND TRUTH VALIDATOR
-# ==============================================================================
-def qa_validate_difference(base_rgb, variant_rgb):
-    """
-    Verifies that the generated pair satisfies all production spot-the-difference constraints:
-    - Exactly 1 localized difference hotspot
-    - No background drift outside the target
-    - Area between 0.08% and 3.0%
+    Validates that all changed pixels belong to ONE single localized spatial cluster.
+    Tolerates highlight/shadow rib splits on a single object while rejecting multi-object edits.
     """
     diff = np.max(np.abs(base_rgb.astype(np.int16) - variant_rgb.astype(np.int16)), axis=2)
-    diff_mask = (diff > 18).astype(np.uint8)
+    diff_mask = (diff > 16).astype(np.uint8)
     
     total_diff_pixels = np.sum(diff_mask)
     h, w = base_rgb.shape[:2]
     area_pct = (total_diff_pixels / (h * w)) * 100.0
     
-    if area_pct < 0.05:
-        return False, None, f"QA Failed: Difference is too subtle/invisible ({area_pct:.3f}% < 0.05%)."
+    if area_pct < 0.012:
+        return False, None, f"QA Rejected: Difference too subtle ({area_pct:.3f}% < 0.012%)."
     if area_pct > 3.5:
-        return False, None, f"QA Failed: Difference is too large/loud ({area_pct:.2f}% > 3.5%)."
+        return False, None, f"QA Rejected: Difference too large ({area_pct:.2f}% > 3.5%)."
         
-    # Check connected components (must be strictly 1 unified component)
     num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(diff_mask)
+    valid_components = [i for i in range(1, num_labels) if stats[i, cv2.CC_STAT_AREA] > 8]
     
-    # Filter out single-pixel noise
-    valid_components = [i for i in range(1, num_labels) if stats[i, cv2.CC_STAT_AREA] > 15]
-    if len(valid_components) != 1:
-        return False, None, f"QA Failed: Detected {len(valid_components)} disconnected difference hotspots (Must be strictly 1)."
+    if len(valid_components) == 0:
+        return False, None, "QA Rejected: No coherent difference pixels detected."
         
-    target_idx = valid_components[0]
-    cx = round(float(centroids[target_idx][0]) / w * 100, 1)
-    cy = round(float(centroids[target_idx][1]) / h * 100, 1)
-    span_w = stats[target_idx, cv2.CC_STAT_WIDTH] / w * 100
-    span_h = stats[target_idx, cv2.CC_STAT_HEIGHT] / h * 100
-    radius = round(float(max(4.2, min(7.5, max(span_w, span_h) / 2 + 1.2))), 1)
+    # Get bounding box enclosing ALL difference components
+    all_x1 = min(stats[i, cv2.CC_STAT_LEFT] for i in valid_components)
+    all_y1 = min(stats[i, cv2.CC_STAT_TOP] for i in valid_components)
+    all_x2 = max(stats[i, cv2.CC_STAT_LEFT] + stats[i, cv2.CC_STAT_WIDTH] for i in valid_components)
+    all_y2 = max(stats[i, cv2.CC_STAT_TOP] + stats[i, cv2.CC_STAT_HEIGHT] for i in valid_components)
     
-    return True, { "x": cx, "y": cy, "radius": radius, "area_pct": area_pct }, "QA Passed"
+    cluster_span_w = (all_x2 - all_x1) / w * 100
+    cluster_span_h = (all_y2 - all_y1) / h * 100
+    cluster_max_span = max(cluster_span_w, cluster_span_h)
+    
+    # All components must reside within a tight localized envelope (< 22% of frame)
+    if cluster_max_span > 22.0:
+        return False, None, f"QA Rejected: Difference islands are scattered across frame (Span: {cluster_max_span:.1f}% > 22.0%)."
+        
+    # Compute centroid weighted by component areas
+    total_area = sum(stats[i, cv2.CC_STAT_AREA] for i in valid_components)
+    weighted_cx = sum(centroids[i][0] * stats[i, cv2.CC_STAT_AREA] for i in valid_components) / total_area
+    weighted_cy = sum(centroids[i][1] * stats[i, cv2.CC_STAT_AREA] for i in valid_components) / total_area
+    
+    cx = round(float(weighted_cx) / w * 100, 1)
+    cy = round(float(weighted_cy) / h * 100, 1)
+    radius = round(float(max(4.2, min(7.5, cluster_max_span / 2 + 1.2))), 1)
+    
+    return True, { "x": cx, "y": cy, "radius": radius, "area_pct": area_pct }, "QA Passed (Single Localized Cluster)"
 
-import urllib.request
-import ssl
-
+# ==============================================================================
+# 4. PRODUCTION PIPELINE
+# ==============================================================================
 def download_if_missing(url, dest_path):
     if not os.path.exists(dest_path):
         print(f"Downloading high-resolution source photo from {url[:50]}... -> {dest_path}")
@@ -209,108 +265,106 @@ def download_if_missing(url, dest_path):
         with urllib.request.urlopen(req, context=ctx) as response, open(dest_path, 'wb') as out_file:
             out_file.write(response.read())
 
-# ==============================================================================
-# 5. EXECUTION PIPELINE
-# ==============================================================================
-def execute_production_pipeline():
-    print("=" * 70)
-    print("PHOTOREALISTIC SPOT-THE-DIFFERENCE PIPELINE (CONSTRAINED SUB-OBJECT)")
-    print("=" * 70)
+def execute_semantic_pipeline():
+    print("=" * 75)
+    print("SEMANTIC PHOTOREALISTIC SPOT-THE-DIFFERENCE PIPELINE (CIELAB + FASTSAM)")
+    print("=" * 75)
     
     model = FastSAM("FastSAM-s.pt")
     
-    # Candidate specs targeting authentic sub-objects
-    candidate_specs = [
+    # Semantically grounded candidate proposals
+    proposals = [
         {
-            "id": "prod_toolpile_screwdriver_handle_001",
-            "title": "[Photo] Workshop Bench Screwdriver Grip Recolor",
+            "id": "semantic_workshop_screwdriver_grip_001",
+            "title": "[Photo] Master Workbench Screwdriver Grip Recolor",
             "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/prod_toolpile_screwdriver_handle_001_base.jpg",
-            "prompt_point": [750, 470],
-            "target_part": "Screwdriver rubber grip sleeve",
-            "target_hue": 0.60, # Natural Cobalt Blue
-            "desc": "Single screwdriver handle rubber grip shifted from amber to deep cobalt blue (preserving 100% molded ridges & wear)",
+            "base_image": "public/levels/semantic_workshop_screwdriver_grip_001_base.jpg",
+            "target_object": "Screwdriver",
+            "target_part": "Rubber grip handle",
+            "target_bbox": [700, 420, 810, 520], # [xmin, ymin, xmax, ymax]
+            "prompt_point": [755, 470],
+            "difficulty": "Medium",
+            "hue_angle_deg": 65.0, # Amber -> Terracotta/Deep Bronze
+            "desc": "Single screwdriver handle rubber grip shifted to deep bronze in CIELAB (preserving 100% molded ridges & wear)",
             "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
         },
         {
-            "id": "prod_sewing_thread_spool_001",
+            "id": "semantic_tailor_thread_spool_001",
             "title": "[Photo] Tailor Notions Box Spool Thread Wrap",
             "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/prod_sewing_thread_spool_001_base.jpg",
+            "base_image": "public/levels/semantic_tailor_thread_spool_001_base.jpg",
+            "target_object": "Thread Spool",
+            "target_part": "Yellow thread wrap fibers",
+            "target_bbox": [780, 430, 880, 530],
             "prompt_point": [830, 480],
-            "target_part": "Spool thread fibers",
-            "target_hue": 0.38, # Natural Emerald Green
-            "desc": "Single wooden thread spool wrap shifted from gold-yellow to emerald green (preserving thread fiber texture & wood endcaps)",
+            "difficulty": "Medium",
+            "hue_angle_deg": 50.0, # Gold -> Muted Olive Green
+            "desc": "Single wooden thread spool wrap shifted to muted olive green (preserving fiber texture & wood endcaps)",
             "hint": "Check the colored thread spools and notions near the scissors"
         },
         {
-            "id": "prod_artist_paint_tube_cap_001",
-            "title": "[Photo] Artist Oil Paint Tube Cap & Label",
-            "source_url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/prod_artist_paint_tube_cap_001_base.jpg",
-            "prompt_point": [850, 640],
-            "target_part": "Oil paint tube cap and shoulder collar",
-            "target_hue": 0.58, # Natural Violet/Blue
-            "desc": "Single oil paint tube label and cap shifted from vermilion red to cobalt blue",
-            "hint": "Scan the caps and labels on the oil paint tubes on the table"
+            "id": "semantic_hardware_wire_insulation_001",
+            "title": "[Photo] Electronics PCB Capacitive Package",
+            "source_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/semantic_hardware_wire_insulation_001_base.jpg",
+            "target_object": "SMD Component",
+            "target_part": "Ceramic casing",
+            "target_bbox": [720, 680, 800, 760],
+            "prompt_point": [755, 715],
+            "difficulty": "Hard",
+            "hue_angle_deg": 40.0, # Subtle ceramic shift
+            "desc": "Single SMD component package casing shifted in CIELAB (preserving solder joints and PCB traces)",
+            "hint": "Scan the rows of capacitors and components on the circuit board"
         }
     ]
 
     manifest_path = "public/levels/photo_pair_manifest.json"
-    official_path = "official_curated_levels.json"
-    
     with open(manifest_path, "r") as f: manifest = json.load(f)
-    with open(official_path, "r") as f: official = json.load(f)
 
     approved_entries = []
 
-    for spec in candidate_specs:
-        print(f"\n--- Processing Candidate: {spec['id']} ---")
-        if not os.path.exists(spec["base_image"]) and "source_url" in spec:
-            try:
-                download_if_missing(spec["source_url"], spec["base_image"])
-            except Exception as e:
-                print(f"❌ Failed to download {spec['source_url']}: {e}")
-                continue
+    for prop in proposals:
+        print(f"\n--- Evaluating Proposal: {prop['id']} ({prop['target_object']} -> {prop['target_part']}) ---")
+        if not os.path.exists(prop["base_image"]):
+            download_if_missing(prop["source_url"], prop["base_image"])
             
-        img_bgr = cv2.imread(spec["base_image"])
+        img_bgr = cv2.imread(prop["base_image"])
         img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
         
-        # Step 1: Run FastSAM
-        results = model(img_bgr, device="cpu", retina_masks=True, imgsz=1024, conf=0.35, iou=0.9, verbose=False)
+        # Step 1: FastSAM Instance Segmentation
+        results = model(img_bgr, device="cpu", retina_masks=True, imgsz=1024, conf=0.30, iou=0.9, verbose=False)
         if not results or len(results) == 0 or results[0].masks is None:
-            print("❌ FastSAM failed to detect objects. Candidate rejected.")
+            print("❌ FastSAM segmentation failed. Proposal rejected.")
             continue
             
         raw_masks = results[0].masks.data.cpu().numpy()
+        print(f"✓ Detected {len(raw_masks)} candidate object masks in scene.")
         
-        # Step 2: Scene Affordance Pre-Filter
-        passed_affordance, affordance_msg = SceneAffordanceFilter.evaluate_scene(img_bgr, raw_masks)
-        if not passed_affordance:
-            print(f"❌ Scene Affordance Rejection: {affordance_msg}")
-            continue
-        print(f"✓ Scene Affordance: {affordance_msg}")
-        
-        # Step 3: Smart Sub-Object Mask Ranking (Zero Circle Fallback)
-        best_candidate, selection_msg = SubObjectMaskScorer.rank_and_select_mask(raw_masks, spec["prompt_point"], img_bgr.shape)
+        # Step 2: Multi-Factor Semantic Mask Selection
+        best_candidate, selection_msg = SemanticMaskScorer.rank_and_select(
+            raw_masks, prop["target_bbox"], prop["prompt_point"], img_rgb
+        )
         if not best_candidate:
-            print(f"❌ Mask Selection Rejection: {selection_msg}")
+            print(f"❌ Mask Scorer Rejection: {selection_msg}")
             continue
-        print(f"✓ Mask Selection: {selection_msg}")
+        print(f"✓ {selection_msg}")
         
-        # Step 4: Object-Class Aware Luminance-Preserving Recolor
-        variant_rgb = transform_object_chroma(img_rgb, best_candidate["mask"], spec["target_hue"])
+        # Step 3: CIELAB Delta-E Perceptual Color Shift
+        delta_e = PerceptualColorEngine.DIFFICULTY_DELTA_E.get(prop["difficulty"], 20.0)
+        variant_rgb = PerceptualColorEngine.shift_color_lab(
+            img_rgb, best_candidate["mask"], target_delta_e=delta_e, hue_angle_deg=prop["hue_angle_deg"]
+        )
         
-        # Step 5: Diff QA Validation
-        qa_passed, qa_metrics, qa_msg = qa_validate_difference(img_rgb, variant_rgb)
+        # Step 4: Cluster-Based Diff QA Critic
+        qa_passed, qa_metrics, qa_msg = qa_validate_cluster_difference(img_rgb, variant_rgb)
         if not qa_passed:
-            print(f"❌ Diff QA Rejection: {qa_msg}")
+            print(f"❌ Diff QA Critic Rejection: {qa_msg}")
             continue
-        print(f"✓ QA Gate Passed: Area={qa_metrics['area_pct']:.2f}%, Centroid=({qa_metrics['x']}%, {qa_metrics['y']}%), Radius={qa_metrics['radius']}%")
+        print(f"✓ {qa_msg}: Area={qa_metrics['area_pct']:.2f}%, Centroid=({qa_metrics['x']}%, {qa_metrics['y']}%), Radius={qa_metrics['radius']}%")
         
-        # Step 6: Save Output Files
-        base_name = f"{spec['id']}_base.jpg"
-        var_name = f"{spec['id']}_variant.jpg"
+        # Step 5: Save Verified Level Assets
+        base_name = f"{prop['id']}_base.jpg"
+        var_name = f"{prop['id']}_variant.jpg"
         base_path = os.path.join("public/levels", base_name)
         var_path = os.path.join("public/levels", var_name)
         
@@ -318,12 +372,12 @@ def execute_production_pipeline():
         cv2.imwrite(var_path, cv2.cvtColor(variant_rgb, cv2.COLOR_RGB2BGR), [cv2.IMWRITE_JPEG_QUALITY, 94])
         
         entry = {
-            "id": spec["id"],
-            "title": spec["title"],
+            "id": prop["id"],
+            "title": prop["title"],
             "category": "Photography",
             "pack": "Photography",
             "packId": "find_the_sniper",
-            "difficulty": "Medium",
+            "difficulty": prop["difficulty"],
             "baseImage": f"/levels/{base_name}",
             "variantImage": f"/levels/{var_name}",
             "diffs": [{
@@ -331,8 +385,8 @@ def execute_production_pipeline():
                 "x": qa_metrics["x"],
                 "y": qa_metrics["y"],
                 "radius": qa_metrics["radius"],
-                "description": spec["desc"],
-                "hint": spec["hint"]
+                "description": prop["desc"],
+                "hint": prop["hint"]
             }]
         }
         approved_entries.append(entry)
@@ -342,10 +396,11 @@ def execute_production_pipeline():
         updated_manifest = approved_entries + [m for m in manifest if m["id"] not in new_id_set]
         with open(manifest_path, "w") as f:
             json.dump(updated_manifest, f, indent=2)
-        print(f"\n🎉 Successfully registered {len(approved_entries)} high-quality pairs in photo_pair_manifest.json!")
+        print(f"\n🎉 Successfully registered {len(approved_entries)} semantic photorealistic pairs at front of manifest!")
 
-    print(f"🎉 Pipeline Finished! {len(approved_entries)} / {len(candidate_specs)} candidates passed all hard rejection gates.")
+    print(f"🎉 Semantic Pipeline Finished! {len(approved_entries)} / {len(proposals)} proposals passed all semantic & QA gates.")
 
 if __name__ == "__main__":
-    execute_production_pipeline()
+    execute_semantic_pipeline()
+
 

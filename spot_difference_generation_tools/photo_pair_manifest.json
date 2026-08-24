@@ -1,5 +1,85 @@
 [
   {
+    "id": "semantic_workshop_screwdriver_grip_001",
+    "title": "[Photo] Master Workbench Screwdriver Grip Recolor",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/semantic_workshop_screwdriver_grip_001_base.jpg",
+    "variantImage": "/levels/semantic_workshop_screwdriver_grip_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.4,
+        "y": 42.3,
+        "radius": 7.5,
+        "description": "Single screwdriver handle rubber grip shifted to deep bronze in CIELAB (preserving 100% molded ridges & wear)",
+        "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
+      }
+    ]
+  },
+  {
+    "id": "semantic_tailor_thread_spool_001",
+    "title": "[Photo] Tailor Notions Box Spool Thread Wrap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/semantic_tailor_thread_spool_001_base.jpg",
+    "variantImage": "/levels/semantic_tailor_thread_spool_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.9,
+        "y": 43.1,
+        "radius": 4.2,
+        "description": "Single wooden thread spool wrap shifted to muted olive green (preserving fiber texture & wood endcaps)",
+        "hint": "Check the colored thread spools and notions near the scissors"
+      }
+    ]
+  },
+  {
+    "id": "semantic_hardware_wire_insulation_001",
+    "title": "[Photo] Electronics PCB Capacitive Package",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/semantic_hardware_wire_insulation_001_base.jpg",
+    "variantImage": "/levels/semantic_hardware_wire_insulation_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69.0,
+        "y": 35.6,
+        "radius": 4.2,
+        "description": "Single SMD component package casing shifted in CIELAB (preserving solder joints and PCB traces)",
+        "hint": "Scan the rows of capacitors and components on the circuit board"
+      }
+    ]
+  },
+  {
+    "id": "prod_toolpile_screwdriver_handle_001",
+    "title": "[Photo] Workshop Bench Screwdriver Grip Recolor",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_toolpile_screwdriver_handle_001_base.jpg",
+    "variantImage": "/levels/prod_toolpile_screwdriver_handle_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.5,
+        "y": 42.6,
+        "radius": 7.5,
+        "description": "Single screwdriver handle rubber grip shifted from amber to deep cobalt blue (preserving 100% molded ridges & wear)",
+        "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
+      }
+    ]
+  },
+  {
     "id": "hyper_synth_logic_board_002",
     "title": "[Ultra-Complex] Analog Synthesizer Master Circuit Matrix",
     "category": "Photography",
