@@ -420,7 +420,6 @@ export default function App() {
   // Stage Set Progression State (5 Images = 1 Single Stage)
   const [currentStageIndex, setCurrentStageIndex] = useState(0);
   const stageTimesRef = useRef([]);
-  const [stageToastMessage, setStageToastMessage] = useState(null);
   const [totalStageTimeMs, setTotalStageTimeMs] = useState(0);
 
   // Handle Game Launch from Main Menu
@@ -506,11 +505,7 @@ export default function App() {
       const totalStageImages = levels.length > 0 ? levels.length : 5;
 
       if (nextIndex < totalStageImages) {
-        // IMAGES 1..4 CLEARED! Show Toast and advance automatically after 1.2s!
-        setStageToastMessage(`IMAGE ${nextIndex} OF ${totalStageImages} CLEARED! 🎯`);
-
         setTimeout(() => {
-          setStageToastMessage(null);
           setCurrentStageIndex(nextIndex);
           const nextLevel = levels[nextIndex];
           if (nextLevel) {
@@ -521,7 +516,7 @@ export default function App() {
             setElapsedTime(0);
             setTimerRunning(true);
           }
-        }, 1200);
+        }, 350);
       } else {
         // ALL 5 IMAGES CLEARED! FULL STAGE CLEAR!
         const cumulativeTime = stageTimesRef.current.reduce((sum, t) => sum + (t || 0), 0);
@@ -684,27 +679,6 @@ export default function App() {
               currentStageIndex={getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex}
               totalStageImages={debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)}
             />
-          )}
-
-          {/* Floating Stage Transition Toast */}
-          {stageToastMessage && (
-            <div style={{
-              position: 'fixed',
-              top: '80px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              zIndex: 90,
-              background: 'linear-gradient(135deg, var(--accent-green), #00b0ff)',
-              color: '#000',
-              fontWeight: 900,
-              fontSize: '1.2rem',
-              padding: '12px 28px',
-              borderRadius: '30px',
-              boxShadow: '0 0 30px rgba(0, 255, 135, 0.8)',
-              animation: 'pageFadeIn 0.2s ease-out'
-            }}>
-              {stageToastMessage}
-            </div>
           )}
 
           {/* Clean Unified Game Timer & Controls Bar */}
