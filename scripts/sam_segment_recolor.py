@@ -30,19 +30,19 @@ class SceneAffordanceFilter:
         # 1. Global edge density check
         edges = cv2.Canny(gray, 60, 150)
         global_edge_density = np.sum(edges > 0) / total_pixels
-        if global_edge_density < 0.025:
-            return False, f"Low scene complexity (Edge density {global_edge_density:.3f} < 0.025). Background too uniform."
+        if global_edge_density < 0.018:
+            return False, f"Low scene complexity (Edge density {global_edge_density:.3f} < 0.018). Background too uniform."
         
         # 2. Object instance count (must be a cluttered composition)
         if len(masks) < 14:
             return False, f"Too few objects ({len(masks)} < 14). Lacks necessary visual clutter."
         
-        # 3. Dominant hero object check (reject if any single object > 22% of frame)
+        # 3. Dominant hero object check (reject if foreground hero object > 38% of frame)
         for idx, m in enumerate(masks):
             mask_area = np.sum(m > 0)
             area_pct = (mask_area / total_pixels) * 100.0
-            if area_pct > 22.0:
-                return False, f"Dominant hero object detected (Object #{idx} is {area_pct:.1f}% of frame > 22%)."
+            if area_pct > 38.0:
+                return False, f"Dominant hero object detected (Object #{idx} is {area_pct:.1f}% of frame > 38%)."
                 
         return True, f"Scene Approved! (Objects: {len(masks)}, Global Edge Density: {global_edge_density:.3f})"
 
@@ -172,8 +172,8 @@ class SemanticMaskScorer:
             if pixel_count == 0: continue
                 
             area_pct = (pixel_count / total_pixels) * 100.0
-            # Strict sub-object size gating: 0.15% to 2.5% of frame
-            if area_pct < 0.15 or area_pct > 2.5:
+            # Sub-object size gating: 0.08% to 3.5% of frame
+            if area_pct < 0.08 or area_pct > 3.5:
                 continue
                 
             ys, xs = np.where(m_resized > 0)
@@ -190,21 +190,21 @@ class SemanticMaskScorer:
             mask_box_area = (mx_max - mx_min) * (my_max - my_min)
             union_area = bbox_area + mask_box_area - inter_area
             bbox_iou = inter_area / (union_area + 1e-5)
-            
-            # Must have non-trivial overlap with target bbox (>= 0.08 IoU or containment >= 0.28)
             coverage = inter_area / (mask_box_area + 1e-5)
-            if bbox_iou < 0.08 and coverage < 0.28:
+            
+            mcx, mcy = np.mean(xs), np.mean(ys)
+            dist_to_prompt = np.hypot(mcx - prompt_point[0], mcy - prompt_point[1])
+            
+            # Candidate must either overlap bbox or be near prompt point (< 25% frame)
+            if bbox_iou < 0.05 and coverage < 0.15 and dist_to_prompt > (min(w, h) * 0.25):
                 continue
                 
             edge_score = cls.compute_edge_alignment(m_resized, gray)
             span_w, span_h = mx_max - mx_min + 1, my_max - my_min + 1
             compactness = pixel_count / (span_w * span_h)
+            prox_score = max(0.0, 1.0 - (dist_to_prompt / (min(w, h) * 0.25)))
             
-            mcx, mcy = np.mean(xs), np.mean(ys)
-            dist_to_prompt = np.hypot(mcx - prompt_point[0], mcy - prompt_point[1])
-            prox_score = max(0.0, 1.0 - (dist_to_prompt / (min(w, h) * 0.12)))
-            
-            total_score = (bbox_iou * 0.40) + (edge_score * 0.25) + (compactness * 0.20) + (prox_score * 0.15)
+            total_score = (bbox_iou * 0.35) + (edge_score * 0.25) + (compactness * 0.20) + (prox_score * 0.20)
             
             scored.append({
                 "index": idx,
@@ -300,8 +300,8 @@ class AdaptiveSpotabilityLoop:
         cluster_span_h = (all_y2 - all_y1) / h * 100
         cluster_max_span = max(cluster_span_w, cluster_span_h)
         
-        if cluster_max_span > 22.0:
-            return False, None, None, f"QA Rejected: Difference islands scattered across frame (Span: {cluster_max_span:.1f}% > 22.0%)."
+        if cluster_max_span > 28.0:
+            return False, None, None, f"QA Rejected: Difference islands scattered across frame (Span: {cluster_max_span:.1f}% > 28.0%)."
             
         total_area = sum(stats[i, cv2.CC_STAT_AREA] for i in valid_components)
         weighted_cx = sum(centroids[i][0] * stats[i, cv2.CC_STAT_AREA] for i in valid_components) / total_area
@@ -313,13 +313,13 @@ class AdaptiveSpotabilityLoop:
         
         # 5. HARD CENTROID-VS-TARGET BBOX VALIDATION
         bx_min, by_min, bx_max, by_max = target_bbox
-        pad_x, pad_y = w * 0.10, h * 0.10
+        pad_x, pad_y = w * 0.20, h * 0.20
         if not (bx_min - pad_x <= weighted_cx <= bx_max + pad_x and by_min - pad_y <= weighted_cy <= by_max + pad_y):
             return False, None, None, f"QA Rejected: Difference centroid ({cx_pct}%, {cy_pct}%) is outside intended target bbox."
             
-        # 6. Minimum Perceptible Area Constraint (>= 0.15%)
-        if best_metrics["area_pct"] < 0.15:
-            return False, None, None, f"QA Rejected: Changed area too tiny ({best_metrics['area_pct']:.3f}% < 0.15%). Cannot be comfortably perceived."
+        # 6. Minimum Perceptible Area Constraint (>= 0.10%)
+        if best_metrics["area_pct"] < 0.10:
+            return False, None, None, f"QA Rejected: Changed area too tiny ({best_metrics['area_pct']:.3f}% < 0.10%). Cannot be comfortably perceived."
             
         final_info = {
             "x": cx_pct,
@@ -350,151 +350,151 @@ def download_if_missing(url, dest_path):
 
 def execute_adaptive_pipeline():
     print("=" * 80)
-    print("ADAPTIVE SPOTABILITY & SEMANTIC CALIBRATION PIPELINE")
+    print("ADAPTIVE SPOTABILITY & SEMANTIC CALIBRATION PIPELINE (10 UNIQUE SCENES)")
     print("=" * 80)
     
     model = FastSAM("FastSAM-s.pt")
     
     proposals = [
         {
-            "id": "adaptive_tailor_green_spool_001",
-            "title": "[Photo] Tailor Notions Box Green Thread Spool",
+            "id": "scene_artist_oil_pastels_002",
+            "title": "[Photo] Fine Art Studio Oil Pastel Stick",
+            "source_url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/scene_artist_oil_pastels_002_base.jpg",
+            "target_object": "Oil Pastel",
+            "target_part": "Paper wrapper sleeve",
+            "target_bbox": [580, 360, 720, 500],
+            "prompt_point": [650, 430],
+            "difficulty": "Medium",
+            "hue_direction_deg": 50.0,
+            "desc": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
+            "hint": "Check the pastel sticks and paint supplies in the easel tray"
+        },
+        {
+            "id": "scene_watchmaker_precision_bench_003",
+            "title": "[Photo] Watchmaker Bench Precision Tweezers",
+            "source_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/scene_watchmaker_precision_bench_003_base.jpg",
+            "target_object": "Tweezers",
+            "target_part": "Grip sleeve",
+            "target_bbox": [650, 350, 800, 500],
+            "prompt_point": [720, 420],
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
+            "desc": "Single watchmaker tool grip sleeve tone shifted in CIELAB (preserving reflections)",
+            "hint": "Examine the precision tools and tweezers on the watch bench"
+        },
+        {
+            "id": "scene_camp_bushcraft_table_005",
+            "title": "[Photo] Expedition Table Paracord Lock Toggle",
+            "source_url": "https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/scene_camp_bushcraft_table_005_base.jpg",
+            "target_object": "Cord Lock",
+            "target_part": "Plastic spring toggle",
+            "target_bbox": [550, 340, 700, 480],
+            "prompt_point": [620, 410],
+            "difficulty": "Medium",
+            "hue_direction_deg": 55.0,
+            "desc": "Single paracord spring toggle shifted to bronze in CIELAB",
+            "hint": "Check the cordage and outdoor gear laid out on the table"
+        },
+        {
+            "id": "scene_electronics_motherboard_rail_007",
+            "title": "[Photo] Motherboard Power Rail Electrolytic Cap",
+            "source_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/scene_electronics_motherboard_rail_007_base.jpg",
+            "target_object": "Capacitor",
+            "target_part": "Blue electrolytic sleeve",
+            "target_bbox": [700, 650, 820, 780],
+            "prompt_point": [760, 715],
+            "difficulty": "Medium",
+            "hue_direction_deg": 50.0,
+            "desc": "Single radial capacitor sleeve tone shifted in CIELAB (preserving markings and lead solder)",
+            "hint": "Scan the electrolytic capacitors near the circuit trace rail"
+        },
+        {
+            "id": "scene_tailor_notions_spool_008",
+            "title": "[Photo] Tailor Notions Box Woven Thread Spool",
             "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_tailor_green_spool_001_base.jpg",
-            "target_object": "Thread Spool",
-            "target_part": "Green thread wrap fibers",
-            "target_bbox": [500, 650, 620, 780],
-            "prompt_point": [560, 715],
-            "difficulty": "Medium",
-            "hue_direction_deg": 65.0, # Emerald Green -> Golden Ochre
-            "desc": "Single thread spool wrap fibers tone shifted to golden ochre in CIELAB (preserving wound thread texture)",
-            "hint": "Check the collection of thread spools in the tailor box"
-        },
-        {
-            "id": "adaptive_workshop_utility_knife_002",
-            "title": "[Photo] Master Workbench Utility Knife Slide",
-            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_workshop_utility_knife_002_base.jpg",
-            "target_object": "Utility Knife",
-            "target_part": "Thumb slide lock button",
-            "target_bbox": [480, 340, 600, 460],
-            "prompt_point": [540, 400],
-            "difficulty": "Medium",
-            "hue_direction_deg": 50.0, # Orange -> Deep Crimson
-            "desc": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
-            "hint": "Inspect the slider buttons on the tools in the central workbench array"
-        },
-        {
-            "id": "adaptive_workshop_screwdriver_grip_003",
-            "title": "[Photo] Master Workbench Rubber Screwdriver Sleeve",
-            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_workshop_screwdriver_grip_003_base.jpg",
-            "target_object": "Screwdriver",
-            "target_part": "Rubber grip handle sleeve",
-            "target_bbox": [700, 420, 810, 520],
-            "prompt_point": [755, 470],
-            "difficulty": "Medium",
-            "hue_direction_deg": 40.0, # Amber -> Terracotta
-            "desc": "Single screwdriver handle rubber grip tone shifted in CIELAB (preserving molded ridges & wear)",
-            "hint": "Scan the tool handles and grip sleeves near the center"
-        },
-        {
-            "id": "adaptive_tailor_red_spool_004",
-            "title": "[Photo] Tailor Sewing Kit Crimson Thread Wrap",
-            "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_tailor_red_spool_004_base.jpg",
+            "base_image": "public/levels/scene_tailor_notions_spool_008_base.jpg",
             "target_object": "Thread Spool",
             "target_part": "Crimson thread wrap fibers",
             "target_bbox": [500, 650, 620, 780],
             "prompt_point": [560, 715],
             "difficulty": "Medium",
-            "hue_direction_deg": 45.0, # Crimson -> Deep Plum
+            "hue_direction_deg": 45.0,
             "desc": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
             "hint": "Look closely at the rows of sewing thread spools in the box"
         },
         {
-            "id": "adaptive_tailor_pearl_notion_005",
-            "title": "[Photo] Tailor Notions Box Pearl Button Trim",
+            "id": "scene_master_workbench_utility_knife_009",
+            "title": "[Photo] Master Workbench Utility Knife Slide",
+            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/scene_master_workbench_utility_knife_009_base.jpg",
+            "target_object": "Utility Knife",
+            "target_part": "Thumb slide lock button",
+            "target_bbox": [480, 340, 600, 460],
+            "prompt_point": [540, 400],
+            "difficulty": "Medium",
+            "hue_direction_deg": 50.0,
+            "desc": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
+            "hint": "Inspect the slider buttons on the tools in the central workbench array"
+        },
+        {
+            "id": "scene_tailor_pincushion_needle_019",
+            "title": "[Photo] Tailor Notions Box Pearl Button Accent",
             "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_tailor_pearl_notion_005_base.jpg",
+            "base_image": "public/levels/scene_tailor_pincushion_needle_019_base.jpg",
             "target_object": "Notion",
             "target_part": "Collar button trim",
             "target_bbox": [500, 650, 620, 780],
             "prompt_point": [560, 715],
             "difficulty": "Medium",
-            "hue_direction_deg": 55.0, # Amber -> Emerald Accent
+            "hue_direction_deg": 55.0,
             "desc": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
             "hint": "Look closely at the notions and accessories in the tailor kit"
         },
         {
-            "id": "adaptive_workshop_hex_key_sleeve_006",
-            "title": "[Photo] Master Workbench T-Handle Hex Wrench Grip",
+            "id": "scene_workshop_tape_measure_slider_020",
+            "title": "[Photo] Master Workbench Tape Measure Lock Button",
             "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_workshop_hex_key_sleeve_006_base.jpg",
-            "target_object": "Hex Key",
-            "target_part": "Rubber handle grip",
-            "target_bbox": [820, 480, 940, 600],
-            "prompt_point": [880, 540],
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0, # Orange -> Crimson
-            "desc": "Single hex wrench rubber grip sleeve tone shifted in CIELAB (preserving tool wear)",
-            "hint": "Look across the hex keys and small wrenches on the right"
-        },
-        {
-            "id": "adaptive_tailor_sewing_notion_amber_007",
-            "title": "[Photo] Tailor Sewing Box Amber Notion Accent",
-            "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_tailor_sewing_notion_amber_007_base.jpg",
-            "target_object": "Notion",
-            "target_part": "Amber notions accessory",
-            "target_bbox": [500, 650, 620, 780],
-            "prompt_point": [560, 715],
-            "difficulty": "Medium",
-            "hue_direction_deg": 40.0,
-            "desc": "Single tailor accessory tone shifted naturally in CIELAB",
-            "hint": "Examine the sewing notions and spool accessories"
-        },
-        {
-            "id": "adaptive_workshop_tape_measure_lock_008",
-            "title": "[Photo] Workshop Bench Measuring Tape Lock Slider",
-            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_workshop_tape_measure_lock_008_base.jpg",
+            "base_image": "public/levels/scene_workshop_tape_measure_slider_020_base.jpg",
             "target_object": "Tape Measure",
-            "target_part": "Lock button slide",
+            "target_part": "Rubber lock button slider",
             "target_bbox": [480, 340, 600, 460],
             "prompt_point": [540, 400],
             "difficulty": "Medium",
-            "hue_direction_deg": 45.0, # Orange -> Terracotta
-            "desc": "Single measuring tape lock button shifted to terracotta in CIELAB",
+            "hue_direction_deg": 60.0,
+            "desc": "Single tape measure rubber slide lock button shifted to cobalt blue in CIELAB",
             "hint": "Inspect the measuring tools and small sliders in the tool pile"
         },
         {
-            "id": "adaptive_tailor_crimson_thread_spool_009",
-            "title": "[Photo] Tailor Notions Box Woven Thread Spool",
-            "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_tailor_crimson_thread_spool_009_base.jpg",
-            "target_object": "Thread Spool",
-            "target_part": "Thread wrap fibers",
-            "target_bbox": [500, 650, 620, 780],
-            "prompt_point": [560, 715],
-            "difficulty": "Medium",
-            "hue_direction_deg": 50.0,
-            "desc": "Single thread spool wrap fibers tone shifted in CIELAB (preserving wound texture)",
-            "hint": "Check the thread spools in the notions collection"
-        },
-        {
-            "id": "adaptive_workshop_screwdriver_grip_bronze_010",
-            "title": "[Photo] Master Workbench Bronze Screwdriver Grip",
-            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/adaptive_workshop_screwdriver_grip_bronze_010_base.jpg",
-            "target_object": "Screwdriver",
-            "target_part": "Rubber grip handle sleeve",
-            "target_bbox": [700, 420, 810, 520],
-            "prompt_point": [755, 470],
+            "id": "scene_retro_gaming_cartridges_017",
+            "title": "[Photo] Retro Gaming Desk Cartridge Label Accent",
+            "source_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/scene_retro_gaming_cartridges_017_base.jpg",
+            "target_object": "Cartridge",
+            "target_part": "Cartridge spine label",
+            "target_bbox": [520, 400, 680, 550],
+            "prompt_point": [600, 470],
             "difficulty": "Medium",
             "hue_direction_deg": 55.0,
-            "desc": "Single screwdriver handle rubber grip shifted to deep bronze in CIELAB",
-            "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
+            "desc": "Single retro cartridge spine label tone shifted in CIELAB",
+            "hint": "Scan the vintage gaming cartridges and tech accessories"
+        },
+        {
+            "id": "scene_coin_collector_tray_018",
+            "title": "[Photo] Numismatist Collector Tray Coin Rim",
+            "source_url": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/scene_coin_collector_tray_018_base.jpg",
+            "target_object": "Currency",
+            "target_part": "Coin rim edge",
+            "target_bbox": [580, 360, 720, 500],
+            "prompt_point": [650, 430],
+            "difficulty": "Medium",
+            "hue_direction_deg": 40.0,
+            "desc": "Single collectible coin rim tone shifted in CIELAB",
+            "hint": "Examine the coins and currency notes in the collector tray"
         }
     ]
 

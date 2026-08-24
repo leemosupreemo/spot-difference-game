@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 73,
-    "dismissedCount": 11,
+    "approvedCount": 81,
+    "dismissedCount": 14,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -79,7 +79,15 @@
     "ai_macro_stained_glass_001",
     "hyper_synth_logic_board_002",
     "artisan_electronics_workbench_001",
-    "semantic_tailor_pincushion_needle_003"
+    "semantic_tailor_pincushion_needle_003",
+    "adaptive_tailor_green_spool_001",
+    "adaptive_workshop_utility_knife_002",
+    "adaptive_workshop_screwdriver_grip_003",
+    "adaptive_tailor_red_spool_004",
+    "adaptive_tailor_pearl_notion_005",
+    "adaptive_tailor_sewing_notion_amber_007",
+    "adaptive_workshop_tape_measure_lock_008",
+    "adaptive_tailor_crimson_thread_spool_009"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -93,7 +101,10 @@
     "semantic_gemstone_ruby_collar_002",
     "semantic_hardware_wire_insulation_001",
     "prod_toolpile_screwdriver_handle_001",
-    "semantic_workshop_tape_measure_button_003"
+    "semantic_workshop_tape_measure_button_003",
+    "adaptive_workshop_hex_key_sleeve_006",
+    "adaptive_workshop_screwdriver_grip_bronze_010",
+    "semantic_workshop_hex_wrench_handle_004"
   ],
   "approvedLevels": [
     {
@@ -2007,6 +2018,50 @@
     "prod_toolpile_screwdriver_handle_001": {
       "status": "dismissed",
       "updatedAt": "2026-08-24T21:28:20.008Z"
+    },
+    "adaptive_tailor_green_spool_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:38:15.344Z"
+    },
+    "adaptive_workshop_utility_knife_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:38:21.470Z"
+    },
+    "adaptive_workshop_screwdriver_grip_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:38:22.803Z"
+    },
+    "adaptive_tailor_red_spool_004": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:38:28.651Z"
+    },
+    "adaptive_tailor_pearl_notion_005": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:38:31.754Z"
+    },
+    "adaptive_workshop_hex_key_sleeve_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:38:37.919Z"
+    },
+    "adaptive_tailor_sewing_notion_amber_007": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:38:43.858Z"
+    },
+    "adaptive_workshop_tape_measure_lock_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:38:46.967Z"
+    },
+    "adaptive_tailor_crimson_thread_spool_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T21:38:49.457Z"
+    },
+    "adaptive_workshop_screwdriver_grip_bronze_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:38:53.361Z"
+    },
+    "semantic_workshop_hex_wrench_handle_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T21:38:55.515Z"
     }
   }
 }
