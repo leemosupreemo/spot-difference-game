@@ -1,5 +1,165 @@
 [
   {
+    "id": "visa_fryum_pack_006",
+    "title": "[Amazon Benchmark] Geometric Snack Fryum Grid #7",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/visa_fryum_pack_006_base.jpg",
+    "variantImage": "/levels/visa_fryum_pack_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66.5,
+        "y": 86,
+        "radius": 8,
+        "description": "Discrete physical object anomaly in collection array",
+        "hint": "Inspect the geometric spoke patterns on each piece"
+      }
+    ]
+  },
+  {
+    "id": "visa_fryum_pack_007",
+    "title": "[Amazon Benchmark] Geometric Snack Fryum Grid #8",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/visa_fryum_pack_007_base.jpg",
+    "variantImage": "/levels/visa_fryum_pack_007_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 83.1,
+        "y": 83.2,
+        "radius": 8,
+        "description": "Discrete physical object anomaly in collection array",
+        "hint": "Inspect the geometric spoke patterns on each piece"
+      }
+    ]
+  },
+  {
+    "id": "visa_capsules_pack_000",
+    "title": "[Amazon Benchmark] Pharmaceutical Capsule Pack #1",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/visa_capsules_pack_000_base.jpg",
+    "variantImage": "/levels/visa_capsules_pack_000_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 8.4,
+        "y": 76.5,
+        "radius": 5.9,
+        "description": "Discrete capsule shell modification in blister pack",
+        "hint": "Inspect each individual capsule pocket on the blister tray"
+      }
+    ]
+  },
+  {
+    "id": "visa_capsules_pack_004",
+    "title": "[Amazon Benchmark] Pharmaceutical Capsule Pack #5",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/visa_capsules_pack_004_base.jpg",
+    "variantImage": "/levels/visa_capsules_pack_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 75.8,
+        "y": 91.1,
+        "radius": 6.8,
+        "description": "Discrete capsule shell modification in blister pack",
+        "hint": "Inspect each individual capsule pocket on the blister tray"
+      }
+    ]
+  },
+  {
+    "id": "visa_capsules_pack_005",
+    "title": "[Amazon Benchmark] Pharmaceutical Capsule Pack #6",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/visa_capsules_pack_005_base.jpg",
+    "variantImage": "/levels/visa_capsules_pack_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25.2,
+        "y": 50.6,
+        "radius": 5.9,
+        "description": "Discrete capsule shell modification in blister pack",
+        "hint": "Inspect each individual capsule pocket on the blister tray"
+      }
+    ]
+  },
+  {
+    "id": "visa_capsules_pack_008",
+    "title": "[Amazon Benchmark] Pharmaceutical Capsule Pack #9",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/visa_capsules_pack_008_base.jpg",
+    "variantImage": "/levels/visa_capsules_pack_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.8,
+        "y": 91.3,
+        "radius": 6.5,
+        "description": "Discrete capsule shell modification in blister pack",
+        "hint": "Inspect each individual capsule pocket on the blister tray"
+      }
+    ]
+  },
+  {
+    "id": "visa_capsules_pack_009",
+    "title": "[Amazon Benchmark] Pharmaceutical Capsule Pack #10",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/visa_capsules_pack_009_base.jpg",
+    "variantImage": "/levels/visa_capsules_pack_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.1,
+        "y": 64,
+        "radius": 8,
+        "description": "Discrete capsule shell modification in blister pack",
+        "hint": "Inspect each individual capsule pocket on the blister tray"
+      }
+    ]
+  },
+  {
+    "id": "visa_capsules_pack_011",
+    "title": "[Amazon Benchmark] Pharmaceutical Capsule Pack #12",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/visa_capsules_pack_011_base.jpg",
+    "variantImage": "/levels/visa_capsules_pack_011_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 85.4,
+        "y": 95.4,
+        "radius": 7.1,
+        "description": "Discrete capsule shell modification in blister pack",
+        "hint": "Inspect each individual capsule pocket on the blister tray"
+      }
+    ]
+  },
+  {
     "id": "fresh_photo_leathercraft_001",
     "title": "Bespoke Leathercraft Saddle Stitch Tooling",
     "category": "Photography",
