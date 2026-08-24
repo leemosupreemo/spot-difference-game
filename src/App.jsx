@@ -253,24 +253,19 @@ export default function App() {
 
   useEffect(() => {
     if (debugMode && debugSourceMode === 'premade') {
-      const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
-      const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-      const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
-      if (candidateEntries.length > 0) {
-        const debugLevels = candidateEntries.map(createPhotoPairLevel);
+      const allActive = getAllPhotoPairEntries();
+      if (allActive.length > 0) {
+        const debugLevels = allActive.map(createPhotoPairLevel);
         setLevels(debugLevels);
-        setCurrentLevelId(debugLevels[0].id);
+        if (!currentLevelId || !debugLevels.some(l => l.id === currentLevelId)) {
+          setCurrentLevelId(debugLevels[0].id);
+        }
       }
     }
-  }, [debugMode, debugSourceMode, skipKeptLevels, curatedStatusMap]);
+  }, [debugMode, debugSourceMode]);
 
   const handleNextPair = async () => {
     sounds.playTap();
-
-    if (currentLevelId) {
-      debugHistoryStackRef.current.push(currentLevelId);
-      visitedDebugLevelIdsRef.current.add(currentLevelId);
-    }
 
     if (debugMode && debugSourceMode === 'procedural') {
       const procLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
@@ -280,24 +275,14 @@ export default function App() {
     }
 
     if (debugMode) {
-      const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
-      const unvisitedUnreviewed = unreviewed.filter(entry => !visitedDebugLevelIdsRef.current.has(entry.id));
-
-      const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-      const unvisitedFallback = fallbackPool.filter(entry => !visitedDebugLevelIdsRef.current.has(entry.id));
-
-      const candidateEntries = unvisitedUnreviewed.length > 0
-        ? unvisitedUnreviewed
-        : unreviewed.length > 0
-          ? unreviewed
-          : unvisitedFallback.length > 0
-            ? unvisitedFallback
-            : fallbackPool;
-
-      if (candidateEntries.length > 0) {
-        const nextBatch = candidateEntries.map(createPhotoPairLevel);
+      const allActive = getAllPhotoPairEntries();
+      if (allActive.length > 0) {
+        const currentIndex = allActive.findIndex(e => e.id === currentLevelId);
+        const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % allActive.length : 0;
+        const nextEntry = allActive[nextIndex];
+        const nextBatch = allActive.map(createPhotoPairLevel);
         setLevels(nextBatch);
-        startLevel(nextBatch[0].id);
+        startLevel(nextEntry.id);
         return;
       }
     }
@@ -313,14 +298,15 @@ export default function App() {
   const handlePrevPair = () => {
     sounds.playTap();
 
-    if (debugHistoryStackRef.current.length > 0) {
-      const prevId = debugHistoryStackRef.current.pop();
-      const allEntries = getAllPhotoPairEntries();
-      const prevEntry = allEntries.find(e => e.id === prevId);
-      if (prevEntry) {
-        const prevLevel = createPhotoPairLevel(prevEntry);
-        setLevels([prevLevel]);
-        startLevel(prevLevel.id);
+    if (debugMode) {
+      const allActive = getAllPhotoPairEntries();
+      if (allActive.length > 0) {
+        const currentIndex = allActive.findIndex(e => e.id === currentLevelId);
+        const prevIndex = currentIndex >= 0 ? (currentIndex - 1 + allActive.length) % allActive.length : 0;
+        const prevEntry = allActive[prevIndex];
+        const prevBatch = allActive.map(createPhotoPairLevel);
+        setLevels(prevBatch);
+        startLevel(prevEntry.id);
         return;
       }
     }
@@ -680,8 +666,8 @@ export default function App() {
               onToggleSourceMode={handleToggleDebugSourceMode}
               skipKeptLevels={skipKeptLevels}
               onToggleSkipKept={handleToggleSkipKept}
-              currentStageIndex={currentStageIndex}
-              totalStageImages={levels.length || 5}
+              currentStageIndex={getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex}
+              totalStageImages={debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)}
             />
           )}
 
