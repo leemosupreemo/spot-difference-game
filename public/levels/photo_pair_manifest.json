@@ -1,5 +1,205 @@
 [
   {
+    "id": "fresh_photo_printmaker_001",
+    "title": "Master Printmaker Linocut Inking Slab",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_printmaker_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_printmaker_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.9,
+        "y": 47.9,
+        "radius": 5.7,
+        "description": "Inking brayer roller on glass slab",
+        "hint": "Look at the tools resting on the inking plate"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_luthier_001",
+    "title": "Artisan Cello Soundboard & Wood Carving",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_luthier_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_luthier_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.7,
+        "y": 61.4,
+        "radius": 8.5,
+        "description": "Violin wood carving clamp on bench",
+        "hint": "Inspect the spruce wood surface and clamps"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_ceramic_001",
+    "title": "Ceramic Pottery Studio Stoneware Trimming",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_ceramic_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_ceramic_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.8,
+        "y": 53.7,
+        "radius": 4.2,
+        "description": "Wire ribbon trimming tool near pottery wheel",
+        "hint": "Look beside the ceramic vessel"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_typewriter_001",
+    "title": "Vintage Mechanical Typewriter Typebars",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_typewriter_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_typewriter_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.3,
+        "y": 45.4,
+        "radius": 4.6,
+        "description": "Typebar segment lever arm",
+        "hint": "Look in the curved typebar basket"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_leathercraft_001",
+    "title": "Bespoke Leathercraft Saddle Stitch Tooling",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_leathercraft_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_leathercraft_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.5,
+        "y": 53.6,
+        "radius": 7.8,
+        "description": "Pricking iron punch on cutting mat",
+        "hint": "Examine the leatherworking tools on the mat"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_botanist_001",
+    "title": "Botanical Herbarium Specimen Folio",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_botanist_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_botanist_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.8,
+        "y": 47.7,
+        "radius": 5.1,
+        "description": "Specimen forceps tweezers on paper",
+        "hint": "Look near the pressed botanical leaves"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_watchmaker_001",
+    "title": "Swiss Horology Watch Movement Balance Cock",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_watchmaker_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_watchmaker_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.8,
+        "y": 47.8,
+        "radius": 5,
+        "description": "Microscopic gear pinion in watch tray",
+        "hint": "Inspect the watchmaker movement gears"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_coffee_barista_001",
+    "title": "Artisanal Espresso Bar Tamper & Portafilter",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_coffee_barista_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_coffee_barista_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46,
+        "y": 54.8,
+        "radius": 5.7,
+        "description": "Precision dosing funnel collar",
+        "hint": "Look on the espresso preparation mat"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_gemologist_001",
+    "title": "Gemologist Mineral Crystal Specimen Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_gemologist_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_gemologist_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.3,
+        "y": 49.8,
+        "radius": 5.1,
+        "description": "Jeweler loupe brass ring on specimen tray",
+        "hint": "Look among the raw crystal specimens"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_stained_glass_001",
+    "title": "Stained Glass Cathedral Lead Solder Bench",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_stained_glass_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_stained_glass_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.8,
+        "y": 47.4,
+        "radius": 5.3,
+        "description": "Lead came glass scoring wheel",
+        "hint": "Look at the stained glass assembly tools"
+      }
+    ]
+  },
+  {
     "id": "method1_photo_leather_awl_002",
     "title": "[Method 1: Workshop Inpainting] Leathercraft Workbench Awl",
     "category": "Photography",
