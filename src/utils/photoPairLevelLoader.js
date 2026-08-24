@@ -125,10 +125,12 @@ export function selectPhotoPairEntries(entries, {
   const otherCategorized = [];
 
   for (const entry of effectiveEntries) {
+    const statusVal = getLevelStatus(statusMap[entry.id]);
+    if (statusVal?.status === 'dismissed') continue;
+
     const packMatches = !packId || entry.packId === packId;
     if (!packMatches) continue;
 
-    const statusVal = getLevelStatus(statusMap[entry.id]);
     const isCategorized = Boolean(statusVal?.status || statusVal?.packId || statusVal?.category || statusVal?.difficulty || statusVal?.suggestedDifficulty);
 
     if (!isCategorized) {

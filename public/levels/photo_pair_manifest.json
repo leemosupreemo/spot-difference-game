@@ -60,66 +60,6 @@
     ]
   },
   {
-    "id": "method3_authored_craft_car_001",
-    "title": "[Method 3: Authored Physical] Craft Mat Miniature Toy Car",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method3_authored_craft_car_001_base.jpg",
-    "variantImage": "/levels/method3_authored_craft_car_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 51,
-        "y": 48,
-        "radius": 5.5,
-        "description": "Miniature toy car on cutting mat",
-        "hint": "Look in the center of the cutting mat grid"
-      }
-    ]
-  },
-  {
-    "id": "method3_authored_rug_pick_001",
-    "title": "[Method 3: Authored Physical] Ornate Rug Guitar Pick",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method3_authored_rug_pick_001_base.jpg",
-    "variantImage": "/levels/method3_authored_rug_pick_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 52.5,
-        "y": 49.5,
-        "radius": 4.5,
-        "description": "Tortoiseshell guitar pick on woven rug",
-        "hint": "Examine the central medallion of the patterned rug"
-      }
-    ]
-  },
-  {
-    "id": "method3_authored_camo_patch_001",
-    "title": "[Method 3: Authored Physical] Camouflage Field Tactical Patch",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method3_authored_camo_patch_001_base.jpg",
-    "variantImage": "/levels/method3_authored_camo_patch_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 44,
-        "y": 56,
-        "radius": 5.2,
-        "description": "Insignia patch on camouflage fabric",
-        "hint": "Look for the embroidered symbol on the pattern"
-      }
-    ]
-  },
-  {
     "id": "ai_macro_watch_escapement_001",
     "title": "Horology Watch Escapement & Ruby Jewels",
     "category": "Real Photo",
