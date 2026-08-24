@@ -1,8 +1,8 @@
 {
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
-    "totalCurated": 70,
-    "approvedCount": 70,
+    "totalCurated": 72,
+    "approvedCount": 72,
     "dismissedCount": 0,
     "wrongDifficultyCount": 0
   },
@@ -76,7 +76,9 @@
     "ai_macro_spice_bazaar_001",
     "ai_macro_sewing_notions_001",
     "ai_macro_watch_escapement_001",
-    "ai_macro_stained_glass_001"
+    "ai_macro_stained_glass_001",
+    "hyper_synth_logic_board_002",
+    "artisan_electronics_workbench_001"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [],
@@ -1936,6 +1938,14 @@
     "ai_macro_stained_glass_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "hyper_synth_logic_board_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:58:57.785Z"
+    },
+    "artisan_electronics_workbench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:59:04.048Z"
     }
   }
 }

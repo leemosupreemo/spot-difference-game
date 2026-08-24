@@ -131,6 +131,15 @@ export default function App() {
     const updated = setLevelCuratedStatus(levelId, status, meta);
     setCuratedStatusMap({ ...updated });
 
+    // Sync in real time to server and disk
+    try {
+      fetch('/api/curation/record-decision', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ levelId, status, meta })
+      }).catch(() => {});
+    } catch (_) {}
+
     if (nextLevelIdToLoad) {
       startLevel(nextLevelIdToLoad);
     }
