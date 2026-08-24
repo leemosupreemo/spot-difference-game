@@ -1,10 +1,10 @@
 {
-  "exportedAt": "2026-08-24T03:45:05.010Z",
+  "exportedAt": "2026-08-24T03:49:18.406Z",
   "summary": {
-    "totalCurated": 245,
-    "approvedCount": 35,
-    "dismissedCount": 165,
-    "wrongDifficultyCount": 42
+    "totalCurated": 77,
+    "approvedCount": 77,
+    "dismissedCount": 0,
+    "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
     "easy_kitchen_001",
@@ -41,9 +41,7 @@
     "procedural_find_the_sniper_1787277668630",
     "procedural_find_the_sniper_1787277678123",
     "procedural_find_the_sniper_1787277685524",
-    "procedural_find_the_sniper_1787277701681"
-  ],
-  "wrongDifficultyLevelIds": [
+    "procedural_find_the_sniper_1787277701681",
     "easy_craft_001",
     "medium_screw_tray_001",
     "medium_tile_piece_001",
@@ -87,171 +85,859 @@
     "procedural_find_the_sniper_1787277694864",
     "procedural_find_the_sniper_1787277710345"
   ],
-  "dismissedLevelIds": [
-    "photo_florist_table_001",
-    "mass_photo_043",
-    "mass_photo_044",
-    "mass_photo_045",
-    "mass_photo_046",
-    "mass_photo_047",
-    "mass_photo_048",
-    "mass_photo_049",
-    "mass_photo_050",
-    "mass_photo_051",
-    "mass_photo_052",
-    "mass_photo_053",
-    "mass_photo_054",
-    "mass_photo_055",
-    "mass_photo_056",
-    "mass_photo_057",
-    "mass_photo_058",
-    "mass_photo_059",
-    "mass_photo_060",
-    "mass_photo_061",
-    "mass_photo_063",
-    "mass_photo_065",
-    "mass_photo_066",
-    "mass_photo_067",
-    "mass_photo_068",
-    "mass_photo_069",
-    "mass_photo_070",
-    "mass_photo_071",
-    "mass_photo_072",
-    "mass_photo_073",
-    "mass_photo_074",
-    "mass_photo_075",
-    "mass_photo_076",
-    "mass_photo_077",
-    "mass_photo_078",
-    "mass_photo_079",
-    "mass_photo_080",
-    "mass_photo_081",
-    "mass_photo_082",
-    "mass_photo_083",
-    "mass_photo_084",
-    "mass_photo_085",
-    "mass_photo_086",
-    "mass_photo_087",
-    "mass_photo_088",
-    "mass_photo_089",
-    "mass_photo_090",
-    "mass_photo_091",
-    "mass_photo_092",
-    "mass_photo_093",
-    "mass_photo_095",
-    "mass_photo_097",
-    "mass_photo_098",
-    "mass_photo_099",
-    "mass_photo_100",
-    "ai_leather_bench_001",
-    "ai_camera_repair_001",
-    "ai_bookbinding_tools_001",
-    "ai_electronics_workbench_001",
-    "photo_watch_gears_002",
-    "photo_camera_optics_002",
-    "photo_sewing_notions_002",
-    "photo_woodcraft_clamp_002",
-    "photo_angler_tackle_002",
-    "ai_chef_spice_bench_001",
-    "photo_botanical_press_002",
-    "hard_authored_001",
-    "hard_authored_002",
-    "hard_authored_003",
-    "hard_authored_004",
-    "hard_authored_005",
-    "hard_authored_006",
-    "hard_authored_007",
-    "hard_authored_008",
-    "hard_authored_009",
-    "hard_authored_010",
-    "hard_authored_011",
-    "hard_authored_012",
-    "hard_authored_013",
-    "hard_authored_014",
-    "hard_authored_015",
-    "hard_authored_016",
-    "hard_authored_017",
-    "hard_authored_018",
-    "hard_authored_019",
-    "hard_authored_020",
-    "hard_authored_021",
-    "hard_authored_022",
-    "hard_authored_023",
-    "hard_authored_024",
-    "hard_authored_025",
-    "hard_authored_026",
-    "hard_authored_027",
-    "hard_authored_028",
-    "hard_authored_029",
-    "hard_authored_030",
-    "procedural_find_the_sniper_1787100470684",
-    "stock_photo_spice_bazaar_001",
-    "stock_photo_parisian_bookstore_001",
-    "stock_photo_tokyo_ramen_001",
-    "stock_photo_alpine_wildflowers_001",
-    "stock_photo_ceramic_studio_001",
-    "stock_photo_venice_canal_001",
-    "stock_photo_coral_reef_001",
-    "stock_photo_watchmaker_desk_001",
-    "stock_photo_glasshouse_flora_001",
-    "stock_photo_autumn_maple_garden_001",
-    "fresh_photo_espresso_bar_001",
-    "fresh_photo_botanical_cactus_001",
-    "fresh_photo_vintage_leathercraft_001",
-    "fresh_photo_artisan_bakery_001",
-    "fresh_photo_vintage_camera_001",
-    "fresh_photo_tea_ceremony_001",
-    "fresh_photo_alpine_peaks_001",
-    "fresh_photo_antique_astronomy_001",
-    "complex_photo_001",
-    "complex_photo_002",
-    "complex_photo_003",
-    "complex_photo_004",
-    "complex_photo_005",
-    "complex_photo_006",
-    "complex_photo_007",
-    "complex_photo_008",
-    "complex_photo_009",
-    "complex_photo_010",
-    "ai_macro_leathercraft_001",
-    "ai_macro_watchmaker_002",
-    "ai_macro_locksmith_001",
-    "ai_macro_calligraphy_001",
-    "ai_macro_cobbler_tools_001",
-    "ai_macro_jewelry_smith_001",
-    "ai_macro_fishing_fly_001",
-    "ai_macro_pottery_tools_001",
-    "ai_macro_bakers_prep_001",
-    "ai_macro_mineral_study_001",
-    "ai_macro_typewriter_repair_001",
-    "ai_macro_barista_coffee_001",
-    "ai_macro_washi_paper_001",
-    "ai_macro_fountain_pen_001",
-    "ai_macro_astronomy_brass_001",
-    "ai_macro_luthier_violin_001",
-    "ai_macro_miniature_painting_001",
-    "ai_macro_espresso_grouphead_001",
-    "ai_macro_mechanical_keyboard_001",
-    "ai_macro_gemologist_loupe_001",
-    "ai_macro_sushi_chef_prep_001",
-    "ai_macro_sailing_rigging_001",
-    "ai_macro_terrarium_moss_001",
-    "ai_macro_chronograph_gears_001",
-    "ai_macro_leather_pricking_001",
-    "ai_macro_bookbinder_marbled_001",
-    "ai_macro_oscilloscope_circuit_001",
-    "ai_macro_astronomy_sextant_001",
-    "ai_macro_cobbler_stitch_001",
-    "ai_macro_typewriter_keys_001",
-    "ai_macro_goldsmith_pave_001",
-    "ai_macro_keyboard_artisan_001",
-    "ai_macro_fountain_pen_craft_001",
-    "ai_macro_luthier_violin_craft_001",
-    "ai_macro_miniature_painter_001",
-    "ai_macro_espresso_barista_001",
-    "ai_macro_astronomy_sextant_craft_001",
-    "ai_macro_letterpress_lead_001",
-    "ai_macro_botanist_herbarium_specimen_001",
-    "ai_macro_machinist_micrometer_001"
-  ]
+  "wrongDifficultyLevelIds": [],
+  "dismissedLevelIds": [],
+  "approvedLevels": [
+    {
+      "id": "easy_kitchen_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.405Z"
+      }
+    },
+    {
+      "id": "medium_nursery_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "medium_workbench_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "hard_forest_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "easy_rug_pick_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_workbench_hardware_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_potting_table_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_watchmaker_bench_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_electronics_bench_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_antique_desk_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_woodworking_bench_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_coffee_station_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_repair_drawer_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_bicycle_repair_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_woodworking_table_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "mass_abstract_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_watch_repair_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_botanist_herbarium_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787100456449",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_watchmaker_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_botanist_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_machinist_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_electronics_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_woodcarver_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_chef_knife_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_cartography_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_camera_optics_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_tea_ceremony_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_vintage_radio_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_letterpress_typesetting_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787277659602",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787277668630",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787277678123",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787277685524",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787277701681",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "easy_craft_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "medium_screw_tray_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "medium_tile_piece_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "hard_wire_clip_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_bakers_table_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_art_table_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_camping_table_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_board_game_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_spice_table_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_fishing_tackle_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_camera_gear_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_pottery_table_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_artist_supply_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_camping_gear_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_sewing_table_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_map_restoration_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_garden_potting_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_game_night_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "abstract_token_field_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "abstract_mechanical_maze_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "mass_abstract_002",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "mass_photo_102",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_bakery_counter_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_greenhouse_potting_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_watchmaker_bench_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_artist_easel_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_coffee_bar_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1786998835444",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_antique_study_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_cartography_desk_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_locksmith_bench_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_repair_hardware_002",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "photo_strategy_pieces_002",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787102156032",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787102175345",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787103751623",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_spice_bazaar_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_sewing_notions_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_watch_escapement_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "ai_macro_stained_glass_001",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787277694864",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    },
+    {
+      "id": "procedural_find_the_sniper_1787277710345",
+      "curationMeta": {
+        "status": "approved",
+        "updatedAt": "2026-08-24T03:49:18.406Z"
+      }
+    }
+  ],
+  "wrongDifficultyLevels": [],
+  "dismissedLevels": [],
+  "rawStatusMap": {
+    "easy_kitchen_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.405Z"
+    },
+    "medium_nursery_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "medium_workbench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "hard_forest_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "easy_rug_pick_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_workbench_hardware_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_potting_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_watchmaker_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_electronics_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_antique_desk_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_woodworking_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_coffee_station_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_repair_drawer_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_bicycle_repair_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_woodworking_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "mass_abstract_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_watch_repair_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_botanist_herbarium_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787100456449": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_watchmaker_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_botanist_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_machinist_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_electronics_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_woodcarver_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_chef_knife_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_cartography_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_camera_optics_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_tea_ceremony_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_vintage_radio_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_letterpress_typesetting_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787277659602": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787277668630": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787277678123": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787277685524": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787277701681": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "easy_craft_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "medium_screw_tray_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "medium_tile_piece_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "hard_wire_clip_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_bakers_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_art_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_camping_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_board_game_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_spice_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_fishing_tackle_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_camera_gear_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_pottery_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_artist_supply_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_camping_gear_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_sewing_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_map_restoration_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_garden_potting_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_game_night_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "abstract_token_field_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "abstract_mechanical_maze_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "mass_abstract_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "mass_photo_102": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_bakery_counter_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_greenhouse_potting_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_watchmaker_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_artist_easel_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_coffee_bar_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1786998835444": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_antique_study_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_cartography_desk_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_locksmith_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_repair_hardware_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "photo_strategy_pieces_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787102156032": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787102175345": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787103751623": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_spice_bazaar_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_sewing_notions_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_watch_escapement_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "ai_macro_stained_glass_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787277694864": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    },
+    "procedural_find_the_sniper_1787277710345": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T03:49:18.406Z"
+    }
+  }
 }
