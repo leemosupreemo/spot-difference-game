@@ -1,5 +1,65 @@
 [
   {
+    "id": "sam_toolpile_wrench_handle_001",
+    "title": "[SAM Segmented] Master Tool Pile Screwdriver Grip",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/sam_toolpile_wrench_handle_001_base.jpg",
+    "variantImage": "/levels/sam_toolpile_wrench_handle_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.5,
+        "y": 42.6,
+        "radius": 7.5,
+        "description": "Single screwdriver handle segmented via FastSAM and color-shifted to deep cobalt blue",
+        "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
+      }
+    ]
+  },
+  {
+    "id": "sam_sewing_thread_spool_001",
+    "title": "[SAM Segmented] Tailor Notions Box Spool Thread",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/sam_sewing_thread_spool_001_base.jpg",
+    "variantImage": "/levels/sam_sewing_thread_spool_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.4,
+        "y": 44.5,
+        "radius": 4.6,
+        "description": "Single wooden thread spool segmented via FastSAM and shifted to emerald green",
+        "hint": "Check the colored thread spools and notions near the scissors"
+      }
+    ]
+  },
+  {
+    "id": "sam_artist_paint_tube_001",
+    "title": "[SAM Segmented] Artist Oil Paint Tube Cap & Label",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/sam_artist_paint_tube_001_base.jpg",
+    "variantImage": "/levels/sam_artist_paint_tube_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.1,
+        "y": 52.2,
+        "radius": 7.5,
+        "description": "Single oil paint tube label and cap segmented via FastSAM and shifted to cobalt blue",
+        "hint": "Scan the caps and labels on the oil paint tubes on the table"
+      }
+    ]
+  },
+  {
     "id": "real_toolpile_screwdriver_handle_001",
     "title": "[Real Photo] Master Tool Pile Screwdriver Handle",
     "category": "Photography",
