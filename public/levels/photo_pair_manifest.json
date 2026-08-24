@@ -1,5 +1,605 @@
 [
   {
+    "id": "fresh30_ceramic_vase_027",
+    "title": "Handcrafted Ceramic Vases & Terracotta",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_ceramic_vase_027_base.jpg",
+    "variantImage": "/levels/fresh30_ceramic_vase_027_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42.2,
+        "y": 47,
+        "radius": 7.5,
+        "description": "Terracotta ceramic vase rim notch",
+        "hint": "Check the glazed rims and ceramic vases"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_antique_books_028",
+    "title": "Archival Leather-Bound Books & Study",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_antique_books_028_base.jpg",
+    "variantImage": "/levels/fresh30_antique_books_028_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.7,
+        "y": 50.4,
+        "radius": 4.2,
+        "description": "Gilded leather book spine embossing",
+        "hint": "Inspect the gilded book spines and study desk"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_geology_crystal_029",
+    "title": "Mineral Specimen & Geological Quartz",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_geology_crystal_029_base.jpg",
+    "variantImage": "/levels/fresh30_geology_crystal_029_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.7,
+        "y": 53.8,
+        "radius": 4.2,
+        "description": "Raw quartz crystal point facet",
+        "hint": "Scan the natural mineral crystals"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_stationery_table_030",
+    "title": "Writer Studio Antique Desk & Papers",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_stationery_table_030_base.jpg",
+    "variantImage": "/levels/fresh30_stationery_table_030_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.6,
+        "y": 58.2,
+        "radius": 4.2,
+        "description": "Wax seal brass stamper emblem",
+        "hint": "Look at the desk accessories and letters"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_microscope_001",
+    "title": "Vintage Optical Laboratory Microscope",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_microscope_001_base.jpg",
+    "variantImage": "/levels/fresh30_microscope_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 37.9,
+        "y": 40,
+        "radius": 7.5,
+        "description": "Brass stage specimen clip",
+        "hint": "Check the specimen stage below the objective lens"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_compass_001",
+    "title": "Navigational Brass Pocket Compass",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_compass_001_base.jpg",
+    "variantImage": "/levels/fresh30_compass_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.2,
+        "y": 49.1,
+        "radius": 7.5,
+        "description": "Cardinal direction needle pivot pointer",
+        "hint": "Inspect the central compass rose and needle pivot"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_palette_001",
+    "title": "Impressionist Oil Paint Palette",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_palette_001_base.jpg",
+    "variantImage": "/levels/fresh30_palette_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.7,
+        "y": 62.7,
+        "radius": 7.5,
+        "description": "Ultramarine blue oil paint dollop",
+        "hint": "Look at the paint pigment dabs around the palette rim"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_chronometer_001",
+    "title": "Chronometer Sub-Dial & Movement",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_chronometer_001_base.jpg",
+    "variantImage": "/levels/fresh30_chronometer_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.9,
+        "y": 48,
+        "radius": 4.2,
+        "description": "Sub-dial small seconds hand index",
+        "hint": "Scan the sub-dial numerals and precision hands"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_sewing_thimble_001",
+    "title": "Tailor Notions & Brass Thimble",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_sewing_thimble_001_base.jpg",
+    "variantImage": "/levels/fresh30_sewing_thimble_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 41,
+        "y": 58.8,
+        "radius": 4.2,
+        "description": "Mother-of-pearl sewing button in tray",
+        "hint": "Look closely at the buttons and notions in the wooden tray"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_leather_punch_001",
+    "title": "Saddlery Tooling Leather Punch",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_leather_punch_001_base.jpg",
+    "variantImage": "/levels/fresh30_leather_punch_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.7,
+        "y": 44.8,
+        "radius": 4.2,
+        "description": "Steel rotary hole punch cylinder collar",
+        "hint": "Inspect the metal tool heads and collars on the bench"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_jewelry_gemstone_001",
+    "title": "Goldsmith Bench & Faceted Gems",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_jewelry_gemstone_001_base.jpg",
+    "variantImage": "/levels/fresh30_jewelry_gemstone_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.9,
+        "y": 56,
+        "radius": 4.2,
+        "description": "Faceted sapphire accent stone prong",
+        "hint": "Look at the individual gemstones in the velvet tray"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_inkwell_001",
+    "title": "Calligraphy Writing Desk & Inkwell",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_inkwell_001_base.jpg",
+    "variantImage": "/levels/fresh30_inkwell_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.9,
+        "y": 42,
+        "radius": 4.2,
+        "description": "Glass ink bottle brass stopper collar",
+        "hint": "Check the glass inkwell bottles and pen rests"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_carpenter_plane_001",
+    "title": "Master Woodworker Hand Plane",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_carpenter_plane_001_base.jpg",
+    "variantImage": "/levels/fresh30_carpenter_plane_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.9,
+        "y": 52.8,
+        "radius": 4.2,
+        "description": "Brass depth adjustment thumbwheel",
+        "hint": "Scan the brass adjustment screws on the hand plane"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_botanical_fern_001",
+    "title": "Archival Pressed Fern Specimen",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_botanical_fern_001_base.jpg",
+    "variantImage": "/levels/fresh30_botanical_fern_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.5,
+        "y": 63.6,
+        "radius": 7.5,
+        "description": "Botanical folio identification wax stamp",
+        "hint": "Look at the specimen labels and seals"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_camera_bellows_001",
+    "title": "Vintage Medium Format Folding Camera",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_camera_bellows_001_base.jpg",
+    "variantImage": "/levels/fresh30_camera_bellows_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 57.9,
+        "y": 49.9,
+        "radius": 4.2,
+        "description": "Brass lens shutter release lever",
+        "hint": "Inspect the levers and knobs around the front lens standard"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_espresso_tamper_001",
+    "title": "Specialty Coffee Roaster Barista Station",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_espresso_tamper_001_base.jpg",
+    "variantImage": "/levels/fresh30_espresso_tamper_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 39.9,
+        "y": 60.9,
+        "radius": 4.2,
+        "description": "Espresso distribution needle tool handle",
+        "hint": "Check the coffee preparation tools near the grinder"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_pottery_rib_001",
+    "title": "Ceramic Studio Trimming Tools",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_pottery_rib_001_base.jpg",
+    "variantImage": "/levels/fresh30_pottery_rib_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.9,
+        "y": 46.9,
+        "radius": 4.2,
+        "description": "Wooden modeling rib thumb notch",
+        "hint": "Look at the wooden pottery tools beside the wheel"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_violin_pegs_001",
+    "title": "Luthier Bench & Violin Pegbox",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_violin_pegs_001_base.jpg",
+    "variantImage": "/levels/fresh30_violin_pegs_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.5,
+        "y": 44.2,
+        "radius": 7.5,
+        "description": "Ebony tuning peg mother-of-pearl inlay",
+        "hint": "Inspect the wooden pegs inside the pegbox"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_locksmith_pins_001",
+    "title": "Antique Key Assortment & Lock Cylinder",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_locksmith_pins_001_base.jpg",
+    "variantImage": "/levels/fresh30_locksmith_pins_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42.9,
+        "y": 54.9,
+        "radius": 4.2,
+        "description": "Skeleton key ward notch tooth",
+        "hint": "Examine the bit teeth on the antique keys"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_spice_mortar_001",
+    "title": "Stone Mortar & Exotic Spices",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_spice_mortar_001_base.jpg",
+    "variantImage": "/levels/fresh30_spice_mortar_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62.1,
+        "y": 50.4,
+        "radius": 7.5,
+        "description": "Whole star anise seed pod fragment",
+        "hint": "Look closely at the spices arranged around the mortar"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_baker_flour_001",
+    "title": "Artisan Bakery Sourdough Workstation",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_baker_flour_001_base.jpg",
+    "variantImage": "/levels/fresh30_baker_flour_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.9,
+        "y": 51.9,
+        "radius": 4.2,
+        "description": "Flour scoring pattern leaf blade cut",
+        "hint": "Check the decorative scoring marks on the loaf"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_printmaking_brayer_001",
+    "title": "Linocut Printmaking Ink Slab",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_printmaking_brayer_001_base.jpg",
+    "variantImage": "/levels/fresh30_printmaking_brayer_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 38.9,
+        "y": 62.9,
+        "radius": 4.2,
+        "description": "Carving gouge blade brass ferrule",
+        "hint": "Inspect the tool handles and ferrules on the ink table"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_mineral_matrix_001",
+    "title": "Geological Mineral & Quartz Cluster",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_mineral_matrix_001_base.jpg",
+    "variantImage": "/levels/fresh30_mineral_matrix_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.8,
+        "y": 48.9,
+        "radius": 4.2,
+        "description": "Amethyst crystal point pyramid facet",
+        "hint": "Scan the faceted crystal clusters and matrix points"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_circuit_solder_001",
+    "title": "Precision Electronics PCB Motherboard",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_circuit_solder_001_base.jpg",
+    "variantImage": "/levels/fresh30_circuit_solder_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59.8,
+        "y": 45.9,
+        "radius": 4.2,
+        "description": "Surface-mount ceramic resistor package",
+        "hint": "Scan the miniature components on the circuit trace"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_tea_whisk_001",
+    "title": "Matcha Tea Ceremony Chasen Bamboo Whisk",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_tea_whisk_001_base.jpg",
+    "variantImage": "/levels/fresh30_tea_whisk_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42,
+        "y": 57,
+        "radius": 4.2,
+        "description": "Ceremonial bamboo whisk thread binding knot",
+        "hint": "Inspect the thread binding wrapped around the whisk core"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_tailor_shears_001",
+    "title": "Bespoke Tailor Shears & Measuring Tape",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_tailor_shears_001_base.jpg",
+    "variantImage": "/levels/fresh30_tailor_shears_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.9,
+        "y": 42.9,
+        "radius": 4.2,
+        "description": "Solid brass pivot nut on heavy fabric shears",
+        "hint": "Look at the screw and pivot bolt on the metal shears"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_cartography_globe_001",
+    "title": "Historical Celestial Cartography Folio",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_cartography_globe_001_base.jpg",
+    "variantImage": "/levels/fresh30_cartography_globe_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55.9,
+        "y": 52.9,
+        "radius": 4.2,
+        "description": "Brass horizon meridian pointer tick",
+        "hint": "Inspect the brass mounting arc and scale markings"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_shoe_cobbler_001",
+    "title": "Artisan Cobbler Wooden Last & Brogues",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_shoe_cobbler_001_base.jpg",
+    "variantImage": "/levels/fresh30_shoe_cobbler_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.8,
+        "y": 50.8,
+        "radius": 4.2,
+        "description": "Brass eyelet rivet on leather wingtip",
+        "hint": "Look at the eyelet lace holes on the shoe quarter"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_sculptor_clay_001",
+    "title": "Sculptor Atelier Clay Modeling Tools",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_sculptor_clay_001_base.jpg",
+    "variantImage": "/levels/fresh30_sculptor_clay_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.8,
+        "y": 48.1,
+        "radius": 7.5,
+        "description": "Wire clay loop tool brass binding wrap",
+        "hint": "Check the wire loop tools and wooden handles"
+      }
+    ]
+  },
+  {
+    "id": "fresh30_tackle_flyfishing_001",
+    "title": "Fly Tying Vise & Hand-Tied Feathers",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh30_tackle_flyfishing_001_base.jpg",
+    "variantImage": "/levels/fresh30_tackle_flyfishing_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31.7,
+        "y": 53,
+        "radius": 7.5,
+        "description": "Peacock herl feather barb on streamer fly",
+        "hint": "Scan the delicate feathers wrapped on the hook shank"
+      }
+    ]
+  },
+  {
     "id": "fresh_photo_leathercraft_001",
     "title": "Bespoke Leathercraft Saddle Stitch Tooling",
     "category": "Photography",
