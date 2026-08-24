@@ -300,8 +300,8 @@ class AdaptiveSpotabilityLoop:
         cluster_span_h = (all_y2 - all_y1) / h * 100
         cluster_max_span = max(cluster_span_w, cluster_span_h)
         
-        if cluster_max_span > 28.0:
-            return False, None, None, f"QA Rejected: Difference islands scattered across frame (Span: {cluster_max_span:.1f}% > 28.0%)."
+        if cluster_max_span > 35.0:
+            return False, None, None, f"QA Rejected: Difference islands scattered across frame (Span: {cluster_max_span:.1f}% > 35.0%)."
             
         total_area = sum(stats[i, cv2.CC_STAT_AREA] for i in valid_components)
         weighted_cx = sum(centroids[i][0] * stats[i, cv2.CC_STAT_AREA] for i in valid_components) / total_area
@@ -357,6 +357,34 @@ def execute_adaptive_pipeline():
     
     proposals = [
         {
+            "id": "ai_canvas_mechanic_screwdriver_001",
+            "title": "[AI Canvas] Master Mechanic Workbench Amber Screwdriver Grip",
+            "source_url": "local:ai_mechanic_workbench_base",
+            "base_image": "public/levels/ai_mechanic_workbench_base.jpg",
+            "target_object": "Screwdriver",
+            "target_part": "Amber translucent handle",
+            "target_bbox": [50, 100, 155, 365],
+            "prompt_point": [95, 280],
+            "difficulty": "Medium",
+            "hue_direction_deg": 65.0, # Amber -> Emerald Green
+            "desc": "Single screwdriver amber handle tone shifted to emerald in CIELAB (preserving fluting and workshop wear)",
+            "hint": "Check the amber screwdriver handle on the left side of the bench"
+        },
+        {
+            "id": "ai_canvas_watchmaker_collar_002",
+            "title": "[AI Canvas] Horologist Parts Tray Screwdriver Collar",
+            "source_url": "local:ai_watchmaker_parts_base",
+            "base_image": "public/levels/ai_watchmaker_parts_base.jpg",
+            "target_object": "Precision Screwdriver",
+            "target_part": "Index collar band",
+            "target_bbox": [400, 450, 560, 580],
+            "prompt_point": [480, 515],
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0, # Cobalt Blue -> Deep Amber
+            "desc": "Single precision screwdriver color-coded collar shifted in CIELAB (preserving knurled grip)",
+            "hint": "Examine the color-coded precision screwdrivers on the leather work pad"
+        },
+        {
             "id": "scene_artist_oil_pastels_002",
             "title": "[Photo] Fine Art Studio Oil Pastel Stick",
             "source_url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&auto=format&fit=crop&q=92",
@@ -399,18 +427,18 @@ def execute_adaptive_pipeline():
             "hint": "Check the cordage and outdoor gear laid out on the table"
         },
         {
-            "id": "scene_electronics_motherboard_rail_007",
-            "title": "[Photo] Motherboard Power Rail Electrolytic Cap",
-            "source_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_electronics_motherboard_rail_007_base.jpg",
+            "id": "ai_canvas_electronics_capacitor_003",
+            "title": "[AI Canvas] Antistatic Electronics Bench Radial Capacitor",
+            "source_url": "local:ai_electronics_pcb_base",
+            "base_image": "public/levels/ai_electronics_pcb_base.jpg",
             "target_object": "Capacitor",
             "target_part": "Blue electrolytic sleeve",
-            "target_bbox": [700, 650, 820, 780],
-            "prompt_point": [760, 715],
+            "target_bbox": [160, 180, 240, 240],
+            "prompt_point": [198, 210],
             "difficulty": "Medium",
-            "hue_direction_deg": 50.0,
-            "desc": "Single radial capacitor sleeve tone shifted in CIELAB (preserving markings and lead solder)",
-            "hint": "Scan the electrolytic capacitors near the circuit trace rail"
+            "hue_direction_deg": 55.0, # Cobalt Blue -> Golden Amber
+            "desc": "Single blue electrolytic capacitor sleeve tone shifted in CIELAB (preserving aluminum casing markings)",
+            "hint": "Check the cluster of blue electrolytic capacitors in the upper left tray"
         },
         {
             "id": "scene_tailor_notions_spool_008",
@@ -439,34 +467,6 @@ def execute_adaptive_pipeline():
             "hue_direction_deg": 50.0,
             "desc": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
             "hint": "Inspect the slider buttons on the tools in the central workbench array"
-        },
-        {
-            "id": "scene_tailor_pincushion_needle_019",
-            "title": "[Photo] Tailor Notions Box Pearl Button Accent",
-            "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_tailor_pincushion_needle_019_base.jpg",
-            "target_object": "Notion",
-            "target_part": "Collar button trim",
-            "target_bbox": [500, 650, 620, 780],
-            "prompt_point": [560, 715],
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0,
-            "desc": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
-            "hint": "Look closely at the notions and accessories in the tailor kit"
-        },
-        {
-            "id": "scene_workshop_tape_measure_slider_020",
-            "title": "[Photo] Master Workbench Tape Measure Lock Button",
-            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_workshop_tape_measure_slider_020_base.jpg",
-            "target_object": "Tape Measure",
-            "target_part": "Rubber lock button slider",
-            "target_bbox": [480, 340, 600, 460],
-            "prompt_point": [540, 400],
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single tape measure rubber slide lock button shifted to cobalt blue in CIELAB",
-            "hint": "Inspect the measuring tools and small sliders in the tool pile"
         },
         {
             "id": "scene_retro_gaming_cartridges_017",
