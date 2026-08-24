@@ -20,66 +20,6 @@
     ]
   },
   {
-    "id": "method1_photo_machinist_001",
-    "title": "[Method 1: Workshop Inpainting] Precision Machinist Hardware",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_machinist_001_base.jpg",
-    "variantImage": "/levels/method1_photo_machinist_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 48,
-        "y": 62.5,
-        "radius": 5.2,
-        "description": "Steel gauge block on the machinist mat",
-        "hint": "Look at the metal components beneath the caliper"
-      }
-    ]
-  },
-  {
-    "id": "method1_photo_botanist_001",
-    "title": "[Method 1: Workshop Inpainting] Botanist Herbarium Folio",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_botanist_001_base.jpg",
-    "variantImage": "/levels/method1_photo_botanist_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 37.5,
-        "y": 46,
-        "radius": 5,
-        "description": "Botanical specimen tweezers",
-        "hint": "Look near the left edge of the botanical specimen sheet"
-      }
-    ]
-  },
-  {
-    "id": "method1_photo_woodcarver_001",
-    "title": "[Method 1: Workshop Inpainting] Woodcarver Chisel Rack",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_woodcarver_001_base.jpg",
-    "variantImage": "/levels/method1_photo_woodcarver_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 53,
-        "y": 48.5,
-        "radius": 5,
-        "description": "Carving gouge blade on the wooden bench",
-        "hint": "Look at the chisel handles and blades on the workbench"
-      }
-    ]
-  },
-  {
     "id": "method1_photo_electronics_001",
     "title": "[Method 1: Workshop Inpainting] Circuit Repair Workbench",
     "category": "Photography",
@@ -100,66 +40,6 @@
     ]
   },
   {
-    "id": "method2_macro_espresso_001",
-    "title": "[Method 2: Macro Diffusion] Espresso Extraction Portafilter",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method2_macro_espresso_001_base.jpg",
-    "variantImage": "/levels/method2_macro_espresso_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 51.5,
-        "y": 48.2,
-        "radius": 5,
-        "description": "Brass locking wing on the portafilter collar",
-        "hint": "Look closely at the metal collar on the espresso grouphead"
-      }
-    ]
-  },
-  {
-    "id": "method2_macro_fountain_pen_001",
-    "title": "[Method 2: Macro Diffusion] Vintage Fountain Pen 14k Gold Nib",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method2_macro_fountain_pen_001_base.jpg",
-    "variantImage": "/levels/method2_macro_fountain_pen_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 52,
-        "y": 45,
-        "radius": 4.8,
-        "description": "Gold breather section on the fountain pen nib",
-        "hint": "Look at the breather hole in the center of the fountain pen nib"
-      }
-    ]
-  },
-  {
-    "id": "method2_macro_luthier_violin_001",
-    "title": "[Method 2: Macro Diffusion] Luthier Violin Purfling Inlay",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method2_macro_luthier_violin_001_base.jpg",
-    "variantImage": "/levels/method2_macro_luthier_violin_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 54,
-        "y": 52,
-        "radius": 5,
-        "description": "Chisel brass ferrule collar",
-        "hint": "Look at the metal collar on the wood carving chisel"
-      }
-    ]
-  },
-  {
     "id": "method2_macro_miniature_001",
     "title": "[Method 2: Macro Diffusion] Miniature Painting Wet Palette",
     "category": "Photography",
@@ -176,66 +56,6 @@
         "radius": 4.8,
         "description": "Acrylic paint droplet on the wet palette",
         "hint": "Notice the pigment bead on the wet palette surface"
-      }
-    ]
-  },
-  {
-    "id": "method2_macro_sextant_001",
-    "title": "[Method 2: Macro Diffusion] Antique Marine Sextant Scale",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method2_macro_sextant_001_base.jpg",
-    "variantImage": "/levels/method2_macro_sextant_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 47.5,
-        "y": 49,
-        "radius": 4.6,
-        "description": "Micrometer drum vernier scale",
-        "hint": "Look at the vernier thumbscrew dial in the center"
-      }
-    ]
-  },
-  {
-    "id": "method3_authored_seed_tray_001",
-    "title": "[Method 3: Authored Physical] Seedling Tray Label Tag",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method3_authored_seed_tray_001_base.jpg",
-    "variantImage": "/levels/method3_authored_seed_tray_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 58,
-        "y": 42,
-        "radius": 4.8,
-        "description": "Plant marker tag in seedling tray",
-        "hint": "Look in the soil cells of the seedling tray"
-      }
-    ]
-  },
-  {
-    "id": "method3_authored_gravel_key_001",
-    "title": "[Method 3: Authored Physical] River Pebble Antique Key",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method3_authored_gravel_key_001_base.jpg",
-    "variantImage": "/levels/method3_authored_gravel_key_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 46.5,
-        "y": 54,
-        "radius": 5,
-        "description": "Brass skeleton key amongst gravel",
-        "hint": "Search for metal amongst the river pebbles"
       }
     ]
   },
