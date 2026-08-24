@@ -1,5 +1,105 @@
 [
   {
+    "id": "layered_horology_gears_001",
+    "title": "[Layered Graph] Horologist 60-Piece Gear & Jewel Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/layered_horology_gears_001_base.jpg",
+    "variantImage": "/levels/layered_horology_gears_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.9,
+        "y": 29.4,
+        "radius": 6.5,
+        "description": "Structured layered removal of hex_nut in high-density scene",
+        "hint": "Scan the dense collection near coordinates (52.9%, 29.4%)"
+      }
+    ]
+  },
+  {
+    "id": "layered_micro_electronics_001",
+    "title": "[Layered Graph] Robotics 60-Chip Logic PCB Assembly",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/layered_micro_electronics_001_base.jpg",
+    "variantImage": "/levels/layered_micro_electronics_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.3,
+        "y": 62.1,
+        "radius": 4.5,
+        "description": "Structured layered removal of ic_chip in high-density scene",
+        "hint": "Scan the dense collection near coordinates (53.3%, 62.1%)"
+      }
+    ]
+  },
+  {
+    "id": "layered_machinist_fasteners_001",
+    "title": "[Layered Graph] Machinist 60-Hardware Fastener Matrix",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/layered_machinist_fasteners_001_base.jpg",
+    "variantImage": "/levels/layered_machinist_fasteners_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42,
+        "y": 36.7,
+        "radius": 6.8,
+        "description": "Structured layered removal of hex_nut in high-density scene",
+        "hint": "Scan the dense collection near coordinates (42%, 36.7%)"
+      }
+    ]
+  },
+  {
+    "id": "layered_vintage_stationery_001",
+    "title": "[Layered Graph] Calligrapher 60-Item Brass Stationery Array",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/layered_vintage_stationery_001_base.jpg",
+    "variantImage": "/levels/layered_vintage_stationery_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 7.4,
+        "y": 39.3,
+        "radius": 4.9,
+        "description": "Structured layered removal of gear in high-density scene",
+        "hint": "Scan the dense collection near coordinates (7.4%, 39.3%)"
+      }
+    ]
+  },
+  {
+    "id": "layered_gemstone_facets_001",
+    "title": "[Layered Graph] Lapidary 60-Faceted Jewel Sorting Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/layered_gemstone_facets_001_base.jpg",
+    "variantImage": "/levels/layered_gemstone_facets_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 17,
+        "y": 76.1,
+        "radius": 4.6,
+        "description": "Structured layered removal of jewel in high-density scene",
+        "hint": "Scan the dense collection near coordinates (17%, 76.1%)"
+      }
+    ]
+  },
+  {
     "id": "hyper_server_logic_board_001",
     "title": "[Ultra-Complex] High-Density Server Motherboard & Chips",
     "category": "Photography",
