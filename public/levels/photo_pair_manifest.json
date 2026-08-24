@@ -11,10 +11,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 46.9,
-        "y": 46.5,
-        "radius": 7.5,
-        "description": "Single tool handle color shifted from amber-orange to deep ocean blue (preserving all scratches & texture)",
+        "x": 48.7,
+        "y": 45.3,
+        "radius": 6.5,
+        "description": "Single rubber tool grip shifted from amber to cobalt blue (preserving 100% molded ridges & wear)",
         "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
       }
     ]
@@ -31,10 +31,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.2,
-        "y": 46,
-        "radius": 4.6,
-        "description": "Single thread spool wrap shifted from gold-yellow to emerald green",
+        "x": 50,
+        "y": 44.7,
+        "radius": 6.5,
+        "description": "Single wooden spool thread fibers shifted from gold to emerald green (preserving thread grain & shadow)",
         "hint": "Check the colored thread spools and notions near the scissors"
       }
     ]
@@ -51,9 +51,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54.2,
-        "y": 62,
-        "radius": 7.5,
+        "x": 52.9,
+        "y": 62.9,
+        "radius": 6.5,
         "description": "Single oil paint tube label & cap shifted from vermilion red to cobalt blue",
         "hint": "Scan the caps and labels on the oil paint tubes on the table"
       }
@@ -61,7 +61,7 @@
   },
   {
     "id": "real_botanical_spice_assortment_001",
-    "title": "[Real Photo] Spice Bazaar Pod Hue Shift",
+    "title": "[Real Photo] Spice Bazaar Star Anise Pod",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -71,17 +71,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 47.9,
-        "y": 48.2,
-        "radius": 4.6,
-        "description": "Single dried star seed pod shifted in tone within the linen array",
+        "x": 44.4,
+        "y": 45.2,
+        "radius": 4.2,
+        "description": "Single dried botanical seed pod tone shifted naturally within the linen array",
         "hint": "Examine the individual dried pods and seeds in the flat lay"
       }
     ]
   },
   {
     "id": "real_electronics_wire_insulation_001",
-    "title": "[Real Photo] Electronics Repair Jumper Wire",
+    "title": "[Real Photo] Electronics Repair Component Case",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -91,10 +91,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 47.1,
-        "y": 45.9,
-        "radius": 4.5,
-        "description": "Single component capacitor casing shifted from turquoise to ruby red",
+        "x": 46.4,
+        "y": 46.2,
+        "radius": 5.6,
+        "description": "Single ceramic capacitor package shifted from turquoise to ruby red",
         "hint": "Scan the rows of capacitors and components on the circuit board"
       }
     ]
