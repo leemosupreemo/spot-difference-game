@@ -1,5 +1,205 @@
 [
   {
+    "id": "adaptive_tailor_green_spool_001",
+    "title": "[Photo] Tailor Notions Box Green Thread Spool",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_tailor_green_spool_001_base.jpg",
+    "variantImage": "/levels/adaptive_tailor_green_spool_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.0,
+        "y": 71.2,
+        "radius": 7.1,
+        "description": "Single thread spool wrap fibers tone shifted to golden ochre in CIELAB (preserving wound thread texture)",
+        "hint": "Check the collection of thread spools in the tailor box"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_workshop_utility_knife_002",
+    "title": "[Photo] Master Workbench Utility Knife Slide",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_workshop_utility_knife_002_base.jpg",
+    "variantImage": "/levels/adaptive_workshop_utility_knife_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32.4,
+        "y": 39.6,
+        "radius": 4.9,
+        "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
+        "hint": "Inspect the slider buttons on the tools in the central workbench array"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_workshop_screwdriver_grip_003",
+    "title": "[Photo] Master Workbench Rubber Screwdriver Sleeve",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_workshop_screwdriver_grip_003_base.jpg",
+    "variantImage": "/levels/adaptive_workshop_screwdriver_grip_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.1,
+        "y": 41.4,
+        "radius": 7.5,
+        "description": "Single screwdriver handle rubber grip tone shifted in CIELAB (preserving molded ridges & wear)",
+        "hint": "Scan the tool handles and grip sleeves near the center"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_tailor_red_spool_004",
+    "title": "[Photo] Tailor Sewing Kit Crimson Thread Wrap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_tailor_red_spool_004_base.jpg",
+    "variantImage": "/levels/adaptive_tailor_red_spool_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.0,
+        "y": 71.2,
+        "radius": 7.1,
+        "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
+        "hint": "Look closely at the rows of sewing thread spools in the box"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_tailor_pearl_notion_005",
+    "title": "[Photo] Tailor Notions Box Pearl Button Trim",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_tailor_pearl_notion_005_base.jpg",
+    "variantImage": "/levels/adaptive_tailor_pearl_notion_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.0,
+        "y": 71.2,
+        "radius": 7.1,
+        "description": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
+        "hint": "Look closely at the notions and accessories in the tailor kit"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_workshop_hex_key_sleeve_006",
+    "title": "[Photo] Master Workbench T-Handle Hex Wrench Grip",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_workshop_hex_key_sleeve_006_base.jpg",
+    "variantImage": "/levels/adaptive_workshop_hex_key_sleeve_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.3,
+        "y": 42.0,
+        "radius": 7.5,
+        "description": "Single hex wrench rubber grip sleeve tone shifted in CIELAB (preserving tool wear)",
+        "hint": "Look across the hex keys and small wrenches on the right"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_tailor_sewing_notion_amber_007",
+    "title": "[Photo] Tailor Sewing Box Amber Notion Accent",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_tailor_sewing_notion_amber_007_base.jpg",
+    "variantImage": "/levels/adaptive_tailor_sewing_notion_amber_007_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.0,
+        "y": 71.2,
+        "radius": 7.1,
+        "description": "Single tailor accessory tone shifted naturally in CIELAB",
+        "hint": "Examine the sewing notions and spool accessories"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_workshop_tape_measure_lock_008",
+    "title": "[Photo] Workshop Bench Measuring Tape Lock Slider",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_workshop_tape_measure_lock_008_base.jpg",
+    "variantImage": "/levels/adaptive_workshop_tape_measure_lock_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32.4,
+        "y": 39.6,
+        "radius": 4.9,
+        "description": "Single measuring tape lock button shifted to terracotta in CIELAB",
+        "hint": "Inspect the measuring tools and small sliders in the tool pile"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_tailor_crimson_thread_spool_009",
+    "title": "[Photo] Tailor Notions Box Woven Thread Spool",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_tailor_crimson_thread_spool_009_base.jpg",
+    "variantImage": "/levels/adaptive_tailor_crimson_thread_spool_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.0,
+        "y": 71.2,
+        "radius": 7.1,
+        "description": "Single thread spool wrap fibers tone shifted in CIELAB (preserving wound texture)",
+        "hint": "Check the thread spools in the notions collection"
+      }
+    ]
+  },
+  {
+    "id": "adaptive_workshop_screwdriver_grip_bronze_010",
+    "title": "[Photo] Master Workbench Bronze Screwdriver Grip",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/adaptive_workshop_screwdriver_grip_bronze_010_base.jpg",
+    "variantImage": "/levels/adaptive_workshop_screwdriver_grip_bronze_010_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.3,
+        "y": 41.8,
+        "radius": 7.5,
+        "description": "Single screwdriver handle rubber grip shifted to deep bronze in CIELAB",
+        "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
+      }
+    ]
+  },
+  {
     "id": "semantic_workshop_screwdriver_grip_001",
     "title": "[Photo] Master Workbench Screwdriver Grip Recolor",
     "category": "Photography",
