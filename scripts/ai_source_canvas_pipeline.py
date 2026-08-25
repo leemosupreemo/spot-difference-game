@@ -245,8 +245,8 @@ class EditabilityScorer:
             span_w = (np.max(xs) - np.min(xs)) / w
             span_h = (np.max(ys) - np.min(ys)) / h
             
-            # If a mask covers > 35% of the frame in a scene with > 20 objects, it is the background tabletop/surface
-            is_background_canvas = (area_pct > 35.0 and object_count > 20)
+            # If a mask covers > 25% of the frame in a scene with > 20 objects, it is the background tabletop/surface
+            is_background_canvas = (area_pct > 25.0 and object_count > 20)
             
             if not is_background_canvas:
                 if area_pct > largest_foreground_area_pct:

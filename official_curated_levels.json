@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 87,
-    "dismissedCount": 22,
+    "approvedCount": 92,
+    "dismissedCount": 25,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -93,7 +93,12 @@
     "scene_retro_gaming_cartridges_017",
     "scene_electronics_motherboard_rail_007",
     "scene_tailor_pincushion_needle_019",
-    "scene_workshop_tape_measure_slider_020"
+    "scene_workshop_tape_measure_slider_020",
+    "goldilocks_ai_watchmaker_parts_002",
+    "goldilocks_photo_artist_oil_pastels_004",
+    "goldilocks_photo_camp_bushcraft_table_005",
+    "goldilocks_photo_tailor_notions_spool_006",
+    "goldilocks_photo_retro_gaming_cartridges_008"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -118,7 +123,10 @@
     "scene_camp_bushcraft_table_005",
     "ai_canvas_electronics_capacitor_003",
     "scene_coin_collector_tray_018",
-    "newbase_watchmaker_micro_tweezers_004"
+    "newbase_watchmaker_micro_tweezers_004",
+    "goldilocks_ai_electronics_cap_001",
+    "goldilocks_ai_mechanic_workbench_003",
+    "goldilocks_photo_coin_collector_tray_009"
   ],
   "approvedLevels": [
     {
@@ -2132,6 +2140,38 @@
     "newbase_watchmaker_micro_tweezers_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-24T23:50:24.150Z"
+    },
+    "goldilocks_ai_electronics_cap_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T00:19:07.905Z"
+    },
+    "goldilocks_ai_watchmaker_parts_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:19:14.035Z"
+    },
+    "goldilocks_ai_mechanic_workbench_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T00:19:35.745Z"
+    },
+    "goldilocks_photo_artist_oil_pastels_004": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:19:52.368Z"
+    },
+    "goldilocks_photo_camp_bushcraft_table_005": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:19:59.627Z"
+    },
+    "goldilocks_photo_tailor_notions_spool_006": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:20:21.806Z"
+    },
+    "goldilocks_photo_retro_gaming_cartridges_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:20:39.666Z"
+    },
+    "goldilocks_photo_coin_collector_tray_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T00:20:43.002Z"
     }
   }
 }

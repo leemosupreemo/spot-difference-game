@@ -1,5 +1,205 @@
 [
   {
+    "id": "goldilocks_ai_sewing_notions_001",
+    "title": "[AI Canvas] Tailor Notions Box Woven Thread Spool",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_sewing_notions_001_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_sewing_notions_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 35.2,
+        "y": 37.3,
+        "radius": 4.4,
+        "description": "Single wooden thread spool cotton wrap shifted in CIELAB (preserving wound thread fibers)",
+        "hint": "Check the colorful thread spools in the compartmentalized tray"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_gardener_potting_002",
+    "title": "[AI Canvas] Greenhouse Potting Bench Plant Marker",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_gardener_potting_002_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_gardener_potting_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 63.0,
+        "y": 66.4,
+        "radius": 7.5,
+        "description": "Single colorful garden plant marker tag tone shifted in CIELAB",
+        "hint": "Examine the plant marker tags and twine balls on the potting bench"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_artist_palette_003",
+    "title": "[AI Canvas] Fine Art Studio Oil Paint Tube Cap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_artist_palette_003_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_artist_palette_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 28.0,
+        "y": 70.0,
+        "radius": 4.2,
+        "description": "Single artist oil paint tube cap tone shifted in CIELAB (preserving studio patina)",
+        "hint": "Check the row of oil paint tubes and pastel sticks on the palette"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_retro_gaming_004",
+    "title": "[AI Canvas] Retro Gaming Desk Cartridge Shell",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_retro_gaming_004_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_retro_gaming_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.0,
+        "y": 82.1,
+        "radius": 4.3,
+        "description": "Single vintage game cartridge shell tone shifted in CIELAB",
+        "hint": "Scan the retro game cartridges and memory cards on the desk"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_leathercraft_005",
+    "title": "[AI Canvas] Leather Artisan Bench Waxed Thread Spool",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_leathercraft_005_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_leathercraft_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 81.5,
+        "y": 22.8,
+        "radius": 4.7,
+        "description": "Single waxed linen thread spool shifted in CIELAB (preserving thread twist)",
+        "hint": "Inspect the collection of colored waxed thread spools"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_miniature_painter_006",
+    "title": "[AI Canvas] Miniature Painter Desk Paint Dropper Cap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_miniature_painter_006_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_miniature_painter_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 86.1,
+        "y": 32.4,
+        "radius": 4.3,
+        "description": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
+        "hint": "Examine the rows of acrylic paint dropper bottles"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_expedition_bushcraft_007",
+    "title": "[AI Canvas] Expedition Gear Table Anodized Carabiner",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_expedition_bushcraft_007_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_expedition_bushcraft_007_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42.9,
+        "y": 89.2,
+        "radius": 4.2,
+        "description": "Single anodized aluminum locking carabiner tone shifted in CIELAB",
+        "hint": "Check the carabiners and paracord bundles on the table"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_woodworking_bench_008",
+    "title": "[AI Canvas] Woodworking Bench Carpenter Pencil",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_woodworking_bench_008_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_woodworking_bench_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 64.9,
+        "y": 12.6,
+        "radius": 7.5,
+        "description": "Single wooden carpenter marking pencil tone shifted in CIELAB",
+        "hint": "Look closely at the colored carpenter marking pencils"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_electronics_cap_009",
+    "title": "[AI Canvas] Electronics Antistatic Bench Radial Capacitor",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_electronics_cap_009_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_electronics_cap_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 18.4,
+        "y": 33.6,
+        "radius": 5.4,
+        "description": "Single blue electrolytic capacitor sleeve shifted in CIELAB",
+        "hint": "Check the blue capacitors on the antistatic bench"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_watchmaker_parts_010",
+    "title": "[AI Canvas] Horologist Parts Tray Precision Screwdriver Collar",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_watchmaker_parts_010_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_watchmaker_parts_010_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59.7,
+        "y": 2.9,
+        "radius": 4.3,
+        "description": "Single precision screwdriver color collar shifted in CIELAB",
+        "hint": "Examine the color-coded precision screwdrivers on the work pad"
+      }
+    ]
+  },
+  {
     "id": "goldilocks_ai_electronics_cap_001",
     "title": "[AI Canvas] Electronics Antistatic Bench Radial Capacitor",
     "category": "Photography",

@@ -34,17 +34,31 @@ class SceneAffordanceFilter:
             return False, f"Low scene complexity (Edge density {global_edge_density:.3f} < 0.018). Background too uniform."
         
         # 2. Object instance count (must be a cluttered composition)
-        if len(masks) < 14:
-            return False, f"Too few objects ({len(masks)} < 14). Lacks necessary visual clutter."
+        object_count = len(masks)
+        if object_count < 14:
+            return False, f"Too few objects ({object_count} < 14). Lacks necessary visual clutter."
         
-        # 3. Dominant hero object check (reject if foreground hero object > 38% of frame)
+        # 3. Hero Object Suppression (Exclude background tabletop / cutting mat)
+        largest_foreground_pct = 0.0
+        largest_fg_idx = -1
+        
         for idx, m in enumerate(masks):
-            mask_area = np.sum(m > 0)
-            area_pct = (mask_area / total_pixels) * 100.0
-            if area_pct > 38.0:
-                return False, f"Dominant hero object detected (Object #{idx} is {area_pct:.1f}% of frame > 38%)."
+            mask_resized = cv2.resize(m.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
+            pcount = np.sum(mask_resized > 0)
+            area_pct = (pcount / total_pixels) * 100.0
+            
+            # If a mask covers > 25% of the frame in a scene with > 25 objects, it is the background tabletop/mat
+            if area_pct > 25.0 and object_count > 25:
+                continue
                 
-        return True, f"Scene Approved! (Objects: {len(masks)}, Global Edge Density: {global_edge_density:.3f})"
+            if area_pct > largest_foreground_pct:
+                largest_foreground_pct = area_pct
+                largest_fg_idx = idx
+                
+        if largest_foreground_pct > 26.0:
+            return False, f"Dominant hero object detected (Object #{largest_fg_idx} is {largest_foreground_pct:.1f}% of frame > 26%)."
+            
+        return True, f"Scene Approved! (Objects: {object_count}, Global Edge Density: {global_edge_density:.3f}, Largest Foreground: {largest_foreground_pct:.1f}%)"
 
 # ==============================================================================
 # 2. LOCAL CLUTTER ESTIMATOR & PERCEPTUAL CIELAB COLOR ENGINE
@@ -362,104 +376,104 @@ def execute_adaptive_pipeline():
     
     proposals = [
         {
-            "id": "goldilocks_ai_electronics_cap_001",
+            "id": "goldilocks_ai_sewing_notions_001",
+            "title": "[AI Canvas] Tailor Notions Box Woven Thread Spool",
+            "source_url": "local:ai_sewing_notions_base",
+            "base_image": "public/levels/ai_sewing_notions_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 50.0,
+            "desc": "Single wooden thread spool cotton wrap shifted in CIELAB (preserving wound thread fibers)",
+            "hint": "Check the colorful thread spools in the compartmentalized tray"
+        },
+        {
+            "id": "goldilocks_ai_gardener_potting_002",
+            "title": "[AI Canvas] Greenhouse Potting Bench Plant Marker",
+            "source_url": "local:ai_gardener_potting_base",
+            "base_image": "public/levels/ai_gardener_potting_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 55.0,
+            "desc": "Single colorful garden plant marker tag tone shifted in CIELAB",
+            "hint": "Examine the plant marker tags and twine balls on the potting bench"
+        },
+        {
+            "id": "goldilocks_ai_artist_palette_003",
+            "title": "[AI Canvas] Fine Art Studio Oil Paint Tube Cap",
+            "source_url": "local:ai_artist_palette_base",
+            "base_image": "public/levels/ai_artist_palette_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
+            "desc": "Single artist oil paint tube cap tone shifted in CIELAB (preserving studio patina)",
+            "hint": "Check the row of oil paint tubes and pastel sticks on the palette"
+        },
+        {
+            "id": "goldilocks_ai_retro_gaming_004",
+            "title": "[AI Canvas] Retro Gaming Desk Cartridge Shell",
+            "source_url": "local:ai_retro_gaming_base",
+            "base_image": "public/levels/ai_retro_gaming_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 55.0,
+            "desc": "Single vintage game cartridge shell tone shifted in CIELAB",
+            "hint": "Scan the retro game cartridges and memory cards on the desk"
+        },
+        {
+            "id": "goldilocks_ai_leathercraft_005",
+            "title": "[AI Canvas] Leather Artisan Bench Waxed Thread Spool",
+            "source_url": "local:ai_leathercraft_base",
+            "base_image": "public/levels/ai_leathercraft_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 45.0,
+            "desc": "Single waxed linen thread spool shifted in CIELAB (preserving thread twist)",
+            "hint": "Inspect the collection of colored waxed thread spools"
+        },
+        {
+            "id": "goldilocks_ai_miniature_painter_006",
+            "title": "[AI Canvas] Miniature Painter Desk Paint Dropper Cap",
+            "source_url": "local:ai_miniature_painter_base",
+            "base_image": "public/levels/ai_miniature_painter_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
+            "desc": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
+            "hint": "Examine the rows of acrylic paint dropper bottles"
+        },
+        {
+            "id": "goldilocks_ai_expedition_bushcraft_007",
+            "title": "[AI Canvas] Expedition Gear Table Anodized Carabiner",
+            "source_url": "local:ai_expedition_bushcraft_base",
+            "base_image": "public/levels/ai_expedition_bushcraft_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 50.0,
+            "desc": "Single anodized aluminum locking carabiner tone shifted in CIELAB",
+            "hint": "Check the carabiners and paracord bundles on the table"
+        },
+        {
+            "id": "goldilocks_ai_woodworking_bench_008",
+            "title": "[AI Canvas] Woodworking Bench Carpenter Pencil",
+            "source_url": "local:ai_woodworking_bench_base",
+            "base_image": "public/levels/ai_woodworking_bench_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
+            "desc": "Single wooden carpenter marking pencil tone shifted in CIELAB",
+            "hint": "Look closely at the colored carpenter marking pencils"
+        },
+        {
+            "id": "goldilocks_ai_electronics_cap_009",
             "title": "[AI Canvas] Electronics Antistatic Bench Radial Capacitor",
             "source_url": "local:ai_electronics_pcb_base",
             "base_image": "public/levels/ai_electronics_pcb_base.jpg",
             "difficulty": "Medium",
-            "hue_direction_deg": 55.0, # Cobalt Blue -> Golden Amber
-            "desc": "Single blue electrolytic capacitor sleeve shifted to golden amber in CIELAB (preserving aluminum casing markings)",
-            "hint": "Check the cluster of blue electrolytic capacitors on the antistatic bench"
+            "hue_direction_deg": 55.0,
+            "desc": "Single blue electrolytic capacitor sleeve shifted in CIELAB",
+            "hint": "Check the blue capacitors on the antistatic bench"
         },
         {
-            "id": "goldilocks_ai_watchmaker_parts_002",
+            "id": "goldilocks_ai_watchmaker_parts_010",
             "title": "[AI Canvas] Horologist Parts Tray Precision Screwdriver Collar",
             "source_url": "local:ai_watchmaker_parts_base",
             "base_image": "public/levels/ai_watchmaker_parts_base.jpg",
             "difficulty": "Medium",
-            "hue_direction_deg": 60.0, # Cobalt Blue -> Deep Amber
-            "desc": "Single precision screwdriver color collar shifted in CIELAB (preserving knurled grip)",
-            "hint": "Examine the color-coded precision screwdrivers on the work pad"
-        },
-        {
-            "id": "goldilocks_ai_mechanic_workbench_003",
-            "title": "[AI Canvas] Master Mechanic Workbench Screwdriver Handle",
-            "source_url": "local:ai_mechanic_workbench_base",
-            "base_image": "public/levels/ai_mechanic_workbench_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 65.0, # Amber -> Emerald Green
-            "desc": "Single screwdriver handle tone shifted to emerald in CIELAB (preserving fluting and wear)",
-            "hint": "Check the collection of screwdriver handles on the mechanic bench"
-        },
-        {
-            "id": "goldilocks_photo_artist_oil_pastels_004",
-            "title": "[Photo] Fine Art Studio Oil Pastel Stick",
-            "source_url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_artist_oil_pastels_002_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 50.0,
-            "desc": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
-            "hint": "Check the pastel sticks and paint supplies in the easel tray"
-        },
-        {
-            "id": "goldilocks_photo_camp_bushcraft_table_005",
-            "title": "[Photo] Expedition Table Paracord Lock Toggle",
-            "source_url": "https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_camp_bushcraft_table_005_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0,
-            "desc": "Single paracord spring toggle shifted to bronze in CIELAB",
-            "hint": "Check the cordage and outdoor gear laid out on the table"
-        },
-        {
-            "id": "goldilocks_photo_tailor_notions_spool_006",
-            "title": "[Photo] Tailor Notions Box Woven Thread Spool",
-            "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_tailor_notions_spool_008_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 45.0,
-            "desc": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
-            "hint": "Look closely at the rows of sewing thread spools in the box"
-        },
-        {
-            "id": "goldilocks_photo_master_workbench_007",
-            "title": "[Photo] Master Workbench Utility Knife Slide",
-            "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_master_workbench_utility_knife_009_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 50.0,
-            "desc": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
-            "hint": "Inspect the slider buttons on the tools in the central workbench array"
-        },
-        {
-            "id": "goldilocks_photo_retro_gaming_cartridges_008",
-            "title": "[Photo] Retro Gaming Desk Cartridge Label Accent",
-            "source_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_retro_gaming_cartridges_017_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0,
-            "desc": "Single retro cartridge spine label tone shifted in CIELAB",
-            "hint": "Scan the vintage gaming cartridges and tech accessories"
-        },
-        {
-            "id": "goldilocks_photo_coin_collector_tray_009",
-            "title": "[Photo] Numismatist Collector Tray Coin Rim",
-            "source_url": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_coin_collector_tray_018_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 40.0,
-            "desc": "Single collectible coin rim tone shifted in CIELAB",
-            "hint": "Examine the coins and currency notes in the collector tray"
-        },
-        {
-            "id": "goldilocks_photo_watchmaker_precision_010",
-            "title": "[Photo] Watchmaker Bench Precision Tweezers Grip",
-            "source_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_watchmaker_precision_bench_003_base.jpg",
-            "difficulty": "Medium",
             "hue_direction_deg": 60.0,
-            "desc": "Single watchmaker tool grip sleeve tone shifted in CIELAB (preserving reflections)",
-            "hint": "Examine the precision tools and tweezers on the watch bench"
+            "desc": "Single precision screwdriver color collar shifted in CIELAB",
+            "hint": "Examine the color-coded precision screwdrivers on the work pad"
         }
     ]
 
