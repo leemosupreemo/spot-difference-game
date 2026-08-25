@@ -1,5 +1,215 @@
 [
   {
+    "id": "dense_ai_electronics_resistor_remove_001",
+    "title": "[AI Dense Remove] Antistatic PCB Bench Missing Resistor",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "remove",
+    "baseImage": "/levels/dense_ai_electronics_resistor_remove_001_base.jpg",
+    "variantImage": "/levels/dense_ai_electronics_resistor_remove_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 92.5,
+        "y": 56.7,
+        "radius": 4.2,
+        "description": "Single through-hole carbon film resistor missing from the circuit board component array",
+        "hint": "Check the cluster of small through-hole resistors on the circuit board"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_watchmaker_gear_add_002",
+    "title": "[AI Dense Add] Watchmaker Parts Tray Extra Brass Gear",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "add",
+    "baseImage": "/levels/dense_ai_watchmaker_gear_add_002_base.jpg",
+    "variantImage": "/levels/dense_ai_watchmaker_gear_add_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.0,
+        "y": 39.7,
+        "radius": 4.2,
+        "description": "Single additional toothed brass watch gear added to the parts tray",
+        "hint": "Inspect the loose watch gears and movement wheels in the center tray"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_mechanic_tool_recolor_003",
+    "title": "[AI Dense Recolor] Master Mechanic Workbench Pliers Grip",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_ai_mechanic_tool_recolor_003_base.jpg",
+    "variantImage": "/levels/dense_ai_mechanic_tool_recolor_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25.5,
+        "y": 97.4,
+        "radius": 4.2,
+        "description": "Single pliers insulated rubber grip sleeve tone shifted in CIELAB",
+        "hint": "Examine the insulated tool grips across the master workbench"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_sewing_spool_recolor_004",
+    "title": "[AI Dense Recolor] Tailor Notions Box Cotton Thread Spool",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_ai_sewing_spool_recolor_004_base.jpg",
+    "variantImage": "/levels/dense_ai_sewing_spool_recolor_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 13.9,
+        "y": 94.1,
+        "radius": 6.5,
+        "description": "Single wooden thread spool cotton fibers tone shifted in CIELAB",
+        "hint": "Check the rows of colorful thread spools in the compartmentalized tray"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_miniature_bottle_remove_005",
+    "title": "[AI Dense Remove] Miniature Painter Desk Missing Paint Dropper",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "remove",
+    "baseImage": "/levels/dense_ai_miniature_bottle_remove_005_base.jpg",
+    "variantImage": "/levels/dense_ai_miniature_bottle_remove_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76.1,
+        "y": 30.3,
+        "radius": 4.2,
+        "description": "Single acrylic hobby paint dropper bottle missing from the paint rack array",
+        "hint": "Look closely at the rows of acrylic paint dropper bottles"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_retro_cart_add_006",
+    "title": "[AI Dense Add] Retro Gaming Desk Extra Game Cartridge",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "add",
+    "baseImage": "/levels/dense_ai_retro_cart_add_006_base.jpg",
+    "variantImage": "/levels/dense_ai_retro_cart_add_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.5,
+        "y": 35.2,
+        "radius": 4.2,
+        "description": "Single additional vintage game cartridge added alongside the cartridge array",
+        "hint": "Scan the retro game cartridges and memory cards on the desk"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_artist_pastel_remove_007",
+    "title": "[AI Dense Remove] Fine Art Studio Missing Pastel Stick",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "remove",
+    "baseImage": "/levels/dense_ai_artist_pastel_remove_007_base.jpg",
+    "variantImage": "/levels/dense_ai_artist_pastel_remove_007_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.8,
+        "y": 14.2,
+        "radius": 4.8,
+        "description": "Single soft pastel stick missing from the wooden easel tray",
+        "hint": "Inspect the pastel sticks and paint supplies in the easel tray"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_woodworking_chisel_recolor_008",
+    "title": "[AI Dense Recolor] Woodworking Bench Chisel Brass Ferrule",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_ai_woodworking_chisel_recolor_008_base.jpg",
+    "variantImage": "/levels/dense_ai_woodworking_chisel_recolor_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.2,
+        "y": 6.5,
+        "radius": 4.2,
+        "description": "Single carving gouge brass ferrule ring tone shifted in CIELAB",
+        "hint": "Look closely at the brass ferrules on the woodworking chisels and gouges"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_leather_punch_add_009",
+    "title": "[AI Dense Add] Leather Artisan Bench Extra Punch Die",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "add",
+    "baseImage": "/levels/dense_ai_leather_punch_add_009_base.jpg",
+    "variantImage": "/levels/dense_ai_leather_punch_add_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.0,
+        "y": 53.9,
+        "radius": 4.2,
+        "description": "Single additional steel round hole punch tool added to the workbench array",
+        "hint": "Check the collection of steel hole punch dies and bevelers"
+      }
+    ]
+  },
+  {
+    "id": "dense_ai_gardener_tag_recolor_010",
+    "title": "[AI Dense Recolor] Greenhouse Potting Bench Plant Tag",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_ai_gardener_tag_recolor_010_base.jpg",
+    "variantImage": "/levels/dense_ai_gardener_tag_recolor_010_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 86.2,
+        "y": 86.4,
+        "radius": 4.2,
+        "description": "Single colorful garden plant marker tag tone shifted in CIELAB",
+        "hint": "Examine the plant marker tags on the seedling pots"
+      }
+    ]
+  },
+  {
     "id": "unified_ai_sewing_remove_001",
     "title": "[AI Remove] Tailor Notions Box Missing Button",
     "category": "Photography",

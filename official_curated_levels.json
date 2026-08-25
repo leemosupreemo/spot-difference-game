@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 99,
-    "dismissedCount": 38,
+    "approvedCount": 100,
+    "dismissedCount": 47,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -105,7 +105,8 @@
     "goldilocks_ai_woodworking_bench_008",
     "goldilocks_ai_watchmaker_parts_010",
     "goldilocks_hard_ai_woodworking_pencil_008",
-    "goldilocks_hard_ai_expedition_toggle_010"
+    "goldilocks_hard_ai_expedition_toggle_010",
+    "unified_ai_expedition_remove_008"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -146,7 +147,16 @@
     "goldilocks_hard_ai_miniature_brushcollar_005",
     "goldilocks_hard_ai_gardener_clip_006",
     "goldilocks_hard_ai_artist_palette_knife_007",
-    "goldilocks_hard_ai_retro_gaming_cart_009"
+    "goldilocks_hard_ai_retro_gaming_cart_009",
+    "unified_ai_sewing_remove_001",
+    "unified_ai_watchmaker_recolor_002",
+    "unified_ai_electronics_add_003",
+    "unified_ai_gardener_remove_004",
+    "unified_ai_artist_recolor_005",
+    "unified_ai_woodworking_add_006",
+    "unified_ai_retro_recolor_007",
+    "unified_ai_leathercraft_recolor_009",
+    "unified_ai_miniature_add_010"
   ],
   "approvedLevels": [
     {
@@ -2272,6 +2282,46 @@
     "goldilocks_hard_ai_expedition_toggle_010": {
       "status": "approved",
       "updatedAt": "2026-08-25T00:38:33.387Z"
+    },
+    "unified_ai_sewing_remove_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:03:44.570Z"
+    },
+    "unified_ai_watchmaker_recolor_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:04:05.313Z"
+    },
+    "unified_ai_electronics_add_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:04:14.406Z"
+    },
+    "unified_ai_gardener_remove_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:04:22.366Z"
+    },
+    "unified_ai_artist_recolor_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:04:27.928Z"
+    },
+    "unified_ai_woodworking_add_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:04:33.526Z"
+    },
+    "unified_ai_retro_recolor_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:04:40.055Z"
+    },
+    "unified_ai_expedition_remove_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:04:53.769Z"
+    },
+    "unified_ai_leathercraft_recolor_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:18:40.551Z"
+    },
+    "unified_ai_miniature_add_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:18:47.599Z"
     }
   }
 }
