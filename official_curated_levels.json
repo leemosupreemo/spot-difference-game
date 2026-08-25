@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 111,
-    "dismissedCount": 79,
+    "approvedCount": 117,
+    "dismissedCount": 83,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -117,7 +117,13 @@
     "verified_m_ai_artist_recolor_005",
     "photo_boardgame_recolor_003",
     "photo_enamel_pins_recolor_008",
-    "photo_succulents_recolor_010"
+    "photo_succulents_recolor_010",
+    "photo_marbles_calibrated_001",
+    "photo_buttons_calibrated_002",
+    "photo_boardgame_calibrated_003",
+    "photo_enamel_pins_calibrated_008",
+    "photo_spices_calibrated_009",
+    "photo_succulents_calibrated_010"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -199,7 +205,11 @@
     "photo_hardware_recolor_005",
     "photo_watch_parts_recolor_006",
     "photo_gemstones_recolor_007",
-    "photo_spices_recolor_009"
+    "photo_spices_recolor_009",
+    "photo_candies_calibrated_004",
+    "photo_hardware_calibrated_005",
+    "photo_watch_parts_calibrated_006",
+    "photo_gemstones_calibrated_007"
   ],
   "approvedLevels": [
     {
@@ -2537,6 +2547,46 @@
     "photo_succulents_recolor_010": {
       "status": "approved",
       "updatedAt": "2026-08-25T05:41:33.428Z"
+    },
+    "photo_marbles_calibrated_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:45:56.397Z"
+    },
+    "photo_buttons_calibrated_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:46:07.940Z"
+    },
+    "photo_boardgame_calibrated_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:46:20.325Z"
+    },
+    "photo_candies_calibrated_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:47:17.646Z"
+    },
+    "photo_hardware_calibrated_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:47:47.657Z"
+    },
+    "photo_watch_parts_calibrated_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:47:54.880Z"
+    },
+    "photo_gemstones_calibrated_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:47:56.702Z"
+    },
+    "photo_enamel_pins_calibrated_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:48:04.431Z"
+    },
+    "photo_spices_calibrated_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:48:11.949Z"
+    },
+    "photo_succulents_calibrated_010": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:48:18.988Z"
     }
   }
 }
