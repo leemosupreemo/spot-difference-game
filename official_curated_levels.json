@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 92,
-    "dismissedCount": 25,
+    "approvedCount": 97,
+    "dismissedCount": 30,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -98,7 +98,12 @@
     "goldilocks_photo_artist_oil_pastels_004",
     "goldilocks_photo_camp_bushcraft_table_005",
     "goldilocks_photo_tailor_notions_spool_006",
-    "goldilocks_photo_retro_gaming_cartridges_008"
+    "goldilocks_photo_retro_gaming_cartridges_008",
+    "goldilocks_ai_sewing_notions_001",
+    "goldilocks_ai_retro_gaming_004",
+    "goldilocks_ai_leathercraft_005",
+    "goldilocks_ai_woodworking_bench_008",
+    "goldilocks_ai_watchmaker_parts_010"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -126,7 +131,12 @@
     "newbase_watchmaker_micro_tweezers_004",
     "goldilocks_ai_electronics_cap_001",
     "goldilocks_ai_mechanic_workbench_003",
-    "goldilocks_photo_coin_collector_tray_009"
+    "goldilocks_photo_coin_collector_tray_009",
+    "goldilocks_ai_gardener_potting_002",
+    "goldilocks_ai_artist_palette_003",
+    "goldilocks_ai_miniature_painter_006",
+    "goldilocks_ai_expedition_bushcraft_007",
+    "goldilocks_ai_electronics_cap_009"
   ],
   "approvedLevels": [
     {
@@ -2172,6 +2182,46 @@
     "goldilocks_photo_coin_collector_tray_009": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T00:20:43.002Z"
+    },
+    "goldilocks_ai_sewing_notions_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:31:56.092Z"
+    },
+    "goldilocks_ai_gardener_potting_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T00:32:13.694Z"
+    },
+    "goldilocks_ai_artist_palette_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T00:32:25.568Z"
+    },
+    "goldilocks_ai_retro_gaming_004": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:32:36.619Z"
+    },
+    "goldilocks_ai_leathercraft_005": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:32:51.396Z"
+    },
+    "goldilocks_ai_miniature_painter_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T00:33:01.921Z"
+    },
+    "goldilocks_ai_expedition_bushcraft_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T00:33:16.206Z"
+    },
+    "goldilocks_ai_woodworking_bench_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:33:22.370Z"
+    },
+    "goldilocks_ai_electronics_cap_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T00:33:29.667Z"
+    },
+    "goldilocks_ai_watchmaker_parts_010": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T00:33:36.635Z"
     }
   }
 }

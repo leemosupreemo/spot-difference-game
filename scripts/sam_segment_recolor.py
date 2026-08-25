@@ -334,9 +334,10 @@ class AdaptiveSpotabilityLoop:
         if not (bx_min - pad_x <= weighted_cx <= bx_max + pad_x and by_min - pad_y <= weighted_cy <= by_max + pad_y):
             return False, None, None, f"QA Rejected: Difference centroid ({cx_pct}%, {cy_pct}%) is outside intended target bbox."
             
-        # 6. Minimum Perceptible Area Constraint (>= 0.10%)
-        if best_metrics["area_pct"] < 0.10:
-            return False, None, None, f"QA Rejected: Changed area too tiny ({best_metrics['area_pct']:.3f}% < 0.10%). Cannot be comfortably perceived."
+        # 6. Minimum Perceptible Area Constraint (>= 0.035% for Hard, >= 0.10% for Medium/Easy)
+        min_perceptible_area = 0.035 if difficulty == "Hard" else 0.10
+        if best_metrics["area_pct"] < min_perceptible_area:
+            return False, None, None, f"QA Rejected: Changed area too tiny ({best_metrics['area_pct']:.3f}% < {min_perceptible_area:.2f}%). Cannot be comfortably perceived."
             
         final_info = {
             "x": cx_pct,
@@ -376,104 +377,104 @@ def execute_adaptive_pipeline():
     
     proposals = [
         {
-            "id": "goldilocks_ai_sewing_notions_001",
-            "title": "[AI Canvas] Tailor Notions Box Woven Thread Spool",
-            "source_url": "local:ai_sewing_notions_base",
-            "base_image": "public/levels/ai_sewing_notions_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 50.0,
-            "desc": "Single wooden thread spool cotton wrap shifted in CIELAB (preserving wound thread fibers)",
-            "hint": "Check the colorful thread spools in the compartmentalized tray"
-        },
-        {
-            "id": "goldilocks_ai_gardener_potting_002",
-            "title": "[AI Canvas] Greenhouse Potting Bench Plant Marker",
-            "source_url": "local:ai_gardener_potting_base",
-            "base_image": "public/levels/ai_gardener_potting_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0,
-            "desc": "Single colorful garden plant marker tag tone shifted in CIELAB",
-            "hint": "Examine the plant marker tags and twine balls on the potting bench"
-        },
-        {
-            "id": "goldilocks_ai_artist_palette_003",
-            "title": "[AI Canvas] Fine Art Studio Oil Paint Tube Cap",
-            "source_url": "local:ai_artist_palette_base",
-            "base_image": "public/levels/ai_artist_palette_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single artist oil paint tube cap tone shifted in CIELAB (preserving studio patina)",
-            "hint": "Check the row of oil paint tubes and pastel sticks on the palette"
-        },
-        {
-            "id": "goldilocks_ai_retro_gaming_004",
-            "title": "[AI Canvas] Retro Gaming Desk Cartridge Shell",
-            "source_url": "local:ai_retro_gaming_base",
-            "base_image": "public/levels/ai_retro_gaming_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0,
-            "desc": "Single vintage game cartridge shell tone shifted in CIELAB",
-            "hint": "Scan the retro game cartridges and memory cards on the desk"
-        },
-        {
-            "id": "goldilocks_ai_leathercraft_005",
-            "title": "[AI Canvas] Leather Artisan Bench Waxed Thread Spool",
-            "source_url": "local:ai_leathercraft_base",
-            "base_image": "public/levels/ai_leathercraft_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 45.0,
-            "desc": "Single waxed linen thread spool shifted in CIELAB (preserving thread twist)",
-            "hint": "Inspect the collection of colored waxed thread spools"
-        },
-        {
-            "id": "goldilocks_ai_miniature_painter_006",
-            "title": "[AI Canvas] Miniature Painter Desk Paint Dropper Cap",
-            "source_url": "local:ai_miniature_painter_base",
-            "base_image": "public/levels/ai_miniature_painter_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
-            "hint": "Examine the rows of acrylic paint dropper bottles"
-        },
-        {
-            "id": "goldilocks_ai_expedition_bushcraft_007",
-            "title": "[AI Canvas] Expedition Gear Table Anodized Carabiner",
-            "source_url": "local:ai_expedition_bushcraft_base",
-            "base_image": "public/levels/ai_expedition_bushcraft_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 50.0,
-            "desc": "Single anodized aluminum locking carabiner tone shifted in CIELAB",
-            "hint": "Check the carabiners and paracord bundles on the table"
-        },
-        {
-            "id": "goldilocks_ai_woodworking_bench_008",
-            "title": "[AI Canvas] Woodworking Bench Carpenter Pencil",
-            "source_url": "local:ai_woodworking_bench_base",
-            "base_image": "public/levels/ai_woodworking_bench_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single wooden carpenter marking pencil tone shifted in CIELAB",
-            "hint": "Look closely at the colored carpenter marking pencils"
-        },
-        {
-            "id": "goldilocks_ai_electronics_cap_009",
-            "title": "[AI Canvas] Electronics Antistatic Bench Radial Capacitor",
-            "source_url": "local:ai_electronics_pcb_base",
-            "base_image": "public/levels/ai_electronics_pcb_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0,
-            "desc": "Single blue electrolytic capacitor sleeve shifted in CIELAB",
-            "hint": "Check the blue capacitors on the antistatic bench"
-        },
-        {
-            "id": "goldilocks_ai_watchmaker_parts_010",
-            "title": "[AI Canvas] Horologist Parts Tray Precision Screwdriver Collar",
+            "id": "goldilocks_hard_ai_watchmaker_jewel_001",
+            "title": "[AI Hard] Horologist Parts Tray Escapement Jewel Bearing",
             "source_url": "local:ai_watchmaker_parts_base",
             "base_image": "public/levels/ai_watchmaker_parts_base.jpg",
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single precision screwdriver color collar shifted in CIELAB",
-            "hint": "Examine the color-coded precision screwdrivers on the work pad"
+            "difficulty": "Hard",
+            "hue_direction_deg": 45.0,
+            "desc": "Single watchmaker ruby jewel setting micro-tone shifted in CIELAB",
+            "hint": "Inspect the intricate micro watch parts and jewel bearings in the sorting tray"
+        },
+        {
+            "id": "goldilocks_hard_ai_electronics_resistor_002",
+            "title": "[AI Hard] Electronics Antistatic Bench Resistor Band",
+            "source_url": "local:ai_electronics_pcb_base",
+            "base_image": "public/levels/ai_electronics_pcb_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 50.0,
+            "desc": "Single through-hole resistor color code band shifted in CIELAB",
+            "hint": "Scan the small resistor leads and miniature component sleeves"
+        },
+        {
+            "id": "goldilocks_hard_ai_mechanic_socket_003",
+            "title": "[AI Hard] Mechanic Workbench Socket Collar Ring",
+            "source_url": "local:ai_mechanic_workbench_base",
+            "base_image": "public/levels/ai_mechanic_workbench_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 55.0,
+            "desc": "Single socket collar indicator ring tone shifted in CIELAB",
+            "hint": "Check the knurled rings and socket collars on the workbench"
+        },
+        {
+            "id": "goldilocks_hard_ai_sewing_pinhead_004",
+            "title": "[AI Hard] Tailor Notions Box Pincushion Bead Head",
+            "source_url": "local:ai_sewing_notions_base",
+            "base_image": "public/levels/ai_sewing_notions_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 45.0,
+            "desc": "Single sewing ball-head pin bead tone shifted in CIELAB",
+            "hint": "Examine the tiny pin heads on the pincushion and sorting compartments"
+        },
+        {
+            "id": "goldilocks_hard_ai_miniature_brushcollar_005",
+            "title": "[AI Hard] Miniature Painter Detail Brush Handle Collar",
+            "source_url": "local:ai_miniature_painter_base",
+            "base_image": "public/levels/ai_miniature_painter_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 50.0,
+            "desc": "Single miniature paintbrush colored handle accent ring shifted in CIELAB",
+            "hint": "Look closely at the colored accent bands on the detail paintbrushes"
+        },
+        {
+            "id": "goldilocks_hard_ai_gardener_clip_006",
+            "title": "[AI Hard] Greenhouse Potting Bench Plant Ring Clip",
+            "source_url": "local:ai_gardener_potting_base",
+            "base_image": "public/levels/ai_gardener_potting_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 45.0,
+            "desc": "Single plant stem support clip ring tone shifted in CIELAB",
+            "hint": "Check the plant support clips and twine loops on the potting bench"
+        },
+        {
+            "id": "goldilocks_hard_ai_artist_palette_knife_007",
+            "title": "[AI Hard] Fine Art Studio Pastel Stick Nub",
+            "source_url": "local:ai_artist_palette_base",
+            "base_image": "public/levels/ai_artist_palette_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 50.0,
+            "desc": "Single soft pastel stick tip tone shifted in CIELAB",
+            "hint": "Inspect the pastel stick tips and small paint caps on the taboret"
+        },
+        {
+            "id": "goldilocks_hard_ai_woodworking_pencil_008",
+            "title": "[AI Hard] Woodworking Bench Carpenter Pencil Tip",
+            "source_url": "local:ai_woodworking_bench_base",
+            "base_image": "public/levels/ai_woodworking_bench_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 45.0,
+            "desc": "Single carpenter marking pencil sharpened lead collar shifted in CIELAB",
+            "hint": "Scan the carpenter marking pencils and chisel collars"
+        },
+        {
+            "id": "goldilocks_hard_ai_retro_gaming_cart_009",
+            "title": "[AI Hard] Retro Gaming Desk Memory Card Slider",
+            "source_url": "local:ai_retro_gaming_base",
+            "base_image": "public/levels/ai_retro_gaming_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 45.0,
+            "desc": "Single translucent memory card edge tone shifted in CIELAB",
+            "hint": "Examine the translucent memory cards and cartridge edges"
+        },
+        {
+            "id": "goldilocks_hard_ai_expedition_toggle_010",
+            "title": "[AI Hard] Expedition Table Paracord Lock Toggle",
+            "source_url": "local:ai_expedition_bushcraft_base",
+            "base_image": "public/levels/ai_expedition_bushcraft_base.jpg",
+            "difficulty": "Hard",
+            "hue_direction_deg": 50.0,
+            "desc": "Single paracord spring lock slider tone shifted in CIELAB",
+            "hint": "Check the cord lock toggles and carabiner gate collars"
         }
     ]
 

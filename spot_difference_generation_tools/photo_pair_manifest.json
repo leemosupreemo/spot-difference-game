@@ -1,5 +1,205 @@
 [
   {
+    "id": "goldilocks_hard_ai_watchmaker_jewel_001",
+    "title": "[AI Hard] Horologist Parts Tray Escapement Jewel Bearing",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_watchmaker_jewel_001_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_watchmaker_jewel_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 7.8,
+        "y": 36.3,
+        "radius": 4.2,
+        "description": "Single watchmaker ruby jewel setting micro-tone shifted in CIELAB",
+        "hint": "Inspect the intricate micro watch parts and jewel bearings in the sorting tray"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_electronics_resistor_002",
+    "title": "[AI Hard] Electronics Antistatic Bench Resistor Band",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_electronics_resistor_002_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_electronics_resistor_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 77.0,
+        "y": 62.7,
+        "radius": 4.2,
+        "description": "Single through-hole resistor color code band shifted in CIELAB",
+        "hint": "Scan the small resistor leads and miniature component sleeves"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_mechanic_socket_003",
+    "title": "[AI Hard] Mechanic Workbench Socket Collar Ring",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_mechanic_socket_003_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_mechanic_socket_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25.5,
+        "y": 97.4,
+        "radius": 4.2,
+        "description": "Single socket collar indicator ring tone shifted in CIELAB",
+        "hint": "Check the knurled rings and socket collars on the workbench"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_sewing_pinhead_004",
+    "title": "[AI Hard] Tailor Notions Box Pincushion Bead Head",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_sewing_pinhead_004_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_sewing_pinhead_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 6.5,
+        "y": 65.8,
+        "radius": 4.2,
+        "description": "Single sewing ball-head pin bead tone shifted in CIELAB",
+        "hint": "Examine the tiny pin heads on the pincushion and sorting compartments"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_miniature_brushcollar_005",
+    "title": "[AI Hard] Miniature Painter Detail Brush Handle Collar",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_miniature_brushcollar_005_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_miniature_brushcollar_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29.3,
+        "y": 69.2,
+        "radius": 4.2,
+        "description": "Single miniature paintbrush colored handle accent ring shifted in CIELAB",
+        "hint": "Look closely at the colored accent bands on the detail paintbrushes"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_gardener_clip_006",
+    "title": "[AI Hard] Greenhouse Potting Bench Plant Ring Clip",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_gardener_clip_006_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_gardener_clip_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73.2,
+        "y": 67.5,
+        "radius": 5.1,
+        "description": "Single plant stem support clip ring tone shifted in CIELAB",
+        "hint": "Check the plant support clips and twine loops on the potting bench"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_artist_palette_knife_007",
+    "title": "[AI Hard] Fine Art Studio Pastel Stick Nub",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_artist_palette_knife_007_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_artist_palette_knife_007_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 15.6,
+        "y": 31.0,
+        "radius": 4.2,
+        "description": "Single soft pastel stick tip tone shifted in CIELAB",
+        "hint": "Inspect the pastel stick tips and small paint caps on the taboret"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_woodworking_pencil_008",
+    "title": "[AI Hard] Woodworking Bench Carpenter Pencil Tip",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_woodworking_pencil_008_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_woodworking_pencil_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.2,
+        "y": 6.5,
+        "radius": 4.2,
+        "description": "Single carpenter marking pencil sharpened lead collar shifted in CIELAB",
+        "hint": "Scan the carpenter marking pencils and chisel collars"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_retro_gaming_cart_009",
+    "title": "[AI Hard] Retro Gaming Desk Memory Card Slider",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_retro_gaming_cart_009_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_retro_gaming_cart_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 7.4,
+        "y": 11.1,
+        "radius": 4.2,
+        "description": "Single translucent memory card edge tone shifted in CIELAB",
+        "hint": "Examine the translucent memory cards and cartridge edges"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_hard_ai_expedition_toggle_010",
+    "title": "[AI Hard] Expedition Table Paracord Lock Toggle",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/goldilocks_hard_ai_expedition_toggle_010_base.jpg",
+    "variantImage": "/levels/goldilocks_hard_ai_expedition_toggle_010_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 80.5,
+        "y": 64.1,
+        "radius": 4.2,
+        "description": "Single paracord spring lock slider tone shifted in CIELAB",
+        "hint": "Check the cord lock toggles and carabiner gate collars"
+      }
+    ]
+  },
+  {
     "id": "goldilocks_ai_sewing_notions_001",
     "title": "[AI Canvas] Tailor Notions Box Woven Thread Spool",
     "category": "Photography",

@@ -188,6 +188,12 @@ class GoldilocksTargetSelector:
         descriptors = []
         
         # 1. FILTER CANDIDATE MASKS BY SIZE & RECOLORABLE FRACTION
+        min_area, max_area = 0.10, 1.20
+        if target_difficulty == "Hard":
+            min_area, max_area = 0.035, 0.25  # Micro-targets for Hard/Sniper mode
+        elif target_difficulty == "Easy":
+            min_area, max_area = 0.40, 2.50
+            
         for idx, m in enumerate(masks):
             mask_resized = cv2.resize(m.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
             pcount = int(np.sum(mask_resized > 0))
@@ -195,8 +201,8 @@ class GoldilocksTargetSelector:
             
             area_pct = (pcount / total_pixels) * 100.0
             
-            # Goldilocks size: 0.15% to 2.2% of frame
-            if area_pct < 0.15 or area_pct > 2.2:
+            # Difficulty-calibrated size gating
+            if area_pct < min_area or area_pct > max_area:
                 continue
                 
             ys, xs = np.where(mask_resized > 0)
