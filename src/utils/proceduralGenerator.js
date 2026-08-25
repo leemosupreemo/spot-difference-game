@@ -1468,6 +1468,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   // =========================================================================
   // STEP 3: CLONE BASE BACKGROUND TO CANVAS B (ZERO GHOSTING)
   // =========================================================================
+  ctxB.drawImage(canvasA, 0, 0);
   // =========================================================================
   // STEP 4: PICK EXACTLY 1 HIGH-CONTRAST, HIGH-SALIENT TARGET FOR MUTATION
   // =========================================================================

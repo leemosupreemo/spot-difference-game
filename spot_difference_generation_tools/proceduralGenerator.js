@@ -12,18 +12,18 @@ export const SCENE_THEMES = [
 ];
 
 export const ART_WORLDS = [
-  { id: 'monet_waterlilies', name: 'Monet Giverny Water Lilies', composition: 'MONET_WATER_MIRROR' },
-  { id: 'vangogh_starry', name: 'Van Gogh Starry Cypress Grove', composition: 'VANGOGH_VORTEX_SKY' },
-  { id: 'woodland_wildlife', name: 'Enchanted Woodland Wildlife', composition: 'FRIEDRICH_SUBLIME_CLEARING' },
-  { id: 'ocean_depths', name: 'Hokusai Abyssal Great Wave', composition: 'HOKUSAI_GREAT_WAVE' },
-  { id: 'tropical_aviary', name: 'Hiroshige Edo Aviary Vista', composition: 'HIROSHIGE_EDO_FRAMING' },
-  { id: 'kyoto_garden', name: 'Kyoto Zen Golden Tapestry', composition: 'KLIMT_TREE_OF_LIFE' },
-  { id: 'synthwave_neon_city', name: 'Retro Cyber Metropolis Horizon', composition: 'NEO_CYBER_PERSPECTIVE' },
-  { id: 'egyptian_gilded_papyrus', name: 'Ancient Gilded Secession Fresco', composition: 'KLIMT_TREE_OF_LIFE' },
-  { id: 'cosmic_nebula_stargate', name: 'Surrealist Celestial Portal', composition: 'MAGRITTE_SURREALIST_PORTAL' },
-  { id: 'steampunk_clockwork', name: 'Clockwork Golden Spiral Engine', composition: 'HOKUSAI_GREAT_WAVE' },
-  { id: 'nordic_aurora_fjord', name: 'Romantic Sublime Aurora Fjord', composition: 'FRIEDRICH_SUBLIME_CLEARING' },
-  { id: 'cubist_mondrian_abstract', name: 'Cubist Bauhaus & Mondrian Abstraction', composition: 'MONDRIAN_NEOPLASTIC_EQUILIBRIUM' }
+  { id: 'monet_waterlilies', name: 'Monet Giverny Water Lilies', worldKey: 'MONET' },
+  { id: 'vangogh_starry', name: 'Van Gogh Starry Cypress Grove', worldKey: 'VANGOGH' },
+  { id: 'ocean_depths', name: 'Hokusai Great Wave of Kanagawa', worldKey: 'HOKUSAI' },
+  { id: 'kyoto_garden', name: 'Klimt Kyoto Golden Tapestry', worldKey: 'KLIMT' },
+  { id: 'synthwave_neon_city', name: 'Retro Synthwave Neon Metropolis', worldKey: 'SYNTHWAVE' },
+  { id: 'cubist_mondrian_abstract', name: 'Mondrian & Bauhaus Neoplasticism', worldKey: 'MONDRIAN' },
+  { id: 'nordic_aurora_fjord', name: 'Nordic Aurora & Glacial Fjord', worldKey: 'NORDIC_AURORA' },
+  { id: 'steampunk_clockwork', name: 'Steampunk Clockwork Mechanism', worldKey: 'STEAMPUNK' },
+  { id: 'woodland_wildlife', name: 'Enchanted Forest & Herbarium', worldKey: 'BOTANICAL' },
+  { id: 'tropical_aviary', name: 'Japanese Edo Cherry Blossom Aviary', worldKey: 'EDO_JAPAN' },
+  { id: 'cosmic_nebula_stargate', name: 'Cosmic Nebula Stargate & Planets', worldKey: 'COSMIC' },
+  { id: 'egyptian_gilded_papyrus', name: 'Gilded Egyptian Papyrus & Glass', worldKey: 'STAINED_GLASS' }
 ];
 
 export const MUTATION_TYPES = [
@@ -630,794 +630,845 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   const palette = worldPalettes[worldDef.id] || ['#ff007f', '#00f0ff', '#ffd166', '#06d6a0', '#ffffff', '#7209b7', '#ffbe0b'];
 
   // =========================================================================
-  // STEP 1: RENDER MASTER COMPOSITION BACKGROUND & MAJOR ANCHORS
+  // STEP 1 & 2: BESPOKE WORLD-SPECIFIC BACKGROUND & THEMATIC OBJECT POPULATION
   // =========================================================================
 
-  if (worldDef.composition === 'HOKUSAI_GREAT_WAVE') {
-    const seaGrad = ctxA.createLinearGradient(0, 0, width, height);
-    seaGrad.addColorStop(0, '#02182b');
-    seaGrad.addColorStop(0.4, '#06395b');
-    seaGrad.addColorStop(0.8, '#10567a');
-    seaGrad.addColorStop(1, '#00101d');
-    ctxA.fillStyle = seaGrad;
+  const key = worldDef.worldKey || 'MONET';
+
+  if (key === 'MONET') {
+    // 1. MONET WATER LILIES: Soft pastel pond with weeping willow reflections & 50+ floating lilies & koi
+    const pondGrad = ctxA.createLinearGradient(0, 0, width, height);
+    pondGrad.addColorStop(0, '#1b4332');
+    pondGrad.addColorStop(0.5, '#2d6a4f');
+    pondGrad.addColorStop(1, '#081c15');
+    ctxA.fillStyle = pondGrad;
     ctxA.fillRect(0, 0, width, height);
 
-    ctxA.fillStyle = '#010d18';
-    ctxA.beginPath();
-    ctxA.moveTo(width * 0.45, height * 0.65);
-    ctxA.lineTo(width * 0.58, height * 0.45);
-    ctxA.lineTo(width * 0.72, height * 0.65);
-    ctxA.closePath();
-    ctxA.fill();
+    // Dappled willow reflections
+    for (let w = 0; w < 8; w++) {
+      ctxA.fillStyle = 'rgba(149, 213, 178, 0.15)';
+      ctxA.beginPath();
+      ctxA.ellipse(randomRange(50, width - 50), randomRange(20, height * 0.4), randomRange(80, 160), randomRange(20, 50), random() * 0.4, 0, Math.PI * 2);
+      ctxA.fill();
+    }
 
-    const waveSig = makeWobbleSignature(random);
-    candidates.push({
-      id: 'hokusai_wave_crest',
-      x: width * 0.35, y: height * 0.38, size: 320, kind: 'GREAT_WAVE_CREST', baseColor: '#0077b6', supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(width * 0.35, height * 0.38);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? '#7209b7' : '#0077b6';
-        const s = (mutated && mType === 'SCALE_CHANGE') ? 1.25 : 1.0;
+    // Floating Lily Pads (30 objects)
+    for (let i = 0; i < 30; i++) {
+      const cx = randomRange(40, width - 40);
+      const cy = randomRange(40, height - 40);
+      const rad = randomRange(28, 55);
+      const padCol = randomChoice(['#40916c', '#52b788', '#2d6a4f', '#74c69d']);
+      const rot = random() * Math.PI * 2;
 
-        ctx.beginPath();
-        ctx.moveTo(-width * 0.4, height * 0.45 * s);
-        ctx.bezierCurveTo(-width * 0.1, -height * 0.2 * s, width * 0.2, -height * 0.45 * s, width * 0.35, -height * 0.25 * s);
-        ctx.bezierCurveTo(width * 0.15, -height * 0.1 * s, -width * 0.05, height * 0.2 * s, -width * 0.4, height * 0.45 * s);
-        ctx.closePath();
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#03045e', cx: 0, cy: 0, rx: 180 * s, ry: 120 * s, sig: waveSig, lineWidth: 4 });
+      candidates.push({
+        id: `monet_lilypad_${i}`,
+        x: cx, y: cy, size: rad * 2, kind: 'Floating Giverny Lily Pad', baseColor: padCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 2 : rot;
+          ctx.rotate(curRot);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : padCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ffd166';
-          ctx.shadowColor = '#ffd166';
-          ctx.shadowBlur = 18;
+          // Lily pad with pie wedge cut
+          ctx.fillStyle = col;
           ctx.beginPath();
-          ctx.arc(width * 0.35 * s, -height * 0.3 * s, 16 * s, 0, Math.PI * 2);
+          ctx.arc(0, 0, rad * s, 0.35, Math.PI * 2);
+          ctx.lineTo(0, 0);
+          ctx.closePath();
           ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
+          ctx.strokeStyle = '#1b4332';
+          ctx.lineWidth = 2.0;
+          ctx.stroke();
 
-    const boatSig = makeWobbleSignature(random);
-    candidates.push({
-      id: 'hokusai_barge',
-      x: width * 0.48, y: height * 0.62, size: 150, kind: 'WOODEN_BARGE', baseColor: '#d4a373', supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(width * 0.48, height * 0.62);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? 0.35 : 0;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? '#e63946' : '#d4a373';
-        const s = (mutated && mType === 'SCALE_CHANGE') ? 1.3 : 1.0;
-
-        ctx.beginPath();
-        ctx.moveTo(-75 * s, 10 * s);
-        ctx.bezierCurveTo(-30 * s, 25 * s, 30 * s, 25 * s, 75 * s, 0);
-        ctx.lineTo(65 * s, -15 * s);
-        ctx.lineTo(-65 * s, -10 * s);
-        ctx.closePath();
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#6f1d1b', cx: 0, cy: 0, rx: 75 * s, ry: 25 * s, sig: boatSig, lineWidth: 2.5 });
-
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.fillStyle = '#ffd166';
-          ctx.fillRect(-12 * s, -40 * s, 12 * s, 15 * s);
-        }
-        ctx.restore();
-      }
-    });
-
-  } else if (worldDef.composition === 'KLIMT_TREE_OF_LIFE') {
-    const goldBg = ctxA.createRadialGradient(width * 0.5, height * 0.5, 40, width * 0.5, height * 0.5, width * 0.6);
-    goldBg.addColorStop(0, '#2e1904');
-    goldBg.addColorStop(0.5, '#4a2c0a');
-    goldBg.addColorStop(1, '#170c02');
-    ctxA.fillStyle = goldBg;
-    ctxA.fillRect(0, 0, width, height);
-
-    const treeSig = makeWobbleSignature(random);
-    candidates.push({
-      id: 'klimt_tree_trunk',
-      x: width * 0.5, y: height * 0.55, size: 300, kind: 'GOLDEN_SPIRAL_TRUNK', baseColor: '#ffd166', supportedMutations: ['ADD_DETAIL', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(width * 0.5, height * 0.55);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : '#ffd166';
-        const s = (mutated && mType === 'SCALE_CHANGE') ? 1.2 : 1.0;
-
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 14 * s;
-        ctx.beginPath();
-        ctx.moveTo(0, 140 * s);
-        ctx.lineTo(0, -40 * s);
-        ctx.bezierCurveTo(-60 * s, -80 * s, -140 * s, -60 * s, -150 * s, -130 * s);
-        ctx.moveTo(0, -40 * s);
-        ctx.bezierCurveTo(60 * s, -80 * s, 140 * s, -60 * s, 150 * s, -130 * s);
-        ctx.stroke();
-
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ff007f';
-          ctx.shadowColor = '#ff007f';
-          ctx.shadowBlur = 18;
-          ctx.beginPath();
-          ctx.arc(0, -180 * s, 16 * s, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
-
-    const figureSig = makeWobbleSignature(random);
-    candidates.push({
-      id: 'klimt_robe_figure',
-      x: phiX, y: phiY + 120, size: 160, kind: 'BYZANTINE_ROBE', baseColor: '#f72585', supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'COLOR_SHIFT'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(phiX, phiY + 120);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? '#4cc9f0' : '#f72585';
-        const s = (mutated && mType === 'SCALE_CHANGE') ? 1.3 : 1.0;
-
-        wobblePath(ctx, 0, 0, 50 * s, 85 * s, 0, figureSig.jitter);
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffd166', cx: 0, cy: 0, rx: 50 * s, ry: 85 * s, sig: figureSig, lineWidth: 3 });
-
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.fillStyle = '#ffd166';
-          for (let r = -2; r <= 2; r++) {
-            ctx.fillRect(r * 18 * s - 5, r * 15 * s, 12 * s, 12 * s);
+          // Veins
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.lineWidth = 1.5;
+            for (let a = 0.6; a < Math.PI * 2; a += 0.8) {
+              ctx.beginPath();
+              ctx.moveTo(0, 0);
+              ctx.lineTo(Math.cos(a) * rad * 0.8 * s, Math.sin(a) * rad * 0.8 * s);
+              ctx.stroke();
+            }
           }
-        }
-        ctx.restore();
-      }
-    });
 
-  } else {
-    const skyGrad = ctxA.createLinearGradient(0, 0, 0, height);
-    skyGrad.addColorStop(0, '#06121e');
-    skyGrad.addColorStop(0.5, '#19334d');
-    skyGrad.addColorStop(1, '#050a10');
+          if (mutated && mType === 'ADD_DETAIL') {
+            // Blooming lotus blossom on top
+            ctx.fillStyle = '#ff70a6';
+            for (let p = 0; p < 6; p++) {
+              ctx.beginPath();
+              ctx.ellipse(Math.cos(p * Math.PI / 3) * 14 * s, Math.sin(p * Math.PI / 3) * 14 * s, 10 * s, 5 * s, p * Math.PI / 3, 0, Math.PI * 2);
+              ctx.fill();
+            }
+            ctx.fillStyle = '#ffd166';
+            ctx.beginPath();
+            ctx.arc(0, 0, 6 * s, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+    // Blooming Water Lilies (20 objects)
+    for (let j = 0; j < 20; j++) {
+      const cx = randomRange(50, width - 50);
+      const cy = randomRange(50, height - 50);
+      const size = randomRange(35, 65);
+      const bloomCol = randomChoice(['#ff70a6', '#f72585', '#ffffff', '#e0aaff', '#ffd166']);
+
+      candidates.push({
+        id: `monet_blossom_${j}`,
+        x: cx, y: cy, size, kind: 'Blooming Water Lily Lotus', baseColor: bloomCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : bloomCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.7 : 1.0;
+
+          // Multi-layer petals
+          ctx.fillStyle = col;
+          for (let p = 0; p < 8; p++) {
+            ctx.beginPath();
+            ctx.ellipse(Math.cos(p * Math.PI / 4) * size * 0.3 * s, Math.sin(p * Math.PI / 4) * size * 0.3 * s, size * 0.35 * s, size * 0.16 * s, p * Math.PI / 4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          // Golden center core
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+            ctx.fillStyle = '#ffd166';
+            ctx.beginPath();
+            ctx.arc(0, 0, size * 0.18 * s, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#ff0054';
+            ctx.beginPath();
+            ctx.arc(0, 0, size * 0.3 * s, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+  } else if (key === 'VANGOGH') {
+    // 2. VAN GOGH STARRY SKY: Midnight vortex sky + 35 glowing spiral nebula stars & cypress trees
+    const skyGrad = ctxA.createLinearGradient(0, 0, width, height);
+    skyGrad.addColorStop(0, '#03071e');
+    skyGrad.addColorStop(0.5, '#0d1b2a');
+    skyGrad.addColorStop(1, '#1b263b');
     ctxA.fillStyle = skyGrad;
     ctxA.fillRect(0, 0, width, height);
 
-    const anchorSig = makeWobbleSignature(random);
-    candidates.push({
-      id: 'master_composition_anchor',
-      x: width * 0.35, y: height * 0.45, size: 280, kind: 'FOREGROUND_ARCHITECTURAL_CANOPY', baseColor: palette[0], supportedMutations: ['ADD_DETAIL', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(width * 0.35, height * 0.45);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(palette[0]) : palette[0];
-        const s = (mutated && mType === 'SCALE_CHANGE') ? 1.25 : 1.0;
+    // Swirling sky vortices
+    for (let v = 0; v < 6; v++) {
+      ctxA.strokeStyle = 'rgba(76, 201, 240, 0.2)';
+      ctxA.lineWidth = 8.0;
+      ctxA.beginPath();
+      ctxA.arc(randomRange(100, width - 100), randomRange(80, height * 0.6), randomRange(80, 180), 0, Math.PI * 1.5);
+      ctxA.stroke();
+    }
 
-        wobblePath(ctx, 0, 0, 140 * s, 80 * s, 0.2, anchorSig.jitter);
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: 140 * s, ry: 80 * s, sig: anchorSig, lineWidth: 3 });
+    // Glowing Spiral Stars (35 objects)
+    for (let s = 0; s < 35; s++) {
+      const cx = randomRange(40, width - 40);
+      const cy = randomRange(30, height * 0.75);
+      const rad = randomRange(26, 52);
+      const starCol = randomChoice(['#ffd166', '#ffb703', '#ffffff', '#4cc9f0', '#fb5607']);
 
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ffd166';
-          ctx.shadowColor = '#ffd166';
-          ctx.shadowBlur = 18;
+      candidates.push({
+        id: `vangogh_star_${s}`,
+        x: cx, y: cy, size: rad * 2, kind: 'Swirling Vortex Star', baseColor: starCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#f72585' : starCol;
+          const sc = (mutated && mType === 'SCALE_CHANGE') ? 1.7 : 1.0;
+
+          // Star halo glow
+          ctx.fillStyle = col;
+          ctx.globalAlpha = 0.35;
           ctx.beginPath();
-          ctx.arc(0, -90 * s, 16 * s, 0, Math.PI * 2);
+          ctx.arc(0, 0, rad * sc, 0, Math.PI * 2);
           ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
+          ctx.globalAlpha = 1.0;
 
-    const heroSig = makeWobbleSignature(random);
-    candidates.push({
-      id: 'master_hero_centerpiece',
-      x: phiX, y: phiY + 50, size: 160, kind: 'HERO_CENTERPIECE_FORM', baseColor: palette[1] || '#00f0ff', supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(phiX, phiY + 50);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(palette[1] || '#00f0ff') : (palette[1] || '#00f0ff');
-        const s = (mutated && mType === 'SCALE_CHANGE') ? 1.3 : 1.0;
-
-        wobblePath(ctx, 0, 0, 70 * s, 50 * s, 0, heroSig.jitter);
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffffff', cx: 0, cy: 0, rx: 70 * s, ry: 50 * s, sig: heroSig, lineWidth: 2.5 });
-
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.fillStyle = '#ffd166';
+          // Concentric radiating rings
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 2.5;
           ctx.beginPath();
-          ctx.arc(30 * s, -10 * s, 14 * s, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // =========================================================================
-  // STEP 2: DENSE, MULTI-MOVEMENT DIVERSE OBJECT POPULATION (85-110 OBJECTS)
-  // =========================================================================
-
-  // A. CUBIST FACET SHARDS & GEOMETRIC PLANES (60px - 110px) - 14 objects
-  for (let c = 0; c < 14; c++) {
-    const cx = randomRange(60, width - 60);
-    const cy = randomRange(60, height - 60);
-    const size = randomRange(60, 110);
-    const baseColor = randomChoice(palette);
-    const sig = makeWobbleSignature(random);
-    const rot = random() * Math.PI * 2;
-
-    candidates.push({
-      id: `cubist_facet_${c}`,
-      x: cx, y: cy, size, kind: 'Cubist Geometric Shard', baseColor, rot,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 2 : rot;
-        ctx.rotate(curRot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.7 : size;
-
-        // Multi-faceted angular geometric shard
-        ctx.beginPath();
-        ctx.moveTo(-s * 0.45, -s * 0.3);
-        ctx.lineTo(s * 0.1, -s * 0.5);
-        ctx.lineTo(s * 0.45, 0);
-        ctx.lineTo(s * 0.2, s * 0.45);
-        ctx.lineTo(-s * 0.35, s * 0.25);
-        ctx.closePath();
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.45, ry: s * 0.45, sig, lineWidth: 2.5 });
-
-        // Base has a prominent white diagonal accent line
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 3.0;
-          ctx.beginPath();
-          ctx.moveTo(-s * 0.4, -s * 0.25);
-          ctx.lineTo(s * 0.18, s * 0.4);
+          ctx.arc(0, 0, rad * 0.65 * sc, 0, Math.PI * 2);
           ctx.stroke();
-        }
 
-        // Add detail adds a bold golden emblem
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ffd166';
+          // Intense core
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(0, 0, rad * 0.3 * sc, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.strokeStyle = '#00f0ff';
+            ctx.lineWidth = 3.0;
+            ctx.beginPath();
+            ctx.arc(0, 0, rad * 1.2 * sc, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+    // Flame-like Cypress Silhouettes (8 objects)
+    for (let c = 0; c < 8; c++) {
+      const cx = (c + 0.5) * (width / 8) + randomRange(-30, 30);
+      const cy = height * 0.75 + randomRange(-20, 20);
+      const hSize = randomRange(120, 220);
+      const wSize = randomRange(45, 80);
+
+      candidates.push({
+        id: `vangogh_cypress_${c}`,
+        x: cx, y: cy, size: hSize, kind: 'Flame Cypress Silhouette', baseColor: '#081c15',
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#e63946' : '#081c15';
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.5 : 1.0;
+
+          ctx.fillStyle = col;
           ctx.beginPath();
-          ctx.arc(s * 0.1, -s * 0.45, 12, 0, Math.PI * 2);
+          ctx.moveTo(0, -hSize * s);
+          ctx.bezierCurveTo(wSize * 0.6 * s, -hSize * 0.5 * s, wSize * 0.5 * s, 0, wSize * 0.3 * s, 40);
+          ctx.lineTo(-wSize * 0.3 * s, 40);
+          ctx.bezierCurveTo(-wSize * 0.5 * s, 0, -wSize * 0.6 * s, -hSize * 0.5 * s, 0, -hSize * s);
+          ctx.closePath();
           ctx.fill();
+
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#ffd166';
+            ctx.beginPath();
+            ctx.arc(0, -hSize * s * 0.7, 14, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+  } else if (key === 'SYNTHWAVE') {
+    // 3. RETRO SYNTHWAVE: Wireframe grid floor, neon sunset, 40+ isometric skyscrapers & holograms
+    const bgGrad = ctxA.createLinearGradient(0, 0, 0, height);
+    bgGrad.addColorStop(0, '#0a0017');
+    bgGrad.addColorStop(0.55, '#3c096c');
+    bgGrad.addColorStop(1, '#050014');
+    ctxA.fillStyle = bgGrad;
+    ctxA.fillRect(0, 0, width, height);
+
+    // Setting Segmented Sun
+    ctxA.fillStyle = '#ff007f';
+    ctxA.beginPath();
+    ctxA.arc(width * 0.5, height * 0.5, 140, Math.PI, 0);
+    ctxA.fill();
+    // Sun segments
+    ctxA.fillStyle = '#3c096c';
+    for (let s = 1; s <= 6; s++) {
+      ctxA.fillRect(width * 0.5 - 150, height * 0.5 - s * 20, 300, s * 2.5);
+    }
+
+    // 3D Wireframe Perspective Grid Floor
+    ctxA.strokeStyle = '#00f0ff';
+    ctxA.lineWidth = 1.5;
+    const horizon = height * 0.55;
+    for (let x = -width; x <= width * 2; x += 60) {
+      ctxA.beginPath();
+      ctxA.moveTo(width * 0.5, horizon);
+      ctxA.lineTo(x, height);
+      ctxA.stroke();
+    }
+    for (let y = horizon; y <= height; y += (y - horizon) * 0.35 + 8) {
+      ctxA.beginPath();
+      ctxA.moveTo(0, y);
+      ctxA.lineTo(width, y);
+      ctxA.stroke();
+    }
+
+    // Isometric Neon Skyscrapers & Holographic Polyhedra (40 objects)
+    for (let b = 0; b < 40; b++) {
+      const cx = randomRange(40, width - 40);
+      const cy = randomRange(horizon + 20, height - 30);
+      const bw = randomRange(30, 60);
+      const bh = randomRange(45, 110);
+      const bCol = randomChoice(['#ff007f', '#00f0ff', '#ffe600', '#7928ca', '#00f5d4']);
+
+      candidates.push({
+        id: `synthwave_bldg_${b}`,
+        x: cx, y: cy, size: Math.max(bw, bh), kind: 'Neon Cyber Skyscraper', baseColor: bCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ffffff' : bCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
+
+          // Building facade
+          ctx.fillStyle = '#10002b';
+          ctx.fillRect(-bw * 0.5 * s, -bh * s, bw * s, bh * s);
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 2.5;
+          ctx.strokeRect(-bw * 0.5 * s, -bh * s, bw * s, bh * s);
+
+          // Window grid lights
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+            ctx.fillStyle = col;
+            for (let r = -bh * s + 10; r < -10; r += 16) {
+              for (let c = -bw * 0.5 * s + 6; c < bw * 0.5 * s - 6; c += 10) {
+                ctx.fillRect(c, r, 5, 8);
+              }
+            }
+          }
+
+          // Rooftop laser beacon
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.strokeStyle = '#ffe600';
+            ctx.lineWidth = 4.0;
+            ctx.beginPath();
+            ctx.moveTo(0, -bh * s);
+            ctx.lineTo(0, -bh * s - 40);
+            ctx.stroke();
+            ctx.fillStyle = '#ffe600';
+            ctx.beginPath();
+            ctx.arc(0, -bh * s - 40, 8, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+  } else if (key === 'MONDRIAN') {
+    // 4. MONDRIAN & BAUHAUS: Asymmetric black architectural grid + 45 primary rectangles & geometric circles
+    ctxA.fillStyle = '#f8f9fa';
+    ctxA.fillRect(0, 0, width, height);
+
+    // Thick Black Dividing Grid Bars
+    ctxA.fillStyle = '#000000';
+    ctxA.fillRect(width * 0.32, 0, 12, height);
+    ctxA.fillRect(width * 0.68, 0, 12, height);
+    ctxA.fillRect(0, height * 0.38, width, 12);
+    ctxA.fillRect(0, height * 0.72, width, 12);
+
+    // Primary Colored Rectangles & Bauhaus Disks (45 objects)
+    for (let m = 0; m < 45; m++) {
+      const cx = randomRange(45, width - 45);
+      const cy = randomRange(45, height - 45);
+      const sz = randomRange(40, 85);
+      const isCircle = m % 2 === 0;
+      const mCol = randomChoice(['#e63946', '#1d3557', '#ffd166', '#000000', '#06d6a0', '#ff007f']);
+
+      candidates.push({
+        id: `mondrian_tile_${m}`,
+        x: cx, y: cy, size: sz, kind: isCircle ? 'Bauhaus Circle Tile' : 'De Stijl Rectangular Pane', baseColor: mCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : mCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
+
+          ctx.fillStyle = col;
           ctx.strokeStyle = '#000000';
-          ctx.lineWidth = 2.0;
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-    });
-  }
+          ctx.lineWidth = 3.5;
 
-  // B. KANDINSKY ABSTRACT CONCENTRIC DISKS & S-RIBBONS (45px - 90px) - 16 objects
-  for (let k = 0; k < 16; k++) {
-    const cx = randomRange(60, width - 60);
-    const cy = randomRange(60, height - 60);
-    const size = randomRange(45, 90);
-    const baseColor = randomChoice(palette);
-    const sig = makeWobbleSignature(random);
-    const isRibbon = k % 2 === 0;
-
-    candidates.push({
-      id: `abstract_form_${k}`,
-      x: cx, y: cy, size, kind: isRibbon ? 'Flowing Curve Ribbon' : 'Concentric Abstract Disk', baseColor,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 2 : 0;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.75 : size;
-
-        if (isRibbon) {
-          ctx.strokeStyle = color;
-          ctx.lineWidth = (mutated && mType === 'REMOVE_DETAIL') ? 4 : 10;
-          ctx.beginPath();
-          ctx.moveTo(-s * 0.45, -s * 0.2);
-          ctx.bezierCurveTo(-s * 0.15, -s * 0.5, s * 0.15, s * 0.5, s * 0.45, 0);
-          ctx.stroke();
+          if (isCircle) {
+            ctx.beginPath();
+            ctx.arc(0, 0, sz * 0.45 * s, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            if (!(mutated && mType === 'REMOVE_DETAIL')) {
+              ctx.fillStyle = '#ffffff';
+              ctx.beginPath();
+              ctx.arc(0, 0, sz * 0.18 * s, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          } else {
+            ctx.fillRect(-sz * 0.45 * s, -sz * 0.35 * s, sz * 0.9 * s, sz * 0.7 * s);
+            ctx.strokeRect(-sz * 0.45 * s, -sz * 0.35 * s, sz * 0.9 * s, sz * 0.7 * s);
+            if (!(mutated && mType === 'REMOVE_DETAIL')) {
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(-sz * 0.15 * s, -sz * 0.15 * s, sz * 0.3 * s, sz * 0.3 * s);
+            }
+          }
 
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#ff007f';
             ctx.beginPath();
-            ctx.arc(0, 0, 14, 0, Math.PI * 2);
+            ctx.arc(sz * 0.35 * s, -sz * 0.25 * s, 10, 0, Math.PI * 2);
             ctx.fill();
           }
-        } else {
-          ctx.beginPath();
-          ctx.arc(0, 0, s * 0.38, 0, Math.PI * 2);
-          applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.38, ry: s * 0.38, sig, lineWidth: 2.5 });
+          ctx.restore();
+        }
+      });
+    }
 
-          // Prominent center core
-          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+  } else if (key === 'STEAMPUNK') {
+    // 5. STEAMPUNK CLOCKWORK: Blueprint drafting grid + 50 interlocking brass cogs & pressure gauges
+    const bgGrad = ctxA.createLinearGradient(0, 0, width, height);
+    bgGrad.addColorStop(0, '#1c1917');
+    bgGrad.addColorStop(1, '#0c0a09');
+    ctxA.fillStyle = bgGrad;
+    ctxA.fillRect(0, 0, width, height);
+
+    // Drafting grid lines
+    ctxA.strokeStyle = 'rgba(212, 175, 55, 0.12)';
+    ctxA.lineWidth = 1.0;
+    for (let x = 0; x < width; x += 40) {
+      ctxA.beginPath(); ctxA.moveTo(x, 0); ctxA.lineTo(x, height); ctxA.stroke();
+    }
+    for (let y = 0; y < height; y += 40) {
+      ctxA.beginPath(); ctxA.moveTo(0, y); ctxA.lineTo(width, y); ctxA.stroke();
+    }
+
+    // Interlocking Brass Cogs & Gauges (50 objects)
+    for (let g = 0; g < 50; g++) {
+      const cx = randomRange(45, width - 45);
+      const cy = randomRange(45, height - 45);
+      const rad = randomRange(26, 55);
+      const isGauge = g % 3 === 0;
+      const gCol = randomChoice(['#d4af37', '#f4a261', '#e76f51', '#2a9d8f', '#b5179e']);
+
+      candidates.push({
+        id: `steampunk_cog_${g}`,
+        x: cx, y: cy, size: rad * 2, kind: isGauge ? 'Copper Pressure Gauge' : 'Interlocking Brass Cog', baseColor: gCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : gCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
+
+          if (isGauge) {
+            ctx.fillStyle = col;
+            ctx.beginPath();
+            ctx.arc(0, 0, rad * s, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+            // Dial needle
+            if (!(mutated && mType === 'REMOVE_DETAIL')) {
+              const rot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI * 0.75 : -Math.PI * 0.25;
+              ctx.strokeStyle = '#e63946';
+              ctx.lineWidth = 3.0;
+              ctx.beginPath();
+              ctx.moveTo(0, 0);
+              ctx.lineTo(Math.cos(rot) * rad * 0.75 * s, Math.sin(rot) * rad * 0.75 * s);
+              ctx.stroke();
+            }
+          } else {
+            // Gear with teeth
+            ctx.fillStyle = col;
+            ctx.beginPath();
+            ctx.arc(0, 0, rad * s, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = col;
+            for (let a = 0; a < Math.PI * 2; a += Math.PI / 6) {
+              ctx.fillRect(Math.cos(a) * rad * s - 4, Math.sin(a) * rad * s - 4, 8, 8);
+            }
+            ctx.fillStyle = '#0c0a09';
+            ctx.beginPath();
+            ctx.arc(0, 0, rad * 0.35 * s, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#ffd166';
+            ctx.beginPath();
+            ctx.arc(0, 0, rad * 0.2 * s, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+  } else if (key === 'HOKUSAI') {
+    // 6. HOKUSAI GREAT WAVE: Prussian indigo sea + Mt. Fuji + 40 wave crests, fishing skiffs & sea birds
+    const seaGrad = ctxA.createLinearGradient(0, 0, width, height);
+    seaGrad.addColorStop(0, '#02182b');
+    seaGrad.addColorStop(0.5, '#06395b');
+    seaGrad.addColorStop(1, '#00101d');
+    ctxA.fillStyle = seaGrad;
+    ctxA.fillRect(0, 0, width, height);
+
+    // Distant Mt Fuji Silhouette
+    ctxA.fillStyle = '#010d18';
+    ctxA.beginPath();
+    ctxA.moveTo(width * 0.45, height * 0.55);
+    ctxA.lineTo(width * 0.55, height * 0.32);
+    ctxA.lineTo(width * 0.65, height * 0.55);
+    ctxA.closePath();
+    ctxA.fill();
+    ctxA.fillStyle = '#ffffff';
+    ctxA.beginPath();
+    ctxA.moveTo(width * 0.52, height * 0.38);
+    ctxA.lineTo(width * 0.55, height * 0.32);
+    ctxA.lineTo(width * 0.58, height * 0.38);
+    ctxA.closePath();
+    ctxA.fill();
+
+    for (let w = 0; w < 40; w++) {
+      const cx = randomRange(40, width - 40);
+      const cy = randomRange(height * 0.35, height - 30);
+      const sz = randomRange(40, 85);
+      const isBoat = w % 4 === 0;
+
+      candidates.push({
+        id: `hokusai_wave_${w}`,
+        x: cx, y: cy, size: sz, kind: isBoat ? 'Wooden Fishing Skiff' : 'Curling Ocean Wave Foam Crest', baseColor: isBoat ? '#d4a373' : '#0077b6',
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#f72585' : (isBoat ? '#d4a373' : '#0077b6');
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
+
+          if (isBoat) {
+            ctx.fillStyle = col;
+            ctx.beginPath();
+            ctx.moveTo(-sz * 0.45 * s, 0);
+            ctx.bezierCurveTo(-sz * 0.2 * s, sz * 0.25 * s, sz * 0.2 * s, sz * 0.25 * s, sz * 0.45 * s, 0);
+            ctx.lineTo(sz * 0.35 * s, -sz * 0.15 * s);
+            ctx.lineTo(-sz * 0.35 * s, -sz * 0.15 * s);
+            ctx.closePath();
+            ctx.fill();
+            ctx.strokeStyle = '#3a1e05';
+            ctx.lineWidth = 2.0;
+            ctx.stroke();
+          } else {
+            ctx.fillStyle = col;
+            ctx.beginPath();
+            ctx.moveTo(-sz * 0.45 * s, sz * 0.3 * s);
+            ctx.bezierCurveTo(-sz * 0.2 * s, -sz * 0.35 * s, sz * 0.2 * s, -sz * 0.45 * s, sz * 0.45 * s, -sz * 0.1 * s);
+            ctx.bezierCurveTo(sz * 0.2 * s, 0, -sz * 0.1 * s, sz * 0.15 * s, -sz * 0.45 * s, sz * 0.3 * s);
+            ctx.closePath();
+            ctx.fill();
+            // Foam claws
             ctx.fillStyle = '#ffffff';
             ctx.beginPath();
-            ctx.arc(0, 0, s * 0.18, 0, Math.PI * 2);
+            ctx.arc(sz * 0.45 * s, -sz * 0.1 * s, sz * 0.15 * s, 0, Math.PI * 2);
             ctx.fill();
+          }
+
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#ffd166';
+            ctx.beginPath();
+            ctx.arc(0, -sz * 0.35 * s, 10, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+  } else if (key === 'KLIMT') {
+    // 7. KLIMT GILDED TREE: Shimmering gold mosaic background + 45 golden spiral branches & Byzantine jewels
+    const goldBg = ctxA.createRadialGradient(width * 0.5, height * 0.5, 40, width * 0.5, height * 0.5, width * 0.6);
+    goldBg.addColorStop(0, '#3d2508');
+    goldBg.addColorStop(0.6, '#211404');
+    goldBg.addColorStop(1, '#0e0801');
+    ctxA.fillStyle = goldBg;
+    ctxA.fillRect(0, 0, width, height);
+
+    for (let k = 0; k < 45; k++) {
+      const cx = randomRange(40, width - 40);
+      const cy = randomRange(40, height - 40);
+      const sz = randomRange(35, 75);
+      const kCol = randomChoice(['#ffd700', '#dfba6f', '#f72585', '#06d6a0', '#00b4d8', '#ffffff']);
+
+      candidates.push({
+        id: `klimt_motif_${k}`,
+        x: cx, y: cy, size: sz, kind: 'Gilded Byzantine Mosaic Spiral', baseColor: kCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : kCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
+
+          // Golden Spiral
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 4.0 * s;
+          ctx.beginPath();
+          ctx.arc(0, 0, sz * 0.38 * s, 0, Math.PI * 1.5);
+          ctx.stroke();
+
+          // Byzantine square jewels
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+            ctx.fillStyle = '#ffd166';
+            ctx.fillRect(-sz * 0.18 * s, -sz * 0.18 * s, sz * 0.36 * s, sz * 0.36 * s);
             ctx.strokeStyle = '#000000';
             ctx.lineWidth = 1.5;
+            ctx.strokeRect(-sz * 0.18 * s, -sz * 0.18 * s, sz * 0.36 * s, sz * 0.36 * s);
+          }
+
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#00f0ff';
+            ctx.beginPath();
+            ctx.arc(0, 0, sz * 0.2 * s, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+  } else if (key === 'NORDIC_AURORA') {
+    // 8. NORDIC AURORA: Glacial mountains + glowing vertical aurora curtains + 40 pine trees & ice stars
+    const nightGrad = ctxA.createLinearGradient(0, 0, 0, height);
+    nightGrad.addColorStop(0, '#03071e');
+    nightGrad.addColorStop(0.6, '#0f2b46');
+    nightGrad.addColorStop(1, '#020d18');
+    ctxA.fillStyle = nightGrad;
+    ctxA.fillRect(0, 0, width, height);
+
+    // Glowing Aurora Curtains
+    for (let a = 0; a < 5; a++) {
+      ctxA.fillStyle = 'rgba(0, 245, 212, 0.18)';
+      ctxA.beginPath();
+      ctxA.moveTo(a * 350, 0);
+      ctxA.bezierCurveTo(a * 350 + 150, height * 0.3, a * 350 - 100, height * 0.5, a * 350 + 80, height * 0.7);
+      ctxA.lineTo(a * 350 + 200, height * 0.7);
+      ctxA.bezierCurveTo(a * 350 + 50, height * 0.5, a * 350 + 250, height * 0.3, a * 350 + 150, 0);
+      ctxA.closePath();
+      ctxA.fill();
+    }
+
+    for (let n = 0; n < 40; n++) {
+      const cx = randomRange(40, width - 40);
+      const cy = randomRange(40, height - 40);
+      const sz = randomRange(35, 75);
+      const nCol = randomChoice(['#00f5d4', '#e0fbfc', '#38b000', '#ffd166', '#f72585']);
+
+      candidates.push({
+        id: `nordic_tree_${n}`,
+        x: cx, y: cy, size: sz, kind: 'Arctic Pine Tree Silhouette', baseColor: nCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ff0054' : nCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
+
+          // Tiered pine tree
+          ctx.fillStyle = col;
+          for (let t = 0; t < 3; t++) {
+            ctx.beginPath();
+            ctx.moveTo(0, -sz * 0.45 * s + t * 14 * s);
+            ctx.lineTo(sz * 0.35 * s - t * 4 * s, -sz * 0.15 * s + t * 16 * s);
+            ctx.lineTo(-sz * 0.35 * s + t * 4 * s, -sz * 0.15 * s + t * 16 * s);
+            ctx.closePath();
+            ctx.fill();
+          }
+
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(0, -sz * 0.5 * s, 8, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+    }
+
+  } else if (key === 'COSMIC') {
+    // 9. COSMIC NEBULA: Deep space void + ringed planets & galactic quasars (40 objects)
+    ctxA.fillStyle = '#02000a';
+    ctxA.fillRect(0, 0, width, height);
+
+    // Glowing Galactic Cloud
+    const nebGrad = ctxA.createRadialGradient(width * 0.5, height * 0.5, 20, width * 0.5, height * 0.5, width * 0.5);
+    nebGrad.addColorStop(0, 'rgba(114, 9, 183, 0.35)');
+    nebGrad.addColorStop(0.5, 'rgba(247, 37, 133, 0.2)');
+    nebGrad.addColorStop(1, 'rgba(2, 0, 10, 0)');
+    ctxA.fillStyle = nebGrad;
+    ctxA.fillRect(0, 0, width, height);
+
+    for (let p = 0; p < 40; p++) {
+      const cx = randomRange(40, width - 40);
+      const cy = randomRange(40, height - 40);
+      const sz = randomRange(35, 75);
+      const isRinged = p % 2 === 0;
+      const pCol = randomChoice(['#00f0ff', '#ff007f', '#ffd166', '#8338ec', '#06d6a0']);
+
+      candidates.push({
+        id: `cosmic_planet_${p}`,
+        x: cx, y: cy, size: sz, kind: isRinged ? 'Ringed Saturnian Exoplanet' : 'Glowing Quasar Core', baseColor: pCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ffffff' : pCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
+
+          // Planet sphere
+          ctx.fillStyle = col;
+          ctx.beginPath();
+          ctx.arc(0, 0, sz * 0.35 * s, 0, Math.PI * 2);
+          ctx.fill();
+
+          if (isRinged) {
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 3.0;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, sz * 0.6 * s, sz * 0.16 * s, Math.PI / 6, 0, Math.PI * 2);
             ctx.stroke();
           }
 
           if (mutated && mType === 'ADD_DETAIL') {
-            ctx.strokeStyle = '#ffd166';
-            ctx.lineWidth = 4;
+            ctx.fillStyle = '#ffd166';
             ctx.beginPath();
-            ctx.arc(0, 0, s * 0.52, 0, Math.PI * 2);
-            ctx.stroke();
+            ctx.arc(sz * 0.45 * s, -sz * 0.35 * s, 8, 0, Math.PI * 2);
+            ctx.fill();
           }
+          ctx.restore();
         }
-        ctx.restore();
-      }
-    });
-  }
+      });
+    }
 
-  // C. IMPRESSIONIST DAPPLED FLORA & ORGANIC FIGURATIVE FORMS (40px - 85px) - 20 objects
-  for (let f = 0; f < 20; f++) {
-    const cx = randomRange(60, width - 60);
-    const cy = randomRange(60, height - 60);
-    const size = randomRange(40, 85);
-    const baseColor = randomChoice(palette);
-    const kind = randomChoice(['Organic Botanical Petal', 'Stylized Silhouette Motif', 'Impressionist Floral Bloom', 'Winged Creature Form']);
-    const sig = makeWobbleSignature(random);
-    const poseRot = random() * Math.PI * 2;
+  } else if (key === 'STAINED_GLASS') {
+    // 10. GOTHIC STAINED GLASS: Dark stone arch + leaded glass facets & fleur-de-lis (45 objects)
+    ctxA.fillStyle = '#08080a';
+    ctxA.fillRect(0, 0, width, height);
 
-    candidates.push({
-      id: `impressionist_flora_${f}`,
-      x: cx, y: cy, size, kind, baseColor, poseRot,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? poseRot + Math.PI / 2 : poseRot;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
+    for (let g = 0; g < 45; g++) {
+      const cx = randomRange(45, width - 45);
+      const cy = randomRange(45, height - 45);
+      const sz = randomRange(35, 75);
+      const gCol = randomChoice(['#e63946', '#0077b6', '#38b000', '#ffd166', '#7209b7']);
 
-        wobblePath(ctx, 0, 0, curSize * 0.45, curSize * 0.3, 0, sig.jitter);
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffffff', cx: 0, cy: 0, rx: curSize * 0.45, ry: curSize * 0.3, sig, lineWidth: 2 });
+      candidates.push({
+        id: `stained_glass_facet_${g}`,
+        x: cx, y: cy, size: sz, kind: 'Cathedral Stained Glass Pane', baseColor: gCol,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : gCol;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
-        // Base has a distinct secondary golden eye / core
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.fillStyle = '#ffd166';
+          // Diamond facet
+          ctx.fillStyle = col;
           ctx.beginPath();
-          ctx.arc(curSize * 0.2, -curSize * 0.1, 8, 0, Math.PI * 2);
+          ctx.moveTo(0, -sz * 0.45 * s);
+          ctx.lineTo(sz * 0.35 * s, 0);
+          ctx.lineTo(0, sz * 0.45 * s);
+          ctx.lineTo(-sz * 0.35 * s, 0);
+          ctx.closePath();
           ctx.fill();
+          // Black lead caming border
           ctx.strokeStyle = '#000000';
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = 4.0;
           ctx.stroke();
-        }
 
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#00f0ff';
-          ctx.beginPath();
-          ctx.arc(-curSize * 0.2, curSize * 0.1, 10, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // D. COMPACT GEOMETRIC ACCENTS & MOTIFS (25px - 45px) - 20 objects
-  for (let a = 0; a < 20; a++) {
-    const cx = randomRange(45, width - 45);
-    const cy = randomRange(45, height - 45);
-    const size = randomRange(25, 45);
-    const baseColor = randomChoice(palette);
-    const kind = 'Geometric Star Accent';
-    const sig = makeWobbleSignature(random);
-    const baseRot = random() * Math.PI;
-
-    candidates.push({
-      id: `compact_accent_${a}`,
-      x: cx, y: cy, size, kind, baseColor,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 4 : baseRot;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const curSize = (mutated && mType === 'SCALE_CHANGE') ? size * 1.85 : size;
-
-        // Distinct starburst / cross shape
-        ctx.fillStyle = color;
-        ctx.fillRect(-curSize * 0.45, -curSize * 0.15, curSize * 0.9, curSize * 0.3);
-        ctx.fillRect(-curSize * 0.15, -curSize * 0.45, curSize * 0.3, curSize * 0.9);
-
-        // Center dot
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.arc(0, 0, curSize * 0.15, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.strokeStyle = '#ffd166';
-          ctx.lineWidth = 2.5;
-          ctx.beginPath();
-          ctx.arc(0, 0, curSize * 0.55, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // E. ART DECO CHEVRON FANS & STEPPED SUNBURSTS (45px - 85px) - 10 objects
-  for (let ad = 0; ad < 10; ad++) {
-    const cx = randomRange(55, width - 55);
-    const cy = randomRange(55, height - 55);
-    const size = randomRange(45, 85);
-    const baseColor = randomChoice(palette);
-    const sig = makeWobbleSignature(random);
-    const baseRot = random() * Math.PI * 2;
-
-    candidates.push({
-      id: `art_deco_fan_${ad}`,
-      x: cx, y: cy, size, kind: 'Art Deco Stepped Sunburst Fan', baseColor,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 2 : baseRot;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
-
-        // Fan stepped arches
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(0, 0, s * 0.45, Math.PI, 0);
-        ctx.closePath();
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffd166', cx: 0, cy: 0, rx: s * 0.45, ry: s * 0.45, sig, lineWidth: 2 });
-
-        // Radiating chevron rays
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 2.0;
-          for (let a = Math.PI; a <= Math.PI * 2; a += Math.PI / 4) {
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#ffffff';
             ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(Math.cos(a) * s * 0.45, Math.sin(a) * s * 0.45);
-            ctx.stroke();
+            ctx.arc(0, 0, sz * 0.15 * s, 0, Math.PI * 2);
+            ctx.fill();
           }
+          ctx.restore();
         }
+      });
+    }
 
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ff007f';
+  } else {
+    // 11-12. BOTANICAL / EDO JAPAN / FALLBACK WORLDS (45 objects)
+    const bgGrad = ctxA.createLinearGradient(0, 0, width, height);
+    bgGrad.addColorStop(0, '#2d3142');
+    bgGrad.addColorStop(1, '#0f111a');
+    ctxA.fillStyle = bgGrad;
+    ctxA.fillRect(0, 0, width, height);
+
+    for (let k = 0; k < 45; k++) {
+      const cx = randomRange(50, width - 50);
+      const cy = randomRange(50, height - 50);
+      const sz = randomRange(35, 75);
+      const col = randomChoice(palette);
+
+      candidates.push({
+        id: `world_object_${k}`,
+        x: cx, y: cy, size: sz, kind: `${worldDef.name} Motif`, baseColor: col,
+        isTargetEligible: true,
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
+        draw: (ctx, mutated, mType) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          applyObjectPopStyle(ctx, true);
+          let c = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : col;
+          const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
+
+          ctx.fillStyle = c;
           ctx.beginPath();
-          ctx.arc(0, -s * 0.25, 10, 0, Math.PI * 2);
+          ctx.arc(0, 0, sz * 0.45 * s, 0, Math.PI * 2);
           ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // F. SACRED GEOMETRY METATRON RINGS & POLYHEDRA (50px - 90px) - 10 objects
-  for (let sg = 0; sg < 10; sg++) {
-    const cx = randomRange(60, width - 60);
-    const cy = randomRange(60, height - 60);
-    const size = randomRange(50, 90);
-    const baseColor = randomChoice(palette);
-    const sig = makeWobbleSignature(random);
-    const baseRot = random() * Math.PI;
-
-    candidates.push({
-      id: `sacred_polyhedron_${sg}`,
-      x: cx, y: cy, size, kind: 'Sacred Geometry Hexagonal Prism', baseColor,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 3 : baseRot;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.75 : size;
-
-        // Outer hexagon
-        ctx.beginPath();
-        for (let i = 0; i < 6; i++) {
-          const a = (i / 6) * Math.PI * 2;
-          const x = Math.cos(a) * s * 0.45;
-          const y = Math.sin(a) * s * 0.45;
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.closePath();
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.45, ry: s * 0.45, sig, lineWidth: 2.2 });
-
-        // Internal isometric cube diagonals
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
           ctx.strokeStyle = '#ffffff';
           ctx.lineWidth = 2.0;
-          for (let i = 0; i < 6; i += 2) {
-            const a = (i / 6) * Math.PI * 2;
+          ctx.stroke();
+
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+            ctx.fillStyle = '#ffd166';
             ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(Math.cos(a) * s * 0.45, Math.sin(a) * s * 0.45);
-            ctx.stroke();
+            ctx.arc(0, 0, sz * 0.2 * s, 0, Math.PI * 2);
+            ctx.fill();
           }
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#00f0ff';
+            ctx.beginPath();
+            ctx.arc(sz * 0.3 * s, 0, 10, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
         }
-
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.strokeStyle = '#00f0ff';
-          ctx.lineWidth = 3.0;
-          ctx.beginPath();
-          ctx.arc(0, 0, s * 0.55, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // G. ISLAMIC ARABESQUE & MOROCCAN 8-POINT STARS (40px - 80px) - 10 objects
-  for (let ia = 0; ia < 10; ia++) {
-    const cx = randomRange(55, width - 55);
-    const cy = randomRange(55, height - 55);
-    const size = randomRange(40, 80);
-    const baseColor = randomChoice(palette);
-    const sig = makeWobbleSignature(random);
-    const baseRot = random() * Math.PI;
-
-    candidates.push({
-      id: `arabesque_star_${ia}`,
-      x: cx, y: cy, size, kind: 'Moroccan Arabesque 8-Point Star', baseColor,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 4 : baseRot;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
-
-        // Two overlapping interlocking squares
-        ctx.fillStyle = color;
-        ctx.fillRect(-s * 0.35, -s * 0.35, s * 0.7, s * 0.7);
-        ctx.save();
-        ctx.rotate(Math.PI / 4);
-        ctx.fillRect(-s * 0.35, -s * 0.35, s * 0.7, s * 0.7);
-        ctx.restore();
-
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#ffd166', cx: 0, cy: 0, rx: s * 0.4, ry: s * 0.4, sig, lineWidth: 2 });
-
-        // Center emerald medallion
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.fillStyle = '#06d6a0';
-          ctx.beginPath();
-          ctx.arc(0, 0, s * 0.16, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        }
-
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ffbe0b';
-          ctx.beginPath();
-          ctx.arc(s * 0.3, -s * 0.3, 8, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // H. BIOLUMINESCENT MARINE CREATURES & SPIRAL SHELLS (45px - 95px) - 10 objects
-  for (let mc = 0; mc < 10; mc++) {
-    const cx = randomRange(55, width - 55);
-    const cy = randomRange(55, height - 55);
-    const size = randomRange(45, 95);
-    const baseColor = randomChoice(palette);
-    const sig = makeWobbleSignature(random);
-    const baseRot = random() * Math.PI * 2;
-
-    candidates.push({
-      id: `marine_creature_${mc}`,
-      x: cx, y: cy, size, kind: 'Bioluminescent Nautilus Spiral', baseColor,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 2 : baseRot;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
-
-        // Spiral nautilus shell
-        ctx.beginPath();
-        ctx.arc(0, 0, s * 0.42, 0, Math.PI * 1.5);
-        ctx.quadraticCurveTo(s * 0.2, s * 0.2, 0, 0);
-        ctx.closePath();
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#00f0ff', cx: 0, cy: 0, rx: s * 0.42, ry: s * 0.42, sig, lineWidth: 2 });
-
-        // Shell chamber ribs
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 2.0;
-          ctx.beginPath();
-          ctx.moveTo(-s * 0.35, 0);
-          ctx.lineTo(0, -s * 0.35);
-          ctx.stroke();
-        }
-
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ff70a6';
-          ctx.beginPath();
-          ctx.arc(s * 0.22, -s * 0.22, 10, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // I. HERALDIC ROYAL CRESTS & ALCHEMY CROWNS (40px - 80px) - 10 objects
-  for (let rc = 0; rc < 10; rc++) {
-    const cx = randomRange(55, width - 55);
-    const cy = randomRange(55, height - 55);
-    const size = randomRange(40, 80);
-    const baseColor = randomChoice(palette);
-    const sig = makeWobbleSignature(random);
-    const baseRot = random() * Math.PI;
-
-    candidates.push({
-      id: `heraldic_crest_${rc}`,
-      x: cx, y: cy, size, kind: 'Heraldic Crown Motif', baseColor,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 4 : baseRot;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
-
-        // Tri-point crown / shield
-        ctx.beginPath();
-        ctx.moveTo(-s * 0.4, s * 0.2);
-        ctx.lineTo(-s * 0.35, -s * 0.3);
-        ctx.lineTo(-s * 0.12, 0);
-        ctx.lineTo(0, -s * 0.45);
-        ctx.lineTo(s * 0.12, 0);
-        ctx.lineTo(s * 0.35, -s * 0.3);
-        ctx.lineTo(s * 0.4, s * 0.2);
-        ctx.closePath();
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.4, ry: s * 0.4, sig, lineWidth: 2.2 });
-
-        // Center pearl jewel
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.arc(0, -s * 0.1, 7, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ffd166';
-          ctx.beginPath();
-          ctx.arc(0, -s * 0.45, 9, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // J. ORIGAMI FOLDED ANIMALS & BLOSSOMS (40px - 85px) - 10 objects
-  for (let og = 0; og < 10; og++) {
-    const cx = randomRange(55, width - 55);
-    const cy = randomRange(55, height - 55);
-    const size = randomRange(40, 85);
-    const baseColor = randomChoice(palette);
-    const sig = makeWobbleSignature(random);
-    const baseRot = random() * Math.PI * 2;
-
-    candidates.push({
-      id: `origami_crane_${og}`,
-      x: cx, y: cy, size, kind: 'Origami Folded Crane Blossom', baseColor,
-      isTargetEligible: true,
-      supportedMutations: ['ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE', 'COLOR_SHIFT', 'SCALE_CHANGE'],
-      draw: (ctx, mutated, mType) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        const rot = (mutated && mType === 'SHAPE_ROTATE') ? baseRot + Math.PI / 2 : baseRot;
-        ctx.rotate(rot);
-        applyObjectPopStyle(ctx, true);
-        let color = (mutated && mType === 'COLOR_SHIFT') ? getHighContrastColor(baseColor) : baseColor;
-        const s = (mutated && mType === 'SCALE_CHANGE') ? size * 1.8 : size;
-
-        // Origami wing diamond
-        ctx.beginPath();
-        ctx.moveTo(0, -s * 0.45);
-        ctx.lineTo(s * 0.4, 0);
-        ctx.lineTo(0, s * 0.35);
-        ctx.lineTo(-s * 0.4, 0);
-        ctx.closePath();
-        applyPaintFinish(ctx, paintStyle, { color, strokeColor: '#000000', cx: 0, cy: 0, rx: s * 0.4, ry: s * 0.4, sig, lineWidth: 2 });
-
-        // Origami fold crease line
-        if (!(mutated && mType === 'REMOVE_DETAIL')) {
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 2.0;
-          ctx.beginPath();
-          ctx.moveTo(0, -s * 0.45);
-          ctx.lineTo(0, s * 0.35);
-          ctx.stroke();
-        }
-
-        if (mutated && mType === 'ADD_DETAIL') {
-          ctx.fillStyle = '#ff0054';
-          ctx.beginPath();
-          ctx.arc(s * 0.25, 0, 9, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-    });
-  }
-
-  // K. MICRO ATMOSPHERIC COLOR PARTICLES, SPARKLES & SHARDS (4px - 14px) - 30 background objects (NOT target eligible)
-  for (let p = 0; p < 30; p++) {
-    const px = randomRange(25, width - 25);
-    const py = randomRange(25, height - 25);
-    const pSize = randomRange(4, 14);
-    const baseColor = randomChoice(['#ffffff', '#ffd166', '#00f0ff', '#ff70a6', '#06d6a0', '#ff007f']);
-
-    candidates.push({
-      id: `micro_sparkle_${p}`,
-      x: px, y: py, size: pSize, kind: 'Atmospheric Micro Shard', baseColor,
-      isTargetEligible: false, // Never pick micro particles as the game difference!
-      supportedMutations: [],
-      draw: (ctx) => {
-        ctx.save();
-        ctx.translate(px, py);
-        ctx.fillStyle = baseColor;
-        ctx.shadowColor = baseColor;
-        ctx.shadowBlur = 6;
-        ctx.beginPath();
-        ctx.arc(0, 0, pSize * 0.4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-    });
+      });
+    }
   }
 
   // =========================================================================
   // STEP 3: CLONE BASE BACKGROUND TO CANVAS B (ZERO GHOSTING)
   // =========================================================================
   ctxB.drawImage(canvasA, 0, 0);
-
   // =========================================================================
   // STEP 4: PICK EXACTLY 1 HIGH-CONTRAST, HIGH-SALIENT TARGET FOR MUTATION
   // =========================================================================
