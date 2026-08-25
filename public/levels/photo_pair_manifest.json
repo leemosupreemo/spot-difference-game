@@ -1,5 +1,235 @@
 [
   {
+    "id": "photo_fresh_yarn_001",
+    "title": "[Photorealistic] Colorful Wool Yarn Balls & Knitting Skeins",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_yarn_001_base.jpg",
+    "variantImage": "/levels/photo_fresh_yarn_001_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25.1,
+        "y": 47.8,
+        "radius": 9.0,
+        "description": "Single ball of colorful knitting wool shifted in hue",
+        "hint": "Scan through the colorful balls of wool and knitting yarn",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_pencils_002",
+    "title": "[Photorealistic] 150 Artist Colored Pencils & Pastels",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_pencils_002_base.jpg",
+    "variantImage": "/levels/photo_fresh_pencils_002_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30.7,
+        "y": 84.5,
+        "radius": 9.0,
+        "description": "Single pastel stick color shifted in the wooden organizer drawer",
+        "hint": "Inspect the organized rows of colored pencils and pastels",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_crayons_003",
+    "title": "[Photorealistic] Vibrant Wax Crayons & Drawing Pastels",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_crayons_003_base.jpg",
+    "variantImage": "/levels/photo_fresh_crayons_003_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.3,
+        "y": 82.1,
+        "radius": 5.9,
+        "description": "Single wax crayon tip shifted in color",
+        "hint": "Check the colorful crayons for a subtle shade variation",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_typewriter_004",
+    "title": "[Photorealistic] Vintage Mechanical Typewriter Keys",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_typewriter_004_base.jpg",
+    "variantImage": "/levels/photo_fresh_typewriter_004_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 20.8,
+        "y": 74.1,
+        "radius": 5.0,
+        "description": "Single circular typewriter key shifted in tone",
+        "hint": "Examine the round mechanical typewriter keys",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_coffee_005",
+    "title": "[Photorealistic] Artisanal Roasted Coffee Beans Flat-Lay",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_coffee_005_base.jpg",
+    "variantImage": "/levels/photo_fresh_coffee_005_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 40.1,
+        "y": 63.3,
+        "radius": 9.0,
+        "description": "Single roasted coffee bean shifted to warm amber roast",
+        "hint": "Look across the roasted coffee beans for a tone difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_pcb_006",
+    "title": "[Photorealistic] Retro Integrated Circuits & Ceramic PCB",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_pcb_006_base.jpg",
+    "variantImage": "/levels/photo_fresh_pcb_006_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 11.5,
+        "y": 20.9,
+        "radius": 5.0,
+        "description": "Single ceramic resistor or DIP capacitor shifted in color",
+        "hint": "Scan the electronic components, DIP chips, and capacitors on the circuit board",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_mechanic_007",
+    "title": "[Photorealistic] Heavy Duty Mechanic Workbench Sockets & Plugs",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_mechanic_007_base.jpg",
+    "variantImage": "/levels/photo_fresh_mechanic_007_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 75.7,
+        "y": 88.2,
+        "radius": 8.7,
+        "description": "Single socket adapter or spark plug insulator shifted in tone",
+        "hint": "Inspect the mechanic tools, sockets, and ratchets on the workbench",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_watchmaker_008",
+    "title": "[Photorealistic] Horology Brass Escapements & Balance Wheels",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_watchmaker_008_base.jpg",
+    "variantImage": "/levels/photo_fresh_watchmaker_008_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 18.6,
+        "y": 51.4,
+        "radius": 5.0,
+        "description": "Single brass gear pinion shifted in warmth",
+        "hint": "Check the precision watchmaker brass gears and ruby jewel bearings",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_stained_glass_009",
+    "title": "[Photorealistic] Leaded Cathedral Stained Glass Facets",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_stained_glass_009_base.jpg",
+    "variantImage": "/levels/photo_fresh_stained_glass_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36.5,
+        "y": 83.0,
+        "radius": 8.5,
+        "description": "Single leaded glass pane shifted in color",
+        "hint": "Scan the luminous stained glass facets and leaded borders",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_fresh_marbles_010",
+    "title": "[Photorealistic] Macro Studio Glass Swirl Marbles",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_marbles_010_base.jpg",
+    "variantImage": "/levels/photo_fresh_marbles_010_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55.7,
+        "y": 20.6,
+        "radius": 5.3,
+        "description": "Single swirling glass marble shifted from turquoise to deep cobalt",
+        "hint": "Scan the dense collection of cats-eye and swirl glass marbles",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "photo_unique_seashells_001",
     "title": "[Photorealistic] Beachcomber Shells & Sea Glass",
     "pack": "Photography",
@@ -2786,9 +3016,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54.8,
-        "y": 43.1,
-        "radius": 4.8,
+        "x": 54.7,
+        "y": 41.4,
+        "radius": 4.5,
         "description": "Single wooden thread spool wrap shifted to muted olive green (preserving fiber texture & wood endcaps)",
         "hint": "Check the colored thread spools and notions near the scissors"
       }
@@ -3543,10 +3773,10 @@
     "title": "Workbench Hardware Ring",
     "diffs": [
       {
-        "y": 27.6,
+        "y": 28.3,
         "id": 1,
         "hint": "Look just left of the blue screwdriver near the top edge.",
-        "x": 91.0,
+        "x": 92.1,
         "radius": 9.0
       }
     ],
@@ -3617,10 +3847,10 @@
     "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
     "diffs": [
       {
-        "y": 85.8,
+        "y": 85.2,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 34.8,
+        "x": 30.4,
         "radius": 9.0
       }
     ],
@@ -3640,11 +3870,11 @@
     "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
     "diffs": [
       {
-        "y": 54.4,
+        "y": 54.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 52.7,
-        "radius": 8.5
+        "x": 52.1,
+        "radius": 9.0
       }
     ],
     "packId": "find_the_sniper",
@@ -3694,10 +3924,10 @@
     "difficulty": "Hard",
     "diffs": [
       {
-        "y": 46.1,
+        "y": 47.3,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 59.7,
+        "x": 58.6,
         "radius": 9.0
       }
     ],
@@ -3770,10 +4000,10 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 59.9,
+        "y": 61.0,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 55.6,
+        "x": 53.6,
         "radius": 9.0
       }
     ],
@@ -3795,10 +4025,10 @@
     "title": "Repair Drawer Washer",
     "diffs": [
       {
-        "y": 76.5,
+        "y": 73.3,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 58.7,
+        "x": 61.0,
         "radius": 9.0
       }
     ]
@@ -3845,10 +4075,10 @@
     "id": "photo_bicycle_repair_001",
     "diffs": [
       {
-        "y": 46.7,
+        "y": 46.5,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 90.1,
+        "x": 90.7,
         "radius": 9.0
       }
     ],
@@ -3928,11 +4158,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 80.8,
+        "y": 75.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 82.7,
-        "radius": 9.0
+        "x": 84.7,
+        "radius": 8.7
       }
     ]
   },
@@ -3984,10 +4214,10 @@
     "title": "Game Night Token",
     "diffs": [
       {
-        "y": 48.6,
+        "y": 44.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 29.6,
+        "x": 29.4,
         "radius": 9.0
       }
     ],
@@ -4003,11 +4233,11 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 58.1,
+        "y": 63.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 4.7,
-        "radius": 9.0
+        "x": 3.9,
+        "radius": 7.2
       }
     ],
     "pack": "Find the Sniper"
@@ -4034,10 +4264,10 @@
   {
     "diffs": [
       {
-        "y": 57.3,
+        "y": 73.3,
         "id": 1,
         "hint": "Inspect the small purple connector slightly right of center.",
-        "x": 86.4,
+        "x": 85.5,
         "radius": 9.0
       }
     ],
@@ -4230,11 +4460,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 51.9,
+        "y": 50.7,
         "id": 1,
         "hint": "Inspect the pressed flower sheet on the right between the two flower stems.",
-        "x": 52.0,
-        "radius": 5.7
+        "x": 52.2,
+        "radius": 4.9
       }
     ],
     "id": "ai_botanist_herbarium_001",
