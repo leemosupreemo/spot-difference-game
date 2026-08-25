@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 81,
-    "dismissedCount": 14,
+    "approvedCount": 87,
+    "dismissedCount": 22,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -87,7 +87,13 @@
     "adaptive_tailor_pearl_notion_005",
     "adaptive_tailor_sewing_notion_amber_007",
     "adaptive_workshop_tape_measure_lock_008",
-    "adaptive_tailor_crimson_thread_spool_009"
+    "adaptive_tailor_crimson_thread_spool_009",
+    "scene_tailor_notions_spool_008",
+    "scene_master_workbench_utility_knife_009",
+    "scene_retro_gaming_cartridges_017",
+    "scene_electronics_motherboard_rail_007",
+    "scene_tailor_pincushion_needle_019",
+    "scene_workshop_tape_measure_slider_020"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -104,7 +110,15 @@
     "semantic_workshop_tape_measure_button_003",
     "adaptive_workshop_hex_key_sleeve_006",
     "adaptive_workshop_screwdriver_grip_bronze_010",
-    "semantic_workshop_hex_wrench_handle_004"
+    "semantic_workshop_hex_wrench_handle_004",
+    "ai_canvas_mechanic_screwdriver_001",
+    "ai_canvas_watchmaker_collar_002",
+    "scene_artist_oil_pastels_002",
+    "scene_watchmaker_precision_bench_003",
+    "scene_camp_bushcraft_table_005",
+    "ai_canvas_electronics_capacitor_003",
+    "scene_coin_collector_tray_018",
+    "newbase_watchmaker_micro_tweezers_004"
   ],
   "approvedLevels": [
     {
@@ -2062,6 +2076,62 @@
     "semantic_workshop_hex_wrench_handle_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-24T21:38:55.515Z"
+    },
+    "ai_canvas_mechanic_screwdriver_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T23:48:48.143Z"
+    },
+    "ai_canvas_watchmaker_collar_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T23:48:57.846Z"
+    },
+    "scene_artist_oil_pastels_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T23:49:07.862Z"
+    },
+    "scene_watchmaker_precision_bench_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T23:49:17.240Z"
+    },
+    "scene_camp_bushcraft_table_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T23:49:26.322Z"
+    },
+    "ai_canvas_electronics_capacitor_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T23:49:33.606Z"
+    },
+    "scene_tailor_notions_spool_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T23:49:39.863Z"
+    },
+    "scene_master_workbench_utility_knife_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T23:49:44.745Z"
+    },
+    "scene_retro_gaming_cartridges_017": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T23:49:53.730Z"
+    },
+    "scene_coin_collector_tray_018": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T23:49:56.146Z"
+    },
+    "scene_electronics_motherboard_rail_007": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T23:50:06.956Z"
+    },
+    "scene_tailor_pincushion_needle_019": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T23:50:16.661Z"
+    },
+    "scene_workshop_tape_measure_slider_020": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T23:50:20.807Z"
+    },
+    "newbase_watchmaker_micro_tweezers_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-24T23:50:24.150Z"
     }
   }
 }

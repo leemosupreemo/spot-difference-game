@@ -269,16 +269,19 @@ class AdaptiveSpotabilityLoop:
             # Spotability Score: (Actual Delta-E * sqrt(Area%)) / (1.0 + Clutter)
             spotability = (actual_delta_e * np.sqrt(max(0.1, area_pct))) / (1.0 + (clutter_multiplier - 1.0) * 0.6)
             
-            # Check convergence
-            if target_min_s <= spotability <= target_max_s or iteration == 5:
+            # 4. Gating Check
+            if target_min_s <= spotability <= target_max_s:
                 best_variant = variant_rgb
                 best_metrics = {
-                    "spotability": spotability,
-                    "delta_e": actual_delta_e,
-                    "area_pct": area_pct,
+                    "spotability": round(spotability, 2),
+                    "delta_e": round(actual_delta_e, 1),
+                    "area_pct": round(area_pct, 3),
                     "iterations": iteration
                 }
                 break
+                
+            if iteration == 5:
+                return False, None, None, f"QA Rejected: Target failed to converge into difficulty window ({spotability:.2f} not in [{target_min_s}, {target_max_s}] after 5 exposure iterations)."
             elif spotability < target_min_s:
                 current_delta_e *= 1.25
             else:
@@ -348,153 +351,115 @@ def download_if_missing(url, dest_path):
         with urllib.request.urlopen(req, context=ctx) as response, open(dest_path, 'wb') as out_file:
             out_file.write(response.read())
 
+from goldilocks_target_selector import GoldilocksTargetSelector
+
 def execute_adaptive_pipeline():
     print("=" * 80)
-    print("ADAPTIVE SPOTABILITY & SEMANTIC CALIBRATION PIPELINE (10 UNIQUE SCENES)")
+    print("GOLDILOCKS TARGET SELECTOR & ADAPTIVE SPOTABILITY CALIBRATION PIPELINE")
     print("=" * 80)
     
     model = FastSAM("FastSAM-s.pt")
     
     proposals = [
         {
-            "id": "ai_canvas_mechanic_screwdriver_001",
-            "title": "[AI Canvas] Master Mechanic Workbench Amber Screwdriver Grip",
-            "source_url": "local:ai_mechanic_workbench_base",
-            "base_image": "public/levels/ai_mechanic_workbench_base.jpg",
-            "target_object": "Screwdriver",
-            "target_part": "Amber translucent handle",
-            "target_bbox": [50, 100, 155, 365],
-            "prompt_point": [95, 280],
+            "id": "goldilocks_ai_electronics_cap_001",
+            "title": "[AI Canvas] Electronics Antistatic Bench Radial Capacitor",
+            "source_url": "local:ai_electronics_pcb_base",
+            "base_image": "public/levels/ai_electronics_pcb_base.jpg",
             "difficulty": "Medium",
-            "hue_direction_deg": 65.0, # Amber -> Emerald Green
-            "desc": "Single screwdriver amber handle tone shifted to emerald in CIELAB (preserving fluting and workshop wear)",
-            "hint": "Check the amber screwdriver handle on the left side of the bench"
+            "hue_direction_deg": 55.0, # Cobalt Blue -> Golden Amber
+            "desc": "Single blue electrolytic capacitor sleeve shifted to golden amber in CIELAB (preserving aluminum casing markings)",
+            "hint": "Check the cluster of blue electrolytic capacitors on the antistatic bench"
         },
         {
-            "id": "ai_canvas_watchmaker_collar_002",
-            "title": "[AI Canvas] Horologist Parts Tray Screwdriver Collar",
+            "id": "goldilocks_ai_watchmaker_parts_002",
+            "title": "[AI Canvas] Horologist Parts Tray Precision Screwdriver Collar",
             "source_url": "local:ai_watchmaker_parts_base",
             "base_image": "public/levels/ai_watchmaker_parts_base.jpg",
-            "target_object": "Precision Screwdriver",
-            "target_part": "Index collar band",
-            "target_bbox": [400, 450, 560, 580],
-            "prompt_point": [480, 515],
             "difficulty": "Medium",
             "hue_direction_deg": 60.0, # Cobalt Blue -> Deep Amber
-            "desc": "Single precision screwdriver color-coded collar shifted in CIELAB (preserving knurled grip)",
-            "hint": "Examine the color-coded precision screwdrivers on the leather work pad"
+            "desc": "Single precision screwdriver color collar shifted in CIELAB (preserving knurled grip)",
+            "hint": "Examine the color-coded precision screwdrivers on the work pad"
         },
         {
-            "id": "scene_artist_oil_pastels_002",
+            "id": "goldilocks_ai_mechanic_workbench_003",
+            "title": "[AI Canvas] Master Mechanic Workbench Screwdriver Handle",
+            "source_url": "local:ai_mechanic_workbench_base",
+            "base_image": "public/levels/ai_mechanic_workbench_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 65.0, # Amber -> Emerald Green
+            "desc": "Single screwdriver handle tone shifted to emerald in CIELAB (preserving fluting and wear)",
+            "hint": "Check the collection of screwdriver handles on the mechanic bench"
+        },
+        {
+            "id": "goldilocks_photo_artist_oil_pastels_004",
             "title": "[Photo] Fine Art Studio Oil Pastel Stick",
             "source_url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&auto=format&fit=crop&q=92",
             "base_image": "public/levels/scene_artist_oil_pastels_002_base.jpg",
-            "target_object": "Oil Pastel",
-            "target_part": "Paper wrapper sleeve",
-            "target_bbox": [580, 360, 720, 500],
-            "prompt_point": [650, 430],
             "difficulty": "Medium",
             "hue_direction_deg": 50.0,
             "desc": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
             "hint": "Check the pastel sticks and paint supplies in the easel tray"
         },
         {
-            "id": "scene_watchmaker_precision_bench_003",
-            "title": "[Photo] Watchmaker Bench Precision Tweezers",
-            "source_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&auto=format&fit=crop&q=92",
-            "base_image": "public/levels/scene_watchmaker_precision_bench_003_base.jpg",
-            "target_object": "Tweezers",
-            "target_part": "Grip sleeve",
-            "target_bbox": [650, 350, 800, 500],
-            "prompt_point": [720, 420],
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single watchmaker tool grip sleeve tone shifted in CIELAB (preserving reflections)",
-            "hint": "Examine the precision tools and tweezers on the watch bench"
-        },
-        {
-            "id": "scene_camp_bushcraft_table_005",
+            "id": "goldilocks_photo_camp_bushcraft_table_005",
             "title": "[Photo] Expedition Table Paracord Lock Toggle",
             "source_url": "https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=1600&auto=format&fit=crop&q=92",
             "base_image": "public/levels/scene_camp_bushcraft_table_005_base.jpg",
-            "target_object": "Cord Lock",
-            "target_part": "Plastic spring toggle",
-            "target_bbox": [550, 340, 700, 480],
-            "prompt_point": [620, 410],
             "difficulty": "Medium",
             "hue_direction_deg": 55.0,
             "desc": "Single paracord spring toggle shifted to bronze in CIELAB",
             "hint": "Check the cordage and outdoor gear laid out on the table"
         },
         {
-            "id": "ai_canvas_electronics_capacitor_003",
-            "title": "[AI Canvas] Antistatic Electronics Bench Radial Capacitor",
-            "source_url": "local:ai_electronics_pcb_base",
-            "base_image": "public/levels/ai_electronics_pcb_base.jpg",
-            "target_object": "Capacitor",
-            "target_part": "Blue electrolytic sleeve",
-            "target_bbox": [160, 180, 240, 240],
-            "prompt_point": [198, 210],
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0, # Cobalt Blue -> Golden Amber
-            "desc": "Single blue electrolytic capacitor sleeve tone shifted in CIELAB (preserving aluminum casing markings)",
-            "hint": "Check the cluster of blue electrolytic capacitors in the upper left tray"
-        },
-        {
-            "id": "scene_tailor_notions_spool_008",
+            "id": "goldilocks_photo_tailor_notions_spool_006",
             "title": "[Photo] Tailor Notions Box Woven Thread Spool",
             "source_url": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=1600&auto=format&fit=crop&q=92",
             "base_image": "public/levels/scene_tailor_notions_spool_008_base.jpg",
-            "target_object": "Thread Spool",
-            "target_part": "Crimson thread wrap fibers",
-            "target_bbox": [500, 650, 620, 780],
-            "prompt_point": [560, 715],
             "difficulty": "Medium",
             "hue_direction_deg": 45.0,
             "desc": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
             "hint": "Look closely at the rows of sewing thread spools in the box"
         },
         {
-            "id": "scene_master_workbench_utility_knife_009",
+            "id": "goldilocks_photo_master_workbench_007",
             "title": "[Photo] Master Workbench Utility Knife Slide",
             "source_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=92",
             "base_image": "public/levels/scene_master_workbench_utility_knife_009_base.jpg",
-            "target_object": "Utility Knife",
-            "target_part": "Thumb slide lock button",
-            "target_bbox": [480, 340, 600, 460],
-            "prompt_point": [540, 400],
             "difficulty": "Medium",
             "hue_direction_deg": 50.0,
             "desc": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
             "hint": "Inspect the slider buttons on the tools in the central workbench array"
         },
         {
-            "id": "scene_retro_gaming_cartridges_017",
+            "id": "goldilocks_photo_retro_gaming_cartridges_008",
             "title": "[Photo] Retro Gaming Desk Cartridge Label Accent",
             "source_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&auto=format&fit=crop&q=92",
             "base_image": "public/levels/scene_retro_gaming_cartridges_017_base.jpg",
-            "target_object": "Cartridge",
-            "target_part": "Cartridge spine label",
-            "target_bbox": [520, 400, 680, 550],
-            "prompt_point": [600, 470],
             "difficulty": "Medium",
             "hue_direction_deg": 55.0,
             "desc": "Single retro cartridge spine label tone shifted in CIELAB",
             "hint": "Scan the vintage gaming cartridges and tech accessories"
         },
         {
-            "id": "scene_coin_collector_tray_018",
+            "id": "goldilocks_photo_coin_collector_tray_009",
             "title": "[Photo] Numismatist Collector Tray Coin Rim",
             "source_url": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1600&auto=format&fit=crop&q=92",
             "base_image": "public/levels/scene_coin_collector_tray_018_base.jpg",
-            "target_object": "Currency",
-            "target_part": "Coin rim edge",
-            "target_bbox": [580, 360, 720, 500],
-            "prompt_point": [650, 430],
             "difficulty": "Medium",
             "hue_direction_deg": 40.0,
             "desc": "Single collectible coin rim tone shifted in CIELAB",
             "hint": "Examine the coins and currency notes in the collector tray"
+        },
+        {
+            "id": "goldilocks_photo_watchmaker_precision_010",
+            "title": "[Photo] Watchmaker Bench Precision Tweezers Grip",
+            "source_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&auto=format&fit=crop&q=92",
+            "base_image": "public/levels/scene_watchmaker_precision_bench_003_base.jpg",
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
+            "desc": "Single watchmaker tool grip sleeve tone shifted in CIELAB (preserving reflections)",
+            "hint": "Examine the precision tools and tweezers on the watch bench"
         }
     ]
 
@@ -504,7 +469,7 @@ def execute_adaptive_pipeline():
     approved_entries = []
 
     for prop in proposals:
-        print(f"\n--- Evaluating: {prop['id']} ({prop['target_object']} -> {prop['target_part']}) ---")
+        print(f"\n--- Evaluating Scene: {prop['id']} ({prop['title']}) ---")
         if not os.path.exists(prop["base_image"]):
             download_if_missing(prop["source_url"], prop["base_image"])
             
@@ -526,45 +491,55 @@ def execute_adaptive_pipeline():
             continue
         print(f"✓ Scene Affordance: {affordance_msg}")
         
-        # Step 3: Local Clutter Estimation
-        clutter_mult = LocalClutterEstimator.estimate_clutter(img_bgr, prop["target_bbox"])
-        print(f"✓ Local Clutter Multiplier: {clutter_mult:.2f}x")
-        
-        # Step 4: Semantic Mask Scorer
-        best_candidate, selection_msg = SemanticMaskScorer.rank_and_select(
-            raw_masks, prop["target_bbox"], prop["prompt_point"], img_rgb
+        # Step 3: Goldilocks Target Selection (Operation suitability, recolorable fraction, visual peers, response probe)
+        target_info, selection_reason, feasible_candidates = GoldilocksTargetSelector.select_best_goldilocks_target(
+            img_bgr, raw_masks, target_difficulty=prop.get("difficulty", "Medium")
         )
-        if not best_candidate:
-            print(f"❌ Mask Selection Rejection: {selection_msg}")
+        if not feasible_candidates:
+            print(f"❌ Goldilocks Target Selection Rejection: {selection_reason}\n")
             continue
-        print(f"✓ {selection_msg}")
+        print(f"✓ {selection_reason}")
+            
+        # Step 4: Try candidates in order until one passes QA
+        passed = False
+        final_variant_rgb = None
+        final_info = None
+        final_qa_msg = None
         
-        # Step 5: Adaptive Spotability Exposure Loop & QA Critic
-        passed, variant_rgb, qa_metrics, qa_msg = AdaptiveSpotabilityLoop.generate_and_calibrate(
-            img_rgb, best_candidate["mask"], prop["target_bbox"],
-            difficulty=prop["difficulty"],
-            hue_direction_deg=prop["hue_direction_deg"],
-            clutter_multiplier=clutter_mult
-        )
-        
+        for cand in feasible_candidates[:5]:
+            p, v_rgb, f_info, q_msg = AdaptiveSpotabilityLoop.generate_and_calibrate(
+                image_rgb=img_rgb,
+                mask=cand["mask"],
+                target_bbox=cand["bbox"],
+                difficulty=prop.get("difficulty", "Medium"),
+                hue_direction_deg=prop.get("hue_direction_deg", 50.0),
+                clutter_multiplier=cand["local_clutter_mult"]
+            )
+            if p:
+                passed = True
+                final_variant_rgb = v_rgb
+                final_info = f_info
+                final_qa_msg = q_msg
+                break
+                
         if not passed:
-            print(f"❌ Adaptive Calibration Rejection: {qa_msg}")
+            print(f"❌ Adaptive Calibration Rejection: {final_qa_msg}")
             continue
             
-        print(f"✓ {qa_msg}")
-        print(f"  • Spotability: {qa_metrics['spotability']:.2f} (Converged in {qa_metrics['iterations']} iterations)")
-        print(f"  • Final Delta-E: {qa_metrics['delta_e']:.1f}")
-        print(f"  • Changed Area: {qa_metrics['area_pct']:.2f}%")
-        print(f"  • Centroid: ({qa_metrics['x']}%, {qa_metrics['y']}%), Radius: {qa_metrics['radius']}%")
+        print(f"✓ {final_qa_msg}")
+        print(f"  • Spotability: {final_info['spotability']:.2f} (Converged in {final_info['iterations']} iterations)")
+        print(f"  • Final Delta-E: {final_info['delta_e']:.1f}")
+        print(f"  • Changed Area: {final_info['area_pct']:.2f}%")
+        print(f"  • Centroid: ({final_info['x']}%, {final_info['y']}%), Radius: {final_info['radius']}%")
         
-        # Step 6: Save Output Files
+        # Step 5: Save Output Files
         base_name = f"{prop['id']}_base.jpg"
         var_name = f"{prop['id']}_variant.jpg"
         base_path = os.path.join("public/levels", base_name)
         var_path = os.path.join("public/levels", var_name)
         
         cv2.imwrite(base_path, img_bgr, [cv2.IMWRITE_JPEG_QUALITY, 94])
-        cv2.imwrite(var_path, cv2.cvtColor(variant_rgb, cv2.COLOR_RGB2BGR), [cv2.IMWRITE_JPEG_QUALITY, 94])
+        cv2.imwrite(var_path, cv2.cvtColor(final_variant_rgb, cv2.COLOR_RGB2BGR), [cv2.IMWRITE_JPEG_QUALITY, 94])
         
         entry = {
             "id": prop["id"],
@@ -577,9 +552,9 @@ def execute_adaptive_pipeline():
             "variantImage": f"/levels/{var_name}",
             "diffs": [{
                 "id": 1,
-                "x": qa_metrics["x"],
-                "y": qa_metrics["y"],
-                "radius": qa_metrics["radius"],
+                "x": final_info["x"],
+                "y": final_info["y"],
+                "radius": final_info["radius"],
                 "description": prop["desc"],
                 "hint": prop["hint"]
             }]

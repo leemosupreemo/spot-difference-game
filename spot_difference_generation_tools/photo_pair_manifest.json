@@ -1,5 +1,165 @@
 [
   {
+    "id": "goldilocks_ai_electronics_cap_001",
+    "title": "[AI Canvas] Electronics Antistatic Bench Radial Capacitor",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_electronics_cap_001_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_electronics_cap_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 18.4,
+        "y": 33.6,
+        "radius": 5.4,
+        "description": "Single blue electrolytic capacitor sleeve shifted to golden amber in CIELAB (preserving aluminum casing markings)",
+        "hint": "Check the cluster of blue electrolytic capacitors on the antistatic bench"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_watchmaker_parts_002",
+    "title": "[AI Canvas] Horologist Parts Tray Precision Screwdriver Collar",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_watchmaker_parts_002_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_watchmaker_parts_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59.7,
+        "y": 2.9,
+        "radius": 4.3,
+        "description": "Single precision screwdriver color collar shifted in CIELAB (preserving knurled grip)",
+        "hint": "Examine the color-coded precision screwdrivers on the work pad"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_ai_mechanic_workbench_003",
+    "title": "[AI Canvas] Master Mechanic Workbench Screwdriver Handle",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_ai_mechanic_workbench_003_base.jpg",
+    "variantImage": "/levels/goldilocks_ai_mechanic_workbench_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 89.8,
+        "y": 85.1,
+        "radius": 7.5,
+        "description": "Single screwdriver handle tone shifted to emerald in CIELAB (preserving fluting and wear)",
+        "hint": "Check the collection of screwdriver handles on the mechanic bench"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_photo_artist_oil_pastels_004",
+    "title": "[Photo] Fine Art Studio Oil Pastel Stick",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_photo_artist_oil_pastels_004_base.jpg",
+    "variantImage": "/levels/goldilocks_photo_artist_oil_pastels_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55.5,
+        "y": 3.5,
+        "radius": 5.8,
+        "description": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
+        "hint": "Check the pastel sticks and paint supplies in the easel tray"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_photo_camp_bushcraft_table_005",
+    "title": "[Photo] Expedition Table Paracord Lock Toggle",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_photo_camp_bushcraft_table_005_base.jpg",
+    "variantImage": "/levels/goldilocks_photo_camp_bushcraft_table_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.8,
+        "y": 16.6,
+        "radius": 5.6,
+        "description": "Single paracord spring toggle shifted to bronze in CIELAB",
+        "hint": "Check the cordage and outdoor gear laid out on the table"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_photo_tailor_notions_spool_006",
+    "title": "[Photo] Tailor Notions Box Woven Thread Spool",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_photo_tailor_notions_spool_006_base.jpg",
+    "variantImage": "/levels/goldilocks_photo_tailor_notions_spool_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 85.6,
+        "y": 14.1,
+        "radius": 7.5,
+        "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
+        "hint": "Look closely at the rows of sewing thread spools in the box"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_photo_retro_gaming_cartridges_008",
+    "title": "[Photo] Retro Gaming Desk Cartridge Label Accent",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_photo_retro_gaming_cartridges_008_base.jpg",
+    "variantImage": "/levels/goldilocks_photo_retro_gaming_cartridges_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 60.6,
+        "y": 24.4,
+        "radius": 4.2,
+        "description": "Single retro cartridge spine label tone shifted in CIELAB",
+        "hint": "Scan the vintage gaming cartridges and tech accessories"
+      }
+    ]
+  },
+  {
+    "id": "goldilocks_photo_coin_collector_tray_009",
+    "title": "[Photo] Numismatist Collector Tray Coin Rim",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/goldilocks_photo_coin_collector_tray_009_base.jpg",
+    "variantImage": "/levels/goldilocks_photo_coin_collector_tray_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33.5,
+        "y": 14.9,
+        "radius": 5.3,
+        "description": "Single collectible coin rim tone shifted in CIELAB",
+        "hint": "Examine the coins and currency notes in the collector tray"
+      }
+    ]
+  },
+  {
     "id": "ai_canvas_mechanic_screwdriver_001",
     "title": "[AI Canvas] Master Mechanic Workbench Amber Screwdriver Grip",
     "category": "Photography",
