@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 125,
-    "dismissedCount": 95,
+    "approvedCount": 127,
+    "dismissedCount": 103,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -131,7 +131,9 @@
     "photo_fresh_pencils_002",
     "photo_fresh_crayons_003",
     "photo_fresh_watchmaker_008",
-    "photo_fresh_stained_glass_009"
+    "photo_fresh_stained_glass_009",
+    "photo_c_spices_004",
+    "photo_c_seeds_010"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -229,7 +231,15 @@
     "photo_fresh_coffee_005",
     "photo_fresh_pcb_006",
     "photo_fresh_mechanic_007",
-    "photo_fresh_marbles_010"
+    "photo_fresh_marbles_010",
+    "photo_c_leaves_003",
+    "photo_c_pumpkins_001",
+    "photo_c_macarons_002",
+    "photo_c_citrus_005",
+    "photo_c_stamps_006",
+    "photo_c_pebbles_007",
+    "photo_c_succulents_008",
+    "photo_c_paint_tubes_009"
   ],
   "approvedLevels": [
     {
@@ -2687,6 +2697,46 @@
     "photo_fresh_marbles_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:26:03.169Z"
+    },
+    "photo_c_leaves_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:44:04.110Z"
+    },
+    "photo_c_pumpkins_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:44:13.015Z"
+    },
+    "photo_c_macarons_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:44:16.958Z"
+    },
+    "photo_c_spices_004": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:44:24.367Z"
+    },
+    "photo_c_citrus_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:44:29.802Z"
+    },
+    "photo_c_stamps_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:44:34.226Z"
+    },
+    "photo_c_pebbles_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:44:45.218Z"
+    },
+    "photo_c_succulents_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:44:47.443Z"
+    },
+    "photo_c_paint_tubes_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:44:51.945Z"
+    },
+    "photo_c_seeds_010": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:46:34.544Z"
     }
   }
 }
