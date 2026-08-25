@@ -14,8 +14,8 @@
       {
         "id": 1,
         "x": 65.9,
-        "y": 82.8,
-        "radius": 4.5,
+        "y": 83.1,
+        "radius": 6.2,
         "description": "Single sea glass pebble shifted from ocean emerald to cobalt azure",
         "hint": "Scan through the natural seashells and sea glass pieces on the sand",
         "operation": "recolor"
@@ -37,8 +37,8 @@
       {
         "id": 1,
         "x": 54.8,
-        "y": 12.7,
-        "radius": 4.5,
+        "y": 13.0,
+        "radius": 5.7,
         "description": "Single oil paint dollop color shifted on the wooden palette",
         "hint": "Inspect the mixed paint dollops and color swatches on the palette",
         "operation": "recolor"
@@ -59,9 +59,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 33.4,
-        "y": 35.7,
-        "radius": 5.7,
+        "x": 33.3,
+        "y": 35.6,
+        "radius": 9.0,
         "description": "Single arcade button or memory card label color shifted",
         "hint": "Scan the retro game cartridges and handheld controller buttons",
         "operation": "recolor"
@@ -82,9 +82,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35.2,
-        "y": 32.8,
-        "radius": 7.3,
+        "x": 35.0,
+        "y": 29.1,
+        "radius": 9.0,
         "description": "Single botanical plant marker or terracotta item shifted in tone",
         "hint": "Check the potting bench tools, seeds, and plant tags",
         "operation": "recolor"
@@ -128,9 +128,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 44.3,
-        "y": 36.8,
-        "radius": 4.5,
+        "x": 44.4,
+        "y": 36.5,
+        "radius": 6.8,
         "description": "Single gourmet pastry macaron or berry garnish shifted in color",
         "hint": "Scan the pastries and fruit garnishes on the marble board",
         "operation": "recolor"
@@ -151,9 +151,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 10.1,
-        "y": 80.9,
-        "radius": 7.2,
+        "x": 10.2,
+        "y": 81.5,
+        "radius": 9.0,
         "description": "Single brass rivet cap or beveling tool shifted in tone",
         "hint": "Examine the brass hardware and leathercraft tools on the bench",
         "operation": "recolor"
@@ -175,8 +175,8 @@
       {
         "id": 1,
         "x": 16.0,
-        "y": 24.4,
-        "radius": 4.5,
+        "y": 25.0,
+        "radius": 6.0,
         "description": "Single acrylic dropper paint bottle cap shifted in color",
         "hint": "Scan the miniature dropper bottles and wash pots on the desk",
         "operation": "recolor"
@@ -197,9 +197,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 19.6,
-        "y": 35.4,
-        "radius": 4.5,
+        "x": 19.4,
+        "y": 35.3,
+        "radius": 8.2,
         "description": "Single tactical carabiner or paracord spool shifted in tone",
         "hint": "Check the expedition survival tools, compass, and cordage",
         "operation": "recolor"
@@ -220,9 +220,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 27.5,
-        "y": 72.8,
-        "radius": 6.2,
+        "x": 27.6,
+        "y": 73.5,
+        "radius": 9.0,
         "description": "Single brass marking gauge or chisel ferrule tone shifted",
         "hint": "Inspect the woodworking tools and brass marking gauges",
         "operation": "recolor"
@@ -243,9 +243,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 29.4,
-        "y": 77.9,
-        "radius": 4.5,
+        "x": 29.3,
+        "y": 78.0,
+        "radius": 6.0,
         "description": "Single swirling glass marble shifted from emerald green to ocean turquoise",
         "hint": "Scan through the glass marble collection for a subtle tone shift",
         "operation": "recolor"
@@ -313,8 +313,8 @@
       {
         "id": 1,
         "x": 91.7,
-        "y": 43.7,
-        "radius": 4.5,
+        "y": 43.5,
+        "radius": 6.0,
         "description": "Single glossy gourmet jelly bean shifted from cherry red to warm amber",
         "hint": "Scan the fruit candy drops and jelly beans",
         "operation": "recolor"
@@ -335,9 +335,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 79.3,
-        "y": 51.4,
-        "radius": 4.9,
+        "x": 79.5,
+        "y": 52.2,
+        "radius": 7.8,
         "description": "Single brass hex nut shifted to warm bronze tone",
         "hint": "Inspect the brass hex nuts in the hardware organizer tray",
         "operation": "recolor"
@@ -359,8 +359,8 @@
       {
         "id": 1,
         "x": 89.0,
-        "y": 25.2,
-        "radius": 4.5,
+        "y": 25.1,
+        "radius": 6.1,
         "description": "Single synthetic ruby jewel bearing tone shifted",
         "hint": "Examine the precision cogs and ruby jewels in the tray",
         "operation": "recolor"
@@ -381,9 +381,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 66.2,
-        "y": 57.4,
-        "radius": 4.5,
+        "x": 66.0,
+        "y": 57.3,
+        "radius": 6.0,
         "description": "Single faceted cut gemstone shifted from sapphire to amethyst tone",
         "hint": "Scan the sparkling faceted jewels across the velvet tray",
         "operation": "recolor"
@@ -404,9 +404,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 76.0,
+        "x": 76.1,
         "y": 51.5,
-        "radius": 4.5,
+        "radius": 5.3,
         "description": "Single retro enamel pin badge color shifted",
         "hint": "Scan the retro enamel pins and metal badges on the denim banner",
         "operation": "recolor"
@@ -428,8 +428,8 @@
       {
         "id": 1,
         "x": 61.2,
-        "y": 26.7,
-        "radius": 4.5,
+        "y": 26.8,
+        "radius": 5.3,
         "description": "Single whole spice pod shifted in warmth",
         "hint": "Check the spice compartments for a tone change",
         "operation": "recolor"
@@ -450,9 +450,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 79.5,
-        "y": 63.0,
-        "radius": 4.5,
+        "x": 79.4,
+        "y": 63.2,
+        "radius": 6.3,
         "description": "Single succulent rosette shifted from sage green to dusty rose",
         "hint": "Look across the nursery tray for a color-shifted succulent rosette",
         "operation": "recolor"
@@ -473,9 +473,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 29.4,
-        "y": 77.9,
-        "radius": 4.5,
+        "x": 29.3,
+        "y": 78.0,
+        "radius": 6.0,
         "description": "Single swirling glass marble color shifted to vibrant contrast tone",
         "hint": "Scan through the glass marble collection for a bold color change",
         "operation": "recolor"
@@ -543,8 +543,8 @@
       {
         "id": 1,
         "x": 91.7,
-        "y": 43.7,
-        "radius": 4.5,
+        "y": 43.5,
+        "radius": 6.0,
         "description": "Single glossy gourmet jelly bean color shifted",
         "hint": "Scan the fruit candy drops and jelly beans",
         "operation": "recolor"
@@ -565,9 +565,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 10.9,
-        "y": 34.1,
-        "radius": 6.0,
+        "x": 11.0,
+        "y": 33.9,
+        "radius": 9.0,
         "description": "Single brass hex nut shifted to steel tone",
         "hint": "Inspect the brass hex nuts in the hardware organizer tray",
         "operation": "recolor"
@@ -588,9 +588,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 19.7,
-        "y": 73.6,
-        "radius": 5.1,
+        "x": 20.3,
+        "y": 72.5,
+        "radius": 8.1,
         "description": "Single synthetic ruby jewel bearing shifted to emerald green",
         "hint": "Examine the precision cogs and ruby jewels in the tray",
         "operation": "recolor"
@@ -611,9 +611,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 10.8,
-        "y": 50.2,
-        "radius": 5.0,
+        "x": 10.7,
+        "y": 50.6,
+        "radius": 7.8,
         "description": "Single faceted cut gemstone color shifted",
         "hint": "Scan the sparkling faceted jewels across the velvet tray",
         "operation": "recolor"
@@ -634,9 +634,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 76.0,
+        "x": 76.1,
         "y": 51.5,
-        "radius": 4.5,
+        "radius": 5.3,
         "description": "Single retro enamel pin badge color shifted",
         "hint": "Scan the retro enamel pins and metal badges on the denim banner",
         "operation": "recolor"
@@ -657,9 +657,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 62.4,
-        "y": 18.9,
-        "radius": 5.6,
+        "x": 62.8,
+        "y": 19.3,
+        "radius": 8.8,
         "description": "Single whole spice pod color shifted",
         "hint": "Check the spice compartments for a tone change",
         "operation": "recolor"
@@ -680,9 +680,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.2,
-        "y": 24.8,
-        "radius": 4.5,
+        "x": 34.5,
+        "y": 24.9,
+        "radius": 6.8,
         "description": "Single succulent rosette shifted from pastel green to vivid violet",
         "hint": "Look across the nursery tray for a color-shifted succulent rosette",
         "operation": "recolor"
@@ -703,9 +703,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.1,
-        "y": 50.2,
-        "radius": 4.5,
+        "x": 52.0,
+        "y": 50.0,
+        "radius": 5.5,
         "description": "Single swirling glass marble shifted from cobalt blue to vibrant crimson",
         "hint": "Inspect the glass marbles on the right side of the marble pile",
         "operation": "recolor"
@@ -795,7 +795,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 73.9,
+        "x": 75.3,
         "y": 49.0,
         "radius": 4.5,
         "description": "Single color-banded ceramic resistor body shifted from blue to vibrant crimson red",
@@ -820,7 +820,7 @@
         "id": 1,
         "x": 82.9,
         "y": 50.7,
-        "radius": 4.5,
+        "radius": 5.5,
         "description": "Single watchmaker synthetic jewel bearing shifted from ruby to emerald green",
         "hint": "Examine the jewel bearings and cogs on the watchmaker tray",
         "operation": "recolor"
@@ -887,9 +887,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.7,
-        "y": 41.3,
-        "radius": 4.5,
+        "x": 50.8,
+        "y": 41.4,
+        "radius": 6.0,
         "description": "Single rich oil paint impasto dollop missing from the wooden palette",
         "hint": "Check the colorful oil paint dollops across the palette",
         "operation": "remove"
@@ -912,7 +912,7 @@
         "id": 1,
         "x": 24.0,
         "y": 64.7,
-        "radius": 4.5,
+        "radius": 5.3,
         "description": "Single enamel collector pin shifted to bright tangerine gold",
         "hint": "Scan the retro enamel pins and metal badges on the board",
         "operation": "recolor"
@@ -935,7 +935,7 @@
         "id": 1,
         "x": 2.3,
         "y": 4.9,
-        "radius": 4.2,
+        "radius": 5.8,
         "description": "Single oil paint impasto dollop missing from the palette",
         "hint": "Inspect the swirl dollops of oil paint on the wooden palette",
         "operation": "remove"
@@ -956,8 +956,8 @@
       {
         "id": 1,
         "x": 53.9,
-        "y": 55.4,
-        "radius": 4.2,
+        "y": 55.8,
+        "radius": 5.8,
         "description": "Single wooden cotton thread spool missing from the compartmentalized notions tray",
         "hint": "Inspect the wooden thread spools in the sorting compartments of the notions box"
       }
@@ -978,7 +978,7 @@
         "id": 1,
         "x": 18.5,
         "y": 51.5,
-        "radius": 4.2,
+        "radius": 5.2,
         "description": "Single precision screwdriver color collar shifted in CIELAB",
         "hint": "Examine the color-coded precision screwdrivers on the work pad"
       }
@@ -1018,9 +1018,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.2,
-        "y": 86.3,
-        "radius": 4.2,
+        "x": 86.3,
+        "y": 86.2,
+        "radius": 6.7,
         "description": "Single colorful garden plant marker tag missing from the bench",
         "hint": "Check the plant marker tags on the potting bench"
       }
@@ -1039,9 +1039,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 38.4,
-        "y": 32.9,
-        "radius": 5.2,
+        "x": 38.5,
+        "y": 33.1,
+        "radius": 6.2,
         "description": "Single artist oil paint tube cap tone shifted in CIELAB",
         "hint": "Inspect the row of oil paint tubes on the palette"
       }
@@ -1062,7 +1062,7 @@
         "id": 1,
         "x": 66.8,
         "y": 84.7,
-        "radius": 7.5,
+        "radius": 9.0,
         "description": "Single wooden carpenter marking pencil tone shifted in CIELAB",
         "hint": "Look closely at the colored carpenter marking pencils"
       }
@@ -1083,7 +1083,7 @@
         "id": 1,
         "x": 70.9,
         "y": 73.5,
-        "radius": 4.7,
+        "radius": 5.6,
         "description": "Single vintage game cartridge shell tone shifted in CIELAB",
         "hint": "Scan the retro game cartridges and memory cards on the desk"
       }
@@ -1102,9 +1102,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59.5,
-        "y": 21.8,
-        "radius": 4.6,
+        "x": 59.6,
+        "y": 21.5,
+        "radius": 8.1,
         "description": "Single locking carabiner missing from the gear array",
         "hint": "Check the carabiners and outdoor gear on the table"
       }
@@ -1124,8 +1124,8 @@
       {
         "id": 1,
         "x": 71.5,
-        "y": 22.6,
-        "radius": 4.3,
+        "y": 22.4,
+        "radius": 5.4,
         "description": "Single waxed linen thread spool shifted in CIELAB",
         "hint": "Inspect the collection of colored waxed thread spools"
       }
@@ -1146,7 +1146,7 @@
         "id": 1,
         "x": 15.6,
         "y": 36.3,
-        "radius": 5.6,
+        "radius": 6.6,
         "description": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
         "hint": "Examine the rows of acrylic paint dropper bottles"
       }
@@ -1166,8 +1166,8 @@
       {
         "id": 1,
         "x": 53.9,
-        "y": 55.4,
-        "radius": 4.2,
+        "y": 55.8,
+        "radius": 5.8,
         "description": "Single wooden cotton thread spool missing from the compartmentalized notions tray",
         "hint": "Inspect the wooden thread spools in the sorting compartments of the notions box"
       }
@@ -1188,7 +1188,7 @@
         "id": 1,
         "x": 18.5,
         "y": 51.5,
-        "radius": 4.2,
+        "radius": 5.2,
         "description": "Single precision screwdriver color collar shifted in CIELAB",
         "hint": "Examine the color-coded precision screwdrivers on the work pad"
       }
@@ -1228,9 +1228,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.2,
-        "y": 86.3,
-        "radius": 4.2,
+        "x": 86.3,
+        "y": 86.2,
+        "radius": 6.7,
         "description": "Single colorful garden plant marker tag missing from the bench",
         "hint": "Check the plant marker tags on the potting bench"
       }
@@ -1249,9 +1249,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 38.4,
-        "y": 32.9,
-        "radius": 5.2,
+        "x": 38.5,
+        "y": 33.1,
+        "radius": 6.2,
         "description": "Single artist oil paint tube cap tone shifted in CIELAB",
         "hint": "Inspect the row of oil paint tubes on the palette"
       }
@@ -1272,7 +1272,7 @@
         "id": 1,
         "x": 66.8,
         "y": 84.7,
-        "radius": 7.5,
+        "radius": 9.0,
         "description": "Single wooden carpenter marking pencil tone shifted in CIELAB",
         "hint": "Look closely at the colored carpenter marking pencils"
       }
@@ -1293,7 +1293,7 @@
         "id": 1,
         "x": 70.9,
         "y": 73.5,
-        "radius": 4.7,
+        "radius": 5.6,
         "description": "Single vintage game cartridge shell tone shifted in CIELAB",
         "hint": "Scan the retro game cartridges and memory cards on the desk"
       }
@@ -1312,9 +1312,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59.5,
-        "y": 21.8,
-        "radius": 4.6,
+        "x": 59.6,
+        "y": 21.5,
+        "radius": 8.1,
         "description": "Single locking carabiner missing from the gear array",
         "hint": "Check the carabiners and outdoor gear on the table"
       }
@@ -1334,8 +1334,8 @@
       {
         "id": 1,
         "x": 71.5,
-        "y": 22.6,
-        "radius": 4.3,
+        "y": 22.4,
+        "radius": 5.4,
         "description": "Single waxed linen thread spool shifted in CIELAB",
         "hint": "Inspect the collection of colored waxed thread spools"
       }
@@ -1356,7 +1356,7 @@
         "id": 1,
         "x": 15.6,
         "y": 36.3,
-        "radius": 5.6,
+        "radius": 6.6,
         "description": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
         "hint": "Examine the rows of acrylic paint dropper bottles"
       }
@@ -1438,9 +1438,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 13.9,
-        "y": 94.1,
-        "radius": 6.5,
+        "x": 13.8,
+        "y": 94.6,
+        "radius": 7.5,
         "description": "Single wooden thread spool cotton fibers tone shifted in CIELAB",
         "hint": "Check the rows of colorful thread spools in the compartmentalized tray"
       }
@@ -1501,9 +1501,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.8,
-        "y": 14.2,
-        "radius": 4.8,
+        "x": 48.7,
+        "y": 14.1,
+        "radius": 8.4,
         "description": "Single soft pastel stick missing from the wooden easel tray",
         "hint": "Inspect the pastel sticks and paint supplies in the easel tray"
       }
@@ -1585,9 +1585,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 40.6,
-        "y": 47.6,
-        "radius": 7.2,
+        "x": 40.5,
+        "y": 48.1,
+        "radius": 9.0,
         "description": "Single additional carpenter marking pencil added to the pencil array",
         "hint": "Look closely at the rows of carpenter marking pencils"
       }
@@ -1607,8 +1607,8 @@
       {
         "id": 1,
         "x": 40.8,
-        "y": 39.7,
-        "radius": 7.5,
+        "y": 39.8,
+        "radius": 9.0,
         "description": "Single additional acrylic paint dropper bottle added to the rack",
         "hint": "Examine the rows of acrylic paint dropper bottles"
       }
@@ -1726,9 +1726,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 73.2,
+        "x": 73.3,
         "y": 67.5,
-        "radius": 5.1,
+        "radius": 6.0,
         "description": "Single plant stem support clip ring tone shifted in CIELAB",
         "hint": "Check the plant support clips and twine loops on the potting bench"
       }
@@ -1828,7 +1828,7 @@
         "id": 1,
         "x": 35.2,
         "y": 37.3,
-        "radius": 4.4,
+        "radius": 5.3,
         "description": "Single wooden thread spool cotton wrap shifted in CIELAB (preserving wound thread fibers)",
         "hint": "Check the colorful thread spools in the compartmentalized tray"
       }
@@ -1846,9 +1846,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 63.0,
-        "y": 66.4,
-        "radius": 7.5,
+        "x": 62.9,
+        "y": 66.3,
+        "radius": 9.0,
         "description": "Single colorful garden plant marker tag tone shifted in CIELAB",
         "hint": "Examine the plant marker tags and twine balls on the potting bench"
       }
@@ -1886,9 +1886,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 44.0,
-        "y": 82.1,
-        "radius": 4.3,
+        "x": 43.9,
+        "y": 82.0,
+        "radius": 5.1,
         "description": "Single vintage game cartridge shell tone shifted in CIELAB",
         "hint": "Scan the retro game cartridges and memory cards on the desk"
       }
@@ -1906,9 +1906,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 81.5,
+        "x": 81.4,
         "y": 22.8,
-        "radius": 4.7,
+        "radius": 5.6,
         "description": "Single waxed linen thread spool shifted in CIELAB (preserving thread twist)",
         "hint": "Inspect the collection of colored waxed thread spools"
       }
@@ -1926,9 +1926,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.1,
-        "y": 32.4,
-        "radius": 4.3,
+        "x": 86.0,
+        "y": 32.5,
+        "radius": 5.2,
         "description": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
         "hint": "Examine the rows of acrylic paint dropper bottles"
       }
@@ -1948,7 +1948,7 @@
         "id": 1,
         "x": 42.9,
         "y": 89.2,
-        "radius": 4.2,
+        "radius": 5.3,
         "description": "Single anodized aluminum locking carabiner tone shifted in CIELAB",
         "hint": "Check the carabiners and paracord bundles on the table"
       }
@@ -1966,9 +1966,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 64.9,
+        "x": 64.5,
         "y": 12.6,
-        "radius": 7.5,
+        "radius": 9.0,
         "description": "Single wooden carpenter marking pencil tone shifted in CIELAB",
         "hint": "Look closely at the colored carpenter marking pencils"
       }
@@ -1986,9 +1986,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 18.4,
-        "y": 33.6,
-        "radius": 5.4,
+        "x": 18.2,
+        "y": 33.4,
+        "radius": 6.3,
         "description": "Single blue electrolytic capacitor sleeve shifted in CIELAB",
         "hint": "Check the blue capacitors on the antistatic bench"
       }
@@ -2006,9 +2006,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59.7,
-        "y": 2.9,
-        "radius": 4.3,
+        "x": 59.6,
+        "y": 3.1,
+        "radius": 5.1,
         "description": "Single precision screwdriver color collar shifted in CIELAB",
         "hint": "Examine the color-coded precision screwdrivers on the work pad"
       }
@@ -2026,9 +2026,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 18.4,
-        "y": 33.6,
-        "radius": 5.4,
+        "x": 18.2,
+        "y": 33.4,
+        "radius": 6.3,
         "description": "Single blue electrolytic capacitor sleeve shifted to golden amber in CIELAB (preserving aluminum casing markings)",
         "hint": "Check the cluster of blue electrolytic capacitors on the antistatic bench"
       }
@@ -2046,9 +2046,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59.7,
-        "y": 2.9,
-        "radius": 4.3,
+        "x": 59.6,
+        "y": 3.1,
+        "radius": 5.1,
         "description": "Single precision screwdriver color collar shifted in CIELAB (preserving knurled grip)",
         "hint": "Examine the color-coded precision screwdrivers on the work pad"
       }
@@ -2068,7 +2068,7 @@
         "id": 1,
         "x": 89.8,
         "y": 85.1,
-        "radius": 7.5,
+        "radius": 9.0,
         "description": "Single screwdriver handle tone shifted to emerald in CIELAB (preserving fluting and wear)",
         "hint": "Check the collection of screwdriver handles on the mechanic bench"
       }
@@ -2087,8 +2087,8 @@
       {
         "id": 1,
         "x": 55.5,
-        "y": 3.5,
-        "radius": 5.8,
+        "y": 3.4,
+        "radius": 6.7,
         "description": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
         "hint": "Check the pastel sticks and paint supplies in the easel tray"
       }
@@ -2108,7 +2108,7 @@
         "id": 1,
         "x": 50.8,
         "y": 16.6,
-        "radius": 5.6,
+        "radius": 6.5,
         "description": "Single paracord spring toggle shifted to bronze in CIELAB",
         "hint": "Check the cordage and outdoor gear laid out on the table"
       }
@@ -2127,8 +2127,8 @@
       {
         "id": 1,
         "x": 85.6,
-        "y": 14.1,
-        "radius": 7.5,
+        "y": 14.0,
+        "radius": 9.0,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
         "hint": "Look closely at the rows of sewing thread spools in the box"
       }
@@ -2167,8 +2167,8 @@
       {
         "id": 1,
         "x": 33.5,
-        "y": 14.9,
-        "radius": 5.3,
+        "y": 14.8,
+        "radius": 6.2,
         "description": "Single collectible coin rim tone shifted in CIELAB",
         "hint": "Examine the coins and currency notes in the collector tray"
       }
@@ -2186,9 +2186,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 6.7,
-        "y": 37.9,
-        "radius": 7.5,
+        "x": 6.6,
+        "y": 38.4,
+        "radius": 9.0,
         "description": "Single screwdriver amber handle tone shifted to emerald in CIELAB (preserving fluting and workshop wear)",
         "hint": "Check the amber screwdriver handle on the left side of the bench"
       }
@@ -2207,8 +2207,8 @@
       {
         "id": 1,
         "x": 33.1,
-        "y": 61.1,
-        "radius": 5.6,
+        "y": 61.4,
+        "radius": 6.6,
         "description": "Single precision screwdriver color-coded collar shifted in CIELAB (preserving knurled grip)",
         "hint": "Examine the color-coded precision screwdrivers on the leather work pad"
       }
@@ -2227,8 +2227,8 @@
       {
         "id": 1,
         "x": 47.0,
-        "y": 52.6,
-        "radius": 7.5,
+        "y": 52.4,
+        "radius": 9.0,
         "description": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
         "hint": "Check the pastel sticks and paint supplies in the easel tray"
       }
@@ -2246,9 +2246,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 46.2,
-        "y": 10.3,
-        "radius": 7.5,
+        "x": 46.3,
+        "y": 10.0,
+        "radius": 8.6,
         "description": "Single watchmaker tool grip sleeve tone shifted in CIELAB (preserving reflections)",
         "hint": "Examine the precision tools and tweezers on the watch bench"
       }
@@ -2266,9 +2266,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 45.9,
-        "y": 47.7,
-        "radius": 7.5,
+        "x": 43.9,
+        "y": 49.0,
+        "radius": 9.0,
         "description": "Single paracord spring toggle shifted to bronze in CIELAB",
         "hint": "Check the cordage and outdoor gear laid out on the table"
       }
@@ -2286,9 +2286,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 14.4,
+        "x": 14.3,
         "y": 27.1,
-        "radius": 4.5,
+        "radius": 5.5,
         "description": "Single blue electrolytic capacitor sleeve tone shifted in CIELAB (preserving aluminum casing markings)",
         "hint": "Check the cluster of blue electrolytic capacitors in the upper left tray"
       }
@@ -2306,9 +2306,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 8.0,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
         "hint": "Look closely at the rows of sewing thread spools in the box"
       }
@@ -2327,8 +2327,8 @@
       {
         "id": 1,
         "x": 32.4,
-        "y": 39.6,
-        "radius": 4.9,
+        "y": 39.7,
+        "radius": 5.8,
         "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
         "hint": "Inspect the slider buttons on the tools in the central workbench array"
       }
@@ -2346,9 +2346,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35.6,
-        "y": 37.5,
-        "radius": 7.5,
+        "x": 36.2,
+        "y": 36.9,
+        "radius": 8.2,
         "description": "Single retro cartridge spine label tone shifted in CIELAB",
         "hint": "Scan the vintage gaming cartridges and tech accessories"
       }
@@ -2366,9 +2366,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 36.4,
+        "x": 36.5,
         "y": 41.1,
-        "radius": 4.2,
+        "radius": 5.1,
         "description": "Single collectible coin rim tone shifted in CIELAB",
         "hint": "Examine the coins and currency notes in the collector tray"
       }
@@ -2386,9 +2386,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 63.2,
+        "x": 63.3,
         "y": 66.0,
-        "radius": 6.2,
+        "radius": 7.1,
         "description": "Single radial capacitor sleeve tone shifted in CIELAB (preserving markings and lead solder)",
         "hint": "Scan the electrolytic capacitors near the circuit trace rail"
       }
@@ -2406,9 +2406,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 7.9,
         "description": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
         "hint": "Look closely at the notions and accessories in the tailor kit"
       }
@@ -2428,7 +2428,7 @@
         "id": 1,
         "x": 32.4,
         "y": 39.6,
-        "radius": 4.9,
+        "radius": 5.8,
         "description": "Single tape measure rubber slide lock button shifted to cobalt blue in CIELAB",
         "hint": "Inspect the measuring tools and small sliders in the tool pile"
       }
@@ -2446,9 +2446,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 46.2,
-        "y": 10.3,
-        "radius": 7.5,
+        "x": 46.3,
+        "y": 10.0,
+        "radius": 8.6,
         "description": "Single watchmaker tool grip sleeve tone shifted in CIELAB (preserving reflections)",
         "hint": "Examine the precision tools and tweezers on the watch bench"
       }
@@ -2466,9 +2466,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 7.9,
         "description": "Single thread spool wrap fibers tone shifted to golden ochre in CIELAB (preserving wound thread texture)",
         "hint": "Check the collection of thread spools in the tailor box"
       }
@@ -2488,7 +2488,7 @@
         "id": 1,
         "x": 32.4,
         "y": 39.6,
-        "radius": 4.9,
+        "radius": 5.8,
         "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
         "hint": "Inspect the slider buttons on the tools in the central workbench array"
       }
@@ -2506,9 +2506,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49.1,
-        "y": 41.4,
-        "radius": 7.5,
+        "x": 49.4,
+        "y": 42.1,
+        "radius": 9.0,
         "description": "Single screwdriver handle rubber grip tone shifted in CIELAB (preserving molded ridges & wear)",
         "hint": "Scan the tool handles and grip sleeves near the center"
       }
@@ -2526,9 +2526,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 7.9,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
         "hint": "Look closely at the rows of sewing thread spools in the box"
       }
@@ -2546,9 +2546,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 7.9,
         "description": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
         "hint": "Look closely at the notions and accessories in the tailor kit"
       }
@@ -2566,9 +2566,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49.3,
-        "y": 42.0,
-        "radius": 7.5,
+        "x": 49.4,
+        "y": 42.2,
+        "radius": 9.0,
         "description": "Single hex wrench rubber grip sleeve tone shifted in CIELAB (preserving tool wear)",
         "hint": "Look across the hex keys and small wrenches on the right"
       }
@@ -2586,9 +2586,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 7.9,
         "description": "Single tailor accessory tone shifted naturally in CIELAB",
         "hint": "Examine the sewing notions and spool accessories"
       }
@@ -2608,7 +2608,7 @@
         "id": 1,
         "x": 32.4,
         "y": 39.6,
-        "radius": 4.9,
+        "radius": 5.8,
         "description": "Single measuring tape lock button shifted to terracotta in CIELAB",
         "hint": "Inspect the measuring tools and small sliders in the tool pile"
       }
@@ -2626,9 +2626,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 7.9,
         "description": "Single thread spool wrap fibers tone shifted in CIELAB (preserving wound texture)",
         "hint": "Check the thread spools in the notions collection"
       }
@@ -2646,9 +2646,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49.3,
-        "y": 41.8,
-        "radius": 7.5,
+        "x": 49.4,
+        "y": 42.1,
+        "radius": 9.0,
         "description": "Single screwdriver handle rubber grip shifted to deep bronze in CIELAB",
         "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
       }
@@ -2666,9 +2666,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49.3,
-        "y": 41.9,
-        "radius": 7.5,
+        "x": 49.4,
+        "y": 42.1,
+        "radius": 9.0,
         "description": "Single screwdriver handle rubber grip tone calibrated in CIELAB (preserving 100% molded ridges & wear)",
         "hint": "Inspect the tool handles and grip sleeves near the center"
       }
@@ -2687,8 +2687,8 @@
       {
         "id": 1,
         "x": 32.4,
-        "y": 39.6,
-        "radius": 4.9,
+        "y": 39.7,
+        "radius": 5.8,
         "description": "Single tape measure rubber slide lock button shifted to cobalt blue in CIELAB",
         "hint": "Inspect the measuring tools and small sliders in the tool pile"
       }
@@ -2706,9 +2706,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 7.9,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
         "hint": "Look closely at the rows of sewing thread spools in the box"
       }
@@ -2726,9 +2726,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.0,
-        "y": 71.2,
-        "radius": 7.1,
+        "x": 34.1,
+        "y": 71.3,
+        "radius": 8.0,
         "description": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
         "hint": "Look closely at the notions and accessories in the tailor kit"
       }
@@ -2746,9 +2746,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49.3,
-        "y": 42.0,
-        "radius": 7.5,
+        "x": 49.4,
+        "y": 42.2,
+        "radius": 9.0,
         "description": "Single hex wrench rubber grip sleeve tone shifted in CIELAB (preserving tool wear)",
         "hint": "Look across the hex keys and small wrenches on the right"
       }
@@ -2767,8 +2767,8 @@
       {
         "id": 1,
         "x": 1.1,
-        "y": 48.9,
-        "radius": 4.9,
+        "y": 48.8,
+        "radius": 5.8,
         "description": "Single plier handle insulation sleeve shifted from orange to crimson in CIELAB (preserving tool wear)",
         "hint": "Scan the handles of the gripping pliers near the center"
       }
@@ -2786,9 +2786,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 53.9,
-        "y": 42.8,
-        "radius": 4.2,
+        "x": 54.8,
+        "y": 43.1,
+        "radius": 4.8,
         "description": "Single wooden thread spool wrap shifted to muted olive green (preserving fiber texture & wood endcaps)",
         "hint": "Check the colored thread spools and notions near the scissors"
       }
@@ -2847,8 +2847,8 @@
       {
         "id": 1,
         "x": 46.0,
-        "y": 21.9,
-        "radius": 6.8,
+        "y": 22.1,
+        "radius": 7.6,
         "description": "Single faceted gemstone crown shifted to amethyst violet in CIELAB (preserving facet reflections)",
         "hint": "Scan the sparkling faceted gemstones in the sorting collection"
       }
@@ -2866,9 +2866,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 45.5,
+        "x": 45.4,
         "y": 22.0,
-        "radius": 5.9,
+        "radius": 6.7,
         "description": "Single ruby gemstone facet tone shifted in CIELAB (preserving mineral refraction & specular highlights)",
         "hint": "Inspect the red and violet gemstones near the center left"
       }
@@ -2907,8 +2907,8 @@
       {
         "id": 1,
         "x": 49.5,
-        "y": 42.6,
-        "radius": 7.5,
+        "y": 42.3,
+        "radius": 9.0,
         "description": "Single screwdriver handle rubber grip shifted from amber to deep cobalt blue (preserving 100% molded ridges & wear)",
         "hint": "Inspect the tool handles and grip sleeves in the workshop collection"
       }
@@ -2926,9 +2926,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 46.6,
-        "y": 54.3,
-        "radius": 7.5,
+        "x": 52.4,
+        "y": 50.4,
+        "radius": 9.0,
         "description": "Single electrolytic capacitor package removed from dense motherboard component array",
         "hint": "Scan the dense rows of capacitors and IC chips on the logic board"
       }
@@ -2946,9 +2946,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 43.8,
-        "y": 51.6,
-        "radius": 4.5,
+        "x": 36.8,
+        "y": 15.9,
+        "radius": 9.0,
         "description": "Discrete blue electrolytic capacitor package removed from PCB header",
         "hint": "Check the multi-component PCB traces near the center header"
       }
@@ -2968,7 +2968,7 @@
         "id": 1,
         "x": 48.3,
         "y": 53.7,
-        "radius": 7.9,
+        "radius": 6.5,
         "description": "Pricking iron punch on cutting mat",
         "hint": "Examine the leatherworking tools on the mat"
       }
@@ -2986,9 +2986,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.8,
-        "y": 56.7,
-        "radius": 8.5,
+        "x": 60.1,
+        "y": 76.5,
+        "radius": 9.0,
         "description": "Wood screw on cedar workbench",
         "hint": "Look near the wood shavings and hand plane"
       }
@@ -3006,9 +3006,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.6,
-        "y": 49.7,
-        "radius": 8.5,
+        "x": 35.3,
+        "y": 61.6,
+        "radius": 8.4,
         "description": "Brass gear pinion in parts tray",
         "hint": "Inspect the compartments of the watchmaker tray"
       }
@@ -3026,9 +3026,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 56.1,
+        "x": 55.5,
         "y": 52.2,
-        "radius": 8.5,
+        "radius": 9.0,
         "description": "Oil paint tube cap on palette",
         "hint": "Look near the brushes and pigment tubes"
       }
@@ -3046,9 +3046,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 57,
-        "y": 45.2,
-        "radius": 8.5,
+        "x": 56.6,
+        "y": 57.4,
+        "radius": 9.0,
         "description": "Stained glass color shift on central petal",
         "hint": "Look closely at the central stained glass flower section"
       }
@@ -3066,9 +3066,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 64.1,
-        "y": 42.6,
-        "radius": 8.5,
+        "x": 65.8,
+        "y": 43.7,
+        "radius": 9.0,
         "description": "Stitching awl on the workbench",
         "hint": "Look at the wooden tools on the right side of the cutting mat"
       }
@@ -3086,9 +3086,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 55.5,
-        "y": 55.7,
-        "radius": 8.5,
+        "x": 57.3,
+        "y": 80.7,
+        "radius": 9.0,
         "description": "Component resistor on the circuit board",
         "hint": "Inspect the electronic components on the soldering mat"
       }
@@ -3106,9 +3106,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 57.2,
-        "y": 44,
-        "radius": 8.5,
+        "x": 85.6,
+        "y": 24.4,
+        "radius": 9.0,
         "description": "Acrylic paint droplet on the wet palette",
         "hint": "Notice the pigment bead on the wet palette surface"
       }
@@ -3125,9 +3125,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 58.4,
-        "y": 52.2,
-        "radius": 8.5,
+        "x": 57.8,
+        "y": 55.4,
+        "radius": 9.0,
         "description": "Balance wheel shock cap ruby jewel changed from magenta to emerald green",
         "hint": "Look at the shock jewel in the center of the balance wheel"
       }
@@ -3144,9 +3144,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 57,
-        "y": 45.2,
-        "radius": 8.5,
+        "x": 56.6,
+        "y": 57.4,
+        "radius": 9.0,
         "description": "Cathedral glass petal to the right of soldering iron changed from ruby red to deep violet purple",
         "hint": "Check the curved glass petal just to the right of the hot solder joint"
       }
@@ -3161,11 +3161,11 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 63.7,
+        "y": 76.0,
         "id": 1,
         "hint": "Check the carved decorative relief piece next to the wooden spoon.",
-        "x": 50.4,
-        "radius": 8.5
+        "x": 44.0,
+        "radius": 9.0
       }
     ],
     "variantImage": "levels/photo-pairs/ai_macro_woodcarver_001/variant.png",
@@ -3178,11 +3178,11 @@
     "totalDifferences": 1,
     "diffs": [
       {
-        "y": 49.9,
+        "y": 52.9,
         "id": 1,
         "hint": "Examine the star anise cluster near the cumin wooden bowl.",
-        "x": 49.9,
-        "radius": 8.5
+        "x": 23.9,
+        "radius": 6.9
       }
     ],
     "baseImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/original.png",
@@ -3200,11 +3200,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 50.3,
+        "y": 48.6,
         "id": 1,
         "hint": "Spot the whole garlic clove near the rosemary cutting board.",
-        "x": 50.1,
-        "radius": 8.5
+        "x": 56.2,
+        "radius": 8.0
       }
     ],
     "originalImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
@@ -3220,11 +3220,11 @@
     "baseImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
     "diffs": [
       {
-        "y": 50.2,
+        "y": 47.4,
         "id": 1,
         "hint": "Check the brass divider caliper near the sea chart compass.",
-        "x": 50.1,
-        "radius": 8.5
+        "x": 62.1,
+        "radius": 9.0
       }
     ],
     "id": "ai_macro_cartography_001",
@@ -3239,11 +3239,11 @@
   {
     "diffs": [
       {
-        "y": 50,
+        "y": 42.7,
         "id": 1,
         "hint": "Look at the spanner wrench tool near the aperture ring.",
-        "x": 49.8,
-        "radius": 8.5
+        "x": 55.5,
+        "radius": 5.2
       }
     ],
     "difficulty": "Medium",
@@ -3265,11 +3265,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 51.6,
+        "y": 53.8,
         "id": 1,
         "hint": "Notice the bamboo tea needle pick resting by the porcelain gaiwan.",
-        "x": 49.5,
-        "radius": 8.5
+        "x": 67.8,
+        "radius": 5.5
       }
     ],
     "totalDifferences": 1,
@@ -3282,11 +3282,11 @@
     "totalDifferences": 1,
     "diffs": [
       {
-        "y": 50.6,
+        "y": 16.5,
         "id": 1,
         "hint": "Examine the silver contact pin on the vintage socket.",
-        "x": 49.9,
-        "radius": 8.5
+        "x": 38.1,
+        "radius": 9.0
       }
     ],
     "category": "Photography",
@@ -3310,11 +3310,11 @@
     "baseImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
     "diffs": [
       {
-        "y": 49.9,
+        "y": 47.5,
         "id": 1,
         "hint": "Find the carved mother-of-pearl button in the sewing tray.",
-        "x": 50.3,
-        "radius": 8.5
+        "x": 63.8,
+        "radius": 7.9
       }
     ],
     "originalImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
@@ -3328,11 +3328,11 @@
     "variantImage": "levels/photo-pairs/ai_macro_watchmaker_001/variant.png",
     "diffs": [
       {
-        "y": 49.8,
+        "y": 31.0,
         "id": 1,
         "hint": "Look inside the small brass cleaning cup in the upper right section.",
-        "x": 50,
-        "radius": 8.5
+        "x": 65.8,
+        "radius": 6.9
       }
     ],
     "pack": "Find the Sniper",
@@ -3347,11 +3347,11 @@
     "originalImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
     "diffs": [
       {
-        "y": 50.2,
+        "y": 69.8,
         "id": 1,
         "hint": "Examine the lower left margin of the center poppy illustration card.",
-        "x": 49.9,
-        "radius": 8.5
+        "x": 37.4,
+        "radius": 4.5
       }
     ],
     "baseImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
@@ -3369,11 +3369,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 49.9,
+        "y": 74.8,
         "id": 1,
         "hint": "Count the row of copper ring washers beneath the ball bearings.",
-        "x": 50.1,
-        "radius": 8.5
+        "x": 45.5,
+        "radius": 7.5
       }
     ],
     "difficulty": "Hard",
@@ -3391,11 +3391,11 @@
     "baseImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
     "diffs": [
       {
-        "y": 49.8,
+        "y": 28.9,
         "id": 1,
         "hint": "Check the bat lever color on the miniature toggle switches.",
-        "x": 50,
-        "radius": 8.5
+        "x": 69.3,
+        "radius": 8.8
       }
     ],
     "id": "ai_macro_electronics_001",
@@ -3412,11 +3412,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 61.3,
+        "y": 90.2,
         "id": 1,
         "hint": "Look around the toy car on the left half of the desk.",
-        "x": 52.7,
-        "radius": 8.5
+        "x": 71.4,
+        "radius": 9.0
       }
     ],
     "baseImage": "levels/photo-pairs/crafts/easy_craft_001/base.jpg",
@@ -3433,11 +3433,11 @@
     "id": "medium_nursery_001",
     "diffs": [
       {
-        "y": 45.6,
+        "y": 40.7,
         "id": 1,
         "hint": "Scan the plant tags in the upper-right tray.",
-        "x": 58.8,
-        "radius": 8.5
+        "x": 63.5,
+        "radius": 9.0
       }
     ],
     "category": "Greenhouse Clutter"
@@ -3447,11 +3447,11 @@
     "variantImage": "levels/photo-pairs/workbench/medium_workbench_001/variant.jpg",
     "diffs": [
       {
-        "y": 56.2,
+        "y": 49.9,
         "id": 1,
         "hint": "Inspect the small screwdriver handle near the right-middle tools.",
-        "x": 50.6,
-        "radius": 8.5
+        "x": 49.7,
+        "radius": 9.0
       }
     ],
     "category": "Workshop Clutter",
@@ -3466,11 +3466,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 52.1,
+        "y": 51.3,
         "id": 1,
         "hint": "Look for the camouflaged tiny figure near center-right.",
-        "x": 50.2,
-        "radius": 8.5
+        "x": 50.4,
+        "radius": 9.0
       }
     ],
     "title": "Forest Floor Camouflage",
@@ -3505,8 +3505,8 @@
         "y": 53.9,
         "id": 1,
         "hint": "Inspect the shifted orange tile fragment left of center.",
-        "x": 36.6,
-        "radius": 4.5
+        "x": 36.5,
+        "radius": 5.4
       }
     ],
     "baseImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/base.jpg",
@@ -3530,7 +3530,7 @@
         "id": 1,
         "hint": "Compare the angle of the small clip in the lower-right wire tangle.",
         "x": 73.6,
-        "radius": 4.2
+        "radius": 4.9
       }
     ],
     "difficulty": "Hard",
@@ -3543,11 +3543,11 @@
     "title": "Workbench Hardware Ring",
     "diffs": [
       {
-        "y": 43.5,
+        "y": 27.6,
         "id": 1,
         "hint": "Look just left of the blue screwdriver near the top edge.",
-        "x": 54.4,
-        "radius": 8.5
+        "x": 91.0,
+        "radius": 9.0
       }
     ],
     "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
@@ -3559,11 +3559,11 @@
   {
     "diffs": [
       {
-        "y": 49.4,
+        "y": 11.9,
         "id": 1,
         "hint": "Check the small detached succulent just left of the twine bundle.",
-        "x": 54.9,
-        "radius": 8.5
+        "x": 38.9,
+        "radius": 9.0
       }
     ],
     "title": "Potting Table Succulent",
@@ -3585,11 +3585,11 @@
     "title": "Watchmaker Bench Gear",
     "diffs": [
       {
-        "y": 49.7,
+        "y": 61.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 50.6,
-        "radius": 8.5
+        "x": 35.3,
+        "radius": 8.4
       }
     ],
     "id": "photo_watchmaker_bench_001"
@@ -3600,11 +3600,11 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 49.2,
+        "y": 75.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 52.9,
-        "radius": 8.5
+        "x": 17.0,
+        "radius": 9.0
       }
     ],
     "title": "Bakers Table Cutter",
@@ -3617,11 +3617,11 @@
     "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
     "diffs": [
       {
-        "y": 53.1,
+        "y": 85.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 44.4,
-        "radius": 8.5
+        "x": 34.8,
+        "radius": 9.0
       }
     ],
     "difficulty": "Medium",
@@ -3655,11 +3655,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 53.7,
+        "y": 59.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 55.9,
-        "radius": 8.5
+        "x": 26.1,
+        "radius": 9.0
       }
     ],
     "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
@@ -3673,11 +3673,11 @@
   {
     "diffs": [
       {
-        "y": 53.5,
+        "y": 79.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 45.3,
-        "radius": 8.5
+        "x": 3.9,
+        "radius": 9.0
       }
     ],
     "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
@@ -3694,11 +3694,11 @@
     "difficulty": "Hard",
     "diffs": [
       {
-        "y": 46.9,
+        "y": 46.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 52,
-        "radius": 8.5
+        "x": 59.7,
+        "radius": 9.0
       }
     ],
     "title": "Board Game Piece",
@@ -3712,11 +3712,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 56.7,
+        "y": 76.5,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 52.8,
-        "radius": 8.5
+        "x": 60.1,
+        "radius": 9.0
       }
     ],
     "difficulty": "Medium",
@@ -3731,11 +3731,11 @@
     "variantImage": "levels/photo-pairs/photo-spice-table/variant.jpg",
     "diffs": [
       {
-        "y": 40.4,
+        "y": 22.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 52.4,
-        "radius": 8.5
+        "x": 78.2,
+        "radius": 9.0
       }
     ],
     "difficulty": "Hard",
@@ -3749,11 +3749,11 @@
   {
     "diffs": [
       {
-        "y": 53,
+        "y": 38.9,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 54.9,
-        "radius": 8.5
+        "x": 78.4,
+        "radius": 9.0
       }
     ],
     "variantImage": "levels/photo-pairs/photo-coffee-station/variant.jpg",
@@ -3770,11 +3770,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 54.2,
+        "y": 59.9,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 54.5,
-        "radius": 8.5
+        "x": 55.6,
+        "radius": 9.0
       }
     ],
     "id": "photo_fishing_tackle_001",
@@ -3795,11 +3795,11 @@
     "title": "Repair Drawer Washer",
     "diffs": [
       {
-        "y": 55.4,
+        "y": 76.5,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 57.4,
-        "radius": 8.5
+        "x": 58.7,
+        "radius": 9.0
       }
     ]
   },
@@ -3810,11 +3810,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 63.2,
+        "y": 65.5,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 45.8,
-        "radius": 8.5
+        "x": 35.4,
+        "radius": 9.0
       }
     ],
     "category": "Photography",
@@ -3827,11 +3827,11 @@
     "title": "Pottery Table Sponge",
     "diffs": [
       {
-        "y": 38.9,
+        "y": 29.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 55.3,
-        "radius": 8.5
+        "x": 48.8,
+        "radius": 9.0
       }
     ],
     "difficulty": "Easy",
@@ -3845,11 +3845,11 @@
     "id": "photo_bicycle_repair_001",
     "diffs": [
       {
-        "y": 49.9,
+        "y": 46.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 57.2,
-        "radius": 8.5
+        "x": 90.1,
+        "radius": 9.0
       }
     ],
     "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
@@ -3867,11 +3867,11 @@
     "id": "photo_woodworking_table_001",
     "diffs": [
       {
-        "y": 51.5,
+        "y": 14.0,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 51,
-        "radius": 8.5
+        "x": 51.9,
+        "radius": 9.0
       }
     ],
     "packId": "find_the_sniper",
@@ -3889,8 +3889,8 @@
         "y": 52.2,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 56.1,
-        "radius": 8.5
+        "x": 55.5,
+        "radius": 9.0
       }
     ],
     "difficulty": "Easy",
@@ -3902,11 +3902,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 50.6,
+        "y": 50.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 55.6,
-        "radius": 8.5
+        "x": 54.8,
+        "radius": 9.0
       }
     ],
     "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg",
@@ -3928,11 +3928,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 55.9,
+        "y": 80.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 59.6,
-        "radius": 8.5
+        "x": 82.7,
+        "radius": 9.0
       }
     ]
   },
@@ -3942,11 +3942,11 @@
     "id": "photo_map_restoration_001",
     "diffs": [
       {
-        "y": 47.4,
+        "y": 16.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 44.4,
-        "radius": 8.5
+        "x": 6.0,
+        "radius": 9.0
       }
     ],
     "pack": "Find the Sniper",
@@ -3958,11 +3958,11 @@
   {
     "diffs": [
       {
-        "y": 49.3,
+        "y": 52.5,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 40.7,
-        "radius": 8.5
+        "x": 33.5,
+        "radius": 9.0
       }
     ],
     "difficulty": "Easy",
@@ -3984,11 +3984,11 @@
     "title": "Game Night Token",
     "diffs": [
       {
-        "y": 47.6,
+        "y": 48.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 47,
-        "radius": 8.5
+        "x": 29.6,
+        "radius": 9.0
       }
     ],
     "id": "photo_game_night_001"
@@ -4003,11 +4003,11 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 48.4,
+        "y": 58.1,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 56.5,
-        "radius": 8.5
+        "x": 4.7,
+        "radius": 9.0
       }
     ],
     "pack": "Find the Sniper"
@@ -4018,11 +4018,11 @@
     "packId": "abstract_animated",
     "diffs": [
       {
-        "y": 44.5,
+        "y": 66.5,
         "id": 1,
         "hint": "Compare the upright turquoise capsule just below center.",
-        "x": 50.7,
-        "radius": 8.5
+        "x": 40.2,
+        "radius": 8.4
       }
     ],
     "pack": "Abstract Animated",
@@ -4034,11 +4034,11 @@
   {
     "diffs": [
       {
-        "y": 47.8,
+        "y": 57.3,
         "id": 1,
         "hint": "Inspect the small purple connector slightly right of center.",
-        "x": 56.6,
-        "radius": 8.5
+        "x": 86.4,
+        "radius": 9.0
       }
     ],
     "variantImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/variant.jpg",
@@ -4057,11 +4057,11 @@
     "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/base.jpg",
     "diffs": [
       {
-        "y": 81.4,
+        "y": 81.3,
         "id": 1,
-        "hint": "Examine the region around (62%, 81%) carefully.",
+        "hint": "Examine the region around near (61.8%, 81.3%)",
         "x": 61.8,
-        "radius": 4.3
+        "radius": 5.2
       }
     ],
     "pack": "Abstract Animated",
@@ -4097,11 +4097,11 @@
     "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_102/variant.jpg",
     "diffs": [
       {
-        "y": 56,
+        "y": 55.0,
         "id": 1,
         "hint": "Compare the small color detail in this area.",
-        "x": 45.2,
-        "radius": 4.2
+        "x": 45.0,
+        "radius": 6.1
       }
     ],
     "pack": "Find the Sniper",
@@ -4112,11 +4112,11 @@
     "difficulty": "Easy",
     "diffs": [
       {
-        "y": 65.8,
+        "y": 66.0,
         "id": 1,
         "hint": "Check the silver powdered sugar shaker to the right of the rolling pin.",
-        "x": 80.2,
-        "radius": 8.5
+        "x": 85.1,
+        "radius": 9.0
       }
     ],
     "pack": "Find the Sniper",
@@ -4129,11 +4129,11 @@
   {
     "diffs": [
       {
-        "y": 71.8,
+        "y": 78.6,
         "id": 1,
         "hint": "Look at the metal soil scoop resting on the wooden table.",
-        "x": 47.9,
-        "radius": 8.5
+        "x": 42.4,
+        "radius": 9.0
       }
     ],
     "packId": "find_the_sniper",
@@ -4156,11 +4156,11 @@
     "variantImage": "levels/photo-pairs/ai-watchmaker-bench/variant.jpg",
     "diffs": [
       {
-        "y": 64.7,
+        "y": 65.6,
         "id": 1,
         "hint": "Inspect the dark blue velvet pad in the lower-right corner.",
-        "x": 78.7,
-        "radius": 8.5
+        "x": 87.6,
+        "radius": 9.0
       }
     ]
   },
@@ -4173,11 +4173,11 @@
     "id": "ai_artist_easel_001",
     "diffs": [
       {
-        "y": 69.9,
+        "y": 72.0,
         "id": 1,
         "hint": "Scan the bottom-left corner of the table for the cobalt blue paint tube.",
-        "x": 20.6,
-        "radius": 8.5
+        "x": 10.6,
+        "radius": 9.0
       }
     ],
     "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg",
@@ -4192,11 +4192,11 @@
     "title": "Artisanal Coffee Bar",
     "diffs": [
       {
-        "y": 60.6,
+        "y": 57.9,
         "id": 1,
         "hint": "Check the wooden-handled barista brush to the left of the tamper.",
-        "x": 17.4,
-        "radius": 8.5
+        "x": 9.6,
+        "radius": 9.0
       }
     ],
     "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg",
@@ -4212,11 +4212,11 @@
     "category": "Antique Study",
     "diffs": [
       {
-        "y": 50.9,
+        "y": 59.1,
         "id": 1,
         "hint": "Look on the wooden desk surface below the brass desk clock.",
-        "x": 57.8,
-        "radius": 8.5
+        "x": 89.4,
+        "radius": 8.7
       }
     ],
     "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg"
@@ -4230,11 +4230,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 53.6,
+        "y": 51.9,
         "id": 1,
         "hint": "Inspect the pressed flower sheet on the right between the two flower stems.",
-        "x": 55.7,
-        "radius": 8.5
+        "x": 52.0,
+        "radius": 5.7
       }
     ],
     "id": "ai_botanist_herbarium_001",
@@ -4249,11 +4249,11 @@
     "title": "Maritime Cartography Desk",
     "diffs": [
       {
-        "y": 54.4,
+        "y": 57.2,
         "id": 1,
         "hint": "Scan the lower-left table area immediately beside the black ink bottle.",
-        "x": 33.7,
-        "radius": 8.5
+        "x": 17.2,
+        "radius": 9.0
       }
     ],
     "variantImage": "levels/photo-pairs/ai-cartography-desk/variant.jpg",
@@ -4266,11 +4266,11 @@
     "title": "Master Locksmith Workbench",
     "diffs": [
       {
-        "y": 57.6,
+        "y": 62.2,
         "id": 1,
         "hint": "Examine the tiny coil springs below the opened brass lock cylinder.",
-        "x": 40.6,
-        "radius": 8.5
+        "x": 50.0,
+        "radius": 8.1
       }
     ],
     "packId": "find_the_sniper",
@@ -4284,11 +4284,11 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 58,
+        "y": 58.0,
         "id": 1,
         "hint": "Scan the brass washer compartment on the right side of the organizer.",
-        "x": 74.9,
-        "radius": 4.6
+        "x": 74.7,
+        "radius": 5.8
       }
     ],
     "pack": "Find the Sniper",

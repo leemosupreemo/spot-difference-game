@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 117,
-    "dismissedCount": 83,
+    "approvedCount": 121,
+    "dismissedCount": 89,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -123,7 +123,11 @@
     "photo_boardgame_calibrated_003",
     "photo_enamel_pins_calibrated_008",
     "photo_spices_calibrated_009",
-    "photo_succulents_calibrated_010"
+    "photo_succulents_calibrated_010",
+    "photo_unique_seashells_001",
+    "photo_unique_gardening_004",
+    "photo_unique_sewing_005",
+    "photo_unique_bakery_006"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -209,7 +213,13 @@
     "photo_candies_calibrated_004",
     "photo_hardware_calibrated_005",
     "photo_watch_parts_calibrated_006",
-    "photo_gemstones_calibrated_007"
+    "photo_gemstones_calibrated_007",
+    "photo_unique_palette_002",
+    "photo_unique_retrogaming_003",
+    "photo_unique_leather_007",
+    "photo_unique_miniatures_008",
+    "photo_unique_bushcraft_009",
+    "photo_unique_woodworking_010"
   ],
   "approvedLevels": [
     {
@@ -2587,6 +2597,46 @@
     "photo_succulents_calibrated_010": {
       "status": "approved",
       "updatedAt": "2026-08-25T05:48:18.988Z"
+    },
+    "photo_unique_seashells_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:04:40.586Z"
+    },
+    "photo_unique_palette_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:04:59.571Z"
+    },
+    "photo_unique_retrogaming_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:05:08.111Z"
+    },
+    "photo_unique_gardening_004": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:05:18.297Z"
+    },
+    "photo_unique_sewing_005": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:05:31.400Z"
+    },
+    "photo_unique_bakery_006": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:05:41.316Z"
+    },
+    "photo_unique_leather_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:05:51.954Z"
+    },
+    "photo_unique_miniatures_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:06:00.150Z"
+    },
+    "photo_unique_bushcraft_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:06:09.426Z"
+    },
+    "photo_unique_woodworking_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:06:41.072Z"
     }
   }
 }
