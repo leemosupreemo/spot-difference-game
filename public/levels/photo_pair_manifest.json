@@ -1,5 +1,235 @@
 [
   {
+    "id": "photo_unique_seashells_001",
+    "title": "[Photorealistic] Beachcomber Shells & Sea Glass",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_seashells_001_base.jpg",
+    "variantImage": "/levels/photo_unique_seashells_001_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 65.9,
+        "y": 82.8,
+        "radius": 4.5,
+        "description": "Single sea glass pebble shifted from ocean emerald to cobalt azure",
+        "hint": "Scan through the natural seashells and sea glass pieces on the sand",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_palette_002",
+    "title": "[Photorealistic] Master Artist Oil Paint Palette & Dollops",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_palette_002_base.jpg",
+    "variantImage": "/levels/photo_unique_palette_002_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.8,
+        "y": 12.7,
+        "radius": 4.5,
+        "description": "Single oil paint dollop color shifted on the wooden palette",
+        "hint": "Inspect the mixed paint dollops and color swatches on the palette",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_retrogaming_003",
+    "title": "[Photorealistic] 90s Retro Arcade Consoles & Gamepads",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_retrogaming_003_base.jpg",
+    "variantImage": "/levels/photo_unique_retrogaming_003_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33.4,
+        "y": 35.7,
+        "radius": 5.7,
+        "description": "Single arcade button or memory card label color shifted",
+        "hint": "Scan the retro game cartridges and handheld controller buttons",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_gardening_004",
+    "title": "[Photorealistic] Greenhouse Botanical Potting Bench",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_gardening_004_base.jpg",
+    "variantImage": "/levels/photo_unique_gardening_004_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 35.2,
+        "y": 32.8,
+        "radius": 7.3,
+        "description": "Single botanical plant marker or terracotta item shifted in tone",
+        "hint": "Check the potting bench tools, seeds, and plant tags",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_sewing_005",
+    "title": "[Photorealistic] Tailor Sewing Spools & Notions Table",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_sewing_005_base.jpg",
+    "variantImage": "/levels/photo_unique_sewing_005_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33.2,
+        "y": 79.0,
+        "radius": 4.5,
+        "description": "Single spool of vibrant thread shifted in hue",
+        "hint": "Look across the wooden sewing table for a thread spool color shift",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_bakery_006",
+    "title": "[Photorealistic] Artisanal French Bakery Pastry Board",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_bakery_006_base.jpg",
+    "variantImage": "/levels/photo_unique_bakery_006_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.3,
+        "y": 36.8,
+        "radius": 4.5,
+        "description": "Single gourmet pastry macaron or berry garnish shifted in color",
+        "hint": "Scan the pastries and fruit garnishes on the marble board",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_leather_007",
+    "title": "[Photorealistic] Craftsman Leather Workshop Table",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_leather_007_base.jpg",
+    "variantImage": "/levels/photo_unique_leather_007_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 10.1,
+        "y": 80.9,
+        "radius": 7.2,
+        "description": "Single brass rivet cap or beveling tool shifted in tone",
+        "hint": "Examine the brass hardware and leathercraft tools on the bench",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_miniatures_008",
+    "title": "[Photorealistic] Miniature Hobbyist Paint Bottles & Brushes",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_miniatures_008_base.jpg",
+    "variantImage": "/levels/photo_unique_miniatures_008_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 16.0,
+        "y": 24.4,
+        "radius": 4.5,
+        "description": "Single acrylic dropper paint bottle cap shifted in color",
+        "hint": "Scan the miniature dropper bottles and wash pots on the desk",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_bushcraft_009",
+    "title": "[Photorealistic] Expedition Survival Flat-Lay & Paracord",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_bushcraft_009_base.jpg",
+    "variantImage": "/levels/photo_unique_bushcraft_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 19.6,
+        "y": 35.4,
+        "radius": 4.5,
+        "description": "Single tactical carabiner or paracord spool shifted in tone",
+        "hint": "Check the expedition survival tools, compass, and cordage",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_unique_woodworking_010",
+    "title": "[Photorealistic] Japanese Woodworking Chisel & Hand Plane Bench",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_woodworking_010_base.jpg",
+    "variantImage": "/levels/photo_unique_woodworking_010_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 27.5,
+        "y": 72.8,
+        "radius": 6.2,
+        "description": "Single brass marking gauge or chisel ferrule tone shifted",
+        "hint": "Inspect the woodworking tools and brass marking gauges",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "photo_marbles_calibrated_001",
     "title": "[Calibrated] 200 Glass Cats-Eye & Swirl Marbles",
     "pack": "Photography",
