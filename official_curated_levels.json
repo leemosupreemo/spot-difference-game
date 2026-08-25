@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 108,
-    "dismissedCount": 72,
+    "approvedCount": 111,
+    "dismissedCount": 79,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -114,7 +114,10 @@
     "dense_ai_leather_punch_add_009",
     "verified_m_ai_sewing_remove_001",
     "verified_m_ai_electronics_add_003",
-    "verified_m_ai_artist_recolor_005"
+    "verified_m_ai_artist_recolor_005",
+    "photo_boardgame_recolor_003",
+    "photo_enamel_pins_recolor_008",
+    "photo_succulents_recolor_010"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -189,7 +192,14 @@
     "dense_240_hardware_recolor_008",
     "dense_200_palette_remove_009",
     "dense_190_pins_recolor_010",
-    "dense_palette_remove_009"
+    "dense_palette_remove_009",
+    "photo_marbles_recolor_001",
+    "photo_buttons_recolor_002",
+    "photo_candies_recolor_004",
+    "photo_hardware_recolor_005",
+    "photo_watch_parts_recolor_006",
+    "photo_gemstones_recolor_007",
+    "photo_spices_recolor_009"
   ],
   "approvedLevels": [
     {
@@ -2487,6 +2497,46 @@
     "dense_palette_remove_009": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T04:39:49.399Z"
+    },
+    "photo_marbles_recolor_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:39:49.608Z"
+    },
+    "photo_buttons_recolor_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:39:51.228Z"
+    },
+    "photo_boardgame_recolor_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:40:02.163Z"
+    },
+    "photo_candies_recolor_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:40:49.728Z"
+    },
+    "photo_hardware_recolor_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:40:58.499Z"
+    },
+    "photo_watch_parts_recolor_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:41:01.118Z"
+    },
+    "photo_gemstones_recolor_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:41:05.591Z"
+    },
+    "photo_enamel_pins_recolor_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:41:16.667Z"
+    },
+    "photo_spices_recolor_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T05:41:26.031Z"
+    },
+    "photo_succulents_recolor_010": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T05:41:33.428Z"
     }
   }
 }

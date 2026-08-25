@@ -1,5 +1,235 @@
 [
   {
+    "id": "photo_marbles_calibrated_001",
+    "title": "[Calibrated] 200 Glass Cats-Eye & Swirl Marbles",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_marbles_calibrated_001_base.jpg",
+    "variantImage": "/levels/photo_marbles_calibrated_001_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29.4,
+        "y": 77.9,
+        "radius": 4.5,
+        "description": "Single swirling glass marble shifted from emerald green to ocean turquoise",
+        "hint": "Scan through the glass marble collection for a subtle tone shift",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_buttons_calibrated_002",
+    "title": "[Calibrated] Vintage Button Compartment Tray",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_buttons_calibrated_002_base.jpg",
+    "variantImage": "/levels/photo_buttons_calibrated_002_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76.4,
+        "y": 28.4,
+        "radius": 4.5,
+        "description": "Single vintage sew-through button tone shifted in its compartment",
+        "hint": "Inspect the button compartments for a nuanced color variation",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_boardgame_calibrated_003",
+    "title": "[Calibrated] Euro Board Game Meeples & Resource Cubes",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_boardgame_calibrated_003_base.jpg",
+    "variantImage": "/levels/photo_boardgame_calibrated_003_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 8.6,
+        "y": 46.4,
+        "radius": 4.5,
+        "description": "Single wooden meeple token color shifted",
+        "hint": "Check the colorful wooden meeples and tokens on the table",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_candies_calibrated_004",
+    "title": "[Calibrated] Glossy Gourmet Jelly Beans & Candy Drops",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_candies_calibrated_004_base.jpg",
+    "variantImage": "/levels/photo_candies_calibrated_004_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.7,
+        "y": 43.7,
+        "radius": 4.5,
+        "description": "Single glossy gourmet jelly bean shifted from cherry red to warm amber",
+        "hint": "Scan the fruit candy drops and jelly beans",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_hardware_calibrated_005",
+    "title": "[Calibrated] Precision Brass & Steel Hardware Organizer",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_hardware_calibrated_005_base.jpg",
+    "variantImage": "/levels/photo_hardware_calibrated_005_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 79.3,
+        "y": 51.4,
+        "radius": 4.9,
+        "description": "Single brass hex nut shifted to warm bronze tone",
+        "hint": "Inspect the brass hex nuts in the hardware organizer tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_watch_parts_calibrated_006",
+    "title": "[Calibrated] Horologist Watchmaker Movement & Ruby Jewels",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_watch_parts_calibrated_006_base.jpg",
+    "variantImage": "/levels/photo_watch_parts_calibrated_006_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 89.0,
+        "y": 25.2,
+        "radius": 4.5,
+        "description": "Single synthetic ruby jewel bearing tone shifted",
+        "hint": "Examine the precision cogs and ruby jewels in the tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_gemstones_calibrated_007",
+    "title": "[Calibrated] Faceted Natural Gemstones on Black Velvet",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_gemstones_calibrated_007_base.jpg",
+    "variantImage": "/levels/photo_gemstones_calibrated_007_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66.2,
+        "y": 57.4,
+        "radius": 4.5,
+        "description": "Single faceted cut gemstone shifted from sapphire to amethyst tone",
+        "hint": "Scan the sparkling faceted jewels across the velvet tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_enamel_pins_calibrated_008",
+    "title": "[Calibrated] Retro Collector Enamel Pins on Denim",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_enamel_pins_calibrated_008_base.jpg",
+    "variantImage": "/levels/photo_enamel_pins_calibrated_008_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76.0,
+        "y": 51.5,
+        "radius": 4.5,
+        "description": "Single retro enamel pin badge color shifted",
+        "hint": "Scan the retro enamel pins and metal badges on the denim banner",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_spices_calibrated_009",
+    "title": "[Calibrated] Artisanal Whole Spice Market Tray",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_spices_calibrated_009_base.jpg",
+    "variantImage": "/levels/photo_spices_calibrated_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.2,
+        "y": 26.7,
+        "radius": 4.5,
+        "description": "Single whole spice pod shifted in warmth",
+        "hint": "Check the spice compartments for a tone change",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_succulents_calibrated_010",
+    "title": "[Calibrated] Greenhouse Miniature Succulent Rosettes",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_succulents_calibrated_010_base.jpg",
+    "variantImage": "/levels/photo_succulents_calibrated_010_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 79.5,
+        "y": 63.0,
+        "radius": 4.5,
+        "description": "Single succulent rosette shifted from sage green to dusty rose",
+        "hint": "Look across the nursery tray for a color-shifted succulent rosette",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "photo_marbles_recolor_001",
     "title": "[Photorealistic] 200 Glass Cats-Eye & Swirl Marbles",
     "pack": "Photography",
