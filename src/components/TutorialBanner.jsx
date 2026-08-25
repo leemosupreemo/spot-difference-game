@@ -114,7 +114,7 @@ export default function TutorialBanner() {
           margin: 0,
           lineHeight: '1.3'
         }}>
-          Compare both photos. <strong style={{ color: 'var(--accent-cyan)' }}>Tap the 1 subtle difference</strong> as fast as you can!
+          Compare both photos. <strong style={{ color: 'var(--accent-cyan)' }}>Tap the difference in the image</strong> as fast as you can!
         </p>
       </div>
 
