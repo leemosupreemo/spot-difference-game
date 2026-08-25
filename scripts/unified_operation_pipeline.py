@@ -35,8 +35,8 @@ def execute_unified_pipeline():
     scenes = [
         # 1. Tailor Notions Box -> REMOVE (1 missing wooden thread spool from peer cluster)
         {
-            "id": "unified_ai_sewing_remove_001",
-            "title": "[AI Remove] Tailor Notions Box Missing Thread Spool",
+            "id": "verified_m_ai_sewing_remove_001",
+            "title": "[AI Remove - Medium] Tailor Notions Box Missing Thread Spool",
             "image_path": "public/levels/ai_sewing_notions_base.jpg",
             "preferred_op": "remove",
             "difficulty": "Medium",
@@ -45,8 +45,8 @@ def execute_unified_pipeline():
         },
         # 2. Watchmaker Parts Tray -> RECOLOR (precision screwdriver collar)
         {
-            "id": "unified_ai_watchmaker_recolor_002",
-            "title": "[AI Recolor] Horologist Parts Tray Screwdriver Collar",
+            "id": "verified_m_ai_watchmaker_recolor_002",
+            "title": "[AI Recolor - Medium] Horologist Parts Tray Screwdriver Collar",
             "image_path": "public/levels/ai_watchmaker_parts_base.jpg",
             "preferred_op": "recolor",
             "difficulty": "Medium",
@@ -56,8 +56,8 @@ def execute_unified_pipeline():
         },
         # 3. Electronics Antistatic Bench -> ADD (1 extra through-hole capacitor in component row)
         {
-            "id": "unified_ai_electronics_add_003",
-            "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
+            "id": "verified_m_ai_electronics_add_003",
+            "title": "[AI Add - Medium] Electronics Antistatic Bench Extra Capacitor",
             "image_path": "public/levels/ai_electronics_pcb_base.jpg",
             "preferred_op": "add",
             "difficulty": "Medium",
@@ -66,8 +66,8 @@ def execute_unified_pipeline():
         },
         # 4. Greenhouse Potting Bench -> REMOVE (1 missing plant marker tag)
         {
-            "id": "unified_ai_gardener_remove_004",
-            "title": "[AI Remove] Greenhouse Potting Bench Missing Plant Tag",
+            "id": "verified_m_ai_gardener_remove_004",
+            "title": "[AI Remove - Medium] Greenhouse Potting Bench Missing Plant Tag",
             "image_path": "public/levels/ai_gardener_potting_base.jpg",
             "preferred_op": "remove",
             "difficulty": "Medium",
@@ -76,8 +76,8 @@ def execute_unified_pipeline():
         },
         # 5. Fine Art Studio Taboret -> RECOLOR (oil paint tube cap)
         {
-            "id": "unified_ai_artist_recolor_005",
-            "title": "[AI Recolor] Fine Art Studio Oil Paint Tube Cap",
+            "id": "verified_m_ai_artist_recolor_005",
+            "title": "[AI Recolor - Medium] Fine Art Studio Oil Paint Tube Cap",
             "image_path": "public/levels/ai_artist_palette_base.jpg",
             "preferred_op": "recolor",
             "difficulty": "Medium",
@@ -87,8 +87,8 @@ def execute_unified_pipeline():
         },
         # 6. Woodworking Joinery Bench -> RECOLOR (carpenter marking pencil body)
         {
-            "id": "unified_ai_woodworking_recolor_006",
-            "title": "[AI Recolor] Woodworking Joinery Bench Carpenter Pencil",
+            "id": "verified_m_ai_woodworking_recolor_006",
+            "title": "[AI Recolor - Medium] Woodworking Joinery Bench Carpenter Pencil",
             "image_path": "public/levels/ai_woodworking_bench_base.jpg",
             "preferred_op": "recolor",
             "difficulty": "Medium",
@@ -98,8 +98,8 @@ def execute_unified_pipeline():
         },
         # 7. Retro Gaming Desk -> RECOLOR (game cartridge shell)
         {
-            "id": "unified_ai_retro_recolor_007",
-            "title": "[AI Recolor] Retro Gaming Desk Cartridge Shell",
+            "id": "verified_m_ai_retro_recolor_007",
+            "title": "[AI Recolor - Medium] Retro Gaming Desk Cartridge Shell",
             "image_path": "public/levels/ai_retro_gaming_base.jpg",
             "preferred_op": "recolor",
             "difficulty": "Medium",
@@ -109,8 +109,8 @@ def execute_unified_pipeline():
         },
         # 8. Wilderness Expedition Prep -> REMOVE (1 missing carabiner)
         {
-            "id": "unified_ai_expedition_remove_008",
-            "title": "[AI Remove] Expedition Prep Table Missing Carabiner",
+            "id": "verified_m_ai_expedition_remove_008",
+            "title": "[AI Remove - Medium] Expedition Prep Table Missing Carabiner",
             "image_path": "public/levels/ai_expedition_bushcraft_base.jpg",
             "preferred_op": "remove",
             "difficulty": "Medium",
@@ -119,8 +119,8 @@ def execute_unified_pipeline():
         },
         # 9. Leathercraft Artisan Bench -> RECOLOR (waxed thread spool)
         {
-            "id": "unified_ai_leathercraft_recolor_009",
-            "title": "[AI Recolor] Leather Artisan Bench Waxed Thread Spool",
+            "id": "verified_m_ai_leathercraft_recolor_009",
+            "title": "[AI Recolor - Medium] Leather Artisan Bench Waxed Thread Spool",
             "image_path": "public/levels/ai_leathercraft_base.jpg",
             "preferred_op": "recolor",
             "difficulty": "Medium",
@@ -130,8 +130,8 @@ def execute_unified_pipeline():
         },
         # 10. Miniature Painter Desk -> RECOLOR (paint dropper bottle cap)
         {
-            "id": "unified_ai_miniature_recolor_010",
-            "title": "[AI Recolor] Miniature Painter Desk Paint Dropper Cap",
+            "id": "verified_m_ai_miniature_recolor_010",
+            "title": "[AI Recolor - Medium] Miniature Painter Desk Paint Dropper Cap",
             "image_path": "public/levels/ai_miniature_painter_base.jpg",
             "preferred_op": "recolor",
             "difficulty": "Medium",

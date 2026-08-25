@@ -3,7 +3,7 @@
   "summary": {
     "totalCurated": 72,
     "approvedCount": 105,
-    "dismissedCount": 52,
+    "dismissedCount": 54,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -166,7 +166,9 @@
     "dense_ai_mechanic_tool_recolor_003",
     "dense_ai_sewing_spool_recolor_004",
     "dense_ai_miniature_bottle_remove_005",
-    "dense_ai_gardener_tag_recolor_010"
+    "dense_ai_gardener_tag_recolor_010",
+    "unified_ai_woodworking_recolor_006",
+    "unified_ai_miniature_recolor_010"
   ],
   "approvedLevels": [
     {
@@ -2372,6 +2374,14 @@
     "dense_ai_gardener_tag_recolor_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T01:23:18.360Z"
+    },
+    "unified_ai_woodworking_recolor_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:36:20.480Z"
+    },
+    "unified_ai_miniature_recolor_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:36:31.422Z"
     }
   }
 }
