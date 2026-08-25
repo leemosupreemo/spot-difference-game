@@ -6,7 +6,7 @@ import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 // Dedicated tutorial photo pair (excluded from game rotation)
 const DEMO_BASE_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/base.jpg';
 const DEMO_VARIANT_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/variant.jpg';
-const DEMO_TARGET = { x: 59.5, y: 55.5, radius: 9.0 };
+const DEMO_TARGET = { x: 59.5, y: 55.5, radius: 9.9 };
 
 export default function TutorialBanner() {
   const [isZoomed, setIsZoomed] = useState(false);
@@ -160,8 +160,8 @@ export default function TutorialBanner() {
               left: `${DEMO_TARGET.x}%`,
               top: `${DEMO_TARGET.y}%`,
               transform: 'translate(-50%, -50%)',
-              width: '106px',
-              height: '106px',
+              width: '117px',
+              height: '117px',
               borderRadius: '50%',
               border: '3px dashed var(--accent-cyan)',
               boxShadow: '0 0 20px rgba(0, 240, 255, 0.7)',
@@ -214,8 +214,8 @@ export default function TutorialBanner() {
               left: `${DEMO_TARGET.x}%`,
               top: `${DEMO_TARGET.y}%`,
               transform: 'translate(-50%, -50%)',
-              width: '106px',
-              height: '106px',
+              width: '117px',
+              height: '117px',
               borderRadius: '50%',
               border: '3.5px solid var(--accent-green)',
               boxShadow: '0 0 22px var(--accent-green)',
