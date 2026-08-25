@@ -56,14 +56,10 @@ export function getAllPhotoPairEntries() {
 }
 
 function loadManifest() {
-  if (cachedManifestEntries) return cachedManifestEntries;
-
   try {
     const result = validatePhotoPairManifest(photoPairManifestData);
     if (result?.validEntries?.length > 0) {
-      cachedManifestEntries = result.validEntries;
-      logApp('INFO', `[ManifestLoaded] Total premade levels loaded: ${cachedManifestEntries.length}`);
-      return cachedManifestEntries;
+      return result.validEntries;
     }
   } catch (err) {
     logApp('ERROR', '[ManifestLoadError]', err?.message || err);
@@ -73,7 +69,7 @@ function loadManifest() {
 }
 
 export function clearPhotoPairManifestCache() {
-  cachedManifestEntries = null;
+  // Fresh manifest is now read directly
 }
 
 export function removeManifestEntriesById(ids = []) {
@@ -145,20 +141,7 @@ export function selectPhotoPairEntries(entries, {
     const isCategorized = Boolean(statusVal?.status || statusVal?.packId || statusVal?.category || statusVal?.difficulty || statusVal?.suggestedDifficulty);
 
     if (!isCategorized) {
-      if (
-        entry.id?.startsWith('sam_') ||
-        entry.id?.startsWith('real_') ||
-        entry.id?.startsWith('layered_') ||
-        entry.id?.startsWith('hyper_') ||
-        entry.id?.startsWith('dense_') ||
-        entry.id?.startsWith('artisan_') ||
-        entry.id?.startsWith('ai_macro_') ||
-        entry.id?.includes('stock_')
-      ) {
-        unreviewedBrandNew.push(entry);
-      } else {
-        unreviewedOther.push(entry);
-      }
+      unreviewedBrandNew.push(entry);
     } else if (statusVal?.status === 'approved') {
       const difficultyMatches = !difficulty || entry.difficulty === difficulty;
       if (difficultyMatches) {

@@ -216,7 +216,6 @@ export default function App() {
   const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
     const allEntries = getAllPhotoPairEntries();
     const brandNew = [];
-    const otherUnlabeled = [];
 
     for (const entry of allEntries) {
       const statusObj = getLevelStatus(mapToUse[entry.id]);
@@ -225,30 +224,16 @@ export default function App() {
       if (skipKept && isKeptStatus(statusVal)) continue;
 
       if (!isLevelCategorized(entry, mapToUse)) {
-        if (
-          entry.id?.startsWith('sam_') ||
-          entry.id?.startsWith('real_') ||
-          entry.id?.startsWith('layered_') ||
-          entry.id?.startsWith('hyper_') ||
-          entry.id?.startsWith('dense_') ||
-          entry.id?.startsWith('artisan_') ||
-          entry.id?.startsWith('ai_macro_') ||
-          entry.id?.includes('stock_')
-        ) {
-          brandNew.push(entry);
-        } else {
-          otherUnlabeled.push(entry);
-        }
+        brandNew.push(entry);
       }
     }
 
-    return [...brandNew, ...otherUnlabeled];
+    return brandNew;
   };
 
   const getDebugCandidateEntries = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
     const allEntries = getAllPhotoPairEntries();
-    const unreviewedBrandNew = [];
-    const unreviewedOther = [];
+    const unreviewed = [];
     const categorized = [];
 
     for (const entry of allEntries) {
@@ -258,27 +243,14 @@ export default function App() {
       if (skipKept && isKeptStatus(statusVal)) continue;
 
       if (!isLevelCategorized(entry, mapToUse)) {
-        if (
-          entry.id?.startsWith('sam_') ||
-          entry.id?.startsWith('real_') ||
-          entry.id?.startsWith('layered_') ||
-          entry.id?.startsWith('hyper_') ||
-          entry.id?.startsWith('dense_') ||
-          entry.id?.startsWith('artisan_') ||
-          entry.id?.startsWith('ai_macro_') ||
-          entry.id?.includes('stock_')
-        ) {
-          unreviewedBrandNew.push(entry);
-        } else {
-          unreviewedOther.push(entry);
-        }
+        unreviewed.push(entry);
       } else {
         categorized.push(entry);
       }
     }
 
     // Non-categorized / brand new image sets prioritized strictly first
-    return [...unreviewedBrandNew, ...unreviewedOther, ...categorized];
+    return [...unreviewed, ...categorized];
   };
 
   const toggleDebugMode = useCallback(() => {
