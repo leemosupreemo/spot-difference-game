@@ -249,18 +249,18 @@ class AdaptiveSpotabilityLoop:
     falls precisely within the human-perceivable difficulty window.
     """
     SPOTABILITY_TARGETS = {
-        "Easy": (12.0, 22.0),
-        "Medium": (6.0, 12.0),
-        "Hard": (3.2, 6.0)
+        "Easy": (13.0, 22.0),
+        "Medium": (8.0, 14.0),
+        "Hard": (6.0, 11.0)
     }
 
     @classmethod
-    def generate_and_calibrate(cls, image_rgb, mask, target_bbox, difficulty="Medium", hue_direction_deg=45.0, clutter_multiplier=1.0):
+    def generate_and_calibrate(cls, image_rgb, mask, target_bbox, difficulty="Medium", hue_direction_deg=60.0, clutter_multiplier=1.0):
         h, w = image_rgb.shape[:2]
-        target_min_s, target_max_s = cls.SPOTABILITY_TARGETS.get(difficulty, (6.0, 12.0))
+        target_min_s, target_max_s = cls.SPOTABILITY_TARGETS.get(difficulty, (8.0, 14.0))
         
-        # Base delta-E adjusted for local clutter
-        base_delta_e = 22.0 if difficulty == "Medium" else (35.0 if difficulty == "Easy" else 13.0)
+        # Base delta-E adjusted for local clutter (ensure solid visible color delta)
+        base_delta_e = 26.0 if difficulty == "Medium" else (36.0 if difficulty == "Easy" else 22.0)
         current_delta_e = base_delta_e * clutter_multiplier
         
         best_variant = None
@@ -334,11 +334,21 @@ class AdaptiveSpotabilityLoop:
         if not (bx_min - pad_x <= weighted_cx <= bx_max + pad_x and by_min - pad_y <= weighted_cy <= by_max + pad_y):
             return False, None, None, f"QA Rejected: Difference centroid ({cx_pct}%, {cy_pct}%) is outside intended target bbox."
             
-        # 6. Minimum Perceptible Area Constraint (>= 0.035% for Hard, >= 0.10% for Medium/Easy)
-        min_perceptible_area = 0.035 if difficulty == "Hard" else 0.10
+        # 6. Minimum Perceptible Area Constraint (>= 0.12% for Hard, >= 0.20% for Medium/Easy)
+        min_perceptible_area = 0.12 if difficulty == "Hard" else 0.20
         if best_metrics["area_pct"] < min_perceptible_area:
-            return False, None, None, f"QA Rejected: Changed area too tiny ({best_metrics['area_pct']:.3f}% < {min_perceptible_area:.2f}%). Cannot be comfortably perceived."
+            return False, None, None, f"QA Rejected: Changed area too tiny ({best_metrics['area_pct']:.3f}% < {min_perceptible_area:.2f}%)."
             
+        # 7. DIRECT-LOOK & DISPLAY RESOLUTION VERIFICATION GATE:
+        from perceptual_verification_engine import PerceptualVerificationEngine
+        base_bgr = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2BGR)
+        var_bgr = cv2.cvtColor(best_variant, cv2.COLOR_RGB2BGR)
+        v_passed, v_metrics, v_reason = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
+            base_bgr, var_bgr, target_bbox, operation="recolor", difficulty=difficulty
+        )
+        if not v_passed:
+            return False, None, None, f"Recolor QA Direct-Look Reject: {v_reason}"
+
         final_info = {
             "x": cx_pct,
             "y": cy_pct,
@@ -346,9 +356,10 @@ class AdaptiveSpotabilityLoop:
             "area_pct": best_metrics["area_pct"],
             "delta_e": best_metrics["delta_e"],
             "spotability": best_metrics["spotability"],
-            "iterations": best_metrics["iterations"]
+            "iterations": best_metrics["iterations"],
+            "verification": v_metrics
         }
-        return True, best_variant, final_info, "QA Passed (Converged within target spotability window)"
+        return True, best_variant, final_info, f"QA Passed ({v_reason})"
 
 # ==============================================================================
 # 5. EXECUTION PIPELINE

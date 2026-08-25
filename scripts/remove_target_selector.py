@@ -12,6 +12,8 @@ Selects the optimal object for a REMOVE difference:
 import cv2
 import numpy as np
 
+from perceptual_verification_engine import PerceptualVerificationEngine
+
 class RemoveTargetSelector:
     """
     Evaluates, selects, and removes an object from a repeated peer family.
@@ -23,9 +25,9 @@ class RemoveTargetSelector:
         total_pixels = h * w
         gray = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2GRAY)
 
-        # Gating sizes based on difficulty
-        min_area, max_area = 0.035, 0.40
-        if target_difficulty == "Medium": min_area, max_area = 0.10, 0.85
+        # Gating sizes based on human verification floor
+        min_area, max_area = 0.20, 1.00
+        if target_difficulty == "Hard": min_area, max_area = 0.12, 0.70  # Peer camouflage drives search, not micro-size
         elif target_difficulty == "Easy": min_area, max_area = 0.40, 2.20
 
         evaluated_candidates = []
@@ -65,9 +67,6 @@ class RemoveTargetSelector:
             # 3. ISOLATION / OCCLUSION CHECK: Low overlap with other items
             bx1, by1, bx2, by2 = c["bbox"]
             bw, bh = bx2 - bx1, by2 - by1
-            pad = int(max(bw, bh) * 0.4)
-            rx1, ry1 = max(0, bx1 - pad), max(0, by1 - pad)
-            rx2, ry2 = min(w, bx2 + pad), min(h, by2 + pad)
 
             # Check compactness (perimeter^2 / area)
             contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -95,9 +94,9 @@ class RemoveTargetSelector:
         return best, f"Selected optimal Remove target (Score: {best['score']}/100, Peers: {best['peer_count']}, Recoverability: {best['recoverability']})", evaluated_candidates
 
     @classmethod
-    def execute_removal_and_qa(cls, image_bgr, target_mask, target_bbox):
+    def execute_removal_and_qa(cls, image_bgr, target_mask, target_bbox, difficulty="Hard"):
         """
-        Inpaints the object cleanly, blends the boundaries, and runs Remove QA Critic.
+        Inpaints the object cleanly, blends the boundaries, and runs Remove QA Critic + Direct-Look Verification.
         """
         h, w = image_bgr.shape[:2]
         total_pixels = h * w
@@ -129,8 +128,16 @@ class RemoveTargetSelector:
         changed_pixels = np.sum(diff_mask)
         area_pct = (changed_pixels / total_pixels) * 100.0
 
-        if area_pct < 0.035:
-            return False, None, None, f"Remove QA Reject: Changed area too small ({area_pct:.3f}% < 0.035%)."
+        min_area = 0.12 if difficulty == "Hard" else 0.20
+        if area_pct < min_area:
+            return False, None, None, f"Remove QA Reject: Changed area too small ({area_pct:.3f}% < {min_area:.2f}%)."
+
+        # DIRECT-LOOK & DISPLAY RESOLUTION VERIFICATION GATE:
+        v_passed, v_metrics, v_reason = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
+            image_bgr, clamped_variant, target_bbox, operation="remove", difficulty=difficulty
+        )
+        if not v_passed:
+            return False, None, None, f"Remove QA Direct-Look Reject: {v_reason}"
 
         ys, xs = np.where(diff_mask > 0)
         cx = float(np.mean(xs)) / w * 100.0
@@ -143,7 +150,8 @@ class RemoveTargetSelector:
             "y": round(cy, 1),
             "radius": radius,
             "area_pct": round(area_pct, 3),
-            "operation": "remove"
+            "operation": "remove",
+            "verification": v_metrics
         }
 
-        return True, clamped_variant, final_info, f"Remove QA Passed (Area: {area_pct:.2f}%, Centroid: ({cx:.1f}%, {cy:.1f}%))"
+        return True, clamped_variant, final_info, f"Remove QA Passed ({v_reason})"

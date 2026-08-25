@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 100,
-    "dismissedCount": 47,
+    "approvedCount": 105,
+    "dismissedCount": 52,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -106,7 +106,12 @@
     "goldilocks_ai_watchmaker_parts_010",
     "goldilocks_hard_ai_woodworking_pencil_008",
     "goldilocks_hard_ai_expedition_toggle_010",
-    "unified_ai_expedition_remove_008"
+    "unified_ai_expedition_remove_008",
+    "dense_ai_watchmaker_gear_add_002",
+    "dense_ai_retro_cart_add_006",
+    "dense_ai_artist_pastel_remove_007",
+    "dense_ai_woodworking_chisel_recolor_008",
+    "dense_ai_leather_punch_add_009"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -156,7 +161,12 @@
     "unified_ai_woodworking_add_006",
     "unified_ai_retro_recolor_007",
     "unified_ai_leathercraft_recolor_009",
-    "unified_ai_miniature_add_010"
+    "unified_ai_miniature_add_010",
+    "dense_ai_electronics_resistor_remove_001",
+    "dense_ai_mechanic_tool_recolor_003",
+    "dense_ai_sewing_spool_recolor_004",
+    "dense_ai_miniature_bottle_remove_005",
+    "dense_ai_gardener_tag_recolor_010"
   ],
   "approvedLevels": [
     {
@@ -2322,6 +2332,46 @@
     "unified_ai_miniature_add_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T01:18:47.599Z"
+    },
+    "dense_ai_electronics_resistor_remove_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:20:43.704Z"
+    },
+    "dense_ai_watchmaker_gear_add_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:23:24.986Z"
+    },
+    "dense_ai_mechanic_tool_recolor_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:21:04.061Z"
+    },
+    "dense_ai_sewing_spool_recolor_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:21:09.897Z"
+    },
+    "dense_ai_miniature_bottle_remove_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:21:29.206Z"
+    },
+    "dense_ai_retro_cart_add_006": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:22:50.956Z"
+    },
+    "dense_ai_artist_pastel_remove_007": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:23:00.041Z"
+    },
+    "dense_ai_woodworking_chisel_recolor_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:23:05.679Z"
+    },
+    "dense_ai_leather_punch_add_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:23:11.762Z"
+    },
+    "dense_ai_gardener_tag_recolor_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:23:18.360Z"
     }
   }
 }

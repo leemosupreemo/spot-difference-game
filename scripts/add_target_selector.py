@@ -12,6 +12,7 @@ insertion slot within the same cluster to create an authentic ADD difference:
 
 import cv2
 import numpy as np
+from perceptual_verification_engine import PerceptualVerificationEngine
 
 class AddTargetSelector:
     """
@@ -23,6 +24,9 @@ class AddTargetSelector:
         h, w = image_bgr.shape[:2]
         total_pixels = h * w
         gray = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2GRAY)
+
+        min_donor_area = 0.12 if target_difficulty == "Hard" else 0.20
+        max_donor_area = 0.70 if target_difficulty == "Hard" else 1.00
 
         # Build union mask of all existing objects in the scene
         existing_objects_mask = np.zeros((h, w), dtype=np.uint8)
@@ -50,8 +54,8 @@ class AddTargetSelector:
                 bx1, by1, bx2, by2 = donor["bbox"]
                 bw, bh = bx2 - bx1 + 1, by2 - by1 + 1
                 
-                # Check difficulty size constraints
-                if donor["area_pct"] < 0.035 or donor["area_pct"] > 0.50:
+                # Check human verification floor size constraints
+                if donor["area_pct"] < min_donor_area or donor["area_pct"] > max_donor_area:
                     continue
 
                 donor_crop_mask = d_mask[by1:by2+1, bx1:bx2+1]
@@ -107,9 +111,9 @@ class AddTargetSelector:
         return best, f"Selected optimal Add pair (Score: {best['score']}/100, Peers: {best['peer_group_size']})", candidate_pairs
 
     @classmethod
-    def execute_add_and_qa(cls, image_bgr, donor_bbox, slot_bbox, donor_mask):
+    def execute_add_and_qa(cls, image_bgr, donor_bbox, slot_bbox, donor_mask, difficulty="Hard"):
         """
-        Synthesizes contact shadow, transfers donor object, and runs Add QA Critic.
+        Synthesizes contact shadow, transfers donor object, and runs Add QA Critic + Direct-Look Verification.
         """
         h, w = image_bgr.shape[:2]
         total_pixels = h * w
@@ -154,8 +158,16 @@ class AddTargetSelector:
         changed_pixels = np.sum(diff_mask)
         area_pct = (changed_pixels / total_pixels) * 100.0
 
-        if area_pct < 0.035:
-            return False, None, None, f"Add QA Reject: Added area too small ({area_pct:.3f}% < 0.035%)."
+        min_area = 0.12 if difficulty == "Hard" else 0.20
+        if area_pct < min_area:
+            return False, None, None, f"Add QA Reject: Added area too small ({area_pct:.3f}% < {min_area:.2f}%)."
+
+        # DIRECT-LOOK & DISPLAY RESOLUTION VERIFICATION GATE:
+        v_passed, v_metrics, v_reason = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
+            image_bgr, variant_bgr, [sx1, sy1, sx1+bw, sy1+bh], operation="add", difficulty=difficulty
+        )
+        if not v_passed:
+            return False, None, None, f"Add QA Direct-Look Reject: {v_reason}"
 
         ys, xs = np.where(diff_mask > 0)
         cx = float(np.mean(xs)) / w * 100.0
@@ -168,7 +180,8 @@ class AddTargetSelector:
             "y": round(cy, 1),
             "radius": radius,
             "area_pct": round(area_pct, 3),
-            "operation": "add"
+            "operation": "add",
+            "verification": v_metrics
         }
 
-        return True, variant_bgr, final_info, f"Add QA Passed (Area: {area_pct:.2f}%, Centroid: ({cx:.1f}%, {cy:.1f}%))"
+        return True, variant_bgr, final_info, f"Add QA Passed ({v_reason})"

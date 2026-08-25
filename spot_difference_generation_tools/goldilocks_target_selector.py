@@ -129,12 +129,12 @@ class GoldilocksTargetSelector:
         recolorable_frac = candidate["recolorable_fraction"]
         baseline_salience = candidate["baseline_salience"]
         
-        # Target spotability band: Medium = 6.0 to 12.0
-        min_s, max_s = 6.0, 12.0
-        if target_difficulty == "Easy": min_s, max_s = 12.0, 22.0
-        elif target_difficulty == "Hard": min_s, max_s = 3.2, 6.0
+        # Target spotability band: Medium = 8.0 to 14.0, Hard = 6.0 to 11.0, Easy = 13.0 to 22.0
+        min_s, max_s = 8.0, 14.0
+        if target_difficulty == "Easy": min_s, max_s = 13.0, 22.0
+        elif target_difficulty == "Hard": min_s, max_s = 6.0, 11.0
         
-        test_delta_es = [8.0, 12.0, 16.0, 20.0, 25.0, 30.0, 36.0, 42.0, 48.0]
+        test_delta_es = [16.0, 20.0, 25.0, 30.0, 36.0, 42.0, 48.0, 56.0]
         acceptable_delta_es = []
         
         for de in test_delta_es:
@@ -188,11 +188,11 @@ class GoldilocksTargetSelector:
         descriptors = []
         
         # 1. FILTER CANDIDATE MASKS BY SIZE & RECOLORABLE FRACTION
-        min_area, max_area = 0.10, 1.20
+        min_area, max_area = 0.20, 1.00
         if target_difficulty == "Hard":
-            min_area, max_area = 0.035, 0.25  # Micro-targets for Hard/Sniper mode
+            min_area, max_area = 0.12, 0.65  # Search difficulty via clutter + peers, not microscopic size
         elif target_difficulty == "Easy":
-            min_area, max_area = 0.40, 2.50
+            min_area, max_area = 0.40, 2.20
             
         for idx, m in enumerate(masks):
             mask_resized = cv2.resize(m.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)

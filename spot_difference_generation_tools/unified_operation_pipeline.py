@@ -33,15 +33,15 @@ def execute_unified_pipeline():
     model = FastSAM("FastSAM-s.pt")
 
     scenes = [
-        # 1. Tailor Notions Box -> REMOVE (1 missing button or thread spool from peer cluster)
+        # 1. Tailor Notions Box -> REMOVE (1 missing wooden thread spool from peer cluster)
         {
             "id": "unified_ai_sewing_remove_001",
-            "title": "[AI Remove] Tailor Notions Box Missing Button",
+            "title": "[AI Remove] Tailor Notions Box Missing Thread Spool",
             "image_path": "public/levels/ai_sewing_notions_base.jpg",
             "preferred_op": "remove",
-            "difficulty": "Hard",
-            "desc": "Single vintage mother-of-pearl button missing from the sorting compartment",
-            "hint": "Inspect the buttons in the sorting compartment of the notions box"
+            "difficulty": "Medium",
+            "desc": "Single wooden cotton thread spool missing from the compartmentalized notions tray",
+            "hint": "Inspect the wooden thread spools in the sorting compartments of the notions box"
         },
         # 2. Watchmaker Parts Tray -> RECOLOR (precision screwdriver collar)
         {
@@ -49,8 +49,8 @@ def execute_unified_pipeline():
             "title": "[AI Recolor] Horologist Parts Tray Screwdriver Collar",
             "image_path": "public/levels/ai_watchmaker_parts_base.jpg",
             "preferred_op": "recolor",
-            "difficulty": "Hard",
-            "hue_direction_deg": 50.0,
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
             "desc": "Single precision screwdriver color collar shifted in CIELAB",
             "hint": "Examine the color-coded precision screwdrivers on the work pad"
         },
@@ -60,59 +60,60 @@ def execute_unified_pipeline():
             "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
             "image_path": "public/levels/ai_electronics_pcb_base.jpg",
             "preferred_op": "add",
-            "difficulty": "Hard",
+            "difficulty": "Medium",
             "desc": "Single additional electrolytic capacitor added to the component array",
             "hint": "Scan the electrolytic capacitors in the upper component tray"
         },
-        # 4. Greenhouse Potting Bench -> REMOVE (1 missing plant support clip)
+        # 4. Greenhouse Potting Bench -> REMOVE (1 missing plant marker tag)
         {
             "id": "unified_ai_gardener_remove_004",
-            "title": "[AI Remove] Greenhouse Potting Bench Missing Plant Clip",
+            "title": "[AI Remove] Greenhouse Potting Bench Missing Plant Tag",
             "image_path": "public/levels/ai_gardener_potting_base.jpg",
             "preferred_op": "remove",
-            "difficulty": "Hard",
-            "desc": "Single plant stem support clip ring missing from the bench",
-            "hint": "Check the plant support clips on the potting bench"
+            "difficulty": "Medium",
+            "desc": "Single colorful garden plant marker tag missing from the bench",
+            "hint": "Check the plant marker tags on the potting bench"
         },
-        # 5. Fine Art Studio Taboret -> RECOLOR (pastel stick tip)
+        # 5. Fine Art Studio Taboret -> RECOLOR (oil paint tube cap)
         {
             "id": "unified_ai_artist_recolor_005",
-            "title": "[AI Recolor] Fine Art Studio Pastel Stick Tip",
+            "title": "[AI Recolor] Fine Art Studio Oil Paint Tube Cap",
             "image_path": "public/levels/ai_artist_palette_base.jpg",
             "preferred_op": "recolor",
-            "difficulty": "Hard",
-            "hue_direction_deg": 55.0,
-            "desc": "Single soft pastel stick tip tone shifted in CIELAB",
-            "hint": "Inspect the pastel sticks in the wooden tray on the taboret"
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
+            "desc": "Single artist oil paint tube cap tone shifted in CIELAB",
+            "hint": "Inspect the row of oil paint tubes on the palette"
         },
-        # 6. Woodworking Joinery Bench -> ADD (1 extra carpenter pencil)
+        # 6. Woodworking Joinery Bench -> RECOLOR (carpenter marking pencil body)
         {
-            "id": "unified_ai_woodworking_add_006",
-            "title": "[AI Add] Woodworking Joinery Bench Extra Marking Pencil",
+            "id": "unified_ai_woodworking_recolor_006",
+            "title": "[AI Recolor] Woodworking Joinery Bench Carpenter Pencil",
             "image_path": "public/levels/ai_woodworking_bench_base.jpg",
-            "preferred_op": "add",
-            "difficulty": "Hard",
-            "desc": "Single additional carpenter marking pencil added to the pencil array",
-            "hint": "Look closely at the rows of carpenter marking pencils"
+            "preferred_op": "recolor",
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
+            "desc": "Single wooden carpenter marking pencil tone shifted in CIELAB",
+            "hint": "Look closely at the colored carpenter marking pencils"
         },
-        # 7. Retro Gaming Desk -> RECOLOR (memory card latch)
+        # 7. Retro Gaming Desk -> RECOLOR (game cartridge shell)
         {
             "id": "unified_ai_retro_recolor_007",
-            "title": "[AI Recolor] Retro Gaming Desk Memory Card Slider",
+            "title": "[AI Recolor] Retro Gaming Desk Cartridge Shell",
             "image_path": "public/levels/ai_retro_gaming_base.jpg",
             "preferred_op": "recolor",
-            "difficulty": "Hard",
-            "hue_direction_deg": 50.0,
-            "desc": "Single translucent memory card edge tone shifted in CIELAB",
-            "hint": "Examine the translucent memory cards and cartridge edges"
+            "difficulty": "Medium",
+            "hue_direction_deg": 55.0,
+            "desc": "Single vintage game cartridge shell tone shifted in CIELAB",
+            "hint": "Scan the retro game cartridges and memory cards on the desk"
         },
-        # 8. Wilderness Expedition Prep -> REMOVE (1 missing paracord spring toggle)
+        # 8. Wilderness Expedition Prep -> REMOVE (1 missing carabiner)
         {
             "id": "unified_ai_expedition_remove_008",
             "title": "[AI Remove] Expedition Prep Table Missing Carabiner",
             "image_path": "public/levels/ai_expedition_bushcraft_base.jpg",
             "preferred_op": "remove",
-            "difficulty": "Hard",
+            "difficulty": "Medium",
             "desc": "Single locking carabiner missing from the gear array",
             "hint": "Check the carabiners and outdoor gear on the table"
         },
@@ -122,19 +123,20 @@ def execute_unified_pipeline():
             "title": "[AI Recolor] Leather Artisan Bench Waxed Thread Spool",
             "image_path": "public/levels/ai_leathercraft_base.jpg",
             "preferred_op": "recolor",
-            "difficulty": "Hard",
-            "hue_direction_deg": 45.0,
+            "difficulty": "Medium",
+            "hue_direction_deg": 50.0,
             "desc": "Single waxed linen thread spool shifted in CIELAB",
             "hint": "Inspect the collection of colored waxed thread spools"
         },
-        # 10. Miniature Painter Desk -> ADD (1 extra hobby paint dropper bottle)
+        # 10. Miniature Painter Desk -> RECOLOR (paint dropper bottle cap)
         {
-            "id": "unified_ai_miniature_add_010",
-            "title": "[AI Add] Miniature Painter Desk Extra Dropper Bottle",
+            "id": "unified_ai_miniature_recolor_010",
+            "title": "[AI Recolor] Miniature Painter Desk Paint Dropper Cap",
             "image_path": "public/levels/ai_miniature_painter_base.jpg",
-            "preferred_op": "add",
-            "difficulty": "Hard",
-            "desc": "Single additional acrylic paint dropper bottle added to the rack",
+            "preferred_op": "recolor",
+            "difficulty": "Medium",
+            "hue_direction_deg": 60.0,
+            "desc": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
             "hint": "Examine the rows of acrylic paint dropper bottles"
         }
     ]
@@ -181,10 +183,12 @@ def execute_unified_pipeline():
         variant_bgr = None
         final_info = None
 
+        diff_level = scene.get("difficulty", "Medium")
+
         # STAGE 3: Operation-Specific Target Selection & Execution
         if op == "recolor":
             target_info, selection_reason, feasible_candidates = GoldilocksTargetSelector.select_best_goldilocks_target(
-                img_bgr, raw_sam_masks, target_difficulty=scene.get("difficulty", "Hard")
+                img_bgr, raw_sam_masks, target_difficulty=diff_level
             )
             if not feasible_candidates:
                 print(f"❌ Goldilocks Selection Rejection: {selection_reason}")
@@ -196,7 +200,7 @@ def execute_unified_pipeline():
                     image_rgb=img_rgb,
                     mask=cand["mask"],
                     target_bbox=cand["bbox"],
-                    difficulty=scene.get("difficulty", "Hard"),
+                    difficulty=diff_level,
                     hue_direction_deg=scene.get("hue_direction_deg", 50.0),
                     clutter_multiplier=cand["local_clutter_mult"]
                 )
@@ -210,7 +214,7 @@ def execute_unified_pipeline():
 
         elif op == "remove":
             best_target, sel_msg, feasible_cands = RemoveTargetSelector.select_best_remove_target(
-                img_bgr, candidate_masks, peer_groups, target_difficulty=scene.get("difficulty", "Hard")
+                img_bgr, candidate_masks, peer_groups, target_difficulty=diff_level
             )
             if not feasible_cands:
                 print(f"❌ Remove Target Selection Rejection: {sel_msg}")
@@ -220,7 +224,7 @@ def execute_unified_pipeline():
             for cand in feasible_cands[:5]:
                 c_data = cand["candidate"]
                 p, v_bgr, f_info, q_msg = RemoveTargetSelector.execute_removal_and_qa(
-                    img_bgr, c_data["mask"], c_data["bbox"]
+                    img_bgr, c_data["mask"], c_data["bbox"], difficulty=diff_level
                 )
                 if p:
                     passed = True
@@ -231,7 +235,7 @@ def execute_unified_pipeline():
 
         elif op == "add":
             best_pair, sel_msg, feasible_pairs = AddTargetSelector.find_best_add_pair(
-                img_bgr, candidate_masks, peer_groups, raw_sam_masks, target_difficulty=scene.get("difficulty", "Hard")
+                img_bgr, candidate_masks, peer_groups, raw_sam_masks, target_difficulty=diff_level
             )
             if not feasible_pairs:
                 print(f"❌ Add Target Selection Rejection: {sel_msg}")
@@ -241,7 +245,7 @@ def execute_unified_pipeline():
             for pair in feasible_pairs[:5]:
                 donor = pair["donor"]
                 p, v_bgr, f_info, q_msg = AddTargetSelector.execute_add_and_qa(
-                    img_bgr, pair["donor_bbox"], pair["slot_bbox"], donor["mask"]
+                    img_bgr, pair["donor_bbox"], pair["slot_bbox"], donor["mask"], difficulty=diff_level
                 )
                 if p:
                     passed = True
