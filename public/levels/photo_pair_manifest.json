@@ -1,5 +1,205 @@
 [
   {
+    "id": "fresh_market_groceries_001",
+    "title": "[100+ Objects | 81% Clutter] Outdoor Artisan Produce Market",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_market_groceries_001_base.jpg",
+    "variantImage": "/levels/fresh_market_groceries_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.9,
+        "y": 52,
+        "radius": 7.5,
+        "description": "Single lemon fruit removed from crowded organic citrus display",
+        "hint": "Scan through the crowded fruit baskets and produce displays"
+      }
+    ]
+  },
+  {
+    "id": "fresh_pastry_counter_002",
+    "title": "[100+ Objects | 75% Clutter] French Patisserie Pastry Showcase",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_pastry_counter_002_base.jpg",
+    "variantImage": "/levels/fresh_pastry_counter_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 53.8,
+        "radius": 7.5,
+        "description": "Single dusted cinnamon pastry bite removed from crowded dessert tray",
+        "hint": "Examine the dense rows of tarts, cannoli, and dusted pastries"
+      }
+    ]
+  },
+  {
+    "id": "fresh_vintage_curio_shop_003",
+    "title": "[100+ Objects | 64% Clutter] Historic Tokyo Curio & Antiques Shop",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_vintage_curio_shop_003_base.jpg",
+    "variantImage": "/levels/fresh_vintage_curio_shop_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49,
+        "y": 51,
+        "radius": 7.5,
+        "description": "Single brass ornamental bell removed from crowded antique storefront",
+        "hint": "Search through the dense collection of vintage shop signs and trinkets"
+      }
+    ]
+  },
+  {
+    "id": "fresh_curio_cabinet_market_004",
+    "title": "[100+ Objects | 47% Clutter] European Flea Market Curio Stall",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_curio_cabinet_market_004_base.jpg",
+    "variantImage": "/levels/fresh_curio_cabinet_market_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.9,
+        "y": 47.5,
+        "radius": 7.5,
+        "description": "Single porcelain figurine removed from crowded collector shelf",
+        "hint": "Scan the crowded shelves filled with vintage porcelain and brass curios"
+      }
+    ]
+  },
+  {
+    "id": "fresh_artist_desk_flatlay_005",
+    "title": "[80+ Objects | 43% Clutter] Fine Art Watercolor Studio Knolling",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_artist_desk_flatlay_005_base.jpg",
+    "variantImage": "/levels/fresh_artist_desk_flatlay_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 51.7,
+        "radius": 7.5,
+        "description": "Single watercolor paint pigment pan removed from desk organizer",
+        "hint": "Inspect the flat lay arrangement of brushes, paint pans, and tools"
+      }
+    ]
+  },
+  {
+    "id": "fresh_flea_market_trinkets_006",
+    "title": "[80+ Objects | 39% Clutter] Vintage Metal Hardware & Key Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_flea_market_trinkets_006_base.jpg",
+    "variantImage": "/levels/fresh_flea_market_trinkets_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.8,
+        "y": 46.8,
+        "radius": 4.5,
+        "description": "Single antique brass skeleton key removed from crowded market tray",
+        "hint": "Look closely at the metal trinkets, keys, and coins on the wooden table"
+      }
+    ]
+  },
+  {
+    "id": "fresh_cartography_celestial_007",
+    "title": "[70+ Objects | 38% Clutter] 17th Century Antique Celestial Sea Chart",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_cartography_celestial_007_base.jpg",
+    "variantImage": "/levels/fresh_cartography_celestial_007_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.5,
+        "y": 46,
+        "radius": 7.5,
+        "description": "Single navigational compass rose pointer removed from chart meridian",
+        "hint": "Scan the intricate nautical chart lines and compass markings"
+      }
+    ]
+  },
+  {
+    "id": "fresh_hardware_store_shelves_008",
+    "title": "[100+ Objects | 37% Clutter] Industrial Supply Hardware Shelves",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_hardware_store_shelves_008_base.jpg",
+    "variantImage": "/levels/fresh_hardware_store_shelves_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.2,
+        "y": 56.1,
+        "radius": 7.5,
+        "description": "Single fastener carton removed from crowded warehouse shelving",
+        "hint": "Search the packed shelves filled with hardware boxes and supplies"
+      }
+    ]
+  },
+  {
+    "id": "fresh_botanical_seeds_spice_009",
+    "title": "[70+ Objects | 31% Clutter] Dried Herbal Botanical Seed Specimen Grid",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_botanical_seeds_spice_009_base.jpg",
+    "variantImage": "/levels/fresh_botanical_seeds_spice_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.9,
+        "y": 47.9,
+        "radius": 4.5,
+        "description": "Single cardamom spice pod removed from dense seed arrangement",
+        "hint": "Examine the collection of dried botanical pods and herbal seeds"
+      }
+    ]
+  },
+  {
+    "id": "fresh_toy_figurines_array_010",
+    "title": "[80+ Objects | 26% Clutter] Collector Miniature Toy Figurine Display",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_toy_figurines_array_010_base.jpg",
+    "variantImage": "/levels/fresh_toy_figurines_array_010_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47,
+        "y": 50.4,
+        "radius": 4.5,
+        "description": "Single miniature building brick unit removed from toy array",
+        "hint": "Scan the colorful collection of building bricks and miniature figures"
+      }
+    ]
+  },
+  {
     "id": "hyper_dense_motherboard_ic_001",
     "title": "[High Complexity 62%] High-Density Server Motherboard & Chips",
     "category": "Photography",
