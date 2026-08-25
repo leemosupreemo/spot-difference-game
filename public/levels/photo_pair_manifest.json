@@ -1,5 +1,205 @@
 [
   {
+    "id": "fresh_stacked_archive_books_011",
+    "title": "[100+ Objects | 75% Clutter] Archival Rare Book Collection & Folios",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_stacked_archive_books_011_base.jpg",
+    "variantImage": "/levels/fresh_stacked_archive_books_011_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47,
+        "y": 51.9,
+        "radius": 7.5,
+        "description": "Single gilded book spine bookmark removed from stacked library volumes",
+        "hint": "Scan the dense stacks of antique books and gilded spine labels"
+      }
+    ]
+  },
+  {
+    "id": "fresh_accessories_flatlay_012",
+    "title": "[80+ Objects | 64% Clutter] Boutique Jewelry & Accessory Knolling Array",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_accessories_flatlay_012_base.jpg",
+    "variantImage": "/levels/fresh_accessories_flatlay_012_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.8,
+        "y": 47.8,
+        "radius": 4.5,
+        "description": "Single gold ring band removed from accessory knolling arrangement",
+        "hint": "Examine the flat lay of designer jewelry, sunglasses, and leather goods"
+      }
+    ]
+  },
+  {
+    "id": "fresh_botanical_herbarium_grid_013",
+    "title": "[70+ Objects | 60% Clutter] Vintage Botanical Herbarium Specimen Grid",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_botanical_herbarium_grid_013_base.jpg",
+    "variantImage": "/levels/fresh_botanical_herbarium_grid_013_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.9,
+        "y": 45.9,
+        "radius": 7.5,
+        "description": "Single pressed botanical petal removed from scientific herbarium plate",
+        "hint": "Inspect the arranged grid of botanical specimens and pressed flora"
+      }
+    ]
+  },
+  {
+    "id": "fresh_fashion_stylist_bench_014",
+    "title": "[90+ Objects | 49% Clutter] Haute Couture Atelier Cutting Table",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_fashion_stylist_bench_014_base.jpg",
+    "variantImage": "/levels/fresh_fashion_stylist_bench_014_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.6,
+        "y": 49.9,
+        "radius": 4.5,
+        "description": "Single brass thimble removed from cluttered tailor cutting table",
+        "hint": "Search through the scattered spools, pins, fabrics, and measuring tapes"
+      }
+    ]
+  },
+  {
+    "id": "fresh_chocolate_truffles_015",
+    "title": "[60+ Objects | 49% Clutter] Swiss Chocolatier Hand-Rolled Truffle Box",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_chocolate_truffles_015_base.jpg",
+    "variantImage": "/levels/fresh_chocolate_truffles_015_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 52.9,
+        "radius": 4.5,
+        "description": "Single cocoa-dusted dark chocolate truffle removed from artisan box",
+        "hint": "Scan the dense rows of decorated dark and milk chocolate bonbons"
+      }
+    ]
+  },
+  {
+    "id": "fresh_tea_ceremony_matcha_016",
+    "title": "[50+ Objects | 47% Clutter] Japanese Uji Ceremonial Matcha Station",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_tea_ceremony_matcha_016_base.jpg",
+    "variantImage": "/levels/fresh_tea_ceremony_matcha_016_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.7,
+        "y": 47,
+        "radius": 4.5,
+        "description": "Single bamboo tea scoop removed from ceremonial wooden tea tray",
+        "hint": "Look closely at the ceramic tea bowls, bamboo whisks, and accessories"
+      }
+    ]
+  },
+  {
+    "id": "fresh_botanical_herbarium_017",
+    "title": "[60+ Objects | 43% Clutter] Artisan Florist Dried Flower Flat Lay",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_botanical_herbarium_017_base.jpg",
+    "variantImage": "/levels/fresh_botanical_herbarium_017_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.9,
+        "y": 50,
+        "radius": 4.5,
+        "description": "Single dried eucalyptus seed pod removed from botanical arrangement",
+        "hint": "Search through the dense collection of dried stems, petals, and seed heads"
+      }
+    ]
+  },
+  {
+    "id": "fresh_stationery_desk_018",
+    "title": "[70+ Objects | 38% Clutter] Calligrapher Desk & Paper Craft Supplies",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_stationery_desk_018_base.jpg",
+    "variantImage": "/levels/fresh_stationery_desk_018_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.9,
+        "y": 47.9,
+        "radius": 4.5,
+        "description": "Single brass binder clip removed from desktop stationery layout",
+        "hint": "Examine the flat lay of notebooks, fountain pen inks, clips, and wax seals"
+      }
+    ]
+  },
+  {
+    "id": "fresh_vintage_study_typewriter_019",
+    "title": "[60+ Objects | 35% Clutter] Author Antique Study & Typewriter Desk",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_vintage_study_typewriter_019_base.jpg",
+    "variantImage": "/levels/fresh_vintage_study_typewriter_019_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.9,
+        "y": 51.9,
+        "radius": 4.5,
+        "description": "Single postage stamp removed from antique wooden desk surface",
+        "hint": "Scan the vintage typewriter, open journals, postage stamps, and coffee cup"
+      }
+    ]
+  },
+  {
+    "id": "fresh_jewelry_accessories_knolling_020",
+    "title": "[80+ Objects | 34% Clutter] Artisan Jeweler Gemstone & Ring Showcase",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_jewelry_accessories_knolling_020_base.jpg",
+    "variantImage": "/levels/fresh_jewelry_accessories_knolling_020_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.9,
+        "y": 48.9,
+        "radius": 4.5,
+        "description": "Single silver gemstone pendant removed from jewelry display tray",
+        "hint": "Inspect the flat lay arrangement of rings, earrings, pendants, and chains"
+      }
+    ]
+  },
+  {
     "id": "fresh_market_groceries_001",
     "title": "[100+ Objects | 81% Clutter] Outdoor Artisan Produce Market",
     "category": "Photography",
