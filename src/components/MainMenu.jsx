@@ -89,7 +89,7 @@ export default function MainMenu({
                   {details.icon}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <h4 style={{ fontSize: '1.05rem', fontWeight: 900, color: isSelected ? '#fff' : 'var(--text-main)', margin: 0 }}>
                       {theme.title}
                     </h4>
@@ -104,9 +104,6 @@ export default function MainMenu({
                       {details.badge}
                     </span>
                   </div>
-                  <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: '1.25' }}>
-                    {details.desc}
-                  </p>
                 </div>
               </div>
             );
