@@ -1,5 +1,235 @@
 [
   {
+    "id": "photo_c_leaves_003",
+    "title": "[Photorealistic] Autumn Maple Leaves & Woodland Pine Cones",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_leaves_003_base.jpg",
+    "variantImage": "/levels/photo_c_leaves_003_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 19.1,
+        "y": 30.7,
+        "radius": 5.0,
+        "description": "Single vibrant autumn maple leaf shifted from amber gold to scarlet red",
+        "hint": "Scan through the golden autumn leaves and pine cones",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_pumpkins_001",
+    "title": "[Photorealistic] Heirloom Miniature Pumpkins & Autumn Gourds",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_pumpkins_001_base.jpg",
+    "variantImage": "/levels/photo_c_pumpkins_001_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 63.7,
+        "y": 18.2,
+        "radius": 5.9,
+        "description": "Single miniature heirloom pumpkin shifted from golden yellow to warm amber",
+        "hint": "Scan through the miniature pumpkins and autumn decorative gourds",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_macarons_002",
+    "title": "[Photorealistic] Pastel French Bakery Macarons",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_macarons_002_base.jpg",
+    "variantImage": "/levels/photo_c_macarons_002_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 24.8,
+        "y": 43.7,
+        "radius": 8.5,
+        "description": "Single pastel macaron cookie shifted in color",
+        "hint": "Inspect the rows of colorful French macarons on the bakery tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_spices_004",
+    "title": "[Photorealistic] Artisanal Whole Spices & Star Anise",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_spices_004_base.jpg",
+    "variantImage": "/levels/photo_c_spices_004_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 24.3,
+        "y": 79.6,
+        "radius": 9.0,
+        "description": "Single star anise pod or spice cluster shifted in tone",
+        "hint": "Scan the spice dishes and whole botanicals for a subtle tone shift",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_citrus_005",
+    "title": "[Photorealistic] Dehydrated Citrus Slices & Blood Orange",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_citrus_005_base.jpg",
+    "variantImage": "/levels/photo_c_citrus_005_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 23.6,
+        "y": 37.4,
+        "radius": 8.5,
+        "description": "Single dried citrus wheel shifted from ruby red to golden orange",
+        "hint": "Look across the dried blood orange, lime, and lemon wheels",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_stamps_006",
+    "title": "[Photorealistic] Vintage World Postage Stamps Album",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_stamps_006_base.jpg",
+    "variantImage": "/levels/photo_c_stamps_006_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 20.8,
+        "y": 74.1,
+        "radius": 5.0,
+        "description": "Single vintage postage stamp portrait or emblem shifted in color",
+        "hint": "Scan the vintage postage stamps mounted on the album page",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_pebbles_007",
+    "title": "[Photorealistic] Tumbled River Agates & Sea Stones",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_pebbles_007_base.jpg",
+    "variantImage": "/levels/photo_c_pebbles_007_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 80.2,
+        "y": 59.2,
+        "radius": 5.9,
+        "description": "Single polished river agate stone shifted in color tone",
+        "hint": "Examine the smooth polished river stones and agates",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_succulents_008",
+    "title": "[Photorealistic] Greenhouse Nursery Echeveria Succulents",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_succulents_008_base.jpg",
+    "variantImage": "/levels/photo_c_succulents_008_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 40.3,
+        "y": 65.1,
+        "radius": 5.0,
+        "description": "Single succulent rosette shifted from jade green to lilac rose",
+        "hint": "Check the greenhouse succulent rosettes for a subtle color variation",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_paint_tubes_009",
+    "title": "[Photorealistic] Master Artist Oil Paint Tubes & Swatches",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_paint_tubes_009_base.jpg",
+    "variantImage": "/levels/photo_c_paint_tubes_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74.3,
+        "y": 16.5,
+        "radius": 5.3,
+        "description": "Single oil paint tube cap or pigment label shifted in color",
+        "hint": "Inspect the artist oil paint tubes and pigment swatch labels",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_c_seeds_010",
+    "title": "[Photorealistic] Botanical Garden Seeds & Legumes",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_c_seeds_010_base.jpg",
+    "variantImage": "/levels/photo_c_seeds_010_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 81.9,
+        "y": 30.1,
+        "radius": 7.3,
+        "description": "Single sorting dish of botanical seeds shifted in warmth",
+        "hint": "Look across the bowls of botanical seeds, grains, and legumes",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "photo_fresh_yarn_001",
     "title": "[Photorealistic] Colorful Wool Yarn Balls & Knitting Skeins",
     "pack": "Photography",
@@ -3645,7 +3875,7 @@
         "y": 90.2,
         "id": 1,
         "hint": "Look around the toy car on the left half of the desk.",
-        "x": 71.4,
+        "x": 70.8,
         "radius": 9.0
       }
     ],
@@ -3961,10 +4191,10 @@
     "variantImage": "levels/photo-pairs/photo-spice-table/variant.jpg",
     "diffs": [
       {
-        "y": 22.1,
+        "y": 20.6,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 78.2,
+        "x": 81.5,
         "radius": 9.0
       }
     ],
@@ -4172,10 +4402,10 @@
     "id": "photo_map_restoration_001",
     "diffs": [
       {
-        "y": 16.8,
+        "y": 18.5,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 6.0,
+        "x": 7.0,
         "radius": 9.0
       }
     ],
@@ -4214,10 +4444,10 @@
     "title": "Game Night Token",
     "diffs": [
       {
-        "y": 44.8,
+        "y": 47.7,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 29.4,
+        "x": 29.2,
         "radius": 9.0
       }
     ],
@@ -4233,11 +4463,11 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 63.7,
+        "y": 62.8,
         "id": 1,
         "hint": "Compare the small object in this area.",
-        "x": 3.9,
-        "radius": 7.2
+        "x": 4.0,
+        "radius": 7.9
       }
     ],
     "pack": "Find the Sniper"
