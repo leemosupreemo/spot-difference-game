@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 121,
-    "dismissedCount": 89,
+    "approvedCount": 125,
+    "dismissedCount": 95,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -127,7 +127,11 @@
     "photo_unique_seashells_001",
     "photo_unique_gardening_004",
     "photo_unique_sewing_005",
-    "photo_unique_bakery_006"
+    "photo_unique_bakery_006",
+    "photo_fresh_pencils_002",
+    "photo_fresh_crayons_003",
+    "photo_fresh_watchmaker_008",
+    "photo_fresh_stained_glass_009"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -219,7 +223,13 @@
     "photo_unique_leather_007",
     "photo_unique_miniatures_008",
     "photo_unique_bushcraft_009",
-    "photo_unique_woodworking_010"
+    "photo_unique_woodworking_010",
+    "photo_fresh_yarn_001",
+    "photo_fresh_typewriter_004",
+    "photo_fresh_coffee_005",
+    "photo_fresh_pcb_006",
+    "photo_fresh_mechanic_007",
+    "photo_fresh_marbles_010"
   ],
   "approvedLevels": [
     {
@@ -2637,6 +2647,46 @@
     "photo_unique_woodworking_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:06:41.072Z"
+    },
+    "photo_fresh_yarn_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:24:15.106Z"
+    },
+    "photo_fresh_pencils_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:24:33.813Z"
+    },
+    "photo_fresh_crayons_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:24:40.801Z"
+    },
+    "photo_fresh_typewriter_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:24:49.371Z"
+    },
+    "photo_fresh_coffee_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:24:51.919Z"
+    },
+    "photo_fresh_pcb_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:25:01.736Z"
+    },
+    "photo_fresh_mechanic_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:25:12.757Z"
+    },
+    "photo_fresh_watchmaker_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:25:25.831Z"
+    },
+    "photo_fresh_stained_glass_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:25:41.538Z"
+    },
+    "photo_fresh_marbles_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T06:26:03.169Z"
     }
   }
 }

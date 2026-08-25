@@ -142,8 +142,7 @@ body {
 .canvas-element {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;

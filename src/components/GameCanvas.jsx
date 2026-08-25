@@ -23,6 +23,22 @@ export default function GameCanvas({
   const [speedPopups, setSpeedPopups] = useState([]);
   const [cursorPos, setCursorPos] = useState({ x: 50, y: 50, visible: false });
   const [canvasUrls, setCanvasUrls] = useState({ left: '', right: '' });
+  const [cardAspectRatio, setCardAspectRatio] = useState('4 / 3');
+
+  // Detect natural image aspect ratio to eliminate cropping and ensure 100% pixel-perfect coordinates
+  useEffect(() => {
+    if (level?.baseImage) {
+      const img = new Image();
+      img.onload = () => {
+        if (img.naturalWidth && img.naturalHeight) {
+          setCardAspectRatio(`${img.naturalWidth} / ${img.naturalHeight}`);
+        }
+      };
+      img.src = resolveAssetUrl(level.baseImage);
+    } else {
+      setCardAspectRatio('4 / 3');
+    }
+  }, [level?.baseImage, level?.id]);
 
   // Pointer/Touch gesture tracking
   const pointerStartRef = useRef({ x: 0, y: 0, time: 0, isDrag: false });
@@ -235,13 +251,14 @@ export default function GameCanvas({
         <div
           ref={containerRefLeft}
           className="canvas-card"
+          style={{ aspectRatio: cardAspectRatio }}
           onPointerDown={(e) => handlePointerDown(e, containerRefLeft)}
           onPointerMove={(e) => handlePointerMove(e, containerRefLeft)}
           onPointerUp={(e) => handlePointerUp(e, containerRefLeft)}
           onPointerLeave={handleMouseLeave}
           onPointerCancel={handleMouseLeave}
         >
-          <canvas ref={canvasRefLeft} className="canvas-element" />
+          <canvas ref={canvasRefLeft} className="canvas-element" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
           {level?.baseImage && (
             <img
               src={resolveAssetUrl(level.baseImage)}
@@ -254,7 +271,7 @@ export default function GameCanvas({
                 left: 0,
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                objectFit: 'fill',
                 zIndex: 1,
                 borderRadius: 'inherit',
                 pointerEvents: 'none',
@@ -341,13 +358,14 @@ export default function GameCanvas({
         <div
           ref={containerRefRight}
           className="canvas-card"
+          style={{ aspectRatio: cardAspectRatio }}
           onPointerDown={(e) => handlePointerDown(e, containerRefRight)}
           onPointerMove={(e) => handlePointerMove(e, containerRefRight)}
           onPointerUp={(e) => handlePointerUp(e, containerRefRight)}
           onPointerLeave={handleMouseLeave}
           onPointerCancel={handleMouseLeave}
         >
-          <canvas ref={canvasRefRight} className="canvas-element" />
+          <canvas ref={canvasRefRight} className="canvas-element" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
           {level?.variantImage && (
             <img
               src={resolveAssetUrl(level.variantImage)}
@@ -360,7 +378,7 @@ export default function GameCanvas({
                 left: 0,
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                objectFit: 'fill',
                 zIndex: 1,
                 borderRadius: 'inherit',
                 pointerEvents: 'none',
