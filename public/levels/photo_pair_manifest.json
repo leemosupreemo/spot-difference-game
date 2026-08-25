@@ -1,5 +1,205 @@
 [
   {
+    "id": "dense_crowd_sewing_notions_001",
+    "title": "[High Object Count] Vintage Haberdashery 80-Piece Sewing Box",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_sewing_notions_001_base.jpg",
+    "variantImage": "/levels/dense_crowd_sewing_notions_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.2,
+        "y": 43.4,
+        "radius": 4.5,
+        "description": "Single wooden thread spool removed from crowded sewing notions tray",
+        "hint": "Scan the dense array of thread spools, buttons, and pins in the sewing box"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_boardgame_tokens_002",
+    "title": "[High Object Count] Master Watchmaker 90-Component Assembly Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_boardgame_tokens_002_base.jpg",
+    "variantImage": "/levels/dense_crowd_boardgame_tokens_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 57.5,
+        "y": 47.5,
+        "radius": 5.5,
+        "description": "Single wooden meeple unit removed from dense tactical resource grid",
+        "hint": "Examine the crowded field of wooden tokens, meeples, and dice"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_micro_circuitry_003",
+    "title": "[High Object Count] High-Density Microprocessor Component Trace",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_micro_circuitry_003_base.jpg",
+    "variantImage": "/levels/dense_crowd_micro_circuitry_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.7,
+        "y": 45.7,
+        "radius": 4.5,
+        "description": "Single SMD resistor package removed from multi-lane circuit matrix",
+        "hint": "Look closely at the microscopic surface-mount chips and copper buses"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_dried_botanicals_004",
+    "title": "[High Object Count] Artisan Florist 60-Item Herbarium Flat Lay",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_dried_botanicals_004_base.jpg",
+    "variantImage": "/levels/dense_crowd_dried_botanicals_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.9,
+        "y": 49.9,
+        "radius": 4.5,
+        "description": "Single dried eucalyptus seed pod removed from botanical arrangement",
+        "hint": "Search through the dense collection of dried stems, petals, and seed heads"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_pastry_showcase_005",
+    "title": "[High Object Count] French Patisserie 50-Item Confectionery Display",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_pastry_showcase_005_base.jpg",
+    "variantImage": "/levels/dense_crowd_pastry_showcase_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.6,
+        "y": 53.8,
+        "radius": 4.5,
+        "description": "Single dusted almond pastry bite removed from crowded showcase tray",
+        "hint": "Scan the rows of glazed tarts, cannoli, and pastries in the glass counter"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_watch_escapement_006",
+    "title": "[High Object Count] Horology Movement 70-Gear Assembly Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_watch_escapement_006_base.jpg",
+    "variantImage": "/levels/dense_crowd_watch_escapement_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.9,
+        "y": 47.9,
+        "radius": 4.5,
+        "description": "Single brass pinion wheel removed from master watchmaker parts tray",
+        "hint": "Inspect the dense array of exposed gears, balance springs, and jewel pivots"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_tailor_workbench_007",
+    "title": "[High Object Count] Bespoke Tailor 80-Piece Cutting Table",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_tailor_workbench_007_base.jpg",
+    "variantImage": "/levels/dense_crowd_tailor_workbench_007_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.9,
+        "y": 50.9,
+        "radius": 4.5,
+        "description": "Single brass safety pin removed from crowded tailor tool layout",
+        "hint": "Check the scattered chalk blocks, shears, thread bobbins, and pins"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_pottery_tools_008",
+    "title": "[High Object Count] Ceramic Studio 60-Tool Sculpting Bench",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_pottery_tools_008_base.jpg",
+    "variantImage": "/levels/dense_crowd_pottery_tools_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.8,
+        "y": 57.5,
+        "radius": 4.5,
+        "description": "Single wooden clay rib modeling tool removed from pottery workbench",
+        "hint": "Scan the dense collection of trimming ribbons, loop tools, and wire cutters"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_knolling_tech_009",
+    "title": "[High Object Count] Hardware Engineer 90-Item Workspace Flat Lay",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_knolling_tech_009_base.jpg",
+    "variantImage": "/levels/dense_crowd_knolling_tech_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44,
+        "y": 49.4,
+        "radius": 4.5,
+        "description": "Single USB dongle adapter removed from crowded engineering desk",
+        "hint": "Examine the dense knolling layout of cables, chips, adapters, and tools"
+      }
+    ]
+  },
+  {
+    "id": "dense_crowd_apothecary_herbs_010",
+    "title": "[High Object Count] Herbal Apothecary 70-Vial Botanical Station",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/dense_crowd_apothecary_herbs_010_base.jpg",
+    "variantImage": "/levels/dense_crowd_apothecary_herbs_010_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.2,
+        "y": 48.1,
+        "radius": 7.5,
+        "description": "Single glass dropper bottle removed from dense apothecary station",
+        "hint": "Look through the crowded jars of tinctures, dried herbs, and essential oils"
+      }
+    ]
+  },
+  {
     "id": "photo_c_spices_004",
     "title": "[Photorealistic] Artisanal Whole Spices & Star Anise",
     "pack": "Photography",
