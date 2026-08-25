@@ -1,5 +1,258 @@
 [
   {
+    "id": "dense_360_marbles_recolor_001",
+    "title": "[360 Marbles] Glass Swirl Marble Pile Color Shift",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_360_marbles_recolor_001_base.jpg",
+    "variantImage": "/levels/dense_360_marbles_recolor_001_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.1,
+        "y": 50.2,
+        "radius": 4.5,
+        "description": "Single swirling glass marble shifted from cobalt blue to vibrant crimson",
+        "hint": "Inspect the glass marbles on the right side of the marble pile",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "dense_240_buttons_remove_002",
+    "title": "[240 Buttons] Vintage Button Sorting Tray Missing Button",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "baseImage": "/levels/dense_240_buttons_remove_002_base.jpg",
+    "variantImage": "/levels/dense_240_buttons_remove_002_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32.0,
+        "y": 54.4,
+        "radius": 4.5,
+        "description": "Single amber bakelite button missing from the sorting tray",
+        "hint": "Examine the middle section of the vintage button sorting tray",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "dense_220_boardgame_recolor_003",
+    "title": "[220 Game Tokens] Wooden Meeple Collection Color Shift",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_220_boardgame_recolor_003_base.jpg",
+    "variantImage": "/levels/dense_220_boardgame_recolor_003_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69.1,
+        "y": 41.7,
+        "radius": 4.5,
+        "description": "Single wooden meeple token color shifted to electric cyan",
+        "hint": "Scan the wooden meeples and tokens on the green felt surface",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "dense_280_candies_recolor_004",
+    "title": "[280 Candies] Gourmet Jelly Bean Platter Color Shift",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_280_candies_recolor_004_base.jpg",
+    "variantImage": "/levels/dense_280_candies_recolor_004_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 11.5,
+        "y": 57.8,
+        "radius": 4.5,
+        "description": "Single glossy jelly bean shifted to bright electric lime green",
+        "hint": "Scan through the jelly bean assortment for a vibrant lime green bean",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "dense_200_resistors_recolor_005",
+    "title": "[200 Resistors] ESD Mat Component Array Color Shift",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_200_resistors_recolor_005_base.jpg",
+    "variantImage": "/levels/dense_200_resistors_recolor_005_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73.9,
+        "y": 49.0,
+        "radius": 4.5,
+        "description": "Single color-banded ceramic resistor body shifted from blue to vibrant crimson red",
+        "hint": "Check the rows of resistors across the center of the ESD mat",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "dense_260_watchmaker_recolor_006",
+    "title": "[260 Watchmaker Cogs] Horology Parts Tray Jewel Color Shift",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_260_watchmaker_recolor_006_base.jpg",
+    "variantImage": "/levels/dense_260_watchmaker_recolor_006_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 82.9,
+        "y": 50.7,
+        "radius": 4.5,
+        "description": "Single watchmaker synthetic jewel bearing shifted from ruby to emerald green",
+        "hint": "Examine the jewel bearings and cogs on the watchmaker tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "dense_180_gemstones_remove_007",
+    "title": "[180 Gemstones] Velvet Jeweler Tray Missing Faceted Gem",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "baseImage": "/levels/dense_180_gemstones_remove_007_base.jpg",
+    "variantImage": "/levels/dense_180_gemstones_remove_007_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.6,
+        "y": 49.3,
+        "radius": 4.5,
+        "description": "Single sparkling faceted sapphire missing from the black velvet tray",
+        "hint": "Scan the sparkling faceted jewels across the velvet tray",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "dense_240_hardware_recolor_008",
+    "title": "[240 Hardware] Workshop Organizer Nut Color Shift",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_240_hardware_recolor_008_base.jpg",
+    "variantImage": "/levels/dense_240_hardware_recolor_008_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 6.6,
+        "y": 71.5,
+        "radius": 4.5,
+        "description": "Single brass hex nut shifted to polished chrome steel",
+        "hint": "Inspect the brass hex nuts in the hardware organizer tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "dense_200_palette_remove_009",
+    "title": "[200 Paint Swirls] Studio Palette Missing Oil Paint Dollop",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "baseImage": "/levels/dense_200_palette_remove_009_base.jpg",
+    "variantImage": "/levels/dense_200_palette_remove_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.7,
+        "y": 41.3,
+        "radius": 4.5,
+        "description": "Single rich oil paint impasto dollop missing from the wooden palette",
+        "hint": "Check the colorful oil paint dollops across the palette",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "dense_190_pins_recolor_010",
+    "title": "[190 Enamel Pins] Collector Pin Board Color Shift",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/dense_190_pins_recolor_010_base.jpg",
+    "variantImage": "/levels/dense_190_pins_recolor_010_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 24.0,
+        "y": 64.7,
+        "radius": 4.5,
+        "description": "Single enamel collector pin shifted to bright tangerine gold",
+        "hint": "Scan the retro enamel pins and metal badges on the board",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "dense_palette_remove_009",
+    "title": "[Ultra-Dense] 200 Artist Oil Paint Dollops",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "baseImage": "/levels/dense_palette_remove_009_base.jpg",
+    "variantImage": "/levels/dense_palette_remove_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 2.3,
+        "y": 4.9,
+        "radius": 4.2,
+        "description": "Single oil paint impasto dollop missing from the palette",
+        "hint": "Inspect the swirl dollops of oil paint on the wooden palette",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
     "id": "verified_m_ai_sewing_remove_001",
     "title": "[AI Remove - Medium] Tailor Notions Box Missing Thread Spool",
     "category": "Photography",

@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 105,
-    "dismissedCount": 54,
+    "approvedCount": 108,
+    "dismissedCount": 61,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -111,7 +111,10 @@
     "dense_ai_retro_cart_add_006",
     "dense_ai_artist_pastel_remove_007",
     "dense_ai_woodworking_chisel_recolor_008",
-    "dense_ai_leather_punch_add_009"
+    "dense_ai_leather_punch_add_009",
+    "verified_m_ai_sewing_remove_001",
+    "verified_m_ai_electronics_add_003",
+    "verified_m_ai_artist_recolor_005"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -168,7 +171,14 @@
     "dense_ai_miniature_bottle_remove_005",
     "dense_ai_gardener_tag_recolor_010",
     "unified_ai_woodworking_recolor_006",
-    "unified_ai_miniature_recolor_010"
+    "unified_ai_miniature_recolor_010",
+    "verified_m_ai_watchmaker_recolor_002",
+    "verified_m_ai_gardener_remove_004",
+    "verified_m_ai_woodworking_recolor_006",
+    "verified_m_ai_retro_recolor_007",
+    "verified_m_ai_expedition_remove_008",
+    "verified_m_ai_leathercraft_recolor_009",
+    "verified_m_ai_miniature_recolor_010"
   ],
   "approvedLevels": [
     {
@@ -2382,6 +2392,46 @@
     "unified_ai_miniature_recolor_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T01:36:31.422Z"
+    },
+    "verified_m_ai_sewing_remove_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:56:09.234Z"
+    },
+    "verified_m_ai_watchmaker_recolor_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:56:23.309Z"
+    },
+    "verified_m_ai_electronics_add_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:56:28.444Z"
+    },
+    "verified_m_ai_gardener_remove_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:56:35.363Z"
+    },
+    "verified_m_ai_artist_recolor_005": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T01:56:43.976Z"
+    },
+    "verified_m_ai_woodworking_recolor_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:56:50.539Z"
+    },
+    "verified_m_ai_retro_recolor_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:56:59.752Z"
+    },
+    "verified_m_ai_expedition_remove_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:57:06.138Z"
+    },
+    "verified_m_ai_leathercraft_recolor_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:57:15.072Z"
+    },
+    "verified_m_ai_miniature_recolor_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T01:57:25.011Z"
     }
   }
 }
