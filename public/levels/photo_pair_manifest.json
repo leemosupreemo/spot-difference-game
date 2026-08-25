@@ -1,5 +1,205 @@
 [
   {
+    "id": "hyper_dense_motherboard_ic_001",
+    "title": "[High Complexity 62%] High-Density Server Motherboard & Chips",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_motherboard_ic_001_base.jpg",
+    "variantImage": "/levels/hyper_dense_motherboard_ic_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.9,
+        "y": 45.9,
+        "radius": 4.5,
+        "description": "Single rectangular IC chip package removed from dense multi-chip logic bus",
+        "hint": "Examine the intricate circuit traces and dense rows of IC packages"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_synth_pcb_002",
+    "title": "[High Complexity 66%] Analog Audio Synthesizer Circuit Matrix",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_synth_pcb_002_base.jpg",
+    "variantImage": "/levels/hyper_dense_synth_pcb_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.7,
+        "y": 54.2,
+        "radius": 7.5,
+        "description": "Single electrolytic capacitor package removed from dense component array",
+        "hint": "Scan the dense rows of capacitors and IC chips on the logic board"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_botanical_spices_003",
+    "title": "[High Complexity 69%] Spice Market 70-Item Botanical Flat Lay",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_botanical_spices_003_base.jpg",
+    "variantImage": "/levels/hyper_dense_botanical_spices_003_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48,
+        "y": 47.7,
+        "radius": 4.5,
+        "description": "Single star anise seed pod removed from crowded spice assortment",
+        "hint": "Search through the dense collection of dried seeds, pods, and nuts"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_machinist_parts_004",
+    "title": "[High Complexity 54%] Machinist Workshop 80-Piece Hardware Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_machinist_parts_004_base.jpg",
+    "variantImage": "/levels/hyper_dense_machinist_parts_004_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.6,
+        "y": 45.8,
+        "radius": 7.5,
+        "description": "Single brass hex nut removed from cluttered hardware compartment",
+        "hint": "Inspect the dense sorting compartments filled with screws and fasteners"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_letterpress_type_005",
+    "title": "[High Complexity 36%] 100-Glyph Lead Metal Typecase Matrix",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_letterpress_type_005_base.jpg",
+    "variantImage": "/levels/hyper_dense_letterpress_type_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51,
+        "y": 47.8,
+        "radius": 4.5,
+        "description": "Single lead character glyph block removed from dense typesetter grid",
+        "hint": "Inspect the dense matrix of lead type blocks across the job case"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_art_pigments_006",
+    "title": "[High Complexity 40%] Painter Studio 60-Item Pigment & Knife Table",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_art_pigments_006_base.jpg",
+    "variantImage": "/levels/hyper_dense_art_pigments_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.7,
+        "y": 61.7,
+        "radius": 7.5,
+        "description": "Single cobalt pigment dollop removed from crowded art supplies table",
+        "hint": "Scan the dozens of colorful paint tubes, palette knives, and brushes"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_horology_gears_007",
+    "title": "[High Complexity 51%] Horology Movement 70-Gear Assembly Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_horology_gears_007_base.jpg",
+    "variantImage": "/levels/hyper_dense_horology_gears_007_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.9,
+        "y": 47.9,
+        "radius": 4.5,
+        "description": "Single brass pinion wheel removed from master watchmaker parts tray",
+        "hint": "Inspect the dense array of exposed gears, balance springs, and jewel pivots"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_cyber_circuit_008",
+    "title": "[High Complexity 64%] High-Density Microprocessor Component Trace",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_cyber_circuit_008_base.jpg",
+    "variantImage": "/levels/hyper_dense_cyber_circuit_008_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 47.6,
+        "y": 45.7,
+        "radius": 4.5,
+        "description": "Single SMD resistor package removed from multi-lane circuit matrix",
+        "hint": "Look closely at the microscopic surface-mount chips and copper buses"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_dried_herbs_009",
+    "title": "[High Complexity 43%] Artisan Florist 60-Item Herbarium Flat Lay",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_dried_herbs_009_base.jpg",
+    "variantImage": "/levels/hyper_dense_dried_herbs_009_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.9,
+        "y": 50,
+        "radius": 4.5,
+        "description": "Single dried eucalyptus seed pod removed from botanical arrangement",
+        "hint": "Search through the dense collection of dried stems, petals, and seed heads"
+      }
+    ]
+  },
+  {
+    "id": "hyper_dense_sewing_notions_010",
+    "title": "[High Complexity 45%] Vintage Haberdashery 80-Piece Sewing Box",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_sewing_notions_010_base.jpg",
+    "variantImage": "/levels/hyper_dense_sewing_notions_010_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.2,
+        "y": 43.5,
+        "radius": 4.5,
+        "description": "Single wooden thread spool removed from crowded sewing notions tray",
+        "hint": "Scan the dense array of thread spools, buttons, and pins in the sewing box"
+      }
+    ]
+  },
+  {
     "id": "dense_crowd_sewing_notions_001",
     "title": "[High Object Count] Vintage Haberdashery 80-Piece Sewing Box",
     "category": "Photography",
