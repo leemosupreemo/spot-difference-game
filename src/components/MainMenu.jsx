@@ -13,7 +13,7 @@ export default function MainMenu({
   const themeDetails = {
     find_the_sniper: {
       icon: <Camera size={26} color="var(--accent-cyan)" />,
-      badge: 'REAL PHOTO PAIRS',
+      badge: 'REALISTIC PHOTOS',
       desc: 'Authentic high-resolution photographs with 1 subtle difference'
     },
     abstract_animated: {
