@@ -3,7 +3,7 @@
   "summary": {
     "totalCurated": 72,
     "approvedCount": 108,
-    "dismissedCount": 61,
+    "dismissedCount": 72,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -178,7 +178,18 @@
     "verified_m_ai_retro_recolor_007",
     "verified_m_ai_expedition_remove_008",
     "verified_m_ai_leathercraft_recolor_009",
-    "verified_m_ai_miniature_recolor_010"
+    "verified_m_ai_miniature_recolor_010",
+    "dense_360_marbles_recolor_001",
+    "dense_240_buttons_remove_002",
+    "dense_220_boardgame_recolor_003",
+    "dense_280_candies_recolor_004",
+    "dense_200_resistors_recolor_005",
+    "dense_260_watchmaker_recolor_006",
+    "dense_180_gemstones_remove_007",
+    "dense_240_hardware_recolor_008",
+    "dense_200_palette_remove_009",
+    "dense_190_pins_recolor_010",
+    "dense_palette_remove_009"
   ],
   "approvedLevels": [
     {
@@ -2432,6 +2443,50 @@
     "verified_m_ai_miniature_recolor_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T01:57:25.011Z"
+    },
+    "dense_360_marbles_recolor_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:38.988Z"
+    },
+    "dense_240_buttons_remove_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:40.470Z"
+    },
+    "dense_220_boardgame_recolor_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:41.860Z"
+    },
+    "dense_280_candies_recolor_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:42.843Z"
+    },
+    "dense_200_resistors_recolor_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:43.894Z"
+    },
+    "dense_260_watchmaker_recolor_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:44.923Z"
+    },
+    "dense_180_gemstones_remove_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:45.967Z"
+    },
+    "dense_240_hardware_recolor_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:46.724Z"
+    },
+    "dense_200_palette_remove_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:47.621Z"
+    },
+    "dense_190_pins_recolor_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:48.592Z"
+    },
+    "dense_palette_remove_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-25T04:39:49.399Z"
     }
   }
 }

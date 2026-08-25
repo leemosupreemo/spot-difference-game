@@ -1,5 +1,235 @@
 [
   {
+    "id": "photo_marbles_recolor_001",
+    "title": "[Photorealistic] 200 Glass Cats-Eye & Swirl Marbles",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_marbles_recolor_001_base.jpg",
+    "variantImage": "/levels/photo_marbles_recolor_001_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29.4,
+        "y": 77.9,
+        "radius": 4.5,
+        "description": "Single swirling glass marble color shifted to vibrant contrast tone",
+        "hint": "Scan through the glass marble collection for a bold color change",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_buttons_recolor_002",
+    "title": "[Photorealistic] Vintage Button Compartment Tray",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_buttons_recolor_002_base.jpg",
+    "variantImage": "/levels/photo_buttons_recolor_002_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76.4,
+        "y": 28.4,
+        "radius": 4.5,
+        "description": "Single vintage sew-through button color shifted",
+        "hint": "Inspect the button compartments for a distinct color change",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_boardgame_recolor_003",
+    "title": "[Photorealistic] Euro Board Game Meeples & Resource Cubes",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_boardgame_recolor_003_base.jpg",
+    "variantImage": "/levels/photo_boardgame_recolor_003_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 8.6,
+        "y": 46.4,
+        "radius": 4.5,
+        "description": "Single wooden meeple token color shifted",
+        "hint": "Check the colorful wooden meeples and tokens on the table",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_candies_recolor_004",
+    "title": "[Photorealistic] Glossy Gourmet Jelly Beans & Candy Drops",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_candies_recolor_004_base.jpg",
+    "variantImage": "/levels/photo_candies_recolor_004_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.7,
+        "y": 43.7,
+        "radius": 4.5,
+        "description": "Single glossy gourmet jelly bean color shifted",
+        "hint": "Scan the fruit candy drops and jelly beans",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_hardware_recolor_005",
+    "title": "[Photorealistic] Precision Brass & Steel Hardware Organizer",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_hardware_recolor_005_base.jpg",
+    "variantImage": "/levels/photo_hardware_recolor_005_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 10.9,
+        "y": 34.1,
+        "radius": 6.0,
+        "description": "Single brass hex nut shifted to steel tone",
+        "hint": "Inspect the brass hex nuts in the hardware organizer tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_watch_parts_recolor_006",
+    "title": "[Photorealistic] Horologist Watchmaker Movement & Ruby Jewels",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_watch_parts_recolor_006_base.jpg",
+    "variantImage": "/levels/photo_watch_parts_recolor_006_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 19.7,
+        "y": 73.6,
+        "radius": 5.1,
+        "description": "Single synthetic ruby jewel bearing shifted to emerald green",
+        "hint": "Examine the precision cogs and ruby jewels in the tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_gemstones_recolor_007",
+    "title": "[Photorealistic] Faceted Natural Gemstones on Black Velvet",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_gemstones_recolor_007_base.jpg",
+    "variantImage": "/levels/photo_gemstones_recolor_007_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 10.8,
+        "y": 50.2,
+        "radius": 5.0,
+        "description": "Single faceted cut gemstone color shifted",
+        "hint": "Scan the sparkling faceted jewels across the velvet tray",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_enamel_pins_recolor_008",
+    "title": "[Photorealistic] Retro Collector Enamel Pins on Denim",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_enamel_pins_recolor_008_base.jpg",
+    "variantImage": "/levels/photo_enamel_pins_recolor_008_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76.0,
+        "y": 51.5,
+        "radius": 4.5,
+        "description": "Single retro enamel pin badge color shifted",
+        "hint": "Scan the retro enamel pins and metal badges on the denim banner",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_spices_recolor_009",
+    "title": "[Photorealistic] Artisanal Whole Spice Market Tray",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_spices_recolor_009_base.jpg",
+    "variantImage": "/levels/photo_spices_recolor_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62.4,
+        "y": 18.9,
+        "radius": 5.6,
+        "description": "Single whole spice pod color shifted",
+        "hint": "Check the spice compartments for a tone change",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "photo_succulents_recolor_010",
+    "title": "[Photorealistic] Greenhouse Miniature Succulent Rosettes",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_succulents_recolor_010_base.jpg",
+    "variantImage": "/levels/photo_succulents_recolor_010_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.2,
+        "y": 24.8,
+        "radius": 4.5,
+        "description": "Single succulent rosette shifted from pastel green to vivid violet",
+        "hint": "Look across the nursery tray for a color-shifted succulent rosette",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "dense_360_marbles_recolor_001",
     "title": "[360 Marbles] Glass Swirl Marble Pile Color Shift",
     "pack": "Photography",
