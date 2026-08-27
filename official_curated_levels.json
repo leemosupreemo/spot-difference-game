@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 170,
-    "dismissedCount": 173,
+    "approvedCount": 171,
+    "dismissedCount": 182,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -176,7 +176,8 @@
     "pipe_v3_watchmaker_recolor_002",
     "pipe_v3_electronics_add_003",
     "pipe_v3_artist_recolor_006",
-    "pipe_v3_retro_reorder_007"
+    "pipe_v3_retro_reorder_007",
+    "fresh_ai_heirloom_spices_botanical_009"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -352,7 +353,16 @@
     "pipe_v3_sewing_remove_001",
     "pipe_v3_gardener_remove_005",
     "pipe_v3_expedition_remove_008",
-    "pipe_v3_leathercraft_recolor_009"
+    "pipe_v3_leathercraft_recolor_009",
+    "fresh_ai_confectionery_truffles_001",
+    "fresh_ai_ceramic_mosaic_tiles_002",
+    "fresh_ai_botanical_pressed_flora_003",
+    "fresh_ai_glass_marbles_millefiori_004",
+    "fresh_ai_succulents_greenhouse_grid_005",
+    "fresh_ai_marine_seashells_specimens_007",
+    "fresh_ai_stained_glass_jewels_008",
+    "fresh_ai_wooden_toy_figurines_010",
+    "fresh_ai_enamel_pins_collector_006"
   ],
   "approvedLevels": [
     {

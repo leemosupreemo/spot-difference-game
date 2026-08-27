@@ -7,8 +7,7 @@ Selects and repositions ONE existing loose object within a compact local ROI:
    - Small translation (15 - 35 px)
    - Angle rotation (15° - 45°)
    - Translation + rotation
-   - Adjacent peer swap (if distance < 60px)
-3. Footprint Reconstruction: Navier-Stokes inpainting on old location.
+3. Footprint Reconstruction: LocalBackgroundSynthesizer (texture patch synthesis).
 4. Composite: Rotated/translated object with synthesized contact shadow.
 5. Strict Compactness Gate: Union bounding box must form ONE compact answer region.
 6. Zero-Drift Clamping outside local ROI.
@@ -18,6 +17,7 @@ Selects and repositions ONE existing loose object within a compact local ROI:
 import cv2
 import numpy as np
 from perceptual_verification_engine import PerceptualVerificationEngine
+from remove_target_selector import LocalBackgroundSynthesizer
 
 class ReorderTargetSelector:
     """
@@ -29,6 +29,9 @@ class ReorderTargetSelector:
         h, w = image_bgr.shape[:2]
         total_pixels = h * w
         gray = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2GRAY)
+
+        disp_scale_x = 700.0 / float(w)
+        disp_scale_y = 440.0 / float(h)
 
         min_area, max_area = 0.15, 0.85
         if target_difficulty == "Hard": min_area, max_area = 0.10, 0.60
@@ -58,6 +61,13 @@ class ReorderTargetSelector:
             pcount = np.sum(mask > 0)
             if pcount == 0: continue
 
+            # Display size check (18px to 42px)
+            bx1, by1, bx2, by2 = c["bbox"]
+            bw, bh = bx2 - bx1 + 1, by2 - by1 + 1
+            d_short = min(bw * disp_scale_x, bh * disp_scale_y)
+            if d_short < 18.0 or d_short > 42.0:
+                continue
+
             group = cand_to_group.get(i)
             peer_count = group["size"] - 1 if group else 0
             if peer_count < 1:
@@ -74,25 +84,21 @@ class ReorderTargetSelector:
                 continue
             recoverability = max(0.0, 1.0 - (halo_std / 45.0))
 
-            bx1, by1, bx2, by2 = c["bbox"]
-            bw, bh = bx2 - bx1 + 1, by2 - by1 + 1
             cx, cy = c["centroid"]
 
             # Try candidate pose mutations: [angle_deg, shift_x, shift_y]
-            # Keep shifts compact (15 to 30% of object dimension)
-            shift_dist = max(12, int(min(bw, bh) * 0.45))
+            shift_dist = max(12, int(min(bw, bh) * 0.40))
             test_mutations = [
                 {"type": "rotation", "angle": 25.0, "dx": 0, "dy": 0},
-                {"type": "rotation", "angle": -30.0, "dx": 0, "dy": 0},
-                {"type": "trans_rot", "angle": 18.0, "dx": shift_dist, "dy": -int(shift_dist * 0.5)},
-                {"type": "trans_rot", "angle": -20.0, "dx": -shift_dist, "dy": int(shift_dist * 0.5)},
-                {"type": "translation", "angle": 0.0, "dx": int(shift_dist * 0.8), "dy": int(shift_dist * 0.8)},
-                {"type": "translation", "angle": 0.0, "dx": -int(shift_dist * 0.8), "dy": -int(shift_dist * 0.8)},
+                {"type": "rotation", "angle": -28.0, "dx": 0, "dy": 0},
+                {"type": "trans_rot", "angle": 18.0, "dx": shift_dist, "dy": -int(shift_dist * 0.4)},
+                {"type": "trans_rot", "angle": -18.0, "dx": -shift_dist, "dy": int(shift_dist * 0.4)},
+                {"type": "translation", "angle": 0.0, "dx": int(shift_dist * 0.75), "dy": int(shift_dist * 0.75)},
+                {"type": "translation", "angle": 0.0, "dx": -int(shift_dist * 0.75), "dy": -int(shift_dist * 0.75)},
             ]
 
             valid_mutations = []
             for mut in test_mutations:
-                # Check target placement bounds
                 nbx1 = int(bx1 + mut["dx"])
                 nby1 = int(by1 + mut["dy"])
                 nbx2 = int(bx2 + mut["dx"])
@@ -101,7 +107,6 @@ class ReorderTargetSelector:
                 if nbx1 < 15 or nby1 < 15 or nbx2 >= w - 15 or nby2 >= h - 15:
                     continue
 
-                # Union bbox size check (must remain one compact region <= 2.2x original size)
                 ubx1 = min(bx1, nbx1)
                 uby1 = min(by1, nby1)
                 ubx2 = max(bx2, nbx2)
@@ -112,7 +117,6 @@ class ReorderTargetSelector:
                 if uw > bw * 2.2 or uh > bh * 2.2:
                     continue
 
-                # Check collision with other non-target objects
                 other_occupied = occupied_mask.copy()
                 other_occupied[mask > 0] = 0
                 new_slot_occ = other_occupied[nby1:nby2+1, nbx1:nbx2+1]
@@ -146,10 +150,10 @@ class ReorderTargetSelector:
         return best, f"Selected optimal Reorder target (Score: {best['score']}/100, Peers: {best['peer_count']}, Mutation: {best['best_mutation']['type']})", evaluated_candidates
 
     @classmethod
-    def execute_reorder_and_qa(cls, image_bgr, target_mask, target_bbox, mutation, union_bbox, difficulty="Medium"):
+    def execute_reorder_and_qa(cls, image_bgr, target_mask, target_bbox, mutation, union_bbox, raw_sam_masks, difficulty="Medium"):
         """
-        Executes inpainting of old footprint, transforms object, composites with contact shadow,
-        and verifies using PerceptualVerificationEngine.
+        Executes background synthesis on vacated footprint, transforms object,
+        composites with contact shadow, and verifies using PerceptualVerificationEngine.
         """
         h, w = image_bgr.shape[:2]
         total_pixels = h * w
@@ -158,14 +162,15 @@ class ReorderTargetSelector:
         bw = bx2 - bx1 + 1
         bh = by2 - by1 + 1
 
-        # 1. Inpaint old footprint cleanly
-        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-        inpaint_mask = cv2.dilate(target_mask, kernel, iterations=1)
-        inpainted_base = cv2.inpaint(image_bgr, inpaint_mask, inpaintRadius=4, flags=cv2.INPAINT_NS)
-
-        blur_mask = cv2.GaussianBlur(inpaint_mask.astype(np.float32), (7, 7), 2.0)
-        alpha_inpaint = np.expand_dims(blur_mask, axis=2)
-        base_reconstructed = (inpainted_base.astype(np.float32) * alpha_inpaint + image_bgr.astype(np.float32) * (1.0 - alpha_inpaint)).astype(np.uint8)
+        # 1. Clean old footprint with LocalBackgroundSynthesizer
+        base_reconstructed, _, _, err = LocalBackgroundSynthesizer.synthesize_background_fill(
+            image_bgr, target_mask, raw_sam_masks, difficulty=difficulty
+        )
+        if base_reconstructed is None:
+            # Fallback to inpainting
+            kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+            inpaint_mask = cv2.dilate(target_mask, kernel, iterations=1)
+            base_reconstructed = cv2.inpaint(image_bgr, inpaint_mask, inpaintRadius=4, flags=cv2.INPAINT_TELEA)
 
         # 2. Extract object patch
         crop_mask = (target_mask[by1:by2+1, bx1:bx2+1] > 0).astype(np.float32)

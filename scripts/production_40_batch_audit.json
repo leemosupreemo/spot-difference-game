@@ -1,9 +1,9 @@
 {
   "total_attempted": 60,
-  "total_accepted": 47,
+  "total_accepted": 48,
   "operation_counts": {
     "recolor": 13,
-    "remove": 12,
+    "remove": 13,
     "add": 10,
     "reorder": 12
   },
@@ -71,14 +71,14 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 71.5,
-        "y": 20.4,
-        "radius": 4.5,
+        "x": 60.2,
+        "y": 80.9,
+        "radius": 4.9,
         "bbox": [
-          881,
-          151,
-          928,
-          195
+          736,
+          663,
+          782,
+          709
         ],
         "metrics": {
           "display_bbox_size": [
@@ -86,15 +86,18 @@
             24
           ],
           "display_short_side": 24,
-          "display_thickness": 22.9,
-          "display_changed_pixels": 538,
-          "source_area_pct": 0.173,
-          "direct_look_mean_delta_e": 106.5,
-          "direct_look_peak_delta_e": 194.0,
-          "direct_look_changed_fraction_pct": 9.52
+          "display_thickness": 18.6,
+          "display_changed_pixels": 970,
+          "source_area_pct": 0.312,
+          "direct_look_mean_delta_e": 86.8,
+          "direct_look_peak_delta_e": 189.2,
+          "direct_look_changed_fraction_pct": 17.56,
+          "texture_ratio": 3.94,
+          "delta_e_fill_to_bg": 13.9,
+          "radial_alignment": 0.66
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 27x24px (short side 24px, thickness 22.9px), Direct \u0394E=106.5"
+      "qa_summary": "Direct-Look Verified: Display size 27x24px (short side 24px, thickness 18.6px), Direct \u0394E=86.8"
     },
     {
       "scene_id": "prod_v4_dense_candies",
@@ -113,30 +116,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 93.7,
-        "y": 92.6,
+        "x": 93.6,
+        "y": 92.5,
         "radius": 5.0,
         "union_bbox": [
           1142,
           755,
-          1229,
-          818
+          1227,
+          816
         ],
         "metrics": {
           "display_bbox_size": [
-            49,
-            34
+            48,
+            33
           ],
-          "display_short_side": 34,
-          "display_thickness": 23.2,
-          "display_changed_pixels": 1253,
-          "source_area_pct": 0.403,
-          "direct_look_mean_delta_e": 104.2,
-          "direct_look_peak_delta_e": 168.5,
-          "direct_look_changed_fraction_pct": 10.71
+          "display_short_side": 33,
+          "display_thickness": 22.2,
+          "display_changed_pixels": 1206,
+          "source_area_pct": 0.391,
+          "direct_look_mean_delta_e": 95.0,
+          "direct_look_peak_delta_e": 162.5,
+          "direct_look_changed_fraction_pct": 10.56
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 49x34px (short side 34px, thickness 23.2px), Direct \u0394E=104.2"
+      "qa_summary": "Direct-Look Verified: Display size 48x33px (short side 33px, thickness 22.2px), Direct \u0394E=95.0"
     },
     {
       "scene_id": "prod_v4_dense_enamel_pins",
@@ -265,30 +268,33 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 66.3,
-        "y": 72.1,
-        "radius": 6.0,
+        "x": 34.5,
+        "y": 44.1,
+        "radius": 6.8,
         "bbox": [
-          801,
-          573,
-          877,
-          651
+          402,
+          338,
+          472,
+          408
         ],
         "metrics": {
           "display_bbox_size": [
-            43,
-            41
+            40,
+            37
           ],
-          "display_short_side": 41,
-          "display_thickness": 16.1,
-          "display_changed_pixels": 1291,
-          "source_area_pct": 0.42,
-          "direct_look_mean_delta_e": 53.3,
-          "direct_look_peak_delta_e": 163.1,
-          "direct_look_changed_fraction_pct": 8.17
+          "display_short_side": 37,
+          "display_thickness": 37.5,
+          "display_changed_pixels": 1900,
+          "source_area_pct": 0.661,
+          "direct_look_mean_delta_e": 88.0,
+          "direct_look_peak_delta_e": 201.1,
+          "direct_look_changed_fraction_pct": 15.14,
+          "texture_ratio": 7.77,
+          "delta_e_fill_to_bg": 0.4,
+          "radial_alignment": 0.65
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 43x41px (short side 41px, thickness 16.1px), Direct \u0394E=53.3"
+      "qa_summary": "Direct-Look Verified: Display size 40x37px (short side 37px, thickness 37.5px), Direct \u0394E=88.0"
     },
     {
       "scene_id": "prod_v4_dense_spices",
@@ -323,14 +329,14 @@
           ],
           "display_short_side": 28,
           "display_thickness": 5.7,
-          "display_changed_pixels": 572,
-          "source_area_pct": 0.198,
-          "direct_look_mean_delta_e": 41.0,
-          "direct_look_peak_delta_e": 96.1,
-          "direct_look_changed_fraction_pct": 5.81
+          "display_changed_pixels": 577,
+          "source_area_pct": 0.203,
+          "direct_look_mean_delta_e": 40.9,
+          "direct_look_peak_delta_e": 94.4,
+          "direct_look_changed_fraction_pct": 5.93
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 36x28px (short side 28px, thickness 5.7px), Direct \u0394E=41.0"
+      "qa_summary": "Direct-Look Verified: Display size 36x28px (short side 28px, thickness 5.7px), Direct \u0394E=40.9"
     },
     {
       "scene_id": "prod_v4_dense_succulents",
@@ -475,9 +481,9 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 86.2,
-        "y": 86.3,
-        "radius": 5.8,
+        "x": 86.4,
+        "y": 86.6,
+        "radius": 6.9,
         "bbox": [
           1160,
           629,
@@ -490,22 +496,25 @@
             39
           ],
           "display_short_side": 28,
-          "display_thickness": 16.1,
-          "display_changed_pixels": 871,
-          "source_area_pct": 0.281,
-          "direct_look_mean_delta_e": 59.2,
-          "direct_look_peak_delta_e": 129.8,
-          "direct_look_changed_fraction_pct": 7.36
+          "display_thickness": 15.3,
+          "display_changed_pixels": 1504,
+          "source_area_pct": 0.491,
+          "direct_look_mean_delta_e": 65.1,
+          "direct_look_peak_delta_e": 144.4,
+          "direct_look_changed_fraction_pct": 12.94,
+          "texture_ratio": 2.1,
+          "delta_e_fill_to_bg": 12.2,
+          "radial_alignment": 0.63
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 28x39px (short side 28px, thickness 16.1px), Direct \u0394E=59.2"
+      "qa_summary": "Direct-Look Verified: Display size 28x39px (short side 28px, thickness 15.3px), Direct \u0394E=65.1"
     },
     {
       "scene_id": "prod_v4_unique_leather",
       "image_path": "public/levels/ai_unique_leather_base.jpg",
       "difficulty": "Medium",
       "accepted": false,
-      "rejection_reason": "Reorder QA Reject (TargetTooSmall): TargetTooSmall: Short side (13px) below verification floor (18px).",
+      "rejection_reason": "Reorder QA Reject (TargetTooLarge): TooObvious: Source changed area (0.832%) exceeds maximum (0.80%).",
       "affordances": {
         "recolor": 1.0,
         "remove": 1.0,
@@ -533,30 +542,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 15.2,
-        "y": 25.5,
-        "radius": 8.0,
+        "x": 15.3,
+        "y": 25.7,
+        "radius": 7.8,
         "union_bbox": [
-          169,
-          137,
+          172,
+          140,
           249,
           240
         ],
         "metrics": {
           "display_bbox_size": [
-            42,
-            60
+            40,
+            58
           ],
-          "display_short_side": 42,
+          "display_short_side": 40,
           "display_thickness": 24.8,
-          "display_changed_pixels": 1614,
-          "source_area_pct": 0.519,
-          "direct_look_mean_delta_e": 91.4,
-          "direct_look_peak_delta_e": 139.9,
-          "direct_look_changed_fraction_pct": 5.76
+          "display_changed_pixels": 1553,
+          "source_area_pct": 0.498,
+          "direct_look_mean_delta_e": 88.7,
+          "direct_look_peak_delta_e": 139.7,
+          "direct_look_changed_fraction_pct": 5.79
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 42x60px (short side 42px, thickness 24.8px), Direct \u0394E=91.4"
+      "qa_summary": "Direct-Look Verified: Display size 40x58px (short side 40px, thickness 24.8px), Direct \u0394E=88.7"
     },
     {
       "scene_id": "prod_v4_unique_palette",
@@ -609,7 +618,7 @@
       "image_path": "public/levels/ai_unique_pencils_base.jpg",
       "difficulty": "Medium",
       "accepted": false,
-      "rejection_reason": "Remove QA Reject (TargetTooSmall): TargetTooSmall: Short side (12px) below verification floor (18px).",
+      "rejection_reason": "Remove: No candidate met whole-object removal criteria.",
       "affordances": {
         "recolor": 1.0,
         "remove": 1.0,
@@ -653,30 +662,33 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 28.9,
-        "y": 3.5,
-        "radius": 5.0,
+        "x": 40.4,
+        "y": 54.8,
+        "radius": 6.4,
         "bbox": [
-          338,
-          0,
-          393,
-          63
+          477,
+          431,
+          534,
+          497
         ],
         "metrics": {
           "display_bbox_size": [
-            31,
-            33
+            32,
+            35
           ],
-          "display_short_side": 31,
-          "display_thickness": 27.4,
-          "display_changed_pixels": 803,
-          "source_area_pct": 0.261,
-          "direct_look_mean_delta_e": 105.6,
-          "direct_look_peak_delta_e": 167.0,
-          "direct_look_changed_fraction_pct": 12.07
+          "display_short_side": 32,
+          "display_thickness": 27.6,
+          "display_changed_pixels": 1572,
+          "source_area_pct": 0.527,
+          "direct_look_mean_delta_e": 71.4,
+          "direct_look_peak_delta_e": 150.5,
+          "direct_look_changed_fraction_pct": 14.34,
+          "texture_ratio": 4.62,
+          "delta_e_fill_to_bg": 7.1,
+          "radial_alignment": 0.64
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 31x33px (short side 31px, thickness 27.4px), Direct \u0394E=105.6"
+      "qa_summary": "Direct-Look Verified: Display size 32x35px (short side 32px, thickness 27.6px), Direct \u0394E=71.4"
     },
     {
       "scene_id": "prod_v4_unique_sewing",
@@ -695,30 +707,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 54.7,
-        "y": 57.0,
-        "radius": 6.3,
+        "x": 54.2,
+        "y": 55.7,
+        "radius": 6.8,
         "union_bbox": [
           714,
           393,
-          792,
-          471
+          789,
+          468
         ],
         "metrics": {
           "display_bbox_size": [
-            40,
-            45
+            39,
+            44
           ],
-          "display_short_side": 40,
-          "display_thickness": 15.6,
-          "display_changed_pixels": 1097,
-          "source_area_pct": 0.359,
-          "direct_look_mean_delta_e": 46.9,
-          "direct_look_peak_delta_e": 129.6,
-          "direct_look_changed_fraction_pct": 6.54
+          "display_short_side": 39,
+          "display_thickness": 18.6,
+          "display_changed_pixels": 1500,
+          "source_area_pct": 0.485,
+          "direct_look_mean_delta_e": 65.5,
+          "direct_look_peak_delta_e": 142.8,
+          "direct_look_changed_fraction_pct": 10.34
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 40x45px (short side 40px, thickness 15.6px), Direct \u0394E=46.9"
+      "qa_summary": "Direct-Look Verified: Display size 39x44px (short side 39px, thickness 18.6px), Direct \u0394E=65.5"
     },
     {
       "scene_id": "prod_v4_unique_woodworking",
@@ -847,30 +859,33 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 59.7,
-        "y": 2.9,
-        "radius": 4.5,
+        "x": 12.8,
+        "y": 49.6,
+        "radius": 6.4,
         "bbox": [
-          796,
-          0,
-          847,
-          46
+          141,
+          353,
+          207,
+          411
         ],
         "metrics": {
           "display_bbox_size": [
-            27,
-            27
+            35,
+            34
           ],
-          "display_short_side": 27,
-          "display_thickness": 8.5,
-          "display_changed_pixels": 568,
-          "source_area_pct": 0.188,
-          "direct_look_mean_delta_e": 56.1,
-          "direct_look_peak_delta_e": 126.6,
-          "direct_look_changed_fraction_pct": 12.98
+          "display_short_side": 34,
+          "display_thickness": 10.1,
+          "display_changed_pixels": 1605,
+          "source_area_pct": 0.535,
+          "direct_look_mean_delta_e": 54.8,
+          "direct_look_peak_delta_e": 121.6,
+          "direct_look_changed_fraction_pct": 14.14,
+          "texture_ratio": 2.93,
+          "delta_e_fill_to_bg": 12.3,
+          "radial_alignment": 0.63
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 27x27px (short side 27px, thickness 8.5px), Direct \u0394E=56.1"
+      "qa_summary": "Direct-Look Verified: Display size 35x34px (short side 34px, thickness 10.1px), Direct \u0394E=54.8"
     },
     {
       "scene_id": "prod_v4_ai_sewing",
@@ -889,30 +904,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 54.7,
-        "y": 57.0,
-        "radius": 6.3,
+        "x": 54.2,
+        "y": 55.7,
+        "radius": 6.8,
         "union_bbox": [
           714,
           393,
-          792,
-          471
+          789,
+          468
         ],
         "metrics": {
           "display_bbox_size": [
-            40,
-            45
+            39,
+            44
           ],
-          "display_short_side": 40,
-          "display_thickness": 15.6,
-          "display_changed_pixels": 1097,
-          "source_area_pct": 0.359,
-          "direct_look_mean_delta_e": 46.9,
-          "direct_look_peak_delta_e": 129.6,
-          "direct_look_changed_fraction_pct": 6.54
+          "display_short_side": 39,
+          "display_thickness": 18.6,
+          "display_changed_pixels": 1500,
+          "source_area_pct": 0.485,
+          "direct_look_mean_delta_e": 65.5,
+          "direct_look_peak_delta_e": 142.8,
+          "direct_look_changed_fraction_pct": 10.34
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 40x45px (short side 40px, thickness 15.6px), Direct \u0394E=46.9"
+      "qa_summary": "Direct-Look Verified: Display size 39x44px (short side 39px, thickness 18.6px), Direct \u0394E=65.5"
     },
     {
       "scene_id": "prod_v4_ai_artist",
@@ -977,14 +992,14 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 66.2,
+        "x": 57.6,
         "y": 80.5,
-        "radius": 4.5,
+        "radius": 5.3,
         "bbox": [
-          890,
-          596,
-          934,
-          641
+          770,
+          592,
+          814,
+          638
         ],
         "metrics": {
           "display_bbox_size": [
@@ -992,15 +1007,18 @@
             27
           ],
           "display_short_side": 24,
-          "display_thickness": 17.2,
-          "display_changed_pixels": 497,
-          "source_area_pct": 0.159,
-          "direct_look_mean_delta_e": 52.0,
-          "direct_look_peak_delta_e": 93.0,
-          "direct_look_changed_fraction_pct": 9.9
+          "display_thickness": 24.6,
+          "display_changed_pixels": 915,
+          "source_area_pct": 0.298,
+          "direct_look_mean_delta_e": 64.2,
+          "direct_look_peak_delta_e": 126.3,
+          "direct_look_changed_fraction_pct": 16.51,
+          "texture_ratio": 13.54,
+          "delta_e_fill_to_bg": 7.6,
+          "radial_alignment": 0.64
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 24x27px (short side 24px, thickness 17.2px), Direct \u0394E=52.0"
+      "qa_summary": "Direct-Look Verified: Display size 24x27px (short side 24px, thickness 24.6px), Direct \u0394E=64.2"
     },
     {
       "scene_id": "prod_v4_ai_expedition",
@@ -1067,30 +1085,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 91.6,
-        "y": 87.9,
-        "radius": 7.1,
+        "x": 91.2,
+        "y": 87.1,
+        "radius": 7.3,
         "union_bbox": [
           1224,
           630,
-          1299,
-          717
+          1295,
+          713
         ],
         "metrics": {
           "display_bbox_size": [
-            39,
-            51
+            37,
+            49
           ],
-          "display_short_side": 39,
-          "display_thickness": 13.7,
-          "display_changed_pixels": 1376,
-          "source_area_pct": 0.45,
-          "direct_look_mean_delta_e": 62.9,
-          "direct_look_peak_delta_e": 133.9,
-          "direct_look_changed_fraction_pct": 8.67
+          "display_short_side": 37,
+          "display_thickness": 13.4,
+          "display_changed_pixels": 1677,
+          "source_area_pct": 0.547,
+          "direct_look_mean_delta_e": 70.1,
+          "direct_look_peak_delta_e": 152.5,
+          "direct_look_changed_fraction_pct": 10.91
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 39x51px (short side 39px, thickness 13.7px), Direct \u0394E=62.9"
+      "qa_summary": "Direct-Look Verified: Display size 37x49px (short side 37px, thickness 13.4px), Direct \u0394E=70.1"
     },
     {
       "scene_id": "prod_v4_ai_leathercraft",
@@ -1155,30 +1173,33 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 86.1,
-        "y": 32.5,
-        "radius": 4.8,
+        "x": 20.5,
+        "y": 63.3,
+        "radius": 5.2,
         "bbox": [
-          1158,
-          225,
-          1218,
-          279
+          261,
+          461,
+          302,
+          506
         ],
         "metrics": {
           "display_bbox_size": [
-            31,
-            32
+            22,
+            26
           ],
-          "display_short_side": 31,
-          "display_thickness": 21.8,
-          "display_changed_pixels": 598,
-          "source_area_pct": 0.191,
-          "direct_look_mean_delta_e": 23.9,
-          "direct_look_peak_delta_e": 40.1,
-          "direct_look_changed_fraction_pct": 5.73
+          "display_short_side": 22,
+          "display_thickness": 28.7,
+          "display_changed_pixels": 868,
+          "source_area_pct": 0.277,
+          "direct_look_mean_delta_e": 112.1,
+          "direct_look_peak_delta_e": 182.0,
+          "direct_look_changed_fraction_pct": 16.3,
+          "texture_ratio": 0.84,
+          "delta_e_fill_to_bg": 12.5,
+          "radial_alignment": 0.63
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 31x32px (short side 31px, thickness 21.8px), Direct \u0394E=23.9"
+      "qa_summary": "Direct-Look Verified: Display size 22x26px (short side 22px, thickness 28.7px), Direct \u0394E=112.1"
     },
     {
       "scene_id": "prod_v4_ai_retrogaming",
@@ -1197,9 +1218,9 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 56.2,
-        "y": 34.1,
-        "radius": 5.3,
+        "x": 56.3,
+        "y": 34.3,
+        "radius": 6.5,
         "union_bbox": [
           744,
           229,
@@ -1212,15 +1233,15 @@
             35
           ],
           "display_short_side": 31,
-          "display_thickness": 5.7,
-          "display_changed_pixels": 537,
-          "source_area_pct": 0.185,
-          "direct_look_mean_delta_e": 51.4,
-          "direct_look_peak_delta_e": 132.0,
-          "direct_look_changed_fraction_pct": 6.32
+          "display_thickness": 10.4,
+          "display_changed_pixels": 1263,
+          "source_area_pct": 0.408,
+          "direct_look_mean_delta_e": 58.1,
+          "direct_look_peak_delta_e": 127.0,
+          "direct_look_changed_fraction_pct": 13.43
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 31x35px (short side 31px, thickness 5.7px), Direct \u0394E=51.4"
+      "qa_summary": "Direct-Look Verified: Display size 31x35px (short side 31px, thickness 10.4px), Direct \u0394E=58.1"
     },
     {
       "scene_id": "prod_v4_ai_woodworking",
@@ -1301,14 +1322,14 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 71.5,
-        "y": 20.4,
-        "radius": 4.5,
+        "x": 60.2,
+        "y": 80.9,
+        "radius": 4.9,
         "bbox": [
-          881,
-          151,
-          928,
-          195
+          736,
+          663,
+          782,
+          709
         ],
         "metrics": {
           "display_bbox_size": [
@@ -1316,15 +1337,18 @@
             24
           ],
           "display_short_side": 24,
-          "display_thickness": 22.9,
-          "display_changed_pixels": 538,
-          "source_area_pct": 0.173,
-          "direct_look_mean_delta_e": 106.5,
-          "direct_look_peak_delta_e": 194.0,
-          "direct_look_changed_fraction_pct": 9.52
+          "display_thickness": 18.6,
+          "display_changed_pixels": 970,
+          "source_area_pct": 0.312,
+          "direct_look_mean_delta_e": 86.8,
+          "direct_look_peak_delta_e": 189.2,
+          "direct_look_changed_fraction_pct": 17.56,
+          "texture_ratio": 3.94,
+          "delta_e_fill_to_bg": 13.9,
+          "radial_alignment": 0.66
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 27x24px (short side 24px, thickness 22.9px), Direct \u0394E=106.5"
+      "qa_summary": "Direct-Look Verified: Display size 27x24px (short side 24px, thickness 18.6px), Direct \u0394E=86.8"
     },
     {
       "scene_id": "prod_v4_var2_dense_candies",
@@ -1343,30 +1367,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 93.7,
-        "y": 92.6,
+        "x": 93.6,
+        "y": 92.5,
         "radius": 5.0,
         "union_bbox": [
           1142,
           755,
-          1229,
-          818
+          1227,
+          816
         ],
         "metrics": {
           "display_bbox_size": [
-            49,
-            34
+            48,
+            33
           ],
-          "display_short_side": 34,
-          "display_thickness": 23.2,
-          "display_changed_pixels": 1253,
-          "source_area_pct": 0.403,
-          "direct_look_mean_delta_e": 104.2,
-          "direct_look_peak_delta_e": 168.5,
-          "direct_look_changed_fraction_pct": 10.71
+          "display_short_side": 33,
+          "display_thickness": 22.2,
+          "display_changed_pixels": 1206,
+          "source_area_pct": 0.391,
+          "direct_look_mean_delta_e": 95.0,
+          "direct_look_peak_delta_e": 162.5,
+          "direct_look_changed_fraction_pct": 10.56
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 49x34px (short side 34px, thickness 23.2px), Direct \u0394E=104.2"
+      "qa_summary": "Direct-Look Verified: Display size 48x33px (short side 33px, thickness 22.2px), Direct \u0394E=95.0"
     },
     {
       "scene_id": "prod_v4_var2_dense_enamel_pins",
@@ -1495,30 +1519,33 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 66.3,
-        "y": 72.1,
-        "radius": 6.0,
+        "x": 34.5,
+        "y": 44.1,
+        "radius": 6.8,
         "bbox": [
-          801,
-          573,
-          877,
-          651
+          402,
+          338,
+          472,
+          408
         ],
         "metrics": {
           "display_bbox_size": [
-            43,
-            41
+            40,
+            37
           ],
-          "display_short_side": 41,
-          "display_thickness": 16.1,
-          "display_changed_pixels": 1291,
-          "source_area_pct": 0.42,
-          "direct_look_mean_delta_e": 53.3,
-          "direct_look_peak_delta_e": 163.1,
-          "direct_look_changed_fraction_pct": 8.17
+          "display_short_side": 37,
+          "display_thickness": 37.5,
+          "display_changed_pixels": 1900,
+          "source_area_pct": 0.661,
+          "direct_look_mean_delta_e": 88.0,
+          "direct_look_peak_delta_e": 201.1,
+          "direct_look_changed_fraction_pct": 15.14,
+          "texture_ratio": 7.77,
+          "delta_e_fill_to_bg": 0.4,
+          "radial_alignment": 0.65
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 43x41px (short side 41px, thickness 16.1px), Direct \u0394E=53.3"
+      "qa_summary": "Direct-Look Verified: Display size 40x37px (short side 37px, thickness 37.5px), Direct \u0394E=88.0"
     },
     {
       "scene_id": "prod_v4_var2_dense_spices",
@@ -1553,14 +1580,14 @@
           ],
           "display_short_side": 28,
           "display_thickness": 5.7,
-          "display_changed_pixels": 572,
-          "source_area_pct": 0.198,
-          "direct_look_mean_delta_e": 41.0,
-          "direct_look_peak_delta_e": 96.1,
-          "direct_look_changed_fraction_pct": 5.81
+          "display_changed_pixels": 577,
+          "source_area_pct": 0.203,
+          "direct_look_mean_delta_e": 40.9,
+          "direct_look_peak_delta_e": 94.4,
+          "direct_look_changed_fraction_pct": 5.93
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 36x28px (short side 28px, thickness 5.7px), Direct \u0394E=41.0"
+      "qa_summary": "Direct-Look Verified: Display size 36x28px (short side 28px, thickness 5.7px), Direct \u0394E=40.9"
     },
     {
       "scene_id": "prod_v4_var2_dense_succulents",
@@ -1641,14 +1668,14 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 66.2,
+        "x": 57.6,
         "y": 80.5,
-        "radius": 4.5,
+        "radius": 5.3,
         "bbox": [
-          890,
-          596,
-          934,
-          641
+          770,
+          592,
+          814,
+          638
         ],
         "metrics": {
           "display_bbox_size": [
@@ -1656,15 +1683,18 @@
             27
           ],
           "display_short_side": 24,
-          "display_thickness": 17.2,
-          "display_changed_pixels": 497,
-          "source_area_pct": 0.159,
-          "direct_look_mean_delta_e": 52.0,
-          "direct_look_peak_delta_e": 93.0,
-          "direct_look_changed_fraction_pct": 9.9
+          "display_thickness": 18.0,
+          "display_changed_pixels": 916,
+          "source_area_pct": 0.298,
+          "direct_look_mean_delta_e": 64.1,
+          "direct_look_peak_delta_e": 122.7,
+          "direct_look_changed_fraction_pct": 16.47,
+          "texture_ratio": 14.8,
+          "delta_e_fill_to_bg": 6.6,
+          "radial_alignment": 0.65
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 24x27px (short side 24px, thickness 17.2px), Direct \u0394E=52.0"
+      "qa_summary": "Direct-Look Verified: Display size 24x27px (short side 24px, thickness 18.0px), Direct \u0394E=64.1"
     },
     {
       "scene_id": "prod_v4_var2_unique_bushcraft",
@@ -1731,30 +1761,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 91.6,
-        "y": 87.9,
-        "radius": 7.1,
+        "x": 91.2,
+        "y": 87.1,
+        "radius": 7.3,
         "union_bbox": [
           1224,
           630,
-          1299,
-          717
+          1295,
+          713
         ],
         "metrics": {
           "display_bbox_size": [
-            39,
-            51
+            37,
+            49
           ],
-          "display_short_side": 39,
-          "display_thickness": 13.7,
-          "display_changed_pixels": 1376,
-          "source_area_pct": 0.45,
-          "direct_look_mean_delta_e": 62.9,
-          "direct_look_peak_delta_e": 133.9,
-          "direct_look_changed_fraction_pct": 8.67
+          "display_short_side": 37,
+          "display_thickness": 13.4,
+          "display_changed_pixels": 1677,
+          "source_area_pct": 0.547,
+          "direct_look_mean_delta_e": 70.1,
+          "direct_look_peak_delta_e": 152.5,
+          "direct_look_changed_fraction_pct": 10.91
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 39x51px (short side 39px, thickness 13.7px), Direct \u0394E=62.9"
+      "qa_summary": "Direct-Look Verified: Display size 37x49px (short side 37px, thickness 13.4px), Direct \u0394E=70.1"
     },
     {
       "scene_id": "prod_v4_var2_unique_leather",
@@ -1867,37 +1897,40 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 48.8,
-        "y": 14.2,
+        "x": 60.8,
+        "y": 15.4,
         "radius": 7.5,
         "bbox": [
-          636,
-          60,
-          710,
-          155
+          799,
+          70,
+          873,
+          160
         ],
         "metrics": {
           "display_bbox_size": [
             39,
-            55
+            52
           ],
           "display_short_side": 39,
-          "display_thickness": 21.3,
-          "display_changed_pixels": 1189,
-          "source_area_pct": 0.384,
-          "direct_look_mean_delta_e": 46.1,
-          "direct_look_peak_delta_e": 103.0,
-          "direct_look_changed_fraction_pct": 5.67
+          "display_thickness": 23.5,
+          "display_changed_pixels": 2157,
+          "source_area_pct": 0.715,
+          "direct_look_mean_delta_e": 70.2,
+          "direct_look_peak_delta_e": 147.3,
+          "direct_look_changed_fraction_pct": 10.59,
+          "texture_ratio": 1.43,
+          "delta_e_fill_to_bg": 3.0,
+          "radial_alignment": 0.67
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 39x55px (short side 39px, thickness 21.3px), Direct \u0394E=46.1"
+      "qa_summary": "Direct-Look Verified: Display size 39x52px (short side 39px, thickness 23.5px), Direct \u0394E=70.2"
     },
     {
       "scene_id": "prod_v4_var2_unique_pencils",
       "image_path": "public/levels/ai_unique_pencils_base.jpg",
       "difficulty": "Medium",
       "accepted": false,
-      "rejection_reason": "Reorder QA Reject (TargetTooSmall): TargetTooSmall: Short side (16px) below verification floor (18px).",
+      "rejection_reason": "Reorder: No candidate met reorder criteria (loose object, recoverable background, compact pose).",
       "affordances": {
         "recolor": 1.0,
         "remove": 1.0,
@@ -2083,30 +2116,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 43.7,
-        "y": 18.4,
-        "radius": 5.8,
+        "x": 44.5,
+        "y": 90.7,
+        "radius": 6.1,
         "union_bbox": [
-          568,
-          107,
-          635,
-          175
+          577,
+          669,
+          654,
+          736
         ],
         "metrics": {
           "display_bbox_size": [
-            36,
-            40
+            40,
+            39
           ],
-          "display_short_side": 36,
+          "display_short_side": 39,
           "display_thickness": 14.8,
-          "display_changed_pixels": 1057,
-          "source_area_pct": 0.339,
-          "direct_look_mean_delta_e": 68.4,
-          "direct_look_peak_delta_e": 153.6,
-          "direct_look_changed_fraction_pct": 8.54
+          "display_changed_pixels": 664,
+          "source_area_pct": 0.233,
+          "direct_look_mean_delta_e": 24.6,
+          "direct_look_peak_delta_e": 47.1,
+          "direct_look_changed_fraction_pct": 4.54
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 36x40px (short side 36px, thickness 14.8px), Direct \u0394E=68.4"
+      "qa_summary": "Direct-Look Verified: Display size 40x39px (short side 39px, thickness 14.8px), Direct \u0394E=24.6"
     },
     {
       "scene_id": "prod_v4_var2_ai_mechanic",
@@ -2125,30 +2158,33 @@
       "operation_selected": "remove",
       "operation_executed": "remove",
       "ground_truth": {
-        "x": 97.7,
-        "y": 47.7,
-        "radius": 4.8,
+        "x": 42.9,
+        "y": 84.6,
+        "radius": 7.5,
         "bbox": [
-          1319,
-          341,
-          1370,
-          393
+          569,
+          595,
+          611,
+          697
         ],
         "metrics": {
           "display_bbox_size": [
-            26,
-            31
+            22,
+            60
           ],
-          "display_short_side": 26,
-          "display_thickness": 26.7,
-          "display_changed_pixels": 709,
-          "source_area_pct": 0.223,
-          "direct_look_mean_delta_e": 72.2,
-          "direct_look_peak_delta_e": 133.4,
-          "direct_look_changed_fraction_pct": 13.73
+          "display_short_side": 22,
+          "display_thickness": 21.0,
+          "display_changed_pixels": 1353,
+          "source_area_pct": 0.433,
+          "direct_look_mean_delta_e": 78.5,
+          "direct_look_peak_delta_e": 136.6,
+          "direct_look_changed_fraction_pct": 5.51,
+          "texture_ratio": 1.72,
+          "delta_e_fill_to_bg": 2.2,
+          "radial_alignment": 0.66
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 26x31px (short side 26px, thickness 26.7px), Direct \u0394E=72.2"
+      "qa_summary": "Direct-Look Verified: Display size 22x60px (short side 22px, thickness 21.0px), Direct \u0394E=78.5"
     },
     {
       "scene_id": "prod_v4_var2_ai_watchmaker",
@@ -2167,30 +2203,30 @@
       "operation_selected": "reorder",
       "operation_executed": "reorder",
       "ground_truth": {
-        "x": 97.8,
-        "y": 62.5,
-        "radius": 8.4,
+        "x": 97.7,
+        "y": 64.8,
+        "radius": 7.9,
         "union_bbox": [
-          1314,
-          426,
+          1312,
+          442,
           1375,
-          538
+          545
         ],
         "metrics": {
           "display_bbox_size": [
-            32,
-            65
+            33,
+            60
           ],
-          "display_short_side": 32,
-          "display_thickness": 27.6,
-          "display_changed_pixels": 1302,
-          "source_area_pct": 0.419,
-          "direct_look_mean_delta_e": 43.7,
-          "direct_look_peak_delta_e": 96.1,
-          "direct_look_changed_fraction_pct": 6.71
+          "display_short_side": 33,
+          "display_thickness": 20.5,
+          "display_changed_pixels": 1158,
+          "source_area_pct": 0.372,
+          "direct_look_mean_delta_e": 37.7,
+          "direct_look_peak_delta_e": 82.2,
+          "direct_look_changed_fraction_pct": 6.83
         }
       },
-      "qa_summary": "Direct-Look Verified: Display size 32x65px (short side 32px, thickness 27.6px), Direct \u0394E=43.7"
+      "qa_summary": "Direct-Look Verified: Display size 33x60px (short side 33px, thickness 20.5px), Direct \u0394E=37.7"
     },
     {
       "scene_id": "prod_v4_var2_ai_sewing",
@@ -2290,8 +2326,8 @@
       "scene_id": "prod_v4_var2_ai_woodworking",
       "image_path": "public/levels/ai_woodworking_bench_base.jpg",
       "difficulty": "Medium",
-      "accepted": false,
-      "rejection_reason": "Remove QA Reject (TooSubtle): TooSubtle: Structural change occupies too little of crop (3.8% < 4.0%).",
+      "accepted": true,
+      "rejection_reason": null,
       "affordances": {
         "recolor": 1.0,
         "remove": 1.0,
@@ -2300,7 +2336,36 @@
       },
       "candidate_count": 115,
       "peer_group_count": 4,
-      "operation_selected": "remove"
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 9.8,
+        "y": 43.7,
+        "radius": 7.5,
+        "bbox": [
+          113,
+          263,
+          154,
+          399
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            22,
+            79
+          ],
+          "display_short_side": 22,
+          "display_thickness": 19.4,
+          "display_changed_pixels": 2013,
+          "source_area_pct": 0.656,
+          "direct_look_mean_delta_e": 58.6,
+          "direct_look_peak_delta_e": 124.5,
+          "direct_look_changed_fraction_pct": 5.04,
+          "texture_ratio": 2.4,
+          "delta_e_fill_to_bg": 1.8,
+          "radial_alignment": 0.69
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 22x79px (short side 22px, thickness 19.4px), Direct \u0394E=58.6"
     }
   ]
 }

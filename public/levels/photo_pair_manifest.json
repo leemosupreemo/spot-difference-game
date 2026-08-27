@@ -34,9 +34,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 94.9,
-        "y": 81.3,
-        "radius": 5.6,
+        "x": 88.6,
+        "y": 53.3,
+        "radius": 5.7,
         "description": "Single mosaic ceramic shard difference",
         "hint": "Scan the geometric and floral glazed pottery tiles",
         "operation": "remove"
@@ -122,9 +122,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.2,
-        "y": 92.6,
-        "radius": 4.9,
+        "x": 14.7,
+        "y": 78.0,
+        "radius": 6.2,
         "description": "Single cloisonne enamel pin mutation",
         "hint": "Examine the geometric badges, moons, and floral enamel pins",
         "operation": "remove"
@@ -144,9 +144,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 40.2,
-        "y": 82.5,
-        "radius": 4.5,
+        "x": 56.9,
+        "y": 60.4,
+        "radius": 6.9,
         "description": "Single seashell or sea glass difference",
         "hint": "Inspect the nautilus, scallop shells, and polished sea glass",
         "operation": "remove"
@@ -254,9 +254,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 71.5,
-        "y": 20.4,
-        "radius": 4.5,
+        "x": 60.2,
+        "y": 80.9,
+        "radius": 4.9,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -276,9 +276,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 93.7,
-        "y": 92.6,
-        "radius": 5,
+        "x": 93.6,
+        "y": 92.5,
+        "radius": 5.0,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -298,7 +298,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 83,
+        "x": 83.0,
         "y": 15.8,
         "radius": 4.5,
         "description": "Single add difference",
@@ -321,7 +321,7 @@
       {
         "id": 1,
         "x": 1.6,
-        "y": 51,
+        "y": 51.0,
         "radius": 7.5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
@@ -342,9 +342,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 66.3,
-        "y": 72.1,
-        "radius": 6,
+        "x": 34.5,
+        "y": 44.1,
+        "radius": 6.8,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -366,7 +366,7 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5,
+        "radius": 5.0,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -387,7 +387,7 @@
       {
         "id": 1,
         "x": 53.9,
-        "y": 20,
+        "y": 20.0,
         "radius": 5.6,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -408,7 +408,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51,
+        "x": 51.0,
         "y": 47.5,
         "radius": 4.8,
         "description": "Single recolor difference",
@@ -430,9 +430,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.2,
-        "y": 86.3,
-        "radius": 5.8,
+        "x": 86.4,
+        "y": 86.6,
+        "radius": 6.9,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -452,9 +452,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 15.2,
-        "y": 25.5,
-        "radius": 8,
+        "x": 15.3,
+        "y": 25.7,
+        "radius": 7.8,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -496,9 +496,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 28.9,
-        "y": 3.5,
-        "radius": 5,
+        "x": 40.4,
+        "y": 54.8,
+        "radius": 6.4,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -518,9 +518,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54.7,
-        "y": 57,
-        "radius": 6.3,
+        "x": 54.2,
+        "y": 55.7,
+        "radius": 6.8,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -541,8 +541,8 @@
       {
         "id": 1,
         "x": 70.4,
-        "y": 26,
-        "radius": 5,
+        "y": 26.0,
+        "radius": 5.0,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -562,7 +562,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 78,
+        "x": 78.0,
         "y": 33.7,
         "radius": 4.5,
         "description": "Single add difference",
@@ -584,9 +584,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59.7,
-        "y": 2.9,
-        "radius": 4.5,
+        "x": 12.8,
+        "y": 49.6,
+        "radius": 6.4,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -606,9 +606,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54.7,
-        "y": 57,
-        "radius": 6.3,
+        "x": 54.2,
+        "y": 55.7,
+        "radius": 6.8,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -650,9 +650,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 66.2,
+        "x": 57.6,
         "y": 80.5,
-        "radius": 4.5,
+        "radius": 5.3,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -694,9 +694,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 91.6,
-        "y": 87.9,
-        "radius": 7.1,
+        "x": 91.2,
+        "y": 87.1,
+        "radius": 7.3,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -738,9 +738,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.1,
-        "y": 32.5,
-        "radius": 4.8,
+        "x": 20.5,
+        "y": 63.3,
+        "radius": 5.2,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -760,9 +760,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 56.2,
-        "y": 34.1,
-        "radius": 5.3,
+        "x": 56.3,
+        "y": 34.3,
+        "radius": 6.5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -804,9 +804,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 71.5,
-        "y": 20.4,
-        "radius": 4.5,
+        "x": 60.2,
+        "y": 80.9,
+        "radius": 4.9,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -826,9 +826,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 93.7,
-        "y": 92.6,
-        "radius": 5,
+        "x": 93.6,
+        "y": 92.5,
+        "radius": 5.0,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -871,7 +871,7 @@
       {
         "id": 1,
         "x": 4.1,
-        "y": 69,
+        "y": 69.0,
         "radius": 7.5,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -892,9 +892,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 66.3,
-        "y": 72.1,
-        "radius": 6,
+        "x": 34.5,
+        "y": 44.1,
+        "radius": 6.8,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -916,7 +916,7 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5,
+        "radius": 5.0,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -958,9 +958,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 66.2,
+        "x": 57.6,
         "y": 80.5,
-        "radius": 4.5,
+        "radius": 5.3,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -1002,9 +1002,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 91.6,
-        "y": 87.9,
-        "radius": 7.1,
+        "x": 91.2,
+        "y": 87.1,
+        "radius": 7.3,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -1024,7 +1024,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 73,
+        "x": 73.0,
         "y": 15.4,
         "radius": 4.5,
         "description": "Single add difference",
@@ -1048,7 +1048,7 @@
         "id": 1,
         "x": 50.7,
         "y": 49.7,
-        "radius": 6,
+        "radius": 6.0,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -1068,8 +1068,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.8,
-        "y": 14.2,
+        "x": 60.8,
+        "y": 15.4,
         "radius": 7.5,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
@@ -1156,9 +1156,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 43.7,
-        "y": 18.4,
-        "radius": 5.8,
+        "x": 44.5,
+        "y": 90.7,
+        "radius": 6.1,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -1178,9 +1178,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 97.7,
-        "y": 47.7,
-        "radius": 4.8,
+        "x": 42.9,
+        "y": 84.6,
+        "radius": 7.5,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -1200,9 +1200,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 97.8,
-        "y": 62.5,
-        "radius": 8.4,
+        "x": 97.7,
+        "y": 64.8,
+        "radius": 7.9,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -1244,12 +1244,34 @@
     "diffs": [
       {
         "id": 1,
-        "x": 27,
+        "x": 27.0,
         "y": 61.4,
         "radius": 4.5,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
         "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_ai_woodworking",
+    "title": "[AI Multi-Op] Joinery Bench Carpenter Pencils B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_ai_woodworking_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_ai_woodworking_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 9.8,
+        "y": 43.7,
+        "radius": 7.5,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
       }
     ]
   },
@@ -1404,28 +1426,6 @@
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_var2_ai_woodworking",
-    "title": "[AI Multi-Op] Joinery Bench Carpenter Pencils B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_ai_woodworking_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_ai_woodworking_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 27.5,
-        "y": 72.8,
-        "radius": 7.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
       }
     ]
   },

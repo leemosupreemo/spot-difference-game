@@ -225,7 +225,7 @@ def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="pub
         for cand_item in all_cands[:5]:
             target_c = cand_item["candidate"]
             passed, var_img, gt, reason = RemoveTargetSelector.execute_removal_and_qa(
-                img_bgr, target_c["mask"], target_c["bbox"], difficulty=difficulty
+                img_bgr, target_c["mask"], target_c["bbox"], raw_masks, difficulty=difficulty
             )
             if passed:
                 variant_bgr = var_img
@@ -270,7 +270,7 @@ def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="pub
         for target_item in all_targets[:6]:
             cand = target_item["candidate"]
             passed, var_img, gt, reason = ReorderTargetSelector.execute_reorder_and_qa(
-                img_bgr, cand["mask"], cand["bbox"], target_item["best_mutation"], target_item["union_bbox"], difficulty=difficulty
+                img_bgr, cand["mask"], cand["bbox"], target_item["best_mutation"], target_item["union_bbox"], raw_masks, difficulty=difficulty
             )
             if passed:
                 variant_bgr = var_img
