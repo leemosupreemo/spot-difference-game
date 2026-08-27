@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 132,
-    "dismissedCount": 138,
+    "approvedCount": 131,
+    "dismissedCount": 139,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -112,7 +112,6 @@
     "dense_ai_artist_pastel_remove_007",
     "dense_ai_woodworking_chisel_recolor_008",
     "dense_ai_leather_punch_add_009",
-    "verified_m_ai_sewing_remove_001",
     "verified_m_ai_electronics_add_003",
     "verified_m_ai_artist_recolor_005",
     "photo_boardgame_recolor_003",
@@ -279,7 +278,8 @@
     "dense_crowd_watch_escapement_006",
     "dense_crowd_pottery_tools_008",
     "dense_crowd_knolling_tech_009",
-    "dense_crowd_apothecary_herbs_010"
+    "dense_crowd_apothecary_herbs_010",
+    "verified_m_ai_sewing_remove_001"
   ],
   "approvedLevels": [
     {
@@ -2495,8 +2495,8 @@
       "updatedAt": "2026-08-25T01:36:31.422Z"
     },
     "verified_m_ai_sewing_remove_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T01:56:09.234Z"
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T04:14:55.507Z"
     },
     "verified_m_ai_watchmaker_recolor_002": {
       "status": "dismissed",
