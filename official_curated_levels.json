@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 127,
-    "dismissedCount": 103,
+    "approvedCount": 132,
+    "dismissedCount": 138,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -133,7 +133,12 @@
     "photo_fresh_watchmaker_008",
     "photo_fresh_stained_glass_009",
     "photo_c_spices_004",
-    "photo_c_seeds_010"
+    "photo_c_seeds_010",
+    "fresh_artist_desk_flatlay_005",
+    "hyper_dense_synth_pcb_002",
+    "hyper_dense_cyber_circuit_008",
+    "dense_crowd_micro_circuitry_003",
+    "dense_crowd_tailor_workbench_007"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -239,7 +244,42 @@
     "photo_c_stamps_006",
     "photo_c_pebbles_007",
     "photo_c_succulents_008",
-    "photo_c_paint_tubes_009"
+    "photo_c_paint_tubes_009",
+    "fresh_stacked_archive_books_011",
+    "fresh_accessories_flatlay_012",
+    "fresh_botanical_herbarium_grid_013",
+    "fresh_fashion_stylist_bench_014",
+    "fresh_chocolate_truffles_015",
+    "fresh_tea_ceremony_matcha_016",
+    "fresh_botanical_herbarium_017",
+    "fresh_stationery_desk_018",
+    "fresh_vintage_study_typewriter_019",
+    "fresh_jewelry_accessories_knolling_020",
+    "fresh_market_groceries_001",
+    "fresh_pastry_counter_002",
+    "fresh_vintage_curio_shop_003",
+    "fresh_curio_cabinet_market_004",
+    "fresh_flea_market_trinkets_006",
+    "fresh_cartography_celestial_007",
+    "fresh_hardware_store_shelves_008",
+    "fresh_botanical_seeds_spice_009",
+    "fresh_toy_figurines_array_010",
+    "hyper_dense_motherboard_ic_001",
+    "hyper_dense_botanical_spices_003",
+    "hyper_dense_machinist_parts_004",
+    "hyper_dense_letterpress_type_005",
+    "hyper_dense_art_pigments_006",
+    "hyper_dense_horology_gears_007",
+    "hyper_dense_dried_herbs_009",
+    "hyper_dense_sewing_notions_010",
+    "dense_crowd_sewing_notions_001",
+    "dense_crowd_boardgame_tokens_002",
+    "dense_crowd_dried_botanicals_004",
+    "dense_crowd_pastry_showcase_005",
+    "dense_crowd_watch_escapement_006",
+    "dense_crowd_pottery_tools_008",
+    "dense_crowd_knolling_tech_009",
+    "dense_crowd_apothecary_herbs_010"
   ],
   "approvedLevels": [
     {
@@ -2737,6 +2777,166 @@
     "photo_c_seeds_010": {
       "status": "approved",
       "updatedAt": "2026-08-25T06:46:34.544Z"
+    },
+    "fresh_stacked_archive_books_011": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:19.757Z"
+    },
+    "fresh_accessories_flatlay_012": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:20.877Z"
+    },
+    "fresh_botanical_herbarium_grid_013": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:24.151Z"
+    },
+    "fresh_fashion_stylist_bench_014": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:26.394Z"
+    },
+    "fresh_chocolate_truffles_015": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:31.450Z"
+    },
+    "fresh_tea_ceremony_matcha_016": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:39.834Z"
+    },
+    "fresh_botanical_herbarium_017": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:41.890Z"
+    },
+    "fresh_stationery_desk_018": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:46.391Z"
+    },
+    "fresh_vintage_study_typewriter_019": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:48.490Z"
+    },
+    "fresh_jewelry_accessories_knolling_020": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:53.025Z"
+    },
+    "fresh_market_groceries_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:48:56.983Z"
+    },
+    "fresh_pastry_counter_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:49:10.232Z"
+    },
+    "fresh_vintage_curio_shop_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:49:18.733Z"
+    },
+    "fresh_curio_cabinet_market_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:49:21.433Z"
+    },
+    "fresh_artist_desk_flatlay_005": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T03:49:37.082Z"
+    },
+    "fresh_flea_market_trinkets_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:49:40.947Z"
+    },
+    "fresh_cartography_celestial_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:49:48.895Z"
+    },
+    "fresh_hardware_store_shelves_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:49:54.053Z"
+    },
+    "fresh_botanical_seeds_spice_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:49:57.935Z"
+    },
+    "fresh_toy_figurines_array_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:05.706Z"
+    },
+    "hyper_dense_motherboard_ic_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:11.134Z"
+    },
+    "hyper_dense_synth_pcb_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T03:50:16.686Z"
+    },
+    "hyper_dense_botanical_spices_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:18.943Z"
+    },
+    "hyper_dense_machinist_parts_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:21.487Z"
+    },
+    "hyper_dense_letterpress_type_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:23.260Z"
+    },
+    "hyper_dense_art_pigments_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:25.505Z"
+    },
+    "hyper_dense_horology_gears_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:27.613Z"
+    },
+    "hyper_dense_cyber_circuit_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T03:50:34.158Z"
+    },
+    "hyper_dense_dried_herbs_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:35.771Z"
+    },
+    "hyper_dense_sewing_notions_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:37.545Z"
+    },
+    "dense_crowd_sewing_notions_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:41.734Z"
+    },
+    "dense_crowd_boardgame_tokens_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:43.213Z"
+    },
+    "dense_crowd_micro_circuitry_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T03:50:48.707Z"
+    },
+    "dense_crowd_dried_botanicals_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:50.719Z"
+    },
+    "dense_crowd_pastry_showcase_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:53.043Z"
+    },
+    "dense_crowd_watch_escapement_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:50:54.619Z"
+    },
+    "dense_crowd_tailor_workbench_007": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T03:51:03.127Z"
+    },
+    "dense_crowd_pottery_tools_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:51:04.933Z"
+    },
+    "dense_crowd_knolling_tech_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:51:07.249Z"
+    },
+    "dense_crowd_apothecary_herbs_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T03:51:08.798Z"
     }
   }
 }
