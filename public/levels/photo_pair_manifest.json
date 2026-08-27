@@ -1,5 +1,225 @@
 [
   {
+    "id": "fresh_v3_ai_pasta_shapes_001",
+    "title": "[AI Multi-Op] Artisan Dried Pasta Shapes Array",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_pasta_shapes_001_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_pasta_shapes_001_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74.7,
+        "y": 25.1,
+        "radius": 4.5,
+        "description": "Single pasta shape mutation in wooden compartment",
+        "hint": "Inspect the compartments of farfalle, rigatoni, and pasta shapes",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_minerals_geodes_002",
+    "title": "[AI Multi-Op] Exotic Mineral Crystals & Agate Slices",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_minerals_geodes_002_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_minerals_geodes_002_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 21.6,
+        "y": 60.2,
+        "radius": 5.7,
+        "description": "Single mineral crystal or agate slice difference",
+        "hint": "Scan the amethyst geodes, pyrite cubes, and agate slices",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_vintage_keys_003",
+    "title": "[AI Multi-Op] Vintage Brass & Iron Skeleton Keys",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_vintage_keys_003_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_vintage_keys_003_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 72.1,
+        "y": 59.1,
+        "radius": 4.5,
+        "description": "Single antique key or escutcheon plate difference",
+        "hint": "Examine the rows of ornate brass keys and lock plates",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_silk_spools_004",
+    "title": "[AI Multi-Op] Vintage Silk Floss & Wooden Thread Spools",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_silk_spools_004_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_silk_spools_004_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 68.7,
+        "y": 7.8,
+        "radius": 5.0,
+        "description": "Single silk floss skein or thread spool difference",
+        "hint": "Look closely at the colored thread spools and silk skeins",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_japanese_teacups_005",
+    "title": "[AI Multi-Op] Japanese Ceramic Teacups & Ochoko Grid",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_japanese_teacups_005_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_japanese_teacups_005_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 93.0,
+        "y": 80.4,
+        "radius": 4.5,
+        "description": "Single ceramic tea bowl difference",
+        "hint": "Scan the array of blue-and-white porcelain, Bizen, and celadon cups",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_butterfly_specimens_006",
+    "title": "[AI Multi-Op] Entomological Butterfly Specimens Showcase",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_butterfly_specimens_006_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_butterfly_specimens_006_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.2,
+        "y": 33.1,
+        "radius": 5.6,
+        "description": "Single pinned butterfly specimen difference",
+        "hint": "Examine the rows of swallowtails, morphos, and moths",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_ancient_coins_007",
+    "title": "[AI Multi-Op] Ancient Roman Coins & Wax Seals",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_ancient_coins_007_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_ancient_coins_007_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.6,
+        "y": 76.2,
+        "radius": 6.4,
+        "description": "Single bronze coin or stamped wax seal difference",
+        "hint": "Inspect the Roman sestertii, Greek drachmas, and wax seals",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_glass_paperweights_008",
+    "title": "[AI Multi-Op] Swirl Glass Paperweights & Cabochons",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_glass_paperweights_008_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_glass_paperweights_008_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29.8,
+        "y": 84.0,
+        "radius": 5.8,
+        "description": "Single glass paperweight orb difference",
+        "hint": "Examine the swirl glass orbs, millefiori eggs, and aventurine gems",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_wild_mushrooms_009",
+    "title": "[AI Multi-Op] Dried Wild Forest Mushrooms & Botanicals",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_wild_mushrooms_009_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_wild_mushrooms_009_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 40.5,
+        "y": 20.2,
+        "radius": 4.5,
+        "description": "Single dried wild mushroom dish difference",
+        "hint": "Inspect the morel caps, golden chanterelles, and mushroom dishes",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v3_ai_drafting_dividers_010",
+    "title": "[AI Multi-Op] Victorian Brass Drafting Dividers & Compasses",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_v3_ai_drafting_dividers_010_base.jpg",
+    "variantImage": "/levels/fresh_v3_ai_drafting_dividers_010_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76.0,
+        "y": 93.7,
+        "radius": 4.5,
+        "description": "Single brass drafting instrument difference",
+        "hint": "Examine the brass bow compasses, proportional dividers, and ruling pens",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "fresh_v2_ai_confectionery_truffles_001",
     "title": "[AI Multi-Op] Gourmet Confectionery & Macaron Array",
     "category": "Photography",

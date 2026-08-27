@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 171,
-    "dismissedCount": 182,
+    "approvedCount": 173,
+    "dismissedCount": 190,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -177,7 +177,9 @@
     "pipe_v3_electronics_add_003",
     "pipe_v3_artist_recolor_006",
     "pipe_v3_retro_reorder_007",
-    "fresh_ai_heirloom_spices_botanical_009"
+    "fresh_ai_heirloom_spices_botanical_009",
+    "fresh_v2_ai_ceramic_mosaic_tiles_002",
+    "fresh_v2_ai_heirloom_spices_botanical_009"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -362,7 +364,15 @@
     "fresh_ai_marine_seashells_specimens_007",
     "fresh_ai_stained_glass_jewels_008",
     "fresh_ai_wooden_toy_figurines_010",
-    "fresh_ai_enamel_pins_collector_006"
+    "fresh_ai_enamel_pins_collector_006",
+    "fresh_v2_ai_confectionery_truffles_001",
+    "fresh_v2_ai_botanical_pressed_flora_003",
+    "fresh_v2_ai_glass_marbles_millefiori_004",
+    "fresh_v2_ai_succulents_greenhouse_grid_005",
+    "fresh_v2_ai_enamel_pins_collector_006",
+    "fresh_v2_ai_marine_seashells_specimens_007",
+    "fresh_v2_ai_stained_glass_jewels_008",
+    "fresh_v2_ai_wooden_toy_figurines_010"
   ],
   "approvedLevels": [
     {
@@ -3312,6 +3322,46 @@
     "pipe_v3_leathercraft_recolor_009": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:34:24.686Z"
+    },
+    "fresh_v2_ai_confectionery_truffles_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T17:52:12.044Z"
+    },
+    "fresh_v2_ai_ceramic_mosaic_tiles_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T17:52:21.431Z"
+    },
+    "fresh_v2_ai_botanical_pressed_flora_003": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T17:52:26.116Z"
+    },
+    "fresh_v2_ai_glass_marbles_millefiori_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T17:52:29.952Z"
+    },
+    "fresh_v2_ai_succulents_greenhouse_grid_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T17:52:33.576Z"
+    },
+    "fresh_v2_ai_enamel_pins_collector_006": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T17:52:40.774Z"
+    },
+    "fresh_v2_ai_marine_seashells_specimens_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T17:52:49.686Z"
+    },
+    "fresh_v2_ai_stained_glass_jewels_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T17:52:56.562Z"
+    },
+    "fresh_v2_ai_heirloom_spices_botanical_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T17:53:00.724Z"
+    },
+    "fresh_v2_ai_wooden_toy_figurines_010": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T17:53:07.768Z"
     }
   }
 }
