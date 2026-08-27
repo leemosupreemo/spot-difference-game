@@ -11,6 +11,7 @@ import {
   resetCuratedStatusMap,
   setLevelCuratedStatus
 } from '../utils/curationStore.js';
+import { trackGameStarted, trackImagePairCompleted, trackStageCleared } from '../services/analytics.js';
 
 const STAGE_PAIR_COUNT = 5;
 
@@ -222,6 +223,7 @@ export function useGameViewModel() {
 
   const handleStartGame = useCallback(async () => {
     logApp('INFO', `[StartGameClicked] Selected theme: ${selectedTheme}`);
+    trackGameStarted({ themeId: selectedTheme, difficulty: 'Medium', mode: activeMode });
     try {
       const stageList = await buildPhotoPairStage({
         packId: selectedTheme,
@@ -234,7 +236,7 @@ export function useGameViewModel() {
     } catch (error) {
       logApp('ERROR', `[BuildStageError] ${error?.message || error}`);
     }
-  }, [selectedTheme, curatedStatusMap, startStageWithLevels]);
+  }, [selectedTheme, curatedStatusMap, activeMode, startStageWithLevels]);
 
   const handleDiffFound = (diffId) => {
     if (!foundDiffs.includes(diffId)) {
@@ -242,6 +244,17 @@ export function useGameViewModel() {
       setFoundDiffs(newFound);
       const pointsEarned = calculateSpeedPoints(elapsedTime);
       setScore(prev => prev + pointsEarned);
+
+      trackImagePairCompleted({
+        result: 'win',
+        level: currentLevel,
+        selectedTheme,
+        elapsedTimeMs: elapsedTime,
+        missCount,
+        hintsUsed: 0,
+        scoreEarned: pointsEarned,
+        stageIndex: currentPairIndex
+      });
 
       if (currentPairIndex + 1 < stagePairs.length) {
         setTimeout(() => {
@@ -326,6 +339,14 @@ export function useGameViewModel() {
           return newStats;
         });
 
+        trackStageCleared({
+          selectedTheme,
+          selectedDifficulty: 'Medium',
+          totalStageTimeMs: elapsedTime,
+          totalStageScore: score + pointsEarned,
+          imagesInStageCount: stagePairs.length || STAGE_PAIR_COUNT
+        });
+
         setTimeout(() => {
           setVictoryModalOpen(true);
         }, 400);
@@ -345,6 +366,17 @@ export function useGameViewModel() {
       sounds.playLose();
       setTimerRunning(false);
       setGameOver(true);
+
+      trackImagePairCompleted({
+        result: 'lose',
+        level: currentLevel,
+        selectedTheme,
+        elapsedTimeMs: elapsedTime,
+        missCount: 3,
+        hintsUsed: 0,
+        scoreEarned: 0,
+        stageIndex: currentPairIndex
+      });
     }
   };
 

@@ -18,8 +18,8 @@ import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, remo
 import { sounds } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
-import { saveLeaderboardStats } from './services/playerProgress';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
+import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared } from './services/analytics';
 
 export default function App() {
   const [levels, setLevels] = useState(() => {
@@ -97,7 +97,9 @@ export default function App() {
     }
   });
   const visitedDebugLevelIdsRef = useRef(new Set());
-  const debugHistoryStackRef = useRef([]);
+  useEffect(() => {
+    initAnalytics();
+  }, []);
 
   const handleToggleSkipKept = (val) => {
     setSkipKeptLevels(val);
@@ -434,6 +436,8 @@ export default function App() {
     setScore(0);
 
     // 1. ABSTRACT CATEGORY: ALWAYS generates procedural art images across 12 distinct art worlds
+    trackGameStarted({ themeId: selectedTheme, difficulty: selectedDifficulty, mode: activeMode });
+
     if (selectedTheme === 'abstract_animated' || (debugMode && debugSourceMode === 'procedural')) {
       const procLevels = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair('abstract_animated', selectedDifficulty, Date.now() + i * 1000));
       logApp('INFO', `[StartGame:AbstractProcedural] Launching 5 procedural levels: ${procLevels.map(l => l.id).join(', ')}`);
@@ -501,6 +505,18 @@ export default function App() {
       setTimerRunning(false);
       stageTimesRef.current[currentStageIndex] = elapsedTime;
 
+      const totalHintsForDiff = selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2;
+      trackImagePairCompleted({
+        result: 'win',
+        level: currentLevel,
+        selectedTheme,
+        elapsedTimeMs: elapsedTime,
+        missCount,
+        hintsUsed: Math.max(0, totalHintsForDiff - hintsLeft),
+        scoreEarned: pointsEarned,
+        stageIndex: currentStageIndex
+      });
+
       // In Debug Mode: Unified continuous big batch loop across all levels
       if (debugMode && debugSourceMode === 'premade') {
         const allActive = getAllPhotoPairEntries();
@@ -537,6 +553,14 @@ export default function App() {
         const cumulativeTime = stageTimesRef.current.reduce((sum, t) => sum + (t || 0), 0);
         setTotalStageTimeMs(cumulativeTime);
         const stageTotalScore = score + pointsEarned;
+
+        trackStageCleared({
+          selectedTheme,
+          selectedDifficulty,
+          totalStageTimeMs: cumulativeTime,
+          totalStageScore: stageTotalScore,
+          imagesInStageCount: totalStageImages
+        });
 
         // Compute Categorized Stats for full 5-image stage
         setDifficultyStats(prev => {
@@ -607,6 +631,18 @@ export default function App() {
         try { sounds.playLose(); } catch (_) {}
         setTimerRunning(false);
         setGameOverModalOpen(true);
+
+        const totalHintsForDiff = selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2;
+        trackImagePairCompleted({
+          result: 'lose',
+          level: currentLevel,
+          selectedTheme,
+          elapsedTimeMs: elapsedTime,
+          missCount: 3,
+          hintsUsed: Math.max(0, totalHintsForDiff - hintsLeft),
+          scoreEarned: 0,
+          stageIndex: currentStageIndex
+        });
       }
       return next;
     });

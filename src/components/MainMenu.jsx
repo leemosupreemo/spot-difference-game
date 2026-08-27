@@ -3,6 +3,7 @@ import { Play, Layers, Sparkles, Camera } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { SCENE_THEMES } from '../utils/proceduralGenerator';
 import { logApp, auditDOMState } from '../utils/logger';
+import { trackCategorySelected } from '../services/analytics';
 import TutorialBanner from './TutorialBanner';
 
 export default function MainMenu({
@@ -63,6 +64,7 @@ export default function MainMenu({
                 onClick={() => {
                   sounds.playTap();
                   setSelectedTheme(theme.id);
+                  trackCategorySelected(theme.id);
                 }}
                 className="glass-panel"
                 style={{

@@ -19,6 +19,7 @@
     "canvas-confetti": "^1.9.4",
     "firebase": "^12.17.1",
     "lucide-react": "^1.30.0",
+    "mixpanel-browser": "^2.82.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
