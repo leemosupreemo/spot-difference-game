@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 173,
-    "dismissedCount": 190,
+    "approvedCount": 179,
+    "dismissedCount": 194,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -179,7 +179,13 @@
     "pipe_v3_retro_reorder_007",
     "fresh_ai_heirloom_spices_botanical_009",
     "fresh_v2_ai_ceramic_mosaic_tiles_002",
-    "fresh_v2_ai_heirloom_spices_botanical_009"
+    "fresh_v2_ai_heirloom_spices_botanical_009",
+    "fresh_v3_ai_pasta_shapes_001",
+    "fresh_v3_ai_vintage_keys_003",
+    "fresh_v3_ai_japanese_teacups_005",
+    "fresh_v3_ai_butterfly_specimens_006",
+    "fresh_v3_ai_glass_paperweights_008",
+    "fresh_v3_ai_drafting_dividers_010"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -372,7 +378,11 @@
     "fresh_v2_ai_enamel_pins_collector_006",
     "fresh_v2_ai_marine_seashells_specimens_007",
     "fresh_v2_ai_stained_glass_jewels_008",
-    "fresh_v2_ai_wooden_toy_figurines_010"
+    "fresh_v2_ai_wooden_toy_figurines_010",
+    "fresh_v3_ai_minerals_geodes_002",
+    "fresh_v3_ai_silk_spools_004",
+    "fresh_v3_ai_ancient_coins_007",
+    "fresh_v3_ai_wild_mushrooms_009"
   ],
   "approvedLevels": [
     {
@@ -3362,6 +3372,46 @@
     "fresh_v2_ai_wooden_toy_figurines_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:53:07.768Z"
+    },
+    "fresh_v3_ai_pasta_shapes_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:08:31.479Z"
+    },
+    "fresh_v3_ai_minerals_geodes_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T18:08:39.982Z"
+    },
+    "fresh_v3_ai_vintage_keys_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:08:50.830Z"
+    },
+    "fresh_v3_ai_silk_spools_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T18:08:56.254Z"
+    },
+    "fresh_v3_ai_japanese_teacups_005": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:09:01.473Z"
+    },
+    "fresh_v3_ai_butterfly_specimens_006": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:09:11.500Z"
+    },
+    "fresh_v3_ai_ancient_coins_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T18:09:16.834Z"
+    },
+    "fresh_v3_ai_glass_paperweights_008": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:09:24.549Z"
+    },
+    "fresh_v3_ai_wild_mushrooms_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T18:09:28.615Z"
+    },
+    "fresh_v3_ai_drafting_dividers_010": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:09:33.740Z"
     }
   }
 }
