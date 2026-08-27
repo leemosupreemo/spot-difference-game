@@ -40,13 +40,6 @@ export default function TimerDisplay({
     setMagnifierEnabled(!magnifierEnabled);
   };
 
-  const difficultyColor =
-    selectedDifficulty === 'Hard'
-      ? 'var(--accent-pink)'
-      : selectedDifficulty === 'Medium'
-      ? 'var(--accent-gold)'
-      : 'var(--accent-green)';
-
   return (
     <div style={{
       width: '100%',
@@ -107,26 +100,6 @@ export default function TimerDisplay({
                 </span>
               </div>
             </div>
-
-            {/* Difficulty Badge */}
-            <span style={{
-              fontSize: '0.82rem',
-              fontWeight: 800,
-              color: difficultyColor,
-              background: 'rgba(0, 0, 0, 0.45)',
-              padding: '0 11px',
-              height: '36px',
-              boxSizing: 'border-box',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '12px',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
-              letterSpacing: '0.4px',
-              lineHeight: 1
-            }}>
-              {selectedDifficulty.toUpperCase()}
-            </span>
 
             {/* 3-Heart LIVES Badge */}
             <div style={{

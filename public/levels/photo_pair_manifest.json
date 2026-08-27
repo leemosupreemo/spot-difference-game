@@ -58,7 +58,7 @@
         "id": 1,
         "x": 93.7,
         "y": 92.6,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -78,7 +78,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 83.0,
+        "x": 83,
         "y": 15.8,
         "radius": 4.5,
         "description": "Single add difference",
@@ -101,7 +101,7 @@
       {
         "id": 1,
         "x": 1.6,
-        "y": 51.0,
+        "y": 51,
         "radius": 7.5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
@@ -124,7 +124,7 @@
         "id": 1,
         "x": 66.3,
         "y": 72.1,
-        "radius": 6.0,
+        "radius": 6,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -146,7 +146,7 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -167,7 +167,7 @@
       {
         "id": 1,
         "x": 53.9,
-        "y": 20.0,
+        "y": 20,
         "radius": 5.6,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -188,7 +188,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.0,
+        "x": 51,
         "y": 47.5,
         "radius": 4.8,
         "description": "Single recolor difference",
@@ -234,7 +234,7 @@
         "id": 1,
         "x": 15.2,
         "y": 25.5,
-        "radius": 8.0,
+        "radius": 8,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -278,7 +278,7 @@
         "id": 1,
         "x": 28.9,
         "y": 3.5,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -299,7 +299,7 @@
       {
         "id": 1,
         "x": 54.7,
-        "y": 57.0,
+        "y": 57,
         "radius": 6.3,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
@@ -321,8 +321,8 @@
       {
         "id": 1,
         "x": 70.4,
-        "y": 26.0,
-        "radius": 5.0,
+        "y": 26,
+        "radius": 5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -342,7 +342,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 78.0,
+        "x": 78,
         "y": 33.7,
         "radius": 4.5,
         "description": "Single add difference",
@@ -387,7 +387,7 @@
       {
         "id": 1,
         "x": 54.7,
-        "y": 57.0,
+        "y": 57,
         "radius": 6.3,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
@@ -608,7 +608,7 @@
         "id": 1,
         "x": 93.7,
         "y": 92.6,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -651,7 +651,7 @@
       {
         "id": 1,
         "x": 4.1,
-        "y": 69.0,
+        "y": 69,
         "radius": 7.5,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -674,7 +674,7 @@
         "id": 1,
         "x": 66.3,
         "y": 72.1,
-        "radius": 6.0,
+        "radius": 6,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -696,7 +696,7 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -804,7 +804,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 73.0,
+        "x": 73,
         "y": 15.4,
         "radius": 4.5,
         "description": "Single add difference",
@@ -828,7 +828,7 @@
         "id": 1,
         "x": 50.7,
         "y": 49.7,
-        "radius": 6.0,
+        "radius": 6,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -1024,7 +1024,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 27.0,
+        "x": 27,
         "y": 61.4,
         "radius": 4.5,
         "description": "Single add difference",
@@ -1070,7 +1070,7 @@
         "id": 1,
         "x": 11.8,
         "y": 51.4,
-        "radius": 6.0,
+        "radius": 6,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
         "operation": "remove"
@@ -1156,7 +1156,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 2.0,
+        "x": 2,
         "y": 5.5,
         "radius": 6.7,
         "description": "Single recolor difference",
@@ -1211,7 +1211,7 @@
   },
   {
     "id": "pipe_v3_sewing_remove_001",
-    "title": "[AI Remove - Medium] Tailor Notions Box Missing Spool",
+    "title": "[AI Remove] Tailor Notions Box Missing Spool",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1224,7 +1224,7 @@
         "id": 1,
         "x": 61.6,
         "y": 47.6,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single wooden thread spool missing from compartment",
         "hint": "Inspect the wooden thread spools in the compartmentalized tray",
         "operation": "remove"
@@ -1233,7 +1233,7 @@
   },
   {
     "id": "pipe_v3_watchmaker_recolor_002",
-    "title": "[AI Recolor - Medium] Horologist Tray Screwdriver Collar",
+    "title": "[AI Recolor] Horologist Tray Screwdriver Collar",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1246,7 +1246,7 @@
         "id": 1,
         "x": 26.2,
         "y": 61.5,
-        "radius": 6.0,
+        "radius": 6,
         "description": "Single precision screwdriver collar tone shifted in CIELAB",
         "hint": "Examine the color-coded precision screwdrivers",
         "operation": "recolor"
@@ -1255,7 +1255,7 @@
   },
   {
     "id": "pipe_v3_electronics_add_003",
-    "title": "[AI Add - Medium] Electronics Antistatic Bench Extra Capacitor",
+    "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1277,7 +1277,7 @@
   },
   {
     "id": "pipe_v3_gardener_remove_005",
-    "title": "[AI Remove - Medium] Greenhouse Potting Bench Missing Plant Tag",
+    "title": "[AI Remove] Greenhouse Potting Bench Missing Plant Tag",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1299,7 +1299,7 @@
   },
   {
     "id": "pipe_v3_artist_recolor_006",
-    "title": "[AI Recolor - Medium] Fine Art Studio Oil Paint Tube Cap",
+    "title": "[AI Recolor] Fine Art Studio Oil Paint Tube Cap",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1321,7 +1321,7 @@
   },
   {
     "id": "pipe_v3_retro_reorder_007",
-    "title": "[AI Reorder - Medium] Retro Gaming Desk Shifted Memory Card",
+    "title": "[AI Reorder] Retro Gaming Desk Shifted Memory Card",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1343,7 +1343,7 @@
   },
   {
     "id": "pipe_v3_expedition_remove_008",
-    "title": "[AI Remove - Medium] Expedition Prep Table Missing Carabiner",
+    "title": "[AI Remove] Expedition Prep Table Missing Carabiner",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1365,7 +1365,7 @@
   },
   {
     "id": "pipe_v3_leathercraft_recolor_009",
-    "title": "[AI Recolor - Medium] Leather Artisan Bench Waxed Thread Spool",
+    "title": "[AI Recolor] Leather Artisan Bench Waxed Thread Spool",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1387,7 +1387,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_sewing_remove_001",
-    "title": "[AI Remove - Medium] Tailor Notions Box Missing Thread Spool",
+    "title": "[AI Remove] Tailor Notions Box Missing Thread Spool",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1408,7 +1408,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_watchmaker_recolor_002",
-    "title": "[AI Recolor - Medium] Horologist Parts Tray Screwdriver Collar",
+    "title": "[AI Recolor] Horologist Parts Tray Screwdriver Collar",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1429,7 +1429,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_electronics_add_003",
-    "title": "[AI Add - Medium] Electronics Antistatic Bench Extra Capacitor",
+    "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1450,7 +1450,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_gardener_remove_004",
-    "title": "[AI Remove - Medium] Greenhouse Potting Bench Missing Plant Tag",
+    "title": "[AI Remove] Greenhouse Potting Bench Missing Plant Tag",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1471,7 +1471,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_artist_recolor_005",
-    "title": "[AI Recolor - Medium] Fine Art Studio Oil Paint Tube Cap",
+    "title": "[AI Recolor] Fine Art Studio Oil Paint Tube Cap",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1492,7 +1492,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_woodworking_recolor_006",
-    "title": "[AI Recolor - Medium] Woodworking Joinery Bench Carpenter Pencil",
+    "title": "[AI Recolor] Woodworking Joinery Bench Carpenter Pencil",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1513,7 +1513,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_retro_recolor_007",
-    "title": "[AI Recolor - Medium] Retro Gaming Desk Cartridge Shell",
+    "title": "[AI Recolor] Retro Gaming Desk Cartridge Shell",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1534,7 +1534,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_expedition_remove_008",
-    "title": "[AI Remove - Medium] Expedition Prep Table Missing Carabiner",
+    "title": "[AI Remove] Expedition Prep Table Missing Carabiner",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1555,7 +1555,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_leathercraft_recolor_009",
-    "title": "[AI Recolor - Medium] Leather Artisan Bench Waxed Thread Spool",
+    "title": "[AI Recolor] Leather Artisan Bench Waxed Thread Spool",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1576,7 +1576,7 @@
   },
   {
     "id": "goldilocks_pipe_v2_miniature_recolor_010",
-    "title": "[AI Recolor - Medium] Miniature Painter Desk Paint Dropper Cap",
+    "title": "[AI Recolor] Miniature Painter Desk Paint Dropper Cap",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1597,7 +1597,7 @@
   },
   {
     "id": "verified_m_ai_sewing_remove_001",
-    "title": "[AI Remove - Medium] Tailor Notions Box Missing Thread Spool",
+    "title": "[AI Remove] Tailor Notions Box Missing Thread Spool",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1618,7 +1618,7 @@
   },
   {
     "id": "verified_m_ai_watchmaker_recolor_002",
-    "title": "[AI Recolor - Medium] Horologist Parts Tray Screwdriver Collar",
+    "title": "[AI Recolor] Horologist Parts Tray Screwdriver Collar",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1639,7 +1639,7 @@
   },
   {
     "id": "verified_m_ai_electronics_add_003",
-    "title": "[AI Add - Medium] Electronics Antistatic Bench Extra Capacitor",
+    "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1660,7 +1660,7 @@
   },
   {
     "id": "verified_m_ai_gardener_remove_004",
-    "title": "[AI Remove - Medium] Greenhouse Potting Bench Missing Plant Tag",
+    "title": "[AI Remove] Greenhouse Potting Bench Missing Plant Tag",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1681,7 +1681,7 @@
   },
   {
     "id": "verified_m_ai_artist_recolor_005",
-    "title": "[AI Recolor - Medium] Fine Art Studio Oil Paint Tube Cap",
+    "title": "[AI Recolor] Fine Art Studio Oil Paint Tube Cap",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1702,7 +1702,7 @@
   },
   {
     "id": "verified_m_ai_woodworking_recolor_006",
-    "title": "[AI Recolor - Medium] Woodworking Joinery Bench Carpenter Pencil",
+    "title": "[AI Recolor] Woodworking Joinery Bench Carpenter Pencil",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1723,7 +1723,7 @@
   },
   {
     "id": "verified_m_ai_retro_recolor_007",
-    "title": "[AI Recolor - Medium] Retro Gaming Desk Cartridge Shell",
+    "title": "[AI Recolor] Retro Gaming Desk Cartridge Shell",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1744,7 +1744,7 @@
   },
   {
     "id": "verified_m_ai_expedition_remove_008",
-    "title": "[AI Remove - Medium] Expedition Prep Table Missing Carabiner",
+    "title": "[AI Remove] Expedition Prep Table Missing Carabiner",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1765,7 +1765,7 @@
   },
   {
     "id": "verified_m_ai_leathercraft_recolor_009",
-    "title": "[AI Recolor - Medium] Leather Artisan Bench Waxed Thread Spool",
+    "title": "[AI Recolor] Leather Artisan Bench Waxed Thread Spool",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -1786,7 +1786,7 @@
   },
   {
     "id": "verified_m_ai_miniature_recolor_010",
-    "title": "[AI Recolor - Medium] Miniature Painter Desk Paint Dropper Cap",
+    "title": "[AI Recolor] Miniature Painter Desk Paint Dropper Cap",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",

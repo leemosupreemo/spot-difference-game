@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 137,
-    "dismissedCount": 143,
+    "approvedCount": 170,
+    "dismissedCount": 173,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -143,7 +143,40 @@
     "goldilocks_pipe_v2_woodworking_recolor_006",
     "goldilocks_pipe_v2_retro_recolor_007",
     "goldilocks_pipe_v2_leathercraft_recolor_009",
-    "goldilocks_pipe_v2_miniature_recolor_010"
+    "goldilocks_pipe_v2_miniature_recolor_010",
+    "prod_v4_dense_boardgame",
+    "prod_v4_dense_buttons",
+    "prod_v4_dense_marbles",
+    "prod_v4_dense_spices",
+    "prod_v4_unique_gardening",
+    "prod_v4_unique_palette",
+    "prod_v4_ai_electronics",
+    "prod_v4_ai_mechanic",
+    "prod_v4_ai_artist",
+    "prod_v4_ai_expedition",
+    "prod_v4_ai_leathercraft",
+    "prod_v4_ai_miniature",
+    "prod_v4_ai_retrogaming",
+    "prod_v4_var2_dense_boardgame",
+    "prod_v4_var2_dense_buttons",
+    "prod_v4_var2_dense_spices",
+    "prod_v4_var2_dense_succulents",
+    "prod_v4_var2_unique_bushcraft",
+    "prod_v4_var2_unique_miniatures",
+    "prod_v4_var2_unique_palette",
+    "prod_v4_var2_unique_seashells",
+    "prod_v4_var2_unique_sewing",
+    "prod_v4_var2_unique_woodworking",
+    "prod_v4_var2_ai_mechanic",
+    "prod_v4_var2_ai_sewing",
+    "prod_v4_dense_succulents",
+    "prod_v4_var2_dense_watch_parts",
+    "prod_v4_var2_unique_pencils",
+    "prod_v4_var2_ai_woodworking",
+    "pipe_v3_watchmaker_recolor_002",
+    "pipe_v3_electronics_add_003",
+    "pipe_v3_artist_recolor_006",
+    "pipe_v3_retro_reorder_007"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -289,7 +322,37 @@
     "goldilocks_pipe_v2_sewing_remove_001",
     "goldilocks_pipe_v2_watchmaker_recolor_002",
     "goldilocks_pipe_v2_gardener_remove_004",
-    "goldilocks_pipe_v2_expedition_remove_008"
+    "goldilocks_pipe_v2_expedition_remove_008",
+    "prod_v4_dense_candies",
+    "prod_v4_dense_gemstones",
+    "prod_v4_dense_hardware",
+    "prod_v4_unique_bakery",
+    "prod_v4_unique_bushcraft",
+    "prod_v4_unique_miniatures",
+    "prod_v4_unique_seashells",
+    "prod_v4_unique_sewing",
+    "prod_v4_ai_watchmaker",
+    "prod_v4_ai_sewing",
+    "prod_v4_ai_baker",
+    "prod_v4_ai_gardener",
+    "prod_v4_var2_dense_candies",
+    "prod_v4_var2_dense_gemstones",
+    "prod_v4_var2_dense_hardware",
+    "prod_v4_var2_dense_marbles",
+    "prod_v4_var2_unique_bakery",
+    "prod_v4_var2_unique_gardening",
+    "prod_v4_var2_unique_leather",
+    "prod_v4_var2_ai_electronics",
+    "prod_v4_var2_ai_watchmaker",
+    "prod_v4_var2_ai_artist",
+    "prod_v4_dense_watch_parts",
+    "prod_v4_unique_retrogaming",
+    "prod_v4_var2_dense_enamel_pins",
+    "prod_v4_var2_unique_retrogaming",
+    "pipe_v3_sewing_remove_001",
+    "pipe_v3_gardener_remove_005",
+    "pipe_v3_expedition_remove_008",
+    "pipe_v3_leathercraft_recolor_009"
   ],
   "approvedLevels": [
     {
@@ -2987,6 +3050,258 @@
     "goldilocks_pipe_v2_miniature_recolor_010": {
       "status": "approved",
       "updatedAt": "2026-08-27T04:19:19.454Z"
+    },
+    "prod_v4_dense_boardgame": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:28:03.319Z"
+    },
+    "prod_v4_dense_buttons": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:28:13.235Z"
+    },
+    "prod_v4_dense_candies": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:28:19.050Z"
+    },
+    "prod_v4_dense_gemstones": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:28:21.030Z"
+    },
+    "prod_v4_dense_hardware": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:28:26.833Z"
+    },
+    "prod_v4_dense_marbles": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:28:34.962Z"
+    },
+    "prod_v4_dense_spices": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:28:43.608Z"
+    },
+    "prod_v4_unique_bakery": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:28:48.024Z"
+    },
+    "prod_v4_unique_bushcraft": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:28:55.306Z"
+    },
+    "prod_v4_unique_gardening": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:29:08.062Z"
+    },
+    "prod_v4_unique_miniatures": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:29:12.436Z"
+    },
+    "prod_v4_unique_palette": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:29:19.962Z"
+    },
+    "prod_v4_unique_seashells": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:29:23.777Z"
+    },
+    "prod_v4_unique_sewing": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:29:30.012Z"
+    },
+    "prod_v4_ai_electronics": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:29:36.194Z"
+    },
+    "prod_v4_ai_mechanic": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:29:41.583Z"
+    },
+    "prod_v4_ai_watchmaker": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:29:45.785Z"
+    },
+    "prod_v4_ai_sewing": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:29:49.576Z"
+    },
+    "prod_v4_ai_artist": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:29:55.309Z"
+    },
+    "prod_v4_ai_baker": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:30:01.760Z"
+    },
+    "prod_v4_ai_expedition": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:30:12.896Z"
+    },
+    "prod_v4_ai_gardener": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:30:26.753Z"
+    },
+    "prod_v4_ai_leathercraft": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:30:32.795Z"
+    },
+    "prod_v4_ai_miniature": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:30:45.281Z"
+    },
+    "prod_v4_ai_retrogaming": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:30:55.420Z"
+    },
+    "prod_v4_var2_dense_boardgame": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:31:01.083Z"
+    },
+    "prod_v4_var2_dense_buttons": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:31:07.626Z"
+    },
+    "prod_v4_var2_dense_candies": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:31:11.041Z"
+    },
+    "prod_v4_var2_dense_gemstones": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:31:12.817Z"
+    },
+    "prod_v4_var2_dense_hardware": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:31:17.239Z"
+    },
+    "prod_v4_var2_dense_marbles": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:31:21.001Z"
+    },
+    "prod_v4_var2_dense_spices": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:31:25.525Z"
+    },
+    "prod_v4_var2_dense_succulents": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:31:38.028Z"
+    },
+    "prod_v4_var2_unique_bakery": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:31:42.604Z"
+    },
+    "prod_v4_var2_unique_bushcraft": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:31:47.387Z"
+    },
+    "prod_v4_var2_unique_gardening": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:31:51.741Z"
+    },
+    "prod_v4_var2_unique_leather": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:31:55.567Z"
+    },
+    "prod_v4_var2_unique_miniatures": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:31:59.726Z"
+    },
+    "prod_v4_var2_unique_palette": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:32:07.561Z"
+    },
+    "prod_v4_var2_unique_seashells": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:32:17.350Z"
+    },
+    "prod_v4_var2_unique_sewing": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:32:22.234Z"
+    },
+    "prod_v4_var2_unique_woodworking": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:32:26.104Z"
+    },
+    "prod_v4_var2_ai_electronics": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:32:36.021Z"
+    },
+    "prod_v4_var2_ai_mechanic": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:32:45.629Z"
+    },
+    "prod_v4_var2_ai_watchmaker": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:32:50.108Z"
+    },
+    "prod_v4_var2_ai_sewing": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:32:54.780Z"
+    },
+    "prod_v4_var2_ai_artist": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:32:58.089Z"
+    },
+    "prod_v4_dense_succulents": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:33:02.088Z"
+    },
+    "prod_v4_dense_watch_parts": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:33:05.772Z"
+    },
+    "prod_v4_unique_retrogaming": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:33:10.283Z"
+    },
+    "prod_v4_var2_dense_enamel_pins": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:33:16.011Z"
+    },
+    "prod_v4_var2_dense_watch_parts": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:33:24.923Z"
+    },
+    "prod_v4_var2_unique_pencils": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:33:31.187Z"
+    },
+    "prod_v4_var2_unique_retrogaming": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:33:34.623Z"
+    },
+    "prod_v4_var2_ai_woodworking": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:33:38.338Z"
+    },
+    "pipe_v3_sewing_remove_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:33:42.945Z"
+    },
+    "pipe_v3_watchmaker_recolor_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:33:50.215Z"
+    },
+    "pipe_v3_electronics_add_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:33:55.416Z"
+    },
+    "pipe_v3_gardener_remove_005": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:33:59.749Z"
+    },
+    "pipe_v3_artist_recolor_006": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:34:06.806Z"
+    },
+    "pipe_v3_retro_reorder_007": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T06:34:10.916Z"
+    },
+    "pipe_v3_expedition_remove_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:34:20.218Z"
+    },
+    "pipe_v3_leathercraft_recolor_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T06:34:24.686Z"
     }
   }
 }
