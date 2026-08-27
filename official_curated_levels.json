@@ -2,8 +2,8 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 131,
-    "dismissedCount": 139,
+    "approvedCount": 136,
+    "dismissedCount": 143,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -137,7 +137,12 @@
     "hyper_dense_synth_pcb_002",
     "hyper_dense_cyber_circuit_008",
     "dense_crowd_micro_circuitry_003",
-    "dense_crowd_tailor_workbench_007"
+    "dense_crowd_tailor_workbench_007",
+    "goldilocks_pipe_v2_electronics_add_003",
+    "goldilocks_pipe_v2_artist_recolor_005",
+    "goldilocks_pipe_v2_woodworking_recolor_006",
+    "goldilocks_pipe_v2_retro_recolor_007",
+    "goldilocks_pipe_v2_leathercraft_recolor_009"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -279,7 +284,11 @@
     "dense_crowd_pottery_tools_008",
     "dense_crowd_knolling_tech_009",
     "dense_crowd_apothecary_herbs_010",
-    "verified_m_ai_sewing_remove_001"
+    "verified_m_ai_sewing_remove_001",
+    "goldilocks_pipe_v2_sewing_remove_001",
+    "goldilocks_pipe_v2_watchmaker_recolor_002",
+    "goldilocks_pipe_v2_gardener_remove_004",
+    "goldilocks_pipe_v2_expedition_remove_008"
   ],
   "approvedLevels": [
     {
@@ -2937,6 +2946,42 @@
     "dense_crowd_apothecary_herbs_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T03:51:08.798Z"
+    },
+    "goldilocks_pipe_v2_sewing_remove_001": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T04:17:18.871Z"
+    },
+    "goldilocks_pipe_v2_watchmaker_recolor_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T04:17:25.352Z"
+    },
+    "goldilocks_pipe_v2_electronics_add_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T04:17:32.139Z"
+    },
+    "goldilocks_pipe_v2_gardener_remove_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T04:17:38.125Z"
+    },
+    "goldilocks_pipe_v2_artist_recolor_005": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T04:17:45.382Z"
+    },
+    "goldilocks_pipe_v2_woodworking_recolor_006": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T04:17:53.379Z"
+    },
+    "goldilocks_pipe_v2_retro_recolor_007": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T04:17:59.670Z"
+    },
+    "goldilocks_pipe_v2_expedition_remove_008": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T04:19:06.108Z"
+    },
+    "goldilocks_pipe_v2_leathercraft_recolor_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T04:19:11.183Z"
     }
   }
 }
