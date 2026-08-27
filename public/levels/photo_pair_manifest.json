@@ -1761,9 +1761,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 36.6,
-        "y": 51.8,
-        "radius": 8.5
+        "x": 34.1,
+        "y": 52.5,
+        "radius": 4.5
       }
     ]
   },
@@ -1780,7 +1780,7 @@
       {
         "id": 1,
         "x": 52.1,
-        "y": 51.1,
+        "y": 51.4,
         "radius": 8.5
       }
     ]
@@ -1815,11 +1815,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 47.6,
-        "y": 45.8,
-        "radius": 7.5,
-        "description": "Single brass hex nut removed from cluttered hardware compartment",
-        "hint": "Inspect the dense sorting compartments filled with screws and fasteners"
+        "x": 47.9,
+        "y": 45.9,
+        "radius": 4.5
       }
     ]
   },
@@ -1853,8 +1851,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54.2,
-        "y": 43.7,
+        "x": 53.5,
+        "y": 46.1,
         "radius": 8.5
       }
     ]
@@ -1891,8 +1889,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 41.6,
-        "y": 48.1,
+        "x": 48.3,
+        "y": 34.0,
         "radius": 8.5
       }
     ]
@@ -1983,8 +1981,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 41.6,
-        "y": 48.1,
+        "x": 48.3,
+        "y": 34.1,
         "radius": 8.5
       }
     ]
@@ -2020,8 +2018,8 @@
       {
         "id": 1,
         "x": 43.7,
-        "y": 53.7,
-        "radius": 8.5
+        "y": 53.8,
+        "radius": 4.5
       }
     ]
   },
@@ -2057,9 +2055,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.9,
-        "y": 50.8,
-        "radius": 8.5
+        "x": 47.0,
+        "y": 50.9,
+        "radius": 4.5
       }
     ]
   },
@@ -2093,9 +2091,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 44.4,
-        "y": 51.2,
-        "radius": 8.5
+        "x": 44.1,
+        "y": 49.4,
+        "radius": 4.5
       }
     ]
   },
@@ -2111,8 +2109,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 76.6,
-        "y": 73.1,
+        "x": 77.5,
+        "y": 73.6,
         "radius": 8.5
       }
     ]
@@ -3051,11 +3049,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49.4,
-        "y": 42.1,
-        "radius": 9,
-        "description": "Single screwdriver handle rubber grip tone shifted in CIELAB (preserving molded ridges & wear)",
-        "hint": "Scan the tool handles and grip sleeves near the center"
+        "x": 50.3,
+        "y": 43.4,
+        "radius": 8.5
       }
     ]
   },
@@ -3171,11 +3167,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.4,
-        "y": 50.4,
-        "radius": 9,
-        "description": "Single electrolytic capacitor package removed from dense motherboard component array",
-        "hint": "Scan the dense rows of capacitors and IC chips on the logic board"
+        "x": 52.1,
+        "y": 51.5,
+        "radius": 8.5
       }
     ]
   },
@@ -3191,9 +3185,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 42.9,
-        "y": 24.4,
-        "radius": 8.5
+        "x": 41.3,
+        "y": 26.5,
+        "radius": 4.5
       }
     ]
   },
@@ -3229,11 +3223,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 57.3,
-        "y": 80.7,
-        "radius": 9,
-        "description": "Component resistor on the circuit board",
-        "hint": "Inspect the electronic components on the soldering mat"
+        "x": 56.9,
+        "y": 80.2,
+        "radius": 8.5
       }
     ]
   },
@@ -3249,9 +3241,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 84.5,
-        "y": 28.5,
-        "radius": 8.5
+        "x": 86.4,
+        "y": 24.0,
+        "radius": 8.2
       }
     ]
   },
@@ -3285,11 +3277,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 56.6,
-        "y": 57.4,
-        "radius": 9,
-        "description": "Cathedral glass petal to the right of soldering iron changed from ruby red to deep violet purple",
-        "hint": "Check the curved glass petal just to the right of the hot solder joint"
+        "x": 56.1,
+        "y": 58.8,
+        "radius": 8.5
       }
     ]
   },
@@ -3361,11 +3351,10 @@
     "baseImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
     "diffs": [
       {
-        "y": 47.4,
         "id": 1,
-        "hint": "Check the brass divider caliper near the sea chart compass.",
-        "x": 62.1,
-        "radius": 9
+        "x": 60.9,
+        "y": 48.5,
+        "radius": 7.6
       }
     ],
     "id": "ai_macro_cartography_001",
@@ -3424,9 +3413,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 40.3,
-        "y": 24.3,
-        "radius": 8.5
+        "x": 41.6,
+        "y": 27.2,
+        "radius": 4.5
       }
     ],
     "category": "Photography",
@@ -3553,8 +3542,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 69.1,
-        "y": 87.7,
+        "x": 70.4,
+        "y": 89.8,
         "radius": 8.5
       }
     ],
@@ -3756,11 +3745,10 @@
     "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
     "diffs": [
       {
-        "y": 85.2,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 30.4,
-        "radius": 9
+        "x": 31.3,
+        "y": 84.2,
+        "radius": 8.5
       }
     ],
     "difficulty": "Medium",
@@ -3833,11 +3821,10 @@
     "difficulty": "Hard",
     "diffs": [
       {
-        "y": 47.3,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 58.6,
-        "radius": 9
+        "x": 57.3,
+        "y": 46.4,
+        "radius": 8.5
       }
     ],
     "title": "Board Game Piece",
@@ -3909,11 +3896,10 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 61,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 53.6,
-        "radius": 9
+        "x": 51.8,
+        "y": 59.7,
+        "radius": 8.5
       }
     ],
     "id": "photo_fishing_tackle_001",
@@ -3949,11 +3935,10 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 65.5,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 35.4,
-        "radius": 9
+        "x": 35.0,
+        "y": 66.7,
+        "radius": 8.5
       }
     ],
     "category": "Photography",
@@ -4096,11 +4081,10 @@
   {
     "diffs": [
       {
-        "y": 52.5,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 33.5,
-        "radius": 9
+        "x": 32.7,
+        "y": 53.2,
+        "radius": 8.5
       }
     ],
     "difficulty": "Easy",
@@ -4123,8 +4107,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 32.5,
-        "y": 45.9,
+        "x": 29.6,
+        "y": 46.9,
         "radius": 8.5
       }
     ],
@@ -4156,8 +4140,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 46.5,
-        "y": 52.3,
+        "x": 41.5,
+        "y": 66.1,
         "radius": 8.5
       }
     ],
@@ -4170,11 +4154,10 @@
   {
     "diffs": [
       {
-        "y": 73.3,
         "id": 1,
-        "hint": "Inspect the small purple connector slightly right of center.",
-        "x": 85.5,
-        "radius": 9
+        "x": 85.6,
+        "y": 73.8,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/variant.jpg",
@@ -4309,11 +4292,10 @@
     "id": "ai_artist_easel_001",
     "diffs": [
       {
-        "y": 72,
         "id": 1,
-        "hint": "Scan the bottom-left corner of the table for the cobalt blue paint tube.",
-        "x": 10.6,
-        "radius": 9
+        "x": 10.7,
+        "y": 71.7,
+        "radius": 8.5
       }
     ],
     "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg",
@@ -4463,11 +4445,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50,
-        "y": 51.7,
-        "radius": 7.5,
-        "description": "Single watercolor paint pigment pan removed from desk organizer",
-        "hint": "Inspect the flat lay arrangement of brushes, paint pans, and tools"
+        "x": 47.9,
+        "y": 50.3,
+        "radius": 4.5
       }
     ]
   },
@@ -4483,11 +4463,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.3,
-        "y": 53.7,
-        "radius": 6.5,
-        "description": "Pricking iron punch on cutting mat",
-        "hint": "Examine the leatherworking tools on the mat"
+        "x": 48.2,
+        "y": 53.8,
+        "radius": 5.5
       }
     ]
   }
