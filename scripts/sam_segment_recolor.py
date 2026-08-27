@@ -93,6 +93,125 @@ class LocalClutterEstimator:
         clutter_multiplier = float(np.clip(1.0 + (edge_density * 6.0), 1.0, 2.6))
         return clutter_multiplier
 
+
+class PeerPaletteColorEngine:
+    """
+    Selects peer-relative destination colors based on the scene peer palette,
+    preventing arbitrary neon outliers.
+    """
+    @staticmethod
+    def extract_dominant_lab(image_bgr, mask):
+        lab = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2LAB).astype(np.float32)
+        valid = (mask > 0)
+        if np.sum(valid) == 0:
+            return np.array([128.0, 128.0, 128.0], dtype=np.float32)
+        mean_l = float(np.mean(lab[:, :, 0][valid]))
+        mean_a = float(np.mean(lab[:, :, 1][valid]))
+        mean_b = float(np.mean(lab[:, :, 2][valid]))
+        return np.array([mean_l, mean_a, mean_b], dtype=np.float32)
+
+    @classmethod
+    def shift_color_peer_relative(cls, image_bgr, target_mask, peer_masks=None, target_delta_e=22.0, default_hue_deg=45.0):
+        """
+        Recolors target_mask towards an authentic peer palette hue or natural neighboring hue.
+        Returns: (result_bgr, actual_delta_e, metrics_dict)
+        """
+        lab = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2LAB).astype(np.float32)
+        l_chan, a_chan, b_chan = lab[:, :, 0], lab[:, :, 1], lab[:, :, 2]
+        
+        target_valid = (target_mask > 0)
+        target_chroma = np.hypot(a_chan - 128.0, b_chan - 128.0)
+        valid_material = target_valid & (target_chroma > 8.0) & (l_chan > 20.0) & (l_chan < 245.0)
+        
+        if np.sum(valid_material) == 0:
+            return image_bgr.copy(), 0.0, {"peer_color_outlier_zscore": 0.0}
+
+        target_mean_lab = cls.extract_dominant_lab(image_bgr, target_mask)
+        
+        # Build peer palette if peer masks provided
+        peer_labs = []
+        if peer_masks and len(peer_masks) > 0:
+            for pm in peer_masks:
+                if np.sum(pm > 0) > 0:
+                    peer_labs.append(cls.extract_dominant_lab(image_bgr, pm))
+                    
+        hue_direction_deg = default_hue_deg
+        peer_color_dist_before = 0.0
+        peer_color_dist_after = 0.0
+        outlier_zscore = 0.0
+
+        if len(peer_labs) >= 2:
+            peer_labs_arr = np.array(peer_labs) # (N, 3)
+            # Distances from target to peers before edit
+            dists_before = np.sqrt(np.sum((peer_labs_arr[:, 1:3] - target_mean_lab[1:3])**2, axis=1))
+            peer_color_dist_before = float(np.mean(dists_before))
+            
+            # Find a peer that is at least 15 ΔE away in chromatic space to use as destination hue direction
+            chroma_dists = np.sqrt(np.sum((peer_labs_arr[:, 1:3] - target_mean_lab[1:3])**2, axis=1))
+            viable_dest_peers = np.where(chroma_dists >= 14.0)[0]
+            
+            if len(viable_dest_peers) > 0:
+                # Pick the closest viable peer to mutate towards (e.g. navy -> olive if olive peer exists)
+                best_peer_idx = viable_dest_peers[np.argmin(chroma_dists[viable_dest_peers])]
+                dest_peer_lab = peer_labs_arr[best_peer_idx]
+                
+                delta_a_dest = dest_peer_lab[1] - target_mean_lab[1]
+                delta_b_dest = dest_peer_lab[2] - target_mean_lab[2]
+                hue_direction_deg = float(np.rad2deg(np.arctan2(delta_b_dest, delta_a_dest)))
+                
+                # Check palette standard deviation
+                palette_std = float(np.std(peer_labs_arr[:, 1:3]) + 1e-4)
+                outlier_zscore = float(np.min(dists_before) / palette_std)
+
+        # Apply true Delta-E shift along hue direction
+        old_a = a_chan[valid_material]
+        old_b = b_chan[valid_material]
+
+        theta_rad = np.deg2rad(hue_direction_deg)
+        a_centered = old_a - 128.0
+        b_centered = old_b - 128.0
+        
+        rot_a = a_centered * np.cos(theta_rad) - b_centered * np.sin(theta_rad) + 128.0
+        rot_b = a_centered * np.sin(theta_rad) + b_centered * np.cos(theta_rad) + 128.0
+
+        delta_a = rot_a - old_a
+        delta_b = rot_b - old_b
+        vector_length = np.hypot(delta_a, delta_b)
+        
+        mean_len = float(np.mean(vector_length))
+        scale = target_delta_e / (mean_len + 1e-5)
+
+        scaled_a = np.clip(old_a + delta_a * scale, 0, 255)
+        scaled_b = np.clip(old_b + delta_b * scale, 0, 255)
+
+        a_chan[valid_material] = scaled_a
+        b_chan[valid_material] = scaled_b
+
+        lab[:, :, 0] = l_chan
+        lab[:, :, 1] = a_chan
+        lab[:, :, 2] = b_chan
+
+        out_bgr = cv2.cvtColor(np.clip(lab, 0, 255).astype(np.uint8), cv2.COLOR_LAB2BGR)
+        result_bgr = image_bgr.copy()
+        result_bgr[valid_material] = out_bgr[valid_material]
+        
+        actual_delta_e = float(np.mean(np.hypot(scaled_a - old_a, scaled_b - old_b)))
+        
+        # Calculate post-edit peer color distance
+        if len(peer_labs) >= 2:
+            new_target_mean_lab = cls.extract_dominant_lab(result_bgr, target_mask)
+            dists_after = np.sqrt(np.sum((peer_labs_arr[:, 1:3] - new_target_mean_lab[1:3])**2, axis=1))
+            peer_color_dist_after = float(np.mean(dists_after))
+
+        metrics = {
+            "peer_color_distance_before": round(peer_color_dist_before, 1),
+            "peer_color_distance_after": round(peer_color_dist_after, 1),
+            "peer_color_outlier_zscore": round(outlier_zscore, 2),
+            "hue_direction_deg": round(hue_direction_deg, 1)
+        }
+        
+        return result_bgr, actual_delta_e, metrics
+
 class TrueDeltaEColorEngine:
     """
     Implements true Euclidean Delta-E scaling in CIELAB color space.

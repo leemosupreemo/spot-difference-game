@@ -1,5 +1,1391 @@
 [
   {
+    "id": "prod_v4_dense_boardgame",
+    "title": "[AI Multi-Op] Strategy Board Game Grid",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_boardgame_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_boardgame_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.9,
+        "y": 54.1,
+        "radius": 5.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_dense_buttons",
+    "title": "[AI Multi-Op] Vintage Tailor Button Assortment",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_buttons_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_buttons_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.5,
+        "y": 20.4,
+        "radius": 4.5,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_dense_candies",
+    "title": "[AI Multi-Op] Artisan Confectionery Sweets Array",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_candies_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_candies_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 93.7,
+        "y": 92.6,
+        "radius": 5.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_dense_gemstones",
+    "title": "[AI Multi-Op] Gemologist Faceted Gemstone Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_gemstones_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_gemstones_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 83.0,
+        "y": 15.8,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_dense_hardware",
+    "title": "[AI Multi-Op] Machinist Hardware Sorting Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_hardware_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_hardware_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 1.6,
+        "y": 51.0,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_dense_marbles",
+    "title": "[AI Multi-Op] Collector Glass Marble Collection",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_marbles_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_marbles_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66.3,
+        "y": 72.1,
+        "radius": 6.0,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_dense_spices",
+    "title": "[AI Multi-Op] Whole Botanical Spice Assortment",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_spices_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_spices_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74.9,
+        "y": 44.7,
+        "radius": 5.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_unique_bakery",
+    "title": "[AI Multi-Op] French Patisserie Display Counter",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_unique_bakery_base.jpg",
+    "variantImage": "/levels/prod_v4_unique_bakery_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.9,
+        "y": 20.0,
+        "radius": 5.6,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_unique_bushcraft",
+    "title": "[AI Multi-Op] Wilderness Bushcraft Survival Gear",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_unique_bushcraft_base.jpg",
+    "variantImage": "/levels/prod_v4_unique_bushcraft_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.0,
+        "y": 47.5,
+        "radius": 4.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_unique_gardening",
+    "title": "[AI Multi-Op] Botanist Potting & Plant Tag Bench",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_unique_gardening_base.jpg",
+    "variantImage": "/levels/prod_v4_unique_gardening_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 86.2,
+        "y": 86.3,
+        "radius": 5.8,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_unique_miniatures",
+    "title": "[AI Multi-Op] Miniature Painter Acrylic Dropper Rack",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_unique_miniatures_base.jpg",
+    "variantImage": "/levels/prod_v4_unique_miniatures_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 15.2,
+        "y": 25.5,
+        "radius": 8.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_unique_palette",
+    "title": "[AI Multi-Op] Painter Studio Oil Tube Palette",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_unique_palette_base.jpg",
+    "variantImage": "/levels/prod_v4_unique_palette_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36.2,
+        "y": 26.1,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_unique_seashells",
+    "title": "[AI Multi-Op] Marine Biologist Seashell Matrix",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_unique_seashells_base.jpg",
+    "variantImage": "/levels/prod_v4_unique_seashells_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 28.9,
+        "y": 3.5,
+        "radius": 5.0,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_unique_sewing",
+    "title": "[AI Multi-Op] Haberdashery Wooden Thread Spools",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_unique_sewing_base.jpg",
+    "variantImage": "/levels/prod_v4_unique_sewing_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.7,
+        "y": 57.0,
+        "radius": 6.3,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_electronics",
+    "title": "[AI Multi-Op] Circuit Lab Capacitor PCB",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_electronics_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_electronics_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 70.4,
+        "y": 26.0,
+        "radius": 5.0,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_mechanic",
+    "title": "[AI Multi-Op] Precision Mechanic Hardware Bench",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_mechanic_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_mechanic_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 78.0,
+        "y": 33.7,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_watchmaker",
+    "title": "[AI Multi-Op] Master Watchmaker Precision Pad",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_watchmaker_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_watchmaker_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59.7,
+        "y": 2.9,
+        "radius": 4.5,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_sewing",
+    "title": "[AI Multi-Op] Tailor Notions Box & Spools",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_sewing_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_sewing_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.7,
+        "y": 57.0,
+        "radius": 6.3,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_artist",
+    "title": "[AI Multi-Op] Fine Art Palette Knife Taboret",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_artist_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_artist_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36.2,
+        "y": 26.1,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_baker",
+    "title": "[AI Multi-Op] Confectioner Dessert Display",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_baker_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_baker_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66.2,
+        "y": 80.5,
+        "radius": 4.5,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_expedition",
+    "title": "[AI Multi-Op] Expedition Camp Equipment Table",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_expedition_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_expedition_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.5,
+        "y": 37.5,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_gardener",
+    "title": "[AI Multi-Op] Greenhouse Potting Seedling Table",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_gardener_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_gardener_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.6,
+        "y": 87.9,
+        "radius": 7.1,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_leathercraft",
+    "title": "[AI Multi-Op] Leather Artisan Waxed Spools",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_leathercraft_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_leathercraft_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 1.6,
+        "y": 94.9,
+        "radius": 6.3,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_miniature",
+    "title": "[AI Multi-Op] Hobby Miniature Workstation",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_miniature_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_miniature_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 86.1,
+        "y": 32.5,
+        "radius": 4.8,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_ai_retrogaming",
+    "title": "[AI Multi-Op] Retro Gaming Desk Cartridges",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_retrogaming_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_retrogaming_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.2,
+        "y": 34.1,
+        "radius": 5.3,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_boardgame",
+    "title": "[AI Multi-Op] Strategy Board Game Grid B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_boardgame_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_boardgame_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.9,
+        "y": 54.1,
+        "radius": 5.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_buttons",
+    "title": "[AI Multi-Op] Vintage Tailor Button Assortment B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_buttons_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_buttons_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.5,
+        "y": 20.4,
+        "radius": 4.5,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_candies",
+    "title": "[AI Multi-Op] Artisan Confectionery Sweets B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_candies_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_candies_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 93.7,
+        "y": 92.6,
+        "radius": 5.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_gemstones",
+    "title": "[AI Multi-Op] Gemologist Gemstone Tray B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_gemstones_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_gemstones_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 40.5,
+        "y": 28.5,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_hardware",
+    "title": "[AI Multi-Op] Machinist Hardware Tray B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_hardware_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_hardware_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 4.1,
+        "y": 69.0,
+        "radius": 7.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_marbles",
+    "title": "[AI Multi-Op] Collector Glass Marble Collection B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_marbles_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_marbles_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66.3,
+        "y": 72.1,
+        "radius": 6.0,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_spices",
+    "title": "[AI Multi-Op] Whole Botanical Spice Assortment B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_spices_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_spices_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74.9,
+        "y": 44.7,
+        "radius": 5.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_succulents",
+    "title": "[AI Multi-Op] Greenhouse Succulents Grid B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_succulents_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_succulents_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.2,
+        "y": 24.8,
+        "radius": 5.9,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_bakery",
+    "title": "[AI Multi-Op] French Patisserie Display B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_bakery_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_bakery_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 66.2,
+        "y": 80.5,
+        "radius": 4.5,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_bushcraft",
+    "title": "[AI Multi-Op] Wilderness Bushcraft Gear B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_bushcraft_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_bushcraft_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.5,
+        "y": 37.5,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_gardening",
+    "title": "[AI Multi-Op] Botanist Potting Bench B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_gardening_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_gardening_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.6,
+        "y": 87.9,
+        "radius": 7.1,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_leather",
+    "title": "[AI Multi-Op] Leathercraft Workbench B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_leather_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_leather_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73.0,
+        "y": 15.4,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_miniatures",
+    "title": "[AI Multi-Op] Miniature Dropper Rack B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_miniatures_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_miniatures_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.7,
+        "y": 49.7,
+        "radius": 6.0,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_palette",
+    "title": "[AI Multi-Op] Painter Oil Palette B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_palette_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_palette_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.8,
+        "y": 14.2,
+        "radius": 7.5,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_seashells",
+    "title": "[AI Multi-Op] Marine Seashell Matrix B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_seashells_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_seashells_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 2.8,
+        "y": 15.2,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_sewing",
+    "title": "[AI Multi-Op] Wooden Thread Spools B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_sewing_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_sewing_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.9,
+        "y": 91.6,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_woodworking",
+    "title": "[AI Multi-Op] Carpenter Tool Layout B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_woodworking_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_woodworking_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 27.5,
+        "y": 72.8,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_ai_electronics",
+    "title": "[AI Multi-Op] Circuit Lab Capacitor PCB B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_ai_electronics_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_ai_electronics_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.7,
+        "y": 18.4,
+        "radius": 5.8,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_ai_mechanic",
+    "title": "[AI Multi-Op] Precision Mechanic Bench B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_ai_mechanic_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_ai_mechanic_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 97.7,
+        "y": 47.7,
+        "radius": 4.8,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_ai_watchmaker",
+    "title": "[AI Multi-Op] Watchmaker Precision Pad B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_ai_watchmaker_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_ai_watchmaker_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 97.8,
+        "y": 62.5,
+        "radius": 8.4,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_ai_sewing",
+    "title": "[AI Multi-Op] Tailor Notions Box B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_ai_sewing_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_ai_sewing_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 17.5,
+        "y": 71.3,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_ai_artist",
+    "title": "[AI Multi-Op] Palette Knife Taboret B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_ai_artist_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_ai_artist_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 27.0,
+        "y": 61.4,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_dense_succulents",
+    "title": "[AI Multi-Op] Greenhouse Potted Succulents Grid",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_succulents_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_succulents_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.2,
+        "y": 24.8,
+        "radius": 5.9,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_dense_watch_parts",
+    "title": "[AI Multi-Op] Horologist Escapement Parts Tray",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_watch_parts_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_watch_parts_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 11.8,
+        "y": 51.4,
+        "radius": 6.0,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_unique_retrogaming",
+    "title": "[AI Multi-Op] Vintage Retro Cartridge Flat Lay",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_unique_retrogaming_base.jpg",
+    "variantImage": "/levels/prod_v4_unique_retrogaming_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.1,
+        "y": 33.9,
+        "radius": 5.2,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_enamel_pins",
+    "title": "[AI Multi-Op] Collector Enamel Pin Showcase B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_enamel_pins_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_enamel_pins_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 8.5,
+        "y": 71.5,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_dense_watch_parts",
+    "title": "[AI Multi-Op] Horologist Escapement Parts Tray B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_dense_watch_parts_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_dense_watch_parts_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 93.8,
+        "y": 77.7,
+        "radius": 5.7,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_pencils",
+    "title": "[AI Multi-Op] Artist Prismacolor Pencil Array B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_pencils_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_pencils_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 2.0,
+        "y": 5.5,
+        "radius": 6.7,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_unique_retrogaming",
+    "title": "[AI Multi-Op] Retro Cartridge Flat Lay B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_retrogaming_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_retrogaming_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.1,
+        "y": 33.9,
+        "radius": 5.2,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "prod_v4_var2_ai_woodworking",
+    "title": "[AI Multi-Op] Joinery Bench Carpenter Pencils B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_ai_woodworking_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_ai_woodworking_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 27.5,
+        "y": 72.8,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "pipe_v3_sewing_remove_001",
+    "title": "[AI Remove - Medium] Tailor Notions Box Missing Spool",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/pipe_v3_sewing_remove_001_base.jpg",
+    "variantImage": "/levels/pipe_v3_sewing_remove_001_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.6,
+        "y": 47.6,
+        "radius": 5.0,
+        "description": "Single wooden thread spool missing from compartment",
+        "hint": "Inspect the wooden thread spools in the compartmentalized tray",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "pipe_v3_watchmaker_recolor_002",
+    "title": "[AI Recolor - Medium] Horologist Tray Screwdriver Collar",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/pipe_v3_watchmaker_recolor_002_base.jpg",
+    "variantImage": "/levels/pipe_v3_watchmaker_recolor_002_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 26.2,
+        "y": 61.5,
+        "radius": 6.0,
+        "description": "Single precision screwdriver collar tone shifted in CIELAB",
+        "hint": "Examine the color-coded precision screwdrivers",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "pipe_v3_electronics_add_003",
+    "title": "[AI Add - Medium] Electronics Antistatic Bench Extra Capacitor",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/pipe_v3_electronics_add_003_base.jpg",
+    "variantImage": "/levels/pipe_v3_electronics_add_003_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.1,
+        "y": 38.3,
+        "radius": 4.5,
+        "description": "Single additional electrolytic capacitor in component row",
+        "hint": "Scan the electrolytic capacitors in the component tray",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "pipe_v3_gardener_remove_005",
+    "title": "[AI Remove - Medium] Greenhouse Potting Bench Missing Plant Tag",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/pipe_v3_gardener_remove_005_base.jpg",
+    "variantImage": "/levels/pipe_v3_gardener_remove_005_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 86.2,
+        "y": 86.3,
+        "radius": 5.8,
+        "description": "Single colorful garden plant marker tag missing",
+        "hint": "Check the plant marker tags on the potting bench",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "pipe_v3_artist_recolor_006",
+    "title": "[AI Recolor - Medium] Fine Art Studio Oil Paint Tube Cap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/pipe_v3_artist_recolor_006_base.jpg",
+    "variantImage": "/levels/pipe_v3_artist_recolor_006_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36.2,
+        "y": 26.1,
+        "radius": 7.5,
+        "description": "Single artist oil paint tube cap tone shifted in CIELAB",
+        "hint": "Inspect the row of oil paint tubes on the palette",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "pipe_v3_retro_reorder_007",
+    "title": "[AI Reorder - Medium] Retro Gaming Desk Shifted Memory Card",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/pipe_v3_retro_reorder_007_base.jpg",
+    "variantImage": "/levels/pipe_v3_retro_reorder_007_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.2,
+        "y": 34.1,
+        "radius": 5.3,
+        "description": "Single memory card shifted on the desk surface",
+        "hint": "Look closely at the cartridges and memory cards",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "pipe_v3_expedition_remove_008",
+    "title": "[AI Remove - Medium] Expedition Prep Table Missing Carabiner",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/pipe_v3_expedition_remove_008_base.jpg",
+    "variantImage": "/levels/pipe_v3_expedition_remove_008_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 98.5,
+        "y": 81.8,
+        "radius": 5.4,
+        "description": "Single locking carabiner missing from the gear array",
+        "hint": "Check the carabiners and outdoor gear on the table",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "pipe_v3_leathercraft_recolor_009",
+    "title": "[AI Recolor - Medium] Leather Artisan Bench Waxed Thread Spool",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/pipe_v3_leathercraft_recolor_009_base.jpg",
+    "variantImage": "/levels/pipe_v3_leathercraft_recolor_009_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 1.6,
+        "y": 94.9,
+        "radius": 6.3,
+        "description": "Single waxed linen thread spool shifted in CIELAB",
+        "hint": "Inspect the collection of colored waxed thread spools",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "goldilocks_pipe_v2_sewing_remove_001",
     "title": "[AI Remove - Medium] Tailor Notions Box Missing Thread Spool",
     "category": "Photography",

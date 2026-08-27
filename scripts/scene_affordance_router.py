@@ -1,12 +1,13 @@
 """
-SCENE AFFORDANCE ROUTER & MULTI-OPERATION BASE IMAGE QA
+SCENE AFFORDANCE ROUTER & MULTI-OPERATION BASE IMAGE QA (RECOLOR / REMOVE / ADD / REORDER)
 ================================================================================
-Evaluates a base canvas before editing and scores:
+Evaluates a base canvas before editing and scores all four operations:
 1. Universal Puzzle Suitability (edge density, DOF uniformity, hero suppression).
 2. Recolor Affordance Score (0.0 - 1.0)
 3. Remove Affordance Score (0.0 - 1.0)
 4. Add Affordance Score (0.0 - 1.0)
-5. Discovers Visual Peer Groups & Recommended Operation Route.
+5. Reorder Affordance Score (0.0 - 1.0)
+6. Discovers Visual Peer Groups & Recommended Operation Route.
 ================================================================================
 """
 
@@ -17,7 +18,7 @@ from ultralytics import FastSAM
 class SceneAffordanceRouter:
     """
     Evaluates base canvas image quality and routes to the optimal difference operation:
-    'recolor', 'remove', or 'add'.
+    recolor, remove, add, or reorder.
     """
 
     @classmethod
@@ -79,6 +80,7 @@ class SceneAffordanceRouter:
 
         recolor_candidates = 0
         remove_candidates = 0
+        reorder_candidates = 0
         largest_foreground_pct = 0.0
 
         for idx, m in enumerate(raw_masks):
@@ -107,16 +109,20 @@ class SceneAffordanceRouter:
                     if r_frac >= 0.35:
                         recolor_candidates += 1
                         
-                    # Check background recoverability for removal (local halo texture variance)
+                    # Check background recoverability for removal and reorder
                     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
                     dilated = cv2.dilate(mask_resized, kernel, iterations=1)
                     halo_mask = (dilated > 0) & (mask_resized == 0)
+                    halo_std = 999.0
                     if np.sum(halo_mask) > 0:
                         halo_gray = gray[halo_mask]
                         halo_std = np.std(halo_gray)
-                        # Stationary or smooth background texture makes removal high quality
                         if halo_std < 42.0:
                             remove_candidates += 1
+
+                    # Reorder candidate check: loose object with recoverable background and reasonable size (0.15 - 1.2%)
+                    if 0.15 <= area_pct <= 1.2 and halo_std < 42.0:
+                        reorder_candidates += 1
                             
                     candidate_masks.append({
                         "idx": idx,
@@ -124,7 +130,8 @@ class SceneAffordanceRouter:
                         "area_pct": area_pct,
                         "bbox": [int(np.min(xs)), int(np.min(ys)), int(np.max(xs)), int(np.max(ys))],
                         "centroid": (float(np.mean(xs)), float(np.mean(ys))),
-                        "r_frac": r_frac
+                        "r_frac": r_frac,
+                        "halo_std": float(halo_std)
                     })
                     
                     # Extract shape descriptor for clustering
@@ -172,18 +179,22 @@ class SceneAffordanceRouter:
         remove_score = min(1.0, (remove_candidates / 10.0) * 0.5 + (remove_peer_support / 2.0) * 0.5)
         
         # Add Affordance: Repeated peer families + empty space around them
-        # (Search for open slots near peer families)
         add_peer_support = sum(1 for g in peer_groups if g["size"] >= 2)
         add_score = min(1.0, (add_peer_support / 3.0) * 0.6 + (edge_density / 0.20) * 0.4)
+
+        # Reorder Affordance: Loose movable objects with recoverable background + peer groups + nearby space
+        reorder_peer_support = sum(1 for g in peer_groups if g["size"] >= 2)
+        reorder_score = min(1.0, (reorder_candidates / 8.0) * 0.5 + (reorder_peer_support / 3.0) * 0.3 + (edge_density / 0.18) * 0.2)
 
         # 7. ROUTER DECISION
         scores = {
             "recolor": round(recolor_score, 2),
             "remove": round(remove_score, 2),
-            "add": round(add_score, 2)
+            "add": round(add_score, 2),
+            "reorder": round(reorder_score, 2)
         }
         
-        if target_mix_preference and target_mix_preference in scores and scores[target_mix_preference] >= 0.45:
+        if target_mix_preference and target_mix_preference in scores and scores[target_mix_preference] >= 0.40:
             recommended_operation = target_mix_preference
         else:
             recommended_operation = max(scores, key=scores.get)
@@ -196,6 +207,7 @@ class SceneAffordanceRouter:
             "peer_group_count": len(peer_groups),
             "peer_groups": peer_groups,
             "candidate_masks": candidate_masks,
+            "raw_masks": raw_masks,
             "affordances": scores,
             "recommended_operation": recommended_operation,
             "metrics": {
@@ -203,19 +215,7 @@ class SceneAffordanceRouter:
                 "edge_density": round(edge_density, 3),
                 "largest_foreground_pct": round(largest_foreground_pct, 1),
                 "recolor_candidates": recolor_candidates,
-                "remove_candidates": remove_candidates
+                "remove_candidates": remove_candidates,
+                "reorder_candidates": reorder_candidates
             }
         }
-
-if __name__ == "__main__":
-    import glob
-    print("Testing SceneAffordanceRouter across all AI base canvases...\n")
-    canvases = sorted(glob.glob("public/levels/ai_*_base.jpg"))
-    for c in canvases:
-        res = SceneAffordanceRouter.evaluate_and_route_canvas(c)
-        if res["approved"]:
-            print(f"✅ {c.split('/')[-1]}: Recommended -> [{res['recommended_operation'].upper()}]")
-            print(f"   Affordances: Recolor={res['affordances']['recolor']}, Remove={res['affordances']['remove']}, Add={res['affordances']['add']}")
-            print(f"   Peers: {res['peer_group_count']} groups | Recolor Cands: {res['metrics']['recolor_candidates']}, Remove Cands: {res['metrics']['remove_candidates']}\n")
-        else:
-            print(f"❌ {c.split('/')[-1]}: {res['reason']}\n")

@@ -1,0 +1,2306 @@
+{
+  "total_attempted": 60,
+  "total_accepted": 47,
+  "operation_counts": {
+    "recolor": 13,
+    "remove": 12,
+    "add": 10,
+    "reorder": 12
+  },
+  "logs": [
+    {
+      "scene_id": "prod_v4_dense_boardgame",
+      "image_path": "public/levels/ai_dense_boardgame_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.65,
+        "reorder": 1.0
+      },
+      "candidate_count": 182,
+      "peer_group_count": 1,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 48.9,
+        "y": 54.1,
+        "radius": 5.6,
+        "bbox": [
+          583,
+          422,
+          654,
+          496
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            41,
+            40
+          ],
+          "display_short_side": 40,
+          "display_thickness": 26.6,
+          "display_changed_pixels": 1082,
+          "source_area_pct": 0.36,
+          "direct_look_mean_delta_e": 23.4,
+          "direct_look_peak_delta_e": 31.3,
+          "direct_look_changed_fraction_pct": 7.68,
+          "peer_color_distance_before": 29.5,
+          "peer_color_distance_after": 23.6,
+          "peer_color_outlier_zscore": 0.41,
+          "hue_direction_deg": -41.8
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 41x40px (short side 40px, thickness 26.6px), Direct \u0394E=23.4"
+    },
+    {
+      "scene_id": "prod_v4_dense_buttons",
+      "image_path": "public/levels/ai_dense_buttons_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.63,
+        "reorder": 0.53
+      },
+      "candidate_count": 300,
+      "peer_group_count": 1,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 71.5,
+        "y": 20.4,
+        "radius": 4.5,
+        "bbox": [
+          881,
+          151,
+          928,
+          195
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            27,
+            24
+          ],
+          "display_short_side": 24,
+          "display_thickness": 22.9,
+          "display_changed_pixels": 538,
+          "source_area_pct": 0.173,
+          "direct_look_mean_delta_e": 106.5,
+          "direct_look_peak_delta_e": 194.0,
+          "direct_look_changed_fraction_pct": 9.52
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 27x24px (short side 24px, thickness 22.9px), Direct \u0394E=106.5"
+    },
+    {
+      "scene_id": "prod_v4_dense_candies",
+      "image_path": "public/levels/ai_dense_candies_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.44,
+        "reorder": 1.0
+      },
+      "candidate_count": 300,
+      "peer_group_count": 1,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 93.7,
+        "y": 92.6,
+        "radius": 5.0,
+        "union_bbox": [
+          1142,
+          755,
+          1229,
+          818
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            49,
+            34
+          ],
+          "display_short_side": 34,
+          "display_thickness": 23.2,
+          "display_changed_pixels": 1253,
+          "source_area_pct": 0.403,
+          "direct_look_mean_delta_e": 104.2,
+          "direct_look_peak_delta_e": 168.5,
+          "direct_look_changed_fraction_pct": 10.71
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 49x34px (short side 34px, thickness 23.2px), Direct \u0394E=104.2"
+    },
+    {
+      "scene_id": "prod_v4_dense_enamel_pins",
+      "image_path": "public/levels/ai_dense_enamel_pins_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add: No plausible empty insertion slot found near repeated peer families with natural peer spacing.",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 206,
+      "peer_group_count": 6,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_dense_gemstones",
+      "image_path": "public/levels/ai_dense_gemstones_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.85,
+        "reorder": 1.0
+      },
+      "candidate_count": 151,
+      "peer_group_count": 3,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 83.0,
+        "y": 15.8,
+        "radius": 4.5,
+        "bbox": [
+          1020,
+          108,
+          1083,
+          162
+        ],
+        "donor_bbox": [
+          1012,
+          191,
+          1074,
+          244
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            36,
+            29
+          ],
+          "display_short_side": 29,
+          "display_thickness": 24.6,
+          "display_changed_pixels": 761,
+          "source_area_pct": 0.238,
+          "direct_look_mean_delta_e": 89.1,
+          "direct_look_peak_delta_e": 181.4,
+          "direct_look_changed_fraction_pct": 7.29
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 36x29px (short side 29px, thickness 24.6px), Direct \u0394E=89.1"
+    },
+    {
+      "scene_id": "prod_v4_dense_hardware",
+      "image_path": "public/levels/ai_dense_hardware_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 252,
+      "peer_group_count": 13,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 1.6,
+        "y": 51.0,
+        "radius": 7.5,
+        "bbox": [
+          1,
+          363,
+          39,
+          502
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            22,
+            73
+          ],
+          "display_short_side": 22,
+          "display_thickness": 30.9,
+          "display_changed_pixels": 1464,
+          "source_area_pct": 0.467,
+          "direct_look_mean_delta_e": 25.0,
+          "direct_look_peak_delta_e": 47.5,
+          "direct_look_changed_fraction_pct": 5.11,
+          "peer_color_distance_before": 15.4,
+          "peer_color_distance_after": 20.8,
+          "peer_color_outlier_zscore": 0.23,
+          "hue_direction_deg": 84.9
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 22x73px (short side 22px, thickness 30.9px), Direct \u0394E=25.0"
+    },
+    {
+      "scene_id": "prod_v4_dense_marbles",
+      "image_path": "public/levels/ai_dense_marbles_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.85,
+        "reorder": 1.0
+      },
+      "candidate_count": 290,
+      "peer_group_count": 2,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 66.3,
+        "y": 72.1,
+        "radius": 6.0,
+        "bbox": [
+          801,
+          573,
+          877,
+          651
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            43,
+            41
+          ],
+          "display_short_side": 41,
+          "display_thickness": 16.1,
+          "display_changed_pixels": 1291,
+          "source_area_pct": 0.42,
+          "direct_look_mean_delta_e": 53.3,
+          "direct_look_peak_delta_e": 163.1,
+          "direct_look_changed_fraction_pct": 8.17
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 43x41px (short side 41px, thickness 16.1px), Direct \u0394E=53.3"
+    },
+    {
+      "scene_id": "prod_v4_dense_spices",
+      "image_path": "public/levels/ai_dense_spices_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 183,
+      "peer_group_count": 5,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 74.9,
+        "y": 44.7,
+        "radius": 5.0,
+        "union_bbox": [
+          917,
+          353,
+          980,
+          405
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            36,
+            28
+          ],
+          "display_short_side": 28,
+          "display_thickness": 5.7,
+          "display_changed_pixels": 572,
+          "source_area_pct": 0.198,
+          "direct_look_mean_delta_e": 41.0,
+          "direct_look_peak_delta_e": 96.1,
+          "direct_look_changed_fraction_pct": 5.81
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 36x28px (short side 28px, thickness 5.7px), Direct \u0394E=41.0"
+    },
+    {
+      "scene_id": "prod_v4_dense_succulents",
+      "image_path": "public/levels/ai_dense_succulents_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add: No plausible empty insertion slot found near repeated peer families with natural peer spacing.",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 0.74
+      },
+      "candidate_count": 263,
+      "peer_group_count": 4,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_dense_watch_parts",
+      "image_path": "public/levels/ai_dense_watch_parts_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add: No plausible empty insertion slot found near repeated peer families with natural peer spacing.",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 214,
+      "peer_group_count": 7,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_unique_bakery",
+      "image_path": "public/levels/ai_unique_bakery_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.94,
+        "reorder": 1.0
+      },
+      "candidate_count": 71,
+      "peer_group_count": 3,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 53.9,
+        "y": 20.0,
+        "radius": 5.6,
+        "bbox": [
+          693,
+          114,
+          776,
+          179
+        ],
+        "donor_bbox": [
+          839,
+          194,
+          921,
+          258
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            43,
+            38
+          ],
+          "display_short_side": 38,
+          "display_thickness": 18.3,
+          "display_changed_pixels": 731,
+          "source_area_pct": 0.233,
+          "direct_look_mean_delta_e": 106.9,
+          "direct_look_peak_delta_e": 167.9,
+          "direct_look_changed_fraction_pct": 4.1
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 43x38px (short side 38px, thickness 18.3px), Direct \u0394E=106.9"
+    },
+    {
+      "scene_id": "prod_v4_unique_bushcraft",
+      "image_path": "public/levels/ai_unique_bushcraft_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 0.91
+      },
+      "candidate_count": 71,
+      "peer_group_count": 3,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 51.0,
+        "y": 47.5,
+        "radius": 4.8,
+        "bbox": [
+          675,
+          337,
+          729,
+          392
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            28,
+            32
+          ],
+          "display_short_side": 28,
+          "display_thickness": 25.4,
+          "display_changed_pixels": 789,
+          "source_area_pct": 0.251,
+          "direct_look_mean_delta_e": 24.1,
+          "direct_look_peak_delta_e": 34.6,
+          "direct_look_changed_fraction_pct": 9.83,
+          "peer_color_distance_before": 14.4,
+          "peer_color_distance_after": 21.2,
+          "peer_color_outlier_zscore": 0.08,
+          "hue_direction_deg": -105.0
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 28x32px (short side 28px, thickness 25.4px), Direct \u0394E=24.1"
+    },
+    {
+      "scene_id": "prod_v4_unique_gardening",
+      "image_path": "public/levels/ai_unique_gardening_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.92,
+        "reorder": 1.0
+      },
+      "candidate_count": 65,
+      "peer_group_count": 2,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 86.2,
+        "y": 86.3,
+        "radius": 5.8,
+        "bbox": [
+          1160,
+          629,
+          1213,
+          696
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            28,
+            39
+          ],
+          "display_short_side": 28,
+          "display_thickness": 16.1,
+          "display_changed_pixels": 871,
+          "source_area_pct": 0.281,
+          "direct_look_mean_delta_e": 59.2,
+          "direct_look_peak_delta_e": 129.8,
+          "direct_look_changed_fraction_pct": 7.36
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 28x39px (short side 28px, thickness 16.1px), Direct \u0394E=59.2"
+    },
+    {
+      "scene_id": "prod_v4_unique_leather",
+      "image_path": "public/levels/ai_unique_leather_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Reorder QA Reject (TargetTooSmall): TargetTooSmall: Short side (13px) below verification floor (18px).",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 112,
+      "peer_group_count": 4,
+      "operation_selected": "reorder"
+    },
+    {
+      "scene_id": "prod_v4_unique_miniatures",
+      "image_path": "public/levels/ai_unique_miniatures_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 161,
+      "peer_group_count": 4,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 15.2,
+        "y": 25.5,
+        "radius": 8.0,
+        "union_bbox": [
+          169,
+          137,
+          249,
+          240
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            42,
+            60
+          ],
+          "display_short_side": 42,
+          "display_thickness": 24.8,
+          "display_changed_pixels": 1614,
+          "source_area_pct": 0.519,
+          "direct_look_mean_delta_e": 91.4,
+          "direct_look_peak_delta_e": 139.9,
+          "direct_look_changed_fraction_pct": 5.76
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 42x60px (short side 42px, thickness 24.8px), Direct \u0394E=91.4"
+    },
+    {
+      "scene_id": "prod_v4_unique_palette",
+      "image_path": "public/levels/ai_unique_palette_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 150,
+      "peer_group_count": 12,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 36.2,
+        "y": 26.1,
+        "radius": 7.5,
+        "bbox": [
+          460,
+          148,
+          535,
+          253
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            39,
+            61
+          ],
+          "display_short_side": 39,
+          "display_thickness": 29.8,
+          "display_changed_pixels": 1597,
+          "source_area_pct": 0.515,
+          "direct_look_mean_delta_e": 24.3,
+          "direct_look_peak_delta_e": 38.1,
+          "direct_look_changed_fraction_pct": 5.46,
+          "peer_color_distance_before": 30.7,
+          "peer_color_distance_after": 19.0,
+          "peer_color_outlier_zscore": 0.42,
+          "hue_direction_deg": 170.3
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 39x61px (short side 39px, thickness 29.8px), Direct \u0394E=24.3"
+    },
+    {
+      "scene_id": "prod_v4_unique_pencils",
+      "image_path": "public/levels/ai_unique_pencils_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Remove QA Reject (TargetTooSmall): TargetTooSmall: Short side (12px) below verification floor (18px).",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.64,
+        "reorder": 1.0
+      },
+      "candidate_count": 96,
+      "peer_group_count": 1,
+      "operation_selected": "remove"
+    },
+    {
+      "scene_id": "prod_v4_unique_retrogaming",
+      "image_path": "public/levels/ai_unique_retrogaming_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add QA Reject (TooSubtle): TooSubtle: Structural change occupies too little of crop (3.6% < 4.0%).",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 178,
+      "peer_group_count": 7,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_unique_seashells",
+      "image_path": "public/levels/ai_unique_seashells_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 285,
+      "peer_group_count": 8,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 28.9,
+        "y": 3.5,
+        "radius": 5.0,
+        "bbox": [
+          338,
+          0,
+          393,
+          63
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            31,
+            33
+          ],
+          "display_short_side": 31,
+          "display_thickness": 27.4,
+          "display_changed_pixels": 803,
+          "source_area_pct": 0.261,
+          "direct_look_mean_delta_e": 105.6,
+          "direct_look_peak_delta_e": 167.0,
+          "direct_look_changed_fraction_pct": 12.07
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 31x33px (short side 31px, thickness 27.4px), Direct \u0394E=105.6"
+    },
+    {
+      "scene_id": "prod_v4_unique_sewing",
+      "image_path": "public/levels/ai_unique_sewing_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 130,
+      "peer_group_count": 6,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 54.7,
+        "y": 57.0,
+        "radius": 6.3,
+        "union_bbox": [
+          714,
+          393,
+          792,
+          471
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            40,
+            45
+          ],
+          "display_short_side": 40,
+          "display_thickness": 15.6,
+          "display_changed_pixels": 1097,
+          "source_area_pct": 0.359,
+          "direct_look_mean_delta_e": 46.9,
+          "direct_look_peak_delta_e": 129.6,
+          "direct_look_changed_fraction_pct": 6.54
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 40x45px (short side 40px, thickness 15.6px), Direct \u0394E=46.9"
+    },
+    {
+      "scene_id": "prod_v4_unique_woodworking",
+      "image_path": "public/levels/ai_unique_woodworking_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add QA Reject (TooSubtle): TooSubtle: Structural change occupies too little of crop (3.2% < 4.0%).",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 115,
+      "peer_group_count": 4,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_ai_electronics",
+      "image_path": "public/levels/ai_electronics_pcb_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 205,
+      "peer_group_count": 8,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 70.4,
+        "y": 26.0,
+        "radius": 5.0,
+        "bbox": [
+          944,
+          171,
+          994,
+          228
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            26,
+            34
+          ],
+          "display_short_side": 26,
+          "display_thickness": 16.4,
+          "display_changed_pixels": 477,
+          "source_area_pct": 0.155,
+          "direct_look_mean_delta_e": 23.7,
+          "direct_look_peak_delta_e": 34.2,
+          "direct_look_changed_fraction_pct": 5.71,
+          "peer_color_distance_before": 26.5,
+          "peer_color_distance_after": 25.0,
+          "peer_color_outlier_zscore": 0.28,
+          "hue_direction_deg": -48.4
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 26x34px (short side 26px, thickness 16.4px), Direct \u0394E=23.7"
+    },
+    {
+      "scene_id": "prod_v4_ai_mechanic",
+      "image_path": "public/levels/ai_mechanic_workbench_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 248,
+      "peer_group_count": 15,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 78.0,
+        "y": 33.7,
+        "radius": 4.5,
+        "bbox": [
+          1050,
+          237,
+          1095,
+          278
+        ],
+        "donor_bbox": [
+          983,
+          211,
+          1027,
+          251
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            24,
+            25
+          ],
+          "display_short_side": 24,
+          "display_thickness": 22.9,
+          "display_changed_pixels": 585,
+          "source_area_pct": 0.186,
+          "direct_look_mean_delta_e": 75.1,
+          "direct_look_peak_delta_e": 175.6,
+          "direct_look_changed_fraction_pct": 11.03
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 24x25px (short side 24px, thickness 22.9px), Direct \u0394E=75.1"
+    },
+    {
+      "scene_id": "prod_v4_ai_watchmaker",
+      "image_path": "public/levels/ai_watchmaker_parts_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 191,
+      "peer_group_count": 6,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 59.7,
+        "y": 2.9,
+        "radius": 4.5,
+        "bbox": [
+          796,
+          0,
+          847,
+          46
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            27,
+            27
+          ],
+          "display_short_side": 27,
+          "display_thickness": 8.5,
+          "display_changed_pixels": 568,
+          "source_area_pct": 0.188,
+          "direct_look_mean_delta_e": 56.1,
+          "direct_look_peak_delta_e": 126.6,
+          "direct_look_changed_fraction_pct": 12.98
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 27x27px (short side 27px, thickness 8.5px), Direct \u0394E=56.1"
+    },
+    {
+      "scene_id": "prod_v4_ai_sewing",
+      "image_path": "public/levels/ai_sewing_notions_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 130,
+      "peer_group_count": 6,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 54.7,
+        "y": 57.0,
+        "radius": 6.3,
+        "union_bbox": [
+          714,
+          393,
+          792,
+          471
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            40,
+            45
+          ],
+          "display_short_side": 40,
+          "display_thickness": 15.6,
+          "display_changed_pixels": 1097,
+          "source_area_pct": 0.359,
+          "direct_look_mean_delta_e": 46.9,
+          "direct_look_peak_delta_e": 129.6,
+          "direct_look_changed_fraction_pct": 6.54
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 40x45px (short side 40px, thickness 15.6px), Direct \u0394E=46.9"
+    },
+    {
+      "scene_id": "prod_v4_ai_artist",
+      "image_path": "public/levels/ai_artist_palette_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 150,
+      "peer_group_count": 12,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 36.2,
+        "y": 26.1,
+        "radius": 7.5,
+        "bbox": [
+          460,
+          148,
+          535,
+          253
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            39,
+            61
+          ],
+          "display_short_side": 39,
+          "display_thickness": 29.8,
+          "display_changed_pixels": 1597,
+          "source_area_pct": 0.515,
+          "direct_look_mean_delta_e": 24.3,
+          "direct_look_peak_delta_e": 38.1,
+          "direct_look_changed_fraction_pct": 5.46,
+          "peer_color_distance_before": 30.7,
+          "peer_color_distance_after": 19.0,
+          "peer_color_outlier_zscore": 0.42,
+          "hue_direction_deg": 170.3
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 39x61px (short side 39px, thickness 29.8px), Direct \u0394E=24.3"
+    },
+    {
+      "scene_id": "prod_v4_ai_baker",
+      "image_path": "public/levels/ai_baker_pastry_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.94,
+        "reorder": 1.0
+      },
+      "candidate_count": 71,
+      "peer_group_count": 3,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 66.2,
+        "y": 80.5,
+        "radius": 4.5,
+        "bbox": [
+          890,
+          596,
+          934,
+          641
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            24,
+            27
+          ],
+          "display_short_side": 24,
+          "display_thickness": 17.2,
+          "display_changed_pixels": 497,
+          "source_area_pct": 0.159,
+          "direct_look_mean_delta_e": 52.0,
+          "direct_look_peak_delta_e": 93.0,
+          "direct_look_changed_fraction_pct": 9.9
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 24x27px (short side 24px, thickness 17.2px), Direct \u0394E=52.0"
+    },
+    {
+      "scene_id": "prod_v4_ai_expedition",
+      "image_path": "public/levels/ai_expedition_bushcraft_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 0.91
+      },
+      "candidate_count": 71,
+      "peer_group_count": 3,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 91.5,
+        "y": 37.5,
+        "radius": 4.5,
+        "bbox": [
+          1235,
+          262,
+          1288,
+          305
+        ],
+        "donor_bbox": [
+          1236,
+          312,
+          1288,
+          354
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            28,
+            25
+          ],
+          "display_short_side": 25,
+          "display_thickness": 15.6,
+          "display_changed_pixels": 504,
+          "source_area_pct": 0.165,
+          "direct_look_mean_delta_e": 48.7,
+          "direct_look_peak_delta_e": 99.0,
+          "direct_look_changed_fraction_pct": 6.81
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 28x25px (short side 25px, thickness 15.6px), Direct \u0394E=48.7"
+    },
+    {
+      "scene_id": "prod_v4_ai_gardener",
+      "image_path": "public/levels/ai_gardener_potting_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.92,
+        "reorder": 1.0
+      },
+      "candidate_count": 65,
+      "peer_group_count": 2,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 91.6,
+        "y": 87.9,
+        "radius": 7.1,
+        "union_bbox": [
+          1224,
+          630,
+          1299,
+          717
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            39,
+            51
+          ],
+          "display_short_side": 39,
+          "display_thickness": 13.7,
+          "display_changed_pixels": 1376,
+          "source_area_pct": 0.45,
+          "direct_look_mean_delta_e": 62.9,
+          "direct_look_peak_delta_e": 133.9,
+          "direct_look_changed_fraction_pct": 8.67
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 39x51px (short side 39px, thickness 13.7px), Direct \u0394E=62.9"
+    },
+    {
+      "scene_id": "prod_v4_ai_leathercraft",
+      "image_path": "public/levels/ai_leathercraft_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 112,
+      "peer_group_count": 4,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 1.6,
+        "y": 94.9,
+        "radius": 6.3,
+        "bbox": [
+          1,
+          690,
+          44,
+          767
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            23,
+            45
+          ],
+          "display_short_side": 23,
+          "display_thickness": 15.3,
+          "display_changed_pixels": 584,
+          "source_area_pct": 0.19,
+          "direct_look_mean_delta_e": 24.6,
+          "direct_look_peak_delta_e": 28.7,
+          "direct_look_changed_fraction_pct": 9.35,
+          "peer_color_distance_before": 19.1,
+          "peer_color_distance_after": 14.6,
+          "peer_color_outlier_zscore": 0.36,
+          "hue_direction_deg": -155.2
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 23x45px (short side 23px, thickness 15.3px), Direct \u0394E=24.6"
+    },
+    {
+      "scene_id": "prod_v4_ai_miniature",
+      "image_path": "public/levels/ai_miniature_painter_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 161,
+      "peer_group_count": 4,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 86.1,
+        "y": 32.5,
+        "radius": 4.8,
+        "bbox": [
+          1158,
+          225,
+          1218,
+          279
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            31,
+            32
+          ],
+          "display_short_side": 31,
+          "display_thickness": 21.8,
+          "display_changed_pixels": 598,
+          "source_area_pct": 0.191,
+          "direct_look_mean_delta_e": 23.9,
+          "direct_look_peak_delta_e": 40.1,
+          "direct_look_changed_fraction_pct": 5.73
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 31x32px (short side 31px, thickness 21.8px), Direct \u0394E=23.9"
+    },
+    {
+      "scene_id": "prod_v4_ai_retrogaming",
+      "image_path": "public/levels/ai_retro_gaming_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 178,
+      "peer_group_count": 7,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 56.2,
+        "y": 34.1,
+        "radius": 5.3,
+        "union_bbox": [
+          744,
+          229,
+          803,
+          289
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            31,
+            35
+          ],
+          "display_short_side": 31,
+          "display_thickness": 5.7,
+          "display_changed_pixels": 537,
+          "source_area_pct": 0.185,
+          "direct_look_mean_delta_e": 51.4,
+          "direct_look_peak_delta_e": 132.0,
+          "direct_look_changed_fraction_pct": 6.32
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 31x35px (short side 31px, thickness 5.7px), Direct \u0394E=51.4"
+    },
+    {
+      "scene_id": "prod_v4_ai_woodworking",
+      "image_path": "public/levels/ai_woodworking_bench_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add QA Reject (TooSubtle): TooSubtle: Structural change occupies too little of crop (3.2% < 4.0%).",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 115,
+      "peer_group_count": 4,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_boardgame",
+      "image_path": "public/levels/ai_dense_boardgame_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.65,
+        "reorder": 1.0
+      },
+      "candidate_count": 182,
+      "peer_group_count": 1,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 48.9,
+        "y": 54.1,
+        "radius": 5.6,
+        "bbox": [
+          583,
+          422,
+          654,
+          496
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            41,
+            40
+          ],
+          "display_short_side": 40,
+          "display_thickness": 26.6,
+          "display_changed_pixels": 1082,
+          "source_area_pct": 0.36,
+          "direct_look_mean_delta_e": 23.4,
+          "direct_look_peak_delta_e": 31.3,
+          "direct_look_changed_fraction_pct": 7.68,
+          "peer_color_distance_before": 29.5,
+          "peer_color_distance_after": 23.6,
+          "peer_color_outlier_zscore": 0.41,
+          "hue_direction_deg": -41.8
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 41x40px (short side 40px, thickness 26.6px), Direct \u0394E=23.4"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_buttons",
+      "image_path": "public/levels/ai_dense_buttons_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.63,
+        "reorder": 0.53
+      },
+      "candidate_count": 300,
+      "peer_group_count": 1,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 71.5,
+        "y": 20.4,
+        "radius": 4.5,
+        "bbox": [
+          881,
+          151,
+          928,
+          195
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            27,
+            24
+          ],
+          "display_short_side": 24,
+          "display_thickness": 22.9,
+          "display_changed_pixels": 538,
+          "source_area_pct": 0.173,
+          "direct_look_mean_delta_e": 106.5,
+          "direct_look_peak_delta_e": 194.0,
+          "direct_look_changed_fraction_pct": 9.52
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 27x24px (short side 24px, thickness 22.9px), Direct \u0394E=106.5"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_candies",
+      "image_path": "public/levels/ai_dense_candies_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.44,
+        "reorder": 1.0
+      },
+      "candidate_count": 300,
+      "peer_group_count": 1,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 93.7,
+        "y": 92.6,
+        "radius": 5.0,
+        "union_bbox": [
+          1142,
+          755,
+          1229,
+          818
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            49,
+            34
+          ],
+          "display_short_side": 34,
+          "display_thickness": 23.2,
+          "display_changed_pixels": 1253,
+          "source_area_pct": 0.403,
+          "direct_look_mean_delta_e": 104.2,
+          "direct_look_peak_delta_e": 168.5,
+          "direct_look_changed_fraction_pct": 10.71
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 49x34px (short side 34px, thickness 23.2px), Direct \u0394E=104.2"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_enamel_pins",
+      "image_path": "public/levels/ai_dense_enamel_pins_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add: No plausible empty insertion slot found near repeated peer families with natural peer spacing.",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 206,
+      "peer_group_count": 6,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_gemstones",
+      "image_path": "public/levels/ai_dense_gemstones_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.85,
+        "reorder": 1.0
+      },
+      "candidate_count": 151,
+      "peer_group_count": 3,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 40.5,
+        "y": 28.5,
+        "radius": 4.5,
+        "bbox": [
+          490,
+          219,
+          534,
+          265
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            25,
+            25
+          ],
+          "display_short_side": 25,
+          "display_thickness": 24.6,
+          "display_changed_pixels": 515,
+          "source_area_pct": 0.16,
+          "direct_look_mean_delta_e": 21.9,
+          "direct_look_peak_delta_e": 30.2,
+          "direct_look_changed_fraction_pct": 9.04,
+          "peer_color_distance_before": 33.6,
+          "peer_color_distance_after": 44.4,
+          "peer_color_outlier_zscore": 0.05,
+          "hue_direction_deg": -6.6
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 25x25px (short side 25px, thickness 24.6px), Direct \u0394E=21.9"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_hardware",
+      "image_path": "public/levels/ai_dense_hardware_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 252,
+      "peer_group_count": 13,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 4.1,
+        "y": 69.0,
+        "radius": 7.5,
+        "bbox": [
+          33,
+          516,
+          72,
+          656
+        ],
+        "donor_bbox": [
+          1,
+          363,
+          39,
+          502
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            22,
+            74
+          ],
+          "display_short_side": 22,
+          "display_thickness": 15.6,
+          "display_changed_pixels": 1387,
+          "source_area_pct": 0.45,
+          "direct_look_mean_delta_e": 50.9,
+          "direct_look_peak_delta_e": 105.4,
+          "direct_look_changed_fraction_pct": 4.1
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 22x74px (short side 22px, thickness 15.6px), Direct \u0394E=50.9"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_marbles",
+      "image_path": "public/levels/ai_dense_marbles_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.85,
+        "reorder": 1.0
+      },
+      "candidate_count": 290,
+      "peer_group_count": 2,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 66.3,
+        "y": 72.1,
+        "radius": 6.0,
+        "bbox": [
+          801,
+          573,
+          877,
+          651
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            43,
+            41
+          ],
+          "display_short_side": 41,
+          "display_thickness": 16.1,
+          "display_changed_pixels": 1291,
+          "source_area_pct": 0.42,
+          "direct_look_mean_delta_e": 53.3,
+          "direct_look_peak_delta_e": 163.1,
+          "direct_look_changed_fraction_pct": 8.17
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 43x41px (short side 41px, thickness 16.1px), Direct \u0394E=53.3"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_spices",
+      "image_path": "public/levels/ai_dense_spices_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 183,
+      "peer_group_count": 5,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 74.9,
+        "y": 44.7,
+        "radius": 5.0,
+        "union_bbox": [
+          917,
+          353,
+          980,
+          405
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            36,
+            28
+          ],
+          "display_short_side": 28,
+          "display_thickness": 5.7,
+          "display_changed_pixels": 572,
+          "source_area_pct": 0.198,
+          "direct_look_mean_delta_e": 41.0,
+          "direct_look_peak_delta_e": 96.1,
+          "direct_look_changed_fraction_pct": 5.81
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 36x28px (short side 28px, thickness 5.7px), Direct \u0394E=41.0"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_succulents",
+      "image_path": "public/levels/ai_dense_succulents_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 0.74
+      },
+      "candidate_count": 263,
+      "peer_group_count": 4,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 34.2,
+        "y": 24.8,
+        "radius": 5.9,
+        "bbox": [
+          394,
+          171,
+          470,
+          250
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            43,
+            42
+          ],
+          "display_short_side": 42,
+          "display_thickness": 32.0,
+          "display_changed_pixels": 1069,
+          "source_area_pct": 0.351,
+          "direct_look_mean_delta_e": 25.1,
+          "direct_look_peak_delta_e": 29.4,
+          "direct_look_changed_fraction_pct": 6.62,
+          "peer_color_distance_before": 38.0,
+          "peer_color_distance_after": 22.9,
+          "peer_color_outlier_zscore": 0.33,
+          "hue_direction_deg": -126.7
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 43x42px (short side 42px, thickness 32.0px), Direct \u0394E=25.1"
+    },
+    {
+      "scene_id": "prod_v4_var2_dense_watch_parts",
+      "image_path": "public/levels/ai_dense_watch_parts_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add: No plausible empty insertion slot found near repeated peer families with natural peer spacing.",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 214,
+      "peer_group_count": 7,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_bakery",
+      "image_path": "public/levels/ai_unique_bakery_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.94,
+        "reorder": 1.0
+      },
+      "candidate_count": 71,
+      "peer_group_count": 3,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 66.2,
+        "y": 80.5,
+        "radius": 4.5,
+        "bbox": [
+          890,
+          596,
+          934,
+          641
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            24,
+            27
+          ],
+          "display_short_side": 24,
+          "display_thickness": 17.2,
+          "display_changed_pixels": 497,
+          "source_area_pct": 0.159,
+          "direct_look_mean_delta_e": 52.0,
+          "direct_look_peak_delta_e": 93.0,
+          "direct_look_changed_fraction_pct": 9.9
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 24x27px (short side 24px, thickness 17.2px), Direct \u0394E=52.0"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_bushcraft",
+      "image_path": "public/levels/ai_unique_bushcraft_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 0.91
+      },
+      "candidate_count": 71,
+      "peer_group_count": 3,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 91.5,
+        "y": 37.5,
+        "radius": 4.5,
+        "bbox": [
+          1235,
+          262,
+          1288,
+          305
+        ],
+        "donor_bbox": [
+          1236,
+          312,
+          1288,
+          354
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            28,
+            25
+          ],
+          "display_short_side": 25,
+          "display_thickness": 15.6,
+          "display_changed_pixels": 504,
+          "source_area_pct": 0.165,
+          "direct_look_mean_delta_e": 48.7,
+          "direct_look_peak_delta_e": 99.0,
+          "direct_look_changed_fraction_pct": 6.81
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 28x25px (short side 25px, thickness 15.6px), Direct \u0394E=48.7"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_gardening",
+      "image_path": "public/levels/ai_unique_gardening_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.92,
+        "reorder": 1.0
+      },
+      "candidate_count": 65,
+      "peer_group_count": 2,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 91.6,
+        "y": 87.9,
+        "radius": 7.1,
+        "union_bbox": [
+          1224,
+          630,
+          1299,
+          717
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            39,
+            51
+          ],
+          "display_short_side": 39,
+          "display_thickness": 13.7,
+          "display_changed_pixels": 1376,
+          "source_area_pct": 0.45,
+          "direct_look_mean_delta_e": 62.9,
+          "direct_look_peak_delta_e": 133.9,
+          "direct_look_changed_fraction_pct": 8.67
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 39x51px (short side 39px, thickness 13.7px), Direct \u0394E=62.9"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_leather",
+      "image_path": "public/levels/ai_unique_leather_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 112,
+      "peer_group_count": 4,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 73.0,
+        "y": 15.4,
+        "radius": 4.5,
+        "bbox": [
+          959,
+          93,
+          1034,
+          141
+        ],
+        "donor_bbox": [
+          940,
+          149,
+          1014,
+          196
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            40,
+            28
+          ],
+          "display_short_side": 28,
+          "display_thickness": 18.3,
+          "display_changed_pixels": 877,
+          "source_area_pct": 0.289,
+          "direct_look_mean_delta_e": 72.7,
+          "direct_look_peak_delta_e": 141.6,
+          "direct_look_changed_fraction_pct": 5.92
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 40x28px (short side 28px, thickness 18.3px), Direct \u0394E=72.7"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_miniatures",
+      "image_path": "public/levels/ai_unique_miniatures_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 161,
+      "peer_group_count": 4,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 50.7,
+        "y": 49.7,
+        "radius": 6.0,
+        "bbox": [
+          668,
+          345,
+          726,
+          418
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            31,
+            43
+          ],
+          "display_short_side": 31,
+          "display_thickness": 11.2,
+          "display_changed_pixels": 715,
+          "source_area_pct": 0.215,
+          "direct_look_mean_delta_e": 23.4,
+          "direct_look_peak_delta_e": 29.3,
+          "direct_look_changed_fraction_pct": 4.81,
+          "peer_color_distance_before": 22.6,
+          "peer_color_distance_after": 28.5,
+          "peer_color_outlier_zscore": 0.01,
+          "hue_direction_deg": -5.0
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 31x43px (short side 31px, thickness 11.2px), Direct \u0394E=23.4"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_palette",
+      "image_path": "public/levels/ai_unique_palette_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 150,
+      "peer_group_count": 12,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 48.8,
+        "y": 14.2,
+        "radius": 7.5,
+        "bbox": [
+          636,
+          60,
+          710,
+          155
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            39,
+            55
+          ],
+          "display_short_side": 39,
+          "display_thickness": 21.3,
+          "display_changed_pixels": 1189,
+          "source_area_pct": 0.384,
+          "direct_look_mean_delta_e": 46.1,
+          "direct_look_peak_delta_e": 103.0,
+          "direct_look_changed_fraction_pct": 5.67
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 39x55px (short side 39px, thickness 21.3px), Direct \u0394E=46.1"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_pencils",
+      "image_path": "public/levels/ai_unique_pencils_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Reorder QA Reject (TargetTooSmall): TargetTooSmall: Short side (16px) below verification floor (18px).",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 0.64,
+        "reorder": 1.0
+      },
+      "candidate_count": 96,
+      "peer_group_count": 1,
+      "operation_selected": "reorder"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_retrogaming",
+      "image_path": "public/levels/ai_unique_retrogaming_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Add QA Reject (TooSubtle): TooSubtle: Structural change occupies too little of crop (3.6% < 4.0%).",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 178,
+      "peer_group_count": 7,
+      "operation_selected": "add"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_seashells",
+      "image_path": "public/levels/ai_unique_seashells_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 285,
+      "peer_group_count": 8,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 2.8,
+        "y": 15.2,
+        "radius": 4.5,
+        "bbox": [
+          15,
+          102,
+          60,
+          157
+        ],
+        "donor_bbox": [
+          99,
+          187,
+          143,
+          241
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            26,
+            30
+          ],
+          "display_short_side": 26,
+          "display_thickness": 13.4,
+          "display_changed_pixels": 571,
+          "source_area_pct": 0.186,
+          "direct_look_mean_delta_e": 44.0,
+          "direct_look_peak_delta_e": 90.1,
+          "direct_look_changed_fraction_pct": 10.44
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 26x30px (short side 26px, thickness 13.4px), Direct \u0394E=44.0"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_sewing",
+      "image_path": "public/levels/ai_unique_sewing_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 130,
+      "peer_group_count": 6,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 49.9,
+        "y": 91.6,
+        "radius": 4.5,
+        "bbox": [
+          650,
+          686,
+          718,
+          723
+        ],
+        "donor_bbox": [
+          666,
+          731,
+          733,
+          767
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            36,
+            22
+          ],
+          "display_short_side": 22,
+          "display_thickness": 21.0,
+          "display_changed_pixels": 586,
+          "source_area_pct": 0.184,
+          "direct_look_mean_delta_e": 98.1,
+          "direct_look_peak_delta_e": 150.1,
+          "direct_look_changed_fraction_pct": 5.83
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 36x22px (short side 22px, thickness 21.0px), Direct \u0394E=98.1"
+    },
+    {
+      "scene_id": "prod_v4_var2_unique_woodworking",
+      "image_path": "public/levels/ai_unique_woodworking_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 115,
+      "peer_group_count": 4,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 27.5,
+        "y": 72.8,
+        "radius": 7.5,
+        "bbox": [
+          348,
+          487,
+          408,
+          631
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            31,
+            83
+          ],
+          "display_short_side": 31,
+          "display_thickness": 30.1,
+          "display_changed_pixels": 1849,
+          "source_area_pct": 0.594,
+          "direct_look_mean_delta_e": 24.3,
+          "direct_look_peak_delta_e": 28.2,
+          "direct_look_changed_fraction_pct": 3.41,
+          "peer_color_distance_before": 22.6,
+          "peer_color_distance_after": 15.9,
+          "peer_color_outlier_zscore": 0.17,
+          "hue_direction_deg": -132.2
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 31x83px (short side 31px, thickness 30.1px), Direct \u0394E=24.3"
+    },
+    {
+      "scene_id": "prod_v4_var2_ai_electronics",
+      "image_path": "public/levels/ai_electronics_pcb_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 205,
+      "peer_group_count": 8,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 43.7,
+        "y": 18.4,
+        "radius": 5.8,
+        "union_bbox": [
+          568,
+          107,
+          635,
+          175
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            36,
+            40
+          ],
+          "display_short_side": 36,
+          "display_thickness": 14.8,
+          "display_changed_pixels": 1057,
+          "source_area_pct": 0.339,
+          "direct_look_mean_delta_e": 68.4,
+          "direct_look_peak_delta_e": 153.6,
+          "direct_look_changed_fraction_pct": 8.54
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 36x40px (short side 36px, thickness 14.8px), Direct \u0394E=68.4"
+    },
+    {
+      "scene_id": "prod_v4_var2_ai_mechanic",
+      "image_path": "public/levels/ai_mechanic_workbench_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 248,
+      "peer_group_count": 15,
+      "operation_selected": "remove",
+      "operation_executed": "remove",
+      "ground_truth": {
+        "x": 97.7,
+        "y": 47.7,
+        "radius": 4.8,
+        "bbox": [
+          1319,
+          341,
+          1370,
+          393
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            26,
+            31
+          ],
+          "display_short_side": 26,
+          "display_thickness": 26.7,
+          "display_changed_pixels": 709,
+          "source_area_pct": 0.223,
+          "direct_look_mean_delta_e": 72.2,
+          "direct_look_peak_delta_e": 133.4,
+          "direct_look_changed_fraction_pct": 13.73
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 26x31px (short side 26px, thickness 26.7px), Direct \u0394E=72.2"
+    },
+    {
+      "scene_id": "prod_v4_var2_ai_watchmaker",
+      "image_path": "public/levels/ai_watchmaker_parts_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 191,
+      "peer_group_count": 6,
+      "operation_selected": "reorder",
+      "operation_executed": "reorder",
+      "ground_truth": {
+        "x": 97.8,
+        "y": 62.5,
+        "radius": 8.4,
+        "union_bbox": [
+          1314,
+          426,
+          1375,
+          538
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            32,
+            65
+          ],
+          "display_short_side": 32,
+          "display_thickness": 27.6,
+          "display_changed_pixels": 1302,
+          "source_area_pct": 0.419,
+          "direct_look_mean_delta_e": 43.7,
+          "direct_look_peak_delta_e": 96.1,
+          "direct_look_changed_fraction_pct": 6.71
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 32x65px (short side 32px, thickness 27.6px), Direct \u0394E=43.7"
+    },
+    {
+      "scene_id": "prod_v4_var2_ai_sewing",
+      "image_path": "public/levels/ai_sewing_notions_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 130,
+      "peer_group_count": 6,
+      "operation_selected": "recolor",
+      "operation_executed": "recolor",
+      "ground_truth": {
+        "x": 17.5,
+        "y": 71.3,
+        "radius": 7.5,
+        "bbox": [
+          203,
+          468,
+          279,
+          627
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            39,
+            92
+          ],
+          "display_short_side": 39,
+          "display_thickness": 18.0,
+          "display_changed_pixels": 1514,
+          "source_area_pct": 0.492,
+          "direct_look_mean_delta_e": 24.3,
+          "direct_look_peak_delta_e": 28.2,
+          "direct_look_changed_fraction_pct": 2.33,
+          "peer_color_distance_before": 25.0,
+          "peer_color_distance_after": 18.3,
+          "peer_color_outlier_zscore": 0.29,
+          "hue_direction_deg": -102.6
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 39x92px (short side 39px, thickness 18.0px), Direct \u0394E=24.3"
+    },
+    {
+      "scene_id": "prod_v4_var2_ai_artist",
+      "image_path": "public/levels/ai_artist_palette_base.jpg",
+      "difficulty": "Medium",
+      "accepted": true,
+      "rejection_reason": null,
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 150,
+      "peer_group_count": 12,
+      "operation_selected": "add",
+      "operation_executed": "add",
+      "ground_truth": {
+        "x": 27.0,
+        "y": 61.4,
+        "radius": 4.5,
+        "bbox": [
+          348,
+          453,
+          395,
+          488
+        ],
+        "donor_bbox": [
+          363,
+          521,
+          409,
+          555
+        ],
+        "metrics": {
+          "display_bbox_size": [
+            24,
+            21
+          ],
+          "display_short_side": 21,
+          "display_thickness": 21.0,
+          "display_changed_pixels": 541,
+          "source_area_pct": 0.173,
+          "direct_look_mean_delta_e": 73.8,
+          "direct_look_peak_delta_e": 124.1,
+          "direct_look_changed_fraction_pct": 9.24
+        }
+      },
+      "qa_summary": "Direct-Look Verified: Display size 24x21px (short side 21px, thickness 21.0px), Direct \u0394E=73.8"
+    },
+    {
+      "scene_id": "prod_v4_var2_ai_woodworking",
+      "image_path": "public/levels/ai_woodworking_bench_base.jpg",
+      "difficulty": "Medium",
+      "accepted": false,
+      "rejection_reason": "Remove QA Reject (TooSubtle): TooSubtle: Structural change occupies too little of crop (3.8% < 4.0%).",
+      "affordances": {
+        "recolor": 1.0,
+        "remove": 1.0,
+        "add": 1.0,
+        "reorder": 1.0
+      },
+      "candidate_count": 115,
+      "peer_group_count": 4,
+      "operation_selected": "remove"
+    }
+  ]
+}

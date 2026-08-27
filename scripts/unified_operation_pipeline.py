@@ -1,15 +1,18 @@
 """
-UNIFIED MULTI-OPERATION DIFFERENCE ENGINE (RECOLOR / REMOVE / ADD)
+UNIFIED MULTI-OPERATION DIFFERENCE ENGINE (RECOLOR / REMOVE / ADD / REORDER)
 ================================================================================
-Orchestrates the entire next-generation pipeline across 10 AI base canvases:
-1. Stage 1: Base Canvas QA & Affordance Scorecard (Recolor, Remove, Add).
-2. Stage 2: Operation Router (Balances 40% Recolor, 30% Remove, 30% Add).
-3. Stage 3: Operation-Specific Target Selector:
-   - Recolor: GoldilocksTargetSelector (chroma, salience, Goldilocks ΔE width)
-   - Remove:  RemoveTargetSelector (peer family, background recoverability, inpaint)
-   - Add:     AddTargetSelector (peer family donor, empty slot search, contact shadow)
-4. Stage 4: Operation-Specific QA Critic & Zero-Drift Clamping.
-5. Stage 5: Manifest Registration & Web Sync.
+Central Authoritative Production Pipeline for Spot-the-Difference Generation:
+1. BaseImageQA & SceneAffordanceRouter: Evaluates base scene for 4 operations.
+2. OperationScheduler: Enforces balanced accepted output mix (25% each) with quota deficit boost.
+   - NO SILENT FALLBACK TO RECOLOR on failed operations.
+   - Iterates through top candidate targets for the chosen operation before rejecting.
+3. Operation-Specific Target Selectors:
+   - Recolor: GoldilocksTargetSelector + PeerPaletteColorEngine (peer-relative palette)
+   - Remove:  RemoveTargetSelector (peer family + gap-anomaly grid penalty)
+   - Add:     AddTargetSelector (peer family + peer-spacing plausibility)
+   - Reorder: ReorderTargetSelector (loose movable objects + compact local pose shift)
+4. Two-Sided PerceptualVerificationEngine: Display resolution (700x440) + direct-look Goldilocks band.
+5. Structured JSON Attempt Logging & Ground-Truth Manifest Registration.
 ================================================================================
 """
 
@@ -23,279 +26,363 @@ from scene_affordance_router import SceneAffordanceRouter
 from goldilocks_target_selector import GoldilocksTargetSelector
 from remove_target_selector import RemoveTargetSelector
 from add_target_selector import AddTargetSelector
-from sam_segment_recolor import AdaptiveSpotabilityLoop
+from reorder_target_selector import ReorderTargetSelector
+from perceptual_verification_engine import PerceptualVerificationEngine
+from sam_segment_recolor import PeerPaletteColorEngine, AdaptiveSpotabilityLoop
 
-def execute_unified_pipeline():
-    print("=" * 80)
-    print("UNIFIED MULTI-OPERATION DIFFERENCE PIPELINE (RECOLOR / REMOVE / ADD)")
-    print("=" * 80)
+DEFAULT_TARGET_MIX = {
+    "recolor": 0.25,
+    "remove": 0.25,
+    "add": 0.25,
+    "reorder": 0.25,
+}
 
-    model = FastSAM("FastSAM-s.pt")
+class OperationScheduler:
+    """
+    Tracks accepted output counts and dynamically balances the operation queue
+    using quota deficit multipliers so no single operation dominates.
+    """
+    def __init__(self, target_mix=None):
+        self.target_mix = target_mix or DEFAULT_TARGET_MIX
+        self.accepted_counts = {op: 0 for op in self.target_mix}
+        self.attempted_counts = {op: 0 for op in self.target_mix}
+        self.success_history = {op: [] for op in self.target_mix}
 
-    scenes = [
-        # 1. Tailor Notions Box -> REMOVE (1 missing wooden thread spool from peer cluster)
-        {
-            "id": "goldilocks_pipe_v2_sewing_remove_001",
-            "title": "[AI Remove - Medium] Tailor Notions Box Missing Thread Spool",
-            "image_path": "public/levels/ai_sewing_notions_base.jpg",
-            "preferred_op": "remove",
-            "difficulty": "Medium",
-            "desc": "Single wooden cotton thread spool missing from the compartmentalized notions tray",
-            "hint": "Inspect the wooden thread spools in the sorting compartments of the notions box"
-        },
-        # 2. Watchmaker Parts Tray -> RECOLOR (precision screwdriver collar)
-        {
-            "id": "goldilocks_pipe_v2_watchmaker_recolor_002",
-            "title": "[AI Recolor - Medium] Horologist Parts Tray Screwdriver Collar",
-            "image_path": "public/levels/ai_watchmaker_parts_base.jpg",
-            "preferred_op": "recolor",
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single precision screwdriver color collar shifted in CIELAB",
-            "hint": "Examine the color-coded precision screwdrivers on the work pad"
-        },
-        # 3. Electronics Antistatic Bench -> ADD (1 extra through-hole capacitor in component row)
-        {
-            "id": "goldilocks_pipe_v2_electronics_add_003",
-            "title": "[AI Add - Medium] Electronics Antistatic Bench Extra Capacitor",
-            "image_path": "public/levels/ai_electronics_pcb_base.jpg",
-            "preferred_op": "add",
-            "difficulty": "Medium",
-            "desc": "Single additional electrolytic capacitor added to the component array",
-            "hint": "Scan the electrolytic capacitors in the upper component tray"
-        },
-        # 4. Greenhouse Potting Bench -> REMOVE (1 missing plant marker tag)
-        {
-            "id": "goldilocks_pipe_v2_gardener_remove_004",
-            "title": "[AI Remove - Medium] Greenhouse Potting Bench Missing Plant Tag",
-            "image_path": "public/levels/ai_gardener_potting_base.jpg",
-            "preferred_op": "remove",
-            "difficulty": "Medium",
-            "desc": "Single colorful garden plant marker tag missing from the bench",
-            "hint": "Check the plant marker tags on the potting bench"
-        },
-        # 5. Fine Art Studio Taboret -> RECOLOR (oil paint tube cap)
-        {
-            "id": "goldilocks_pipe_v2_artist_recolor_005",
-            "title": "[AI Recolor - Medium] Fine Art Studio Oil Paint Tube Cap",
-            "image_path": "public/levels/ai_artist_palette_base.jpg",
-            "preferred_op": "recolor",
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single artist oil paint tube cap tone shifted in CIELAB",
-            "hint": "Inspect the row of oil paint tubes on the palette"
-        },
-        # 6. Woodworking Joinery Bench -> RECOLOR (carpenter marking pencil body)
-        {
-            "id": "goldilocks_pipe_v2_woodworking_recolor_006",
-            "title": "[AI Recolor - Medium] Woodworking Joinery Bench Carpenter Pencil",
-            "image_path": "public/levels/ai_woodworking_bench_base.jpg",
-            "preferred_op": "recolor",
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single wooden carpenter marking pencil tone shifted in CIELAB",
-            "hint": "Look closely at the colored carpenter marking pencils"
-        },
-        # 7. Retro Gaming Desk -> RECOLOR (game cartridge shell)
-        {
-            "id": "goldilocks_pipe_v2_retro_recolor_007",
-            "title": "[AI Recolor - Medium] Retro Gaming Desk Cartridge Shell",
-            "image_path": "public/levels/ai_retro_gaming_base.jpg",
-            "preferred_op": "recolor",
-            "difficulty": "Medium",
-            "hue_direction_deg": 55.0,
-            "desc": "Single vintage game cartridge shell tone shifted in CIELAB",
-            "hint": "Scan the retro game cartridges and memory cards on the desk"
-        },
-        # 8. Wilderness Expedition Prep -> REMOVE (1 missing carabiner)
-        {
-            "id": "goldilocks_pipe_v2_expedition_remove_008",
-            "title": "[AI Remove - Medium] Expedition Prep Table Missing Carabiner",
-            "image_path": "public/levels/ai_expedition_bushcraft_base.jpg",
-            "preferred_op": "remove",
-            "difficulty": "Medium",
-            "desc": "Single locking carabiner missing from the gear array",
-            "hint": "Check the carabiners and outdoor gear on the table"
-        },
-        # 9. Leathercraft Artisan Bench -> RECOLOR (waxed thread spool)
-        {
-            "id": "goldilocks_pipe_v2_leathercraft_recolor_009",
-            "title": "[AI Recolor - Medium] Leather Artisan Bench Waxed Thread Spool",
-            "image_path": "public/levels/ai_leathercraft_base.jpg",
-            "preferred_op": "recolor",
-            "difficulty": "Medium",
-            "hue_direction_deg": 50.0,
-            "desc": "Single waxed linen thread spool shifted in CIELAB",
-            "hint": "Inspect the collection of colored waxed thread spools"
-        },
-        # 10. Miniature Painter Desk -> RECOLOR (paint dropper bottle cap)
-        {
-            "id": "goldilocks_pipe_v2_miniature_recolor_010",
-            "title": "[AI Recolor - Medium] Miniature Painter Desk Paint Dropper Cap",
-            "image_path": "public/levels/ai_miniature_painter_base.jpg",
-            "preferred_op": "recolor",
-            "difficulty": "Medium",
-            "hue_direction_deg": 60.0,
-            "desc": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
-            "hint": "Examine the rows of acrylic paint dropper bottles"
-        }
-    ]
+    def record_attempt(self, op, success):
+        self.attempted_counts[op] += 1
+        self.success_history[op].append(1 if success else 0)
+        if success:
+            self.accepted_counts[op] += 1
 
-    manifest_path = "public/levels/photo_pair_manifest.json"
-    manifest = []
-    if os.path.exists(manifest_path):
-        with open(manifest_path, "r") as f:
-            manifest = json.load(f)
+    def select_operation_for_scene(self, affordances, preferred_op=None):
+        """
+        Calculates priority = affordance * deficit_multiplier * success_prior.
+        Never forces an operation with affordance < 0.25.
+        """
+        total_accepted = max(1, sum(self.accepted_counts.values()))
+        
+        if preferred_op and preferred_op in affordances and affordances[preferred_op] >= 0.35:
+            return preferred_op
 
-    approved_entries = []
+        priorities = {}
+        for op, target_ratio in self.target_mix.items():
+            affordance = affordances.get(op, 0.0)
+            if affordance < 0.25:
+                priorities[op] = 0.0
+                continue
 
-    for scene in scenes:
-        print(f"\n{'='*20} Processing: {scene['id']} ({scene['title']}) {'='*20}")
-        img_path = scene["image_path"]
-        if not os.path.exists(img_path):
-            print(f"❌ Missing base image: {img_path}")
-            continue
+            current_ratio = self.accepted_counts[op] / float(total_accepted)
+            deficit = target_ratio - current_ratio
+            deficit_mult = max(0.2, 1.0 + (deficit * 6.0))
 
-        img_bgr = cv2.imread(img_path)
-        img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-        h, w = img_bgr.shape[:2]
+            history = self.success_history[op][-10:]
+            success_prior = (sum(history) + 2.0) / (len(history) + 3.0)
 
-        # STAGE 1 & 2: Scene QA Scorecard & Affordance Routing
-        router_res = SceneAffordanceRouter.evaluate_and_route_canvas(
-            img_path, target_mix_preference=scene.get("preferred_op")
+            priority = affordance * deficit_mult * success_prior
+            priorities[op] = priority
+
+        best_op = max(priorities, key=priorities.get)
+        return best_op
+
+def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="public/levels", difficulty="Medium"):
+    """
+    Authoritative single-scene generator with candidate iteration.
+    Enforces strict operation routing without silent fallback.
+    Returns: (success: bool, result_entry: dict or None, log_entry: dict)
+    """
+    image_path = scene_spec["image_path"]
+    scene_id = scene_spec["id"]
+    title = scene_spec.get("title", f"Level {scene_id}")
+
+    log_entry = {
+        "scene_id": scene_id,
+        "image_path": image_path,
+        "difficulty": difficulty,
+        "accepted": False,
+        "rejection_reason": None
+    }
+
+    if not os.path.exists(image_path):
+        log_entry["rejection_reason"] = f"Base image not found: {image_path}"
+        return False, None, log_entry
+
+    img_bgr = cv2.imread(image_path)
+    if img_bgr is None:
+        log_entry["rejection_reason"] = f"Failed to decode image: {image_path}"
+        return False, None, log_entry
+
+    h, w = img_bgr.shape[:2]
+
+    # 1. Base Image QA & Affordance Routing
+    qa_res = SceneAffordanceRouter.evaluate_and_route_canvas(image_path)
+    if not qa_res["approved"]:
+        log_entry["rejection_reason"] = qa_res["reason"]
+        return False, None, log_entry
+
+    affordances = qa_res["affordances"]
+    candidate_masks = qa_res["candidate_masks"]
+    peer_groups = qa_res["peer_groups"]
+    raw_masks = qa_res.get("raw_masks", [])
+
+    log_entry["affordances"] = affordances
+    log_entry["candidate_count"] = len(candidate_masks)
+    log_entry["peer_group_count"] = len(peer_groups)
+
+    # 2. Select Operation
+    preferred_op = scene_spec.get("preferred_op")
+    if scheduler:
+        chosen_op = scheduler.select_operation_for_scene(affordances, preferred_op)
+    else:
+        chosen_op = preferred_op if preferred_op in affordances else qa_res["recommended_operation"]
+
+    log_entry["operation_selected"] = chosen_op
+
+    variant_bgr = None
+    ground_truth = None
+    op_success = False
+    op_reason = ""
+
+    # 3. Execute Selected Operation with Candidate Iteration
+    if chosen_op == "recolor":
+        descriptors = [GoldilocksTargetSelector.extract_shape_descriptor(c["mask"]) for c in candidate_masks]
+        peer_counts = GoldilocksTargetSelector.find_visual_peers(descriptors)
+        for i, c in enumerate(candidate_masks):
+            c["peer_count"] = peer_counts[i]
+            frac, _, _ = GoldilocksTargetSelector.compute_recolorable_fraction(img_bgr, c["mask"])
+            c["recolorable_fraction"] = frac
+            c["baseline_salience"] = GoldilocksTargetSelector.compute_baseline_salience(img_bgr, c["mask"])
+
+        valid_recolor_cands = [c for c in candidate_masks if c["recolorable_fraction"] >= 0.40 and c["peer_count"] >= 1 and 0.12 <= c["area_pct"] <= 0.85]
+        if not valid_recolor_cands:
+            log_entry["rejection_reason"] = "Recolor: No suitable Goldilocks recolor candidates with peers and valid chroma."
+            if scheduler: scheduler.record_attempt(chosen_op, False)
+            return False, None, log_entry
+
+        valid_recolor_cands.sort(key=lambda x: x["peer_count"] * 10.0 + x["recolorable_fraction"] * 5.0, reverse=True)
+
+        for cand in valid_recolor_cands[:5]:
+            target_mask = cand["mask"]
+            target_bbox = cand["bbox"]
+            peer_masks = [c["mask"] for c in candidate_masks if c["idx"] != cand["idx"] and c["peer_count"] >= 1]
+
+            target_delta_e = 24.0 if difficulty == "Medium" else (18.0 if difficulty == "Hard" else 30.0)
+            default_hue = scene_spec.get("hue_direction_deg", 50.0)
+
+            var_candidate, actual_de, color_metrics = PeerPaletteColorEngine.shift_color_peer_relative(
+                img_bgr, target_mask, peer_masks=peer_masks, target_delta_e=target_delta_e, default_hue_deg=default_hue
+            )
+
+            bx1, by1, bx2, by2 = target_bbox
+            pad = int(max(bx2 - bx1, by2 - by1) * 0.25)
+            rx1, ry1 = max(0, bx1 - pad), max(0, by1 - pad)
+            rx2, ry2 = min(w, bx2 + pad), min(h, by2 + pad)
+            clamped_var = img_bgr.copy()
+            clamped_var[ry1:ry2, rx1:rx2] = var_candidate[ry1:ry2, rx1:rx2]
+
+            v_passed, v_metrics, v_reason, v_code = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
+                img_bgr, clamped_var, target_bbox, operation="recolor", difficulty=difficulty
+            )
+            if v_passed:
+                variant_bgr = clamped_var
+                cx_pct = round(float(bx1 + bx2) / 2.0 / float(w) * 100.0, 1)
+                cy_pct = round(float(by1 + by2) / 2.0 / float(h) * 100.0, 1)
+                span_x = (bx2 - bx1 + 1) / float(w) * 100.0
+                span_y = (by2 - by1 + 1) / float(h) * 100.0
+                radius = round(max(4.5, min(7.5, max(span_x, span_y) / 2.0 + 1.2)), 1)
+                ground_truth = {
+                    "x": cx_pct,
+                    "y": cy_pct,
+                    "radius": radius,
+                    "bbox": target_bbox,
+                    "metrics": {**v_metrics, **color_metrics}
+                }
+                op_success = True
+                op_reason = v_reason
+                break
+            else:
+                op_reason = f"Recolor QA Reject ({v_code}): {v_reason}"
+
+    elif chosen_op == "remove":
+        best_cand, select_reason, all_cands = RemoveTargetSelector.select_best_remove_target(
+            img_bgr, candidate_masks, peer_groups, target_difficulty=difficulty
         )
-        if not router_res["approved"]:
-            print(f"❌ Scene QA Rejection: {router_res['reason']}")
-            continue
+        if not all_cands:
+            log_entry["rejection_reason"] = f"Remove: {select_reason}"
+            if scheduler: scheduler.record_attempt(chosen_op, False)
+            return False, None, log_entry
 
-        op = router_res["recommended_operation"]
-        print(f"✓ Scene QA Approved! Affordances: Recolor={router_res['affordances']['recolor']}, Remove={router_res['affordances']['remove']}, Add={router_res['affordances']['add']}")
-        print(f"✓ Routed Operation: [{op.upper()}] (Peers: {router_res['peer_group_count']} groups, Candidates: {router_res['candidate_count']})")
-
-        candidate_masks = router_res["candidate_masks"]
-        peer_groups = router_res["peer_groups"]
-
-        # FastSAM raw masks for Add Target Selector
-        sam_results = model(img_path, device="cpu", retina_masks=True, imgsz=1024, conf=0.20, iou=0.65, verbose=False)
-        raw_sam_masks = sam_results[0].masks.data.cpu().numpy()
-
-        passed = False
-        variant_bgr = None
-        final_info = None
-
-        diff_level = scene.get("difficulty", "Medium")
-
-        # STAGE 3: Operation-Specific Target Selection & Execution
-        if op == "recolor":
-            target_info, selection_reason, feasible_candidates = GoldilocksTargetSelector.select_best_goldilocks_target(
-                img_bgr, raw_sam_masks, target_difficulty=diff_level
+        for cand_item in all_cands[:5]:
+            target_c = cand_item["candidate"]
+            passed, var_img, gt, reason = RemoveTargetSelector.execute_removal_and_qa(
+                img_bgr, target_c["mask"], target_c["bbox"], difficulty=difficulty
             )
-            if not feasible_candidates:
-                print(f"❌ Goldilocks Selection Rejection: {selection_reason}")
-                continue
-            print(f"✓ {selection_reason}")
+            if passed:
+                variant_bgr = var_img
+                ground_truth = gt
+                op_success = True
+                op_reason = reason
+                break
+            else:
+                op_reason = reason
 
-            for cand in feasible_candidates[:5]:
-                p, v_rgb, f_info, q_msg = AdaptiveSpotabilityLoop.generate_and_calibrate(
-                    image_rgb=img_rgb,
-                    mask=cand["mask"],
-                    target_bbox=cand["bbox"],
-                    difficulty=diff_level,
-                    hue_direction_deg=scene.get("hue_direction_deg", 50.0),
-                    clutter_multiplier=cand["local_clutter_mult"]
-                )
-                if p:
-                    passed = True
-                    variant_bgr = cv2.cvtColor(v_rgb, cv2.COLOR_RGB2BGR)
-                    final_info = f_info
-                    print(f"✓ {q_msg}")
-                    print(f"  • Spotability: {f_info['spotability']} | Changed Area: {f_info['area_pct']}% | Centroid: ({f_info['x']}%, {f_info['y']}%)")
-                    break
+    elif chosen_op == "add":
+        best_pair, select_reason, all_pairs = AddTargetSelector.find_best_add_pair(
+            img_bgr, candidate_masks, peer_groups, raw_masks, target_difficulty=difficulty
+        )
+        if not all_pairs:
+            log_entry["rejection_reason"] = f"Add: {select_reason}"
+            if scheduler: scheduler.record_attempt(chosen_op, False)
+            return False, None, log_entry
 
-        elif op == "remove":
-            best_target, sel_msg, feasible_cands = RemoveTargetSelector.select_best_remove_target(
-                img_bgr, candidate_masks, peer_groups, target_difficulty=diff_level
+        for pair in all_pairs[:6]:
+            passed, var_img, gt, reason = AddTargetSelector.execute_add_and_qa(
+                img_bgr, pair["donor_bbox"], pair["slot_bbox"], pair["donor"]["mask"], difficulty=difficulty
             )
-            if not feasible_cands:
-                print(f"❌ Remove Target Selection Rejection: {sel_msg}")
-                continue
-            print(f"✓ {sel_msg}")
+            if passed:
+                variant_bgr = var_img
+                ground_truth = gt
+                op_success = True
+                op_reason = reason
+                break
+            else:
+                op_reason = reason
 
-            for cand in feasible_cands[:5]:
-                c_data = cand["candidate"]
-                p, v_bgr, f_info, q_msg = RemoveTargetSelector.execute_removal_and_qa(
-                    img_bgr, c_data["mask"], c_data["bbox"], difficulty=diff_level
-                )
-                if p:
-                    passed = True
-                    variant_bgr = v_bgr
-                    final_info = f_info
-                    print(f"✓ {q_msg}")
-                    break
+    elif chosen_op == "reorder":
+        best_target, select_reason, all_targets = ReorderTargetSelector.find_best_reorder_target(
+            img_bgr, candidate_masks, peer_groups, raw_masks, target_difficulty=difficulty
+        )
+        if not all_targets:
+            log_entry["rejection_reason"] = f"Reorder: {select_reason}"
+            if scheduler: scheduler.record_attempt(chosen_op, False)
+            return False, None, log_entry
 
-        elif op == "add":
-            best_pair, sel_msg, feasible_pairs = AddTargetSelector.find_best_add_pair(
-                img_bgr, candidate_masks, peer_groups, raw_sam_masks, target_difficulty=diff_level
+        for target_item in all_targets[:6]:
+            cand = target_item["candidate"]
+            passed, var_img, gt, reason = ReorderTargetSelector.execute_reorder_and_qa(
+                img_bgr, cand["mask"], cand["bbox"], target_item["best_mutation"], target_item["union_bbox"], difficulty=difficulty
             )
-            if not feasible_pairs:
-                print(f"❌ Add Target Selection Rejection: {sel_msg}")
-                continue
-            print(f"✓ {sel_msg}")
+            if passed:
+                variant_bgr = var_img
+                ground_truth = gt
+                op_success = True
+                op_reason = reason
+                break
+            else:
+                op_reason = reason
 
-            for pair in feasible_pairs[:5]:
-                donor = pair["donor"]
-                p, v_bgr, f_info, q_msg = AddTargetSelector.execute_add_and_qa(
-                    img_bgr, pair["donor_bbox"], pair["slot_bbox"], donor["mask"], difficulty=diff_level
-                )
-                if p:
-                    passed = True
-                    variant_bgr = v_bgr
-                    final_info = f_info
-                    print(f"✓ {q_msg}")
-                    break
+    else:
+        log_entry["rejection_reason"] = f"Unknown operation: {chosen_op}"
+        return False, None, log_entry
 
-        if not passed:
-            print("❌ Operation Execution Rejected in QA.")
-            continue
+    if not op_success:
+        log_entry["rejection_reason"] = op_reason
+        if scheduler: scheduler.record_attempt(chosen_op, False)
+        return False, None, log_entry
 
-        # STAGE 4: Save Level Images & Register into Manifest
-        base_name = f"{scene['id']}_base.jpg"
-        var_name = f"{scene['id']}_variant.jpg"
-        base_path = os.path.join("public/levels", base_name)
-        var_path = os.path.join("public/levels", var_name)
+    # 4. Save Image Files & Build Manifest Entry
+    base_filename = f"{scene_id}_base.jpg"
+    variant_filename = f"{scene_id}_variant.jpg"
+    base_save_path = os.path.join(output_dir, base_filename)
+    variant_save_path = os.path.join(output_dir, variant_filename)
 
-        cv2.imwrite(base_path, img_bgr, [cv2.IMWRITE_JPEG_QUALITY, 94])
-        cv2.imwrite(var_path, variant_bgr, [cv2.IMWRITE_JPEG_QUALITY, 94])
+    cv2.imwrite(base_save_path, img_bgr, [cv2.IMWRITE_JPEG_QUALITY, 92])
+    cv2.imwrite(variant_save_path, variant_bgr, [cv2.IMWRITE_JPEG_QUALITY, 92])
 
-        entry = {
-            "id": scene["id"],
-            "title": scene["title"],
-            "category": "Photography",
-            "pack": "Photography",
-            "packId": "find_the_sniper",
-            "difficulty": scene["difficulty"],
-            "operation": op,
-            "baseImage": f"/levels/{base_name}",
-            "variantImage": f"/levels/{var_name}",
-            "diffs": [{
-                "id": 1,
-                "x": final_info["x"],
-                "y": final_info["y"],
-                "radius": final_info["radius"],
-                "description": scene["desc"],
-                "hint": scene["hint"]
-            }]
-        }
-        approved_entries.append(entry)
+    desc = scene_spec.get("desc", f"Single {chosen_op} difference")
+    hint = scene_spec.get("hint", f"Look closely for a {chosen_op} difference")
 
-    if approved_entries:
-        new_id_set = {e["id"] for e in approved_entries}
-        updated_manifest = approved_entries + [m for m in manifest if m["id"] not in new_id_set]
+    manifest_entry = {
+        "id": scene_id,
+        "title": title,
+        "category": "Photography",
+        "pack": "Photography",
+        "packId": "find_the_sniper",
+        "difficulty": difficulty,
+        "baseImage": f"/levels/{base_filename}",
+        "variantImage": f"/levels/{variant_filename}",
+        "operation": chosen_op,
+        "diffs": [{
+            "id": 1,
+            "x": ground_truth["x"],
+            "y": ground_truth["y"],
+            "radius": ground_truth["radius"],
+            "description": desc,
+            "hint": hint,
+            "operation": chosen_op
+        }]
+    }
+
+    if scheduler:
+        scheduler.record_attempt(chosen_op, True)
+
+    log_entry["accepted"] = True
+    log_entry["operation_executed"] = chosen_op
+    log_entry["ground_truth"] = ground_truth
+    log_entry["qa_summary"] = op_reason
+
+    return True, manifest_entry, log_entry
+
+def generate_batch(scenes, target_mix=None, output_dir="public/levels", manifest_path="public/levels/photo_pair_manifest.json"):
+    """
+    Central Authoritative Batch Generation Function.
+    Iterates across candidate scenes, balances the 4 operations, and writes the manifest.
+    """
+    print("=" * 80)
+    print("AUTHORITATIVE MULTI-OPERATION GENERATION PIPELINE")
+    print("Target Mix:", target_mix or DEFAULT_TARGET_MIX)
+    print("=" * 80)
+
+    scheduler = OperationScheduler(target_mix=target_mix)
+    accepted_entries = []
+    attempt_logs = []
+
+    for idx, scene_spec in enumerate(scenes):
+        print(f"\n[{idx+1}/{len(scenes)}] Processing scene: {scene_spec['id']}...")
+        success, entry, log_info = generate_single_scene_difference(
+            scene_spec, scheduler=scheduler, output_dir=output_dir, difficulty=scene_spec.get("difficulty", "Medium")
+        )
+        attempt_logs.append(log_info)
+
+        if success:
+            accepted_entries.append(entry)
+            print(f"  ✓ ACCEPTED [{entry['operation'].upper()}]: {entry['title']}")
+            print(f"    Centroid: ({entry['diffs'][0]['x']}%, {entry['diffs'][0]['y']}%), Radius: {entry['diffs'][0]['radius']}%")
+            print(f"    Current Accepted Mix: {scheduler.accepted_counts}")
+        else:
+            print(f"  ✗ REJECTED: {log_info['rejection_reason']}")
+
+    # Prepend accepted entries to manifest
+    if accepted_entries and os.path.exists(manifest_path):
+        with open(manifest_path, "r") as f:
+            existing_manifest = json.load(f)
+
+        new_ids = set(e["id"] for e in accepted_entries)
+        updated_manifest = accepted_entries + [e for e in existing_manifest if e["id"] not in new_ids]
+
         with open(manifest_path, "w") as f:
             json.dump(updated_manifest, f, indent=2)
-        print(f"\n🎉 Successfully calibrated and registered {len(approved_entries)} multi-operation AI pairs!")
 
-    print(f"🎉 Pipeline Finished! {len(approved_entries)} / {len(scenes)} passed all multi-operation QA gates.")
+        print(f"\n🎉 Successfully updated manifest with {len(accepted_entries)} accepted levels! Total entries: {len(updated_manifest)}")
+
+    print("\nFINAL BATCH ACCEPTANCE REPORT:")
+    print(f"Total Attempted: {len(scenes)}")
+    print(f"Total Accepted:  {len(accepted_entries)}")
+    print(f"Operation Mix:   {scheduler.accepted_counts}")
+
+    return accepted_entries, attempt_logs, scheduler.accepted_counts
 
 if __name__ == "__main__":
-    execute_unified_pipeline()
+    test_scenes = [
+        {"id": "pipe_v3_sewing_remove_001", "title": "[AI Remove - Medium] Tailor Notions Box Missing Spool", "image_path": "public/levels/ai_sewing_notions_base.jpg", "preferred_op": "remove", "difficulty": "Medium", "desc": "Single wooden thread spool missing from compartment", "hint": "Inspect the wooden thread spools in the compartmentalized tray"},
+        {"id": "pipe_v3_watchmaker_recolor_002", "title": "[AI Recolor - Medium] Horologist Tray Screwdriver Collar", "image_path": "public/levels/ai_watchmaker_parts_base.jpg", "preferred_op": "recolor", "difficulty": "Medium", "desc": "Single precision screwdriver collar tone shifted in CIELAB", "hint": "Examine the color-coded precision screwdrivers"},
+        {"id": "pipe_v3_electronics_add_003", "title": "[AI Add - Medium] Electronics Antistatic Bench Extra Capacitor", "image_path": "public/levels/ai_electronics_pcb_base.jpg", "preferred_op": "add", "difficulty": "Medium", "desc": "Single additional electrolytic capacitor in component row", "hint": "Scan the electrolytic capacitors in the component tray"},
+        {"id": "pipe_v3_woodworking_reorder_004", "title": "[AI Reorder - Medium] Woodworking Joinery Bench Rotated Chisel", "image_path": "public/levels/ai_woodworking_bench_base.jpg", "preferred_op": "reorder", "difficulty": "Medium", "desc": "Single wood chisel rotated on the workbench", "hint": "Check the hand tools and chisels on the wooden bench"},
+        {"id": "pipe_v3_gardener_remove_005", "title": "[AI Remove - Medium] Greenhouse Potting Bench Missing Plant Tag", "image_path": "public/levels/ai_gardener_potting_base.jpg", "preferred_op": "remove", "difficulty": "Medium", "desc": "Single colorful garden plant marker tag missing", "hint": "Check the plant marker tags on the potting bench"},
+        {"id": "pipe_v3_artist_recolor_006", "title": "[AI Recolor - Medium] Fine Art Studio Oil Paint Tube Cap", "image_path": "public/levels/ai_artist_palette_base.jpg", "preferred_op": "recolor", "difficulty": "Medium", "desc": "Single artist oil paint tube cap tone shifted in CIELAB", "hint": "Inspect the row of oil paint tubes on the palette"},
+        {"id": "pipe_v3_retro_reorder_007", "title": "[AI Reorder - Medium] Retro Gaming Desk Shifted Memory Card", "image_path": "public/levels/ai_retro_gaming_base.jpg", "preferred_op": "reorder", "difficulty": "Medium", "desc": "Single memory card shifted on the desk surface", "hint": "Look closely at the cartridges and memory cards"},
+        {"id": "pipe_v3_expedition_remove_008", "title": "[AI Remove - Medium] Expedition Prep Table Missing Carabiner", "image_path": "public/levels/ai_expedition_bushcraft_base.jpg", "preferred_op": "remove", "difficulty": "Medium", "desc": "Single locking carabiner missing from the gear array", "hint": "Check the carabiners and outdoor gear on the table"},
+        {"id": "pipe_v3_leathercraft_recolor_009", "title": "[AI Recolor - Medium] Leather Artisan Bench Waxed Thread Spool", "image_path": "public/levels/ai_leathercraft_base.jpg", "preferred_op": "recolor", "difficulty": "Medium", "desc": "Single waxed linen thread spool shifted in CIELAB", "hint": "Inspect the collection of colored waxed thread spools"},
+        {"id": "pipe_v3_miniature_add_010", "title": "[AI Add - Medium] Miniature Painter Desk Extra Dropper Bottle", "image_path": "public/levels/ai_miniature_painter_base.jpg", "preferred_op": "add", "difficulty": "Medium", "desc": "Single hobby paint dropper bottle added to rack", "hint": "Examine the rows of acrylic paint dropper bottles"}
+    ]
+
+    generate_batch(test_scenes)
