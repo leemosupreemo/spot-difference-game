@@ -1,13 +1,13 @@
 [
   {
-    "id": "fresh_ai_confectionery_truffles_001",
+    "id": "fresh_v2_ai_confectionery_truffles_001",
     "title": "[AI Multi-Op] Gourmet Confectionery & Macaron Array",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_confectionery_truffles_001_base.jpg",
-    "variantImage": "/levels/fresh_ai_confectionery_truffles_001_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_confectionery_truffles_001_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_confectionery_truffles_001_variant.jpg",
     "operation": "recolor",
     "diffs": [
       {
@@ -22,14 +22,14 @@
     ]
   },
   {
-    "id": "fresh_ai_ceramic_mosaic_tiles_002",
+    "id": "fresh_v2_ai_ceramic_mosaic_tiles_002",
     "title": "[AI Multi-Op] Mediterranean Ceramic Mosaic Tiles",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_ceramic_mosaic_tiles_002_base.jpg",
-    "variantImage": "/levels/fresh_ai_ceramic_mosaic_tiles_002_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_ceramic_mosaic_tiles_002_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_ceramic_mosaic_tiles_002_variant.jpg",
     "operation": "remove",
     "diffs": [
       {
@@ -44,14 +44,14 @@
     ]
   },
   {
-    "id": "fresh_ai_botanical_pressed_flora_003",
+    "id": "fresh_v2_ai_botanical_pressed_flora_003",
     "title": "[AI Multi-Op] Botanical Pressed Flora & Herbarium Specimen",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_botanical_pressed_flora_003_base.jpg",
-    "variantImage": "/levels/fresh_ai_botanical_pressed_flora_003_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_botanical_pressed_flora_003_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_botanical_pressed_flora_003_variant.jpg",
     "operation": "add",
     "diffs": [
       {
@@ -66,21 +66,21 @@
     ]
   },
   {
-    "id": "fresh_ai_glass_marbles_millefiori_004",
+    "id": "fresh_v2_ai_glass_marbles_millefiori_004",
     "title": "[AI Multi-Op] Antique Glass Marbles & Millefiori Beads",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_glass_marbles_millefiori_004_base.jpg",
-    "variantImage": "/levels/fresh_ai_glass_marbles_millefiori_004_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_glass_marbles_millefiori_004_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_glass_marbles_millefiori_004_variant.jpg",
     "operation": "recolor",
     "diffs": [
       {
         "id": 1,
         "x": 6.3,
         "y": 49.4,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single glass marble or millefiori bead difference",
         "hint": "Look closely at the swirl glass orbs and floral mosaic beads",
         "operation": "recolor"
@@ -88,14 +88,14 @@
     ]
   },
   {
-    "id": "fresh_ai_succulents_greenhouse_grid_005",
+    "id": "fresh_v2_ai_succulents_greenhouse_grid_005",
     "title": "[AI Multi-Op] Potted Greenhouse Succulents Grid",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_succulents_greenhouse_grid_005_base.jpg",
-    "variantImage": "/levels/fresh_ai_succulents_greenhouse_grid_005_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_succulents_greenhouse_grid_005_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_succulents_greenhouse_grid_005_variant.jpg",
     "operation": "reorder",
     "diffs": [
       {
@@ -110,20 +110,20 @@
     ]
   },
   {
-    "id": "fresh_ai_enamel_pins_collector_006",
+    "id": "fresh_v2_ai_enamel_pins_collector_006",
     "title": "[AI Multi-Op] Collector Enamel Pin Showcase",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_enamel_pins_collector_006_base.jpg",
-    "variantImage": "/levels/fresh_ai_enamel_pins_collector_006_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_enamel_pins_collector_006_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_enamel_pins_collector_006_variant.jpg",
     "operation": "remove",
     "diffs": [
       {
         "id": 1,
         "x": 14.7,
-        "y": 78.0,
+        "y": 78,
         "radius": 6.2,
         "description": "Single cloisonne enamel pin mutation",
         "hint": "Examine the geometric badges, moons, and floral enamel pins",
@@ -132,14 +132,14 @@
     ]
   },
   {
-    "id": "fresh_ai_marine_seashells_specimens_007",
+    "id": "fresh_v2_ai_marine_seashells_specimens_007",
     "title": "[AI Multi-Op] Marine Seashells & Sea Glass Array",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_marine_seashells_specimens_007_base.jpg",
-    "variantImage": "/levels/fresh_ai_marine_seashells_specimens_007_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_marine_seashells_specimens_007_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_marine_seashells_specimens_007_variant.jpg",
     "operation": "remove",
     "diffs": [
       {
@@ -154,20 +154,20 @@
     ]
   },
   {
-    "id": "fresh_ai_stained_glass_jewels_008",
+    "id": "fresh_v2_ai_stained_glass_jewels_008",
     "title": "[AI Multi-Op] Stained Glass Mosaic Jewels",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_stained_glass_jewels_008_base.jpg",
-    "variantImage": "/levels/fresh_ai_stained_glass_jewels_008_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_stained_glass_jewels_008_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_stained_glass_jewels_008_variant.jpg",
     "operation": "recolor",
     "diffs": [
       {
         "id": 1,
         "x": 20.2,
-        "y": 61.0,
+        "y": 61,
         "radius": 4.5,
         "description": "Single stained glass jewel cabochon difference",
         "hint": "Examine the faceted glass gems and colored cabochons",
@@ -176,20 +176,20 @@
     ]
   },
   {
-    "id": "fresh_ai_heirloom_spices_botanical_009",
+    "id": "fresh_v2_ai_heirloom_spices_botanical_009",
     "title": "[AI Multi-Op] Heirloom Whole Spices & Dried Botanicals",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_heirloom_spices_botanical_009_base.jpg",
-    "variantImage": "/levels/fresh_ai_heirloom_spices_botanical_009_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_heirloom_spices_botanical_009_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_heirloom_spices_botanical_009_variant.jpg",
     "operation": "recolor",
     "diffs": [
       {
         "id": 1,
         "x": 58.2,
-        "y": 11.0,
+        "y": 11,
         "radius": 5.8,
         "description": "Single aromatic whole spice dish difference",
         "hint": "Inspect the star anise pods, cardamom, and spice dishes",
@@ -198,14 +198,14 @@
     ]
   },
   {
-    "id": "fresh_ai_wooden_toy_figurines_010",
+    "id": "fresh_v2_ai_wooden_toy_figurines_010",
     "title": "[AI Multi-Op] Painted Wooden Toy Figurines & Meeples",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_ai_wooden_toy_figurines_010_base.jpg",
-    "variantImage": "/levels/fresh_ai_wooden_toy_figurines_010_variant.jpg",
+    "baseImage": "/levels/fresh_v2_ai_wooden_toy_figurines_010_base.jpg",
+    "variantImage": "/levels/fresh_v2_ai_wooden_toy_figurines_010_variant.jpg",
     "operation": "add",
     "diffs": [
       {
@@ -278,7 +278,7 @@
         "id": 1,
         "x": 93.6,
         "y": 92.5,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -298,7 +298,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 83.0,
+        "x": 83,
         "y": 15.8,
         "radius": 4.5,
         "description": "Single add difference",
@@ -321,7 +321,7 @@
       {
         "id": 1,
         "x": 1.6,
-        "y": 51.0,
+        "y": 51,
         "radius": 7.5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
@@ -366,7 +366,7 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -387,7 +387,7 @@
       {
         "id": 1,
         "x": 53.9,
-        "y": 20.0,
+        "y": 20,
         "radius": 5.6,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -408,7 +408,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.0,
+        "x": 51,
         "y": 47.5,
         "radius": 4.8,
         "description": "Single recolor difference",
@@ -541,8 +541,8 @@
       {
         "id": 1,
         "x": 70.4,
-        "y": 26.0,
-        "radius": 5.0,
+        "y": 26,
+        "radius": 5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -562,7 +562,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 78.0,
+        "x": 78,
         "y": 33.7,
         "radius": 4.5,
         "description": "Single add difference",
@@ -828,7 +828,7 @@
         "id": 1,
         "x": 93.6,
         "y": 92.5,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -871,7 +871,7 @@
       {
         "id": 1,
         "x": 4.1,
-        "y": 69.0,
+        "y": 69,
         "radius": 7.5,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -916,7 +916,7 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -1024,7 +1024,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 73.0,
+        "x": 73,
         "y": 15.4,
         "radius": 4.5,
         "description": "Single add difference",
@@ -1048,7 +1048,7 @@
         "id": 1,
         "x": 50.7,
         "y": 49.7,
-        "radius": 6.0,
+        "radius": 6,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -1244,7 +1244,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 27.0,
+        "x": 27,
         "y": 61.4,
         "radius": 4.5,
         "description": "Single add difference",
