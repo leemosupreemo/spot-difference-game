@@ -2,7 +2,7 @@
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
     "totalCurated": 72,
-    "approvedCount": 136,
+    "approvedCount": 137,
     "dismissedCount": 143,
     "wrongDifficultyCount": 0
   },
@@ -142,7 +142,8 @@
     "goldilocks_pipe_v2_artist_recolor_005",
     "goldilocks_pipe_v2_woodworking_recolor_006",
     "goldilocks_pipe_v2_retro_recolor_007",
-    "goldilocks_pipe_v2_leathercraft_recolor_009"
+    "goldilocks_pipe_v2_leathercraft_recolor_009",
+    "goldilocks_pipe_v2_miniature_recolor_010"
   ],
   "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
@@ -2982,6 +2983,10 @@
     "goldilocks_pipe_v2_leathercraft_recolor_009": {
       "status": "approved",
       "updatedAt": "2026-08-27T04:19:11.183Z"
+    },
+    "goldilocks_pipe_v2_miniature_recolor_010": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T04:19:19.454Z"
     }
   }
 }

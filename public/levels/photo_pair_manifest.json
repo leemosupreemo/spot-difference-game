@@ -3303,5 +3303,45 @@
     "variantImage": "levels/photo-pairs/photo-strategy-pieces-002/variant.jpg",
     "id": "photo_strategy_pieces_002",
     "difficulty": "Hard"
+  },
+  {
+    "id": "fresh_artist_desk_flatlay_005",
+    "title": "[80+ Objects | 43% Clutter] Fine Art Watercolor Studio Knolling",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/fresh_artist_desk_flatlay_005_base.jpg",
+    "variantImage": "/levels/fresh_artist_desk_flatlay_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 51.7,
+        "radius": 7.5,
+        "description": "Single watercolor paint pigment pan removed from desk organizer",
+        "hint": "Inspect the flat lay arrangement of brushes, paint pans, and tools"
+      }
+    ]
+  },
+  {
+    "id": "fresh_photo_leathercraft_001",
+    "title": "Bespoke Leathercraft Saddle Stitch Tooling",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_photo_leathercraft_001_base.jpg",
+    "variantImage": "/levels/fresh_photo_leathercraft_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.3,
+        "y": 53.7,
+        "radius": 6.5,
+        "description": "Pricking iron punch on cutting mat",
+        "hint": "Examine the leatherworking tools on the mat"
+      }
+    ]
   }
 ]
