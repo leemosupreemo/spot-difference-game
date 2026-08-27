@@ -12,12 +12,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 74.7,
-        "y": 25.1,
-        "radius": 4.5,
-        "description": "Single pasta shape mutation in wooden compartment",
-        "hint": "Inspect the compartments of farfalle, rigatoni, and pasta shapes",
-        "operation": "recolor"
+        "x": 75.0,
+        "y": 24.8,
+        "radius": 5.2
       }
     ]
   },
@@ -36,10 +33,7 @@
         "id": 1,
         "x": 21.6,
         "y": 60.2,
-        "radius": 5.7,
-        "description": "Single mineral crystal or agate slice difference",
-        "hint": "Scan the amethyst geodes, pyrite cubes, and agate slices",
-        "operation": "remove"
+        "radius": 6.5
       }
     ]
   },
@@ -58,10 +52,7 @@
         "id": 1,
         "x": 72.1,
         "y": 59.1,
-        "radius": 4.5,
-        "description": "Single antique key or escutcheon plate difference",
-        "hint": "Examine the rows of ornate brass keys and lock plates",
-        "operation": "add"
+        "radius": 5.0
       }
     ]
   },
@@ -80,10 +71,7 @@
         "id": 1,
         "x": 68.7,
         "y": 7.8,
-        "radius": 5,
-        "description": "Single silk floss skein or thread spool difference",
-        "hint": "Look closely at the colored thread spools and silk skeins",
-        "operation": "reorder"
+        "radius": 5.8
       }
     ]
   },
@@ -100,12 +88,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 93,
-        "y": 80.4,
-        "radius": 4.5,
-        "description": "Single ceramic tea bowl difference",
-        "hint": "Scan the array of blue-and-white porcelain, Bizen, and celadon cups",
-        "operation": "recolor"
+        "x": 92.9,
+        "y": 80.5,
+        "radius": 5.0
       }
     ]
   },
@@ -124,10 +109,7 @@
         "id": 1,
         "x": 71.2,
         "y": 33.1,
-        "radius": 5.6,
-        "description": "Single pinned butterfly specimen difference",
-        "hint": "Examine the rows of swallowtails, morphos, and moths",
-        "operation": "remove"
+        "radius": 6.5
       }
     ]
   },
@@ -146,10 +128,7 @@
         "id": 1,
         "x": 49.6,
         "y": 76.2,
-        "radius": 6.4,
-        "description": "Single bronze coin or stamped wax seal difference",
-        "hint": "Inspect the Roman sestertii, Greek drachmas, and wax seals",
-        "operation": "remove"
+        "radius": 7.3
       }
     ]
   },
@@ -167,11 +146,8 @@
       {
         "id": 1,
         "x": 29.8,
-        "y": 84,
-        "radius": 5.8,
-        "description": "Single glass paperweight orb difference",
-        "hint": "Examine the swirl glass orbs, millefiori eggs, and aventurine gems",
-        "operation": "reorder"
+        "y": 84.0,
+        "radius": 6.8
       }
     ]
   },
@@ -188,12 +164,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 40.5,
+        "x": 40.6,
         "y": 20.2,
-        "radius": 4.5,
-        "description": "Single dried wild mushroom dish difference",
-        "hint": "Inspect the morel caps, golden chanterelles, and mushroom dishes",
-        "operation": "add"
+        "radius": 5.0
       }
     ]
   },
@@ -210,12 +183,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 76,
-        "y": 93.7,
-        "radius": 4.5,
-        "description": "Single brass drafting instrument difference",
-        "hint": "Examine the brass bow compasses, proportional dividers, and ruling pens",
-        "operation": "recolor"
+        "x": 76.0,
+        "y": 93.6,
+        "radius": 5.0
       }
     ]
   },
@@ -232,12 +202,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 73.8,
-        "y": 56.1,
-        "radius": 5.2,
-        "description": "Single confectionery treat mutation in tray",
-        "hint": "Inspect the compartmentalized rows of truffles, macarons, and jellies",
-        "operation": "recolor"
+        "x": 73.5,
+        "y": 55.7,
+        "radius": 6.0
       }
     ]
   },
@@ -256,10 +223,7 @@
         "id": 1,
         "x": 88.6,
         "y": 53.3,
-        "radius": 5.7,
-        "description": "Single mosaic ceramic shard difference",
-        "hint": "Scan the geometric and floral glazed pottery tiles",
-        "operation": "remove"
+        "radius": 6.8
       }
     ]
   },
@@ -278,10 +242,7 @@
         "id": 1,
         "x": 14.7,
         "y": 4.8,
-        "radius": 4.5,
-        "description": "Single pressed flower or botanical element difference",
-        "hint": "Examine the pressed wildflower petals, fern fronds, and seed pods",
-        "operation": "add"
+        "radius": 5.1
       }
     ]
   },
@@ -298,12 +259,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 6.3,
-        "y": 49.4,
-        "radius": 5,
-        "description": "Single glass marble or millefiori bead difference",
-        "hint": "Look closely at the swirl glass orbs and floral mosaic beads",
-        "operation": "recolor"
+        "x": 6.1,
+        "y": 49.6,
+        "radius": 5.8
       }
     ]
   },
@@ -322,10 +280,7 @@
         "id": 1,
         "x": 14.3,
         "y": 61.3,
-        "radius": 6.1,
-        "description": "Single potted succulent rosette difference",
-        "hint": "Scan the array of miniature potted rosettes and cacti",
-        "operation": "reorder"
+        "radius": 6.9
       }
     ]
   },
@@ -343,11 +298,8 @@
       {
         "id": 1,
         "x": 14.7,
-        "y": 78,
-        "radius": 6.2,
-        "description": "Single cloisonne enamel pin mutation",
-        "hint": "Examine the geometric badges, moons, and floral enamel pins",
-        "operation": "remove"
+        "y": 78.0,
+        "radius": 7.3
       }
     ]
   },
@@ -365,11 +317,8 @@
       {
         "id": 1,
         "x": 56.9,
-        "y": 60.4,
-        "radius": 6.9,
-        "description": "Single seashell or sea glass difference",
-        "hint": "Inspect the nautilus, scallop shells, and polished sea glass",
-        "operation": "remove"
+        "y": 60.5,
+        "radius": 7.8
       }
     ]
   },
@@ -386,12 +335,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 20.2,
-        "y": 61,
-        "radius": 4.5,
-        "description": "Single stained glass jewel cabochon difference",
-        "hint": "Examine the faceted glass gems and colored cabochons",
-        "operation": "recolor"
+        "x": 20.1,
+        "y": 61.1,
+        "radius": 5.0
       }
     ]
   },
@@ -409,11 +355,8 @@
       {
         "id": 1,
         "x": 58.2,
-        "y": 11,
-        "radius": 5.8,
-        "description": "Single aromatic whole spice dish difference",
-        "hint": "Inspect the star anise pods, cardamom, and spice dishes",
-        "operation": "recolor"
+        "y": 10.9,
+        "radius": 6.6
       }
     ]
   },
@@ -432,10 +375,7 @@
         "id": 1,
         "x": 56.2,
         "y": 84.4,
-        "radius": 4.5,
-        "description": "Single wooden toy meeple or domino difference",
-        "hint": "Examine the rows of wooden animal shapes, meeples, and domino blocks",
-        "operation": "add"
+        "radius": 5.0
       }
     ]
   },
@@ -452,12 +392,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.9,
-        "y": 54.1,
-        "radius": 5.6,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 48.5,
+        "y": 53.7,
+        "radius": 7.1
       }
     ]
   },
@@ -476,10 +413,7 @@
         "id": 1,
         "x": 60.2,
         "y": 80.9,
-        "radius": 4.9,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 5.8
       }
     ]
   },
@@ -498,10 +432,7 @@
         "id": 1,
         "x": 93.6,
         "y": 92.5,
-        "radius": 5,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "radius": 5.8
       }
     ]
   },
@@ -518,12 +449,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 83,
+        "x": 83.0,
         "y": 15.8,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "radius": 5.2
       }
     ]
   },
@@ -540,12 +468,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 1.6,
-        "y": 51,
-        "radius": 7.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 1.5,
+        "y": 50.9,
+        "radius": 10.3
       }
     ]
   },
@@ -562,12 +487,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.5,
-        "y": 44.1,
-        "radius": 6.8,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "x": 34.4,
+        "y": 44.0,
+        "radius": 7.8
       }
     ]
   },
@@ -586,10 +508,7 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "radius": 5.3
       }
     ]
   },
@@ -606,12 +525,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 53.9,
-        "y": 20,
-        "radius": 5.6,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "x": 53.8,
+        "y": 20.0,
+        "radius": 6.6
       }
     ]
   },
@@ -628,12 +544,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51,
-        "y": 47.5,
-        "radius": 4.8,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 51.0,
+        "y": 47.4,
+        "radius": 5.8
       }
     ]
   },
@@ -652,10 +565,7 @@
         "id": 1,
         "x": 86.4,
         "y": 86.6,
-        "radius": 6.9,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 7.7
       }
     ]
   },
@@ -673,11 +583,8 @@
       {
         "id": 1,
         "x": 15.3,
-        "y": 25.7,
-        "radius": 7.8,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "y": 25.6,
+        "radius": 9.0
       }
     ]
   },
@@ -694,12 +601,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 36.2,
-        "y": 26.1,
-        "radius": 7.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 36.3,
+        "y": 26.6,
+        "radius": 9.2
       }
     ]
   },
@@ -718,10 +622,7 @@
         "id": 1,
         "x": 40.4,
         "y": 54.8,
-        "radius": 6.4,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 7.5
       }
     ]
   },
@@ -740,10 +641,7 @@
         "id": 1,
         "x": 54.2,
         "y": 55.7,
-        "radius": 6.8,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "radius": 7.7
       }
     ]
   },
@@ -760,12 +658,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 70.4,
-        "y": 26,
-        "radius": 5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 70.2,
+        "y": 25.8,
+        "radius": 5.8
       }
     ]
   },
@@ -782,12 +677,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 78,
-        "y": 33.7,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "x": 78.0,
+        "y": 33.6,
+        "radius": 5.1
       }
     ]
   },
@@ -804,12 +696,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 12.8,
-        "y": 49.6,
-        "radius": 6.4,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "x": 12.9,
+        "y": 49.7,
+        "radius": 7.3
       }
     ]
   },
@@ -828,10 +717,7 @@
         "id": 1,
         "x": 57.6,
         "y": 80.5,
-        "radius": 5.3,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 6.2
       }
     ]
   },
@@ -850,10 +736,7 @@
         "id": 1,
         "x": 91.5,
         "y": 37.5,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "radius": 5.1
       }
     ]
   },
@@ -871,11 +754,8 @@
       {
         "id": 1,
         "x": 91.2,
-        "y": 87.1,
-        "radius": 7.3,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "y": 87.2,
+        "radius": 8.1
       }
     ]
   },
@@ -892,12 +772,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 1.6,
-        "y": 94.9,
-        "radius": 6.3,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 1.8,
+        "y": 93.9,
+        "radius": 7.1
       }
     ]
   },
@@ -916,10 +793,7 @@
         "id": 1,
         "x": 20.5,
         "y": 63.3,
-        "radius": 5.2,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 6.2
       }
     ]
   },
@@ -937,11 +811,8 @@
       {
         "id": 1,
         "x": 56.3,
-        "y": 34.3,
-        "radius": 6.5,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "y": 34.2,
+        "radius": 7.5
       }
     ]
   },
@@ -959,11 +830,8 @@
       {
         "id": 1,
         "x": 40.5,
-        "y": 28.5,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "y": 28.4,
+        "radius": 5.2
       }
     ]
   },
@@ -981,11 +849,8 @@
       {
         "id": 1,
         "x": 4.1,
-        "y": 69,
-        "radius": 7.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "y": 69.1,
+        "radius": 10.4
       }
     ]
   },
@@ -1004,10 +869,7 @@
         "id": 1,
         "x": 57.6,
         "y": 80.5,
-        "radius": 5.3,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 6.2
       }
     ]
   },
@@ -1024,12 +886,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 73,
+        "x": 73.0,
         "y": 15.4,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "radius": 5.5
       }
     ]
   },
@@ -1046,12 +905,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.7,
-        "y": 49.7,
-        "radius": 6,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 50.4,
+        "y": 50.1,
+        "radius": 6.8
       }
     ]
   },
@@ -1070,10 +926,7 @@
         "id": 1,
         "x": 60.8,
         "y": 15.4,
-        "radius": 7.5,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 9.7
       }
     ]
   },
@@ -1092,10 +945,7 @@
         "id": 1,
         "x": 2.8,
         "y": 15.2,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "radius": 5.5
       }
     ]
   },
@@ -1113,11 +963,8 @@
       {
         "id": 1,
         "x": 49.9,
-        "y": 91.6,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "y": 91.7,
+        "radius": 5.0
       }
     ]
   },
@@ -1134,12 +981,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 27.5,
-        "y": 72.8,
-        "radius": 7.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 27.6,
+        "y": 73.2,
+        "radius": 11.5
       }
     ]
   },
@@ -1157,11 +1001,8 @@
       {
         "id": 1,
         "x": 44.5,
-        "y": 90.7,
-        "radius": 6.1,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "y": 90.8,
+        "radius": 7.3
       }
     ]
   },
@@ -1180,10 +1021,7 @@
         "id": 1,
         "x": 42.9,
         "y": 84.6,
-        "radius": 7.5,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 9.9
       }
     ]
   },
@@ -1201,11 +1039,8 @@
       {
         "id": 1,
         "x": 97.7,
-        "y": 64.8,
-        "radius": 7.9,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "y": 64.7,
+        "radius": 8.7
       }
     ]
   },
@@ -1223,11 +1058,8 @@
       {
         "id": 1,
         "x": 17.5,
-        "y": 71.3,
-        "radius": 7.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "y": 71.5,
+        "radius": 12.4
       }
     ]
   },
@@ -1244,12 +1076,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 27,
+        "x": 27.0,
         "y": 61.4,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "radius": 5.0
       }
     ]
   },
@@ -1267,11 +1096,8 @@
       {
         "id": 1,
         "x": 9.8,
-        "y": 43.7,
-        "radius": 7.5,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "y": 43.6,
+        "radius": 12.0
       }
     ]
   },
@@ -1288,12 +1114,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.2,
+        "x": 34.5,
         "y": 24.8,
-        "radius": 5.9,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "radius": 6.7
       }
     ]
   },
@@ -1310,12 +1133,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 11.8,
+        "x": 11.7,
         "y": 51.4,
-        "radius": 6,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "radius": 6.9
       }
     ]
   },
@@ -1333,11 +1153,8 @@
       {
         "id": 1,
         "x": 56.1,
-        "y": 33.9,
-        "radius": 5.2,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
+        "y": 34.0,
+        "radius": 6.0
       }
     ]
   },
@@ -1356,10 +1173,7 @@
         "id": 1,
         "x": 8.5,
         "y": 71.5,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "radius": 5.0
       }
     ]
   },
@@ -1377,11 +1191,8 @@
       {
         "id": 1,
         "x": 93.8,
-        "y": 77.7,
-        "radius": 5.7,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
+        "y": 77.8,
+        "radius": 6.9
       }
     ]
   },
@@ -1398,12 +1209,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 2,
-        "y": 5.5,
-        "radius": 6.7,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
+        "x": 1.5,
+        "y": 5.1,
+        "radius": 7.0
       }
     ]
   },
@@ -1421,11 +1229,8 @@
       {
         "id": 1,
         "x": 61.6,
-        "y": 47.6,
-        "radius": 5,
-        "description": "Single wooden thread spool missing from compartment",
-        "hint": "Inspect the wooden thread spools in the compartmentalized tray",
-        "operation": "remove"
+        "y": 47.7,
+        "radius": 5.8
       }
     ]
   },
@@ -1442,12 +1247,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 26.2,
-        "y": 61.5,
-        "radius": 6,
-        "description": "Single precision screwdriver collar tone shifted in CIELAB",
-        "hint": "Examine the color-coded precision screwdrivers",
-        "operation": "recolor"
+        "x": 26.1,
+        "y": 61.6,
+        "radius": 6.9
       }
     ]
   },
@@ -1464,12 +1266,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 44.1,
+        "x": 44.0,
         "y": 38.3,
-        "radius": 4.5,
-        "description": "Single additional electrolytic capacitor in component row",
-        "hint": "Scan the electrolytic capacitors in the component tray",
-        "operation": "add"
+        "radius": 5.0
       }
     ]
   },
@@ -1486,12 +1285,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.2,
+        "x": 86.3,
         "y": 86.3,
-        "radius": 5.8,
-        "description": "Single colorful garden plant marker tag missing",
-        "hint": "Check the plant marker tags on the potting bench",
-        "operation": "remove"
+        "radius": 6.6
       }
     ]
   },
@@ -1510,10 +1306,7 @@
         "id": 1,
         "x": 56.2,
         "y": 34.1,
-        "radius": 5.3,
-        "description": "Single memory card shifted on the desk surface",
-        "hint": "Look closely at the cartridges and memory cards",
-        "operation": "reorder"
+        "radius": 6.1
       }
     ]
   },
@@ -1530,12 +1323,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 98.5,
+        "x": 98.4,
         "y": 81.8,
-        "radius": 5.4,
-        "description": "Single locking carabiner missing from the gear array",
-        "hint": "Check the carabiners and outdoor gear on the table",
-        "operation": "remove"
+        "radius": 6.4
       }
     ]
   },
@@ -1553,10 +1343,8 @@
       {
         "id": 1,
         "x": 53.9,
-        "y": 55.4,
-        "radius": 4.2,
-        "description": "Single wooden cotton thread spool missing from the compartmentalized notions tray",
-        "hint": "Inspect the wooden thread spools in the sorting compartments of the notions box"
+        "y": 55.3,
+        "radius": 5.8
       }
     ]
   },
@@ -1575,9 +1363,7 @@
         "id": 1,
         "x": 18.5,
         "y": 51.5,
-        "radius": 4.2,
-        "description": "Single precision screwdriver color collar shifted in CIELAB",
-        "hint": "Examine the color-coded precision screwdrivers on the work pad"
+        "radius": 5.2
       }
     ]
   },
@@ -1596,9 +1382,7 @@
         "id": 1,
         "x": 45.1,
         "y": 48.6,
-        "radius": 4.2,
-        "description": "Single additional electrolytic capacitor added to the component array",
-        "hint": "Scan the electrolytic capacitors in the upper component tray"
+        "radius": 5.0
       }
     ]
   },
@@ -1617,9 +1401,7 @@
         "id": 1,
         "x": 86.2,
         "y": 86.3,
-        "radius": 4.2,
-        "description": "Single colorful garden plant marker tag missing from the bench",
-        "hint": "Check the plant marker tags on the potting bench"
+        "radius": 6.6
       }
     ]
   },
@@ -1638,9 +1420,7 @@
         "id": 1,
         "x": 38.4,
         "y": 32.9,
-        "radius": 5.2,
-        "description": "Single artist oil paint tube cap tone shifted in CIELAB",
-        "hint": "Inspect the row of oil paint tubes on the palette"
+        "radius": 6.2
       }
     ]
   },
@@ -1658,10 +1438,8 @@
       {
         "id": 1,
         "x": 66.8,
-        "y": 84.7,
-        "radius": 7.5,
-        "description": "Single wooden carpenter marking pencil tone shifted in CIELAB",
-        "hint": "Look closely at the colored carpenter marking pencils"
+        "y": 84.6,
+        "radius": 13.1
       }
     ]
   },
@@ -1678,11 +1456,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 70.9,
-        "y": 73.5,
-        "radius": 4.7,
-        "description": "Single vintage game cartridge shell tone shifted in CIELAB",
-        "hint": "Scan the retro game cartridges and memory cards on the desk"
+        "x": 71.0,
+        "y": 73.4,
+        "radius": 5.5
       }
     ]
   },
@@ -1700,10 +1476,8 @@
       {
         "id": 1,
         "x": 59.5,
-        "y": 21.8,
-        "radius": 4.6,
-        "description": "Single locking carabiner missing from the gear array",
-        "hint": "Check the carabiners and outdoor gear on the table"
+        "y": 21.7,
+        "radius": 8.0
       }
     ]
   },
@@ -1721,10 +1495,8 @@
       {
         "id": 1,
         "x": 71.5,
-        "y": 22.6,
-        "radius": 4.3,
-        "description": "Single waxed linen thread spool shifted in CIELAB",
-        "hint": "Inspect the collection of colored waxed thread spools"
+        "y": 22.5,
+        "radius": 5.4
       }
     ]
   },
@@ -1742,10 +1514,8 @@
       {
         "id": 1,
         "x": 15.6,
-        "y": 36.3,
-        "radius": 5.6,
-        "description": "Single acrylic hobby paint dropper bottle cap shifted in CIELAB",
-        "hint": "Examine the rows of acrylic paint dropper bottles"
+        "y": 36.2,
+        "radius": 6.6
       }
     ]
   },
@@ -1761,9 +1531,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.1,
-        "y": 52.5,
-        "radius": 4.5
+        "x": 33.5,
+        "y": 53.0,
+        "radius": 5.0
       }
     ]
   },
@@ -1781,7 +1551,7 @@
         "id": 1,
         "x": 52.1,
         "y": 51.4,
-        "radius": 8.5
+        "radius": 16.0
       }
     ]
   },
@@ -1817,7 +1587,7 @@
         "id": 1,
         "x": 47.9,
         "y": 45.9,
-        "radius": 4.5
+        "radius": 5.0
       }
     ]
   },
@@ -1851,9 +1621,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 53.5,
-        "y": 46.1,
-        "radius": 8.5
+        "x": 53.6,
+        "y": 45.8,
+        "radius": 16.0
       }
     ]
   },
@@ -1871,9 +1641,7 @@
         "id": 1,
         "x": 51.9,
         "y": 47.9,
-        "radius": 4.5,
-        "description": "Single brass pinion wheel removed from master watchmaker parts tray",
-        "hint": "Inspect the dense array of exposed gears, balance springs, and jewel pivots"
+        "radius": 5.0
       }
     ]
   },
@@ -1891,7 +1659,7 @@
         "id": 1,
         "x": 48.3,
         "y": 34.0,
-        "radius": 8.5
+        "radius": 16.0
       }
     ]
   },
@@ -1907,9 +1675,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.9,
-        "y": 51.8,
-        "radius": 8.5
+        "x": 54.0,
+        "y": 50.1,
+        "radius": 5.0
       }
     ]
   },
@@ -1982,8 +1750,8 @@
       {
         "id": 1,
         "x": 48.3,
-        "y": 34.1,
-        "radius": 8.5
+        "y": 34.0,
+        "radius": 16.0
       }
     ]
   },
@@ -1999,9 +1767,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.2,
-        "y": 51.7,
-        "radius": 8.5
+        "x": 54.0,
+        "y": 50.1,
+        "radius": 5.0
       }
     ]
   },
@@ -2019,7 +1787,7 @@
         "id": 1,
         "x": 43.7,
         "y": 53.8,
-        "radius": 4.5
+        "radius": 5.0
       }
     ]
   },
@@ -2035,11 +1803,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.9,
-        "y": 47.9,
-        "radius": 4.5,
-        "description": "Single brass pinion wheel removed from master watchmaker parts tray",
-        "hint": "Inspect the dense array of exposed gears, balance springs, and jewel pivots"
+        "x": 52.0,
+        "y": 48.0,
+        "radius": 5.0
       }
     ]
   },
@@ -2057,7 +1823,7 @@
         "id": 1,
         "x": 47.0,
         "y": 50.9,
-        "radius": 4.5
+        "radius": 5.0
       }
     ]
   },
@@ -2075,7 +1841,7 @@
         "id": 1,
         "x": 49.8,
         "y": 53.8,
-        "radius": 4.5
+        "radius": 5.0
       }
     ]
   },
@@ -2091,9 +1857,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 44.1,
+        "x": 43.9,
         "y": 49.4,
-        "radius": 4.5
+        "radius": 5.1
       }
     ]
   },
@@ -2110,8 +1876,8 @@
       {
         "id": 1,
         "x": 77.5,
-        "y": 73.6,
-        "radius": 8.5
+        "y": 73.5,
+        "radius": 16.0
       }
     ]
   },
@@ -2129,12 +1895,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 24.3,
+        "x": 23.9,
         "y": 79.6,
-        "radius": 9,
-        "description": "Single star anise pod or spice cluster shifted in tone",
-        "hint": "Scan the spice dishes and whole botanicals for a subtle tone shift",
-        "operation": "recolor"
+        "radius": 10.4
       }
     ]
   },
@@ -2175,12 +1938,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 30.7,
-        "y": 84.5,
-        "radius": 9,
-        "description": "Single pastel stick color shifted in the wooden organizer drawer",
-        "hint": "Inspect the organized rows of colored pencils and pastels",
-        "operation": "recolor"
+        "x": 30.8,
+        "y": 84.4,
+        "radius": 9.4
       }
     ]
   },
@@ -2222,11 +1982,8 @@
       {
         "id": 1,
         "x": 18.6,
-        "y": 51.4,
-        "radius": 5,
-        "description": "Single brass gear pinion shifted in warmth",
-        "hint": "Check the precision watchmaker brass gears and ruby jewel bearings",
-        "operation": "recolor"
+        "y": 51.3,
+        "radius": 5.2
       }
     ]
   },
@@ -2244,12 +2001,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 36.5,
-        "y": 83,
-        "radius": 8.5,
-        "description": "Single leaded glass pane shifted in color",
-        "hint": "Scan the luminous stained glass facets and leaded borders",
-        "operation": "recolor"
+        "x": 36.4,
+        "y": 83.0,
+        "radius": 10.2
       }
     ]
   },
@@ -2290,12 +2044,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35,
-        "y": 29.1,
-        "radius": 9,
-        "description": "Single botanical plant marker or terracotta item shifted in tone",
-        "hint": "Check the potting bench tools, seeds, and plant tags",
-        "operation": "recolor"
+        "x": 35.0,
+        "y": 29.4,
+        "radius": 13.7
       }
     ]
   },
@@ -2313,12 +2064,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 33.2,
-        "y": 79,
-        "radius": 4.5,
-        "description": "Single spool of vibrant thread shifted in hue",
-        "hint": "Look across the wooden sewing table for a thread spool color shift",
-        "operation": "recolor"
+        "x": 33.3,
+        "y": 79.3,
+        "radius": 5.0
       }
     ]
   },
@@ -2382,12 +2130,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 76.4,
+        "x": 76.3,
         "y": 28.4,
-        "radius": 4.5,
-        "description": "Single vintage sew-through button tone shifted in its compartment",
-        "hint": "Inspect the button compartments for a nuanced color variation",
-        "operation": "recolor"
+        "radius": 5.0
       }
     ]
   },
@@ -2405,12 +2150,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 8.6,
-        "y": 46.4,
-        "radius": 4.5,
-        "description": "Single wooden meeple token color shifted",
-        "hint": "Check the colorful wooden meeples and tokens on the table",
-        "operation": "recolor"
+        "x": 8.5,
+        "y": 46.2,
+        "radius": 5.0
       }
     ]
   },
@@ -2497,12 +2239,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 8.6,
-        "y": 46.4,
-        "radius": 4.5,
-        "description": "Single wooden meeple token color shifted",
-        "hint": "Check the colorful wooden meeples and tokens on the table",
-        "operation": "recolor"
+        "x": 8.5,
+        "y": 46.2,
+        "radius": 5.0
       }
     ]
   },
@@ -2565,11 +2304,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 45,
+        "x": 45.0,
         "y": 39.7,
-        "radius": 4.2,
-        "description": "Single additional toothed brass watch gear added to the parts tray",
-        "hint": "Inspect the loose watch gears and movement wheels in the center tray"
+        "radius": 5.0
       }
     ]
   },
@@ -2587,10 +2324,8 @@
       {
         "id": 1,
         "x": 48.5,
-        "y": 35.2,
-        "radius": 4.2,
-        "description": "Single additional vintage game cartridge added alongside the cartridge array",
-        "hint": "Scan the retro game cartridges and memory cards on the desk"
+        "y": 35.1,
+        "radius": 5.0
       }
     ]
   },
@@ -2630,9 +2365,7 @@
         "id": 1,
         "x": 46.2,
         "y": 6.5,
-        "radius": 4.2,
-        "description": "Single carving gouge brass ferrule ring tone shifted in CIELAB",
-        "hint": "Look closely at the brass ferrules on the woodworking chisels and gouges"
+        "radius": 5.0
       }
     ]
   },
@@ -2649,11 +2382,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54,
+        "x": 54.0,
         "y": 53.9,
-        "radius": 4.2,
-        "description": "Single additional steel round hole punch tool added to the workbench array",
-        "hint": "Check the collection of steel hole punch dies and bevelers"
+        "radius": 5.0
       }
     ]
   },
@@ -2671,9 +2402,7 @@
         "id": 1,
         "x": 46.2,
         "y": 6.5,
-        "radius": 4.2,
-        "description": "Single carpenter marking pencil sharpened lead collar shifted in CIELAB",
-        "hint": "Scan the carpenter marking pencils and chisel collars"
+        "radius": 5.0
       }
     ]
   },
@@ -2690,10 +2419,8 @@
       {
         "id": 1,
         "x": 80.5,
-        "y": 64.1,
-        "radius": 4.2,
-        "description": "Single paracord spring lock slider tone shifted in CIELAB",
-        "hint": "Check the cord lock toggles and carabiner gate collars"
+        "y": 64.0,
+        "radius": 5.0
       }
     ]
   },
@@ -2769,11 +2496,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 64.5,
+        "x": 64.8,
         "y": 12.6,
-        "radius": 9,
-        "description": "Single wooden carpenter marking pencil tone shifted in CIELAB",
-        "hint": "Look closely at the colored carpenter marking pencils"
+        "radius": 11.0
       }
     ]
   },
@@ -2871,9 +2596,7 @@
         "id": 1,
         "x": 60.6,
         "y": 24.4,
-        "radius": 4.2,
-        "description": "Single retro cartridge spine label tone shifted in CIELAB",
-        "hint": "Scan the vintage gaming cartridges and tech accessories"
+        "radius": 5.0
       }
     ]
   },
@@ -3051,7 +2774,7 @@
         "id": 1,
         "x": 50.3,
         "y": 43.4,
-        "radius": 8.5
+        "radius": 9.8
       }
     ]
   },
@@ -3167,9 +2890,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.1,
-        "y": 51.5,
-        "radius": 8.5
+        "x": 51.5,
+        "y": 49.1,
+        "radius": 16.0
       }
     ]
   },
@@ -3186,8 +2909,8 @@
       {
         "id": 1,
         "x": 41.3,
-        "y": 26.5,
-        "radius": 4.5
+        "y": 26.4,
+        "radius": 5.0
       }
     ]
   },
@@ -3203,11 +2926,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 65.8,
-        "y": 43.7,
-        "radius": 9,
-        "description": "Stitching awl on the workbench",
-        "hint": "Look at the wooden tools on the right side of the cutting mat"
+        "x": 65.7,
+        "y": 44.2,
+        "radius": 16.0
       }
     ]
   },
@@ -3223,9 +2944,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 56.9,
-        "y": 80.2,
-        "radius": 8.5
+        "x": 57.4,
+        "y": 79.6,
+        "radius": 15.0
       }
     ]
   },
@@ -3241,9 +2962,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.4,
-        "y": 24.0,
-        "radius": 8.2
+        "x": 86.5,
+        "y": 23.9,
+        "radius": 9.2
       }
     ]
   },
@@ -3258,11 +2979,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 57.8,
-        "y": 55.4,
-        "radius": 9,
-        "description": "Balance wheel shock cap ruby jewel changed from magenta to emerald green",
-        "hint": "Look at the shock jewel in the center of the balance wheel"
+        "x": 56.0,
+        "y": 56.3,
+        "radius": 10.1
       }
     ]
   },
@@ -3277,9 +2996,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 56.1,
-        "y": 58.8,
-        "radius": 8.5
+        "x": 55.6,
+        "y": 58.9,
+        "radius": 16.0
       }
     ]
   },
@@ -3292,11 +3011,10 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 76,
         "id": 1,
-        "hint": "Check the carved decorative relief piece next to the wooden spoon.",
-        "x": 44,
-        "radius": 9
+        "x": 43.8,
+        "y": 76.8,
+        "radius": 13.4
       }
     ],
     "variantImage": "levels/photo-pairs/ai_macro_woodcarver_001/variant.png",
@@ -3352,9 +3070,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 60.9,
-        "y": 48.5,
-        "radius": 7.6
+        "x": 60.8,
+        "y": 48.4,
+        "radius": 8.4
       }
     ],
     "id": "ai_macro_cartography_001",
@@ -3415,7 +3133,7 @@
         "id": 1,
         "x": 41.6,
         "y": 27.2,
-        "radius": 4.5
+        "radius": 5.0
       }
     ],
     "category": "Photography",
@@ -3457,11 +3175,10 @@
     "variantImage": "levels/photo-pairs/ai_macro_watchmaker_001/variant.png",
     "diffs": [
       {
-        "y": 31,
         "id": 1,
-        "hint": "Look inside the small brass cleaning cup in the upper right section.",
-        "x": 65.8,
-        "radius": 6.9
+        "x": 65.7,
+        "y": 30.8,
+        "radius": 7.3
       }
     ],
     "pack": "Find the Sniper",
@@ -3476,11 +3193,10 @@
     "originalImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
     "diffs": [
       {
-        "y": 69.8,
         "id": 1,
-        "hint": "Examine the lower left margin of the center poppy illustration card.",
-        "x": 37.4,
-        "radius": 4.5
+        "x": 37.1,
+        "y": 69.9,
+        "radius": 5.0
       }
     ],
     "baseImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
@@ -3520,11 +3236,10 @@
     "baseImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
     "diffs": [
       {
-        "y": 28.9,
         "id": 1,
-        "hint": "Check the bat lever color on the miniature toggle switches.",
-        "x": 69.3,
-        "radius": 8.8
+        "x": 69.4,
+        "y": 29.9,
+        "radius": 8.9
       }
     ],
     "id": "ai_macro_electronics_001",
@@ -3542,9 +3257,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 70.4,
-        "y": 89.8,
-        "radius": 8.5
+        "x": 70.1,
+        "y": 89.6,
+        "radius": 14.6
       }
     ],
     "baseImage": "levels/photo-pairs/crafts/easy_craft_001/base.jpg",
@@ -3561,11 +3276,10 @@
     "id": "medium_nursery_001",
     "diffs": [
       {
-        "y": 40.7,
         "id": 1,
-        "hint": "Scan the plant tags in the upper-right tray.",
-        "x": 63.5,
-        "radius": 9
+        "x": 63.8,
+        "y": 40.6,
+        "radius": 13.2
       }
     ],
     "category": "Greenhouse Clutter"
@@ -3575,11 +3289,10 @@
     "variantImage": "levels/photo-pairs/workbench/medium_workbench_001/variant.jpg",
     "diffs": [
       {
-        "y": 49.9,
         "id": 1,
-        "hint": "Inspect the small screwdriver handle near the right-middle tools.",
-        "x": 49.7,
-        "radius": 9
+        "x": 49.5,
+        "y": 48.7,
+        "radius": 16.0
       }
     ],
     "category": "Workshop Clutter",
@@ -3594,11 +3307,10 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 51.3,
         "id": 1,
-        "hint": "Look for the camouflaged tiny figure near center-right.",
-        "x": 50.4,
-        "radius": 9
+        "x": 50.0,
+        "y": 50.5,
+        "radius": 16.0
       }
     ],
     "title": "Forest Floor Camouflage",
@@ -3617,11 +3329,10 @@
     "baseImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/base.jpg",
     "diffs": [
       {
-        "y": 48.1,
         "id": 1,
-        "hint": "Compare the small silver screw between the right-side hardware.",
         "x": 66.9,
-        "radius": 4.2
+        "y": 48.2,
+        "radius": 5.0
       }
     ],
     "variantImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/variant.jpg",
@@ -3630,11 +3341,10 @@
   {
     "diffs": [
       {
-        "y": 53.9,
         "id": 1,
-        "hint": "Inspect the shifted orange tile fragment left of center.",
-        "x": 36.5,
-        "radius": 5.4
+        "x": 36.6,
+        "y": 53.7,
+        "radius": 5.6
       }
     ],
     "baseImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/base.jpg",
@@ -3654,11 +3364,10 @@
     "variantImage": "levels/photo-pairs/wire-tangle/hard_wire_clip_001/variant.jpg",
     "diffs": [
       {
-        "y": 57.2,
         "id": 1,
-        "hint": "Compare the angle of the small clip in the lower-right wire tangle.",
-        "x": 73.6,
-        "radius": 4.9
+        "x": 73.7,
+        "y": 57.2,
+        "radius": 6.3
       }
     ],
     "difficulty": "Hard",
@@ -3671,11 +3380,10 @@
     "title": "Workbench Hardware Ring",
     "diffs": [
       {
-        "y": 28.3,
         "id": 1,
-        "hint": "Look just left of the blue screwdriver near the top edge.",
-        "x": 92.1,
-        "radius": 9
+        "x": 91.8,
+        "y": 28.1,
+        "radius": 16.0
       }
     ],
     "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
@@ -3687,11 +3395,10 @@
   {
     "diffs": [
       {
-        "y": 11.9,
         "id": 1,
-        "hint": "Check the small detached succulent just left of the twine bundle.",
-        "x": 38.9,
-        "radius": 9
+        "x": 38.8,
+        "y": 12.0,
+        "radius": 16.0
       }
     ],
     "title": "Potting Table Succulent",
@@ -3713,11 +3420,10 @@
     "title": "Watchmaker Bench Gear",
     "diffs": [
       {
-        "y": 61.6,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 35.3,
-        "radius": 8.4
+        "x": 35.5,
+        "y": 62.5,
+        "radius": 9.5
       }
     ],
     "id": "photo_watchmaker_bench_001"
@@ -3728,11 +3434,10 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 75.6,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 17,
-        "radius": 9
+        "x": 16.9,
+        "y": 75.1,
+        "radius": 10.9
       }
     ],
     "title": "Bakers Table Cutter",
@@ -3746,9 +3451,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 31.3,
+        "x": 31.2,
         "y": 84.2,
-        "radius": 8.5
+        "radius": 16.0
       }
     ],
     "difficulty": "Medium",
@@ -3767,11 +3472,10 @@
     "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
     "diffs": [
       {
-        "y": 54.7,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 52.1,
-        "radius": 9
+        "x": 50.8,
+        "y": 52.2,
+        "radius": 16.0
       }
     ],
     "packId": "find_the_sniper",
@@ -3782,11 +3486,10 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 59.1,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 26.1,
-        "radius": 9
+        "x": 26.3,
+        "y": 59.6,
+        "radius": 16.0
       }
     ],
     "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
@@ -3800,11 +3503,10 @@
   {
     "diffs": [
       {
-        "y": 79.7,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 3.9,
-        "radius": 9
+        "x": 4.5,
+        "y": 79.0,
+        "radius": 16.0
       }
     ],
     "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
@@ -3822,9 +3524,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 57.3,
-        "y": 46.4,
-        "radius": 8.5
+        "x": 57.4,
+        "y": 46.3,
+        "radius": 15.0
       }
     ],
     "title": "Board Game Piece",
@@ -3838,11 +3540,10 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 76.5,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 60.1,
-        "radius": 9
+        "x": 60.6,
+        "y": 78.2,
+        "radius": 16.0
       }
     ],
     "difficulty": "Medium",
@@ -3857,11 +3558,10 @@
     "variantImage": "levels/photo-pairs/photo-spice-table/variant.jpg",
     "diffs": [
       {
-        "y": 20.6,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 81.5,
-        "radius": 9
+        "x": 80.6,
+        "y": 20.6,
+        "radius": 16.0
       }
     ],
     "difficulty": "Hard",
@@ -3875,11 +3575,10 @@
   {
     "diffs": [
       {
-        "y": 38.9,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 78.4,
-        "radius": 9
+        "x": 78.2,
+        "y": 38.7,
+        "radius": 16.0
       }
     ],
     "variantImage": "levels/photo-pairs/photo-coffee-station/variant.jpg",
@@ -3897,9 +3596,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.8,
-        "y": 59.7,
-        "radius": 8.5
+        "x": 52.4,
+        "y": 58.8,
+        "radius": 14.8
       }
     ],
     "id": "photo_fishing_tackle_001",
@@ -3920,11 +3619,10 @@
     "title": "Repair Drawer Washer",
     "diffs": [
       {
-        "y": 73.3,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 61,
-        "radius": 9
+        "x": 59.0,
+        "y": 71.9,
+        "radius": 16.0
       }
     ]
   },
@@ -3938,7 +3636,7 @@
         "id": 1,
         "x": 35.0,
         "y": 66.7,
-        "radius": 8.5
+        "radius": 14.3
       }
     ],
     "category": "Photography",
@@ -3951,11 +3649,10 @@
     "title": "Pottery Table Sponge",
     "diffs": [
       {
-        "y": 29.8,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 48.8,
-        "radius": 9
+        "x": 49.2,
+        "y": 30.0,
+        "radius": 11.0
       }
     ],
     "difficulty": "Easy",
@@ -3969,11 +3666,10 @@
     "id": "photo_bicycle_repair_001",
     "diffs": [
       {
-        "y": 46.5,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 90.7,
-        "radius": 9
+        "x": 91.6,
+        "y": 46.1,
+        "radius": 15.9
       }
     ],
     "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
@@ -3991,11 +3687,10 @@
     "id": "photo_woodworking_table_001",
     "diffs": [
       {
-        "y": 14,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 51.9,
-        "radius": 9
+        "x": 52.0,
+        "y": 14.1,
+        "radius": 11.7
       }
     ],
     "packId": "find_the_sniper",
@@ -4011,9 +3706,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52,
-        "y": 52,
-        "radius": 8.5
+        "x": 51.8,
+        "y": 52.0,
+        "radius": 16.0
       }
     ],
     "difficulty": "Easy",
@@ -4025,11 +3720,10 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 50.7,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 54.8,
-        "radius": 9
+        "x": 55.4,
+        "y": 51.3,
+        "radius": 16.0
       }
     ],
     "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg",
@@ -4051,11 +3745,10 @@
     "packId": "find_the_sniper",
     "diffs": [
       {
-        "y": 75.6,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 84.7,
-        "radius": 8.7
+        "x": 84.0,
+        "y": 75.5,
+        "radius": 10.4
       }
     ]
   },
@@ -4065,11 +3758,10 @@
     "id": "photo_map_restoration_001",
     "diffs": [
       {
-        "y": 18.5,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 7,
-        "radius": 9
+        "x": 7.0,
+        "y": 18.6,
+        "radius": 10.8
       }
     ],
     "pack": "Find the Sniper",
@@ -4082,9 +3774,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 32.7,
+        "x": 33.5,
         "y": 53.2,
-        "radius": 8.5
+        "radius": 14.7
       }
     ],
     "difficulty": "Easy",
@@ -4107,9 +3799,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 29.6,
+        "x": 29.7,
         "y": 46.9,
-        "radius": 8.5
+        "radius": 13.9
       }
     ],
     "id": "photo_game_night_001"
@@ -4124,11 +3816,10 @@
     "difficulty": "Medium",
     "diffs": [
       {
-        "y": 62.8,
         "id": 1,
-        "hint": "Compare the small object in this area.",
-        "x": 4,
-        "radius": 7.9
+        "x": 3.7,
+        "y": 63.5,
+        "radius": 8.1
       }
     ],
     "pack": "Find the Sniper"
@@ -4140,9 +3831,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 41.5,
-        "y": 66.1,
-        "radius": 8.5
+        "x": 41.8,
+        "y": 66.2,
+        "radius": 12.5
       }
     ],
     "pack": "Abstract Animated",
@@ -4155,9 +3846,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 85.6,
-        "y": 73.8,
-        "radius": 8.5
+        "x": 86.2,
+        "y": 73.7,
+        "radius": 15.1
       }
     ],
     "variantImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/variant.jpg",
@@ -4198,11 +3889,10 @@
     "difficulty": "Easy",
     "diffs": [
       {
-        "y": 39,
         "id": 1,
-        "hint": "Examine the region around (45%, 38%) carefully.",
-        "x": 46.2,
-        "radius": 6
+        "x": 46.4,
+        "y": 39.2,
+        "radius": 7.4
       }
     ],
     "packId": "abstract_animated"
@@ -4231,11 +3921,10 @@
     "difficulty": "Easy",
     "diffs": [
       {
-        "y": 66,
         "id": 1,
-        "hint": "Check the silver powdered sugar shaker to the right of the rolling pin.",
-        "x": 85.1,
-        "radius": 9
+        "x": 85.8,
+        "y": 66.2,
+        "radius": 16.0
       }
     ],
     "pack": "Find the Sniper",
@@ -4248,11 +3937,10 @@
   {
     "diffs": [
       {
-        "y": 78.6,
         "id": 1,
-        "hint": "Look at the metal soil scoop resting on the wooden table.",
-        "x": 42.4,
-        "radius": 9
+        "x": 43.7,
+        "y": 78.4,
+        "radius": 16.0
       }
     ],
     "packId": "find_the_sniper",
@@ -4275,11 +3963,10 @@
     "variantImage": "levels/photo-pairs/ai-watchmaker-bench/variant.jpg",
     "diffs": [
       {
-        "y": 65.6,
         "id": 1,
-        "hint": "Inspect the dark blue velvet pad in the lower-right corner.",
-        "x": 87.6,
-        "radius": 9
+        "x": 87.9,
+        "y": 67.7,
+        "radius": 12.5
       }
     ]
   },
@@ -4293,9 +3980,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 10.7,
-        "y": 71.7,
-        "radius": 8.5
+        "x": 11.1,
+        "y": 71.6,
+        "radius": 16.0
       }
     ],
     "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg",
@@ -4310,11 +3997,10 @@
     "title": "Artisanal Coffee Bar",
     "diffs": [
       {
-        "y": 57.9,
         "id": 1,
-        "hint": "Check the wooden-handled barista brush to the left of the tamper.",
-        "x": 9.6,
-        "radius": 9
+        "x": 9.9,
+        "y": 58.4,
+        "radius": 12.4
       }
     ],
     "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg",
@@ -4330,11 +4016,10 @@
     "category": "Antique Study",
     "diffs": [
       {
-        "y": 59.1,
         "id": 1,
-        "hint": "Look on the wooden desk surface below the brass desk clock.",
-        "x": 89.4,
-        "radius": 8.7
+        "x": 89.5,
+        "y": 59.2,
+        "radius": 9.2
       }
     ],
     "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg"
@@ -4366,11 +4051,10 @@
     "title": "Maritime Cartography Desk",
     "diffs": [
       {
-        "y": 57.2,
         "id": 1,
-        "hint": "Scan the lower-left table area immediately beside the black ink bottle.",
-        "x": 17.2,
-        "radius": 9
+        "x": 17.1,
+        "y": 56.6,
+        "radius": 9.7
       }
     ],
     "variantImage": "levels/photo-pairs/ai-cartography-desk/variant.jpg",
@@ -4383,11 +4067,10 @@
     "title": "Master Locksmith Workbench",
     "diffs": [
       {
-        "y": 62.2,
         "id": 1,
-        "hint": "Examine the tiny coil springs below the opened brass lock cylinder.",
-        "x": 50,
-        "radius": 8.1
+        "x": 49.7,
+        "y": 62.2,
+        "radius": 8.7
       }
     ],
     "packId": "find_the_sniper",
@@ -4418,11 +4101,10 @@
     "category": "Game Night",
     "diffs": [
       {
-        "y": 35.1,
         "id": 1,
-        "hint": "Inspect the wooden resource token on the lower-right map tile.",
-        "x": 60.2,
-        "radius": 4.2
+        "x": 60.3,
+        "y": 35.1,
+        "radius": 5.0
       }
     ],
     "title": "Tabletop Strategy Board",
@@ -4447,7 +4129,7 @@
         "id": 1,
         "x": 47.9,
         "y": 50.3,
-        "radius": 4.5
+        "radius": 5.0
       }
     ]
   },
@@ -4465,7 +4147,7 @@
         "id": 1,
         "x": 48.2,
         "y": 53.8,
-        "radius": 5.5
+        "radius": 6.3
       }
     ]
   }
