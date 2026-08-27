@@ -290,14 +290,17 @@ def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="pub
         if scheduler: scheduler.record_attempt(chosen_op, False)
         return False, None, log_entry
 
-    # 4. Save Image Files & Build Manifest Entry
+    # 4. Save Image Files & Build Manifest Entry with Q100 Lossless Output
     base_filename = f"{scene_id}_base.jpg"
     variant_filename = f"{scene_id}_variant.jpg"
     base_save_path = os.path.join(output_dir, base_filename)
     variant_save_path = os.path.join(output_dir, variant_filename)
 
-    cv2.imwrite(base_save_path, img_bgr, [cv2.IMWRITE_JPEG_QUALITY, 92])
-    cv2.imwrite(variant_save_path, variant_bgr, [cv2.IMWRITE_JPEG_QUALITY, 92])
+    from PIL import Image
+    base_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+    var_rgb = cv2.cvtColor(variant_bgr, cv2.COLOR_BGR2RGB)
+    Image.fromarray(base_rgb).save(base_save_path, "JPEG", quality=100, subsampling=0)
+    Image.fromarray(var_rgb).save(variant_save_path, "JPEG", quality=100, subsampling=0)
 
     desc = scene_spec.get("desc", f"Single {chosen_op} difference")
     hint = scene_spec.get("hint", f"Look closely for a {chosen_op} difference")
@@ -306,11 +309,11 @@ def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="pub
         "id": scene_id,
         "title": title,
         "category": "Photography",
-        "pack": "Photography",
+        "pack": "Find the Sniper",
         "packId": "find_the_sniper",
         "difficulty": difficulty,
-        "baseImage": f"/levels/{base_filename}",
-        "variantImage": f"/levels/{variant_filename}",
+        "baseImage": f"levels/{base_filename}",
+        "variantImage": f"levels/{variant_filename}",
         "operation": chosen_op,
         "diffs": [{
             "id": 1,

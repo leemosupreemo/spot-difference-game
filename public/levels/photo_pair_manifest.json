@@ -1,5 +1,885 @@
 [
   {
+    "id": "fresh_v4_pair_065",
+    "title": "Miniature Figurines & Pigments",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_065_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_065_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.7,
+        "y": 49.7,
+        "radius": 6.0,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_041",
+    "title": "Victorian Pocket Watches (Jewel Escapement)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_041_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_041_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 60.4,
+        "y": 92.0,
+        "radius": 5.4,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_042",
+    "title": "Gourmet Cheese Board (Ramekin Recolor)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_042_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_042_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.1,
+        "y": 29.5,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_044",
+    "title": "Artisan Campanelle & Farfalle",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_044_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_044_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.4,
+        "y": 42.6,
+        "radius": 6.4,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_045",
+    "title": "Pyrite Crystal Cube on Slate",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_045_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_045_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76.9,
+        "y": 35.9,
+        "radius": 5.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_046",
+    "title": "Antique Ornate Key Escutcheon",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_046_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_046_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 5.7,
+        "y": 90.1,
+        "radius": 8.4,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_047",
+    "title": "Twisted Silk Skein (Vibrant Hue)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_047_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_047_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 86.0,
+        "y": 31.4,
+        "radius": 5.9,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_049",
+    "title": "Millefiori Swirl Paperweight (Chroma)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_049_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_049_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62.3,
+        "y": 7.6,
+        "radius": 5.1,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_050",
+    "title": "Forest Morel Cap in Ceramic Dish",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_050_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_050_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 37.0,
+        "y": 25.6,
+        "radius": 5.2,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_052",
+    "title": "Fruit Hard Candies & Lozenges",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_052_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_052_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 93.6,
+        "y": 92.5,
+        "radius": 5.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_053",
+    "title": "Natural Mineral Prisms & Agate",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_053_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_053_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 76.5,
+        "y": 17.4,
+        "radius": 5.8,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_054",
+    "title": "Vintage Sulphide & Swirl Marbles",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_054_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_054_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.6,
+        "y": 4.1,
+        "radius": 4.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_055",
+    "title": "Whole Nutmegs & Star Anise Seeds",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_055_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_055_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74.9,
+        "y": 44.7,
+        "radius": 5.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_056",
+    "title": "Carved Wooden Chess & Checkers",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_056_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_056_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.1,
+        "y": 79.7,
+        "radius": 5.2,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_057",
+    "title": "Handcrafted Filigree Metal Buttons",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_057_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_057_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69.1,
+        "y": 23.9,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_058",
+    "title": "Retro Lapel Enamel Badges",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_058_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_058_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 8.5,
+        "y": 71.5,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_059",
+    "title": "Brass Screws & Industrial Washers",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_059_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_059_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 1.6,
+        "y": 51.0,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_001",
+    "title": "Victorian Pocket Watches (Dial Focus)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_001_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_001_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31.2,
+        "y": 50.5,
+        "radius": 5.4,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_002",
+    "title": "Gourmet Cheese Board (Slate Substrate)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_002_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_002_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 94.8,
+        "y": 83.9,
+        "radius": 5.6,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_003",
+    "title": "Polished Gemstone Cabochons (Wood Grid)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_003_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_003_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62.0,
+        "y": 65.4,
+        "radius": 5.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_004",
+    "title": "Artisanal Pasta Shapes Array",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_004_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_004_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 53.3,
+        "y": 58.1,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_005",
+    "title": "Amethyst & Pyrite Mineral Grid",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_005_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_005_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 7.2,
+        "y": 77.0,
+        "radius": 7.2,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_006",
+    "title": "Antique Brass Skeleton Keys",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_006_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_006_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 72.1,
+        "y": 59.1,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_007",
+    "title": "Twisted Silk Skeins & Pearl Buttons",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_007_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_007_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 21.2,
+        "y": 8.7,
+        "radius": 5.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_008",
+    "title": "Porcelain Sometsuke Teacups",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_008_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_008_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 93.0,
+        "y": 80.4,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_011",
+    "title": "Millefiori Glass Paperweights",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_011_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_011_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30.0,
+        "y": 84.2,
+        "radius": 5.5,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_012",
+    "title": "Foraged Forest Wild Mushrooms",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_012_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_012_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30.8,
+        "y": 11.0,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_013",
+    "title": "Victorian Brass Drafting Dividers",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_013_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_013_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 87.7,
+        "y": 93.3,
+        "radius": 4.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_015",
+    "title": "Glazed Ceramic Mosaic Tiles",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_015_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_015_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 80.3,
+        "y": 93.0,
+        "radius": 6.2,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_022",
+    "title": "Heirloom Spices & Seeds Array",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_022_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_022_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.2,
+        "y": 11.0,
+        "radius": 5.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_024",
+    "title": "Vintage Wooden Board Game Tokens",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_024_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_024_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.9,
+        "y": 54.1,
+        "radius": 5.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_026",
+    "title": "Artisanal Glazed Confectionery Drops",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_026_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_026_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 87.9,
+        "y": 34.7,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_027",
+    "title": "Vintage Cloisonne Enamel Badges",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_027_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_027_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 14.6,
+        "y": 72.1,
+        "radius": 7.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_028",
+    "title": "Faceted Gemstones on Black Basalt",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_028_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_028_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 40.5,
+        "y": 28.5,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_030",
+    "title": "Whole Culinary Spice Collection",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_030_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_030_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 48.7,
+        "y": 19.2,
+        "radius": 4.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_032",
+    "title": "Horologist Escapement Wheels & Gears",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_032_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_032_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 93.5,
+        "y": 77.2,
+        "radius": 5.9,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_036",
+    "title": "Dense Circuit Board Inductors & Chips",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_036_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_036_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 70.4,
+        "y": 26.0,
+        "radius": 5.0,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_038",
+    "title": "Tailor Silk Threads & Brass Thimbles",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_038_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_038_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 54.6,
+        "y": 57.0,
+        "radius": 6.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_039",
+    "title": "Artist Oil Pigments & Fine Brushes",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_039_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_039_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36.2,
+        "y": 26.1,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v4_pair_040",
+    "title": "Patisserie French Macarons & Truffles",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_040_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_040_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.3,
+        "y": 36.7,
+        "radius": 5.7,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "fresh_v4_ai_pocket_watches_001",
     "title": "Victorian Pocket Watches on Blue Velvet",
     "baseImage": "levels/fresh_v4_ai_pocket_watches_001_base.jpg",
