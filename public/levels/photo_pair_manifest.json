@@ -1,5 +1,225 @@
 [
   {
+    "id": "fresh_ai_confectionery_truffles_001",
+    "title": "[AI Multi-Op] Gourmet Confectionery & Macaron Array",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_confectionery_truffles_001_base.jpg",
+    "variantImage": "/levels/fresh_ai_confectionery_truffles_001_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73.8,
+        "y": 56.1,
+        "radius": 5.2,
+        "description": "Single confectionery treat mutation in tray",
+        "hint": "Inspect the compartmentalized rows of truffles, macarons, and jellies",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_ceramic_mosaic_tiles_002",
+    "title": "[AI Multi-Op] Mediterranean Ceramic Mosaic Tiles",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_ceramic_mosaic_tiles_002_base.jpg",
+    "variantImage": "/levels/fresh_ai_ceramic_mosaic_tiles_002_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 94.9,
+        "y": 81.3,
+        "radius": 5.6,
+        "description": "Single mosaic ceramic shard difference",
+        "hint": "Scan the geometric and floral glazed pottery tiles",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_botanical_pressed_flora_003",
+    "title": "[AI Multi-Op] Botanical Pressed Flora & Herbarium Specimen",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_botanical_pressed_flora_003_base.jpg",
+    "variantImage": "/levels/fresh_ai_botanical_pressed_flora_003_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 14.7,
+        "y": 4.8,
+        "radius": 4.5,
+        "description": "Single pressed flower or botanical element difference",
+        "hint": "Examine the pressed wildflower petals, fern fronds, and seed pods",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_glass_marbles_millefiori_004",
+    "title": "[AI Multi-Op] Antique Glass Marbles & Millefiori Beads",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_glass_marbles_millefiori_004_base.jpg",
+    "variantImage": "/levels/fresh_ai_glass_marbles_millefiori_004_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 6.3,
+        "y": 49.4,
+        "radius": 5.0,
+        "description": "Single glass marble or millefiori bead difference",
+        "hint": "Look closely at the swirl glass orbs and floral mosaic beads",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_succulents_greenhouse_grid_005",
+    "title": "[AI Multi-Op] Potted Greenhouse Succulents Grid",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_succulents_greenhouse_grid_005_base.jpg",
+    "variantImage": "/levels/fresh_ai_succulents_greenhouse_grid_005_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 14.3,
+        "y": 61.3,
+        "radius": 6.1,
+        "description": "Single potted succulent rosette difference",
+        "hint": "Scan the array of miniature potted rosettes and cacti",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_enamel_pins_collector_006",
+    "title": "[AI Multi-Op] Collector Enamel Pin Showcase",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_enamel_pins_collector_006_base.jpg",
+    "variantImage": "/levels/fresh_ai_enamel_pins_collector_006_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.2,
+        "y": 92.6,
+        "radius": 4.9,
+        "description": "Single cloisonne enamel pin mutation",
+        "hint": "Examine the geometric badges, moons, and floral enamel pins",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_marine_seashells_specimens_007",
+    "title": "[AI Multi-Op] Marine Seashells & Sea Glass Array",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_marine_seashells_specimens_007_base.jpg",
+    "variantImage": "/levels/fresh_ai_marine_seashells_specimens_007_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 40.2,
+        "y": 82.5,
+        "radius": 4.5,
+        "description": "Single seashell or sea glass difference",
+        "hint": "Inspect the nautilus, scallop shells, and polished sea glass",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_stained_glass_jewels_008",
+    "title": "[AI Multi-Op] Stained Glass Mosaic Jewels",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_stained_glass_jewels_008_base.jpg",
+    "variantImage": "/levels/fresh_ai_stained_glass_jewels_008_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 20.2,
+        "y": 61.0,
+        "radius": 4.5,
+        "description": "Single stained glass jewel cabochon difference",
+        "hint": "Examine the faceted glass gems and colored cabochons",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_heirloom_spices_botanical_009",
+    "title": "[AI Multi-Op] Heirloom Whole Spices & Dried Botanicals",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_heirloom_spices_botanical_009_base.jpg",
+    "variantImage": "/levels/fresh_ai_heirloom_spices_botanical_009_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.2,
+        "y": 11.0,
+        "radius": 5.8,
+        "description": "Single aromatic whole spice dish difference",
+        "hint": "Inspect the star anise pods, cardamom, and spice dishes",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_ai_wooden_toy_figurines_010",
+    "title": "[AI Multi-Op] Painted Wooden Toy Figurines & Meeples",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/fresh_ai_wooden_toy_figurines_010_base.jpg",
+    "variantImage": "/levels/fresh_ai_wooden_toy_figurines_010_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.2,
+        "y": 84.4,
+        "radius": 4.5,
+        "description": "Single wooden toy meeple or domino difference",
+        "hint": "Examine the rows of wooden animal shapes, meeples, and domino blocks",
+        "operation": "add"
+      }
+    ]
+  },
+  {
     "id": "prod_v4_dense_boardgame",
     "title": "[AI Multi-Op] Strategy Board Game Grid",
     "category": "Photography",

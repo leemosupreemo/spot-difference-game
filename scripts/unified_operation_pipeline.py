@@ -152,7 +152,18 @@ def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="pub
             c["recolorable_fraction"] = frac
             c["baseline_salience"] = GoldilocksTargetSelector.compute_baseline_salience(img_bgr, c["mask"])
 
-        valid_recolor_cands = [c for c in candidate_masks if c["recolorable_fraction"] >= 0.40 and c["peer_count"] >= 1 and 0.12 <= c["area_pct"] <= 0.85]
+        disp_scale_x = 700.0 / float(w)
+        disp_scale_y = 440.0 / float(h)
+        valid_recolor_cands = []
+        for c in candidate_masks:
+            if c["recolorable_fraction"] < 0.40 or c["peer_count"] < 1 or c["area_pct"] < 0.15 or c["area_pct"] > 0.75:
+                continue
+            bw = c["bbox"][2] - c["bbox"][0] + 1
+            bh = c["bbox"][3] - c["bbox"][1] + 1
+            d_short = min(bw * disp_scale_x, bh * disp_scale_y)
+            if 18.0 <= d_short <= 42.0:
+                valid_recolor_cands.append(c)
+
         if not valid_recolor_cands:
             log_entry["rejection_reason"] = "Recolor: No suitable Goldilocks recolor candidates with peers and valid chroma."
             if scheduler: scheduler.record_attempt(chosen_op, False)
