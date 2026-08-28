@@ -1,5 +1,419 @@
 [
   {
+    "id": "fresh_v5_gemstone_beads_pair1",
+    "title": "Jewelry Gemstone Beads (Pair 1)",
+    "baseImage": "levels/fresh_v5_gemstone_beads_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_gemstone_beads_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 7.0,
+        "y": 69.2,
+        "radius": 4.8,
+        "description": "Bead removed from tray",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_gemstone_beads_pair2",
+    "title": "Jewelry Gemstone Beads (Pair 2)",
+    "baseImage": "levels/fresh_v5_gemstone_beads_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_gemstone_beads_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62.5,
+        "y": 54.9,
+        "radius": 4.8,
+        "description": "Bead removed from tray",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_pickup_sticks_pair1",
+    "title": "Tangled Pick Up Sticks (Pair 1)",
+    "baseImage": "levels/fresh_v5_pickup_sticks_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_pickup_sticks_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 17.9,
+        "y": 39.5,
+        "radius": 8.0,
+        "description": "Stick removed from pile",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_pickup_sticks_pair2",
+    "title": "Tangled Pick Up Sticks (Pair 2)",
+    "baseImage": "levels/fresh_v5_pickup_sticks_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_pickup_sticks_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.1,
+        "y": 77.0,
+        "radius": 6.8
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_paper_clips_pair1",
+    "title": "Spilled Paperclips on Concrete (Pair 1)",
+    "baseImage": "levels/fresh_v5_paper_clips_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_paper_clips_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 27.2,
+        "y": 4.5,
+        "radius": 5.9
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_paper_clips_pair2",
+    "title": "Spilled Paperclips on Concrete (Pair 2)",
+    "baseImage": "levels/fresh_v5_paper_clips_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_paper_clips_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.1,
+        "y": 94.7,
+        "radius": 6.7,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_vintage_buttons_pair1",
+    "title": "Antique Mother of Pearl & Bakelite Buttons (Pair 1)",
+    "baseImage": "levels/fresh_v5_vintage_buttons_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_vintage_buttons_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 16.6,
+        "y": 16.2,
+        "radius": 5.4,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_vintage_buttons_pair2",
+    "title": "Antique Mother of Pearl & Bakelite Buttons (Pair 2)",
+    "baseImage": "levels/fresh_v5_vintage_buttons_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_vintage_buttons_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 90.8,
+        "y": 56.4,
+        "radius": 4.8,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_sewing_notions_pair1",
+    "title": "Silk Thread Spools & Safety Pins (Pair 1)",
+    "baseImage": "levels/fresh_v5_sewing_notions_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_sewing_notions_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.6,
+        "y": 45.4,
+        "radius": 5.2,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_sewing_notions_pair2",
+    "title": "Silk Thread Spools & Safety Pins (Pair 2)",
+    "baseImage": "levels/fresh_v5_sewing_notions_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_sewing_notions_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59.0,
+        "y": 68.8,
+        "radius": 4.8,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_colored_pencils_pair1",
+    "title": "Rainbow Colored Pencils & Wood Shavings (Pair 1)",
+    "baseImage": "levels/fresh_v5_colored_pencils_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_colored_pencils_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 20.1,
+        "y": 85.5,
+        "radius": 5.1,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_colored_pencils_pair2",
+    "title": "Rainbow Colored Pencils & Wood Shavings (Pair 2)",
+    "baseImage": "levels/fresh_v5_colored_pencils_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_colored_pencils_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 72.2,
+        "y": 82.0,
+        "radius": 4.8,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_boardgame_meeples_pair1",
+    "title": "Wooden Meeples & Polyhedral RPG Dice (Pair 1)",
+    "baseImage": "levels/fresh_v5_boardgame_meeples_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_boardgame_meeples_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31.0,
+        "y": 64.3,
+        "radius": 4.8,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_boardgame_meeples_pair2",
+    "title": "Wooden Meeples & Polyhedral RPG Dice (Pair 2)",
+    "baseImage": "levels/fresh_v5_boardgame_meeples_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_boardgame_meeples_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 68.8,
+        "y": 16.7,
+        "radius": 4.8,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_dry_pasta_pair1",
+    "title": "Italian Tricolor Dry Pasta on Slate (Pair 1)",
+    "baseImage": "levels/fresh_v5_dry_pasta_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_dry_pasta_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 20.6,
+        "y": 55.9,
+        "radius": 4.8,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_dry_pasta_pair2",
+    "title": "Italian Tricolor Dry Pasta on Slate (Pair 2)",
+    "baseImage": "levels/fresh_v5_dry_pasta_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_dry_pasta_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 63.1,
+        "y": 9.7,
+        "radius": 5.5
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_antique_keys_pair1",
+    "title": "Intricate Antique Skeleton Keys on Leather (Pair 1)",
+    "baseImage": "levels/fresh_v5_antique_keys_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_antique_keys_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 26.0,
+        "y": 90.6,
+        "radius": 6.0,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_antique_keys_pair2",
+    "title": "Intricate Antique Skeleton Keys on Leather (Pair 2)",
+    "baseImage": "levels/fresh_v5_antique_keys_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_antique_keys_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73.1,
+        "y": 28.2,
+        "radius": 4.8,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_gummy_candies_pair1",
+    "title": "Sugar Dusted Fruit Gummy Drops on Slate (Pair 1)",
+    "baseImage": "levels/fresh_v5_gummy_candies_pair1_base.jpg",
+    "variantImage": "levels/fresh_v5_gummy_candies_pair1_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29.1,
+        "y": 36.9,
+        "radius": 5.2,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v5_gummy_candies_pair2",
+    "title": "Sugar Dusted Fruit Gummy Drops on Slate (Pair 2)",
+    "baseImage": "levels/fresh_v5_gummy_candies_pair2_base.jpg",
+    "variantImage": "levels/fresh_v5_gummy_candies_pair2_variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.8,
+        "y": 24.5,
+        "radius": 5.2,
+        "description": "Object removed from scene",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
     "id": "fresh_v4_pair_065",
     "title": "Miniature Figurines & Pigments",
     "category": "Photography",
