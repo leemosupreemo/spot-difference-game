@@ -7,17 +7,20 @@ Selects and repositions ONE existing loose object within a compact local ROI:
    - Small translation (15 - 35 px)
    - Angle rotation (15° - 45°)
    - Translation + rotation
-3. Footprint Reconstruction: LocalBackgroundSynthesizer (texture patch synthesis).
+3. Footprint Reconstruction:
+   - Uses BackgroundReconstructionRouter (coherent single-source clone / exemplar completion).
+   - Strictly NO blind full-object inpainting fallback (restricted to genuinely tiny/thin masks <= 3px only).
 4. Composite: Rotated/translated object with synthesized contact shadow.
 5. Strict Compactness Gate: Union bounding box must form ONE compact answer region.
-6. Zero-Drift Clamping outside local ROI.
+6. Zero-Drift Bit-Identical Clamping outside local ROI.
 ================================================================================
 """
 
 import cv2
 import numpy as np
 from perceptual_verification_engine import PerceptualVerificationEngine
-from remove_target_selector import LocalBackgroundSynthesizer
+from remove_target_selector import BackgroundReconstructionRouter, LocalBackgroundSynthesizer
+
 
 class ReorderTargetSelector:
     """
@@ -84,8 +87,6 @@ class ReorderTargetSelector:
                 continue
             recoverability = max(0.0, 1.0 - (halo_std / 45.0))
 
-            cx, cy = c["centroid"]
-
             # Try candidate pose mutations: [angle_deg, shift_x, shift_y]
             shift_dist = max(12, int(min(bw, bh) * 0.40))
             test_mutations = [
@@ -99,14 +100,28 @@ class ReorderTargetSelector:
 
             valid_mutations = []
             for mut in test_mutations:
+                # Compute transformed bounding box
                 nbx1 = int(bx1 + mut["dx"])
                 nby1 = int(by1 + mut["dy"])
-                nbx2 = int(bx2 + mut["dx"])
-                nby2 = int(by2 + mut["dy"])
+                nbx2 = nbx1 + bw - 1
+                nby2 = nby1 + bh - 1
 
-                if nbx1 < 15 or nby1 < 15 or nbx2 >= w - 15 or nby2 >= h - 15:
+                # Check frame bounds
+                if nbx1 < 10 or nby1 < 10 or nbx2 >= w - 10 or nby2 >= h - 10:
                     continue
 
+                # Check collision with other non-target objects
+                other_occupied = occupied_mask.copy()
+                other_occupied[by1:by2+1, bx1:bx2+1] = cv2.bitwise_and(
+                    other_occupied[by1:by2+1, bx1:bx2+1],
+                    cv2.bitwise_not(mask[by1:by2+1, bx1:bx2+1])
+                )
+                target_dest_roi = other_occupied[nby1:nby2+1, nbx1:nbx2+1]
+                overlap_ratio = np.sum(target_dest_roi > 0) / float(pcount + 1e-5)
+                if overlap_ratio > 0.22:
+                    continue
+
+                # Compactness of change
                 ubx1 = min(bx1, nbx1)
                 uby1 = min(by1, nby1)
                 ubx2 = max(bx2, nbx2)
@@ -114,33 +129,34 @@ class ReorderTargetSelector:
                 uw = ubx2 - ubx1 + 1
                 uh = uby2 - uby1 + 1
 
-                if uw > bw * 2.2 or uh > bh * 2.2:
+                # Ensure union bounding box is not excessively stretched
+                u_area_pct = (uw * uh) / float(total_pixels) * 100.0
+                if u_area_pct > 2.5:
                     continue
 
-                other_occupied = occupied_mask.copy()
-                other_occupied[mask > 0] = 0
-                new_slot_occ = other_occupied[nby1:nby2+1, nbx1:nbx2+1]
-                if np.sum(new_slot_occ > 0) / float(pcount + 1) > 0.20:
-                    continue
-
-                score = (recoverability * 40.0) + (min(1.0, peer_count / 5.0) * 35.0) + (25.0 - abs(mut["angle"]) * 0.3)
                 valid_mutations.append({
                     "mutation": mut,
-                    "score": score,
-                    "union_bbox": [ubx1, uby1, ubx2, uby2]
+                    "union_bbox": (ubx1, uby1, ubx2, uby2),
+                    "new_bbox": (nbx1, nby1, nbx2, nby2),
+                    "overlap_ratio": overlap_ratio
                 })
 
-            if valid_mutations:
-                valid_mutations.sort(key=lambda x: x["score"], reverse=True)
-                best_mut = valid_mutations[0]
-                evaluated_candidates.append({
-                    "candidate": c,
-                    "best_mutation": best_mut["mutation"],
-                    "union_bbox": best_mut["union_bbox"],
-                    "score": round(best_mut["score"], 1),
-                    "peer_count": peer_count,
-                    "recoverability": round(recoverability, 2)
-                })
+            if not valid_mutations:
+                continue
+
+            best_mut = valid_mutations[0]
+
+            score = (recoverability * 45.0) + (min(1.0, peer_count / 5.0) * 35.0) + (min(1.0, (1.0 - best_mut["overlap_ratio"])) * 20.0)
+
+            evaluated_candidates.append({
+                "candidate": c,
+                "score": round(score, 1),
+                "recoverability": round(recoverability, 2),
+                "peer_count": peer_count,
+                "best_mutation": best_mut["mutation"],
+                "union_bbox": best_mut["union_bbox"],
+                "new_bbox": best_mut["new_bbox"]
+            })
 
         if not evaluated_candidates:
             return None, "No candidate met reorder criteria (loose object, recoverable background, compact pose).", []
@@ -152,8 +168,9 @@ class ReorderTargetSelector:
     @classmethod
     def execute_reorder_and_qa(cls, image_bgr, target_mask, target_bbox, mutation, union_bbox, raw_sam_masks, difficulty="Medium"):
         """
-        Executes background synthesis on vacated footprint, transforms object,
+        Executes structure-aware background reconstruction on vacated footprint, transforms object,
         composites with contact shadow, and verifies using PerceptualVerificationEngine.
+        Strictly disallows full-object inpaint fallback.
         """
         h, w = image_bgr.shape[:2]
         total_pixels = h * w
@@ -161,16 +178,21 @@ class ReorderTargetSelector:
         bx1, by1, bx2, by2 = target_bbox
         bw = bx2 - bx1 + 1
         bh = by2 - by1 + 1
+        area_pct = (np.sum(target_mask > 0) / float(total_pixels)) * 100.0
 
-        # 1. Clean old footprint with LocalBackgroundSynthesizer
-        base_reconstructed, _, _, err = LocalBackgroundSynthesizer.synthesize_background_fill(
+        # 1. Clean old footprint with BackgroundReconstructionRouter
+        base_reconstructed, _, _, err = BackgroundReconstructionRouter.reconstruct_background(
             image_bgr, target_mask, raw_sam_masks, difficulty=difficulty
         )
+
         if base_reconstructed is None:
-            # Fallback to inpainting
-            kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-            inpaint_mask = cv2.dilate(target_mask, kernel, iterations=1)
-            base_reconstructed = cv2.inpaint(image_bgr, inpaint_mask, inpaintRadius=4, flags=cv2.INPAINT_TELEA)
+            # Strictly restrict any fallback to genuinely tiny/thin masks only
+            if area_pct <= 0.05 or min(bw, bh) <= 3:
+                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+                inpaint_mask = cv2.dilate(target_mask, kernel, iterations=1)
+                base_reconstructed = cv2.inpaint(image_bgr, inpaint_mask, inpaintRadius=3, flags=cv2.INPAINT_TELEA)
+            else:
+                return False, None, None, f"Reorder Reject: Background reconstruction failed on vacated footprint ({err})"
 
         # 2. Extract object patch
         crop_mask = (target_mask[by1:by2+1, bx1:bx2+1] > 0).astype(np.float32)
@@ -219,7 +241,7 @@ class ReorderTargetSelector:
             variant_bgr[nby1:nby1+bh, nbx1:nbx1+bw].astype(np.float32) * (1.0 - rot_alpha_3d)
         ).astype(np.uint8)
 
-        # 6. Zero-drift clamping outside union_bbox + margin
+        # 6. Zero-drift bit-identical clamping outside union_bbox + margin
         ubx1, uby1, ubx2, uby2 = union_bbox
         pad = int(max(ubx2 - ubx1, uby2 - uby1) * 0.25)
         rx1, ry1 = max(0, ubx1 - pad), max(0, uby1 - pad)
