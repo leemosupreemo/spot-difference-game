@@ -3,7 +3,7 @@ import { Capacitor } from "@capacitor/core";
 import { logApp } from "../utils/logger.js";
 
 const env = typeof import.meta !== "undefined" && import.meta.env ? import.meta.env : {};
-const MIXPANEL_TOKEN = env.VITE_MIXPANEL_TOKEN || "diff_hunter_mixpanel_token";
+const MIXPANEL_TOKEN = env.VITE_MIXPANEL_TOKEN || "063a583465a765e3f8346253d15098d1";
 
 let isInitialized = false;
 let sessionStartTime = Date.now();
