@@ -16,8 +16,8 @@ function isPositiveRadius(value) {
 
 function isAssetPath(value) {
   return isNonEmptyString(value)
-    && (value.startsWith('/levels/') || value.startsWith('levels/'))
-    && /\.(avif|jpe?g|png|webp)$/i.test(value);
+    && (value.startsWith('/levels/') || value.startsWith('levels/') || /^https?:\/\//i.test(value) || value.startsWith('data:'))
+    && (/\.(avif|jpe?g|png|webp)($|\?)/i.test(value) || /^https?:\/\//i.test(value) || value.startsWith('data:'));
 }
 
 function isValidDiff(diff) {

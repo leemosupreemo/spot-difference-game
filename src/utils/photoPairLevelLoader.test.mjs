@@ -5,8 +5,14 @@ import {
   clearPhotoPairManifestCache,
   createPhotoPairLevel,
   applyCuratedPackOverrides,
-  selectPhotoPairEntries
+  selectPhotoPairEntries,
+  resolveAssetUrl,
+  getAllPhotoPairEntries
 } from './photoPairLevelLoader.js';
+import {
+  saveCachedRemoteLevels,
+  clearCachedRemoteLevels
+} from '../services/remoteLevelSync.js';
 
 const entry = {
   id: 'market_001',
@@ -19,6 +25,15 @@ const entry = {
   variantImage: 'levels/photo-pairs/find-the-sniper/market_001/variant.webp',
   diffs: [{ id: 1, x: 63.2, y: 48.7, radius: 4.5 }]
 };
+
+test('resolveAssetUrl preserves remote HTTPS and HTTP URLs and prefixes relative paths', () => {
+  assert.equal(resolveAssetUrl('https://firebasestorage.googleapis.com/v0/b/app/image.jpg'), 'https://firebasestorage.googleapis.com/v0/b/app/image.jpg');
+  assert.equal(resolveAssetUrl('http://example.com/levels/sample.jpg'), 'http://example.com/levels/sample.jpg');
+  assert.equal(resolveAssetUrl('data:image/jpeg;base64,/9j/4AAQSkZJRg=='), 'data:image/jpeg;base64,/9j/4AAQSkZJRg==');
+  assert.equal(resolveAssetUrl('/levels/sample.jpg'), './levels/sample.jpg');
+  assert.equal(resolveAssetUrl('levels/sample.jpg'), './levels/sample.jpg');
+  assert.equal(resolveAssetUrl(null), null);
+});
 
 test('adapts a manifest entry into the existing level render contract', () => {
   const calls = [];
@@ -86,6 +101,52 @@ test('uses a curator category designation when selecting a manifest entry', () =
   assert.equal(selected.length, 1);
   assert.equal(selected[0].packId, 'abstract_animated');
   assert.equal(selected[0].pack, 'Abstract');
+});
+
+test('getAllPhotoPairEntries merges cached remote levels and deduplicates by ID', () => {
+  clearCachedRemoteLevels();
+  const initialEntries = getAllPhotoPairEntries();
+  const initialCount = initialEntries.length;
+
+  const mockRemoteNew = {
+    id: 'remote_brand_new_level_999',
+    title: 'Remote Mountain Peak',
+    category: 'Photography',
+    pack: 'Photography',
+    packId: 'find_the_sniper',
+    difficulty: 'Medium',
+    baseImage: 'https://firebasestorage.googleapis.com/base.jpg',
+    variantImage: 'https://firebasestorage.googleapis.com/variant.jpg',
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5 }]
+  };
+
+  // Mock duplicate ID of an existing local level
+  const firstLocalId = initialEntries[0].id;
+  const mockRemoteDuplicate = {
+    id: firstLocalId,
+    title: 'Duplicate Local Title',
+    category: 'Photography',
+    pack: 'Photography',
+    packId: 'find_the_sniper',
+    difficulty: 'Easy',
+    baseImage: '/levels/dup_base.jpg',
+    variantImage: '/levels/dup_variant.jpg',
+    diffs: [{ id: 1, x: 40, y: 40, radius: 5 }]
+  };
+
+  saveCachedRemoteLevels([mockRemoteNew, mockRemoteDuplicate]);
+
+  const mergedEntries = getAllPhotoPairEntries();
+  assert.equal(mergedEntries.length, initialCount + 1, 'Should add exactly 1 new remote level and skip duplicate ID');
+
+  const foundNew = mergedEntries.find(e => e.id === 'remote_brand_new_level_999');
+  assert.ok(foundNew, 'New remote level should be found in merged manifest');
+  assert.equal(foundNew.title, 'Remote Mountain Peak');
+
+  // Clean up
+  clearCachedRemoteLevels();
+  const restoredEntries = getAllPhotoPairEntries();
+  assert.equal(restoredEntries.length, initialCount);
 });
 
 test('builds a stage from a fetched manifest and loadable image pairs', async () => {
