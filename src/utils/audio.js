@@ -8,6 +8,7 @@ class SoundController {
   }
 
   init() {
+    if (typeof window === 'undefined') return;
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (AudioCtx) {
@@ -31,14 +32,15 @@ class SoundController {
   // Mobile Light Haptic Feedback
   triggerHaptic(type = 'light') {
     try {
+      if (typeof window === 'undefined') return;
       if (type === 'success') {
-        Haptics.impact({ style: ImpactStyle.Medium });
+        Haptics.impact({ style: ImpactStyle.Medium }).catch(() => {});
       } else if (type === 'error') {
-        Haptics.notification({ type: NotificationType.Error });
+        Haptics.notification({ type: NotificationType.Error }).catch(() => {});
       } else if (type === 'win') {
-        Haptics.notification({ type: NotificationType.Success });
+        Haptics.notification({ type: NotificationType.Success }).catch(() => {});
       } else {
-        Haptics.impact({ style: ImpactStyle.Light });
+        Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
       }
     } catch (e) {
       // Fallback on non-mobile web
