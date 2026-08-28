@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "mixpanel": {
+      "command": "node",
+      "args": [
+        "/Users/leemosupreemo/.npm/_npx/7eaeb32b8660bc65/node_modules/mixpanel-mcp/dist/index.js"
+      ],
+      "env": {
+        "MIXPANEL_PROJECT_TOKEN": "063a583465a765e3f8346253d15098d1",
+        "MIXPANEL_SERVICE_ACCOUNT": "",
+        "MIXPANEL_SERVICE_ACCOUNT_SECRET": "",
+        "MIXPANEL_PROJECT_ID": ""
+      }
+    }
+  }
+}

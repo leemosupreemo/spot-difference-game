@@ -791,8 +791,6 @@ export default function App() {
       <HelpModal
         isOpen={helpModalOpen}
         onClose={() => setHelpModalOpen(false)}
-        debugMode={debugMode}
-        onToggleDebug={toggleDebugMode}
       />
 
       <DiagnosticsModal
