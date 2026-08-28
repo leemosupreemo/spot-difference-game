@@ -1,5 +1,442 @@
 [
   {
+    "id": "fresh_v6_pair_001",
+    "title": "Antique Mother of Pearl & Bakelite Buttons (Pair 1)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_001_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_001_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 19.3,
+        "y": 11.2,
+        "radius": 4.8,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_002",
+    "title": "Antique Mother of Pearl & Bakelite Buttons (Pair 2)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_002_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_002_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42.5,
+        "y": 77.4,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_003",
+    "title": "Wooden Meeples & Polyhedral RPG Dice (Pair 3)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_003_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_003_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25.9,
+        "y": 23.3,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_004",
+    "title": "Wooden Meeples & Polyhedral RPG Dice (Pair 4)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_004_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_004_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 86.1,
+        "y": 57.6,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_005",
+    "title": "Italian Tricolor Dry Pasta on Slate (Pair 5)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_005_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_005_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.8,
+        "y": 94.2,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_006",
+    "title": "Italian Tricolor Dry Pasta on Slate (Pair 6)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_006_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_006_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33.1,
+        "y": 32.3,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_007",
+    "title": "Intricate Antique Skeleton Keys on Leather (Pair 7)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_007_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_007_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 5.1,
+        "y": 29.7,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_008",
+    "title": "Intricate Antique Skeleton Keys on Leather (Pair 8)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_008_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_008_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 22.8,
+        "y": 80.7,
+        "radius": 4.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_009",
+    "title": "Sugar Dusted Fruit Gummy Drops on Slate (Pair 9)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_009_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_009_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 4.3,
+        "y": 57.8,
+        "radius": 4.9,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_010",
+    "title": "Sugar Dusted Fruit Gummy Drops on Slate (Pair 10)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_010_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_010_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.7,
+        "y": 14.1,
+        "radius": 5.0,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_011",
+    "title": "Rainbow Colored Pencils & Wood Shavings (Pair 11)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_011_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_011_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31.0,
+        "y": 82.9,
+        "radius": 5.1,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_012",
+    "title": "Silk Thread Spools & Safety Pins (Pair 12)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_012_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_012_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 67.8,
+        "y": 47.9,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_013",
+    "title": "Spilled Paperclips on Concrete (Pair 13)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_013_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_013_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 6.7,
+        "y": 12.9,
+        "radius": 7.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_014",
+    "title": "Spilled Paperclips on Concrete (Pair 14)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_014_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_014_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 6.5,
+        "y": 29.8,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_015",
+    "title": "Tangled Pick Up Sticks on Green Felt (Pair 15)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_015_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_015_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 37.2,
+        "y": 9.3,
+        "radius": 5.2
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_016",
+    "title": "Ceramic Mosaic Tiles Array (Pair 16)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_016_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_016_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.0,
+        "y": 63.2,
+        "radius": 4.9,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_017",
+    "title": "Espresso Portafilter & Coffee Gear (Pair 17)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_017_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_017_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36.6,
+        "y": 29.9,
+        "radius": 4.9,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_018",
+    "title": "Espresso Portafilter & Coffee Gear (Pair 18)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_018_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_018_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.0,
+        "y": 87.3,
+        "radius": 4.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_019",
+    "title": "Handcrafted Leathercraft Workshop (Pair 19)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_019_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_019_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 26.0,
+        "y": 86.2,
+        "radius": 6.8,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_v6_pair_020",
+    "title": "Handcrafted Leathercraft Workshop (Pair 20)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_020_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_020_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 45.7,
+        "y": 41.0,
+        "radius": 4.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "fresh_v5_gemstone_beads_pair1",
     "title": "Jewelry Gemstone Beads (Pair 1)",
     "baseImage": "levels/fresh_v5_gemstone_beads_pair1_base.jpg",
