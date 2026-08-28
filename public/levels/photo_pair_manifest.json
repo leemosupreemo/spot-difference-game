@@ -16,7 +16,7 @@
         "y": 10.1,
         "radius": 4.8,
         "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
+        "hint": "Look closely near coordinates (71%, 10%)",
         "operation": "remove"
       }
     ]
@@ -38,7 +38,7 @@
         "y": 20.6,
         "radius": 4.8,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (97%, 21%)",
         "operation": "add"
       }
     ]
@@ -60,7 +60,7 @@
         "y": 87,
         "radius": 5.6,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (92%, 87%)",
         "operation": "add"
       }
     ]
@@ -82,7 +82,7 @@
         "y": 75.5,
         "radius": 5.4,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (46%, 75%)",
         "operation": "recolor"
       }
     ]
@@ -104,7 +104,7 @@
         "y": 11,
         "radius": 4.5,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (31%, 11%)",
         "operation": "add"
       }
     ]
@@ -126,7 +126,7 @@
         "y": 93.4,
         "radius": 5,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (56%, 93%)",
         "operation": "reorder"
       }
     ]
@@ -148,7 +148,7 @@
         "y": 8.9,
         "radius": 5.6,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (21%, 9%)",
         "operation": "recolor"
       }
     ]
@@ -170,7 +170,7 @@
         "y": 18.8,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (70%, 19%)",
         "operation": "recolor"
       }
     ]
@@ -192,7 +192,7 @@
         "y": 11,
         "radius": 5.8,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (58%, 11%)",
         "operation": "recolor"
       }
     ]
@@ -214,7 +214,7 @@
         "y": 22.4,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (30%, 23%)",
         "operation": "recolor"
       }
     ]
@@ -236,7 +236,7 @@
         "y": 75.2,
         "radius": 5.6,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (91%, 76%)",
         "operation": "recolor"
       }
     ]
@@ -258,7 +258,7 @@
         "y": 57.8,
         "radius": 4.9,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (4%, 58%)",
         "operation": "add"
       }
     ]
@@ -280,7 +280,7 @@
         "y": 14.1,
         "radius": 5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (52%, 14%)",
         "operation": "recolor"
       }
     ]
@@ -302,7 +302,7 @@
         "y": 94.2,
         "radius": 4.5,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (62%, 94%)",
         "operation": "add"
       }
     ]
@@ -324,7 +324,7 @@
         "y": 32.3,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (33%, 32%)",
         "operation": "recolor"
       }
     ]
@@ -346,7 +346,7 @@
         "y": 82.9,
         "radius": 5.1,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (31%, 83%)",
         "operation": "recolor"
       }
     ]
@@ -366,9 +366,9 @@
         "id": 1,
         "x": 6.7,
         "y": 12.9,
-        "radius": 7.5,
+        "radius": 9.0,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (7%, 13%)",
         "operation": "add"
       }
     ]
@@ -390,7 +390,7 @@
         "y": 29.8,
         "radius": 7.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (7%, 29%)",
         "operation": "recolor"
       }
     ]
@@ -412,7 +412,7 @@
         "y": 11.2,
         "radius": 4.8,
         "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
+        "hint": "Look closely near coordinates (19%, 11%)",
         "operation": "remove"
       }
     ]
@@ -434,7 +434,7 @@
         "y": 77.4,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (43%, 77%)",
         "operation": "recolor"
       }
     ]
@@ -456,7 +456,7 @@
         "y": 23.3,
         "radius": 4.5,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (26%, 23%)",
         "operation": "add"
       }
     ]
@@ -478,7 +478,7 @@
         "y": 57.6,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (86%, 58%)",
         "operation": "recolor"
       }
     ]
@@ -500,7 +500,7 @@
         "y": 94.2,
         "radius": 4.5,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (62%, 94%)",
         "operation": "add"
       }
     ]
@@ -522,7 +522,7 @@
         "y": 32.3,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (33%, 32%)",
         "operation": "recolor"
       }
     ]
@@ -544,7 +544,7 @@
         "y": 29.7,
         "radius": 4.5,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (5%, 30%)",
         "operation": "add"
       }
     ]
@@ -566,7 +566,7 @@
         "y": 80.7,
         "radius": 4.8,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (23%, 81%)",
         "operation": "recolor"
       }
     ]
@@ -588,7 +588,7 @@
         "y": 57.8,
         "radius": 4.9,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (4%, 58%)",
         "operation": "add"
       }
     ]
@@ -610,7 +610,7 @@
         "y": 14.1,
         "radius": 5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (52%, 14%)",
         "operation": "recolor"
       }
     ]
@@ -632,7 +632,7 @@
         "y": 82.9,
         "radius": 5.1,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (31%, 83%)",
         "operation": "recolor"
       }
     ]
@@ -654,7 +654,7 @@
         "y": 47.9,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (68%, 48%)",
         "operation": "recolor"
       }
     ]
@@ -674,9 +674,9 @@
         "id": 1,
         "x": 6.7,
         "y": 12.9,
-        "radius": 7.5,
+        "radius": 9.0,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (7%, 13%)",
         "operation": "add"
       }
     ]
@@ -698,7 +698,7 @@
         "y": 29.8,
         "radius": 7.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (7%, 29%)",
         "operation": "recolor"
       }
     ]
@@ -718,7 +718,8 @@
         "id": 1,
         "x": 37.2,
         "y": 9.3,
-        "radius": 5.2
+        "radius": 5.2,
+        "hint": "Look closely near coordinates (37%, 9%)"
       }
     ]
   },
@@ -739,7 +740,7 @@
         "y": 63.2,
         "radius": 4.9,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (56%, 63%)",
         "operation": "recolor"
       }
     ]
@@ -757,11 +758,11 @@
     "diffs": [
       {
         "id": 1,
-        "x": 36.6,
-        "y": 29.9,
-        "radius": 4.9,
+        "x": 36.7,
+        "y": 30.0,
+        "radius": 6.8,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (37%, 30%)",
         "operation": "add"
       }
     ]
@@ -783,7 +784,7 @@
         "y": 87.3,
         "radius": 4.6,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (52%, 87%)",
         "operation": "recolor"
       }
     ]
@@ -805,7 +806,7 @@
         "y": 86.2,
         "radius": 6.8,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (26%, 86%)",
         "operation": "add"
       }
     ]
@@ -827,7 +828,7 @@
         "y": 41,
         "radius": 4.6,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (46%, 41%)",
         "operation": "recolor"
       }
     ]
@@ -849,7 +850,8 @@
         "y": 69.2,
         "radius": 4.8,
         "description": "Bead removed from tray",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (7%, 69%)"
       }
     ]
   },
@@ -870,7 +872,8 @@
         "y": 54.9,
         "radius": 4.8,
         "description": "Bead removed from tray",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (62%, 55%)"
       }
     ]
   },
@@ -887,11 +890,12 @@
     "diffs": [
       {
         "id": 1,
-        "x": 17.9,
-        "y": 39.5,
-        "radius": 8,
+        "x": 18.3,
+        "y": 39.7,
+        "radius": 9.0,
         "description": "Stick removed from pile",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (18%, 40%)"
       }
     ]
   },
@@ -909,8 +913,9 @@
       {
         "id": 1,
         "x": 91.1,
-        "y": 77,
-        "radius": 6.8
+        "y": 77.0,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (91%, 77%)"
       }
     ]
   },
@@ -927,9 +932,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 27.2,
+        "x": 27.4,
         "y": 4.5,
-        "radius": 5.9
+        "radius": 7.9,
+        "hint": "Look closely near coordinates (27%, 4%)"
       }
     ]
   },
@@ -950,7 +956,8 @@
         "y": 94.7,
         "radius": 6.7,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (59%, 94%)"
       }
     ]
   },
@@ -971,7 +978,8 @@
         "y": 16.2,
         "radius": 5.4,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (17%, 16%)"
       }
     ]
   },
@@ -992,7 +1000,8 @@
         "y": 56.4,
         "radius": 4.8,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (91%, 56%)"
       }
     ]
   },
@@ -1013,7 +1022,8 @@
         "y": 45.4,
         "radius": 5.2,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (35%, 45%)"
       }
     ]
   },
@@ -1034,7 +1044,8 @@
         "y": 68.8,
         "radius": 4.8,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (59%, 69%)"
       }
     ]
   },
@@ -1055,7 +1066,8 @@
         "y": 85.5,
         "radius": 5.1,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (20%, 85%)"
       }
     ]
   },
@@ -1076,7 +1088,8 @@
         "y": 82,
         "radius": 4.8,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (72%, 82%)"
       }
     ]
   },
@@ -1097,7 +1110,8 @@
         "y": 64.3,
         "radius": 4.8,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (31%, 64%)"
       }
     ]
   },
@@ -1118,7 +1132,8 @@
         "y": 16.7,
         "radius": 4.8,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (69%, 17%)"
       }
     ]
   },
@@ -1139,7 +1154,8 @@
         "y": 55.9,
         "radius": 4.8,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (21%, 56%)"
       }
     ]
   },
@@ -1158,7 +1174,8 @@
         "id": 1,
         "x": 63.1,
         "y": 9.7,
-        "radius": 5.5
+        "radius": 5.5,
+        "hint": "Look closely near coordinates (63%, 10%)"
       }
     ]
   },
@@ -1179,7 +1196,8 @@
         "y": 90.6,
         "radius": 6,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (26%, 90%)"
       }
     ]
   },
@@ -1200,7 +1218,8 @@
         "y": 28.2,
         "radius": 4.8,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (73%, 28%)"
       }
     ]
   },
@@ -1221,7 +1240,8 @@
         "y": 36.9,
         "radius": 5.2,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (29%, 37%)"
       }
     ]
   },
@@ -1242,7 +1262,8 @@
         "y": 24.5,
         "radius": 5.2,
         "description": "Object removed from scene",
-        "operation": "remove"
+        "operation": "remove",
+        "hint": "Look closely near coordinates (92%, 24%)"
       }
     ]
   },
@@ -1263,7 +1284,7 @@
         "y": 92,
         "radius": 5.4,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (60%, 92%)",
         "operation": "reorder"
       }
     ]
@@ -1285,7 +1306,7 @@
         "y": 29.5,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (50%, 30%)",
         "operation": "recolor"
       }
     ]
@@ -1307,7 +1328,7 @@
         "y": 42.6,
         "radius": 6.4,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (48%, 43%)",
         "operation": "reorder"
       }
     ]
@@ -1329,7 +1350,7 @@
         "y": 35.9,
         "radius": 5.8,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (77%, 36%)",
         "operation": "recolor"
       }
     ]
@@ -1351,7 +1372,7 @@
         "y": 90.1,
         "radius": 8.4,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (6%, 90%)",
         "operation": "reorder"
       }
     ]
@@ -1373,7 +1394,7 @@
         "y": 31.4,
         "radius": 5.9,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (86%, 31%)",
         "operation": "recolor"
       }
     ]
@@ -1395,7 +1416,7 @@
         "y": 7.6,
         "radius": 5.1,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (62%, 8%)",
         "operation": "recolor"
       }
     ]
@@ -1417,7 +1438,7 @@
         "y": 25.6,
         "radius": 5.2,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (37%, 26%)",
         "operation": "recolor"
       }
     ]
@@ -1439,7 +1460,7 @@
         "y": 92.5,
         "radius": 5,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (94%, 92%)",
         "operation": "reorder"
       }
     ]
@@ -1461,7 +1482,7 @@
         "y": 17.4,
         "radius": 5.8,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (76%, 17%)",
         "operation": "reorder"
       }
     ]
@@ -1483,7 +1504,7 @@
         "y": 4.1,
         "radius": 4.6,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (54%, 4%)",
         "operation": "recolor"
       }
     ]
@@ -1505,7 +1526,7 @@
         "y": 44.7,
         "radius": 5,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (75%, 45%)",
         "operation": "reorder"
       }
     ]
@@ -1527,7 +1548,7 @@
         "y": 79.7,
         "radius": 5.2,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (91%, 80%)",
         "operation": "reorder"
       }
     ]
@@ -1549,7 +1570,7 @@
         "y": 23.9,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (69%, 24%)",
         "operation": "recolor"
       }
     ]
@@ -1567,11 +1588,11 @@
     "diffs": [
       {
         "id": 1,
-        "x": 1.6,
-        "y": 51,
-        "radius": 7.5,
+        "x": 1.5,
+        "y": 50.9,
+        "radius": 9.0,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (2%, 51%)",
         "operation": "recolor"
       }
     ]
@@ -1593,7 +1614,7 @@
         "y": 50.5,
         "radius": 5.4,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (31%, 50%)",
         "operation": "recolor"
       }
     ]
@@ -1615,7 +1636,7 @@
         "y": 83.9,
         "radius": 5.6,
         "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
+        "hint": "Look closely near coordinates (95%, 84%)",
         "operation": "remove"
       }
     ]
@@ -1637,7 +1658,7 @@
         "y": 65.4,
         "radius": 5.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (62%, 66%)",
         "operation": "recolor"
       }
     ]
@@ -1659,7 +1680,7 @@
         "y": 58.1,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (53%, 58%)",
         "operation": "recolor"
       }
     ]
@@ -1681,7 +1702,7 @@
         "y": 77,
         "radius": 7.2,
         "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
+        "hint": "Look closely near coordinates (7%, 77%)",
         "operation": "remove"
       }
     ]
@@ -1703,7 +1724,7 @@
         "y": 59.1,
         "radius": 4.5,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (72%, 59%)",
         "operation": "add"
       }
     ]
@@ -1725,7 +1746,7 @@
         "y": 8.7,
         "radius": 5,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (21%, 9%)",
         "operation": "reorder"
       }
     ]
@@ -1747,7 +1768,7 @@
         "y": 80.4,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (93%, 80%)",
         "operation": "recolor"
       }
     ]
@@ -1769,7 +1790,7 @@
         "y": 84.2,
         "radius": 5.5,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (30%, 84%)",
         "operation": "reorder"
       }
     ]
@@ -1791,7 +1812,7 @@
         "y": 11,
         "radius": 4.5,
         "description": "Single add difference",
-        "hint": "Look closely for a add difference",
+        "hint": "Look closely near coordinates (31%, 11%)",
         "operation": "add"
       }
     ]
@@ -1813,7 +1834,7 @@
         "y": 93.3,
         "radius": 4.8,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (88%, 93%)",
         "operation": "recolor"
       }
     ]
@@ -1835,7 +1856,7 @@
         "y": 93,
         "radius": 6.2,
         "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
+        "hint": "Look closely near coordinates (80%, 93%)",
         "operation": "remove"
       }
     ]
@@ -1857,7 +1878,7 @@
         "y": 11,
         "radius": 5.8,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (58%, 11%)",
         "operation": "recolor"
       }
     ]
@@ -1879,7 +1900,7 @@
         "y": 54.1,
         "radius": 5.6,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (48%, 54%)",
         "operation": "recolor"
       }
     ]
@@ -1901,7 +1922,7 @@
         "y": 34.7,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (88%, 35%)",
         "operation": "recolor"
       }
     ]
@@ -1923,7 +1944,7 @@
         "y": 28.5,
         "radius": 4.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (40%, 28%)",
         "operation": "recolor"
       }
     ]
@@ -1945,7 +1966,7 @@
         "y": 19.2,
         "radius": 4.6,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (49%, 19%)",
         "operation": "recolor"
       }
     ]
@@ -1967,7 +1988,7 @@
         "y": 77.2,
         "radius": 5.9,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (93%, 77%)",
         "operation": "reorder"
       }
     ]
@@ -1989,7 +2010,7 @@
         "y": 26,
         "radius": 5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (70%, 26%)",
         "operation": "recolor"
       }
     ]
@@ -2011,7 +2032,7 @@
         "y": 57,
         "radius": 6,
         "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
+        "hint": "Look closely near coordinates (55%, 57%)",
         "operation": "reorder"
       }
     ]
@@ -2033,7 +2054,7 @@
         "y": 26.1,
         "radius": 7.5,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (36%, 27%)",
         "operation": "recolor"
       }
     ]
@@ -2055,7 +2076,7 @@
         "y": 36.7,
         "radius": 5.7,
         "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
+        "hint": "Look closely near coordinates (44%, 37%)",
         "operation": "recolor"
       }
     ]
@@ -2075,7 +2096,8 @@
         "id": 1,
         "x": 77.9,
         "y": 92.4,
-        "radius": 5.3
+        "radius": 5.3,
+        "hint": "Look closely near coordinates (78%, 92%)"
       }
     ]
   },
@@ -2094,7 +2116,8 @@
         "id": 1,
         "x": 94.8,
         "y": 83.9,
-        "radius": 5.6
+        "radius": 5.6,
+        "hint": "Look closely near coordinates (95%, 84%)"
       }
     ]
   },
@@ -2113,7 +2136,8 @@
         "id": 1,
         "x": 46.1,
         "y": 75.5,
-        "radius": 5.4
+        "radius": 5.4,
+        "hint": "Look closely near coordinates (46%, 75%)"
       }
     ]
   },
@@ -2132,7 +2156,8 @@
         "id": 1,
         "x": 75,
         "y": 24.8,
-        "radius": 5.2
+        "radius": 5.2,
+        "hint": "Look closely near coordinates (75%, 25%)"
       }
     ]
   },
@@ -2151,7 +2176,8 @@
         "id": 1,
         "x": 21.6,
         "y": 60.2,
-        "radius": 6.5
+        "radius": 6.5,
+        "hint": "Look closely near coordinates (22%, 60%)"
       }
     ]
   },
@@ -2170,7 +2196,8 @@
         "id": 1,
         "x": 72.1,
         "y": 59.1,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (72%, 59%)"
       }
     ]
   },
@@ -2189,7 +2216,8 @@
         "id": 1,
         "x": 68.7,
         "y": 7.8,
-        "radius": 5.8
+        "radius": 5.8,
+        "hint": "Look closely near coordinates (69%, 8%)"
       }
     ]
   },
@@ -2208,7 +2236,8 @@
         "id": 1,
         "x": 92.9,
         "y": 80.5,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (93%, 80%)"
       }
     ]
   },
@@ -2227,7 +2256,8 @@
         "id": 1,
         "x": 71.2,
         "y": 33.1,
-        "radius": 6.5
+        "radius": 6.5,
+        "hint": "Look closely near coordinates (71%, 33%)"
       }
     ]
   },
@@ -2246,7 +2276,8 @@
         "id": 1,
         "x": 49.6,
         "y": 76.2,
-        "radius": 7.3
+        "radius": 7.3,
+        "hint": "Look closely near coordinates (50%, 76%)"
       }
     ]
   },
@@ -2265,7 +2296,8 @@
         "id": 1,
         "x": 29.8,
         "y": 84,
-        "radius": 6.8
+        "radius": 6.8,
+        "hint": "Look closely near coordinates (30%, 84%)"
       }
     ]
   },
@@ -2284,7 +2316,8 @@
         "id": 1,
         "x": 40.6,
         "y": 20.2,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (41%, 20%)"
       }
     ]
   },
@@ -2303,7 +2336,8 @@
         "id": 1,
         "x": 76,
         "y": 93.6,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (76%, 94%)"
       }
     ]
   },
@@ -2322,7 +2356,8 @@
         "id": 1,
         "x": 73.5,
         "y": 55.7,
-        "radius": 6
+        "radius": 6,
+        "hint": "Look closely near coordinates (74%, 56%)"
       }
     ]
   },
@@ -2341,7 +2376,8 @@
         "id": 1,
         "x": 88.6,
         "y": 53.3,
-        "radius": 6.8
+        "radius": 6.8,
+        "hint": "Look closely near coordinates (89%, 53%)"
       }
     ]
   },
@@ -2360,7 +2396,8 @@
         "id": 1,
         "x": 14.7,
         "y": 4.8,
-        "radius": 5.1
+        "radius": 5.1,
+        "hint": "Look closely near coordinates (15%, 5%)"
       }
     ]
   },
@@ -2379,7 +2416,8 @@
         "id": 1,
         "x": 6.1,
         "y": 49.6,
-        "radius": 5.8
+        "radius": 5.8,
+        "hint": "Look closely near coordinates (6%, 50%)"
       }
     ]
   },
@@ -2398,7 +2436,8 @@
         "id": 1,
         "x": 14.3,
         "y": 61.3,
-        "radius": 6.9
+        "radius": 6.9,
+        "hint": "Look closely near coordinates (14%, 61%)"
       }
     ]
   },
@@ -2417,7 +2456,8 @@
         "id": 1,
         "x": 56.9,
         "y": 60.5,
-        "radius": 7.8
+        "radius": 7.8,
+        "hint": "Look closely near coordinates (57%, 60%)"
       }
     ]
   },
@@ -2436,7 +2476,8 @@
         "id": 1,
         "x": 20.1,
         "y": 61.1,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (20%, 61%)"
       }
     ]
   },
@@ -2455,7 +2496,8 @@
         "id": 1,
         "x": 58.2,
         "y": 10.9,
-        "radius": 6.6
+        "radius": 6.6,
+        "hint": "Look closely near coordinates (58%, 11%)"
       }
     ]
   },
@@ -2474,7 +2516,8 @@
         "id": 1,
         "x": 48.5,
         "y": 53.7,
-        "radius": 7.1
+        "radius": 7.1,
+        "hint": "Look closely near coordinates (48%, 54%)"
       }
     ]
   },
@@ -2493,7 +2536,8 @@
         "id": 1,
         "x": 60.2,
         "y": 80.9,
-        "radius": 5.8
+        "radius": 5.8,
+        "hint": "Look closely near coordinates (60%, 81%)"
       }
     ]
   },
@@ -2512,7 +2556,8 @@
         "id": 1,
         "x": 93.6,
         "y": 92.5,
-        "radius": 5.8
+        "radius": 5.8,
+        "hint": "Look closely near coordinates (94%, 92%)"
       }
     ]
   },
@@ -2531,7 +2576,8 @@
         "id": 1,
         "x": 83,
         "y": 15.8,
-        "radius": 5.2
+        "radius": 5.2,
+        "hint": "Look closely near coordinates (83%, 16%)"
       }
     ]
   },
@@ -2550,7 +2596,8 @@
         "id": 1,
         "x": 1.5,
         "y": 50.9,
-        "radius": 10.3
+        "radius": 10.3,
+        "hint": "Look closely near coordinates (2%, 51%)"
       }
     ]
   },
@@ -2569,7 +2616,8 @@
         "id": 1,
         "x": 34.4,
         "y": 44,
-        "radius": 7.8
+        "radius": 7.8,
+        "hint": "Look closely near coordinates (34%, 44%)"
       }
     ]
   },
@@ -2588,7 +2636,8 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5.3
+        "radius": 5.3,
+        "hint": "Look closely near coordinates (75%, 45%)"
       }
     ]
   },
@@ -2607,7 +2656,8 @@
         "id": 1,
         "x": 53.8,
         "y": 20,
-        "radius": 6.6
+        "radius": 6.6,
+        "hint": "Look closely near coordinates (54%, 20%)"
       }
     ]
   },
@@ -2626,7 +2676,8 @@
         "id": 1,
         "x": 51,
         "y": 47.4,
-        "radius": 5.8
+        "radius": 5.8,
+        "hint": "Look closely near coordinates (51%, 47%)"
       }
     ]
   },
@@ -2645,7 +2696,8 @@
         "id": 1,
         "x": 86.4,
         "y": 86.6,
-        "radius": 7.7
+        "radius": 7.7,
+        "hint": "Look closely near coordinates (86%, 87%)"
       }
     ]
   },
@@ -2664,7 +2716,8 @@
         "id": 1,
         "x": 15.3,
         "y": 25.6,
-        "radius": 9
+        "radius": 9,
+        "hint": "Look closely near coordinates (15%, 26%)"
       }
     ]
   },
@@ -2683,7 +2736,8 @@
         "id": 1,
         "x": 36.3,
         "y": 26.6,
-        "radius": 9.2
+        "radius": 9.2,
+        "hint": "Look closely near coordinates (36%, 27%)"
       }
     ]
   },
@@ -2702,7 +2756,8 @@
         "id": 1,
         "x": 40.4,
         "y": 54.8,
-        "radius": 7.5
+        "radius": 7.5,
+        "hint": "Look closely near coordinates (40%, 55%)"
       }
     ]
   },
@@ -2721,7 +2776,8 @@
         "id": 1,
         "x": 54.2,
         "y": 55.7,
-        "radius": 7.7
+        "radius": 7.7,
+        "hint": "Look closely near coordinates (54%, 56%)"
       }
     ]
   },
@@ -2740,7 +2796,8 @@
         "id": 1,
         "x": 70.2,
         "y": 25.8,
-        "radius": 5.8
+        "radius": 5.8,
+        "hint": "Look closely near coordinates (70%, 26%)"
       }
     ]
   },
@@ -2759,7 +2816,8 @@
         "id": 1,
         "x": 78,
         "y": 33.6,
-        "radius": 5.1
+        "radius": 5.1,
+        "hint": "Look closely near coordinates (78%, 34%)"
       }
     ]
   },
@@ -2778,7 +2836,8 @@
         "id": 1,
         "x": 12.9,
         "y": 49.7,
-        "radius": 7.3
+        "radius": 7.3,
+        "hint": "Look closely near coordinates (13%, 50%)"
       }
     ]
   },
@@ -2797,7 +2856,8 @@
         "id": 1,
         "x": 57.6,
         "y": 80.5,
-        "radius": 6.2
+        "radius": 6.2,
+        "hint": "Look closely near coordinates (58%, 80%)"
       }
     ]
   },
@@ -2816,7 +2876,8 @@
         "id": 1,
         "x": 91.5,
         "y": 37.5,
-        "radius": 5.1
+        "radius": 5.1,
+        "hint": "Look closely near coordinates (92%, 38%)"
       }
     ]
   },
@@ -2835,7 +2896,8 @@
         "id": 1,
         "x": 91.2,
         "y": 87.2,
-        "radius": 8.1
+        "radius": 8.1,
+        "hint": "Look closely near coordinates (91%, 87%)"
       }
     ]
   },
@@ -2854,7 +2916,8 @@
         "id": 1,
         "x": 1.8,
         "y": 93.9,
-        "radius": 7.1
+        "radius": 7.1,
+        "hint": "Look closely near coordinates (2%, 94%)"
       }
     ]
   },
@@ -2873,7 +2936,8 @@
         "id": 1,
         "x": 20.5,
         "y": 63.3,
-        "radius": 6.2
+        "radius": 6.2,
+        "hint": "Look closely near coordinates (21%, 63%)"
       }
     ]
   },
@@ -2892,7 +2956,8 @@
         "id": 1,
         "x": 40.5,
         "y": 28.4,
-        "radius": 5.2
+        "radius": 5.2,
+        "hint": "Look closely near coordinates (40%, 28%)"
       }
     ]
   },
@@ -2911,7 +2976,8 @@
         "id": 1,
         "x": 4.1,
         "y": 69.1,
-        "radius": 10.4
+        "radius": 10.4,
+        "hint": "Look closely near coordinates (4%, 69%)"
       }
     ]
   },
@@ -2930,7 +2996,8 @@
         "id": 1,
         "x": 57.6,
         "y": 80.5,
-        "radius": 6.2
+        "radius": 6.2,
+        "hint": "Look closely near coordinates (58%, 80%)"
       }
     ]
   },
@@ -2949,7 +3016,8 @@
         "id": 1,
         "x": 73,
         "y": 15.4,
-        "radius": 5.5
+        "radius": 5.5,
+        "hint": "Look closely near coordinates (73%, 15%)"
       }
     ]
   },
@@ -2968,7 +3036,8 @@
         "id": 1,
         "x": 50.4,
         "y": 50.1,
-        "radius": 6.8
+        "radius": 6.8,
+        "hint": "Look closely near coordinates (50%, 50%)"
       }
     ]
   },
@@ -2987,7 +3056,8 @@
         "id": 1,
         "x": 60.8,
         "y": 15.4,
-        "radius": 9.7
+        "radius": 9.7,
+        "hint": "Look closely near coordinates (61%, 15%)"
       }
     ]
   },
@@ -3006,7 +3076,8 @@
         "id": 1,
         "x": 2.8,
         "y": 15.2,
-        "radius": 5.5
+        "radius": 5.5,
+        "hint": "Look closely near coordinates (3%, 15%)"
       }
     ]
   },
@@ -3025,7 +3096,8 @@
         "id": 1,
         "x": 49.9,
         "y": 91.7,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (50%, 92%)"
       }
     ]
   },
@@ -3044,7 +3116,8 @@
         "id": 1,
         "x": 27.6,
         "y": 73.2,
-        "radius": 11.5
+        "radius": 11.5,
+        "hint": "Look closely near coordinates (28%, 73%)"
       }
     ]
   },
@@ -3063,7 +3136,8 @@
         "id": 1,
         "x": 44.5,
         "y": 90.8,
-        "radius": 7.3
+        "radius": 7.3,
+        "hint": "Look closely near coordinates (45%, 91%)"
       }
     ]
   },
@@ -3082,7 +3156,8 @@
         "id": 1,
         "x": 42.9,
         "y": 84.6,
-        "radius": 9.9
+        "radius": 9.9,
+        "hint": "Look closely near coordinates (43%, 85%)"
       }
     ]
   },
@@ -3101,7 +3176,8 @@
         "id": 1,
         "x": 97.7,
         "y": 64.7,
-        "radius": 8.7
+        "radius": 8.7,
+        "hint": "Look closely near coordinates (98%, 65%)"
       }
     ]
   },
@@ -3120,7 +3196,8 @@
         "id": 1,
         "x": 17.5,
         "y": 71.5,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (17%, 72%)"
       }
     ]
   },
@@ -3139,7 +3216,8 @@
         "id": 1,
         "x": 27,
         "y": 61.4,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (27%, 61%)"
       }
     ]
   },
@@ -3158,7 +3236,8 @@
         "id": 1,
         "x": 9.8,
         "y": 43.6,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (10%, 44%)"
       }
     ]
   },
@@ -3177,7 +3256,8 @@
         "id": 1,
         "x": 34.5,
         "y": 24.8,
-        "radius": 6.7
+        "radius": 6.7,
+        "hint": "Look closely near coordinates (34%, 25%)"
       }
     ]
   },
@@ -3196,7 +3276,8 @@
         "id": 1,
         "x": 11.7,
         "y": 51.4,
-        "radius": 6.9
+        "radius": 6.9,
+        "hint": "Look closely near coordinates (12%, 51%)"
       }
     ]
   },
@@ -3215,7 +3296,8 @@
         "id": 1,
         "x": 93.8,
         "y": 77.8,
-        "radius": 6.9
+        "radius": 6.9,
+        "hint": "Look closely near coordinates (94%, 78%)"
       }
     ]
   },
@@ -3234,7 +3316,8 @@
         "id": 1,
         "x": 1.5,
         "y": 5.1,
-        "radius": 7
+        "radius": 7,
+        "hint": "Look closely near coordinates (2%, 5%)"
       }
     ]
   },
@@ -3253,7 +3336,8 @@
         "id": 1,
         "x": 61.6,
         "y": 47.7,
-        "radius": 5.8
+        "radius": 5.8,
+        "hint": "Look closely near coordinates (62%, 48%)"
       }
     ]
   },
@@ -3272,7 +3356,8 @@
         "id": 1,
         "x": 26.1,
         "y": 61.6,
-        "radius": 6.9
+        "radius": 6.9,
+        "hint": "Look closely near coordinates (26%, 62%)"
       }
     ]
   },
@@ -3291,7 +3376,8 @@
         "id": 1,
         "x": 44,
         "y": 38.3,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (44%, 38%)"
       }
     ]
   },
@@ -3310,7 +3396,8 @@
         "id": 1,
         "x": 86.3,
         "y": 86.3,
-        "radius": 6.6
+        "radius": 6.6,
+        "hint": "Look closely near coordinates (86%, 86%)"
       }
     ]
   },
@@ -3329,7 +3416,8 @@
         "id": 1,
         "x": 98.4,
         "y": 81.8,
-        "radius": 6.4
+        "radius": 6.4,
+        "hint": "Look closely near coordinates (98%, 82%)"
       }
     ]
   },
@@ -3348,7 +3436,8 @@
         "id": 1,
         "x": 53.9,
         "y": 55.3,
-        "radius": 5.8
+        "radius": 5.8,
+        "hint": "Look closely near coordinates (54%, 55%)"
       }
     ]
   },
@@ -3367,7 +3456,8 @@
         "id": 1,
         "x": 18.5,
         "y": 51.5,
-        "radius": 5.2
+        "radius": 5.2,
+        "hint": "Look closely near coordinates (19%, 51%)"
       }
     ]
   },
@@ -3386,7 +3476,8 @@
         "id": 1,
         "x": 45.1,
         "y": 48.6,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (45%, 49%)"
       }
     ]
   },
@@ -3405,7 +3496,8 @@
         "id": 1,
         "x": 86.2,
         "y": 86.3,
-        "radius": 6.6
+        "radius": 6.6,
+        "hint": "Look closely near coordinates (86%, 86%)"
       }
     ]
   },
@@ -3424,7 +3516,8 @@
         "id": 1,
         "x": 38.4,
         "y": 32.9,
-        "radius": 6.2
+        "radius": 6.2,
+        "hint": "Look closely near coordinates (38%, 33%)"
       }
     ]
   },
@@ -3443,7 +3536,8 @@
         "id": 1,
         "x": 66.8,
         "y": 84.6,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (67%, 85%)"
       }
     ]
   },
@@ -3462,7 +3556,8 @@
         "id": 1,
         "x": 59.5,
         "y": 21.7,
-        "radius": 8
+        "radius": 8,
+        "hint": "Look closely near coordinates (60%, 22%)"
       }
     ]
   },
@@ -3481,7 +3576,8 @@
         "id": 1,
         "x": 71.5,
         "y": 22.5,
-        "radius": 5.4
+        "radius": 5.4,
+        "hint": "Look closely near coordinates (71%, 23%)"
       }
     ]
   },
@@ -3500,7 +3596,8 @@
         "id": 1,
         "x": 15.6,
         "y": 36.2,
-        "radius": 6.6
+        "radius": 6.6,
+        "hint": "Look closely near coordinates (16%, 36%)"
       }
     ]
   },
@@ -3518,7 +3615,8 @@
         "id": 1,
         "x": 33.5,
         "y": 53,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (34%, 53%)"
       }
     ]
   },
@@ -3534,9 +3632,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.1,
-        "y": 51.4,
-        "radius": 8.5
+        "x": 51.5,
+        "y": 49.4,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (51%, 49%)"
       }
     ]
   },
@@ -3554,7 +3653,8 @@
         "id": 1,
         "x": 48,
         "y": 47.8,
-        "radius": 4.5
+        "radius": 4.5,
+        "hint": "Look closely near coordinates (48%, 48%)"
       }
     ]
   },
@@ -3572,7 +3672,8 @@
         "id": 1,
         "x": 47.9,
         "y": 45.9,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (48%, 46%)"
       }
     ]
   },
@@ -3590,7 +3691,8 @@
         "id": 1,
         "x": 51,
         "y": 47.8,
-        "radius": 4.5
+        "radius": 4.5,
+        "hint": "Look closely near coordinates (51%, 48%)"
       }
     ]
   },
@@ -3606,9 +3708,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 53.6,
-        "y": 45.8,
-        "radius": 8.5
+        "x": 50.7,
+        "y": 46.3,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (51%, 46%)"
       }
     ]
   },
@@ -3626,7 +3729,8 @@
         "id": 1,
         "x": 51.9,
         "y": 47.9,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (52%, 48%)"
       }
     ]
   },
@@ -3642,9 +3746,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.3,
-        "y": 34,
-        "radius": 8.5
+        "x": 48.4,
+        "y": 34.0,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (48%, 34%)"
       }
     ]
   },
@@ -3662,7 +3767,8 @@
         "id": 1,
         "x": 54,
         "y": 50.1,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (54%, 50%)"
       }
     ]
   },
@@ -3680,7 +3786,8 @@
         "id": 1,
         "x": 52.1,
         "y": 43.8,
-        "radius": 4.5
+        "radius": 4.5,
+        "hint": "Look closely near coordinates (52%, 44%)"
       }
     ]
   },
@@ -3698,7 +3805,8 @@
         "id": 1,
         "x": 52.1,
         "y": 43.8,
-        "radius": 4.5
+        "radius": 4.5,
+        "hint": "Look closely near coordinates (52%, 44%)"
       }
     ]
   },
@@ -3718,7 +3826,7 @@
         "y": 47.5,
         "radius": 5.5,
         "description": "Single wooden meeple unit removed from dense tactical resource grid",
-        "hint": "Examine the crowded field of wooden tokens, meeples, and dice"
+        "hint": "Look closely near coordinates (57%, 48%)"
       }
     ]
   },
@@ -3734,9 +3842,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.3,
-        "y": 34,
-        "radius": 8.5
+        "x": 48.4,
+        "y": 34.1,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (48%, 34%)"
       }
     ]
   },
@@ -3754,7 +3863,8 @@
         "id": 1,
         "x": 54,
         "y": 50.1,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (54%, 50%)"
       }
     ]
   },
@@ -3772,7 +3882,8 @@
         "id": 1,
         "x": 43.7,
         "y": 53.8,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (44%, 54%)"
       }
     ]
   },
@@ -3790,7 +3901,8 @@
         "id": 1,
         "x": 52,
         "y": 48,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (52%, 48%)"
       }
     ]
   },
@@ -3808,7 +3920,8 @@
         "id": 1,
         "x": 47,
         "y": 50.9,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (47%, 51%)"
       }
     ]
   },
@@ -3826,7 +3939,8 @@
         "id": 1,
         "x": 49.8,
         "y": 53.8,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (50%, 54%)"
       }
     ]
   },
@@ -3844,7 +3958,8 @@
         "id": 1,
         "x": 43.9,
         "y": 49.4,
-        "radius": 5.1
+        "radius": 5.1,
+        "hint": "Look closely near coordinates (44%, 49%)"
       }
     ]
   },
@@ -3860,9 +3975,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 77.5,
-        "y": 73.5,
-        "radius": 8.5
+        "x": 77.6,
+        "y": 73.4,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (78%, 73%)"
       }
     ]
   },
@@ -3882,7 +3998,8 @@
         "id": 1,
         "x": 23.9,
         "y": 79.6,
-        "radius": 10.4
+        "radius": 10.4,
+        "hint": "Look closely near coordinates (24%, 80%)"
       }
     ]
   },
@@ -3904,7 +4021,7 @@
         "y": 30.1,
         "radius": 7.3,
         "description": "Single sorting dish of botanical seeds shifted in warmth",
-        "hint": "Look across the bowls of botanical seeds, grains, and legumes",
+        "hint": "Look closely near coordinates (82%, 30%)",
         "operation": "recolor"
       }
     ]
@@ -3925,7 +4042,8 @@
         "id": 1,
         "x": 30.8,
         "y": 84.4,
-        "radius": 9.4
+        "radius": 9.4,
+        "hint": "Look closely near coordinates (31%, 84%)"
       }
     ]
   },
@@ -3947,7 +4065,7 @@
         "y": 82.1,
         "radius": 5.9,
         "description": "Single wax crayon tip shifted in color",
-        "hint": "Check the colorful crayons for a subtle shade variation",
+        "hint": "Look closely near coordinates (91%, 82%)",
         "operation": "recolor"
       }
     ]
@@ -3968,7 +4086,8 @@
         "id": 1,
         "x": 18.6,
         "y": 51.3,
-        "radius": 5.2
+        "radius": 5.2,
+        "hint": "Look closely near coordinates (19%, 51%)"
       }
     ]
   },
@@ -3988,7 +4107,8 @@
         "id": 1,
         "x": 36.4,
         "y": 83,
-        "radius": 10.2
+        "radius": 10.2,
+        "hint": "Look closely near coordinates (36%, 83%)"
       }
     ]
   },
@@ -4010,7 +4130,7 @@
         "y": 83.1,
         "radius": 6.2,
         "description": "Single sea glass pebble shifted from ocean emerald to cobalt azure",
-        "hint": "Scan through the natural seashells and sea glass pieces on the sand",
+        "hint": "Look closely near coordinates (66%, 83%)",
         "operation": "recolor"
       }
     ]
@@ -4029,9 +4149,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35,
+        "x": 35.0,
         "y": 29.4,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (35%, 29%)"
       }
     ]
   },
@@ -4051,7 +4172,8 @@
         "id": 1,
         "x": 33.3,
         "y": 79.3,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (33%, 79%)"
       }
     ]
   },
@@ -4073,7 +4195,7 @@
         "y": 36.5,
         "radius": 6.8,
         "description": "Single gourmet pastry macaron or berry garnish shifted in color",
-        "hint": "Scan the pastries and fruit garnishes on the marble board",
+        "hint": "Look closely near coordinates (44%, 37%)",
         "operation": "recolor"
       }
     ]
@@ -4096,7 +4218,7 @@
         "y": 78,
         "radius": 6,
         "description": "Single swirling glass marble shifted from emerald green to ocean turquoise",
-        "hint": "Scan through the glass marble collection for a subtle tone shift",
+        "hint": "Look closely near coordinates (29%, 78%)",
         "operation": "recolor"
       }
     ]
@@ -4117,7 +4239,8 @@
         "id": 1,
         "x": 76.3,
         "y": 28.4,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (76%, 28%)"
       }
     ]
   },
@@ -4137,7 +4260,8 @@
         "id": 1,
         "x": 8.5,
         "y": 46.2,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (9%, 46%)"
       }
     ]
   },
@@ -4159,7 +4283,7 @@
         "y": 26.8,
         "radius": 5.3,
         "description": "Single whole spice pod shifted in warmth",
-        "hint": "Check the spice compartments for a tone change",
+        "hint": "Look closely near coordinates (61%, 27%)",
         "operation": "recolor"
       }
     ]
@@ -4182,7 +4306,7 @@
         "y": 63.2,
         "radius": 6.3,
         "description": "Single succulent rosette shifted from sage green to dusty rose",
-        "hint": "Look across the nursery tray for a color-shifted succulent rosette",
+        "hint": "Look closely near coordinates (80%, 63%)",
         "operation": "recolor"
       }
     ]
@@ -4203,7 +4327,8 @@
         "id": 1,
         "x": 8.5,
         "y": 46.2,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (9%, 46%)"
       }
     ]
   },
@@ -4225,7 +4350,7 @@
         "y": 24.9,
         "radius": 6.8,
         "description": "Single succulent rosette shifted from pastel green to vivid violet",
-        "hint": "Look across the nursery tray for a color-shifted succulent rosette",
+        "hint": "Look closely near coordinates (34%, 25%)",
         "operation": "recolor"
       }
     ]
@@ -4245,7 +4370,8 @@
         "id": 1,
         "x": 45,
         "y": 39.7,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (45%, 40%)"
       }
     ]
   },
@@ -4266,7 +4392,7 @@
         "y": 14.1,
         "radius": 8.4,
         "description": "Single soft pastel stick missing from the wooden easel tray",
-        "hint": "Inspect the pastel sticks and paint supplies in the easel tray"
+        "hint": "Look closely near coordinates (49%, 14%)"
       }
     ]
   },
@@ -4285,7 +4411,8 @@
         "id": 1,
         "x": 46.2,
         "y": 6.5,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (46%, 6%)"
       }
     ]
   },
@@ -4304,7 +4431,8 @@
         "id": 1,
         "x": 54,
         "y": 53.9,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (54%, 54%)"
       }
     ]
   },
@@ -4322,7 +4450,8 @@
         "id": 1,
         "x": 46.2,
         "y": 6.5,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (46%, 6%)"
       }
     ]
   },
@@ -4340,7 +4469,8 @@
         "id": 1,
         "x": 80.5,
         "y": 64,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (80%, 64%)"
       }
     ]
   },
@@ -4358,9 +4488,9 @@
         "id": 1,
         "x": 35.2,
         "y": 37.3,
-        "radius": 5.3,
+        "radius": 7.3,
         "description": "Single wooden thread spool cotton wrap shifted in CIELAB (preserving wound thread fibers)",
-        "hint": "Check the colorful thread spools in the compartmentalized tray"
+        "hint": "Look closely near coordinates (35%, 37%)"
       }
     ]
   },
@@ -4380,7 +4510,7 @@
         "y": 22.8,
         "radius": 5.6,
         "description": "Single waxed linen thread spool shifted in CIELAB (preserving thread twist)",
-        "hint": "Inspect the collection of colored waxed thread spools"
+        "hint": "Look closely near coordinates (81%, 23%)"
       }
     ]
   },
@@ -4398,7 +4528,8 @@
         "id": 1,
         "x": 64.8,
         "y": 12.6,
-        "radius": 11
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (65%, 13%)"
       }
     ]
   },
@@ -4418,7 +4549,7 @@
         "y": 3.1,
         "radius": 5.1,
         "description": "Single precision screwdriver color collar shifted in CIELAB (preserving knurled grip)",
-        "hint": "Examine the color-coded precision screwdrivers on the work pad"
+        "hint": "Look closely near coordinates (60%, 3%)"
       }
     ]
   },
@@ -4438,7 +4569,7 @@
         "y": 3.4,
         "radius": 6.7,
         "description": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
-        "hint": "Check the pastel sticks and paint supplies in the easel tray"
+        "hint": "Look closely near coordinates (56%, 4%)"
       }
     ]
   },
@@ -4458,7 +4589,7 @@
         "y": 16.6,
         "radius": 6.5,
         "description": "Single paracord spring toggle shifted to bronze in CIELAB",
-        "hint": "Check the cordage and outdoor gear laid out on the table"
+        "hint": "Look closely near coordinates (51%, 17%)"
       }
     ]
   },
@@ -4478,7 +4609,7 @@
         "y": 14,
         "radius": 9,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
-        "hint": "Look closely at the rows of sewing thread spools in the box"
+        "hint": "Look closely near coordinates (86%, 14%)"
       }
     ]
   },
@@ -4498,7 +4629,7 @@
         "y": 71.3,
         "radius": 8,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
-        "hint": "Look closely at the rows of sewing thread spools in the box"
+        "hint": "Look closely near coordinates (34%, 71%)"
       }
     ]
   },
@@ -4518,7 +4649,7 @@
         "y": 39.7,
         "radius": 5.8,
         "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
-        "hint": "Inspect the slider buttons on the tools in the central workbench array"
+        "hint": "Look closely near coordinates (32%, 40%)"
       }
     ]
   },
@@ -4534,11 +4665,11 @@
     "diffs": [
       {
         "id": 1,
-        "x": 63.3,
-        "y": 66,
-        "radius": 7.1,
+        "x": 63.2,
+        "y": 66.0,
+        "radius": 9.0,
         "description": "Single radial capacitor sleeve tone shifted in CIELAB (preserving markings and lead solder)",
-        "hint": "Scan the electrolytic capacitors near the circuit trace rail"
+        "hint": "Look closely near coordinates (63%, 66%)"
       }
     ]
   },
@@ -4558,7 +4689,7 @@
         "y": 71.3,
         "radius": 7.9,
         "description": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
-        "hint": "Look closely at the notions and accessories in the tailor kit"
+        "hint": "Look closely near coordinates (34%, 71%)"
       }
     ]
   },
@@ -4578,7 +4709,7 @@
         "y": 39.6,
         "radius": 5.8,
         "description": "Single tape measure rubber slide lock button shifted to cobalt blue in CIELAB",
-        "hint": "Inspect the measuring tools and small sliders in the tool pile"
+        "hint": "Look closely near coordinates (32%, 40%)"
       }
     ]
   },
@@ -4598,7 +4729,7 @@
         "y": 71.3,
         "radius": 7.9,
         "description": "Single thread spool wrap fibers tone shifted to golden ochre in CIELAB (preserving wound thread texture)",
-        "hint": "Check the collection of thread spools in the tailor box"
+        "hint": "Look closely near coordinates (34%, 71%)"
       }
     ]
   },
@@ -4618,7 +4749,7 @@
         "y": 39.6,
         "radius": 5.8,
         "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
-        "hint": "Inspect the slider buttons on the tools in the central workbench array"
+        "hint": "Look closely near coordinates (32%, 40%)"
       }
     ]
   },
@@ -4636,7 +4767,8 @@
         "id": 1,
         "x": 50.3,
         "y": 43.4,
-        "radius": 9.8
+        "radius": 9.8,
+        "hint": "Look closely near coordinates (50%, 43%)"
       }
     ]
   },
@@ -4656,7 +4788,7 @@
         "y": 71.3,
         "radius": 7.9,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
-        "hint": "Look closely at the rows of sewing thread spools in the box"
+        "hint": "Look closely near coordinates (34%, 71%)"
       }
     ]
   },
@@ -4676,7 +4808,7 @@
         "y": 71.3,
         "radius": 7.9,
         "description": "Single tailor accessory tone shifted naturally in CIELAB",
-        "hint": "Examine the sewing notions and spool accessories"
+        "hint": "Look closely near coordinates (34%, 71%)"
       }
     ]
   },
@@ -4696,7 +4828,7 @@
         "y": 39.6,
         "radius": 5.8,
         "description": "Single measuring tape lock button shifted to terracotta in CIELAB",
-        "hint": "Inspect the measuring tools and small sliders in the tool pile"
+        "hint": "Look closely near coordinates (32%, 40%)"
       }
     ]
   },
@@ -4716,7 +4848,7 @@
         "y": 71.3,
         "radius": 7.9,
         "description": "Single thread spool wrap fibers tone shifted in CIELAB (preserving wound texture)",
-        "hint": "Check the thread spools in the notions collection"
+        "hint": "Look closely near coordinates (34%, 71%)"
       }
     ]
   },
@@ -4736,7 +4868,7 @@
         "y": 71.3,
         "radius": 8,
         "description": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
-        "hint": "Look closely at the notions and accessories in the tailor kit"
+        "hint": "Look closely near coordinates (34%, 71%)"
       }
     ]
   },
@@ -4752,9 +4884,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.5,
-        "y": 49.1,
-        "radius": 8.5
+        "x": 51.2,
+        "y": 48.2,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (51%, 48%)"
       }
     ]
   },
@@ -4772,7 +4905,8 @@
         "id": 1,
         "x": 41.3,
         "y": 26.4,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (41%, 26%)"
       }
     ]
   },
@@ -4788,9 +4922,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 65.7,
-        "y": 44.2,
-        "radius": 8.5
+        "x": 65.9,
+        "y": 44.0,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (66%, 44%)"
       }
     ]
   },
@@ -4806,9 +4941,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 57.4,
-        "y": 79.6,
-        "radius": 8.5
+        "x": 57.5,
+        "y": 79.5,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (57%, 80%)"
       }
     ]
   },
@@ -4826,7 +4962,8 @@
         "id": 1,
         "x": 86.5,
         "y": 23.9,
-        "radius": 9.2
+        "radius": 9.2,
+        "hint": "Look closely near coordinates (86%, 24%)"
       }
     ]
   },
@@ -4843,7 +4980,8 @@
         "id": 1,
         "x": 56,
         "y": 56.3,
-        "radius": 10.1
+        "radius": 10.1,
+        "hint": "Look closely near coordinates (56%, 56%)"
       }
     ]
   },
@@ -4858,9 +4996,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 55.6,
-        "y": 58.9,
-        "radius": 8.5
+        "x": 56.0,
+        "y": 58.3,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (56%, 58%)"
       }
     ]
   },
@@ -4876,7 +5015,8 @@
         "id": 1,
         "x": 43.8,
         "y": 76.8,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (44%, 77%)"
       }
     ],
     "variantImage": "levels/photo-pairs/ai_macro_woodcarver_001/variant.png",
@@ -4891,7 +5031,7 @@
       {
         "y": 52.9,
         "id": 1,
-        "hint": "Examine the star anise cluster near the cumin wooden bowl.",
+        "hint": "Look closely near coordinates (24%, 53%)",
         "x": 23.9,
         "radius": 6.9
       }
@@ -4913,7 +5053,7 @@
       {
         "y": 48.6,
         "id": 1,
-        "hint": "Spot the whole garlic clove near the rosemary cutting board.",
+        "hint": "Look closely near coordinates (56%, 48%)",
         "x": 56.2,
         "radius": 8
       }
@@ -4934,7 +5074,8 @@
         "id": 1,
         "x": 60.8,
         "y": 48.4,
-        "radius": 8.4
+        "radius": 8.4,
+        "hint": "Look closely near coordinates (61%, 48%)"
       }
     ],
     "id": "ai_macro_cartography_001",
@@ -4951,7 +5092,7 @@
       {
         "y": 42.7,
         "id": 1,
-        "hint": "Look at the spanner wrench tool near the aperture ring.",
+        "hint": "Look closely near coordinates (55%, 43%)",
         "x": 55.5,
         "radius": 5.2
       }
@@ -4977,7 +5118,7 @@
       {
         "y": 53.8,
         "id": 1,
-        "hint": "Notice the bamboo tea needle pick resting by the porcelain gaiwan.",
+        "hint": "Look closely near coordinates (68%, 54%)",
         "x": 67.8,
         "radius": 5.5
       }
@@ -4995,7 +5136,8 @@
         "id": 1,
         "x": 41.6,
         "y": 27.2,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (42%, 27%)"
       }
     ],
     "category": "Photography",
@@ -5021,7 +5163,7 @@
       {
         "y": 47.5,
         "id": 1,
-        "hint": "Find the carved mother-of-pearl button in the sewing tray.",
+        "hint": "Look closely near coordinates (64%, 48%)",
         "x": 63.8,
         "radius": 7.9
       }
@@ -5040,7 +5182,8 @@
         "id": 1,
         "x": 65.7,
         "y": 30.8,
-        "radius": 7.3
+        "radius": 7.3,
+        "hint": "Look closely near coordinates (66%, 31%)"
       }
     ],
     "pack": "Find the Sniper",
@@ -5058,7 +5201,8 @@
         "id": 1,
         "x": 37.1,
         "y": 69.9,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (37%, 70%)"
       }
     ],
     "baseImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
@@ -5078,7 +5222,7 @@
       {
         "y": 74.8,
         "id": 1,
-        "hint": "Count the row of copper ring washers beneath the ball bearings.",
+        "hint": "Look closely near coordinates (45%, 75%)",
         "x": 45.5,
         "radius": 7.5
       }
@@ -5101,7 +5245,8 @@
         "id": 1,
         "x": 69.4,
         "y": 29.9,
-        "radius": 8.9
+        "radius": 8.9,
+        "hint": "Look closely near coordinates (69%, 30%)"
       }
     ],
     "id": "ai_macro_electronics_001",
@@ -5123,7 +5268,8 @@
         "id": 1,
         "x": 63.8,
         "y": 40.6,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (64%, 41%)"
       }
     ],
     "category": "Greenhouse Clutter"
@@ -5134,9 +5280,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49.5,
-        "y": 48.7,
-        "radius": 8.5
+        "x": 49.7,
+        "y": 49.6,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (50%, 50%)"
       }
     ],
     "category": "Workshop Clutter",
@@ -5152,9 +5299,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50,
-        "y": 50.5,
-        "radius": 8.5
+        "x": 50.3,
+        "y": 50.4,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (50%, 50%)"
       }
     ],
     "title": "Forest Floor Camouflage",
@@ -5176,7 +5324,8 @@
         "id": 1,
         "x": 66.9,
         "y": 48.2,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (67%, 48%)"
       }
     ],
     "variantImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/variant.jpg",
@@ -5188,7 +5337,8 @@
         "id": 1,
         "x": 36.6,
         "y": 53.7,
-        "radius": 5.6
+        "radius": 5.6,
+        "hint": "Look closely near coordinates (37%, 54%)"
       }
     ],
     "baseImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/base.jpg",
@@ -5211,7 +5361,8 @@
         "id": 1,
         "x": 73.7,
         "y": 57.2,
-        "radius": 6.3
+        "radius": 6.3,
+        "hint": "Look closely near coordinates (74%, 57%)"
       }
     ],
     "difficulty": "Hard",
@@ -5227,7 +5378,8 @@
         "id": 1,
         "x": 91.8,
         "y": 28.1,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (92%, 28%)"
       }
     ],
     "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
@@ -5240,9 +5392,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 38.8,
-        "y": 12,
-        "radius": 8.5
+        "x": 39.5,
+        "y": 11.4,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (40%, 11%)"
       }
     ],
     "title": "Potting Table Succulent",
@@ -5267,7 +5420,8 @@
         "id": 1,
         "x": 35.5,
         "y": 62.5,
-        "radius": 9.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (35%, 63%)"
       }
     ],
     "id": "photo_watchmaker_bench_001"
@@ -5281,7 +5435,8 @@
         "id": 1,
         "x": 16.9,
         "y": 75.1,
-        "radius": 10.9
+        "radius": 10.9,
+        "hint": "Look closely near coordinates (17%, 75%)"
       }
     ],
     "title": "Bakers Table Cutter",
@@ -5295,9 +5450,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 31.2,
-        "y": 84.2,
-        "radius": 8.5
+        "x": 31.8,
+        "y": 84.1,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (32%, 84%)"
       }
     ],
     "difficulty": "Medium",
@@ -5317,9 +5473,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.8,
-        "y": 52.2,
-        "radius": 8.5
+        "x": 50.4,
+        "y": 52.5,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (50%, 53%)"
       }
     ],
     "packId": "find_the_sniper",
@@ -5331,9 +5488,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 26.3,
-        "y": 59.6,
-        "radius": 8.5
+        "x": 26.7,
+        "y": 59.8,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (27%, 60%)"
       }
     ],
     "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
@@ -5349,8 +5507,9 @@
       {
         "id": 1,
         "x": 4.5,
-        "y": 79,
-        "radius": 8.5
+        "y": 79.6,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (4%, 80%)"
       }
     ],
     "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
@@ -5369,8 +5528,9 @@
       {
         "id": 1,
         "x": 57.4,
-        "y": 46.3,
-        "radius": 8.5
+        "y": 46.2,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (57%, 46%)"
       }
     ],
     "title": "Board Game Piece",
@@ -5386,8 +5546,9 @@
       {
         "id": 1,
         "x": 60.6,
-        "y": 78.2,
-        "radius": 8.5
+        "y": 78.0,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (61%, 78%)"
       }
     ],
     "difficulty": "Medium",
@@ -5403,9 +5564,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 80.6,
-        "y": 20.6,
-        "radius": 8.5
+        "x": 80.9,
+        "y": 20.5,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (81%, 21%)"
       }
     ],
     "difficulty": "Hard",
@@ -5421,8 +5583,9 @@
       {
         "id": 1,
         "x": 78.2,
-        "y": 38.7,
-        "radius": 8.5
+        "y": 38.9,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (78%, 39%)"
       }
     ],
     "variantImage": "levels/photo-pairs/photo-coffee-station/variant.jpg",
@@ -5440,9 +5603,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.4,
-        "y": 58.8,
-        "radius": 8.5
+        "x": 52.5,
+        "y": 58.7,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (53%, 59%)"
       }
     ],
     "id": "photo_fishing_tackle_001",
@@ -5464,9 +5628,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59,
-        "y": 71.9,
-        "radius": 8.5
+        "x": 59.6,
+        "y": 72.8,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (60%, 73%)"
       }
     ]
   },
@@ -5478,9 +5643,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35,
-        "y": 66.7,
-        "radius": 8.5
+        "x": 35.1,
+        "y": 66.5,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (35%, 67%)"
       }
     ],
     "category": "Photography",
@@ -5496,7 +5662,8 @@
         "id": 1,
         "x": 49.2,
         "y": 30,
-        "radius": 11
+        "radius": 11,
+        "hint": "Look closely near coordinates (49%, 30%)"
       }
     ],
     "difficulty": "Easy",
@@ -5511,9 +5678,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 91.6,
+        "x": 92.1,
         "y": 46.1,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (92%, 46%)"
       }
     ],
     "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
@@ -5532,9 +5700,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52,
-        "y": 14.1,
-        "radius": 8.5
+        "x": 52.1,
+        "y": 14.2,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (52%, 14%)"
       }
     ],
     "packId": "find_the_sniper",
@@ -5551,8 +5720,9 @@
       {
         "id": 1,
         "x": 51.8,
-        "y": 52,
-        "radius": 8.5
+        "y": 53.2,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (52%, 53%)"
       }
     ],
     "difficulty": "Easy",
@@ -5565,9 +5735,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 55.4,
-        "y": 51.3,
-        "radius": 8.5
+        "x": 55.8,
+        "y": 51.8,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (56%, 52%)"
       }
     ],
     "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg",
@@ -5592,7 +5763,8 @@
         "id": 1,
         "x": 84,
         "y": 75.5,
-        "radius": 10.4
+        "radius": 10.4,
+        "hint": "Look closely near coordinates (84%, 76%)"
       }
     ]
   },
@@ -5605,7 +5777,8 @@
         "id": 1,
         "x": 7,
         "y": 18.6,
-        "radius": 10.8
+        "radius": 10.8,
+        "hint": "Look closely near coordinates (7%, 19%)"
       }
     ],
     "pack": "Find the Sniper",
@@ -5618,9 +5791,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 33.5,
-        "y": 53.2,
-        "radius": 8.5
+        "x": 33.6,
+        "y": 53.1,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (34%, 53%)"
       }
     ],
     "difficulty": "Easy",
@@ -5643,9 +5817,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 29.7,
+        "x": 29.6,
         "y": 46.9,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (30%, 47%)"
       }
     ],
     "id": "photo_game_night_001"
@@ -5663,7 +5838,8 @@
         "id": 1,
         "x": 3.7,
         "y": 63.5,
-        "radius": 8.1
+        "radius": 8.1,
+        "hint": "Look closely near coordinates (4%, 63%)"
       }
     ],
     "pack": "Find the Sniper"
@@ -5677,7 +5853,8 @@
         "id": 1,
         "x": 41.8,
         "y": 66.2,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (42%, 66%)"
       }
     ],
     "pack": "Abstract Animated",
@@ -5690,9 +5867,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.2,
+        "x": 86.4,
         "y": 73.7,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (86%, 74%)"
       }
     ],
     "variantImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/variant.jpg",
@@ -5736,7 +5914,8 @@
         "id": 1,
         "x": 46.4,
         "y": 39.2,
-        "radius": 7.4
+        "radius": 7.4,
+        "hint": "Look closely near coordinates (46%, 39%)"
       }
     ],
     "packId": "abstract_animated"
@@ -5752,7 +5931,7 @@
       {
         "y": 55,
         "id": 1,
-        "hint": "Compare the small color detail in this area.",
+        "hint": "Look closely near coordinates (45%, 55%)",
         "x": 45,
         "radius": 6.1
       }
@@ -5766,9 +5945,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 85.8,
-        "y": 66.2,
-        "radius": 8.5
+        "x": 85.2,
+        "y": 66.3,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (85%, 66%)"
       }
     ],
     "pack": "Find the Sniper",
@@ -5782,9 +5962,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 43.7,
-        "y": 78.4,
-        "radius": 8.5
+        "x": 43.2,
+        "y": 78.6,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (43%, 79%)"
       }
     ],
     "packId": "find_the_sniper",
@@ -5810,7 +5991,8 @@
         "id": 1,
         "x": 87.9,
         "y": 67.7,
-        "radius": 8.5
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (88%, 68%)"
       }
     ]
   },
@@ -5824,9 +6006,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 11.1,
-        "y": 71.6,
-        "radius": 8.5
+        "x": 10.9,
+        "y": 71.2,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (11%, 71%)"
       }
     ],
     "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg",
@@ -5842,9 +6025,10 @@
     "diffs": [
       {
         "id": 1,
-        "x": 9.9,
-        "y": 58.4,
-        "radius": 8.5
+        "x": 10.0,
+        "y": 58.3,
+        "radius": 9.0,
+        "hint": "Look closely near coordinates (10%, 58%)"
       }
     ],
     "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg",
@@ -5863,7 +6047,8 @@
         "id": 1,
         "x": 89.5,
         "y": 59.2,
-        "radius": 9.2
+        "radius": 9.2,
+        "hint": "Look closely near coordinates (90%, 59%)"
       }
     ],
     "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg"
@@ -5880,7 +6065,8 @@
         "id": 1,
         "x": 52.2,
         "y": 50.9,
-        "radius": 4.6
+        "radius": 4.6,
+        "hint": "Look closely near coordinates (52%, 51%)"
       }
     ],
     "id": "ai_botanist_herbarium_001",
@@ -5898,7 +6084,8 @@
         "id": 1,
         "x": 17.1,
         "y": 56.6,
-        "radius": 9.7
+        "radius": 9.7,
+        "hint": "Look closely near coordinates (17%, 57%)"
       }
     ],
     "variantImage": "levels/photo-pairs/ai-cartography-desk/variant.jpg",
@@ -5914,7 +6101,8 @@
         "id": 1,
         "x": 49.7,
         "y": 62.2,
-        "radius": 8.7
+        "radius": 8.7,
+        "hint": "Look closely near coordinates (50%, 62%)"
       }
     ],
     "packId": "find_the_sniper",
@@ -5930,7 +6118,7 @@
       {
         "y": 58,
         "id": 1,
-        "hint": "Scan the brass washer compartment on the right side of the organizer.",
+        "hint": "Look closely near coordinates (75%, 58%)",
         "x": 74.7,
         "radius": 5.8
       }
@@ -5948,7 +6136,8 @@
         "id": 1,
         "x": 60.3,
         "y": 35.1,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (60%, 35%)"
       }
     ],
     "title": "Tabletop Strategy Board",
@@ -5973,7 +6162,8 @@
         "id": 1,
         "x": 47.9,
         "y": 50.3,
-        "radius": 5
+        "radius": 5,
+        "hint": "Look closely near coordinates (48%, 50%)"
       }
     ]
   },
@@ -5991,7 +6181,8 @@
         "id": 1,
         "x": 48.2,
         "y": 53.8,
-        "radius": 6.3
+        "radius": 6.3,
+        "hint": "Look closely near coordinates (48%, 54%)"
       }
     ]
   }
