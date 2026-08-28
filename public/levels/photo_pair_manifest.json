@@ -57,7 +57,7 @@
       {
         "id": 1,
         "x": 92.1,
-        "y": 87.0,
+        "y": 87,
         "radius": 5.6,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -101,7 +101,7 @@
       {
         "id": 1,
         "x": 30.8,
-        "y": 11.0,
+        "y": 11,
         "radius": 4.5,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -124,7 +124,7 @@
         "id": 1,
         "x": 56.5,
         "y": 93.4,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -189,7 +189,7 @@
       {
         "id": 1,
         "x": 58.2,
-        "y": 11.0,
+        "y": 11,
         "radius": 5.8,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
@@ -213,50 +213,6 @@
         "x": 30.1,
         "y": 22.4,
         "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ]
-  },
-  {
-    "id": "fresh_nature_pair_011",
-    "title": "Playful Hand-Carved Wooden Animal Toys (Nature 11)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_011_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_011_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.2,
-        "y": 84.4,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ]
-  },
-  {
-    "id": "fresh_nature_pair_012",
-    "title": "Playful Hand-Carved Wooden Animal Toys (Nature 12)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_012_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_012_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 71.5,
-        "y": 17.2,
-        "radius": 4.8,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -322,7 +278,7 @@
         "id": 1,
         "x": 51.7,
         "y": 14.1,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -386,7 +342,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 31.0,
+        "x": 31,
         "y": 82.9,
         "radius": 5.1,
         "description": "Single recolor difference",
@@ -652,7 +608,7 @@
         "id": 1,
         "x": 51.7,
         "y": 14.1,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -672,7 +628,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 31.0,
+        "x": 31,
         "y": 82.9,
         "radius": 5.1,
         "description": "Single recolor difference",
@@ -779,7 +735,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 56.0,
+        "x": 56,
         "y": 63.2,
         "radius": 4.9,
         "description": "Single recolor difference",
@@ -823,7 +779,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.0,
+        "x": 52,
         "y": 87.3,
         "radius": 4.6,
         "description": "Single recolor difference",
@@ -845,7 +801,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 26.0,
+        "x": 26,
         "y": 86.2,
         "radius": 6.8,
         "description": "Single add difference",
@@ -868,7 +824,7 @@
       {
         "id": 1,
         "x": 45.7,
-        "y": 41.0,
+        "y": 41,
         "radius": 4.6,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
@@ -889,7 +845,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 7.0,
+        "x": 7,
         "y": 69.2,
         "radius": 4.8,
         "description": "Bead removed from tray",
@@ -933,7 +889,7 @@
         "id": 1,
         "x": 17.9,
         "y": 39.5,
-        "radius": 8.0,
+        "radius": 8,
         "description": "Stick removed from pile",
         "operation": "remove"
       }
@@ -953,7 +909,7 @@
       {
         "id": 1,
         "x": 91.1,
-        "y": 77.0,
+        "y": 77,
         "radius": 6.8
       }
     ]
@@ -1074,7 +1030,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59.0,
+        "x": 59,
         "y": 68.8,
         "radius": 4.8,
         "description": "Object removed from scene",
@@ -1117,7 +1073,7 @@
       {
         "id": 1,
         "x": 72.2,
-        "y": 82.0,
+        "y": 82,
         "radius": 4.8,
         "description": "Object removed from scene",
         "operation": "remove"
@@ -1137,7 +1093,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 31.0,
+        "x": 31,
         "y": 64.3,
         "radius": 4.8,
         "description": "Object removed from scene",
@@ -1219,9 +1175,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 26.0,
+        "x": 26,
         "y": 90.6,
-        "radius": 6.0,
+        "radius": 6,
         "description": "Object removed from scene",
         "operation": "remove"
       }
@@ -1291,28 +1247,6 @@
     ]
   },
   {
-    "id": "fresh_v4_pair_065",
-    "title": "Miniature Figurines & Pigments",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_065_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_065_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.7,
-        "y": 49.7,
-        "radius": 6.0,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ]
-  },
-  {
     "id": "fresh_v4_pair_041",
     "title": "Victorian Pocket Watches (Jewel Escapement)",
     "category": "Photography",
@@ -1326,7 +1260,7 @@
       {
         "id": 1,
         "x": 60.4,
-        "y": 92.0,
+        "y": 92,
         "radius": 5.4,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
@@ -1435,7 +1369,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.0,
+        "x": 86,
         "y": 31.4,
         "radius": 5.9,
         "description": "Single recolor difference",
@@ -1479,7 +1413,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 37.0,
+        "x": 37,
         "y": 25.6,
         "radius": 5.2,
         "description": "Single recolor difference",
@@ -1503,7 +1437,7 @@
         "id": 1,
         "x": 93.6,
         "y": 92.5,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -1569,7 +1503,7 @@
         "id": 1,
         "x": 74.9,
         "y": 44.7,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -1621,28 +1555,6 @@
     ]
   },
   {
-    "id": "fresh_v4_pair_058",
-    "title": "Retro Lapel Enamel Badges",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_058_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_058_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 8.5,
-        "y": 71.5,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ]
-  },
-  {
     "id": "fresh_v4_pair_059",
     "title": "Brass Screws & Industrial Washers",
     "category": "Photography",
@@ -1656,7 +1568,7 @@
       {
         "id": 1,
         "x": 1.6,
-        "y": 51.0,
+        "y": 51,
         "radius": 7.5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
@@ -1721,7 +1633,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 62.0,
+        "x": 62,
         "y": 65.4,
         "radius": 5.5,
         "description": "Single recolor difference",
@@ -1766,7 +1678,7 @@
       {
         "id": 1,
         "x": 7.2,
-        "y": 77.0,
+        "y": 77,
         "radius": 7.2,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
@@ -1811,7 +1723,7 @@
         "id": 1,
         "x": 21.2,
         "y": 8.7,
-        "radius": 5.0,
+        "radius": 5,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -1831,7 +1743,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 93.0,
+        "x": 93,
         "y": 80.4,
         "radius": 4.5,
         "description": "Single recolor difference",
@@ -1853,7 +1765,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 30.0,
+        "x": 30,
         "y": 84.2,
         "radius": 5.5,
         "description": "Single reorder difference",
@@ -1876,7 +1788,7 @@
       {
         "id": 1,
         "x": 30.8,
-        "y": 11.0,
+        "y": 11,
         "radius": 4.5,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -1920,7 +1832,7 @@
       {
         "id": 1,
         "x": 80.3,
-        "y": 93.0,
+        "y": 93,
         "radius": 6.2,
         "description": "Single remove difference",
         "hint": "Look closely for a remove difference",
@@ -1942,7 +1854,7 @@
       {
         "id": 1,
         "x": 58.2,
-        "y": 11.0,
+        "y": 11,
         "radius": 5.8,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
@@ -1991,28 +1903,6 @@
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
-      }
-    ]
-  },
-  {
-    "id": "fresh_v4_pair_027",
-    "title": "Vintage Cloisonne Enamel Badges",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_027_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_027_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 14.6,
-        "y": 72.1,
-        "radius": 7.0,
-        "description": "Single reorder difference",
-        "hint": "Look closely for a reorder difference",
-        "operation": "reorder"
       }
     ]
   },
@@ -2096,8 +1986,8 @@
       {
         "id": 1,
         "x": 70.4,
-        "y": 26.0,
-        "radius": 5.0,
+        "y": 26,
+        "radius": 5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
@@ -2118,8 +2008,8 @@
       {
         "id": 1,
         "x": 54.6,
-        "y": 57.0,
-        "radius": 6.0,
+        "y": 57,
+        "radius": 6,
         "description": "Single reorder difference",
         "hint": "Look closely for a reorder difference",
         "operation": "reorder"
@@ -2513,25 +2403,6 @@
     ]
   },
   {
-    "id": "fresh_v2_ai_enamel_pins_collector_006",
-    "title": "[AI Multi-Op] Collector Enamel Pin Showcase",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_enamel_pins_collector_006_base.jpg",
-    "variantImage": "/levels/fresh_v2_ai_enamel_pins_collector_006_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 14.7,
-        "y": 78,
-        "radius": 7.3
-      }
-    ]
-  },
-  {
     "id": "fresh_v2_ai_marine_seashells_specimens_007",
     "title": "[AI Multi-Op] Marine Seashells & Sea Glass Array",
     "category": "Photography",
@@ -2585,25 +2456,6 @@
         "x": 58.2,
         "y": 10.9,
         "radius": 6.6
-      }
-    ]
-  },
-  {
-    "id": "fresh_v2_ai_wooden_toy_figurines_010",
-    "title": "[AI Multi-Op] Painted Wooden Toy Figurines & Meeples",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_wooden_toy_figurines_010_base.jpg",
-    "variantImage": "/levels/fresh_v2_ai_wooden_toy_figurines_010_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.2,
-        "y": 84.4,
-        "radius": 5
       }
     ]
   },
@@ -3026,25 +2878,6 @@
     ]
   },
   {
-    "id": "prod_v4_ai_retrogaming",
-    "title": "[AI Multi-Op] Retro Gaming Desk Cartridges",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_retrogaming_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_retrogaming_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.3,
-        "y": 34.2,
-        "radius": 7.5
-      }
-    ]
-  },
-  {
     "id": "prod_v4_var2_dense_gemstones",
     "title": "[AI Multi-Op] Gemologist Gemstone Tray B",
     "category": "Photography",
@@ -3368,44 +3201,6 @@
     ]
   },
   {
-    "id": "prod_v4_unique_retrogaming",
-    "title": "[AI Multi-Op] Vintage Retro Cartridge Flat Lay",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_unique_retrogaming_base.jpg",
-    "variantImage": "/levels/prod_v4_unique_retrogaming_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.1,
-        "y": 34,
-        "radius": 6
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_var2_dense_enamel_pins",
-    "title": "[AI Multi-Op] Collector Enamel Pin Showcase B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_dense_enamel_pins_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_dense_enamel_pins_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 8.5,
-        "y": 71.5,
-        "radius": 5
-      }
-    ]
-  },
-  {
     "id": "prod_v4_var2_dense_watch_parts",
     "title": "[AI Multi-Op] Horologist Escapement Parts Tray B",
     "category": "Photography",
@@ -3516,25 +3311,6 @@
         "x": 86.3,
         "y": 86.3,
         "radius": 6.6
-      }
-    ]
-  },
-  {
-    "id": "pipe_v3_retro_reorder_007",
-    "title": "[AI Reorder] Retro Gaming Desk Shifted Memory Card",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/pipe_v3_retro_reorder_007_base.jpg",
-    "variantImage": "/levels/pipe_v3_retro_reorder_007_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.2,
-        "y": 34.1,
-        "radius": 6.1
       }
     ]
   },
@@ -3672,25 +3448,6 @@
     ]
   },
   {
-    "id": "goldilocks_pipe_v2_retro_recolor_007",
-    "title": "[AI Recolor] Retro Gaming Desk Cartridge Shell",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_retro_recolor_007_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_retro_recolor_007_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 71,
-        "y": 73.4,
-        "radius": 5.5
-      }
-    ]
-  },
-  {
     "id": "goldilocks_pipe_v2_expedition_remove_008",
     "title": "[AI Remove] Expedition Prep Table Missing Carabiner",
     "category": "Photography",
@@ -3795,7 +3552,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.0,
+        "x": 48,
         "y": 47.8,
         "radius": 4.5
       }
@@ -3831,7 +3588,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.0,
+        "x": 51,
         "y": 47.8,
         "radius": 4.5
       }
@@ -3886,7 +3643,7 @@
       {
         "id": 1,
         "x": 48.3,
-        "y": 34.0,
+        "y": 34,
         "radius": 8.5
       }
     ]
@@ -3978,7 +3735,7 @@
       {
         "id": 1,
         "x": 48.3,
-        "y": 34.0,
+        "y": 34,
         "radius": 8.5
       }
     ]
@@ -4272,7 +4029,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35.0,
+        "x": 35,
         "y": 29.4,
         "radius": 8.5
       }
@@ -4385,29 +4142,6 @@
     ]
   },
   {
-    "id": "photo_enamel_pins_calibrated_008",
-    "title": "[Calibrated] Retro Collector Enamel Pins on Denim",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_enamel_pins_calibrated_008_base.jpg",
-    "variantImage": "/levels/photo_enamel_pins_calibrated_008_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 76.1,
-        "y": 51.5,
-        "radius": 5.3,
-        "description": "Single retro enamel pin badge color shifted",
-        "hint": "Scan the retro enamel pins and metal badges on the denim banner",
-        "operation": "recolor"
-      }
-    ]
-  },
-  {
     "id": "photo_spices_calibrated_009",
     "title": "[Calibrated] Artisanal Whole Spice Market Tray",
     "pack": "Photography",
@@ -4474,29 +4208,6 @@
     ]
   },
   {
-    "id": "photo_enamel_pins_recolor_008",
-    "title": "[Photorealistic] Retro Collector Enamel Pins on Denim",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_enamel_pins_recolor_008_base.jpg",
-    "variantImage": "/levels/photo_enamel_pins_recolor_008_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 76.1,
-        "y": 51.5,
-        "radius": 5.3,
-        "description": "Single retro enamel pin badge color shifted",
-        "hint": "Scan the retro enamel pins and metal badges on the denim banner",
-        "operation": "recolor"
-      }
-    ]
-  },
-  {
     "id": "photo_succulents_recolor_010",
     "title": "[Photorealistic] Greenhouse Miniature Succulent Rosettes",
     "pack": "Photography",
@@ -4534,25 +4245,6 @@
         "id": 1,
         "x": 45,
         "y": 39.7,
-        "radius": 5
-      }
-    ]
-  },
-  {
-    "id": "dense_ai_retro_cart_add_006",
-    "title": "[AI Dense Add] Retro Gaming Desk Extra Game Cartridge",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "operation": "add",
-    "baseImage": "/levels/dense_ai_retro_cart_add_006_base.jpg",
-    "variantImage": "/levels/dense_ai_retro_cart_add_006_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 48.5,
-        "y": 35.1,
         "radius": 5
       }
     ]
@@ -4669,26 +4361,6 @@
         "radius": 5.3,
         "description": "Single wooden thread spool cotton wrap shifted in CIELAB (preserving wound thread fibers)",
         "hint": "Check the colorful thread spools in the compartmentalized tray"
-      }
-    ]
-  },
-  {
-    "id": "goldilocks_ai_retro_gaming_004",
-    "title": "[AI Canvas] Retro Gaming Desk Cartridge Shell",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/goldilocks_ai_retro_gaming_004_base.jpg",
-    "variantImage": "/levels/goldilocks_ai_retro_gaming_004_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 43.9,
-        "y": 82,
-        "radius": 5.1,
-        "description": "Single vintage game cartridge shell tone shifted in CIELAB",
-        "hint": "Scan the retro game cartridges and memory cards on the desk"
       }
     ]
   },
@@ -4811,24 +4483,6 @@
     ]
   },
   {
-    "id": "goldilocks_photo_retro_gaming_cartridges_008",
-    "title": "[Photo] Retro Gaming Desk Cartridge Label Accent",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/goldilocks_photo_retro_gaming_cartridges_008_base.jpg",
-    "variantImage": "/levels/goldilocks_photo_retro_gaming_cartridges_008_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 60.6,
-        "y": 24.4,
-        "radius": 5
-      }
-    ]
-  },
-  {
     "id": "scene_tailor_notions_spool_008",
     "title": "[Photo] Tailor Notions Box Woven Thread Spool",
     "category": "Photography",
@@ -4865,26 +4519,6 @@
         "radius": 5.8,
         "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
         "hint": "Inspect the slider buttons on the tools in the central workbench array"
-      }
-    ]
-  },
-  {
-    "id": "scene_retro_gaming_cartridges_017",
-    "title": "[Photo] Retro Gaming Desk Cartridge Label Accent",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/scene_retro_gaming_cartridges_017_base.jpg",
-    "variantImage": "/levels/scene_retro_gaming_cartridges_017_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 36.2,
-        "y": 36.9,
-        "radius": 8.2,
-        "description": "Single retro cartridge spine label tone shifted in CIELAB",
-        "hint": "Scan the vintage gaming cartridges and tech accessories"
       }
     ]
   },
@@ -5477,24 +5111,6 @@
     "difficulty": "Hard"
   },
   {
-    "category": "Craft Clutter",
-    "variantImage": "levels/photo-pairs/crafts/easy_craft_001/variant.jpg",
-    "packId": "find_the_sniper",
-    "difficulty": "Easy",
-    "pack": "Find the Sniper",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 70.1,
-        "y": 89.6,
-        "radius": 8.5
-      }
-    ],
-    "baseImage": "levels/photo-pairs/crafts/easy_craft_001/base.jpg",
-    "title": "Craft Desk Toy Car",
-    "id": "easy_craft_001"
-  },
-  {
     "title": "Nursery Plant Tag",
     "baseImage": "levels/photo-pairs/nursery/medium_nursery_001/base.jpg",
     "variantImage": "levels/photo-pairs/nursery/medium_nursery_001/variant.jpg",
@@ -5536,7 +5152,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 50.5,
         "radius": 8.5
       }
@@ -5625,7 +5241,7 @@
       {
         "id": 1,
         "x": 38.8,
-        "y": 12.0,
+        "y": 12,
         "radius": 8.5
       }
     ],
@@ -5733,7 +5349,7 @@
       {
         "id": 1,
         "x": 4.5,
-        "y": 79.0,
+        "y": 79,
         "radius": 8.5
       }
     ],
@@ -5848,7 +5464,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59.0,
+        "x": 59,
         "y": 71.9,
         "radius": 8.5
       }
@@ -5862,7 +5478,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35.0,
+        "x": 35,
         "y": 66.7,
         "radius": 8.5
       }
@@ -5916,7 +5532,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 52.0,
+        "x": 52,
         "y": 14.1,
         "radius": 8.5
       }
@@ -5935,7 +5551,7 @@
       {
         "id": 1,
         "x": 51.8,
-        "y": 52.0,
+        "y": 52,
         "radius": 8.5
       }
     ],
