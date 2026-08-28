@@ -55,17 +55,36 @@ export function getAllPhotoPairEntries() {
   return [...unrated, ...rated];
 }
 
+import { getCachedRemoteLevels } from '../services/remoteLevelSync.js';
+
 function loadManifest() {
+  const allEntries = [];
   try {
     const result = validatePhotoPairManifest(photoPairManifestData);
     if (result?.validEntries?.length > 0) {
-      return result.validEntries;
+      allEntries.push(...result.validEntries);
     }
   } catch (err) {
     logApp('ERROR', '[ManifestLoadError]', err?.message || err);
   }
 
-  return [];
+  // Merge remote OTA levels from Firebase cache
+  try {
+    const remoteEntries = getCachedRemoteLevels();
+    if (Array.isArray(remoteEntries) && remoteEntries.length > 0) {
+      const seenIds = new Set(allEntries.map(e => e.id));
+      for (const rEntry of remoteEntries) {
+        if (!seenIds.has(rEntry.id)) {
+          allEntries.push(rEntry);
+          seenIds.add(rEntry.id);
+        }
+      }
+    }
+  } catch (remoteErr) {
+    logApp('WARN', '[RemoteLevelMergeWarn]', remoteErr?.message || remoteErr);
+  }
+
+  return allEntries;
 }
 
 export function clearPhotoPairManifestCache() {

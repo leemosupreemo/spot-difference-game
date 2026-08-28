@@ -20,6 +20,7 @@ import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
 import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared } from './services/analytics';
+import { syncRemoteLevelPacks } from './services/remoteLevelSync';
 
 export default function App() {
   const [levels, setLevels] = useState(() => {
@@ -99,6 +100,7 @@ export default function App() {
   const visitedDebugLevelIdsRef = useRef(new Set());
   useEffect(() => {
     initAnalytics();
+    syncRemoteLevelPacks().catch(() => {});
   }, []);
 
   const handleToggleSkipKept = (val) => {
