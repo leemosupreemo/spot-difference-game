@@ -1,5 +1,445 @@
 [
   {
+    "id": "fresh_nature_pair_001",
+    "title": "Beachcomber Tidepool Finds (Nature 1)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_001_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_001_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.3,
+        "y": 10.1,
+        "radius": 4.8,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_002",
+    "title": "Beachcomber Tidepool Finds (Nature 2)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_002_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_002_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 97.1,
+        "y": 20.6,
+        "radius": 4.8,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_003",
+    "title": "Polished Gemstone Cabochons on Basalt (Nature 3)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_003_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_003_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 92.1,
+        "y": 87.0,
+        "radius": 5.6,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_004",
+    "title": "Polished Gemstone Cabochons on Basalt (Nature 4)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_004_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_004_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 46.1,
+        "y": 75.5,
+        "radius": 5.4,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_005",
+    "title": "Wild Forest Mushrooms & Acorns (Nature 5)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_005_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_005_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30.8,
+        "y": 11.0,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_006",
+    "title": "Wild Forest Mushrooms & Acorns (Nature 6)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_006_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_006_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.5,
+        "y": 93.4,
+        "radius": 5.0,
+        "description": "Single reorder difference",
+        "hint": "Look closely for a reorder difference",
+        "operation": "reorder"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_007",
+    "title": "Marine Seashells & Coral Specimen (Nature 7)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_007_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_007_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 20.9,
+        "y": 8.9,
+        "radius": 5.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_008",
+    "title": "Botanical Succulents Greenhouse Grid (Nature 8)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_008_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_008_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69.8,
+        "y": 18.8,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_009",
+    "title": "Heirloom Spice Bazaar Botanical Seeds (Nature 9)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_009_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_009_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.2,
+        "y": 11.0,
+        "radius": 5.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_010",
+    "title": "Nature Geodes & Agate Slices (Nature 10)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_010_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_010_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30.1,
+        "y": 22.4,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_011",
+    "title": "Playful Hand-Carved Wooden Animal Toys (Nature 11)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_011_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_011_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.2,
+        "y": 84.4,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_012",
+    "title": "Playful Hand-Carved Wooden Animal Toys (Nature 12)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_012_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_012_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.5,
+        "y": 17.2,
+        "radius": 4.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_013",
+    "title": "Outdoor Garden Seedlings & Plant Tags (Nature 13)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_013_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_013_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.3,
+        "y": 75.2,
+        "radius": 5.6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_014",
+    "title": "Playful Sugar Dusted Fruit Gummy Candies (Nature 14)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_014_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_014_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 4.3,
+        "y": 57.8,
+        "radius": 4.9,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_015",
+    "title": "Playful Sugar Dusted Fruit Gummy Candies (Nature 15)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_015_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_015_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.7,
+        "y": 14.1,
+        "radius": 5.0,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_016",
+    "title": "Playful Italian Tricolor Dry Pasta (Nature 16)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_016_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_016_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.8,
+        "y": 94.2,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_017",
+    "title": "Playful Italian Tricolor Dry Pasta (Nature 17)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_017_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_017_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33.1,
+        "y": 32.3,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_018",
+    "title": "Outdoor Sketch Colored Pencils & Shavings (Nature 18)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_018_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_018_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31.0,
+        "y": 82.9,
+        "radius": 5.1,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_019",
+    "title": "Playful Spilled Paperclips on Concrete (Nature 19)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_019_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_019_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 6.7,
+        "y": 12.9,
+        "radius": 7.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ]
+  },
+  {
+    "id": "fresh_nature_pair_020",
+    "title": "Playful Spilled Paperclips on Concrete (Nature 20)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_020_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_020_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 6.5,
+        "y": 29.8,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ]
+  },
+  {
     "id": "fresh_v6_pair_001",
     "title": "Antique Mother of Pearl & Bakelite Buttons (Pair 1)",
     "category": "Photography",
