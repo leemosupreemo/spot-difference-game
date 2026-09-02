@@ -337,3 +337,23 @@ export function trackStageCleared({
     mixpanel.people.increment("Total Stages Cleared", 1);
   }
 }
+
+export function trackRatingPromptShown({ visitNumber = 2 } = {}) {
+  trackEvent("Rating Prompt Shown", {
+    visit_number: visitNumber
+  });
+}
+
+export function trackRatingPromptAction({ action = "rate", visitNumber = 2 } = {}) {
+  trackEvent("Rating Prompt Action", {
+    action,
+    visit_number: visitNumber
+  });
+  if (mixpanel?.people) {
+    mixpanel.people.set({
+      "Rating Prompt Response": action,
+      "Rating Prompt Handled Date": new Date().toISOString()
+    });
+  }
+}
+

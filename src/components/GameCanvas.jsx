@@ -12,6 +12,7 @@ export default function GameCanvas({
   activeHintId,
   magnifierEnabled,
   elapsedTime = 0,
+  revealAnswer = false,
   debugMode = false
 }) {
   const canvasRefLeft = useRef(null);
@@ -61,6 +62,8 @@ export default function GameCanvas({
     }
   }, [magnifierEnabled]);
 
+  const isPhoto = Boolean(level?.baseImage && !level.baseImage.startsWith('data:'));
+
   // Render original and modified canvases
   const drawCanvases = useCallback(() => {
     if (!level) return;
@@ -72,7 +75,9 @@ export default function GameCanvas({
     if (ctxLeft) {
       canvasRefLeft.current.width = width;
       canvasRefLeft.current.height = height;
-      level.render(ctxLeft, width, height, false);
+      if (typeof level.render === 'function') {
+        level.render(ctxLeft, width, height, false);
+      }
     }
 
     // Draw Right (Modified)
@@ -80,15 +85,19 @@ export default function GameCanvas({
     if (ctxRight) {
       canvasRefRight.current.width = width;
       canvasRefRight.current.height = height;
-      level.render(ctxRight, width, height, true);
+      if (typeof level.render === 'function') {
+        level.render(ctxRight, width, height, true);
+      }
     }
 
-    try {
-      const leftUrl = level.baseImage ? resolveAssetUrl(level.baseImage) : canvasRefLeft.current?.toDataURL('image/jpeg', 0.95);
-      const rightUrl = level.variantImage ? resolveAssetUrl(level.variantImage) : canvasRefRight.current?.toDataURL('image/jpeg', 0.95);
-      setCanvasUrls({ left: leftUrl || '', right: rightUrl || '' });
-    } catch (e) {}
-  }, [level]);
+    if (!isPhoto && magnifierEnabled) {
+      try {
+        const leftUrl = canvasRefLeft.current?.toDataURL('image/jpeg', 0.9);
+        const rightUrl = canvasRefRight.current?.toDataURL('image/jpeg', 0.9);
+        setCanvasUrls({ left: leftUrl || '', right: rightUrl || '' });
+      } catch (e) {}
+    }
+  }, [level, isPhoto, magnifierEnabled]);
 
   useEffect(() => {
     drawCanvases();
@@ -109,7 +118,7 @@ export default function GameCanvas({
 
   // Handle pointer down (touch/mouse start)
   const handlePointerDown = (e, containerRef) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || revealAnswer) return;
     const rect = containerRef.current.getBoundingClientRect();
     const clientX = e.clientX ?? e.touches?.[0]?.clientX;
     const clientY = e.clientY ?? e.touches?.[0]?.clientY;
@@ -153,7 +162,7 @@ export default function GameCanvas({
 
   // Handle pointer up (only intentional quick taps trigger guesses)
   const handlePointerUp = (e, containerRef) => {
-    if (!containerRef.current || !level) return;
+    if (!containerRef.current || !level || revealAnswer) return;
 
     const start = pointerStartRef.current;
     const duration = Date.now() - start.time;
@@ -232,8 +241,8 @@ export default function GameCanvas({
     }
   };
 
-  const leftBgUrl = canvasUrls.left || (level?.baseImage ? resolveAssetUrl(level.baseImage) : '');
-  const rightBgUrl = canvasUrls.right || (level?.variantImage ? resolveAssetUrl(level.variantImage) : '');
+  const leftBgUrl = isPhoto ? resolveAssetUrl(level?.baseImage) : canvasUrls.left;
+  const rightBgUrl = isPhoto ? resolveAssetUrl(level?.variantImage) : canvasUrls.right;
 
   return (
     <div style={{
@@ -259,8 +268,9 @@ export default function GameCanvas({
           onPointerCancel={handleMouseLeave}
         >
           <canvas ref={canvasRefLeft} className="canvas-element" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
-          {level?.baseImage && (
+          {isPhoto && level?.baseImage && (
             <img
+              key={`${level.id}-base`}
               src={resolveAssetUrl(level.baseImage)}
               alt={level.title || 'Original Scene'}
               className="canvas-element"
@@ -310,15 +320,25 @@ export default function GameCanvas({
             );
           })}
 
+          {/* Reveal Marker on Failure (Answer Spotlight before Fail Modal) */}
+          {revealAnswer && level?.diffs?.map(diff => (
+            <div
+              key={`left-reveal-${diff.id}`}
+              className="reveal-marker"
+              style={{
+                left: `${diff.x}%`,
+                top: `${diff.y}%`,
+                width: `${Math.max(54, (diff.radius || 10) * 3.8)}px`,
+                height: `${Math.max(54, (diff.radius || 10) * 3.8)}px`
+              }}
+            />
+          ))}
+
           {/* Temporary Miss Red Circle Markers & Floating -1 Heart Popups */}
           {misses.map(miss => (
             <React.Fragment key={`left-miss-group-${miss.id}`}>
               <div
                 className="miss-marker"
-                style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
-              />
-              <div
-                className="miss-heart-popup"
                 style={{ left: `${miss.x}%`, top: `${miss.y}%` }}
               >
                 -1 ❤️
@@ -337,18 +357,19 @@ export default function GameCanvas({
             </div>
           ))}
 
-          {/* Synchronized Magnifier Lens (Offset above touch point so finger sits at bottom edge) */}
+          {/* Synchronized Magnifier Lens (Fixed above touch point, extends outside bounds at edges) */}
           {magnifierEnabled && cursorPos.visible && leftBgUrl && (
             <div
               className="magnifier-lens"
               style={{
                 left: `${cursorPos.x}%`,
                 top: `${cursorPos.y}%`,
-                transform: cursorPos.y > 22 ? 'translate(-50%, calc(-100% - 16px))' : 'translate(-50%, 20px)',
+                transform: 'translate(-50%, calc(-100% + 4px))',
                 backgroundImage: `url(${leftBgUrl})`,
-                backgroundPosition: `${cursorPos.x}% ${cursorPos.y}%`,
-                backgroundSize: '500%',
-                zIndex: 10
+                backgroundPosition: `calc(77px - ${cursorPos.x * 7.7}px) calc(77px - ${cursorPos.y * 7.7}px)`,
+                backgroundSize: '770px 770px',
+                backgroundRepeat: 'no-repeat',
+                zIndex: 40
               }}
             />
           )}
@@ -366,8 +387,9 @@ export default function GameCanvas({
           onPointerCancel={handleMouseLeave}
         >
           <canvas ref={canvasRefRight} className="canvas-element" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
-          {level?.variantImage && (
+          {isPhoto && level?.variantImage && (
             <img
+              key={`${level.id}-variant`}
               src={resolveAssetUrl(level.variantImage)}
               alt={level.title || 'Modified Scene'}
               className="canvas-element"
@@ -417,6 +439,20 @@ export default function GameCanvas({
             );
           })}
 
+          {/* Reveal Marker on Failure (Answer Spotlight before Fail Modal) */}
+          {revealAnswer && level?.diffs?.map(diff => (
+            <div
+              key={`right-reveal-${diff.id}`}
+              className="reveal-marker"
+              style={{
+                left: `${diff.x}%`,
+                top: `${diff.y}%`,
+                width: `${Math.max(54, (diff.radius || 10) * 3.8)}px`,
+                height: `${Math.max(54, (diff.radius || 10) * 3.8)}px`
+              }}
+            />
+          ))}
+
           {/* Temporary Miss Red Circle Markers & Floating -1 Heart Popups */}
           {misses.map(miss => (
             <React.Fragment key={`right-miss-group-${miss.id}`}>
@@ -440,18 +476,19 @@ export default function GameCanvas({
             </div>
           ))}
 
-          {/* Synchronized Magnifier Lens (Offset above touch point so finger sits at bottom edge) */}
+          {/* Synchronized Magnifier Lens (Fixed above touch point, extends outside bounds at edges) */}
           {magnifierEnabled && cursorPos.visible && rightBgUrl && (
             <div
               className="magnifier-lens"
               style={{
                 left: `${cursorPos.x}%`,
                 top: `${cursorPos.y}%`,
-                transform: cursorPos.y > 22 ? 'translate(-50%, calc(-100% - 16px))' : 'translate(-50%, 20px)',
+                transform: 'translate(-50%, calc(-100% + 4px))',
                 backgroundImage: `url(${rightBgUrl})`,
-                backgroundPosition: `${cursorPos.x}% ${cursorPos.y}%`,
-                backgroundSize: '500%',
-                zIndex: 10
+                backgroundPosition: `calc(77px - ${cursorPos.x * 7.7}px) calc(77px - ${cursorPos.y * 7.7}px)`,
+                backgroundSize: '770px 770px',
+                backgroundRepeat: 'no-repeat',
+                zIndex: 40
               }}
             />
           )}

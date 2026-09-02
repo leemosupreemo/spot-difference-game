@@ -9,6 +9,7 @@ import VictoryModal from './components/VictoryModal';
 import GameOverModal from './components/GameOverModal';
 import ProgressModal from './components/ProgressModal';
 import HelpModal from './components/HelpModal';
+import RatingModal from './components/RatingModal';
 import DiagnosticsModal from './components/DiagnosticsModal';
 import DebugLevelGeneratorModal from './components/DebugLevelGeneratorModal';
 import DebugCuratorBar from './components/DebugCuratorBar';
@@ -19,8 +20,9 @@ import { sounds } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
-import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared } from './services/analytics';
+import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown } from './services/analytics';
 import { syncRemoteLevelPacks } from './services/remoteLevelSync';
+import { syncRemoteAppConfig } from './services/appConfig';
 
 export default function App() {
   const [levels, setLevels] = useState(() => {
@@ -72,8 +74,10 @@ export default function App() {
   // Modals
   const [victoryModalOpen, setVictoryModalOpen] = useState(false);
   const [gameOverModalOpen, setGameOverModalOpen] = useState(false);
+  const [revealAnswer, setRevealAnswer] = useState(false);
   const [progressModalOpen, setProgressModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
+  const [ratingModalOpen, setRatingModalOpen] = useState(false);
   const [diagnosticsModalOpen, setDiagnosticsModalOpen] = useState(false);
   const [debugModalOpen, setDebugModalOpen] = useState(false);
 
@@ -101,6 +105,23 @@ export default function App() {
   useEffect(() => {
     initAnalytics();
     syncRemoteLevelPacks().catch(() => {});
+    syncRemoteAppConfig().catch(() => {});
+
+    // Track launch count & trigger App Store rating prompt on second launch
+    try {
+      const storedVisits = localStorage.getItem('diff_hunter_launch_count');
+      const count = (parseInt(storedVisits, 10) || 0) + 1;
+      localStorage.setItem('diff_hunter_launch_count', String(count));
+
+      const ratingHandled = localStorage.getItem('diff_hunter_rating_handled');
+      if (count === 2 && !ratingHandled) {
+        const timer = setTimeout(() => {
+          setRatingModalOpen(true);
+          trackRatingPromptShown({ visitNumber: count });
+        }, 1200);
+        return () => clearTimeout(timer);
+      }
+    } catch (_) {}
   }, []);
 
   const handleToggleSkipKept = (val) => {
@@ -406,10 +427,20 @@ export default function App() {
     setMissCount(0);
     setHintsLeft(selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2);
     setActiveHintId(null);
+    setMagnifierEnabled(false);
     setElapsedTime(0);
     setTimerRunning(true);
     setVictoryModalOpen(false);
+    setGameOverModalOpen(false);
+    setRevealAnswer(false);
   }, [selectedDifficulty]);
+
+  // Reset magnifier zoom whenever player leaves or enters non-game views
+  useEffect(() => {
+    if (view !== 'game') {
+      setMagnifierEnabled(false);
+    }
+  }, [view]);
 
   // Timer Effect (millisecond precision)
   useEffect(() => {
@@ -436,6 +467,7 @@ export default function App() {
     stageTimesRef.current = [];
     setTotalStageTimeMs(0);
     setScore(0);
+    setMagnifierEnabled(false);
 
     // 1. ABSTRACT CATEGORY: ALWAYS generates procedural art images across 12 distinct art worlds
     trackGameStarted({ themeId: selectedTheme, difficulty: selectedDifficulty, mode: activeMode });
@@ -520,18 +552,27 @@ export default function App() {
       });
 
       // In Debug Mode: Unified continuous big batch loop across all levels
-      if (debugMode && debugSourceMode === 'premade') {
-        const allActive = getAllPhotoPairEntries();
-        const curIdx = allActive.findIndex(e => e.id === currentLevelId);
-        const nextIndex = curIdx >= 0 ? (curIdx + 1) % allActive.length : 0;
-        setTimeout(() => {
-          setCurrentStageIndex(nextIndex);
-          const nextEntry = allActive[nextIndex];
-          if (nextEntry) {
-            startLevel(nextEntry.id);
-          }
-        }, 350);
-        return;
+      if (debugMode) {
+        if (debugSourceMode === 'premade') {
+          const allActive = getAllPhotoPairEntries();
+          const curIdx = allActive.findIndex(e => e.id === currentLevelId);
+          const nextIndex = curIdx >= 0 ? (curIdx + 1) % allActive.length : 0;
+          setTimeout(() => {
+            setCurrentStageIndex(nextIndex);
+            const nextEntry = allActive[nextIndex];
+            if (nextEntry) {
+              startLevel(nextEntry.id);
+            }
+          }, 350);
+          return;
+        } else if (debugSourceMode === 'procedural') {
+          setTimeout(() => {
+            const nextProc = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
+            setLevels([nextProc]);
+            startLevel(nextProc.id);
+          }, 350);
+          return;
+        }
       }
 
       const nextIndex = currentStageIndex + 1;
@@ -542,12 +583,7 @@ export default function App() {
           setCurrentStageIndex(nextIndex);
           const nextLevel = levels[nextIndex];
           if (nextLevel) {
-            setCurrentLevelId(nextLevel.id);
-            setFoundDiffs([]);
-            setHintsLeft(selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2);
-            setActiveHintId(null);
-            setElapsedTime(0);
-            setTimerRunning(true);
+            startLevel(nextLevel.id);
           }
         }, 350);
       } else {
@@ -626,13 +662,13 @@ export default function App() {
 
   // Handle Miss Tap (3 Strikes -> Game Over)
   const handleMissTap = () => {
-    if (gameOverModalOpen) return;
+    if (gameOverModalOpen || revealAnswer) return;
     setMissCount(prev => {
       const next = prev + 1;
       if (next >= 3) {
         try { sounds.playLose(); } catch (_) {}
         setTimerRunning(false);
-        setGameOverModalOpen(true);
+        setRevealAnswer(true);
 
         const totalHintsForDiff = selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2;
         trackImagePairCompleted({
@@ -645,6 +681,11 @@ export default function App() {
           scoreEarned: 0,
           stageIndex: currentStageIndex
         });
+
+        // Spotlight correct answer for 2.5s before opening Game Over modal
+        setTimeout(() => {
+          setGameOverModalOpen(true);
+        }, 2500);
       }
       return next;
     });
@@ -758,6 +799,7 @@ export default function App() {
             activeHintId={activeHintId}
             magnifierEnabled={magnifierEnabled}
             elapsedTime={elapsedTime}
+            revealAnswer={revealAnswer}
             debugMode={debugMode}
           />
         </main>
@@ -779,10 +821,12 @@ export default function App() {
         isOpen={gameOverModalOpen}
         onClose={() => {
           setGameOverModalOpen(false);
+          setRevealAnswer(false);
           setView('menu');
         }}
         onRestart={() => {
           setGameOverModalOpen(false);
+          setRevealAnswer(false);
           handleStartGame();
         }}
         elapsedTime={elapsedTime}
@@ -793,6 +837,15 @@ export default function App() {
       <HelpModal
         isOpen={helpModalOpen}
         onClose={() => setHelpModalOpen(false)}
+      />
+
+      <RatingModal
+        isOpen={ratingModalOpen}
+        onClose={() => setRatingModalOpen(false)}
+        onOpenSupport={() => {
+          setRatingModalOpen(false);
+          setHelpModalOpen(true);
+        }}
       />
 
       <DiagnosticsModal

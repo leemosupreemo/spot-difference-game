@@ -109,12 +109,12 @@ export default function TutorialBanner() {
           </h3>
         </div>
         <p style={{
-          fontSize: '0.82rem',
+          fontSize: '0.84rem',
           color: 'var(--text-muted)',
           margin: 0,
           lineHeight: '1.3'
         }}>
-          Compare both photos. <strong style={{ color: 'var(--accent-cyan)' }}>Tap the difference in the image</strong> as fast as you can!
+          Compare images and <strong style={{ color: 'var(--accent-cyan)' }}>tap the difference</strong> as fast as you can!
         </p>
       </div>
 

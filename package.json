@@ -9,6 +9,7 @@
     "test": "node --test src/**/*.test.mjs && python3 scripts/test_pipeline_unit_suite.py",
     "test:watch": "node --test --watch src/**/*.test.mjs",
     "prune:dismissed": "node scripts/prune_dismissed_levels.mjs",
+    "add:pair": "node scripts/add_image_pair.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

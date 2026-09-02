@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Flame, Globe, Award, Zap, Trophy, Target, Timer } from 'lucide-react';
+import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { fetchLeaderboards } from '../services/playerProgress';
 
 export default function ProgressModal({ isOpen, onClose: _onClose, difficultyStats }) {
   const [mainView, setMainView] = useState('leaderboards'); // 'leaderboards' | 'progress'
-  const [selectedTab, setSelectedTab] = useState('Easy'); // Easy | Medium | Hard
   const [selectedLeaderboardPack, setSelectedLeaderboardPack] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
   const [leaderboardData, setLeaderboardData] = useState(null);
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
@@ -23,19 +22,25 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
 
   if (!isOpen) return null;
 
-  const currentStats = difficultyStats[selectedTab] || {
-    setsCleared: 0,
-    totalPoints: 0,
-    avgPointsPerSet: 0,
-    fastestFirstTimeOverall: null,
-    fastestRepeatOverall: null,
-    sets: {}
-  };
-
   const categoriesList = [
     { id: 'find_the_sniper', title: 'Photography', icon: '📷' },
     { id: 'abstract_animated', title: 'Abstract', icon: '🎨' }
   ];
+
+  const getAllRecordedSets = () => {
+    const allSets = [];
+    const seenSetKeys = new Set();
+    Object.entries(difficultyStats || {}).forEach(([diffKey, diffObj]) => {
+      Object.entries(diffObj?.sets || {}).forEach(([setKey, setObj]) => {
+        const uniqueKey = `${diffKey}_${setKey}`;
+        if (!seenSetKeys.has(uniqueKey)) {
+          seenSetKeys.add(uniqueKey);
+          allSets.push(setObj);
+        }
+      });
+    });
+    return allSets;
+  };
 
   const getCategoryStats = (packId) => {
     let clears = 0;
@@ -44,7 +49,8 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
     let bestRepeatTime = null;
     let setCompletedCount = 0;
 
-    Object.values(currentStats.sets || {}).forEach(setObj => {
+    const allSets = getAllRecordedSets();
+    allSets.forEach(setObj => {
       const setPack = setObj.packId || 'find_the_sniper';
       if (setPack === packId || (packId === 'find_the_sniper' && (!setObj.packId || setObj.packId === 'find_the_sniper'))) {
         const c = setObj.clears || 1;
@@ -170,26 +176,39 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.92rem' }}>
                 <thead>
                   <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
-                    <th style={{ padding: '12px 16px' }}>RANK / PLAYER</th>
-                    <th style={{ padding: '12px 16px', textAlign: 'center' }}>AVG 1ST ATTEMPT</th>
-                    <th style={{ padding: '12px 16px', textAlign: 'right' }}>AVG OVERALL</th>
+                    <th style={{ padding: '12px 14px' }}>RANK / PLAYER</th>
+                    <th style={{
+                      padding: '12px 10px',
+                      textAlign: 'center',
+                      color: 'var(--accent-gold)',
+                      background: 'rgba(255, 183, 3, 0.14)',
+                      borderLeft: '1px solid rgba(255, 183, 3, 0.35)',
+                      borderRight: '1px solid rgba(255, 183, 3, 0.35)',
+                      fontWeight: 900
+                    }}>
+                      ★ AVG 1ST ATTEMPT
+                    </th>
+                    <th style={{ padding: '12px 10px', textAlign: 'center' }}>AVG OVERALL</th>
+                    <th style={{ padding: '12px 10px', textAlign: 'center' }}>FASTEST TIME</th>
                   </tr>
                 </thead>
                 <tbody>
                   {topLeaderboardEntries.length === 0 ? (
                     <tr>
-                      <td colSpan={3} style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
+                      <td colSpan={4} style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
                         No records yet. Complete a stage set to submit your score!
                       </td>
                     </tr>
                   ) : (
                     topLeaderboardEntries.map((entry, index) => {
                       const isMe = entry.isCurrentPlayer;
-                      const firstTimeMs = entry.avgFirstTimeByPack?.[selectedLeaderboardPack];
-                      const repeatTimeMs = entry.effectiveTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
+                      const firstTimeMs = entry.firstTime || entry.avgFirstTimeByPack?.[selectedLeaderboardPack];
+                      const repeatTimeMs = entry.repeatTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
+                      const fastestTimeMs = entry.fastestTime || entry.fastestTimeByPack?.[selectedLeaderboardPack];
 
                       const firstTimeStr = typeof firstTimeMs === 'number' && firstTimeMs > 0 ? `${(firstTimeMs / 1000).toFixed(2)}s` : '--';
                       const overallTimeStr = typeof repeatTimeMs === 'number' && repeatTimeMs > 0 ? `${(repeatTimeMs / 1000).toFixed(2)}s` : '--';
+                      const fastestTimeStr = typeof fastestTimeMs === 'number' && fastestTimeMs > 0 ? `${(fastestTimeMs / 1000).toFixed(2)}s` : '--';
                       const displayName = isMe ? 'YOU (THIS DEVICE)' : (entry.playerName || `SPEEDRUNNER #${index + 1}`);
 
                       return (
@@ -200,17 +219,30 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
                             borderBottom: '1px solid rgba(255,255,255,0.05)'
                           }}
                         >
-                          <td style={{ padding: '12px 16px', fontWeight: 800, color: isMe ? 'var(--accent-cyan)' : '#fff' }}>
-                            <span style={{ color: index === 0 ? 'var(--accent-gold)' : index === 1 ? '#c0c0c0' : index === 2 ? '#cd7f32' : 'var(--text-muted)', marginRight: '10px' }}>
+                          <td style={{ padding: '12px 14px', fontWeight: 800, color: isMe ? 'var(--accent-cyan)' : '#fff' }}>
+                            <span style={{ color: index === 0 ? 'var(--accent-gold)' : index === 1 ? '#c0c0c0' : index === 2 ? '#cd7f32' : 'var(--text-muted)', marginRight: '8px' }}>
                               #{index + 1}
                             </span>
                             {displayName}
                           </td>
-                          <td style={{ padding: '12px 16px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-gold)', fontWeight: 700 }}>
+                          <td style={{
+                            padding: '12px 10px',
+                            textAlign: 'center',
+                            fontFamily: 'var(--font-mono)',
+                            color: 'var(--accent-gold)',
+                            fontWeight: 900,
+                            fontSize: '0.96rem',
+                            background: isMe ? 'rgba(255, 183, 3, 0.22)' : 'rgba(255, 183, 3, 0.08)',
+                            borderLeft: '1px solid rgba(255, 183, 3, 0.3)',
+                            borderRight: '1px solid rgba(255, 183, 3, 0.3)'
+                          }}>
                             {firstTimeStr}
                           </td>
-                          <td style={{ padding: '12px 16px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
+                          <td style={{ padding: '12px 10px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
                             {overallTimeStr}
+                          </td>
+                          <td style={{ padding: '12px 10px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontWeight: 800 }}>
+                            {fastestTimeStr}
                           </td>
                         </tr>
                       );
@@ -224,56 +256,16 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
       ) : (
         /* MY PROGRESS VIEW */
         <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box', overflowY: 'auto' }}>
-          {/* Difficulty Tab Selector */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '10px',
-            background: 'rgba(0,0,0,0.5)',
-            padding: '5px',
-            borderRadius: '16px',
-            marginBottom: '16px',
-            border: '1px solid var(--border-glass)',
-            boxSizing: 'border-box'
-          }}>
-            {['Easy', 'Medium', 'Hard'].map((diff) => {
-              const isSelected = selectedTab === diff;
-              const colors = { Easy: 'var(--accent-green)', Medium: 'var(--accent-gold)', Hard: 'var(--accent-pink)' };
-              return (
-                <button
-                  key={diff}
-                  onClick={() => { sounds.playTap(); setSelectedTab(diff); }}
-                  className="glass-btn"
-                  style={{
-                    justifyContent: 'center',
-                    padding: '8px 12px',
-                    fontSize: '0.9rem',
-                    fontWeight: 800,
-                    borderRadius: '10px',
-                    background: isSelected ? colors[diff] : 'rgba(255, 255, 255, 0.05)',
-                    color: isSelected ? '#000' : 'var(--text-main)',
-                    border: `1.5px solid ${isSelected ? colors[diff] : 'var(--border-glass)'}`,
-                    boxShadow: 'none',
-                    transform: 'none',
-                    boxSizing: 'border-box'
-                  }}
-                >
-                  {diff === 'Easy' && '🟢 '}
-                  {diff === 'Medium' && '🟡 '}
-                  {diff === 'Hard' && '🔴 '}
-                  {diff.toUpperCase()}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Summary Stat Cards for Selected Difficulty */}
+          {/* Overall Summary Stat Cards */}
           {(() => {
-            const allSets = Object.values(currentStats.sets || {});
-            const totalDiffClears = allSets.reduce((sum, s) => sum + (s.clears || 1), 0) || currentStats.setsCleared || 0;
-            const totalDiffPoints = currentStats.totalPoints || allSets.reduce((sum, s) => sum + (s.totalPoints || 0), 0);
-            const avgPointsOverall = totalDiffClears > 0 ? Math.round(totalDiffPoints / totalDiffClears) : (currentStats.avgPointsPerSet || 0);
-            const bestOverallTimeMs = currentStats.fastestRepeatOverall || currentStats.fastestFirstTimeOverall;
+            const allSets = getAllRecordedSets();
+            const totalClears = allSets.reduce((sum, s) => sum + (s.clears || 1), 0);
+            const totalPoints = allSets.reduce((sum, s) => sum + (s.totalPoints || 0), 0);
+            const avgPointsOverall = totalClears > 0 ? Math.round(totalPoints / totalClears) : 0;
+            const bestOverallTimeMs = allSets.reduce((best, s) => {
+              const t = s.fastestRepeat || s.firstTime;
+              return t && (!best || t < best) ? t : best;
+            }, null);
 
             return (
               <div style={{
@@ -295,7 +287,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
                     <Trophy size={14} /> TOTAL POINTS
                   </div>
                   <span style={{ fontSize: '1.2rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#fff' }}>
-                    {totalDiffPoints.toLocaleString()} <span style={{ fontSize: '0.7rem', color: 'var(--accent-gold)' }}>PTS</span>
+                    {totalPoints.toLocaleString()} <span style={{ fontSize: '0.7rem', color: 'var(--accent-gold)' }}>PTS</span>
                   </span>
                 </div>
 
@@ -329,7 +321,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
                     <Target size={14} /> SETS CLEARED
                   </div>
                   <span style={{ fontSize: '1.2rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#fff' }}>
-                    {totalDiffClears} <span style={{ fontSize: '0.7rem', color: 'var(--accent-green)' }}>SETS</span>
+                    {totalClears} <span style={{ fontSize: '0.7rem', color: 'var(--accent-green)' }}>SETS</span>
                   </span>
                 </div>
 
@@ -353,10 +345,6 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
             );
           })()}
 
-          <h3 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '14px', color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Flame size={18} color="var(--accent-pink)" /> {selectedTab.toUpperCase()} CATEGORY BREAKDOWN
-          </h3>
-
           <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
               <thead>
@@ -365,7 +353,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
                   <th style={{ padding: '12px 10px', textAlign: 'center' }}>CLEARED</th>
                   <th style={{ padding: '12px 10px', textAlign: 'center' }}>TOTAL PTS</th>
                   <th style={{ padding: '12px 10px', textAlign: 'center' }}>AVG / SET</th>
-                  <th style={{ padding: '12px 14px', textAlign: 'right' }}>BEST TIME</th>
+                  <th style={{ padding: '12px 10px', textAlign: 'center' }}>BEST TIME</th>
                 </tr>
               </thead>
               <tbody>
@@ -387,7 +375,7 @@ export default function ProgressModal({ isOpen, onClose: _onClose, difficultySta
                       <td style={{ padding: '12px 10px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontWeight: 800 }}>
                         {stats.avgPointsPerSet.toLocaleString()}
                       </td>
-                      <td style={{ padding: '12px 14px', textAlign: 'right', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
+                      <td style={{ padding: '12px 10px', textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--accent-green)', fontWeight: 800 }}>
                         {repeatStr}
                       </td>
                     </tr>

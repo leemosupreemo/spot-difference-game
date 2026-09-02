@@ -45,7 +45,7 @@ export default function MainMenu({
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
           <Layers size={20} color="var(--accent-cyan)" />
           <h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>
-            SELECT GAME MODE
+            GAME MODE
           </h3>
         </div>
 

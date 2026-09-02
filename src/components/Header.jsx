@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, Eye, Award, Info, ArrowLeft, Wrench, Terminal } from 'lucide-react';
+import { Volume2, VolumeX, Award, Info, ArrowLeft, Wrench, Terminal } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function Header({
@@ -64,15 +64,18 @@ export default function Header({
               style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', userSelect: 'none' }}
               title="Tap to toggle debug tools"
             >
-              <div style={{
-                background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-pink))',
-                padding: '6px',
-                borderRadius: '10px',
-                display: 'flex',
-                boxShadow: '0 0 12px rgba(0, 240, 255, 0.4)'
-              }}>
-                <Eye size={20} color="#000" strokeWidth={2.5} />
-              </div>
+              <img
+                src="/app-icon.png"
+                alt="Diff Hunter App Icon"
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '8px',
+                  display: 'block',
+                  boxShadow: '0 0 14px rgba(0, 240, 255, 0.45)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}
+              />
               <h1 style={{ fontSize: '1.25rem', fontWeight: 900, lineHeight: 1.1, background: 'linear-gradient(90deg, #fff, var(--accent-cyan))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0 }}>
                 DIFF HUNTER
               </h1>
@@ -171,7 +174,7 @@ export default function Header({
               <button
                 className="glass-btn"
                 onClick={handleOpenStats}
-                title="Progress & Records"
+                title="Scores & Leaderboards"
                 style={{
                   padding: '8px 14px',
                   fontSize: '0.9rem',
@@ -183,7 +186,7 @@ export default function Header({
                 }}
               >
                 <Award size={18} color="var(--accent-gold)" />
-                <span>Stats</span>
+                <span>Scores</span>
               </button>
             )}
 

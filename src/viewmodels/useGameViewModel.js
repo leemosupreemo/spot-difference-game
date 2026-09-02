@@ -38,6 +38,7 @@ export function useGameViewModel() {
   // Modals
   const [victoryModalOpen, setVictoryModalOpen] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [revealAnswer, setRevealAnswer] = useState(false);
   const [progressModalOpen, setProgressModalOpen] = useState(false);
   const [leaderboardModalOpen, setLeaderboardModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
@@ -164,11 +165,19 @@ export function useGameViewModel() {
     setFoundDiffs([]);
     setMissCount(0);
     setScore(0);
+    setMagnifierEnabled(false);
     setElapsedTime(0);
     setTimerRunning(true);
     setVictoryModalOpen(false);
     setGameOver(false);
   }, []);
+
+  // Reset magnifier zoom when leaving game view
+  useEffect(() => {
+    if (view !== 'game') {
+      setMagnifierEnabled(false);
+    }
+  }, [view]);
 
   // Timer Effect
   useEffect(() => {
@@ -355,7 +364,7 @@ export function useGameViewModel() {
   };
 
   const handleMissTap = () => {
-    if (gameOver) return;
+    if (gameOver || revealAnswer) return;
     const nextMisses = missCount + 1;
     setMissCount(nextMisses);
     if (activeMode !== 'zen') {
@@ -365,7 +374,7 @@ export function useGameViewModel() {
     if (nextMisses >= 3) {
       sounds.playLose();
       setTimerRunning(false);
-      setGameOver(true);
+      setRevealAnswer(true);
 
       trackImagePairCompleted({
         result: 'lose',
@@ -377,6 +386,10 @@ export function useGameViewModel() {
         scoreEarned: 0,
         stageIndex: currentPairIndex
       });
+
+      setTimeout(() => {
+        setGameOver(true);
+      }, 2500);
     }
   };
 
@@ -410,6 +423,8 @@ export function useGameViewModel() {
     setVictoryModalOpen,
     gameOver,
     setGameOver,
+    revealAnswer,
+    setRevealAnswer,
     progressModalOpen,
     setProgressModalOpen,
     leaderboardModalOpen,

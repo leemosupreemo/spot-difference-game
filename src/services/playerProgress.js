@@ -73,6 +73,7 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
   const packFirstCounts = {};
   const packRepeatSums = {};
   const packRepeatCounts = {};
+  const fastestTimeByPack = {};
 
   const categoryKeys = Object.keys(difficultyStats || {});
   const categories = categoryKeys.length > 0 ? categoryKeys : ['Easy', 'Medium', 'Hard', 'All'];
@@ -111,6 +112,15 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
         packRepeatCounts[packId] += 1;
       }
 
+      const validTimes = [setRecord.firstTime, setRecord.fastestRepeat, setRecord.bestCleanTime, setRecord.bestFaultedTime]
+        .filter(t => typeof t === 'number' && t > 0);
+      if (validTimes.length > 0) {
+        const minTime = Math.min(...validTimes);
+        if (!fastestTimeByPack[packId] || minTime < fastestTimeByPack[packId]) {
+          fastestTimeByPack[packId] = minTime;
+        }
+      }
+
       if (setCleared) {
         totalSetsCleared += 1;
       }
@@ -120,7 +130,7 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
     avgRepeatTimeByDifficulty[diff] = repeatCount > 0 ? Math.round(repeatSum / repeatCount) : null;
   });
 
-  const allPacks = new Set([...Object.keys(packFirstSums), ...Object.keys(packRepeatSums)]);
+  const allPacks = new Set([...Object.keys(packFirstSums), ...Object.keys(packRepeatSums), ...Object.keys(fastestTimeByPack)]);
   allPacks.forEach(packId => {
     avgFirstTimeByPack[packId] = packFirstCounts[packId] > 0 ? Math.round(packFirstSums[packId] / packFirstCounts[packId]) : null;
     avgRepeatTimeByPack[packId] = packRepeatCounts[packId] > 0 ? Math.round(packRepeatSums[packId] / packRepeatCounts[packId]) : null;
@@ -132,6 +142,7 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
     avgRepeatTimeByDifficulty,
     avgFirstTimeByPack,
     avgRepeatTimeByPack,
+    fastestTimeByPack,
     // Backwards-compatible aliases
     avgTimesByDifficulty: avgRepeatTimeByDifficulty,
     avgTimesByPack: avgRepeatTimeByPack,
@@ -324,6 +335,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
       avgRepeatTimeByDifficulty: { Easy: 6420, Medium: 9850, Hard: 14200 },
       avgFirstTimeByPack: { find_the_sniper: 11200, abstract_animated: 14500 },
       avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 },
+      fastestTimeByPack: { find_the_sniper: 2450, abstract_animated: 3100 },
       avgTimesByDifficulty: { Easy: 6420, Medium: 9850, Hard: 14200 },
       avgTimesByPack: { find_the_sniper: 8900, abstract_animated: 11400 },
       totalSetsCleared: 24,
@@ -336,6 +348,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
       avgRepeatTimeByDifficulty: { Easy: 7890, Medium: 11200, Hard: 16500 },
       avgFirstTimeByPack: { find_the_sniper: 12800, abstract_animated: 16200 },
       avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 },
+      fastestTimeByPack: { find_the_sniper: 2890, abstract_animated: 3650 },
       avgTimesByDifficulty: { Easy: 7890, Medium: 11200, Hard: 16500 },
       avgTimesByPack: { find_the_sniper: 10400, abstract_animated: 13100 },
       totalSetsCleared: 18,
@@ -348,6 +361,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
       avgRepeatTimeByDifficulty: { Easy: 9150, Medium: 12800, Hard: 18900 },
       avgFirstTimeByPack: { find_the_sniper: 14200, abstract_animated: 18100 },
       avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 },
+      fastestTimeByPack: { find_the_sniper: 3420, abstract_animated: 4100 },
       avgTimesByDifficulty: { Easy: 9150, Medium: 12800, Hard: 18900 },
       avgTimesByPack: { find_the_sniper: 11800, abstract_animated: 14900 },
       totalSetsCleared: 15,
@@ -360,6 +374,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
       avgRepeatTimeByDifficulty: { Easy: 10400, Medium: 14100, Hard: 21300 },
       avgFirstTimeByPack: { find_the_sniper: 15900, abstract_animated: 19800 },
       avgRepeatTimeByPack: { find_the_sniper: 13200, abstract_animated: 16800 },
+      fastestTimeByPack: { find_the_sniper: 3950, abstract_animated: 4850 },
       avgTimesByDifficulty: { Easy: 10400, Medium: 14100, Hard: 21300 },
       avgTimesByPack: { find_the_sniper: 13200, abstract_animated: 16800 },
       totalSetsCleared: 12,
@@ -372,6 +387,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
       avgRepeatTimeByDifficulty: { Easy: 11800, Medium: 15900, Hard: 23800 },
       avgFirstTimeByPack: { find_the_sniper: 17400, abstract_animated: 21900 },
       avgRepeatTimeByPack: { find_the_sniper: 14600, abstract_animated: 18500 },
+      fastestTimeByPack: { find_the_sniper: 4600, abstract_animated: 5500 },
       avgTimesByDifficulty: { Easy: 11800, Medium: 15900, Hard: 23800 },
       avgTimesByPack: { find_the_sniper: 14600, abstract_animated: 18500 },
       totalSetsCleared: 9,
@@ -385,33 +401,58 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
 
   const combinedList = Array.from(allEntriesMap.values());
 
-  const getTop5ForPack = (packId, mode = 'first') => {
-    const key = mode === 'first' ? 'avgFirstTimeByPack' : 'avgRepeatTimeByPack';
+  const getTop5ForPack = (packId) => {
     return combinedList
       .map(p => {
-        let time = p[key]?.[packId];
-        if (!time && mode === 'first' && p.avgFirstTimeByDifficulty) {
+        let firstTime = p.avgFirstTimeByPack?.[packId];
+        let repeatTime = p.avgRepeatTimeByPack?.[packId] || p.avgTimesByPack?.[packId];
+        let fastestTime = p.fastestTimeByPack?.[packId];
+
+        if (!firstTime && p.avgFirstTimeByDifficulty) {
           const diffs = Object.values(p.avgFirstTimeByDifficulty).filter(t => typeof t === 'number' && t > 0);
-          if (diffs.length > 0) time = Math.round(diffs.reduce((a, b) => a + b, 0) / diffs.length);
+          if (diffs.length > 0) firstTime = Math.round(diffs.reduce((a, b) => a + b, 0) / diffs.length);
         }
-        if (!time && p.avgTimesByPack?.[packId]) {
-          time = p.avgTimesByPack[packId];
+
+        if (!repeatTime && p.avgRepeatTimeByDifficulty) {
+          const diffs = Object.values(p.avgRepeatTimeByDifficulty).filter(t => typeof t === 'number' && t > 0);
+          if (diffs.length > 0) repeatTime = Math.round(diffs.reduce((a, b) => a + b, 0) / diffs.length);
         }
-        if (!time && p.isCurrentPlayer) {
-          time = mode === 'first' ? (p.avgFirstTimeByPack?.[packId] || p.overallBestFirstTime || null) : (p.avgRepeatTimeByPack?.[packId] || p.overallBestRepeatTime || null);
+
+        if (!fastestTime && repeatTime) {
+          fastestTime = Math.round(repeatTime * 0.32);
         }
-        if (!time && !p.isCurrentPlayer) {
-          time = mode === 'first' ? (packId === 'abstract_animated' ? 16500 : 13800) : (packId === 'abstract_animated' ? 14200 : 12500);
+
+        if (!p.isCurrentPlayer) {
+          if (!firstTime) firstTime = packId === 'abstract_animated' ? 16500 : 13800;
+          if (!repeatTime) repeatTime = packId === 'abstract_animated' ? 14200 : 12500;
+          if (!fastestTime) fastestTime = packId === 'abstract_animated' ? 4200 : 3500;
         }
+
+        // Placement is combination of all 3 metrics
+        const validMetrics = [firstTime, repeatTime, fastestTime].filter(t => typeof t === 'number' && t > 0);
+        const compositeScore = validMetrics.length > 0
+          ? Math.round(validMetrics.reduce((a, b) => a + b, 0) / validMetrics.length)
+          : 999999;
+
         return {
           ...p,
-          effectiveTime: time
+          firstTime,
+          repeatTime,
+          fastestTime,
+          effectiveTime: firstTime || repeatTime || 999999,
+          compositeScore
         };
       })
       .sort((a, b) => {
-        if (!a.effectiveTime) return 1;
-        if (!b.effectiveTime) return -1;
-        return a.effectiveTime - b.effectiveTime;
+        const timeA = a.firstTime || (a.repeatTime ? a.repeatTime * 1.25 : 999999);
+        const timeB = b.firstTime || (b.repeatTime ? b.repeatTime * 1.25 : 999999);
+        if (timeA !== timeB) return timeA - timeB;
+        const repeatA = a.repeatTime || 999999;
+        const repeatB = b.repeatTime || 999999;
+        if (repeatA !== repeatB) return repeatA - repeatB;
+        const fastA = a.fastestTime || 999999;
+        const fastB = b.fastestTime || 999999;
+        return fastA - fastB;
       })
       .slice(0, 10);
   };
@@ -419,12 +460,12 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
     return {
       isCloud,
       byPackFirst: {
-        find_the_sniper: getTop5ForPack('find_the_sniper', 'first'),
-        abstract_animated: getTop5ForPack('abstract_animated', 'first')
+        find_the_sniper: getTop5ForPack('find_the_sniper'),
+        abstract_animated: getTop5ForPack('abstract_animated')
       },
       byPackRepeat: {
-        find_the_sniper: getTop5ForPack('find_the_sniper', 'repeat'),
-        abstract_animated: getTop5ForPack('abstract_animated', 'repeat')
+        find_the_sniper: getTop5ForPack('find_the_sniper'),
+        abstract_animated: getTop5ForPack('abstract_animated')
       },
       localPlayer: localPlayerEntry
     };
@@ -445,6 +486,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           playerName: 'PixelSniper_Pro',
           avgFirstTimeByPack: { find_the_sniper: 11200, abstract_animated: 14500 },
           avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 },
+          fastestTimeByPack: { find_the_sniper: 2450, abstract_animated: 3100 },
           totalSetsCleared: 24,
           isCurrentPlayer: false
         },
@@ -453,6 +495,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           playerName: 'VortexEagle',
           avgFirstTimeByPack: { find_the_sniper: 12800, abstract_animated: 16200 },
           avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 },
+          fastestTimeByPack: { find_the_sniper: 2890, abstract_animated: 3650 },
           totalSetsCleared: 18,
           isCurrentPlayer: false
         },
@@ -461,39 +504,54 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           playerName: 'ChronoMaster',
           avgFirstTimeByPack: { find_the_sniper: 14200, abstract_animated: 18100 },
           avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 },
+          fastestTimeByPack: { find_the_sniper: 3420, abstract_animated: 4100 },
           totalSetsCleared: 15,
           isCurrentPlayer: false
         }
       ];
 
-      const getFallbackListForPack = (packId, mode = 'first') => {
-        const key = mode === 'first' ? 'avgFirstTimeByPack' : 'avgRepeatTimeByPack';
+      const getFallbackListForPack = (packId) => {
         return [localPlayerEntry, ...fallbackEntries].map(p => {
-          let time = p[key]?.[packId];
-          if (!time && p.isCurrentPlayer) {
-            time = mode === 'first'
-              ? (p.avgFirstTimeByPack?.[packId] || p.overallBestFirstTime || (packId === 'abstract_animated' ? 15800 : 13200))
-              : (p.avgRepeatTimeByPack?.[packId] || p.overallBestRepeatTime || (packId === 'abstract_animated' ? 12800 : 10800));
+          let firstTime = p.avgFirstTimeByPack?.[packId];
+          let repeatTime = p.avgRepeatTimeByPack?.[packId] || p.avgTimesByPack?.[packId];
+          let fastestTime = p.fastestTimeByPack?.[packId];
+
+          if (!p.isCurrentPlayer) {
+            if (!firstTime) firstTime = packId === 'abstract_animated' ? 16500 : 13800;
+            if (!repeatTime) repeatTime = packId === 'abstract_animated' ? 14200 : 12500;
+            if (!fastestTime) fastestTime = packId === 'abstract_animated' ? 4200 : 3500;
           }
-          if (!time && !p.isCurrentPlayer) {
-            time = mode === 'first' ? (packId === 'abstract_animated' ? 17500 : 14800) : (packId === 'abstract_animated' ? 14500 : 12500);
-          }
+
+          const validMetrics = [firstTime, repeatTime, fastestTime].filter(t => typeof t === 'number' && t > 0);
+          const compositeScore = validMetrics.length > 0
+            ? Math.round(validMetrics.reduce((a, b) => a + b, 0) / validMetrics.length)
+            : 999999;
+
           return {
             ...p,
-            effectiveTime: time
+            firstTime,
+            repeatTime,
+            fastestTime,
+            effectiveTime: firstTime || repeatTime || 999999,
+            compositeScore
           };
-        }).sort((a, b) => a.effectiveTime - b.effectiveTime);
+        }).sort((a, b) => {
+          const timeA = a.firstTime || (a.repeatTime ? a.repeatTime * 1.25 : 999999);
+          const timeB = b.firstTime || (b.repeatTime ? b.repeatTime * 1.25 : 999999);
+          if (timeA !== timeB) return timeA - timeB;
+          return (a.repeatTime || 999999) - (b.repeatTime || 999999);
+        });
       };
 
       resolve({
         isCloud: false,
         byPackFirst: {
-          find_the_sniper: getFallbackListForPack('find_the_sniper', 'first'),
-          abstract_animated: getFallbackListForPack('abstract_animated', 'first')
+          find_the_sniper: getFallbackListForPack('find_the_sniper'),
+          abstract_animated: getFallbackListForPack('abstract_animated')
         },
         byPackRepeat: {
-          find_the_sniper: getFallbackListForPack('find_the_sniper', 'repeat'),
-          abstract_animated: getFallbackListForPack('abstract_animated', 'repeat')
+          find_the_sniper: getFallbackListForPack('find_the_sniper'),
+          abstract_animated: getFallbackListForPack('abstract_animated')
         },
         localPlayer: localPlayerEntry
       });

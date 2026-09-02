@@ -5,7 +5,9 @@ import {
   trackCategorySelected,
   trackGameStarted,
   trackImagePairCompleted,
-  trackStageCleared
+  trackStageCleared,
+  trackRatingPromptShown,
+  trackRatingPromptAction
 } from "./analytics.js";
 
 test("initializes analytics safely without throwing in any environment", () => {
@@ -96,5 +98,13 @@ test("tracks full 5-image stage clearance", () => {
       totalStageScore: 2150,
       imagesInStageCount: 5
     });
+  });
+});
+
+test("tracks rating prompt impressions and user actions", () => {
+  assert.doesNotThrow(() => {
+    trackRatingPromptShown({ visitNumber: 2 });
+    trackRatingPromptAction({ action: "rate", visitNumber: 2 });
+    trackRatingPromptAction({ action: "dismiss", visitNumber: 2 });
   });
 });

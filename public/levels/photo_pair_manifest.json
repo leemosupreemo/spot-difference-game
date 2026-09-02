@@ -366,7 +366,7 @@
         "id": 1,
         "x": 6.7,
         "y": 12.9,
-        "radius": 9.0,
+        "radius": 9,
         "description": "Single add difference",
         "hint": "Look closely near coordinates (7%, 13%)",
         "operation": "add"
@@ -674,7 +674,7 @@
         "id": 1,
         "x": 6.7,
         "y": 12.9,
-        "radius": 9.0,
+        "radius": 9,
         "description": "Single add difference",
         "hint": "Look closely near coordinates (7%, 13%)",
         "operation": "add"
@@ -759,7 +759,7 @@
       {
         "id": 1,
         "x": 36.7,
-        "y": 30.0,
+        "y": 30,
         "radius": 6.8,
         "description": "Single add difference",
         "hint": "Look closely near coordinates (37%, 30%)",
@@ -892,7 +892,7 @@
         "id": 1,
         "x": 18.3,
         "y": 39.7,
-        "radius": 9.0,
+        "radius": 9,
         "description": "Stick removed from pile",
         "operation": "remove",
         "hint": "Look closely near coordinates (18%, 40%)"
@@ -913,8 +913,8 @@
       {
         "id": 1,
         "x": 91.1,
-        "y": 77.0,
-        "radius": 9.0,
+        "y": 77,
+        "radius": 9,
         "hint": "Look closely near coordinates (91%, 77%)"
       }
     ]
@@ -1590,7 +1590,7 @@
         "id": 1,
         "x": 1.5,
         "y": 50.9,
-        "radius": 9.0,
+        "radius": 9,
         "description": "Single recolor difference",
         "hint": "Look closely near coordinates (2%, 51%)",
         "operation": "recolor"
@@ -2162,26 +2162,6 @@
     ]
   },
   {
-    "id": "fresh_v3_ai_minerals_geodes_002",
-    "title": "[AI Multi-Op] Exotic Mineral Crystals & Agate Slices",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_minerals_geodes_002_base.jpg",
-    "variantImage": "/levels/fresh_v3_ai_minerals_geodes_002_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 21.6,
-        "y": 60.2,
-        "radius": 6.5,
-        "hint": "Look closely near coordinates (22%, 60%)"
-      }
-    ]
-  },
-  {
     "id": "fresh_v3_ai_vintage_keys_003",
     "title": "[AI Multi-Op] Vintage Brass & Iron Skeleton Keys",
     "category": "Photography",
@@ -2198,26 +2178,6 @@
         "y": 59.1,
         "radius": 5,
         "hint": "Look closely near coordinates (72%, 59%)"
-      }
-    ]
-  },
-  {
-    "id": "fresh_v3_ai_silk_spools_004",
-    "title": "[AI Multi-Op] Vintage Silk Floss & Wooden Thread Spools",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_silk_spools_004_base.jpg",
-    "variantImage": "/levels/fresh_v3_ai_silk_spools_004_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 68.7,
-        "y": 7.8,
-        "radius": 5.8,
-        "hint": "Look closely near coordinates (69%, 8%)"
       }
     ]
   },
@@ -2262,26 +2222,6 @@
     ]
   },
   {
-    "id": "fresh_v3_ai_ancient_coins_007",
-    "title": "[AI Multi-Op] Ancient Roman Coins & Wax Seals",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_ancient_coins_007_base.jpg",
-    "variantImage": "/levels/fresh_v3_ai_ancient_coins_007_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 49.6,
-        "y": 76.2,
-        "radius": 7.3,
-        "hint": "Look closely near coordinates (50%, 76%)"
-      }
-    ]
-  },
-  {
     "id": "fresh_v3_ai_glass_paperweights_008",
     "title": "[AI Multi-Op] Swirl Glass Paperweights & Cabochons",
     "category": "Photography",
@@ -2298,26 +2238,6 @@
         "y": 84,
         "radius": 6.8,
         "hint": "Look closely near coordinates (30%, 84%)"
-      }
-    ]
-  },
-  {
-    "id": "fresh_v3_ai_wild_mushrooms_009",
-    "title": "[AI Multi-Op] Dried Wild Forest Mushrooms & Botanicals",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_wild_mushrooms_009_base.jpg",
-    "variantImage": "/levels/fresh_v3_ai_wild_mushrooms_009_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 40.6,
-        "y": 20.2,
-        "radius": 5,
-        "hint": "Look closely near coordinates (41%, 20%)"
       }
     ]
   },
@@ -2342,26 +2262,6 @@
     ]
   },
   {
-    "id": "fresh_v2_ai_confectionery_truffles_001",
-    "title": "[AI Multi-Op] Gourmet Confectionery & Macaron Array",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_confectionery_truffles_001_base.jpg",
-    "variantImage": "/levels/fresh_v2_ai_confectionery_truffles_001_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 73.5,
-        "y": 55.7,
-        "radius": 6,
-        "hint": "Look closely near coordinates (74%, 56%)"
-      }
-    ]
-  },
-  {
     "id": "fresh_v2_ai_ceramic_mosaic_tiles_002",
     "title": "[AI Multi-Op] Mediterranean Ceramic Mosaic Tiles",
     "category": "Photography",
@@ -2378,106 +2278,6 @@
         "y": 53.3,
         "radius": 6.8,
         "hint": "Look closely near coordinates (89%, 53%)"
-      }
-    ]
-  },
-  {
-    "id": "fresh_v2_ai_botanical_pressed_flora_003",
-    "title": "[AI Multi-Op] Botanical Pressed Flora & Herbarium Specimen",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_botanical_pressed_flora_003_base.jpg",
-    "variantImage": "/levels/fresh_v2_ai_botanical_pressed_flora_003_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 14.7,
-        "y": 4.8,
-        "radius": 5.1,
-        "hint": "Look closely near coordinates (15%, 5%)"
-      }
-    ]
-  },
-  {
-    "id": "fresh_v2_ai_glass_marbles_millefiori_004",
-    "title": "[AI Multi-Op] Antique Glass Marbles & Millefiori Beads",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_glass_marbles_millefiori_004_base.jpg",
-    "variantImage": "/levels/fresh_v2_ai_glass_marbles_millefiori_004_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 6.1,
-        "y": 49.6,
-        "radius": 5.8,
-        "hint": "Look closely near coordinates (6%, 50%)"
-      }
-    ]
-  },
-  {
-    "id": "fresh_v2_ai_succulents_greenhouse_grid_005",
-    "title": "[AI Multi-Op] Potted Greenhouse Succulents Grid",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_succulents_greenhouse_grid_005_base.jpg",
-    "variantImage": "/levels/fresh_v2_ai_succulents_greenhouse_grid_005_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 14.3,
-        "y": 61.3,
-        "radius": 6.9,
-        "hint": "Look closely near coordinates (14%, 61%)"
-      }
-    ]
-  },
-  {
-    "id": "fresh_v2_ai_marine_seashells_specimens_007",
-    "title": "[AI Multi-Op] Marine Seashells & Sea Glass Array",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_marine_seashells_specimens_007_base.jpg",
-    "variantImage": "/levels/fresh_v2_ai_marine_seashells_specimens_007_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.9,
-        "y": 60.5,
-        "radius": 7.8,
-        "hint": "Look closely near coordinates (57%, 60%)"
-      }
-    ]
-  },
-  {
-    "id": "fresh_v2_ai_stained_glass_jewels_008",
-    "title": "[AI Multi-Op] Stained Glass Mosaic Jewels",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_stained_glass_jewels_008_base.jpg",
-    "variantImage": "/levels/fresh_v2_ai_stained_glass_jewels_008_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 20.1,
-        "y": 61.1,
-        "radius": 5,
-        "hint": "Look closely near coordinates (20%, 61%)"
       }
     ]
   },
@@ -2542,66 +2342,6 @@
     ]
   },
   {
-    "id": "prod_v4_dense_candies",
-    "title": "[AI Multi-Op] Artisan Confectionery Sweets Array",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_candies_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_candies_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 93.6,
-        "y": 92.5,
-        "radius": 5.8,
-        "hint": "Look closely near coordinates (94%, 92%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_dense_gemstones",
-    "title": "[AI Multi-Op] Gemologist Faceted Gemstone Tray",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_gemstones_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_gemstones_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 83,
-        "y": 15.8,
-        "radius": 5.2,
-        "hint": "Look closely near coordinates (83%, 16%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_dense_hardware",
-    "title": "[AI Multi-Op] Machinist Hardware Sorting Tray",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_hardware_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_hardware_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 1.5,
-        "y": 50.9,
-        "radius": 10.3,
-        "hint": "Look closely near coordinates (2%, 51%)"
-      }
-    ]
-  },
-  {
     "id": "prod_v4_dense_marbles",
     "title": "[AI Multi-Op] Collector Glass Marble Collection",
     "category": "Photography",
@@ -2642,46 +2382,6 @@
     ]
   },
   {
-    "id": "prod_v4_unique_bakery",
-    "title": "[AI Multi-Op] French Patisserie Display Counter",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_unique_bakery_base.jpg",
-    "variantImage": "/levels/prod_v4_unique_bakery_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 53.8,
-        "y": 20,
-        "radius": 6.6,
-        "hint": "Look closely near coordinates (54%, 20%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_unique_bushcraft",
-    "title": "[AI Multi-Op] Wilderness Bushcraft Survival Gear",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_unique_bushcraft_base.jpg",
-    "variantImage": "/levels/prod_v4_unique_bushcraft_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 51,
-        "y": 47.4,
-        "radius": 5.8,
-        "hint": "Look closely near coordinates (51%, 47%)"
-      }
-    ]
-  },
-  {
     "id": "prod_v4_unique_gardening",
     "title": "[AI Multi-Op] Botanist Potting & Plant Tag Bench",
     "category": "Photography",
@@ -2702,26 +2402,6 @@
     ]
   },
   {
-    "id": "prod_v4_unique_miniatures",
-    "title": "[AI Multi-Op] Miniature Painter Acrylic Dropper Rack",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_unique_miniatures_base.jpg",
-    "variantImage": "/levels/prod_v4_unique_miniatures_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 15.3,
-        "y": 25.6,
-        "radius": 9,
-        "hint": "Look closely near coordinates (15%, 26%)"
-      }
-    ]
-  },
-  {
     "id": "prod_v4_unique_palette",
     "title": "[AI Multi-Op] Painter Studio Oil Tube Palette",
     "category": "Photography",
@@ -2738,46 +2418,6 @@
         "y": 26.6,
         "radius": 9.2,
         "hint": "Look closely near coordinates (36%, 27%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_unique_seashells",
-    "title": "[AI Multi-Op] Marine Biologist Seashell Matrix",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_unique_seashells_base.jpg",
-    "variantImage": "/levels/prod_v4_unique_seashells_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 40.4,
-        "y": 54.8,
-        "radius": 7.5,
-        "hint": "Look closely near coordinates (40%, 55%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_unique_sewing",
-    "title": "[AI Multi-Op] Haberdashery Wooden Thread Spools",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_unique_sewing_base.jpg",
-    "variantImage": "/levels/prod_v4_unique_sewing_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 54.2,
-        "y": 55.7,
-        "radius": 7.7,
-        "hint": "Look closely near coordinates (54%, 56%)"
       }
     ]
   },
@@ -2822,46 +2462,6 @@
     ]
   },
   {
-    "id": "prod_v4_ai_watchmaker",
-    "title": "[AI Multi-Op] Master Watchmaker Precision Pad",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_watchmaker_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_watchmaker_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 12.9,
-        "y": 49.7,
-        "radius": 7.3,
-        "hint": "Look closely near coordinates (13%, 50%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_ai_baker",
-    "title": "[AI Multi-Op] Confectioner Dessert Display",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_baker_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_baker_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 57.6,
-        "y": 80.5,
-        "radius": 6.2,
-        "hint": "Look closely near coordinates (58%, 80%)"
-      }
-    ]
-  },
-  {
     "id": "prod_v4_ai_expedition",
     "title": "[AI Multi-Op] Expedition Camp Equipment Table",
     "category": "Photography",
@@ -2878,26 +2478,6 @@
         "y": 37.5,
         "radius": 5.1,
         "hint": "Look closely near coordinates (92%, 38%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_ai_gardener",
-    "title": "[AI Multi-Op] Greenhouse Potting Seedling Table",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_gardener_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_gardener_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 91.2,
-        "y": 87.2,
-        "radius": 8.1,
-        "hint": "Look closely near coordinates (91%, 87%)"
       }
     ]
   },
@@ -2938,86 +2518,6 @@
         "y": 63.3,
         "radius": 6.2,
         "hint": "Look closely near coordinates (21%, 63%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_var2_dense_gemstones",
-    "title": "[AI Multi-Op] Gemologist Gemstone Tray B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_dense_gemstones_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_dense_gemstones_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 40.5,
-        "y": 28.4,
-        "radius": 5.2,
-        "hint": "Look closely near coordinates (40%, 28%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_var2_dense_hardware",
-    "title": "[AI Multi-Op] Machinist Hardware Tray B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_dense_hardware_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_dense_hardware_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 4.1,
-        "y": 69.1,
-        "radius": 10.4,
-        "hint": "Look closely near coordinates (4%, 69%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_var2_unique_bakery",
-    "title": "[AI Multi-Op] French Patisserie Display B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_bakery_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_bakery_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 57.6,
-        "y": 80.5,
-        "radius": 6.2,
-        "hint": "Look closely near coordinates (58%, 80%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_var2_unique_leather",
-    "title": "[AI Multi-Op] Leathercraft Workbench B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_leather_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_leather_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 73,
-        "y": 15.4,
-        "radius": 5.5,
-        "hint": "Look closely near coordinates (73%, 15%)"
       }
     ]
   },
@@ -3122,26 +2622,6 @@
     ]
   },
   {
-    "id": "prod_v4_var2_ai_electronics",
-    "title": "[AI Multi-Op] Circuit Lab Capacitor PCB B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_ai_electronics_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_ai_electronics_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 44.5,
-        "y": 90.8,
-        "radius": 7.3,
-        "hint": "Look closely near coordinates (45%, 91%)"
-      }
-    ]
-  },
-  {
     "id": "prod_v4_var2_ai_mechanic",
     "title": "[AI Multi-Op] Precision Mechanic Bench B",
     "category": "Photography",
@@ -3162,26 +2642,6 @@
     ]
   },
   {
-    "id": "prod_v4_var2_ai_watchmaker",
-    "title": "[AI Multi-Op] Watchmaker Precision Pad B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_ai_watchmaker_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_ai_watchmaker_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 97.7,
-        "y": 64.7,
-        "radius": 8.7,
-        "hint": "Look closely near coordinates (98%, 65%)"
-      }
-    ]
-  },
-  {
     "id": "prod_v4_var2_ai_sewing",
     "title": "[AI Multi-Op] Tailor Notions Box B",
     "category": "Photography",
@@ -3196,28 +2656,8 @@
         "id": 1,
         "x": 17.5,
         "y": 71.5,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (17%, 72%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_var2_ai_artist",
-    "title": "[AI Multi-Op] Palette Knife Taboret B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_ai_artist_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_ai_artist_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 27,
-        "y": 61.4,
-        "radius": 5,
-        "hint": "Look closely near coordinates (27%, 61%)"
       }
     ]
   },
@@ -3236,7 +2676,7 @@
         "id": 1,
         "x": 9.8,
         "y": 43.6,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (10%, 44%)"
       }
     ]
@@ -3258,26 +2698,6 @@
         "y": 24.8,
         "radius": 6.7,
         "hint": "Look closely near coordinates (34%, 25%)"
-      }
-    ]
-  },
-  {
-    "id": "prod_v4_dense_watch_parts",
-    "title": "[AI Multi-Op] Horologist Escapement Parts Tray",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_watch_parts_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_watch_parts_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 11.7,
-        "y": 51.4,
-        "radius": 6.9,
-        "hint": "Look closely near coordinates (12%, 51%)"
       }
     ]
   },
@@ -3322,26 +2742,6 @@
     ]
   },
   {
-    "id": "pipe_v3_sewing_remove_001",
-    "title": "[AI Remove] Tailor Notions Box Missing Spool",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/pipe_v3_sewing_remove_001_base.jpg",
-    "variantImage": "/levels/pipe_v3_sewing_remove_001_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 61.6,
-        "y": 47.7,
-        "radius": 5.8,
-        "hint": "Look closely near coordinates (62%, 48%)"
-      }
-    ]
-  },
-  {
     "id": "pipe_v3_watchmaker_recolor_002",
     "title": "[AI Recolor] Horologist Tray Screwdriver Collar",
     "category": "Photography",
@@ -3382,86 +2782,6 @@
     ]
   },
   {
-    "id": "pipe_v3_gardener_remove_005",
-    "title": "[AI Remove] Greenhouse Potting Bench Missing Plant Tag",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/pipe_v3_gardener_remove_005_base.jpg",
-    "variantImage": "/levels/pipe_v3_gardener_remove_005_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 86.3,
-        "y": 86.3,
-        "radius": 6.6,
-        "hint": "Look closely near coordinates (86%, 86%)"
-      }
-    ]
-  },
-  {
-    "id": "pipe_v3_expedition_remove_008",
-    "title": "[AI Remove] Expedition Prep Table Missing Carabiner",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/pipe_v3_expedition_remove_008_base.jpg",
-    "variantImage": "/levels/pipe_v3_expedition_remove_008_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 98.4,
-        "y": 81.8,
-        "radius": 6.4,
-        "hint": "Look closely near coordinates (98%, 82%)"
-      }
-    ]
-  },
-  {
-    "id": "goldilocks_pipe_v2_sewing_remove_001",
-    "title": "[AI Remove] Tailor Notions Box Missing Thread Spool",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "remove",
-    "baseImage": "/levels/goldilocks_pipe_v2_sewing_remove_001_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_sewing_remove_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 53.9,
-        "y": 55.3,
-        "radius": 5.8,
-        "hint": "Look closely near coordinates (54%, 55%)"
-      }
-    ]
-  },
-  {
-    "id": "goldilocks_pipe_v2_watchmaker_recolor_002",
-    "title": "[AI Recolor] Horologist Parts Tray Screwdriver Collar",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_watchmaker_recolor_002_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_watchmaker_recolor_002_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 18.5,
-        "y": 51.5,
-        "radius": 5.2,
-        "hint": "Look closely near coordinates (19%, 51%)"
-      }
-    ]
-  },
-  {
     "id": "goldilocks_pipe_v2_electronics_add_003",
     "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
     "category": "Photography",
@@ -3478,26 +2798,6 @@
         "y": 48.6,
         "radius": 5,
         "hint": "Look closely near coordinates (45%, 49%)"
-      }
-    ]
-  },
-  {
-    "id": "goldilocks_pipe_v2_gardener_remove_004",
-    "title": "[AI Remove] Greenhouse Potting Bench Missing Plant Tag",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "remove",
-    "baseImage": "/levels/goldilocks_pipe_v2_gardener_remove_004_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_gardener_remove_004_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 86.2,
-        "y": 86.3,
-        "radius": 6.6,
-        "hint": "Look closely near coordinates (86%, 86%)"
       }
     ]
   },
@@ -3536,28 +2836,8 @@
         "id": 1,
         "x": 66.8,
         "y": 84.6,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (67%, 85%)"
-      }
-    ]
-  },
-  {
-    "id": "goldilocks_pipe_v2_expedition_remove_008",
-    "title": "[AI Remove] Expedition Prep Table Missing Carabiner",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "remove",
-    "baseImage": "/levels/goldilocks_pipe_v2_expedition_remove_008_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_expedition_remove_008_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 59.5,
-        "y": 21.7,
-        "radius": 8,
-        "hint": "Look closely near coordinates (60%, 22%)"
       }
     ]
   },
@@ -3602,25 +2882,6 @@
     ]
   },
   {
-    "id": "hyper_dense_motherboard_ic_001",
-    "title": "[High Complexity 62%] High-Density Server Motherboard & Chips",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_motherboard_ic_001_base.jpg",
-    "variantImage": "/levels/hyper_dense_motherboard_ic_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 33.5,
-        "y": 53,
-        "radius": 5,
-        "hint": "Look closely near coordinates (34%, 53%)"
-      }
-    ]
-  },
-  {
     "id": "hyper_dense_synth_pcb_002",
     "title": "[High Complexity 66%] Analog Audio Synthesizer Circuit Matrix",
     "category": "Photography",
@@ -3634,103 +2895,8 @@
         "id": 1,
         "x": 51.5,
         "y": 49.4,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (51%, 49%)"
-      }
-    ]
-  },
-  {
-    "id": "hyper_dense_botanical_spices_003",
-    "title": "[High Complexity 69%] Spice Market 70-Item Botanical Flat Lay",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_botanical_spices_003_base.jpg",
-    "variantImage": "/levels/hyper_dense_botanical_spices_003_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 48,
-        "y": 47.8,
-        "radius": 4.5,
-        "hint": "Look closely near coordinates (48%, 48%)"
-      }
-    ]
-  },
-  {
-    "id": "hyper_dense_machinist_parts_004",
-    "title": "[High Complexity 54%] Machinist Workshop 80-Piece Hardware Tray",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_machinist_parts_004_base.jpg",
-    "variantImage": "/levels/hyper_dense_machinist_parts_004_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 47.9,
-        "y": 45.9,
-        "radius": 5,
-        "hint": "Look closely near coordinates (48%, 46%)"
-      }
-    ]
-  },
-  {
-    "id": "hyper_dense_letterpress_type_005",
-    "title": "[High Complexity 36%] 100-Glyph Lead Metal Typecase Matrix",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_letterpress_type_005_base.jpg",
-    "variantImage": "/levels/hyper_dense_letterpress_type_005_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 51,
-        "y": 47.8,
-        "radius": 4.5,
-        "hint": "Look closely near coordinates (51%, 48%)"
-      }
-    ]
-  },
-  {
-    "id": "hyper_dense_art_pigments_006",
-    "title": "[High Complexity 40%] Painter Studio 60-Item Pigment & Knife Table",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_art_pigments_006_base.jpg",
-    "variantImage": "/levels/hyper_dense_art_pigments_006_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.7,
-        "y": 46.3,
-        "radius": 9.0,
-        "hint": "Look closely near coordinates (51%, 46%)"
-      }
-    ]
-  },
-  {
-    "id": "hyper_dense_horology_gears_007",
-    "title": "[High Complexity 51%] Horology Movement 70-Gear Assembly Tray",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_horology_gears_007_base.jpg",
-    "variantImage": "/levels/hyper_dense_horology_gears_007_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 51.9,
-        "y": 47.9,
-        "radius": 5,
-        "hint": "Look closely near coordinates (52%, 48%)"
       }
     ]
   },
@@ -3747,86 +2913,9 @@
       {
         "id": 1,
         "x": 48.4,
-        "y": 34.0,
-        "radius": 9.0,
+        "y": 34,
+        "radius": 9,
         "hint": "Look closely near coordinates (48%, 34%)"
-      }
-    ]
-  },
-  {
-    "id": "hyper_dense_dried_herbs_009",
-    "title": "[High Complexity 43%] Artisan Florist 60-Item Herbarium Flat Lay",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_dried_herbs_009_base.jpg",
-    "variantImage": "/levels/hyper_dense_dried_herbs_009_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 54,
-        "y": 50.1,
-        "radius": 5,
-        "hint": "Look closely near coordinates (54%, 50%)"
-      }
-    ]
-  },
-  {
-    "id": "hyper_dense_sewing_notions_010",
-    "title": "[High Complexity 45%] Vintage Haberdashery 80-Piece Sewing Box",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_sewing_notions_010_base.jpg",
-    "variantImage": "/levels/hyper_dense_sewing_notions_010_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 52.1,
-        "y": 43.8,
-        "radius": 4.5,
-        "hint": "Look closely near coordinates (52%, 44%)"
-      }
-    ]
-  },
-  {
-    "id": "dense_crowd_sewing_notions_001",
-    "title": "[High Object Count] Vintage Haberdashery 80-Piece Sewing Box",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_sewing_notions_001_base.jpg",
-    "variantImage": "/levels/dense_crowd_sewing_notions_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 52.1,
-        "y": 43.8,
-        "radius": 4.5,
-        "hint": "Look closely near coordinates (52%, 44%)"
-      }
-    ]
-  },
-  {
-    "id": "dense_crowd_boardgame_tokens_002",
-    "title": "[High Object Count] Master Watchmaker 90-Component Assembly Tray",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_boardgame_tokens_002_base.jpg",
-    "variantImage": "/levels/dense_crowd_boardgame_tokens_002_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 57.5,
-        "y": 47.5,
-        "radius": 5.5,
-        "description": "Single wooden meeple unit removed from dense tactical resource grid",
-        "hint": "Look closely near coordinates (57%, 48%)"
       }
     ]
   },
@@ -3844,65 +2933,8 @@
         "id": 1,
         "x": 48.4,
         "y": 34.1,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (48%, 34%)"
-      }
-    ]
-  },
-  {
-    "id": "dense_crowd_dried_botanicals_004",
-    "title": "[High Object Count] Artisan Florist 60-Item Herbarium Flat Lay",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_dried_botanicals_004_base.jpg",
-    "variantImage": "/levels/dense_crowd_dried_botanicals_004_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 54,
-        "y": 50.1,
-        "radius": 5,
-        "hint": "Look closely near coordinates (54%, 50%)"
-      }
-    ]
-  },
-  {
-    "id": "dense_crowd_pastry_showcase_005",
-    "title": "[High Object Count] French Patisserie 50-Item Confectionery Display",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_pastry_showcase_005_base.jpg",
-    "variantImage": "/levels/dense_crowd_pastry_showcase_005_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 43.7,
-        "y": 53.8,
-        "radius": 5,
-        "hint": "Look closely near coordinates (44%, 54%)"
-      }
-    ]
-  },
-  {
-    "id": "dense_crowd_watch_escapement_006",
-    "title": "[High Object Count] Horology Movement 70-Gear Assembly Tray",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_watch_escapement_006_base.jpg",
-    "variantImage": "/levels/dense_crowd_watch_escapement_006_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 52,
-        "y": 48,
-        "radius": 5,
-        "hint": "Look closely near coordinates (52%, 48%)"
       }
     ]
   },
@@ -3922,63 +2954,6 @@
         "y": 50.9,
         "radius": 5,
         "hint": "Look closely near coordinates (47%, 51%)"
-      }
-    ]
-  },
-  {
-    "id": "dense_crowd_pottery_tools_008",
-    "title": "[High Object Count] Ceramic Studio 60-Tool Sculpting Bench",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_pottery_tools_008_base.jpg",
-    "variantImage": "/levels/dense_crowd_pottery_tools_008_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 49.8,
-        "y": 53.8,
-        "radius": 5,
-        "hint": "Look closely near coordinates (50%, 54%)"
-      }
-    ]
-  },
-  {
-    "id": "dense_crowd_knolling_tech_009",
-    "title": "[High Object Count] Hardware Engineer 90-Item Workspace Flat Lay",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_knolling_tech_009_base.jpg",
-    "variantImage": "/levels/dense_crowd_knolling_tech_009_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 43.9,
-        "y": 49.4,
-        "radius": 5.1,
-        "hint": "Look closely near coordinates (44%, 49%)"
-      }
-    ]
-  },
-  {
-    "id": "dense_crowd_apothecary_herbs_010",
-    "title": "[High Object Count] Herbal Apothecary 70-Vial Botanical Station",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_apothecary_herbs_010_base.jpg",
-    "variantImage": "/levels/dense_crowd_apothecary_herbs_010_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 77.6,
-        "y": 73.4,
-        "radius": 9.0,
-        "hint": "Look closely near coordinates (78%, 73%)"
       }
     ]
   },
@@ -4149,9 +3124,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35.0,
+        "x": 35,
         "y": 29.4,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (35%, 29%)"
       }
     ]
@@ -4528,7 +3503,7 @@
         "id": 1,
         "x": 64.8,
         "y": 12.6,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (65%, 13%)"
       }
     ]
@@ -4666,8 +3641,8 @@
       {
         "id": 1,
         "x": 63.2,
-        "y": 66.0,
-        "radius": 9.0,
+        "y": 66,
+        "radius": 9,
         "description": "Single radial capacitor sleeve tone shifted in CIELAB (preserving markings and lead solder)",
         "hint": "Look closely near coordinates (63%, 66%)"
       }
@@ -4886,7 +3861,7 @@
         "id": 1,
         "x": 51.2,
         "y": 48.2,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (51%, 48%)"
       }
     ]
@@ -4923,8 +3898,8 @@
       {
         "id": 1,
         "x": 65.9,
-        "y": 44.0,
-        "radius": 9.0,
+        "y": 44,
+        "radius": 9,
         "hint": "Look closely near coordinates (66%, 44%)"
       }
     ]
@@ -4943,7 +3918,7 @@
         "id": 1,
         "x": 57.5,
         "y": 79.5,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (57%, 80%)"
       }
     ]
@@ -4996,9 +3971,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 56.0,
+        "x": 56,
         "y": 58.3,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (56%, 58%)"
       }
     ]
@@ -5015,7 +3990,7 @@
         "id": 1,
         "x": 43.8,
         "y": 76.8,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (44%, 77%)"
       }
     ],
@@ -5268,7 +4243,7 @@
         "id": 1,
         "x": 63.8,
         "y": 40.6,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (64%, 41%)"
       }
     ],
@@ -5282,7 +4257,7 @@
         "id": 1,
         "x": 49.7,
         "y": 49.6,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (50%, 50%)"
       }
     ],
@@ -5301,7 +4276,7 @@
         "id": 1,
         "x": 50.3,
         "y": 50.4,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (50%, 50%)"
       }
     ],
@@ -5378,7 +4353,7 @@
         "id": 1,
         "x": 91.8,
         "y": 28.1,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (92%, 28%)"
       }
     ],
@@ -5394,7 +4369,7 @@
         "id": 1,
         "x": 39.5,
         "y": 11.4,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (40%, 11%)"
       }
     ],
@@ -5420,7 +4395,7 @@
         "id": 1,
         "x": 35.5,
         "y": 62.5,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (35%, 63%)"
       }
     ],
@@ -5452,7 +4427,7 @@
         "id": 1,
         "x": 31.8,
         "y": 84.1,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (32%, 84%)"
       }
     ],
@@ -5475,7 +4450,7 @@
         "id": 1,
         "x": 50.4,
         "y": 52.5,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (50%, 53%)"
       }
     ],
@@ -5490,7 +4465,7 @@
         "id": 1,
         "x": 26.7,
         "y": 59.8,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (27%, 60%)"
       }
     ],
@@ -5508,7 +4483,7 @@
         "id": 1,
         "x": 4.5,
         "y": 79.6,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (4%, 80%)"
       }
     ],
@@ -5529,7 +4504,7 @@
         "id": 1,
         "x": 57.4,
         "y": 46.2,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (57%, 46%)"
       }
     ],
@@ -5546,8 +4521,8 @@
       {
         "id": 1,
         "x": 60.6,
-        "y": 78.0,
-        "radius": 9.0,
+        "y": 78,
+        "radius": 9,
         "hint": "Look closely near coordinates (61%, 78%)"
       }
     ],
@@ -5566,7 +4541,7 @@
         "id": 1,
         "x": 80.9,
         "y": 20.5,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (81%, 21%)"
       }
     ],
@@ -5584,7 +4559,7 @@
         "id": 1,
         "x": 78.2,
         "y": 38.9,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (78%, 39%)"
       }
     ],
@@ -5605,7 +4580,7 @@
         "id": 1,
         "x": 52.5,
         "y": 58.7,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (53%, 59%)"
       }
     ],
@@ -5630,7 +4605,7 @@
         "id": 1,
         "x": 59.6,
         "y": 72.8,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (60%, 73%)"
       }
     ]
@@ -5645,7 +4620,7 @@
         "id": 1,
         "x": 35.1,
         "y": 66.5,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (35%, 67%)"
       }
     ],
@@ -5680,7 +4655,7 @@
         "id": 1,
         "x": 92.1,
         "y": 46.1,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (92%, 46%)"
       }
     ],
@@ -5702,7 +4677,7 @@
         "id": 1,
         "x": 52.1,
         "y": 14.2,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (52%, 14%)"
       }
     ],
@@ -5721,7 +4696,7 @@
         "id": 1,
         "x": 51.8,
         "y": 53.2,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (52%, 53%)"
       }
     ],
@@ -5737,7 +4712,7 @@
         "id": 1,
         "x": 55.8,
         "y": 51.8,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (56%, 52%)"
       }
     ],
@@ -5793,7 +4768,7 @@
         "id": 1,
         "x": 33.6,
         "y": 53.1,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (34%, 53%)"
       }
     ],
@@ -5819,7 +4794,7 @@
         "id": 1,
         "x": 29.6,
         "y": 46.9,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (30%, 47%)"
       }
     ],
@@ -5853,7 +4828,7 @@
         "id": 1,
         "x": 41.8,
         "y": 66.2,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (42%, 66%)"
       }
     ],
@@ -5869,7 +4844,7 @@
         "id": 1,
         "x": 86.4,
         "y": 73.7,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (86%, 74%)"
       }
     ],
@@ -5947,7 +4922,7 @@
         "id": 1,
         "x": 85.2,
         "y": 66.3,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (85%, 66%)"
       }
     ],
@@ -5964,7 +4939,7 @@
         "id": 1,
         "x": 43.2,
         "y": 78.6,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (43%, 79%)"
       }
     ],
@@ -5991,7 +4966,7 @@
         "id": 1,
         "x": 87.9,
         "y": 67.7,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (88%, 68%)"
       }
     ]
@@ -6008,7 +4983,7 @@
         "id": 1,
         "x": 10.9,
         "y": 71.2,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (11%, 71%)"
       }
     ],
@@ -6025,9 +5000,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 10.0,
+        "x": 10,
         "y": 58.3,
-        "radius": 9.0,
+        "radius": 9,
         "hint": "Look closely near coordinates (10%, 58%)"
       }
     ],
