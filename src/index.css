@@ -44,10 +44,10 @@ body {
   font-family: var(--font-main);
   min-height: 100vh;
   overflow-x: hidden;
-  padding-top: max(env(safe-area-inset-top), 24px);
-  padding-bottom: max(env(safe-area-inset-bottom), 16px);
-  padding-left: max(env(safe-area-inset-left), 8px);
-  padding-right: max(env(safe-area-inset-right), 8px);
+  padding-top: max(env(safe-area-inset-top), var(--safe-top, 14px));
+  padding-bottom: max(env(safe-area-inset-bottom), var(--safe-bottom, 14px));
+  padding-left: max(env(safe-area-inset-left), var(--safe-left, 36px));
+  padding-right: max(env(safe-area-inset-right), var(--safe-right, 36px));
 }
 
 /* Glassmorphic Container Card */

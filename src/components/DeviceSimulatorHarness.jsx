@@ -191,6 +191,22 @@ export default function DeviceSimulatorHarness({ children }) {
     );
   }
 
+  const simSafeLeft = activeDevice.category === 'phone'
+    ? (orientation === 'landscape' ? (activeDevice.id === 'iphone-se' ? 28 : 52) : 0)
+    : 24;
+
+  const simSafeRight = activeDevice.category === 'phone'
+    ? (orientation === 'landscape' ? (activeDevice.id === 'iphone-se' ? 28 : 52) : 0)
+    : 24;
+
+  const simSafeTop = activeDevice.category === 'phone'
+    ? (orientation === 'portrait' ? 48 : 12)
+    : 16;
+
+  const simSafeBottom = activeDevice.category === 'phone'
+    ? (orientation === 'portrait' ? 28 : 12)
+    : 16;
+
   return (
     <div
       style={{
@@ -375,7 +391,7 @@ export default function DeviceSimulatorHarness({ children }) {
           }}
         >
           {/* Top Dynamic Island / Notch Mock */}
-          {activeDevice.category === 'phone' && (
+          {activeDevice.category === 'phone' && activeDevice.id !== 'iphone-se' && (
             <div
               style={{
                 position: 'absolute',
@@ -400,7 +416,11 @@ export default function DeviceSimulatorHarness({ children }) {
               overflowY: 'auto',
               overflowX: 'hidden',
               position: 'relative',
-              background: '#090a10'
+              background: '#090a10',
+              '--safe-left': `${simSafeLeft}px`,
+              '--safe-right': `${simSafeRight}px`,
+              '--safe-top': `${simSafeTop}px`,
+              '--safe-bottom': `${simSafeBottom}px`
             }}
           >
             {children}

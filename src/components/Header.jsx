@@ -126,49 +126,53 @@ export default function Header({
 
           {/* Action Controls */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {/* Live Diagnostics & System Logs Button */}
-            <button
-              className="glass-btn"
-              onClick={() => {
-                sounds.playTap();
-                if (onOpenDiagnostics) onOpenDiagnostics();
-              }}
-              title="Live Diagnostics & System Logs"
-              style={{
-                padding: '8px 10px',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--accent-cyan)',
-                borderColor: 'rgba(0, 240, 255, 0.4)',
-                background: 'rgba(0, 240, 255, 0.1)'
-              }}
-            >
-              <Terminal size={17} />
-            </button>
+            {/* Live Diagnostics & System Logs Button (Debug Only) */}
+            {debugMode && (
+              <>
+                <button
+                  className="glass-btn"
+                  onClick={() => {
+                    sounds.playTap();
+                    if (onOpenDiagnostics) onOpenDiagnostics();
+                  }}
+                  title="Live Diagnostics & System Logs"
+                  style={{
+                    padding: '8px 10px',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--accent-cyan)',
+                    borderColor: 'rgba(0, 240, 255, 0.4)',
+                    background: 'rgba(0, 240, 255, 0.1)'
+                  }}
+                >
+                  <Terminal size={17} />
+                </button>
 
-            {/* Quick Debug Toggle in Header */}
-            <button
-              className="glass-btn"
-              onClick={() => {
-                sounds.playTap();
-                if (onToggleDebug) onToggleDebug();
-              }}
-              title={debugMode ? "Debug Mode Active (Tap to disable)" : "Enable Debug Curator Tools"}
-              style={{
-                padding: '8px 10px',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: debugMode ? 'var(--accent-pink)' : 'var(--text-muted)',
-                borderColor: debugMode ? 'var(--accent-pink)' : 'var(--border-glass)',
-                background: debugMode ? 'rgba(255, 0, 127, 0.15)' : 'rgba(255, 255, 255, 0.05)'
-              }}
-            >
-              <Wrench size={17} color={debugMode ? "var(--accent-pink)" : "currentColor"} />
-            </button>
+                {/* Quick Debug Toggle in Header */}
+                <button
+                  className="glass-btn"
+                  onClick={() => {
+                    sounds.playTap();
+                    if (onToggleDebug) onToggleDebug();
+                  }}
+                  title="Debug Mode Active (Tap to disable)"
+                  style={{
+                    padding: '8px 10px',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--accent-pink)',
+                    borderColor: 'var(--accent-pink)',
+                    background: 'rgba(255, 0, 127, 0.15)'
+                  }}
+                >
+                  <Wrench size={17} color="var(--accent-pink)" />
+                </button>
+              </>
+            )}
 
             {view === 'menu' && (
               <button

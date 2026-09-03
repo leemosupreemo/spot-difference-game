@@ -17,4 +17,6 @@ test('Header renders the app icon next to DIFF HUNTER title', () => {
   assert.doesNotMatch(source, /<Eye/);
   assert.match(source, /<span>Scores<\/span>/);
   assert.doesNotMatch(source, /<span>Stats<\/span>/);
+  assert.match(source, /\{debugMode && \(/);
 });
+
