@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "thirteen-a5760"
-  }
+  },
+  "targets": {
+    "thirteen-a5760": {
+      "hosting": {
+        "diff-hunter": [
+          "diff-hunter-test"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
