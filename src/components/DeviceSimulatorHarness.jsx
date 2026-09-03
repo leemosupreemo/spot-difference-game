@@ -79,6 +79,16 @@ const PRESET_DEVICES = [
 ];
 
 export default function DeviceSimulatorHarness({ children }) {
+  const isSimulatorFeatureEnabled = useMemo(() => {
+    try {
+      if (typeof window === 'undefined') return false;
+      const params = new URLSearchParams(window.location.search);
+      return params.has('sim') || params.has('simulator') || params.has('device') || params.get('debug') === '1' || localStorage.getItem('diff_hunter_sim_flag') === 'true';
+    } catch (_) {
+      return false;
+    }
+  }, []);
+
   const [selectedDeviceId, setSelectedDeviceId] = useState(() => {
     try {
       const urlParam = new URLSearchParams(window.location.search).get('device');
@@ -112,7 +122,12 @@ export default function DeviceSimulatorHarness({ children }) {
     } catch (_) {}
   }, [selectedDeviceId, orientation]);
 
-  const isSimulated = activeDevice.id !== 'full';
+  const isSimulated = isSimulatorFeatureEnabled && activeDevice.id !== 'full';
+
+  // If feature flag is off, return clean children with 0 overlays
+  if (!isSimulatorFeatureEnabled) {
+    return children;
+  }
 
   // Calculate dimensions based on orientation
   const frameWidth = isSimulated
@@ -153,7 +168,7 @@ export default function DeviceSimulatorHarness({ children }) {
     return () => window.removeEventListener('resize', calculateScale);
   }, [isSimulated, frameWidth, frameHeight, zoomScale, showToolbar]);
 
-  // If in native full screen mode, just render children with floating toggle
+  // If in native full screen mode with feature flag active, render children with floating toggle
   if (!isSimulated) {
     return (
       <div style={{ width: '100%', minHeight: '100vh', position: 'relative' }}>

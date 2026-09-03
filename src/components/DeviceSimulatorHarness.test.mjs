@@ -34,4 +34,6 @@ test('DeviceSimulatorHarness defines comprehensive iPhone and iPad presets', () 
   // Orientation & auto scale controls
   assert.match(source, /RotateCw/);
   assert.match(source, /computedScale/);
+  assert.match(source, /isSimulatorFeatureEnabled/);
 });
+
