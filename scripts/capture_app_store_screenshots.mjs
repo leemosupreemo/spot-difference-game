@@ -6,9 +6,11 @@ import { preview } from 'vite';
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const OUTPUT_DIR_6_7 = path.resolve('screenshots/app_store_6.7_inch_landscape');
 const OUTPUT_DIR_6_5 = path.resolve('screenshots/app_store_6.5_inch_landscape');
+const OUTPUT_DIR_IPAD = path.resolve('screenshots/app_store_ipad_13_inch');
 
 fs.mkdirSync(OUTPUT_DIR_6_7, { recursive: true });
 fs.mkdirSync(OUTPUT_DIR_6_5, { recursive: true });
+fs.mkdirSync(OUTPUT_DIR_IPAD, { recursive: true });
 
 async function capture() {
   console.log('🚀 Starting Vite preview server...');
@@ -40,7 +42,7 @@ async function capture() {
   const pages = await browser.pages();
   const page = pages.length > 0 ? pages[0] : await browser.newPage();
   
-  // Exact iPhone 15/16 Pro Max Landscape Viewport (932 x 430 * 3 = 2796 x 1290)
+  // 1. Exact iPhone 15/16 Pro Max Landscape Viewport (932 x 430 * 3 = 2796 x 1290)
   await page.setViewport({
     width: 932,
     height: 430,
@@ -51,13 +53,13 @@ async function capture() {
   });
 
   // 1. Capture Main Menu
-  console.log('📸 1. Capturing 01_main_menu.png...');
+  console.log('📸 1. Capturing 01_main_menu.png (iPhone)...');
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
   await new Promise(r => setTimeout(r, 1200));
   await page.screenshot({ path: path.join(OUTPUT_DIR_6_7, '01_main_menu.png') });
 
   // 2. Capture Photography Gameplay
-  console.log('📸 2. Capturing 02_gameplay_photography.png...');
+  console.log('📸 2. Capturing 02_gameplay_photography.png (iPhone)...');
   await page.evaluate(() => {
     const startBtn = document.querySelector('.glass-btn-primary');
     if (startBtn) startBtn.click();
@@ -66,7 +68,7 @@ async function capture() {
   await page.screenshot({ path: path.join(OUTPUT_DIR_6_7, '02_gameplay_photography.png') });
 
   // 3. Capture Zoom / Magnifier Mode
-  console.log('📸 3. Capturing 03_zoom_precision.png...');
+  console.log('📸 3. Capturing 03_zoom_precision.png (iPhone)...');
   await page.evaluate(() => {
     const buttons = Array.from(document.querySelectorAll('button'));
     const zoomBtn = buttons.find(b => b.textContent.includes('Zoom'));
@@ -74,13 +76,12 @@ async function capture() {
   });
   await new Promise(r => setTimeout(r, 500));
   
-  // Touch point near center of left canvas in landscape
   await page.touchscreen.tap(230, 240);
   await new Promise(r => setTimeout(r, 1000));
   await page.screenshot({ path: path.join(OUTPUT_DIR_6_7, '03_zoom_precision.png') });
 
   // 4. Capture Scores & Live Leaderboard
-  console.log('📸 4. Capturing 04_scores_leaderboard.png...');
+  console.log('📸 4. Capturing 04_scores_leaderboard.png (iPhone)...');
   await page.evaluate(() => {
     const buttons = Array.from(document.querySelectorAll('button'));
     const backBtn = buttons.find(b => b.title === 'Back to Menu' || b.querySelector('svg.lucide-arrow-left'));
@@ -97,7 +98,7 @@ async function capture() {
   await page.screenshot({ path: path.join(OUTPUT_DIR_6_7, '04_scores_leaderboard.png') });
 
   // 5. Capture Abstract Generative Art Gameplay
-  console.log('📸 5. Capturing 05_gameplay_abstract.png...');
+  console.log('📸 5. Capturing 05_gameplay_abstract.png (iPhone)...');
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
   await new Promise(r => setTimeout(r, 800));
   
@@ -127,9 +128,49 @@ async function capture() {
       .toFile(outputPath);
   }
 
+  // 2. Exact iPad Pro 13" Landscape Viewport (1366 x 1024 * 2 = 2732 x 2048)
+  console.log('📱 Capturing 13" iPad Pro Landscape screenshots (2732x2048)...');
+  await page.setViewport({
+    width: 1366,
+    height: 1024,
+    deviceScaleFactor: 2,
+    isMobile: true,
+    hasTouch: true,
+    isLandscape: true
+  });
+
+  // iPad Screenshot 1: Main Menu
+  await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
+  await new Promise(r => setTimeout(r, 1000));
+  await page.screenshot({ path: path.join(OUTPUT_DIR_IPAD, '01_main_menu.png') });
+
+  // iPad Screenshot 2: Gameplay Photo
+  await page.evaluate(() => {
+    const startBtn = document.querySelector('.glass-btn-primary');
+    if (startBtn) startBtn.click();
+  });
+  await new Promise(r => setTimeout(r, 1500));
+  await page.screenshot({ path: path.join(OUTPUT_DIR_IPAD, '02_gameplay_photography.png') });
+
+  // iPad Screenshot 3: Scores Leaderboard
+  await page.evaluate(() => {
+    const buttons = Array.from(document.querySelectorAll('button'));
+    const backBtn = buttons.find(b => b.title === 'Back to Menu' || b.querySelector('svg.lucide-arrow-left'));
+    if (backBtn) backBtn.click();
+  });
+  await new Promise(r => setTimeout(r, 600));
+
+  await page.evaluate(() => {
+    const buttons = Array.from(document.querySelectorAll('button'));
+    const scoresBtn = buttons.find(b => b.textContent.includes('Scores'));
+    if (scoresBtn) scoresBtn.click();
+  });
+  await new Promise(r => setTimeout(r, 1200));
+  await page.screenshot({ path: path.join(OUTPUT_DIR_IPAD, '03_scores_leaderboard.png') });
+
   await browser.close();
   await server.close();
-  console.log('🎉 Landscape App Store screenshots successfully generated!');
+  console.log('🎉 iPhone & iPad App Store screenshots successfully generated!');
 }
 
 capture().catch(err => {
