@@ -726,7 +726,6 @@ export default function App() {
         onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
         muted={muted}
         setMuted={setMuted}
-        onLogoClick={toggleDebugMode}
         onToggleDebug={toggleDebugMode}
         debugMode={debugMode}
       />

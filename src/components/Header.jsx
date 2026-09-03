@@ -15,21 +15,9 @@ export default function Header({
   onToggleDebug,
   debugMode
 }) {
-  const [tapCount, setTapCount] = useState(0);
-
   const toggleSound = () => {
     const isMuted = sounds.toggleMute();
     setMuted(isMuted);
-  };
-
-  const handleLogoClick = () => {
-    const nextCount = tapCount + 1;
-    setTapCount(nextCount);
-    if (nextCount >= 3) {
-      setTapCount(0);
-      if (onToggleDebug) onToggleDebug();
-      else if (onLogoClick) onLogoClick();
-    }
   };
 
   const handleOpenStats = () => {
@@ -60,9 +48,7 @@ export default function Header({
           {/* Left Side: Logo on Main Menu, or Back Button on Stats / Game screens */}
           {view === 'menu' ? (
             <div
-              onClick={handleLogoClick}
-              style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', userSelect: 'none' }}
-              title="Tap to toggle debug tools"
+              style={{ display: 'flex', alignItems: 'center', gap: '10px', userSelect: 'none' }}
             >
               <img
                 src="/app-icon.png"
