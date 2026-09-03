@@ -1,5 +1,5 @@
 import React from 'react';
-import { Timer, Lightbulb, Search, Zap, Heart } from 'lucide-react';
+import { Timer, Lightbulb, Search, Zap, Heart, ArrowLeft } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { calculateSpeedPoints } from '../utils/scoring';
 
@@ -12,7 +12,9 @@ export default function TimerDisplay({
   missCount = 0,
   currentStageIndex = 0,
   totalStageImages = 5,
-  selectedDifficulty = 'Medium'
+  selectedDifficulty = 'Medium',
+  onBack,
+  debugMode = false
 }) {
   const potentialPoints = calculateSpeedPoints(elapsedTime);
   const livesRemaining = Math.max(0, 3 - missCount);
@@ -56,9 +58,38 @@ export default function TimerDisplay({
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
           
-          {/* Left Side: Combined Timer + Points, Stage Index, Difficulty, and Lives */}
+          {/* Left Side: Back Button (Playing Mode), Timer + Points, and Lives */}
           <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
             
+            {/* Back Button (Moved to HUD while playing) */}
+            {onBack && (
+              <button
+                className="glass-btn"
+                onClick={() => {
+                  sounds.playTap();
+                  onBack();
+                }}
+                style={{
+                  padding: '0 12px',
+                  height: '36px',
+                  fontSize: '0.88rem',
+                  fontWeight: 800,
+                  borderRadius: '12px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  cursor: 'pointer',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  borderColor: 'rgba(255, 255, 255, 0.2)',
+                  color: '#fff'
+                }}
+                title="Back to Menu"
+              >
+                <ArrowLeft size={16} />
+                <span>Back</span>
+              </button>
+            )}
+
             {/* Combined Timer & Live Score Badge */}
             <div style={{
               background: 'rgba(0, 240, 255, 0.08)',
@@ -134,29 +165,31 @@ export default function TimerDisplay({
             </div>
           </div>
 
-          {/* Right Side: Game Controls (Hint & Zoom) */}
+          {/* Right Side: Game Controls (Hint [Debug Only] & Zoom) */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {/* Hint Button */}
-            <button
-              className={`glass-btn ${hintsLeft > 0 ? '' : 'disabled'}`}
-              onClick={handleHintClick}
-              disabled={hintsLeft <= 0}
-              style={{
-                borderColor: hintsLeft > 0 ? 'var(--accent-gold)' : 'transparent',
-                color: hintsLeft > 0 ? 'var(--accent-gold)' : 'var(--text-muted)',
-                opacity: hintsLeft > 0 ? 1 : 0.4,
-                padding: '7px 13px',
-                borderRadius: '10px',
-                fontSize: '0.88rem',
-                fontWeight: 800,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              <Lightbulb size={17} />
-              <span>Hint ({hintsLeft})</span>
-            </button>
+            {/* Hint Button (Hidden in production; active in debug mode only) */}
+            {debugMode && (
+              <button
+                className={`glass-btn ${hintsLeft > 0 ? '' : 'disabled'}`}
+                onClick={handleHintClick}
+                disabled={hintsLeft <= 0}
+                style={{
+                  borderColor: hintsLeft > 0 ? 'var(--accent-gold)' : 'transparent',
+                  color: hintsLeft > 0 ? 'var(--accent-gold)' : 'var(--text-muted)',
+                  opacity: hintsLeft > 0 ? 1 : 0.4,
+                  padding: '7px 13px',
+                  borderRadius: '10px',
+                  fontSize: '0.88rem',
+                  fontWeight: 800,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                <Lightbulb size={17} />
+                <span>Hint ({hintsLeft})</span>
+              </button>
+            )}
 
             {/* Magnifier Toggle */}
             <button

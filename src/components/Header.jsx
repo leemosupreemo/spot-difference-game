@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Volume2, VolumeX, Award, Info, ArrowLeft, Wrench, Terminal } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
@@ -11,9 +11,8 @@ export default function Header({
   onOpenProgress,
   onOpenHelp,
   onOpenDiagnostics,
-  onLogoClick,
   onToggleDebug,
-  debugMode
+  debugMode = false
 }) {
   const toggleSound = () => {
     const isMuted = sounds.toggleMute();
@@ -25,6 +24,11 @@ export default function Header({
     if (onOpenLeaderboard) onOpenLeaderboard();
     else if (onOpenProgress) onOpenProgress();
   };
+
+  // When playing (view === 'game'), hide header entirely if not in debug mode
+  if (view === 'game' && !debugMode) {
+    return null;
+  }
 
   const maxHeaderWidth = view === 'menu' ? '850px' : view === 'stats' ? '900px' : '1300px';
 
@@ -45,7 +49,7 @@ export default function Header({
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
           
-          {/* Left Side: Logo on Main Menu, or Back Button on Stats / Game screens */}
+          {/* Left Side: Logo on Main Menu, or Back Button on Stats screen */}
           {view === 'menu' ? (
             <div
               style={{ display: 'flex', alignItems: 'center', gap: '10px', userSelect: 'none' }}
@@ -160,6 +164,7 @@ export default function Header({
               </>
             )}
 
+            {/* Scores Button on Menu */}
             {view === 'menu' && (
               <button
                 className="glass-btn"
@@ -180,38 +185,43 @@ export default function Header({
               </button>
             )}
 
-            <button
-              className="glass-btn"
-              onClick={onOpenHelp}
-              title="How to Play & Options"
-              style={{
-                padding: '8px 14px',
-                fontSize: '0.9rem',
-                fontWeight: 800,
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              <Info size={18} />
-              <span>Help</span>
-            </button>
+            {/* Help & Sound buttons appear on Menu / Stats, but disappear while playing */}
+            {view !== 'game' && (
+              <>
+                <button
+                  className="glass-btn"
+                  onClick={onOpenHelp}
+                  title="How to Play & Options"
+                  style={{
+                    padding: '8px 14px',
+                    fontSize: '0.9rem',
+                    fontWeight: 800,
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <Info size={18} />
+                  <span>Help</span>
+                </button>
 
-            <button
-              className="glass-btn"
-              onClick={toggleSound}
-              title={muted ? "Unmute Sound" : "Mute Sound"}
-              style={{
-                padding: '8px 12px',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              {muted ? <VolumeX size={18} color="var(--accent-pink)" /> : <Volume2 size={18} color="var(--accent-cyan)" />}
-            </button>
+                <button
+                  className="glass-btn"
+                  onClick={toggleSound}
+                  title={muted ? "Unmute Sound" : "Mute Sound"}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  {muted ? <VolumeX size={18} color="var(--accent-pink)" /> : <Volume2 size={18} color="var(--accent-cyan)" />}
+                </button>
+              </>
+            )}
           </div>
 
         </div>

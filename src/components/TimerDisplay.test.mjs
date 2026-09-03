@@ -19,4 +19,7 @@ test('TimerDisplay formats millisecond precision timer and live speed points', (
   assert.match(source, /magnifierEnabled/);
   assert.match(source, /livesRemaining/);
   assert.match(source, /Math\.max\(0, 3 - missCount\)/);
+  assert.match(source, /onBack/);
+  assert.match(source, /\{debugMode && \(/);
 });
+

@@ -787,6 +787,8 @@ export default function App() {
             currentStageIndex={debugMode && debugSourceMode === 'premade' ? (getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex}
             totalStageImages={debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)}
             selectedDifficulty={selectedDifficulty}
+            onBack={() => setView('menu')}
+            debugMode={debugMode}
           />
 
           {/* Interactive Dual Viewport (IMAGES ONLY) */}
