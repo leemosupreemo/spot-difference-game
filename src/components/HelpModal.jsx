@@ -10,7 +10,7 @@ export default function HelpModal({ isOpen, onClose }) {
 
   const handleOpenExternal = () => {
     sounds.playTap();
-    const url = 'https://thirteen-a5760.web.app/privacy-policy.html';
+    const url = 'https://diff-hunter-test.web.app/privacy-policy.html';
     try {
       if (typeof window !== 'undefined') {
         window.open(url, '_blank', 'noopener,noreferrer');
