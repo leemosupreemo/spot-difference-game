@@ -225,14 +225,14 @@ export default function VictoryModal({
           </div>
 
           <div>
-            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>ACCURACY</span>
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', paddingRight: '8px' }}>ACCURACY</span>
             <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--accent-green)' }}>
               {accuracy}%
             </span>
           </div>
 
           <div>
-            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>MISSES</span>
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', paddingRight: '8px' }}>MISSES</span>
             <span style={{ fontSize: '1rem', fontWeight: 700, color: safeMisses > 0 ? 'var(--accent-pink)' : 'var(--text-muted)' }}>
               {safeMisses}
             </span>
@@ -254,7 +254,7 @@ export default function VictoryModal({
             onClick={() => { sounds.playTap(); onNextLevel(); }}
             style={{ flex: 1.4, justifyContent: 'center', fontSize: '1.05rem', fontWeight: 900, padding: '10px 16px', borderRadius: '12px' }}
           >
-            Next Pair <ArrowRight size={18} />
+            Next Stage <ArrowRight size={18} />
           </button>
         </div>
 

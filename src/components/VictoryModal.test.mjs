@@ -28,3 +28,12 @@ test('triggers fanfare and golden confetti when an image set is completed with 3
   assert.match(source, /#FFA500/);
   assert.match(source, /isThreeStars\s*\?\s*goldenColors\s*:\s*standardColors/);
 });
+
+test('adds right padding to ACCURACY and MISSES labels and displays Next Stage button', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /paddingRight:\s*['"]8px['"][\s\S]*ACCURACY/);
+  assert.match(source, /paddingRight:\s*['"]8px['"][\s\S]*MISSES/);
+  assert.match(source, /Next Stage/);
+  assert.doesNotMatch(source, /Next Pair/);
+});
