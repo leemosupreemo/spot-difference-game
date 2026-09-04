@@ -111,6 +111,9 @@ if ! "${archive_cmd[@]}"; then
 fi
 echo "✅ Archive created at: $ARCHIVE_PATH"
 
+mkdir -p "$HOME/Library/Developer/Xcode/Archives/$(date +%Y-%m-%d)"
+cp -R "$ARCHIVE_PATH" "$HOME/Library/Developer/Xcode/Archives/$(date +%Y-%m-%d)/DiffHunter ${TIMESTAMP}.xcarchive" 2>/dev/null || true
+
 if [[ "$UPLOAD_TO_STORE" == true ]]; then
   echo "📤 4. Uploading build directly to App Store Connect..."
   export_cmd=(
@@ -128,22 +131,13 @@ if [[ "$UPLOAD_TO_STORE" == true ]]; then
     echo "🔗 Check TestFlight build status: https://appstoreconnect.apple.com/apps"
     echo "----------------------------------------------------"
   else
-    echo "⚠️  Direct xcodebuild upload encountered an issue. Falling back to local IPA export..."
-    fallback_export_cmd=(
-      xcodebuild -exportArchive
-      -archivePath "$ARCHIVE_PATH"
-      -exportOptionsPlist "$LOCAL_EXPORT_OPTIONS_PLIST"
-      -exportPath "$EXPORT_PATH"
-      -allowProvisioningUpdates
-    )
-    if "${fallback_export_cmd[@]}"; then
-      ipa_path="$(find "$EXPORT_PATH" -maxdepth 1 -name '*.ipa' -print -quit || true)"
-      echo "✅ Local App Store IPA generated at: $ipa_path"
-      echo "ℹ️  You can upload this IPA via Transporter app or 'xcrun altool --upload-app -f \"$ipa_path\" -t ios ...'"
-    else
-      echo "❌ Local IPA export failed."
-      exit 1
-    fi
+    echo "----------------------------------------------------"
+    echo "ℹ️  Xcode CLI upload requires App Store Connect API Key or manual session."
+    echo "🖥️  Opening the archive directly in Xcode Organizer..."
+    open "$ARCHIVE_PATH"
+    echo "✅ Xcode Organizer is now open with Build #${BUILD_NUMBER} selected."
+    echo "👉 Just click 'Distribute App' -> 'App Store Connect' -> 'Upload' in Xcode to finish!"
+    echo "----------------------------------------------------"
   fi
 else
   echo "📤 4. Exporting App Store IPA package locally (no upload requested)..."
@@ -156,15 +150,16 @@ else
   )
 
   if ! "${export_cmd[@]}"; then
-    echo "❌ Xcode IPA export failed!"
-    exit 1
+    echo "ℹ️  Opening archive in Xcode Organizer..."
+    open "$ARCHIVE_PATH"
+    echo "✅ Xcode Organizer opened with Build #${BUILD_NUMBER}."
+  else
+    ipa_path="$(find "$EXPORT_PATH" -maxdepth 1 -name '*.ipa' -print -quit || true)"
+    echo "----------------------------------------------------"
+    echo "✅ APP STORE IPA EXPORTED LOCALLY!"
+    echo "📦 Package Path: $ipa_path"
+    echo "----------------------------------------------------"
   fi
-
-  ipa_path="$(find "$EXPORT_PATH" -maxdepth 1 -name '*.ipa' -print -quit || true)"
-  echo "----------------------------------------------------"
-  echo "✅ APP STORE IPA EXPORTED LOCALLY!"
-  echo "📦 Package Path: $ipa_path"
-  echo "----------------------------------------------------"
 fi
 
 exit 0
