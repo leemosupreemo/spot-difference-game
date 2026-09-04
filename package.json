@@ -11,6 +11,8 @@
     "prune:dismissed": "node scripts/prune_dismissed_levels.mjs",
     "add:pair": "node scripts/add_image_pair.mjs",
     "lint": "oxlint",
+    "distribute:firebase": "bash scripts/distribute_ios.sh",
+    "distribute:appstore": "bash scripts/distribute_appstore.sh",
     "preview": "vite preview"
   },
   "dependencies": {

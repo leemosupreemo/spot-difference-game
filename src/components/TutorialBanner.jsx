@@ -109,7 +109,7 @@ export default function TutorialBanner() {
           </h3>
         </div>
         <p style={{
-          fontSize: '0.84rem',
+          fontSize: '0.76rem',
           color: 'var(--text-muted)',
           margin: 0,
           lineHeight: '1.3'
