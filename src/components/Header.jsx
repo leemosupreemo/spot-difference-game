@@ -58,9 +58,9 @@ export default function Header({
                 src="/app-icon.png"
                 alt="Diff Hunter App Icon"
                 style={{
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: '8px',
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '12px',
                   display: 'block',
                   boxShadow: '0 0 14px rgba(0, 240, 255, 0.45)',
                   border: '1px solid rgba(255, 255, 255, 0.2)'
@@ -109,7 +109,7 @@ export default function Header({
                 cursor: 'pointer'
               }}
             >
-              <ArrowLeft size={18} />
+              <ArrowLeft size={22} />
               <span>Back</span>
             </button>
           )}
@@ -137,7 +137,7 @@ export default function Header({
                     background: 'rgba(0, 240, 255, 0.1)'
                   }}
                 >
-                  <Terminal size={17} />
+                  <Terminal size={20} />
                 </button>
 
                 {/* Quick Debug Toggle in Header */}
@@ -159,7 +159,7 @@ export default function Header({
                     background: 'rgba(255, 0, 127, 0.15)'
                   }}
                 >
-                  <Wrench size={17} color="var(--accent-pink)" />
+                  <Wrench size={20} color="var(--accent-pink)" />
                 </button>
               </>
             )}
@@ -180,7 +180,7 @@ export default function Header({
                   gap: '6px'
                 }}
               >
-                <Award size={18} color="var(--accent-gold)" />
+                <Award size={22} color="var(--accent-gold)" />
                 <span>Scores</span>
               </button>
             )}
@@ -202,7 +202,7 @@ export default function Header({
                     gap: '6px'
                   }}
                 >
-                  <Info size={18} />
+                  <Info size={22} />
                   <span>Help</span>
                 </button>
 
@@ -218,7 +218,7 @@ export default function Header({
                     justifyContent: 'center'
                   }}
                 >
-                  {muted ? <VolumeX size={18} color="var(--accent-pink)" /> : <Volume2 size={18} color="var(--accent-cyan)" />}
+                  {muted ? <VolumeX size={22} color="var(--accent-pink)" /> : <Volume2 size={22} color="var(--accent-cyan)" />}
                 </button>
               </>
             )}

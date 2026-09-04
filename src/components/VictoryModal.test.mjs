@@ -15,3 +15,16 @@ test('contains a fail-safe around the native victory celebration effect', () => 
   assert.match(source, /try \{[\s\S]*confetti\(/);
   assert.match(source, /catch \(error\) \{[\s\S]*Victory celebration unavailable/);
 });
+
+test('triggers fanfare and golden confetti when an image set is completed with 3 stars', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Confirms fanfare sound invocation
+  assert.match(source, /sounds\.playFanfare\(/);
+
+  // Confirms golden color palette for 3-star completion
+  assert.match(source, /goldenColors\s*=\s*\[/);
+  assert.match(source, /#FFD700/);
+  assert.match(source, /#FFA500/);
+  assert.match(source, /isThreeStars\s*\?\s*goldenColors\s*:\s*standardColors/);
+});

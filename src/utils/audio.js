@@ -169,8 +169,13 @@ class SoundController {
     }
   }
 
-  // Level complete fanfare
-  playWin() {
+  // Level / Stage complete fanfare
+  playWin(stars = 3) {
+    this.playFanfare(stars);
+  }
+
+  // Celebratory fanfare when an image set / stage is completed
+  playFanfare(stars = 3) {
     this.triggerHaptic('win');
     if (this.muted) return;
     this.init();
@@ -178,22 +183,78 @@ class SoundController {
 
     try {
       const now = this.ctx.currentTime;
+      const isThreeStars = stars === 3;
+
+      // Triumphant herald melody
       const melody = [
-        { freq: 523.25, time: 0, duration: 0.12 },   // C5
-        { freq: 659.25, time: 0.12, duration: 0.12 },// E5
-        { freq: 783.99, time: 0.24, duration: 0.12 },// G5
-        { freq: 1046.50, time: 0.36, duration: 0.4 } // C6
+        { freq: 523.25, time: 0, duration: 0.12, type: 'triangle', gain: 0.22 },    // C5
+        { freq: 659.25, time: 0.12, duration: 0.12, type: 'triangle', gain: 0.22 }, // E5
+        { freq: 783.99, time: 0.24, duration: 0.14, type: 'triangle', gain: 0.25 }, // G5
+        { freq: 1046.50, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.3 }  // C6 (lead note)
       ];
 
-      melody.forEach(note => {
+      // Brass harmony chord on the final celebratory note
+      const harmonyNotes = [
+        { freq: 783.99, time: 0.38, duration: 0.55, type: 'sine', gain: 0.18 },     // G5 harmony
+        { freq: 1318.51, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.16 } // E6 harmony
+      ];
+
+      const allNotes = [...melody, ...harmonyNotes];
+
+      // If 3 stars, add shimmering golden overtones & sparkle arpeggio
+      if (isThreeStars) {
+        allNotes.push(
+          { freq: 1567.98, time: 0.44, duration: 0.45, type: 'sine', gain: 0.14 },   // G6 golden sparkle
+          { freq: 2093.00, time: 0.52, duration: 0.45, type: 'sine', gain: 0.12 }    // C7 shimmer
+        );
+      }
+
+      allNotes.forEach(note => {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
 
-        osc.type = 'triangle';
+        osc.type = note.type || 'triangle';
         osc.frequency.setValueAtTime(note.freq, now + note.time);
 
+        const peakGain = note.gain || 0.2;
         gain.gain.setValueAtTime(0, now + note.time);
-        gain.gain.linearRampToValueAtTime(0.25, now + note.time + 0.02);
+        gain.gain.linearRampToValueAtTime(peakGain, now + note.time + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + note.time + note.duration);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now + note.time);
+        osc.stop(now + note.time + note.duration);
+      });
+    } catch (e) {
+      console.warn("Audio play error", e);
+    }
+  }
+
+  // Game over / stage failure sound
+  playLose() {
+    this.triggerHaptic('error');
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    try {
+      const now = this.ctx.currentTime;
+      const notes = [
+        { freq: 330.0, time: 0, duration: 0.18 },    // E4
+        { freq: 293.66, time: 0.18, duration: 0.18 }, // D4
+        { freq: 261.63, time: 0.36, duration: 0.35 }  // C4
+      ];
+
+      notes.forEach(note => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(note.freq, now + note.time);
+
+        gain.gain.setValueAtTime(0.15, now + note.time);
         gain.gain.exponentialRampToValueAtTime(0.001, now + note.time + note.duration);
 
         osc.connect(gain);

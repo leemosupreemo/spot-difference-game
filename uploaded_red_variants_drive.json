@@ -1,0 +1,90 @@
+[
+  {
+    "num": 1,
+    "name": "DiffHunter_Red_01_Ruby_Crimson.jpg",
+    "title": "Red Variant 01: Ruby & Crimson Radiance",
+    "desc": "Classic vibrant ruby rayburst & hexagonal bokeh (top-right) with deep crimson fluid marble waves (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/10piYHeHQ1CG5PdrlmhxGq81f-gpxDkK3/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 2,
+    "name": "DiffHunter_Red_02_Neon_Scarlet.jpg",
+    "title": "Red Variant 02: Neon Scarlet & Bright Coral",
+    "desc": "Electrifying scarlet light leaks with high-key glowing bokeh (top-right) and energetic coral-red liquid flow (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1gfFrDMrU4JuqP5PzNNEZKLDs0J2Unqrl/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 3,
+    "name": "DiffHunter_Red_03_Deep_Burgundy_Wine.jpg",
+    "title": "Red Variant 03: Deep Burgundy & Royal Wine",
+    "desc": "Luminous wine-tinted light prism rays (top-right) contrasting with rich, deep burgundy marble swirls (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1DZP8Z517MCTFFyB-4YEKy4PQaion40Kb/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 4,
+    "name": "DiffHunter_Red_04_Cherry_Rose.jpg",
+    "title": "Red Variant 04: Cherry Red & Rose Quartz",
+    "desc": "Delicate rose quartz optical flare rays and hexagonal crystals (top-right) with silky cherry red fluid marble (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1EVhesYDL1sHK1zo-in1FXIgwZXKeXhj5/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 5,
+    "name": "DiffHunter_Red_05_Fiery_Vermilion.jpg",
+    "title": "Red Variant 05: Fiery Vermilion & Molten Amber-Red",
+    "desc": "Brilliant fiery sunburst rays and amber-red bokeh (top-right) paired with molten vermilion magma liquid swirls (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/13XMCEqLYC_1eN3zjV1Z-VVB5nPJlqG4K/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 6,
+    "name": "DiffHunter_Red_06_Cardinal_Contrast.jpg",
+    "title": "Red Variant 06: Cardinal Red & High-Contrast Track",
+    "desc": "Punchy cardinal red rayburst and geometric bokeh (top-right) with clean, saturated cardinal liquid ribbons (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1WY809c-BuCcuGEwILUNUzUJ17qBV-KJh/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 7,
+    "name": "DiffHunter_Red_07_Cyber_Neon_Red.jpg",
+    "title": "Red Variant 07: Cyber Neon Red & Laser Bloom",
+    "desc": "Futuristic cyber neon red laser ray beams with glowing hexagonal matrices (top-right) and electric crimson fluid currents (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1u6hEKaUnoxNPPSC4prGDwX9isHTNuV6u/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 8,
+    "name": "DiffHunter_Red_08_Sunset_Coral_Red.jpg",
+    "title": "Red Variant 08: Sunset Coral & Peach-Red",
+    "desc": "Warm sunset coral optical light dispersion (top-right) with soft flowing peach-red gradient liquid marble (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/15N8e-KQyuhHEJYk_rdl9XC2iS9uBA3MY/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 9,
+    "name": "DiffHunter_Red_09_Garnet_Prism.jpg",
+    "title": "Red Variant 09: Deep Garnet & Prismatic Red Shift",
+    "desc": "Intense dark garnet jewel-tone marble waves (bottom-left) meeting multi-spectral prismatic ruby light refractions (top-right).",
+    "fileUrl": "https://drive.google.com/file/d/136wOBJMCFVhyS8RtwMnKo3jpsBr_49m2/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 10,
+    "name": "DiffHunter_Red_10_Velvet_Crimson_Bloom.jpg",
+    "title": "Red Variant 10: Velvet Crimson & Luminous Bokeh Bloom",
+    "desc": "Rich velvet crimson fluid ripples (bottom-left) contrasted with ultra-soft glowing ruby lens flare bloom and floating bokeh (top-right).",
+    "fileUrl": "https://drive.google.com/file/d/1YQmOlMZTnLSKi6b45UpmmFkrbeqvsHhy/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": "Showcase",
+    "name": "DiffHunter_10_Red_Variants_Showcase.html",
+    "title": "Interactive 10-Red-Variant Showcase Gallery",
+    "desc": "Interactive gallery with high-res previews and download buttons for all 10 red split-scene variants.",
+    "fileUrl": "https://drive.google.com/file/d/16j3I5Tw7e47dLKWsg10jcRUKPy2ysbE8/view?usp=drivesdk",
+    "status": "success"
+  }
+]

@@ -19,7 +19,7 @@ test('TimerDisplay formats millisecond precision timer and live speed points', (
   assert.match(source, /magnifierEnabled/);
   assert.match(source, /livesRemaining/);
   assert.match(source, /Math\.max\(0, 3 - missCount\)/);
-  assert.match(source, /onBack/);
-  assert.match(source, /\{debugMode && \(/);
+  assert.match(source, /Search size=\{20\} color="var\(--accent-cyan\)"/);
+  assert.match(source, /<span style=\{\{ color: 'var\(--accent-cyan\)'/);
 });
 

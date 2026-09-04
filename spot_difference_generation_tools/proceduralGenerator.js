@@ -726,10 +726,12 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         id: `monet_blossom_${j}`,
         x: cx, y: cy, size, kind: 'Blooming Water Lily Lotus', baseColor: bloomCol,
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : bloomCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.7 : 1.0;
@@ -788,10 +790,12 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         id: `vangogh_star_${s}`,
         x: cx, y: cy, size: rad * 2, kind: 'Swirling Vortex Star', baseColor: starCol,
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 3 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#f72585' : starCol;
           const sc = (mutated && mType === 'SCALE_CHANGE') ? 1.7 : 1.0;
@@ -840,12 +844,14 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
       candidates.push({
         id: `vangogh_cypress_${c}`,
-        x: cx, y: cy, size: hSize, kind: 'Flame Cypress Silhouette', baseColor: '#081c15',
+        x: cx, y: cy - (hSize * 0.4), size: hSize, kind: 'Flame Cypress Silhouette', baseColor: '#081c15',
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.35 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#e63946' : '#081c15';
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.5 : 1.0;
@@ -858,6 +864,15 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           ctx.bezierCurveTo(-wSize * 0.5 * s, 0, -wSize * 0.6 * s, -hSize * 0.5 * s, 0, -hSize * s);
           ctx.closePath();
           ctx.fill();
+
+          // Cypress foliage flame highlights
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+            ctx.strokeStyle = 'rgba(76, 201, 240, 0.45)';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(0, -hSize * s * 0.4, wSize * 0.25 * s, Math.PI * 0.2, Math.PI * 0.8);
+            ctx.stroke();
+          }
 
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#ffd166';
@@ -917,12 +932,14 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
       candidates.push({
         id: `synthwave_bldg_${b}`,
-        x: cx, y: cy, size: Math.max(bw, bh), kind: 'Neon Cyber Skyscraper', baseColor: bCol,
+        x: cx, y: cy - (bh * 0.5), size: Math.max(bw, bh), kind: 'Neon Cyber Skyscraper', baseColor: bCol,
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.2 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#ffffff' : bCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -990,6 +1007,8 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : mCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -1063,6 +1082,8 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? (isGauge ? 0 : Math.PI / 6) : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : gCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -1077,12 +1098,12 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
             ctx.stroke();
             // Dial needle
             if (!(mutated && mType === 'REMOVE_DETAIL')) {
-              const rot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI * 0.75 : -Math.PI * 0.25;
+              const needleRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI * 0.75 : -Math.PI * 0.25;
               ctx.strokeStyle = '#e63946';
               ctx.lineWidth = 3.0;
               ctx.beginPath();
               ctx.moveTo(0, 0);
-              ctx.lineTo(Math.cos(rot) * rad * 0.75 * s, Math.sin(rot) * rad * 0.75 * s);
+              ctx.lineTo(Math.cos(needleRot) * rad * 0.75 * s, Math.sin(needleRot) * rad * 0.75 * s);
               ctx.stroke();
             }
           } else {
@@ -1099,6 +1120,16 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
             ctx.beginPath();
             ctx.arc(0, 0, rad * 0.35 * s, 0, Math.PI * 2);
             ctx.fill();
+
+            // Inner gear spoke rivets
+            if (!(mutated && mType === 'REMOVE_DETAIL')) {
+              ctx.fillStyle = '#ffffff';
+              for (let a = 0; a < Math.PI * 2; a += Math.PI / 2) {
+                ctx.beginPath();
+                ctx.arc(Math.cos(a) * rad * 0.6 * s, Math.sin(a) * rad * 0.6 * s, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+              }
+            }
           }
 
           if (mutated && mType === 'ADD_DETAIL') {
@@ -1147,10 +1178,12 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         id: `hokusai_wave_${w}`,
         x: cx, y: cy, size: sz, kind: isBoat ? 'Wooden Fishing Skiff' : 'Curling Ocean Wave Foam Crest', baseColor: isBoat ? '#d4a373' : '#0077b6',
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.35 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#f72585' : (isBoat ? '#d4a373' : '#0077b6');
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -1167,6 +1200,16 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
             ctx.strokeStyle = '#3a1e05';
             ctx.lineWidth = 2.0;
             ctx.stroke();
+
+            // Boat oar / mast detail
+            if (!(mutated && mType === 'REMOVE_DETAIL')) {
+              ctx.strokeStyle = '#ffffff';
+              ctx.lineWidth = 2.0;
+              ctx.beginPath();
+              ctx.moveTo(0, 0);
+              ctx.lineTo(0, -sz * 0.3 * s);
+              ctx.stroke();
+            }
           } else {
             ctx.fillStyle = col;
             ctx.beginPath();
@@ -1176,10 +1219,12 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
             ctx.closePath();
             ctx.fill();
             // Foam claws
-            ctx.fillStyle = '#ffffff';
-            ctx.beginPath();
-            ctx.arc(sz * 0.45 * s, -sz * 0.1 * s, sz * 0.15 * s, 0, Math.PI * 2);
-            ctx.fill();
+            if (!(mutated && mType === 'REMOVE_DETAIL')) {
+              ctx.fillStyle = '#ffffff';
+              ctx.beginPath();
+              ctx.arc(sz * 0.45 * s, -sz * 0.1 * s, sz * 0.15 * s, 0, Math.PI * 2);
+              ctx.fill();
+            }
           }
 
           if (mutated && mType === 'ADD_DETAIL') {
@@ -1212,10 +1257,12 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         id: `klimt_motif_${k}`,
         x: cx, y: cy, size: sz, kind: 'Gilded Byzantine Mosaic Spiral', baseColor: kCol,
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 2 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : kCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -1276,12 +1323,14 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
       candidates.push({
         id: `nordic_tree_${n}`,
-        x: cx, y: cy, size: sz, kind: 'Arctic Pine Tree Silhouette', baseColor: nCol,
+        x: cx, y: cy - (sz * 0.22), size: sz, kind: 'Arctic Pine Tree Silhouette', baseColor: nCol,
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.35 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#ff0054' : nCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -1297,8 +1346,16 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
             ctx.fill();
           }
 
-          if (mutated && mType === 'ADD_DETAIL') {
+          // Snow cap highlights
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
             ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(0, -sz * 0.35 * s, 6 * s, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          if (mutated && mType === 'ADD_DETAIL') {
+            ctx.fillStyle = '#ffd166';
             ctx.beginPath();
             ctx.arc(0, -sz * 0.5 * s, 8, 0, Math.PI * 2);
             ctx.fill();
@@ -1332,10 +1389,11 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         id: `cosmic_planet_${p}`,
         x: cx, y: cy, size: sz, kind: isRinged ? 'Ringed Saturnian Exoplanet' : 'Glowing Quasar Core', baseColor: pCol,
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const ringAngle = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 2 : Math.PI / 6;
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#ffffff' : pCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -1347,11 +1405,21 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           ctx.fill();
 
           if (isRinged) {
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 3.0;
-            ctx.beginPath();
-            ctx.ellipse(0, 0, sz * 0.6 * s, sz * 0.16 * s, Math.PI / 6, 0, Math.PI * 2);
-            ctx.stroke();
+            if (!(mutated && mType === 'REMOVE_DETAIL')) {
+              ctx.strokeStyle = '#ffffff';
+              ctx.lineWidth = 3.0;
+              ctx.beginPath();
+              ctx.ellipse(0, 0, sz * 0.6 * s, sz * 0.16 * s, ringAngle, 0, Math.PI * 2);
+              ctx.stroke();
+            }
+          } else {
+            // Planet crater / core spot
+            if (!(mutated && mType === 'REMOVE_DETAIL')) {
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+              ctx.beginPath();
+              ctx.arc(sz * 0.12 * s, -sz * 0.12 * s, sz * 0.1 * s, 0, Math.PI * 2);
+              ctx.fill();
+            }
           }
 
           if (mutated && mType === 'ADD_DETAIL') {
@@ -1380,10 +1448,12 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         id: `stained_glass_facet_${g}`,
         x: cx, y: cy, size: sz, kind: 'Cathedral Stained Glass Pane', baseColor: gCol,
         isTargetEligible: true,
-        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL'],
+        supportedMutations: ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL', 'REMOVE_DETAIL', 'SHAPE_ROTATE'],
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : gCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -1401,6 +1471,18 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           ctx.strokeStyle = '#000000';
           ctx.lineWidth = 4.0;
           ctx.stroke();
+
+          // Inner facet cross / star highlight
+          if (!(mutated && mType === 'REMOVE_DETAIL')) {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+            ctx.lineWidth = 2.0;
+            ctx.beginPath();
+            ctx.moveTo(0, -sz * 0.3 * s);
+            ctx.lineTo(0, sz * 0.3 * s);
+            ctx.moveTo(-sz * 0.2 * s, 0);
+            ctx.lineTo(sz * 0.2 * s, 0);
+            ctx.stroke();
+          }
 
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#ffffff';
@@ -1435,6 +1517,8 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
+          ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
           let c = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : col;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
@@ -1492,9 +1576,89 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   targetObj.draw(ctxA, false, '');
   targetObj.draw(ctxB, true, mutationType);
 
-  const diffX = Math.round((targetObj.x / width) * 1000) / 10;
-  const diffY = Math.round((targetObj.y / height) * 1000) / 10;
-  const hitRadius = targetDifficulty === 'Easy' ? 10 : targetDifficulty === 'Medium' ? 8 : 6;
+  // Precise visual centroid & bounding difference analysis
+  let finalTargetX = targetObj.x;
+  let finalTargetY = targetObj.y;
+  let detectedSpanRadiusPx = 0;
+
+  try {
+    if (typeof ctxA.getImageData === 'function' && typeof ctxB.getImageData === 'function') {
+      let dataA = ctxA.getImageData(0, 0, width, height)?.data;
+      let dataB = ctxB.getImageData(0, 0, width, height)?.data;
+      if (dataA && dataB && dataA.length === dataB.length && dataA.length > 0) {
+        let minX = width, maxX = 0, minY = height, maxY = 0;
+        let sumX = 0, sumY = 0, diffCount = 0;
+
+        for (let y = 0; y < height; y += 2) {
+          for (let x = 0; x < width; x += 2) {
+            const idx = (y * width + x) * 4;
+            const dR = Math.abs(dataA[idx] - dataB[idx]);
+            const dG = Math.abs(dataA[idx + 1] - dataB[idx + 1]);
+            const dB = Math.abs(dataA[idx + 2] - dataB[idx + 2]);
+            const dA = Math.abs(dataA[idx + 3] - dataB[idx + 3]);
+            if (dR + dG + dB + dA > 24) {
+              if (x < minX) minX = x;
+              if (x > maxX) maxX = x;
+              if (y < minY) minY = y;
+              if (y > maxY) maxY = y;
+              sumX += x;
+              sumY += y;
+              diffCount++;
+            }
+          }
+        }
+
+        if (diffCount < 10) {
+          // Guaranteed fallback: force color shift and size mutation on target object
+          targetObj.draw(ctxB, true, 'COLOR_SHIFT');
+          dataB = ctxB.getImageData(0, 0, width, height)?.data;
+          minX = width; maxX = 0; minY = height; maxY = 0;
+          sumX = 0; sumY = 0; diffCount = 0;
+          for (let y = 0; y < height; y += 2) {
+            for (let x = 0; x < width; x += 2) {
+              const idx = (y * width + x) * 4;
+              const dR = Math.abs(dataA[idx] - dataB[idx]);
+              const dG = Math.abs(dataA[idx + 1] - dataB[idx + 1]);
+              const dB = Math.abs(dataA[idx + 2] - dataB[idx + 2]);
+              const dA = Math.abs(dataA[idx + 3] - dataB[idx + 3]);
+              if (dR + dG + dB + dA > 24) {
+                if (x < minX) minX = x;
+                if (x > maxX) maxX = x;
+                if (y < minY) minY = y;
+                if (y > maxY) maxY = y;
+                sumX += x;
+                sumY += y;
+                diffCount++;
+              }
+            }
+          }
+        }
+
+        if (diffCount >= 8) {
+          finalTargetX = sumX / diffCount;
+          finalTargetY = sumY / diffCount;
+          const halfSpanX = (maxX - minX) / 2;
+          const halfSpanY = (maxY - minY) / 2;
+          detectedSpanRadiusPx = Math.hypot(halfSpanX, halfSpanY);
+        }
+      }
+    }
+  } catch (_) {}
+
+  const diffX = Math.round((finalTargetX / width) * 1000) / 10;
+  const diffY = Math.round((finalTargetY / height) * 1000) / 10;
+
+  // Fully encompass the entire visual difference bounds plus generous mobile touch buffer
+  const targetScale = mutationType === 'SCALE_CHANGE' ? 1.7 : 1.0;
+  const effectiveSpanPx = Math.max(detectedSpanRadiusPx, (targetObj.size * targetScale) * 0.55, 30);
+  const radiusPercentX = (effectiveSpanPx / width) * 100;
+  const radiusPercentY = (effectiveSpanPx / height) * 100;
+  const objectPercentRadius = Math.max(radiusPercentX, radiusPercentY);
+
+  const diffBuffer = targetDifficulty === 'Easy' ? 5.5 : targetDifficulty === 'Medium' ? 4.0 : 3.0;
+  const minFloor = targetDifficulty === 'Easy' ? 12 : targetDifficulty === 'Medium' ? 10 : 8.5;
+
+  const hitRadius = Math.round(Math.max(minFloor, objectPercentRadius + diffBuffer) * 10) / 10;
 
   let hintAction = 'Look closely at';
   if (mutationType === 'COLOR_SHIFT') hintAction = 'Notice the vibrant color change on';

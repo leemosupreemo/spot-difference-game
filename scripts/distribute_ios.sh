@@ -39,6 +39,28 @@ Options:
 EOF
 }
 
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --groups)
+      FIREBASE_GROUPS="$2"
+      shift 2
+      ;;
+    --release-notes)
+      RELEASE_NOTES="$2"
+      shift 2
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1"
+      usage
+      exit 1
+      ;;
+  esac
+done
+
 require_cmd() {
   local cmd="$1"
   if ! command -v "$cmd" >/dev/null 2>&1; then

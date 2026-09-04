@@ -11,6 +11,7 @@ import ProgressModal from './components/ProgressModal';
 import HelpModal from './components/HelpModal';
 import RatingModal from './components/RatingModal';
 import DiagnosticsModal from './components/DiagnosticsModal';
+import ConfirmExitModal from './components/ConfirmExitModal';
 import DebugLevelGeneratorModal from './components/DebugLevelGeneratorModal';
 import DebugCuratorBar from './components/DebugCuratorBar';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
@@ -78,6 +79,7 @@ export default function App() {
   const [progressModalOpen, setProgressModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [ratingModalOpen, setRatingModalOpen] = useState(false);
+  const [confirmExitModalOpen, setConfirmExitModalOpen] = useState(false);
   const [diagnosticsModalOpen, setDiagnosticsModalOpen] = useState(false);
   const [debugModalOpen, setDebugModalOpen] = useState(false);
 
@@ -714,12 +716,36 @@ export default function App() {
     startLevel(customLevel.id);
   };
 
+  // Back navigation with confirmation modal while in an active game
+  const handleRequestBack = () => {
+    if (view === 'game') {
+      setTimerRunning(false);
+      setConfirmExitModalOpen(true);
+    } else {
+      setView('menu');
+    }
+  };
+
+  const handleConfirmExit = () => {
+    setConfirmExitModalOpen(false);
+    setTimerRunning(false);
+    setMagnifierEnabled(false);
+    setView('menu');
+  };
+
+  const handleCancelExit = () => {
+    setConfirmExitModalOpen(false);
+    if (view === 'game' && !victoryModalOpen && !gameOverModalOpen) {
+      setTimerRunning(true);
+    }
+  };
+
   return (
     <div className="app-container">
       {/* Universal Top Header */}
       <Header
         view={view}
-        onBack={() => setView('menu')}
+        onBack={handleRequestBack}
         onOpenLeaderboard={() => setView('stats')}
         onOpenProgress={() => setView('stats')}
         onOpenHelp={() => setHelpModalOpen(true)}
@@ -787,7 +813,7 @@ export default function App() {
             currentStageIndex={debugMode && debugSourceMode === 'premade' ? (getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex}
             totalStageImages={debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)}
             selectedDifficulty={selectedDifficulty}
-            onBack={() => setView('menu')}
+            onBack={handleRequestBack}
             debugMode={debugMode}
           />
 
@@ -799,6 +825,7 @@ export default function App() {
             onMissTap={handleMissTap}
             activeHintId={activeHintId}
             magnifierEnabled={magnifierEnabled}
+            setMagnifierEnabled={setMagnifierEnabled}
             elapsedTime={elapsedTime}
             revealAnswer={revealAnswer}
             debugMode={debugMode}
@@ -838,6 +865,12 @@ export default function App() {
       <HelpModal
         isOpen={helpModalOpen}
         onClose={() => setHelpModalOpen(false)}
+      />
+
+      <ConfirmExitModal
+        isOpen={confirmExitModalOpen}
+        onConfirm={handleConfirmExit}
+        onCancel={handleCancelExit}
       />
 
       <RatingModal

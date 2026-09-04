@@ -11,6 +11,7 @@ export default function GameCanvas({
   onMissTap,
   activeHintId,
   magnifierEnabled,
+  setMagnifierEnabled,
   elapsedTime = 0,
   revealAnswer = false,
   debugMode = false
@@ -25,6 +26,69 @@ export default function GameCanvas({
   const [cursorPos, setCursorPos] = useState({ x: 50, y: 50, visible: false });
   const [canvasUrls, setCanvasUrls] = useState({ left: '', right: '' });
   const [cardAspectRatio, setCardAspectRatio] = useState('4 / 3');
+
+  // Quick tap outside either left or right image bounds toggles zoom mode off
+  useEffect(() => {
+    if (!magnifierEnabled || typeof setMagnifierEnabled !== 'function') return;
+
+    let outsideStart = null;
+
+    const handleGlobalDown = (e) => {
+      // Ignore if touch/click originated inside left or right image card or on a button
+      if (
+        containerRefLeft.current?.contains(e.target) ||
+        containerRefRight.current?.contains(e.target) ||
+        e.target?.closest?.('button')
+      ) {
+        outsideStart = null;
+        return;
+      }
+
+      const clientX = e.clientX ?? e.touches?.[0]?.clientX;
+      const clientY = e.clientY ?? e.touches?.[0]?.clientY;
+      if (clientX === undefined || clientY === undefined) return;
+
+      outsideStart = { x: clientX, y: clientY, time: Date.now() };
+    };
+
+    const handleGlobalUp = (e) => {
+      if (!outsideStart) return;
+
+      if (
+        containerRefLeft.current?.contains(e.target) ||
+        containerRefRight.current?.contains(e.target) ||
+        e.target?.closest?.('button')
+      ) {
+        outsideStart = null;
+        return;
+      }
+
+      const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX;
+      const clientY = e.clientY ?? e.changedTouches?.[0]?.clientY;
+      const duration = Date.now() - outsideStart.time;
+
+      let isQuickTap = duration <= 400;
+      if (clientX !== undefined && clientY !== undefined) {
+        const dist = Math.hypot(clientX - outsideStart.x, clientY - outsideStart.y);
+        if (dist > 16) isQuickTap = false;
+      }
+
+      if (isQuickTap) {
+        sounds.playTap();
+        setMagnifierEnabled(false);
+      }
+
+      outsideStart = null;
+    };
+
+    window.addEventListener('pointerdown', handleGlobalDown, { passive: true });
+    window.addEventListener('pointerup', handleGlobalUp, { passive: true });
+
+    return () => {
+      window.removeEventListener('pointerdown', handleGlobalDown);
+      window.removeEventListener('pointerup', handleGlobalUp);
+    };
+  }, [magnifierEnabled, setMagnifierEnabled]);
 
   // Detect natural image aspect ratio to eliminate cropping and ensure 100% pixel-perfect coordinates
   useEffect(() => {

@@ -45,5 +45,27 @@ test('GameCanvas renders identical miss markers on both left and right canvases'
   assert.match(source, /key=\{`right-miss-group-\$\{miss\.id\}`\}[\s\S]*className="miss-marker"[\s\S]*-1 ❤️/);
 });
 
+test('game-viewport includes thin vertical divider line without altering layout spacing', () => {
+  const cssPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'index.css');
+  const cssSource = fs.readFileSync(cssPath, 'utf8');
+
+  assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*position:\s*absolute/);
+  assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*left:\s*50%/);
+  assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*width:\s*1px/);
+  assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*pointer-events:\s*none/);
+});
+
+test('quick one tap outside either left or right image bounds toggles zoom mode off', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Verify setMagnifierEnabled is accepted and called on quick tap outside
+  assert.match(source, /setMagnifierEnabled/);
+  assert.match(source, /containerRefLeft\.current\?\.contains\(e\.target\)/);
+  assert.match(source, /containerRefRight\.current\?\.contains\(e\.target\)/);
+  assert.match(source, /setMagnifierEnabled\(false\)/);
+  assert.match(source, /sounds\.playTap\(\)/);
+});
+
+
 
 

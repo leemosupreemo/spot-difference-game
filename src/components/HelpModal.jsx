@@ -258,7 +258,7 @@ export default function HelpModal({ isOpen, onClose }) {
                   <Eye size={20} color="var(--accent-cyan)" />
                 </div>
                 <div>
-                  <strong style={{ color: '#fff', display: 'block' }}>1. Tap the Difference</strong>
+                  <strong style={{ color: '#fff', display: 'block' }}>Tap the Difference</strong>
                   Look closely at the two images. As soon as you spot what's different, tap it directly on either image — plain and simple!
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default function HelpModal({ isOpen, onClose }) {
                   <Timer size={20} color="var(--accent-pink)" />
                 </div>
                 <div>
-                  <strong style={{ color: '#fff', display: 'block' }}>2. Millisecond Speedrun Timer</strong>
+                  <strong style={{ color: '#fff', display: 'block' }}>Speedrun Timer</strong>
                   The timer starts the moment the images appear. Find the difference as fast as possible to maximize your speed score and clear the stage!
                 </div>
               </div>

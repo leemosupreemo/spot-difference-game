@@ -5,6 +5,7 @@ import { sounds } from '../utils/audio';
 
 export default function VictoryModal({
   isOpen,
+  level,
   levelTitle,
   elapsedTime = 0,
   missCount = 0,
@@ -14,13 +15,29 @@ export default function VictoryModal({
   onRestart,
   onClose
 }) {
+  // Calculate Stars based on Points Obtained across stage (Score >= 1000 -> 3 Stars, Score >= 500 -> 2 Stars, Score > 0 -> 1 Star, or explicit stars prop)
+  const displayStars = (score > 0)
+    ? (score >= 1000 ? 3 : score >= 500 ? 2 : 1)
+    : (typeof stars === 'number' ? stars : 3);
+
   useEffect(() => {
     if (isOpen) {
-      sounds.playWin();
+      if (typeof sounds.playFanfare === 'function') {
+        sounds.playFanfare(displayStars);
+      } else {
+        sounds.playWin(displayStars);
+      }
 
       // Trigger Confetti Fireworks
-      const count = 200;
-      const defaults = { origin: { y: 0.7 } };
+      const isThreeStars = displayStars === 3;
+      const count = isThreeStars ? 280 : 200;
+
+      // Golden color palette when 3 stars are achieved
+      const goldenColors = ['#FFD700', '#FFA500', '#FFDF00', '#F7B731', '#FFEAA7', '#D4AF37', '#FFF380', '#00F0FF'];
+      const standardColors = ['#00F0FF', '#7000FF', '#FF007F', '#00FF88', '#38EF7D', '#3A86FF', '#F12711'];
+      const activeColors = isThreeStars ? goldenColors : standardColors;
+
+      const defaults = { origin: { y: 0.7 }, colors: activeColors };
 
       function fire(particleRatio, opts) {
         try {
@@ -39,17 +56,40 @@ export default function VictoryModal({
       fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
       fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
       fire(0.1, { spread: 120, startVelocity: 45 });
+
+      if (isThreeStars) {
+        // Extra golden side cannons for 3-star glorious victory
+        const timer = setTimeout(() => {
+          try {
+            confetti({
+              particleCount: 45,
+              angle: 60,
+              spread: 55,
+              origin: { x: 0.05, y: 0.75 },
+              colors: goldenColors
+            });
+            confetti({
+              particleCount: 45,
+              angle: 120,
+              spread: 55,
+              origin: { x: 0.95, y: 0.75 },
+              colors: goldenColors
+            });
+          } catch (error) {
+            console.warn('Victory celebration unavailable:', error);
+          }
+        }, 180);
+        return () => clearTimeout(timer);
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, displayStars]);
 
   if (!isOpen) return null;
 
   const seconds = (elapsedTime / 1000).toFixed(2);
   const safeMisses = Number.isFinite(missCount) ? missCount : 0;
   const accuracy = Math.max(0, Math.min(100, Math.round(100 - safeMisses * 15)));
-
-  // Calculate Stars based on Points Obtained across stage (Score >= 1000 -> 3 Stars, Score >= 500 -> 2 Stars, Score > 0 -> 1 Star)
-  const displayStars = score >= 1000 ? 3 : score >= 500 ? 2 : 1;
+  const titleText = levelTitle || level?.title || 'Stage Set';
 
   return (
     <div
@@ -124,7 +164,7 @@ export default function VictoryModal({
           STAGE CLEAR!
         </h2>
         <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
-          {levelTitle}
+          {titleText}
         </p>
 
         {/* Stars Earned (Populating based on Points Obtained) */}

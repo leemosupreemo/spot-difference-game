@@ -23,6 +23,11 @@ test('sounds play methods execute safely without throwing', () => {
     sounds.playSuccess();
     sounds.playError();
     sounds.playWin();
+    sounds.playWin(3);
+    sounds.playFanfare();
+    sounds.playFanfare(3);
+    sounds.playFanfare(2);
+    sounds.playLose();
     sounds.playHint();
     sounds.playTick();
   });

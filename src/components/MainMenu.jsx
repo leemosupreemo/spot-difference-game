@@ -19,7 +19,7 @@ export default function MainMenu({
     },
     abstract_animated: {
       icon: <Sparkles size={26} color="#d9b3ff" />,
-      badge: 'PROCEDURAL WORLDS',
+      badge: 'INFINITE WORLDS',
       desc: 'Dynamic generative art compositions across 12 artistic worlds'
     }
   };

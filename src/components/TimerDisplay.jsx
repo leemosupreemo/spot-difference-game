@@ -85,7 +85,7 @@ export default function TimerDisplay({
                 }}
                 title="Back to Menu"
               >
-                <ArrowLeft size={16} />
+                <ArrowLeft size={19} />
                 <span>Back</span>
               </button>
             )}
@@ -103,7 +103,7 @@ export default function TimerDisplay({
               gap: '10px'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Timer size={18} color="var(--accent-cyan)" />
+                <Timer size={22} color="var(--accent-cyan)" />
                 <span style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '1.25rem',
@@ -119,7 +119,7 @@ export default function TimerDisplay({
               <div style={{ width: '1px', height: '18px', background: 'rgba(255, 255, 255, 0.2)' }} />
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <Zap size={15} color="var(--accent-gold)" />
+                <Zap size={18} color="var(--accent-gold)" />
                 <span style={{
                   fontSize: '1.05rem',
                   fontWeight: 900,
@@ -151,7 +151,7 @@ export default function TimerDisplay({
                   return (
                     <Heart
                       key={i}
-                      size={16}
+                      size={19}
                       fill={active ? 'var(--accent-pink)' : 'transparent'}
                       color={active ? 'var(--accent-pink)' : 'rgba(255, 255, 255, 0.25)'}
                       style={{
@@ -186,28 +186,34 @@ export default function TimerDisplay({
                   gap: '6px'
                 }}
               >
-                <Lightbulb size={17} />
+                <Lightbulb size={20} />
                 <span>Hint ({hintsLeft})</span>
               </button>
             )}
 
-            {/* Magnifier Toggle */}
+            {/* Magnifier Toggle (Always colored in cyan/blue text & search icon) */}
             <button
-              className={`glass-btn ${magnifierEnabled ? 'glass-btn-primary' : ''}`}
+              className="glass-btn"
               onClick={toggleMagnifier}
               title="Toggle Magnifier Lens"
               style={{
+                borderColor: magnifierEnabled ? 'var(--accent-cyan)' : 'rgba(0, 240, 255, 0.45)',
+                background: magnifierEnabled ? 'rgba(0, 240, 255, 0.28)' : 'rgba(0, 240, 255, 0.1)',
+                color: 'var(--accent-cyan)',
                 padding: '7px 13px',
                 borderRadius: '10px',
                 fontSize: '0.88rem',
                 fontWeight: 800,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '6px',
+                boxShadow: magnifierEnabled ? '0 0 16px rgba(0, 240, 255, 0.55)' : '0 0 8px rgba(0, 240, 255, 0.15)',
+                textShadow: '0 0 8px rgba(0, 240, 255, 0.5)',
+                transition: 'all 0.18s ease'
               }}
             >
-              <Search size={17} />
-              <span>Zoom</span>
+              <Search size={20} color="var(--accent-cyan)" style={{ filter: 'drop-shadow(0 0 4px rgba(0, 240, 255, 0.6))' }} />
+              <span style={{ color: 'var(--accent-cyan)', fontWeight: 800 }}>Zoom</span>
             </button>
           </div>
 

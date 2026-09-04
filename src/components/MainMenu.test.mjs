@@ -14,7 +14,7 @@ test('MainMenu supports Photography and Abstract categories and Start Game CTA',
 
   assert.match(source, /SCENE_THEMES/);
   assert.match(source, /find_the_sniper/);
-  assert.match(source, /abstract_animated/);
+  assert.match(source, /INFINITE WORLDS/);
   assert.match(source, /START GAME/);
   assert.match(source, /trackCategorySelected/);
   assert.match(source, /onStartGame/);

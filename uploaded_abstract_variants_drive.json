@@ -1,0 +1,90 @@
+[
+  {
+    "num": 1,
+    "name": "DiffHunter_Abstract_01_Halftone_vs_TopoWaves.jpg",
+    "title": "Variant 01: Cyan Halftone Matrix vs Topo Contour Waves",
+    "desc": "Expansive cyan halftone dot gradient field (top-right) vs flowing organic topographic elevation contour waves (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1qDRhkOPczWr1eTSVJqrQtYV0sHkyH2xI/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 2,
+    "name": "DiffHunter_Abstract_02_HexBokeh_vs_FluidMarble.jpg",
+    "title": "Variant 02: Hexagonal Bokeh Light Rays vs Fluid Liquid Marble",
+    "desc": "Prismatic light rays & translucent bokeh hexagons (top-right) vs chromatic liquid marble swirls & waves (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1CNb1AYNWslapf2cpfz9Jf6HkomNz8az7/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 3,
+    "name": "DiffHunter_Abstract_03_Wireframe_vs_Voronoi.jpg",
+    "title": "Variant 03: 3D Wireframe Terrain vs Voronoi Cellular Net",
+    "desc": "Glowing isometric 3D wireframe mesh digital terrain (top-right) vs organic Voronoi cellular network with soft glow (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1s8zTQsYYmMhfuJAyDvhv8V39ug8QBuSK/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 4,
+    "name": "DiffHunter_Abstract_04_Nebula_vs_Blueprint.jpg",
+    "title": "Variant 04: Cosmic Nebula Stardust vs Blueprint Schematics",
+    "desc": "Deep space stardust particle cloud & cyan nebula (top-right) vs technical architectural blueprint grid with measurement marks (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1HIBkmGSwZpsgGp2L_E4B37pTvszpINso/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 5,
+    "name": "DiffHunter_Abstract_05_SonarRings_vs_CyberGlitch.jpg",
+    "title": "Variant 05: Sonar Radar Rings vs Cyber Glitch Scanlines",
+    "desc": "Concentric sonar radar ripples & radial tick lines (top-right) vs horizontal cyber glitch scanline bars & data blocks (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1HOptvVZa25R71p1PyiMZyGVBR_nkCHtc/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 6,
+    "name": "DiffHunter_Abstract_06_CrystalFacets_vs_AuroraRibbons.jpg",
+    "title": "Variant 06: Low-Poly Crystal Facets vs Aurora Ribbon Waves",
+    "desc": "Geometric crystalline low-poly mosaic facets (top-right) vs flowing layered Aurora Borealis wave ribbons (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1_MAWDPLoOvYB12Hfmid6HQH1slqaa8PB/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 7,
+    "name": "DiffHunter_Abstract_07_DiamondGrid_vs_MarbleSpirals.jpg",
+    "title": "Variant 07: Isometric Diamond Pattern vs Marble Concentric Swirls",
+    "desc": "Dense isometric diamond tessellation texture (top-right) vs smooth fluid marble spiral curve vortex (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1lpL_Gz_4uBFL9Lo5QXQCGPLI58j93oR8/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 8,
+    "name": "DiffHunter_Abstract_08_RadialStarburst_vs_DraftingGrid.jpg",
+    "title": "Variant 08: Radial Starburst Rays vs Technical Drafting Calipers",
+    "desc": "Dynamic optical radial sunburst ray beams (top-right) vs technical engineering drafting circles & coordinate grid (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1Rwc9JKjO9ewbtO1d4bVVxAbgXQf6RXBM/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 9,
+    "name": "DiffHunter_Abstract_09_StarCluster_vs_SineHarmonics.jpg",
+    "title": "Variant 09: Cosmic Star Cluster vs Sine Oscilloscope Waves",
+    "desc": "Dense twinkling stardust particle cloud with cross sparkles (top-right) vs harmonic sine oscilloscope wave ribbons (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1BUbiQlCwoeL3JmWL_iOen1sGb9Y8ttqO/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": 10,
+    "name": "DiffHunter_Abstract_10_Honeycomb_vs_SplashRipples.jpg",
+    "title": "Variant 10: Hexagonal Honeycomb Matrix vs Watercolor Splash Ripples",
+    "desc": "Geometric hexagonal honeycomb grid mesh with cyan nodes (top-right) vs concentric watercolor splash ripple blooms (bottom-left).",
+    "fileUrl": "https://drive.google.com/file/d/1o2Aa5M8QdCmi0xDvvvVHQwaiMzJkrJr1/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "num": "Showcase",
+    "name": "DiffHunter_10_Abstract_Variants_Showcase.html",
+    "title": "Interactive 10-Abstract-Variant Showcase Gallery",
+    "desc": "Interactive gallery with high-res previews and download buttons for all 10 abstract background variants.",
+    "fileUrl": "https://drive.google.com/file/d/1XP8owkIpjUgjHXVzEiHdSBy6bgnK_4gk/view?usp=drivesdk",
+    "status": "success"
+  }
+]
