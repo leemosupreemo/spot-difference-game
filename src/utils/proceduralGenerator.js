@@ -53,6 +53,35 @@ export const PAINT_STYLES = [
   'TERRAZZO_INLAY'
 ];
 
+export function getGuaranteedShiftColor(baseColor) {
+  const c = (baseColor || '#ffffff').toLowerCase();
+  // Warm reds / pinks / oranges -> Shift to Electric Cyan / Aqua
+  if (c.includes('ff007f') || c.includes('f72585') || c.includes('e63946') || c.includes('e11d48') || c.includes('ff0054') || c.includes('ff5400') || c.includes('fb5607') || c.includes('ff70a6')) {
+    return '#00f0ff';
+  }
+  // Cyans / Blues / Teals -> Shift to Neon Hot Magenta
+  if (c.includes('00f0ff') || c.includes('00f5d4') || c.includes('4cc9f0') || c.includes('48cae4') || c.includes('0077b6') || c.includes('00b4d8') || c.includes('00bbf9') || c.includes('03045e') || c.includes('1d3557')) {
+    return '#ff007f';
+  }
+  // Yellows / Golds / Ambers -> Shift to Deep Royal Violet
+  if (c.includes('ffd166') || c.includes('ffb703') || c.includes('ffd700') || c.includes('dfba6f') || c.includes('d4af37') || c.includes('fee440') || c.includes('ffe600') || c.includes('e9c46a') || c.includes('fcbf49')) {
+    return '#7209b7';
+  }
+  // Greens / Emeralds -> Shift to Crimson Rose
+  if (c.includes('06d6a0') || c.includes('2a9d8f') || c.includes('38b000') || c.includes('70e000') || c.includes('52b788') || c.includes('40916c') || c.includes('1b4332') || c.includes('74c69d')) {
+    return '#ff0054';
+  }
+  // Purples / Violets -> Shift to Vibrant Sun Gold
+  if (c.includes('7209b7') || c.includes('8338ec') || c.includes('7928ca') || c.includes('9d4edd') || c.includes('b5179e') || c.includes('c77dff') || c.includes('e0aaff') || c.includes('a855f7') || c.includes('560bad')) {
+    return '#ffe600';
+  }
+  // Whites / Pastels / Dark Neutrals
+  if (c.includes('fff') || c.includes('e0fbfc') || c.includes('f8f9fa') || c.includes('081c15') || c.includes('0c0a09') || c.includes('000000')) {
+    return '#ff007f';
+  }
+  return '#00f0ff';
+}
+
 function createPRNG(seed) {
   let s = Math.abs(Math.floor(seed || 1)) % 2147483647;
   if (s <= 0) s = 1;
@@ -668,16 +697,16 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI / 2 : rot;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? rot + Math.PI : rot;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : padCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(padCol) : padCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
           // Lily pad with pie wedge cut
           ctx.fillStyle = col;
           ctx.beginPath();
-          ctx.arc(0, 0, rad * s, 0.35, Math.PI * 2);
+          ctx.arc(0, 0, rad * s, 0.45, Math.PI * 2);
           ctx.lineTo(0, 0);
           ctx.closePath();
           ctx.fill();
@@ -687,7 +716,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
           // Veins
           if (!(mutated && mType === 'REMOVE_DETAIL')) {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
             ctx.lineWidth = 1.5;
             for (let a = 0.6; a < Math.PI * 2; a += 0.8) {
               ctx.beginPath();
@@ -730,13 +759,13 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 8 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : bloomCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(bloomCol) : bloomCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.7 : 1.0;
 
-          // Multi-layer petals
+          // Multi-layer petals (8 petals at 45 degree intervals, rotating by 22.5 deg rotates into gaps)
           ctx.fillStyle = col;
           for (let p = 0; p < 8; p++) {
             ctx.beginPath();
@@ -794,10 +823,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 3 : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 6 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#f72585' : starCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(starCol) : starCol;
           const sc = (mutated && mType === 'SCALE_CHANGE') ? 1.7 : 1.0;
 
           // Star halo glow
@@ -808,11 +837,21 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           ctx.fill();
           ctx.globalAlpha = 1.0;
 
-          // Concentric radiating rings
+          // Distinct Radiating Vortex Star Rays (6 curved spiral brushstrokes)
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 3.0;
+          for (let a = 0; a < Math.PI * 2; a += Math.PI / 3) {
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(Math.cos(a + 0.4) * rad * 0.75 * sc, Math.sin(a + 0.4) * rad * 0.75 * sc, Math.cos(a) * rad * 1.05 * sc, Math.sin(a) * rad * 1.05 * sc);
+            ctx.stroke();
+          }
+
+          // Concentric radiating ring
           ctx.strokeStyle = col;
           ctx.lineWidth = 2.5;
           ctx.beginPath();
-          ctx.arc(0, 0, rad * 0.65 * sc, 0, Math.PI * 2);
+          ctx.arc(0, 0, rad * 0.55 * sc, 0, Math.PI * 2);
           ctx.stroke();
 
           // Intense core
@@ -825,9 +864,9 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.strokeStyle = '#00f0ff';
-            ctx.lineWidth = 3.0;
+            ctx.lineWidth = 3.5;
             ctx.beginPath();
-            ctx.arc(0, 0, rad * 1.2 * sc, 0, Math.PI * 2);
+            ctx.arc(0, 0, rad * 1.25 * sc, 0, Math.PI * 2);
             ctx.stroke();
           }
           ctx.restore();
@@ -850,10 +889,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.35 : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.45 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#e63946' : '#081c15';
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor('#081c15') : '#081c15';
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.5 : 1.0;
 
           ctx.fillStyle = col;
@@ -938,10 +977,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.2 : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.35 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ffffff' : bCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(bCol) : bCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
           // Building facade
@@ -1007,10 +1046,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? (isCircle ? Math.PI / 2 : Math.PI / 4) : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : mCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(mCol) : mCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
           ctx.fillStyle = col;
@@ -1018,14 +1057,24 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           ctx.lineWidth = 3.5;
 
           if (isCircle) {
+            // Two-tone divided half-circle so 90 deg rotation is instantly visible
             ctx.beginPath();
-            ctx.arc(0, 0, sz * 0.45 * s, 0, Math.PI * 2);
+            ctx.arc(0, 0, sz * 0.45 * s, 0, Math.PI);
+            ctx.closePath();
             ctx.fill();
             ctx.stroke();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(0, 0, sz * 0.45 * s, Math.PI, Math.PI * 2);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
             if (!(mutated && mType === 'REMOVE_DETAIL')) {
-              ctx.fillStyle = '#ffffff';
+              ctx.fillStyle = '#ffd166';
               ctx.beginPath();
-              ctx.arc(0, 0, sz * 0.18 * s, 0, Math.PI * 2);
+              ctx.arc(0, -sz * 0.18 * s, sz * 0.14 * s, 0, Math.PI * 2);
               ctx.fill();
             }
           } else {
@@ -1040,7 +1089,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#ff007f';
             ctx.beginPath();
-            ctx.arc(sz * 0.35 * s, -sz * 0.25 * s, 10, 0, Math.PI * 2);
+            ctx.arc(sz * 0.35 * s, -sz * 0.25 * s, 12, 0, Math.PI * 2);
             ctx.fill();
           }
           ctx.restore();
@@ -1082,10 +1131,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? (isGauge ? 0 : Math.PI / 6) : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? (isGauge ? 0 : Math.PI / 12) : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : gCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(gCol) : gCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
           if (isGauge) {
@@ -1096,18 +1145,18 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 2.5;
             ctx.stroke();
-            // Dial needle
+            // Dial needle (rotates by 162 deg on mutation)
             if (!(mutated && mType === 'REMOVE_DETAIL')) {
               const needleRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI * 0.75 : -Math.PI * 0.25;
               ctx.strokeStyle = '#e63946';
-              ctx.lineWidth = 3.0;
+              ctx.lineWidth = 3.5;
               ctx.beginPath();
               ctx.moveTo(0, 0);
               ctx.lineTo(Math.cos(needleRot) * rad * 0.75 * s, Math.sin(needleRot) * rad * 0.75 * s);
               ctx.stroke();
             }
           } else {
-            // Gear with teeth
+            // Gear with 12 teeth (period PI / 6, rotated by PI / 12 shifts teeth into gaps!)
             ctx.fillStyle = col;
             ctx.beginPath();
             ctx.arc(0, 0, rad * s, 0, Math.PI * 2);
@@ -1182,10 +1231,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.35 : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.45 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#f72585' : (isBoat ? '#d4a373' : '#0077b6');
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(isBoat ? '#d4a373' : '#0077b6') : (isBoat ? '#d4a373' : '#0077b6');
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
           if (isBoat) {
@@ -1204,10 +1253,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
             // Boat oar / mast detail
             if (!(mutated && mType === 'REMOVE_DETAIL')) {
               ctx.strokeStyle = '#ffffff';
-              ctx.lineWidth = 2.0;
+              ctx.lineWidth = 2.5;
               ctx.beginPath();
               ctx.moveTo(0, 0);
-              ctx.lineTo(0, -sz * 0.3 * s);
+              ctx.lineTo(0, -sz * 0.35 * s);
               ctx.stroke();
             }
           } else {
@@ -1222,7 +1271,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
             if (!(mutated && mType === 'REMOVE_DETAIL')) {
               ctx.fillStyle = '#ffffff';
               ctx.beginPath();
-              ctx.arc(sz * 0.45 * s, -sz * 0.1 * s, sz * 0.15 * s, 0, Math.PI * 2);
+              ctx.arc(sz * 0.45 * s, -sz * 0.1 * s, sz * 0.18 * s, 0, Math.PI * 2);
               ctx.fill();
             }
           }
@@ -1230,7 +1279,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#ffd166';
             ctx.beginPath();
-            ctx.arc(0, -sz * 0.35 * s, 10, 0, Math.PI * 2);
+            ctx.arc(0, -sz * 0.35 * s, 12, 0, Math.PI * 2);
             ctx.fill();
           }
           ctx.restore();
@@ -1261,20 +1310,20 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 2 : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : kCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(kCol) : kCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
-          // Golden Spiral
+          // Golden Spiral Arc
           ctx.strokeStyle = col;
           ctx.lineWidth = 4.0 * s;
           ctx.beginPath();
           ctx.arc(0, 0, sz * 0.38 * s, 0, Math.PI * 1.5);
           ctx.stroke();
 
-          // Byzantine square jewels
+          // Byzantine square jewels (rotated by 45 deg becomes a diamond!)
           if (!(mutated && mType === 'REMOVE_DETAIL')) {
             ctx.fillStyle = '#ffd166';
             ctx.fillRect(-sz * 0.18 * s, -sz * 0.18 * s, sz * 0.36 * s, sz * 0.36 * s);
@@ -1286,7 +1335,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#00f0ff';
             ctx.beginPath();
-            ctx.arc(0, 0, sz * 0.2 * s, 0, Math.PI * 2);
+            ctx.arc(0, 0, sz * 0.22 * s, 0, Math.PI * 2);
             ctx.fill();
           }
           ctx.restore();
@@ -1329,10 +1378,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.35 : 0;
+          const curRot = (mutated && mType === 'SHAPE_ROTATE') ? 0.4 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ff0054' : nCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(nCol) : nCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
           // Tiered pine tree
@@ -1350,14 +1399,14 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           if (!(mutated && mType === 'REMOVE_DETAIL')) {
             ctx.fillStyle = '#ffffff';
             ctx.beginPath();
-            ctx.arc(0, -sz * 0.35 * s, 6 * s, 0, Math.PI * 2);
+            ctx.arc(0, -sz * 0.35 * s, 7 * s, 0, Math.PI * 2);
             ctx.fill();
           }
 
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#ffd166';
             ctx.beginPath();
-            ctx.arc(0, -sz * 0.5 * s, 8, 0, Math.PI * 2);
+            ctx.arc(0, -sz * 0.5 * s, 10, 0, Math.PI * 2);
             ctx.fill();
           }
           ctx.restore();
@@ -1393,9 +1442,9 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
         draw: (ctx, mutated, mType) => {
           ctx.save();
           ctx.translate(cx, cy);
-          const ringAngle = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 2 : Math.PI / 6;
+          const ringAngle = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI * 0.65 : Math.PI / 6;
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#ffffff' : pCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(pCol) : pCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
           // Planet sphere
@@ -1407,25 +1456,33 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           if (isRinged) {
             if (!(mutated && mType === 'REMOVE_DETAIL')) {
               ctx.strokeStyle = '#ffffff';
-              ctx.lineWidth = 3.0;
+              ctx.lineWidth = 3.5;
               ctx.beginPath();
-              ctx.ellipse(0, 0, sz * 0.6 * s, sz * 0.16 * s, ringAngle, 0, Math.PI * 2);
+              ctx.ellipse(0, 0, sz * 0.65 * s, sz * 0.18 * s, ringAngle, 0, Math.PI * 2);
               ctx.stroke();
             }
           } else {
-            // Planet crater / core spot
+            // Planet crater / pulsar core spot & cross beams
             if (!(mutated && mType === 'REMOVE_DETAIL')) {
-              ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
               ctx.beginPath();
-              ctx.arc(sz * 0.12 * s, -sz * 0.12 * s, sz * 0.1 * s, 0, Math.PI * 2);
+              ctx.arc(sz * 0.12 * s, -sz * 0.12 * s, sz * 0.12 * s, 0, Math.PI * 2);
               ctx.fill();
+            }
+            if (mutated && mType === 'SHAPE_ROTATE') {
+              ctx.strokeStyle = '#00f0ff';
+              ctx.lineWidth = 2.5;
+              ctx.beginPath();
+              ctx.moveTo(-sz * 0.5 * s, 0); ctx.lineTo(sz * 0.5 * s, 0);
+              ctx.moveTo(0, -sz * 0.5 * s); ctx.lineTo(0, sz * 0.5 * s);
+              ctx.stroke();
             }
           }
 
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#ffd166';
             ctx.beginPath();
-            ctx.arc(sz * 0.45 * s, -sz * 0.35 * s, 8, 0, Math.PI * 2);
+            ctx.arc(sz * 0.45 * s, -sz * 0.35 * s, 10, 0, Math.PI * 2);
             ctx.fill();
           }
           ctx.restore();
@@ -1455,10 +1512,10 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let col = (mutated && mType === 'COLOR_SHIFT') ? '#00f0ff' : gCol;
+          let col = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(gCol) : gCol;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
-          // Diamond facet
+          // Diamond facet (rotates 45 deg)
           ctx.fillStyle = col;
           ctx.beginPath();
           ctx.moveTo(0, -sz * 0.45 * s);
@@ -1474,7 +1531,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
 
           // Inner facet cross / star highlight
           if (!(mutated && mType === 'REMOVE_DETAIL')) {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
             ctx.lineWidth = 2.0;
             ctx.beginPath();
             ctx.moveTo(0, -sz * 0.3 * s);
@@ -1487,7 +1544,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           if (mutated && mType === 'ADD_DETAIL') {
             ctx.fillStyle = '#ffffff';
             ctx.beginPath();
-            ctx.arc(0, 0, sz * 0.15 * s, 0, Math.PI * 2);
+            ctx.arc(0, 0, sz * 0.18 * s, 0, Math.PI * 2);
             ctx.fill();
           }
           ctx.restore();
@@ -1520,12 +1577,17 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           const curRot = (mutated && mType === 'SHAPE_ROTATE') ? Math.PI / 4 : 0;
           ctx.rotate(curRot);
           applyObjectPopStyle(ctx, true);
-          let c = (mutated && mType === 'COLOR_SHIFT') ? '#ff007f' : col;
+          let c = (mutated && mType === 'COLOR_SHIFT') ? getGuaranteedShiftColor(col) : col;
           const s = (mutated && mType === 'SCALE_CHANGE') ? 1.6 : 1.0;
 
+          // Asymmetrical petal blade with notch
           ctx.fillStyle = c;
           ctx.beginPath();
-          ctx.arc(0, 0, sz * 0.45 * s, 0, Math.PI * 2);
+          ctx.moveTo(0, -sz * 0.45 * s);
+          ctx.lineTo(sz * 0.4 * s, 0);
+          ctx.lineTo(0, sz * 0.45 * s);
+          ctx.lineTo(-sz * 0.2 * s, 0);
+          ctx.closePath();
           ctx.fill();
           ctx.strokeStyle = '#ffffff';
           ctx.lineWidth = 2.0;
@@ -1561,7 +1623,7 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
   const targetObj = eligibleCandidates[targetIndex] || candidates.find(c => c.isTargetEligible) || candidates[0];
 
   // Pick mutation from the target's supported pool
-  const mutationType = randomChoice(targetObj.supportedMutations || ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL']);
+  let mutationType = randomChoice(targetObj.supportedMutations || ['COLOR_SHIFT', 'SCALE_CHANGE', 'ADD_DETAIL']);
 
   // =========================================================================
   // STEP 5: RENDER ALL OBJECTS ONTO BOTH CANVASES (TARGET DRAWN LAST ON TOP!)
@@ -1608,8 +1670,9 @@ export function generateProceduralLevelPair(themeId = 'abstract_animated', targe
           }
         }
 
-        if (diffCount < 10) {
-          // Guaranteed fallback: force color shift and size mutation on target object
+        if (diffCount < 18) {
+          // Guaranteed fallback: force color shift on target object
+          mutationType = 'COLOR_SHIFT';
           targetObj.draw(ctxB, true, 'COLOR_SHIFT');
           dataB = ctxB.getImageData(0, 0, width, height)?.data;
           minX = width; maxX = 0; minY = height; maxY = 0;
