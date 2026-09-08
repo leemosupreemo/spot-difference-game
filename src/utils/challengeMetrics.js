@@ -374,7 +374,7 @@ export async function renderChallengeCardBlob({
 
     ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
     ctx.font = '500 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('Available on the App Store • Diff Hunter', 540, 940);
+    ctx.fillText('Coming Soon to iPhone • Diff Hunter', 540, 940);
     ctx.restore();
 
     return new Promise(resolve => {

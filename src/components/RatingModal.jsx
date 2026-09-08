@@ -53,7 +53,10 @@ export default function RatingModal({
     }
   };
 
-  const handleDismiss = () => {
+  const handleDismiss = (e) => {
+    if (e && typeof e.stopPropagation === 'function') {
+      e.stopPropagation();
+    }
     sounds.playTap();
     try {
       localStorage.setItem('diff_hunter_rating_handled', 'dismissed');

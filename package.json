@@ -13,6 +13,7 @@
     "lint": "oxlint",
     "distribute:firebase": "bash scripts/distribute_ios.sh",
     "distribute:appstore": "bash scripts/distribute_appstore.sh",
+    "deploy:web": "vite build && firebase deploy --only hosting",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -110,16 +110,17 @@ body {
   position: relative;
 }
 
-/* Thin vertical dividing line centered exactly between images without affecting spacing */
+/* Vertical dividing line centered exactly between images without affecting spacing */
 .game-viewport::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 1px;
+  width: 2px;
   transform: translateX(-50%);
-  background: linear-gradient(180deg, rgba(0, 240, 255, 0) 0%, rgba(0, 240, 255, 0.3) 8%, rgba(0, 240, 255, 0.3) 92%, rgba(0, 240, 255, 0) 100%);
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0) 0%, rgba(0, 240, 255, 0.45) 6%, rgba(0, 240, 255, 0.45) 94%, rgba(0, 240, 255, 0) 100%);
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.3);
   pointer-events: none;
   z-index: 2;
 }
@@ -401,3 +402,94 @@ body {
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
+
+/* ==========================================================================
+   Responsive Web & Desktop Layout Expansion
+   Only expands on larger screens (>= 900px), preserving exact mobile UX
+   ========================================================================== */
+.menu-container {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto 20px auto;
+  padding: 0 16px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto 12px auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+  transition: max-width 0.2s ease;
+}
+
+.tutorial-card {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a0d16;
+  transition: all 0.35s ease;
+}
+
+@media (min-width: 900px) {
+  .menu-container {
+    max-width: 1300px !important;
+  }
+
+  .header-container {
+    max-width: 1300px !important;
+  }
+
+  .tutorial-banner {
+    padding: 20px 26px 24px 26px !important;
+    border-radius: 20px !important;
+  }
+
+  .tutorial-card {
+    max-width: 540px !important;
+    border-radius: 16px !important;
+  }
+
+  .tutorial-header-title {
+    font-size: 1.45rem !important;
+    letter-spacing: 0.8px !important;
+  }
+
+  .tutorial-header-desc {
+    font-size: 0.96rem !important;
+    margin-top: 4px !important;
+  }
+
+  .mode-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .mode-card-item {
+    padding: 20px 24px !important;
+    border-radius: 18px !important;
+  }
+
+  .start-game-btn {
+    padding: 18px 32px !important;
+    font-size: 1.45rem !important;
+    border-radius: 16px !important;
+  }
+
+  .tutorial-hand-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tutorial-card {
+    max-width: 590px !important;
+  }
+}
+

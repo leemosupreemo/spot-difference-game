@@ -6,7 +6,7 @@
     "thirteen-a5760": {
       "hosting": {
         "diff-hunter": [
-          "diff-hunter-test"
+          "diffhunter"
         ]
       }
     }

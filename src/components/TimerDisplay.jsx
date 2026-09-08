@@ -195,6 +195,13 @@ export default function TimerDisplay({
             <button
               className="glass-btn"
               onClick={toggleMagnifier}
+              onPointerEnter={() => typeof window !== 'undefined' && window.dispatchEvent(new CustomEvent('diffhunter:hide-magnifier'))}
+              onPointerOver={() => typeof window !== 'undefined' && window.dispatchEvent(new CustomEvent('diffhunter:hide-magnifier'))}
+              onPointerMove={() => typeof window !== 'undefined' && window.dispatchEvent(new CustomEvent('diffhunter:hide-magnifier'))}
+              onTouchStart={() => typeof window !== 'undefined' && window.dispatchEvent(new CustomEvent('diffhunter:hide-magnifier'))}
+              onTouchMove={() => typeof window !== 'undefined' && window.dispatchEvent(new CustomEvent('diffhunter:hide-magnifier'))}
+              onMouseEnter={() => typeof window !== 'undefined' && window.dispatchEvent(new CustomEvent('diffhunter:hide-magnifier'))}
+              data-zoom-button="true"
               title="Toggle Magnifier Lens"
               style={{
                 borderColor: magnifierEnabled ? 'var(--accent-cyan)' : 'rgba(0, 240, 255, 0.45)',

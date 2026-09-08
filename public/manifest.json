@@ -1,0 +1,24 @@
+{
+  "name": "Diff Hunter - Spot the Difference",
+  "short_name": "Diff Hunter",
+  "description": "Fast-paced spot the difference speedrun game with realistic photography and dynamic worlds.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#090a10",
+  "theme_color": "#090a10",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

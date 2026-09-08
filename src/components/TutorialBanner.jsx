@@ -81,7 +81,7 @@ export default function TutorialBanner() {
   };
 
   return (
-    <div className="glass-panel" style={{
+    <div className="glass-panel tutorial-banner" style={{
       padding: '12px 16px 14px 16px',
       borderRadius: '18px',
       marginBottom: '14px',
@@ -96,8 +96,8 @@ export default function TutorialBanner() {
         marginBottom: '10px'
       }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '3px' }}>
-          <Sparkles size={16} color="var(--accent-cyan)" />
-          <h3 style={{
+          <Sparkles size={18} color="var(--accent-cyan)" />
+          <h3 className="tutorial-header-title" style={{
             fontSize: '1.05rem',
             fontWeight: 900,
             color: '#fff',
@@ -108,7 +108,7 @@ export default function TutorialBanner() {
             SPOT & TAP
           </h3>
         </div>
-        <p style={{
+        <p className="tutorial-header-desc" style={{
           fontSize: '0.76rem',
           color: 'var(--text-muted)',
           margin: 0,
@@ -127,15 +127,8 @@ export default function TutorialBanner() {
         width: '100%'
       }}>
         {/* Card 1: Original Photo (Deep Zoom 3.8x on difference) */}
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          maxWidth: '260px',
-          aspectRatio: '16 / 10',
-          borderRadius: '12px',
-          overflow: 'hidden',
+        <div className="tutorial-card" style={{
           border: isZoomed ? '1.5px solid rgba(0, 240, 255, 0.7)' : '1.5px solid rgba(255, 255, 255, 0.18)',
-          background: '#0a0d16',
           boxShadow: isZoomed ? '0 0 18px rgba(0, 240, 255, 0.35)' : '0 4px 16px rgba(0,0,0,0.6)',
           transition: 'border-color 0.35s ease, box-shadow 0.35s ease'
         }}>
@@ -160,36 +153,29 @@ export default function TutorialBanner() {
               left: `${DEMO_TARGET.x}%`,
               top: `${DEMO_TARGET.y}%`,
               transform: 'translate(-50%, -50%)',
-              width: '117px',
-              height: '117px',
+              width: '46%',
+              aspectRatio: '1 / 1',
               borderRadius: '50%',
-              border: '3px dashed var(--accent-cyan)',
-              boxShadow: '0 0 20px rgba(0, 240, 255, 0.7)',
+              border: 'clamp(2.5px, 0.6vw, 4.5px) dashed var(--accent-cyan)',
+              boxShadow: '0 0 24px rgba(0, 240, 255, 0.75)',
               pointerEvents: 'none',
               animation: 'hitPulse 0.4s ease-out'
             }} />
           )}
         </div>
 
-        <span style={{ fontSize: '0.95rem', color: 'var(--accent-cyan)', fontWeight: 900, userSelect: 'none' }}>
+        <span style={{ fontSize: '1.1rem', color: 'var(--accent-cyan)', fontWeight: 900, userSelect: 'none', padding: '0 4px' }}>
           VS
         </span>
 
         {/* Card 2: Modified Photo (Deep Zoom 3.8x + Hit Indicator) */}
         <div
           onClick={handleManualTap}
+          className="tutorial-card"
           style={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: '260px',
-            aspectRatio: '16 / 10',
-            borderRadius: '12px',
-            overflow: 'hidden',
-            border: foundSuccess ? '1.5px solid var(--accent-green)' : '1.5px solid rgba(0, 240, 255, 0.45)',
-            background: '#0a0d16',
+            border: foundSuccess ? '2px solid var(--accent-green)' : '1.5px solid rgba(0, 240, 255, 0.45)',
             boxShadow: foundSuccess ? '0 0 22px rgba(0, 255, 135, 0.5)' : '0 4px 16px rgba(0,0,0,0.6)',
-            cursor: 'pointer',
-            transition: 'all 0.35s ease'
+            cursor: 'pointer'
           }}
           title="Tap the difference to try it!"
         >
@@ -214,11 +200,11 @@ export default function TutorialBanner() {
               left: `${DEMO_TARGET.x}%`,
               top: `${DEMO_TARGET.y}%`,
               transform: 'translate(-50%, -50%)',
-              width: '117px',
-              height: '117px',
+              width: '46%',
+              aspectRatio: '1 / 1',
               borderRadius: '50%',
-              border: '3.5px solid var(--accent-green)',
-              boxShadow: '0 0 22px var(--accent-green)',
+              border: 'clamp(3px, 0.7vw, 5.5px) solid var(--accent-green)',
+              boxShadow: '0 0 26px var(--accent-green), 0 0 45px rgba(0, 255, 135, 0.45)',
               background: 'transparent',
               pointerEvents: 'none',
               display: 'flex',
@@ -245,7 +231,7 @@ export default function TutorialBanner() {
               zIndex: 10,
               opacity: showHand ? 1 : 0
             }}>
-              <Hand size={18} fill="var(--accent-gold)" color="#000" />
+              <Hand className="tutorial-hand-icon" size={24} fill="var(--accent-gold)" color="#000" />
             </div>
           )}
         </div>

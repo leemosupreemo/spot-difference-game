@@ -33,7 +33,7 @@ export default function Header({
   const maxHeaderWidth = view === 'menu' ? '850px' : view === 'stats' ? '900px' : '1300px';
 
   return (
-    <div style={{
+    <div className="header-container" style={{
       width: '100%',
       maxWidth: maxHeaderWidth,
       margin: '0 auto 12px auto',

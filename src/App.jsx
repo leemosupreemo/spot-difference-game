@@ -775,7 +775,6 @@ export default function App() {
   // Back navigation with confirmation modal while in an active game
   const handleRequestBack = () => {
     if (view === 'game') {
-      setTimerRunning(false);
       setConfirmExitModalOpen(true);
     } else {
       setView('menu');
@@ -791,9 +790,6 @@ export default function App() {
 
   const handleCancelExit = () => {
     setConfirmExitModalOpen(false);
-    if (view === 'game' && !victoryModalOpen && !gameOverModalOpen) {
-      setTimerRunning(true);
-    }
   };
 
   return (
@@ -939,7 +935,6 @@ export default function App() {
         onClose={() => setRatingModalOpen(false)}
         onOpenSupport={() => {
           setRatingModalOpen(false);
-          setHelpModalOpen(true);
         }}
       />
 

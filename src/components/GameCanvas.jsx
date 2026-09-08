@@ -90,6 +90,36 @@ export default function GameCanvas({
     };
   }, [magnifierEnabled, setMagnifierEnabled]);
 
+  // Hide magnifying lens whenever cursor/touch enters or hovers over the zoom button or top controls
+  useEffect(() => {
+    if (!magnifierEnabled) return;
+
+    const handleHide = () => {
+      setCursorPos(prev => ({ ...prev, visible: false }));
+    };
+
+    const handleGlobalPointerCheck = (e) => {
+      const clientX = e.clientX ?? e.touches?.[0]?.clientX;
+      const clientY = e.clientY ?? e.touches?.[0]?.clientY;
+      if (clientX === undefined || clientY === undefined) return;
+
+      const target = typeof document !== 'undefined' && document.elementFromPoint ? document.elementFromPoint(clientX, clientY) : null;
+      if (target?.closest?.('[data-zoom-button="true"]') || target?.closest?.('button')) {
+        setCursorPos(prev => ({ ...prev, visible: false }));
+      }
+    };
+
+    window.addEventListener('diffhunter:hide-magnifier', handleHide);
+    window.addEventListener('pointermove', handleGlobalPointerCheck, { passive: true });
+    window.addEventListener('touchmove', handleGlobalPointerCheck, { passive: true });
+
+    return () => {
+      window.removeEventListener('diffhunter:hide-magnifier', handleHide);
+      window.removeEventListener('pointermove', handleGlobalPointerCheck);
+      window.removeEventListener('touchmove', handleGlobalPointerCheck);
+    };
+  }, [magnifierEnabled]);
+
   // Detect natural image aspect ratio to eliminate cropping and ensure 100% pixel-perfect coordinates
   useEffect(() => {
     if (level?.baseImage) {
@@ -196,6 +226,11 @@ export default function GameCanvas({
     };
 
     if (magnifierEnabled) {
+      const target = typeof document !== 'undefined' && document.elementFromPoint ? document.elementFromPoint(clientX, clientY) : null;
+      if (target?.closest?.('[data-zoom-button="true"]') || target?.closest?.('button')) {
+        setCursorPos(prev => ({ ...prev, visible: false }));
+        return;
+      }
       const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
       const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
       setCursorPos({ x, y, visible: true });
@@ -218,6 +253,11 @@ export default function GameCanvas({
     }
 
     if (magnifierEnabled) {
+      const target = typeof document !== 'undefined' && document.elementFromPoint ? document.elementFromPoint(clientX, clientY) : null;
+      if (target?.closest?.('[data-zoom-button="true"]') || target?.closest?.('button')) {
+        setCursorPos(prev => ({ ...prev, visible: false }));
+        return;
+      }
       const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
       const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
       setCursorPos({ x, y, visible: true });
@@ -234,6 +274,12 @@ export default function GameCanvas({
     const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX;
     const clientY = e.clientY ?? e.changedTouches?.[0]?.clientY;
     if (clientX === undefined || clientY === undefined) return;
+
+    const target = typeof document !== 'undefined' && document.elementFromPoint ? document.elementFromPoint(clientX, clientY) : null;
+    if (target?.closest?.('[data-zoom-button="true"]') || target?.closest?.('button')) {
+      setCursorPos(prev => ({ ...prev, visible: false }));
+      return;
+    }
 
     const rect = containerRef.current.getBoundingClientRect();
     const clickXPercent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
@@ -300,9 +346,7 @@ export default function GameCanvas({
   };
 
   const handleMouseLeave = () => {
-    if (!magnifierEnabled) {
-      setCursorPos(prev => ({ ...prev, visible: false }));
-    }
+    setCursorPos(prev => ({ ...prev, visible: false }));
   };
 
   const leftBgUrl = isPhoto ? resolveAssetUrl(level?.baseImage) : canvasUrls.left;

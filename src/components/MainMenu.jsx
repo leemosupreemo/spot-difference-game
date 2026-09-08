@@ -1,8 +1,10 @@
-import { Play, Layers, Sparkles, Camera, Swords } from 'lucide-react';
+import { Play, Layers, Sparkles, Camera, Swords, Smartphone } from 'lucide-react';
+import { Capacitor } from '@capacitor/core';
 import { sounds } from '../utils/audio';
 import { SCENE_THEMES } from '../utils/proceduralGenerator';
 import { logApp, auditDOMState } from '../utils/logger';
 import { trackCategorySelected } from '../services/analytics';
+import { getAppStoreReviewUrl } from '../services/appConfig';
 import TutorialBanner from './TutorialBanner';
 
 export default function MainMenu({
@@ -11,6 +13,7 @@ export default function MainMenu({
   onStartGame,
   incomingChallenge = null
 }) {
+  const isNative = typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform();
   const themeDetails = {
     find_the_sniper: {
       icon: <Camera size={26} color="var(--accent-cyan)" />,
@@ -25,13 +28,7 @@ export default function MainMenu({
   };
 
   return (
-    <div style={{
-      maxWidth: '750px',
-      margin: '0 auto 20px auto',
-      padding: '0 16px',
-      textAlign: 'center',
-      animation: 'pageFadeIn 0.15s ease-out'
-    }}>
+    <div className="menu-container page-fade-in">
       {/* Incoming Challenge Banner (When launched from a friend's link) */}
       {incomingChallenge && (
         <div style={{
@@ -90,7 +87,8 @@ export default function MainMenu({
         padding: '16px 18px',
         borderRadius: '18px',
         textAlign: 'left',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        marginBottom: '14px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
           <Layers size={20} color="var(--accent-cyan)" />
@@ -99,7 +97,7 @@ export default function MainMenu({
           </h3>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '10px', marginBottom: '14px' }}>
+        <div className="mode-cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '10px', marginBottom: '14px' }}>
           {SCENE_THEMES.map(theme => {
             const isSelected = selectedTheme === theme.id;
             const details = themeDetails[theme.id] || {
@@ -116,7 +114,7 @@ export default function MainMenu({
                   setSelectedTheme(theme.id);
                   trackCategorySelected(theme.id);
                 }}
-                className="glass-panel"
+                className="glass-panel mode-card-item"
                 style={{
                   padding: '14px 16px',
                   borderRadius: '14px',
@@ -142,7 +140,7 @@ export default function MainMenu({
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <h4 style={{ fontSize: '1.05rem', fontWeight: 900, color: isSelected ? '#fff' : 'var(--text-main)', margin: 0 }}>
+                    <h4 className="mode-card-title" style={{ fontSize: '1.05rem', fontWeight: 900, color: isSelected ? '#fff' : 'var(--text-main)', margin: 0 }}>
                       {theme.title}
                     </h4>
                     <span style={{
@@ -156,6 +154,16 @@ export default function MainMenu({
                       {details.badge}
                     </span>
                   </div>
+                  {details.desc && (
+                    <p style={{
+                      fontSize: '0.74rem',
+                      color: 'var(--text-muted)',
+                      margin: '4px 0 0 0',
+                      lineHeight: '1.25'
+                    }}>
+                      {details.desc}
+                    </p>
+                  )}
                 </div>
               </div>
             );
@@ -164,7 +172,7 @@ export default function MainMenu({
 
         {/* Main Action START GAME Button */}
         <button
-          className="glass-btn glass-btn-primary"
+          className="glass-btn glass-btn-primary start-game-btn"
           onPointerDown={() => {
             logApp('INFO', `[StartGameBtnPointerDown] Theme: ${selectedTheme}`);
             auditDOMState('StartGameBtnPointerDown');
@@ -194,6 +202,29 @@ export default function MainMenu({
           <Play size={22} fill="#000" /> START GAME
         </button>
       </div>
+
+      {/* Web Only "Coming Soon to iPhone" Badge Banner */}
+      {!isNative && (
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            color: 'var(--text-muted)',
+            fontSize: '0.82rem',
+            fontWeight: 600,
+            padding: '8px 16px',
+            borderRadius: '12px',
+            background: 'rgba(255, 255, 255, 0.03)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            marginTop: '4px',
+            userSelect: 'none'
+          }}
+        >
+          <Smartphone size={16} color="var(--accent-cyan)" />
+          <span>Coming soon to iPhone & iPad on the <strong style={{ color: '#fff' }}>App Store</strong></span>
+        </div>
+      )}
     </div>
   );
 }

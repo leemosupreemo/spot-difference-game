@@ -51,7 +51,7 @@ test('game-viewport includes thin vertical divider line without altering layout 
 
   assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*position:\s*absolute/);
   assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*left:\s*50%/);
-  assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*width:\s*1px/);
+  assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*width:\s*[12]px/);
   assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*pointer-events:\s*none/);
 });
 
