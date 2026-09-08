@@ -55,6 +55,7 @@ export default function App() {
     } catch (_) {}
     return INITIAL_LEVELS[0].id;
   });
+  const [view, setView] = useState('menu'); // 'menu' | 'game' | 'creator' | 'stats'
   const [incomingChallenge, setIncomingChallenge] = useState(() => {
     try {
       return typeof window !== 'undefined' ? parseIncomingChallenge(window.location.search) : null;
