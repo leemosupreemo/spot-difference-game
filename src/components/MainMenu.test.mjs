@@ -19,3 +19,12 @@ test('MainMenu supports Photography and Abstract categories and Start Game CTA',
   assert.match(source, /trackCategorySelected/);
   assert.match(source, /onStartGame/);
 });
+
+test('MainMenu supports incoming challenge banner for viral link reception', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /incomingChallenge/);
+  assert.match(source, /CHALLENGE RECEIVED/);
+  assert.match(source, /Can you beat/);
+});
+

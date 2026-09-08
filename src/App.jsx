@@ -21,9 +21,11 @@ import { sounds } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
-import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown } from './services/analytics';
+import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted } from './services/analytics';
+import { parseIncomingChallenge } from './utils/challengeMetrics';
 import { syncRemoteLevelPacks } from './services/remoteLevelSync';
 import { syncRemoteAppConfig } from './services/appConfig';
+import { initializeNotificationListeners, scheduleInstallNotifications } from './services/notificationService';
 
 export default function App() {
   const [levels, setLevels] = useState(() => {
@@ -53,9 +55,33 @@ export default function App() {
     } catch (_) {}
     return INITIAL_LEVELS[0].id;
   });
-  const [view, setView] = useState('menu'); // 'menu' | 'game' | 'creator' | 'stats'
-  const [selectedDifficulty, setSelectedDifficulty] = useState('Medium'); // 'Easy' | 'Medium' | 'Hard'
-  const [selectedTheme, setSelectedTheme] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
+  const [incomingChallenge, setIncomingChallenge] = useState(() => {
+    try {
+      return typeof window !== 'undefined' ? parseIncomingChallenge(window.location.search) : null;
+    } catch (_) {
+      return null;
+    }
+  });
+
+  const [selectedDifficulty, setSelectedDifficulty] = useState(() => {
+    try {
+      const challenge = typeof window !== 'undefined' ? parseIncomingChallenge(window.location.search) : null;
+      if (challenge?.difficulty && ['Easy', 'Medium', 'Hard'].includes(challenge.difficulty)) {
+        return challenge.difficulty;
+      }
+    } catch (_) {}
+    return 'Medium';
+  }); // 'Easy' | 'Medium' | 'Hard'
+
+  const [selectedTheme, setSelectedTheme] = useState(() => {
+    try {
+      const challenge = typeof window !== 'undefined' ? parseIncomingChallenge(window.location.search) : null;
+      if (challenge?.themeId && ['find_the_sniper', 'abstract_animated'].includes(challenge.themeId)) {
+        return challenge.themeId;
+      }
+    } catch (_) {}
+    return 'find_the_sniper';
+  }); // 'find_the_sniper' | 'abstract_animated'
   const [activeMode, setActiveMode] = useState('classic'); // 'classic' | 'blitz' | 'zen'
   
   // Gameplay State
@@ -106,8 +132,20 @@ export default function App() {
   const visitedDebugLevelIdsRef = useRef(new Set());
   useEffect(() => {
     initAnalytics();
+    initializeNotificationListeners().catch(() => {});
     syncRemoteLevelPacks().catch(() => {});
     syncRemoteAppConfig().catch(() => {});
+
+    // If launched via Challenge Link, track reception
+    if (incomingChallenge) {
+      trackChallengeReceived({
+        challengerName: incomingChallenge.challengerName,
+        targetTimeSec: incomingChallenge.targetTimeSec,
+        difficulty: incomingChallenge.difficulty,
+        themeId: incomingChallenge.themeId
+      });
+      logApp('INFO', `[ChallengeReceived] Challenger: ${incomingChallenge.challengerName}, Target: ${incomingChallenge.targetTimeSec}s`);
+    }
 
     // Track launch count & trigger App Store rating prompt on second launch
     try {
@@ -124,7 +162,7 @@ export default function App() {
         return () => clearTimeout(timer);
       }
     } catch (_) {}
-  }, []);
+  }, [incomingChallenge]);
 
   const handleToggleSkipKept = (val) => {
     setSkipKeptLevels(val);
@@ -602,6 +640,23 @@ export default function App() {
           imagesInStageCount: totalStageImages
         });
 
+        // Trigger lifecycle notification scheduling (+2hr welcome, +5day retention)
+        scheduleInstallNotifications().catch(() => {});
+
+        if (incomingChallenge) {
+          const playerSec = Number((cumulativeTime / 1000).toFixed(2));
+          const targetSec = incomingChallenge.targetTimeSec;
+          const playerWon = playerSec <= targetSec;
+          trackChallengeMatchCompleted({
+            challengerName: incomingChallenge.challengerName,
+            targetTimeSec: targetSec,
+            playerTimeSec: playerSec,
+            playerWon,
+            difficulty: selectedDifficulty,
+            themeId: selectedTheme
+          });
+        }
+
         // Compute Categorized Stats for full 5-image stage
         setDifficultyStats(prev => {
           const diffCategory = selectedDifficulty;
@@ -768,6 +823,7 @@ export default function App() {
             onOpenProgress={() => setView('stats')}
             onOpenDebug={() => setDebugModalOpen(true)}
             debugMode={debugMode}
+            incomingChallenge={incomingChallenge}
           />
         ) : view === 'stats' ? (
           <ProgressModal
@@ -840,6 +896,10 @@ export default function App() {
         level={currentLevel}
         elapsedTime={totalStageTimeMs || elapsedTime}
         score={score}
+        difficulty={selectedDifficulty}
+        themeId={selectedTheme}
+        isStageSet={true}
+        incomingChallenge={incomingChallenge}
         onNextLevel={handleStartGame}
         onRestart={handleStartGame}
         onClose={() => setVictoryModalOpen(false)}

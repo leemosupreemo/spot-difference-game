@@ -357,3 +357,224 @@ export function trackRatingPromptAction({ action = "rate", visitNumber = 2 } = {
   }
 }
 
+/**
+ * Tracks when a player reaches the Results screen (VictoryModal).
+ * Essential for measuring Share Rate = shares / result screen views.
+ */
+export function trackResultScreenViewed({
+  elapsedTimeMs = 0,
+  percentileBeat = 93,
+  topPercentile = 7,
+  isPersonalBest = false,
+  score = 0,
+  stars = 3,
+  difficulty = "Medium",
+  themeId = "find_the_sniper",
+  isStageSet = true,
+  isChallengeMode = false,
+  challengerName = null
+} = {}) {
+  const elapsedTimeSec = Number((Math.max(0, elapsedTimeMs) / 1000).toFixed(2));
+
+  trackEvent("Result Screen Viewed", {
+    elapsed_time_sec: elapsedTimeSec,
+    elapsed_time_ms: elapsedTimeMs,
+    percentile_beat: percentileBeat,
+    top_percentile: topPercentile,
+    is_personal_best: Boolean(isPersonalBest),
+    score,
+    stars,
+    difficulty,
+    theme_id: themeId,
+    is_stage_set: Boolean(isStageSet),
+    is_challenge_mode: Boolean(isChallengeMode),
+    challenger_name: challengerName
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.increment("Total Result Screen Views", 1);
+    if (isPersonalBest) {
+      mixpanel.people.set({ "Fastest Clear Sec": elapsedTimeSec });
+    }
+  }
+}
+
+/**
+ * Tracks when the user initiates a challenge share action.
+ */
+export function trackChallengeShareClicked({
+  source = "victory_modal_cta",
+  elapsedTimeMs = 0,
+  percentileBeat = 93,
+  isPersonalBest = false,
+  difficulty = "Medium",
+  themeId = "find_the_sniper"
+} = {}) {
+  const elapsedTimeSec = Number((Math.max(0, elapsedTimeMs) / 1000).toFixed(2));
+
+  trackEvent("Challenge Share Clicked", {
+    source,
+    elapsed_time_sec: elapsedTimeSec,
+    elapsed_time_ms: elapsedTimeMs,
+    percentile_beat: percentileBeat,
+    is_personal_best: Boolean(isPersonalBest),
+    difficulty,
+    theme_id: themeId
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.increment("Total Challenge Share Taps", 1);
+  }
+}
+
+/**
+ * Tracks successful completion of a challenge share (native share, clipboard copy, image export, or Game Center).
+ */
+export function trackChallengeShareCompleted({
+  method = "native_share",
+  elapsedTimeMs = 0,
+  percentileBeat = 93,
+  isPersonalBest = false,
+  difficulty = "Medium",
+  themeId = "find_the_sniper"
+} = {}) {
+  const elapsedTimeSec = Number((Math.max(0, elapsedTimeMs) / 1000).toFixed(2));
+
+  trackEvent("Challenge Share Completed", {
+    method,
+    elapsed_time_sec: elapsedTimeSec,
+    elapsed_time_ms: elapsedTimeMs,
+    percentile_beat: percentileBeat,
+    is_personal_best: Boolean(isPersonalBest),
+    difficulty,
+    theme_id: themeId
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.increment("Total Shares Completed", 1);
+    mixpanel.people.set({
+      "Last Share Date": new Date().toISOString(),
+      "Last Share Method": method
+    });
+  }
+}
+
+/**
+ * Tracks when a user cancels or fails a share attempt.
+ */
+export function trackChallengeShareCancelled({
+  reason = "user_cancelled",
+  elapsedTimeMs = 0
+} = {}) {
+  trackEvent("Challenge Share Cancelled", {
+    reason,
+    elapsed_time_sec: Number((Math.max(0, elapsedTimeMs) / 1000).toFixed(2))
+  });
+}
+
+/**
+ * Tracks when the app is launched via a Challenge Link.
+ */
+export function trackChallengeReceived({
+  challengerName = "Friend",
+  targetTimeSec = 3.0,
+  difficulty = "Medium",
+  themeId = "find_the_sniper"
+} = {}) {
+  trackEvent("Challenge Received", {
+    challenger_name: challengerName,
+    target_time_sec: targetTimeSec,
+    difficulty,
+    theme_id: themeId
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.increment("Total Challenges Received", 1);
+    mixpanel.people.set({ "Last Challenger Name": challengerName });
+  }
+}
+
+/**
+ * Tracks the outcome of a head-to-head Challenge Match.
+ */
+export function trackChallengeMatchCompleted({
+  challengerName = "Friend",
+  targetTimeSec = 3.0,
+  playerTimeSec = 2.5,
+  playerWon = true,
+  difficulty = "Medium",
+  themeId = "find_the_sniper"
+} = {}) {
+  const timeDiffSec = Number(Math.abs(playerTimeSec - targetTimeSec).toFixed(2));
+
+  trackEvent("Challenge Match Completed", {
+    challenger_name: challengerName,
+    target_time_sec: targetTimeSec,
+    player_time_sec: playerTimeSec,
+    player_won: Boolean(playerWon),
+    time_diff_sec: timeDiffSec,
+    difficulty,
+    theme_id: themeId
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.increment(playerWon ? "Challenge Matches Won" : "Challenge Matches Lost", 1);
+  }
+}
+
+/**
+ * Tracks when local push/lifecycle notifications are scheduled.
+ */
+export function trackNotificationScheduled({
+  welcomeAt = "",
+  reminderAt = "",
+  granted = true
+} = {}) {
+  trackEvent("Notifications Scheduled", {
+    welcome_at: welcomeAt,
+    reminder_at: reminderAt,
+    granted: Boolean(granted)
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.set({
+      "Notifications Enabled": Boolean(granted),
+      "Notifications Scheduled Date": new Date().toISOString()
+    });
+  }
+}
+
+/**
+ * Tracks notification permission prompt response.
+ */
+export function trackNotificationPermissionResult({
+  status = "granted",
+  granted = true
+} = {}) {
+  trackEvent("Notification Permission Prompted", {
+    status,
+    granted: Boolean(granted)
+  });
+}
+
+/**
+ * Tracks when a user taps a local notification to open the app.
+ */
+export function trackNotificationClicked({
+  notificationId = 0,
+  title = "",
+  actionId = ""
+} = {}) {
+  trackEvent("Notification Clicked", {
+    notification_id: notificationId,
+    title,
+    action_id: actionId
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.increment("Total Notification Opens", 1);
+  }
+}
+
+
+

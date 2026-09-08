@@ -18,6 +18,7 @@
   "dependencies": {
     "@capacitor/core": "^8.5.0",
     "@capacitor/haptics": "^8.0.2",
+    "@capacitor/local-notifications": "^8.3.1",
     "@capacitor/status-bar": "^8.0.3",
     "canvas-confetti": "^1.9.4",
     "firebase": "^12.17.1",

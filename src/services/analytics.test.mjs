@@ -7,7 +7,16 @@ import {
   trackImagePairCompleted,
   trackStageCleared,
   trackRatingPromptShown,
-  trackRatingPromptAction
+  trackRatingPromptAction,
+  trackResultScreenViewed,
+  trackChallengeShareClicked,
+  trackChallengeShareCompleted,
+  trackChallengeShareCancelled,
+  trackChallengeReceived,
+  trackChallengeMatchCompleted,
+  trackNotificationScheduled,
+  trackNotificationPermissionResult,
+  trackNotificationClicked
 } from "./analytics.js";
 
 test("initializes analytics safely without throwing in any environment", () => {
@@ -108,3 +117,72 @@ test("tracks rating prompt impressions and user actions", () => {
     trackRatingPromptAction({ action: "dismiss", visitNumber: 2 });
   });
 });
+
+test("tracks challenge and result screen funnel events properly", () => {
+  assert.doesNotThrow(() => {
+    trackResultScreenViewed({
+      elapsedTimeMs: 2430,
+      percentileBeat: 93,
+      topPercentile: 7,
+      isPersonalBest: true,
+      score: 480,
+      stars: 3,
+      difficulty: "Medium",
+      themeId: "find_the_sniper"
+    });
+
+    trackChallengeShareClicked({
+      source: "victory_modal_cta",
+      elapsedTimeMs: 2430,
+      percentileBeat: 93,
+      isPersonalBest: true
+    });
+
+    trackChallengeShareCompleted({
+      method: "native_share",
+      elapsedTimeMs: 2430,
+      percentileBeat: 93,
+      isPersonalBest: true
+    });
+
+    trackChallengeShareCancelled({
+      reason: "dismissed",
+      elapsedTimeMs: 2430
+    });
+
+    trackChallengeReceived({
+      challengerName: "Alex",
+      targetTimeSec: 2.43
+    });
+
+    trackChallengeMatchCompleted({
+      challengerName: "Alex",
+      targetTimeSec: 2.43,
+      playerTimeSec: 2.18,
+      playerWon: true
+    });
+  });
+});
+
+test("tracks notification lifecycle events properly", () => {
+  assert.doesNotThrow(() => {
+    trackNotificationScheduled({
+      welcomeAt: new Date().toISOString(),
+      reminderAt: new Date().toISOString(),
+      granted: true
+    });
+
+    trackNotificationPermissionResult({
+      status: "granted",
+      granted: true
+    });
+
+    trackNotificationClicked({
+      notificationId: 1001,
+      title: "Spot the difference?",
+      actionId: "tap"
+    });
+  });
+});
+
+

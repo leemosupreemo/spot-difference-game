@@ -37,3 +37,19 @@ test('adds right padding to ACCURACY and MISSES labels and displays Next Stage b
   assert.match(source, /Next Stage/);
   assert.doesNotMatch(source, /Next Pair/);
 });
+
+test('incorporates Challenge a Friend button, percentile benchmark, and ShareChallengeModal', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Confirms Challenge a Friend CTA button
+  assert.match(source, /Challenge a Friend/);
+  // Confirms percentile rank benchmark display
+  assert.match(source, /calculatePercentileRank/);
+  assert.match(source, /You beat/);
+  assert.match(source, /Diff Hunter players/);
+  // Confirms ShareChallengeModal inclusion
+  assert.match(source, /<ShareChallengeModal/);
+  // Confirms tracking result screen view
+  assert.match(source, /trackResultScreenViewed/);
+});
+
