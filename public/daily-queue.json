@@ -1,0 +1,181 @@
+{
+  "updatedAt": "2026-09-10T23:00:00.000Z",
+  "schedule": {
+    "2026-09-09": [
+      "fresh_nature_pair_001",
+      "fresh_nature_pair_002",
+      "fresh_nature_pair_003"
+    ],
+    "2026-09-10": [
+      "fresh_nature_pair_008",
+      "fresh_nature_pair_009",
+      "fresh_nature_pair_010"
+    ],
+    "2026-09-11": [
+      "fresh_v6_pair_001",
+      "fresh_v6_pair_002",
+      "fresh_v6_pair_003"
+    ],
+    "2026-09-12": [
+      "fresh_v6_pair_004",
+      "fresh_v6_pair_005",
+      "fresh_v6_pair_006"
+    ],
+    "2026-09-13": [
+      "fresh_v6_pair_007",
+      "fresh_v6_pair_008",
+      "fresh_v6_pair_009"
+    ]
+  },
+  "queue": [
+    {
+      "setId": "set_1",
+      "levels": [
+        "fresh_v6_pair_010",
+        "fresh_v6_pair_011",
+        "fresh_v6_pair_012"
+      ]
+    },
+    {
+      "setId": "set_2",
+      "levels": [
+        "fresh_v6_pair_013",
+        "fresh_v6_pair_014",
+        "fresh_v6_pair_015"
+      ]
+    },
+    {
+      "setId": "set_3",
+      "levels": [
+        "fresh_v6_pair_016",
+        "fresh_v6_pair_019",
+        "fresh_v6_pair_020"
+      ]
+    },
+    {
+      "setId": "set_4",
+      "levels": [
+        "fresh_nature_pair_004",
+        "fresh_nature_pair_005",
+        "fresh_nature_pair_006"
+      ]
+    },
+    {
+      "setId": "set_5",
+      "levels": [
+        "fresh_nature_pair_014",
+        "fresh_nature_pair_015",
+        "fresh_nature_pair_016"
+      ]
+    },
+    {
+      "setId": "set_6",
+      "levels": [
+        "fresh_nature_pair_017",
+        "fresh_nature_pair_018",
+        "fresh_nature_pair_019"
+      ]
+    },
+    {
+      "setId": "set_legacy_1",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "medium_workbench_001",
+        "photo_art_table_001",
+        "photo_potting_table_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_2",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "photo_workbench_hardware_001",
+        "photo_watchmaker_bench_001",
+        "photo_bakers_table_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_3",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "photo_electronics_bench_001",
+        "photo_antique_desk_001",
+        "photo_woodworking_bench_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_4",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "photo_coffee_station_001",
+        "photo_repair_drawer_001",
+        "photo_bicycle_repair_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_5",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "photo_woodworking_table_001",
+        "photo_watch_repair_001",
+        "medium_nursery_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_6",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "hard_forest_001",
+        "medium_screw_tray_001",
+        "medium_tile_piece_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_7",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "hard_wire_clip_001",
+        "photo_camping_table_001",
+        "photo_board_game_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_8",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "photo_spice_table_001",
+        "photo_fishing_tackle_001",
+        "photo_camera_gear_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_9",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "photo_artist_supply_001",
+        "photo_camping_gear_001",
+        "photo_sewing_table_001"
+      ]
+    },
+    {
+      "setId": "set_legacy_10",
+      "label": "Old (Legacy 640x480)",
+      "isLegacy": true,
+      "levels": [
+        "photo_map_restoration_001",
+        "photo_garden_potting_001",
+        "photo_game_night_001"
+      ]
+    }
+  ],
+  "customLevels": []
+}

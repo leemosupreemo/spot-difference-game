@@ -7,7 +7,8 @@ import {
   applyCuratedPackOverrides,
   selectPhotoPairEntries,
   resolveAssetUrl,
-  getAllPhotoPairEntries
+  getAllPhotoPairEntries,
+  getEntryAspectBucket
 } from './photoPairLevelLoader.js';
 import {
   saveCachedRemoteLevels,
@@ -219,3 +220,53 @@ test('continues loading later candidates after an image pair fails', async () =>
   assert.equal(stage.length, 1);
   assert.equal(stage[0].id, 'good_market_001');
 });
+
+test('getEntryAspectBucket correctly categorizes 4:3 high-res, 4:3 standard, and widescreen', () => {
+  // High-res 4:3 (1200x896)
+  assert.equal(getEntryAspectBucket({ dimensions: { width: 1200, height: 896 }, aspectRatio: '4:3' }), 0);
+  // Standard/Legacy 4:3 (640x480)
+  assert.equal(getEntryAspectBucket({ dimensions: { width: 640, height: 480 }, aspectRatio: '4:3' }), 1);
+  // Widescreen 16:9 (1376x768)
+  assert.equal(getEntryAspectBucket({ dimensions: { width: 1376, height: 768 }, aspectRatio: '16:9' }), 2);
+  // Default mock entry without dimension metadata -> treated as 4:3 high-res
+  assert.equal(getEntryAspectBucket({}), 0);
+});
+
+test('selectPhotoPairEntries prioritizes full-frame 4:3 images over 16:9 widescreen images', () => {
+  const widescreenEntry = {
+    ...entry,
+    id: 'widescreen_v7_001',
+    dimensions: { width: 1376, height: 768 },
+    aspectRatio: '16:9'
+  };
+  const fullFrame43Entry = {
+    ...entry,
+    id: 'fullframe_43_001',
+    dimensions: { width: 1200, height: 896 },
+    aspectRatio: '4:3'
+  };
+
+  // Even if widescreen entry is placed first in input array
+  const entries = [widescreenEntry, fullFrame43Entry];
+  const selected = selectPhotoPairEntries(entries, {
+    packId: 'find_the_sniper',
+    difficulty: 'Hard',
+    count: 2
+  });
+
+  assert.equal(selected.length, 2);
+  assert.equal(selected[0].id, 'fullframe_43_001', '4:3 full-frame photo must be prioritized first to match Generated mode size');
+  assert.equal(selected[1].id, 'widescreen_v7_001', '16:9 widescreen photo must be placed second');
+});
+
+test('createPhotoPairLevel retains dimensions and aspectRatio properties', () => {
+  const customEntry = {
+    ...entry,
+    dimensions: { width: 1200, height: 896 },
+    aspectRatio: '4:3'
+  };
+  const level = createPhotoPairLevel(customEntry);
+  assert.deepEqual(level.dimensions, { width: 1200, height: 896 });
+  assert.equal(level.aspectRatio, '4:3');
+});
+

@@ -19,7 +19,8 @@ export default function DebugCuratorBar({
   skipKeptLevels = true,
   onToggleSkipKept,
   currentStageIndex = 0,
-  totalStageImages = 5
+  totalStageImages = 5,
+  gameMode = 'standard'
 }) {
   const [isExportOpen, setIsExportOpen] = useState(false);
 
@@ -82,6 +83,54 @@ export default function DebugCuratorBar({
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: 900, color: 'var(--accent-cyan)', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: '4px' }}>
               🛠️ DEBUG CURATOR
+            </span>
+
+            {/* Daily Challenge Pool Badge */}
+            {gameMode === 'daily' && (
+              <span style={{
+                fontSize: '0.74rem',
+                fontWeight: 900,
+                color: '#000',
+                background: 'linear-gradient(135deg, var(--accent-cyan), #00ff87)',
+                padding: '3px 8px',
+                borderRadius: '8px',
+                letterSpacing: '0.4px',
+                boxShadow: '0 0 10px rgba(0, 240, 255, 0.3)'
+              }}>
+                📅 DAILY POOL
+              </span>
+            )}
+
+            {/* Old / Legacy Indicator */}
+            {currentLevel?.isLegacy && (
+              <span style={{
+                fontSize: '0.74rem',
+                fontWeight: 900,
+                color: 'var(--accent-gold)',
+                background: 'rgba(255, 183, 3, 0.18)',
+                border: '1px solid rgba(255, 183, 3, 0.5)',
+                padding: '3px 8px',
+                borderRadius: '8px',
+                letterSpacing: '0.4px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}>
+                ⚠️ OLD (LEGACY 640×480)
+              </span>
+            )}
+
+            {/* Level Title / ID & Source */}
+            <span style={{
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              color: 'var(--text-muted)',
+              maxWidth: '220px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
+            }} title={`${currentLevel.dailySource ? `[${currentLevel.dailySource}] ` : ''}${currentLevel.id} (${currentLevel.title})`}>
+              {currentLevel.dailySource ? `[${currentLevel.dailySource}] ` : ''}{currentLevel.id}
             </span>
 
             {/* Source Mode Toggle: Premade vs Procedural */}

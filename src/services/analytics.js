@@ -60,26 +60,34 @@ export function initAnalytics() {
       batch_requests: false
     });
 
-    const platform = Capacitor.isNativePlatform() ? "ios" : "web";
+    const isNative = Capacitor.isNativePlatform();
+    const platform = isNative ? Capacitor.getPlatform() : "web";
+    const isPwa = !isNative && typeof window !== "undefined" && Boolean(
+      window.matchMedia?.('(display-mode: standalone)')?.matches ||
+      window.navigator?.standalone === true
+    );
+    const clientType = isNative ? "native_app" : (isPwa ? "pwa" : "web_browser");
 
     mixpanel.register({
       app_name: "DiffHunter",
       platform,
+      is_native: isNative,
+      client_type: clientType,
       screen_width: window.innerWidth,
       screen_height: window.innerHeight
     });
 
     isInitialized = true;
-    logApp("INFO", `[Analytics] Mixpanel initialized on platform: ${platform}`);
+    logApp("INFO", `[Analytics] Mixpanel initialized: platform=${platform}, clientType=${clientType}, isNative=${isNative}`);
 
-    trackFirstLaunchAndVisits(platform);
+    trackFirstLaunchAndVisits(platform, clientType, isNative);
     setupSessionDurationTracking();
   } catch (err) {
     console.warn("[Analytics] Mixpanel init warning:", err?.message || err);
   }
 }
 
-function trackFirstLaunchAndVisits(platform) {
+function trackFirstLaunchAndVisits(platform, clientType = "web_browser", isNative = false) {
   try {
     const now = new Date();
     const todayStr = getTodayDateString();
@@ -93,14 +101,18 @@ function trackFirstLaunchAndVisits(platform) {
 
       trackEvent("First Launch", {
         first_launch_date: firstLaunchIso,
-        platform
+        platform,
+        client_type: clientType,
+        is_native: isNative
       });
 
-      if (typeof window !== "undefined" && isInitialized && mixpanel?.people && mixpanel?.__loaded) {
+      if (typeof window !== "undefined" && isInitialized && mixpanel?.people) {
         mixpanel.people.set_once({
           "$created": firstLaunchIso,
           "First Launch Date": firstLaunchIso,
-          "Initial Platform": platform
+          "Initial Platform": platform,
+          "Initial Client Type": clientType,
+          "Is Native App": isNative
         });
       }
     }
@@ -149,7 +161,10 @@ function trackFirstLaunchAndVisits(platform) {
         "Visits This Week": visitData.visitsThisWeek,
         "Current ISO Week": currentWeek,
         "Days Active Count": visitData.daysActiveCount,
-        "Total Visits": visitData.totalVisits
+        "Total Visits": visitData.totalVisits,
+        "Platform": platform,
+        "Client Type": clientType,
+        "Is Native": isNative
       });
     }
   } catch (err) {
@@ -200,12 +215,40 @@ export function trackEvent(eventName, properties = {}) {
       session_time_elapsed_sec: Math.round((Date.now() - sessionStartTime) / 1000)
     };
 
-    if (typeof window !== "undefined" && isInitialized && mixpanel?.track && mixpanel?.__loaded) {
+    if (typeof window !== "undefined" && isInitialized && typeof mixpanel?.track === "function") {
       mixpanel.track(eventName, enriched);
     }
     logApp("INFO", `[Mixpanel] Track: ${eventName}`, enriched);
   } catch (err) {
     console.warn(`[Analytics] Track error on ${eventName}:`, err?.message || err);
+  }
+}
+
+/**
+ * Associates user identity and properties with Mixpanel.
+ */
+export function identifyPlayer(playerId, userProperties = {}) {
+  if (typeof window === "undefined" || !isInitialized || typeof mixpanel?.identify !== "function") return;
+  try {
+    mixpanel.identify(playerId);
+    if (userProperties && Object.keys(userProperties).length > 0 && mixpanel.people) {
+      mixpanel.people.set(userProperties);
+    }
+    logApp("INFO", `[Mixpanel] Identified player: ${playerId}`, userProperties);
+  } catch (err) {
+    console.warn("[Analytics] identifyPlayer warning:", err?.message || err);
+  }
+}
+
+/**
+ * Resets user distinct_id on logout or debug purge.
+ */
+export function resetAnalyticsUser() {
+  if (typeof window === "undefined" || !isInitialized || typeof mixpanel?.reset !== "function") return;
+  try {
+    mixpanel.reset();
+  } catch (err) {
+    console.warn("[Analytics] resetAnalyticsUser warning:", err?.message || err);
   }
 }
 

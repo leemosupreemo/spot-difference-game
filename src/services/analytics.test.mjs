@@ -16,7 +16,9 @@ import {
   trackChallengeMatchCompleted,
   trackNotificationScheduled,
   trackNotificationPermissionResult,
-  trackNotificationClicked
+  trackNotificationClicked,
+  identifyPlayer,
+  resetAnalyticsUser
 } from "./analytics.js";
 
 test("initializes analytics safely without throwing in any environment", () => {
@@ -182,6 +184,16 @@ test("tracks notification lifecycle events properly", () => {
       title: "Spot the difference?",
       actionId: "tap"
     });
+  });
+});
+
+test("identifies player and resets user without throwing", () => {
+  assert.doesNotThrow(() => {
+    identifyPlayer("player_12345", {
+      "Hunter Tag": "ApexSpotter",
+      "Player Name": "ApexSpotter"
+    });
+    resetAnalyticsUser();
   });
 });
 

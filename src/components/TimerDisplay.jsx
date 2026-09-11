@@ -45,9 +45,9 @@ export default function TimerDisplay({
   return (
     <div style={{
       width: '100%',
-      maxWidth: '1300px',
-      margin: '0 auto 10px auto',
-      padding: '0 16px',
+      maxWidth: '1400px',
+      margin: '0 auto 14px auto',
+      padding: '0 4px',
       boxSizing: 'border-box'
     }}>
       <div className="glass-panel" style={{

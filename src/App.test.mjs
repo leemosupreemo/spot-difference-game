@@ -24,3 +24,30 @@ test('App.jsx defines essential state variables including view and incomingChall
   assert.match(source, /view\s*===\s*['"]creator['"]/);
   assert.match(source, /view\s*===\s*['"]game['"]/);
 });
+
+test('App.jsx tracks hasCompletedFirstSetState and passes it to MainMenu', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+
+  assert.match(source, /hasCompletedFirstSetState/);
+  assert.match(source, /hasCompletedFirstSet=\{hasCompletedFirstSetState\}/);
+  assert.match(source, /markFirstSetCompleted\(\)/);
+});
+
+test('Scores opens My Progress as the active default tab', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+
+  assert.match(source, /const handleOpenLeaderboard = \(\) => \{\s*setStatsInitialTab\('progress'\)/);
+  assert.match(source, /onOpenStats=\{\(\) => \{\s*setStatsInitialTab\('progress'\)/);
+});
+test('App.jsx gates SetOfTheDayBanner behind !isDailyCompleted and routes daily failure to DailyVictoryModal', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+
+  // Gated banner (always shows in debug mode)
+  assert.match(source, /\{\s*\(\s*!isDailyCompleted \|\| debugMode\s*\) && \(\s*<SetOfTheDayBanner/);
+  assert.match(source, /setIsDailyCompleted\(true\)/);
+
+  // Daily failure routes to DailyVictoryModal instead of GameOverModal
+  assert.match(source, /if \(gameMode === 'daily'\) \{/);
+  assert.match(source, /isFailed:\s*true/);
+  assert.match(source, /isFailed=\{dailyVictoryData\?\.isFailed\}/);
+});

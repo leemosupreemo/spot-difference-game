@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Capacitor } from '@capacitor/core';
 import { 
   Smartphone, 
   Tablet, 
@@ -82,6 +83,7 @@ export default function DeviceSimulatorHarness({ children }) {
   const isSimulatorFeatureEnabled = useMemo(() => {
     try {
       if (typeof window === 'undefined') return false;
+      if (typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform()) return false;
       const params = new URLSearchParams(window.location.search);
       return params.has('sim') || params.has('simulator') || params.has('device') || params.get('debug') === '1' || localStorage.getItem('diff_hunter_sim_flag') === 'true';
     } catch (_) {
@@ -124,11 +126,6 @@ export default function DeviceSimulatorHarness({ children }) {
 
   const isSimulated = isSimulatorFeatureEnabled && activeDevice.id !== 'full';
 
-  // If feature flag is off, return clean children with 0 overlays
-  if (!isSimulatorFeatureEnabled) {
-    return children;
-  }
-
   // Calculate dimensions based on orientation
   const frameWidth = isSimulated
     ? (orientation === 'landscape' ? activeDevice.landscapeWidth : activeDevice.landscapeHeight)
@@ -167,6 +164,11 @@ export default function DeviceSimulatorHarness({ children }) {
     window.addEventListener('resize', calculateScale);
     return () => window.removeEventListener('resize', calculateScale);
   }, [isSimulated, frameWidth, frameHeight, zoomScale, showToolbar]);
+
+  // If feature flag is off, return clean children with 0 overlays
+  if (!isSimulatorFeatureEnabled) {
+    return children;
+  }
 
   // If in native full screen mode with feature flag active, render children with floating toggle
   if (!isSimulated) {

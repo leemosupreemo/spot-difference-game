@@ -13,10 +13,10 @@ test('ShareChallengeModal includes viral challenge actions, card generation, and
   const source = fs.readFileSync(componentPath, 'utf8');
 
   // Confirms Challenge a Friend modal header and copy
-  assert.match(source, /CHALLENGE A FRIEND/);
-  assert.match(source, /Share Challenge Link/);
-  assert.match(source, /Copy Challenge Text & Link/);
-  assert.match(source, /Save Branded Image Card/);
+  assert.match(source, /Share result/);
+  assert.match(source, /More/);
+  assert.match(source, /Copy link/);
+  assert.match(source, /Save image/);
 
   // Confirms canvas image card rendering
   assert.match(source, /renderChallengeCardBlob/);

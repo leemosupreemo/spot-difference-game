@@ -5,7 +5,11 @@ import {
   syncProgressFromFirestore,
   getSavedPlayerName,
   savePlayerName,
-  fetchLeaderboards
+  fetchLeaderboards,
+  hasCompletedFirstSet,
+  markFirstSetCompleted,
+  _resetFirstSetCompletedForTesting,
+  STORAGE_KEY_HAS_COMPLETED_SET
 } from './playerProgress.js';
 
 test('computes separate first-time, repeat, and fastest individual times per image pack', () => {
@@ -56,6 +60,7 @@ test('fetchLeaderboards ranks by avg first time as primary anchor with all 3 met
   assert.ok(data.byPackRepeat);
   assert.ok(data.localPlayer);
   assert.ok(data.byPackRepeat.find_the_sniper.length >= 5);
+  assert.equal(data.byPackRepeat.find_the_sniper.length, 20);
 
   const entries = data.byPackRepeat.find_the_sniper;
   for (let i = 0; i < entries.length - 1; i++) {
@@ -69,4 +74,16 @@ test('fetchLeaderboards ranks by avg first time as primary anchor with all 3 met
   assert.ok(top1.repeatTime);
   assert.ok(top1.fastestTime);
 });
+
+test('tracks first set completion lifecycle', () => {
+  _resetFirstSetCompletedForTesting();
+  assert.equal(hasCompletedFirstSet(), false);
+
+  markFirstSetCompleted();
+  assert.equal(hasCompletedFirstSet(), true);
+
+  _resetFirstSetCompletedForTesting();
+  assert.equal(hasCompletedFirstSet(), false);
+});
+
 

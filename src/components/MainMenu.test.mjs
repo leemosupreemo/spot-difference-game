@@ -28,3 +28,34 @@ test('MainMenu supports incoming challenge banner for viral link reception', () 
   assert.match(source, /Can you beat/);
 });
 
+test('MainMenu conditionally displays TutorialBanner only until first image set is completed', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /hasCompletedFirstSet/);
+  assert.match(source, /isSetCompleted/);
+  assert.match(source, /\{!isSetCompleted && <TutorialBanner \/>\}/);
+});
+
+test('MainMenu enforces max length on Start Game button with periodic sheen and ripples removed', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /start-game-outer-container/);
+  assert.match(source, /start-game-btn-wrapper/);
+  assert.doesNotMatch(source, /pond-ripple-container/);
+  assert.doesNotMatch(source, /pond-ripple/);
+  assert.match(source, /maxWidth:\s*'360px'/);
+  assert.doesNotMatch(source, /isRipplingBlue/);
+});
+
+test('index.css defines periodic sheen shimmer on start game button with ripples removed', () => {
+  const cssPath = path.join(path.dirname(componentPath), '../index.css');
+  const css = fs.readFileSync(cssPath, 'utf8');
+
+  assert.match(css, /startBtnPeriodicSheen/);
+  assert.match(css, /\.start-game-btn::after/);
+  assert.doesNotMatch(css, /@keyframes pondPropagateAndBounce/);
+  assert.doesNotMatch(css, /startBtnWavePulse/);
+});
+
+
+

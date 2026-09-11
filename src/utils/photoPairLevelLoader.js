@@ -112,6 +112,26 @@ export function applyCuratedPackOverrides(entries, statusMap = {}) {
   });
 }
 
+export function getEntryAspectBucket(entry) {
+  // If entry has no dimensions or aspectRatio (e.g. test fixtures), treat as 4:3 high-res
+  if (!entry.dimensions && !entry.aspectRatio) {
+    return 0; // Tier 0: 4:3 full-frame high-res
+  }
+
+  let ratio = null;
+  if (entry.dimensions?.width && entry.dimensions?.height) {
+    ratio = entry.dimensions.width / entry.dimensions.height;
+  }
+
+  const is43 = entry.aspectRatio === '4:3' || (ratio !== null && Math.abs(ratio - 4 / 3) < 0.08);
+  if (is43) {
+    const width = entry.dimensions?.width || 1200;
+    return width >= 1000 ? 0 : 1; // Tier 0: 4:3 high-res, Tier 1: 4:3 standard/legacy
+  }
+
+  return 2; // Tier 2: Non-4:3 widescreen
+}
+
 export function createPhotoPairLevel(entry, preloadedImages = null) {
   return {
     id: entry.id,
@@ -125,6 +145,8 @@ export function createPhotoPairLevel(entry, preloadedImages = null) {
     baseImage: entry.baseImage,
     variantImage: entry.variantImage,
     diffs: entry.diffs,
+    dimensions: entry.dimensions || null,
+    aspectRatio: entry.aspectRatio || (entry.dimensions ? `${entry.dimensions.width} / ${entry.dimensions.height}` : '4 / 3'),
     render: (ctx, width, height, isModified) => {
       if (preloadedImages) {
         const img = isModified ? preloadedImages.variant : preloadedImages.base;
@@ -143,12 +165,15 @@ export function selectPhotoPairEntries(entries, {
 } = {}) {
   const effectiveEntries = applyCuratedPackOverrides(entries, statusMap);
 
-  // Separate into unreviewed vs approved categories
-  const unreviewedBrandNew = [];
-  const unreviewedOther = [];
-  const approvedMatching = [];
-  const approvedOther = [];
-  const otherCategorized = [];
+  // Tiers:
+  // 0: Full-frame 4:3 High-Res (e.g. 1200x896) matching Generated mode size
+  // 1: Full-frame 4:3 Legacy/Standard (e.g. 640x480)
+  // 2: Non-4:3 Widescreen (e.g. 16:9 1376x768)
+  const tiers = [
+    { unreviewedBrandNew: [], unreviewedOther: [], approvedMatching: [], approvedOther: [], otherCategorized: [] },
+    { unreviewedBrandNew: [], unreviewedOther: [], approvedMatching: [], approvedOther: [], otherCategorized: [] },
+    { unreviewedBrandNew: [], unreviewedOther: [], approvedMatching: [], approvedOther: [], otherCategorized: [] }
+  ];
 
   for (const entry of effectiveEntries) {
     const statusVal = getLevelStatus(statusMap[entry.id]);
@@ -157,29 +182,34 @@ export function selectPhotoPairEntries(entries, {
     const packMatches = !packId || entry.packId === packId;
     if (!packMatches) continue;
 
+    const tierIndex = getEntryAspectBucket(entry);
+    const tier = tiers[tierIndex];
     const isCategorized = Boolean(statusVal?.status || statusVal?.packId || statusVal?.category || statusVal?.difficulty || statusVal?.suggestedDifficulty);
 
     if (!isCategorized) {
-      unreviewedBrandNew.push(entry);
+      tier.unreviewedBrandNew.push(entry);
     } else if (statusVal?.status === 'approved') {
       const difficultyMatches = !difficulty || entry.difficulty === difficulty;
       if (difficultyMatches) {
-        approvedMatching.push(entry);
+        tier.approvedMatching.push(entry);
       } else {
-        approvedOther.push(entry);
+        tier.approvedOther.push(entry);
       }
     } else if (statusVal?.status !== 'dismissed') {
-      otherCategorized.push(entry);
+      tier.otherCategorized.push(entry);
     }
   }
 
-  const prioritized = [
-    ...unreviewedBrandNew,
-    ...unreviewedOther,
-    ...approvedMatching,
-    ...approvedOther,
-    ...otherCategorized
-  ];
+  const prioritized = [];
+  for (const tier of tiers) {
+    prioritized.push(
+      ...tier.unreviewedBrandNew,
+      ...tier.unreviewedOther,
+      ...tier.approvedMatching,
+      ...tier.approvedOther,
+      ...tier.otherCategorized
+    );
+  }
 
   return prioritized.slice(0, count);
 }

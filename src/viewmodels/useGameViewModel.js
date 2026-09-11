@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { LEVELS as INITIAL_LEVELS } from '../utils/canvasLevels.js';
 import { buildPhotoPairStage } from '../utils/photoPairLevelLoader.js';
 import { calculateSpeedPoints } from '../utils/scoring.js';
-import { saveImageProgress, saveLeaderboardStats, syncProgressFromFirestore } from '../services/playerProgress.js';
+import { saveImageProgress, saveLeaderboardStats, syncProgressFromFirestore, markFirstSetCompleted } from '../services/playerProgress.js';
 import { sounds } from '../utils/audio.js';
 import { logApp, auditDOMState } from '../utils/logger.js';
 import {
@@ -12,6 +12,7 @@ import {
   setLevelCuratedStatus
 } from '../utils/curationStore.js';
 import { trackGameStarted, trackImagePairCompleted, trackStageCleared } from '../services/analytics.js';
+import { getInitialDebugMode } from '../utils/debugMode.js';
 
 const STAGE_PAIR_COUNT = 5;
 
@@ -49,16 +50,8 @@ export function useGameViewModel() {
   const [currentPairIndex, setCurrentPairIndex] = useState(0);
   const stagePairCount = stagePairs.length || STAGE_PAIR_COUNT;
 
-  // Debug Flag
-  const [debugMode, setDebugMode] = useState(() => {
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('debug') === '1' || urlParams.get('debug') === 'true') return true;
-      return localStorage.getItem('diff_hunter_debug') === 'true';
-    } catch (_) {
-      return false;
-    }
-  });
+  // Debug Flag (Always enabled on dev branch/URLs unless explicitly specified otherwise)
+  const [debugMode, setDebugMode] = useState(() => getInitialDebugMode());
 
   // Curation State
   const [curatedStatusMap, setCuratedStatusMap] = useState(() => {
@@ -330,6 +323,7 @@ export function useGameViewModel() {
             }
           };
 
+          markFirstSetCompleted();
           try {
             localStorage.setItem('diff_hunter_categorized_stats', JSON.stringify(newStats));
           } catch (_) {}

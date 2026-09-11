@@ -2,7 +2,7 @@ import React from 'react';
 import { AlertCircle, X, Play } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
-export default function ConfirmExitModal({ isOpen, onConfirm, onCancel }) {
+export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily = false }) {
   if (!isOpen) return null;
 
   return (
@@ -29,8 +29,8 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel }) {
           width: '94%',
           padding: '24px 20px',
           textAlign: 'center',
-          border: '1.5px solid rgba(0, 240, 255, 0.4)',
-          boxShadow: '0 0 35px rgba(0, 240, 255, 0.25)',
+          border: isDaily ? '1.5px solid rgba(255, 0, 127, 0.6)' : '1.5px solid rgba(0, 240, 255, 0.4)',
+          boxShadow: isDaily ? '0 0 35px rgba(255, 0, 127, 0.35)' : '0 0 35px rgba(0, 240, 255, 0.25)',
           borderRadius: '20px',
           position: 'relative',
           animation: 'pageFadeIn 0.12s ease-out'
@@ -66,22 +66,24 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel }) {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: 'rgba(0, 240, 255, 0.15)',
-          border: '1.5px solid var(--accent-cyan)',
+          background: isDaily ? 'rgba(255, 0, 127, 0.15)' : 'rgba(0, 240, 255, 0.15)',
+          border: isDaily ? '1.5px solid var(--accent-pink)' : '1.5px solid var(--accent-cyan)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           margin: '0 auto 14px auto',
-          boxShadow: '0 0 20px rgba(0, 240, 255, 0.35)'
+          boxShadow: isDaily ? '0 0 20px rgba(255, 0, 127, 0.4)' : '0 0 20px rgba(0, 240, 255, 0.35)'
         }}>
-          <AlertCircle size={30} color="var(--accent-cyan)" />
+          <AlertCircle size={30} color={isDaily ? 'var(--accent-pink)' : 'var(--accent-cyan)'} />
         </div>
 
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '8px', color: '#fff', letterSpacing: '0.5px' }}>
-          Quit Current Game?
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '8px', color: isDaily ? 'var(--accent-pink)' : '#fff', letterSpacing: '0.5px' }}>
+          {isDaily ? 'Forfeit Set of the Day?' : 'Quit Current Game?'}
         </h2>
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '22px', lineHeight: 1.45 }}>
-          Your current stage progress will be lost. Are you sure you want to return to the menu?
+          {isDaily
+            ? "Quitting now will forfeit today's Set of the Day run as a failed attempt. You will not be able to re-attempt until tomorrow's daily refresh."
+            : "Your current stage progress will be lost. Are you sure you want to return to the menu?"}
         </p>
 
         {/* Action Buttons */}
@@ -116,7 +118,7 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel }) {
               background: 'rgba(255, 0, 127, 0.08)'
             }}
           >
-            Quit to Menu
+            {isDaily ? 'Forfeit' : 'Quit to Menu'}
           </button>
         </div>
       </div>

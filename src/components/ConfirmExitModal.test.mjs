@@ -4,28 +4,25 @@ import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-const componentPath = path.join(
+const modalPath = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
   'ConfirmExitModal.jsx'
 );
 
-test('ConfirmExitModal renders confirmation dialog with Keep Playing and Quit to Menu CTAs', () => {
-  const source = fs.readFileSync(componentPath, 'utf8');
+test('ConfirmExitModal shows daily challenge forfeit warning when isDaily is true', () => {
+  const source = fs.readFileSync(modalPath, 'utf8');
 
+  // Prop verification
+  assert.match(source, /isDaily\s*=\s*false/);
+
+  // Daily forfeit warning copy
+  assert.match(source, /Forfeit Set of the Day\?/);
+  assert.match(source, /Quitting now will forfeit today's Set of the Day run as a failed attempt/);
+  assert.match(source, /You will not be able to re-attempt until tomorrow's daily refresh/);
+  assert.match(source, /\{isDaily \? 'Forfeit' : 'Quit to Menu'\}/);
+
+  // Standard quit copy
   assert.match(source, /Quit Current Game\?/);
-  assert.match(source, /Keep Playing/);
+  assert.match(source, /Your current stage progress will be lost/);
   assert.match(source, /Quit to Menu/);
-  assert.match(source, /onConfirm/);
-  assert.match(source, /onCancel/);
 });
-
-test('App.jsx intercepts back button in game view to show ConfirmExitModal', () => {
-  const appPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'App.jsx');
-  const appSource = fs.readFileSync(appPath, 'utf8');
-
-  assert.match(appSource, /import ConfirmExitModal from '\.\/components\/ConfirmExitModal'/);
-  assert.match(appSource, /confirmExitModalOpen/);
-  assert.match(appSource, /handleRequestBack/);
-  assert.match(appSource, /<ConfirmExitModal/);
-});
-

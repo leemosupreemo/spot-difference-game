@@ -122,18 +122,30 @@ export default function GameCanvas({
 
   // Detect natural image aspect ratio to eliminate cropping and ensure 100% pixel-perfect coordinates
   useEffect(() => {
-    if (level?.baseImage) {
+    if (level?.dimensions?.width && level?.dimensions?.height) {
+      const ratio = level.dimensions.width / level.dimensions.height;
+      if (Math.abs(ratio - 4 / 3) < 0.05) {
+        setCardAspectRatio('4 / 3');
+      } else {
+        setCardAspectRatio(`${level.dimensions.width} / ${level.dimensions.height}`);
+      }
+    } else if (level?.baseImage) {
       const img = new Image();
       img.onload = () => {
         if (img.naturalWidth && img.naturalHeight) {
-          setCardAspectRatio(`${img.naturalWidth} / ${img.naturalHeight}`);
+          const ratio = img.naturalWidth / img.naturalHeight;
+          if (Math.abs(ratio - 4 / 3) < 0.05) {
+            setCardAspectRatio('4 / 3');
+          } else {
+            setCardAspectRatio(`${img.naturalWidth} / ${img.naturalHeight}`);
+          }
         }
       };
       img.src = resolveAssetUrl(level.baseImage);
     } else {
       setCardAspectRatio('4 / 3');
     }
-  }, [level?.baseImage, level?.id]);
+  }, [level?.baseImage, level?.id, level?.dimensions]);
 
   // Pointer/Touch gesture tracking
   const pointerStartRef = useRef({ x: 0, y: 0, time: 0, isDrag: false });
@@ -355,9 +367,9 @@ export default function GameCanvas({
   return (
     <div style={{
       width: '100%',
-      maxWidth: '1300px',
+      maxWidth: '1400px',
       margin: '0 auto',
-      padding: '0 16px',
+      padding: '0 4px',
       boxSizing: 'border-box'
     }}>
       

@@ -17,15 +17,34 @@ import DebugCuratorBar from './components/DebugCuratorBar';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
 import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGenerator';
 import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
-import { sounds } from './utils/audio';
+import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
+import { getInitialDebugMode } from './utils/debugMode';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
 import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted } from './services/analytics';
 import { parseIncomingChallenge } from './utils/challengeMetrics';
 import { syncRemoteLevelPacks } from './services/remoteLevelSync';
 import { syncRemoteAppConfig } from './services/appConfig';
 import { initializeNotificationListeners, scheduleInstallNotifications } from './services/notificationService';
+import { initGameCenter, mirrorRoundToGameCenter } from './services/gameCenter';
+import SetOfTheDayBanner from './components/SetOfTheDayBanner';
+import DailyVictoryModal from './components/DailyVictoryModal';
+import {
+  getDailySetForDate,
+  getAllDailyChallengePoolLevels,
+  recordDailyChallengeCompletion,
+  recordDailyChallengeAttempt,
+  recordDailyChallengeFailure,
+  recordDailyChallengeCompletionRemote,
+  recordDailyChallengeFailureRemote,
+  startDailyChallengeSession,
+  canAttemptDaily,
+  getDailyPlayerStatus,
+  resetDailyPlayerStatus,
+  syncRemoteDailyQueue
+} from './services/dailyChallenge';
+import { hasCompletedFirstSet, markFirstSetCompleted } from './services/playerProgress';
 
 export default function App() {
   const [levels, setLevels] = useState(() => {
@@ -84,6 +103,9 @@ export default function App() {
     return 'find_the_sniper';
   }); // 'find_the_sniper' | 'abstract_animated'
   const [activeMode, setActiveMode] = useState('classic'); // 'classic' | 'blitz' | 'zen'
+  const [gameMode, setGameMode] = useState('standard'); // 'standard' | 'daily'
+  const [dailyVictoryData, setDailyVictoryData] = useState(null);
+  const [statsInitialTab, setStatsInitialTab] = useState('leaderboards');
   
   // Gameplay State
   const [foundDiffs, setFoundDiffs] = useState([]);
@@ -110,16 +132,8 @@ export default function App() {
   const [diagnosticsModalOpen, setDiagnosticsModalOpen] = useState(false);
   const [debugModalOpen, setDebugModalOpen] = useState(false);
 
-  // Debug Flag (Hidden by default; enabled via URL ?debug=1 or secret logo tap)
-  const [debugMode, setDebugMode] = useState(() => {
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('debug') === '1' || urlParams.get('debug') === 'true') return true;
-      return localStorage.getItem('diff_hunter_debug') === 'true';
-    } catch (e) {
-      return false;
-    }
-  });
+  // Debug Flag (Always enabled on dev branch/URLs unless explicitly specified otherwise)
+  const [debugMode, setDebugMode] = useState(() => getInitialDebugMode());
 
   const [debugSourceMode, setDebugSourceMode] = useState('premade'); // 'premade' | 'procedural'
   const [skipKeptLevels, setSkipKeptLevels] = useState(() => {
@@ -133,9 +147,12 @@ export default function App() {
   const visitedDebugLevelIdsRef = useRef(new Set());
   useEffect(() => {
     initAnalytics();
+    initGameCenter().catch(() => {});
     initializeNotificationListeners().catch(() => {});
     syncRemoteLevelPacks().catch(() => {});
     syncRemoteAppConfig().catch(() => {});
+    syncRemoteDailyQueue().catch(() => {});
+    music.start();
 
     // If launched via Challenge Link, track reception
     if (incomingChallenge) {
@@ -331,6 +348,13 @@ export default function App() {
     });
   }, []);
 
+  const handleResetDailyChallenge = useCallback(() => {
+    resetDailyPlayerStatus();
+    setIsDailyCompleted(false);
+    sounds.playWin();
+    logApp('INFO', '[DailyChallenge] Player daily status reset via debug/test controls');
+  }, []);
+
   useEffect(() => {
     if (debugMode && debugSourceMode === 'premade') {
       const allActive = getAllPhotoPairEntries();
@@ -350,6 +374,17 @@ export default function App() {
 
   const handleNextPair = async () => {
     sounds.playTap();
+
+    if (debugMode && gameMode === 'daily') {
+      const currentIndex = levels.findIndex(l => l.id === currentLevelId);
+      const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % levels.length : 0;
+      const nextLevel = levels[nextIndex];
+      if (nextLevel) {
+        setCurrentStageIndex(nextIndex);
+        startLevel(nextLevel.id);
+      }
+      return;
+    }
 
     if (debugMode && debugSourceMode === 'procedural') {
       const procLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
@@ -381,6 +416,17 @@ export default function App() {
 
   const handlePrevPair = () => {
     sounds.playTap();
+
+    if (debugMode && gameMode === 'daily') {
+      const currentIndex = levels.findIndex(l => l.id === currentLevelId);
+      const prevIndex = currentIndex >= 0 ? (currentIndex - 1 + levels.length) % levels.length : 0;
+      const prevLevel = levels[prevIndex];
+      if (prevLevel) {
+        setCurrentStageIndex(prevIndex);
+        startLevel(prevLevel.id);
+      }
+      return;
+    }
 
     if (debugMode) {
       const allActive = getAllPhotoPairEntries();
@@ -434,6 +480,16 @@ export default function App() {
         Medium: { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} },
         Hard: { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} }
       };
+    }
+  });
+
+  const [hasCompletedFirstSetState, setHasCompletedFirstSetState] = useState(() => hasCompletedFirstSet());
+  const [isDailyCompleted, setIsDailyCompleted] = useState(() => {
+    try {
+      const status = getDailyPlayerStatus();
+      return Boolean(status?.completed || status?.attempted || status?.failed);
+    } catch (_) {
+      return false;
     }
   });
 
@@ -503,7 +559,9 @@ export default function App() {
 
   // Handle Game Launch from Main Menu
   const handleStartGame = async () => {
+    setVictoryModalOpen(false);
     logApp('INFO', `[StartGameClicked] Theme: ${selectedTheme}, Diff: ${selectedDifficulty}, DebugMode: ${debugMode}`);
+    setGameMode('standard');
     setCurrentStageIndex(0);
     stageTimesRef.current = [];
     setTotalStageTimeMs(0);
@@ -561,6 +619,57 @@ export default function App() {
     setView('game');
   };
 
+  // Launch Set of the Day (3-image sequence from unrepeated daily queue)
+  const handleStartDailyChallenge = () => {
+    sounds.playTap();
+    if (!canAttemptDaily() && !debugMode) {
+      logApp('INFO', '[DailyChallenge] Daily challenge already attempted today');
+      return;
+    }
+    // Start session locally & remotely
+    startDailyChallengeSession().then(session => {
+      if (session && !session.allowed && !debugMode) {
+        logApp('INFO', '[DailyChallenge] Remote attempt already exists for today');
+        setIsDailyCompleted(true);
+      }
+    }).catch(() => {});
+
+    if (!debugMode) {
+      setIsDailyCompleted(true);
+    }
+    let dailyLevels;
+    if (debugMode) {
+      logApp('INFO', '[StartDailyChallenge:Debug] Requesting whole daily challenge pool');
+      dailyLevels = getAllDailyChallengePoolLevels();
+    } else {
+      logApp('INFO', '[StartDailyChallenge] Requesting today\'s 3-image sequence');
+      dailyLevels = getDailySetForDate();
+    }
+
+    if (!dailyLevels || dailyLevels.length === 0) {
+      logApp('WARN', '[DailyChallenge] No daily levels found in catalog');
+      return;
+    }
+
+    setGameMode('daily');
+    setCurrentStageIndex(0);
+    stageTimesRef.current = [];
+    setTotalStageTimeMs(0);
+    setScore(0);
+    setMagnifierEnabled(false);
+    setLevels(dailyLevels);
+    startLevel(dailyLevels[0].id);
+    setView('game');
+
+    trackGameStarted({
+      themeId: 'daily_challenge',
+      difficulty: 'Medium',
+      mode: activeMode,
+      totalLevelsInStage: dailyLevels.length
+    });
+    logApp('INFO', `[DailyChallenge] Launching ${dailyLevels.length}-image daily sequence: ${dailyLevels.map(l => l.id).join(', ')}`);
+  };
+
   // Difference Found Handler
   const handleDiffFound = (diffId) => {
     if (foundDiffs.includes(diffId)) return;
@@ -594,7 +703,17 @@ export default function App() {
 
       // In Debug Mode: Unified continuous big batch loop across all levels
       if (debugMode) {
-        if (debugSourceMode === 'premade') {
+        if (gameMode === 'daily') {
+          const nextIndex = (currentStageIndex + 1) % levels.length;
+          setTimeout(() => {
+            setCurrentStageIndex(nextIndex);
+            const nextLevel = levels[nextIndex];
+            if (nextLevel) {
+              startLevel(nextLevel.id);
+            }
+          }, 350);
+          return;
+        } else if (debugSourceMode === 'premade') {
           const allActive = getAllPhotoPairEntries();
           const curIdx = allActive.findIndex(e => e.id === currentLevelId);
           const nextIndex = curIdx >= 0 ? (curIdx + 1) % allActive.length : 0;
@@ -617,7 +736,7 @@ export default function App() {
       }
 
       const nextIndex = currentStageIndex + 1;
-      const totalStageImages = levels.length > 0 ? levels.length : 5;
+      const totalStageImages = gameMode === 'daily' ? 3 : (levels.length > 0 ? levels.length : 5);
 
       if (nextIndex < totalStageImages) {
         setTimeout(() => {
@@ -628,10 +747,72 @@ export default function App() {
           }
         }, 350);
       } else {
-        // ALL 5 IMAGES CLEARED! FULL STAGE CLEAR!
-        const cumulativeTime = stageTimesRef.current.reduce((sum, t) => sum + (t || 0), 0);
+        // FULL STAGE / SEQUENCE CLEAR!
+        const cumulativeTime = stageTimesRef.current.slice(0, totalStageImages).reduce((sum, t) => sum + (t || 0), 0);
         setTotalStageTimeMs(cumulativeTime);
         const stageTotalScore = score + pointsEarned;
+
+        // Daily Challenge Mode (3 Images Sequence) Completion
+        if (gameMode === 'daily') {
+          markFirstSetCompleted();
+          setHasCompletedFirstSetState(true);
+          setIsDailyCompleted(true);
+
+          const dailyResult = recordDailyChallengeCompletion({
+            totalTimeMs: cumulativeTime
+          });
+
+          // Sync completion to Firestore live daily leaderboard asynchronously
+          recordDailyChallengeCompletionRemote({
+            totalTimeMs: cumulativeTime
+          }).then(remoteResult => {
+            if (remoteResult) {
+              setDailyVictoryData(prev => prev ? {
+                ...prev,
+                position: remoteResult.position,
+                totalPlayers: remoteResult.totalPlayers,
+                percentile: remoteResult.percentile
+              } : null);
+            }
+          }).catch(() => {});
+
+          // Mirror to Game Center if signed in
+          mirrorRoundToGameCenter({
+            elapsedTimeMs: cumulativeTime,
+            difficulty: 'Medium',
+            isPersonalBest: dailyResult.isNewRecord,
+            score: stageTotalScore,
+            stars: dailyResult.stars
+          }).catch(() => {});
+
+          trackStageCleared({
+            selectedTheme: 'daily_challenge',
+            selectedDifficulty: 'Medium',
+            totalStageTimeMs: cumulativeTime,
+            totalStageScore: stageTotalScore,
+            imagesInStageCount: 3
+          });
+
+          logApp('INFO', `[DailyChallengeCleared] Time: ${cumulativeTime}ms, Rank: #${dailyResult.position}, Stars: ${dailyResult.stars}`);
+
+          setTimeout(() => {
+            setDailyVictoryData({
+              isOpen: true,
+              totalTimeMs: cumulativeTime,
+              position: dailyResult.position,
+              totalPlayers: dailyResult.totalPlayers,
+              percentile: dailyResult.percentile,
+              stars: dailyResult.stars,
+              isNewRecord: dailyResult.isNewRecord,
+              isFailed: false,
+              stageIndex: 2
+            });
+          }, 500);
+          return;
+        }
+
+        markFirstSetCompleted();
+        setHasCompletedFirstSetState(true);
 
         trackStageCleared({
           selectedTheme,
@@ -740,9 +921,28 @@ export default function App() {
           stageIndex: currentStageIndex
         });
 
-        // Spotlight correct answer for 2.5s before opening Game Over modal
+        // Spotlight correct answer for 2.5s before opening modal
         setTimeout(() => {
-          setGameOverModalOpen(true);
+          if (gameMode === 'daily') {
+            recordDailyChallengeFailureRemote({
+              stageIndex: currentStageIndex
+            }).catch(() => {});
+            setIsDailyCompleted(true);
+            const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
+            setDailyVictoryData({
+              isOpen: true,
+              totalTimeMs: cumulativeTime,
+              position: null,
+              totalPlayers: null,
+              percentile: null,
+              stars: 0,
+              isNewRecord: false,
+              isFailed: true,
+              stageIndex: currentStageIndex
+            });
+          } else {
+            setGameOverModalOpen(true);
+          }
         }, 2500);
       }
       return next;
@@ -785,48 +985,123 @@ export default function App() {
     setConfirmExitModalOpen(false);
     setTimerRunning(false);
     setMagnifierEnabled(false);
+    if (gameMode === 'daily') {
+      if (!debugMode) {
+        recordDailyChallengeFailureRemote({ stageIndex: currentStageIndex }).catch(() => {});
+        setIsDailyCompleted(true);
+      }
+      try { sounds.playLose(); } catch (_) {}
+      const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
+      setDailyVictoryData({
+        isOpen: true,
+        totalTimeMs: cumulativeTime,
+        position: null,
+        totalPlayers: null,
+        percentile: null,
+        stars: 0,
+        isNewRecord: false,
+        isFailed: true,
+        isForfeit: true,
+        stageIndex: currentStageIndex
+      });
+      return;
+    }
     setView('menu');
   };
 
   const handleCancelExit = () => {
     setConfirmExitModalOpen(false);
+    if (view === 'game') {
+      setTimerRunning(true);
+    }
+  };
+
+  // Sound Mute Toggle
+  const handleToggleMute = (val) => {
+    setMuted(val);
+    sounds.setMuted(val);
+  };
+
+  // Custom Level Creator
+  const handleOpenCreator = () => {
+    sounds.playTap();
+    setView('creator');
+  };
+
+  const handleOpenLeaderboard = () => {
+    setStatsInitialTab('progress');
+    setView('stats');
+  };
+
+  const handleOpenProgress = () => {
+    setStatsInitialTab('progress');
+    setView('stats');
+  };
+
+  const handleOpenDailyLeaderboard = () => {
+    setStatsInitialTab('daily');
+    setView('stats');
   };
 
   return (
     <div className="app-container">
-      {/* Universal Top Header */}
-      <Header
-        view={view}
-        onBack={handleRequestBack}
-        onOpenLeaderboard={() => setView('stats')}
-        onOpenProgress={() => setView('stats')}
-        onOpenHelp={() => setHelpModalOpen(true)}
-        onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
-        muted={muted}
-        setMuted={setMuted}
-        onToggleDebug={toggleDebugMode}
-        debugMode={debugMode}
-      />
+      <div className="app-content">
+        {/* Persistent Top Header (Menu & Stats only; in game if debug) */}
+        <Header
+          view={view}
+          onBack={handleRequestBack}
+          muted={muted}
+          setMuted={handleToggleMute}
+          onOpenLeaderboard={handleOpenLeaderboard}
+          onOpenProgress={handleOpenProgress}
+          onOpenHelp={() => setHelpModalOpen(true)}
+          onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
+          onToggleDebug={toggleDebugMode}
+          debugMode={debugMode}
+        />
 
-      {/* Main Navigation Routing */}
-      <div key={view} className="page-fade-in">
+        {/* View Switcher */}
         {view === 'menu' ? (
           <MainMenu
+            onStartGame={handleStartGame}
             selectedTheme={selectedTheme}
             setSelectedTheme={setSelectedTheme}
             selectedDifficulty={selectedDifficulty}
             setSelectedDifficulty={setSelectedDifficulty}
-            onStartGame={handleStartGame}
-            onOpenProgress={() => setView('stats')}
-            onOpenDebug={() => setDebugModalOpen(true)}
+            activeMode={activeMode}
+            setActiveMode={setActiveMode}
+            onOpenLeaderboard={handleOpenLeaderboard}
+            onOpenStats={() => {
+              setStatsInitialTab('progress');
+              setView('stats');
+            }}
+            onOpenCreator={handleOpenCreator}
             debugMode={debugMode}
-            incomingChallenge={incomingChallenge}
+            onToggleDebug={toggleDebugMode}
+            onOpenHelp={() => setHelpModalOpen(true)}
+            onOpenShareChallenge={() => setShareChallengeModalOpen(true)}
+            hasCompletedFirstSet={hasCompletedFirstSetState}
+            bannerSlot={
+              (!isDailyCompleted || debugMode) && (
+                <SetOfTheDayBanner
+                  onStartDaily={handleStartDailyChallenge}
+                  onOpenDailyLeaderboard={handleOpenDailyLeaderboard}
+                  onResetDaily={handleResetDailyChallenge}
+                  forceShow={debugMode}
+                  debugMode={debugMode}
+                />
+              )
+            }
           />
         ) : view === 'stats' ? (
           <ProgressModal
             isOpen={true}
             onClose={() => setView('menu')}
             difficultyStats={difficultyStats}
+            onStartDaily={handleStartDailyChallenge}
+            onResetDaily={handleResetDailyChallenge}
+            initialTab={statsInitialTab}
+            debugMode={debugMode}
           />
         ) : view === 'creator' ? (
           <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />
@@ -848,8 +1123,9 @@ export default function App() {
               onToggleSourceMode={handleToggleDebugSourceMode}
               skipKeptLevels={skipKeptLevels}
               onToggleSkipKept={handleToggleSkipKept}
-              currentStageIndex={getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex}
-              totalStageImages={debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)}
+              currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode && debugSourceMode === 'premade' ? (getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
+              totalStageImages={gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5))}
+              gameMode={gameMode}
             />
           )}
 
@@ -863,8 +1139,8 @@ export default function App() {
             score={score}
             mode={activeMode}
             missCount={missCount}
-            currentStageIndex={debugMode && debugSourceMode === 'premade' ? (getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex}
-            totalStageImages={debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)}
+            currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode && debugSourceMode === 'premade' ? (getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
+            totalStageImages={gameMode === 'daily' && !debugMode ? 3 : (gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)))}
             selectedDifficulty={selectedDifficulty}
             onBack={handleRequestBack}
             debugMode={debugMode}
@@ -902,6 +1178,42 @@ export default function App() {
         onClose={() => setVictoryModalOpen(false)}
       />
 
+      {/* Set of the Day Completion / Finish Modal */}
+      {dailyVictoryData?.isOpen && (
+        <DailyVictoryModal
+          isOpen={Boolean(dailyVictoryData?.isOpen)}
+          totalTimeMs={dailyVictoryData?.totalTimeMs}
+          position={dailyVictoryData?.position}
+          totalPlayers={dailyVictoryData?.totalPlayers}
+          percentile={dailyVictoryData?.percentile}
+          stars={dailyVictoryData?.stars}
+          isNewRecord={dailyVictoryData?.isNewRecord}
+          isFailed={dailyVictoryData?.isFailed}
+          isForfeit={dailyVictoryData?.isForfeit}
+          stageIndex={dailyVictoryData?.stageIndex}
+          debugMode={debugMode}
+          onRestart={debugMode ? () => {
+            setDailyVictoryData(null);
+            setRevealAnswer(false);
+            setGameOverModalOpen(false);
+            handleStartDailyChallenge();
+          } : undefined}
+          onOpenLeaderboard={() => {
+            setDailyVictoryData(null);
+            setRevealAnswer(false);
+            setGameOverModalOpen(false);
+            setStatsInitialTab('daily');
+            setView('stats');
+          }}
+          onClose={() => {
+            setDailyVictoryData(null);
+            setRevealAnswer(false);
+            setGameOverModalOpen(false);
+            setView('menu');
+          }}
+        />
+      )}
+
       <GameOverModal
         isOpen={gameOverModalOpen}
         onClose={() => {
@@ -926,6 +1238,7 @@ export default function App() {
 
       <ConfirmExitModal
         isOpen={confirmExitModalOpen}
+        isDaily={gameMode === 'daily'}
         onConfirm={handleConfirmExit}
         onCancel={handleCancelExit}
       />

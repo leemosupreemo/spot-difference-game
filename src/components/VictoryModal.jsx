@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { Trophy, Star, Clock, Zap, ArrowRight, RotateCcw, X, Share2, Flame, Swords } from 'lucide-react';
+import { Trophy, Star, Zap, ArrowRight, RotateCcw, X, Share2, Swords } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { calculatePercentileRank, checkAndUpdatePersonalBest, recordLocalShareEvent } from '../utils/challengeMetrics';
 import { trackResultScreenViewed, trackChallengeShareClicked } from '../services/analytics';
+import { mirrorRoundToGameCenter, openGameCenterLeaderboard, isGameCenterSupported } from '../services/gameCenter';
 import ShareChallengeModal from './ShareChallengeModal';
+import ResultCard from './ResultCard';
 
 export default function VictoryModal({
   isOpen,
@@ -13,33 +15,51 @@ export default function VictoryModal({
   elapsedTime = 0,
   missCount = 0,
   score = 0,
-  stars = 3,
   difficulty = 'Medium',
   themeId = 'find_the_sniper',
   isStageSet = true,
   incomingChallenge = null,
+  isDaily = false,
+  isFailed = false,
+  isNewRecord = false,
   onNextLevel,
   onRestart,
   onClose
 }) {
+  const celebrated = useRef(false);
+  const celebrationTimer = useRef(null);
   const [shareModalOpen, setShareModalOpen] = useState(false);
 
-  // Calculate Stars based on Points Obtained across stage (Score >= 1000 -> 3 Stars, Score >= 500 -> 2 Stars, Score > 0 -> 1 Star, or explicit stars prop)
-  const displayStars = (score > 0)
-    ? (score >= 1000 ? 3 : score >= 500 ? 2 : 1)
-    : (typeof stars === 'number' ? stars : 3);
-
   // Percentile and Personal Best Metrics
-  const { topPercentile, beatPercentile, rankLabel } = useMemo(() => {
+  const { topPercentile, beatPercentile } = useMemo(() => {
     return calculatePercentileRank(elapsedTime, difficulty, isStageSet);
   }, [elapsedTime, difficulty, isStageSet]);
 
+  const displayStars = isFailed ? 0 : topPercentile <= 25 ? 3 : topPercentile <= 50 ? 2 : 1;
+
   const [isPersonalBest, setIsPersonalBest] = useState(false);
+  const canShare = Boolean(isPersonalBest || isNewRecord || (isDaily && !isFailed));
 
   useEffect(() => {
+    if (!isOpen) {
+      celebrated.current = false;
+      setShareModalOpen(false);
+      return;
+    }
+    if (celebrated.current) return;
+    celebrated.current = true;
     if (isOpen) {
       const pbCheck = checkAndUpdatePersonalBest(elapsedTime, difficulty, themeId, isStageSet);
       setIsPersonalBest(pbCheck.isPersonalBest);
+
+      // Automatically mirror fastest times & achievements to Apple Game Center if signed in
+      mirrorRoundToGameCenter({
+        elapsedTimeMs: elapsedTime,
+        difficulty,
+        isPersonalBest: pbCheck.isPersonalBest,
+        score,
+        stars: displayStars
+      }).catch(() => {});
 
       // Record result screen view for share rate conversion funnel
       recordLocalShareEvent('view');
@@ -94,7 +114,7 @@ export default function VictoryModal({
 
       if (isThreeStars) {
         // Extra golden side cannons for 3-star glorious victory
-        const timer = setTimeout(() => {
+        celebrationTimer.current = setTimeout(() => {
           try {
             confetti({
               particleCount: 45,
@@ -114,7 +134,7 @@ export default function VictoryModal({
             console.warn('Victory celebration unavailable:', error);
           }
         }, 180);
-        return () => clearTimeout(timer);
+        return () => clearTimeout(celebrationTimer.current);
       }
     }
   }, [isOpen, displayStars, elapsedTime, difficulty, themeId, isStageSet, beatPercentile, topPercentile, score, incomingChallenge]);
@@ -132,12 +152,20 @@ export default function VictoryModal({
   const challengerSecNum = challengerSec ? parseFloat(challengerSec) : null;
   const playerWonChallenge = challengerSecNum !== null ? userSecNum <= challengerSecNum : null;
 
+  const handleLeaveResult = action => {
+    sounds.playTap();
+    clearTimeout(celebrationTimer.current);
+    confetti.reset?.();
+    onClose();
+    action?.();
+  };
+
   const handleOpenShare = () => {
     sounds.playTap();
     trackChallengeShareClicked({
       source: isPersonalBest ? 'victory_modal_pb_cta' : 'victory_modal_cta',
       elapsedTimeMs: elapsedTime,
-      percentileBeat,
+      percentileBeat: beatPercentile,
       isPersonalBest,
       difficulty,
       themeId
@@ -148,7 +176,7 @@ export default function VictoryModal({
   return (
     <>
       <div
-        onClick={() => { sounds.playTap(); onClose(); }}
+        onClick={() => handleLeaveResult()}
         style={{
           position: 'fixed',
           inset: 0,
@@ -180,7 +208,7 @@ export default function VictoryModal({
         >
           {/* Top Right Close "X" Button */}
           <button
-            onClick={() => { sounds.playTap(); onClose(); }}
+            onClick={() => handleLeaveResult()}
             style={{
               position: 'absolute',
               top: 12,
@@ -223,7 +251,7 @@ export default function VictoryModal({
           </p>
 
           {/* Stars Earned */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
+          <div role="img" aria-label={`${displayStars} out of 3 stars`} style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
             {[1, 2, 3].map(starNum => {
               const active = starNum <= displayStars;
               return (
@@ -250,53 +278,11 @@ export default function VictoryModal({
             })}
           </div>
 
-          {/* Salient Virality Highlight / Personal Best Banner */}
-          <div style={{
-            background: isPersonalBest
-              ? 'linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(255, 0, 127, 0.15))'
-              : 'rgba(0, 240, 255, 0.08)',
-            border: isPersonalBest
-              ? '1px solid rgba(255, 183, 3, 0.6)'
-              : '1px solid rgba(0, 240, 255, 0.25)',
-            borderRadius: '14px',
-            padding: '10px 14px',
-            marginBottom: '14px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '8px',
-            textAlign: 'left'
-          }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                {isPersonalBest ? (
-                  <span style={{ fontSize: '0.78rem', fontWeight: 900, color: 'var(--accent-gold)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <Flame size={14} /> NEW PERSONAL BEST!
-                  </span>
-                ) : (
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-cyan)' }}>
-                    PERFORMANCE BENCHMARK
-                  </span>
-                )}
-              </div>
-              <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#fff', marginTop: '2px' }}>
-                You beat <span style={{ color: 'var(--accent-green)', fontWeight: 900 }}>{beatPercentile}%</span> of Diff Hunter players
-              </div>
-            </div>
-
-            <div style={{
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              borderRadius: '8px',
-              padding: '4px 8px',
-              fontSize: '0.72rem',
-              fontWeight: 900,
-              color: 'var(--accent-gold)',
-              whiteSpace: 'nowrap'
-            }}>
-              {rankLabel}
-            </div>
-          </div>
+          <ResultCard
+            elapsedTimeMs={elapsedTime}
+            topPercentile={topPercentile}
+            isNewRecord={Boolean(isPersonalBest || isNewRecord)}
+          />
 
           {/* Incoming Head-to-Head Challenge Rivalry Result Banner */}
           {incomingChallenge && (
@@ -325,7 +311,7 @@ export default function VictoryModal({
           {/* Performance Breakdown Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '10px',
             background: 'rgba(0,0,0,0.4)',
             padding: '12px 14px',
@@ -333,15 +319,6 @@ export default function VictoryModal({
             marginBottom: '14px',
             textAlign: 'left'
           }}>
-            <div>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <Clock size={12} color="var(--accent-cyan)" /> TIME TAKEN
-              </span>
-              <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)' }}>
-                {seconds}s
-              </span>
-            </div>
-
             <div>
               <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <Zap size={12} color="var(--accent-gold)" /> TOTAL PTS
@@ -366,37 +343,66 @@ export default function VictoryModal({
             </div>
           </div>
 
-          {/* PLG Feature: Challenge a Friend Button */}
-          <button
-            onClick={handleOpenShare}
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              padding: '12px 16px',
-              borderRadius: '14px',
-              marginBottom: '12px',
-              fontSize: '0.96rem',
-              fontWeight: 900,
-              cursor: 'pointer',
-              background: 'linear-gradient(135deg, rgba(255, 183, 3, 0.9), rgba(255, 110, 0, 0.95))',
-              color: '#000',
-              border: 'none',
-              boxShadow: '0 4px 18px rgba(255, 183, 3, 0.4)',
-              transition: 'transform 0.15s ease, box-shadow 0.15s ease'
-            }}
-          >
-            <Share2 size={18} />
-            {incomingChallenge ? `Challenge ${incomingChallenge.challengerName} Back` : 'Challenge a Friend'}
-          </button>
+          {/* PLG Feature: Challenge a Friend Button - only for new record or daily series completed successfully */}
+          {canShare && (
+            <button
+              onClick={handleOpenShare}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '12px 16px',
+                borderRadius: '14px',
+                marginBottom: '10px',
+                fontSize: '0.96rem',
+                fontWeight: 900,
+                cursor: 'pointer',
+                background: 'linear-gradient(135deg, rgba(255, 183, 3, 0.9), rgba(255, 110, 0, 0.95))',
+                color: '#000',
+                border: 'none',
+                boxShadow: '0 4px 18px rgba(255, 183, 3, 0.4)',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease'
+              }}
+            >
+              <Share2 size={18} />
+              Share
+            </button>
+          )}
+
+          {/* Game Center Leaderboard Action (iOS) */}
+          {isGameCenterSupported() && (
+            <button
+              onClick={() => { sounds.playTap(); openGameCenterLeaderboard(); }}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '9px 14px',
+                borderRadius: '12px',
+                marginBottom: '12px',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                background: 'rgba(255, 255, 255, 0.08)',
+                color: '#fff',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <Trophy size={15} color="var(--accent-gold)" />
+              Game Center Leaderboards
+            </button>
+          )}
 
           {/* Navigation Buttons */}
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
             <button
               className="glass-btn"
-              onClick={() => { sounds.playTap(); onRestart(); }}
+              onClick={() => handleLeaveResult(onRestart)}
               style={{ flex: 1, justifyContent: 'center', fontSize: '1rem', fontWeight: 800, padding: '10px 14px', borderRadius: '12px' }}
             >
               <RotateCcw size={18} /> Retry
@@ -404,7 +410,7 @@ export default function VictoryModal({
 
             <button
               className="glass-btn glass-btn-primary"
-              onClick={() => { sounds.playTap(); onNextLevel(); }}
+              onClick={() => handleLeaveResult(onNextLevel)}
               style={{ flex: 1.4, justifyContent: 'center', fontSize: '1.05rem', fontWeight: 900, padding: '10px 16px', borderRadius: '12px' }}
             >
               Next Stage <ArrowRight size={18} />
@@ -422,7 +428,7 @@ export default function VictoryModal({
           elapsedTime={elapsedTime}
           percentileBeat={beatPercentile}
           topPercentile={topPercentile}
-          isPersonalBest={isPersonalBest}
+          isPersonalBest={Boolean(isPersonalBest || isNewRecord)}
           difficulty={difficulty}
           themeId={themeId}
           levelTitle={titleText}

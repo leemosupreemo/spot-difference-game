@@ -103,44 +103,55 @@ export function subscribeToRemoteLevels(callback) {
  * Asynchronously fetches and syncs published level packs from Firebase Firestore.
  * Collection: 'remote_level_packs'
  */
-export async function syncRemoteLevelPacks() {
+export async function syncRemoteLevelPacks(timeoutMs = 3000) {
   if (!firebaseConfig.projectId || !firebaseConfig.apiKey) {
     return getCachedRemoteLevels();
   }
 
+  // In Node test / offline environments without emulator, return cached levels immediately
+  if (typeof window === 'undefined' && !process.env?.FIRESTORE_EMULATOR_HOST) {
+    return getCachedRemoteLevels();
+  }
+
   try {
-    const app = getApps()[0] || initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    const fetchTask = async () => {
+      const app = getApps()[0] || initializeApp(firebaseConfig);
+      const auth = getAuth(app);
 
-    if (!auth.currentUser) {
-      try {
-        await signInAnonymously(auth);
-      } catch (authErr) {
-        logApp('WARN', '[RemoteLevelAuthWarn]', authErr?.message || authErr);
+      if (!auth.currentUser) {
+        try {
+          await signInAnonymously(auth);
+        } catch (authErr) {
+          logApp('WARN', '[RemoteLevelAuthWarn]', authErr?.message || authErr);
+        }
       }
-    }
 
-    const db = getFirestore(app);
-    const packsRef = collection(db, 'remote_level_packs');
-    // Fetch active published packs
-    const q = query(packsRef, where('active', '==', true));
-    const snapshot = await getDocs(q);
+      const db = getFirestore(app);
+      const packsRef = collection(db, 'remote_level_packs');
+      // Fetch active published packs
+      const q = query(packsRef, where('active', '==', true));
+      const snapshot = await getDocs(q);
 
-    const remoteEntries = [];
-    snapshot.forEach(docSnap => {
-      const data = docSnap.data();
-      if (Array.isArray(data?.levels)) {
-        remoteEntries.push(...data.levels);
-      } else if (data?.id && data?.baseImage) {
-        remoteEntries.push(data);
+      const remoteEntries = [];
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        if (Array.isArray(data?.levels)) {
+          remoteEntries.push(...data.levels);
+        } else if (data?.id && data?.baseImage) {
+          remoteEntries.push(data);
+        }
+      });
+
+      if (remoteEntries.length > 0) {
+        const updated = saveCachedRemoteLevels(remoteEntries);
+        logApp('INFO', `[RemoteLevelSync] Successfully synced ${updated.length} remote levels from Firebase.`);
+        return updated;
       }
-    });
+      return getCachedRemoteLevels();
+    };
 
-    if (remoteEntries.length > 0) {
-      const updated = saveCachedRemoteLevels(remoteEntries);
-      logApp('INFO', `[RemoteLevelSync] Successfully synced ${updated.length} remote levels from Firebase.`);
-      return updated;
-    }
+    const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(getCachedRemoteLevels()), timeoutMs));
+    return await Promise.race([fetchTask(), timeoutPromise]);
   } catch (err) {
     logApp('INFO', '[RemoteLevelSyncOffline] Offline or no remote packs:', err?.message || err);
   }

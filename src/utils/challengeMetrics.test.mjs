@@ -68,7 +68,8 @@ test('generateChallengeText formats viral challenge copy', () => {
     challengeUrl: 'https://example.com/play?c=1'
   });
 
-  assert.match(text, /Can you beat my 2\.43s/);
+  assert.match(text, /I spotted it in 2\.43 seconds/);
+  assert.doesNotMatch(text, /Can you beat me/);
   assert.match(text, /NEW PERSONAL BEST/);
   assert.match(text, /beat 93% of Diff Hunter players/);
   assert.match(text, /There is ONE difference/);
@@ -97,4 +98,16 @@ test('getShareStats and recordLocalShareEvent compute share rate cleanly', () =>
   assert.equal(typeof stats.shareTaps, 'number');
   assert.equal(typeof stats.sharesCompleted, 'number');
   assert.equal(typeof stats.shareRate, 'number');
+});
+
+test('native and localhost challenge URLs use the public playable game', () => {
+  const previous = globalThis.window;
+  try {
+    for (const origin of ['capacitor://localhost', 'http://localhost:5173', 'null']) {
+      globalThis.window = { location: { origin } };
+      const url = new URL(generateChallengeUrl({ elapsedTimeMs: 35000, playerName: 'Alex' }));
+      assert.equal(url.origin, 'https://diffhunter.web.app');
+      assert.equal(parseIncomingChallenge(url.search).targetTimeMs, 35000);
+    }
+  } finally { globalThis.window = previous; }
 });

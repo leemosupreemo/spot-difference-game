@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "node --test src/**/*.test.mjs && python3 scripts/test_pipeline_unit_suite.py",
+    "test": "node --test src/**/*.test.mjs && npm run test:ui && python3 scripts/test_pipeline_unit_suite.py",
     "test:watch": "node --test --watch src/**/*.test.mjs",
     "prune:dismissed": "node scripts/prune_dismissed_levels.mjs",
     "add:pair": "node scripts/add_image_pair.mjs",
@@ -14,12 +14,17 @@
     "distribute:firebase": "bash scripts/distribute_ios.sh",
     "distribute:appstore": "bash scripts/distribute_appstore.sh",
     "deploy:web": "vite build && firebase deploy --only hosting",
-    "preview": "vite preview"
+    "deploy:dev": "VITE_IS_DEV_CHANNEL=true vite build && firebase hosting:channel:deploy dev --only diff-hunter --expires 30d",
+    "queue:daily": "node scripts/manage_daily_queue.mjs",
+    "preview": "vite preview",
+    "test:ui": "vitest run src/**/*.test.jsx"
   },
   "dependencies": {
     "@capacitor/core": "^8.5.0",
+    "@capacitor/filesystem": "^8.1.3",
     "@capacitor/haptics": "^8.0.2",
     "@capacitor/local-notifications": "^8.3.1",
+    "@capacitor/share": "^8.0.1",
     "@capacitor/status-bar": "^8.0.3",
     "canvas-confetti": "^1.9.4",
     "firebase": "^12.17.1",

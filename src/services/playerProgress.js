@@ -37,6 +37,54 @@ async function getPlayer() {
 
 let inMemoryPlayerName = 'SpeedHunter';
 
+export const STORAGE_KEY_HAS_COMPLETED_SET = 'diff_hunter_has_completed_first_set';
+let inMemoryHasCompletedFirstSet = false;
+
+export function hasCompletedFirstSet() {
+  if (inMemoryHasCompletedFirstSet) return true;
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem) {
+      if (localStorage.getItem(STORAGE_KEY_HAS_COMPLETED_SET) === 'true') {
+        return true;
+      }
+      // Backward-compatibility: Check if player already completed standard sets
+      const statsRaw = localStorage.getItem('diff_hunter_categorized_stats');
+      if (statsRaw) {
+        const stats = JSON.parse(statsRaw);
+        for (const cat of Object.values(stats)) {
+          if (cat && (cat.setsCleared > 0 || (cat.sets && Object.keys(cat.sets).length > 0))) {
+            return true;
+          }
+        }
+      }
+      // Backward-compatibility: Check if player already completed a daily challenge set
+      const dailyRaw = localStorage.getItem('diff_hunter_daily_sets');
+      if (dailyRaw && dailyRaw !== '{}') {
+        return true;
+      }
+    }
+  } catch (_) {}
+  return inMemoryHasCompletedFirstSet;
+}
+
+export function markFirstSetCompleted() {
+  inMemoryHasCompletedFirstSet = true;
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.setItem) {
+      localStorage.setItem(STORAGE_KEY_HAS_COMPLETED_SET, 'true');
+    }
+  } catch (_) {}
+}
+
+export function _resetFirstSetCompletedForTesting() {
+  inMemoryHasCompletedFirstSet = false;
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.removeItem) {
+      localStorage.removeItem(STORAGE_KEY_HAS_COMPLETED_SET);
+    }
+  } catch (_) {}
+}
+
 export function getSavedPlayerName() {
   try {
     if (typeof localStorage !== 'undefined' && localStorage.getItem) {
@@ -328,71 +376,25 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
     const allEntriesMap = new Map();
 
   const fallbackEntries = [
-    {
-      uid: 'demo_1',
-      playerName: 'PixelSniper_Pro',
-      avgFirstTimeByDifficulty: { Easy: 8200, Medium: 12400, Hard: 18500 },
-      avgRepeatTimeByDifficulty: { Easy: 6420, Medium: 9850, Hard: 14200 },
-      avgFirstTimeByPack: { find_the_sniper: 11200, abstract_animated: 14500 },
-      avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 },
-      fastestTimeByPack: { find_the_sniper: 2450, abstract_animated: 3100 },
-      avgTimesByDifficulty: { Easy: 6420, Medium: 9850, Hard: 14200 },
-      avgTimesByPack: { find_the_sniper: 8900, abstract_animated: 11400 },
-      totalSetsCleared: 24,
-      isCurrentPlayer: false
-    },
-    {
-      uid: 'demo_2',
-      playerName: 'VortexEagle',
-      avgFirstTimeByDifficulty: { Easy: 9800, Medium: 14200, Hard: 20100 },
-      avgRepeatTimeByDifficulty: { Easy: 7890, Medium: 11200, Hard: 16500 },
-      avgFirstTimeByPack: { find_the_sniper: 12800, abstract_animated: 16200 },
-      avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 },
-      fastestTimeByPack: { find_the_sniper: 2890, abstract_animated: 3650 },
-      avgTimesByDifficulty: { Easy: 7890, Medium: 11200, Hard: 16500 },
-      avgTimesByPack: { find_the_sniper: 10400, abstract_animated: 13100 },
-      totalSetsCleared: 18,
-      isCurrentPlayer: false
-    },
-    {
-      uid: 'demo_3',
-      playerName: 'ChronoMaster',
-      avgFirstTimeByDifficulty: { Easy: 11500, Medium: 15900, Hard: 22800 },
-      avgRepeatTimeByDifficulty: { Easy: 9150, Medium: 12800, Hard: 18900 },
-      avgFirstTimeByPack: { find_the_sniper: 14200, abstract_animated: 18100 },
-      avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 },
-      fastestTimeByPack: { find_the_sniper: 3420, abstract_animated: 4100 },
-      avgTimesByDifficulty: { Easy: 9150, Medium: 12800, Hard: 18900 },
-      avgTimesByPack: { find_the_sniper: 11800, abstract_animated: 14900 },
-      totalSetsCleared: 15,
-      isCurrentPlayer: false
-    },
-    {
-      uid: 'demo_4',
-      playerName: 'ApexHawk_X',
-      avgFirstTimeByDifficulty: { Easy: 12900, Medium: 17400, Hard: 25600 },
-      avgRepeatTimeByDifficulty: { Easy: 10400, Medium: 14100, Hard: 21300 },
-      avgFirstTimeByPack: { find_the_sniper: 15900, abstract_animated: 19800 },
-      avgRepeatTimeByPack: { find_the_sniper: 13200, abstract_animated: 16800 },
-      fastestTimeByPack: { find_the_sniper: 3950, abstract_animated: 4850 },
-      avgTimesByDifficulty: { Easy: 10400, Medium: 14100, Hard: 21300 },
-      avgTimesByPack: { find_the_sniper: 13200, abstract_animated: 16800 },
-      totalSetsCleared: 12,
-      isCurrentPlayer: false
-    },
-    {
-      uid: 'demo_5',
-      playerName: 'NovaSeeker',
-      avgFirstTimeByDifficulty: { Easy: 14200, Medium: 19100, Hard: 28400 },
-      avgRepeatTimeByDifficulty: { Easy: 11800, Medium: 15900, Hard: 23800 },
-      avgFirstTimeByPack: { find_the_sniper: 17400, abstract_animated: 21900 },
-      avgRepeatTimeByPack: { find_the_sniper: 14600, abstract_animated: 18500 },
-      fastestTimeByPack: { find_the_sniper: 4600, abstract_animated: 5500 },
-      avgTimesByDifficulty: { Easy: 11800, Medium: 15900, Hard: 23800 },
-      avgTimesByPack: { find_the_sniper: 14600, abstract_animated: 18500 },
-      totalSetsCleared: 9,
-      isCurrentPlayer: false
-    }
+    { uid: 'demo_1', playerName: 'PixelSniper_Pro', avgFirstTimeByPack: { find_the_sniper: 11200, abstract_animated: 14500 }, avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 }, fastestTimeByPack: { find_the_sniper: 2450, abstract_animated: 3100 }, totalSetsCleared: 24, isCurrentPlayer: false },
+    { uid: 'demo_2', playerName: 'VortexEagle', avgFirstTimeByPack: { find_the_sniper: 12800, abstract_animated: 16200 }, avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 }, fastestTimeByPack: { find_the_sniper: 2890, abstract_animated: 3650 }, totalSetsCleared: 18, isCurrentPlayer: false },
+    { uid: 'demo_3', playerName: 'ChronoMaster', avgFirstTimeByPack: { find_the_sniper: 14200, abstract_animated: 18100 }, avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 }, fastestTimeByPack: { find_the_sniper: 3420, abstract_animated: 4100 }, totalSetsCleared: 15, isCurrentPlayer: false },
+    { uid: 'demo_4', playerName: 'ApexHawk_X', avgFirstTimeByPack: { find_the_sniper: 15900, abstract_animated: 19800 }, avgRepeatTimeByPack: { find_the_sniper: 13200, abstract_animated: 16800 }, fastestTimeByPack: { find_the_sniper: 3950, abstract_animated: 4850 }, totalSetsCleared: 12, isCurrentPlayer: false },
+    { uid: 'demo_5', playerName: 'NovaSeeker', avgFirstTimeByPack: { find_the_sniper: 17400, abstract_animated: 21900 }, avgRepeatTimeByPack: { find_the_sniper: 14600, abstract_animated: 18500 }, fastestTimeByPack: { find_the_sniper: 4600, abstract_animated: 5500 }, totalSetsCleared: 9, isCurrentPlayer: false },
+    { uid: 'demo_6', playerName: 'ShadowGlint', avgFirstTimeByPack: { find_the_sniper: 18800, abstract_animated: 23200 }, avgRepeatTimeByPack: { find_the_sniper: 15800, abstract_animated: 19700 }, fastestTimeByPack: { find_the_sniper: 4950, abstract_animated: 5900 }, totalSetsCleared: 8, isCurrentPlayer: false },
+    { uid: 'demo_7', playerName: 'NeonStalker', avgFirstTimeByPack: { find_the_sniper: 20100, abstract_animated: 24800 }, avgRepeatTimeByPack: { find_the_sniper: 17100, abstract_animated: 21200 }, fastestTimeByPack: { find_the_sniper: 5300, abstract_animated: 6400 }, totalSetsCleared: 7, isCurrentPlayer: false },
+    { uid: 'demo_8', playerName: 'SwiftRetina', avgFirstTimeByPack: { find_the_sniper: 21600, abstract_animated: 26500 }, avgRepeatTimeByPack: { find_the_sniper: 18400, abstract_animated: 22800 }, fastestTimeByPack: { find_the_sniper: 5750, abstract_animated: 6900 }, totalSetsCleared: 6, isCurrentPlayer: false },
+    { uid: 'demo_9', playerName: 'AeroGaze', avgFirstTimeByPack: { find_the_sniper: 23000, abstract_animated: 28100 }, avgRepeatTimeByPack: { find_the_sniper: 19800, abstract_animated: 24300 }, fastestTimeByPack: { find_the_sniper: 6200, abstract_animated: 7400 }, totalSetsCleared: 6, isCurrentPlayer: false },
+    { uid: 'demo_10', playerName: 'QuantumRider', avgFirstTimeByPack: { find_the_sniper: 24500, abstract_animated: 29800 }, avgRepeatTimeByPack: { find_the_sniper: 21200, abstract_animated: 25900 }, fastestTimeByPack: { find_the_sniper: 6700, abstract_animated: 7950 }, totalSetsCleared: 5, isCurrentPlayer: false },
+    { uid: 'demo_11', playerName: 'PrismRanger', avgFirstTimeByPack: { find_the_sniper: 26000, abstract_animated: 31500 }, avgRepeatTimeByPack: { find_the_sniper: 22600, abstract_animated: 27500 }, fastestTimeByPack: { find_the_sniper: 7200, abstract_animated: 8500 }, totalSetsCleared: 5, isCurrentPlayer: false },
+    { uid: 'demo_12', playerName: 'SpecterPulse', avgFirstTimeByPack: { find_the_sniper: 27600, abstract_animated: 33200 }, avgRepeatTimeByPack: { find_the_sniper: 24100, abstract_animated: 29100 }, fastestTimeByPack: { find_the_sniper: 7750, abstract_animated: 9100 }, totalSetsCleared: 4, isCurrentPlayer: false },
+    { uid: 'demo_13', playerName: 'HyperSight', avgFirstTimeByPack: { find_the_sniper: 29200, abstract_animated: 35000 }, avgRepeatTimeByPack: { find_the_sniper: 25700, abstract_animated: 30800 }, fastestTimeByPack: { find_the_sniper: 8300, abstract_animated: 9750 }, totalSetsCleared: 4, isCurrentPlayer: false },
+    { uid: 'demo_14', playerName: 'FalconTrace', avgFirstTimeByPack: { find_the_sniper: 30900, abstract_animated: 36900 }, avgRepeatTimeByPack: { find_the_sniper: 27300, abstract_animated: 32600 }, fastestTimeByPack: { find_the_sniper: 8900, abstract_animated: 10400 }, totalSetsCleared: 3, isCurrentPlayer: false },
+    { uid: 'demo_15', playerName: 'ZenithVector', avgFirstTimeByPack: { find_the_sniper: 32700, abstract_animated: 38800 }, avgRepeatTimeByPack: { find_the_sniper: 29000, abstract_animated: 34500 }, fastestTimeByPack: { find_the_sniper: 9550, abstract_animated: 11100 }, totalSetsCleared: 3, isCurrentPlayer: false },
+    { uid: 'demo_16', playerName: 'MirageOptic', avgFirstTimeByPack: { find_the_sniper: 34600, abstract_animated: 40800 }, avgRepeatTimeByPack: { find_the_sniper: 30800, abstract_animated: 36500 }, fastestTimeByPack: { find_the_sniper: 10200, abstract_animated: 11850 }, totalSetsCleared: 2, isCurrentPlayer: false },
+    { uid: 'demo_17', playerName: 'OmegaLens', avgFirstTimeByPack: { find_the_sniper: 36600, abstract_animated: 42900 }, avgRepeatTimeByPack: { find_the_sniper: 32700, abstract_animated: 38600 }, fastestTimeByPack: { find_the_sniper: 10900, abstract_animated: 12650 }, totalSetsCleared: 2, isCurrentPlayer: false },
+    { uid: 'demo_18', playerName: 'ApexScout', avgFirstTimeByPack: { find_the_sniper: 38700, abstract_animated: 45100 }, avgRepeatTimeByPack: { find_the_sniper: 34700, abstract_animated: 40800 }, fastestTimeByPack: { find_the_sniper: 11650, abstract_animated: 13500 }, totalSetsCleared: 1, isCurrentPlayer: false },
+    { uid: 'demo_19', playerName: 'VividRacer', avgFirstTimeByPack: { find_the_sniper: 41000, abstract_animated: 47400 }, avgRepeatTimeByPack: { find_the_sniper: 36800, abstract_animated: 43100 }, fastestTimeByPack: { find_the_sniper: 12450, abstract_animated: 14400 }, totalSetsCleared: 1, isCurrentPlayer: false }
   ];
 
   fallbackEntries.forEach(entry => allEntriesMap.set(entry.uid, entry));
@@ -401,7 +403,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
 
   const combinedList = Array.from(allEntriesMap.values());
 
-  const getTop5ForPack = (packId) => {
+  const getTop20ForPack = (packId) => {
     return combinedList
       .map(p => {
         let firstTime = p.avgFirstTimeByPack?.[packId];
@@ -454,18 +456,18 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         const fastB = b.fastestTime || 999999;
         return fastA - fastB;
       })
-      .slice(0, 10);
+      .slice(0, 20);
   };
 
     return {
       isCloud,
       byPackFirst: {
-        find_the_sniper: getTop5ForPack('find_the_sniper'),
-        abstract_animated: getTop5ForPack('abstract_animated')
+        find_the_sniper: getTop20ForPack('find_the_sniper'),
+        abstract_animated: getTop20ForPack('abstract_animated')
       },
       byPackRepeat: {
-        find_the_sniper: getTop5ForPack('find_the_sniper'),
-        abstract_animated: getTop5ForPack('abstract_animated')
+        find_the_sniper: getTop20ForPack('find_the_sniper'),
+        abstract_animated: getTop20ForPack('abstract_animated')
       },
       localPlayer: localPlayerEntry
     };
@@ -540,7 +542,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           const timeB = b.firstTime || (b.repeatTime ? b.repeatTime * 1.25 : 999999);
           if (timeA !== timeB) return timeA - timeB;
           return (a.repeatTime || 999999) - (b.repeatTime || 999999);
-        });
+        }).slice(0, 20);
       };
 
       resolve({

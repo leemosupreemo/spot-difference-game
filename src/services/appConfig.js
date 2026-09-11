@@ -22,6 +22,41 @@ const firebaseConfig = {
 };
 
 let inMemoryAppStoreUrl = null;
+const STORAGE_KEY_FF_SET_OF_THE_DAY = 'diff_hunter_ff_set_of_the_day';
+let inMemorySetOfTheDayEnabled = null;
+
+/**
+ * Returns whether Set of the Day feature is enabled.
+ */
+export function isSetOfTheDayEnabled() {
+  if (inMemorySetOfTheDayEnabled !== null) {
+    return inMemorySetOfTheDayEnabled;
+  }
+
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem) {
+      const stored = localStorage.getItem(STORAGE_KEY_FF_SET_OF_THE_DAY);
+      if (stored !== null) {
+        inMemorySetOfTheDayEnabled = stored === 'true';
+        return inMemorySetOfTheDayEnabled;
+      }
+    }
+  } catch (_) {}
+
+  return true; // default enabled
+}
+
+/**
+ * Updates Set of the Day feature flag.
+ */
+export function setSetOfTheDayEnabled(enabled) {
+  inMemorySetOfTheDayEnabled = Boolean(enabled);
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.setItem) {
+      localStorage.setItem(STORAGE_KEY_FF_SET_OF_THE_DAY, String(enabled));
+    }
+  } catch (_) {}
+}
 
 /**
  * Returns current App Store Review URL (from in-memory cache, localStorage, or fallback).
@@ -70,6 +105,10 @@ export async function syncRemoteAppConfig() {
         setAppStoreReviewUrl(config.appStoreUrl);
         logApp('INFO', '[AppConfigSync] Loaded App Store URL from static config:', config.appStoreUrl);
       }
+      if (typeof config?.enableSetOfTheDay === 'boolean') {
+        setSetOfTheDayEnabled(config.enableSetOfTheDay);
+        logApp('INFO', '[AppConfigSync] Loaded Set of the Day flag from static config:', config.enableSetOfTheDay);
+      }
     }
   } catch (_) {}
 
@@ -86,11 +125,16 @@ export async function syncRemoteAppConfig() {
       if (remoteUrl && typeof remoteUrl === 'string' && remoteUrl.startsWith('http')) {
         setAppStoreReviewUrl(remoteUrl);
         logApp('INFO', '[AppConfigSync] Synced remote App Store URL from Firestore:', remoteUrl);
-        return remoteUrl;
       }
+      const remoteFlag = data?.enableSetOfTheDay ?? data?.enable_set_of_the_day;
+      if (typeof remoteFlag === 'boolean') {
+        setSetOfTheDayEnabled(remoteFlag);
+        logApp('INFO', '[AppConfigSync] Synced Set of the Day flag from Firestore:', remoteFlag);
+      }
+      if (remoteUrl) return remoteUrl;
     }
   } catch (err) {
-    logApp('INFO', '[AppConfigSyncOffline] Using cached App Store URL:', err?.message || err);
+    logApp('INFO', '[AppConfigSyncOffline] Using cached app configuration:', err?.message || err);
   }
 
   return getAppStoreReviewUrl();

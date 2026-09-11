@@ -25,6 +25,28 @@ export default function Header({
     else if (onOpenProgress) onOpenProgress();
   };
 
+  const [logoTapCount, setLogoTapCount] = React.useState(0);
+  const lastLogoTapRef = React.useRef(0);
+
+  const handleLogoTap = (e) => {
+    e.stopPropagation();
+    const now = Date.now();
+    if (now - lastLogoTapRef.current > 1500) {
+      setLogoTapCount(1);
+    } else {
+      const nextCount = logoTapCount + 1;
+      if (nextCount >= 3) {
+        setLogoTapCount(0);
+        sounds.playWin();
+        if (onToggleDebug) onToggleDebug();
+        return;
+      }
+      setLogoTapCount(nextCount);
+      sounds.playTap();
+    }
+    lastLogoTapRef.current = now;
+  };
+
   // When playing (view === 'game'), hide header entirely if not in debug mode
   if (view === 'game' && !debugMode) {
     return null;
@@ -52,7 +74,9 @@ export default function Header({
           {/* Left Side: Logo on Main Menu, or Back Button on Stats screen */}
           {view === 'menu' ? (
             <div
-              style={{ display: 'flex', alignItems: 'center', gap: '10px', userSelect: 'none' }}
+              onClick={handleLogoTap}
+              title="Tap 3 times to toggle Debug/Test mode"
+              style={{ display: 'flex', alignItems: 'center', gap: '10px', userSelect: 'none', cursor: 'pointer' }}
             >
               <img
                 src="/app-icon.png"

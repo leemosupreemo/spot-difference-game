@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Play, Layers, Sparkles, Camera, Swords, Smartphone } from 'lucide-react';
 import { Capacitor } from '@capacitor/core';
 import { sounds } from '../utils/audio';
@@ -5,25 +6,26 @@ import { SCENE_THEMES } from '../utils/proceduralGenerator';
 import { logApp, auditDOMState } from '../utils/logger';
 import { trackCategorySelected } from '../services/analytics';
 import { getAppStoreReviewUrl } from '../services/appConfig';
+import { hasCompletedFirstSet } from '../services/playerProgress';
 import TutorialBanner from './TutorialBanner';
 
 export default function MainMenu({
   selectedTheme,
   setSelectedTheme,
   onStartGame,
-  incomingChallenge = null
+  incomingChallenge = null,
+  hasCompletedFirstSet: hasCompletedProp
 }) {
+  const isSetCompleted = hasCompletedProp !== undefined ? hasCompletedProp : hasCompletedFirstSet();
   const isNative = typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform();
   const themeDetails = {
     find_the_sniper: {
       icon: <Camera size={26} color="var(--accent-cyan)" />,
-      badge: 'REALISTIC PHOTOS',
-      desc: 'Authentic high-resolution photographs with 1 subtle difference'
+      badge: 'REALISTIC PHOTOS'
     },
     abstract_animated: {
       icon: <Sparkles size={26} color="#d9b3ff" />,
-      badge: 'INFINITE WORLDS',
-      desc: 'Dynamic generative art compositions across 12 artistic worlds'
+      badge: 'INFINITE WORLDS'
     }
   };
 
@@ -79,8 +81,8 @@ export default function MainMenu({
         </div>
       )}
 
-      {/* Top Interactive Tutorial Graphic Banner with full-width SPOT & TAP */}
-      <TutorialBanner />
+      {/* Top Interactive Tutorial Graphic Banner with full-width SPOT & TAP (hidden once first image set is completed) */}
+      {!isSetCompleted && <TutorialBanner />}
 
       {/* Main Mode / Category Selection Card */}
       <div className="glass-panel" style={{
@@ -154,53 +156,50 @@ export default function MainMenu({
                       {details.badge}
                     </span>
                   </div>
-                  {details.desc && (
-                    <p style={{
-                      fontSize: '0.74rem',
-                      color: 'var(--text-muted)',
-                      margin: '4px 0 0 0',
-                      lineHeight: '1.25'
-                    }}>
-                      {details.desc}
-                    </p>
-                  )}
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Main Action START GAME Button */}
-        <button
-          className="glass-btn glass-btn-primary start-game-btn"
-          onPointerDown={() => {
-            logApp('INFO', `[StartGameBtnPointerDown] Theme: ${selectedTheme}`);
-            auditDOMState('StartGameBtnPointerDown');
-          }}
-          onClick={(e) => {
-            e.currentTarget.blur();
-            logApp('INFO', `[StartGameBtnClicked] Theme: ${selectedTheme}`);
-            auditDOMState('StartGameBtnClicked');
-            try { sounds.playWin(); } catch (_) {}
-            try { onStartGame(); } catch (err) { logApp('ERROR', '[onStartGameError]', err?.stack || err); }
-          }}
-          style={{
-            width: '100%',
-            padding: '15px 24px',
-            fontSize: '1.25rem',
-            fontWeight: 900,
-            justifyContent: 'center',
-            borderRadius: '14px',
-            boxShadow: '0 6px 30px rgba(0, 240, 255, 0.5)',
-            letterSpacing: '0.5px',
-            touchAction: 'manipulation',
-            WebkitUserSelect: 'auto',
-            userSelect: 'auto',
-            cursor: 'pointer'
-          }}
-        >
-          <Play size={22} fill="#000" /> START GAME
-        </button>
+        {/* Main Action START GAME Button with Periodic Sheen */}
+        <div className="start-game-outer-container start-game-btn-wrapper">
+          <div className="start-game-btn-anchor">
+            <button
+              className="glass-btn glass-btn-primary start-game-btn"
+              onPointerDown={() => {
+                logApp('INFO', `[StartGameBtnPointerDown] Theme: ${selectedTheme}`);
+                auditDOMState('StartGameBtnPointerDown');
+              }}
+              onClick={(e) => {
+                e.currentTarget.blur();
+                logApp('INFO', `[StartGameBtnClicked] Theme: ${selectedTheme}`);
+                auditDOMState('StartGameBtnClicked');
+                try { sounds.playWin(); } catch (_) {}
+                try { onStartGame(); } catch (err) { logApp('ERROR', '[onStartGameError]', err?.stack || err); }
+              }}
+              style={{
+                width: '100%',
+                maxWidth: '360px',
+                padding: '15px 24px',
+                fontSize: '1.25rem',
+                fontWeight: 900,
+                justifyContent: 'center',
+                borderRadius: '14px',
+                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.35)',
+                letterSpacing: '0.5px',
+                touchAction: 'manipulation',
+                WebkitUserSelect: 'auto',
+                userSelect: 'auto',
+                cursor: 'pointer',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+            >
+              <Play size={22} fill="#000" /> START GAME
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Web Only "Coming Soon to iPhone" Badge Banner */}

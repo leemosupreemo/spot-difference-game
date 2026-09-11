@@ -44,10 +44,10 @@ body {
   font-family: var(--font-main);
   min-height: 100vh;
   overflow-x: hidden;
-  padding-top: max(env(safe-area-inset-top), var(--safe-top, 14px));
-  padding-bottom: max(env(safe-area-inset-bottom), var(--safe-bottom, 14px));
-  padding-left: max(env(safe-area-inset-left), var(--safe-left, 36px));
-  padding-right: max(env(safe-area-inset-right), var(--safe-right, 36px));
+  padding-top: max(env(safe-area-inset-top), var(--safe-top, 10px));
+  padding-bottom: max(env(safe-area-inset-bottom), var(--safe-bottom, 10px));
+  padding-left: max(env(safe-area-inset-left), var(--safe-left, 14px));
+  padding-right: max(env(safe-area-inset-right), var(--safe-right, 14px));
 }
 
 /* Glassmorphic Container Card */
@@ -99,13 +99,112 @@ body {
   box-shadow: 0 6px 25px rgba(0, 240, 255, 0.6);
 }
 
+/* Start Game Larger Outer Container ("Container in a Container") */
+.start-game-outer-container {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 20px;
+  margin: 8px 0 0 0;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  --btn-max-w: 360px;
+  --btn-h: 54px;
+  --btn-radius: 14px;
+  --container-radius: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.start-game-outer-container:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Inner Start Game Button Anchor & Button with Capped Max Length */
+.start-game-btn-anchor {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.start-game-btn {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+  transform: none !important;
+  transition: opacity 0.15s ease;
+}
+
+.start-game-btn:hover,
+.start-game-btn:focus,
+.start-game-btn:active {
+  transform: none !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Periodic Sheen on Start Game Button */
+.start-game-btn::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -120%;
+  width: 55%;
+  height: 220%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 15%,
+    rgba(255, 255, 255, 0.45) 45%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.45) 55%,
+    rgba(255, 255, 255, 0) 85%,
+    transparent 100%
+  );
+  transform: rotate(22deg);
+  pointer-events: none;
+  animation: startBtnPeriodicSheen 3.8s ease-in-out infinite;
+}
+
+@keyframes startBtnPeriodicSheen {
+  0%, 55% {
+    left: -120%;
+    opacity: 0;
+  }
+  58% {
+    opacity: 0.9;
+  }
+  80% {
+    left: 200%;
+    opacity: 0.9;
+  }
+  82%, 100% {
+    left: 200%;
+    opacity: 0;
+  }
+}
+
 /* Side-by-side Image Container - ALWAYS HORIZONTAL (2 COLUMNS) REGARDLESS OF SCREEN ORIENTATION */
 .game-viewport {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   position: relative;
 }
@@ -127,7 +226,7 @@ body {
 
 @media (max-width: 600px) {
   .game-viewport {
-    gap: 6px;
+    gap: 4px;
   }
 }
 
@@ -475,10 +574,20 @@ body {
     border-radius: 18px !important;
   }
 
+  .mode-card-desc {
+    font-size: 0.94rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .start-game-btn-anchor {
+    max-width: 440px !important;
+  }
+
   .start-game-btn {
     padding: 18px 32px !important;
     font-size: 1.45rem !important;
     border-radius: 16px !important;
+    max-width: 440px !important;
   }
 
   .tutorial-hand-icon {
@@ -493,3 +602,66 @@ body {
   }
 }
 
+/* Quiet Tron-like atmosphere for an expired daily run. */
+.tron-expired-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.72;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(0, 240, 255, 0.08), transparent 48%),
+    linear-gradient(180deg, rgba(3, 12, 28, 0.08), rgba(0, 0, 0, 0.24));
+}
+
+.tron-expired-particles ~ * {
+  position: relative;
+  z-index: 1;
+}
+
+.tron-expired-scanline {
+  position: absolute;
+  inset: -30% 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 7px,
+    rgba(0, 240, 255, 0.035) 8px,
+    transparent 9px
+  );
+  animation: tronScanlineSweep 9s linear infinite;
+}
+
+.tron-expired-particle {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 6px #00f0ff, 0 0 14px rgba(0, 240, 255, 0.55);
+  animation: tronParticleDrift ease-in-out infinite;
+}
+
+.tron-expired-particle.is-violet {
+  background: #9b6cff;
+  box-shadow: 0 0 6px #9b6cff, 0 0 14px rgba(155, 108, 255, 0.5);
+}
+
+@keyframes tronParticleDrift {
+  0%, 100% { transform: translate3d(0, 8px, 0); opacity: 0.2; }
+  45% { transform: translate3d(10px, -12px, 0); opacity: 0.75; }
+  70% { transform: translate3d(-7px, -3px, 0); opacity: 0.4; }
+}
+
+@keyframes tronScanlineSweep {
+  from { transform: translateY(-12%); }
+  to { transform: translateY(12%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tron-expired-scanline,
+  .tron-expired-particle {
+    animation: none;
+  }
+}

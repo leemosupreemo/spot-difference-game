@@ -1,5 +1,6 @@
 // Web Audio API & Native Capacitor Haptic Controller for Mobile (iOS & Android)
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
+import { music } from './music.js';
 
 class SoundController {
   constructor() {
@@ -20,9 +21,14 @@ class SoundController {
     }
   }
 
-  toggleMute() {
-    this.muted = !this.muted;
+  setMuted(mute) {
+    this.muted = Boolean(mute);
+    music.setMuted(this.muted);
     return this.muted;
+  }
+
+  toggleMute() {
+    return this.setMuted(!this.muted);
   }
 
   isMuted() {
@@ -296,3 +302,4 @@ class SoundController {
 }
 
 export const sounds = new SoundController();
+export { music } from './music.js';

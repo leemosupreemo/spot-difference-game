@@ -25,3 +25,5 @@ build/
 *.sln
 *.sw?
 .firebase/
+__pycache__/
+*.py[cod]

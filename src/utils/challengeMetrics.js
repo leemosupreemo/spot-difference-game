@@ -181,11 +181,9 @@ export function generateChallengeUrl({ elapsedTimeMs, playerName, difficulty = '
   const name = playerName || getSavedPlayerName() || 'Player';
 
   try {
-    const origin = typeof window !== 'undefined' && window.location?.origin && !window.location.origin.startsWith('null') && !window.location.origin.startsWith('file:')
-      ? window.location.origin
-      : 'https://apps.apple.com/app/id6740888200';
-
-    const url = new URL(origin);
+    const candidate = new URL(typeof window !== 'undefined' ? window.location?.origin || 'https://diffhunter.web.app' : 'https://diffhunter.web.app');
+    const publicHost = candidate.protocol === 'https:' && !['localhost', '127.0.0.1', '[::1]'].includes(candidate.hostname) && !candidate.hostname.endsWith('.local');
+    const url = new URL(publicHost ? candidate.origin : 'https://diffhunter.web.app');
     url.searchParams.set('challenge', '1');
     url.searchParams.set('challenger', name);
     url.searchParams.set('time', seconds);
@@ -195,27 +193,201 @@ export function generateChallengeUrl({ elapsedTimeMs, playerName, difficulty = '
 
     return url.toString();
   } catch {
-    return `${getAppStoreReviewUrl()}&challenge=1&time=${seconds}&challenger=${encodeURIComponent(name)}`;
+    const url = new URL('https://diffhunter.web.app');
+    url.search = new URLSearchParams({ challenge: '1', time: seconds, challenger: name, diff: difficulty, theme: themeId, ...(levelId ? { levelId } : {}) }).toString();
+    return url.toString();
   }
 }
 
 /**
  * Generates viral challenge text copy for iMessage / SMS / Social.
  */
-export function generateChallengeText({ elapsedTimeMs, beatPercentile = 93, isPersonalBest = false, playerName = '', challengeUrl = '' }) {
+export function generateChallengeText({ elapsedTimeMs, beatPercentile = 93, topPercentile, isPersonalBest = false, playerName = '', challengeUrl = '' }) {
   const seconds = (Math.max(0, elapsedTimeMs) / 1000).toFixed(2);
   const name = playerName || getSavedPlayerName() || 'I';
   const url = challengeUrl || getAppStoreReviewUrl();
+  const topPct = topPercentile || Math.max(1, 100 - beatPercentile);
 
   const pbLine = isPersonalBest ? '🏆 NEW PERSONAL BEST!\n' : '';
 
   return (
-    `👀 Can you beat my ${seconds}s in Diff Hunter?\n\n` +
+    `I spotted it in ${seconds} seconds.\n` +
+    `Top ${topPct}%\n` +
     `${pbLine}` +
     `⚡ ${name === 'I' ? 'I' : name} beat ${beatPercentile}% of Diff Hunter players.\n` +
     `There is ONE difference. Spot it before time runs out!\n\n` +
     `👉 Play the challenge: ${url}`
   );
+}
+
+/**
+ * Generates clean Result Card text copy:
+ * "I spotted it in X.XX seconds.
+ *  Top X%
+ *  Ready to share."
+ */
+export function generateResultCardText({ elapsedTimeMs, topPercentile = 7, challengeUrl = '' }) {
+  const seconds = (Math.max(0, elapsedTimeMs) / 1000).toFixed(2);
+  const safeTop = typeof topPercentile === 'number' && !isNaN(topPercentile) ? topPercentile : 7;
+  const urlSuffix = challengeUrl ? `\n\n👉 Challenge: ${challengeUrl}` : '';
+  return `I spotted it in ${seconds} seconds.\nTop ${safeTop}%${urlSuffix}`;
+}
+
+/**
+ * Direct platform sharing helper for:
+ * text / TikTok / Instagram / etc.
+ *
+ * @param {object} options
+ * @param {'text' | 'tiktok' | 'instagram' | 'more' | 'copy'} options.platform
+ * @param {number} options.elapsedTimeMs
+ * @param {number} options.topPercentile
+ * @param {number} options.beatPercentile
+ * @param {boolean} options.isPersonalBest
+ * @param {Blob} [options.cardBlob]
+ * @param {string} [options.challengeUrl]
+ * @param {string} [options.playerName]
+ * @returns {Promise<{ success: boolean, message: string }>}
+ */
+export async function shareToPlatform({
+  platform,
+  elapsedTimeMs,
+  topPercentile = 7,
+  beatPercentile = 93,
+  isPersonalBest = false,
+  cardBlob = null,
+  challengeUrl = '',
+  playerName = ''
+}) {
+  const seconds = (Math.max(0, elapsedTimeMs) / 1000).toFixed(2);
+  const url = challengeUrl || (typeof window !== 'undefined' ? window.location?.origin : '') || getAppStoreReviewUrl();
+  const shareText = generateResultCardText({ elapsedTimeMs, topPercentile, challengeUrl: url });
+
+  recordLocalShareEvent('tap');
+
+  if (platform === 'text') {
+    // 1. Mobile / Web SMS
+    const encodedBody = encodeURIComponent(shareText);
+    const smsUri = `sms:?&body=${encodedBody}`;
+
+    if (typeof navigator !== 'undefined' && navigator.share && !cardBlob) {
+      try {
+        await navigator.share({
+          title: `Diff Hunter Challenge (${seconds}s)`,
+          text: shareText
+        });
+        recordLocalShareEvent('complete');
+        return { success: true, message: 'Shared via text! 💬' };
+      } catch (err) {
+        if (err?.name === 'AbortError') return { success: false, message: 'Share cancelled' };
+      }
+    }
+
+    try {
+      if (typeof window !== 'undefined') {
+        window.location.href = smsUri;
+        recordLocalShareEvent('complete');
+        return { success: true, message: 'Opening Messages... 💬' };
+      }
+    } catch (_) {}
+
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareText);
+        recordLocalShareEvent('complete');
+        return { success: true, message: 'Text copied to clipboard! 💬' };
+      }
+    } catch (_) {}
+
+    return { success: true, message: 'Text ready to share! 💬' };
+  }
+
+  if (platform === 'tiktok') {
+    // Copy text & try native file share or open TikTok
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareText);
+      }
+    } catch (_) {}
+
+    if (cardBlob && typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [new File([cardBlob], 'diff_hunter_result.png', { type: 'image/png' })] })) {
+      try {
+        const file = new File([cardBlob], 'diff_hunter_result.png', { type: 'image/png' });
+        await navigator.share({
+          title: 'Diff Hunter Result',
+          text: shareText,
+          files: [file]
+        });
+        recordLocalShareEvent('complete');
+        return { success: true, message: 'Shared to TikTok! 🎵' };
+      } catch (err) {
+        if (err?.name === 'AbortError') return { success: false, message: 'Share cancelled' };
+      }
+    }
+
+    if (typeof window !== 'undefined') {
+      window.open('https://www.tiktok.com/', '_blank');
+    }
+    recordLocalShareEvent('complete');
+    return { success: true, message: 'Result copied! Opening TikTok 🎵' };
+  }
+
+  if (platform === 'instagram') {
+    // Copy text & try native file share or open Instagram
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareText);
+      }
+    } catch (_) {}
+
+    if (cardBlob && typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [new File([cardBlob], 'diff_hunter_result.png', { type: 'image/png' })] })) {
+      try {
+        const file = new File([cardBlob], 'diff_hunter_result.png', { type: 'image/png' });
+        await navigator.share({
+          title: 'Diff Hunter Result',
+          files: [file]
+        });
+        recordLocalShareEvent('complete');
+        return { success: true, message: 'Shared to Instagram! 📸' };
+      } catch (err) {
+        if (err?.name === 'AbortError') return { success: false, message: 'Share cancelled' };
+      }
+    }
+
+    if (typeof window !== 'undefined') {
+      window.open('https://www.instagram.com/', '_blank');
+    }
+    recordLocalShareEvent('complete');
+    return { success: true, message: 'Result copied! Opening Instagram 📸' };
+  }
+
+  // etc. / more / system share sheet
+  if (typeof navigator !== 'undefined' && navigator.share) {
+    try {
+      const sharePayload = {
+        title: `Diff Hunter Result (${seconds}s)`,
+        text: shareText,
+        url: url
+      };
+      if (cardBlob && navigator.canShare && navigator.canShare({ files: [new File([cardBlob], 'diff_hunter_result.png', { type: 'image/png' })] })) {
+        sharePayload.files = [new File([cardBlob], 'diff_hunter_result.png', { type: 'image/png' })];
+      }
+      await navigator.share(sharePayload);
+      recordLocalShareEvent('complete');
+      return { success: true, message: 'Shared successfully! 🚀' };
+    } catch (err) {
+      if (err?.name === 'AbortError') return { success: false, message: 'Share cancelled' };
+    }
+  }
+
+  try {
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(shareText);
+      recordLocalShareEvent('complete');
+      return { success: true, message: 'Result copied to clipboard! 🚀' };
+    }
+  } catch (_) {}
+
+  return { success: true, message: 'Result ready! 🚀' };
 }
 
 /**
@@ -333,39 +505,35 @@ export async function renderChallengeCardBlob({
       ctx.fillText(levelTitle.toUpperCase(), 540, 230);
     }
 
-    // 6. Time Display (Hero Metric)
-    ctx.font = '900 160px "SF Mono", Monaco, Menlo, monospace';
+    // 6. Result Card Primary Lines:
+    // Line 1: "I spotted it in X.XX seconds."
+    ctx.font = '900 58px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = 'rgba(0, 240, 255, 0.8)';
-    ctx.shadowBlur = 35;
-    ctx.fillText(`${seconds}s`, 540, 430);
+    ctx.shadowColor = 'rgba(0, 240, 255, 0.7)';
+    ctx.shadowBlur = 20;
+    ctx.fillText(`I spotted it in ${seconds} seconds.`, 540, 420);
     ctx.shadowBlur = 0;
 
-    // 7. Percentile Beat Callout
-    ctx.fillStyle = '#00ff88';
-    ctx.font = '900 52px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText(`BEAT ${beatPercentile}% OF PLAYERS`, 540, 530);
-
-    // 8. Top Percentile Pill
-    ctx.fillStyle = 'rgba(255, 183, 3, 0.2)';
+    // Line 2: "Top X%" Pill Badge
+    const pillWidth = 340;
+    const pillHeight = 84;
+    const pillX = 540 - pillWidth / 2;
+    const pillY = 480;
+    ctx.fillStyle = 'rgba(255, 183, 3, 0.22)';
     ctx.strokeStyle = '#ffb703';
-    ctx.lineWidth = 3;
-    roundRect(ctx, 360, 580, 360, 64, 32);
+    ctx.lineWidth = 4;
+    roundRect(ctx, pillX, pillY, pillWidth, pillHeight, 42);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = '#ffb703';
-    ctx.font = '800 32px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText(`TOP ${topPercentile}% SPEED`, 540, 624);
+    ctx.font = '900 50px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText(`Top ${topPercentile}%`, 540, pillY + 58);
 
-    // 9. Viral Challenge Prompt
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '700 36px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('👀 Can you beat this time?', 540, 730);
-
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+    // Additional viral prompt
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
     ctx.font = '500 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('There is ONE difference. Find it.', 540, 780);
+    ctx.fillText('There is ONE difference. Spot it before time runs out!', 540, 740);
 
     // 10. Player & App Store Branding Footer
     ctx.fillStyle = 'rgba(0, 240, 255, 0.9)';

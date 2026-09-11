@@ -80,7 +80,7 @@ echo "----------------------------------------------------"
 echo "🔢 Build Number: $BUILD_NUMBER"
 
 echo "📦 1. Building Vite web bundle and syncing Capacitor iOS native project..."
-(cd "$ROOT_DIR" && npm run build && npx cap sync ios)
+(cd "$ROOT_DIR" && VITE_IS_DEV_CHANNEL="${VITE_IS_DEV_CHANNEL:-true}" VITE_FORCE_DEBUG="${VITE_FORCE_DEBUG:-true}" npm run build && npx cap sync ios)
 
 if [[ -n "${KEYCHAIN_PASSWORD:-}" ]]; then
   echo "🔐 2. Unlocking login keychain for codesign..."

@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Sparkles, Zap, Hand } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
+import { hasCompletedFirstSet } from '../services/playerProgress';
 
 // Dedicated tutorial photo pair (excluded from game rotation)
 const DEMO_BASE_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/base.jpg';
 const DEMO_VARIANT_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/variant.jpg';
 const DEMO_TARGET = { x: 59.5, y: 55.5, radius: 9.9 };
 
-export default function TutorialBanner() {
+export default function TutorialBanner({ forceShow = false }) {
+  const isCompleted = !forceShow && hasCompletedFirstSet();
+
   const [isZoomed, setIsZoomed] = useState(false);
   const [showHand, setShowHand] = useState(false);
   const [handTapping, setHandTapping] = useState(false);
@@ -16,6 +19,8 @@ export default function TutorialBanner() {
 
   // Auto-playing loop demonstration (runs every 5.4s)
   useEffect(() => {
+    if (isCompleted) return;
+
     let t1, t2, t3, t4, t5, t6;
 
     const runLoop = () => {
@@ -79,6 +84,10 @@ export default function TutorialBanner() {
       setFoundSuccess(false);
     }, 3000);
   };
+
+  if (isCompleted) {
+    return null;
+  }
 
   return (
     <div className="glass-panel tutorial-banner" style={{
