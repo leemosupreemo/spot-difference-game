@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Flame, Star, Trophy, ArrowRight, Share2, X, Edit3, Check } from 'lucide-react';
 import { sounds } from '../utils/audio.js';
-import { getDailyLeaderboard, fetchDailyLeaderboard, updateDailyPlayerName } from '../services/dailyChallenge.js';
+import { getDailyLeaderboard, fetchDailyLeaderboard, updateDailyPlayerName, getDailyTimeToBeat } from '../services/dailyChallenge.js';
 import { getSavedPlayerName } from '../services/playerProgress.js';
 import {
   trackResultScreenViewed,
   identifyPlayer
 } from '../services/analytics.js';
 import { recordLocalShareEvent } from '../utils/challengeMetrics.js';
-import ResultCard from './ResultCard.jsx';
 import ShareChallengeModal from './ShareChallengeModal.jsx';
 import TronExpiredParticles from './TronExpiredParticles.jsx';
 
@@ -31,6 +30,7 @@ export default function DailyVictoryModal({
 }) {
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [leaderboardEntries, setLeaderboardEntries] = useState([]);
+  const [timeToBeatMs, setTimeToBeatMs] = useState(null);
 
   const isDebug = Boolean(
     debugMode ||
@@ -67,6 +67,8 @@ export default function DailyVictoryModal({
       try {
         const entries = getDailyLeaderboard();
         setLeaderboardEntries(entries || []);
+        const target = getDailyTimeToBeat();
+        setTimeToBeatMs(typeof target === 'number' ? target : null);
       } catch (_) {}
 
       // Fetch live global leaderboard from Firestore asynchronously
@@ -146,7 +148,7 @@ export default function DailyVictoryModal({
         style={{
           width: '100%',
           maxWidth: '480px',
-          maxHeight: '92vh',
+          maxHeight: 'calc(100dvh - 32px)',
           overflowY: 'auto',
           borderRadius: '24px',
           padding: '24px 20px',
@@ -170,6 +172,26 @@ export default function DailyVictoryModal({
       >
         {isFailed && <TronExpiredParticles />}
         {/* Top Right Close "X" Button */}
+        <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: '8px', zIndex: 10 }}>
+          <button
+            onClick={handleShare}
+            aria-label="Share daily result"
+            title="Share result"
+            className="glass-btn"
+            style={{ width: '34px', height: '34px', padding: 0, justifyContent: 'center', borderRadius: '10px' }}
+          >
+            <Share2 size={16} />
+          </button>
+          <button
+            onClick={() => { sounds.playTap(); if (onOpenLeaderboard) onOpenLeaderboard(); }}
+            aria-label="View daily leaderboard"
+            title="View daily leaderboard"
+            className="glass-btn"
+            style={{ width: '34px', height: '34px', padding: 0, justifyContent: 'center', borderRadius: '10px' }}
+          >
+            <Trophy size={16} color="var(--accent-gold)" />
+          </button>
+        </div>
         <button
           onClick={() => {
             try { sounds.playTap(); } catch (_) {}
@@ -223,7 +245,7 @@ export default function DailyVictoryModal({
           >
             {isFailed
               ? (isForfeit ? 'DAILY CHALLENGE FORFEITED' : 'DAILY CHALLENGE RUN ENDED')
-              : 'SET OF THE DAY COMPLETE!'}
+              : 'DAILY CHALLENGE COMPLETE'}
           </span>
         </div>
 
@@ -256,7 +278,8 @@ export default function DailyVictoryModal({
 
         {/* Hero Completion Time (Only on Success) */}
         {!isFailed && (
-          <div style={{ marginBottom: '12px' }}>
+          <div style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+            <div>
             <div
               style={{
                 fontSize: '0.74rem',
@@ -266,7 +289,7 @@ export default function DailyVictoryModal({
                 letterSpacing: '1px'
               }}
             >
-              Total 3-Image Time
+              TIME
             </div>
             <div
               style={{
@@ -293,78 +316,19 @@ export default function DailyVictoryModal({
                 👑 NEW #1 FASTEST TIME FOR TODAY!
               </div>
             )}
+            </div>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap', marginBottom: '12px', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 700 }}>
+            <span>Top {Math.max(1, Math.round(100 - percentile))}%</span>
+            {timeToBeatMs > 0 && <span>Beat { (timeToBeatMs / 1000).toFixed(2) }s</span>}
+          </div>
           </div>
         )}
 
-        {/* Compact result summary */}
-        {!isFailed && (
-          <ResultCard
-            elapsedTimeMs={totalTimeMs}
-            topPercentile={Math.max(1, 100 - percentile)}
-            beatPercentile={percentile}
-            isNewRecord={isNewRecord}
-            isDaily={true}
-            isDailyCompleted={!isFailed}
-            playerName={customPlayerName}
-          />
-        )}
-
-        {/* Metrics Grid (Position & Percentile) for Success */}
-        {!isFailed && (
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '10px',
-              marginBottom: '14px'
-            }}
-          >
-            <div
-              style={{
-                padding: '10px 8px',
-                borderRadius: '14px',
-                background: 'rgba(0, 0, 0, 0.45)',
-                border: '1px solid rgba(255, 255, 255, 0.1)'
-              }}
-            >
-              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '2px' }}>
-                TODAY'S RANK
-              </div>
-              <div
-                style={{
-                  fontSize: '1.25rem',
-                  fontWeight: 900,
-                  color: position <= 3 ? 'var(--accent-gold)' : 'var(--accent-cyan)'
-                }}
-              >
-                #{position} <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>/ {totalPlayers}</span>
-              </div>
-            </div>
-
-            <div
-              style={{
-                padding: '10px 8px',
-                borderRadius: '14px',
-                background: 'rgba(0, 0, 0, 0.45)',
-                border: '1px solid rgba(255, 255, 255, 0.1)'
-              }}
-            >
-              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 700, marginBottom: '2px' }}>
-                PERCENTILE
-              </div>
-              <div
-                style={{
-                  fontSize: '1.25rem',
-                  fontWeight: 900,
-                  color: 'var(--accent-green)'
-                }}
-              >
-                Top {Math.max(1, 100 - percentile)}%
-              </div>
-            </div>
-          </div>
-        )}
-
+        {/* Success links to the full leaderboard; failures retain a compact top-three reference. */}
+        <div className="daily-victory-results-grid" style={{ display: 'grid', gap: '10px', alignItems: 'start' }}>
+        {!isFailed && null}
+        {isFailed && (
+          <>
           {/* Embedded Top Times List */}
           <div
             style={{
@@ -397,11 +361,11 @@ export default function DailyVictoryModal({
                     textTransform: 'uppercase'
                   }}
                 >
-                  {isFailed ? "Today's Top 3" : "Today's Top Times"}
+                  Today's Top 3
                 </span>
               </div>
               <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                {isFailed ? 'Top 3 to Beat' : 'Live Leaderboard'}
+                {isFailed ? 'Top 3 to Beat' : 'Live Top 3'}
               </span>
             </div>
 
@@ -506,7 +470,7 @@ export default function DailyVictoryModal({
             ) : (
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
                 <tbody>
-                  {(isFailed || isForfeit ? leaderboardEntries.slice(0, 3) : leaderboardEntries).map((entry, index) => {
+                  {leaderboardEntries.slice(0, 3).map((entry, index) => {
                     const isMe = entry.isLocalPlayer;
                     const rankNum = entry.rank || (index + 1);
                     const timeStr = typeof entry.totalTimeMs === 'number'
@@ -576,36 +540,14 @@ export default function DailyVictoryModal({
               </table>
             )}
           </div>
-        </div>
-
-        {/* Share Button (When Success) */}
-        {!isFailed && (
-          <button
-            onClick={handleShare}
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              padding: '10px',
-              borderRadius: '12px',
-              marginBottom: '10px',
-              fontSize: '0.92rem',
-              fontWeight: 900,
-              cursor: 'pointer',
-              background: 'linear-gradient(135deg, rgba(255, 183, 3, 0.95), rgba(255, 110, 0, 0.95))',
-              color: '#000',
-              border: 'none',
-              boxShadow: '0 4px 16px rgba(255, 183, 3, 0.4)'
-            }}
-          >
-            <Share2 size={16} /> Share
-          </button>
+          </div>
+          </>
         )}
+        </div>
 
         {/* Action Buttons */}
         <div style={{ display: 'flex', gap: '10px' }}>
+          {isFailed && (
           <button
             onClick={() => {
               sounds.playTap();
@@ -623,6 +565,7 @@ export default function DailyVictoryModal({
           >
             <Trophy size={16} color="var(--accent-gold)" /> Daily Board
           </button>
+          )}
 
           <button
             onClick={() => {
@@ -631,7 +574,7 @@ export default function DailyVictoryModal({
             }}
             className="glass-btn glass-btn-primary"
             style={{
-              flex: 1.2,
+              flex: isFailed ? 1.2 : 1,
               justifyContent: 'center',
               padding: '10px',
               fontSize: '0.95rem',

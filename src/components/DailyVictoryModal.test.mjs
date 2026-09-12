@@ -19,7 +19,7 @@ test('DailyVictoryModal renders top times list and supports failure state', () =
 
   // Verify top times list rendering
   assert.match(source, /getDailyLeaderboard/);
-  assert.match(source, /Today's Top Times/);
+  assert.match(source, /Today's Top 3/);
   assert.match(source, /leaderboardEntries/);
 
   // Verify failure state handling instead of basic stage failed
@@ -37,10 +37,10 @@ test('DailyVictoryModal renders top times list and supports failure state', () =
 
   // Verify time reached is not mentioned on failure
   assert.doesNotMatch(source, /Time Reached/);
-  assert.match(source, /\{!isFailed && \(\s*<div style=\{\{ marginBottom: '12px' \}\}>\s*<div[\s\S]*?Total 3-Image Time/);
+  assert.match(source, /\{!isFailed && \(\s*<div style=\{\{ marginBottom: '12px', display: 'flex'/);
 
   // Verify failure or forfeit limits displayed leaderboard to top 3 players
-  assert.match(source, /isFailed \|\| isForfeit \? leaderboardEntries\.slice\(0, 3\)/);
+  assert.match(source, /leaderboardEntries\.slice\(0, 3\)/);
   assert.match(source, /Today's Top 3/);
 
   // Verify anonymous player tag editing and live leaderboard
@@ -56,5 +56,27 @@ test('SetOfTheDayBanner does not show once completed or attempted', () => {
   assert.match(source, /playerStatus\.completed/);
   assert.match(source, /playerStatus\.attempted/);
   assert.match(source, /isAttempted/);
-  assert.match(source, /if \(!enabled \|\| \(!forceShow && !debugMode && isAttempted\)\) return null;/);
+  assert.match(source, /!playerStatus\.completed && isAttempted/);
+});
+
+test('daily victory keeps failure details compact and exposes a top-three leaderboard', () => {
+  const source = fs.readFileSync(dailyModalPath, 'utf8');
+
+  assert.doesNotMatch(source, /Total 3-Image Time/);
+  assert.doesNotMatch(source, /SET OF THE DAY COMPLETE!/);
+  assert.match(source, /leaderboardEntries\.slice\(0, 3\)/);
+  assert.match(source, /className="daily-victory-results-grid"/);
+  assert.match(source, /aria-label="Share daily result"/);
+  assert.match(source, /aria-label="Share daily result"[\s\S]*?width:\s*['"]34px['"]/);
+});
+
+test('daily success replaces rank and inline leaderboard with a link beside the hero time', () => {
+  const source = fs.readFileSync(dailyModalPath, 'utf8');
+
+  assert.doesNotMatch(source, /TODAY'S RANK/);
+  assert.match(source, /aria-label="View daily leaderboard"/);
+  assert.match(source, /Top \{Math\.max\(1, Math\.round\(100 - percentile\)\)\}%/);
+  assert.match(source, /getDailyTimeToBeat/);
+  assert.match(source, /aria-label="Share daily result"[\s\S]*?totalSecStr/);
+  assert.match(source, /aria-label="View daily leaderboard"/);
 });
