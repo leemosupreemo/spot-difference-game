@@ -820,11 +820,17 @@ export default function App() {
           setIsDailyCompleted(true);
 
           const dailyResult = recordDailyChallengeCompletion({
-            totalTimeMs: cumulativeTime
+            dateStr: levels?.dateStr,
+            totalTimeMs: cumulativeTime,
+            setId: levels?.dailySetId,
+            entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id)
           });
 
           // Sync completion to Firestore live daily leaderboard asynchronously
           recordDailyChallengeCompletionRemote({
+            dateStr: levels?.dateStr,
+            setId: levels?.dailySetId,
+            entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id),
             totalTimeMs: cumulativeTime
           }).then(remoteResult => {
             if (remoteResult) {

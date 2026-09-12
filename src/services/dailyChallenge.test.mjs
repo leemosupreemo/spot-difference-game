@@ -27,6 +27,42 @@ import {
   resetDailyPlayerStatus
 } from './dailyChallenge.js';
 
+test('daily set identity is stable and preserves ordered entry IDs', () => {
+  resetDailyQueueToDefault();
+  const first = getDailySetForDate('2026-09-11');
+  const second = getDailySetForDate('2026-09-11');
+  assert.equal(first.dailySetId, 'daily_2026-09-11');
+  assert.equal(first.dateStr, '2026-09-11');
+  assert.deepEqual(first.entryIds, first.map(level => level.id));
+  assert.deepEqual(second.entryIds, first.entryIds);
+  assert.equal(first.length, 3);
+});
+
+test('daily completion persists date, identity, ordered IDs, and first/repeat timing', () => {
+  const dateStr = '2026-12-01';
+  resetDailyPlayerStatus(dateStr);
+  const first = recordDailyChallengeCompletion({
+    dateStr,
+    totalTimeMs: 30000,
+    entryIds: ['daily_a', 'daily_b', 'daily_c']
+  });
+  assert.equal(first.setId, `daily_${dateStr}`);
+  assert.deepEqual(first.entryIds, ['daily_a', 'daily_b', 'daily_c']);
+  assert.equal(first.firstTime, 30000);
+  assert.equal(first.fastestRepeat, null);
+
+  const repeat = recordDailyChallengeCompletion({
+    dateStr,
+    totalTimeMs: 28000,
+    entryIds: ['daily_a', 'daily_b', 'daily_c']
+  });
+  const status = getDailyPlayerStatus(dateStr);
+  assert.equal(repeat.setId, `daily_${dateStr}`);
+  assert.equal(status.firstTime, 30000);
+  assert.equal(status.fastestRepeat, 28000);
+  assert.deepEqual(status.entryIds, ['daily_a', 'daily_b', 'daily_c']);
+});
+
 test('getTodayDateString formats date correctly as YYYY-MM-DD', () => {
   const d = new Date(2026, 8, 8); // Sept 8, 2026
   assert.equal(getTodayDateString(d), '2026-09-08');
@@ -134,16 +170,16 @@ test('getDailySetForDate resolves explicitly scheduled OTA daily sets', () => {
   const scheduledDate = '2026-12-25';
   setDailyQueue({
     schedule: {
-      [scheduledDate]: ['fresh_nature_pair_007', 'fresh_nature_pair_008', 'fresh_nature_pair_009']
+      [scheduledDate]: ['fresh_nature_pair_014', 'fresh_nature_pair_015', 'fresh_nature_pair_016']
     },
     queue: []
   });
 
   const levels = getDailySetForDate(scheduledDate);
   assert.equal(levels.length, 3);
-  assert.equal(levels[0].id, 'fresh_nature_pair_007');
-  assert.equal(levels[1].id, 'fresh_nature_pair_008');
-  assert.equal(levels[2].id, 'fresh_nature_pair_009');
+  assert.equal(levels[0].id, 'fresh_nature_pair_014');
+  assert.equal(levels[1].id, 'fresh_nature_pair_015');
+  assert.equal(levels[2].id, 'fresh_nature_pair_016');
 });
 
 test('getDailySetForDate resolves from sequential OTA queue when unscheduled', () => {
@@ -222,11 +258,11 @@ test('getAllDailyChallengePoolLevels returns the whole daily catalog with labele
   resetDailyQueueToDefault();
   const pool = getAllDailyChallengePoolLevels();
   assert.ok(Array.isArray(pool));
-  // Pool should have scheduled dates + modern queue sets + legacy queue sets (> 50 total levels)
-  assert.ok(pool.length >= 50, `Expected at least 50 levels in daily pool, got ${pool.length}`);
+  // Pool should include the remaining scheduled and queue sets after dismissed assets were pruned.
+  assert.ok(pool.length >= 30, `Expected at least 30 levels in daily pool, got ${pool.length}`);
 
   const legacyLevels = pool.filter(l => l.isLegacy);
-  assert.ok(legacyLevels.length >= 20, `Expected at least 20 legacy levels, got ${legacyLevels.length}`);
+  assert.ok(legacyLevels.length >= 10, `Expected at least 10 legacy levels, got ${legacyLevels.length}`);
 
   for (const legacy of legacyLevels) {
     assert.equal(legacy.isLegacy, true);
@@ -236,7 +272,7 @@ test('getAllDailyChallengePoolLevels returns the whole daily catalog with labele
   }
 
   const modernLevels = pool.filter(l => !l.isLegacy);
-  assert.ok(modernLevels.length >= 20, `Expected at least 20 modern levels, got ${modernLevels.length}`);
+  assert.ok(modernLevels.length >= 15, `Expected at least 15 modern levels, got ${modernLevels.length}`);
   for (const mod of modernLevels) {
     assert.equal(mod.isLegacy, false);
     assert.equal(mod.isDaily, true);
@@ -287,8 +323,5 @@ test('getTodayDateString rolls over daily set at 4:00 AM Eastern (1:00 AM Pacifi
   const newDayPT = new Date('2026-09-11T01:05:00-07:00');
   assert.equal(getTodayDateString(newDayPT), '2026-09-11');
 });
-
-
-
 
 

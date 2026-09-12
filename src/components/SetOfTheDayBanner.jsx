@@ -5,12 +5,15 @@ import { isSetOfTheDayEnabled } from '../services/appConfig.js';
 import {
   getDailyTimeToBeat,
   getDailyPlayerStatus,
-  getTodayDateString
+  getTodayDateString,
+  getDailyLeaderboard,
+  fetchDailyLeaderboard
 } from '../services/dailyChallenge.js';
 
 export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard, forceShow = false, debugMode = false, onResetDaily = null }) {
   const [enabled, setEnabled] = useState(isSetOfTheDayEnabled());
   const [timeToBeatMs, setTimeToBeatMs] = useState(null);
+  const [topTimes, setTopTimes] = useState([]);
   const [playerStatus, setPlayerStatus] = useState(() => {
     try {
       return getDailyPlayerStatus();
@@ -31,16 +34,26 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
 
     const status = getDailyPlayerStatus(today);
     setPlayerStatus(status);
+
+    const localTopTimes = getDailyLeaderboard(today).slice(0, 3);
+    setTopTimes(localTopTimes);
+    fetchDailyLeaderboard(today).then(remoteEntries => {
+      if (remoteEntries?.length) setTopTimes(remoteEntries.slice(0, 3));
+    }).catch(() => {});
   }, []);
 
   // Do not continue showing after a player attempts or completes it (always show in debug mode)
   const isAttempted = Boolean(playerStatus.completed || playerStatus.attempted || playerStatus.failed);
-  if (!enabled || (!forceShow && !debugMode && isAttempted)) return null;
+  if (!enabled || (!forceShow && !debugMode && !playerStatus.completed && isAttempted)) return null;
 
   const timeToBeatSec = timeToBeatMs ? (timeToBeatMs / 1000).toFixed(1) : '--.-';
   const playerTimeSec = playerStatus.completed && playerStatus.totalTimeMs
     ? (playerStatus.totalTimeMs / 1000).toFixed(1)
     : null;
+  const topThreeTimeLabels = topTimes.map((entry, index) => {
+    const seconds = typeof entry?.totalTimeMs === 'number' ? `${(entry.totalTimeMs / 1000).toFixed(1)}s` : '--.-';
+    return `#${entry?.rank || index + 1} ${seconds}`;
+  });
 
   const handleResetClick = (e) => {
     e.stopPropagation();
@@ -209,7 +222,7 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
           </div>
         </div>
 
-        {/* Right Side: TIME TO BEAT */}
+        {/* Right Side: time to beat before completion, top three after completion */}
         <div
           style={{
             display: 'flex',
@@ -242,7 +255,7 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
               }}
             >
               <Trophy size={11} color="var(--accent-gold)" />
-              Time to Beat
+              {playerStatus.completed ? 'Top 3 Today' : 'Time to Beat'}
             </div>
 
             <div
@@ -254,7 +267,9 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
                 textShadow: '0 0 10px rgba(0, 240, 255, 0.6)'
               }}
             >
-              {timeToBeatSec}s
+              {playerStatus.completed
+                ? (topThreeTimeLabels.length > 0 ? topThreeTimeLabels.join('  ·  ') : 'Loading...')
+                : `${timeToBeatSec}s`}
             </div>
           </div>
 

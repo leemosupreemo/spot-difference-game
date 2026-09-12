@@ -487,7 +487,7 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
     if (scheduledLevels.length === 3) {
       dailySets[dateStr] = scheduledLevels.map(l => l.id);
       storageSet(STORAGE_KEY_DAILY_SETS, JSON.stringify(dailySets));
-      return scheduledLevels;
+      return decorateDailyLevels(scheduledLevels, dateStr);
     }
   }
 
@@ -526,7 +526,7 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
       if (levels.length === 3) {
         dailySets[dateStr] = chosenIds;
         storageSet(STORAGE_KEY_DAILY_SETS, JSON.stringify(dailySets));
-        return levels;
+        return decorateDailyLevels(levels, dateStr);
       }
     }
   }
@@ -585,6 +585,24 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
       return level;
     });
 
+  return decorateDailyLevels(levels, dateStr);
+}
+
+/**
+ * Adds the stable identity shared by daily queue resolution and completion records.
+ * The array metadata keeps the existing level return shape compatible with callers.
+ */
+function decorateDailyLevels(levels, dateStr) {
+  const dailySetId = `daily_${dateStr}`;
+  const entryIds = levels.map(level => level.id);
+  levels.dailySetId = dailySetId;
+  levels.setId = dailySetId;
+  levels.dateStr = dateStr;
+  levels.entryIds = entryIds;
+  levels.forEach(level => {
+    level.dailySetId = dailySetId;
+    level.dateStr = dateStr;
+  });
   return levels;
 }
 
@@ -992,13 +1010,22 @@ export function recordDailyChallengeFailure({
 export function recordDailyChallengeCompletion({
   dateStr = getTodayDateString(),
   totalTimeMs,
-  playerName = ''
+  playerName = '',
+  setId = `daily_${dateStr}`,
+  entryIds = []
 }) {
   if (typeof totalTimeMs !== 'number' || totalTimeMs <= 0) {
     throw new Error('Invalid totalTimeMs');
   }
 
   const effectivePlayerName = (playerName || getSavedPlayerName() || 'Player').trim();
+  const dailySetId = typeof setId === 'string' && setId.trim() ? setId : `daily_${dateStr}`;
+  const orderedEntryIds = Array.isArray(entryIds) ? entryIds.filter(Boolean) : [];
+  const priorStatus = getDailyPlayerStatus(dateStr);
+  const firstTime = priorStatus.firstTime || totalTimeMs;
+  const fastestRepeat = priorStatus.completed
+    ? Math.min(priorStatus.fastestRepeat || totalTimeMs, totalTimeMs)
+    : null;
 
   // Retrieve current daily leaderboard
   const currentEntries = getDailyLeaderboard(dateStr);
@@ -1014,13 +1041,25 @@ export function recordDailyChallengeCompletion({
     if (prevTime <= totalTimeMs) {
       // Previous time was better or equal, keep previous
       const status = getDailyPlayerStatus(dateStr);
+      const repeatStatus = {
+        ...status,
+        setId: dailySetId,
+        entryIds: orderedEntryIds.length ? orderedEntryIds : (status.entryIds || []),
+        firstTime: status.firstTime || firstTime,
+        fastestRepeat: status.completed ? fastestRepeat : null
+      };
+      storageSet(`${STORAGE_KEY_DAILY_PLAYER_PREFIX}${dateStr}`, JSON.stringify(repeatStatus));
       return {
         position: status.position || (existingPlayerIndex + 1),
         totalPlayers: currentEntries.length,
         percentile: status.percentile || 90,
         stars: status.stars || stars,
         totalTimeMs: prevTime,
-        isNewRecord: false
+        isNewRecord: false,
+        setId: dailySetId,
+        entryIds: orderedEntryIds.length ? orderedEntryIds : (status.entryIds || []),
+        firstTime: status.firstTime || firstTime,
+        fastestRepeat: repeatStatus.fastestRepeat
       };
     }
     currentEntries.splice(existingPlayerIndex, 1);
@@ -1066,7 +1105,11 @@ export function recordDailyChallengeCompletion({
     position,
     totalPlayers,
     percentile,
-    dateStr
+    dateStr,
+    setId: dailySetId,
+    entryIds: orderedEntryIds,
+    firstTime,
+    fastestRepeat
   }));
 
   return {
@@ -1075,7 +1118,11 @@ export function recordDailyChallengeCompletion({
     percentile,
     stars,
     totalTimeMs,
-    isNewRecord
+    isNewRecord,
+    setId: dailySetId,
+    entryIds: orderedEntryIds,
+    firstTime,
+    fastestRepeat
   };
 }
 
@@ -1184,9 +1231,11 @@ export async function startDailyChallengeSession({ dateStr = getTodayDateString(
 export async function recordDailyChallengeCompletionRemote({
   dateStr = getTodayDateString(),
   totalTimeMs,
-  playerName = ''
+  playerName = '',
+  setId = `daily_${dateStr}`,
+  entryIds = []
 }) {
-  const localResult = recordDailyChallengeCompletion({ dateStr, totalTimeMs, playerName });
+  const localResult = recordDailyChallengeCompletion({ dateStr, totalTimeMs, playerName, setId, entryIds });
 
   const effectivePlayerName = (
     playerName ||
@@ -1206,6 +1255,8 @@ export async function recordDailyChallengeCompletionRemote({
         uid: player.uid,
         effectiveId,
         dateStr,
+        setId: localResult.setId,
+        entryIds: localResult.entryIds,
         status: 'completed',
         totalTimeMs,
         stars: localResult.stars,
