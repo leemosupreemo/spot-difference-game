@@ -334,7 +334,11 @@ export function useGameViewModel() {
             title: currentLevel.title,
             completionTimeMs: isFirstTime ? newFirstTime : newFastestRepeat,
             isFirstSeen: isFirstTime,
-            clears: updatedSetData.clears
+            clears: updatedSetData.clears,
+            // Curated stages may carry set identity on their first level;
+            // legacy/procedural stages continue to serialize without it.
+            setId: stagePairs[0]?.setId,
+            entryIds: stagePairs.map(level => level.id)
           }).catch(() => {});
 
           saveLeaderboardStats(newStats).catch(() => {});

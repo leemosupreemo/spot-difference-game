@@ -33,7 +33,6 @@ import SetOfTheDayBanner from './components/SetOfTheDayBanner';
 import DailyVictoryModal from './components/DailyVictoryModal';
 import {
   getDailySetForDate,
-  getAllDailyChallengePoolLevels,
   recordDailyChallengeCompletion,
   recordDailyChallengeAttempt,
   recordDailyChallengeFailure,
@@ -45,7 +44,7 @@ import {
   resetDailyPlayerStatus,
   syncRemoteDailyQueue
 } from './services/dailyChallenge';
-import { hasCompletedFirstSet, markFirstSetCompleted } from './services/playerProgress';
+import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress } from './services/playerProgress';
 
 export default function App() {
   const [levels, setLevels] = useState(() => {
@@ -148,6 +147,15 @@ export default function App() {
 
   // Debug Flag (Always enabled on dev branch/URLs unless explicitly specified otherwise)
   const [debugMode, setDebugMode] = useState(() => getInitialDebugMode());
+
+  const [tutorialAnimationEnabled, setTutorialAnimationEnabled] = useState(() => {
+    try {
+      const saved = localStorage.getItem('diff_hunter_tutorial_animation');
+      return saved !== 'false';
+    } catch (_) {
+      return true;
+    }
+  });
 
   const [debugSourceMode, setDebugSourceMode] = useState('premade'); // 'premade' | 'procedural'
   const [skipKeptLevels, setSkipKeptLevels] = useState(() => {
@@ -367,6 +375,17 @@ export default function App() {
       } catch (e) {}
       if (next) sounds.playWin();
       else sounds.playTap();
+      return next;
+    });
+  }, []);
+
+  const handleToggleTutorialAnimation = useCallback(() => {
+    setTutorialAnimationEnabled(prev => {
+      const next = !prev;
+      try {
+        localStorage.setItem('diff_hunter_tutorial_animation', String(next));
+      } catch (_) {}
+      sounds.playTap();
       return next;
     });
   }, []);
@@ -650,6 +669,11 @@ export default function App() {
       logApp('INFO', '[DailyChallenge] Daily challenge already attempted today');
       return;
     }
+    // Ensure debug runs use the latest OTA/Firebase queue before resolving the set.
+    if (debugMode) {
+      syncRemoteDailyQueue().catch(() => {});
+    }
+
     // Start session locally & remotely
     startDailyChallengeSession().then(session => {
       if (session && !session.allowed && !debugMode) {
@@ -663,8 +687,8 @@ export default function App() {
     }
     let dailyLevels;
     if (debugMode) {
-      logApp('INFO', '[StartDailyChallenge:Debug] Requesting whole daily challenge pool');
-      dailyLevels = getAllDailyChallengePoolLevels();
+      logApp('INFO', '[StartDailyChallenge:Debug] Requesting three-image daily queue set');
+      dailyLevels = getDailySetForDate();
     } else {
       logApp('INFO', '[StartDailyChallenge] Requesting today\'s 3-image sequence');
       dailyLevels = getDailySetForDate();
@@ -725,19 +749,10 @@ export default function App() {
         stageIndex: currentStageIndex
       });
 
-      // In Debug Mode: Unified continuous big batch loop across all levels
-      if (debugMode) {
-        if (gameMode === 'daily') {
-          const nextIndex = (currentStageIndex + 1) % levels.length;
-          setTimeout(() => {
-            setCurrentStageIndex(nextIndex);
-            const nextLevel = levels[nextIndex];
-            if (nextLevel) {
-              startLevel(nextLevel.id);
-            }
-          }, 350);
-          return;
-        } else if (debugSourceMode === 'premade') {
+      // In Debug Mode, standard curator review remains continuous. Daily mode
+      // follows the normal three-image completion path so its victory screen appears.
+      if (debugMode && gameMode !== 'daily') {
+        if (debugSourceMode === 'premade') {
           const allActive = getAllPhotoPairEntries();
           const curIdx = allActive.findIndex(e => e.id === currentLevelId);
           const nextIndex = curIdx >= 0 ? (curIdx + 1) % allActive.length : 0;
@@ -775,6 +790,28 @@ export default function App() {
         const cumulativeTime = stageTimesRef.current.slice(0, totalStageImages).reduce((sum, t) => sum + (t || 0), 0);
         setTotalStageTimeMs(cumulativeTime);
         const stageTotalScore = score + pointsEarned;
+
+        // Persist each completed photo entry with the identity of the fixed
+        // set that supplied the ordered stage. The per-entry elapsed time is
+        // retained for image history while the set metadata makes the record
+        // suitable for set-scoped competition.
+        if (gameMode !== 'daily' && selectedTheme === 'find_the_sniper' && photoSetId) {
+          const entryIds = levels.slice(0, totalStageImages).map(level => level.id);
+          const priorSet = difficultyStats[selectedDifficulty]?.sets?.[photoSetId];
+          const isFirstSetCompletion = !priorSet?.firstTime;
+          levels.slice(0, totalStageImages).forEach((level, index) => {
+            saveImageProgress({
+              imageId: level.id,
+              packId: selectedTheme,
+              title: level.title,
+              completionTimeMs: stageTimesRef.current[index] || 0,
+              isFirstSeen: isFirstSetCompletion,
+              clears: (priorSet?.clears || 0) + 1,
+              setId: photoSetId,
+              entryIds
+            }).catch(() => {});
+          });
+        }
 
         // Daily Challenge Mode (3 Images Sequence) Completion
         if (gameMode === 'daily') {
@@ -867,19 +904,36 @@ export default function App() {
         setDifficultyStats(prev => {
           const diffCategory = selectedDifficulty;
           const categoryData = prev[diffCategory] || { setsCleared: 0, totalPoints: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} };
-          const stageKey = `stage_${selectedTheme}_${Date.now()}`;
-          const setData = categoryData.sets[stageKey] || { title: `Stage Set`, firstTime: null, fastestRepeat: null, clears: 0, totalPoints: 0 };
+          // Curated Photo Mode stages are identified by their stable set ID so
+          // repeat attempts update the same record. Procedural/legacy stages
+          // retain their historical generated key behavior.
+          const isDeterministicPhotoSet = selectedTheme === 'find_the_sniper' && Boolean(photoSetId);
+          const stageKey = isDeterministicPhotoSet ? photoSetId : `stage_${selectedTheme}_${Date.now()}`;
+          const stageEntryIds = levels.slice(0, totalStageImages).map(level => level.id);
+          const setData = categoryData.sets[stageKey] || {
+            title: `Stage Set`,
+            firstTime: null,
+            fastestRepeat: null,
+            fastestTime: null,
+            clears: 0,
+            totalPoints: 0,
+            ...(isDeterministicPhotoSet ? { setId: photoSetId, entryIds: stageEntryIds } : {})
+          };
 
           const isFirstTime = !setData.firstTime;
           const newFirstTime = isFirstTime ? cumulativeTime : setData.firstTime;
-          const newFastestRepeat = !setData.fastestRepeat || cumulativeTime < setData.fastestRepeat ? cumulativeTime : setData.fastestRepeat;
+          const newFastestRepeat = isDeterministicPhotoSet
+            ? (isFirstTime ? (setData.fastestRepeat || null) : (!setData.fastestRepeat || cumulativeTime < setData.fastestRepeat ? cumulativeTime : setData.fastestRepeat))
+            : (!setData.fastestRepeat || cumulativeTime < setData.fastestRepeat ? cumulativeTime : setData.fastestRepeat);
           const newSetTotalPoints = (setData.totalPoints || 0) + stageTotalScore;
 
           const updatedSetData = {
             title: `5-Image Stage (${selectedTheme === 'find_the_sniper' ? 'Photography' : 'Abstract'})`,
             packId: selectedTheme,
+            ...(isDeterministicPhotoSet ? { setId: photoSetId, entryIds: stageEntryIds } : {}),
             firstTime: newFirstTime,
             fastestRepeat: newFastestRepeat,
+            fastestTime: Math.min(...[newFirstTime, newFastestRepeat].filter(time => typeof time === 'number' && time > 0)),
             clears: setData.clears + 1,
             totalPoints: newSetTotalPoints,
             lastScore: stageTotalScore
@@ -1108,6 +1162,8 @@ export default function App() {
             onOpenHelp={() => setHelpModalOpen(true)}
             onOpenShareChallenge={() => setShareChallengeModalOpen(true)}
             hasCompletedFirstSet={hasCompletedFirstSetState}
+            tutorialAnimationEnabled={tutorialAnimationEnabled}
+            onToggleTutorialAnimation={handleToggleTutorialAnimation}
             bannerSlot={
               (!isDailyCompleted || debugMode) && (
                 <SetOfTheDayBanner
@@ -1171,6 +1227,8 @@ export default function App() {
             selectedDifficulty={selectedDifficulty}
             onBack={handleRequestBack}
             debugMode={debugMode}
+            muted={muted}
+            setMuted={handleToggleMute}
           />
 
           {/* Interactive Dual Viewport (IMAGES ONLY) */}

@@ -284,7 +284,65 @@ export async function syncProgressFromFirestore(localStats = {}) {
   return mergedStats;
 }
 
-export async function saveImageProgress({ imageId, packId, title, completionTimeMs, isFirstSeen, clears }) {
+/**
+ * Build the progress document for an image completion.
+ * Set-scoped records keep their stable identity and aggregate timing fields;
+ * callers without set metadata retain the original image-history schema.
+ */
+export function buildImageProgressPayload({
+  imageId,
+  packId,
+  title,
+  completionTimeMs,
+  isFirstSeen,
+  clears,
+  setId,
+  entryIds,
+  existingData = {}
+}) {
+  const existing = existingData || {};
+  const hasSetIdentity = typeof setId === 'string' && setId.trim().length > 0;
+  const existingFirstTime = typeof existing.firstTime === 'number'
+    ? existing.firstTime
+    : (typeof existing.firstSeenTimeMs === 'number' ? existing.firstSeenTimeMs : null);
+  const existingRepeat = typeof existing.fastestRepeat === 'number'
+    ? existing.fastestRepeat
+    : (typeof existing.bestRepeatTimeMs === 'number' ? existing.bestRepeatTimeMs : null);
+  const effectiveIsFirstSeen = Boolean(isFirstSeen) && !existingFirstTime;
+
+  const payload = {
+    imageId,
+    packId,
+    title,
+    clears: Math.max(clears || 1, (existing.clears || 0) + 1),
+    updatedAt: new Date().toISOString()
+  };
+
+  if (hasSetIdentity) {
+    payload.setId = setId.trim();
+    if (Array.isArray(entryIds)) payload.entryIds = [...entryIds];
+
+    const firstTime = effectiveIsFirstSeen ? completionTimeMs : existingFirstTime;
+    const fastestRepeat = effectiveIsFirstSeen
+      ? null
+      : (existingRepeat ? Math.min(existingRepeat, completionTimeMs) : completionTimeMs);
+    const validTimes = [firstTime, fastestRepeat].filter(time => typeof time === 'number' && time > 0);
+    payload.firstTime = firstTime;
+    payload.fastestRepeat = fastestRepeat;
+    payload.fastestTime = validTimes.length > 0 ? Math.min(...validTimes) : null;
+    return payload;
+  }
+
+  // Legacy image history fields remain unchanged for records without setId.
+  if (effectiveIsFirstSeen) {
+    payload.firstSeenTimeMs = completionTimeMs;
+  } else {
+    payload.bestRepeatTimeMs = existingRepeat ? Math.min(existingRepeat, completionTimeMs) : completionTimeMs;
+  }
+  return payload;
+}
+
+export async function saveImageProgress({ imageId, packId, title, completionTimeMs, isFirstSeen, clears, setId, entryIds }) {
   const player = await getPlayer();
   if (!player) return false;
 
@@ -294,23 +352,18 @@ export async function saveImageProgress({ imageId, packId, title, completionTime
     const existingDoc = await getDoc(docRef);
     const alreadySeenInCloud = existingDoc.exists() && !!existingDoc.data()?.firstSeenTimeMs;
 
-    // Anti-Tamper Protection: If image record exists in Firestore, never mark as firstSeen!
-    const effectiveIsFirstSeen = isFirstSeen && !alreadySeenInCloud;
-
-    const payload = {
+    // Anti-tamper protection is applied by the payload builder from cloud data.
+    const payload = buildImageProgressPayload({
       imageId,
       packId,
       title,
-      clears: Math.max(clears || 1, (existingDoc.data()?.clears || 0) + 1),
-      updatedAt: new Date().toISOString()
-    };
-
-    if (effectiveIsFirstSeen) {
-      payload.firstSeenTimeMs = completionTimeMs;
-    } else {
-      const existingBestRepeat = existingDoc.data()?.bestRepeatTimeMs;
-      payload.bestRepeatTimeMs = existingBestRepeat ? Math.min(existingBestRepeat, completionTimeMs) : completionTimeMs;
-    }
+      completionTimeMs,
+      isFirstSeen: isFirstSeen && !alreadySeenInCloud,
+      clears,
+      setId,
+      entryIds,
+      existingData: existingDoc.exists() ? existingDoc.data() : {}
+    });
 
     await setDoc(docRef, payload, { merge: true });
     return true;
@@ -562,4 +615,3 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
 
   return Promise.race([fetchPromise, timeoutPromise]);
 }
-

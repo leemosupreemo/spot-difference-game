@@ -87,3 +87,60 @@ test('tracks first set completion lifecycle', () => {
 });
 
 
+
+test('builds a set-scoped first completion payload with ordered entry IDs', async () => {
+  const { buildImageProgressPayload } = await import('./playerProgress.js');
+  const payload = buildImageProgressPayload({
+    imageId: 'photo_001',
+    packId: 'find_the_sniper',
+    title: 'Photo 001',
+    completionTimeMs: 18420,
+    isFirstSeen: true,
+    clears: 1,
+    setId: 'photo_set_007',
+    entryIds: ['photo_001', 'photo_002', 'photo_003', 'photo_004', 'photo_005']
+  });
+  assert.equal(payload.setId, 'photo_set_007');
+  assert.deepEqual(payload.entryIds, ['photo_001', 'photo_002', 'photo_003', 'photo_004', 'photo_005']);
+  assert.equal(payload.firstTime, 18420);
+  assert.equal(payload.fastestRepeat, null);
+  assert.equal(payload.fastestTime, 18420);
+});
+
+test('builds a set-scoped repeat payload without overwriting the original first time', async () => {
+  const { buildImageProgressPayload } = await import('./playerProgress.js');
+  const payload = buildImageProgressPayload({
+    imageId: 'photo_001',
+    packId: 'find_the_sniper',
+    title: 'Photo 001',
+    completionTimeMs: 16000,
+    isFirstSeen: false,
+    clears: 2,
+    setId: 'photo_set_007',
+    entryIds: ['photo_001', 'photo_002', 'photo_003', 'photo_004', 'photo_005'],
+    existingData: { firstTime: 18420, firstSeenTimeMs: 18420, fastestRepeat: 17200, bestRepeatTimeMs: 17200, fastestTime: 17200 }
+  });
+  assert.equal(payload.firstTime, 18420);
+  assert.equal(payload.fastestRepeat, 16000);
+  assert.equal(payload.fastestTime, 16000);
+  assert.equal(payload.firstSeenTimeMs, undefined);
+  assert.equal(payload.bestRepeatTimeMs, undefined);
+});
+
+test('keeps legacy image history fields when no set identity is supplied', async () => {
+  const { buildImageProgressPayload } = await import('./playerProgress.js');
+  const first = buildImageProgressPayload({
+    imageId: 'legacy_001', packId: 'find_the_sniper', title: 'Legacy',
+    completionTimeMs: 9000, isFirstSeen: true, clears: 1
+  });
+  assert.equal(first.firstSeenTimeMs, 9000);
+  assert.equal(first.setId, undefined);
+
+  const repeat = buildImageProgressPayload({
+    imageId: 'legacy_001', packId: 'find_the_sniper', title: 'Legacy',
+    completionTimeMs: 8000, isFirstSeen: false, clears: 2,
+    existingData: first
+  });
+  assert.equal(repeat.bestRepeatTimeMs, 8000);
+  assert.equal(repeat.firstSeenTimeMs, undefined);
+});
