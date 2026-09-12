@@ -175,6 +175,7 @@ export async function unlockGameCenterAchievement({
  * @param {Object} params
  * @param {number} params.elapsedTimeMs - Round duration in milliseconds
  * @param {string} [params.difficulty] - 'Easy', 'Medium', 'Hard'
+ * @param {string} [params.setId] - Stable deterministic Photo Set identity
  * @param {boolean} [params.isPersonalBest] - Whether this was a new personal record
  * @param {number} [params.score] - In-game points earned
  * @param {number} [params.stars] - Star rating (1-3)
@@ -183,6 +184,7 @@ export async function unlockGameCenterAchievement({
 export async function mirrorRoundToGameCenter({
   elapsedTimeMs,
   difficulty = 'Medium',
+  setId = null,
   isPersonalBest = false,
   score = 0,
   stars = 3
@@ -198,13 +200,17 @@ export async function mirrorRoundToGameCenter({
   const leaderboardsUpdated = [];
   const achievementsUnlocked = [];
 
-  // 1. Submit to Difficulty-specific Fastest Time Leaderboard
-  const diffLeaderboardId = getLeaderboardForDifficulty(difficulty);
-  const diffResult = await submitGameCenterScore({
-    leaderboardId: diffLeaderboardId,
-    score: elapsedTimeMs
-  });
-  if (diffResult?.success) leaderboardsUpdated.push(diffLeaderboardId);
+  // Deterministic Photo Sets are comparable by set identity. Game Center has
+  // no per-set IDs configured, so mirror them only to the global board rather
+  // than misclassifying them under a subjective difficulty board.
+  if (!setId) {
+    const diffLeaderboardId = getLeaderboardForDifficulty(difficulty);
+    const diffResult = await submitGameCenterScore({
+      leaderboardId: diffLeaderboardId,
+      score: elapsedTimeMs
+    });
+    if (diffResult?.success) leaderboardsUpdated.push(diffLeaderboardId);
+  }
 
   // 2. Submit to Global Fastest Time Leaderboard
   const globalResult = await submitGameCenterScore({

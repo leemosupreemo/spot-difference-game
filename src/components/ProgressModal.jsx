@@ -4,9 +4,7 @@ import { sounds } from '../utils/audio';
 import { fetchLeaderboards } from '../services/playerProgress';
 import {
   isGameCenterSupported,
-  openGameCenterLeaderboard,
-  openGameCenterAchievements,
-  onGameCenterAuthChange
+  openGameCenterLeaderboard
 } from '../services/gameCenter';
 import {
   getDailyLeaderboard,
@@ -28,16 +26,12 @@ export default function ProgressModal({
 }) {
   const [mainView, setMainView] = useState(initialTab); // 'leaderboards' | 'daily' | 'progress'
   const [selectedLeaderboardPack, setSelectedLeaderboardPack] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
+  const [selectedLeaderboardSet, setSelectedLeaderboardSet] = useState('');
   const [leaderboardData, setLeaderboardData] = useState(null);
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
-  const [gcState, setGcState] = useState({ isAuthenticated: false, player: null });
   const [dailyBoard, setDailyBoard] = useState([]);
   const [dailyStatus, setDailyStatus] = useState({ completed: false });
   const [dailyTimeToBeat, setDailyTimeToBeat] = useState(null);
-
-  useEffect(() => {
-    return onGameCenterAuthChange(setGcState);
-  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -45,6 +39,8 @@ export default function ProgressModal({
       fetchLeaderboards(difficultyStats)
         .then(data => {
           setLeaderboardData(data);
+          const availableSets = Object.keys(data?.bySetFirst || {});
+          setSelectedLeaderboardSet(current => current && availableSets.includes(current) ? current : (availableSets[0] || ''));
         })
         .finally(() => setLoadingLeaderboard(false));
 
@@ -116,7 +112,12 @@ export default function ProgressModal({
     return { clears, totalPoints, avgPointsPerSet, bestFirstTime, bestRepeatTime, setCompletedCount };
   };
 
-  const topLeaderboardEntries = leaderboardData?.byPackFirst?.[selectedLeaderboardPack] || leaderboardData?.byPackRepeat?.[selectedLeaderboardPack] || [];
+  const deterministicPhotoEntries = selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet
+    ? (leaderboardData?.bySetFirst?.[selectedLeaderboardSet] || leaderboardData?.bySetRepeat?.[selectedLeaderboardSet] || [])
+    : [];
+  const topLeaderboardEntries = deterministicPhotoEntries.length > 0
+    ? deterministicPhotoEntries
+    : (leaderboardData?.byPackFirst?.[selectedLeaderboardPack] || leaderboardData?.byPackRepeat?.[selectedLeaderboardPack] || []);
 
   return (
     <div style={{
@@ -172,53 +173,26 @@ export default function ProgressModal({
       {mainView === 'leaderboards' ? (
         /* GLOBAL LEADERBOARDS VIEW */
         <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box', overflowY: 'auto' }}>
-          {/* Apple Game Center Quick Access (iOS) */}
-          {isGameCenterSupported() && (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '10px 14px',
-                marginBottom: '16px',
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03))',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: '12px',
-                flexWrap: 'wrap',
-                gap: '8px'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Trophy size={18} color="var(--accent-gold)" />
-                <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#fff' }}>
-                  {gcState.isAuthenticated
-                    ? `Game Center: ${gcState.player?.alias || 'Connected'}`
-                    : 'Apple Game Center'}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                <Award size={20} color="var(--accent-gold)" /> LIVE LEADERBOARD
+              </h3>
+              {selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet && (
+                <span style={{ fontSize: '0.78rem', color: 'var(--accent-cyan)', fontWeight: 800 }}>
+                  {selectedLeaderboardSet.replace(/_/g, ' ').toUpperCase()}
                 </span>
-              </div>
-              <div style={{ display: 'flex', gap: '8px' }}>
+              )}
+              {isGameCenterSupported() && (
                 <button
                   onClick={() => { sounds.playTap(); openGameCenterLeaderboard(); }}
                   className="glass-btn glass-btn-primary"
-                  style={{ fontSize: '0.8rem', padding: '6px 12px', borderRadius: '8px' }}
+                  style={{ fontSize: '0.76rem', padding: '6px 10px', borderRadius: '8px' }}
                 >
-                  Leaderboards
+                  View in Game Center
                 </button>
-                <button
-                  onClick={() => { sounds.playTap(); openGameCenterAchievements(); }}
-                  className="glass-btn"
-                  style={{ fontSize: '0.8rem', padding: '6px 12px', borderRadius: '8px' }}
-                >
-                  Achievements
-                </button>
-              </div>
+              )}
             </div>
-          )}
-
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-              <Award size={20} color="var(--accent-gold)" /> LIVE LEADERBOARD
-            </h3>
 
             {/* Category Filter Pills */}
             <div style={{ display: 'flex', gap: '6px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '10px', border: '1px solid var(--border-glass)' }}>
@@ -238,6 +212,16 @@ export default function ProgressModal({
               >
                 📷 Photography
               </button>
+              {selectedLeaderboardPack === 'find_the_sniper' && Object.keys(leaderboardData?.bySetFirst || {}).length > 0 && (
+                <select
+                  aria-label="Photo Set leaderboard"
+                  value={selectedLeaderboardSet}
+                  onChange={event => setSelectedLeaderboardSet(event.target.value)}
+                  style={{ background: 'rgba(0,0,0,0.45)', color: '#fff', border: '1px solid var(--border-glass)', borderRadius: '8px', padding: '5px 8px', fontWeight: 700 }}
+                >
+                  {Object.keys(leaderboardData.bySetFirst).map(setId => <option key={setId} value={setId}>{setId.replace(/_/g, ' ')}</option>)}
+                </select>
+              )}
               <button
                 onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('abstract_animated'); }}
                 style={{

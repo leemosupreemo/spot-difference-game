@@ -122,6 +122,9 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
   const packRepeatSums = {};
   const packRepeatCounts = {};
   const fastestTimeByPack = {};
+  const bySetFirst = {};
+  const bySetRepeat = {};
+  const fastestTimeBySet = {};
 
   const categoryKeys = Object.keys(difficultyStats || {});
   const categories = categoryKeys.length > 0 ? categoryKeys : ['Easy', 'Medium', 'Hard', 'All'];
@@ -137,6 +140,9 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
 
     setEntries.forEach(setRecord => {
       const packId = setRecord.packId || 'find_the_sniper';
+      const setId = typeof setRecord.setId === 'string' && setRecord.setId.trim()
+        ? setRecord.setId.trim()
+        : null;
       let setCleared = false;
 
       if (typeof setRecord.firstTime === 'number' && setRecord.firstTime > 0) {
@@ -147,6 +153,7 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
         if (!packFirstSums[packId]) { packFirstSums[packId] = 0; packFirstCounts[packId] = 0; }
         packFirstSums[packId] += setRecord.firstTime;
         packFirstCounts[packId] += 1;
+        if (setId && (!bySetFirst[setId] || setRecord.firstTime < bySetFirst[setId])) bySetFirst[setId] = setRecord.firstTime;
       }
 
       const repeatTime = setRecord.fastestRepeat || setRecord.bestCleanTime || setRecord.firstTime;
@@ -158,6 +165,7 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
         if (!packRepeatSums[packId]) { packRepeatSums[packId] = 0; packRepeatCounts[packId] = 0; }
         packRepeatSums[packId] += repeatTime;
         packRepeatCounts[packId] += 1;
+        if (setId && (!bySetRepeat[setId] || repeatTime < bySetRepeat[setId])) bySetRepeat[setId] = repeatTime;
       }
 
       const validTimes = [setRecord.firstTime, setRecord.fastestRepeat, setRecord.bestCleanTime, setRecord.bestFaultedTime]
@@ -167,6 +175,7 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
         if (!fastestTimeByPack[packId] || minTime < fastestTimeByPack[packId]) {
           fastestTimeByPack[packId] = minTime;
         }
+        if (setId && (!fastestTimeBySet[setId] || minTime < fastestTimeBySet[setId])) fastestTimeBySet[setId] = minTime;
       }
 
       if (setCleared) {
@@ -191,6 +200,9 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
     avgFirstTimeByPack,
     avgRepeatTimeByPack,
     fastestTimeByPack,
+    bySetFirst,
+    bySetRepeat,
+    fastestTimeBySet,
     // Backwards-compatible aliases
     avgTimesByDifficulty: avgRepeatTimeByDifficulty,
     avgTimesByPack: avgRepeatTimeByPack,
@@ -512,6 +524,19 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
       .slice(0, 20);
   };
 
+  const getTop20ForSet = (setId) => combinedList
+    .map(player => {
+      const firstTime = player.bySetFirst?.[setId];
+      const repeatTime = player.bySetRepeat?.[setId];
+      const fastestTime = player.fastestTimeBySet?.[setId];
+      return { ...player, firstTime, repeatTime, fastestTime, effectiveTime: firstTime || repeatTime || 999999 };
+    })
+    .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number')
+    .sort((a, b) => (a.firstTime || a.repeatTime || 999999) - (b.firstTime || b.repeatTime || 999999))
+    .slice(0, 20);
+
+  const setIds = [...new Set(combinedList.flatMap(player => Object.keys(player.bySetFirst || {})))];
+
     return {
       isCloud,
       byPackFirst: {
@@ -522,6 +547,9 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         find_the_sniper: getTop20ForPack('find_the_sniper'),
         abstract_animated: getTop20ForPack('abstract_animated')
       },
+      bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId)])),
+      bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId)])),
+      fastestTimeBySet: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId)])),
       localPlayer: localPlayerEntry
     };
   })();
@@ -598,6 +626,16 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         }).slice(0, 20);
       };
 
+      const setIds = [...new Set([...(localPayload.bySetFirst ? Object.keys(localPayload.bySetFirst) : [])])];
+      const getFallbackListForSet = (setId) => [localPlayerEntry, ...fallbackEntries]
+        .map(player => ({
+          ...player,
+          firstTime: player.bySetFirst?.[setId],
+          repeatTime: player.bySetRepeat?.[setId],
+          fastestTime: player.fastestTimeBySet?.[setId]
+        }))
+        .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number');
+
       resolve({
         isCloud: false,
         byPackFirst: {
@@ -608,6 +646,9 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           find_the_sniper: getFallbackListForPack('find_the_sniper'),
           abstract_animated: getFallbackListForPack('abstract_animated')
         },
+        bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId)])),
+        bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId)])),
+        fastestTimeBySet: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId)])),
         localPlayer: localPlayerEntry
       });
     }, 2500);
