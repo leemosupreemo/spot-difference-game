@@ -66,3 +66,13 @@ test('App.jsx gates SetOfTheDayBanner behind !isDailyCompleted and routes daily 
   assert.match(source, /isFailed:\s*true/);
   assert.match(source, /isFailed=\{dailyVictoryData\?\.isFailed\}/);
 });
+
+test('debug daily mode uses the three-image queue set and reaches the daily victory path', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+
+  assert.match(source, /\[StartDailyChallenge:Debug\][\s\S]*dailyLevels = getDailySetForDate\(\)/);
+  assert.match(source, /if \(debugMode\) \{[\s\S]*syncRemoteDailyQueue\(\)\.catch/);
+  assert.doesNotMatch(source, /await syncRemoteDailyQueue/);
+  assert.match(source, /setTimeout\(\(\) => \{[\s\S]*setVictoryModalOpen\(true\)/);
+  assert.match(source, /if \(gameMode === 'daily'\) \{[\s\S]*setDailyVictoryData\(/);
+});

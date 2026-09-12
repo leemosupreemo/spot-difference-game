@@ -627,8 +627,8 @@ export default function App() {
       if (debugMode && debugSourceMode === 'premade') {
         const allActive = getAllPhotoPairEntries();
         if (allActive.length > 0) {
-          const debugLevels = allActive.map(createPhotoPairLevel);
-          logApp('INFO', `[StartGame:DebugBigBatch] Launching unified batch of ${debugLevels.length} premade levels`);
+          const debugLevels = allActive.slice(0, 5).map(createPhotoPairLevel);
+          logApp('INFO', `[StartGame:Debug] Launching 5 premade levels for set completion: ${debugLevels.map(l => l.id).join(', ')}`);
           setLevels(debugLevels);
           startLevel(debugLevels[0].id);
           setView('game');
@@ -748,31 +748,6 @@ export default function App() {
         scoreEarned: pointsEarned,
         stageIndex: currentStageIndex
       });
-
-      // In Debug Mode, standard curator review remains continuous. Daily mode
-      // follows the normal three-image completion path so its victory screen appears.
-      if (debugMode && gameMode !== 'daily') {
-        if (debugSourceMode === 'premade') {
-          const allActive = getAllPhotoPairEntries();
-          const curIdx = allActive.findIndex(e => e.id === currentLevelId);
-          const nextIndex = curIdx >= 0 ? (curIdx + 1) % allActive.length : 0;
-          setTimeout(() => {
-            setCurrentStageIndex(nextIndex);
-            const nextEntry = allActive[nextIndex];
-            if (nextEntry) {
-              startLevel(nextEntry.id);
-            }
-          }, 350);
-          return;
-        } else if (debugSourceMode === 'procedural') {
-          setTimeout(() => {
-            const nextProc = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
-            setLevels([nextProc]);
-            startLevel(nextProc.id);
-          }, 350);
-          return;
-        }
-      }
 
       const nextIndex = currentStageIndex + 1;
       const totalStageImages = gameMode === 'daily' ? 3 : (levels.length > 0 ? levels.length : 5);
