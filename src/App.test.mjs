@@ -47,6 +47,13 @@ test('standard Photo Mode does not fall back to generated abstract levels', () =
   assert.doesNotMatch(source, /\[StartGame:Fallback\]/);
 });
 
+test('Photo Mode offers only complete Photography sets and blocks an invalid selection', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+
+  assert.match(source, /filter\(entry => entry\.packId === 'find_the_sniper'\)/);
+  assert.match(source, /if \(!photoSetId \|\| !photoSetIds\.includes\(photoSetId\)\)/);
+});
+
 test('App.jsx gates SetOfTheDayBanner behind !isDailyCompleted and routes daily failure to DailyVictoryModal', () => {
   const source = fs.readFileSync(appPath, 'utf8');
 

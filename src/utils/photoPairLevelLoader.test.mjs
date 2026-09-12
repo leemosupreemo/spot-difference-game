@@ -181,9 +181,11 @@ test('builds a stage from a fetched manifest and loadable image pairs', async ()
 
 test('builds the requested photo set in sequence order regardless of difficulty', async () => {
   const setEntries = [
-    { ...entry, id: 'set_entry_003', setId: 'photo_set_test', sequence: 3, difficulty: 'Hard' },
+    { ...entry, id: 'set_entry_005', setId: 'photo_set_test', sequence: 5, difficulty: 'Medium' },
     { ...entry, id: 'set_entry_001', setId: 'photo_set_test', sequence: 1, difficulty: 'Easy' },
-    { ...entry, id: 'set_entry_002', setId: 'photo_set_test', sequence: 2, difficulty: 'Medium' }
+    { ...entry, id: 'set_entry_003', setId: 'photo_set_test', sequence: 3, difficulty: 'Hard' },
+    { ...entry, id: 'set_entry_002', setId: 'photo_set_test', sequence: 2, difficulty: 'Medium' },
+    { ...entry, id: 'set_entry_004', setId: 'photo_set_test', sequence: 4, difficulty: 'Easy' }
   ];
   const fetchImpl = async () => ({
     ok: true,
@@ -194,7 +196,7 @@ test('builds the requested photo set in sequence order regardless of difficulty'
     packId: 'find_the_sniper',
     setId: 'photo_set_test',
     difficulty: 'Easy',
-    count: 3,
+    count: 5,
     fetchImpl,
     curatedStatusMap: {}
   });
@@ -202,14 +204,46 @@ test('builds the requested photo set in sequence order regardless of difficulty'
     packId: 'find_the_sniper',
     setId: 'photo_set_test',
     difficulty: 'Hard',
-    count: 3,
+    count: 5,
     fetchImpl,
     curatedStatusMap: {}
   });
 
-  const expectedIds = ['set_entry_001', 'set_entry_002', 'set_entry_003'];
+  const expectedIds = ['set_entry_001', 'set_entry_002', 'set_entry_003', 'set_entry_004', 'set_entry_005'];
   assert.deepEqual(easyStage.map(item => item.id), expectedIds);
   assert.deepEqual(hardStage.map(item => item.id), expectedIds);
+});
+
+test('rejects a requested set that is incomplete within the requested pack', async () => {
+  const mixedPackSet = [
+    { ...entry, id: 'photo_001', setId: 'photo_set_mixed', sequence: 1 },
+    { ...entry, id: 'photo_002', setId: 'photo_set_mixed', sequence: 2 },
+    { ...entry, id: 'abstract_003', setId: 'photo_set_mixed', sequence: 3, packId: 'abstract_animated' },
+    { ...entry, id: 'photo_004', setId: 'photo_set_mixed', sequence: 4 },
+    { ...entry, id: 'photo_005', setId: 'photo_set_mixed', sequence: 5 }
+  ];
+
+  const stage = await buildPhotoPairStage({
+    packId: 'find_the_sniper',
+    setId: 'photo_set_mixed',
+    count: 5,
+    fetchImpl: async () => ({ ok: true, json: async () => mixedPackSet }),
+    curatedStatusMap: {}
+  });
+
+  assert.deepEqual(stage, []);
+});
+
+test('treats an explicitly empty set ID as invalid instead of using legacy selection', async () => {
+  const stage = await buildPhotoPairStage({
+    packId: 'find_the_sniper',
+    setId: '',
+    count: 5,
+    fetchImpl: async () => ({ ok: true, json: async () => [entry] }),
+    curatedStatusMap: {}
+  });
+
+  assert.deepEqual(stage, []);
 });
 
 test('returns no stage when the requested photo set is incomplete', async () => {

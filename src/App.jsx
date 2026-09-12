@@ -95,7 +95,9 @@ export default function App() {
   }); // 'Easy' | 'Medium' | 'Hard'
 
   const [photoSetIds] = useState(() => (
-    getCompletePhotoSets(getAllPhotoPairEntries()).map(photoSet => photoSet.setId)
+    getCompletePhotoSets(
+      getAllPhotoPairEntries().filter(entry => entry.packId === 'find_the_sniper')
+    ).map(photoSet => photoSet.setId)
   ));
   const [photoSetId, setPhotoSetId] = useState(() => {
     try {
@@ -613,6 +615,11 @@ export default function App() {
           setView('game');
           return;
         }
+      }
+
+      if (!photoSetId || !photoSetIds.includes(photoSetId)) {
+        logApp('WARN', '[StartGame:PhotoSetUnavailable] No valid Photography set is selected');
+        return;
       }
 
       const stageList = await buildPhotoPairStage({
