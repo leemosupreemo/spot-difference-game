@@ -17,6 +17,7 @@ import DebugCuratorBar from './components/DebugCuratorBar';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
 import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGenerator';
 import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
+import { getCompletePhotoSets } from './utils/photoSetCatalog';
 import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
@@ -93,6 +94,17 @@ export default function App() {
     return 'Medium';
   }); // 'Easy' | 'Medium' | 'Hard'
 
+  const [photoSetIds] = useState(() => (
+    getCompletePhotoSets(getAllPhotoPairEntries()).map(photoSet => photoSet.setId)
+  ));
+  const [photoSetId, setPhotoSetId] = useState(() => {
+    try {
+      const savedSetId = localStorage.getItem('diff_hunter_photo_set_id');
+      if (savedSetId && photoSetIds.includes(savedSetId)) return savedSetId;
+    } catch {}
+    return photoSetIds[0] || '';
+  });
+
   const [selectedTheme, setSelectedTheme] = useState(() => {
     try {
       const challenge = typeof window !== 'undefined' ? parseIncomingChallenge(window.location.search) : null;
@@ -145,6 +157,15 @@ export default function App() {
     }
   });
   const visitedDebugLevelIdsRef = useRef(new Set());
+
+  const handlePhotoSetChange = useCallback((nextSetId) => {
+    if (!photoSetIds.includes(nextSetId)) return;
+    setPhotoSetId(nextSetId);
+    try {
+      localStorage.setItem('diff_hunter_photo_set_id', nextSetId);
+    } catch {}
+  }, [photoSetIds]);
+
   useEffect(() => {
     initAnalytics();
     initGameCenter().catch(() => {});
@@ -596,6 +617,7 @@ export default function App() {
 
       const stageList = await buildPhotoPairStage({
         packId: 'find_the_sniper',
+        setId: photoSetId,
         difficulty: selectedDifficulty,
         count: 5,
         seed: Date.now(),
@@ -608,15 +630,10 @@ export default function App() {
         setView('game');
         return;
       }
+      logApp('WARN', `[StartGame:PhotoSetUnavailable] Photo set could not be loaded: ${photoSetId}`);
     } catch (err) {
       logApp('ERROR', `[StartGame:Error] ${err?.message || err}`);
     }
-
-    const procFallback = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair('abstract_animated', selectedDifficulty, Date.now() + i));
-    logApp('INFO', `[StartGame:Fallback] Launching 5 fallback levels: ${procFallback.map(l => l.id).join(', ')}`);
-    setLevels(procFallback);
-    startLevel(procFallback[0].id);
-    setView('game');
   };
 
   // Launch Set of the Day (3-image sequence from unrepeated daily queue)
@@ -1066,6 +1083,9 @@ export default function App() {
             onStartGame={handleStartGame}
             selectedTheme={selectedTheme}
             setSelectedTheme={setSelectedTheme}
+            photoSetIds={photoSetIds}
+            photoSetId={photoSetId}
+            onPhotoSetChange={handlePhotoSetChange}
             selectedDifficulty={selectedDifficulty}
             setSelectedDifficulty={setSelectedDifficulty}
             activeMode={activeMode}

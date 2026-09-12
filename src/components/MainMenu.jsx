@@ -12,6 +12,9 @@ import TutorialBanner from './TutorialBanner';
 export default function MainMenu({
   selectedTheme,
   setSelectedTheme,
+  photoSetIds = [],
+  photoSetId = '',
+  onPhotoSetChange = null,
   onStartGame,
   incomingChallenge = null,
   hasCompletedFirstSet: hasCompletedProp
@@ -161,6 +164,35 @@ export default function MainMenu({
             );
           })}
         </div>
+
+        {selectedTheme === 'find_the_sniper' && (
+          <label style={{ display: 'block', marginBottom: '14px' }}>
+            <span style={{ display: 'block', marginBottom: '6px', fontSize: '0.76rem', fontWeight: 900, color: 'var(--text-muted)', letterSpacing: '0.5px' }}>
+              PHOTO SET
+            </span>
+            <select
+              aria-label="Photo Set"
+              value={photoSetId}
+              disabled={photoSetIds.length === 0}
+              onChange={(event) => onPhotoSetChange?.(event.target.value)}
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                borderRadius: '10px',
+                border: '1px solid var(--border-glass)',
+                background: 'rgba(10, 8, 28, 0.9)',
+                color: 'var(--text-main)',
+                fontWeight: 800
+              }}
+            >
+              {photoSetIds.map((availableSetId, index) => (
+                <option key={availableSetId} value={availableSetId}>
+                  {`Photo Set ${index + 1}`}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
 
         {/* Main Action START GAME Button with Periodic Sheen */}
         <div className="start-game-outer-container start-game-btn-wrapper">

@@ -39,6 +39,14 @@ test('Scores opens My Progress as the active default tab', () => {
   assert.match(source, /const handleOpenLeaderboard = \(\) => \{\s*setStatsInitialTab\('progress'\)/);
   assert.match(source, /onOpenStats=\{\(\) => \{\s*setStatsInitialTab\('progress'\)/);
 });
+
+test('standard Photo Mode does not fall back to generated abstract levels', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+
+  assert.match(source, /setId:\s*photoSetId/);
+  assert.doesNotMatch(source, /\[StartGame:Fallback\]/);
+});
+
 test('App.jsx gates SetOfTheDayBanner behind !isDailyCompleted and routes daily failure to DailyVictoryModal', () => {
   const source = fs.readFileSync(appPath, 'utf8');
 

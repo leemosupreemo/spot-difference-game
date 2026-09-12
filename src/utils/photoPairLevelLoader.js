@@ -1,5 +1,6 @@
 import { generateProceduralLevelPair } from './proceduralGenerator.js';
 import { validatePhotoPairManifest } from './photoPairManifest.js';
+import { getCompletePhotoSets } from './photoSetCatalog.js';
 import photoPairManifestData from '../../public/levels/photo_pair_manifest.json' with { type: 'json' };
 import { logApp } from './logger.js';
 
@@ -216,6 +217,7 @@ export function selectPhotoPairEntries(entries, {
 
 export async function buildPhotoPairStage({
   packId = 'find_the_sniper',
+  setId = null,
   difficulty = 'Medium',
   count = DEFAULT_STAGE_COUNT,
   seed = Date.now(),
@@ -223,7 +225,7 @@ export async function buildPhotoPairStage({
   imageFactory = null,
   curatedStatusMap = null
 } = {}) {
-  logApp('INFO', `[BuildStageStart] Pack: ${packId} Difficulty: ${difficulty} Seed: ${seed}`);
+  logApp('INFO', `[BuildStageStart] Pack: ${packId} Set: ${setId || 'legacy'} Difficulty: ${difficulty} Seed: ${seed}`);
   try {
     let allEntries = null;
     if (fetchImpl) {
@@ -246,7 +248,20 @@ export async function buildPhotoPairStage({
     logApp('INFO', `[BuildStage] Total active manifest entries: ${activeEntries.length} (from ${allEntries.length} raw entries)`);
 
     if (activeEntries && activeEntries.length > 0) {
-      const candidates = selectPhotoPairEntries(activeEntries, { packId, difficulty, count: activeEntries.length, seed, statusMap });
+      let candidates;
+      if (setId) {
+        const effectiveEntries = applyCuratedPackOverrides(activeEntries, statusMap);
+        const requestedSet = getCompletePhotoSets(effectiveEntries, count)
+          .find(photoSet => photoSet.setId === setId);
+
+        if (!requestedSet) {
+          logApp('WARN', `[BuildStage] Requested photo set is unavailable or incomplete: ${setId}`);
+          return [];
+        }
+        candidates = requestedSet.entries;
+      } else {
+        candidates = selectPhotoPairEntries(activeEntries, { packId, difficulty, count: activeEntries.length, seed, statusMap });
+      }
       const stage = [];
 
       for (const entry of candidates) {
@@ -275,6 +290,11 @@ export async function buildPhotoPairStage({
         }
       }
 
+      if (setId && stage.length !== count) {
+        logApp('WARN', `[BuildStage] Requested photo set could not be loaded completely: ${setId}`);
+        return [];
+      }
+
       while (stage.length < count) {
         const procSeed = seed + stage.length * 1000;
         stage.push(generateProceduralLevelPair(packId, difficulty, procSeed));
@@ -286,6 +306,8 @@ export async function buildPhotoPairStage({
   } catch (err) {
     logApp('ERROR', '[buildPhotoPairStageError]', err?.message || err);
   }
+
+  if (setId) return [];
 
   // Safe procedural fallback
   const fallbackStage = [];

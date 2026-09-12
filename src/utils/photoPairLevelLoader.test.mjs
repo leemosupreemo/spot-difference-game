@@ -179,6 +179,60 @@ test('builds a stage from a fetched manifest and loadable image pairs', async ()
   assert.deepEqual(loadedSources, [entry.baseImage, entry.variantImage]);
 });
 
+test('builds the requested photo set in sequence order regardless of difficulty', async () => {
+  const setEntries = [
+    { ...entry, id: 'set_entry_003', setId: 'photo_set_test', sequence: 3, difficulty: 'Hard' },
+    { ...entry, id: 'set_entry_001', setId: 'photo_set_test', sequence: 1, difficulty: 'Easy' },
+    { ...entry, id: 'set_entry_002', setId: 'photo_set_test', sequence: 2, difficulty: 'Medium' }
+  ];
+  const fetchImpl = async () => ({
+    ok: true,
+    json: async () => setEntries
+  });
+
+  const easyStage = await buildPhotoPairStage({
+    packId: 'find_the_sniper',
+    setId: 'photo_set_test',
+    difficulty: 'Easy',
+    count: 3,
+    fetchImpl,
+    curatedStatusMap: {}
+  });
+  const hardStage = await buildPhotoPairStage({
+    packId: 'find_the_sniper',
+    setId: 'photo_set_test',
+    difficulty: 'Hard',
+    count: 3,
+    fetchImpl,
+    curatedStatusMap: {}
+  });
+
+  const expectedIds = ['set_entry_001', 'set_entry_002', 'set_entry_003'];
+  assert.deepEqual(easyStage.map(item => item.id), expectedIds);
+  assert.deepEqual(hardStage.map(item => item.id), expectedIds);
+});
+
+test('returns no stage when the requested photo set is incomplete', async () => {
+  const incompleteSet = [
+    { ...entry, id: 'set_entry_001', setId: 'photo_set_incomplete', sequence: 1 },
+    { ...entry, id: 'set_entry_002', setId: 'photo_set_incomplete', sequence: 2 }
+  ];
+
+  const stage = await buildPhotoPairStage({
+    packId: 'find_the_sniper',
+    setId: 'photo_set_incomplete',
+    difficulty: 'Medium',
+    count: 3,
+    fetchImpl: async () => ({
+      ok: true,
+      json: async () => incompleteSet
+    }),
+    curatedStatusMap: {}
+  });
+
+  assert.deepEqual(stage, []);
+});
+
 test('continues loading later candidates after an image pair fails', async () => {
   clearPhotoPairManifestCache();
   const badEntry = {
@@ -269,4 +323,3 @@ test('createPhotoPairLevel retains dimensions and aspectRatio properties', () =>
   assert.deepEqual(level.dimensions, { width: 1200, height: 896 });
   assert.equal(level.aspectRatio, '4:3');
 });
-

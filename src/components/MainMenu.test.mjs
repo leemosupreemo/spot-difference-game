@@ -28,6 +28,17 @@ test('MainMenu supports incoming challenge banner for viral link reception', () 
   assert.match(source, /Can you beat/);
 });
 
+test('MainMenu exposes a controlled Photo Set selector only for Photography mode', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /photoSetIds/);
+  assert.match(source, /photoSetId/);
+  assert.match(source, /onPhotoSetChange/);
+  assert.match(source, /selectedTheme === 'find_the_sniper'/);
+  assert.match(source, /<select/);
+  assert.match(source, /PHOTO SET/);
+});
+
 test('MainMenu conditionally displays TutorialBanner only until first image set is completed', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
