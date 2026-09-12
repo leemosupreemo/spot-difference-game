@@ -58,3 +58,9 @@ test('openGameCenterAchievements gracefully returns unsupported_platform in non-
   assert.equal(result.reason, 'unsupported_platform');
 });
 
+
+test('deterministic Photo Set mirroring does not require a difficulty leaderboard', async () => {
+  const source = await import('node:fs').then(fs => fs.readFileSync(new URL('./gameCenter.js', import.meta.url), 'utf8'));
+  assert.match(source, /setId/);
+  assert.match(source, /if \(!setId\)/);
+});

@@ -144,3 +144,22 @@ test('keeps legacy image history fields when no set identity is supplied', async
   assert.equal(repeat.bestRepeatTimeMs, 8000);
   assert.equal(repeat.firstSeenTimeMs, undefined);
 });
+
+test('computes standard deterministic Photo Set timing payloads by set identity', () => {
+  const payload = computeLeaderboardPayload({
+    Medium: {
+      sets: {
+        photo_set_007: { setId: 'photo_set_007', packId: 'find_the_sniper', firstTime: 18420, fastestRepeat: 16000 },
+        photo_set_008: { setId: 'photo_set_008', packId: 'find_the_sniper', firstTime: 22000, fastestRepeat: 19000 },
+        abstract_legacy: { packId: 'abstract_animated', firstTime: 12000, fastestRepeat: 10000 }
+      }
+    }
+  }, 'Tester');
+
+  assert.equal(payload.bySetFirst.photo_set_007, 18420);
+  assert.equal(payload.bySetRepeat.photo_set_007, 16000);
+  assert.equal(payload.fastestTimeBySet.photo_set_007, 16000);
+  assert.equal(payload.bySetFirst.photo_set_008, 22000);
+  assert.equal(payload.fastestTimeBySet.photo_set_008, 19000);
+  assert.equal(payload.bySetFirst.abstract_legacy, undefined);
+});

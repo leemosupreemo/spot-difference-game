@@ -45,3 +45,12 @@ test('ProgressModal renders Category Breakdown table with clean columns', () => 
   assert.match(source, /AVG \/ SET/);
   assert.match(source, /BEST TIME/);
 });
+
+test('ProgressModal exposes one Game Center leaderboard action beside the heading', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /View in Game Center/);
+  assert.match(source, /openGameCenterLeaderboard/);
+  assert.doesNotMatch(source, /openGameCenterAchievements/);
+  assert.doesNotMatch(source, />\s*Achievements\s*</);
+});
