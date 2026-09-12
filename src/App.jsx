@@ -1120,6 +1120,7 @@ export default function App() {
         />
 
         {/* View Switcher */}
+        <div key={view} className="screen-view-transition">
         {view === 'menu' ? (
           <MainMenu
             onStartGame={handleStartGame}
@@ -1191,8 +1192,7 @@ export default function App() {
               totalStageImages={gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5))}
               gameMode={gameMode}
             />
-          )}
-
+        )}
           {/* Clean Unified Game Timer & Controls Bar */}
           <TimerDisplay
             elapsedTime={elapsedTime}
@@ -1227,6 +1227,7 @@ export default function App() {
           />
         </main>
       )}
+      </div>
       </div>
 
       {/* Modals */}

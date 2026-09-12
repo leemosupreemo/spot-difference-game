@@ -76,3 +76,8 @@ test('debug daily mode uses the three-image queue set and reaches the daily vict
   assert.match(source, /setTimeout\(\(\) => \{[\s\S]*setVictoryModalOpen\(true\)/);
   assert.match(source, /if \(gameMode === 'daily'\) \{[\s\S]*setDailyVictoryData\(/);
 });
+
+test('whole-screen view changes use the screen transition wrapper', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+  assert.match(source, /<div key=\{view\} className="screen-view-transition">/);
+});
