@@ -524,7 +524,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
       .slice(0, 20);
   };
 
-  const getTop20ForSet = (setId) => combinedList
+  const getTop20ForSet = (setId, metric = 'firstTime') => combinedList
     .map(player => {
       const firstTime = player.bySetFirst?.[setId];
       const repeatTime = player.bySetRepeat?.[setId];
@@ -532,7 +532,7 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
       return { ...player, firstTime, repeatTime, fastestTime, effectiveTime: firstTime || repeatTime || 999999 };
     })
     .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number')
-    .sort((a, b) => (a.firstTime || a.repeatTime || 999999) - (b.firstTime || b.repeatTime || 999999))
+    .sort((a, b) => (a[metric] || 999999) - (b[metric] || 999999))
     .slice(0, 20);
 
   const setIds = [...new Set(combinedList.flatMap(player => Object.keys(player.bySetFirst || {})))];
@@ -547,9 +547,10 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         find_the_sniper: getTop20ForPack('find_the_sniper'),
         abstract_animated: getTop20ForPack('abstract_animated')
       },
-      bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId)])),
-      bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId)])),
-      fastestTimeBySet: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId)])),
+      bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId, 'firstTime')])),
+      bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId, 'repeatTime')])),
+      bySetFastest: Object.fromEntries(setIds.map(setId => [setId, getTop20ForSet(setId, 'fastestTime')])),
+      fastestTimeBySet: localPlayerEntry.fastestTimeBySet,
       localPlayer: localPlayerEntry
     };
   })();
@@ -646,9 +647,10 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           find_the_sniper: getFallbackListForPack('find_the_sniper'),
           abstract_animated: getFallbackListForPack('abstract_animated')
         },
-        bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId)])),
-        bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId)])),
-        fastestTimeBySet: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId)])),
+        bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.firstTime || 999999) - (b.firstTime || 999999))])),
+        bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.repeatTime || 999999) - (b.repeatTime || 999999))])),
+        bySetFastest: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.fastestTime || 999999) - (b.fastestTime || 999999))])),
+        fastestTimeBySet: localPlayerEntry.fastestTimeBySet,
         localPlayer: localPlayerEntry
       });
     }, 2500);

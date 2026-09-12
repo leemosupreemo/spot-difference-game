@@ -115,7 +115,9 @@ export default function ProgressModal({
   const deterministicPhotoEntries = selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet
     ? (leaderboardData?.bySetFirst?.[selectedLeaderboardSet] || leaderboardData?.bySetRepeat?.[selectedLeaderboardSet] || [])
     : [];
-  const topLeaderboardEntries = deterministicPhotoEntries.length > 0
+  // Once a Photo Set is selected, an empty set remains empty. Falling back to
+  // a pack-wide ranking would compare different deterministic content.
+  const topLeaderboardEntries = selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet
     ? deterministicPhotoEntries
     : (leaderboardData?.byPackFirst?.[selectedLeaderboardPack] || leaderboardData?.byPackRepeat?.[selectedLeaderboardPack] || []);
 

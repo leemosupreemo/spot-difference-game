@@ -120,6 +120,10 @@ export function getGameCenterPlayer() {
   return authState.player;
 }
 
+export function shouldMirrorDifficultyLeaderboard(setId) {
+  return !(typeof setId === 'string' && setId.trim().length > 0);
+}
+
 /**
  * Submit a score/time to a specified Game Center leaderboard.
  * Only submits if authenticated.
@@ -203,7 +207,7 @@ export async function mirrorRoundToGameCenter({
   // Deterministic Photo Sets are comparable by set identity. Game Center has
   // no per-set IDs configured, so mirror them only to the global board rather
   // than misclassifying them under a subjective difficulty board.
-  if (!setId) {
+  if (shouldMirrorDifficultyLeaderboard(setId)) {
     const diffLeaderboardId = getLeaderboardForDifficulty(difficulty);
     const diffResult = await submitGameCenterScore({
       leaderboardId: diffLeaderboardId,
