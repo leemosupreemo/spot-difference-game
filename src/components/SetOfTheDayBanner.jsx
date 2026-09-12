@@ -74,6 +74,12 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
   };
 
   return (
+    <>
+      <style>{`@keyframes setOfTheDayBorderShift {
+        0%, 100% { border-color: rgba(255, 0, 127, 0.72); }
+        33% { border-color: rgba(0, 240, 255, 0.72); }
+        66% { border-color: rgba(255, 183, 3, 0.78); }
+      }`}</style>
     <div
       style={{
         width: '100%',
@@ -102,9 +108,8 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
           background: 'linear-gradient(135deg, rgba(255, 0, 127, 0.22) 0%, rgba(121, 40, 202, 0.28) 45%, rgba(0, 240, 255, 0.18) 100%)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: isHovered
-            ? '1.5px solid rgba(255, 183, 3, 0.9)'
-            : '1.5px solid rgba(255, 0, 127, 0.45)',
+          border: '2px solid rgba(255, 0, 127, 0.72)',
+          animation: 'setOfTheDayBorderShift 8s ease-in-out infinite',
           boxShadow: isHovered
             ? '0 0 28px rgba(255, 0, 127, 0.4), 0 0 16px rgba(255, 183, 3, 0.35)'
             : '0 6px 20px rgba(0, 0, 0, 0.35), 0 0 16px rgba(255, 0, 127, 0.2)',
@@ -291,5 +296,6 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
         </div>
       </div>
     </div>
+    </>
   );
 }
