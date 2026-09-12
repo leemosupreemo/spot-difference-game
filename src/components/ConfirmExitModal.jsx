@@ -27,7 +27,10 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
         style={{
           maxWidth: '420px',
           width: '94%',
+          maxHeight: 'calc(100dvh - 32px)',
+          overflowY: 'auto',
           padding: '24px 20px',
+          boxSizing: 'border-box',
           textAlign: 'center',
           border: isDaily ? '1.5px solid rgba(255, 0, 127, 0.6)' : '1.5px solid rgba(0, 240, 255, 0.4)',
           boxShadow: isDaily ? '0 0 35px rgba(255, 0, 127, 0.35)' : '0 0 35px rgba(0, 240, 255, 0.25)',
@@ -83,7 +86,7 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '22px', lineHeight: 1.45 }}>
           {isDaily
             ? "Quitting now will forfeit today's Set of the Day run as a failed attempt. You will not be able to re-attempt until tomorrow's daily refresh."
-            : "Your current stage progress will be lost. Are you sure you want to return to the menu?"}
+            : "Your current stage progress will be lost."}
         </p>
 
         {/* Action Buttons */}

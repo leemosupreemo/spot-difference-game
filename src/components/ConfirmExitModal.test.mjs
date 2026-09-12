@@ -24,5 +24,6 @@ test('ConfirmExitModal shows daily challenge forfeit warning when isDaily is tru
   // Standard quit copy
   assert.match(source, /Quit Current Game\?/);
   assert.match(source, /Your current stage progress will be lost/);
+  assert.doesNotMatch(source, /Are you sure you want to return to the menu/);
   assert.match(source, /Quit to Menu/);
 });
