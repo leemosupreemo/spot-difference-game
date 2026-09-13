@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import MainMenu from './components/MainMenu';
 import Header from './components/Header';
 import GameCanvas from './components/GameCanvas';
@@ -25,7 +25,7 @@ import { getInitialDebugMode } from './utils/debugMode';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
 import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted } from './services/analytics';
 import { parseIncomingChallenge } from './utils/challengeMetrics';
-import { syncRemoteLevelPacks } from './services/remoteLevelSync';
+import { syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
 import { syncRemoteAppConfig } from './services/appConfig';
 import { initializeNotificationListeners, scheduleInstallNotifications } from './services/notificationService';
 import { initGameCenter, mirrorRoundToGameCenter } from './services/gameCenter';
@@ -93,11 +93,10 @@ export default function App() {
     return 'Medium';
   }); // 'Easy' | 'Medium' | 'Hard'
 
-  const [photoSetIds] = useState(() => (
-    getCompletePhotoSets(
-      getAllPhotoPairEntries().filter(entry => entry.packId === 'find_the_sniper')
-    ).map(photoSet => photoSet.setId)
-  ));
+  const [remoteLevelsRevision, setRemoteLevelsRevision] = useState(0);
+  const photoSetIds = useMemo(() => getCompletePhotoSets(
+    getAllPhotoPairEntries().filter(entry => entry.packId === 'find_the_sniper')
+  ).map(photoSet => photoSet.setId), [remoteLevelsRevision]);
   const [photoSetId, setPhotoSetId] = useState(() => {
     try {
       const savedSetId = localStorage.getItem('diff_hunter_photo_set_id');
@@ -212,6 +211,15 @@ export default function App() {
       }
     } catch (_) {}
   }, [incomingChallenge]);
+
+  // Refresh derived Photo Set choices as soon as a remote pack arrives.
+  useEffect(() => subscribeToRemoteLevels(() => setRemoteLevelsRevision(revision => revision + 1)), []);
+
+  useEffect(() => {
+    if (photoSetIds.length > 0 && !photoSetIds.includes(photoSetId)) {
+      setPhotoSetId(photoSetIds[0]);
+    }
+  }, [photoSetIds, photoSetId]);
 
   const handleToggleSkipKept = (val) => {
     setSkipKeptLevels(val);

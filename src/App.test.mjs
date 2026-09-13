@@ -81,3 +81,10 @@ test('whole-screen view changes use the screen transition wrapper', () => {
   const source = fs.readFileSync(appPath, 'utf8');
   assert.match(source, /<div key=\{view\} className="screen-view-transition">/);
 });
+
+test('refreshes Photo Set choices when remote levels sync without rebuilding', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+  assert.match(source, /subscribeToRemoteLevels/);
+  assert.match(source, /setRemoteLevelsRevision/);
+  assert.match(source, /getAllPhotoPairEntries\(\)\.filter/);
+});
