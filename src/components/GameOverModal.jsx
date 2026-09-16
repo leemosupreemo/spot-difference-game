@@ -24,20 +24,21 @@ export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime,
       }}
     >
       <div
-        className="glass-panel"
+        className="glass-panel modal-split-card"
         onClick={(e) => e.stopPropagation()}
         style={{
         maxWidth: '440px',
         width: '94%',
-        maxHeight: '92vh',
+        maxHeight: 'calc(100dvh - 32px)',
         overflowY: 'auto',
         padding: '20px 18px',
+        boxSizing: 'border-box',
         textAlign: 'center',
         border: '2px solid var(--accent-pink)',
         boxShadow: '0 0 40px rgba(255, 0, 127, 0.45)',
         borderRadius: '20px',
         position: 'relative',
-        animation: 'pageFadeIn 0.12s ease-out'
+        '--modal-accent': 'var(--accent-pink)'
       }}>
 
         {/* Top Right Close "X" Button */}
@@ -73,13 +74,13 @@ export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 12px auto',
+          margin: '0 auto 14px auto',
           boxShadow: '0 0 24px var(--accent-pink)'
         }}>
-          <Skull size={30} color="#000" />
+          <Skull size={28} color="#000" />
         </div>
 
-        <h2 style={{ fontSize: '1.6rem', fontWeight: 900, marginBottom: '4px', color: 'var(--accent-pink)', letterSpacing: '0.5px' }}>
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '8px', color: 'var(--accent-pink)', letterSpacing: '0.5px' }}>
           STAGE FAILED
         </h2>
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '16px', fontWeight: 600 }}>

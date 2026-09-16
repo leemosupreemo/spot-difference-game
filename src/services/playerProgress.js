@@ -1,17 +1,24 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
-import { doc, getFirestore, setDoc, collection, getDocs, getDoc } from 'firebase/firestore';
+import { doc, getFirestore, setDoc, collection, getDocs, getDoc, query, where, limit } from 'firebase/firestore';
+import { ALL_PHOTO_SET_IDS, getDeterministicSetBaseline } from '../utils/setLeaderboards.js';
+import { getGameCenterPlayer } from './gameCenter.js';
+import { submitLeaderboardScore } from './leaderboardService.js';
+import { recordNetworkSuccess } from './networkService.js';
 
 const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
 
 const firebaseConfig = {
-  apiKey: env.VITE_FIREBASE_API_KEY || 'AIzaSy_thirteen_a5760_web_key',
-  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || 'thirteen-a5760.firebaseapp.com',
-  projectId: env.VITE_FIREBASE_PROJECT_ID || 'thirteen-a5760',
-  appId: env.VITE_FIREBASE_APP_ID || '1:396835359318:web:diffhunter'
+  apiKey: env.VITE_FIREBASE_API_KEY || 'AIzaSyCbX3ZqIQvcNYyI8Uy_fwN1mXtV14jt3pA',
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || 'diff-hunter-progress-20260810.firebaseapp.com',
+  projectId: env.VITE_FIREBASE_PROJECT_ID || 'diff-hunter-progress-20260810',
+  appId: env.VITE_FIREBASE_APP_ID || '1:169569618752:web:4151f5708b21afaaac48a5'
 };
 
 function isConfigured() {
+  if (typeof process !== 'undefined' && process.env && (process.env.NODE_ENV === 'test' || process.env.NODE_TEST_CONTEXT)) {
+    return false;
+  }
   return Boolean(firebaseConfig.projectId && firebaseConfig.apiKey);
 }
 
@@ -85,14 +92,52 @@ export function _resetFirstSetCompletedForTesting() {
   } catch (_) {}
 }
 
+export const DEFAULT_HUNTER_PREFIXES = [
+  'SpeedHunter',
+  'PixelSniper',
+  'CyberSeeker',
+  'NeonHunter',
+  'ApexScout',
+  'ChronoHunter',
+  'ShadowSeeker',
+  'VortexSniper',
+  'NovaSpotter'
+];
+
+/**
+ * Generates a memorable, arcade-themed default Hunter Tag (e.g. "PixelSniper_4821").
+ */
+export function generateDefaultPlayerName() {
+  const prefix = DEFAULT_HUNTER_PREFIXES[Math.floor(Math.random() * DEFAULT_HUNTER_PREFIXES.length)];
+  const num = Math.floor(1000 + Math.random() * 9000);
+  return `${prefix}_${num}`;
+}
+
+/**
+ * Retrieves the persistent default name for the user, or creates and saves one.
+ */
+export function getDefaultPlayerName() {
+  return getSavedPlayerName();
+}
+
 export function getSavedPlayerName() {
   try {
+    let name = null;
     if (typeof localStorage !== 'undefined' && localStorage.getItem) {
-      return localStorage.getItem('diff_hunter_player_name') || inMemoryPlayerName;
+      name = localStorage.getItem('diff_hunter_player_name');
     }
-    return inMemoryPlayerName;
+    if (!name && inMemoryPlayerName) {
+      name = inMemoryPlayerName;
+    }
+    if (name && name.trim()) {
+      return name.trim();
+    }
+
+    // Generate a default name and persist it so the player always has a consistent identity
+    const defaultName = generateDefaultPlayerName();
+    return savePlayerName(defaultName);
   } catch (_) {
-    return inMemoryPlayerName;
+    return inMemoryPlayerName || 'SpeedHunter';
   }
 }
 
@@ -124,6 +169,7 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
   const fastestTimeByPack = {};
   const bySetFirst = {};
   const bySetRepeat = {};
+  const bySetPoints = {};
   const fastestTimeBySet = {};
 
   const categoryKeys = Object.keys(difficultyStats || {});
@@ -178,6 +224,15 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
         if (setId && (!fastestTimeBySet[setId] || minTime < fastestTimeBySet[setId])) fastestTimeBySet[setId] = minTime;
       }
 
+      const setPoints = Math.max(
+        setRecord.bestScore || 0,
+        setRecord.lastScore || 0,
+        setRecord.totalPoints && setRecord.clears ? Math.round(setRecord.totalPoints / setRecord.clears) : 0
+      );
+      if (setId && typeof setPoints === 'number' && setPoints > 0) {
+        if (!bySetPoints[setId] || setPoints > bySetPoints[setId]) bySetPoints[setId] = setPoints;
+      }
+
       if (setCleared) {
         totalSetsCleared += 1;
       }
@@ -202,6 +257,7 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
     fastestTimeByPack,
     bySetFirst,
     bySetRepeat,
+    bySetPoints,
     fastestTimeBySet,
     // Backwards-compatible aliases
     avgTimesByDifficulty: avgRepeatTimeByDifficulty,
@@ -292,6 +348,137 @@ export async function syncProgressFromFirestore(localStats = {}) {
   try {
     localStorage.setItem('diff_hunter_categorized_stats', JSON.stringify(mergedStats));
   } catch (_) {}
+
+  return mergedStats;
+}
+
+export function mergeDifficultyStats(localStats = {}, cloudStats = {}) {
+  const merged = { ...localStats };
+  const categories = ['Easy', 'Medium', 'Hard', 'All'];
+
+  categories.forEach(diff => {
+    const localCat = merged[diff] || { setsCleared: 0, sets: {} };
+    const cloudCat = cloudStats?.[diff] || { setsCleared: 0, sets: {} };
+
+    const mergedSets = { ...(localCat.sets || {}) };
+    const cloudSets = cloudCat.sets || {};
+
+    Object.entries(cloudSets).forEach(([stageKey, cloudSet]) => {
+      const localSet = mergedSets[stageKey];
+      if (!localSet) {
+        mergedSets[stageKey] = { ...cloudSet };
+      } else {
+        const firstTimes = [localSet.firstTime, cloudSet.firstTime].filter(t => typeof t === 'number' && t > 0);
+        const repeatTimes = [localSet.fastestRepeat, cloudSet.fastestRepeat].filter(t => typeof t === 'number' && t > 0);
+        const fastestTimes = [localSet.fastestTime, cloudSet.fastestTime, ...firstTimes, ...repeatTimes].filter(t => typeof t === 'number' && t > 0);
+
+        mergedSets[stageKey] = {
+          ...cloudSet,
+          ...localSet,
+          clears: Math.max(localSet.clears || 0, cloudSet.clears || 0),
+          totalPoints: Math.max(localSet.totalPoints || 0, cloudSet.totalPoints || 0),
+          firstTime: firstTimes.length > 0 ? Math.min(...firstTimes) : null,
+          fastestRepeat: repeatTimes.length > 0 ? Math.min(...repeatTimes) : null,
+          fastestTime: fastestTimes.length > 0 ? Math.min(...fastestTimes) : null,
+          lastScore: localSet.lastScore || cloudSet.lastScore || 0
+        };
+      }
+    });
+
+    const setEntries = Object.values(mergedSets);
+    const allFirstTimes = setEntries.map(s => s.firstTime).filter(Boolean);
+    const allRepeats = setEntries.map(s => s.fastestRepeat).filter(Boolean);
+    const categoryTotalPoints = setEntries.reduce((sum, s) => sum + (s.totalPoints || 0), 0);
+    const totalClearsAcrossCategory = setEntries.reduce((sum, s) => sum + (s.clears || 1), 0);
+
+    merged[diff] = {
+      ...localCat,
+      ...cloudCat,
+      setsCleared: setEntries.length,
+      totalPoints: Math.max(localCat.totalPoints || 0, categoryTotalPoints),
+      avgPointsPerSet: totalClearsAcrossCategory > 0 ? Math.round(categoryTotalPoints / totalClearsAcrossCategory) : 0,
+      fastestFirstTimeOverall: allFirstTimes.length > 0 ? Math.min(...allFirstTimes) : null,
+      fastestRepeatOverall: allRepeats.length > 0 ? Math.min(...allRepeats) : null,
+      sets: mergedSets
+    };
+  });
+
+  return merged;
+}
+
+export async function restoreProgressFromCloud(localStats = {}) {
+  const effectiveLocalStats = (localStats && Object.keys(localStats).length > 0)
+    ? localStats
+    : (() => {
+        try {
+          const saved = typeof localStorage !== 'undefined' ? localStorage.getItem('diff_hunter_categorized_stats') : null;
+          return saved ? JSON.parse(saved) : {};
+        } catch (_) {
+          return {};
+        }
+      })();
+
+  const player = await getPlayer();
+  if (!player) return effectiveLocalStats;
+
+  let cloudDifficultyStats = null;
+
+  // 1. Check if current auth UID has a leaderboard doc with difficultyStats
+  try {
+    const userDoc = await getDoc(doc(player.db, 'leaderboards', player.uid));
+    if (userDoc.exists() && userDoc.data()?.difficultyStats) {
+      cloudDifficultyStats = userDoc.data().difficultyStats;
+    }
+  } catch (e) {
+    console.warn('Could not fetch user leaderboard doc:', e);
+  }
+
+  // 2. If no stats on current auth UID, query by Game Center ID if available
+  if (!cloudDifficultyStats) {
+    const gcPlayer = getGameCenterPlayer();
+    const gameCenterId = gcPlayer?.gamePlayerID || gcPlayer?.teamPlayerID || null;
+    if (gameCenterId) {
+      try {
+        const q = query(
+          collection(player.db, 'leaderboards'),
+          where('gameCenterId', '==', gameCenterId),
+          limit(1)
+        );
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          const matchedDoc = snap.docs[0].data();
+          if (matchedDoc?.difficultyStats) {
+            cloudDifficultyStats = matchedDoc.difficultyStats;
+          }
+        }
+      } catch (e) {
+        console.warn('Could not query leaderboards by gameCenterId:', e);
+      }
+    }
+  }
+
+  if (!cloudDifficultyStats) {
+    // Fallback to image-level history sync if no categorizedStats doc exists
+    return syncProgressFromFirestore(effectiveLocalStats);
+  }
+
+  const mergedStats = mergeDifficultyStats(effectiveLocalStats, cloudDifficultyStats);
+
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.setItem) {
+      localStorage.setItem('diff_hunter_categorized_stats', JSON.stringify(mergedStats));
+    }
+  } catch (_) {}
+
+  const hasAnyClears = Object.values(mergedStats).some(cat =>
+    cat?.setsCleared > 0 || (cat?.sets && Object.keys(cat.sets).length > 0)
+  );
+  if (hasAnyClears) {
+    markFirstSetCompleted();
+  }
+
+  // Re-save under current player's auth UID so their current session is updated
+  saveLeaderboardStats(mergedStats).catch(() => {});
 
   return mergedStats;
 }
@@ -389,6 +576,9 @@ export async function saveLeaderboardStats(difficultyStats) {
   const name = getSavedPlayerName();
   const payload = computeLeaderboardPayload(difficultyStats, name);
 
+  const gcPlayer = getGameCenterPlayer();
+  const gameCenterId = gcPlayer?.gamePlayerID || gcPlayer?.teamPlayerID || null;
+
   if (!player) {
     try {
       localStorage.setItem('diff_hunter_local_leaderboard', JSON.stringify({ ...payload, uid: 'local_player' }));
@@ -397,16 +587,82 @@ export async function saveLeaderboardStats(difficultyStats) {
   }
 
   try {
-    await setDoc(doc(player.db, 'leaderboards', player.uid), {
+    const dataToSave = {
       ...payload,
-      uid: player.uid
-    }, { merge: true });
+      uid: player.uid,
+      difficultyStats: difficultyStats || null
+    };
+    if (gameCenterId) {
+      dataToSave.gameCenterId = gameCenterId;
+    }
+    await setDoc(doc(player.db, 'leaderboards', player.uid), dataToSave, { merge: true });
+    recordNetworkSuccess();
+
+    // Mirror qualifying scores into durable central leaderboards
+    try {
+      if (payload.fastestTimeByPack?.find_the_sniper) {
+        submitLeaderboardScore({
+          boardType: 'category',
+          boardId: 'photo',
+          score: payload.fastestTimeByPack.find_the_sniper,
+          metric: 'elapsedMs'
+        }).catch(() => {});
+      }
+      if (payload.fastestTimeByPack?.abstract_animated) {
+        submitLeaderboardScore({
+          boardType: 'category',
+          boardId: 'abstract',
+          score: payload.fastestTimeByPack.abstract_animated,
+          metric: 'elapsedMs'
+        }).catch(() => {});
+      }
+      if (payload.bySetFirst) {
+        Object.entries(payload.bySetFirst).forEach(([setId, timeMs]) => {
+          if (timeMs && typeof timeMs === 'number' && timeMs > 0) {
+            submitLeaderboardScore({
+              boardType: 'photoSet',
+              boardId: setId,
+              score: timeMs,
+              metric: 'elapsedMs'
+            }).catch(() => {});
+          }
+        });
+      }
+    } catch (_) {}
+
     return true;
   } catch (err) {
     console.warn('Firestore saveLeaderboardStats error:', err);
     return false;
   }
 }
+
+const fallbackEntries = [
+  { uid: 'demo_1', playerName: 'PixelSniper_Pro', avgFirstTimeByPack: { find_the_sniper: 11200, abstract_animated: 14500 }, avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 }, fastestTimeByPack: { find_the_sniper: 2450, abstract_animated: 3100 }, totalSetsCleared: 24, isCurrentPlayer: false },
+  { uid: 'demo_2', playerName: 'VortexEagle', avgFirstTimeByPack: { find_the_sniper: 12800, abstract_animated: 16200 }, avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 }, fastestTimeByPack: { find_the_sniper: 2890, abstract_animated: 3650 }, totalSetsCleared: 18, isCurrentPlayer: false },
+  { uid: 'demo_3', playerName: 'ChronoMaster', avgFirstTimeByPack: { find_the_sniper: 14200, abstract_animated: 18100 }, avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 }, fastestTimeByPack: { find_the_sniper: 3420, abstract_animated: 4100 }, totalSetsCleared: 15, isCurrentPlayer: false },
+  { uid: 'demo_4', playerName: 'ApexHawk_X', avgFirstTimeByPack: { find_the_sniper: 15900, abstract_animated: 19800 }, avgRepeatTimeByPack: { find_the_sniper: 13200, abstract_animated: 16800 }, fastestTimeByPack: { find_the_sniper: 3950, abstract_animated: 4850 }, totalSetsCleared: 12, isCurrentPlayer: false },
+  { uid: 'demo_5', playerName: 'NovaSeeker', avgFirstTimeByPack: { find_the_sniper: 17400, abstract_animated: 21900 }, avgRepeatTimeByPack: { find_the_sniper: 14600, abstract_animated: 18500 }, fastestTimeByPack: { find_the_sniper: 4600, abstract_animated: 5500 }, totalSetsCleared: 9, isCurrentPlayer: false },
+  { uid: 'demo_6', playerName: 'ShadowGlint', avgFirstTimeByPack: { find_the_sniper: 18800, abstract_animated: 23200 }, avgRepeatTimeByPack: { find_the_sniper: 15800, abstract_animated: 19700 }, fastestTimeByPack: { find_the_sniper: 4950, abstract_animated: 5900 }, totalSetsCleared: 8, isCurrentPlayer: false },
+  { uid: 'demo_7', playerName: 'NeonStalker', avgFirstTimeByPack: { find_the_sniper: 20100, abstract_animated: 24800 }, avgRepeatTimeByPack: { find_the_sniper: 17100, abstract_animated: 21200 }, fastestTimeByPack: { find_the_sniper: 5300, abstract_animated: 6400 }, totalSetsCleared: 7, isCurrentPlayer: false },
+  { uid: 'demo_8', playerName: 'SwiftRetina', avgFirstTimeByPack: { find_the_sniper: 21600, abstract_animated: 26500 }, avgRepeatTimeByPack: { find_the_sniper: 18400, abstract_animated: 22800 }, fastestTimeByPack: { find_the_sniper: 5750, abstract_animated: 6900 }, totalSetsCleared: 6, isCurrentPlayer: false },
+  { uid: 'demo_9', playerName: 'AeroGaze', avgFirstTimeByPack: { find_the_sniper: 23000, abstract_animated: 28100 }, avgRepeatTimeByPack: { find_the_sniper: 19800, abstract_animated: 24300 }, fastestTimeByPack: { find_the_sniper: 6200, abstract_animated: 7400 }, totalSetsCleared: 6, isCurrentPlayer: false },
+  { uid: 'demo_10', playerName: 'QuantumRider', avgFirstTimeByPack: { find_the_sniper: 24500, abstract_animated: 29800 }, avgRepeatTimeByPack: { find_the_sniper: 21200, abstract_animated: 25900 }, fastestTimeByPack: { find_the_sniper: 6700, abstract_animated: 7950 }, totalSetsCleared: 5, isCurrentPlayer: false },
+  { uid: 'demo_11', playerName: 'PrismRanger', avgFirstTimeByPack: { find_the_sniper: 26000, abstract_animated: 31500 }, avgRepeatTimeByPack: { find_the_sniper: 22600, abstract_animated: 27500 }, fastestTimeByPack: { find_the_sniper: 7200, abstract_animated: 8500 }, totalSetsCleared: 5, isCurrentPlayer: false },
+  { uid: 'demo_12', playerName: 'SpecterPulse', avgFirstTimeByPack: { find_the_sniper: 27600, abstract_animated: 33200 }, avgRepeatTimeByPack: { find_the_sniper: 24100, abstract_animated: 29100 }, fastestTimeByPack: { find_the_sniper: 7750, abstract_animated: 9100 }, totalSetsCleared: 4, isCurrentPlayer: false },
+  { uid: 'demo_13', playerName: 'HyperSight', avgFirstTimeByPack: { find_the_sniper: 29200, abstract_animated: 35000 }, avgRepeatTimeByPack: { find_the_sniper: 25700, abstract_animated: 30800 }, fastestTimeByPack: { find_the_sniper: 8300, abstract_animated: 9750 }, totalSetsCleared: 4, isCurrentPlayer: false },
+  { uid: 'demo_14', playerName: 'FalconTrace', avgFirstTimeByPack: { find_the_sniper: 30900, abstract_animated: 36900 }, avgRepeatTimeByPack: { find_the_sniper: 27300, abstract_animated: 32600 }, fastestTimeByPack: { find_the_sniper: 8900, abstract_animated: 10400 }, totalSetsCleared: 3, isCurrentPlayer: false },
+  { uid: 'demo_15', playerName: 'ZenithVector', avgFirstTimeByPack: { find_the_sniper: 32700, abstract_animated: 38800 }, avgRepeatTimeByPack: { find_the_sniper: 29000, abstract_animated: 34500 }, fastestTimeByPack: { find_the_sniper: 9550, abstract_animated: 11100 }, totalSetsCleared: 3, isCurrentPlayer: false },
+  { uid: 'demo_16', playerName: 'MirageOptic', avgFirstTimeByPack: { find_the_sniper: 34600, abstract_animated: 40800 }, avgRepeatTimeByPack: { find_the_sniper: 30800, abstract_animated: 36500 }, fastestTimeByPack: { find_the_sniper: 10200, abstract_animated: 11850 }, totalSetsCleared: 2, isCurrentPlayer: false },
+  { uid: 'demo_17', playerName: 'OmegaLens', avgFirstTimeByPack: { find_the_sniper: 36600, abstract_animated: 42900 }, avgRepeatTimeByPack: { find_the_sniper: 32700, abstract_animated: 38600 }, fastestTimeByPack: { find_the_sniper: 10900, abstract_animated: 12650 }, totalSetsCleared: 2, isCurrentPlayer: false },
+  { uid: 'demo_18', playerName: 'ApexScout', avgFirstTimeByPack: { find_the_sniper: 38700, abstract_animated: 45100 }, avgRepeatTimeByPack: { find_the_sniper: 34700, abstract_animated: 40800 }, fastestTimeByPack: { find_the_sniper: 11650, abstract_animated: 13500 }, totalSetsCleared: 1, isCurrentPlayer: false },
+  { uid: 'demo_19', playerName: 'VividRacer', avgFirstTimeByPack: { find_the_sniper: 41000, abstract_animated: 47400 }, avgRepeatTimeByPack: { find_the_sniper: 36800, abstract_animated: 43100 }, fastestTimeByPack: { find_the_sniper: 12450, abstract_animated: 14400 }, totalSetsCleared: 1, isCurrentPlayer: false },
+  { uid: 'demo_20', playerName: 'CobaltShift', avgFirstTimeByPack: { find_the_sniper: 43500, abstract_animated: 49800 }, avgRepeatTimeByPack: { find_the_sniper: 39100, abstract_animated: 45400 }, fastestTimeByPack: { find_the_sniper: 13300, abstract_animated: 15300 }, totalSetsCleared: 1, isCurrentPlayer: false },
+  { uid: 'demo_21', playerName: 'SolarFlare', avgFirstTimeByPack: { find_the_sniper: 46200, abstract_animated: 52400 }, avgRepeatTimeByPack: { find_the_sniper: 41500, abstract_animated: 47900 }, fastestTimeByPack: { find_the_sniper: 14200, abstract_animated: 16300 }, totalSetsCleared: 1, isCurrentPlayer: false },
+  { uid: 'demo_22', playerName: 'LunarPulse', avgFirstTimeByPack: { find_the_sniper: 49000, abstract_animated: 55200 }, avgRepeatTimeByPack: { find_the_sniper: 44100, abstract_animated: 50600 }, fastestTimeByPack: { find_the_sniper: 15200, abstract_animated: 17400 }, totalSetsCleared: 1, isCurrentPlayer: false },
+  { uid: 'demo_23', playerName: 'TitanGaze', avgFirstTimeByPack: { find_the_sniper: 52000, abstract_animated: 58100 }, avgRepeatTimeByPack: { find_the_sniper: 46900, abstract_animated: 53500 }, fastestTimeByPack: { find_the_sniper: 16300, abstract_animated: 18600 }, totalSetsCleared: 1, isCurrentPlayer: false },
+  { uid: 'demo_24', playerName: 'EchoStrike', avgFirstTimeByPack: { find_the_sniper: 55200, abstract_animated: 61200 }, avgRepeatTimeByPack: { find_the_sniper: 49800, abstract_animated: 56600 }, fastestTimeByPack: { find_the_sniper: 17500, abstract_animated: 19900 }, totalSetsCleared: 1, isCurrentPlayer: false }
+];
 
 export async function fetchLeaderboards(localDifficultyStats = {}) {
   const fetchPromise = (async () => {
@@ -423,8 +679,10 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
     try {
       const player = await getPlayer();
       if (player) {
+        recordNetworkSuccess();
         isCloud = true;
         const snap = await getDocs(collection(player.db, 'leaderboards'));
+        recordNetworkSuccess();
         snap.forEach(docSnap => {
           const data = docSnap.data();
           const isMe = data.uid === player.uid;
@@ -439,28 +697,6 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
     }
 
     const allEntriesMap = new Map();
-
-  const fallbackEntries = [
-    { uid: 'demo_1', playerName: 'PixelSniper_Pro', avgFirstTimeByPack: { find_the_sniper: 11200, abstract_animated: 14500 }, avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 }, fastestTimeByPack: { find_the_sniper: 2450, abstract_animated: 3100 }, totalSetsCleared: 24, isCurrentPlayer: false },
-    { uid: 'demo_2', playerName: 'VortexEagle', avgFirstTimeByPack: { find_the_sniper: 12800, abstract_animated: 16200 }, avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 }, fastestTimeByPack: { find_the_sniper: 2890, abstract_animated: 3650 }, totalSetsCleared: 18, isCurrentPlayer: false },
-    { uid: 'demo_3', playerName: 'ChronoMaster', avgFirstTimeByPack: { find_the_sniper: 14200, abstract_animated: 18100 }, avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 }, fastestTimeByPack: { find_the_sniper: 3420, abstract_animated: 4100 }, totalSetsCleared: 15, isCurrentPlayer: false },
-    { uid: 'demo_4', playerName: 'ApexHawk_X', avgFirstTimeByPack: { find_the_sniper: 15900, abstract_animated: 19800 }, avgRepeatTimeByPack: { find_the_sniper: 13200, abstract_animated: 16800 }, fastestTimeByPack: { find_the_sniper: 3950, abstract_animated: 4850 }, totalSetsCleared: 12, isCurrentPlayer: false },
-    { uid: 'demo_5', playerName: 'NovaSeeker', avgFirstTimeByPack: { find_the_sniper: 17400, abstract_animated: 21900 }, avgRepeatTimeByPack: { find_the_sniper: 14600, abstract_animated: 18500 }, fastestTimeByPack: { find_the_sniper: 4600, abstract_animated: 5500 }, totalSetsCleared: 9, isCurrentPlayer: false },
-    { uid: 'demo_6', playerName: 'ShadowGlint', avgFirstTimeByPack: { find_the_sniper: 18800, abstract_animated: 23200 }, avgRepeatTimeByPack: { find_the_sniper: 15800, abstract_animated: 19700 }, fastestTimeByPack: { find_the_sniper: 4950, abstract_animated: 5900 }, totalSetsCleared: 8, isCurrentPlayer: false },
-    { uid: 'demo_7', playerName: 'NeonStalker', avgFirstTimeByPack: { find_the_sniper: 20100, abstract_animated: 24800 }, avgRepeatTimeByPack: { find_the_sniper: 17100, abstract_animated: 21200 }, fastestTimeByPack: { find_the_sniper: 5300, abstract_animated: 6400 }, totalSetsCleared: 7, isCurrentPlayer: false },
-    { uid: 'demo_8', playerName: 'SwiftRetina', avgFirstTimeByPack: { find_the_sniper: 21600, abstract_animated: 26500 }, avgRepeatTimeByPack: { find_the_sniper: 18400, abstract_animated: 22800 }, fastestTimeByPack: { find_the_sniper: 5750, abstract_animated: 6900 }, totalSetsCleared: 6, isCurrentPlayer: false },
-    { uid: 'demo_9', playerName: 'AeroGaze', avgFirstTimeByPack: { find_the_sniper: 23000, abstract_animated: 28100 }, avgRepeatTimeByPack: { find_the_sniper: 19800, abstract_animated: 24300 }, fastestTimeByPack: { find_the_sniper: 6200, abstract_animated: 7400 }, totalSetsCleared: 6, isCurrentPlayer: false },
-    { uid: 'demo_10', playerName: 'QuantumRider', avgFirstTimeByPack: { find_the_sniper: 24500, abstract_animated: 29800 }, avgRepeatTimeByPack: { find_the_sniper: 21200, abstract_animated: 25900 }, fastestTimeByPack: { find_the_sniper: 6700, abstract_animated: 7950 }, totalSetsCleared: 5, isCurrentPlayer: false },
-    { uid: 'demo_11', playerName: 'PrismRanger', avgFirstTimeByPack: { find_the_sniper: 26000, abstract_animated: 31500 }, avgRepeatTimeByPack: { find_the_sniper: 22600, abstract_animated: 27500 }, fastestTimeByPack: { find_the_sniper: 7200, abstract_animated: 8500 }, totalSetsCleared: 5, isCurrentPlayer: false },
-    { uid: 'demo_12', playerName: 'SpecterPulse', avgFirstTimeByPack: { find_the_sniper: 27600, abstract_animated: 33200 }, avgRepeatTimeByPack: { find_the_sniper: 24100, abstract_animated: 29100 }, fastestTimeByPack: { find_the_sniper: 7750, abstract_animated: 9100 }, totalSetsCleared: 4, isCurrentPlayer: false },
-    { uid: 'demo_13', playerName: 'HyperSight', avgFirstTimeByPack: { find_the_sniper: 29200, abstract_animated: 35000 }, avgRepeatTimeByPack: { find_the_sniper: 25700, abstract_animated: 30800 }, fastestTimeByPack: { find_the_sniper: 8300, abstract_animated: 9750 }, totalSetsCleared: 4, isCurrentPlayer: false },
-    { uid: 'demo_14', playerName: 'FalconTrace', avgFirstTimeByPack: { find_the_sniper: 30900, abstract_animated: 36900 }, avgRepeatTimeByPack: { find_the_sniper: 27300, abstract_animated: 32600 }, fastestTimeByPack: { find_the_sniper: 8900, abstract_animated: 10400 }, totalSetsCleared: 3, isCurrentPlayer: false },
-    { uid: 'demo_15', playerName: 'ZenithVector', avgFirstTimeByPack: { find_the_sniper: 32700, abstract_animated: 38800 }, avgRepeatTimeByPack: { find_the_sniper: 29000, abstract_animated: 34500 }, fastestTimeByPack: { find_the_sniper: 9550, abstract_animated: 11100 }, totalSetsCleared: 3, isCurrentPlayer: false },
-    { uid: 'demo_16', playerName: 'MirageOptic', avgFirstTimeByPack: { find_the_sniper: 34600, abstract_animated: 40800 }, avgRepeatTimeByPack: { find_the_sniper: 30800, abstract_animated: 36500 }, fastestTimeByPack: { find_the_sniper: 10200, abstract_animated: 11850 }, totalSetsCleared: 2, isCurrentPlayer: false },
-    { uid: 'demo_17', playerName: 'OmegaLens', avgFirstTimeByPack: { find_the_sniper: 36600, abstract_animated: 42900 }, avgRepeatTimeByPack: { find_the_sniper: 32700, abstract_animated: 38600 }, fastestTimeByPack: { find_the_sniper: 10900, abstract_animated: 12650 }, totalSetsCleared: 2, isCurrentPlayer: false },
-    { uid: 'demo_18', playerName: 'ApexScout', avgFirstTimeByPack: { find_the_sniper: 38700, abstract_animated: 45100 }, avgRepeatTimeByPack: { find_the_sniper: 34700, abstract_animated: 40800 }, fastestTimeByPack: { find_the_sniper: 11650, abstract_animated: 13500 }, totalSetsCleared: 1, isCurrentPlayer: false },
-    { uid: 'demo_19', playerName: 'VividRacer', avgFirstTimeByPack: { find_the_sniper: 41000, abstract_animated: 47400 }, avgRepeatTimeByPack: { find_the_sniper: 36800, abstract_animated: 43100 }, fastestTimeByPack: { find_the_sniper: 12450, abstract_animated: 14400 }, totalSetsCleared: 1, isCurrentPlayer: false }
-  ];
 
   fallbackEntries.forEach(entry => allEntriesMap.set(entry.uid, entry));
   firestoreEntries.forEach(entry => allEntriesMap.set(entry.uid, entry));
@@ -521,21 +757,46 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         const fastB = b.fastestTime || 999999;
         return fastA - fastB;
       })
-      .slice(0, 20);
+      .slice(0, 25);
   };
 
-  const getTop20ForSet = (setId, metric = 'firstTime') => combinedList
-    .map(player => {
-      const firstTime = player.bySetFirst?.[setId];
-      const repeatTime = player.bySetRepeat?.[setId];
-      const fastestTime = player.fastestTimeBySet?.[setId];
-      return { ...player, firstTime, repeatTime, fastestTime, effectiveTime: firstTime || repeatTime || 999999 };
-    })
-    .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number')
-    .sort((a, b) => (a[metric] || 999999) - (b[metric] || 999999))
-    .slice(0, 20);
+  const getTop20ForSet = (setId, metric = 'firstTime') => {
+    const realPlayers = combinedList
+      .map(player => {
+        const firstTime = player.bySetFirst?.[setId];
+        const repeatTime = player.bySetRepeat?.[setId];
+        const fastestTime = player.fastestTimeBySet?.[setId];
+        const mostPoints = player.bySetPoints?.[setId]
+          || (fastestTime ? Math.max(1200, Math.round(2500 - (fastestTime / 1000) * 35)) : null);
+        return {
+          ...player,
+          firstTime,
+          repeatTime,
+          fastestTime,
+          mostPoints,
+          effectiveTime: firstTime || repeatTime || 999999
+        };
+      })
+      .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number');
 
-  const setIds = [...new Set(combinedList.flatMap(player => Object.keys(player.bySetFirst || {})))];
+    const baseline = getDeterministicSetBaseline(setId);
+    const existingUids = new Set(realPlayers.map(p => p.uid));
+    const merged = [...realPlayers];
+    for (const b of baseline) {
+      if (!existingUids.has(b.uid)) {
+        merged.push(b);
+      }
+    }
+
+    return merged
+      .sort((a, b) => (a[metric] || a.fastestTime || 999999) - (b[metric] || b.fastestTime || 999999))
+      .slice(0, 25);
+  };
+
+  const setIds = [...new Set([
+    ...ALL_PHOTO_SET_IDS,
+    ...combinedList.flatMap(player => Object.keys(player.bySetFirst || {}))
+  ])];
 
     return {
       isCloud,
@@ -563,36 +824,6 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         ...localPayload,
         isCurrentPlayer: true
       };
-
-      const fallbackEntries = [
-        {
-          uid: 'demo_1',
-          playerName: 'PixelSniper_Pro',
-          avgFirstTimeByPack: { find_the_sniper: 11200, abstract_animated: 14500 },
-          avgRepeatTimeByPack: { find_the_sniper: 8900, abstract_animated: 11400 },
-          fastestTimeByPack: { find_the_sniper: 2450, abstract_animated: 3100 },
-          totalSetsCleared: 24,
-          isCurrentPlayer: false
-        },
-        {
-          uid: 'demo_2',
-          playerName: 'VortexEagle',
-          avgFirstTimeByPack: { find_the_sniper: 12800, abstract_animated: 16200 },
-          avgRepeatTimeByPack: { find_the_sniper: 10400, abstract_animated: 13100 },
-          fastestTimeByPack: { find_the_sniper: 2890, abstract_animated: 3650 },
-          totalSetsCleared: 18,
-          isCurrentPlayer: false
-        },
-        {
-          uid: 'demo_3',
-          playerName: 'ChronoMaster',
-          avgFirstTimeByPack: { find_the_sniper: 14200, abstract_animated: 18100 },
-          avgRepeatTimeByPack: { find_the_sniper: 11800, abstract_animated: 14900 },
-          fastestTimeByPack: { find_the_sniper: 3420, abstract_animated: 4100 },
-          totalSetsCleared: 15,
-          isCurrentPlayer: false
-        }
-      ];
 
       const getFallbackListForPack = (packId) => {
         return [localPlayerEntry, ...fallbackEntries].map(p => {
@@ -624,18 +855,33 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           const timeB = b.firstTime || (b.repeatTime ? b.repeatTime * 1.25 : 999999);
           if (timeA !== timeB) return timeA - timeB;
           return (a.repeatTime || 999999) - (b.repeatTime || 999999);
-        }).slice(0, 20);
+        }).slice(0, 25);
       };
 
-      const setIds = [...new Set([...(localPayload.bySetFirst ? Object.keys(localPayload.bySetFirst) : [])])];
-      const getFallbackListForSet = (setId) => [localPlayerEntry, ...fallbackEntries]
-        .map(player => ({
-          ...player,
-          firstTime: player.bySetFirst?.[setId],
-          repeatTime: player.bySetRepeat?.[setId],
-          fastestTime: player.fastestTimeBySet?.[setId]
-        }))
-        .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number');
+      const setIds = [...new Set([
+        ...ALL_PHOTO_SET_IDS,
+        ...(localPayload.bySetFirst ? Object.keys(localPayload.bySetFirst) : [])
+      ])];
+      const getFallbackListForSet = (setId) => {
+        const local = [localPlayerEntry, ...fallbackEntries]
+          .map(player => ({
+            ...player,
+            firstTime: player.bySetFirst?.[setId],
+            repeatTime: player.bySetRepeat?.[setId],
+            fastestTime: player.fastestTimeBySet?.[setId]
+          }))
+          .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number');
+
+        const baseline = getDeterministicSetBaseline(setId);
+        const existingUids = new Set(local.map(p => p.uid));
+        const merged = [...local];
+        for (const b of baseline) {
+          if (!existingUids.has(b.uid)) {
+            merged.push(b);
+          }
+        }
+        return merged;
+      };
 
       resolve({
         isCloud: false,
@@ -647,13 +893,13 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           find_the_sniper: getFallbackListForPack('find_the_sniper'),
           abstract_animated: getFallbackListForPack('abstract_animated')
         },
-        bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.firstTime || 999999) - (b.firstTime || 999999))])),
-        bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.repeatTime || 999999) - (b.repeatTime || 999999))])),
-        bySetFastest: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.fastestTime || 999999) - (b.fastestTime || 999999))])),
+        bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.firstTime || 999999) - (b.firstTime || 999999)).slice(0, 25)])),
+        bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.repeatTime || 999999) - (b.repeatTime || 999999)).slice(0, 25)])),
+        bySetFastest: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.fastestTime || 999999) - (b.fastestTime || 999999)).slice(0, 25)])),
         fastestTimeBySet: localPlayerEntry.fastestTimeBySet,
         localPlayer: localPlayerEntry
       });
-    }, 2500);
+    }, 6500);
   });
 
   return Promise.race([fetchPromise, timeoutPromise]);

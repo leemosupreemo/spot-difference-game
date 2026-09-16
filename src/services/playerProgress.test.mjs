@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {
   computeLeaderboardPayload,
   syncProgressFromFirestore,
+  mergeDifficultyStats,
+  restoreProgressFromCloud,
   getSavedPlayerName,
   savePlayerName,
   fetchLeaderboards,
@@ -54,13 +56,104 @@ test('syncProgressFromFirestore returns merged stats when cloud history contains
   assert.equal(res.All.setsCleared, 1);
 });
 
+test('mergeDifficultyStats restores cloud sets when local is empty (reinstall scenario)', () => {
+  const localStats = {
+    Medium: { setsCleared: 0, sets: {} }
+  };
+  const cloudStats = {
+    Medium: {
+      setsCleared: 2,
+      sets: {
+        photo_set_001: {
+          setId: 'photo_set_001',
+          firstTime: 14000,
+          fastestRepeat: 11000,
+          fastestTime: 11000,
+          clears: 3,
+          totalPoints: 2800
+        },
+        photo_set_002: {
+          setId: 'photo_set_002',
+          firstTime: 18000,
+          fastestRepeat: null,
+          fastestTime: 18000,
+          clears: 1,
+          totalPoints: 950
+        }
+      }
+    }
+  };
+
+  const merged = mergeDifficultyStats(localStats, cloudStats);
+  assert.equal(merged.Medium.setsCleared, 2);
+  assert.equal(merged.Medium.sets.photo_set_001.clears, 3);
+  assert.equal(merged.Medium.sets.photo_set_001.fastestTime, 11000);
+  assert.equal(merged.Medium.sets.photo_set_002.clears, 1);
+  assert.equal(merged.Medium.sets.photo_set_002.firstTime, 18000);
+});
+
+test('mergeDifficultyStats keeps optimal metrics and highest attempt counts across local and cloud', () => {
+  const localStats = {
+    Medium: {
+      setsCleared: 1,
+      sets: {
+        photo_set_001: {
+          setId: 'photo_set_001',
+          firstTime: 15000,
+          fastestRepeat: 10500,
+          fastestTime: 10500,
+          clears: 4,
+          totalPoints: 3500
+        }
+      }
+    }
+  };
+  const cloudStats = {
+    Medium: {
+      setsCleared: 1,
+      sets: {
+        photo_set_001: {
+          setId: 'photo_set_001',
+          firstTime: 14000,
+          fastestRepeat: 12000,
+          fastestTime: 12000,
+          clears: 2,
+          totalPoints: 1800
+        }
+      }
+    }
+  };
+
+  const merged = mergeDifficultyStats(localStats, cloudStats);
+  const set1 = merged.Medium.sets.photo_set_001;
+  // Best first time from cloud (14000 vs 15000)
+  assert.equal(set1.firstTime, 14000);
+  // Best repeat from local (10500 vs 12000)
+  assert.equal(set1.fastestRepeat, 10500);
+  // Overall fastest is 10500
+  assert.equal(set1.fastestTime, 10500);
+  // Maximum clears/attempts (4 vs 2)
+  assert.equal(set1.clears, 4);
+  // Maximum total points (3500 vs 1800)
+  assert.equal(set1.totalPoints, 3500);
+});
+
+test('restoreProgressFromCloud returns stats gracefully in offline test environment', async () => {
+  const localStats = {
+    Medium: { setsCleared: 1, sets: { photo_set_001: { clears: 1 } } }
+  };
+  const res = await restoreProgressFromCloud(localStats);
+  assert.ok(res);
+  assert.equal(res.Medium.setsCleared, 1);
+});
+
 test('fetchLeaderboards ranks by avg first time as primary anchor with all 3 metrics present', async () => {
   const data = await fetchLeaderboards({});
   assert.ok(data.byPackFirst);
   assert.ok(data.byPackRepeat);
   assert.ok(data.localPlayer);
   assert.ok(data.byPackRepeat.find_the_sniper.length >= 5);
-  assert.equal(data.byPackRepeat.find_the_sniper.length, 20);
+  assert.equal(data.byPackRepeat.find_the_sniper.length, 25);
 
   const entries = data.byPackRepeat.find_the_sniper;
   for (let i = 0; i < entries.length - 1; i++) {
@@ -162,4 +255,15 @@ test('computes standard deterministic Photo Set timing payloads by set identity'
   assert.equal(payload.bySetFirst.photo_set_008, 22000);
   assert.equal(payload.fastestTimeBySet.photo_set_008, 19000);
   assert.equal(payload.bySetFirst.abstract_legacy, undefined);
+});
+
+test('keeps first and repeat Photo Set timing payloads independently ranked', () => {
+  const payload = computeLeaderboardPayload({ All: { sets: {
+    first: { setId: 'photo_set_001', firstTime: 12000, fastestRepeat: 9000 },
+    second: { setId: 'photo_set_002', firstTime: 8000, fastestRepeat: 11000 }
+  } } }, 'Tester');
+  assert.equal(payload.bySetFirst.photo_set_001, 12000);
+  assert.equal(payload.bySetRepeat.photo_set_001, 9000);
+  assert.equal(payload.bySetFirst.photo_set_002, 8000);
+  assert.equal(payload.bySetRepeat.photo_set_002, 11000);
 });

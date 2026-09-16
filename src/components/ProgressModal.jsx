@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer, Flame, Star, Calendar, Play } from 'lucide-react';
+import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer, Flame, Star, Calendar, Play, Edit3, Check, WifiOff, RefreshCw } from 'lucide-react';
 import { sounds } from '../utils/audio';
-import { fetchLeaderboards } from '../services/playerProgress';
+import { fetchLeaderboards, getSavedPlayerName, savePlayerName } from '../services/playerProgress';
+import { identifyPlayer } from '../services/analytics';
+import { isOnline, subscribeNetworkStatus, checkConnectivity } from '../services/networkService';
 import {
   isGameCenterSupported,
   openGameCenterLeaderboard
@@ -14,6 +16,7 @@ import {
   getTodayDateString,
   formatTimeUntilNextDaily
 } from '../services/dailyChallenge';
+import { getSetNumber, ALL_PHOTO_SET_IDS } from '../utils/setLeaderboards.js';
 
 export default function ProgressModal({
   isOpen,
@@ -22,25 +25,79 @@ export default function ProgressModal({
   onStartDaily,
   onResetDaily = null,
   initialTab = 'leaderboards',
-  debugMode = false
+  initialSetId = '',
+  debugMode = false,
+  forceOffline = false,
+  initialEditingTag = false
 }) {
   const [mainView, setMainView] = useState(initialTab); // 'leaderboards' | 'daily' | 'progress'
   const [selectedLeaderboardPack, setSelectedLeaderboardPack] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
-  const [selectedLeaderboardSet, setSelectedLeaderboardSet] = useState('');
+  const [selectedLeaderboardSet, setSelectedLeaderboardSet] = useState(initialSetId || '');
   const [leaderboardData, setLeaderboardData] = useState(null);
   const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
   const [dailyBoard, setDailyBoard] = useState([]);
   const [dailyStatus, setDailyStatus] = useState({ completed: false });
   const [dailyTimeToBeat, setDailyTimeToBeat] = useState(null);
+  const [customTag, setCustomTag] = useState(() => getSavedPlayerName());
+  const [isEditingTag, setIsEditingTag] = useState(initialEditingTag);
+  const [networkOnline, setNetworkOnline] = useState(() => forceOffline ? false : isOnline());
+
+  useEffect(() => {
+    return subscribeNetworkStatus(online => {
+      if (!forceOffline) setNetworkOnline(online);
+    });
+  }, [forceOffline]);
+
+  const handleSaveTag = () => {
+    const trimmed = customTag.trim();
+    if (!trimmed) return;
+    try { sounds.playTap(); } catch (_) {}
+    setIsEditingTag(false);
+    savePlayerName(trimmed);
+    identifyPlayer(trimmed, {
+      "Hunter Tag": trimmed,
+      "Player Name": trimmed
+    });
+  };
+
+  const handleRetryFetch = () => {
+    try { sounds.playTap(); } catch (_) {}
+    setLoadingLeaderboard(true);
+    checkConnectivity().then(online => {
+      setNetworkOnline(online);
+    }).catch(() => {});
+    fetchLeaderboards(difficultyStats)
+      .then(data => {
+        setLeaderboardData(data);
+      })
+      .finally(() => setLoadingLeaderboard(false));
+
+    const today = getTodayDateString();
+    fetchDailyLeaderboard(today).then(remoteBoard => {
+      if (remoteBoard && remoteBoard.length > 0) {
+        setDailyBoard(remoteBoard);
+      }
+    }).catch(() => {});
+  };
+
+  const isOfflineMode = forceOffline || !networkOnline;
 
   useEffect(() => {
     if (isOpen) {
+      if (initialTab) {
+        setMainView(initialTab);
+      }
+      setCustomTag(getSavedPlayerName());
       setLoadingLeaderboard(true);
       fetchLeaderboards(difficultyStats)
         .then(data => {
           setLeaderboardData(data);
           const availableSets = Object.keys(data?.bySetFirst || {});
-          setSelectedLeaderboardSet(current => current && availableSets.includes(current) ? current : (availableSets[0] || ''));
+          if (initialSetId && availableSets.includes(initialSetId)) {
+            setSelectedLeaderboardSet(initialSetId);
+          } else {
+            setSelectedLeaderboardSet(current => current && availableSets.includes(current) ? current : (availableSets[0] || ''));
+          }
         })
         .finally(() => setLoadingLeaderboard(false));
 
@@ -121,15 +178,30 @@ export default function ProgressModal({
     ? deterministicPhotoEntries
     : (leaderboardData?.byPackFirst?.[selectedLeaderboardPack] || leaderboardData?.byPackRepeat?.[selectedLeaderboardPack] || []);
 
+  const isSetView = Boolean(selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet);
+
+  const getPlayerSetStats = (setId) => {
+    if (!setId || !difficultyStats) return null;
+    for (const diffObj of Object.values(difficultyStats)) {
+      if (diffObj?.sets?.[setId]) {
+        return diffObj.sets[setId];
+      }
+    }
+    return null;
+  };
+
   return (
-    <div style={{
-      width: '100%',
-      maxWidth: '900px',
-      margin: '0 auto',
-      padding: '0 16px',
-      boxSizing: 'border-box',
-      animation: 'pageFadeIn 0.15s ease-out'
-    }}>
+    <div
+      className="modal-split-card"
+      style={{
+        width: '100%',
+        maxWidth: '900px',
+        margin: '0 auto',
+        padding: '0 16px',
+        boxSizing: 'border-box',
+        '--modal-accent': 'var(--accent-cyan)'
+      }}
+    >
       {/* Main View Mode Selector (Leaderboards vs Daily vs Progress) */}
       <div style={{
         display: 'grid',
@@ -174,12 +246,15 @@ export default function ProgressModal({
 
       {mainView === 'leaderboards' ? (
         /* GLOBAL LEADERBOARDS VIEW */
-        <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box', overflowY: 'auto' }}>
+        <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                <Award size={20} color="var(--accent-gold)" /> LIVE LEADERBOARD
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0, letterSpacing: '0.5px' }}>
+                <Award size={22} color="var(--accent-gold)" /> LIVE LEADERBOARD
               </h3>
+              <span style={{ fontSize: '0.74rem', color: 'var(--accent-gold)', fontWeight: 800, background: 'rgba(255, 183, 3, 0.12)', padding: '2px 8px', borderRadius: '6px', border: '1px solid rgba(255, 183, 3, 0.3)' }}>
+                TOP 25
+              </span>
               {selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet && (
                 <span style={{ fontSize: '0.78rem', color: 'var(--accent-cyan)', fontWeight: 800 }}>
                   {selectedLeaderboardSet.replace(/_/g, ' ').toUpperCase()}
@@ -214,16 +289,6 @@ export default function ProgressModal({
               >
                 📷 Photography
               </button>
-              {selectedLeaderboardPack === 'find_the_sniper' && Object.keys(leaderboardData?.bySetFirst || {}).length > 0 && (
-                <select
-                  aria-label="Photo Set leaderboard"
-                  value={selectedLeaderboardSet}
-                  onChange={event => setSelectedLeaderboardSet(event.target.value)}
-                  style={{ background: 'rgba(0,0,0,0.45)', color: '#fff', border: '1px solid var(--border-glass)', borderRadius: '8px', padding: '5px 8px', fontWeight: 700 }}
-                >
-                  {Object.keys(leaderboardData.bySetFirst).map(setId => <option key={setId} value={setId}>{setId.replace(/_/g, ' ')}</option>)}
-                </select>
-              )}
               <button
                 onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('abstract_animated'); }}
                 style={{
@@ -243,6 +308,171 @@ export default function ProgressModal({
             </div>
           </div>
 
+          {/* Photo Set Dropdown: Under Live Leaderboard title, left aligned */}
+          {selectedLeaderboardPack === 'find_the_sniper' && Object.keys(leaderboardData?.bySetFirst || {}).length > 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', justifyContent: 'flex-start' }}>
+              <select
+                aria-label="Photo Set leaderboard"
+                value={selectedLeaderboardSet}
+                onChange={event => {
+                  sounds.playTap();
+                  setSelectedLeaderboardSet(event.target.value);
+                }}
+                style={{
+                  background: 'rgba(0,0,0,0.5)',
+                  color: '#fff',
+                  border: '1px solid var(--border-glass)',
+                  borderRadius: '10px',
+                  padding: '6px 12px',
+                  fontWeight: 700,
+                  fontSize: '0.84rem',
+                  outline: 'none',
+                  cursor: 'pointer',
+                  maxWidth: '340px'
+                }}
+              >
+                <option value="">General Leaderboard (All Sets)</option>
+                {Object.keys(leaderboardData.bySetFirst).map(setId => (
+                  <option key={setId} value={setId}>
+                    {`Set ${getSetNumber(setId)}: ${setId.replace(/_/g, ' ')}`}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* Offline Mode Indicator Banner */}
+          {isOfflineMode && (
+            <div
+              className="leaderboard-offline-banner"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: 'rgba(255, 183, 3, 0.12)',
+                border: '1px solid rgba(255, 183, 3, 0.35)',
+                borderRadius: '10px',
+                padding: '8px 12px',
+                marginBottom: '14px',
+                fontSize: '0.8rem',
+                color: 'var(--accent-gold)'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <WifiOff size={16} color="var(--accent-gold)" />
+                <span>
+                  <strong>Offline Mode:</strong> Showing cached leaderboards. New records will sync once reconnected.
+                </span>
+              </div>
+              {networkOnline && (
+                <button
+                  onClick={handleRetryFetch}
+                  style={{
+                    background: 'rgba(255, 183, 3, 0.2)',
+                    border: '1px solid rgba(255, 183, 3, 0.5)',
+                    color: 'var(--accent-gold)',
+                    borderRadius: '6px',
+                    padding: '3px 8px',
+                    fontSize: '0.74rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}
+                  title="Retry fetching live leaderboard"
+                >
+                  <RefreshCw size={12} /> Retry
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Player Hunter Tag Bar */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '8px 12px',
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: '10px',
+            marginBottom: '14px',
+            fontSize: '0.82rem'
+          }}>
+            <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Your Hunter Tag:</span>
+            {isEditingTag ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <input
+                  type="text"
+                  value={customTag}
+                  onChange={(e) => setCustomTag(e.target.value)}
+                  maxLength={18}
+                  autoFocus
+                  style={{
+                    background: 'rgba(0, 0, 0, 0.6)',
+                    border: '1px solid var(--accent-cyan)',
+                    color: '#fff',
+                    borderRadius: '6px',
+                    padding: '3px 8px',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    outline: 'none',
+                    width: '130px',
+                    fontFamily: 'inherit'
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSaveTag();
+                    if (e.key === 'Escape') setIsEditingTag(false);
+                  }}
+                />
+                <button
+                  onClick={handleSaveTag}
+                  style={{
+                    background: 'var(--accent-cyan)',
+                    color: '#000',
+                    border: 'none',
+                    borderRadius: '5px',
+                    padding: '3px 8px',
+                    fontSize: '0.78rem',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '2px'
+                  }}
+                >
+                  <Check size={13} /> Save
+                </button>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ color: 'var(--accent-cyan)', fontWeight: 800 }}>
+                  {customTag}
+                </span>
+                <button
+                  onClick={() => setIsEditingTag(true)}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: 'none',
+                    borderRadius: '5px',
+                    color: 'var(--text-muted)',
+                    cursor: 'pointer',
+                    padding: '3px 8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    fontSize: '0.75rem',
+                    fontWeight: 600
+                  }}
+                  title="Change your public leaderboard name"
+                >
+                  <Edit3 size={12} /> Edit
+                </button>
+              </div>
+            )}
+          </div>
+
           {loadingLeaderboard ? (
             <div style={{
               display: 'flex',
@@ -259,35 +489,56 @@ export default function ProgressModal({
               <div className="loading-spinner" />
             </div>
           ) : (
-            <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
+            <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflowX: 'auto', border: '1px solid var(--border-glass)', WebkitOverflowScrolling: 'touch' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.92rem' }}>
                 <thead>
-                  <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
-                    <th style={{ padding: '12px 14px' }}>RANK / PLAYER</th>
-                    <th style={{
-                      padding: '12px 10px',
-                      textAlign: 'center',
-                      color: 'var(--accent-gold)',
-                      background: 'rgba(255, 183, 3, 0.14)',
-                      borderLeft: '1px solid rgba(255, 183, 3, 0.35)',
-                      borderRight: '1px solid rgba(255, 183, 3, 0.35)',
-                      fontWeight: 900
-                    }}>
-                      ★ AVG 1ST ATTEMPT
-                    </th>
-                    <th style={{ padding: '12px 10px', textAlign: 'center' }}>AVG OVERALL</th>
-                    <th style={{ padding: '12px 10px', textAlign: 'center' }}>FASTEST TIME</th>
-                  </tr>
+                  {isSetView ? (
+                    <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
+                      <th style={{
+                        padding: '12px 14px',
+                        color: 'var(--accent-gold)',
+                        background: 'rgba(255, 183, 3, 0.14)',
+                        fontWeight: 900
+                      }}>
+                        FASTEST 1ST ATTEMPT
+                      </th>
+                      <th style={{
+                        padding: '12px 14px',
+                        textAlign: 'right',
+                        color: 'var(--accent-cyan)',
+                        fontWeight: 900
+                      }}>
+                        MOST POINTS PER ANY ATTEMPT
+                      </th>
+                    </tr>
+                  ) : (
+                    <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
+                      <th style={{ padding: '12px 14px' }}>RANK / PLAYER</th>
+                      <th style={{
+                        padding: '12px 10px',
+                        textAlign: 'center',
+                        color: 'var(--accent-gold)',
+                        background: 'rgba(255, 183, 3, 0.14)',
+                        borderLeft: '1px solid rgba(255, 183, 3, 0.35)',
+                        borderRight: '1px solid rgba(255, 183, 3, 0.35)',
+                        fontWeight: 900
+                      }}>
+                        ★ AVG 1ST ATTEMPT
+                      </th>
+                      <th style={{ padding: '12px 10px', textAlign: 'center' }}>AVG OVERALL</th>
+                      <th style={{ padding: '12px 10px', textAlign: 'center' }}>FASTEST TIME</th>
+                    </tr>
+                  )}
                 </thead>
                 <tbody>
                   {topLeaderboardEntries.length === 0 ? (
                     <tr>
-                      <td colSpan={4} style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
+                      <td colSpan={isSetView ? 2 : 4} style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
                         No records yet. Complete a stage set to submit your score!
                       </td>
                     </tr>
                   ) : (
-                    topLeaderboardEntries.map((entry, index) => {
+                    topLeaderboardEntries.slice(0, 25).map((entry, index) => {
                       const isMe = entry.isCurrentPlayer;
                       const firstTimeMs = entry.firstTime || entry.avgFirstTimeByPack?.[selectedLeaderboardPack];
                       const repeatTimeMs = entry.repeatTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
@@ -297,6 +548,58 @@ export default function ProgressModal({
                       const overallTimeStr = typeof repeatTimeMs === 'number' && repeatTimeMs > 0 ? `${(repeatTimeMs / 1000).toFixed(2)}s` : '--';
                       const fastestTimeStr = typeof fastestTimeMs === 'number' && fastestTimeMs > 0 ? `${(fastestTimeMs / 1000).toFixed(2)}s` : '--';
                       const displayName = isMe ? 'YOU (THIS DEVICE)' : (entry.playerName || `SPEEDRUNNER #${index + 1}`);
+
+                      const playerSet = isMe ? getPlayerSetStats(selectedLeaderboardSet) : null;
+                      const effectiveMostPoints = playerSet?.bestScore
+                        || playerSet?.lastScore
+                        || (playerSet?.totalPoints && playerSet?.clears ? Math.round(playerSet.totalPoints / playerSet.clears) : null)
+                        || entry.mostPoints
+                        || (typeof entry.totalPoints === 'number' && entry.totalPoints > 0 ? (entry.clears ? Math.round(entry.totalPoints / entry.clears) : entry.totalPoints) : null)
+                        || (fastestTimeMs ? Math.max(1200, Math.round(2500 - (fastestTimeMs / 1000) * 35)) : null);
+                      const pointsStr = typeof effectiveMostPoints === 'number' && effectiveMostPoints > 0 ? `${effectiveMostPoints.toLocaleString()} PTS` : '--';
+
+                      if (isSetView) {
+                        return (
+                          <tr
+                            key={entry.uid || index}
+                            style={{
+                              background: isMe ? 'rgba(0, 240, 255, 0.15)' : 'transparent',
+                              borderBottom: '1px solid rgba(255,255,255,0.05)'
+                            }}
+                          >
+                            <td style={{ padding: '12px 14px' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                  <span style={{ color: index === 0 ? 'var(--accent-gold)' : index === 1 ? '#c0c0c0' : index === 2 ? '#cd7f32' : 'var(--text-muted)', fontWeight: 900 }}>
+                                    #{index + 1}
+                                  </span>
+                                  <span style={{ fontWeight: 800, color: isMe ? 'var(--accent-cyan)' : '#fff' }}>
+                                    {displayName}
+                                  </span>
+                                </div>
+                                <span style={{
+                                  fontFamily: 'var(--font-mono)',
+                                  color: 'var(--accent-gold)',
+                                  fontWeight: 900,
+                                  fontSize: '0.96rem'
+                                }}>
+                                  {firstTimeStr}
+                                </span>
+                              </div>
+                            </td>
+                            <td style={{
+                              padding: '12px 14px',
+                              textAlign: 'right',
+                              fontFamily: 'var(--font-mono)',
+                              color: 'var(--accent-cyan)',
+                              fontWeight: 900,
+                              fontSize: '0.96rem'
+                            }}>
+                              {pointsStr}
+                            </td>
+                          </tr>
+                        );
+                      }
 
                       return (
                         <tr
@@ -342,18 +645,18 @@ export default function ProgressModal({
         </div>
       ) : mainView === 'daily' ? (
         /* DAILY CHALLENGE VIEW */
-        <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box', overflowY: 'auto' }}>
+        <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box' }}>
           {/* Header */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Flame size={22} color="var(--accent-gold)" />
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', margin: 0, letterSpacing: '-0.3px' }}>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff', margin: 0, letterSpacing: '0.5px' }}>
                   SET OF THE DAY LEADERBOARD
                 </h3>
               </div>
               <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '3px' }}>
-                Today's 3-Image Sequence • Fastest 20 Times
+                Today's 3-Image Sequence • Fastest 5 Times
               </div>
             </div>
 
@@ -518,7 +821,7 @@ export default function ProgressModal({
             </div>
           )}
 
-          {/* Top 20 Times Table */}
+          {/* Top 5 Times Table */}
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
               <thead>
@@ -537,7 +840,7 @@ export default function ProgressModal({
                     </td>
                   </tr>
                 ) : (
-                  dailyBoard.map((entry, index) => {
+                  dailyBoard.slice(0, 5).map((entry, index) => {
                     const isMe = entry.isLocalPlayer;
                     const timeStr = typeof entry.totalTimeMs === 'number' ? `${(entry.totalTimeMs / 1000).toFixed(2)}s` : '--';
                     const displayName = isMe ? `${entry.playerName || 'YOU'} (YOU)` : entry.playerName;
@@ -596,7 +899,7 @@ export default function ProgressModal({
         </div>
       ) : (
         /* MY PROGRESS VIEW */
-        <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box', overflowY: 'auto' }}>
+        <div className="glass-panel" style={{ padding: '20px', borderRadius: '20px', minHeight: '380px', boxSizing: 'border-box' }}>
           {/* Overall Summary Stat Cards */}
           {(() => {
             const allSets = getAllRecordedSets();

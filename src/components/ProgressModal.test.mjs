@@ -54,3 +54,49 @@ test('ProgressModal exposes one Game Center leaderboard action beside the headin
   assert.doesNotMatch(source, /openGameCenterAchievements/);
   assert.doesNotMatch(source, />\s*Achievements\s*</);
 });
+
+test('ProgressModal does not substitute a pack ranking when a selected Photo Set is empty', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /Once a Photo Set is selected, an empty set remains empty/);
+  assert.match(source, /selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet/);
+});
+
+test('ProgressModal renders daily challenge leaderboard limited to top 5', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /Fastest 5 Times/);
+  assert.doesNotMatch(source, /Fastest 20 Times/);
+  assert.match(source, /dailyBoard\.slice\(0,\s*5\)/);
+});
+
+test('ProgressModal renders global live leaderboard limited to top 25', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /TOP 25/);
+  assert.match(source, /topLeaderboardEntries\.slice\(0,\s*25\)/);
+});
+
+test('ProgressModal renders 2 columns for individual set records', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /FASTEST 1ST ATTEMPT/);
+  assert.match(source, /MOST POINTS PER ANY ATTEMPT/);
+  assert.match(source, /isSetView \? 2 : 4/);
+});
+
+test('ProgressModal detects offline mode and displays indicator banner with retry action', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Network detection and subscriptions
+  assert.match(source, /isOnline/);
+  assert.match(source, /subscribeNetworkStatus/);
+  assert.match(source, /isOfflineMode/);
+
+  // Offline banner rendering and copy
+  assert.match(source, /leaderboard-offline-banner/);
+  assert.match(source, /Offline Mode:/);
+  assert.match(source, /Showing cached leaderboards\. New records will sync once reconnected\./);
+
+  // Retry action when network is restored
+  assert.match(source, /handleRetryFetch/);
+  assert.match(source, /<RefreshCw/);
+  assert.match(source, /Retry/);
+});
+

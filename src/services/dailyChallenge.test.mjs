@@ -90,9 +90,9 @@ test('getDailySetForDate does not repeat levels across consecutive days', () => 
   }
 });
 
-test('getDailyLeaderboard returns sorted entries capped at 20', () => {
+test('getDailyLeaderboard returns sorted entries capped at 5', () => {
   const leaderboard = getDailyLeaderboard('2026-09-08');
-  assert.ok(leaderboard.length > 0 && leaderboard.length <= 20);
+  assert.ok(leaderboard.length > 0 && leaderboard.length <= 5);
   for (let i = 0; i < leaderboard.length - 1; i++) {
     assert.ok(leaderboard[i].totalTimeMs <= leaderboard[i + 1].totalTimeMs);
     assert.equal(leaderboard[i].rank, i + 1);

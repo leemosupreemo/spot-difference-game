@@ -13,14 +13,15 @@ import {
   openGameCenterLeaderboard,
   openGameCenterAchievements
 } from './gameCenter.js';
+import { shouldMirrorDifficultyLeaderboard } from './gameCenter.js';
 
 test('getLeaderboardForDifficulty resolves corresponding Game Center leaderboard IDs', () => {
-  assert.equal(getLeaderboardForDifficulty('Easy'), GAME_CENTER_LEADERBOARDS.EASY_FASTEST);
-  assert.equal(getLeaderboardForDifficulty('easy'), GAME_CENTER_LEADERBOARDS.EASY_FASTEST);
-  assert.equal(getLeaderboardForDifficulty('Hard'), GAME_CENTER_LEADERBOARDS.HARD_FASTEST);
-  assert.equal(getLeaderboardForDifficulty('hard'), GAME_CENTER_LEADERBOARDS.HARD_FASTEST);
-  assert.equal(getLeaderboardForDifficulty('Medium'), GAME_CENTER_LEADERBOARDS.MEDIUM_FASTEST);
-  assert.equal(getLeaderboardForDifficulty('unknown'), GAME_CENTER_LEADERBOARDS.MEDIUM_FASTEST);
+  assert.equal(getLeaderboardForDifficulty('Easy'), GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST);
+  assert.equal(getLeaderboardForDifficulty('easy'), GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST);
+  assert.equal(getLeaderboardForDifficulty('Hard'), GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST);
+  assert.equal(getLeaderboardForDifficulty('hard'), GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST);
+  assert.equal(getLeaderboardForDifficulty('Medium'), GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST);
+  assert.equal(getLeaderboardForDifficulty('unknown'), GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST);
 });
 
 test('Game Center configuration has required leaderboards and achievements defined', () => {
@@ -60,7 +61,7 @@ test('openGameCenterAchievements gracefully returns unsupported_platform in non-
 
 
 test('deterministic Photo Set mirroring does not require a difficulty leaderboard', async () => {
-  const source = await import('node:fs').then(fs => fs.readFileSync(new URL('./gameCenter.js', import.meta.url), 'utf8'));
-  assert.match(source, /setId/);
-  assert.match(source, /if \(!setId\)/);
+  assert.equal(shouldMirrorDifficultyLeaderboard('photo_set_007'), false);
+  assert.equal(shouldMirrorDifficultyLeaderboard(''), true);
+  assert.equal(shouldMirrorDifficultyLeaderboard(undefined), true);
 });

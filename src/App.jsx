@@ -14,6 +14,7 @@ import DiagnosticsModal from './components/DiagnosticsModal';
 import ConfirmExitModal from './components/ConfirmExitModal';
 import DebugLevelGeneratorModal from './components/DebugLevelGeneratorModal';
 import DebugCuratorBar from './components/DebugCuratorBar';
+import { initAuth } from './services/authService';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
 import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGenerator';
 import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
@@ -28,7 +29,7 @@ import { parseIncomingChallenge } from './utils/challengeMetrics';
 import { syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
 import { syncRemoteAppConfig } from './services/appConfig';
 import { initializeNotificationListeners, scheduleInstallNotifications } from './services/notificationService';
-import { initGameCenter, mirrorRoundToGameCenter } from './services/gameCenter';
+import { initGameCenter, mirrorRoundToGameCenter, onGameCenterAuthChange, isGameCenterSupported, isGameCenterAuthenticated, getGameCenterPlayer } from './services/gameCenter';
 import SetOfTheDayBanner from './components/SetOfTheDayBanner';
 import DailyVictoryModal from './components/DailyVictoryModal';
 import {
@@ -44,9 +45,21 @@ import {
   resetDailyPlayerStatus,
   syncRemoteDailyQueue
 } from './services/dailyChallenge';
-import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress } from './services/playerProgress';
+import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress, restoreProgressFromCloud } from './services/playerProgress';
+import { getSetNumber, checkAndUpdateDynamicSetRecord } from './utils/setLeaderboards.js';
+import { submitLeaderboardScore } from './services/leaderboardService.js';
+import { recordSetCompletionDistribution } from './services/distributionService.js';
+import ScreenshotHarness from './components/ScreenshotHarness.jsx';
 
 export default function App() {
+  const screenshotModal = typeof window !== 'undefined'
+    ? new URLSearchParams(window.location.search).get('screenshotModal')
+    : null;
+
+  if (screenshotModal) {
+    return <ScreenshotHarness modalId={screenshotModal} />;
+  }
+
   const [levels, setLevels] = useState(() => {
     try {
       const allEntries = getAllPhotoPairEntries();
@@ -143,6 +156,8 @@ export default function App() {
   const [confirmExitModalOpen, setConfirmExitModalOpen] = useState(false);
   const [diagnosticsModalOpen, setDiagnosticsModalOpen] = useState(false);
   const [debugModalOpen, setDebugModalOpen] = useState(false);
+  const [selectedStatsSetId, setSelectedStatsSetId] = useState('');
+  const [lastSetCompletionInfo, setLastSetCompletionInfo] = useState(null);
 
   // Debug Flag (Always enabled on dev branch/URLs unless explicitly specified otherwise)
   const [debugMode, setDebugMode] = useState(() => getInitialDebugMode());
@@ -211,6 +226,40 @@ export default function App() {
       }
     } catch (_) {}
   }, [incomingChallenge]);
+
+  // Restore set progress and attempt history from Cloud / Game Center on startup
+  useEffect(() => {
+    restoreProgressFromCloud(difficultyStats).then(syncedStats => {
+      if (syncedStats && Object.keys(syncedStats).length > 0) {
+        setDifficultyStats(syncedStats);
+        setHasCompletedFirstSetState(hasCompletedFirstSet());
+      }
+    }).catch(() => {});
+
+    // Listen for Game Center authentication updates (e.g. silent iOS background login)
+    const unsubGc = onGameCenterAuthChange(authState => {
+      if (authState?.isAuthenticated && authState?.player?.gamePlayerID) {
+        restoreProgressFromCloud().then(syncedStats => {
+          if (syncedStats && Object.keys(syncedStats).length > 0) {
+            setDifficultyStats(syncedStats);
+            setHasCompletedFirstSetState(hasCompletedFirstSet());
+          }
+        }).catch(() => {});
+      }
+    });
+
+    return () => {
+      if (typeof unsubGc === 'function') unsubGc();
+    };
+  }, []);
+
+  // Initialize silent anonymous auth on launch
+  useEffect(() => {
+    const unsubAuth = initAuth();
+    return () => {
+      if (typeof unsubAuth === 'function') unsubAuth();
+    };
+  }, []);
 
   // Refresh derived Photo Set choices as soon as a remote pack arrives.
   useEffect(() => subscribeToRemoteLevels(() => setRemoteLevelsRevision(revision => revision + 1)), []);
@@ -794,6 +843,23 @@ export default function App() {
               entryIds
             }).catch(() => {});
           });
+
+          // Submit to durable photoSet and category leaderboards
+          submitLeaderboardScore({
+            boardType: 'photoSet',
+            boardId: photoSetId,
+            score: cumulativeTime,
+            metric: 'elapsedMs'
+          }).catch(() => {});
+
+          recordSetCompletionDistribution(photoSetId, cumulativeTime).catch(() => {});
+
+          submitLeaderboardScore({
+            boardType: 'category',
+            boardId: selectedTheme === 'find_the_sniper' ? 'photo' : 'abstract',
+            score: cumulativeTime,
+            metric: 'elapsedMs'
+          }).catch(() => {});
         }
 
         // Daily Challenge Mode (3 Images Sequence) Completion
@@ -845,10 +911,16 @@ export default function App() {
 
           logApp('INFO', `[DailyChallengeCleared] Time: ${cumulativeTime}ms, Rank: #${dailyResult.position}, Stars: ${dailyResult.stars}`);
 
+          const dailySetId = levels?.dailySetId || dailyResult?.setId || 'daily_set_1';
+          const dailySetNum = getSetNumber(dailySetId) || 1;
+
           setTimeout(() => {
             setDailyVictoryData({
               isOpen: true,
               totalTimeMs: cumulativeTime,
+              score: stageTotalScore || score,
+              setId: dailySetId,
+              setNumber: dailySetNum,
               position: dailyResult.position,
               totalPlayers: dailyResult.totalPlayers,
               percentile: dailyResult.percentile,
@@ -916,6 +988,18 @@ export default function App() {
             : (!setData.fastestRepeat || cumulativeTime < setData.fastestRepeat ? cumulativeTime : setData.fastestRepeat);
           const newSetTotalPoints = (setData.totalPoints || 0) + stageTotalScore;
 
+          const previousBest = isFirstTime ? null : (setData.fastestTime || Math.min(...[setData.firstTime, setData.fastestRepeat].filter(Boolean)));
+          const isPb = isDeterministicPhotoSet
+            ? (isFirstTime || cumulativeTime < previousBest)
+            : checkAndUpdateDynamicSetRecord(cumulativeTime).isNewRecord;
+
+          setLastSetCompletionInfo({
+            setId: isDeterministicPhotoSet ? photoSetId : null,
+            setNumber: isDeterministicPhotoSet ? getSetNumber(photoSetId) : null,
+            attemptNumber: isDeterministicPhotoSet ? (setData.clears + 1) : null,
+            isPersonalBest: isPb
+          });
+
           const updatedSetData = {
             title: `5-Image Stage (${selectedTheme === 'find_the_sniper' ? 'Photography' : 'Abstract'})`,
             packId: selectedTheme,
@@ -925,7 +1009,8 @@ export default function App() {
             fastestTime: Math.min(...[newFirstTime, newFastestRepeat].filter(time => typeof time === 'number' && time > 0)),
             clears: setData.clears + 1,
             totalPoints: newSetTotalPoints,
-            lastScore: stageTotalScore
+            lastScore: stageTotalScore,
+            bestScore: Math.max(setData.bestScore || 0, setData.lastScore || 0, stageTotalScore)
           };
 
           const updatedSets = { ...categoryData.sets, [stageKey]: updatedSetData };
@@ -1095,8 +1180,14 @@ export default function App() {
     setView('creator');
   };
 
+  const handleOpenSetLeaderboard = (targetSetId = '') => {
+    setSelectedStatsSetId(targetSetId || '');
+    setStatsInitialTab('leaderboards');
+    setView('stats');
+  };
+
   const handleOpenLeaderboard = () => {
-    setStatsInitialTab('progress');
+    setStatsInitialTab('leaderboards');
     setView('stats');
   };
 
@@ -1143,7 +1234,7 @@ export default function App() {
             setActiveMode={setActiveMode}
             onOpenLeaderboard={handleOpenLeaderboard}
             onOpenStats={() => {
-              setStatsInitialTab('progress');
+              setStatsInitialTab('leaderboards');
               setView('stats');
             }}
             onOpenCreator={handleOpenCreator}
@@ -1174,6 +1265,7 @@ export default function App() {
             onStartDaily={handleStartDailyChallenge}
             onResetDaily={handleResetDailyChallenge}
             initialTab={statsInitialTab}
+            initialSetId={selectedStatsSetId}
             debugMode={debugMode}
           />
         ) : view === 'creator' ? (
@@ -1248,6 +1340,19 @@ export default function App() {
         themeId={selectedTheme}
         isStageSet={true}
         incomingChallenge={incomingChallenge}
+        setId={lastSetCompletionInfo?.setId}
+        setNumber={lastSetCompletionInfo?.setNumber}
+        attemptNumber={lastSetCompletionInfo?.attemptNumber}
+        isPersonalBestForSet={lastSetCompletionInfo?.isPersonalBest}
+        onOpenLeaderboard={() => {
+          const targetSetId = lastSetCompletionInfo?.setId;
+          setVictoryModalOpen(false);
+          if (targetSetId) {
+            handleOpenSetLeaderboard(targetSetId);
+          } else {
+            handleOpenLeaderboard();
+          }
+        }}
         onNextLevel={handleStartGame}
         onRestart={handleStartGame}
         onClose={() => setVictoryModalOpen(false)}
@@ -1258,6 +1363,9 @@ export default function App() {
         <DailyVictoryModal
           isOpen={Boolean(dailyVictoryData?.isOpen)}
           totalTimeMs={dailyVictoryData?.totalTimeMs}
+          score={dailyVictoryData?.score}
+          setId={dailyVictoryData?.setId}
+          setNumber={dailyVictoryData?.setNumber}
           position={dailyVictoryData?.position}
           totalPlayers={dailyVictoryData?.totalPlayers}
           percentile={dailyVictoryData?.percentile}
@@ -1274,11 +1382,16 @@ export default function App() {
             handleStartDailyChallenge();
           } : undefined}
           onOpenLeaderboard={() => {
+            const targetSetId = dailyVictoryData?.setId;
             setDailyVictoryData(null);
             setRevealAnswer(false);
             setGameOverModalOpen(false);
-            setStatsInitialTab('daily');
-            setView('stats');
+            if (targetSetId) {
+              handleOpenSetLeaderboard(targetSetId);
+            } else {
+              setStatsInitialTab('daily');
+              setView('stats');
+            }
           }}
           onClose={() => {
             setDailyVictoryData(null);

@@ -5,9 +5,6 @@
 
 export const GAME_CENTER_LEADERBOARDS = {
   GLOBAL_FASTEST: 'diff_hunter_fastest_time',
-  EASY_FASTEST: 'diff_hunter_fastest_easy',
-  MEDIUM_FASTEST: 'diff_hunter_fastest_medium',
-  HARD_FASTEST: 'diff_hunter_fastest_hard',
   HIGH_SCORE: 'diff_hunter_high_score'
 };
 
@@ -49,9 +46,6 @@ export const GAME_CENTER_ACHIEVEMENTS = {
  * @param {string} difficulty
  * @returns {string}
  */
-export function getLeaderboardForDifficulty(difficulty = 'Medium') {
-  const norm = String(difficulty || '').toLowerCase();
-  if (norm === 'easy') return GAME_CENTER_LEADERBOARDS.EASY_FASTEST;
-  if (norm === 'hard') return GAME_CENTER_LEADERBOARDS.HARD_FASTEST;
-  return GAME_CENTER_LEADERBOARDS.MEDIUM_FASTEST;
+export function getLeaderboardForDifficulty() {
+  return GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST;
 }

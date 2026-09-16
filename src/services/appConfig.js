@@ -15,10 +15,10 @@ const STORAGE_KEY_APP_STORE_URL = 'diff_hunter_app_store_url';
 const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
 
 const firebaseConfig = {
-  apiKey: env.VITE_FIREBASE_API_KEY || 'AIzaSy_thirteen_a5760_web_key',
-  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || 'thirteen-a5760.firebaseapp.com',
-  projectId: env.VITE_FIREBASE_PROJECT_ID || 'thirteen-a5760',
-  appId: env.VITE_FIREBASE_APP_ID || '1:396835359318:web:diffhunter'
+  apiKey: env.VITE_FIREBASE_API_KEY || 'AIzaSyCbX3ZqIQvcNYyI8Uy_fwN1mXtV14jt3pA',
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || 'diff-hunter-progress-20260810.firebaseapp.com',
+  projectId: env.VITE_FIREBASE_PROJECT_ID || 'diff-hunter-progress-20260810',
+  appId: env.VITE_FIREBASE_APP_ID || '1:169569618752:web:4151f5708b21afaaac48a5'
 };
 
 let inMemoryAppStoreUrl = null;

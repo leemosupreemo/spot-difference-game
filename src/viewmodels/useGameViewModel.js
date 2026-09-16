@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { LEVELS as INITIAL_LEVELS } from '../utils/canvasLevels.js';
 import { buildPhotoPairStage } from '../utils/photoPairLevelLoader.js';
-import { calculateSpeedPoints } from '../utils/scoring.js';
-import { saveImageProgress, saveLeaderboardStats, syncProgressFromFirestore, markFirstSetCompleted } from '../services/playerProgress.js';
+import { saveImageProgress, saveLeaderboardStats, restoreProgressFromCloud, markFirstSetCompleted } from '../services/playerProgress.js';
+import { submitLeaderboardScore } from '../services/leaderboardService.js';
 import { sounds } from '../utils/audio.js';
 import { logApp, auditDOMState } from '../utils/logger.js';
 import {
@@ -72,13 +72,13 @@ export function useGameViewModel() {
     }
   });
 
-  // Restore seen image history from Firestore on startup
+  // Restore seen image history and set progress from Cloud on startup
   useEffect(() => {
-    syncProgressFromFirestore(difficultyStats).then(syncedStats => {
+    restoreProgressFromCloud(difficultyStats).then(syncedStats => {
       if (syncedStats && Object.keys(syncedStats).length > 0) {
         setDifficultyStats(syncedStats);
       }
-    });
+    }).catch(() => {});
   }, []);
 
   const handleSetCuratedStatus = useCallback((levelId, status, meta) => {
@@ -295,7 +295,8 @@ export function useGameViewModel() {
             bestFaultedTime: newBestFaulted,
             clears: setData.clears + 1,
             totalPoints: newSetTotalPoints,
-            lastScore: stageTotalScore
+            lastScore: stageTotalScore,
+            bestScore: Math.max(setData.bestScore || 0, setData.lastScore || 0, stageTotalScore)
           };
 
           const updatedSets = { ...categoryData.sets, [currentLevel.id]: updatedSetData };
@@ -342,6 +343,21 @@ export function useGameViewModel() {
           }).catch(() => {});
 
           saveLeaderboardStats(newStats).catch(() => {});
+
+          if (stagePairs[0]?.setId) {
+            submitLeaderboardScore({
+              boardType: 'photoSet',
+              boardId: stagePairs[0].setId,
+              score: elapsedTime,
+              metric: 'elapsedMs'
+            }).catch(() => {});
+          }
+          submitLeaderboardScore({
+            boardType: 'category',
+            boardId: selectedTheme === 'find_the_sniper' ? 'photo' : 'abstract',
+            score: elapsedTime,
+            metric: 'elapsedMs'
+          }).catch(() => {});
 
           return newStats;
         });

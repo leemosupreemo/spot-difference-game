@@ -78,28 +78,40 @@ export function isGameCenterSupported() {
  */
 export async function initGameCenter() {
   if (!isGameCenterSupported()) {
-    authState = { isInitialized: true, isAuthenticated: false, player: null };
+    authState = { isInitialized: true, isAuthenticated: false, player: null, error: null };
     notifyListeners();
     return authState;
   }
 
   try {
-    const res = await NativeGameCenter.authenticate();
-    authState = {
-      isInitialized: true,
-      isAuthenticated: Boolean(res?.isAuthenticated),
-      player: res?.player || null
-    };
-    notifyListeners();
+    const authPromise = NativeGameCenter.authenticate();
+    const timeoutPromise = new Promise((resolve) =>
+      setTimeout(() => resolve({ isAuthenticated: false, player: null, error: 'Authentication timed out' }), 20000)
+    );
+    const res = await Promise.race([authPromise, timeoutPromise]);
+
+    // Don't overwrite if the event listener already confirmed authenticated status
+    if (!authState.isAuthenticated || res?.isAuthenticated) {
+      authState = {
+        isInitialized: true,
+        isAuthenticated: Boolean(res?.isAuthenticated),
+        player: res?.player || authState.player || null,
+        error: res?.error || null
+      };
+      notifyListeners();
+    }
     return authState;
   } catch (err) {
     console.warn('Game Center authentication failed or cancelled:', err);
-    authState = {
-      isInitialized: true,
-      isAuthenticated: false,
-      player: null
-    };
-    notifyListeners();
+    if (!authState.isAuthenticated) {
+      authState = {
+        isInitialized: true,
+        isAuthenticated: false,
+        player: null,
+        error: err?.message || String(err)
+      };
+      notifyListeners();
+    }
     return authState;
   }
 }
@@ -129,9 +141,27 @@ export function shouldMirrorDifficultyLeaderboard(setId) {
  * Only submits if authenticated.
  * @param {{ leaderboardId: string, score: number }} params
  */
-export async function submitGameCenterScore({ leaderboardId, score }) {
+export async function submitGameCenterScore(arg1, arg2) {
   if (!isGameCenterSupported() || !authState.isAuthenticated) {
     return { success: false, reason: 'not_authenticated' };
+  }
+
+  let leaderboardId = GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST;
+  let score;
+
+  if (typeof arg1 === 'object' && arg1 !== null) {
+    leaderboardId = arg1.leaderboardId || GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST;
+    score = arg1.score;
+  } else if (typeof arg1 === 'number') {
+    score = arg1;
+    leaderboardId = typeof arg2 === 'string' ? arg2 : GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST;
+  } else if (typeof arg2 === 'number') {
+    leaderboardId = typeof arg1 === 'string' ? arg1 : GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST;
+    score = arg2;
+  }
+
+  if (!leaderboardId || typeof score !== 'number') {
+    return { success: false, reason: 'invalid_arguments' };
   }
 
   try {
@@ -204,26 +234,14 @@ export async function mirrorRoundToGameCenter({
   const leaderboardsUpdated = [];
   const achievementsUnlocked = [];
 
-  // Deterministic Photo Sets are comparable by set identity. Game Center has
-  // no per-set IDs configured, so mirror them only to the global board rather
-  // than misclassifying them under a subjective difficulty board.
-  if (shouldMirrorDifficultyLeaderboard(setId)) {
-    const diffLeaderboardId = getLeaderboardForDifficulty(difficulty);
-    const diffResult = await submitGameCenterScore({
-      leaderboardId: diffLeaderboardId,
-      score: elapsedTimeMs
-    });
-    if (diffResult?.success) leaderboardsUpdated.push(diffLeaderboardId);
-  }
-
-  // 2. Submit to Global Fastest Time Leaderboard
+  // 1. Submit to Global Fastest Time Leaderboard
   const globalResult = await submitGameCenterScore({
     leaderboardId: GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST,
     score: elapsedTimeMs
   });
   if (globalResult?.success) leaderboardsUpdated.push(GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST);
 
-  // 3. Submit High Score if score is provided
+  // 2. Submit High Score if score is provided
   if (typeof score === 'number' && score > 0) {
     const scoreResult = await submitGameCenterScore({
       leaderboardId: GAME_CENTER_LEADERBOARDS.HIGH_SCORE,

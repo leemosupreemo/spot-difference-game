@@ -33,6 +33,27 @@ test('calculatePercentileRank calculates accurate top and beat percentiles for f
   assert.equal(stageFast.beatPercentile, 95);
 });
 
+test('calculatePercentileRank integrates set-calibrated and live distribution options', () => {
+  // Set-calibrated lookup
+  const setRank = calculatePercentileRank(15000, 'Medium', true, { setId: 'photo_set_005' });
+  assert.ok(setRank.topPercentile <= 20);
+  assert.ok(setRank.beatPercentile >= 80);
+
+  // Live distribution override
+  const liveDist = {
+    count: 50,
+    b0: 0,
+    b1: 2,
+    b2: 5,
+    b3: 15,
+    b4: 20,
+    b5: 8
+  };
+  const liveRank = calculatePercentileRank(11000, 'Medium', true, { distribution: liveDist });
+  assert.ok(liveRank.beatPercentile >= 90);
+  assert.equal(liveRank.isLiveDistribution, true);
+});
+
 test('checkAndUpdatePersonalBest tracks new records correctly', () => {
   // Clear any existing localStorage mock if needed
   const res1 = checkAndUpdatePersonalBest(3500, 'Medium', 'test_theme', false);

@@ -7,6 +7,9 @@
 
 import { getAppStoreReviewUrl } from '../services/appConfig.js';
 import { getSavedPlayerName } from '../services/playerProgress.js';
+import { getSetPercentile } from '../services/distributionService.js';
+
+export { getSetPercentile };
 
 const STORAGE_KEY_BEST_TIMES = 'diff_hunter_best_times';
 const STORAGE_KEY_SHARE_STATS = 'diff_hunter_share_stats';
@@ -14,13 +17,24 @@ const STORAGE_KEY_SHARE_STATS = 'diff_hunter_share_stats';
 /**
  * Calculates percentile rank based on reaction time.
  * Calibrated for Diff Hunter timed spot-the-difference gameplay.
+ * Supports set-calibrated and live histogram distributions via options.
  *
  * @param {number} elapsedTimeMs - Completion time in milliseconds.
  * @param {string} difficulty - 'Easy' | 'Medium' | 'Hard'
  * @param {boolean} isStageSet - True if 5-image stage cumulative time, False if single pair
+ * @param {Object} [options] - Optional context { setId, isDaily, distribution, useCalibrated }
  * @returns {{ topPercentile: number, beatPercentile: number, rankLabel: string }}
  */
-export function calculatePercentileRank(elapsedTimeMs, difficulty = 'Medium', isStageSet = false) {
+export function calculatePercentileRank(elapsedTimeMs, difficulty = 'Medium', isStageSet = false, options = {}) {
+  if (options && (options.setId || options.isDaily || options.distribution || options.useCalibrated)) {
+    return getSetPercentile(options.setId, elapsedTimeMs, {
+      difficulty,
+      isStageSet,
+      isDaily: Boolean(options.isDaily),
+      distribution: options.distribution
+    });
+  }
+
   const safeMs = Math.max(100, Number.isFinite(elapsedTimeMs) ? elapsedTimeMs : 5000);
 
   // Difficulty adjustment factor (Hard takes longer, Easy is faster)

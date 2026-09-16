@@ -17,6 +17,8 @@ import { getAllPhotoPairEntries, createPhotoPairLevel } from '../utils/photoPair
 import { getSavedPlayerName, savePlayerName } from './playerProgress.js';
 import { getGameCenterPlayer } from './gameCenter.js';
 import { logApp } from '../utils/logger.js';
+import { submitLeaderboardScore } from './leaderboardService.js';
+import { getSetPercentile, recordDailyChallengeDistribution, fetchDailyDistribution } from './distributionService.js';
 
 const STORAGE_KEY_DAILY_SETS = 'diff_hunter_daily_sets';
 const STORAGE_KEY_DAILY_USED_QUEUE = 'diff_hunter_daily_queue_used';
@@ -27,10 +29,10 @@ const STORAGE_KEY_DAILY_REMOTE_QUEUE = 'diff_hunter_daily_remote_queue';
 const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
 
 const firebaseConfig = {
-  apiKey: env.VITE_FIREBASE_API_KEY || 'AIzaSy_thirteen_a5760_web_key',
-  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || 'thirteen-a5760.firebaseapp.com',
-  projectId: env.VITE_FIREBASE_PROJECT_ID || 'thirteen-a5760',
-  appId: env.VITE_FIREBASE_APP_ID || '1:396835359318:web:diffhunter'
+  apiKey: env.VITE_FIREBASE_API_KEY || 'AIzaSyCbX3ZqIQvcNYyI8Uy_fwN1mXtV14jt3pA',
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || 'diff-hunter-progress-20260810.firebaseapp.com',
+  projectId: env.VITE_FIREBASE_PROJECT_ID || 'diff-hunter-progress-20260810',
+  appId: env.VITE_FIREBASE_APP_ID || '1:169569618752:web:4151f5708b21afaaac48a5'
 };
 
 const memoryStore = new Map();
@@ -689,7 +691,7 @@ export function getAllDailyChallengePoolLevels() {
  * Generate default competitive baseline entries for a specific day.
  * Ensures the leaderboard has realistic opponents and a "Time to Beat" immediately.
  */
-function generateDefaultDailyBaseline(dateStr) {
+export function generateDefaultDailyBaseline(dateStr) {
   const seed = hashString(dateStr);
   const rng = createSeededRandom(seed);
 
@@ -774,7 +776,7 @@ export function calculateRatingByStandardDeviation(timeMs, allTimesMs) {
 }
 
 /**
- * Returns the top 20 fastest times for a given day.
+ * Returns the top 5 fastest times for a given day.
  * @param {string} [dateStr]
  * @returns {Array<Object>}
  */
@@ -796,7 +798,7 @@ export function getDailyLeaderboard(dateStr = getTodayDateString()) {
 
   // Ensure entries are sorted and ranked
   entries.sort((a, b) => a.totalTimeMs - b.totalTimeMs);
-  return entries.slice(0, 20).map((entry, idx) => ({
+  return entries.slice(0, 5).map((entry, idx) => ({
     ...entry,
     rank: idx + 1
   }));
@@ -1087,16 +1089,23 @@ export function recordDailyChallengeCompletion({
   const position = ranked.findIndex(e => e.isLocalPlayer) + 1;
   const totalPlayers = ranked.length;
 
-  // Percentile: % of players beaten
-  const percentile = Math.min(99, Math.max(1, Math.round(((totalPlayers - position + 1) / totalPlayers) * 100)));
+  // Percentile: accurately calibrated against worldwide distribution
+  const percentileRank = getSetPercentile(dailySetId || dateStr, totalTimeMs, {
+    isDaily: true,
+    difficulty: 'Medium'
+  });
+  const percentile = percentileRank.beatPercentile;
   const isNewRecord = position === 1;
 
-  // Save top 20
-  const top20 = ranked.slice(0, 20);
+  // Record completion to distribution asynchronously
+  recordDailyChallengeDistribution(dateStr, totalTimeMs).catch(() => {});
+
+  // Save top 5
+  const top5 = ranked.slice(0, 5);
   const leaderboardKey = `${STORAGE_KEY_DAILY_LEADERBOARD_PREFIX}${dateStr}`;
   const playerKey = `${STORAGE_KEY_DAILY_PLAYER_PREFIX}${dateStr}`;
 
-  storageSet(leaderboardKey, JSON.stringify(top20));
+  storageSet(leaderboardKey, JSON.stringify(top5));
   storageSet(playerKey, JSON.stringify({
     completed: true,
     attempted: true,
@@ -1274,6 +1283,15 @@ export async function recordDailyChallengeCompletionRemote({
 
       // Refetch live global leaderboard
       await fetchDailyLeaderboard(dateStr);
+
+      // Record score into durable daily leaderboard (Top 5)
+      submitLeaderboardScore({
+        boardType: 'daily',
+        boardId: dateStr,
+        score: totalTimeMs,
+        metric: 'elapsedMs',
+        displayName: effectivePlayerName
+      }).catch(() => {});
     }
   } catch (err) {
     logApp('WARN', '[DailyChallenge] Remote completion sync warning:', err?.message || err);
@@ -1353,18 +1371,18 @@ export async function fetchDailyLeaderboard(dateStr = getTodayDateString()) {
         remoteEntries.sort((a, b) => a.totalTimeMs - b.totalTimeMs);
       }
 
-      if (remoteEntries.length < 8) {
+      if (remoteEntries.length < 5) {
         const baseline = generateDefaultDailyBaseline(dateStr);
         for (const base of baseline) {
           if (!remoteEntries.some(r => r.playerName === base.playerName)) {
             remoteEntries.push(base);
           }
-          if (remoteEntries.length >= 20) break;
+          if (remoteEntries.length >= 5) break;
         }
         remoteEntries.sort((a, b) => a.totalTimeMs - b.totalTimeMs);
       }
 
-      const ranked = remoteEntries.slice(0, 20).map((e, idx) => ({
+      const ranked = remoteEntries.slice(0, 5).map((e, idx) => ({
         ...e,
         rank: idx + 1
       }));
@@ -1378,7 +1396,13 @@ export async function fetchDailyLeaderboard(dateStr = getTodayDateString()) {
         const currentStatus = getDailyPlayerStatus(dateStr);
         const position = myIdx + 1;
         const totalPlayers = ranked.length;
-        const percentile = Math.min(99, Math.max(1, Math.round(((totalPlayers - position + 1) / totalPlayers) * 100)));
+        const liveDist = await fetchDailyDistribution(dateStr).catch(() => null);
+        const percentileRank = getSetPercentile(currentStatus?.setId || dateStr, currentStatus?.totalTimeMs || ranked[myIdx].totalTimeMs, {
+          isDaily: true,
+          difficulty: 'Medium',
+          distribution: liveDist
+        });
+        const percentile = percentileRank.beatPercentile;
         storageSet(playerKey, JSON.stringify({
           ...currentStatus,
           position,

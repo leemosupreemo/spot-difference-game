@@ -47,13 +47,10 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
   if (!enabled || (!forceShow && !debugMode && !playerStatus.completed && isAttempted)) return null;
 
   const timeToBeatSec = timeToBeatMs ? (timeToBeatMs / 1000).toFixed(1) : '--.-';
-  const playerTimeSec = playerStatus.completed && playerStatus.totalTimeMs
-    ? (playerStatus.totalTimeMs / 1000).toFixed(1)
-    : null;
-  const topThreeTimeLabels = topTimes.map((entry, index) => {
-    const seconds = typeof entry?.totalTimeMs === 'number' ? `${(entry.totalTimeMs / 1000).toFixed(1)}s` : '--.-';
-    return `#${entry?.rank || index + 1} ${seconds}`;
-  });
+  const topTimeMs = topTimes[0]?.totalTimeMs ?? timeToBeatMs;
+  const topTimeSec = typeof topTimeMs === 'number'
+    ? (topTimeMs / 1000).toFixed(1)
+    : timeToBeatSec;
 
   const handleResetClick = (e) => {
     e.stopPropagation();
@@ -117,20 +114,6 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
           transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
-        {/* Animated subtle top shimmer */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '2px',
-            background: 'linear-gradient(90deg, #ff007f, #ffb703, #00f0ff, #ff007f)',
-            backgroundSize: '200% 100%',
-            opacity: 0.85
-          }}
-        />
-
         {/* Left Info Section */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px', zIndex: 1 }}>
           <div
@@ -215,19 +198,16 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
                 fontSize: '0.96rem',
                 fontWeight: 800,
                 color: '#ffffff',
-                letterSpacing: '-0.2px'
+                letterSpacing: '-0.2px',
+                transform: 'translateX(9px)'
               }}
             >
-              {playerStatus.completed ? (
-                <span>Cleared in {playerTimeSec}s • Tap to improve!</span>
-              ) : (
-                <span>3-Image Daily Sequence • Never Repeated</span>
-              )}
+              <span>3-Image Daily Sequence • Never Repeated</span>
             </div>
           </div>
         </div>
 
-        {/* Right Side: time to beat before completion, top three after completion */}
+        {/* Right Side: top time to beat */}
         <div
           style={{
             display: 'flex',
@@ -260,7 +240,7 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
               }}
             >
               <Trophy size={11} color="var(--accent-gold)" />
-              {playerStatus.completed ? 'Top 3 Today' : 'Time to Beat'}
+              {playerStatus.completed ? 'Top Time' : 'Time to Beat'}
             </div>
 
             <div
@@ -272,9 +252,7 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
                 textShadow: '0 0 10px rgba(0, 240, 255, 0.6)'
               }}
             >
-              {playerStatus.completed
-                ? (topThreeTimeLabels.length > 0 ? topThreeTimeLabels.join('  ·  ') : 'Loading...')
-                : `${timeToBeatSec}s`}
+              {`${topTimeSec}s`}
             </div>
           </div>
 

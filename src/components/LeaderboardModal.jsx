@@ -19,31 +19,45 @@ export default function LeaderboardModal({ isOpen, onClose, levelStats, totalSco
       justifyContent: 'center',
       padding: '20px'
     }}>
-      <div className="glass-panel" style={{
+      <div className="glass-panel modal-split-card" style={{
         maxWidth: '520px',
         width: '100%',
+        maxHeight: 'calc(100dvh - 32px)',
+        overflowY: 'auto',
         padding: '28px',
-        position: 'relative'
+        boxSizing: 'border-box',
+        position: 'relative',
+        '--modal-accent': 'var(--accent-gold)'
       }}>
         
         <button
           onClick={() => { sounds.playTap(); onClose(); }}
           style={{
             position: 'absolute',
-            top: 20,
-            right: 20,
-            background: 'none',
-            border: 'none',
+            top: 12,
+            right: 12,
+            background: 'rgba(255, 255, 255, 0.08)',
+            border: '1px solid var(--border-glass)',
             color: 'var(--text-muted)',
-            cursor: 'pointer'
+            borderRadius: '50%',
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 10
           }}
+          aria-label="Close"
         >
-          <X size={22} />
+          <X size={18} />
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-          <Trophy size={28} color="var(--accent-gold)" />
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>MY SPEEDRUN RECORDS</h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', paddingRight: '40px' }}>
+          <Trophy size={22} color="var(--accent-gold)" style={{ flexShrink: 0 }} />
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0, letterSpacing: '0.5px', color: '#fff' }}>
+            MY SPEEDRUN RECORDS
+          </h2>
         </div>
 
         {/* Total Score Banner */}
