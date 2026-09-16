@@ -1,8 +1,8 @@
 {
   "exportedAt": "2026-08-24T20:53:38.892Z",
   "summary": {
-    "totalCurated": 72,
-    "approvedCount": 179,
+    "totalCurated": 288,
+    "approvedCount": 104,
     "dismissedCount": 194,
     "wrongDifficultyCount": 0
   },
@@ -28,17 +28,12 @@
     "ai_macro_machinist_001",
     "ai_macro_electronics_001",
     "ai_macro_woodcarver_001",
-    "ai_macro_chef_knife_001",
-    "ai_macro_cartography_001",
     "ai_macro_camera_optics_001",
-    "ai_macro_tea_ceremony_001",
-    "ai_macro_vintage_radio_001",
     "method1_photo_leathercraft_001",
     "method1_photo_electronics_001",
     "method2_macro_miniature_001",
     "method1_photo_artist_cap_001",
     "method2_macro_stained_glass_001",
-    "fresh_photo_leathercraft_001",
     "method1_photo_woodworking_screw_001",
     "method1_photo_watchmaker_gear_001",
     "easy_craft_001",
@@ -74,107 +69,37 @@
     "photo_repair_hardware_002",
     "photo_strategy_pieces_002",
     "ai_macro_spice_bazaar_001",
-    "ai_macro_sewing_notions_001",
     "ai_macro_watch_escapement_001",
     "ai_macro_stained_glass_001",
-    "hyper_synth_logic_board_002",
-    "artisan_electronics_workbench_001",
     "semantic_tailor_pincushion_needle_003",
-    "adaptive_tailor_green_spool_001",
-    "adaptive_workshop_utility_knife_002",
     "adaptive_workshop_screwdriver_grip_003",
-    "adaptive_tailor_red_spool_004",
     "adaptive_tailor_pearl_notion_005",
     "adaptive_tailor_sewing_notion_amber_007",
-    "adaptive_workshop_tape_measure_lock_008",
     "adaptive_tailor_crimson_thread_spool_009",
-    "scene_tailor_notions_spool_008",
-    "scene_master_workbench_utility_knife_009",
     "scene_retro_gaming_cartridges_017",
-    "scene_electronics_motherboard_rail_007",
-    "scene_tailor_pincushion_needle_019",
     "scene_workshop_tape_measure_slider_020",
-    "goldilocks_ai_watchmaker_parts_002",
-    "goldilocks_photo_artist_oil_pastels_004",
     "goldilocks_photo_camp_bushcraft_table_005",
-    "goldilocks_photo_tailor_notions_spool_006",
     "goldilocks_photo_retro_gaming_cartridges_008",
-    "goldilocks_ai_sewing_notions_001",
     "goldilocks_ai_retro_gaming_004",
-    "goldilocks_ai_leathercraft_005",
-    "goldilocks_ai_woodworking_bench_008",
     "goldilocks_ai_watchmaker_parts_010",
-    "goldilocks_hard_ai_woodworking_pencil_008",
-    "goldilocks_hard_ai_expedition_toggle_010",
     "unified_ai_expedition_remove_008",
-    "dense_ai_watchmaker_gear_add_002",
     "dense_ai_retro_cart_add_006",
-    "dense_ai_artist_pastel_remove_007",
-    "dense_ai_woodworking_chisel_recolor_008",
-    "dense_ai_leather_punch_add_009",
     "verified_m_ai_electronics_add_003",
     "verified_m_ai_artist_recolor_005",
-    "photo_boardgame_recolor_003",
     "photo_enamel_pins_recolor_008",
-    "photo_succulents_recolor_010",
-    "photo_marbles_calibrated_001",
-    "photo_buttons_calibrated_002",
-    "photo_boardgame_calibrated_003",
     "photo_enamel_pins_calibrated_008",
-    "photo_spices_calibrated_009",
-    "photo_succulents_calibrated_010",
-    "photo_unique_seashells_001",
-    "photo_unique_gardening_004",
-    "photo_unique_sewing_005",
-    "photo_unique_bakery_006",
-    "photo_fresh_pencils_002",
     "photo_fresh_crayons_003",
-    "photo_fresh_watchmaker_008",
     "photo_fresh_stained_glass_009",
-    "photo_c_spices_004",
-    "photo_c_seeds_010",
-    "fresh_artist_desk_flatlay_005",
-    "hyper_dense_synth_pcb_002",
     "hyper_dense_cyber_circuit_008",
-    "dense_crowd_micro_circuitry_003",
     "dense_crowd_tailor_workbench_007",
-    "goldilocks_pipe_v2_electronics_add_003",
-    "goldilocks_pipe_v2_artist_recolor_005",
-    "goldilocks_pipe_v2_woodworking_recolor_006",
     "goldilocks_pipe_v2_retro_recolor_007",
-    "goldilocks_pipe_v2_leathercraft_recolor_009",
-    "goldilocks_pipe_v2_miniature_recolor_010",
-    "prod_v4_dense_boardgame",
-    "prod_v4_dense_buttons",
-    "prod_v4_dense_marbles",
-    "prod_v4_dense_spices",
-    "prod_v4_unique_gardening",
-    "prod_v4_unique_palette",
-    "prod_v4_ai_electronics",
-    "prod_v4_ai_mechanic",
     "prod_v4_ai_artist",
-    "prod_v4_ai_expedition",
-    "prod_v4_ai_leathercraft",
-    "prod_v4_ai_miniature",
     "prod_v4_ai_retrogaming",
     "prod_v4_var2_dense_boardgame",
     "prod_v4_var2_dense_buttons",
     "prod_v4_var2_dense_spices",
     "prod_v4_var2_dense_succulents",
     "prod_v4_var2_unique_bushcraft",
-    "prod_v4_var2_unique_miniatures",
-    "prod_v4_var2_unique_palette",
-    "prod_v4_var2_unique_seashells",
-    "prod_v4_var2_unique_sewing",
-    "prod_v4_var2_unique_woodworking",
-    "prod_v4_var2_ai_mechanic",
-    "prod_v4_var2_ai_sewing",
-    "prod_v4_dense_succulents",
-    "prod_v4_var2_dense_watch_parts",
-    "prod_v4_var2_unique_pencils",
-    "prod_v4_var2_ai_woodworking",
-    "pipe_v3_watchmaker_recolor_002",
-    "pipe_v3_electronics_add_003",
     "pipe_v3_artist_recolor_006",
     "pipe_v3_retro_reorder_007",
     "fresh_ai_heirloom_spices_botanical_009",
@@ -858,54 +783,6 @@
       }
     },
     {
-      "variantImage": "levels/photo-pairs/ai_macro_chef_knife_001/variant.png",
-      "title": "Culinary Herb & Prep Station",
-      "pack": "Find the Sniper",
-      "diffs": [
-        {
-          "y": 50.3,
-          "id": 1,
-          "hint": "Spot the whole garlic clove near the rosemary cutting board.",
-          "x": 50.1,
-          "radius": 8.5
-        }
-      ],
-      "originalImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
-      "totalDifferences": 1,
-      "id": "ai_macro_chef_knife_001",
-      "baseImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
-      "category": "Photography",
-      "difficulty": "Medium",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "category": "Photography",
-      "baseImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
-      "diffs": [
-        {
-          "y": 50.2,
-          "id": 1,
-          "hint": "Check the brass divider caliper near the sea chart compass.",
-          "x": 50.1,
-          "radius": 8.5
-        }
-      ],
-      "id": "ai_macro_cartography_001",
-      "pack": "Find the Sniper",
-      "packId": "find_the_sniper",
-      "originalImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
-      "variantImage": "levels/photo-pairs/ai_macro_cartography_001/variant.png",
-      "totalDifferences": 1,
-      "title": "Vintage Cartographer Sea Chart",
-      "difficulty": "Medium",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
       "diffs": [
         {
           "y": 50,
@@ -925,54 +802,6 @@
       "packId": "find_the_sniper",
       "id": "ai_macro_camera_optics_001",
       "originalImage": "levels/photo-pairs/ai_macro_camera_optics_001/original.png",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "baseImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/original.png",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/variant.png",
-      "id": "ai_macro_tea_ceremony_001",
-      "pack": "Find the Sniper",
-      "diffs": [
-        {
-          "y": 51.6,
-          "id": 1,
-          "hint": "Notice the bamboo tea needle pick resting by the porcelain gaiwan.",
-          "x": 49.5,
-          "radius": 8.5
-        }
-      ],
-      "totalDifferences": 1,
-      "difficulty": "Hard",
-      "title": "Traditional Gongfu Tea Board",
-      "originalImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/original.png",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "totalDifferences": 1,
-      "diffs": [
-        {
-          "y": 50.6,
-          "id": 1,
-          "hint": "Examine the silver contact pin on the vintage socket.",
-          "x": 49.9,
-          "radius": 8.5
-        }
-      ],
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/ai_macro_vintage_radio_001/variant.png",
-      "originalImage": "levels/photo-pairs/ai_macro_vintage_radio_001/original.png",
-      "pack": "Find the Sniper",
-      "title": "Vacuum Tube Audio Assembly",
-      "packId": "find_the_sniper",
-      "baseImage": "levels/photo-pairs/ai_macro_vintage_radio_001/original.png",
-      "id": "ai_macro_vintage_radio_001",
-      "difficulty": "Hard",
       "curationMeta": {
         "status": "approved"
       }
@@ -1086,29 +915,6 @@
           "radius": 8.5,
           "description": "Stained glass color shift on central petal",
           "hint": "Look closely at the central stained glass flower section"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "fresh_photo_leathercraft_001",
-      "title": "Bespoke Leathercraft Saddle Stitch Tooling",
-      "category": "Photography",
-      "pack": "Photography",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "baseImage": "/levels/fresh_photo_leathercraft_001_base.jpg",
-      "variantImage": "/levels/fresh_photo_leathercraft_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 48.3,
-          "y": 53.7,
-          "radius": 7.9,
-          "description": "Pricking iron punch on cutting mat",
-          "hint": "Examine the leatherworking tools on the mat"
         }
       ],
       "curationMeta": {
@@ -1890,30 +1696,6 @@
       }
     },
     {
-      "id": "ai_macro_sewing_notions_001",
-      "title": "Couture Tailor Notions Box",
-      "packId": "find_the_sniper",
-      "difficulty": "Easy",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/ai_macro_sewing_notions_001/variant.png",
-      "pack": "Find the Sniper",
-      "baseImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
-      "diffs": [
-        {
-          "y": 49.9,
-          "id": 1,
-          "hint": "Find the carved mother-of-pearl button in the sewing tray.",
-          "x": 50.3,
-          "radius": 8.5
-        }
-      ],
-      "originalImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
-      "totalDifferences": 1,
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
       "id": "ai_macro_watch_escapement_001",
       "title": "Horology Watch Escapement & Ruby Jewels",
       "category": "Real Photo",
@@ -2045,23 +1827,7 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_macro_chef_knife_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
-    "ai_macro_cartography_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
     "ai_macro_camera_optics_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
-    "ai_macro_tea_ceremony_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
-    "ai_macro_vintage_radio_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -2082,10 +1848,6 @@
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
     "method2_macro_stained_glass_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
-    "fresh_photo_leathercraft_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -2229,10 +1991,6 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_macro_sewing_notions_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
     "ai_macro_watch_escapement_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
@@ -2240,14 +1998,6 @@
     "ai_macro_stained_glass_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
-    "hyper_synth_logic_board_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:58:57.785Z"
-    },
-    "artisan_electronics_workbench_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:59:04.048Z"
     },
     "semantic_workshop_screwdriver_grip_001": {
       "status": "dismissed",
@@ -2297,21 +2047,9 @@
       "status": "dismissed",
       "updatedAt": "2026-08-24T21:28:20.008Z"
     },
-    "adaptive_tailor_green_spool_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T21:38:15.344Z"
-    },
-    "adaptive_workshop_utility_knife_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T21:38:21.470Z"
-    },
     "adaptive_workshop_screwdriver_grip_003": {
       "status": "approved",
       "updatedAt": "2026-08-24T21:38:22.803Z"
-    },
-    "adaptive_tailor_red_spool_004": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T21:38:28.651Z"
     },
     "adaptive_tailor_pearl_notion_005": {
       "status": "approved",
@@ -2324,10 +2062,6 @@
     "adaptive_tailor_sewing_notion_amber_007": {
       "status": "approved",
       "updatedAt": "2026-08-24T21:38:43.858Z"
-    },
-    "adaptive_workshop_tape_measure_lock_008": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T21:38:46.967Z"
     },
     "adaptive_tailor_crimson_thread_spool_009": {
       "status": "approved",
@@ -2365,14 +2099,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-24T23:49:33.606Z"
     },
-    "scene_tailor_notions_spool_008": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T23:49:39.863Z"
-    },
-    "scene_master_workbench_utility_knife_009": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T23:49:44.745Z"
-    },
     "scene_retro_gaming_cartridges_017": {
       "status": "approved",
       "updatedAt": "2026-08-24T23:49:53.730Z"
@@ -2380,14 +2106,6 @@
     "scene_coin_collector_tray_018": {
       "status": "dismissed",
       "updatedAt": "2026-08-24T23:49:56.146Z"
-    },
-    "scene_electronics_motherboard_rail_007": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T23:50:06.956Z"
-    },
-    "scene_tailor_pincushion_needle_019": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T23:50:16.661Z"
     },
     "scene_workshop_tape_measure_slider_020": {
       "status": "approved",
@@ -2401,25 +2119,13 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T00:19:07.905Z"
     },
-    "goldilocks_ai_watchmaker_parts_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T00:19:14.035Z"
-    },
     "goldilocks_ai_mechanic_workbench_003": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T00:19:35.745Z"
     },
-    "goldilocks_photo_artist_oil_pastels_004": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T00:19:52.368Z"
-    },
     "goldilocks_photo_camp_bushcraft_table_005": {
       "status": "approved",
       "updatedAt": "2026-08-25T00:19:59.627Z"
-    },
-    "goldilocks_photo_tailor_notions_spool_006": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T00:20:21.806Z"
     },
     "goldilocks_photo_retro_gaming_cartridges_008": {
       "status": "approved",
@@ -2428,10 +2134,6 @@
     "goldilocks_photo_coin_collector_tray_009": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T00:20:43.002Z"
-    },
-    "goldilocks_ai_sewing_notions_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T00:31:56.092Z"
     },
     "goldilocks_ai_gardener_potting_002": {
       "status": "dismissed",
@@ -2445,10 +2147,6 @@
       "status": "approved",
       "updatedAt": "2026-08-25T00:32:36.619Z"
     },
-    "goldilocks_ai_leathercraft_005": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T00:32:51.396Z"
-    },
     "goldilocks_ai_miniature_painter_006": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T00:33:01.921Z"
@@ -2456,10 +2154,6 @@
     "goldilocks_ai_expedition_bushcraft_007": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T00:33:16.206Z"
-    },
-    "goldilocks_ai_woodworking_bench_008": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T00:33:22.370Z"
     },
     "goldilocks_ai_electronics_cap_009": {
       "status": "dismissed",
@@ -2497,17 +2191,9 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T00:38:07.564Z"
     },
-    "goldilocks_hard_ai_woodworking_pencil_008": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T00:38:16.800Z"
-    },
     "goldilocks_hard_ai_retro_gaming_cart_009": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T00:38:22.843Z"
-    },
-    "goldilocks_hard_ai_expedition_toggle_010": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T00:38:33.387Z"
     },
     "unified_ai_sewing_remove_001": {
       "status": "dismissed",
@@ -2553,10 +2239,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T01:20:43.704Z"
     },
-    "dense_ai_watchmaker_gear_add_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T01:23:24.986Z"
-    },
     "dense_ai_mechanic_tool_recolor_003": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T01:21:04.061Z"
@@ -2572,18 +2254,6 @@
     "dense_ai_retro_cart_add_006": {
       "status": "approved",
       "updatedAt": "2026-08-25T01:22:50.956Z"
-    },
-    "dense_ai_artist_pastel_remove_007": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T01:23:00.041Z"
-    },
-    "dense_ai_woodworking_chisel_recolor_008": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T01:23:05.679Z"
-    },
-    "dense_ai_leather_punch_add_009": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T01:23:11.762Z"
     },
     "dense_ai_gardener_tag_recolor_010": {
       "status": "dismissed",
@@ -2689,10 +2359,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T05:39:51.228Z"
     },
-    "photo_boardgame_recolor_003": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T05:40:02.163Z"
-    },
     "photo_candies_recolor_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T05:40:49.728Z"
@@ -2717,22 +2383,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T05:41:26.031Z"
     },
-    "photo_succulents_recolor_010": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T05:41:33.428Z"
-    },
-    "photo_marbles_calibrated_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T05:45:56.397Z"
-    },
-    "photo_buttons_calibrated_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T05:46:07.940Z"
-    },
-    "photo_boardgame_calibrated_003": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T05:46:20.325Z"
-    },
     "photo_candies_calibrated_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T05:47:17.646Z"
@@ -2753,18 +2403,6 @@
       "status": "approved",
       "updatedAt": "2026-08-25T05:48:04.431Z"
     },
-    "photo_spices_calibrated_009": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T05:48:11.949Z"
-    },
-    "photo_succulents_calibrated_010": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T05:48:18.988Z"
-    },
-    "photo_unique_seashells_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:04:40.586Z"
-    },
     "photo_unique_palette_002": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:04:59.571Z"
@@ -2772,18 +2410,6 @@
     "photo_unique_retrogaming_003": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:05:08.111Z"
-    },
-    "photo_unique_gardening_004": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:05:18.297Z"
-    },
-    "photo_unique_sewing_005": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:05:31.400Z"
-    },
-    "photo_unique_bakery_006": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:05:41.316Z"
     },
     "photo_unique_leather_007": {
       "status": "dismissed",
@@ -2805,10 +2431,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:24:15.106Z"
     },
-    "photo_fresh_pencils_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:24:33.813Z"
-    },
     "photo_fresh_crayons_003": {
       "status": "approved",
       "updatedAt": "2026-08-25T06:24:40.801Z"
@@ -2828,10 +2450,6 @@
     "photo_fresh_mechanic_007": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:25:12.757Z"
-    },
-    "photo_fresh_watchmaker_008": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:25:25.831Z"
     },
     "photo_fresh_stained_glass_009": {
       "status": "approved",
@@ -2853,10 +2471,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:44:16.958Z"
     },
-    "photo_c_spices_004": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:44:24.367Z"
-    },
     "photo_c_citrus_005": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:44:29.802Z"
@@ -2876,10 +2490,6 @@
     "photo_c_paint_tubes_009": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:44:51.945Z"
-    },
-    "photo_c_seeds_010": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:46:34.544Z"
     },
     "fresh_stacked_archive_books_011": {
       "status": "dismissed",
@@ -2937,10 +2547,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T03:49:21.433Z"
     },
-    "fresh_artist_desk_flatlay_005": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T03:49:37.082Z"
-    },
     "fresh_flea_market_trinkets_006": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T03:49:40.947Z"
@@ -2964,10 +2570,6 @@
     "hyper_dense_motherboard_ic_001": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T03:50:11.134Z"
-    },
-    "hyper_dense_synth_pcb_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T03:50:16.686Z"
     },
     "hyper_dense_botanical_spices_003": {
       "status": "dismissed",
@@ -3009,10 +2611,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T03:50:43.213Z"
     },
-    "dense_crowd_micro_circuitry_003": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T03:50:48.707Z"
-    },
     "dense_crowd_dried_botanicals_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T03:50:50.719Z"
@@ -3049,21 +2647,9 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T04:17:25.352Z"
     },
-    "goldilocks_pipe_v2_electronics_add_003": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T04:17:32.139Z"
-    },
     "goldilocks_pipe_v2_gardener_remove_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T04:17:38.125Z"
-    },
-    "goldilocks_pipe_v2_artist_recolor_005": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T04:17:45.382Z"
-    },
-    "goldilocks_pipe_v2_woodworking_recolor_006": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T04:17:53.379Z"
     },
     "goldilocks_pipe_v2_retro_recolor_007": {
       "status": "approved",
@@ -3072,22 +2658,6 @@
     "goldilocks_pipe_v2_expedition_remove_008": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T04:19:06.108Z"
-    },
-    "goldilocks_pipe_v2_leathercraft_recolor_009": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T04:19:11.183Z"
-    },
-    "goldilocks_pipe_v2_miniature_recolor_010": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T04:19:19.454Z"
-    },
-    "prod_v4_dense_boardgame": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:28:03.319Z"
-    },
-    "prod_v4_dense_buttons": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:28:13.235Z"
     },
     "prod_v4_dense_candies": {
       "status": "dismissed",
@@ -3101,14 +2671,6 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:28:26.833Z"
     },
-    "prod_v4_dense_marbles": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:28:34.962Z"
-    },
-    "prod_v4_dense_spices": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:28:43.608Z"
-    },
     "prod_v4_unique_bakery": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:28:48.024Z"
@@ -3117,17 +2679,9 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:28:55.306Z"
     },
-    "prod_v4_unique_gardening": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:29:08.062Z"
-    },
     "prod_v4_unique_miniatures": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:29:12.436Z"
-    },
-    "prod_v4_unique_palette": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:29:19.962Z"
     },
     "prod_v4_unique_seashells": {
       "status": "dismissed",
@@ -3136,14 +2690,6 @@
     "prod_v4_unique_sewing": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:29:30.012Z"
-    },
-    "prod_v4_ai_electronics": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:29:36.194Z"
-    },
-    "prod_v4_ai_mechanic": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:29:41.583Z"
     },
     "prod_v4_ai_watchmaker": {
       "status": "dismissed",
@@ -3161,21 +2707,9 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:30:01.760Z"
     },
-    "prod_v4_ai_expedition": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:30:12.896Z"
-    },
     "prod_v4_ai_gardener": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:30:26.753Z"
-    },
-    "prod_v4_ai_leathercraft": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:30:32.795Z"
-    },
-    "prod_v4_ai_miniature": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:30:45.281Z"
     },
     "prod_v4_ai_retrogaming": {
       "status": "approved",
@@ -3229,49 +2763,17 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:31:55.567Z"
     },
-    "prod_v4_var2_unique_miniatures": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:31:59.726Z"
-    },
-    "prod_v4_var2_unique_palette": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:32:07.561Z"
-    },
-    "prod_v4_var2_unique_seashells": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:32:17.350Z"
-    },
-    "prod_v4_var2_unique_sewing": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:32:22.234Z"
-    },
-    "prod_v4_var2_unique_woodworking": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:32:26.104Z"
-    },
     "prod_v4_var2_ai_electronics": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:32:36.021Z"
-    },
-    "prod_v4_var2_ai_mechanic": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:32:45.629Z"
     },
     "prod_v4_var2_ai_watchmaker": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:32:50.108Z"
     },
-    "prod_v4_var2_ai_sewing": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:32:54.780Z"
-    },
     "prod_v4_var2_ai_artist": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:32:58.089Z"
-    },
-    "prod_v4_dense_succulents": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:33:02.088Z"
     },
     "prod_v4_dense_watch_parts": {
       "status": "dismissed",
@@ -3285,33 +2787,13 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:33:16.011Z"
     },
-    "prod_v4_var2_dense_watch_parts": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:33:24.923Z"
-    },
-    "prod_v4_var2_unique_pencils": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:33:31.187Z"
-    },
     "prod_v4_var2_unique_retrogaming": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:33:34.623Z"
     },
-    "prod_v4_var2_ai_woodworking": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:33:38.338Z"
-    },
     "pipe_v3_sewing_remove_001": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T06:33:42.945Z"
-    },
-    "pipe_v3_watchmaker_recolor_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:33:50.215Z"
-    },
-    "pipe_v3_electronics_add_003": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T06:33:55.416Z"
     },
     "pipe_v3_gardener_remove_005": {
       "status": "dismissed",

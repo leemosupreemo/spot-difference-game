@@ -12,19 +12,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 38.8,
-        "y": 73.4,
-        "radius": 6.1,
+        "x": 50.0,
+        "y": 73.8,
+        "radius": 8.2,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 1
   },
@@ -41,19 +41,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 25.8,
-        "y": 55.3,
-        "radius": 5.3,
+        "x": 34.6,
+        "y": 55.2,
+        "radius": 7.1,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 2
   },
@@ -70,19 +70,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 97.9,
-        "y": 5.3,
-        "radius": 6.3,
+        "x": 97.6,
+        "y": 5.5,
+        "radius": 8.5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 3
   },
@@ -99,19 +99,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 64.8,
-        "y": 75.1,
-        "radius": 4.8,
+        "x": 52.7,
+        "y": 74.7,
+        "radius": 6.5,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 4
   },
@@ -128,19 +128,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 78.7,
-        "y": 55.4,
-        "radius": 6,
+        "x": 71.3,
+        "y": 55.9,
+        "radius": 8.1,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 5
   },
@@ -157,19 +157,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 24.6,
+        "x": 33.2,
         "y": 84.7,
-        "radius": 5.5,
+        "radius": 7.4,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_002",
     "sequence": 1
   },
@@ -186,19 +186,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 45.1,
+        "x": 50.0,
         "y": 46.9,
-        "radius": 4.5,
+        "radius": 6.0,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_002",
     "sequence": 2
   },
@@ -215,19 +215,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 29.1,
+        "x": 39.1,
         "y": 26.1,
-        "radius": 4.5,
+        "radius": 6.0,
         "description": "Single recolor difference",
         "hint": "Look closely for a recolor difference",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_002",
     "sequence": 3
   },
@@ -389,19 +389,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 91.3,
-        "y": 75.2,
-        "radius": 5.6,
+        "x": 88.1,
+        "y": 75.8,
+        "radius": 7.5,
         "description": "Single recolor difference",
         "hint": "Look closely near coordinates (91%, 76%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_003",
     "sequence": 4
   },
@@ -940,19 +940,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 93.6,
+        "x": 92.8,
         "y": 92.5,
-        "radius": 5,
+        "radius": 5.6,
         "description": "Single reorder difference",
         "hint": "Look closely near coordinates (94%, 92%)",
         "operation": "reorder"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_007",
     "sequence": 3
   },
@@ -969,19 +969,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 76.5,
+        "x": 73.6,
         "y": 17.4,
-        "radius": 5.8,
+        "radius": 6.5,
         "description": "Single reorder difference",
         "hint": "Look closely near coordinates (76%, 17%)",
         "operation": "reorder"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_007",
     "sequence": 4
   },
@@ -998,19 +998,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 53.6,
-        "y": 4.1,
-        "radius": 4.6,
+        "x": 50.0,
+        "y": 3.9,
+        "radius": 5.2,
         "description": "Single recolor difference",
         "hint": "Look closely near coordinates (54%, 4%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_007",
     "sequence": 5
   },
@@ -1027,19 +1027,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 74.9,
-        "y": 44.7,
-        "radius": 5,
+        "x": 71.9,
+        "y": 44.8,
+        "radius": 5.6,
         "description": "Single reorder difference",
         "hint": "Look closely near coordinates (75%, 45%)",
         "operation": "reorder"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_008",
     "sequence": 1
   },
@@ -1056,19 +1056,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 91.1,
+        "x": 90.0,
         "y": 79.7,
-        "radius": 5.2,
+        "radius": 5.8,
         "description": "Single reorder difference",
         "hint": "Look closely near coordinates (91%, 80%)",
         "operation": "reorder"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_008",
     "sequence": 2
   },
@@ -1259,19 +1259,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 93.5,
+        "x": 92.7,
         "y": 77.2,
-        "radius": 5.9,
+        "radius": 6.6,
         "description": "Single reorder difference",
         "hint": "Look closely near coordinates (93%, 77%)",
         "operation": "reorder"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_009",
     "sequence": 4
   },
@@ -1288,19 +1288,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 70.4,
-        "y": 26,
-        "radius": 5,
+        "x": 60.0,
+        "y": 25.8,
+        "radius": 6.7,
         "description": "Single recolor difference",
         "hint": "Look closely near coordinates (70%, 26%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_009",
     "sequence": 5
   },
@@ -1317,19 +1317,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54.6,
-        "y": 57,
-        "radius": 6,
+        "x": 50.0,
+        "y": 57.1,
+        "radius": 8.1,
         "description": "Single reorder difference",
         "hint": "Look closely near coordinates (55%, 57%)",
         "operation": "reorder"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_010",
     "sequence": 1
   },
@@ -1346,19 +1346,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 44.3,
-        "y": 36.7,
-        "radius": 5.7,
+        "x": 50.0,
+        "y": 36.8,
+        "radius": 7.7,
         "description": "Single recolor difference",
         "hint": "Look closely near coordinates (44%, 37%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_010",
     "sequence": 2
   },
@@ -1591,17 +1591,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.5,
-        "y": 53.7,
-        "radius": 7.1,
+        "x": 50.0,
+        "y": 53.6,
+        "radius": 8.0,
         "hint": "Look closely near coordinates (48%, 54%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 1
   },
@@ -1618,17 +1618,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 60.2,
+        "x": 55.4,
         "y": 80.9,
-        "radius": 5.8,
+        "radius": 6.5,
         "hint": "Look closely near coordinates (60%, 81%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 2
   },
@@ -1645,17 +1645,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.4,
-        "y": 44,
-        "radius": 7.8,
+        "x": 38.5,
+        "y": 44.1,
+        "radius": 8.7,
         "hint": "Look closely near coordinates (34%, 44%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 3
   },
@@ -1672,17 +1672,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 74.9,
-        "y": 44.7,
-        "radius": 5.3,
+        "x": 71.9,
+        "y": 44.8,
+        "radius": 5.9,
         "hint": "Look closely near coordinates (75%, 45%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 4
   },
@@ -1699,17 +1699,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 86.4,
+        "x": 81.7,
         "y": 86.6,
-        "radius": 7.7,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (86%, 87%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 5
   },
@@ -1726,17 +1726,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 36.3,
-        "y": 26.6,
-        "radius": 9.2,
+        "x": 48.8,
+        "y": 26.5,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (36%, 27%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 1
   },
@@ -1753,17 +1753,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 70.2,
+        "x": 60.0,
         "y": 25.8,
-        "radius": 5.8,
+        "radius": 7.8,
         "hint": "Look closely near coordinates (70%, 26%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 2
   },
@@ -1780,17 +1780,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 78,
+        "x": 70.4,
         "y": 33.6,
-        "radius": 5.1,
+        "radius": 6.9,
         "hint": "Look closely near coordinates (78%, 34%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 3
   },
@@ -1807,17 +1807,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 91.5,
+        "x": 88.6,
         "y": 37.5,
-        "radius": 5.1,
+        "radius": 6.9,
         "hint": "Look closely near coordinates (92%, 38%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 4
   },
@@ -1834,17 +1834,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 1.8,
-        "y": 93.9,
-        "radius": 7.1,
+        "x": 2.4,
+        "y": 93.8,
+        "radius": 9.5,
         "hint": "Look closely near coordinates (2%, 94%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 5
   },
@@ -1861,17 +1861,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 20.5,
+        "x": 27.6,
         "y": 63.3,
-        "radius": 6.2,
+        "radius": 8.3,
         "hint": "Look closely near coordinates (21%, 63%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 1
   },
@@ -1888,17 +1888,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.4,
-        "y": 50.1,
-        "radius": 6.8,
+        "x": 50.0,
+        "y": 50.2,
+        "radius": 9.1,
         "hint": "Look closely near coordinates (50%, 50%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 2
   },
@@ -1915,17 +1915,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 60.8,
+        "x": 50.0,
         "y": 15.4,
-        "radius": 9.7,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (61%, 15%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 3
   },
@@ -1942,17 +1942,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 2.8,
+        "x": 3.2,
         "y": 15.2,
-        "radius": 5.5,
+        "radius": 6.2,
         "hint": "Look closely near coordinates (3%, 15%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 4
   },
@@ -1969,17 +1969,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 49.9,
-        "y": 91.7,
-        "radius": 5,
+        "x": 50.0,
+        "y": 91.6,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (50%, 92%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 5
   },
@@ -1996,17 +1996,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 27.6,
+        "x": 37.1,
         "y": 73.2,
-        "radius": 11.5,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (28%, 73%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 1
   },
@@ -2023,17 +2023,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 42.9,
+        "x": 50.0,
         "y": 84.6,
-        "radius": 9.9,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (43%, 85%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 2
   },
@@ -2050,17 +2050,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 17.5,
-        "y": 71.5,
-        "radius": 9,
+        "x": 23.5,
+        "y": 71.6,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (17%, 72%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 3
   },
@@ -2077,17 +2077,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 9.8,
-        "y": 43.6,
-        "radius": 9,
+        "x": 13.1,
+        "y": 43.7,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (10%, 44%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 4
   },
@@ -2104,17 +2104,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.5,
-        "y": 24.8,
-        "radius": 6.7,
+        "x": 38.6,
+        "y": 24.9,
+        "radius": 7.5,
         "hint": "Look closely near coordinates (34%, 25%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 5
   },
@@ -2131,17 +2131,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 93.8,
-        "y": 77.8,
-        "radius": 6.9,
+        "x": 93.0,
+        "y": 77.7,
+        "radius": 7.7,
         "hint": "Look closely near coordinates (94%, 78%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 1
   },
@@ -2158,17 +2158,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 1.5,
+        "x": 1.7,
         "y": 5.1,
-        "radius": 7,
+        "radius": 7.8,
         "hint": "Look closely near coordinates (2%, 5%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 2
   },
@@ -2185,17 +2185,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 26.1,
-        "y": 61.6,
-        "radius": 6.9,
+        "x": 35.1,
+        "y": 61.7,
+        "radius": 9.3,
         "hint": "Look closely near coordinates (26%, 62%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 3
   },
@@ -2212,17 +2212,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 44,
+        "x": 50.0,
         "y": 38.3,
-        "radius": 5,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (44%, 38%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 4
   },
@@ -2239,17 +2239,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 45.1,
+        "x": 50.0,
         "y": 48.6,
-        "radius": 5,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (45%, 49%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 5
   },
@@ -2266,17 +2266,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 38.4,
+        "x": 50.0,
         "y": 32.9,
-        "radius": 6.2,
+        "radius": 8.3,
         "hint": "Look closely near coordinates (38%, 33%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 1
   },
@@ -2293,17 +2293,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 66.8,
+        "x": 55.4,
         "y": 84.6,
-        "radius": 9,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (67%, 85%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 2
   },
@@ -2320,17 +2320,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 71.5,
+        "x": 61.7,
         "y": 22.5,
-        "radius": 5.4,
+        "radius": 7.3,
         "hint": "Look closely near coordinates (71%, 23%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 3
   },
@@ -2347,17 +2347,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 15.6,
-        "y": 36.2,
-        "radius": 6.6,
+        "x": 21.0,
+        "y": 36.4,
+        "radius": 8.9,
         "hint": "Look closely near coordinates (16%, 36%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 4
   },
@@ -2373,17 +2373,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.5,
-        "y": 49.4,
-        "radius": 9,
+        "x": 50.0,
+        "y": 48.6,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (51%, 49%)"
       }
     ],
     "dimensions": {
-      "width": 1400,
-      "height": 934
+      "width": 1244,
+      "height": 933
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 5
   },
@@ -2399,17 +2399,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.4,
+        "x": 50.0,
         "y": 34.1,
-        "radius": 9,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (48%, 34%)"
       }
     ],
     "dimensions": {
-      "width": 1400,
+      "width": 1244,
       "height": 933
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_018",
     "sequence": 1
   },
@@ -2427,17 +2427,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 23.9,
+        "x": 27.1,
         "y": 79.6,
-        "radius": 10.4,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (24%, 80%)"
       }
     ],
     "dimensions": {
-      "width": 1200,
-      "height": 800
+      "width": 1064,
+      "height": 798
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_018",
     "sequence": 2
   },
@@ -2455,8 +2455,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 81.9,
-        "y": 30.1,
+        "x": 81.8,
+        "y": 50.0,
         "radius": 7.3,
         "description": "Single sorting dish of botanical seeds shifted in warmth",
         "hint": "Look closely near coordinates (82%, 30%)",
@@ -2465,9 +2465,9 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 1600
+      "height": 900
     },
-    "aspectRatio": "1200:1600",
+    "aspectRatio": "4:3",
     "setId": "photo_set_018",
     "sequence": 3
   },
@@ -2485,17 +2485,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 30.8,
-        "y": 84.4,
-        "radius": 9.4,
+        "x": 34.5,
+        "y": 84.3,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (31%, 84%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_018",
     "sequence": 4
   },
@@ -2543,17 +2543,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 18.6,
-        "y": 51.3,
-        "radius": 5.2,
+        "x": 25.0,
+        "y": 51.4,
+        "radius": 7.0,
         "hint": "Look closely near coordinates (19%, 51%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 1
   },
@@ -2599,19 +2599,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 65.9,
-        "y": 83.1,
-        "radius": 6.2,
+        "x": 61.9,
+        "y": 83.0,
+        "radius": 6.9,
         "description": "Single sea glass pebble shifted from ocean emerald to cobalt azure",
         "hint": "Look closely near coordinates (66%, 83%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 3
   },
@@ -2629,17 +2629,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35,
+        "x": 47.1,
         "y": 29.4,
-        "radius": 9,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (35%, 29%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 4
   },
@@ -2657,17 +2657,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 33.3,
+        "x": 44.8,
         "y": 79.3,
-        "radius": 5,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (33%, 79%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 5
   },
@@ -2685,19 +2685,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 44.4,
-        "y": 36.5,
-        "radius": 6.8,
+        "x": 50.0,
+        "y": 36.9,
+        "radius": 9.1,
         "description": "Single gourmet pastry macaron or berry garnish shifted in color",
         "hint": "Look closely near coordinates (44%, 37%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 1
   },
@@ -2715,19 +2715,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 29.3,
-        "y": 78,
-        "radius": 6,
+        "x": 32.8,
+        "y": 77.8,
+        "radius": 6.7,
         "description": "Single swirling glass marble shifted from emerald green to ocean turquoise",
         "hint": "Look closely near coordinates (29%, 78%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 2
   },
@@ -2745,17 +2745,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 76.3,
-        "y": 28.4,
-        "radius": 5,
+        "x": 73.5,
+        "y": 28.5,
+        "radius": 5.6,
         "hint": "Look closely near coordinates (76%, 28%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 3
   },
@@ -2773,17 +2773,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 8.5,
-        "y": 46.2,
-        "radius": 5,
+        "x": 9.5,
+        "y": 46.3,
+        "radius": 5.6,
         "hint": "Look closely near coordinates (9%, 46%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 4
   },
@@ -2801,19 +2801,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 61.2,
-        "y": 26.8,
-        "radius": 5.3,
+        "x": 56.6,
+        "y": 26.9,
+        "radius": 5.9,
         "description": "Single whole spice pod shifted in warmth",
         "hint": "Look closely near coordinates (61%, 27%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 5
   },
@@ -2831,19 +2831,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 79.4,
-        "y": 63.2,
-        "radius": 6.3,
+        "x": 77.0,
+        "y": 63.1,
+        "radius": 7.1,
         "description": "Single succulent rosette shifted from sage green to dusty rose",
         "hint": "Look closely near coordinates (80%, 63%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 1
   },
@@ -2861,17 +2861,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 8.5,
-        "y": 46.2,
-        "radius": 5,
+        "x": 9.6,
+        "y": 46.3,
+        "radius": 5.6,
         "hint": "Look closely near coordinates (9%, 46%)"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 2
   },
@@ -2889,19 +2889,19 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.5,
+        "x": 38.6,
         "y": 24.9,
-        "radius": 6.8,
+        "radius": 7.6,
         "description": "Single succulent rosette shifted from pastel green to vivid violet",
         "hint": "Look closely near coordinates (34%, 25%)",
         "operation": "recolor"
       }
     ],
     "dimensions": {
-      "width": 1264,
-      "height": 848
+      "width": 1128,
+      "height": 846
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 3
   },
@@ -2918,17 +2918,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 45,
+        "x": 50.0,
         "y": 39.7,
-        "radius": 5,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (45%, 40%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 4
   },
@@ -2945,18 +2945,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 48.7,
-        "y": 14.1,
-        "radius": 8.4,
+        "x": 50.0,
+        "y": 14.2,
+        "radius": 10.0,
         "description": "Single soft pastel stick missing from the wooden easel tray",
         "hint": "Look closely near coordinates (49%, 14%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 5
   },
@@ -2973,17 +2973,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 46.2,
+        "x": 50.0,
         "y": 6.5,
-        "radius": 5,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (46%, 6%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 1
   },
@@ -3000,17 +3000,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 54,
+        "x": 50.0,
         "y": 53.9,
-        "radius": 5,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (54%, 54%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 2
   },
@@ -3026,17 +3026,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 46.2,
+        "x": 50.0,
         "y": 6.5,
-        "radius": 5,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (46%, 6%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 3
   },
@@ -3052,17 +3052,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 80.5,
-        "y": 64,
-        "radius": 5,
+        "x": 73.8,
+        "y": 64.0,
+        "radius": 6.7,
         "hint": "Look closely near coordinates (80%, 64%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 4
   },
@@ -3078,18 +3078,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 35.2,
-        "y": 37.3,
-        "radius": 7.3,
+        "x": 47.2,
+        "y": 37.2,
+        "radius": 9.8,
         "description": "Single wooden thread spool cotton wrap shifted in CIELAB (preserving wound thread fibers)",
         "hint": "Look closely near coordinates (35%, 37%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 5
   },
@@ -3105,18 +3105,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 81.4,
+        "x": 75.1,
         "y": 22.8,
-        "radius": 5.6,
+        "radius": 7.5,
         "description": "Single waxed linen thread spool shifted in CIELAB (preserving thread twist)",
         "hint": "Look closely near coordinates (81%, 23%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_023",
     "sequence": 1
   },
@@ -3132,17 +3132,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 64.8,
+        "x": 52.7,
         "y": 12.6,
-        "radius": 9,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (65%, 13%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_023",
     "sequence": 2
   },
@@ -3158,18 +3158,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 59.6,
-        "y": 3.1,
-        "radius": 5.1,
+        "x": 50.0,
+        "y": 3.0,
+        "radius": 6.9,
         "description": "Single precision screwdriver color collar shifted in CIELAB (preserving knurled grip)",
         "hint": "Look closely near coordinates (60%, 3%)"
       }
     ],
     "dimensions": {
-      "width": 1376,
+      "width": 1024,
       "height": 768
     },
-    "aspectRatio": "16:9",
+    "aspectRatio": "4:3",
     "setId": "photo_set_023",
     "sequence": 3
   },
@@ -3185,18 +3185,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 55.5,
-        "y": 3.4,
-        "radius": 6.7,
+        "x": 50.0,
+        "y": 3.5,
+        "radius": 7.5,
         "description": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
         "hint": "Look closely near coordinates (56%, 4%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_023",
     "sequence": 4
   },
@@ -3212,18 +3212,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 85.6,
-        "y": 14,
-        "radius": 9,
+        "x": 83.7,
+        "y": 14.1,
+        "radius": 10.0,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
         "hint": "Look closely near coordinates (86%, 14%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_023",
     "sequence": 5
   },
@@ -3239,18 +3239,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.1,
-        "y": 71.3,
-        "radius": 8,
+        "x": 38.3,
+        "y": 71.2,
+        "radius": 9.0,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
         "hint": "Look closely near coordinates (34%, 71%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_024",
     "sequence": 1
   },
@@ -3266,18 +3266,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 32.4,
+        "x": 36.5,
         "y": 39.7,
-        "radius": 5.8,
+        "radius": 6.5,
         "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
         "hint": "Look closely near coordinates (32%, 40%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_024",
     "sequence": 2
   },
@@ -3293,18 +3293,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 63.2,
-        "y": 66,
-        "radius": 9,
+        "x": 58.5,
+        "y": 65.9,
+        "radius": 10.0,
         "description": "Single radial capacitor sleeve tone shifted in CIELAB (preserving markings and lead solder)",
         "hint": "Look closely near coordinates (63%, 66%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_024",
     "sequence": 3
   },
@@ -3320,18 +3320,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.1,
-        "y": 71.3,
-        "radius": 7.9,
+        "x": 38.4,
+        "y": 71.2,
+        "radius": 8.9,
         "description": "Single tailor notion accessory shifted in CIELAB (preserving stitch texture)",
         "hint": "Look closely near coordinates (34%, 71%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_024",
     "sequence": 4
   },
@@ -3347,18 +3347,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.1,
-        "y": 71.3,
-        "radius": 7.9,
+        "x": 38.4,
+        "y": 71.2,
+        "radius": 8.9,
         "description": "Single thread spool wrap fibers tone shifted to golden ochre in CIELAB (preserving wound thread texture)",
         "hint": "Look closely near coordinates (34%, 71%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_024",
     "sequence": 5
   },
@@ -3374,18 +3374,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 32.4,
-        "y": 39.6,
-        "radius": 5.8,
+        "x": 36.5,
+        "y": 39.7,
+        "radius": 6.5,
         "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
         "hint": "Look closely near coordinates (32%, 40%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_025",
     "sequence": 1
   },
@@ -3401,18 +3401,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 34.1,
-        "y": 71.3,
-        "radius": 7.9,
+        "x": 38.4,
+        "y": 71.2,
+        "radius": 8.9,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
         "hint": "Look closely near coordinates (34%, 71%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_025",
     "sequence": 2
   },
@@ -3428,18 +3428,18 @@
     "diffs": [
       {
         "id": 1,
-        "x": 32.4,
-        "y": 39.6,
-        "radius": 5.8,
+        "x": 36.5,
+        "y": 39.7,
+        "radius": 6.5,
         "description": "Single measuring tape lock button shifted to terracotta in CIELAB",
         "hint": "Look closely near coordinates (32%, 40%)"
       }
     ],
     "dimensions": {
-      "width": 1600,
-      "height": 1067
+      "width": 1420,
+      "height": 1065
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_025",
     "sequence": 3
   },
@@ -3455,17 +3455,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 51.2,
-        "y": 48.2,
-        "radius": 9,
+        "x": 50.0,
+        "y": 47.4,
+        "radius": 10.0,
         "hint": "Look closely near coordinates (51%, 48%)"
       }
     ],
     "dimensions": {
-      "width": 1400,
-      "height": 934
+      "width": 1244,
+      "height": 933
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_025",
     "sequence": 4
   },
@@ -3481,17 +3481,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 41.3,
-        "y": 26.4,
-        "radius": 5,
+        "x": 46.5,
+        "y": 26.5,
+        "radius": 5.6,
         "hint": "Look closely near coordinates (41%, 26%)"
       }
     ],
     "dimensions": {
-      "width": 1400,
+      "width": 1244,
       "height": 933
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_025",
     "sequence": 5
   },
@@ -3657,11 +3657,11 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 48.6,
+        "y": 48.4,
         "id": 1,
         "hint": "Look closely near coordinates (56%, 48%)",
-        "x": 56.2,
-        "radius": 8
+        "x": 50.4,
+        "radius": 9.0
       }
     ],
     "originalImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
@@ -3672,10 +3672,10 @@
     "difficulty": "Medium",
     "packId": "find_the_sniper",
     "dimensions": {
-      "width": 1200,
-      "height": 800
+      "width": 1064,
+      "height": 798
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_027",
     "sequence": 2
   },
@@ -3685,9 +3685,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 60.8,
-        "y": 48.4,
-        "radius": 8.4,
+        "x": 56.0,
+        "y": 48.1,
+        "radius": 9.4,
         "hint": "Look closely near coordinates (61%, 48%)"
       }
     ],
@@ -3700,10 +3700,10 @@
     "title": "Vintage Cartographer Sea Chart",
     "difficulty": "Medium",
     "dimensions": {
-      "width": 1200,
+      "width": 1068,
       "height": 801
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_027",
     "sequence": 3
   },
@@ -3715,10 +3715,10 @@
     "pack": "Find the Sniper",
     "diffs": [
       {
-        "y": 53.8,
+        "y": 50.1,
         "id": 1,
         "hint": "Look closely near coordinates (68%, 54%)",
-        "x": 67.8,
+        "x": 68.0,
         "radius": 5.5
       }
     ],
@@ -3729,9 +3729,9 @@
     "packId": "find_the_sniper",
     "dimensions": {
       "width": 1200,
-      "height": 1800
+      "height": 900
     },
-    "aspectRatio": "1200:1800",
+    "aspectRatio": "4:3",
     "setId": "photo_set_027",
     "sequence": 4
   },
@@ -3740,9 +3740,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 41.6,
-        "y": 27.2,
-        "radius": 5,
+        "x": 46.7,
+        "y": 26.8,
+        "radius": 5.6,
         "hint": "Look closely near coordinates (42%, 27%)"
       }
     ],
@@ -3756,10 +3756,10 @@
     "id": "ai_macro_vintage_radio_001",
     "difficulty": "Hard",
     "dimensions": {
-      "width": 1200,
-      "height": 800
+      "width": 1064,
+      "height": 798
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_027",
     "sequence": 5
   },
@@ -3774,20 +3774,20 @@
     "baseImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
     "diffs": [
       {
-        "y": 47.5,
+        "y": 47.8,
         "id": 1,
         "hint": "Look closely near coordinates (64%, 48%)",
-        "x": 63.8,
-        "radius": 7.9
+        "x": 54.3,
+        "radius": 10.0
       }
     ],
     "originalImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
     "totalDifferences": 1,
     "dimensions": {
-      "width": 1200,
-      "height": 712
+      "width": 948,
+      "height": 711
     },
-    "aspectRatio": "1200:712",
+    "aspectRatio": "4:3",
     "setId": "photo_set_028",
     "sequence": 1
   },
@@ -4773,17 +4773,17 @@
     "diffs": [
       {
         "id": 1,
-        "x": 47.9,
-        "y": 50.3,
-        "radius": 5,
+        "x": 50.0,
+        "y": 50.4,
+        "radius": 5.6,
         "hint": "Look closely near coordinates (48%, 50%)"
       }
     ],
     "dimensions": {
-      "width": 1400,
+      "width": 1244,
       "height": 933
     },
-    "aspectRatio": "3:2",
+    "aspectRatio": "4:3",
     "setId": "photo_set_035",
     "sequence": 4
   },
@@ -4800,16 +4800,16 @@
       {
         "id": 1,
         "x": 48.2,
-        "y": 53.8,
+        "y": 50.0,
         "radius": 6.3,
         "hint": "Look closely near coordinates (48%, 54%)"
       }
     ],
     "dimensions": {
       "width": 1200,
-      "height": 1800
+      "height": 900
     },
-    "aspectRatio": "1200:1800",
+    "aspectRatio": "4:3",
     "setId": "photo_set_035",
     "sequence": 5
   }
