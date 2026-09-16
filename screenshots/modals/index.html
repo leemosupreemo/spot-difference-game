@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diff Hunter - Modal & Menu Screenshots</title>
+  <style>
+    :root {
+      --bg: #0d0f18;
+      --card-bg: rgba(26, 32, 53, 0.75);
+      --border: rgba(255, 255, 255, 0.12);
+      --accent: #00f0ff;
+      --accent-gold: #ffb703;
+      --text: #f0f4f8;
+      --text-muted: #8e9bb0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 32px 20px;
+    }
+    header {
+      max-width: 1400px;
+      margin: 0 auto 36px auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+    .stats-bar {
+      display: inline-flex;
+      gap: 16px;
+      margin-top: 14px;
+      padding: 8px 18px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+    .card-img-wrap {
+      background: #05070d;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justifyContent: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-img-wrap img {
+      max-width: 100%;
+      height: 380px;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      cursor: zoom-in;
+    }
+    .card-body {
+      padding: 16px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      flex: 1;
+    }
+    .card-footer {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Diff Hunter Visual Modals & Menus</h1>
+    <p class="subtitle">Automated visual snapshot report of all modals, special menus, and victory states.</p>
+    <div class="stats-bar">
+      <span>Total Captured: 24/24</span>
+      <span>•</span>
+      <span>Resolution: 786×1704 (@2x iPhone)</span>
+      <span>•</span>
+      <span>Date: 9/15/2026</span>
+    </div>
+  </header>
+
+  <main class="grid">
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="01_offline-banner.png" target="_blank">
+            <img src="01_offline-banner.png" alt="Offline Warning Banner" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">System</div>
+          <h2 class="card-title">Offline Warning Banner</h2>
+          <p class="card-desc">Prominent warning when device is offline, with cached data notice and retry button</p>
+          <div class="card-footer">
+            <span>01_offline-banner.png</span>
+            <span>126.1 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="02_daily-banner-unattempted.png" target="_blank">
+            <img src="02_daily-banner-unattempted.png" alt="Daily Challenge Banner (Active)" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Daily</div>
+          <h2 class="card-title">Daily Challenge Banner (Active)</h2>
+          <p class="card-desc">Set of the Day banner on Main Menu showing Time to Beat for unattempted state</p>
+          <div class="card-footer">
+            <span>02_daily-banner-unattempted.png</span>
+            <span>227.2 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="03_daily-banner-completed.png" target="_blank">
+            <img src="03_daily-banner-completed.png" alt="Daily Challenge Banner (Completed)" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Daily</div>
+          <h2 class="card-title">Daily Challenge Banner (Completed)</h2>
+          <p class="card-desc">Set of the Day banner on Main Menu showing completed state with Top Time</p>
+          <div class="card-footer">
+            <span>03_daily-banner-completed.png</span>
+            <span>227.2 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="04_victory-standard.png" target="_blank">
+            <img src="04_victory-standard.png" alt="Victory - Stage Set Complete" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Victory</div>
+          <h2 class="card-title">Victory - Stage Set Complete</h2>
+          <p class="card-desc">Standard victory modal with 3 stars, speed points, completion time, and Next Stage button</p>
+          <div class="card-footer">
+            <span>04_victory-standard.png</span>
+            <span>243.9 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="05_victory-world-1st.png" target="_blank">
+            <img src="05_victory-world-1st.png" alt="Victory - World 1st Rank" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Victory</div>
+          <h2 class="card-title">Victory - World 1st Rank</h2>
+          <p class="card-desc">Top placement in the world with gold trophy and gradient title</p>
+          <div class="card-footer">
+            <span>05_victory-world-1st.png</span>
+            <span>248.0 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="06_victory-new-record.png" target="_blank">
+            <img src="06_victory-new-record.png" alt="Victory - New Personal Best" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Victory</div>
+          <h2 class="card-title">Victory - New Personal Best</h2>
+          <p class="card-desc">Personal best completion with golden badge and gold accent glow</p>
+          <div class="card-footer">
+            <span>06_victory-new-record.png</span>
+            <span>241.7 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="07_victory-leaderboard.png" target="_blank">
+            <img src="07_victory-leaderboard.png" alt="Victory - Leaderboard Qualified" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Victory</div>
+          <h2 class="card-title">Victory - Leaderboard Qualified</h2>
+          <p class="card-desc">Leaderboard qualification banner displaying player tag and online status</p>
+          <div class="card-footer">
+            <span>07_victory-leaderboard.png</span>
+            <span>338.1 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="08_victory-name-editing.png" target="_blank">
+            <img src="08_victory-name-editing.png" alt="Victory - Editing Hunter Tag" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Victory</div>
+          <h2 class="card-title">Victory - Editing Hunter Tag</h2>
+          <p class="card-desc">Interactive name entry input field with save checkmark for leaderboard submission</p>
+          <div class="card-footer">
+            <span>08_victory-name-editing.png</span>
+            <span>333.4 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="09_victory-fanfare.png" target="_blank">
+            <img src="09_victory-fanfare.png" alt="Victory - Golden Celebration Fanfare" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Victory</div>
+          <h2 class="card-title">Victory - Golden Celebration Fanfare</h2>
+          <p class="card-desc">Celebratory golden confetti particles firing across victory screen</p>
+          <div class="card-footer">
+            <span>09_victory-fanfare.png</span>
+            <span>297.9 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="10_victory-offline.png" target="_blank">
+            <img src="10_victory-offline.png" alt="Victory - Leaderboard Offline Sync" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Victory</div>
+          <h2 class="card-title">Victory - Leaderboard Offline Sync</h2>
+          <p class="card-desc">Notice explaining score is cached locally and will sync once back online</p>
+          <div class="card-footer">
+            <span>10_victory-offline.png</span>
+            <span>368.5 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="11_daily-victory-success.png" target="_blank">
+            <img src="11_daily-victory-success.png" alt="Daily Challenge - Victory & World Rank" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Daily</div>
+          <h2 class="card-title">Daily Challenge - Victory & World Rank</h2>
+          <p class="card-desc">Daily Challenge completion modal with World 2nd silver trophy and 40px share button</p>
+          <div class="card-footer">
+            <span>11_daily-victory-success.png</span>
+            <span>287.1 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="12_daily-victory-failed.png" target="_blank">
+            <img src="12_daily-victory-failed.png" alt="Daily Challenge - Run Ended" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Daily</div>
+          <h2 class="card-title">Daily Challenge - Run Ended</h2>
+          <p class="card-desc">Daily Challenge run ended modal with plain text heading and Today's Top 3 leaderboard</p>
+          <div class="card-footer">
+            <span>12_daily-victory-failed.png</span>
+            <span>274.5 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="13_daily-victory-forfeited.png" target="_blank">
+            <img src="13_daily-victory-forfeited.png" alt="Daily Challenge - Forfeited" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Daily</div>
+          <h2 class="card-title">Daily Challenge - Forfeited</h2>
+          <p class="card-desc">Daily Challenge forfeited modal with plain text heading and full-width Main Menu button</p>
+          <div class="card-footer">
+            <span>13_daily-victory-forfeited.png</span>
+            <span>262.6 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="14_daily-victory-name-editing.png" target="_blank">
+            <img src="14_daily-victory-name-editing.png" alt="Daily Victory - Editing Hunter Tag" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Daily</div>
+          <h2 class="card-title">Daily Victory - Editing Hunter Tag</h2>
+          <p class="card-desc">Editing Hunter Tag input field on Daily Challenge completion</p>
+          <div class="card-footer">
+            <span>14_daily-victory-name-editing.png</span>
+            <span>289.3 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="15_confirm-exit-standard.png" target="_blank">
+            <img src="15_confirm-exit-standard.png" alt="Confirm Exit - Standard Quit" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Confirmation</div>
+          <h2 class="card-title">Confirm Exit - Standard Quit</h2>
+          <p class="card-desc">Standard quit confirmation modal: "Quit Current Game? Your current stage progress will be lost."</p>
+          <div class="card-footer">
+            <span>15_confirm-exit-standard.png</span>
+            <span>81.3 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="16_confirm-exit-daily.png" target="_blank">
+            <img src="16_confirm-exit-daily.png" alt="Confirm Exit - Daily Forfeit Warning" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Confirmation</div>
+          <h2 class="card-title">Confirm Exit - Daily Forfeit Warning</h2>
+          <p class="card-desc">Daily challenge forfeit warning: "Forfeit Set of the Day? This will mark today's set as a failure."</p>
+          <div class="card-footer">
+            <span>16_confirm-exit-daily.png</span>
+            <span>79.1 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="17_game-over.png" target="_blank">
+            <img src="17_game-over.png" alt="Game Over - Stage Failed" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Game</div>
+          <h2 class="card-title">Game Over - Stage Failed</h2>
+          <p class="card-desc">Stage failed modal with Skull icon, 0/3 hearts, Try Again, and Main Menu buttons</p>
+          <div class="card-footer">
+            <span>17_game-over.png</span>
+            <span>95.2 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="18_share-challenge.png" target="_blank">
+            <img src="18_share-challenge.png" alt="Share Result Sheet" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Social</div>
+          <h2 class="card-title">Share Result Sheet</h2>
+          <p class="card-desc">Share sheet with social actions (Text, TikTok, Instagram, More, Copy link, Save image)</p>
+          <div class="card-footer">
+            <span>18_share-challenge.png</span>
+            <span>60.7 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="19_help.png" target="_blank">
+            <img src="19_help.png" alt="Help & How to Play" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Info</div>
+          <h2 class="card-title">Help & How to Play</h2>
+          <p class="card-desc">Game instructions, rules, scoring breakdown, and options</p>
+          <div class="card-footer">
+            <span>19_help.png</span>
+            <span>105.8 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="20_rating.png" target="_blank">
+            <img src="20_rating.png" alt="Rating & Feedback Modal" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Info</div>
+          <h2 class="card-title">Rating & Feedback Modal</h2>
+          <p class="card-desc">5-star interactive rating prompt and App Store review trigger</p>
+          <div class="card-footer">
+            <span>20_rating.png</span>
+            <span>83.6 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="21_progress-leaderboards.png" target="_blank">
+            <img src="21_progress-leaderboards.png" alt="Scores - Global Leaderboard (Top 25)" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Leaderboard</div>
+          <h2 class="card-title">Scores - Global Leaderboard (Top 25)</h2>
+          <p class="card-desc">Global leaderboard tab showing world top 25 records and ranks</p>
+          <div class="card-footer">
+            <span>21_progress-leaderboards.png</span>
+            <span>138.7 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="22_progress-daily.png" target="_blank">
+            <img src="22_progress-daily.png" alt="Scores - Daily Challenge Tab" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Leaderboard</div>
+          <h2 class="card-title">Scores - Daily Challenge Tab</h2>
+          <p class="card-desc">Daily Challenge tab with streak, calendar, and today's completion details</p>
+          <div class="card-footer">
+            <span>22_progress-daily.png</span>
+            <span>175.2 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="23_progress-my-progress.png" target="_blank">
+            <img src="23_progress-my-progress.png" alt="Scores - My Progress Tab" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Leaderboard</div>
+          <h2 class="card-title">Scores - My Progress Tab</h2>
+          <p class="card-desc">Player lifetime statistics, sets cleared, accuracy, and difficulty breakdown</p>
+          <div class="card-footer">
+            <span>23_progress-my-progress.png</span>
+            <span>148.2 KB</span>
+          </div>
+        </div>
+      </article>
+    
+      <article class="card">
+        <div class="card-img-wrap">
+          <a href="24_progress-offline.png" target="_blank">
+            <img src="24_progress-offline.png" alt="Scores - Offline Mode Banner" loading="lazy">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Leaderboard</div>
+          <h2 class="card-title">Scores - Offline Mode Banner</h2>
+          <p class="card-desc">Leaderboard modal showing the active Offline Mode notice and retry button</p>
+          <div class="card-footer">
+            <span>24_progress-offline.png</span>
+            <span>156.5 KB</span>
+          </div>
+        </div>
+      </article>
+    
+  </main>
+</body>
+</html>
