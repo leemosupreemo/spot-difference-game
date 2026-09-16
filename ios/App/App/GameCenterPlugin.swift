@@ -18,12 +18,33 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
 
     private var hasConfiguredAuthHandler = false
     private var hasCompletedInitialAuth = false
+    private var lastAuthError: String?
     private var authViewController: UIViewController?
     private var pendingAuthCalls: [CAPPluginCall] = []
+    private var pendingGameCenterUI: [(call: CAPPluginCall, state: GKGameCenterViewControllerState, leaderboardId: String?)] = []
 
     override public func load() {
         super.load()
         setupSilentAuth()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAppDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func handleAppDidBecomeActive() {
+        let isAuth = GKLocalPlayer.local.isAuthenticated
+        let playerData = self.playerDictionary()
+        self.notifyListeners("gameCenterAuthChanged", data: [
+            "isAuthenticated": isAuth,
+            "player": playerData
+        ])
     }
 
     private func getTopViewController(base: UIViewController? = nil) -> UIViewController? {
@@ -62,37 +83,48 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
             self.authViewController = viewController
 
             if let vc = viewController {
-                // If there are explicit pending calls waiting for auth, present the controller
-                if !self.pendingAuthCalls.isEmpty {
-                    DispatchQueue.main.async {
-                        self.presentAuthViewController(vc)
-                    }
+                CAPLog.print("⚡️ GameCenter: Authentication view controller provided by GameKit, presenting...")
+                DispatchQueue.main.async {
+                    self.presentAuthViewController(vc)
                 }
-            } else {
-                let isAuth = GKLocalPlayer.local.isAuthenticated
-                let playerData = self.playerDictionary()
+                return
+            }
 
-                self.notifyListeners("gameCenterAuthChanged", data: [
+            let isAuth = GKLocalPlayer.local.isAuthenticated
+            let playerData = self.playerDictionary()
+
+            if let err = error {
+                self.lastAuthError = err.localizedDescription
+                CAPLog.print("⚡️ GameCenter authenticateHandler error: \(err.localizedDescription) (code: \((err as NSError).code))")
+            } else if isAuth {
+                self.lastAuthError = nil
+                CAPLog.print("⚡️ GameCenter: Local player authenticated successfully as \(GKLocalPlayer.local.alias)")
+            }
+
+            self.notifyListeners("gameCenterAuthChanged", data: [
+                "isAuthenticated": isAuth,
+                "player": playerData,
+                "error": error?.localizedDescription ?? (isAuth ? NSNull() : "Not authenticated")
+            ])
+
+            let callsToResolve = self.pendingAuthCalls
+            self.pendingAuthCalls.removeAll()
+
+            for call in callsToResolve {
+                call.resolve([
                     "isAuthenticated": isAuth,
-                    "player": playerData
+                    "player": isAuth ? playerData : NSNull(),
+                    "error": error?.localizedDescription ?? (isAuth ? NSNull() : "Not authenticated")
                 ])
+            }
 
-                let callsToResolve = self.pendingAuthCalls
-                self.pendingAuthCalls.removeAll()
-
-                for call in callsToResolve {
-                    if let err = error, !isAuth {
-                        call.resolve([
-                            "isAuthenticated": false,
-                            "error": err.localizedDescription,
-                            "player": NSNull()
-                        ])
-                    } else {
-                        call.resolve([
-                            "isAuthenticated": isAuth,
-                            "player": isAuth ? playerData : NSNull()
-                        ])
-                    }
+            let uiRequests = self.pendingGameCenterUI
+            self.pendingGameCenterUI.removeAll()
+            for request in uiRequests {
+                if isAuth {
+                    self.presentGameCenterUI(state: request.state, leaderboardId: request.leaderboardId, call: request.call)
+                } else {
+                    request.call.resolve(["success": false, "reason": "not_authenticated"])
                 }
             }
         }
@@ -133,7 +165,7 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
             return
         }
 
-        if let vc = authViewController {
+        if let vc = authViewController, !vc.isBeingPresented && vc.presentingViewController == nil {
             pendingAuthCalls.append(call)
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -146,7 +178,7 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
             call.resolve([
                 "isAuthenticated": false,
                 "player": NSNull(),
-                "reason": "not_authenticated"
+                "error": lastAuthError ?? "Game Center player is not available"
             ])
             return
         }
@@ -218,17 +250,12 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
                 return
             }
 
-            if let authVC = self.authViewController {
-                self.presentAuthViewController(authVC) { [weak self] in
-                    guard let self = self else { return }
-                    if GKLocalPlayer.local.isAuthenticated {
-                        self.presentGameCenterUI(state: .leaderboards, leaderboardId: call.getString("leaderboardId"), call: call)
-                    } else {
-                        call.resolve(["success": false, "reason": "not_authenticated"])
-                    }
-                }
+            self.pendingGameCenterUI.append((call: call, state: .leaderboards, leaderboardId: call.getString("leaderboardId")))
+            if let authVC = self.authViewController, !authVC.isBeingPresented && authVC.presentingViewController == nil {
+                self.presentAuthViewController(authVC)
             } else {
-                self.showGameCenterSettingsPrompt(call: call)
+                self.hasConfiguredAuthHandler = false
+                self.setupSilentAuth()
             }
         }
     }
@@ -242,17 +269,12 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
                 return
             }
 
-            if let authVC = self.authViewController {
-                self.presentAuthViewController(authVC) { [weak self] in
-                    guard let self = self else { return }
-                    if GKLocalPlayer.local.isAuthenticated {
-                        self.presentGameCenterUI(state: .achievements, leaderboardId: nil, call: call)
-                    } else {
-                        call.resolve(["success": false, "reason": "not_authenticated"])
-                    }
-                }
+            self.pendingGameCenterUI.append((call: call, state: .achievements, leaderboardId: nil))
+            if let authVC = self.authViewController, !authVC.isBeingPresented && authVC.presentingViewController == nil {
+                self.presentAuthViewController(authVC)
             } else {
-                self.showGameCenterSettingsPrompt(call: call)
+                self.hasConfiguredAuthHandler = false
+                self.setupSilentAuth()
             }
         }
     }
@@ -273,32 +295,6 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
         gcVC.gameCenterDelegate = self
         topVC.present(gcVC, animated: true) {
             call.resolve(["success": true])
-        }
-    }
-
-    private func showGameCenterSettingsPrompt(call: CAPPluginCall) {
-        guard let topVC = getTopViewController() else {
-            call.resolve(["success": false, "reason": "not_authenticated"])
-            return
-        }
-
-        let alert = UIAlertController(
-            title: "Game Center Required",
-            message: "Sign in to Apple Game Center in your device Settings to view live leaderboards, track your rank, and unlock achievements.",
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: "Settings", style: .default) { _ in
-            if let settingsUrl = URL(string: UIApplication.openSettingsURLString),
-               UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
-            }
-        })
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        topVC.present(alert, animated: true) {
-            call.resolve(["success": false, "reason": "settings_prompted"])
         }
     }
 
