@@ -17,7 +17,11 @@ export default function MainMenu({
   onPhotoSetChange = null,
   onStartGame,
   incomingChallenge = null,
-  hasCompletedFirstSet: hasCompletedProp
+  hasCompletedFirstSet: hasCompletedProp,
+  bannerSlot = null,
+  debugMode = false,
+  tutorialAnimationEnabled = true,
+  onToggleTutorialAnimation = null
 }) {
   const isSetCompleted = hasCompletedProp !== undefined ? hasCompletedProp : hasCompletedFirstSet();
   const isNative = typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform();
@@ -84,8 +88,33 @@ export default function MainMenu({
         </div>
       )}
 
-      {/* Top Interactive Tutorial Graphic Banner with full-width SPOT & TAP (hidden once first image set is completed) */}
-      {!isSetCompleted && <TutorialBanner />}
+      {bannerSlot}
+
+      {debugMode && onToggleTutorialAnimation && (
+        <button
+          type="button"
+          onClick={onToggleTutorialAnimation}
+          className="glass-btn"
+          style={{
+            width: '100%',
+            marginBottom: '10px',
+            padding: '8px 12px',
+            justifyContent: 'center',
+            fontSize: '0.78rem',
+            fontWeight: 800,
+            color: tutorialAnimationEnabled ? 'var(--accent-green)' : 'var(--text-muted)',
+            borderColor: tutorialAnimationEnabled ? 'rgba(0, 255, 135, 0.45)' : 'var(--border-glass)',
+            background: tutorialAnimationEnabled ? 'rgba(0, 255, 135, 0.12)' : 'rgba(255, 255, 255, 0.05)'
+          }}
+        >
+          {tutorialAnimationEnabled ? '▶ Tutorial Animation: ON' : '⏸ Tutorial Animation: OFF'}
+        </button>
+      )}
+
+      {/* Tutorial graphic remains available in debug mode after the first set. */}
+      {(!isSetCompleted || debugMode) && tutorialAnimationEnabled && (
+        <TutorialBanner forceShow={debugMode} />
+      )}
 
       {/* Main Mode / Category Selection Card */}
       <div className="glass-panel" style={{
@@ -165,7 +194,7 @@ export default function MainMenu({
           })}
         </div>
 
-        {selectedTheme === 'find_the_sniper' && (
+        {debugMode && selectedTheme === 'find_the_sniper' && (
           <label style={{ display: 'block', marginBottom: '14px' }}>
             <span style={{ display: 'block', marginBottom: '6px', fontSize: '0.76rem', fontWeight: 900, color: 'var(--text-muted)', letterSpacing: '0.5px' }}>
               PHOTO SET

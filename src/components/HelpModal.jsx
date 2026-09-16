@@ -34,16 +34,18 @@ export default function HelpModal({ isOpen, onClose }) {
       }}
     >
       <div
-        className="glass-panel"
+        className="glass-panel modal-split-card"
         onClick={(e) => e.stopPropagation()}
         style={{
           maxWidth: '560px',
           width: '100%',
           padding: '24px',
           position: 'relative',
-          maxHeight: '90vh',
+          maxHeight: 'calc(100dvh - 32px)',
+          boxSizing: 'border-box',
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          '--modal-accent': 'var(--accent-cyan)'
         }}
       >
         {/* Top Right Close "X" Button */}
@@ -70,9 +72,17 @@ export default function HelpModal({ isOpen, onClose }) {
           <X size={18} />
         </button>
 
+        {/* Modal Header */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', paddingRight: '40px' }}>
+          <HelpCircle size={22} color="var(--accent-cyan)" />
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0, letterSpacing: '0.5px', color: '#fff' }}>
+            HELP & INFO
+          </h2>
+        </div>
+
         {/* Tab Selector (only when not in full policy sub-view) */}
         {!showFullPolicy ? (
-          <div style={{ display: 'flex', gap: '8px', marginBottom: '18px', paddingRight: '36px' }}>
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
             <button
               onClick={() => { sounds.playTap(); setActiveTab('rules'); }}
               style={{
@@ -176,7 +186,7 @@ export default function HelpModal({ isOpen, onClose }) {
                 }}>
                   Legal & Privacy
                 </span>
-                <h2 style={{ fontSize: '1.25rem', fontWeight: 900, margin: '4px 0 2px 0', color: '#fff' }}>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: 900, margin: '4px 0 2px 0', letterSpacing: '0.5px', color: '#fff' }}>
                   Diff Hunter Privacy Policy
                 </h2>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
@@ -269,7 +279,7 @@ export default function HelpModal({ isOpen, onClose }) {
                 </div>
                 <div>
                   <strong style={{ color: '#fff', display: 'block' }}>Speedrun Timer</strong>
-                  The timer starts the moment the images appear. Find the difference as fast as possible to maximize your speed score and clear the stage!
+                  The timer starts the moment the images appear. Find the difference as fast as possible to maximize your speed score.
                 </div>
               </div>
             </div>

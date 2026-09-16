@@ -1,5 +1,5 @@
 import React from 'react';
-import { Timer, Lightbulb, Search, Zap, Heart, ArrowLeft } from 'lucide-react';
+import { Timer, Lightbulb, Search, Zap, Heart, ArrowLeft, Volume2, VolumeX } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { calculateSpeedPoints } from '../utils/scoring';
 
@@ -14,7 +14,9 @@ export default function TimerDisplay({
   totalStageImages = 5,
   selectedDifficulty = 'Medium',
   onBack,
-  debugMode = false
+  debugMode = false,
+  muted = false,
+  setMuted
 }) {
   const potentialPoints = calculateSpeedPoints(elapsedTime);
   const livesRemaining = Math.max(0, 3 - missCount);
@@ -40,6 +42,11 @@ export default function TimerDisplay({
   const toggleMagnifier = () => {
     sounds.playTap();
     setMagnifierEnabled(!magnifierEnabled);
+  };
+
+  const toggleSound = () => {
+    const isMuted = sounds.toggleMute();
+    if (typeof setMuted === 'function') setMuted(isMuted);
   };
 
   return (
@@ -221,6 +228,24 @@ export default function TimerDisplay({
             >
               <Search size={20} color="var(--accent-cyan)" style={{ filter: 'drop-shadow(0 0 4px rgba(0, 240, 255, 0.6))' }} />
               <span style={{ color: 'var(--accent-cyan)', fontWeight: 800 }}>Zoom</span>
+            </button>
+
+            <button
+              className="glass-btn"
+              onClick={toggleSound}
+              data-sound-button="true"
+              title={muted ? 'Unmute Sound' : 'Mute Sound'}
+              aria-label={muted ? 'Unmute sound' : 'Mute sound'}
+              style={{
+                padding: '7px 10px',
+                borderRadius: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: muted ? 'var(--accent-pink)' : 'var(--accent-cyan)'
+              }}
+            >
+              {muted ? <VolumeX size={20} color="var(--accent-pink)" /> : <Volume2 size={20} color="var(--accent-cyan)" />}
             </button>
           </div>
 

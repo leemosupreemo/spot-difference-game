@@ -38,7 +38,7 @@ test('a personal best has one label and one Share button that opens all share op
   expect(screen.getAllByText(/personal best/i)).toHaveLength(1);
   expect(screen.queryByText(/can you beat me/i)).toBeNull();
   expect(screen.queryByRole('button', { name: 'Text', exact: true })).toBeNull();
-  fireEvent.click(screen.getByRole('button', { name: /^(Share|Challenge a Friend)$/ }));
+  fireEvent.click(screen.getByRole('button', { name: 'Share result' }));
   const sheet = await screen.findByRole('dialog', { name: 'Share result' });
   expect(sheet).toBeTruthy();
   for (const name of ['Text', 'TikTok', 'Instagram', 'More', 'Copy link', 'Save image']) {
@@ -51,21 +51,21 @@ test('a personal best has one label and one Share button that opens all share op
 
 test('existing challenge button can open the sheet without a reference error', async () => {
   render(<VictoryModal {...props} />);
-  fireEvent.click(screen.getByRole('button', { name: /^(Share|Challenge a Friend)$/ }));
+  fireEvent.click(screen.getByRole('button', { name: 'Share result' }));
   expect(await screen.findByRole('dialog', { name: 'Share result' })).toBeTruthy();
 });
 
-test('Retry does not celebrate again while the next stage is loading', async () => {
+test('Next Stage does not celebrate again while the next stage is loading', async () => {
   const { default: confetti } = await import('canvas-confetti');
   confetti.mockClear();
   const onClose = vi.fn();
-  const onRestart = vi.fn();
-  const { rerender } = render(<VictoryModal {...props} onClose={onClose} onRestart={onRestart} />);
+  const onNextLevel = vi.fn();
+  const { rerender } = render(<VictoryModal {...props} onClose={onClose} onNextLevel={onNextLevel} />);
   const initialBursts = confetti.mock.calls.length;
   expect(initialBursts).toBeGreaterThan(0);
-  fireEvent.click(screen.getByRole('button', { name: 'Retry' }));
+  fireEvent.click(screen.getByRole('button', { name: 'Next Stage' }));
   expect(onClose).toHaveBeenCalledOnce();
-  expect(onRestart).toHaveBeenCalledOnce();
-  rerender(<VictoryModal {...props} score={0} elapsedTime={0} onClose={onClose} onRestart={onRestart} />);
+  expect(onNextLevel).toHaveBeenCalledOnce();
+  rerender(<VictoryModal {...props} score={0} elapsedTime={0} onClose={onClose} onNextLevel={onNextLevel} />);
   expect(confetti.mock.calls).toHaveLength(initialBursts);
 });

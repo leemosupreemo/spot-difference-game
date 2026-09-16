@@ -9,7 +9,7 @@ const DEMO_BASE_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/base.jpg';
 const DEMO_VARIANT_IMAGE = 'levels/photo-pairs/kitchen/easy_kitchen_001/variant.jpg';
 const DEMO_TARGET = { x: 59.5, y: 55.5, radius: 9.9 };
 
-export default function TutorialBanner({ forceShow = false }) {
+export default function TutorialBanner({ forceShow = false, animationEnabled = true }) {
   const isCompleted = !forceShow && hasCompletedFirstSet();
 
   const [isZoomed, setIsZoomed] = useState(false);
@@ -19,7 +19,13 @@ export default function TutorialBanner({ forceShow = false }) {
 
   // Auto-playing loop demonstration (runs every 5.4s)
   useEffect(() => {
-    if (isCompleted) return;
+    if (isCompleted || !animationEnabled) {
+      setIsZoomed(false);
+      setShowHand(false);
+      setHandTapping(false);
+      setFoundSuccess(false);
+      return;
+    }
 
     let t1, t2, t3, t4, t5, t6;
 
@@ -72,7 +78,7 @@ export default function TutorialBanner({ forceShow = false }) {
       clearTimeout(t5);
       clearTimeout(t6);
     };
-  }, []);
+  }, [isCompleted, animationEnabled]);
 
   const handleManualTap = () => {
     sounds.playSuccess();
@@ -179,14 +185,14 @@ export default function TutorialBanner({ forceShow = false }) {
 
         {/* Card 2: Modified Photo (Deep Zoom 3.8x + Hit Indicator) */}
         <div
-          onClick={handleManualTap}
+          onClick={animationEnabled ? handleManualTap : undefined}
           className="tutorial-card"
           style={{
             border: foundSuccess ? '2px solid var(--accent-green)' : '1.5px solid rgba(0, 240, 255, 0.45)',
             boxShadow: foundSuccess ? '0 0 22px rgba(0, 255, 135, 0.5)' : '0 4px 16px rgba(0,0,0,0.6)',
-            cursor: 'pointer'
+            cursor: animationEnabled ? 'pointer' : 'default'
           }}
-          title="Tap the difference to try it!"
+          title={animationEnabled ? 'Tap the difference to try it!' : 'Tutorial animation paused'}
         >
           <img
             src={resolveAssetUrl(DEMO_VARIANT_IMAGE)}

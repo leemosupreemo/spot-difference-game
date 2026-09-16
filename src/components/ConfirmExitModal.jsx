@@ -22,7 +22,7 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
       }}
     >
       <div
-        className="glass-panel"
+        className="glass-panel modal-split-card"
         onClick={(e) => e.stopPropagation()}
         style={{
           maxWidth: '420px',
@@ -36,7 +36,7 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
           boxShadow: isDaily ? '0 0 35px rgba(255, 0, 127, 0.35)' : '0 0 35px rgba(0, 240, 255, 0.25)',
           borderRadius: '20px',
           position: 'relative',
-          animation: 'pageFadeIn 0.12s ease-out'
+          '--modal-accent': isDaily ? 'var(--accent-pink)' : 'var(--accent-cyan)'
         }}
       >
         {/* Top Right Close "X" Button */}
@@ -77,7 +77,7 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
           margin: '0 auto 14px auto',
           boxShadow: isDaily ? '0 0 20px rgba(255, 0, 127, 0.4)' : '0 0 20px rgba(0, 240, 255, 0.35)'
         }}>
-          <AlertCircle size={30} color={isDaily ? 'var(--accent-pink)' : 'var(--accent-cyan)'} />
+          <AlertCircle size={28} color={isDaily ? 'var(--accent-pink)' : 'var(--accent-cyan)'} />
         </div>
 
         <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '8px', color: isDaily ? 'var(--accent-pink)' : '#fff', letterSpacing: '0.5px' }}>
@@ -85,7 +85,7 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
         </h2>
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '22px', lineHeight: 1.45 }}>
           {isDaily
-            ? "Quitting now will forfeit today's Set of the Day run as a failed attempt. You will not be able to re-attempt until tomorrow's daily refresh."
+            ? "This will mark today's set as a failure."
             : "Your current stage progress will be lost."}
         </p>
 

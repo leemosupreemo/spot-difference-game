@@ -20,3 +20,23 @@ test('Header renders the app icon next to DIFF HUNTER title', () => {
   assert.match(source, /\{debugMode && \(/);
 });
 
+test('Header leaves gameplay controls to the in-game HUD', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /if \(view === 'game'\) return null;/);
+});
+
+test('Header stays clean with navigation controls and no login/status buttons', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // No auth or status buttons in top bar
+  assert.doesNotMatch(source, /auth-status-btn/);
+  assert.doesNotMatch(source, /AuthProviderIcon/);
+  assert.doesNotMatch(source, /Not Logged In/);
+  assert.doesNotMatch(source, /Tap to Sign In/);
+
+  // Focuses on core navigation and controls
+  assert.match(source, /handleOpenStats/);
+  assert.match(source, /toggleSound/);
+  assert.match(source, /onOpenHelp/);
+});

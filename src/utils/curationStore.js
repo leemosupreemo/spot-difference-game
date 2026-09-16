@@ -5,14 +5,32 @@
 // 3. 'wrong_difficulty' (⚠️ Keep, but wrong difficulty)
 
 import officialCuratedData from '../../official_curated_levels.json' with { type: 'json' };
+import { NEWLY_CROPPED_LEVEL_IDS } from '../data/newlyCroppedIds.js';
 
 const STORAGE_KEY = 'diff_hunter_curated_status';
+const CROPPED_RESET_KEY = 'diff_hunter_cropped_43_reset_applied_v1';
 const BASE_OFFICIAL_STATUS_MAP = officialCuratedData?.rawStatusMap || {};
 
 export function getCuratedStatusMap() {
   try {
+    const resetDone = localStorage.getItem(CROPPED_RESET_KEY);
     const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : {};
+    let parsed = saved ? JSON.parse(saved) : {};
+
+    if (!resetDone) {
+      let modified = false;
+      for (const id of NEWLY_CROPPED_LEVEL_IDS) {
+        if (id in parsed) {
+          delete parsed[id];
+          modified = true;
+        }
+      }
+      if (modified) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      }
+      localStorage.setItem(CROPPED_RESET_KEY, 'true');
+    }
+
     return { ...BASE_OFFICIAL_STATUS_MAP, ...parsed };
   } catch (e) {
     return { ...BASE_OFFICIAL_STATUS_MAP };

@@ -86,18 +86,20 @@ export default function CuratedExportModal({ isOpen, onClose }) {
       justifyContent: 'center',
       padding: '14px'
     }}>
-      <div className="glass-panel" style={{
+      <div className="glass-panel modal-split-card" style={{
         width: 'min(720px, 100%)',
-        maxHeight: '92vh',
+        maxHeight: 'calc(100dvh - 32px)',
         overflowY: 'auto',
         borderRadius: '18px',
         padding: '18px',
+        boxSizing: 'border-box',
         border: '1px solid rgba(0, 240, 255, 0.45)',
-        boxShadow: '0 0 36px rgba(0, 240, 255, 0.22)'
+        boxShadow: '0 0 36px rgba(0, 240, 255, 0.22)',
+        '--modal-accent': 'var(--accent-cyan)'
       }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px', marginBottom: '14px' }}>
           <div>
-            <h3 style={{ color: '#fff', fontWeight: 900, fontSize: '1.1rem', marginBottom: '4px' }}>
+            <h3 style={{ color: '#fff', fontWeight: 900, fontSize: '1.4rem', letterSpacing: '0.5px', marginBottom: '4px' }}>
               Curation Export
             </h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0 }}>

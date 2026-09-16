@@ -17,8 +17,8 @@ test('ConfirmExitModal shows daily challenge forfeit warning when isDaily is tru
 
   // Daily forfeit warning copy
   assert.match(source, /Forfeit Set of the Day\?/);
-  assert.match(source, /Quitting now will forfeit today's Set of the Day run as a failed attempt/);
-  assert.match(source, /You will not be able to re-attempt until tomorrow's daily refresh/);
+  assert.match(source, /This will mark today's set as a failure\./);
+  assert.doesNotMatch(source, /You will not be able to re-attempt until tomorrow's daily refresh/);
   assert.match(source, /\{isDaily \? 'Forfeit' : 'Quit to Menu'\}/);
 
   // Standard quit copy

@@ -67,7 +67,7 @@ test('daily victory keeps failure details compact and exposes a top-three leader
   assert.match(source, /leaderboardEntries\.slice\(0, 3\)/);
   assert.match(source, /className="daily-victory-results-grid"/);
   assert.match(source, /aria-label="Share daily result"/);
-  assert.match(source, /aria-label="Share daily result"[\s\S]*?width:\s*['"]34px['"]/);
+  assert.match(source, /aria-label="Share daily result"[\s\S]*?width:\s*['"]40px['"]/);
 });
 
 test('daily success replaces rank and inline leaderboard with a link beside the hero time', () => {
@@ -79,4 +79,12 @@ test('daily success replaces rank and inline leaderboard with a link beside the 
   assert.match(source, /getDailyTimeToBeat/);
   assert.match(source, /aria-label="Share daily result"[\s\S]*?totalSecStr/);
   assert.match(source, /aria-label="View daily leaderboard"/);
+});
+
+test('daily forfeit hides button to left of main menu and lets main menu take full length', () => {
+  const source = fs.readFileSync(dailyModalPath, 'utf8');
+
+  assert.match(source, /isFailed && !isForfeit/);
+  assert.match(source, /Main Menu/);
+  assert.match(source, /width:\s*['"]100%['"]/);
 });

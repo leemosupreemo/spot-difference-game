@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Flame, Star, Trophy, ArrowRight, Share2, X, Edit3, Check } from 'lucide-react';
+import { Star, Trophy, ArrowRight, Share2, X, Edit3, Check, WifiOff } from 'lucide-react';
 import { sounds } from '../utils/audio.js';
 import { getDailyLeaderboard, fetchDailyLeaderboard, updateDailyPlayerName, getDailyTimeToBeat } from '../services/dailyChallenge.js';
-import { getSavedPlayerName } from '../services/playerProgress.js';
+import { getSavedPlayerName, savePlayerName } from '../services/playerProgress.js';
+import { isOnline, subscribeNetworkStatus } from '../services/networkService.js';
 import {
   trackResultScreenViewed,
   identifyPlayer
 } from '../services/analytics.js';
 import { recordLocalShareEvent } from '../utils/challengeMetrics.js';
+import { getSetNumber } from '../utils/setLeaderboards.js';
 import ShareChallengeModal from './ShareChallengeModal.jsx';
 import TronExpiredParticles from './TronExpiredParticles.jsx';
 
@@ -19,11 +21,16 @@ export default function DailyVictoryModal({
   totalPlayers = 1,
   percentile = 95,
   stars = 3,
+  score = 0,
   isNewRecord = false,
   isFailed = false,
   isForfeit = false,
   stageIndex = 0,
   debugMode = false,
+  setId = 'set_1',
+  setNumber = null,
+  initialEditingName = false,
+  forceOffline = false,
   onRestart,
   onOpenLeaderboard,
   onClose
@@ -31,6 +38,54 @@ export default function DailyVictoryModal({
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [leaderboardEntries, setLeaderboardEntries] = useState([]);
   const [timeToBeatMs, setTimeToBeatMs] = useState(null);
+
+  const displaySetNumber = setNumber || getSetNumber(setId) || 1;
+  const isLeaderboardRecord = Boolean(!isFailed && (position === 1 || position === 2 || position === 3));
+
+  const worldTitleConfig = React.useMemo(() => {
+    if (!isFailed) {
+      if (position === 1) {
+        return {
+          title: 'World 1st!',
+          trophyColor: '#FFD700',
+          trophyGlow: 'rgba(255, 215, 0, 0.65)',
+          gradient: 'linear-gradient(90deg, #FFFFFF 0%, #FFD700 60%, #FFA500 100%)'
+        };
+      }
+      if (position === 2) {
+        return {
+          title: 'World 2nd!',
+          trophyColor: '#E0E0E0',
+          trophyGlow: 'rgba(224, 224, 224, 0.65)',
+          gradient: 'linear-gradient(90deg, #FFFFFF 0%, #E0E0E0 60%, #A0A0A0 100%)'
+        };
+      }
+      if (position === 3) {
+        return {
+          title: 'World 3rd!',
+          trophyColor: '#CD7F32',
+          trophyGlow: 'rgba(205, 127, 50, 0.65)',
+          gradient: 'linear-gradient(90deg, #FFFFFF 0%, #CD7F32 60%, #B87333 100%)'
+        };
+      }
+    }
+    return {
+      title: 'Set Complete!',
+      trophyColor: null,
+      trophyGlow: null,
+      gradient: 'linear-gradient(90deg, #fff, var(--accent-gold))'
+    };
+  }, [isFailed, position]);
+
+  const recordBadgeText = React.useMemo(() => {
+    if (isFailed) return null;
+    // World 1st, 2nd, and 3rd are prominently displayed as the modal title with the trophy
+    if (position === 1 || position === 2 || position === 3) return null;
+    if (isNewRecord) return '(personal best!)';
+    return null;
+  }, [isFailed, position, isNewRecord]);
+
+  const hasRecord = Boolean(isLeaderboardRecord || isNewRecord);
 
   const isDebug = Boolean(
     debugMode ||
@@ -44,14 +99,22 @@ export default function DailyVictoryModal({
     })())
   );
 
-  const [isEditingName, setIsEditingName] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(initialEditingName);
   const [customPlayerName, setCustomPlayerName] = useState(() => getSavedPlayerName() || 'SpeedHunter');
+  const [networkOnline, setNetworkOnline] = useState(() => forceOffline ? false : isOnline());
+
+  useEffect(() => {
+    return subscribeNetworkStatus(online => {
+      if (!forceOffline) setNetworkOnline(online);
+    });
+  }, [forceOffline]);
 
   const handleSaveName = async () => {
     const trimmed = customPlayerName.trim();
     if (!trimmed) return;
     try { sounds.playTap(); } catch (_) {}
     setIsEditingName(false);
+    savePlayerName(trimmed);
     await updateDailyPlayerName(trimmed);
     identifyPlayer(trimmed, {
       "Hunter Tag": trimmed,
@@ -94,23 +157,116 @@ export default function DailyVictoryModal({
       });
 
       if (!isFailed) {
+        const isLeaderboardRecord = Boolean(position && position <= 3);
+        const isPb = Boolean(isNewRecord && !isLeaderboardRecord);
+
         if (typeof sounds.playFanfare === 'function') {
-          sounds.playFanfare(stars);
+          sounds.playFanfare(stars, { isLeaderboardRecord, isPersonalBest: isPb });
         } else {
-          sounds.playWin(stars);
+          sounds.playWin(stars, { isLeaderboardRecord, isPersonalBest: isPb });
         }
 
-        // Fire festive confetti
-        const colors = ['#FFD700', '#FF007F', '#00F0FF', '#00FF87', '#FFA500'];
-        confetti({
-          particleCount: 160,
-          spread: 90,
-          origin: { y: 0.65 },
-          colors
-        });
+        const goldenFireworksColors = ['#FFD700', '#FFA500', '#FFDF00', '#FFEAA7', '#D4AF37', '#FFF380', '#DAA520', '#FFFFFF', '#F39C12'];
+        const pbFireworksColors = ['#00F0FF', '#FF007F', '#00FF88', '#9D4EDD', '#FFB703', '#3A86FF', '#FFFFFF'];
+        const standardColors = ['#00F0FF', '#7000FF', '#FF007F', '#00FF88', '#38EF7D', '#3A86FF', '#F12711'];
+
+        try {
+          if (isLeaderboardRecord) {
+            // Golden Fireworks for New Daily Leaderboard Record (Top 3)
+            confetti({
+              particleCount: 110,
+              spread: 360,
+              startVelocity: 42,
+              ticks: 130,
+              origin: { x: 0.5, y: 0.35 },
+              colors: goldenFireworksColors,
+              scalar: 1.25
+            });
+            setTimeout(() => {
+              try {
+                confetti({
+                  particleCount: 80,
+                  spread: 360,
+                  startVelocity: 38,
+                  ticks: 110,
+                  origin: { x: 0.22, y: 0.45 },
+                  colors: goldenFireworksColors,
+                  scalar: 1.15
+                });
+              } catch (_) {}
+            }, 140);
+            setTimeout(() => {
+              try {
+                confetti({
+                  particleCount: 80,
+                  spread: 360,
+                  startVelocity: 38,
+                  ticks: 110,
+                  origin: { x: 0.78, y: 0.45 },
+                  colors: goldenFireworksColors,
+                  scalar: 1.15
+                });
+              } catch (_) {}
+            }, 280);
+          } else if (isPb) {
+            // Vibrant Fireworks Variant for Personal Best
+            confetti({
+              particleCount: 100,
+              spread: 360,
+              startVelocity: 40,
+              ticks: 120,
+              origin: { x: 0.5, y: 0.38 },
+              colors: pbFireworksColors,
+              scalar: 1.2
+            });
+            setTimeout(() => {
+              try {
+                confetti({
+                  particleCount: 75,
+                  spread: 360,
+                  startVelocity: 36,
+                  ticks: 100,
+                  origin: { x: 0.28, y: 0.42 },
+                  colors: pbFireworksColors,
+                  scalar: 1.1
+                });
+              } catch (_) {}
+            }, 140);
+            setTimeout(() => {
+              try {
+                confetti({
+                  particleCount: 75,
+                  spread: 360,
+                  startVelocity: 36,
+                  ticks: 100,
+                  origin: { x: 0.72, y: 0.42 },
+                  colors: pbFireworksColors,
+                  scalar: 1.1
+                });
+              } catch (_) {}
+            }, 280);
+          } else if (stars === 3) {
+            // More for 3 stars
+            confetti({
+              particleCount: 180,
+              spread: 90,
+              origin: { y: 0.65 },
+              colors: ['#FFD700', '#FFA500', '#FFDF00', '#F7B731', '#FFEAA7', '#00F0FF']
+            });
+          } else if (stars === 2) {
+            // Some for 2 stars
+            confetti({
+              particleCount: 75,
+              spread: 60,
+              origin: { y: 0.65 },
+              colors: standardColors
+            });
+          }
+          // None for 1 star (no confetti)
+        } catch (_) {}
       }
     }
-  }, [isOpen, stars, isFailed, totalTimeMs, percentile, isNewRecord]);
+  }, [isOpen, stars, isFailed, totalTimeMs, percentile, isNewRecord, position]);
 
   if (!isOpen) return null;
 
@@ -143,7 +299,7 @@ export default function DailyVictoryModal({
       }}
     >
       <div
-        className="glass-panel"
+        className="glass-panel modal-split-card"
         onClick={(e) => e.stopPropagation()}
         style={{
           width: '100%',
@@ -167,31 +323,34 @@ export default function DailyVictoryModal({
             : '0 0 45px rgba(0, 240, 255, 0.35)',
           textAlign: 'center',
           boxSizing: 'border-box',
-          position: 'relative'
+          position: 'relative',
+          '--modal-accent': isFailed ? 'var(--accent-pink)' : isNewRecord ? 'var(--accent-gold)' : 'var(--accent-cyan)'
         }}
       >
         {isFailed && <TronExpiredParticles />}
-        {/* Top Right Close "X" Button */}
-        <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: '8px', zIndex: 10 }}>
-          <button
-            onClick={handleShare}
-            aria-label="Share daily result"
-            title="Share result"
-            className="glass-btn"
-            style={{ width: '34px', height: '34px', padding: 0, justifyContent: 'center', borderRadius: '10px' }}
-          >
-            <Share2 size={16} />
-          </button>
-          <button
-            onClick={() => { sounds.playTap(); if (onOpenLeaderboard) onOpenLeaderboard(); }}
-            aria-label="View daily leaderboard"
-            title="View daily leaderboard"
-            className="glass-btn"
-            style={{ width: '34px', height: '34px', padding: 0, justifyContent: 'center', borderRadius: '10px' }}
-          >
-            <Trophy size={16} color="var(--accent-gold)" />
-          </button>
-        </div>
+        {/* Top Left Actions on Failure */}
+        {isFailed && (
+          <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', gap: '8px', zIndex: 10 }}>
+            <button
+              onClick={handleShare}
+              aria-label="Share daily result"
+              title="Share result"
+              className="glass-btn"
+              style={{ width: '40px', height: '40px', padding: 0, justifyContent: 'center', borderRadius: '12px' }}
+            >
+              <Share2 size={20} />
+            </button>
+            <button
+              onClick={() => { sounds.playTap(); if (onOpenLeaderboard) onOpenLeaderboard(); }}
+              aria-label="View daily leaderboard"
+              title="View daily leaderboard"
+              className="glass-btn"
+              style={{ width: '40px', height: '40px', padding: 0, justifyContent: 'center', borderRadius: '12px' }}
+            >
+              <Trophy size={20} color="var(--accent-gold)" />
+            </button>
+          </div>
+        )}
         <button
           onClick={() => {
             try { sounds.playTap(); } catch (_) {}
@@ -199,8 +358,8 @@ export default function DailyVictoryModal({
           }}
           style={{
             position: 'absolute',
-            top: 14,
-            right: 14,
+            top: 12,
+            right: 12,
             background: 'rgba(255,255,255,0.08)',
             border: '1px solid var(--border-glass)',
             color: 'var(--text-muted)',
@@ -217,41 +376,85 @@ export default function DailyVictoryModal({
         >
           <X size={18} />
         </button>
-        {/* Header Badge */}
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '6px 14px',
-            borderRadius: '20px',
-            background: isFailed
-              ? 'linear-gradient(135deg, rgba(255, 0, 127, 0.25), rgba(255, 80, 0, 0.25))'
-              : 'linear-gradient(135deg, rgba(255, 0, 127, 0.25), rgba(255, 183, 3, 0.25))',
-            border: isFailed
-              ? '1px solid rgba(255, 0, 127, 0.5)'
-              : '1px solid rgba(255, 183, 3, 0.4)',
-            marginBottom: '12px'
-          }}
-        >
-          <Flame size={18} color={isFailed ? 'var(--accent-pink)' : 'var(--accent-gold)'} />
-          <span
-            style={{
-              fontSize: '0.85rem',
+
+        {/* Header: "Set Complete!" with Leaderboard button on left for success, or failure text title */}
+        {!isFailed ? (
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '40px', marginBottom: '8px', padding: '0 48px' }}>
+            <button
+              onClick={() => { sounds.playTap(); if (onOpenLeaderboard) onOpenLeaderboard(); }}
+              aria-label="View daily leaderboard"
+              title="View daily leaderboard"
+              className="glass-btn"
+              style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                width: '40px',
+                height: '40px',
+                padding: 0,
+                borderRadius: '12px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--border-glass)',
+                cursor: 'pointer',
+                zIndex: 5
+              }}
+            >
+              <Trophy size={20} color="var(--accent-gold)" />
+            </button>
+
+            <h2 style={{
+              fontSize: '1.4rem',
               fontWeight: 900,
-              color: isFailed ? 'var(--accent-pink)' : 'var(--accent-gold)',
-              letterSpacing: '1px'
+              margin: 0,
+              letterSpacing: '0.5px',
+              textAlign: 'center',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
+            }}>
+              {worldTitleConfig.trophyColor && (
+                <Trophy
+                  size={22}
+                  color={worldTitleConfig.trophyColor}
+                  fill={worldTitleConfig.trophyColor}
+                  style={{
+                    filter: `drop-shadow(0 0 10px ${worldTitleConfig.trophyGlow})`,
+                    flexShrink: 0
+                  }}
+                />
+              )}
+              <span style={{
+                background: worldTitleConfig.gradient,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>
+                {worldTitleConfig.title}
+              </span>
+            </h2>
+          </div>
+        ) : (
+          <h2
+            style={{
+              fontSize: '1.4rem',
+              fontWeight: 900,
+              color: 'var(--accent-pink)',
+              letterSpacing: '0.5px',
+              margin: '30px 0 14px 0',
+              textAlign: 'center',
+              lineHeight: 1.2
             }}
           >
-            {isFailed
-              ? (isForfeit ? 'DAILY CHALLENGE FORFEITED' : 'DAILY CHALLENGE RUN ENDED')
-              : 'DAILY CHALLENGE COMPLETE'}
-          </span>
-        </div>
+            {isForfeit ? 'DAILY CHALLENGE FORFEITED' : 'DAILY CHALLENGE RUN ENDED'}
+          </h2>
+        )}
 
         {/* Stars Awarded (Only on Success) */}
         {!isFailed && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '12px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '8px' }}>
             {[1, 2, 3].map((starIndex) => {
               const isEarned = starIndex <= stars;
               return (
@@ -276,24 +479,37 @@ export default function DailyVictoryModal({
           </div>
         )}
 
+        {/* Underneath centered: Pts */}
+        {!isFailed && (
+          <div style={{
+            fontSize: '1.25rem',
+            fontWeight: 900,
+            color: 'var(--accent-gold)',
+            fontFamily: 'var(--font-mono)',
+            textAlign: 'center',
+            marginBottom: '4px'
+          }}>
+            {score.toLocaleString()} PTS
+          </div>
+        )}
+
         {/* Hero Completion Time (Only on Success) */}
         {!isFailed && (
-          <div style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-            <div>
-            <div
+          <div style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            {hasRecord && (
+              <button
+                onClick={handleShare}
+                aria-label="Share daily result"
+                title="Share daily result"
+                className="glass-btn"
+                style={{ width: '40px', height: '40px', padding: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', background: 'linear-gradient(135deg, rgba(255, 183, 3, 0.9), rgba(255, 110, 0, 0.95))', color: '#000', border: 'none', cursor: 'pointer' }}
+              >
+                <Share2 size={20} />
+              </button>
+            )}
+            <span
               style={{
-                fontSize: '0.74rem',
-                fontWeight: 800,
-                color: 'var(--text-muted)',
-                textTransform: 'uppercase',
-                letterSpacing: '1px'
-              }}
-            >
-              TIME
-            </div>
-            <div
-              style={{
-                fontSize: '2.9rem',
+                fontSize: '2.4rem',
                 fontWeight: 900,
                 fontFamily: 'var(--font-mono)',
                 color: '#ffffff',
@@ -302,25 +518,42 @@ export default function DailyVictoryModal({
               }}
             >
               {totalSecStr}s
-            </div>
-            {isNewRecord && (
-              <div
+            </span>
+            {recordBadgeText && (
+              <span
                 style={{
-                  fontSize: '0.86rem',
+                  fontSize: '0.88rem',
                   fontWeight: 900,
                   color: 'var(--accent-gold)',
-                  marginTop: '4px',
                   textShadow: '0 0 10px rgba(255, 183, 3, 0.8)'
                 }}
               >
-                👑 NEW #1 FASTEST TIME FOR TODAY!
-              </div>
+                {recordBadgeText}
+              </span>
             )}
-            </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap', marginBottom: '12px', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 700 }}>
-            <span>Top {Math.max(1, Math.round(100 - percentile))}%</span>
-            {timeToBeatMs > 0 && <span>Beat { (timeToBeatMs / 1000).toFixed(2) }s</span>}
           </div>
+        )}
+
+        {/* Details Subsection: Left-aligned details with right-aligned values (no attempt # for daily) */}
+        {!isFailed && (
+          <div style={{
+            background: 'rgba(0, 0, 0, 0.45)',
+            border: '1px solid var(--border-glass)',
+            borderRadius: '14px',
+            padding: '10px 16px',
+            marginBottom: '14px',
+            fontSize: '0.95rem',
+            textAlign: 'left'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 0', borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Set #</span>
+              <span style={{ fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)' }}>{displaySetNumber}</span>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 0' }}>
+              <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Percentile</span>
+              <span style={{ fontWeight: 800, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>Top {Math.max(1, Math.round(100 - percentile))}%</span>
+            </div>
           </div>
         )}
 
@@ -376,15 +609,36 @@ export default function DailyVictoryModal({
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '6px 10px',
-                  background: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  borderRadius: '8px',
+                  padding: isLeaderboardRecord ? '8px 12px' : '6px 10px',
+                  background: isLeaderboardRecord
+                    ? 'linear-gradient(135deg, rgba(255, 183, 3, 0.16), rgba(0, 0, 0, 0.6))'
+                    : 'rgba(255, 255, 255, 0.04)',
+                  border: isLeaderboardRecord
+                    ? '1.5px solid var(--accent-gold)'
+                    : '1px solid rgba(255, 255, 255, 0.08)',
+                  boxShadow: isLeaderboardRecord
+                    ? '0 0 16px rgba(255, 183, 3, 0.25)'
+                    : 'none',
+                  borderRadius: isLeaderboardRecord ? '10px' : '8px',
                   marginBottom: '10px',
                   fontSize: '0.78rem'
                 }}
               >
-                <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Your Hunter Tag:</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {isLeaderboardRecord && <Trophy size={14} color="var(--accent-gold)" />}
+                  <span style={{
+                    color: isLeaderboardRecord ? 'var(--accent-gold)' : 'var(--text-muted)',
+                    fontWeight: isLeaderboardRecord ? 800 : 600,
+                    letterSpacing: isLeaderboardRecord ? '0.3px' : 'normal'
+                  }}>
+                    {isLeaderboardRecord ? 'LEADERBOARD QUALIFIED! Your Hunter Tag:' : 'Your Hunter Tag:'}
+                  </span>
+                  {!networkOnline && (
+                    <span style={{ fontSize: '0.68rem', color: 'var(--accent-gold)', display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                      <WifiOff size={11} /> (offline, syncs online)
+                    </span>
+                  )}
+                </div>
                 {isEditingName ? (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <input
@@ -395,7 +649,7 @@ export default function DailyVictoryModal({
                       autoFocus
                       style={{
                         background: 'rgba(0, 0, 0, 0.6)',
-                        border: '1px solid var(--accent-cyan)',
+                        border: isLeaderboardRecord ? '1px solid var(--accent-gold)' : '1px solid var(--accent-cyan)',
                         color: '#fff',
                         borderRadius: '6px',
                         padding: '3px 8px',
@@ -412,7 +666,9 @@ export default function DailyVictoryModal({
                     <button
                       onClick={handleSaveName}
                       style={{
-                        background: 'var(--accent-cyan)',
+                        background: isLeaderboardRecord
+                          ? 'linear-gradient(135deg, var(--accent-gold), #FFA500)'
+                          : 'var(--accent-cyan)',
                         color: '#000',
                         border: 'none',
                         borderRadius: '5px',
@@ -430,7 +686,7 @@ export default function DailyVictoryModal({
                   </div>
                 ) : (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ color: 'var(--accent-cyan)', fontWeight: 800 }}>
+                    <span style={{ color: isLeaderboardRecord ? 'var(--accent-gold)' : 'var(--accent-cyan)', fontWeight: 800 }}>
                       {customPlayerName}
                     </span>
                     <button
@@ -547,7 +803,7 @@ export default function DailyVictoryModal({
 
         {/* Action Buttons */}
         <div style={{ display: 'flex', gap: '10px' }}>
-          {isFailed && (
+          {isFailed && !isForfeit && (
           <button
             onClick={() => {
               sounds.playTap();
@@ -574,7 +830,8 @@ export default function DailyVictoryModal({
             }}
             className="glass-btn glass-btn-primary"
             style={{
-              flex: isFailed ? 1.2 : 1,
+              flex: (isFailed && !isForfeit) ? 1.2 : 1,
+              width: '100%',
               justifyContent: 'center',
               padding: '10px',
               fontSize: '0.95rem',

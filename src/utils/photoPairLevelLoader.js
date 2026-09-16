@@ -35,11 +35,13 @@ function shuffleEntries(entries, seed) {
 }
 
 import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
+import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
 
 export function getAllPhotoPairEntries() {
   const entries = loadManifest();
   const statusMap = getCuratedStatusMap();
-  const unrated = [];
+  const unratedCropped = [];
+  const otherUnrated = [];
   const rated = [];
 
   for (const entry of entries) {
@@ -47,13 +49,17 @@ export function getAllPhotoPairEntries() {
     if (statusVal === 'dismissed') continue;
 
     if (!statusVal) {
-      unrated.push(entry);
+      if (NEWLY_CROPPED_LEVEL_IDS_SET.has(entry.id)) {
+        unratedCropped.push(entry);
+      } else {
+        otherUnrated.push(entry);
+      }
     } else {
       rated.push(entry);
     }
   }
 
-  return [...unrated, ...rated];
+  return [...unratedCropped, ...otherUnrated, ...rated];
 }
 
 import { getCachedRemoteLevels } from '../services/remoteLevelSync.js';

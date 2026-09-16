@@ -55,6 +55,12 @@ test('game-viewport includes thin vertical divider line without altering layout 
   assert.match(cssSource, /\.game-viewport::after\s*\{[^}]*pointer-events:\s*none/);
 });
 
+test('photo mode preserves each source pair aspect ratio', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /style=\{\{ aspectRatio: cardAspectRatio \}\}/g);
+  assert.doesNotMatch(source, /aspectRatio: isPhoto \? '4 \/ 3' : cardAspectRatio/);
+});
+
 test('quick one tap outside either left or right image bounds toggles zoom mode off', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
@@ -65,7 +71,5 @@ test('quick one tap outside either left or right image bounds toggles zoom mode 
   assert.match(source, /setMagnifierEnabled\(false\)/);
   assert.match(source, /sounds\.playTap\(\)/);
 });
-
-
 
 

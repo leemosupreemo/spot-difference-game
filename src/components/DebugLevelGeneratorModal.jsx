@@ -125,18 +125,19 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
       }}
     >
       <div
-        className="glass-panel"
+        className="glass-panel modal-split-card"
         onClick={(e) => e.stopPropagation()}
         style={{
         maxWidth: '780px',
         width: '100%',
-        maxHeight: '90vh',
+        maxHeight: 'calc(100dvh - 32px)',
         overflowY: 'auto',
         borderRadius: '24px',
         padding: '28px',
+        boxSizing: 'border-box',
         border: '1px solid rgba(0, 240, 255, 0.4)',
         boxShadow: '0 0 40px rgba(0, 240, 255, 0.25)',
-        animation: 'pageFadeIn 0.12s ease-out'
+        '--modal-accent': 'var(--accent-cyan)'
       }}>
         
         {/* Header */}
@@ -146,7 +147,7 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
               <Cpu size={24} color="var(--accent-cyan)" />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff' }}>
+              <h2 style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '0.5px', color: '#fff' }}>
                 🛠️ DEV DEBUG LEVEL BUILDER PIPELINE
               </h2>
               <span style={{ fontSize: '0.78rem', color: 'var(--accent-gold)', fontWeight: 600 }}>

@@ -98,10 +98,32 @@ export default function ShareChallengeModal({
 
   return (
     <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: '16px', paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
-      <div role="dialog" aria-modal="true" aria-labelledby="share-result-title" className="glass-panel" onClick={event => event.stopPropagation()} style={{ width: '100%', maxWidth: '440px', padding: '20px', borderRadius: '22px', maxHeight: '80dvh', overflowY: 'auto', background: '#111827' }}>
+      <div role="dialog" aria-modal="true" aria-labelledby="share-result-title" className="glass-panel modal-split-card" onClick={event => event.stopPropagation()} style={{ width: '100%', maxWidth: '440px', padding: '20px', borderRadius: '22px', maxHeight: '80dvh', overflowY: 'auto', background: '#111827', '--modal-accent': 'var(--accent-cyan)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <h2 id="share-result-title" style={{ margin: 0, fontSize: '1.1rem' }}>Share result</h2>
-          <button autoFocus className="glass-btn" aria-label="Close share sheet" onClick={onClose} style={{ padding: '10px' }}><X size={18} /></button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Share2 size={22} color="var(--accent-cyan)" />
+            <h2 id="share-result-title" style={{ margin: 0, fontSize: '1.4rem', fontWeight: 900, letterSpacing: '0.5px', color: '#fff' }}>
+              Share result
+            </h2>
+          </div>
+          <button
+            autoFocus
+            className="glass-btn"
+            aria-label="Close share sheet"
+            onClick={onClose}
+            style={{
+              padding: 0,
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--text-muted)'
+            }}
+          >
+            <X size={18} />
+          </button>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
           {options.map(([platform, label, icon]) => (

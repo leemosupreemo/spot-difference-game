@@ -86,7 +86,7 @@ export default function RatingModal({
       }}
     >
       <div
-        className="glass-panel"
+        className="glass-panel modal-split-card"
         onClick={(e) => e.stopPropagation()}
         style={{
           maxWidth: '400px',
@@ -99,8 +99,8 @@ export default function RatingModal({
           borderRadius: '24px',
           border: '2px solid rgba(255, 183, 3, 0.4)',
           boxShadow: '0 0 45px rgba(255, 183, 3, 0.25), 0 20px 50px rgba(0, 0, 0, 0.7)',
-          animation: 'pageFadeIn 0.15s ease-out',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          '--modal-accent': 'var(--accent-gold)'
         }}
       >
         {/* Close "X" Button */}
@@ -128,25 +128,26 @@ export default function RatingModal({
 
         {/* Top Floating Heart Icon */}
         <div style={{
-          width: '52px',
-          height: '52px',
+          width: '56px',
+          height: '56px',
           borderRadius: '50%',
           background: 'linear-gradient(135deg, rgba(255, 0, 127, 0.25), rgba(255, 183, 3, 0.3))',
           border: '2px solid var(--accent-gold)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '4px auto 14px auto',
+          margin: '0 auto 14px auto',
           boxShadow: '0 0 22px rgba(255, 183, 3, 0.45)'
         }}>
-          <Heart size={26} color="var(--accent-pink)" fill="var(--accent-pink)" />
+          <Heart size={28} color="var(--accent-pink)" fill="var(--accent-pink)" />
         </div>
 
         {/* Header Title */}
         <h2 style={{
-          fontSize: '1.45rem',
+          fontSize: '1.4rem',
           fontWeight: 900,
-          margin: '0 0 18px 0',
+          letterSpacing: '0.5px',
+          margin: '0 0 16px 0',
           background: 'linear-gradient(90deg, #ffffff, var(--accent-gold))',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'

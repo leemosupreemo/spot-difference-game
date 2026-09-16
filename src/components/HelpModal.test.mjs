@@ -29,4 +29,5 @@ test('HelpModal How to Play rules focus on tap the difference without original/m
   assert.match(source, /Tap the Difference/);
   assert.match(source, /plain and simple/);
   assert.match(source, /Speedrun Timer/);
+  assert.doesNotMatch(source, /clear the stage/i);
 });

@@ -45,3 +45,31 @@ test('uses the compact share sheet and percentile benchmark', () => {
   assert.match(source, /trackResultScreenViewed/);
   assert.doesNotMatch(source, /PERFORMANCE BENCHMARK/);
 });
+
+test('keeps Stage Clear actions compact and focused on the next stage', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.doesNotMatch(source, />\s*<RotateCcw[^>]*\/>\s*Retry/);
+  assert.match(source, /aria-label="Share result"/);
+  assert.match(source, /gridTemplateColumns: 'repeat\(3, 1fr\)'/);
+  assert.match(source, /width: '100%'[\s\S]*Next Stage/);
+});
+
+test('calculates World Top 3 rank and displays World 1st/2nd/3rd title with gold/silver/bronze trophy', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /calculateSetWorldRank/);
+  assert.match(source, /worldRank === 1[\s\S]*World 1st![\s\S]*#FFD700/);
+  assert.match(source, /worldRank === 2[\s\S]*World 2nd![\s\S]*#E0E0E0/);
+  assert.match(source, /worldRank === 3[\s\S]*World 3rd![\s\S]*#CD7F32/);
+  assert.doesNotMatch(source, /\(world 1st!\)/);
+});
+
+test('supports different levels of fanfare with fireworks for leaderboard records and personal best', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Confirms tiered fanfare and fireworks logic
+  assert.match(source, /isLeaderboardRecord/);
+  assert.match(source, /isPb/);
+  assert.match(source, /goldenFireworksColors/);
+  assert.match(source, /pbFireworksColors/);
+  assert.match(source, /sounds\.playFanfare\(displayStars,\s*\{\s*isLeaderboardRecord,\s*isPersonalBest:\s*isPb\s*\}\)/);
+});

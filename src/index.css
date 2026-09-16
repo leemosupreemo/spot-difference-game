@@ -44,6 +44,7 @@ body {
   font-family: var(--font-main);
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   padding-top: max(env(safe-area-inset-top), var(--safe-top, 10px));
   padding-bottom: max(env(safe-area-inset-bottom), var(--safe-bottom, 10px));
   padding-left: max(env(safe-area-inset-left), var(--safe-left, 14px));
@@ -58,6 +59,49 @@ body {
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Standardized Modal Typography & Header UI */
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.modal-hero-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px auto;
+  flex-shrink: 0;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
 }
 
 .glass-btn {
@@ -289,37 +333,331 @@ body {
   display: none;
 }
 
-@keyframes pageFadeIn {
-  from {
-    opacity: 0;
+/* ==========================================================================
+   SPLIT-MEET ASSEMBLE ANIMATIONS (MODALS & SCREEN TRANSITIONS)
+   Left and right halves render on the outside and meet in the middle
+   ========================================================================== */
+
+@-webkit-keyframes splitDoorSlideLeft {
+  0% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    opacity: 0.8;
   }
-  to {
+  96% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes splitDoorSlideLeft {
+  0% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    opacity: 0.8;
+  }
+  96% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@-webkit-keyframes splitDoorSlideRight {
+  0% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    opacity: 0.8;
+  }
+  96% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes splitDoorSlideRight {
+  0% {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    opacity: 0.8;
+  }
+  96% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@-webkit-keyframes splitMeetReveal {
+  0% {
+    opacity: 0;
+    -webkit-clip-path: polygon(
+      0% 0%, 0% 0%, 0% 100%, 0% 100%,
+      100% 0%, 100% 0%, 100% 100%, 100% 100%
+    );
+    clip-path: polygon(
+      0% 0%, 0% 0%, 0% 100%, 0% 100%,
+      100% 0%, 100% 0%, 100% 100%, 100% 100%
+    );
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+  }
+  20% {
     opacity: 1;
+  }
+  96% {
+    -webkit-clip-path: polygon(
+      0% 0%, 50.5% 0%, 50.5% 100%, 0% 100%,
+      49.5% 0%, 100% 0%, 100% 100%, 49.5% 100%
+    );
+    clip-path: polygon(
+      0% 0%, 50.5% 0%, 50.5% 100%, 0% 100%,
+      49.5% 0%, 100% 0%, 100% 100%, 49.5% 100%
+    );
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-clip-path: none;
+    clip-path: none;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes splitMeetReveal {
+  0% {
+    opacity: 0;
+    -webkit-clip-path: polygon(
+      0% 0%, 0% 0%, 0% 100%, 0% 100%,
+      100% 0%, 100% 0%, 100% 100%, 100% 100%
+    );
+    clip-path: polygon(
+      0% 0%, 0% 0%, 0% 100%, 0% 100%,
+      100% 0%, 100% 0%, 100% 100%, 100% 100%
+    );
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+  }
+  20% {
+    opacity: 1;
+  }
+  96% {
+    -webkit-clip-path: polygon(
+      0% 0%, 50.5% 0%, 50.5% 100%, 0% 100%,
+      49.5% 0%, 100% 0%, 100% 100%, 49.5% 100%
+    );
+    clip-path: polygon(
+      0% 0%, 50.5% 0%, 50.5% 100%, 0% 100%,
+      49.5% 0%, 100% 0%, 100% 100%, 49.5% 100%
+    );
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-clip-path: none;
+    clip-path: none;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/* Updated pageFadeIn to split-meet entrance */
+@-webkit-keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+    -webkit-clip-path: polygon(
+      0% 0%, 0% 0%, 0% 100%, 0% 100%,
+      100% 0%, 100% 0%, 100% 100%, 100% 100%
+    );
+    clip-path: polygon(
+      0% 0%, 0% 0%, 0% 100%, 0% 100%,
+      100% 0%, 100% 0%, 100% 100%, 100% 100%
+    );
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+  }
+  20% {
+    opacity: 1;
+  }
+  96% {
+    -webkit-clip-path: polygon(
+      0% 0%, 50.5% 0%, 50.5% 100%, 0% 100%,
+      49.5% 0%, 100% 0%, 100% 100%, 49.5% 100%
+    );
+    clip-path: polygon(
+      0% 0%, 50.5% 0%, 50.5% 100%, 0% 100%,
+      49.5% 0%, 100% 0%, 100% 100%, 49.5% 100%
+    );
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-clip-path: none;
+    clip-path: none;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+    -webkit-clip-path: polygon(
+      0% 0%, 0% 0%, 0% 100%, 0% 100%,
+      100% 0%, 100% 0%, 100% 100%, 100% 100%
+    );
+    clip-path: polygon(
+      0% 0%, 0% 0%, 0% 100%, 0% 100%,
+      100% 0%, 100% 0%, 100% 100%, 100% 100%
+    );
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+  }
+  20% {
+    opacity: 1;
+  }
+  96% {
+    -webkit-clip-path: polygon(
+      0% 0%, 50.5% 0%, 50.5% 100%, 0% 100%,
+      49.5% 0%, 100% 0%, 100% 100%, 49.5% 100%
+    );
+    clip-path: polygon(
+      0% 0%, 50.5% 0%, 50.5% 100%, 0% 100%,
+      49.5% 0%, 100% 0%, 100% 100%, 49.5% 100%
+    );
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-clip-path: none;
+    clip-path: none;
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
 }
 
 .page-fade-in {
-  animation: pageFadeIn 0.15s ease-out forwards;
-  will-change: opacity;
+  animation: pageFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes screenViewEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.992);
-    filter: saturate(0.7) brightness(0.88);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: saturate(1) brightness(1);
-  }
-}
-
+/* Full Screen Transition View */
 .screen-view-transition {
-  animation: screenViewEnter 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
-  transform-origin: center top;
-  will-change: opacity, transform, filter;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+  animation: splitMeetReveal 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: center center;
+}
+
+/* Left outside screen shutter panel */
+.screen-view-transition::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.08), transparent);
+  border-right: 2px solid var(--accent-cyan, #00f0ff);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  pointer-events: none;
+  z-index: 50;
+  animation: splitDoorSlideLeft 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Right outside screen shutter panel */
+.screen-view-transition::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(270deg, rgba(0, 240, 255, 0.08), transparent);
+  border-left: 2px solid var(--accent-cyan, #00f0ff);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  pointer-events: none;
+  z-index: 50;
+  animation: splitDoorSlideRight 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Modal Split-Meet Card */
+.modal-split-card {
+  position: relative;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  animation: pageFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Left outside modal card shutter */
+.modal-split-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: var(--radius-lg, 20px) 0 0 var(--radius-lg, 20px);
+  border-right: 2px solid var(--modal-accent, var(--accent-cyan, #00f0ff));
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.08), transparent);
+  pointer-events: none;
+  z-index: 60;
+  animation: splitDoorSlideLeft 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Right outside modal card shutter */
+.modal-split-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 0 var(--radius-lg, 20px) var(--radius-lg, 20px) 0;
+  border-left: 2px solid var(--modal-accent, var(--accent-cyan, #00f0ff));
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  background: linear-gradient(270deg, rgba(0, 240, 255, 0.08), transparent);
+  pointer-events: none;
+  z-index: 60;
+  animation: splitDoorSlideRight 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes hitPulse {
@@ -543,6 +881,21 @@ body {
   transition: max-width 0.2s ease;
 }
 
+@media (max-width: 520px) {
+  .header-container {
+    padding: 0 8px !important;
+  }
+  .header-container header {
+    padding: 8px 10px !important;
+  }
+  .header-secondary-btn {
+    padding: 8px 10px !important;
+  }
+  .header-secondary-btn span {
+    display: none !important;
+  }
+}
+
 .tutorial-card {
   position: relative;
   width: 100%;
@@ -679,8 +1032,18 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .screen-view-transition {
-    animation: none;
+  .screen-view-transition,
+  .modal-split-card,
+  .page-fade-in {
+    animation: none !important;
+    -webkit-clip-path: none !important;
+    clip-path: none !important;
+  }
+  .screen-view-transition::before,
+  .screen-view-transition::after,
+  .modal-split-card::before,
+  .modal-split-card::after {
+    display: none !important;
   }
   .tron-expired-scanline,
   .tron-expired-particle {

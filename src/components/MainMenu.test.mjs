@@ -28,13 +28,13 @@ test('MainMenu supports incoming challenge banner for viral link reception', () 
   assert.match(source, /Can you beat/);
 });
 
-test('MainMenu exposes a controlled Photo Set selector only for Photography mode', () => {
+test('MainMenu exposes a controlled Photo Set selector only in debug mode for Photography mode', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
   assert.match(source, /photoSetIds/);
   assert.match(source, /photoSetId/);
   assert.match(source, /onPhotoSetChange/);
-  assert.match(source, /selectedTheme === 'find_the_sniper'/);
+  assert.match(source, /debugMode && selectedTheme === 'find_the_sniper'/);
   assert.match(source, /<select/);
   assert.match(source, /PHOTO SET/);
 });
@@ -44,7 +44,16 @@ test('MainMenu conditionally displays TutorialBanner only until first image set 
 
   assert.match(source, /hasCompletedFirstSet/);
   assert.match(source, /isSetCompleted/);
-  assert.match(source, /\{!isSetCompleted && <TutorialBanner \/>\}/);
+  assert.match(source, /\(!isSetCompleted \|\| debugMode\)/);
+  assert.match(source, /tutorialAnimationEnabled &&/);
+});
+
+test('MainMenu exposes debug-only tutorial animation toggle and daily banner slot', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /bannerSlot/);
+  assert.match(source, /Tutorial Animation: ON/);
+  assert.match(source, /Tutorial Animation: OFF/);
 });
 
 test('MainMenu enforces max length on Start Game button with periodic sheen and ripples removed', () => {
@@ -67,6 +76,3 @@ test('index.css defines periodic sheen shimmer on start game button with ripples
   assert.doesNotMatch(css, /@keyframes pondPropagateAndBounce/);
   assert.doesNotMatch(css, /startBtnWavePulse/);
 });
-
-
-

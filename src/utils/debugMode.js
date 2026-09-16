@@ -10,8 +10,16 @@
  * ================================================================================
  */
 
+import { Capacitor } from '@capacitor/core';
+
 export function isDevEnvironment() {
   try {
+    // Native mobile app containers (Capacitor on iOS / Android) run from localhost internally.
+    // They are native production builds, NOT browser dev environments!
+    if (typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform()) {
+      return false;
+    }
+
     if (typeof window !== 'undefined' && window.location) {
       const hostname = window.location.hostname || '';
       if (

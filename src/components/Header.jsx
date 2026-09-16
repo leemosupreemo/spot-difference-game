@@ -14,6 +14,11 @@ export default function Header({
   onToggleDebug,
   debugMode = false
 }) {
+  const [logoTapCount, setLogoTapCount] = React.useState(0);
+  const lastLogoTapRef = React.useRef(0);
+
+  if (view === 'game') return null;
+
   const toggleSound = () => {
     const isMuted = sounds.toggleMute();
     setMuted(isMuted);
@@ -24,9 +29,6 @@ export default function Header({
     if (onOpenLeaderboard) onOpenLeaderboard();
     else if (onOpenProgress) onOpenProgress();
   };
-
-  const [logoTapCount, setLogoTapCount] = React.useState(0);
-  const lastLogoTapRef = React.useRef(0);
 
   const handleLogoTap = (e) => {
     e.stopPropagation();
@@ -46,11 +48,6 @@ export default function Header({
     }
     lastLogoTapRef.current = now;
   };
-
-  // When playing (view === 'game'), hide header entirely if not in debug mode
-  if (view === 'game' && !debugMode) {
-    return null;
-  }
 
   const maxHeaderWidth = view === 'menu' ? '850px' : view === 'stats' ? '900px' : '1300px';
 
@@ -191,7 +188,7 @@ export default function Header({
             {/* Scores Button on Menu */}
             {view === 'menu' && (
               <button
-                className="glass-btn"
+                className="glass-btn header-secondary-btn"
                 onClick={handleOpenStats}
                 title="Scores & Leaderboards"
                 style={{
@@ -201,7 +198,8 @@ export default function Header({
                   borderRadius: '12px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px'
+                  gap: '6px',
+                  flexShrink: 0
                 }}
               >
                 <Award size={22} color="var(--accent-gold)" />
@@ -209,28 +207,29 @@ export default function Header({
               </button>
             )}
 
-            {/* Help & Sound buttons appear on Menu / Stats, but disappear while playing */}
+            {/* Help stays on menu/stats; sound remains available while playing. */}
             {view !== 'game' && (
-              <>
-                <button
-                  className="glass-btn"
-                  onClick={onOpenHelp}
-                  title="How to Play & Options"
-                  style={{
-                    padding: '8px 14px',
-                    fontSize: '0.9rem',
-                    fontWeight: 800,
-                    borderRadius: '12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <Info size={22} />
-                  <span>Help</span>
-                </button>
+              <button
+                className="glass-btn header-secondary-btn"
+                onClick={onOpenHelp}
+                title="How to Play & Options"
+                style={{
+                  padding: '8px 14px',
+                  fontSize: '0.9rem',
+                  fontWeight: 800,
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  flexShrink: 0
+                }}
+              >
+                <Info size={22} />
+                <span>Help</span>
+              </button>
+            )}
 
-                <button
+            <button
                   className="glass-btn"
                   onClick={toggleSound}
                   title={muted ? "Unmute Sound" : "Mute Sound"}
@@ -244,8 +243,6 @@ export default function Header({
                 >
                   {muted ? <VolumeX size={22} color="var(--accent-pink)" /> : <Volume2 size={22} color="var(--accent-cyan)" />}
                 </button>
-              </>
-            )}
           </div>
 
         </div>

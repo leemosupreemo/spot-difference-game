@@ -182,18 +182,20 @@ export default function DiagnosticsModal({
       }}
     >
       <div
-        className="glass-panel"
+        className="glass-panel modal-split-card"
         onClick={(e) => e.stopPropagation()}
         style={{
           maxWidth: '750px',
           width: '100%',
-          maxHeight: '88vh',
+          maxHeight: 'calc(100dvh - 32px)',
           display: 'flex',
           flexDirection: 'column',
           padding: '20px',
+          boxSizing: 'border-box',
           border: '1px solid rgba(0, 240, 255, 0.4)',
           boxShadow: '0 0 35px rgba(0, 240, 255, 0.25)',
-          position: 'relative'
+          position: 'relative',
+          '--modal-accent': 'var(--accent-cyan)'
         }}
       >
         
@@ -201,15 +203,27 @@ export default function DiagnosticsModal({
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Terminal size={22} color="var(--accent-cyan)" />
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#fff', fontWeight: 900, letterSpacing: '0.5px' }}>
+            <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#fff', fontWeight: 900, letterSpacing: '0.5px' }}>
               Live System Diagnostics & Logs
             </h3>
           </div>
           <button
             onClick={() => { sounds.playTap(); onClose(); }}
-            style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '4px' }}
+            style={{
+              background: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid var(--border-glass)',
+              color: 'var(--text-muted)',
+              borderRadius: '50%',
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer'
+            }}
+            aria-label="Close"
           >
-            <X size={22} />
+            <X size={18} />
           </button>
         </div>
 

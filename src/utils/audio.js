@@ -176,12 +176,33 @@ class SoundController {
   }
 
   // Level / Stage complete fanfare
-  playWin(stars = 3) {
-    this.playFanfare(stars);
+  playWin(stars = 3, options = {}) {
+    this.playFanfare(stars, options);
   }
 
   // Celebratory fanfare when an image set / stage is completed
-  playFanfare(stars = 3) {
+  // Supports different fanfare levels:
+  // - None for 1 star (subtle haptic only)
+  // - Some for 2 stars (modest pleasant 3-note melody)
+  // - More for 3 stars (full brass herald melody with shimmer harmonics)
+  // - Energetic variant for personal best (rapid vibrant ascending arpeggio)
+  // - Grand golden royal fanfare for new leaderboard records
+  playFanfare(stars = 3, options = {}) {
+    const isLeaderboardRecord = Boolean(
+      options === 'leaderboard' ||
+      options?.isLeaderboardRecord
+    );
+    const isPersonalBest = Boolean(
+      options === 'personal_best' ||
+      options?.isPersonalBest
+    );
+
+    // 1 star with no record: None
+    if (stars <= 1 && !isLeaderboardRecord && !isPersonalBest) {
+      this.triggerHaptic('light');
+      return;
+    }
+
     this.triggerHaptic('win');
     if (this.muted) return;
     this.init();
@@ -189,30 +210,53 @@ class SoundController {
 
     try {
       const now = this.ctx.currentTime;
-      const isThreeStars = stars === 3;
+      let allNotes = [];
 
-      // Triumphant herald melody
-      const melody = [
-        { freq: 523.25, time: 0, duration: 0.12, type: 'triangle', gain: 0.22 },    // C5
-        { freq: 659.25, time: 0.12, duration: 0.12, type: 'triangle', gain: 0.22 }, // E5
-        { freq: 783.99, time: 0.24, duration: 0.14, type: 'triangle', gain: 0.25 }, // G5
-        { freq: 1046.50, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.3 }  // C6 (lead note)
-      ];
-
-      // Brass harmony chord on the final celebratory note
-      const harmonyNotes = [
-        { freq: 783.99, time: 0.38, duration: 0.55, type: 'sine', gain: 0.18 },     // G5 harmony
-        { freq: 1318.51, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.16 } // E6 harmony
-      ];
-
-      const allNotes = [...melody, ...harmonyNotes];
-
-      // If 3 stars, add shimmering golden overtones & sparkle arpeggio
-      if (isThreeStars) {
-        allNotes.push(
-          { freq: 1567.98, time: 0.44, duration: 0.45, type: 'sine', gain: 0.14 },   // G6 golden sparkle
-          { freq: 2093.00, time: 0.52, duration: 0.45, type: 'sine', gain: 0.12 }    // C7 shimmer
-        );
+      if (isLeaderboardRecord) {
+        // Grand Royal Golden Herald Fanfare for New Leaderboard Records
+        allNotes = [
+          { freq: 392.00, time: 0, duration: 0.10, type: 'triangle', gain: 0.22 },     // G4
+          { freq: 523.25, time: 0.10, duration: 0.12, type: 'triangle', gain: 0.25 },  // C5
+          { freq: 659.25, time: 0.22, duration: 0.12, type: 'triangle', gain: 0.25 },  // E5
+          { freq: 783.99, time: 0.34, duration: 0.14, type: 'triangle', gain: 0.28 },  // G5
+          { freq: 1046.50, time: 0.48, duration: 0.70, type: 'triangle', gain: 0.35 }, // C6 (grand climax)
+          { freq: 523.25, time: 0.48, duration: 0.70, type: 'sawtooth', gain: 0.14 },  // C5 brass foundation
+          { freq: 783.99, time: 0.48, duration: 0.70, type: 'sine', gain: 0.20 },      // G5
+          { freq: 1318.51, time: 0.48, duration: 0.70, type: 'triangle', gain: 0.20 }, // E6
+          { freq: 1567.98, time: 0.54, duration: 0.60, type: 'sine', gain: 0.18 },    // G6 sparkle
+          { freq: 2093.00, time: 0.62, duration: 0.60, type: 'sine', gain: 0.16 },    // C7 shimmer
+          { freq: 2637.02, time: 0.70, duration: 0.50, type: 'sine', gain: 0.12 }     // E7 golden brilliance
+        ];
+      } else if (isPersonalBest) {
+        // Energetic Variant Fanfare for Personal Best
+        allNotes = [
+          { freq: 523.25, time: 0, duration: 0.09, type: 'triangle', gain: 0.20 },     // C5
+          { freq: 659.25, time: 0.09, duration: 0.09, type: 'triangle', gain: 0.22 },  // E5
+          { freq: 783.99, time: 0.18, duration: 0.09, type: 'triangle', gain: 0.24 },  // G5
+          { freq: 987.77, time: 0.27, duration: 0.11, type: 'triangle', gain: 0.25 },  // B5
+          { freq: 1046.50, time: 0.38, duration: 0.50, type: 'triangle', gain: 0.30 }, // C6
+          { freq: 1318.51, time: 0.44, duration: 0.50, type: 'sine', gain: 0.18 },      // E6
+          { freq: 1567.98, time: 0.50, duration: 0.45, type: 'sine', gain: 0.15 }      // G6
+        ];
+      } else if (stars >= 3) {
+        // Full Triumphant Herald Fanfare for 3 Stars
+        allNotes = [
+          { freq: 523.25, time: 0, duration: 0.12, type: 'triangle', gain: 0.22 },     // C5
+          { freq: 659.25, time: 0.12, duration: 0.12, type: 'triangle', gain: 0.22 },  // E5
+          { freq: 783.99, time: 0.24, duration: 0.14, type: 'triangle', gain: 0.25 },  // G5
+          { freq: 1046.50, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.30 }, // C6
+          { freq: 783.99, time: 0.38, duration: 0.55, type: 'sine', gain: 0.18 },      // G5 harmony
+          { freq: 1318.51, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.16 }, // E6 harmony
+          { freq: 1567.98, time: 0.44, duration: 0.45, type: 'sine', gain: 0.14 },    // G6 golden sparkle
+          { freq: 2093.00, time: 0.52, duration: 0.45, type: 'sine', gain: 0.12 }     // C7 shimmer
+        ];
+      } else if (stars === 2) {
+        // Modest, Pleasant 3-Note Fanfare for 2 Stars
+        allNotes = [
+          { freq: 523.25, time: 0, duration: 0.10, type: 'triangle', gain: 0.18 },     // C5
+          { freq: 659.25, time: 0.10, duration: 0.10, type: 'triangle', gain: 0.18 },  // E5
+          { freq: 783.99, time: 0.20, duration: 0.30, type: 'triangle', gain: 0.22 }   // G5
+        ];
       }
 
       allNotes.forEach(note => {

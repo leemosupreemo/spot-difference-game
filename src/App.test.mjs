@@ -33,11 +33,11 @@ test('App.jsx tracks hasCompletedFirstSetState and passes it to MainMenu', () =>
   assert.match(source, /markFirstSetCompleted\(\)/);
 });
 
-test('Scores opens My Progress as the active default tab', () => {
+test('Scores opens Global Leaderboard as the active default tab', () => {
   const source = fs.readFileSync(appPath, 'utf8');
 
-  assert.match(source, /const handleOpenLeaderboard = \(\) => \{\s*setStatsInitialTab\('progress'\)/);
-  assert.match(source, /onOpenStats=\{\(\) => \{\s*setStatsInitialTab\('progress'\)/);
+  assert.match(source, /const handleOpenLeaderboard = \(\) => \{\s*setStatsInitialTab\('leaderboards'\)/);
+  assert.match(source, /onOpenStats=\{\(\) => \{\s*setStatsInitialTab\('leaderboards'\)/);
 });
 
 test('standard Photo Mode does not fall back to generated abstract levels', () => {
