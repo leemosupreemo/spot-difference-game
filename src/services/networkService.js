@@ -4,6 +4,8 @@
  * and offline leaderboard submission queuing so no player record is lost.
  */
 
+import { isScreenshotHarnessMode } from '../utils/screenshotMode.js';
+
 export const STORAGE_KEY_PENDING_QUEUE = 'diff_hunter_pending_leaderboard_queue';
 
 let mockOnlineState = null;
@@ -35,6 +37,7 @@ export function recordNetworkSuccess() {
  */
 export async function checkConnectivity() {
   if (mockOnlineState !== null) return mockOnlineState;
+  if (isScreenshotHarnessMode()) return isOnline();
   if (typeof fetch !== 'function') return isOnline();
 
   try {

@@ -72,6 +72,34 @@
       transform: translateY(-4px);
       border-color: var(--accent);
     }
+    .card.regression {
+      border-color: #ff3860;
+      box-shadow: 0 0 0 1px #ff3860, 0 12px 30px rgba(255, 56, 96, 0.25);
+    }
+    .triptych {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+    .triptych figure {
+      margin: 0;
+    }
+    .triptych figcaption {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    .card-img-wrap .triptych img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #05070d;
+    }
     .card-img-wrap {
       background: #05070d;
       padding: 12px;
@@ -132,6 +160,7 @@
     <p class="subtitle">Automated visual snapshot report of all modals, special menus, and victory states.</p>
     <div class="stats-bar">
       <span>Total Captured: 24/24</span>
+      
       <span>•</span>
       <span>Resolution: 786×1704 (@2x iPhone)</span>
       <span>•</span>
@@ -143,9 +172,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="01_offline-banner.png" target="_blank">
-            <img src="01_offline-banner.png" alt="Offline Warning Banner" loading="lazy">
-          </a>
+          
+            <a href="01_offline-banner.png" target="_blank">
+              <img src="01_offline-banner.png" alt="Offline Warning Banner" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">System</div>
@@ -160,9 +191,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="02_daily-banner-unattempted.png" target="_blank">
-            <img src="02_daily-banner-unattempted.png" alt="Daily Challenge Banner (Active)" loading="lazy">
-          </a>
+          
+            <a href="02_daily-banner-unattempted.png" target="_blank">
+              <img src="02_daily-banner-unattempted.png" alt="Daily Challenge Banner (Active)" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Daily</div>
@@ -177,9 +210,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="03_daily-banner-completed.png" target="_blank">
-            <img src="03_daily-banner-completed.png" alt="Daily Challenge Banner (Completed)" loading="lazy">
-          </a>
+          
+            <a href="03_daily-banner-completed.png" target="_blank">
+              <img src="03_daily-banner-completed.png" alt="Daily Challenge Banner (Completed)" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Daily</div>
@@ -194,9 +229,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="04_victory-standard.png" target="_blank">
-            <img src="04_victory-standard.png" alt="Victory - Stage Set Complete" loading="lazy">
-          </a>
+          
+            <a href="04_victory-standard.png" target="_blank">
+              <img src="04_victory-standard.png" alt="Victory - Stage Set Complete" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Victory</div>
@@ -204,16 +241,18 @@
           <p class="card-desc">Standard victory modal with 3 stars, speed points, completion time, and Next Stage button</p>
           <div class="card-footer">
             <span>04_victory-standard.png</span>
-            <span>243.9 KB</span>
+            <span>245.0 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="05_victory-world-1st.png" target="_blank">
-            <img src="05_victory-world-1st.png" alt="Victory - World 1st Rank" loading="lazy">
-          </a>
+          
+            <a href="05_victory-world-1st.png" target="_blank">
+              <img src="05_victory-world-1st.png" alt="Victory - World 1st Rank" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Victory</div>
@@ -221,16 +260,18 @@
           <p class="card-desc">Top placement in the world with gold trophy and gradient title</p>
           <div class="card-footer">
             <span>05_victory-world-1st.png</span>
-            <span>248.0 KB</span>
+            <span>247.4 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="06_victory-new-record.png" target="_blank">
-            <img src="06_victory-new-record.png" alt="Victory - New Personal Best" loading="lazy">
-          </a>
+          
+            <a href="06_victory-new-record.png" target="_blank">
+              <img src="06_victory-new-record.png" alt="Victory - New Personal Best" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Victory</div>
@@ -238,16 +279,18 @@
           <p class="card-desc">Personal best completion with golden badge and gold accent glow</p>
           <div class="card-footer">
             <span>06_victory-new-record.png</span>
-            <span>241.7 KB</span>
+            <span>242.1 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="07_victory-leaderboard.png" target="_blank">
-            <img src="07_victory-leaderboard.png" alt="Victory - Leaderboard Qualified" loading="lazy">
-          </a>
+          
+            <a href="07_victory-leaderboard.png" target="_blank">
+              <img src="07_victory-leaderboard.png" alt="Victory - Leaderboard Qualified" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Victory</div>
@@ -255,16 +298,18 @@
           <p class="card-desc">Leaderboard qualification banner displaying player tag and online status</p>
           <div class="card-footer">
             <span>07_victory-leaderboard.png</span>
-            <span>338.1 KB</span>
+            <span>337.0 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="08_victory-name-editing.png" target="_blank">
-            <img src="08_victory-name-editing.png" alt="Victory - Editing Hunter Tag" loading="lazy">
-          </a>
+          
+            <a href="08_victory-name-editing.png" target="_blank">
+              <img src="08_victory-name-editing.png" alt="Victory - Editing Hunter Tag" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Victory</div>
@@ -272,16 +317,18 @@
           <p class="card-desc">Interactive name entry input field with save checkmark for leaderboard submission</p>
           <div class="card-footer">
             <span>08_victory-name-editing.png</span>
-            <span>333.4 KB</span>
+            <span>329.0 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="09_victory-fanfare.png" target="_blank">
-            <img src="09_victory-fanfare.png" alt="Victory - Golden Celebration Fanfare" loading="lazy">
-          </a>
+          
+            <a href="09_victory-fanfare.png" target="_blank">
+              <img src="09_victory-fanfare.png" alt="Victory - Golden Celebration Fanfare" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Victory</div>
@@ -289,16 +336,18 @@
           <p class="card-desc">Celebratory golden confetti particles firing across victory screen</p>
           <div class="card-footer">
             <span>09_victory-fanfare.png</span>
-            <span>297.9 KB</span>
+            <span>297.5 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="10_victory-offline.png" target="_blank">
-            <img src="10_victory-offline.png" alt="Victory - Leaderboard Offline Sync" loading="lazy">
-          </a>
+          
+            <a href="10_victory-offline.png" target="_blank">
+              <img src="10_victory-offline.png" alt="Victory - Leaderboard Offline Sync" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Victory</div>
@@ -306,16 +355,18 @@
           <p class="card-desc">Notice explaining score is cached locally and will sync once back online</p>
           <div class="card-footer">
             <span>10_victory-offline.png</span>
-            <span>368.5 KB</span>
+            <span>375.5 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="11_daily-victory-success.png" target="_blank">
-            <img src="11_daily-victory-success.png" alt="Daily Challenge - Victory & World Rank" loading="lazy">
-          </a>
+          
+            <a href="11_daily-victory-success.png" target="_blank">
+              <img src="11_daily-victory-success.png" alt="Daily Challenge - Victory & World Rank" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Daily</div>
@@ -323,16 +374,18 @@
           <p class="card-desc">Daily Challenge completion modal with World 2nd silver trophy and 40px share button</p>
           <div class="card-footer">
             <span>11_daily-victory-success.png</span>
-            <span>287.1 KB</span>
+            <span>284.5 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="12_daily-victory-failed.png" target="_blank">
-            <img src="12_daily-victory-failed.png" alt="Daily Challenge - Run Ended" loading="lazy">
-          </a>
+          
+            <a href="12_daily-victory-failed.png" target="_blank">
+              <img src="12_daily-victory-failed.png" alt="Daily Challenge - Run Ended" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Daily</div>
@@ -340,16 +393,18 @@
           <p class="card-desc">Daily Challenge run ended modal with plain text heading and Today's Top 3 leaderboard</p>
           <div class="card-footer">
             <span>12_daily-victory-failed.png</span>
-            <span>274.5 KB</span>
+            <span>277.6 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="13_daily-victory-forfeited.png" target="_blank">
-            <img src="13_daily-victory-forfeited.png" alt="Daily Challenge - Forfeited" loading="lazy">
-          </a>
+          
+            <a href="13_daily-victory-forfeited.png" target="_blank">
+              <img src="13_daily-victory-forfeited.png" alt="Daily Challenge - Forfeited" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Daily</div>
@@ -357,16 +412,18 @@
           <p class="card-desc">Daily Challenge forfeited modal with plain text heading and full-width Main Menu button</p>
           <div class="card-footer">
             <span>13_daily-victory-forfeited.png</span>
-            <span>262.6 KB</span>
+            <span>264.2 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="14_daily-victory-name-editing.png" target="_blank">
-            <img src="14_daily-victory-name-editing.png" alt="Daily Victory - Editing Hunter Tag" loading="lazy">
-          </a>
+          
+            <a href="14_daily-victory-name-editing.png" target="_blank">
+              <img src="14_daily-victory-name-editing.png" alt="Daily Victory - Editing Hunter Tag" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Daily</div>
@@ -374,16 +431,18 @@
           <p class="card-desc">Editing Hunter Tag input field on Daily Challenge completion</p>
           <div class="card-footer">
             <span>14_daily-victory-name-editing.png</span>
-            <span>289.3 KB</span>
+            <span>291.0 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="15_confirm-exit-standard.png" target="_blank">
-            <img src="15_confirm-exit-standard.png" alt="Confirm Exit - Standard Quit" loading="lazy">
-          </a>
+          
+            <a href="15_confirm-exit-standard.png" target="_blank">
+              <img src="15_confirm-exit-standard.png" alt="Confirm Exit - Standard Quit" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Confirmation</div>
@@ -398,9 +457,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="16_confirm-exit-daily.png" target="_blank">
-            <img src="16_confirm-exit-daily.png" alt="Confirm Exit - Daily Forfeit Warning" loading="lazy">
-          </a>
+          
+            <a href="16_confirm-exit-daily.png" target="_blank">
+              <img src="16_confirm-exit-daily.png" alt="Confirm Exit - Daily Forfeit Warning" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Confirmation</div>
@@ -415,9 +476,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="17_game-over.png" target="_blank">
-            <img src="17_game-over.png" alt="Game Over - Stage Failed" loading="lazy">
-          </a>
+          
+            <a href="17_game-over.png" target="_blank">
+              <img src="17_game-over.png" alt="Game Over - Stage Failed" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Game</div>
@@ -432,9 +495,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="18_share-challenge.png" target="_blank">
-            <img src="18_share-challenge.png" alt="Share Result Sheet" loading="lazy">
-          </a>
+          
+            <a href="18_share-challenge.png" target="_blank">
+              <img src="18_share-challenge.png" alt="Share Result Sheet" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Social</div>
@@ -449,9 +514,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="19_help.png" target="_blank">
-            <img src="19_help.png" alt="Help & How to Play" loading="lazy">
-          </a>
+          
+            <a href="19_help.png" target="_blank">
+              <img src="19_help.png" alt="Help & How to Play" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Info</div>
@@ -466,9 +533,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="20_rating.png" target="_blank">
-            <img src="20_rating.png" alt="Rating & Feedback Modal" loading="lazy">
-          </a>
+          
+            <a href="20_rating.png" target="_blank">
+              <img src="20_rating.png" alt="Rating & Feedback Modal" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Info</div>
@@ -483,9 +552,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="21_progress-leaderboards.png" target="_blank">
-            <img src="21_progress-leaderboards.png" alt="Scores - Global Leaderboard (Top 25)" loading="lazy">
-          </a>
+          
+            <a href="21_progress-leaderboards.png" target="_blank">
+              <img src="21_progress-leaderboards.png" alt="Scores - Global Leaderboard (Top 25)" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Leaderboard</div>
@@ -493,16 +564,18 @@
           <p class="card-desc">Global leaderboard tab showing world top 25 records and ranks</p>
           <div class="card-footer">
             <span>21_progress-leaderboards.png</span>
-            <span>138.7 KB</span>
+            <span>200.9 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="22_progress-daily.png" target="_blank">
-            <img src="22_progress-daily.png" alt="Scores - Daily Challenge Tab" loading="lazy">
-          </a>
+          
+            <a href="22_progress-daily.png" target="_blank">
+              <img src="22_progress-daily.png" alt="Scores - Daily Challenge Tab" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Leaderboard</div>
@@ -510,16 +583,18 @@
           <p class="card-desc">Daily Challenge tab with streak, calendar, and today's completion details</p>
           <div class="card-footer">
             <span>22_progress-daily.png</span>
-            <span>175.2 KB</span>
+            <span>175.3 KB</span>
           </div>
         </div>
       </article>
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="23_progress-my-progress.png" target="_blank">
-            <img src="23_progress-my-progress.png" alt="Scores - My Progress Tab" loading="lazy">
-          </a>
+          
+            <a href="23_progress-my-progress.png" target="_blank">
+              <img src="23_progress-my-progress.png" alt="Scores - My Progress Tab" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Leaderboard</div>
@@ -534,9 +609,11 @@
     
       <article class="card">
         <div class="card-img-wrap">
-          <a href="24_progress-offline.png" target="_blank">
-            <img src="24_progress-offline.png" alt="Scores - Offline Mode Banner" loading="lazy">
-          </a>
+          
+            <a href="24_progress-offline.png" target="_blank">
+              <img src="24_progress-offline.png" alt="Scores - Offline Mode Banner" loading="lazy">
+            </a>
+          
         </div>
         <div class="card-body">
           <div class="card-tag">Leaderboard</div>
@@ -544,7 +621,7 @@
           <p class="card-desc">Leaderboard modal showing the active Offline Mode notice and retry button</p>
           <div class="card-footer">
             <span>24_progress-offline.png</span>
-            <span>156.5 KB</span>
+            <span>209.0 KB</span>
           </div>
         </div>
       </article>

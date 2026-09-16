@@ -27,3 +27,6 @@ build/
 .firebase/
 __pycache__/
 *.py[cod]
+
+# Visual regression scratch output (candidate captures + diffs), not the committed baseline gallery
+screenshots/modals/.visual-check/

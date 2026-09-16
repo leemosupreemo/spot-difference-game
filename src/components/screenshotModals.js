@@ -21,43 +21,52 @@ export const SCREENSHOT_MODALS = [
     id: 'victory-standard',
     name: 'Victory - Stage Set Complete',
     description: 'Standard victory modal with 3 stars, speed points, completion time, and Next Stage button',
-    category: 'Victory'
+    category: 'Victory',
+    // VictoryModal always fires a confetti burst, whose particle positions are randomized per render.
+    diffThreshold: 0.1
   },
   {
     id: 'victory-world-1st',
     name: 'Victory - World 1st Rank',
     description: 'Top placement in the world with gold trophy and gradient title',
-    category: 'Victory'
+    category: 'Victory',
+    diffThreshold: 0.1
   },
   {
     id: 'victory-new-record',
     name: 'Victory - New Personal Best',
     description: 'Personal best completion with golden badge and gold accent glow',
-    category: 'Victory'
+    category: 'Victory',
+    diffThreshold: 0.1
   },
   {
     id: 'victory-leaderboard',
     name: 'Victory - Leaderboard Qualified',
     description: 'Leaderboard qualification banner displaying player tag and online status',
-    category: 'Victory'
+    category: 'Victory',
+    diffThreshold: 0.1
   },
   {
     id: 'victory-name-editing',
     name: 'Victory - Editing Hunter Tag',
     description: 'Interactive name entry input field with save checkmark for leaderboard submission',
-    category: 'Victory'
+    category: 'Victory',
+    diffThreshold: 0.1
   },
   {
     id: 'victory-fanfare',
     name: 'Victory - Golden Celebration Fanfare',
     description: 'Celebratory golden confetti particles firing across victory screen',
-    category: 'Victory'
+    category: 'Victory',
+    // Two extra confetti bursts on top of the standard one: allow more particle-position noise.
+    diffThreshold: 0.12
   },
   {
     id: 'victory-offline',
     name: 'Victory - Leaderboard Offline Sync',
     description: 'Notice explaining score is cached locally and will sync once back online',
-    category: 'Victory'
+    category: 'Victory',
+    diffThreshold: 0.1
   },
   {
     id: 'daily-victory-success',

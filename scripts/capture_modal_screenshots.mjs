@@ -1,12 +1,79 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
+import sharp from 'sharp';
 import { preview, build } from 'vite';
 import { SCREENSHOT_MODALS } from '../src/components/screenshotModals.js';
 
 const CHROME_PATH = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const OUTPUT_DIR = path.resolve('screenshots/modals');
+const BASELINE_DIR = path.resolve('screenshots/modals');
+const CHECK_MODE = process.argv.includes('--check');
+const OUTPUT_DIR = CHECK_MODE ? path.join(BASELINE_DIR, '.visual-check', 'candidate') : BASELINE_DIR;
+const DIFF_DIR = path.join(BASELINE_DIR, '.visual-check', 'diff');
 const PREVIEW_PORT = 4177;
+
+// Per-channel intensity delta above which a pixel counts as "changed".
+const PIXEL_DELTA_THRESHOLD = 32;
+// Share of changed pixels above which a screenshot is flagged as a regression.
+const DIFF_RATIO_THRESHOLD = Number(process.env.VISUAL_DIFF_THRESHOLD || 0.002);
+
+async function loadRawRgba(filePath) {
+  const { data, info } = await sharp(filePath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  return { data, width: info.width, height: info.height };
+}
+
+async function compareAgainstBaseline(baselinePath, candidatePath, diffPath, diffThreshold = DIFF_RATIO_THRESHOLD) {
+  if (!fs.existsSync(baselinePath)) {
+    return { status: 'new', diffRatio: null };
+  }
+
+  const [baseline, candidate] = await Promise.all([
+    loadRawRgba(baselinePath),
+    loadRawRgba(candidatePath)
+  ]);
+
+  if (baseline.width !== candidate.width || baseline.height !== candidate.height) {
+    return {
+      status: 'regression',
+      diffRatio: 1,
+      reason: `size changed from ${baseline.width}x${baseline.height} to ${candidate.width}x${candidate.height}`
+    };
+  }
+
+  const { width, height } = baseline;
+  const pixelCount = width * height;
+  const diffBuffer = Buffer.alloc(pixelCount * 4);
+  let changedPixels = 0;
+
+  for (let i = 0; i < pixelCount; i++) {
+    const o = i * 4;
+    const dr = Math.abs(baseline.data[o] - candidate.data[o]);
+    const dg = Math.abs(baseline.data[o + 1] - candidate.data[o + 1]);
+    const db = Math.abs(baseline.data[o + 2] - candidate.data[o + 2]);
+
+    if (Math.max(dr, dg, db) > PIXEL_DELTA_THRESHOLD) {
+      changedPixels++;
+      diffBuffer[o] = 255;
+      diffBuffer[o + 1] = 0;
+      diffBuffer[o + 2] = 64;
+      diffBuffer[o + 3] = 255;
+    } else {
+      const gray = Math.round(((candidate.data[o] + candidate.data[o + 1] + candidate.data[o + 2]) / 3) * 0.35);
+      diffBuffer[o] = gray;
+      diffBuffer[o + 1] = gray;
+      diffBuffer[o + 2] = gray;
+      diffBuffer[o + 3] = 255;
+    }
+  }
+
+  const diffRatio = changedPixels / pixelCount;
+
+  if (diffRatio > 0) {
+    await sharp(diffBuffer, { raw: { width, height, channels: 4 } }).png().toFile(diffPath);
+  }
+
+  return { status: diffRatio > diffThreshold ? 'regression' : 'pass', diffRatio };
+}
 
 async function assertDailyBannerTextAlignment(page) {
   const alignment = await page.evaluate(() => {
@@ -45,6 +112,10 @@ async function assertDailyBannerTextAlignment(page) {
 }
 
 fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+if (CHECK_MODE) {
+  fs.rmSync(DIFF_DIR, { recursive: true, force: true });
+  fs.mkdirSync(DIFF_DIR, { recursive: true });
+}
 
 async function run() {
   console.log('🔍 Checking Google Chrome at:', CHROME_PATH);
@@ -129,11 +200,25 @@ async function run() {
 
       const stat = fs.statSync(outputPath);
       const sizeKb = (stat.size / 1024).toFixed(1);
-      results.push({ ...item, filename, sizeKb, success: true });
-      console.log(`✅ (${sizeKb} KB)`);
+
+      if (CHECK_MODE) {
+        const baselinePath = path.join(BASELINE_DIR, filename);
+        const diffPath = path.join(DIFF_DIR, filename);
+        const comparison = await compareAgainstBaseline(baselinePath, outputPath, diffPath, item.diffThreshold);
+        results.push({ ...item, filename, sizeKb, success: true, ...comparison });
+        const label = comparison.status === 'regression'
+          ? `❌ REGRESSION (${(comparison.diffRatio * 100).toFixed(2)}% changed)`
+          : comparison.status === 'new'
+            ? '🆕 no baseline yet'
+            : `✅ (${(comparison.diffRatio * 100).toFixed(3)}% changed)`;
+        console.log(label);
+      } else {
+        results.push({ ...item, filename, sizeKb, success: true, status: 'pass' });
+        console.log(`✅ (${sizeKb} KB)`);
+      }
     } catch (err) {
       console.log(`❌ FAILED: ${err.message}`);
-      results.push({ ...item, filename, error: err.message, success: false });
+      results.push({ ...item, filename, error: err.message, success: false, status: 'error' });
     }
   }
 
@@ -213,6 +298,34 @@ async function run() {
       transform: translateY(-4px);
       border-color: var(--accent);
     }
+    .card.regression {
+      border-color: #ff3860;
+      box-shadow: 0 0 0 1px #ff3860, 0 12px 30px rgba(255, 56, 96, 0.25);
+    }
+    .triptych {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+    .triptych figure {
+      margin: 0;
+    }
+    .triptych figcaption {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    .card-img-wrap .triptych img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #05070d;
+    }
     .card-img-wrap {
       background: #05070d;
       padding: 12px;
@@ -270,9 +383,12 @@ async function run() {
 <body>
   <header>
     <h1>Diff Hunter Visual Modals & Menus</h1>
-    <p class="subtitle">Automated visual snapshot report of all modals, special menus, and victory states.</p>
+    <p class="subtitle">${CHECK_MODE
+      ? 'Visual regression check: current build vs. the committed baseline gallery.'
+      : 'Automated visual snapshot report of all modals, special menus, and victory states.'}</p>
     <div class="stats-bar">
       <span>Total Captured: ${results.filter(r => r.success).length}/${results.length}</span>
+      ${CHECK_MODE ? `<span>•</span><span>Regressions: ${results.filter(r => r.status === 'regression').length}</span>` : ''}
       <span>•</span>
       <span>Resolution: 786×1704 (@2x iPhone)</span>
       <span>•</span>
@@ -282,19 +398,27 @@ async function run() {
 
   <main class="grid">
     ${results.map(r => `
-      <article class="card">
+      <article class="card${r.status === 'regression' ? ' regression' : ''}">
         <div class="card-img-wrap">
-          <a href="${r.filename}" target="_blank">
-            <img src="${r.filename}" alt="${r.name}" loading="lazy">
-          </a>
+          ${CHECK_MODE ? `
+            <div class="triptych">
+              <figure><figcaption>Baseline</figcaption><img src="../${r.filename}" alt="baseline" loading="lazy" onerror="this.replaceWith('n/a')"></figure>
+              <figure><figcaption>Current</figcaption><img src="candidate/${r.filename}" alt="current" loading="lazy"></figure>
+              <figure><figcaption>Diff</figcaption><img src="diff/${r.filename}" alt="diff" loading="lazy" onerror="this.replaceWith('no change')"></figure>
+            </div>
+          ` : `
+            <a href="${r.filename}" target="_blank">
+              <img src="${r.filename}" alt="${r.name}" loading="lazy">
+            </a>
+          `}
         </div>
         <div class="card-body">
-          <div class="card-tag">${r.category}</div>
+          <div class="card-tag">${r.category}${CHECK_MODE ? ` · ${r.status.toUpperCase()}` : ''}</div>
           <h2 class="card-title">${r.name}</h2>
           <p class="card-desc">${r.description}</p>
           <div class="card-footer">
             <span>${r.filename}</span>
-            <span>${r.sizeKb || 0} KB</span>
+            <span>${CHECK_MODE && r.diffRatio != null ? `${(r.diffRatio * 100).toFixed(3)}% changed` : `${r.sizeKb || 0} KB`}</span>
           </div>
         </div>
       </article>
@@ -303,7 +427,9 @@ async function run() {
 </body>
 </html>`;
 
-  const reportPath = path.join(OUTPUT_DIR, 'index.html');
+  const reportPath = CHECK_MODE
+    ? path.join(BASELINE_DIR, '.visual-check', 'report.html')
+    : path.join(OUTPUT_DIR, 'index.html');
   fs.writeFileSync(reportPath, htmlReport);
   console.log(`✅ Visual report written to: ${reportPath}`);
 
@@ -313,6 +439,25 @@ async function run() {
   const failures = results.filter(result => !result.success);
   if (failures.length > 0) {
     throw new Error(`${failures.length} screenshot capture${failures.length === 1 ? '' : 's'} failed`);
+  }
+
+  if (CHECK_MODE) {
+    const regressions = results.filter(r => r.status === 'regression');
+    const newBaselines = results.filter(r => r.status === 'new');
+    if (newBaselines.length > 0) {
+      console.log(`\n🆕 ${newBaselines.length} modal(s) have no baseline yet: ${newBaselines.map(r => r.filename).join(', ')}`);
+    }
+    if (regressions.length > 0) {
+      console.log(`\n❌ ${regressions.length} VISUAL REGRESSION(S) DETECTED:`);
+      for (const r of regressions) {
+        console.log(`   - ${r.filename}: ${(r.diffRatio * 100).toFixed(2)}% of pixels changed${r.reason ? ` (${r.reason})` : ''}`);
+      }
+      console.log(`\n   Review the report, then if the change is intentional run:`);
+      console.log(`   npm run test:screenshots   # regenerates the committed baseline`);
+      throw new Error(`${regressions.length} visual regression(s) found — see ${reportPath}`);
+    }
+    console.log('\n🎉 NO VISUAL REGRESSIONS DETECTED');
+    return;
   }
 
   console.log('\n🎉 ALL SCREENSHOTS SUCCESSFULLY CAPTURED!');

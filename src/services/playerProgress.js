@@ -5,6 +5,7 @@ import { ALL_PHOTO_SET_IDS, getDeterministicSetBaseline } from '../utils/setLead
 import { getGameCenterPlayer } from './gameCenter.js';
 import { submitLeaderboardScore } from './leaderboardService.js';
 import { recordNetworkSuccess } from './networkService.js';
+import { isScreenshotHarnessMode } from '../utils/screenshotMode.js';
 
 const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
 
@@ -25,7 +26,7 @@ function isConfigured() {
 let playerPromise;
 
 async function getPlayer() {
-  if (!isConfigured()) return null;
+  if (!isConfigured() || isScreenshotHarnessMode()) return null;
   if (!playerPromise) {
     playerPromise = (async () => {
       try {

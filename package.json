@@ -19,7 +19,8 @@
     "queue:daily": "node scripts/manage_daily_queue.mjs",
     "preview": "vite preview",
     "test:ui": "vitest run src/**/*.test.jsx",
-    "test:screenshots": "node scripts/capture_modal_screenshots.mjs"
+    "test:screenshots": "node scripts/capture_modal_screenshots.mjs",
+    "test:visual": "node scripts/capture_modal_screenshots.mjs --check"
   },
   "dependencies": {
     "@capacitor/core": "^8.5.0",

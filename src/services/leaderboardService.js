@@ -12,6 +12,7 @@ import {
   submitGameCenterScore
 } from './gameCenter.js';
 import { isOnline, queuePendingSubmission, syncPendingSubmissions, registerSyncRunner, recordNetworkSuccess } from './networkService.js';
+import { isScreenshotHarnessMode } from '../utils/screenshotMode.js';
 
 registerSyncRunner(() => syncPendingSubmissions(submitLeaderboardScore));
 
@@ -33,7 +34,7 @@ function getPlatform() {
 }
 
 function getLeaderboardDb() {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined' || isScreenshotHarnessMode()) return null;
   try {
     const app = getApps()[0] || initializeApp(firebaseConfig);
     return getFirestore(app);

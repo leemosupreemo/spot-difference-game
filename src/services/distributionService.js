@@ -10,6 +10,7 @@ import { initializeApp, getApps } from 'firebase/app';
 import { doc, getFirestore, getDoc, setDoc, increment, serverTimestamp } from 'firebase/firestore';
 import { firebaseConfig } from './authService.js';
 import { getDeterministicSetBaseline } from '../utils/setLeaderboards.js';
+import { isScreenshotHarnessMode } from '../utils/screenshotMode.js';
 
 /**
  * Standard histogram bucket boundaries (in milliseconds)
@@ -296,7 +297,7 @@ export function setCachedDistribution(id, data) {
  * Fetches distribution document from Firestore with client caching.
  */
 export async function fetchDistribution(collectionName, id) {
-  if (!id) return null;
+  if (!id || isScreenshotHarnessMode()) return null;
   const cached = getCachedDistribution(id);
   if (cached) return cached;
 
@@ -322,7 +323,7 @@ export async function fetchDistribution(collectionName, id) {
  * Also optimistically updates the local cache.
  */
 export async function recordDistributionIncrement(collectionName, id, elapsedTimeMs) {
-  if (!id || typeof elapsedTimeMs !== 'number' || elapsedTimeMs <= 0) return null;
+  if (!id || typeof elapsedTimeMs !== 'number' || elapsedTimeMs <= 0 || isScreenshotHarnessMode()) return null;
   const bucketKey = getBucketKey(elapsedTimeMs);
 
   // Optimistic local update
