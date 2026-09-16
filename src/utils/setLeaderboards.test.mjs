@@ -1,0 +1,63 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {
+  ALL_PHOTO_SET_IDS,
+  getSetNumber,
+  getDeterministicSetBaseline,
+  calculateSetWorldRank,
+  parseSetSearch
+} from './setLeaderboards.js';
+
+test('ALL_PHOTO_SET_IDS contains 35 photo sets', () => {
+  assert.equal(ALL_PHOTO_SET_IDS.length, 35);
+  assert.equal(ALL_PHOTO_SET_IDS[0], 'photo_set_001');
+  assert.equal(ALL_PHOTO_SET_IDS[34], 'photo_set_035');
+});
+
+test('getSetNumber correctly parses set IDs', () => {
+  assert.equal(getSetNumber('photo_set_001'), 1);
+  assert.equal(getSetNumber('photo_set_007'), 7);
+  assert.equal(getSetNumber('photo_set_035'), 35);
+  assert.equal(getSetNumber('set_3'), 3);
+  assert.equal(getSetNumber('daily_set_12'), 12);
+  assert.equal(getSetNumber('set4'), 4);
+  assert.equal(getSetNumber(5), 5);
+  assert.equal(getSetNumber(null), 1);
+});
+
+test('getDeterministicSetBaseline returns at least 3 competitive runners for any set', () => {
+  const baselines = getDeterministicSetBaseline('photo_set_001');
+  assert.ok(baselines.length >= 3);
+  assert.ok(baselines[0].fastestTime < baselines[1].fastestTime);
+  assert.ok(baselines[1].fastestTime < baselines[2].fastestTime);
+  assert.ok(baselines[0].playerName.length > 0);
+});
+
+test('calculateSetWorldRank determines top 3 placement relative to set leaderboard', () => {
+  const baselines = getDeterministicSetBaseline('photo_set_005');
+  // Beating the #1 time should give world 1st
+  const superFastTime = baselines[0].fastestTime - 500;
+  assert.equal(calculateSetWorldRank('photo_set_005', superFastTime), 1);
+
+  // Between #1 and #2 gives world 2nd
+  const secondFastTime = Math.round((baselines[0].fastestTime + baselines[1].fastestTime) / 2);
+  assert.equal(calculateSetWorldRank('photo_set_005', secondFastTime), 2);
+
+  // Between #2 and #3 gives world 3rd
+  const thirdFastTime = Math.round((baselines[1].fastestTime + baselines[2].fastestTime) / 2);
+  assert.equal(calculateSetWorldRank('photo_set_005', thirdFastTime), 3);
+
+  // Slower than #3 gives null
+  const slowTime = baselines[2].fastestTime + 50000;
+  assert.equal(calculateSetWorldRank('photo_set_005', slowTime), null);
+});
+
+test('parseSetSearch parses various search query formats', () => {
+  assert.equal(parseSetSearch('5'), 'photo_set_005');
+  assert.equal(parseSetSearch('Set 5'), 'photo_set_005');
+  assert.equal(parseSetSearch('#5'), 'photo_set_005');
+  assert.equal(parseSetSearch('set#12'), 'photo_set_012');
+  assert.equal(parseSetSearch('photo_set_020'), 'photo_set_020');
+  assert.equal(parseSetSearch('999'), null);
+  assert.equal(parseSetSearch('hello'), null);
+});

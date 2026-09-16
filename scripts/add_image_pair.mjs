@@ -30,10 +30,10 @@ const MANIFEST_PATH = path.join(DEFAULT_LEVELS_DIR, 'photo_pair_manifest.json');
 const OFFICIAL_PATH = path.join(ROOT_DIR, 'official_curated_levels.json');
 
 const firebaseConfig = {
-  apiKey: process.env.VITE_FIREBASE_API_KEY || 'AIzaSy_thirteen_a5760_web_key',
-  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || 'thirteen-a5760.firebaseapp.com',
-  projectId: process.env.VITE_FIREBASE_PROJECT_ID || 'thirteen-a5760',
-  appId: process.env.VITE_FIREBASE_APP_ID || '1:396835359318:web:diffhunter'
+  apiKey: process.env.VITE_FIREBASE_API_KEY || 'AIzaSyCbX3ZqIQvcNYyI8Uy_fwN1mXtV14jt3pA',
+  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || 'diff-hunter-progress-20260810.firebaseapp.com',
+  projectId: process.env.VITE_FIREBASE_PROJECT_ID || 'diff-hunter-progress-20260810',
+  appId: process.env.VITE_FIREBASE_APP_ID || '1:169569618752:web:4151f5708b21afaaac48a5'
 };
 
 function printHelp() {

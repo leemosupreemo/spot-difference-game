@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "thirteen-a5760"
+    "default": "diff-hunter-progress-20260810"
   },
   "targets": {
-    "thirteen-a5760": {
+    "diff-hunter-progress-20260810": {
       "hosting": {
         "diff-hunter": [
-          "diffhunter"
+          "diff-hunter-progress-20260810"
         ]
       }
     }
