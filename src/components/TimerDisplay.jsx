@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Timer, Lightbulb, Search, Zap, Heart, ArrowLeft, Volume2, VolumeX } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { calculateSpeedPoints } from '../utils/scoring';
@@ -10,16 +10,36 @@ export default function TimerDisplay({
   magnifierEnabled,
   setMagnifierEnabled,
   missCount = 0,
-  currentStageIndex = 0,
-  totalStageImages = 5,
-  selectedDifficulty = 'Medium',
   onBack,
   debugMode = false,
   muted = false,
-  setMuted
+  setMuted,
+  missPenaltyTick = 0
 }) {
   const potentialPoints = calculateSpeedPoints(elapsedTime);
   const livesRemaining = Math.max(0, 3 - missCount);
+
+  // Wrong-guess "+5s" penalty callout: pops up above the timer and flashes the digits red.
+  const [penaltyKey, setPenaltyKey] = useState(0);
+  const [penaltyVisible, setPenaltyVisible] = useState(false);
+  const prevPenaltyTickRef = useRef(missPenaltyTick);
+  const penaltyHideTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    if (missPenaltyTick !== prevPenaltyTickRef.current) {
+      prevPenaltyTickRef.current = missPenaltyTick;
+      setPenaltyKey(prev => prev + 1);
+      setPenaltyVisible(true);
+      if (penaltyHideTimeoutRef.current) clearTimeout(penaltyHideTimeoutRef.current);
+      penaltyHideTimeoutRef.current = setTimeout(() => setPenaltyVisible(false), 1100);
+    }
+  }, [missPenaltyTick]);
+
+  useEffect(() => {
+    return () => {
+      if (penaltyHideTimeoutRef.current) clearTimeout(penaltyHideTimeoutRef.current);
+    };
+  }, []);
 
   // Format elapsed milliseconds as MM:SS.ms
   const formatTime = (ms) => {
@@ -99,26 +119,34 @@ export default function TimerDisplay({
 
             {/* Combined Timer & Live Score Badge */}
             <div style={{
-              background: 'rgba(0, 240, 255, 0.08)',
-              border: '1px solid rgba(0, 240, 255, 0.35)',
+              position: 'relative',
+              background: penaltyVisible ? 'rgba(255, 0, 127, 0.12)' : 'rgba(0, 240, 255, 0.08)',
+              border: penaltyVisible ? '1px solid rgba(255, 0, 127, 0.55)' : '1px solid rgba(0, 240, 255, 0.35)',
               borderRadius: '12px',
               padding: '0 12px',
               height: '36px',
               boxSizing: 'border-box',
               display: 'flex',
               alignItems: 'center',
-              gap: '10px'
+              gap: '10px',
+              transition: 'background 0.25s ease, border-color 0.25s ease'
             }}>
+              {penaltyVisible && (
+                <span key={penaltyKey} className="timer-penalty-badge" aria-hidden="true">+5s</span>
+              )}
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Timer size={22} color="var(--accent-cyan)" />
-                <span style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '1.25rem',
-                  fontWeight: 700,
-                  color: 'var(--accent-cyan)',
-                  textShadow: '0 0 8px rgba(0, 240, 255, 0.4)',
-                  lineHeight: 1
-                }}>
+                <Timer size={22} color={penaltyVisible ? 'var(--accent-pink)' : 'var(--accent-cyan)'} />
+                <span
+                  className={penaltyVisible ? 'timer-penalty-shake' : ''}
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '1.25rem',
+                    fontWeight: 700,
+                    color: penaltyVisible ? 'var(--accent-pink)' : 'var(--accent-cyan)',
+                    textShadow: penaltyVisible ? '0 0 10px rgba(255, 0, 127, 0.7)' : '0 0 8px rgba(0, 240, 255, 0.4)',
+                    lineHeight: 1
+                  }}
+                >
                   {formatTime(elapsedTime)}
                 </span>
               </div>

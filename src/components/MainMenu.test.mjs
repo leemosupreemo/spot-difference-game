@@ -76,3 +76,26 @@ test('index.css defines periodic sheen shimmer on start game button with ripples
   assert.doesNotMatch(css, /@keyframes pondPropagateAndBounce/);
   assert.doesNotMatch(css, /startBtnWavePulse/);
 });
+
+test('Game Mode card selection swaps a dim, zoom/fade background hint behind the mode cards', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // A real photo for Photography and a procedurally generated scene for Abstract,
+  // neither pulled from the playable rotation.
+  assert.match(source, /generateProceduralLevelPair\('abstract_animated', 'Medium', GAME_MODE_ABSTRACT_SEED\)/);
+  assert.match(source, /resolveAssetUrl\(GAME_MODE_PHOTO_BG\)/);
+  assert.match(source, /selectedTheme === 'abstract_animated' \? abstractModeBg : photoModeBg/);
+
+  // Re-tapping a card (even the already-active one) replays the animation via a remount key.
+  assert.match(source, /setGameModeBgTick\(tick => tick \+ 1\)/);
+  assert.match(source, /key=\{`\$\{selectedTheme\}-\$\{gameModeBgTick\}`\}/);
+
+  // Layer sits behind the card content and stays subtle, not a hero visual.
+  assert.match(source, /className="game-mode-bg"/);
+
+  const cssPath = path.join(path.dirname(componentPath), '../index.css');
+  const css = fs.readFileSync(cssPath, 'utf8');
+  assert.match(css, /@keyframes gameModeBgZoomFadeIn/);
+  assert.match(css, /to \{ opacity: 0\.22; transform: scale\(1\); \}/);
+  assert.match(css, /\.game-mode-bg-image \{[\s\S]*?animation: none;[\s\S]*?\}/);
+});

@@ -3,7 +3,6 @@ import MainMenu from './components/MainMenu';
 import Header from './components/Header';
 import GameCanvas from './components/GameCanvas';
 import TimerDisplay from './components/TimerDisplay';
-import LevelSelector from './components/LevelSelector';
 import CustomLevelMaker from './components/CustomLevelMaker';
 import VictoryModal from './components/VictoryModal';
 import GameOverModal from './components/GameOverModal';
@@ -16,7 +15,7 @@ import DebugLevelGeneratorModal from './components/DebugLevelGeneratorModal';
 import DebugCuratorBar from './components/DebugCuratorBar';
 import { initAuth } from './services/authService';
 import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
-import { generateProceduralLevelPair, SCENE_THEMES } from './utils/proceduralGenerator';
+import { generateProceduralLevelPair } from './utils/proceduralGenerator';
 import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
 import { getCompletePhotoSets } from './utils/photoSetCatalog';
 import { sounds, music } from './utils/audio';
@@ -29,14 +28,12 @@ import { parseIncomingChallenge } from './utils/challengeMetrics';
 import { syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
 import { syncRemoteAppConfig } from './services/appConfig';
 import { initializeNotificationListeners, scheduleInstallNotifications } from './services/notificationService';
-import { initGameCenter, mirrorRoundToGameCenter, onGameCenterAuthChange, isGameCenterSupported, isGameCenterAuthenticated, getGameCenterPlayer } from './services/gameCenter';
+import { initGameCenter, mirrorRoundToGameCenter, onGameCenterAuthChange } from './services/gameCenter';
 import SetOfTheDayBanner from './components/SetOfTheDayBanner';
 import DailyVictoryModal from './components/DailyVictoryModal';
 import {
   getDailySetForDate,
   recordDailyChallengeCompletion,
-  recordDailyChallengeAttempt,
-  recordDailyChallengeFailure,
   recordDailyChallengeCompletionRemote,
   recordDailyChallengeFailureRemote,
   startDailyChallengeSession,
@@ -45,10 +42,9 @@ import {
   resetDailyPlayerStatus,
   syncRemoteDailyQueue
 } from './services/dailyChallenge';
-import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress, restoreProgressFromCloud } from './services/playerProgress';
+import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress, restoreProgressFromCloud, clearAllLocalRecords } from './services/playerProgress';
 import { getSetNumber, checkAndUpdateDynamicSetRecord } from './utils/setLeaderboards.js';
 import { submitLeaderboardScore } from './services/leaderboardService.js';
-import { recordSetCompletionDistribution } from './services/distributionService.js';
 import ScreenshotHarness from './components/ScreenshotHarness.jsx';
 
 export default function App() {
@@ -88,7 +84,7 @@ export default function App() {
     return INITIAL_LEVELS[0].id;
   });
   const [view, setView] = useState('menu'); // 'menu' | 'game' | 'creator' | 'stats'
-  const [incomingChallenge, setIncomingChallenge] = useState(() => {
+  const [incomingChallenge] = useState(() => {
     try {
       return typeof window !== 'undefined' ? parseIncomingChallenge(window.location.search) : null;
     } catch (_) {
@@ -144,13 +140,13 @@ export default function App() {
   // Timer State
   const [elapsedTime, setElapsedTime] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
+  const [missPenaltyTick, setMissPenaltyTick] = useState(0);
   const timerRef = useRef(null);
 
   // Modals
   const [victoryModalOpen, setVictoryModalOpen] = useState(false);
   const [gameOverModalOpen, setGameOverModalOpen] = useState(false);
   const [revealAnswer, setRevealAnswer] = useState(false);
-  const [progressModalOpen, setProgressModalOpen] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [ratingModalOpen, setRatingModalOpen] = useState(false);
   const [confirmExitModalOpen, setConfirmExitModalOpen] = useState(false);
@@ -180,8 +176,6 @@ export default function App() {
       return true;
     }
   });
-  const visitedDebugLevelIdsRef = useRef(new Set());
-
   const handlePhotoSetChange = useCallback((nextSetId) => {
     if (!photoSetIds.includes(nextSetId)) return;
     setPhotoSetId(nextSetId);
@@ -452,6 +446,23 @@ export default function App() {
     setIsDailyCompleted(false);
     sounds.playWin();
     logApp('INFO', '[DailyChallenge] Player daily status reset via debug/test controls');
+  }, []);
+
+  const handleResetLocalRecords = useCallback(() => {
+    const confirmed = window.confirm(
+      'Clear all locally saved records and scores on this device? This wipes your category stats, best times, and daily challenge history. This cannot be undone.'
+    );
+    if (!confirmed) return;
+
+    clearAllLocalRecords();
+    setDifficultyStats({
+      Easy: { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} },
+      Medium: { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} },
+      Hard: { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} }
+    });
+    setIsDailyCompleted(false);
+    sounds.playTap();
+    logApp('INFO', '[LocalRecords] Cleared all locally saved records/scores via player-initiated reset');
   }, []);
 
   useEffect(() => {
@@ -852,8 +863,6 @@ export default function App() {
             metric: 'elapsedMs'
           }).catch(() => {});
 
-          recordSetCompletionDistribution(photoSetId, cumulativeTime).catch(() => {});
-
           submitLeaderboardScore({
             boardType: 'category',
             boardId: selectedTheme === 'find_the_sniper' ? 'photo' : 'abstract',
@@ -886,8 +895,7 @@ export default function App() {
               setDailyVictoryData(prev => prev ? {
                 ...prev,
                 position: remoteResult.position,
-                totalPlayers: remoteResult.totalPlayers,
-                percentile: remoteResult.percentile
+                totalPlayers: remoteResult.totalPlayers
               } : null);
             }
           }).catch(() => {});
@@ -923,7 +931,6 @@ export default function App() {
               setNumber: dailySetNum,
               position: dailyResult.position,
               totalPlayers: dailyResult.totalPlayers,
-              percentile: dailyResult.percentile,
               stars: dailyResult.stars,
               isNewRecord: dailyResult.isNewRecord,
               isFailed: false,
@@ -944,8 +951,11 @@ export default function App() {
           imagesInStageCount: totalStageImages
         });
 
-        // Trigger lifecycle notification scheduling (+2hr welcome, +5day retention)
-        scheduleInstallNotifications().catch(() => {});
+        // Trigger lifecycle notification scheduling (+2hr welcome, +5day retention).
+        // Delayed 10s so the native permission prompt doesn't interrupt the victory celebration.
+        setTimeout(() => {
+          scheduleInstallNotifications().catch(() => {});
+        }, 10000);
 
         if (incomingChallenge) {
           const playerSec = Number((cumulativeTime / 1000).toFixed(2));
@@ -1086,7 +1096,6 @@ export default function App() {
               totalTimeMs: cumulativeTime,
               position: null,
               totalPlayers: null,
-              percentile: null,
               stars: 0,
               isNewRecord: false,
               isFailed: true,
@@ -1100,9 +1109,10 @@ export default function App() {
       return next;
     });
 
-    const penaltyMs = selectedDifficulty === 'Hard' ? 3000 : 2000;
+    const penaltyMs = 5000;
     if (activeMode !== 'zen') {
       setElapsedTime(prev => prev + penaltyMs);
+      setMissPenaltyTick(prev => prev + 1);
     }
   };
 
@@ -1149,7 +1159,6 @@ export default function App() {
         totalTimeMs: cumulativeTime,
         position: null,
         totalPlayers: null,
-        percentile: null,
         stars: 0,
         isNewRecord: false,
         isFailed: true,
@@ -1267,6 +1276,7 @@ export default function App() {
             initialTab={statsInitialTab}
             initialSetId={selectedStatsSetId}
             debugMode={debugMode}
+            onResetLocalRecords={handleResetLocalRecords}
           />
         ) : view === 'creator' ? (
           <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />
@@ -1310,6 +1320,7 @@ export default function App() {
             debugMode={debugMode}
             muted={muted}
             setMuted={handleToggleMute}
+            missPenaltyTick={missPenaltyTick}
           />
 
           {/* Interactive Dual Viewport (IMAGES ONLY) */}
@@ -1355,6 +1366,10 @@ export default function App() {
         }}
         onNextLevel={handleStartGame}
         onRestart={handleStartGame}
+        onReturnToMenu={() => {
+          setVictoryModalOpen(false);
+          setView('menu');
+        }}
         onClose={() => setVictoryModalOpen(false)}
       />
 
@@ -1367,20 +1382,10 @@ export default function App() {
           setId={dailyVictoryData?.setId}
           setNumber={dailyVictoryData?.setNumber}
           position={dailyVictoryData?.position}
-          totalPlayers={dailyVictoryData?.totalPlayers}
-          percentile={dailyVictoryData?.percentile}
           stars={dailyVictoryData?.stars}
           isNewRecord={dailyVictoryData?.isNewRecord}
           isFailed={dailyVictoryData?.isFailed}
           isForfeit={dailyVictoryData?.isForfeit}
-          stageIndex={dailyVictoryData?.stageIndex}
-          debugMode={debugMode}
-          onRestart={debugMode ? () => {
-            setDailyVictoryData(null);
-            setRevealAnswer(false);
-            setGameOverModalOpen(false);
-            handleStartDailyChallenge();
-          } : undefined}
           onOpenLeaderboard={() => {
             const targetSetId = dailyVictoryData?.setId;
             setDailyVictoryData(null);
@@ -1417,6 +1422,8 @@ export default function App() {
         elapsedTime={elapsedTime}
         missCount={missCount}
         levelTitle={currentLevel?.title || 'Stage Set'}
+        setId={photoSetId}
+        themeId={selectedTheme}
       />
 
       <HelpModal

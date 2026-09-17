@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  calculatePercentileRank,
+  calculateStarRating,
   checkAndUpdatePersonalBest,
   generateChallengeUrl,
   generateChallengeText,
@@ -10,48 +10,21 @@ import {
   recordLocalShareEvent
 } from './challengeMetrics.js';
 
-test('calculatePercentileRank calculates accurate top and beat percentiles for fast and normal times', () => {
-  // Ultra fast 1.5s single pair
-  const elite = calculatePercentileRank(1500, 'Medium', false);
-  assert.equal(elite.topPercentile, 1);
-  assert.equal(elite.beatPercentile, 99);
-  assert.match(elite.rankLabel, /TOP 1%/);
+test('calculateStarRating awards more stars for faster times', () => {
+  // Ultra fast single pair
+  assert.equal(calculateStarRating(1500, 'Medium', false), 3);
 
-  // 2.4s single pair
-  const topTier = calculatePercentileRank(2400, 'Medium', false);
-  assert.equal(topTier.topPercentile, 6);
-  assert.equal(topTier.beatPercentile, 94);
+  // Mid-pack single pair
+  assert.equal(calculateStarRating(5000, 'Medium', false), 2);
 
-  // Slower 12s single pair
-  const slow = calculatePercentileRank(12000, 'Medium', false);
-  assert.equal(slow.topPercentile, 85);
-  assert.equal(slow.beatPercentile, 15);
+  // Slower single pair
+  assert.equal(calculateStarRating(12000, 'Medium', false), 1);
 
-  // 5-image stage cumulative time
-  const stageFast = calculatePercentileRank(14000, 'Medium', true);
-  assert.equal(stageFast.topPercentile, 5);
-  assert.equal(stageFast.beatPercentile, 95);
-});
+  // Fast 5-image stage cumulative time
+  assert.equal(calculateStarRating(14000, 'Medium', true), 3);
 
-test('calculatePercentileRank integrates set-calibrated and live distribution options', () => {
-  // Set-calibrated lookup
-  const setRank = calculatePercentileRank(15000, 'Medium', true, { setId: 'photo_set_005' });
-  assert.ok(setRank.topPercentile <= 20);
-  assert.ok(setRank.beatPercentile >= 80);
-
-  // Live distribution override
-  const liveDist = {
-    count: 50,
-    b0: 0,
-    b1: 2,
-    b2: 5,
-    b3: 15,
-    b4: 20,
-    b5: 8
-  };
-  const liveRank = calculatePercentileRank(11000, 'Medium', true, { distribution: liveDist });
-  assert.ok(liveRank.beatPercentile >= 90);
-  assert.equal(liveRank.isLiveDistribution, true);
+  // Slower stage cumulative time
+  assert.equal(calculateStarRating(60000, 'Medium', true), 1);
 });
 
 test('checkAndUpdatePersonalBest tracks new records correctly', () => {
@@ -83,16 +56,16 @@ test('generateChallengeUrl creates universal deep link with challenge params', (
 test('generateChallengeText formats viral challenge copy', () => {
   const text = generateChallengeText({
     elapsedTimeMs: 2430,
-    beatPercentile: 93,
     isPersonalBest: true,
     playerName: 'Alex',
     challengeUrl: 'https://example.com/play?c=1'
   });
 
-  assert.match(text, /I spotted it in 2\.43 seconds/);
+  assert.match(text, /Alex spotted it in 2\.43 seconds/);
   assert.doesNotMatch(text, /Can you beat me/);
+  assert.doesNotMatch(text, /Top \d+%/);
+  assert.doesNotMatch(text, /beat \d+% of/i);
   assert.match(text, /NEW PERSONAL BEST/);
-  assert.match(text, /beat 93% of Diff Hunter players/);
   assert.match(text, /There is ONE difference/);
   assert.match(text, /https:\/\/example\.com\/play\?c=1/);
 });

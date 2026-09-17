@@ -215,47 +215,47 @@ class SoundController {
       if (isLeaderboardRecord) {
         // Grand Royal Golden Herald Fanfare for New Leaderboard Records
         allNotes = [
-          { freq: 392.00, time: 0, duration: 0.10, type: 'triangle', gain: 0.22 },     // G4
-          { freq: 523.25, time: 0.10, duration: 0.12, type: 'triangle', gain: 0.25 },  // C5
-          { freq: 659.25, time: 0.22, duration: 0.12, type: 'triangle', gain: 0.25 },  // E5
-          { freq: 783.99, time: 0.34, duration: 0.14, type: 'triangle', gain: 0.28 },  // G5
-          { freq: 1046.50, time: 0.48, duration: 0.70, type: 'triangle', gain: 0.35 }, // C6 (grand climax)
-          { freq: 523.25, time: 0.48, duration: 0.70, type: 'sawtooth', gain: 0.14 },  // C5 brass foundation
-          { freq: 783.99, time: 0.48, duration: 0.70, type: 'sine', gain: 0.20 },      // G5
-          { freq: 1318.51, time: 0.48, duration: 0.70, type: 'triangle', gain: 0.20 }, // E6
-          { freq: 1567.98, time: 0.54, duration: 0.60, type: 'sine', gain: 0.18 },    // G6 sparkle
-          { freq: 2093.00, time: 0.62, duration: 0.60, type: 'sine', gain: 0.16 },    // C7 shimmer
-          { freq: 2637.02, time: 0.70, duration: 0.50, type: 'sine', gain: 0.12 }     // E7 golden brilliance
+          { freq: 392.00, time: 0, duration: 0.10, type: 'triangle', gain: 0.29 },     // G4
+          { freq: 523.25, time: 0.10, duration: 0.12, type: 'triangle', gain: 0.33 },  // C5
+          { freq: 659.25, time: 0.22, duration: 0.12, type: 'triangle', gain: 0.33 },  // E5
+          { freq: 783.99, time: 0.34, duration: 0.14, type: 'triangle', gain: 0.37 },  // G5
+          { freq: 1046.50, time: 0.48, duration: 0.70, type: 'triangle', gain: 0.46 }, // C6 (grand climax)
+          { freq: 523.25, time: 0.48, duration: 0.70, type: 'sawtooth', gain: 0.19 },  // C5 brass foundation
+          { freq: 783.99, time: 0.48, duration: 0.70, type: 'sine', gain: 0.26 },      // G5
+          { freq: 1318.51, time: 0.48, duration: 0.70, type: 'triangle', gain: 0.26 }, // E6
+          { freq: 1567.98, time: 0.54, duration: 0.60, type: 'sine', gain: 0.24 },    // G6 sparkle
+          { freq: 2093.00, time: 0.62, duration: 0.60, type: 'sine', gain: 0.21 },    // C7 shimmer
+          { freq: 2637.02, time: 0.70, duration: 0.50, type: 'sine', gain: 0.16 }     // E7 golden brilliance
         ];
       } else if (isPersonalBest) {
         // Energetic Variant Fanfare for Personal Best
         allNotes = [
-          { freq: 523.25, time: 0, duration: 0.09, type: 'triangle', gain: 0.20 },     // C5
-          { freq: 659.25, time: 0.09, duration: 0.09, type: 'triangle', gain: 0.22 },  // E5
-          { freq: 783.99, time: 0.18, duration: 0.09, type: 'triangle', gain: 0.24 },  // G5
-          { freq: 987.77, time: 0.27, duration: 0.11, type: 'triangle', gain: 0.25 },  // B5
-          { freq: 1046.50, time: 0.38, duration: 0.50, type: 'triangle', gain: 0.30 }, // C6
-          { freq: 1318.51, time: 0.44, duration: 0.50, type: 'sine', gain: 0.18 },      // E6
-          { freq: 1567.98, time: 0.50, duration: 0.45, type: 'sine', gain: 0.15 }      // G6
+          { freq: 523.25, time: 0, duration: 0.09, type: 'triangle', gain: 0.26 },     // C5
+          { freq: 659.25, time: 0.09, duration: 0.09, type: 'triangle', gain: 0.29 },  // E5
+          { freq: 783.99, time: 0.18, duration: 0.09, type: 'triangle', gain: 0.31 },  // G5
+          { freq: 987.77, time: 0.27, duration: 0.11, type: 'triangle', gain: 0.33 },  // B5
+          { freq: 1046.50, time: 0.38, duration: 0.50, type: 'triangle', gain: 0.39 }, // C6
+          { freq: 1318.51, time: 0.44, duration: 0.50, type: 'sine', gain: 0.24 },      // E6
+          { freq: 1567.98, time: 0.50, duration: 0.45, type: 'sine', gain: 0.20 }      // G6
         ];
       } else if (stars >= 3) {
         // Full Triumphant Herald Fanfare for 3 Stars
         allNotes = [
-          { freq: 523.25, time: 0, duration: 0.12, type: 'triangle', gain: 0.22 },     // C5
-          { freq: 659.25, time: 0.12, duration: 0.12, type: 'triangle', gain: 0.22 },  // E5
-          { freq: 783.99, time: 0.24, duration: 0.14, type: 'triangle', gain: 0.25 },  // G5
-          { freq: 1046.50, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.30 }, // C6
-          { freq: 783.99, time: 0.38, duration: 0.55, type: 'sine', gain: 0.18 },      // G5 harmony
-          { freq: 1318.51, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.16 }, // E6 harmony
-          { freq: 1567.98, time: 0.44, duration: 0.45, type: 'sine', gain: 0.14 },    // G6 golden sparkle
-          { freq: 2093.00, time: 0.52, duration: 0.45, type: 'sine', gain: 0.12 }     // C7 shimmer
+          { freq: 523.25, time: 0, duration: 0.12, type: 'triangle', gain: 0.29 },     // C5
+          { freq: 659.25, time: 0.12, duration: 0.12, type: 'triangle', gain: 0.29 },  // E5
+          { freq: 783.99, time: 0.24, duration: 0.14, type: 'triangle', gain: 0.33 },  // G5
+          { freq: 1046.50, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.39 }, // C6
+          { freq: 783.99, time: 0.38, duration: 0.55, type: 'sine', gain: 0.24 },      // G5 harmony
+          { freq: 1318.51, time: 0.38, duration: 0.55, type: 'triangle', gain: 0.21 }, // E6 harmony
+          { freq: 1567.98, time: 0.44, duration: 0.45, type: 'sine', gain: 0.19 },    // G6 golden sparkle
+          { freq: 2093.00, time: 0.52, duration: 0.45, type: 'sine', gain: 0.16 }     // C7 shimmer
         ];
       } else if (stars === 2) {
         // Modest, Pleasant 3-Note Fanfare for 2 Stars
         allNotes = [
-          { freq: 523.25, time: 0, duration: 0.10, type: 'triangle', gain: 0.18 },     // C5
-          { freq: 659.25, time: 0.10, duration: 0.10, type: 'triangle', gain: 0.18 },  // E5
-          { freq: 783.99, time: 0.20, duration: 0.30, type: 'triangle', gain: 0.22 }   // G5
+          { freq: 523.25, time: 0, duration: 0.10, type: 'triangle', gain: 0.24 },     // C5
+          { freq: 659.25, time: 0.10, duration: 0.10, type: 'triangle', gain: 0.24 },  // E5
+          { freq: 783.99, time: 0.20, duration: 0.30, type: 'triangle', gain: 0.29 }   // G5
         ];
       }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { AlertCircle, X, Play } from 'lucide-react';
 import { sounds } from '../utils/audio';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily = false }) {
   if (!isOpen) return null;
@@ -13,8 +14,8 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
         inset: 0,
         zIndex: 100,
         background: 'rgba(0,0,0,0.88)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -39,6 +40,7 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
           '--modal-accent': isDaily ? 'var(--accent-pink)' : 'var(--accent-cyan)'
         }}
       >
+        <ModalAmbientParticles />
         {/* Top Right Close "X" Button */}
         <button
           onClick={() => { sounds.playTap(); onCancel(); }}

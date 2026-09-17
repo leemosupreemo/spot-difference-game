@@ -169,24 +169,6 @@ export default function ScreenshotHarness({ modalId }) {
           />
         );
 
-      case 'victory-name-editing':
-        return (
-          <VictoryModal
-            isOpen={true}
-            isStageSet={true}
-            elapsedTime={12150}
-            score={1890}
-            setId="photo_set_001"
-            setNumber={1}
-            attemptNumber={1}
-            initialEditingName={true}
-            onClose={() => {}}
-            onNextLevel={() => {}}
-            onRestart={() => {}}
-            onOpenLeaderboard={() => {}}
-          />
-        );
-
       case 'victory-fanfare':
         return (
           <VictoryModal
@@ -228,7 +210,6 @@ export default function ScreenshotHarness({ modalId }) {
             isOpen={true}
             totalTimeMs={18420}
             position={2}
-            percentile={97}
             stars={3}
             score={1490}
             setId="photo_set_004"
@@ -275,12 +256,10 @@ export default function ScreenshotHarness({ modalId }) {
             isOpen={true}
             totalTimeMs={18420}
             position={2}
-            percentile={97}
             stars={3}
             score={1490}
             setId="photo_set_004"
             setNumber={4}
-            initialEditingName={true}
             onClose={() => {}}
             onOpenLeaderboard={() => {}}
             onRestart={() => {}}
@@ -313,6 +292,8 @@ export default function ScreenshotHarness({ modalId }) {
             isOpen={true}
             seconds={45.2}
             levelTitle="Antique Watchmaker - Set 2"
+            setId="photo_set_002"
+            themeId="find_the_sniper"
             onRestart={() => {}}
             onClose={() => {}}
           />

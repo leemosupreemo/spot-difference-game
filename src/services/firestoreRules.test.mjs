@@ -28,7 +28,7 @@ test('firestore.rules protects daily attempts and remote levels', () => {
   assert.match(rulesContent, /match \/app_config\/\{docId\}/);
 });
 
-test('firestore.rules permits public read and write for set and daily distributions', () => {
-  assert.match(rulesContent, /match \/set_distributions\/\{setId\}/);
-  assert.match(rulesContent, /match \/daily_distributions\/\{dateStr\}/);
+test('firestore.rules no longer defines percentile distribution collections', () => {
+  assert.doesNotMatch(rulesContent, /set_distributions/);
+  assert.doesNotMatch(rulesContent, /daily_distributions/);
 });

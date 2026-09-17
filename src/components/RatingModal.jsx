@@ -3,6 +3,7 @@ import { Star, X, Heart } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { trackRatingPromptAction } from '../services/analytics';
 import { getAppStoreReviewUrl } from '../services/appConfig';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function RatingModal({
   isOpen,
@@ -72,10 +73,10 @@ export default function RatingModal({
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 110,
-        background: 'rgba(0,0,0,0.85)',
-        backdropFilter: 'blur(14px)',
-        WebkitBackdropFilter: 'blur(14px)',
+        zIndex: 100,
+        background: 'rgba(0,0,0,0.88)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -91,7 +92,7 @@ export default function RatingModal({
         style={{
           maxWidth: '400px',
           width: '100%',
-          maxHeight: 'min(90vh, 380px)',
+          maxHeight: 'calc(100dvh - 32px)',
           overflowY: 'auto',
           padding: '24px 20px',
           position: 'relative',
@@ -103,6 +104,7 @@ export default function RatingModal({
           '--modal-accent': 'var(--accent-gold)'
         }}
       >
+        <ModalAmbientParticles />
         {/* Close "X" Button */}
         <button
           onClick={handleDismiss}
@@ -159,7 +161,7 @@ export default function RatingModal({
         <div style={{
           display: 'flex',
           justifyContent: 'center',
-          gap: '8px',
+          gap: 'var(--modal-gap-sm)',
           marginBottom: '22px',
           background: 'rgba(0, 0, 0, 0.35)',
           padding: '14px 12px',

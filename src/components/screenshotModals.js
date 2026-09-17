@@ -47,13 +47,6 @@ export const SCREENSHOT_MODALS = [
     diffThreshold: 0.1
   },
   {
-    id: 'victory-name-editing',
-    name: 'Victory - Editing Hunter Tag',
-    description: 'Interactive name entry input field with save checkmark for leaderboard submission',
-    category: 'Victory',
-    diffThreshold: 0.1
-  },
-  {
     id: 'victory-fanfare',
     name: 'Victory - Golden Celebration Fanfare',
     description: 'Celebratory golden confetti particles firing across victory screen',

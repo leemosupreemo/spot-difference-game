@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer, Flame, Star, Calendar, Play, Edit3, Check, WifiOff, RefreshCw } from 'lucide-react';
+import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer, Flame, Star, Play, WifiOff, RefreshCw, ChevronDown } from 'lucide-react';
 import { sounds } from '../utils/audio';
-import { fetchLeaderboards, getSavedPlayerName, savePlayerName } from '../services/playerProgress';
-import { identifyPlayer } from '../services/analytics';
+import { fetchLeaderboards } from '../services/playerProgress';
 import { isOnline, subscribeNetworkStatus, checkConnectivity } from '../services/networkService';
 import {
   isGameCenterSupported,
+  isGameCenterAuthenticated,
+  onGameCenterAuthChange,
   openGameCenterLeaderboard
 } from '../services/gameCenter';
 import {
@@ -13,10 +14,9 @@ import {
   fetchDailyLeaderboard,
   getDailyTimeToBeat,
   getDailyPlayerStatus,
-  getTodayDateString,
-  formatTimeUntilNextDaily
+  getTodayDateString
 } from '../services/dailyChallenge';
-import { getSetNumber, ALL_PHOTO_SET_IDS } from '../utils/setLeaderboards.js';
+import { getSetNumber } from '../utils/setLeaderboards.js';
 
 export default function ProgressModal({
   isOpen,
@@ -24,11 +24,11 @@ export default function ProgressModal({
   difficultyStats,
   onStartDaily,
   onResetDaily = null,
+  onResetLocalRecords = null,
   initialTab = 'leaderboards',
   initialSetId = '',
   debugMode = false,
-  forceOffline = false,
-  initialEditingTag = false
+  forceOffline = false
 }) {
   const [mainView, setMainView] = useState(initialTab); // 'leaderboards' | 'daily' | 'progress'
   const [selectedLeaderboardPack, setSelectedLeaderboardPack] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
@@ -38,9 +38,8 @@ export default function ProgressModal({
   const [dailyBoard, setDailyBoard] = useState([]);
   const [dailyStatus, setDailyStatus] = useState({ completed: false });
   const [dailyTimeToBeat, setDailyTimeToBeat] = useState(null);
-  const [customTag, setCustomTag] = useState(() => getSavedPlayerName());
-  const [isEditingTag, setIsEditingTag] = useState(initialEditingTag);
   const [networkOnline, setNetworkOnline] = useState(() => forceOffline ? false : isOnline());
+  const [gameCenterAuthenticated, setGameCenterAuthenticated] = useState(() => isGameCenterAuthenticated());
 
   useEffect(() => {
     return subscribeNetworkStatus(online => {
@@ -48,17 +47,11 @@ export default function ProgressModal({
     });
   }, [forceOffline]);
 
-  const handleSaveTag = () => {
-    const trimmed = customTag.trim();
-    if (!trimmed) return;
-    try { sounds.playTap(); } catch (_) {}
-    setIsEditingTag(false);
-    savePlayerName(trimmed);
-    identifyPlayer(trimmed, {
-      "Hunter Tag": trimmed,
-      "Player Name": trimmed
+  useEffect(() => {
+    return onGameCenterAuthChange(state => {
+      setGameCenterAuthenticated(Boolean(state?.isAuthenticated));
     });
-  };
+  }, []);
 
   const handleRetryFetch = () => {
     try { sounds.playTap(); } catch (_) {}
@@ -81,13 +74,16 @@ export default function ProgressModal({
   };
 
   const isOfflineMode = forceOffline || !networkOnline;
+  const hasSetInitialTabRef = React.useRef(false);
 
   useEffect(() => {
     if (isOpen) {
-      if (initialTab) {
+      // Only snap to the requested initial tab on the opening transition, not on every
+      // subsequent difficultyStats change (e.g. a local reset) while already open.
+      if (initialTab && !hasSetInitialTabRef.current) {
         setMainView(initialTab);
       }
-      setCustomTag(getSavedPlayerName());
+      hasSetInitialTabRef.current = true;
       setLoadingLeaderboard(true);
       fetchLeaderboards(difficultyStats)
         .then(data => {
@@ -96,7 +92,8 @@ export default function ProgressModal({
           if (initialSetId && availableSets.includes(initialSetId)) {
             setSelectedLeaderboardSet(initialSetId);
           } else {
-            setSelectedLeaderboardSet(current => current && availableSets.includes(current) ? current : (availableSets[0] || ''));
+            // Default to the General Leaderboard (Top 25) unless the caller asked for a specific set
+            setSelectedLeaderboardSet(current => current && availableSets.includes(current) ? current : '');
           }
         })
         .finally(() => setLoadingLeaderboard(false));
@@ -113,6 +110,8 @@ export default function ProgressModal({
           setDailyTimeToBeat(getDailyTimeToBeat(today));
         }
       }).catch(() => {});
+    } else {
+      hasSetInitialTabRef.current = false;
     }
   }, [isOpen, difficultyStats]);
 
@@ -223,17 +222,9 @@ export default function ProgressModal({
         <button
           onClick={() => { sounds.playTap(); setMainView('daily'); }}
           className={`glass-btn ${mainView === 'daily' ? 'glass-btn-primary' : ''}`}
-          style={{
-            justifyContent: 'center',
-            padding: '10px 6px',
-            fontSize: '0.88rem',
-            fontWeight: 800,
-            borderRadius: '12px',
-            borderColor: mainView === 'daily' ? 'rgba(255, 183, 3, 0.7)' : undefined,
-            color: mainView === 'daily' ? 'var(--accent-gold)' : undefined
-          }}
+          style={{ justifyContent: 'center', padding: '10px 6px', fontSize: '0.88rem', fontWeight: 800, borderRadius: '12px' }}
         >
-          <Flame size={16} color="var(--accent-gold)" /> Daily Challenge
+          <Flame size={16} /> Daily Challenge
         </button>
         <button
           onClick={() => { sounds.playTap(); setMainView('progress'); }}
@@ -252,21 +243,13 @@ export default function ProgressModal({
               <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', margin: 0, letterSpacing: '0.5px' }}>
                 <Award size={22} color="var(--accent-gold)" /> LIVE LEADERBOARD
               </h3>
-              <span style={{ fontSize: '0.74rem', color: 'var(--accent-gold)', fontWeight: 800, background: 'rgba(255, 183, 3, 0.12)', padding: '2px 8px', borderRadius: '6px', border: '1px solid rgba(255, 183, 3, 0.3)' }}>
-                TOP 25
-              </span>
-              {selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet && (
-                <span style={{ fontSize: '0.78rem', color: 'var(--accent-cyan)', fontWeight: 800 }}>
-                  {selectedLeaderboardSet.replace(/_/g, ' ').toUpperCase()}
-                </span>
-              )}
-              {isGameCenterSupported() && (
+              {isGameCenterSupported() && gameCenterAuthenticated && (
                 <button
                   onClick={() => { sounds.playTap(); openGameCenterLeaderboard(); }}
                   className="glass-btn glass-btn-primary"
                   style={{ fontSize: '0.76rem', padding: '6px 10px', borderRadius: '8px' }}
                 >
-                  View in Game Center
+                  Game Center
                 </button>
               )}
             </div>
@@ -275,71 +258,72 @@ export default function ProgressModal({
             <div style={{ display: 'flex', gap: '6px', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '10px', border: '1px solid var(--border-glass)' }}>
               <button
                 onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('find_the_sniper'); }}
-                style={{
-                  padding: '5px 12px',
-                  fontSize: '0.8rem',
-                  fontWeight: 800,
-                  borderRadius: '8px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: selectedLeaderboardPack === 'find_the_sniper' ? 'var(--accent-cyan)' : 'transparent',
-                  color: selectedLeaderboardPack === 'find_the_sniper' ? '#000' : 'var(--text-muted)',
-                  transition: 'all 0.15s ease'
-                }}
+                className={`glass-btn ${selectedLeaderboardPack === 'find_the_sniper' ? 'glass-btn-primary' : ''}`}
+                style={{ padding: '5px 12px', fontSize: '0.8rem', fontWeight: 800, borderRadius: '8px' }}
               >
                 📷 Photography
               </button>
               <button
                 onClick={() => { sounds.playTap(); setSelectedLeaderboardPack('abstract_animated'); }}
-                style={{
-                  padding: '5px 12px',
-                  fontSize: '0.8rem',
-                  fontWeight: 800,
-                  borderRadius: '8px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: selectedLeaderboardPack === 'abstract_animated' ? '#d9b3ff' : 'transparent',
-                  color: selectedLeaderboardPack === 'abstract_animated' ? '#000' : 'var(--text-muted)',
-                  transition: 'all 0.15s ease'
-                }}
+                className={`glass-btn ${selectedLeaderboardPack === 'abstract_animated' ? 'glass-btn-primary' : ''}`}
+                style={{ padding: '5px 12px', fontSize: '0.8rem', fontWeight: 800, borderRadius: '8px' }}
               >
                 🎨 Abstract
               </button>
             </div>
           </div>
 
-          {/* Photo Set Dropdown: Under Live Leaderboard title, left aligned */}
-          {selectedLeaderboardPack === 'find_the_sniper' && Object.keys(leaderboardData?.bySetFirst || {}).length > 0 && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', justifyContent: 'flex-start' }}>
-              <select
-                aria-label="Photo Set leaderboard"
-                value={selectedLeaderboardSet}
-                onChange={event => {
-                  sounds.playTap();
-                  setSelectedLeaderboardSet(event.target.value);
-                }}
-                style={{
-                  background: 'rgba(0,0,0,0.5)',
-                  color: '#fff',
-                  border: '1px solid var(--border-glass)',
-                  borderRadius: '10px',
-                  padding: '6px 12px',
-                  fontWeight: 700,
-                  fontSize: '0.84rem',
-                  outline: 'none',
-                  cursor: 'pointer',
-                  maxWidth: '340px'
-                }}
-              >
-                <option value="">General Leaderboard (All Sets)</option>
-                {Object.keys(leaderboardData.bySetFirst).map(setId => (
-                  <option key={setId} value={setId}>
-                    {`Set ${getSetNumber(setId)}: ${setId.replace(/_/g, ' ')}`}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+          {/* Photo Set Dropdown: Under Live Leaderboard title, left aligned. This row's space is
+              always reserved (even when the dropdown itself doesn't apply, e.g. Abstract pack)
+              so the table below doesn't jump up when switching category pills. */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', justifyContent: 'flex-start', minHeight: '40px' }}>
+            {selectedLeaderboardPack === 'find_the_sniper' && Object.keys(leaderboardData?.bySetFirst || {}).length > 0 && (
+              <div style={{ position: 'relative', display: 'inline-flex' }}>
+                <select
+                  aria-label="Photo Set leaderboard"
+                  value={selectedLeaderboardSet}
+                  onChange={event => {
+                    sounds.playTap();
+                    setSelectedLeaderboardSet(event.target.value);
+                  }}
+                  style={{
+                    appearance: 'none',
+                    WebkitAppearance: 'none',
+                    MozAppearance: 'none',
+                    background: 'rgba(0, 240, 255, 0.1)',
+                    color: '#fff',
+                    border: '1.5px solid var(--accent-cyan)',
+                    boxShadow: '0 0 12px rgba(0, 240, 255, 0.25)',
+                    borderRadius: '10px',
+                    padding: '8px 34px 8px 14px',
+                    fontWeight: 800,
+                    fontSize: '0.84rem',
+                    outline: 'none',
+                    cursor: 'pointer',
+                    maxWidth: '340px'
+                  }}
+                >
+                  <option value="">General Leaderboard (Top 25)</option>
+                  {Object.keys(leaderboardData.bySetFirst).map(setId => (
+                    <option key={setId} value={setId}>
+                      {`Set ${getSetNumber(setId)}: ${setId.replace(/_/g, ' ')}`}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  size={16}
+                  color="var(--accent-cyan)"
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    pointerEvents: 'none'
+                  }}
+                />
+              </div>
+            )}
+          </div>
 
           {/* Offline Mode Indicator Banner */}
           {isOfflineMode && (
@@ -388,91 +372,6 @@ export default function ProgressModal({
             </div>
           )}
 
-          {/* Player Hunter Tag Bar */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '8px 12px',
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '10px',
-            marginBottom: '14px',
-            fontSize: '0.82rem'
-          }}>
-            <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Your Hunter Tag:</span>
-            {isEditingTag ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <input
-                  type="text"
-                  value={customTag}
-                  onChange={(e) => setCustomTag(e.target.value)}
-                  maxLength={18}
-                  autoFocus
-                  style={{
-                    background: 'rgba(0, 0, 0, 0.6)',
-                    border: '1px solid var(--accent-cyan)',
-                    color: '#fff',
-                    borderRadius: '6px',
-                    padding: '3px 8px',
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    outline: 'none',
-                    width: '130px',
-                    fontFamily: 'inherit'
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') handleSaveTag();
-                    if (e.key === 'Escape') setIsEditingTag(false);
-                  }}
-                />
-                <button
-                  onClick={handleSaveTag}
-                  style={{
-                    background: 'var(--accent-cyan)',
-                    color: '#000',
-                    border: 'none',
-                    borderRadius: '5px',
-                    padding: '3px 8px',
-                    fontSize: '0.78rem',
-                    fontWeight: 800,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '2px'
-                  }}
-                >
-                  <Check size={13} /> Save
-                </button>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ color: 'var(--accent-cyan)', fontWeight: 800 }}>
-                  {customTag}
-                </span>
-                <button
-                  onClick={() => setIsEditingTag(true)}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    border: 'none',
-                    borderRadius: '5px',
-                    color: 'var(--text-muted)',
-                    cursor: 'pointer',
-                    padding: '3px 8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    fontSize: '0.75rem',
-                    fontWeight: 600
-                  }}
-                  title="Change your public leaderboard name"
-                >
-                  <Edit3 size={12} /> Edit
-                </button>
-              </div>
-            )}
-          </div>
-
           {loadingLeaderboard ? (
             <div style={{
               display: 'flex',
@@ -494,13 +393,11 @@ export default function ProgressModal({
                 <thead>
                   {isSetView ? (
                     <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
-                      <th style={{
-                        padding: '12px 14px',
-                        color: 'var(--accent-gold)',
-                        background: 'rgba(255, 183, 3, 0.14)',
-                        fontWeight: 900
-                      }}>
-                        FASTEST 1ST ATTEMPT
+                      <th style={{ padding: '12px 14px', fontWeight: 900 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
+                          <span>RANK / PLAYER</span>
+                          <span style={{ color: 'var(--accent-gold)' }}>FASTEST 1ST ATTEMPT</span>
+                        </div>
                       </th>
                       <th style={{
                         padding: '12px 14px',
@@ -547,7 +444,7 @@ export default function ProgressModal({
                       const firstTimeStr = typeof firstTimeMs === 'number' && firstTimeMs > 0 ? `${(firstTimeMs / 1000).toFixed(2)}s` : '--';
                       const overallTimeStr = typeof repeatTimeMs === 'number' && repeatTimeMs > 0 ? `${(repeatTimeMs / 1000).toFixed(2)}s` : '--';
                       const fastestTimeStr = typeof fastestTimeMs === 'number' && fastestTimeMs > 0 ? `${(fastestTimeMs / 1000).toFixed(2)}s` : '--';
-                      const displayName = isMe ? 'YOU (THIS DEVICE)' : (entry.playerName || `SPEEDRUNNER #${index + 1}`);
+                      const displayName = entry.playerName || `SPEEDRUNNER #${index + 1}`;
 
                       const playerSet = isMe ? getPlayerSetStats(selectedLeaderboardSet) : null;
                       const effectiveMostPoints = playerSet?.bestScore
@@ -655,9 +552,6 @@ export default function ProgressModal({
                   SET OF THE DAY LEADERBOARD
                 </h3>
               </div>
-              <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '3px' }}>
-                Today's 3-Image Sequence • Fastest 5 Times
-              </div>
             </div>
 
             {/* Time to beat badge & Play CTA */}
@@ -717,7 +611,7 @@ export default function ProgressModal({
                 <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--accent-pink)' }}>
                   DAILY RUN ENDED
                 </div>
-                <div style={{ fontSize: '0.98rem', fontWeight: 900, color: '#fff' }}>
+                <div style={{ fontSize: '0.83rem', fontWeight: 900, color: '#fff' }}>
                   Attempted today • Refreshes daily at 4:00 AM ET (1:00 AM PT)
                 </div>
               </div>
@@ -784,17 +678,6 @@ export default function ProgressModal({
                     />
                   ))}
                 </div>
-                <div style={{
-                  padding: '4px 10px',
-                  borderRadius: '8px',
-                  background: 'rgba(0, 255, 135, 0.2)',
-                  color: 'var(--accent-green)',
-                  fontSize: '0.82rem',
-                  fontWeight: 900
-                }}>
-                  Top {Math.max(1, 100 - (dailyStatus.percentile || 95))}%
-                </div>
-
                 {debugMode && onResetDaily && (
                   <button
                     onClick={() => {
@@ -822,20 +705,19 @@ export default function ProgressModal({
           )}
 
           {/* Top 5 Times Table */}
-          <div style={{ overflowX: 'auto' }}>
+          <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '16px', overflowX: 'auto', border: '1px solid var(--border-glass)', WebkitOverflowScrolling: 'touch' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid var(--border-glass)', color: 'var(--text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.8px' }}>
+                <tr style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', textAlign: 'left', borderBottom: '1px solid var(--border-glass)' }}>
                   <th style={{ padding: '12px 14px' }}>RANK / PLAYER</th>
                   <th style={{ padding: '12px 10px', textAlign: 'center' }}>RATING</th>
                   <th style={{ padding: '12px 10px', textAlign: 'center' }}>TOTAL TIME</th>
-                  <th style={{ padding: '12px 14px', textAlign: 'right' }}>DATE</th>
                 </tr>
               </thead>
               <tbody>
                 {dailyBoard.length === 0 ? (
                   <tr>
-                    <td colSpan={4} style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
+                    <td colSpan={3} style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
                       No times recorded yet for today. Be the first to clear the Set of the Day!
                     </td>
                   </tr>
@@ -886,9 +768,6 @@ export default function ProgressModal({
                         }}>
                           {timeStr}
                         </td>
-                        <td style={{ padding: '12px 14px', textAlign: 'right', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                          Today
-                        </td>
                       </tr>
                     );
                   })
@@ -907,7 +786,7 @@ export default function ProgressModal({
             const totalPoints = allSets.reduce((sum, s) => sum + (s.totalPoints || 0), 0);
             const avgPointsOverall = totalClears > 0 ? Math.round(totalPoints / totalClears) : 0;
             const bestOverallTimeMs = allSets.reduce((best, s) => {
-              const t = s.fastestRepeat || s.firstTime;
+              const t = s.firstTime;
               return t && (!best || t < best) ? t : best;
             }, null);
 
@@ -979,7 +858,7 @@ export default function ProgressModal({
                   gap: '4px'
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.74rem', fontWeight: 800, color: 'var(--accent-pink)' }}>
-                    <Timer size={14} /> BEST TIME
+                    <Timer size={14} /> FASTEST 1ST ATTEMPT
                   </div>
                   <span style={{ fontSize: '1.2rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#fff' }}>
                     {bestOverallTimeMs ? `${(bestOverallTimeMs / 1000).toFixed(2)}s` : '--'}
@@ -1028,6 +907,30 @@ export default function ProgressModal({
               </tbody>
             </table>
           </div>
+
+          {debugMode && onResetLocalRecords && (
+            <button
+              onClick={() => {
+                sounds.playTap();
+                onResetLocalRecords();
+              }}
+              className="glass-btn"
+              style={{
+                marginTop: '16px',
+                padding: '10px 14px',
+                borderRadius: '12px',
+                fontSize: '0.82rem',
+                fontWeight: 800,
+                color: 'var(--accent-pink)',
+                borderColor: 'rgba(255, 0, 127, 0.4)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <RefreshCw size={14} /> Reset My Local Records
+            </button>
+          )}
         </div>
       )}
     </div>

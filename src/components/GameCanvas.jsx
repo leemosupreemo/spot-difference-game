@@ -13,8 +13,7 @@ export default function GameCanvas({
   magnifierEnabled,
   setMagnifierEnabled,
   elapsedTime = 0,
-  revealAnswer = false,
-  debugMode = false
+  revealAnswer = false
 }) {
   const canvasRefLeft = useRef(null);
   const canvasRefRight = useRef(null);
@@ -27,65 +26,36 @@ export default function GameCanvas({
   const [canvasUrls, setCanvasUrls] = useState({ left: '', right: '' });
   const [cardAspectRatio, setCardAspectRatio] = useState('4 / 3');
 
-  // Quick tap outside either left or right image bounds toggles zoom mode off
+  // Releasing (mouse up / touch end) outside either image's bounds turns zoom mode off.
+  // This only fires on release itself, not while merely dragging outside — a drag that starts
+  // inside an image and stays inside, or comes back inside before release, must not disable zoom.
   useEffect(() => {
     if (!magnifierEnabled || typeof setMagnifierEnabled !== 'function') return;
 
-    let outsideStart = null;
-
-    const handleGlobalDown = (e) => {
-      // Ignore if touch/click originated inside left or right image card or on a button
-      if (
-        containerRefLeft.current?.contains(e.target) ||
-        containerRefRight.current?.contains(e.target) ||
-        e.target?.closest?.('button')
-      ) {
-        outsideStart = null;
-        return;
-      }
-
-      const clientX = e.clientX ?? e.touches?.[0]?.clientX;
-      const clientY = e.clientY ?? e.touches?.[0]?.clientY;
-      if (clientX === undefined || clientY === undefined) return;
-
-      outsideStart = { x: clientX, y: clientY, time: Date.now() };
-    };
-
     const handleGlobalUp = (e) => {
-      if (!outsideStart) return;
-
-      if (
-        containerRefLeft.current?.contains(e.target) ||
-        containerRefRight.current?.contains(e.target) ||
-        e.target?.closest?.('button')
-      ) {
-        outsideStart = null;
-        return;
-      }
-
       const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX;
       const clientY = e.clientY ?? e.changedTouches?.[0]?.clientY;
-      const duration = Date.now() - outsideStart.time;
+      if (clientX === undefined || clientY === undefined) return;
 
-      let isQuickTap = duration <= 400;
-      if (clientX !== undefined && clientY !== undefined) {
-        const dist = Math.hypot(clientX - outsideStart.x, clientY - outsideStart.y);
-        if (dist > 16) isQuickTap = false;
-      }
+      const target = typeof document !== 'undefined' && document.elementFromPoint
+        ? document.elementFromPoint(clientX, clientY)
+        : e.target;
 
-      if (isQuickTap) {
+      const releasedInsideImage =
+        containerRefLeft.current?.contains(target) ||
+        containerRefRight.current?.contains(target);
+      const releasedOnButton = target?.closest?.('button');
+
+      if (!releasedInsideImage && !releasedOnButton) {
         sounds.playTap();
+        setCursorPos(prev => ({ ...prev, visible: false }));
         setMagnifierEnabled(false);
       }
-
-      outsideStart = null;
     };
 
-    window.addEventListener('pointerdown', handleGlobalDown, { passive: true });
     window.addEventListener('pointerup', handleGlobalUp, { passive: true });
 
     return () => {
-      window.removeEventListener('pointerdown', handleGlobalDown);
       window.removeEventListener('pointerup', handleGlobalUp);
     };
   }, [magnifierEnabled, setMagnifierEnabled]);

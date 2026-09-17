@@ -9,14 +9,14 @@ const PARTICLES = Array.from({ length: 18 }, (_, index) => ({
   size: `${2 + (index % 3)}px`
 }));
 
-export default function TronExpiredParticles() {
+export default function ModalAmbientParticles() {
   return (
-    <div className="tron-expired-particles" aria-hidden="true">
-      <div className="tron-expired-scanline" />
+    <div className="modal-ambient-particles" aria-hidden="true">
+      <div className="modal-ambient-scanline" />
       {PARTICLES.map(particle => (
         <span
           key={particle.id}
-          className={`tron-expired-particle ${particle.id % 4 === 0 ? 'is-violet' : ''}`}
+          className={`modal-ambient-particle ${particle.id % 4 === 0 ? 'is-violet' : ''}`}
           style={{
             left: particle.left,
             top: particle.top,

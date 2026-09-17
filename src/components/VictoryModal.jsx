@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { Trophy, Star, Zap, ArrowRight, X, Share2, Swords, Check, Edit2, WifiOff } from 'lucide-react';
+import { Trophy, Star, ArrowRight, X, Share2, Swords, Check, WifiOff } from 'lucide-react';
 import { sounds } from '../utils/audio';
-import { calculatePercentileRank, checkAndUpdatePersonalBest, recordLocalShareEvent } from '../utils/challengeMetrics';
+import { calculateStarRating, checkAndUpdatePersonalBest, recordLocalShareEvent } from '../utils/challengeMetrics';
 import { trackResultScreenViewed, trackChallengeShareClicked, identifyPlayer } from '../services/analytics';
-import { mirrorRoundToGameCenter, openGameCenterLeaderboard, isGameCenterSupported } from '../services/gameCenter';
+import { mirrorRoundToGameCenter } from '../services/gameCenter';
 import { getSetNumber, calculateSetWorldRank, checkAndUpdateDynamicSetRecord } from '../utils/setLeaderboards.js';
-import { recordSetCompletionDistribution, fetchSetDistribution, getCachedDistribution } from '../services/distributionService.js';
-import { getSavedPlayerName, savePlayerName } from '../services/playerProgress.js';
+import { savePlayerName, generateDefaultPlayerName } from '../services/playerProgress.js';
+import { containsProfanity } from '../utils/profanityFilter.js';
 import { submitLeaderboardScore } from '../services/leaderboardService.js';
 import { isOnline, subscribeNetworkStatus } from '../services/networkService.js';
 import ShareChallengeModal from './ShareChallengeModal';
+import HunterTagRejectionNotice from './HunterTagRejectionNotice.jsx';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function VictoryModal({
   isOpen,
@@ -30,11 +32,10 @@ export default function VictoryModal({
   setNumber = null,
   attemptNumber = null,
   isPersonalBestForSet = null,
-  initialEditingName = false,
   forceOffline = false,
   onNextLevel,
-  onRestart,
   onClose,
+  onReturnToMenu,
   onOpenLeaderboard
 }) {
   const celebrated = useRef(false);
@@ -46,31 +47,7 @@ export default function VictoryModal({
   const displaySetNumber = setNumber || (effectiveSetId ? getSetNumber(effectiveSetId) : 1);
   const displayAttemptNumber = attemptNumber || 1;
 
-  // Percentile and Personal Best Metrics
-  const [liveDistribution, setLiveDistribution] = useState(() => {
-    return effectiveSetId ? getCachedDistribution(effectiveSetId) : null;
-  });
-
-  useEffect(() => {
-    if (!isOpen || isAbstract || !effectiveSetId || !elapsedTime) return;
-
-    recordSetCompletionDistribution(effectiveSetId, elapsedTime).catch(() => {});
-
-    fetchSetDistribution(effectiveSetId).then(dist => {
-      if (dist && dist.count > 0) {
-        setLiveDistribution(dist);
-      }
-    }).catch(() => {});
-  }, [isOpen, isAbstract, effectiveSetId, elapsedTime]);
-
-  const { topPercentile, beatPercentile, isLiveDistribution } = useMemo(() => {
-    return calculatePercentileRank(elapsedTime, difficulty, isStageSet, {
-      setId: effectiveSetId,
-      distribution: liveDistribution
-    });
-  }, [elapsedTime, difficulty, isStageSet, effectiveSetId, liveDistribution]);
-
-  const displayStars = isFailed ? 0 : topPercentile <= 25 ? 3 : topPercentile <= 50 ? 2 : 1;
+  const displayStars = isFailed ? 0 : calculateStarRating(elapsedTime, difficulty, isStageSet);
 
   const [isPersonalBest, setIsPersonalBest] = useState(false);
 
@@ -82,11 +59,16 @@ export default function VictoryModal({
 
   const isLeaderboardRecord = Boolean(!isAbstract && (worldRank === 1 || worldRank === 2 || worldRank === 3));
 
-  // Player Hunter Tag / Leaderboard Name Entry
-  const [customPlayerName, setCustomPlayerName] = useState(() => getSavedPlayerName());
-  const [isEditingName, setIsEditingName] = useState(initialEditingName);
-  const [nameSavedSuccess, setNameSavedSuccess] = useState(false);
+  // Player Hunter Tag / Leaderboard Name Entry — arcade style: only surfaces on a fresh record.
+  // Starts blank so the placeholder shows; if the player quits without saving, a random name
+  // is generated so the record still gets submitted instead of silently dropped.
+  const [customPlayerName, setCustomPlayerName] = useState('');
+  // 'form' (enter name) -> 'saved' ("Xth Place Saved!") -> 'collapsing' (animating shut) -> 'hidden'
+  const [bannerPhase, setBannerPhase] = useState('form');
+  const [nameRejected, setNameRejected] = useState(false);
+  const [nameRejectReason, setNameRejectReason] = useState('profanity');
   const [networkOnline, setNetworkOnline] = useState(() => forceOffline ? false : isOnline());
+  const bannerTimers = useRef([]);
 
   useEffect(() => {
     return subscribeNetworkStatus(online => {
@@ -96,20 +78,21 @@ export default function VictoryModal({
 
   useEffect(() => {
     if (isOpen) {
-      setCustomPlayerName(getSavedPlayerName());
-      if (!initialEditingName) setIsEditingName(false);
-      setNameSavedSuccess(false);
+      setCustomPlayerName('');
+      setBannerPhase('form');
+      setNameRejected(false);
     }
-  }, [isOpen, initialEditingName]);
+    return () => {
+      bannerTimers.current.forEach(clearTimeout);
+      bannerTimers.current = [];
+    };
+  }, [isOpen]);
 
-  const handleSaveName = async () => {
-    const trimmed = (customPlayerName || '').trim();
-    if (!trimmed) return;
-    try { sounds.playTap(); } catch (_) {}
-    const finalName = savePlayerName(trimmed);
+  const ordinalPlace = worldRank === 1 ? '1st' : worldRank === 2 ? '2nd' : worldRank === 3 ? '3rd' : `${worldRank}th`;
+
+  const submitRecordName = finalName => {
+    savePlayerName(finalName);
     setCustomPlayerName(finalName);
-    setIsEditingName(false);
-    setNameSavedSuccess(true);
 
     try {
       identifyPlayer(finalName, {
@@ -135,8 +118,41 @@ export default function VictoryModal({
         metric: 'elapsedMs'
       }).catch(() => {});
     }
+  };
 
-    setTimeout(() => setNameSavedSuccess(false), 3000);
+  const handleSaveName = () => {
+    const trimmed = (customPlayerName || '').trim();
+    if (!trimmed) {
+      try { sounds.playError(); } catch (_) {}
+      setNameRejectReason('empty');
+      setNameRejected(true);
+      return;
+    }
+
+    if (containsProfanity(trimmed)) {
+      try { sounds.playError(); } catch (_) {}
+      setNameRejectReason('profanity');
+      setNameRejected(true);
+      return;
+    }
+    setNameRejected(false);
+
+    try { sounds.playTap(); } catch (_) {}
+    submitRecordName(trimmed);
+    setBannerPhase('saved');
+
+    bannerTimers.current.push(setTimeout(() => setBannerPhase('collapsing'), 1600));
+    bannerTimers.current.push(setTimeout(() => setBannerPhase('hidden'), 2000));
+  };
+
+  // If the player quits out of a fresh leaderboard record without saving a name,
+  // fall back to their typed text (if valid) or a random generated name so the
+  // record is still submitted rather than lost.
+  const commitAbandonedRecordName = () => {
+    if (!isLeaderboardRecord || bannerPhase !== 'form') return;
+    const trimmed = (customPlayerName || '').trim();
+    const finalName = (trimmed && !containsProfanity(trimmed)) ? trimmed : generateDefaultPlayerName();
+    submitRecordName(finalName);
   };
 
   const worldTitleConfig = useMemo(() => {
@@ -221,8 +237,6 @@ export default function VictoryModal({
       recordLocalShareEvent('view');
       trackResultScreenViewed({
         elapsedTimeMs: elapsedTime,
-        percentileBeat: beatPercentile,
-        topPercentile,
         isPersonalBest: pb,
         score,
         stars: displayStars,
@@ -233,7 +247,6 @@ export default function VictoryModal({
         challengerName: incomingChallenge?.challengerName || null
       });
 
-      const isLeaderboardRecord = Boolean(!isAbstract && (worldRank === 1 || worldRank === 2 || worldRank === 3));
       const isPb = Boolean((isPersonalBest || isNewRecord || isPersonalBestForSet) && !isLeaderboardRecord);
 
       if (typeof sounds.playFanfare === 'function') {
@@ -249,7 +262,7 @@ export default function VictoryModal({
       // - Golden fireworks for any new leaderboard record
       // - Vibrant celebratory fireworks variant for personal best
       const isThreeStars = displayStars === 3;
-      const count = isThreeStars ? 280 : 200;
+      const count = isThreeStars ? 380 : 260;
 
       // Golden color palette when 3 stars are achieved or for leaderboard records
       const goldenColors = ['#FFD700', '#FFA500', '#FFDF00', '#F7B731', '#FFEAA7', '#D4AF37', '#FFF380', '#00F0FF'];
@@ -276,26 +289,26 @@ export default function VictoryModal({
         // Fireworks for any new leaderboard record (golden colored)
         try {
           confetti({
-            particleCount: 110,
+            particleCount: 150,
             spread: 360,
-            startVelocity: 42,
-            ticks: 130,
+            startVelocity: 52,
+            ticks: 150,
             origin: { x: 0.5, y: 0.35 },
             colors: goldenFireworksColors,
-            scalar: 1.25
+            scalar: 1.45
           });
         } catch (_) {}
 
         const t1 = setTimeout(() => {
           try {
             confetti({
-              particleCount: 80,
+              particleCount: 110,
               spread: 360,
-              startVelocity: 38,
-              ticks: 110,
+              startVelocity: 48,
+              ticks: 130,
               origin: { x: 0.22, y: 0.45 },
               colors: goldenFireworksColors,
-              scalar: 1.15
+              scalar: 1.35
             });
           } catch (_) {}
         }, 140);
@@ -303,13 +316,13 @@ export default function VictoryModal({
         const t2 = setTimeout(() => {
           try {
             confetti({
-              particleCount: 80,
+              particleCount: 110,
               spread: 360,
-              startVelocity: 38,
-              ticks: 110,
+              startVelocity: 48,
+              ticks: 130,
               origin: { x: 0.78, y: 0.45 },
               colors: goldenFireworksColors,
-              scalar: 1.15
+              scalar: 1.35
             });
           } catch (_) {}
         }, 280);
@@ -317,16 +330,18 @@ export default function VictoryModal({
         const t3 = setTimeout(() => {
           try {
             confetti({
-              particleCount: 50,
+              particleCount: 70,
               angle: 60,
-              spread: 55,
+              spread: 65,
+              startVelocity: 45,
               origin: { x: 0.05, y: 0.75 },
               colors: goldenFireworksColors
             });
             confetti({
-              particleCount: 50,
+              particleCount: 70,
               angle: 120,
-              spread: 55,
+              spread: 65,
+              startVelocity: 45,
               origin: { x: 0.95, y: 0.75 },
               colors: goldenFireworksColors
             });
@@ -339,26 +354,26 @@ export default function VictoryModal({
         // Fireworks variant for Personal Best (vibrant multi-color)
         try {
           confetti({
-            particleCount: 100,
+            particleCount: 135,
             spread: 360,
-            startVelocity: 40,
-            ticks: 120,
+            startVelocity: 50,
+            ticks: 140,
             origin: { x: 0.5, y: 0.38 },
             colors: pbFireworksColors,
-            scalar: 1.2
+            scalar: 1.4
           });
         } catch (_) {}
 
         const t1 = setTimeout(() => {
           try {
             confetti({
-              particleCount: 75,
+              particleCount: 100,
               spread: 360,
-              startVelocity: 36,
-              ticks: 100,
+              startVelocity: 46,
+              ticks: 120,
               origin: { x: 0.28, y: 0.42 },
               colors: pbFireworksColors,
-              scalar: 1.1
+              scalar: 1.3
             });
           } catch (_) {}
         }, 140);
@@ -366,13 +381,13 @@ export default function VictoryModal({
         const t2 = setTimeout(() => {
           try {
             confetti({
-              particleCount: 75,
+              particleCount: 100,
               spread: 360,
-              startVelocity: 36,
-              ticks: 100,
+              startVelocity: 46,
+              ticks: 120,
               origin: { x: 0.72, y: 0.42 },
               colors: pbFireworksColors,
-              scalar: 1.1
+              scalar: 1.3
             });
           } catch (_) {}
         }, 280);
@@ -381,25 +396,27 @@ export default function VictoryModal({
         return () => { clearTimeout(t1); clearTimeout(t2); };
       } else if (isThreeStars) {
         // More for 3 stars
-        fire(0.25, { spread: 26, startVelocity: 55 });
-        fire(0.2, { spread: 60 });
-        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-        fire(0.1, { spread: 120, startVelocity: 45 });
+        fire(0.25, { spread: 30, startVelocity: 65 });
+        fire(0.2, { spread: 68, startVelocity: 45 });
+        fire(0.35, { spread: 115, decay: 0.91, scalar: 0.95 });
+        fire(0.1, { spread: 130, startVelocity: 32, decay: 0.92, scalar: 1.35 });
+        fire(0.1, { spread: 130, startVelocity: 55 });
 
         celebrationTimer.current = setTimeout(() => {
           try {
             confetti({
-              particleCount: 45,
+              particleCount: 60,
               angle: 60,
-              spread: 55,
+              spread: 65,
+              startVelocity: 42,
               origin: { x: 0.05, y: 0.75 },
               colors: goldenColors
             });
             confetti({
-              particleCount: 45,
+              particleCount: 60,
               angle: 120,
-              spread: 55,
+              spread: 65,
+              startVelocity: 42,
               origin: { x: 0.95, y: 0.75 },
               colors: goldenColors
             });
@@ -410,11 +427,11 @@ export default function VictoryModal({
         return () => clearTimeout(celebrationTimer.current);
       } else if (displayStars === 2) {
         // Some for 2 stars
-        fire(0.4, { spread: 60, startVelocity: 38 });
+        fire(0.4, { spread: 68, startVelocity: 46 });
       }
       // None for 1 star (no fire calls)
     }
-  }, [isOpen, displayStars, elapsedTime, difficulty, themeId, isStageSet, beatPercentile, topPercentile, score, incomingChallenge, isAbstract, worldRank, isPersonalBest, isNewRecord, isPersonalBestForSet]);
+  }, [isOpen, displayStars, elapsedTime, difficulty, themeId, isStageSet, score, incomingChallenge, isAbstract, worldRank, isPersonalBest, isNewRecord, isPersonalBestForSet]);
 
   if (!isOpen) return null;
 
@@ -433,6 +450,7 @@ export default function VictoryModal({
     sounds.playTap();
     clearTimeout(celebrationTimer.current);
     confetti.reset?.();
+    commitAbandonedRecordName();
     onClose();
     action?.();
   };
@@ -442,7 +460,6 @@ export default function VictoryModal({
     trackChallengeShareClicked({
       source: isPersonalBest ? 'victory_modal_pb_cta' : 'victory_modal_cta',
       elapsedTimeMs: elapsedTime,
-      percentileBeat: beatPercentile,
       isPersonalBest,
       difficulty,
       themeId
@@ -453,12 +470,13 @@ export default function VictoryModal({
   return (
     <>
       <div
-        onClick={() => handleLeaveResult()}
+        data-testid="victory-modal-backdrop"
+        onClick={() => handleLeaveResult(onNextLevel)}
         style={{
           position: 'fixed',
           inset: 0,
           zIndex: 100,
-          background: 'rgba(0,0,0,0.85)',
+          background: 'rgba(0,0,0,0.88)',
           backdropFilter: 'blur(12px)',
           display: 'flex',
           alignItems: 'center',
@@ -484,9 +502,12 @@ export default function VictoryModal({
             '--modal-accent': isPersonalBest ? 'var(--accent-gold)' : 'var(--accent-cyan)'
           }}
         >
+          <ModalAmbientParticles />
           {/* Top Right Close "X" Button */}
           <button
-            onClick={() => handleLeaveResult()}
+            onClick={() => handleLeaveResult(onReturnToMenu || onClose)}
+            title="Return to Main Menu"
+            aria-label="Return to Main Menu"
             style={{
               position: 'absolute',
               top: 12,
@@ -509,7 +530,7 @@ export default function VictoryModal({
           {/* Header with Leaderboards button to the left of title */}
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '40px', marginBottom: '8px', padding: '0 48px' }}>
             <button
-              onClick={() => { sounds.playTap(); onOpenLeaderboard?.(effectiveSetId); }}
+              onClick={() => { sounds.playTap(); commitAbandonedRecordName(); onOpenLeaderboard?.(effectiveSetId); }}
               aria-label="View leaderboards"
               title="View leaderboards"
               className="glass-btn"
@@ -542,7 +563,7 @@ export default function VictoryModal({
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '8px'
+              gap: 'var(--modal-gap-sm)'
             }}>
               {worldTitleConfig.trophyColor && (
                 <Trophy
@@ -565,44 +586,29 @@ export default function VictoryModal({
             </h2>
           </div>
 
-          {/* Underneath centered: Star Rating */}
-          <div role="img" aria-label={`${displayStars} out of 3 stars`} style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '6px' }}>
+          {/* Underneath centered: Star Rating. Outline stays static; only the gold fill pops in, per star. */}
+          <div role="img" aria-label={`${displayStars} out of 3 stars`} style={{ display: 'flex', justifyContent: 'center', gap: 'var(--modal-gap-sm)', marginBottom: '14px' }}>
             {[1, 2, 3].map(starNum => {
               const active = starNum <= displayStars;
               return (
-                <div
-                  key={starNum}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transform: active ? 'scale(1.15)' : 'scale(0.88)',
-                    transition: `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${starNum * 0.15}s`
-                  }}
-                >
-                  <Star
-                    size={30}
-                    fill={active ? 'var(--accent-gold)' : 'none'}
-                    color={active ? 'var(--accent-gold)' : 'rgba(255, 255, 255, 0.25)'}
-                    style={{
-                      filter: active ? 'drop-shadow(0 0 14px rgba(255, 183, 3, 0.95))' : 'none'
-                    }}
-                  />
+                <div key={starNum} style={{ position: 'relative', width: '30px', height: '30px' }}>
+                  <Star size={30} fill="none" color="rgba(255, 255, 255, 0.25)" />
+                  {active && (
+                    <div style={{ position: 'absolute', inset: '-10px', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                      <Star
+                        size={30}
+                        fill="var(--accent-gold)"
+                        color="var(--accent-gold)"
+                        style={{
+                          filter: 'drop-shadow(0 0 14px rgba(255, 183, 3, 0.95))',
+                          animation: `starFillPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${(starNum - 1) * 0.65}s both`
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               );
             })}
-          </div>
-
-          {/* Underneath centered: Pts */}
-          <div style={{
-            fontSize: '1.25rem',
-            fontWeight: 900,
-            color: 'var(--accent-gold)',
-            fontFamily: 'var(--font-mono)',
-            textAlign: 'center',
-            marginBottom: '4px'
-          }}>
-            {score.toLocaleString()} PTS
           </div>
 
           {/* Underneath centered: Time (with Share button to left and record label next to time if record achieved) */}
@@ -610,7 +616,7 @@ export default function VictoryModal({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '8px',
+            gap: 'var(--modal-gap-sm)',
             marginBottom: '12px',
             flexWrap: 'wrap'
           }}>
@@ -635,7 +641,7 @@ export default function VictoryModal({
                   boxShadow: '0 2px 10px rgba(255, 183, 3, 0.4)'
                 }}
               >
-                <Share2 size={20} />
+                <Share2 size={18} />
               </button>
             )}
             <span style={{
@@ -660,85 +666,106 @@ export default function VictoryModal({
             )}
           </div>
 
-          {/* Leaderboard Record Name Entry Banner */}
-          {isLeaderboardRecord && (
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(255, 183, 3, 0.16), rgba(0, 0, 0, 0.6))',
-              border: '1.5px solid var(--accent-gold)',
-              boxShadow: '0 0 24px rgba(255, 183, 3, 0.3)',
-              borderRadius: '14px',
-              padding: '10px 14px',
-              marginBottom: '10px',
-              textAlign: 'left'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Trophy size={16} color="var(--accent-gold)" />
-                  <span style={{ fontSize: '0.82rem', fontWeight: 900, color: 'var(--accent-gold)', letterSpacing: '0.5px' }}>
-                    LEADERBOARD QUALIFIED!
-                  </span>
-                </div>
-                {nameSavedSuccess ? (
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--accent-green)' }}>
-                    {networkOnline ? '✓ Saved to Leaderboard!' : '✓ Saved locally (syncs when online)'}
-                  </span>
-                ) : (
-                  <span style={{ fontSize: '0.72rem', color: networkOnline ? 'var(--text-muted)' : 'var(--accent-gold)' }}>
-                    {networkOnline ? 'Enter name for leaderboard:' : '📡 Offline — saved locally, syncs online:'}
-                  </span>
-                )}
-              </div>
-
-              <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                <input
-                  type="text"
-                  value={customPlayerName}
-                  onChange={(e) => setCustomPlayerName(e.target.value)}
-                  maxLength={18}
-                  placeholder="Hunter Tag"
+          {/* Leaderboard Record Name Entry Banner: form -> "Xth Place Saved!" -> smoothly collapses away */}
+          {isLeaderboardRecord && bannerPhase !== 'hidden' && (
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateRows: bannerPhase === 'collapsing' ? '0fr' : '1fr',
+                marginBottom: bannerPhase === 'collapsing' ? '0' : '10px',
+                transition: 'grid-template-rows 0.4s ease, margin-bottom 0.4s ease'
+              }}
+            >
+              <div style={{ overflow: 'hidden' }}>
+                <div
                   style={{
-                    flex: 1,
-                    background: 'rgba(0, 0, 0, 0.65)',
-                    border: '1px solid rgba(255, 183, 3, 0.5)',
-                    color: '#fff',
-                    borderRadius: '8px',
-                    padding: '6px 10px',
-                    fontSize: '0.85rem',
-                    fontWeight: 700,
-                    outline: 'none',
-                    fontFamily: 'inherit'
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') handleSaveName();
-                  }}
-                />
-                <button
-                  onClick={handleSaveName}
-                  style={{
-                    background: 'linear-gradient(135deg, var(--accent-gold), #FFA500)',
-                    color: '#000',
-                    border: 'none',
-                    borderRadius: '8px',
-                    padding: '6px 12px',
-                    fontSize: '0.82rem',
-                    fontWeight: 900,
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '3px',
-                    boxShadow: '0 2px 10px rgba(255, 183, 3, 0.4)'
+                    background: 'linear-gradient(135deg, rgba(255, 183, 3, 0.16), rgba(0, 0, 0, 0.6))',
+                    border: '1.5px solid var(--accent-gold)',
+                    boxShadow: '0 0 24px rgba(255, 183, 3, 0.3)',
+                    borderRadius: '14px',
+                    padding: '10px 14px',
+                    textAlign: 'left'
                   }}
                 >
-                  <Check size={14} /> Save
-                </button>
-              </div>
+                  {bannerPhase === 'saved' ? (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--modal-gap-sm)', padding: '4px 0' }}>
+                      <Trophy size={18} color="var(--accent-gold)" />
+                      <span style={{ fontSize: '1rem', fontWeight: 900, color: 'var(--accent-gold)', letterSpacing: '0.3px' }}>
+                        {ordinalPlace} Place Saved!
+                      </span>
+                    </div>
+                  ) : (
+                    <>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <Trophy size={16} color="var(--accent-gold)" />
+                          <span style={{ fontSize: '0.82rem', fontWeight: 900, color: 'var(--accent-gold)', letterSpacing: '0.5px' }}>
+                            LEADERBOARD QUALIFIED!
+                          </span>
+                        </div>
+                        {!networkOnline && (
+                          <span style={{ fontSize: '0.72rem', color: 'var(--accent-gold)' }}>
+                            📡 Offline — saved locally, syncs online:
+                          </span>
+                        )}
+                      </div>
 
-              {!networkOnline && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '6px', fontSize: '0.72rem', color: 'rgba(255, 183, 3, 0.95)' }}>
-                  <WifiOff size={12} />
-                  <span>Offline mode: Record is cached locally and will sync automatically when reconnected.</span>
+                      <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <input
+                          type="text"
+                          value={customPlayerName}
+                          onChange={(e) => { setCustomPlayerName(e.target.value); setNameRejected(false); }}
+                          maxLength={18}
+                          placeholder="Enter name"
+                          style={{
+                            flex: 1,
+                            background: 'rgba(0, 0, 0, 0.65)',
+                            border: nameRejected ? '1px solid var(--accent-pink)' : '1px solid rgba(255, 183, 3, 0.5)',
+                            color: '#fff',
+                            borderRadius: '8px',
+                            padding: '6px 10px',
+                            fontSize: '0.85rem',
+                            fontWeight: 700,
+                            outline: 'none',
+                            fontFamily: 'inherit'
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleSaveName();
+                          }}
+                        />
+                        <button
+                          onClick={handleSaveName}
+                          style={{
+                            background: 'linear-gradient(135deg, var(--accent-cyan), #0072ff)',
+                            color: '#000',
+                            border: 'none',
+                            borderRadius: '8px',
+                            padding: '6px 12px',
+                            fontSize: '0.82rem',
+                            fontWeight: 900,
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '3px',
+                            boxShadow: '0 4px 20px rgba(0, 240, 255, 0.4)'
+                          }}
+                        >
+                          <Check size={14} /> Save
+                        </button>
+                      </div>
+
+                      <HunterTagRejectionNotice visible={nameRejected} reason={nameRejectReason} />
+
+                      {!networkOnline && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '6px', fontSize: '0.72rem', color: 'rgba(255, 183, 3, 0.95)' }}>
+                          <WifiOff size={12} />
+                          <span>Offline mode: Record is cached locally and will sync automatically when reconnected.</span>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
           )}
 
@@ -766,81 +793,14 @@ export default function VictoryModal({
               </div>
             )}
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 0' }}>
-              <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Percentile</span>
-              <span style={{ fontWeight: 800, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>Top {topPercentile}%</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 0', borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Points</span>
+              <span style={{ fontWeight: 800, color: 'var(--accent-gold)', fontFamily: 'var(--font-mono)' }}>{score.toLocaleString()} PTS</span>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 0', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
-              <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Hunter Tag</span>
-              {isEditingName && !isLeaderboardRecord ? (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <input
-                    type="text"
-                    value={customPlayerName}
-                    onChange={(e) => setCustomPlayerName(e.target.value)}
-                    maxLength={18}
-                    autoFocus
-                    style={{
-                      background: 'rgba(0, 0, 0, 0.6)',
-                      border: '1px solid var(--accent-cyan)',
-                      color: '#fff',
-                      borderRadius: '6px',
-                      padding: '2px 8px',
-                      fontSize: '0.82rem',
-                      outline: 'none',
-                      width: '120px',
-                      fontFamily: 'inherit'
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') handleSaveName();
-                      if (e.key === 'Escape') setIsEditingName(false);
-                    }}
-                  />
-                  <button
-                    onClick={handleSaveName}
-                    style={{
-                      background: 'var(--accent-cyan)',
-                      color: '#000',
-                      border: 'none',
-                      borderRadius: '5px',
-                      padding: '2px 8px',
-                      fontSize: '0.78rem',
-                      fontWeight: 800,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '2px'
-                    }}
-                  >
-                    <Check size={12} /> Save
-                  </button>
-                </div>
-              ) : (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ fontWeight: 800, color: isLeaderboardRecord ? 'var(--accent-gold)' : 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
-                    {customPlayerName}
-                  </span>
-                  {!isLeaderboardRecord && (
-                    <button
-                      onClick={() => setIsEditingName(true)}
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.08)',
-                        border: 'none',
-                        borderRadius: '4px',
-                        color: 'var(--text-muted)',
-                        cursor: 'pointer',
-                        padding: '2px 5px',
-                        display: 'flex',
-                        alignItems: 'center'
-                      }}
-                      aria-label="Edit Hunter Tag"
-                    >
-                      <Edit2 size={12} />
-                    </button>
-                  )}
-                </div>
-              )}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 0' }}>
+              <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Accuracy</span>
+              <span style={{ fontWeight: 800, color: 'var(--accent-green)', fontFamily: 'var(--font-mono)' }}>{accuracy}%</span>
             </div>
           </div>
 
@@ -860,7 +820,7 @@ export default function VictoryModal({
                 <Swords size={16} />
                 {playerWonChallenge ? `YOU BEAT ${incomingChallenge.challengerName.toUpperCase()}!` : `${incomingChallenge.challengerName.toUpperCase()} WAS FASTER!`}
               </div>
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', marginTop: '6px', fontSize: '0.95rem', fontFamily: 'var(--font-mono)' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 'var(--modal-gap-md)', marginTop: '6px', fontSize: '0.95rem', fontFamily: 'var(--font-mono)' }}>
                 <span style={{ color: 'var(--text-muted)' }}>{incomingChallenge.challengerName}: <b style={{ color: '#fff' }}>{challengerSec}s</b></span>
                 <span style={{ color: 'var(--text-muted)' }}>vs</span>
                 <span style={{ color: playerWonChallenge ? 'var(--accent-green)' : 'var(--accent-gold)' }}>You: <b style={{ color: '#fff' }}>{seconds}s</b></span>
@@ -868,74 +828,35 @@ export default function VictoryModal({
             </div>
           )}
 
-          {/* Performance Breakdown Grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '6px',
-            background: 'rgba(0,0,0,0.4)',
-            padding: '9px 8px',
-            borderRadius: '14px',
-            marginBottom: '10px',
-            textAlign: 'center'
-          }}>
-            <div style={{ minWidth: 0 }}>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <Zap size={13} color="var(--accent-gold)" /> TOTAL PTS
-              </span>
-              <span style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--accent-gold)', fontFamily: 'var(--font-mono)' }}>
-                {score} PTS
-              </span>
-            </div>
-
-            <div style={{ minWidth: 0 }}>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', paddingRight: '8px' }}>ACCURACY</span>
-              <span style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--accent-green)' }}>
-                {accuracy}%
-              </span>
-            </div>
-
-            <div style={{ minWidth: 0 }}>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', paddingRight: '8px' }}>MISSES</span>
-              <span style={{ fontSize: '1.05rem', fontWeight: 700, color: safeMisses > 0 ? 'var(--accent-pink)' : 'var(--text-muted)' }}>
-                {safeMisses}
-              </span>
-            </div>
-          </div>
-
-          {/* Game Center Leaderboard Action (iOS) */}
-          {isGameCenterSupported() && (
+          {/* Navigation Buttons */}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', width: '100%' }}>
             <button
-              onClick={() => { sounds.playTap(); openGameCenterLeaderboard(); }}
+              className="glass-btn"
+              onClick={() => handleLeaveResult(onReturnToMenu || onClose)}
               style={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
+                flex: 1,
                 justifyContent: 'center',
-                gap: '8px',
-                padding: '9px 14px',
+                fontSize: '0.95rem',
+                fontWeight: 800,
+                padding: '12px 14px',
                 borderRadius: '12px',
-                marginBottom: '8px',
-                fontSize: '0.85rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                background: 'rgba(255, 255, 255, 0.08)',
-                color: '#fff',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                transition: 'all 0.15s ease'
+                whiteSpace: 'nowrap'
               }}
             >
-              <Trophy size={15} color="var(--accent-gold)" />
-              Game Center Leaderboards
+              Return to Menu
             </button>
-          )}
-
-          {/* Navigation Buttons */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <button
               className="glass-btn glass-btn-primary"
               onClick={() => handleLeaveResult(onNextLevel)}
-              style={{ width: '100%', justifyContent: 'center', fontSize: '1.05rem', fontWeight: 900, padding: '12px 16px', borderRadius: '12px' }}
+              style={{
+                flex: 1.2,
+                justifyContent: 'center',
+                fontSize: '1.05rem',
+                fontWeight: 900,
+                padding: '12px 16px',
+                borderRadius: '12px',
+                whiteSpace: 'nowrap'
+              }}
             >
               Next Stage <ArrowRight size={18} />
             </button>
@@ -950,8 +871,6 @@ export default function VictoryModal({
           isOpen={shareModalOpen}
           onClose={() => setShareModalOpen(false)}
           elapsedTime={elapsedTime}
-          percentileBeat={beatPercentile}
-          topPercentile={topPercentile}
           isPersonalBest={Boolean(isPersonalBest || isNewRecord)}
           difficulty={difficulty}
           themeId={themeId}

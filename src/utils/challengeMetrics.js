@@ -1,111 +1,43 @@
 /**
  * Challenge a Friend & PLG Virality Utility
  *
- * Implements percentile benchmarking, personal best triggers,
+ * Implements star-rating benchmarking, personal best triggers,
  * viral challenge copy generation, universal link creation, and canvas card rendering.
  */
 
 import { getAppStoreReviewUrl } from '../services/appConfig.js';
 import { getSavedPlayerName } from '../services/playerProgress.js';
-import { getSetPercentile } from '../services/distributionService.js';
-
-export { getSetPercentile };
 
 const STORAGE_KEY_BEST_TIMES = 'diff_hunter_best_times';
 const STORAGE_KEY_SHARE_STATS = 'diff_hunter_share_stats';
 
 /**
- * Calculates percentile rank based on reaction time.
+ * Calculates a 1-3 star rating based on reaction time.
  * Calibrated for Diff Hunter timed spot-the-difference gameplay.
- * Supports set-calibrated and live histogram distributions via options.
  *
  * @param {number} elapsedTimeMs - Completion time in milliseconds.
  * @param {string} difficulty - 'Easy' | 'Medium' | 'Hard'
  * @param {boolean} isStageSet - True if 5-image stage cumulative time, False if single pair
- * @param {Object} [options] - Optional context { setId, isDaily, distribution, useCalibrated }
- * @returns {{ topPercentile: number, beatPercentile: number, rankLabel: string }}
+ * @returns {number} 1, 2, or 3 stars
  */
-export function calculatePercentileRank(elapsedTimeMs, difficulty = 'Medium', isStageSet = false, options = {}) {
-  if (options && (options.setId || options.isDaily || options.distribution || options.useCalibrated)) {
-    return getSetPercentile(options.setId, elapsedTimeMs, {
-      difficulty,
-      isStageSet,
-      isDaily: Boolean(options.isDaily),
-      distribution: options.distribution
-    });
-  }
-
+export function calculateStarRating(elapsedTimeMs, difficulty = 'Medium', isStageSet = false) {
   const safeMs = Math.max(100, Number.isFinite(elapsedTimeMs) ? elapsedTimeMs : 5000);
 
   // Difficulty adjustment factor (Hard takes longer, Easy is faster)
   const diffFactor = difficulty === 'Hard' ? 1.3 : difficulty === 'Easy' ? 0.8 : 1.0;
   const effectiveMs = safeMs / diffFactor;
 
-  let topPercentile;
-
   if (isStageSet) {
-    // 5-Image Stage Cumulative Time (Range: ~8s to 60s+)
-    if (effectiveMs <= 10000) {
-      topPercentile = 2;
-    } else if (effectiveMs <= 14000) {
-      topPercentile = 5;
-    } else if (effectiveMs <= 18000) {
-      topPercentile = 9;
-    } else if (effectiveMs <= 23000) {
-      topPercentile = 16;
-    } else if (effectiveMs <= 30000) {
-      topPercentile = 28;
-    } else if (effectiveMs <= 40000) {
-      topPercentile = 45;
-    } else if (effectiveMs <= 55000) {
-      topPercentile = 65;
-    } else if (effectiveMs <= 75000) {
-      topPercentile = 80;
-    } else {
-      topPercentile = Math.min(99, Math.round(80 + (effectiveMs - 75000) / 5000));
-    }
-  } else {
-    // Single Image Pair Time (Range: ~1.2s to 25s+)
-    if (effectiveMs <= 1500) {
-      topPercentile = 1;
-    } else if (effectiveMs <= 1900) {
-      topPercentile = 3;
-    } else if (effectiveMs <= 2400) {
-      topPercentile = 6;
-    } else if (effectiveMs <= 2800) {
-      topPercentile = 10;
-    } else if (effectiveMs <= 3500) {
-      topPercentile = 18;
-    } else if (effectiveMs <= 4500) {
-      topPercentile = 29;
-    } else if (effectiveMs <= 6000) {
-      topPercentile = 42;
-    } else if (effectiveMs <= 8000) {
-      topPercentile = 58;
-    } else if (effectiveMs <= 11000) {
-      topPercentile = 74;
-    } else if (effectiveMs <= 15000) {
-      topPercentile = 85;
-    } else {
-      topPercentile = Math.min(99, Math.round(85 + (effectiveMs - 15000) / 2000));
-    }
+    // 5-Image Stage Cumulative Time
+    if (effectiveMs <= 25000) return 3;
+    if (effectiveMs <= 45000) return 2;
+    return 1;
   }
 
-  topPercentile = Math.max(1, Math.min(99, topPercentile));
-  const beatPercentile = Math.max(1, 100 - topPercentile);
-
-  let rankLabel = `TOP ${topPercentile}%`;
-  if (topPercentile <= 5) {
-    rankLabel = `TOP ${topPercentile}% ELITE SPEED`;
-  } else if (topPercentile <= 15) {
-    rankLabel = `TOP ${topPercentile}% SPEED`;
-  }
-
-  return {
-    topPercentile,
-    beatPercentile,
-    rankLabel
-  };
+  // Single Image Pair Time
+  if (effectiveMs <= 4000) return 3;
+  if (effectiveMs <= 7000) return 2;
+  return 1;
 }
 
 /**
@@ -216,19 +148,16 @@ export function generateChallengeUrl({ elapsedTimeMs, playerName, difficulty = '
 /**
  * Generates viral challenge text copy for iMessage / SMS / Social.
  */
-export function generateChallengeText({ elapsedTimeMs, beatPercentile = 93, topPercentile, isPersonalBest = false, playerName = '', challengeUrl = '' }) {
+export function generateChallengeText({ elapsedTimeMs, isPersonalBest = false, playerName = '', challengeUrl = '' }) {
   const seconds = (Math.max(0, elapsedTimeMs) / 1000).toFixed(2);
   const name = playerName || getSavedPlayerName() || 'I';
   const url = challengeUrl || getAppStoreReviewUrl();
-  const topPct = topPercentile || Math.max(1, 100 - beatPercentile);
 
   const pbLine = isPersonalBest ? '🏆 NEW PERSONAL BEST!\n' : '';
 
   return (
-    `I spotted it in ${seconds} seconds.\n` +
-    `Top ${topPct}%\n` +
+    `${name === 'I' ? 'I' : name} spotted it in ${seconds} seconds.\n` +
     `${pbLine}` +
-    `⚡ ${name === 'I' ? 'I' : name} beat ${beatPercentile}% of Diff Hunter players.\n` +
     `There is ONE difference. Spot it before time runs out!\n\n` +
     `👉 Play the challenge: ${url}`
   );
@@ -237,14 +166,12 @@ export function generateChallengeText({ elapsedTimeMs, beatPercentile = 93, topP
 /**
  * Generates clean Result Card text copy:
  * "I spotted it in X.XX seconds.
- *  Top X%
  *  Ready to share."
  */
-export function generateResultCardText({ elapsedTimeMs, topPercentile = 7, challengeUrl = '' }) {
+export function generateResultCardText({ elapsedTimeMs, challengeUrl = '' }) {
   const seconds = (Math.max(0, elapsedTimeMs) / 1000).toFixed(2);
-  const safeTop = typeof topPercentile === 'number' && !isNaN(topPercentile) ? topPercentile : 7;
   const urlSuffix = challengeUrl ? `\n\n👉 Challenge: ${challengeUrl}` : '';
-  return `I spotted it in ${seconds} seconds.\nTop ${safeTop}%${urlSuffix}`;
+  return `I spotted it in ${seconds} seconds.${urlSuffix}`;
 }
 
 /**
@@ -254,8 +181,6 @@ export function generateResultCardText({ elapsedTimeMs, topPercentile = 7, chall
  * @param {object} options
  * @param {'text' | 'tiktok' | 'instagram' | 'more' | 'copy'} options.platform
  * @param {number} options.elapsedTimeMs
- * @param {number} options.topPercentile
- * @param {number} options.beatPercentile
  * @param {boolean} options.isPersonalBest
  * @param {Blob} [options.cardBlob]
  * @param {string} [options.challengeUrl]
@@ -265,8 +190,6 @@ export function generateResultCardText({ elapsedTimeMs, topPercentile = 7, chall
 export async function shareToPlatform({
   platform,
   elapsedTimeMs,
-  topPercentile = 7,
-  beatPercentile = 93,
   isPersonalBest = false,
   cardBlob = null,
   challengeUrl = '',
@@ -274,7 +197,7 @@ export async function shareToPlatform({
 }) {
   const seconds = (Math.max(0, elapsedTimeMs) / 1000).toFixed(2);
   const url = challengeUrl || (typeof window !== 'undefined' ? window.location?.origin : '') || getAppStoreReviewUrl();
-  const shareText = generateResultCardText({ elapsedTimeMs, topPercentile, challengeUrl: url });
+  const shareText = generateResultCardText({ elapsedTimeMs, challengeUrl: url });
 
   recordLocalShareEvent('tap');
 
@@ -452,8 +375,6 @@ export function parseIncomingChallenge(searchParamsOrString) {
  */
 export async function renderChallengeCardBlob({
   elapsedTimeMs = 2430,
-  beatPercentile = 93,
-  topPercentile = 7,
   isPersonalBest = false,
   playerName = 'SpeedHunter',
   levelTitle = 'Photography Stage'
@@ -528,26 +449,10 @@ export async function renderChallengeCardBlob({
     ctx.fillText(`I spotted it in ${seconds} seconds.`, 540, 420);
     ctx.shadowBlur = 0;
 
-    // Line 2: "Top X%" Pill Badge
-    const pillWidth = 340;
-    const pillHeight = 84;
-    const pillX = 540 - pillWidth / 2;
-    const pillY = 480;
-    ctx.fillStyle = 'rgba(255, 183, 3, 0.22)';
-    ctx.strokeStyle = '#ffb703';
-    ctx.lineWidth = 4;
-    roundRect(ctx, pillX, pillY, pillWidth, pillHeight, 42);
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = '#ffb703';
-    ctx.font = '900 50px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText(`Top ${topPercentile}%`, 540, pillY + 58);
-
     // Additional viral prompt
     ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
     ctx.font = '500 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillText('There is ONE difference. Spot it before time runs out!', 540, 740);
+    ctx.fillText('There is ONE difference. Spot it before time runs out!', 540, 560);
 
     // 10. Player & App Store Branding Footer
     ctx.fillStyle = 'rgba(0, 240, 255, 0.9)';

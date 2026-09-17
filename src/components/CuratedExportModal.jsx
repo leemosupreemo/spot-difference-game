@@ -7,6 +7,7 @@ import {
 } from '../utils/curationStore';
 import { PHOTO_PACKS } from '../data/photoPacks';
 import { sounds } from '../utils/audio';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 async function copyText(text) {
   if (navigator.clipboard?.writeText) {
@@ -95,9 +96,11 @@ export default function CuratedExportModal({ isOpen, onClose }) {
         boxSizing: 'border-box',
         border: '1px solid rgba(0, 240, 255, 0.45)',
         boxShadow: '0 0 36px rgba(0, 240, 255, 0.22)',
+        position: 'relative',
         '--modal-accent': 'var(--accent-cyan)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px', marginBottom: '14px' }}>
+        <ModalAmbientParticles />
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--modal-gap-md)', marginBottom: '14px' }}>
           <div>
             <h3 style={{ color: '#fff', fontWeight: 900, fontSize: '1.4rem', letterSpacing: '0.5px', marginBottom: '4px' }}>
               Curation Export
@@ -120,7 +123,7 @@ export default function CuratedExportModal({ isOpen, onClose }) {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-          gap: '8px',
+          gap: 'var(--modal-gap-sm)',
           marginBottom: '12px'
         }}>
           <button type="button" className="glass-btn glass-btn-primary" onClick={handleCopy} style={{ justifyContent: 'center' }}>
@@ -137,7 +140,7 @@ export default function CuratedExportModal({ isOpen, onClose }) {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-          gap: '8px',
+          gap: 'var(--modal-gap-sm)',
           marginBottom: '12px'
         }}>
           <div style={{ padding: '10px', borderRadius: '10px', background: 'rgba(0, 255, 135, 0.1)', border: '1px solid rgba(0, 255, 135, 0.35)' }}>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Eye, Timer, X, Shield, ExternalLink, HelpCircle, CheckCircle2, FileText, ArrowLeft } from 'lucide-react';
 import { sounds } from '../utils/audio';
+import CompareDemoAnimation from './CompareDemoAnimation';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function HelpModal({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState('rules'); // 'rules' | 'privacy'
@@ -25,7 +27,7 @@ export default function HelpModal({ isOpen, onClose }) {
         position: 'fixed',
         inset: 0,
         zIndex: 100,
-        background: 'rgba(0,0,0,0.85)',
+        background: 'rgba(0,0,0,0.88)',
         backdropFilter: 'blur(12px)',
         display: 'flex',
         alignItems: 'center',
@@ -42,12 +44,14 @@ export default function HelpModal({ isOpen, onClose }) {
           padding: '24px',
           position: 'relative',
           maxHeight: 'calc(100dvh - 32px)',
+          overflow: 'hidden',
           boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',
           '--modal-accent': 'var(--accent-cyan)'
         }}
       >
+        <ModalAmbientParticles />
         {/* Top Right Close "X" Button */}
         <button
           onClick={() => { sounds.playTap(); onClose(); }}
@@ -73,7 +77,7 @@ export default function HelpModal({ isOpen, onClose }) {
         </button>
 
         {/* Modal Header */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', paddingRight: '40px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)', marginBottom: '14px', paddingRight: '40px' }}>
           <HelpCircle size={22} color="var(--accent-cyan)" />
           <h2 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0, letterSpacing: '0.5px', color: '#fff' }}>
             HELP & INFO
@@ -82,7 +86,7 @@ export default function HelpModal({ isOpen, onClose }) {
 
         {/* Tab Selector (only when not in full policy sub-view) */}
         {!showFullPolicy ? (
-          <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', gap: 'var(--modal-gap-sm)', marginBottom: '16px' }}>
             <button
               onClick={() => { sounds.playTap(); setActiveTab('rules'); }}
               style={{
@@ -110,9 +114,9 @@ export default function HelpModal({ isOpen, onClose }) {
                 flex: 1,
                 padding: '8px 14px',
                 borderRadius: '10px',
-                border: activeTab === 'privacy' ? '1px solid var(--accent-pink)' : '1px solid var(--border-glass)',
-                background: activeTab === 'privacy' ? 'rgba(255, 0, 127, 0.15)' : 'rgba(255, 255, 255, 0.04)',
-                color: activeTab === 'privacy' ? 'var(--accent-pink)' : 'var(--text-muted)',
+                border: activeTab === 'privacy' ? '1px solid var(--accent-cyan)' : '1px solid var(--border-glass)',
+                background: activeTab === 'privacy' ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 255, 255, 0.04)',
+                color: activeTab === 'privacy' ? 'var(--accent-cyan)' : 'var(--text-muted)',
                 fontWeight: 800,
                 fontSize: '0.88rem',
                 cursor: 'pointer',
@@ -165,11 +169,11 @@ export default function HelpModal({ isOpen, onClose }) {
           </div>
         )}
 
-        {/* Tab Content Area */}
-        <div style={{ overflowY: 'auto', paddingRight: '4px', marginBottom: '18px', flex: 1 }}>
+        {/* Tab Content Area: fixed min-height so switching tabs doesn't resize the modal itself */}
+        <div style={{ overflowY: 'auto', paddingRight: '4px', marginBottom: '18px', flex: 1, minHeight: '300px' }}>
           {showFullPolicy ? (
             /* FULL IN-APP PRIVACY POLICY DOCUMENT */
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.86rem', color: 'var(--text-main)', lineHeight: 1.5 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--modal-gap-lg)', fontSize: '0.86rem', color: 'var(--text-main)', lineHeight: 1.5 }}>
               <div>
                 <span style={{
                   display: 'inline-block',
@@ -262,8 +266,8 @@ export default function HelpModal({ isOpen, onClose }) {
               </div>
             </div>
           ) : activeTab === 'rules' ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.88rem', color: 'var(--text-main)' }}>
-              <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--modal-gap-lg)', fontSize: '0.88rem', color: 'var(--text-main)' }}>
+              <div style={{ display: 'flex', gap: 'var(--modal-gap-md)', alignItems: 'flex-start' }}>
                 <div style={{ background: 'rgba(0, 240, 255, 0.15)', padding: '8px', borderRadius: '10px', display: 'flex' }}>
                   <Eye size={20} color="var(--accent-cyan)" />
                 </div>
@@ -273,7 +277,7 @@ export default function HelpModal({ isOpen, onClose }) {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', gap: 'var(--modal-gap-md)', alignItems: 'flex-start' }}>
                 <div style={{ background: 'rgba(255, 0, 127, 0.15)', padding: '8px', borderRadius: '10px', display: 'flex' }}>
                   <Timer size={20} color="var(--accent-pink)" />
                 </div>
@@ -282,11 +286,15 @@ export default function HelpModal({ isOpen, onClose }) {
                   The timer starts the moment the images appear. Find the difference as fast as possible to maximize your speed score.
                 </div>
               </div>
+
+              <div style={{ marginTop: '2px' }}>
+                <CompareDemoAnimation compact />
+              </div>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--modal-gap-lg)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
               <div style={{ background: 'rgba(0, 240, 255, 0.06)', padding: '12px 14px', borderRadius: '12px', border: '1px solid rgba(0, 240, 255, 0.2)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', color: 'var(--accent-cyan)', fontWeight: 800 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)', marginBottom: '6px', color: 'var(--accent-cyan)', fontWeight: 800 }}>
                   <CheckCircle2 size={16} /> Privacy-First Architecture
                 </div>
                 <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.4 }}>
@@ -308,7 +316,7 @@ export default function HelpModal({ isOpen, onClose }) {
                 </p>
               </div>
 
-              <div style={{ paddingTop: '8px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ paddingTop: '8px', display: 'flex', flexDirection: 'column', gap: 'var(--modal-gap-sm)' }}>
                 <button
                   onClick={() => { sounds.playTap(); setShowFullPolicy(true); }}
                   style={{
@@ -323,7 +331,7 @@ export default function HelpModal({ isOpen, onClose }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '8px',
+                    gap: 'var(--modal-gap-sm)',
                     width: '100%'
                   }}
                 >

@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Play, Layers, Sparkles, Camera, Swords, Smartphone } from 'lucide-react';
 import { Capacitor } from '@capacitor/core';
 import { sounds } from '../utils/audio';
-import { SCENE_THEMES } from '../utils/proceduralGenerator';
+import { SCENE_THEMES, generateProceduralLevelPair } from '../utils/proceduralGenerator';
+import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 import { logApp, auditDOMState } from '../utils/logger';
 import { trackCategorySelected } from '../services/analytics';
-import { getAppStoreReviewUrl } from '../services/appConfig';
 import { hasCompletedFirstSet } from '../services/playerProgress';
 import TutorialBanner from './TutorialBanner';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
+
+// A representative real photo (Photography mode) and a deterministically seeded
+// procedural scene (Abstract mode) used as a dim, animated background hint for
+// whichever Game Mode card is active. Neither is part of the playable rotation.
+const GAME_MODE_PHOTO_BG = 'levels/photo-pairs/kitchen/easy_kitchen_001/base.jpg';
+const GAME_MODE_ABSTRACT_SEED = 8675309;
 
 export default function MainMenu({
   selectedTheme,
@@ -25,6 +32,19 @@ export default function MainMenu({
 }) {
   const isSetCompleted = hasCompletedProp !== undefined ? hasCompletedProp : hasCompletedFirstSet();
   const isNative = typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform();
+
+  const photoModeBg = useMemo(() => resolveAssetUrl(GAME_MODE_PHOTO_BG), []);
+  const abstractModeBg = useMemo(() => {
+    try {
+      return generateProceduralLevelPair('abstract_animated', 'Medium', GAME_MODE_ABSTRACT_SEED).baseImage;
+    } catch (_) {
+      return null;
+    }
+  }, []);
+  const gameModeBgImage = selectedTheme === 'abstract_animated' ? abstractModeBg : photoModeBg;
+  // Bumped on every tap (even re-tapping the active mode) so the zoom/fade replays.
+  const [gameModeBgTick, setGameModeBgTick] = useState(0);
+
   const themeDetails = {
     find_the_sniper: {
       icon: <Camera size={26} color="var(--accent-cyan)" />,
@@ -38,6 +58,7 @@ export default function MainMenu({
 
   return (
     <div className="menu-container page-fade-in">
+      <ModalAmbientParticles />
       {/* Incoming Challenge Banner (When launched from a friend's link) */}
       {incomingChallenge && (
         <div style={{
@@ -118,12 +139,23 @@ export default function MainMenu({
 
       {/* Main Mode / Category Selection Card */}
       <div className="glass-panel" style={{
+        position: 'relative',
+        overflow: 'hidden',
         padding: '16px 18px',
         borderRadius: '18px',
         textAlign: 'left',
         boxSizing: 'border-box',
         marginBottom: '14px'
       }}>
+        {gameModeBgImage && (
+          <div className="game-mode-bg" aria-hidden="true">
+            <div
+              key={`${selectedTheme}-${gameModeBgTick}`}
+              className="game-mode-bg-image"
+              style={{ backgroundImage: `url(${gameModeBgImage})` }}
+            />
+          </div>
+        )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
           <Layers size={20} color="var(--accent-cyan)" />
           <h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>
@@ -146,6 +178,7 @@ export default function MainMenu({
                 onClick={() => {
                   sounds.playTap();
                   setSelectedTheme(theme.id);
+                  setGameModeBgTick(tick => tick + 1);
                   trackCategorySelected(theme.id);
                 }}
                 className="glass-panel mode-card-item"

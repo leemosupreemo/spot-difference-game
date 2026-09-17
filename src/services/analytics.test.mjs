@@ -124,8 +124,6 @@ test("tracks challenge and result screen funnel events properly", () => {
   assert.doesNotThrow(() => {
     trackResultScreenViewed({
       elapsedTimeMs: 2430,
-      percentileBeat: 93,
-      topPercentile: 7,
       isPersonalBest: true,
       score: 480,
       stars: 3,
@@ -136,14 +134,12 @@ test("tracks challenge and result screen funnel events properly", () => {
     trackChallengeShareClicked({
       source: "victory_modal_cta",
       elapsedTimeMs: 2430,
-      percentileBeat: 93,
       isPersonalBest: true
     });
 
     trackChallengeShareCompleted({
       method: "native_share",
       elapsedTimeMs: 2430,
-      percentileBeat: 93,
       isPersonalBest: true
     });
 

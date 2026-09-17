@@ -36,6 +36,14 @@ test('ProgressModal omits removed deprecated labels and footer texts', () => {
   assert.doesNotMatch(source, /CATEGORY BREAKDOWN/);
 });
 
+test('ProgressModal My Progress summary labels its best-time stat as the fastest 1st attempt', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /FASTEST 1ST ATTEMPT/);
+  // Must be driven purely by firstTime, not a mix that prefers fastestRepeat
+  assert.match(source, /const bestOverallTimeMs = allSets\.reduce\(\(best, s\) => \{\s*const t = s\.firstTime;/);
+});
+
 test('ProgressModal renders Category Breakdown table with clean columns', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
@@ -49,8 +57,9 @@ test('ProgressModal renders Category Breakdown table with clean columns', () => 
 test('ProgressModal exposes one Game Center leaderboard action beside the heading', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
-  assert.match(source, /View in Game Center/);
+  assert.match(source, />\s*Game Center\s*</);
   assert.match(source, /openGameCenterLeaderboard/);
+  assert.match(source, /isGameCenterSupported\(\) && gameCenterAuthenticated/);
   assert.doesNotMatch(source, /openGameCenterAchievements/);
   assert.doesNotMatch(source, />\s*Achievements\s*</);
 });
@@ -61,17 +70,37 @@ test('ProgressModal does not substitute a pack ranking when a selected Photo Set
   assert.match(source, /selectedLeaderboardPack === 'find_the_sniper' && selectedLeaderboardSet/);
 });
 
+test('ProgressModal reserves the Photo Set dropdown row height so switching to Abstract does not shift the table up', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  // The row wrapper (marginBottom + minHeight) must render unconditionally; only the <select>
+  // itself is conditional on the Photography pack being active
+  assert.match(source, /Photo Set Dropdown[\s\S]*?<div style=\{\{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', justifyContent: 'flex-start', minHeight: '40px' \}\}>\s*\{selectedLeaderboardPack === 'find_the_sniper'/);
+});
+
 test('ProgressModal renders daily challenge leaderboard limited to top 5', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
-  assert.match(source, /Fastest 5 Times/);
-  assert.doesNotMatch(source, /Fastest 20 Times/);
   assert.match(source, /dailyBoard\.slice\(0,\s*5\)/);
+  // The "Today's 3-Image Sequence" subtext under the heading has been removed
+  assert.doesNotMatch(source, /3-Image Sequence/);
+});
+
+test('ProgressModal styles the daily leaderboard table like the other tables and drops the Date column', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  const dailyTableSection = source.slice(source.indexOf('Top 5 Times Table'), source.indexOf('MY PROGRESS VIEW'));
+
+  assert.match(dailyTableSection, /background: 'rgba\(0,0,0,0\.3\)', borderRadius: '16px', overflowX: 'auto', border: '1px solid var\(--border-glass\)'/);
+  assert.match(dailyTableSection, /background: 'rgba\(255,255,255,0\.06\)', color: 'var\(--text-muted\)', textAlign: 'left', borderBottom: '1px solid var\(--border-glass\)'/);
+  assert.doesNotMatch(dailyTableSection, /textTransform: 'uppercase'/);
+  assert.doesNotMatch(dailyTableSection, />DATE</);
+  assert.doesNotMatch(dailyTableSection, />\s*Today\s*</);
+  assert.match(dailyTableSection, /colSpan=\{3\}/);
 });
 
 test('ProgressModal renders global live leaderboard limited to top 25', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
-  assert.match(source, /TOP 25/);
   assert.match(source, /topLeaderboardEntries\.slice\(0,\s*25\)/);
+  // No "TOP 25" badge cluttering the header - the limit is just implicit in the list length
+  assert.doesNotMatch(source, /TOP 25/);
 });
 
 test('ProgressModal renders 2 columns for individual set records', () => {
@@ -79,6 +108,9 @@ test('ProgressModal renders 2 columns for individual set records', () => {
   assert.match(source, /FASTEST 1ST ATTEMPT/);
   assert.match(source, /MOST POINTS PER ANY ATTEMPT/);
   assert.match(source, /isSetView \? 2 : 4/);
+  // The first column's header must label the rank/player half of the cell, not just the
+  // fastest-attempt time half - the data row itself packs both into one <td>
+  assert.match(source, /RANK \/ PLAYER[\s\S]*?FASTEST 1ST ATTEMPT/);
 });
 
 test('ProgressModal detects offline mode and displays indicator banner with retry action', () => {

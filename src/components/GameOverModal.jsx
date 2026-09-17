@@ -1,11 +1,15 @@
 import React from 'react';
 import { RefreshCw, Skull, X } from 'lucide-react';
 import { sounds } from '../utils/audio';
+import { getSetNumber } from '../utils/setLeaderboards.js';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
-export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime, missCount, levelTitle }) {
+export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime, levelTitle, setId = null, themeId = 'find_the_sniper' }) {
   if (!isOpen) return null;
 
   const seconds = (elapsedTime / 1000).toFixed(2);
+  const isAbstract = themeId === 'abstract_animated';
+  const stageNumber = getSetNumber(setId);
 
   return (
     <div
@@ -15,8 +19,8 @@ export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime,
         inset: 0,
         zIndex: 100,
         background: 'rgba(0,0,0,0.88)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -40,6 +44,7 @@ export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime,
         position: 'relative',
         '--modal-accent': 'var(--accent-pink)'
       }}>
+        <ModalAmbientParticles />
 
         {/* Top Right Close "X" Button */}
         <button
@@ -84,14 +89,14 @@ export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime,
           STAGE FAILED
         </h2>
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '16px', fontWeight: 600 }}>
-          {levelTitle}
+          {isAbstract ? levelTitle : `Stage #${stageNumber}`}
         </p>
 
         {/* Performance Breakdown */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '12px',
+          gap: 'var(--modal-gap-md)',
           background: 'rgba(0,0,0,0.45)',
           padding: '14px 16px',
           borderRadius: '16px',
@@ -119,7 +124,7 @@ export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime,
         </div>
 
         {/* Buttons */}
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', gap: 'var(--modal-gap-md)', justifyContent: 'center' }}>
           <button
             className="glass-btn glass-btn-primary"
             onClick={() => { sounds.playTap(); onRestart(); }}

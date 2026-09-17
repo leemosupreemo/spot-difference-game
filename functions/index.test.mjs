@@ -3,6 +3,7 @@ import test from 'node:test';
 import {
   evaluateQualification,
   validateSubmissionInput,
+  containsProfanity,
   LEADERBOARD_LIMITS
 } from './index.js';
 
@@ -71,6 +72,44 @@ test('validateSubmissionInput sanitizes display name and sets defaults', () => {
     displayName: 'SuperDuperLongPlayerNameThatExceedsLimit'
   });
   assert.equal(res2.displayName.length <= 24, true);
+});
+
+test('containsProfanity mirrors the client-side filter behavior', () => {
+  assert.equal(containsProfanity('SpeedHunter'), false);
+  assert.equal(containsProfanity('Classic'), false);
+  assert.equal(containsProfanity('fuckboy'), true);
+  assert.equal(containsProfanity('sh1t'), true);
+});
+
+test('validateSubmissionInput rejects profane display names server-side, even if the client bypassed its own check', () => {
+  const auth = { uid: 'anon_1234' };
+
+  assert.throws(() => {
+    validateSubmissionInput(auth, {
+      boardType: 'photoSet',
+      boardId: 'set_1',
+      score: 5000,
+      displayName: 'fuckboy'
+    });
+  }, /isn't allowed/i);
+
+  assert.throws(() => {
+    validateSubmissionInput(auth, {
+      boardType: 'photoSet',
+      boardId: 'set_1',
+      score: 5000,
+      displayName: 'sh1thead'
+    });
+  }, /isn't allowed/i);
+
+  // Clean names and the server-generated default still pass through untouched
+  const res = validateSubmissionInput(auth, {
+    boardType: 'photoSet',
+    boardId: 'set_1',
+    score: 5000,
+    displayName: 'PixelSniper'
+  });
+  assert.equal(res.displayName, 'PixelSniper');
 });
 
 test('evaluateQualification accepts candidate into empty board and calculates rank 1', () => {

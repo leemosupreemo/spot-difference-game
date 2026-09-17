@@ -1,8 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
 import { doc, getFirestore, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import { firebaseConfig, getCurrentPlayerId, getCurrentAuthUser } from './authService.js';
+import { firebaseConfig, getCurrentPlayerId } from './authService.js';
 import { getSavedPlayerName } from './playerProgress.js';
 import { getDeterministicSetBaseline } from '../utils/setLeaderboards.js';
 import { generateDefaultDailyBaseline } from './dailyChallenge.js';
@@ -340,6 +339,20 @@ export async function submitLeaderboardScore({
         };
       }
     } catch (cloudErr) {
+      // A deliberate server-side rejection (e.g. profanity in the display name) is permanent —
+      // retrying via the offline fallback would just queue the same rejected submission forever.
+      if (cloudErr?.code === 'functions/invalid-argument') {
+        console.warn('Leaderboard submission rejected by server validation:', cloudErr?.message || cloudErr);
+        return {
+          qualified: false,
+          rejected: true,
+          reason: cloudErr?.message || 'Submission rejected.',
+          rank: null,
+          entries: [],
+          remoteSynced: false,
+          isOffline: false
+        };
+      }
       console.warn('Cloud Function invocation bypassed/failed (falling back to client evaluation):', cloudErr?.message || cloudErr);
     }
   }

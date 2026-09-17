@@ -35,7 +35,8 @@ test('RatingModal conforms to strict styling and layout specifications', () => {
   // 3) Top and bottom padding to prevent bleeding off screen
   assert.match(source, /paddingTop: 'max\(env\(safe-area-inset-top\)/);
   assert.match(source, /paddingBottom: 'max\(env\(safe-area-inset-bottom\)/);
-  assert.match(source, /maxHeight: 'min\(90vh/);
+  // Standardized to the same dynamic viewport cap every other modal uses
+  assert.match(source, /maxHeight: 'calc\(100dvh - 32px\)'/);
 
   // 5) No "Rate on App Store" button
   assert.doesNotMatch(source, />\s*Rate on App Store/);

@@ -15,8 +15,8 @@ test('App.jsx defines essential state variables including view and incomingChall
   // Verify view state is properly declared
   assert.match(source, /const\s*\[\s*view\s*,\s*setView\s*\]\s*=\s*useState\(['"]menu['"]\)/);
 
-  // Verify incomingChallenge state is properly declared
-  assert.match(source, /const\s*\[\s*incomingChallenge\s*,\s*setIncomingChallenge\s*\]\s*=/);
+  // Verify incomingChallenge state is properly declared (read-only: derived once from the URL, never updated)
+  assert.match(source, /const\s*\[\s*incomingChallenge\s*\]\s*=\s*useState/);
 
   // Verify view transitions and routing exist
   assert.match(source, /view\s*===\s*['"]menu['"]/);

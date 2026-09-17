@@ -18,6 +18,30 @@ const VALID_BOARD_TYPES = ['daily', 'category', 'photoSet'];
 const VALID_METRICS = ['elapsedMs', 'points'];
 const MINIMUM_TIME_MS = 1000; // Anti-cheat baseline: impossible to spot 5 diffs in under 1s
 
+// Server-side mirror of src/utils/profanityFilter.js — the client-side check is a UX nicety,
+// this is the actual enforcement boundary since a modified client could skip it entirely.
+const WHOLE_WORD_BLOCKED = ['ass', 'sex', 'tit', 'fag', 'cum', 'hoe', 'coon'];
+const SUBSTRING_BLOCKED = [
+  'fuck', 'shit', 'bitch', 'cunt', 'nigger', 'nigga', 'whore', 'pussy', 'dick',
+  'asshole', 'bastard', 'slut', 'twat', 'wank', 'dildo', 'rape', 'faggot',
+  'retard', 'kike', 'spic', 'chink', 'tranny', 'motherfucker', 'jizz'
+];
+const LEET_MAP = { '0': 'o', '1': 'i', '3': 'e', '4': 'a', '5': 's', '7': 't', '@': 'a', '$': 's' };
+
+function deleetify(text) {
+  return text.split('').map(ch => LEET_MAP[ch] || ch).join('');
+}
+
+export function containsProfanity(name) {
+  const lower = deleetify(String(name || '').toLowerCase());
+
+  const words = lower.split(/[^a-z]+/).filter(Boolean);
+  if (words.some(word => WHOLE_WORD_BLOCKED.includes(word))) return true;
+
+  const collapsed = lower.replace(/[^a-z]/g, '');
+  return SUBSTRING_BLOCKED.some(term => collapsed.includes(term));
+}
+
 /**
  * Pure evaluation logic for leaderboard qualification and re-ranking.
  * 
@@ -144,8 +168,14 @@ export function validateSubmissionInput(auth, data = {}) {
     );
   }
 
-  const cleanName = typeof displayName === 'string' && displayName.trim()
-    ? displayName.trim().slice(0, 24)
+  const trimmedDisplayName = typeof displayName === 'string' ? displayName.trim() : '';
+
+  if (trimmedDisplayName && containsProfanity(trimmedDisplayName)) {
+    throw new HttpsError('invalid-argument', "That name isn't allowed. Please choose another name.");
+  }
+
+  const cleanName = trimmedDisplayName
+    ? trimmedDisplayName.slice(0, 24)
     : `Player ${auth.uid.slice(-4).toUpperCase()}`;
 
   return {

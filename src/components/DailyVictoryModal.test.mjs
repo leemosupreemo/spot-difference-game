@@ -46,8 +46,11 @@ test('DailyVictoryModal renders top times list and supports failure state', () =
   // Verify anonymous player tag editing and live leaderboard
   assert.match(source, /fetchDailyLeaderboard/);
   assert.match(source, /updateDailyPlayerName/);
-  assert.match(source, /Your Hunter Tag/);
+  assert.match(source, /placeholder="Enter name"/);
   assert.match(source, /customPlayerName/);
+
+  // Tag entry is arcade style: it only appears once a Top 3 record is set, not on every success
+  assert.match(source, /\{isLeaderboardRecord && bannerPhase !== 'hidden' && \(/);
 });
 
 test('SetOfTheDayBanner does not show once completed or attempted', () => {
@@ -75,16 +78,15 @@ test('daily success replaces rank and inline leaderboard with a link beside the 
 
   assert.doesNotMatch(source, /TODAY'S RANK/);
   assert.match(source, /aria-label="View daily leaderboard"/);
-  assert.match(source, /Top \{Math\.max\(1, Math\.round\(100 - percentile\)\)\}%/);
-  assert.match(source, /getDailyTimeToBeat/);
+  assert.doesNotMatch(source, /[Pp]ercentile/);
   assert.match(source, /aria-label="Share daily result"[\s\S]*?totalSecStr/);
   assert.match(source, /aria-label="View daily leaderboard"/);
 });
 
-test('daily forfeit hides button to left of main menu and lets main menu take full length', () => {
+test('daily failure footer has no leaderboard button beside main menu, which takes full length', () => {
   const source = fs.readFileSync(dailyModalPath, 'utf8');
 
-  assert.match(source, /isFailed && !isForfeit/);
+  assert.doesNotMatch(source, /Daily Board/);
   assert.match(source, /Main Menu/);
   assert.match(source, /width:\s*['"]100%['"]/);
 });

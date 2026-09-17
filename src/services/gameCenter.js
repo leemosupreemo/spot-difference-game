@@ -1,8 +1,7 @@
 import { Capacitor, registerPlugin } from '@capacitor/core';
 import {
   GAME_CENTER_LEADERBOARDS,
-  GAME_CENTER_ACHIEVEMENTS,
-  getLeaderboardForDifficulty
+  GAME_CENTER_ACHIEVEMENTS
 } from './gameCenterConfig.js';
 
 // Register native plugin with graceful fallback for web/non-iOS platforms
@@ -209,7 +208,6 @@ export async function unlockGameCenterAchievement({
  * @param {Object} params
  * @param {number} params.elapsedTimeMs - Round duration in milliseconds
  * @param {string} [params.difficulty] - 'Easy', 'Medium', 'Hard'
- * @param {string} [params.setId] - Stable deterministic Photo Set identity
  * @param {boolean} [params.isPersonalBest] - Whether this was a new personal record
  * @param {number} [params.score] - In-game points earned
  * @param {number} [params.stars] - Star rating (1-3)
@@ -218,7 +216,6 @@ export async function unlockGameCenterAchievement({
 export async function mirrorRoundToGameCenter({
   elapsedTimeMs,
   difficulty = 'Medium',
-  setId = null,
   isPersonalBest = false,
   score = 0,
   stars = 3

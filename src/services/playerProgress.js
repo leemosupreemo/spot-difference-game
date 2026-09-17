@@ -93,6 +93,54 @@ export function _resetFirstSetCompletedForTesting() {
   } catch (_) {}
 }
 
+// Fixed keys for locally stored progress/scores (not identity, settings, or debug/simulator state).
+const LOCAL_RECORD_KEYS = [
+  'diff_hunter_categorized_stats',
+  STORAGE_KEY_HAS_COMPLETED_SET,
+  'diff_hunter_local_leaderboard',
+  'diff_hunter_best_times',
+  'diff_hunter_share_stats',
+  'diff_hunter_fastest_dynamic_time',
+  'diff_hunter_pending_leaderboard_queue',
+  'diff_hunter_daily_sets',
+  'diff_hunter_daily_queue_used',
+  'diff_hunter_daily_remote_queue'
+];
+
+// Per-day/dynamic prefixes for locally stored progress/scores.
+const LOCAL_RECORD_KEY_PREFIXES = [
+  'diff_hunter_daily_leaderboard_',
+  'diff_hunter_daily_player_',
+  'diff_hunter_lb_'
+];
+
+/**
+ * Wipes locally stored gameplay records/scores (categorized stats, daily challenge
+ * history, cached leaderboards). Leaves identity (player name, anonymous uid) and
+ * app/debug settings untouched.
+ */
+export function clearAllLocalRecords() {
+  inMemoryHasCompletedFirstSet = false;
+  try {
+    if (typeof localStorage === 'undefined') return;
+
+    LOCAL_RECORD_KEYS.forEach(key => {
+      try { localStorage.removeItem(key); } catch (_) {}
+    });
+
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && LOCAL_RECORD_KEY_PREFIXES.some(prefix => key.startsWith(prefix))) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach(key => {
+      try { localStorage.removeItem(key); } catch (_) {}
+    });
+  } catch (_) {}
+}
+
 export const DEFAULT_HUNTER_PREFIXES = [
   'SpeedHunter',
   'PixelSniper',

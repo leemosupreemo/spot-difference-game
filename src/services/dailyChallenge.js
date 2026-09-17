@@ -5,7 +5,6 @@ import {
   doc,
   getDoc,
   setDoc,
-  updateDoc,
   collection,
   getDocs,
   query,
@@ -18,7 +17,6 @@ import { getSavedPlayerName, savePlayerName } from './playerProgress.js';
 import { getGameCenterPlayer } from './gameCenter.js';
 import { logApp } from '../utils/logger.js';
 import { submitLeaderboardScore } from './leaderboardService.js';
-import { getSetPercentile, recordDailyChallengeDistribution, fetchDailyDistribution } from './distributionService.js';
 
 const STORAGE_KEY_DAILY_SETS = 'diff_hunter_daily_sets';
 const STORAGE_KEY_DAILY_USED_QUEUE = 'diff_hunter_daily_queue_used';
@@ -926,7 +924,7 @@ export function resetDailyPlayerStatus(dateStr = getTodayDateString()) {
 /**
  * Returns player completion/attempt status for the specified day.
  * @param {string} [dateStr]
- * @returns {{ completed: boolean, attempted: boolean, failed: boolean, totalTimeMs?: number, stars?: number, position?: number, totalPlayers?: number, percentile?: number, stageIndex?: number }}
+ * @returns {{ completed: boolean, attempted: boolean, failed: boolean, totalTimeMs?: number, stars?: number, position?: number, totalPlayers?: number, stageIndex?: number }}
  */
 export function getDailyPlayerStatus(dateStr = getTodayDateString()) {
   const storageKey = `${STORAGE_KEY_DAILY_PLAYER_PREFIX}${dateStr}`;
@@ -1001,13 +999,13 @@ export function recordDailyChallengeFailure({
 
 /**
  * Records player completion of the 3-image Set of the Day.
- * Computes stars, percentile rank, and updates the top 25 leaderboard.
+ * Computes stars and updates the top 25 leaderboard.
  *
  * @param {Object} params
  * @param {string} [params.dateStr]
  * @param {number} params.totalTimeMs
  * @param {string} [params.playerName]
- * @returns {{ position: number, totalPlayers: number, percentile: number, stars: number, totalTimeMs: number, isNewRecord: boolean }}
+ * @returns {{ position: number, totalPlayers: number, stars: number, totalTimeMs: number, isNewRecord: boolean }}
  */
 export function recordDailyChallengeCompletion({
   dateStr = getTodayDateString(),
@@ -1054,7 +1052,6 @@ export function recordDailyChallengeCompletion({
       return {
         position: status.position || (existingPlayerIndex + 1),
         totalPlayers: currentEntries.length,
-        percentile: status.percentile || 90,
         stars: status.stars || stars,
         totalTimeMs: prevTime,
         isNewRecord: false,
@@ -1088,17 +1085,7 @@ export function recordDailyChallengeCompletion({
   }));
   const position = ranked.findIndex(e => e.isLocalPlayer) + 1;
   const totalPlayers = ranked.length;
-
-  // Percentile: accurately calibrated against worldwide distribution
-  const percentileRank = getSetPercentile(dailySetId || dateStr, totalTimeMs, {
-    isDaily: true,
-    difficulty: 'Medium'
-  });
-  const percentile = percentileRank.beatPercentile;
   const isNewRecord = position === 1;
-
-  // Record completion to distribution asynchronously
-  recordDailyChallengeDistribution(dateStr, totalTimeMs).catch(() => {});
 
   // Save top 5
   const top5 = ranked.slice(0, 5);
@@ -1113,7 +1100,6 @@ export function recordDailyChallengeCompletion({
     stars,
     position,
     totalPlayers,
-    percentile,
     dateStr,
     setId: dailySetId,
     entryIds: orderedEntryIds,
@@ -1124,7 +1110,6 @@ export function recordDailyChallengeCompletion({
   return {
     position,
     totalPlayers,
-    percentile,
     stars,
     totalTimeMs,
     isNewRecord,
@@ -1396,18 +1381,10 @@ export async function fetchDailyLeaderboard(dateStr = getTodayDateString()) {
         const currentStatus = getDailyPlayerStatus(dateStr);
         const position = myIdx + 1;
         const totalPlayers = ranked.length;
-        const liveDist = await fetchDailyDistribution(dateStr).catch(() => null);
-        const percentileRank = getSetPercentile(currentStatus?.setId || dateStr, currentStatus?.totalTimeMs || ranked[myIdx].totalTimeMs, {
-          isDaily: true,
-          difficulty: 'Medium',
-          distribution: liveDist
-        });
-        const percentile = percentileRank.beatPercentile;
         storageSet(playerKey, JSON.stringify({
           ...currentStatus,
           position,
-          totalPlayers,
-          percentile
+          totalPlayers
         }));
       }
 

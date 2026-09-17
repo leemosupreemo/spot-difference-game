@@ -406,8 +406,6 @@ export function trackRatingPromptAction({ action = "rate", visitNumber = 2 } = {
  */
 export function trackResultScreenViewed({
   elapsedTimeMs = 0,
-  percentileBeat = 93,
-  topPercentile = 7,
   isPersonalBest = false,
   score = 0,
   stars = 3,
@@ -422,8 +420,6 @@ export function trackResultScreenViewed({
   trackEvent("Result Screen Viewed", {
     elapsed_time_sec: elapsedTimeSec,
     elapsed_time_ms: elapsedTimeMs,
-    percentile_beat: percentileBeat,
-    top_percentile: topPercentile,
     is_personal_best: Boolean(isPersonalBest),
     score,
     stars,
@@ -448,7 +444,6 @@ export function trackResultScreenViewed({
 export function trackChallengeShareClicked({
   source = "victory_modal_cta",
   elapsedTimeMs = 0,
-  percentileBeat = 93,
   isPersonalBest = false,
   difficulty = "Medium",
   themeId = "find_the_sniper"
@@ -459,7 +454,6 @@ export function trackChallengeShareClicked({
     source,
     elapsed_time_sec: elapsedTimeSec,
     elapsed_time_ms: elapsedTimeMs,
-    percentile_beat: percentileBeat,
     is_personal_best: Boolean(isPersonalBest),
     difficulty,
     theme_id: themeId
@@ -476,7 +470,6 @@ export function trackChallengeShareClicked({
 export function trackChallengeShareCompleted({
   method = "native_share",
   elapsedTimeMs = 0,
-  percentileBeat = 93,
   isPersonalBest = false,
   difficulty = "Medium",
   themeId = "find_the_sniper"
@@ -487,7 +480,6 @@ export function trackChallengeShareCompleted({
     method,
     elapsed_time_sec: elapsedTimeSec,
     elapsed_time_ms: elapsedTimeMs,
-    percentile_beat: percentileBeat,
     is_personal_best: Boolean(isPersonalBest),
     difficulty,
     theme_id: themeId

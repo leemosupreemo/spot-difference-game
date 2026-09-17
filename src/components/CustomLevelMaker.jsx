@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Upload, Plus, Trash2, Play, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { Upload, Trash2, Play, Sparkles, Image as ImageIcon } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
 export default function CustomLevelMaker({ onSaveCustomLevel }) {
@@ -97,7 +97,7 @@ export default function CustomLevelMaker({ onSaveCustomLevel }) {
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
           <Sparkles size={24} color="var(--accent-cyan)" />
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>CUSTOM LEVEL MAKER</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '0.5px', color: '#fff' }}>CUSTOM LEVEL MAKER</h2>
         </div>
 
         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '24px' }}>

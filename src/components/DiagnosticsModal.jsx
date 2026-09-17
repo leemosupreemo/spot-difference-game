@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Terminal, Copy, Check, Share2, Trash2, X, RefreshCw, Smartphone, ShieldCheck, Layers } from 'lucide-react';
+import { Terminal, Copy, Check, Share2, Trash2, X } from 'lucide-react';
 import { getAppLogs, clearAppLogs, subscribeAppLogs, logApp } from '../utils/logger';
 import { getCuratedStatusMap, getLevelStatus } from '../utils/curationStore';
 import { getAllPhotoPairEntries, selectPhotoPairEntries } from '../utils/photoPairLevelLoader';
 import { sounds } from '../utils/audio';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function DiagnosticsModal({
   isOpen,
@@ -170,7 +171,7 @@ export default function DiagnosticsModal({
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 99999,
+        zIndex: 20000, // debug-overlay tier: must clear DeviceSimulatorHarness's chrome (up to z:10000)
         background: 'rgba(0, 0, 0, 0.88)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
@@ -198,10 +199,10 @@ export default function DiagnosticsModal({
           '--modal-accent': 'var(--accent-cyan)'
         }}
       >
-        
+        <ModalAmbientParticles />
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)' }}>
             <Terminal size={22} color="var(--accent-cyan)" />
             <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#fff', fontWeight: 900, letterSpacing: '0.5px' }}>
               Live System Diagnostics & Logs
@@ -231,7 +232,7 @@ export default function DiagnosticsModal({
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-          gap: '8px',
+          gap: 'var(--modal-gap-sm)',
           marginBottom: '14px',
           background: 'rgba(0,0,0,0.3)',
           padding: '10px',
@@ -262,7 +263,7 @@ export default function DiagnosticsModal({
         </div>
 
         {/* Controls Toolbar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--modal-gap-sm)', marginBottom: '10px', flexWrap: 'wrap' }}>
           <input
             type="text"
             placeholder="Filter logs (e.g. BuildStage, SelectEntries)..."

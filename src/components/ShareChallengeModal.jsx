@@ -5,9 +5,10 @@ import { generateChallengeUrl, generateChallengeText, renderChallengeCardBlob, r
 import { isNativeSharing, shareNativeResult } from '../utils/nativeShare';
 import { trackChallengeShareClicked, trackChallengeShareCompleted, trackChallengeShareCancelled } from '../services/analytics';
 import { getSavedPlayerName } from '../services/playerProgress';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function ShareChallengeModal({
-  isOpen, onClose, elapsedTime = 0, percentileBeat = 0, topPercentile = 100,
+  isOpen, onClose, elapsedTime = 0,
   isPersonalBest = false, difficulty = 'Medium', themeId = 'find_the_sniper',
   levelTitle = 'Stage Set', levelId = ''
 }) {
@@ -16,20 +17,20 @@ export default function ShareChallengeModal({
   const [busy, setBusy] = useState(false);
   const playerName = getSavedPlayerName() || 'SpeedHunter';
   const challengeUrl = generateChallengeUrl({ elapsedTimeMs: elapsedTime, playerName, difficulty, themeId, levelId });
-  const metrics = { elapsedTimeMs: elapsedTime, percentileBeat, isPersonalBest, difficulty, themeId };
-  const shareText = generateChallengeText({ elapsedTimeMs: elapsedTime, beatPercentile: percentileBeat, topPercentile, isPersonalBest, playerName, challengeUrl });
+  const metrics = { elapsedTimeMs: elapsedTime, isPersonalBest, difficulty, themeId };
+  const shareText = generateChallengeText({ elapsedTimeMs: elapsedTime, isPersonalBest, playerName, challengeUrl });
 
   useEffect(() => {
     let active = true;
     setCardBlob(null);
     setMessage('');
     if (isOpen) {
-      renderChallengeCardBlob({ elapsedTimeMs: elapsedTime, beatPercentile: percentileBeat, topPercentile, isPersonalBest, playerName, levelTitle })
+      renderChallengeCardBlob({ elapsedTimeMs: elapsedTime, isPersonalBest, playerName, levelTitle })
         .then(blob => { if (active) setCardBlob(blob); })
         .catch(() => { if (active) setMessage('Image unavailable. You can still share the link.'); });
     }
     return () => { active = false; };
-  }, [isOpen, elapsedTime, percentileBeat, topPercentile, isPersonalBest, playerName, levelTitle]);
+  }, [isOpen, elapsedTime, isPersonalBest, playerName, levelTitle]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -72,7 +73,7 @@ export default function ShareChallengeModal({
         setTimeout(() => URL.revokeObjectURL(url), 1000);
         result = { success: true, message: 'Image download started.' };
       } else {
-        result = await shareToPlatform({ platform, elapsedTimeMs: elapsedTime, topPercentile, beatPercentile: percentileBeat, isPersonalBest, cardBlob, challengeUrl, playerName });
+        result = await shareToPlatform({ platform, elapsedTimeMs: elapsedTime, isPersonalBest, cardBlob, challengeUrl, playerName });
       }
       setMessage(result.message);
       if (result.success) {
@@ -97,10 +98,11 @@ export default function ShareChallengeModal({
   ];
 
   return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 10000, background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: '16px', paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
-      <div role="dialog" aria-modal="true" aria-labelledby="share-result-title" className="glass-panel modal-split-card" onClick={event => event.stopPropagation()} style={{ width: '100%', maxWidth: '440px', padding: '20px', borderRadius: '22px', maxHeight: '80dvh', overflowY: 'auto', background: '#111827', '--modal-accent': 'var(--accent-cyan)' }}>
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.88)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
+      <div role="dialog" aria-modal="true" aria-labelledby="share-result-title" className="glass-panel modal-split-card" onClick={event => event.stopPropagation()} style={{ width: '100%', maxWidth: '440px', padding: '20px', borderRadius: '22px', maxHeight: 'calc(100dvh - 32px)', overflowY: 'auto', boxSizing: 'border-box', background: '#111827', position: 'relative', '--modal-accent': 'var(--accent-cyan)' }}>
+        <ModalAmbientParticles />
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)' }}>
             <Share2 size={22} color="var(--accent-cyan)" />
             <h2 id="share-result-title" style={{ margin: 0, fontSize: '1.4rem', fontWeight: 900, letterSpacing: '0.5px', color: '#fff' }}>
               Share result
@@ -127,7 +129,7 @@ export default function ShareChallengeModal({
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
           {options.map(([platform, label, icon]) => (
-            <button key={platform} className="glass-btn" disabled={busy || (platform === 'save' && !cardBlob)} onClick={() => handleAction(platform)} style={{ flexDirection: 'column', justifyContent: 'center', gap: '8px', padding: '14px 4px', fontSize: '0.8rem', minHeight: '76px' }}>
+            <button key={platform} className="glass-btn" disabled={busy || (platform === 'save' && !cardBlob)} onClick={() => handleAction(platform)} style={{ flexDirection: 'column', justifyContent: 'center', gap: 'var(--modal-gap-sm)', padding: '14px 4px', fontSize: '0.8rem', minHeight: '76px' }}>
               {icon}{label}
             </button>
           ))}

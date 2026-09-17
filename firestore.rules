@@ -1,8 +1,33 @@
 rules_version = '2';
 service cloud.firestore {
+  // Server-side backstop against profane player names on the one write path that isn't
+  // funneled through the trusted submitLeaderboardScore Cloud Function (daily_leaderboard
+  // entries are written directly by the client). Mirrors src/utils/profanityFilter.js —
+  // Firestore's RE2 regex engine can't do the leetspeak normalization the client does, so
+  // this is a stricter, literal-word backstop rather than a full replica.
+  function isAllowedPlayerName(name) {
+    return name is string
+      && name.size() <= 24
+      && !name.matches('(?i).*\\b(ass|sex|tit|fag|cum|hoe|coon)\\b.*')
+      && !name.matches('(?i).*(fuck|shit|bitch|cunt|nigger|nigga|whore|pussy|dick|asshole|bastard|slut|twat|wank|dildo|rape|faggot|retard|kike|spic|chink|tranny|motherfucker|jizz).*');
+  }
+
   match /databases/{database}/documents {
     match /players/{playerId}/{document=**} {
       allow read, write: if request.auth != null && request.auth.uid == playerId;
+    }
+    // Per-player cloud-sync doc (difficultyStats + playerName snapshot for restoreProgressFromCloud),
+    // keyed by the player's own uid — a self-write, same pattern as /players/{playerId} above.
+    // This is a MORE SPECIFIC match than /leaderboards/{document=**} below; Firestore grants
+    // access if ANY matching rule allows it, so this carves out a narrow exception to the
+    // blanket deny without opening up the shared board documents (their doc IDs are
+    // `{boardType}_{boardId}` strings, e.g. "photoSet_set_1", which can never equal a real
+    // Firebase Auth uid, so they can never satisfy `request.auth.uid == uid` below).
+    match /leaderboards/{uid} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && request.auth.uid == uid
+                   && (!('playerName' in request.resource.data) || isAllowedPlayerName(request.resource.data.playerName));
     }
     match /leaderboards/{document=**} {
       allow read: if true;
@@ -17,7 +42,8 @@ service cloud.firestore {
       allow write: if request.auth != null
                    && request.auth.uid == uid
                    && request.resource.data.totalTimeMs is number
-                   && request.resource.data.totalTimeMs >= 3000;
+                   && request.resource.data.totalTimeMs >= 3000
+                   && (!('playerName' in request.resource.data) || isAllowedPlayerName(request.resource.data.playerName));
     }
     match /daily_attempts/{attemptId} {
       allow read: if request.auth != null;
@@ -33,12 +59,6 @@ service cloud.firestore {
     match /app_config/{docId} {
       allow read: if true;
       allow write: if request.auth != null;
-    }
-    match /set_distributions/{setId} {
-      allow read, write: if true;
-    }
-    match /daily_distributions/{dateStr} {
-      allow read, write: if true;
     }
   }
 }

@@ -25,7 +25,9 @@ test('centered utility dialogs use the same dynamic viewport cap', () => {
     'CuratedExportModal.jsx',
     'DebugLevelGeneratorModal.jsx',
     'DiagnosticsModal.jsx',
-    'DailyVictoryModal.jsx'
+    'DailyVictoryModal.jsx',
+    'RatingModal.jsx',
+    'ShareChallengeModal.jsx'
   ];
 
   for (const file of files) {

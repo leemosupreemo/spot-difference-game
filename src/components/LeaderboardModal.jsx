@@ -1,6 +1,7 @@
 import React from 'react';
-import { Award, Trophy, Clock, Target, CheckCircle, X } from 'lucide-react';
+import { Award, Trophy, X } from 'lucide-react';
 import { sounds } from '../utils/audio';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function LeaderboardModal({ isOpen, onClose, levelStats, totalScore }) {
   if (!isOpen) return null;
@@ -12,7 +13,7 @@ export default function LeaderboardModal({ isOpen, onClose, levelStats, totalSco
       position: 'fixed',
       inset: 0,
       zIndex: 100,
-      background: 'rgba(0,0,0,0.85)',
+      background: 'rgba(0,0,0,0.88)',
       backdropFilter: 'blur(12px)',
       display: 'flex',
       alignItems: 'center',
@@ -29,7 +30,7 @@ export default function LeaderboardModal({ isOpen, onClose, levelStats, totalSco
         position: 'relative',
         '--modal-accent': 'var(--accent-gold)'
       }}>
-        
+        <ModalAmbientParticles />
         <button
           onClick={() => { sounds.playTap(); onClose(); }}
           style={{
@@ -53,7 +54,7 @@ export default function LeaderboardModal({ isOpen, onClose, levelStats, totalSco
           <X size={18} />
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', paddingRight: '40px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)', marginBottom: '16px', paddingRight: '40px' }}>
           <Trophy size={22} color="var(--accent-gold)" style={{ flexShrink: 0 }} />
           <h2 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0, letterSpacing: '0.5px', color: '#fff' }}>
             MY SPEEDRUN RECORDS

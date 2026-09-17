@@ -99,7 +99,7 @@ test('getDailyLeaderboard returns sorted entries capped at 5', () => {
   }
 });
 
-test('recordDailyChallengeCompletion calculates position, percentile, and stars', () => {
+test('recordDailyChallengeCompletion calculates position and stars', () => {
   const testDate = '2026-09-12';
   const result = recordDailyChallengeCompletion({
     dateStr: testDate,
@@ -110,7 +110,7 @@ test('recordDailyChallengeCompletion calculates position, percentile, and stars'
   assert.equal(result.stars, 3);
   assert.equal(result.position, 1);
   assert.equal(result.isNewRecord, true);
-  assert.ok(result.percentile >= 90);
+  assert.equal(result.percentile, undefined);
 
   const status = getDailyPlayerStatus(testDate);
   assert.equal(status.completed, true);

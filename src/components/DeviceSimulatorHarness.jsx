@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Capacitor } from '@capacitor/core';
-import { 
-  Smartphone, 
-  Tablet, 
-  RotateCw, 
-  Maximize2, 
-  Minimize2, 
-  Sliders, 
-  X, 
-  Layers, 
-  Monitor 
+import {
+  Smartphone,
+  Tablet,
+  RotateCw,
+  X,
+  Monitor
 } from 'lucide-react';
 
 const PRESET_DEVICES = [
@@ -110,7 +106,7 @@ export default function DeviceSimulatorHarness({ children }) {
   });
 
   const [showToolbar, setShowToolbar] = useState(true);
-  const [zoomScale, setZoomScale] = useState('auto'); // 'auto' | 1 | 0.85 | 0.75
+  const [zoomScale, _setZoomScale] = useState('auto'); // 'auto' | 1 | 0.85 | 0.75
 
   const activeDevice = useMemo(() => {
     return PRESET_DEVICES.find(d => d.id === selectedDeviceId) || PRESET_DEVICES[0];

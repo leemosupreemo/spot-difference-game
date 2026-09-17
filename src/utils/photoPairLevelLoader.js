@@ -15,25 +15,6 @@ export function resolveAssetUrl(url) {
   return `./${cleanPath}`;
 }
 
-function makeSeededRandom(seed) {
-  let state = Math.abs(Math.floor(seed || 1)) % 2147483647;
-  if (state === 0) state = 1;
-  return () => {
-    state = (state * 16807) % 2147483647;
-    return (state - 1) / 2147483646;
-  };
-}
-
-function shuffleEntries(entries, seed) {
-  const shuffled = [...entries];
-  const random = makeSeededRandom(seed);
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
 import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
 import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
 
@@ -167,7 +148,6 @@ export function selectPhotoPairEntries(entries, {
   packId,
   difficulty,
   count = DEFAULT_STAGE_COUNT,
-  seed = Date.now(),
   statusMap = {}
 } = {}) {
   const effectiveEntries = applyCuratedPackOverrides(entries, statusMap);

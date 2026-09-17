@@ -13,7 +13,7 @@ vi.mock('../services/analytics', () => ({
 vi.mock('../services/gameCenter', () => ({
   mirrorRoundToGameCenter: vi.fn().mockResolvedValue(null),
   openGameCenterLeaderboard: vi.fn(), isGameCenterSupported: () => false,
-  isGameCenterAuthenticated: () => false
+  isGameCenterAuthenticated: () => false, onGameCenterAuthChange: () => () => {}
 }));
 vi.mock('../utils/challengeMetrics', async (importOriginal) => ({
   ...await importOriginal(), renderChallengeCardBlob: vi.fn().mockResolvedValue(new Blob(['image'], { type: 'image/png' }))
@@ -69,3 +69,29 @@ test('Next Stage does not celebrate again while the next stage is loading', asyn
   rerender(<VictoryModal {...props} score={0} elapsedTime={0} onClose={onClose} onNextLevel={onNextLevel} />);
   expect(confetti.mock.calls).toHaveLength(initialBursts);
 });
+
+test('tapping outside the modal advances to the next stage', () => {
+  const onClose = vi.fn();
+  const onNextLevel = vi.fn();
+  render(<VictoryModal {...props} onClose={onClose} onNextLevel={onNextLevel} />);
+  const backdrop = screen.getByTestId('victory-modal-backdrop');
+  fireEvent.click(backdrop);
+  expect(onClose).toHaveBeenCalledOnce();
+  expect(onNextLevel).toHaveBeenCalledOnce();
+});
+
+test('clicking Return to Menu exits the modal and returns to menu', () => {
+  const onClose = vi.fn();
+  const onReturnToMenu = vi.fn();
+  render(<VictoryModal {...props} onClose={onClose} onReturnToMenu={onReturnToMenu} />);
+  const returnBtn = screen.getByRole('button', { name: 'Return to Menu' });
+  const nextStageBtn = screen.getByRole('button', { name: 'Next Stage' });
+  expect(returnBtn).toBeTruthy();
+  expect(nextStageBtn).toBeTruthy();
+  // Ensure Return to Menu appears before Next Stage in DOM order
+  expect(returnBtn.compareDocumentPosition(nextStageBtn) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  fireEvent.click(returnBtn);
+  expect(onClose).toHaveBeenCalledOnce();
+  expect(onReturnToMenu).toHaveBeenCalledOnce();
+});
+

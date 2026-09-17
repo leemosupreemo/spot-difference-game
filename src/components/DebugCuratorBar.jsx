@@ -36,11 +36,6 @@ export default function DebugCuratorBar({
     onSetStatus(levelId, 'approved');
   };
 
-  const handleDifficulty = (suggestedDifficulty) => {
-    sounds.playTap();
-    onSetStatus(levelId, 'wrong_difficulty', { suggestedDifficulty });
-  };
-
   const handleDismiss = () => {
     sounds.playError();
     onSetStatus(levelId, 'dismissed');

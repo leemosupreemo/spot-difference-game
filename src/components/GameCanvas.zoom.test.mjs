@@ -61,15 +61,20 @@ test('photo mode preserves each source pair aspect ratio', () => {
   assert.doesNotMatch(source, /aspectRatio: isPhoto \? '4 \/ 3' : cardAspectRatio/);
 });
 
-test('quick one tap outside either left or right image bounds toggles zoom mode off', () => {
+test('releasing outside either image bounds (tap or drag) toggles zoom mode off only on release', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
-  // Verify setMagnifierEnabled is accepted and called on quick tap outside
+  // Verify setMagnifierEnabled is accepted and called on release outside bounds
   assert.match(source, /setMagnifierEnabled/);
-  assert.match(source, /containerRefLeft\.current\?\.contains\(e\.target\)/);
-  assert.match(source, /containerRefRight\.current\?\.contains\(e\.target\)/);
+  assert.match(source, /containerRefLeft\.current\?\.contains\(target\)/);
+  assert.match(source, /containerRefRight\.current\?\.contains\(target\)/);
   assert.match(source, /setMagnifierEnabled\(false\)/);
   assert.match(source, /sounds\.playTap\(\)/);
+
+  // The check runs on pointerup (release), not pointerdown/pointermove, so an in-bounds
+  // release after dragging outside and back never disables zoom
+  assert.match(source, /window\.addEventListener\('pointerup', handleGlobalUp/);
+  assert.doesNotMatch(source, /window\.addEventListener\('pointerdown', handleGlobalDown/);
 });
 
 

@@ -33,7 +33,6 @@ test('ScreenshotHarness defines complete coverage of modals and special menus', 
   assert.ok(ids.includes('victory-world-1st'), 'Must include world 1st placement');
   assert.ok(ids.includes('victory-new-record'), 'Must include new personal best');
   assert.ok(ids.includes('victory-leaderboard'), 'Must include leaderboard qualified banner');
-  assert.ok(ids.includes('victory-name-editing'), 'Must include writing in name for leaderboard');
   assert.ok(ids.includes('victory-fanfare'), 'Must include golden fanfare celebration');
 
   // 4. Other core modals

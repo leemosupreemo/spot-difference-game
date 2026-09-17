@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Terminal, Cpu, Play, Download, X, Sparkles, CheckCircle2, Image as ImageIcon, Link as LinkIcon } from 'lucide-react';
+import { Cpu, Play, Download, X, Sparkles, CheckCircle2, Image as ImageIcon } from 'lucide-react';
 import { SCENE_THEMES, generateProceduralLevelPair } from '../utils/proceduralGenerator';
 import { sounds } from '../utils/audio';
+import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLevels }) {
   const [activeTab, setActiveTab] = useState('procedural'); // 'procedural' | 'real_photo'
@@ -115,8 +116,8 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
         position: 'fixed',
         inset: 0,
         background: 'rgba(5, 6, 12, 0.88)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -137,9 +138,10 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
         boxSizing: 'border-box',
         border: '1px solid rgba(0, 240, 255, 0.4)',
         boxShadow: '0 0 40px rgba(0, 240, 255, 0.25)',
+        position: 'relative',
         '--modal-accent': 'var(--accent-cyan)'
       }}>
-        
+        <ModalAmbientParticles />
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -186,7 +188,7 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
         {activeTab === 'procedural' ? (
           <div>
             {/* Form Controls */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--modal-gap-lg)', marginBottom: '24px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '6px' }}>
                   LEVEL PACK THEME
@@ -306,7 +308,7 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'var(--modal-gap-md)', marginBottom: '20px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '4px' }}>TITLE</label>
                 <input
@@ -373,7 +375,7 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '200px', overflowY: 'auto', paddingRight: '4px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--modal-gap-sm)', maxHeight: '200px', overflowY: 'auto', paddingRight: '4px' }}>
               {generatedPack.map((lvl, idx) => (
                 <div key={lvl.id} style={{
                   background: 'rgba(255,255,255,0.04)',

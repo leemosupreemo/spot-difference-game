@@ -29,29 +29,34 @@ test('triggers fanfare and golden confetti when an image set is completed with 3
   assert.match(source, /isThreeStars\s*\?\s*goldenColors\s*:\s*standardColors/);
 });
 
-test('adds right padding to ACCURACY and MISSES labels and displays Next Stage button', () => {
+test('displays Next Stage button and folds Accuracy into the detail list instead of a standalone breakdown grid', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
-  assert.match(source, /paddingRight:\s*['"]8px['"][\s\S]*ACCURACY/);
-  assert.match(source, /paddingRight:\s*['"]8px['"][\s\S]*MISSES/);
   assert.match(source, /Next Stage/);
   assert.doesNotMatch(source, /Next Pair/);
+  // Accuracy now lives as a row in the same detail list as Set # / Attempt #, not an uppercase
+  // label in a separate 3-column Performance Breakdown Grid
+  assert.match(source, />Accuracy<\/span>/);
+  assert.doesNotMatch(source, /ACCURACY/);
+  assert.doesNotMatch(source, /MISSES/);
 });
 
-test('uses the compact share sheet and percentile benchmark', () => {
+test('uses the compact share sheet and star rating benchmark', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
-  assert.match(source, /calculatePercentileRank/);
+  assert.match(source, /calculateStarRating/);
   assert.match(source, /<ShareChallengeModal/);
   assert.match(source, /trackResultScreenViewed/);
   assert.doesNotMatch(source, /PERFORMANCE BENCHMARK/);
+  assert.doesNotMatch(source, /[Pp]ercentile/);
 });
 
 test('keeps Stage Clear actions compact and focused on the next stage', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
   assert.doesNotMatch(source, />\s*<RotateCcw[^>]*\/>\s*Retry/);
   assert.match(source, /aria-label="Share result"/);
-  assert.match(source, /gridTemplateColumns: 'repeat\(3, 1fr\)'/);
   assert.match(source, /width: '100%'[\s\S]*Next Stage/);
+  assert.match(source, /Return to Menu[\s\S]*?Next Stage/);
+  assert.match(source, /onClick=\{\(\) => handleLeaveResult\(onNextLevel\)\}/);
 });
 
 test('calculates World Top 3 rank and displays World 1st/2nd/3rd title with gold/silver/bronze trophy', () => {

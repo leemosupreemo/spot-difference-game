@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Flame, Clock, Trophy, ChevronRight, Sparkles, Star } from 'lucide-react';
+import { Flame, Trophy, ChevronRight, Star } from 'lucide-react';
 import { sounds } from '../utils/audio.js';
 import { isSetOfTheDayEnabled } from '../services/appConfig.js';
 import {
@@ -78,12 +78,13 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
         66% { border-color: rgba(255, 183, 3, 0.78); }
       }`}</style>
     <div
+      className="set-of-day-banner-container"
       style={{
         width: '100%',
         maxWidth: '850px',
         margin: '0 auto 12px auto',
-        padding: '0 16px',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        transition: 'max-width 0.2s ease'
       }}
     >
       <div
@@ -195,14 +196,15 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
 
             <div
               style={{
-                fontSize: '0.96rem',
+                fontSize: '0.82rem',
                 fontWeight: 800,
                 color: '#ffffff',
                 letterSpacing: '-0.2px',
-                transform: 'translateX(9px)'
+                textAlign: 'left',
+                transform: 'translateX(1px)'
               }}
             >
-              <span>3-Image Daily Sequence • Never Repeated</span>
+              <span>Daily Sequence • Never Repeated</span>
             </div>
           </div>
         </div>
@@ -219,11 +221,7 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
         >
           <div
             style={{
-              textAlign: 'right',
-              padding: '6px 12px',
-              borderRadius: '10px',
-              background: 'rgba(0, 0, 0, 0.45)',
-              border: '1px solid rgba(255, 255, 255, 0.12)'
+              textAlign: 'right'
             }}
           >
             <div
@@ -261,15 +259,18 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
               width: '32px',
               height: '32px',
               borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.08)',
+              background: isHovered
+                ? 'linear-gradient(135deg, #33f3ff, #1a82ff)'
+                : 'linear-gradient(135deg, var(--accent-cyan), #0072ff)',
+              boxShadow: '0 4px 20px rgba(0, 240, 255, 0.4)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: isHovered ? 'var(--accent-cyan)' : 'var(--text-muted)',
+              color: '#000',
               transition: 'all 0.15s ease'
             }}
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={22} strokeWidth={3} />
           </div>
         </div>
       </div>
