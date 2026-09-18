@@ -1,3 +1,4 @@
+import io
 import json
 import os
 import tempfile
@@ -22,12 +23,15 @@ from base_generation_types import (
 )
 from base_pair_publisher import generate_structural_pair, publish_pair
 from base_run_store import AcceptedHistoryStore, RunStore
+from base_scene_catalog import load_scene_catalog
 from base_visual_critic import FakeVisualCritic
 from image_pair_finalizer import finalize_pair
 
 import generate_photo_batch
 from generate_photo_batch import app, build_run_config_from_answers, resolve_providers_for_execution
 from typer.testing import CliRunner
+
+FULL_CATALOG_PATH = os.path.join(os.path.dirname(__file__), "base_scene_catalog.json")
 
 SAMPLE_BRIEF = SceneBrief(
     id="forest_survey_table",
@@ -1274,6 +1278,54 @@ class TestGenerateCommand(unittest.TestCase):
         self.assertEqual(result.exit_code, 0, result.stdout)
         self.assertIn("dry-run", result.stdout.lower())
 
+    def test_direct_flags_without_config_build_an_execute_mode_config(self):
+        # Matches the plan's documented live-smoke-test invocation shape:
+        # `generate --provider google --count 1 --max-images 1 --keep-rejected --yes`,
+        # with no --config at all.
+        captured = {}
+
+        def fake_execute(run_config, run_id=None, resume=False):
+            captured["config"] = run_config
+
+        with patch("generate_photo_batch._execute_run", side_effect=fake_execute):
+            result = self.runner.invoke(
+                app,
+                [
+                    "generate",
+                    "--provider",
+                    "google",
+                    "--count",
+                    "1",
+                    "--max-images",
+                    "1",
+                    "--keep-rejected",
+                    "--yes",
+                ],
+            )
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertEqual(captured["config"].provider_mode, "google")
+        self.assertEqual(captured["config"].count, 1)
+        self.assertEqual(captured["config"].max_images, 1)
+        self.assertTrue(captured["config"].keep_rejected)
+        self.assertEqual(captured["config"].execution_mode, "execute")
+
+    def test_config_flag_overrides_and_ignores_other_flags(self):
+        config_path = self._write_config(provider_mode="openai", count=3)
+        captured = {}
+
+        def fake_execute(run_config, run_id=None, resume=False):
+            captured["config"] = run_config
+
+        with patch("generate_photo_batch._execute_run", side_effect=fake_execute):
+            result = self.runner.invoke(
+                app,
+                ["generate", "--config", config_path, "--provider", "google", "--count", "99", "--yes"],
+            )
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        # The loaded --config wins entirely; the other flags are ignored.
+        self.assertEqual(captured["config"].provider_mode, "openai")
+        self.assertEqual(captured["config"].count, 3)
+
 
 class TestResolveProvidersForExecution(unittest.TestCase):
     class FakeProviderClass:
@@ -1547,6 +1599,135 @@ class TestWizardFlagEquivalence(unittest.TestCase):
         self.assertEqual(
             build_run_config_from_answers(wizard_answers), build_run_config_from_answers(flag_answers)
         )
+
+
+class TestMockedEndToEndAcceptance(unittest.TestCase):
+    """A single fully-mocked run through every real production code path --
+    catalog selection, provider generation, real normalization, real local
+    gate logic (with a fixture route function), a fake critic, real ledger
+    transitions, a mocked structural handoff, real finalization, real atomic
+    publication into a temporary directory, and real report generation --
+    asserting no real network client is ever constructed and no file is ever
+    written under the real `public/levels`.
+    """
+
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.root = self.tmpdir.name
+
+    def test_mocked_batch_reaches_published_without_network_or_production_writes(self):
+        from base_image_provider import normalize_provider_image
+
+        briefs = load_scene_catalog(FULL_CATALOG_PATH)
+
+        def make_master_png_bytes():
+            image = Image.new("RGB", DEFAULT_BASE_GENERATION_POLICY.master_size, (110, 120, 130))
+            buffer = io.BytesIO()
+            image.save(buffer, format="PNG")
+            return buffer.getvalue()
+
+        class FakeGenerationProvider:
+            """Stands in for GoogleImageProvider/OpenAIImageProvider. Never
+            imports or constructs a real SDK client."""
+
+            def __init__(self, provider_name):
+                self.provider_name = provider_name
+                self.calls = 0
+
+            def generate(self, request):
+                self.calls += 1
+                return [
+                    ProviderImage(
+                        provider=self.provider_name,
+                        model=request.model,
+                        request_id=f"{self.provider_name}-req-{self.calls}",
+                        native_size=request.size,
+                        image_bytes=make_master_png_bytes(),
+                    )
+                ]
+
+        fake_google = FakeGenerationProvider("google")
+        fake_openai = FakeGenerationProvider("openai")
+
+        evaluator = BaseCandidateEvaluator(
+            critic=FakeVisualCritic(),
+            policy=DEFAULT_BASE_GENERATION_POLICY,
+            route_canvas=lambda path: PASSING_ROUTE_RESULT,
+            hash_image=lambda path: hash(path) & ((1 << 64) - 1),
+        )
+
+        history_store = AcceptedHistoryStore(path=os.path.join(self.root, "accepted.jsonl"))
+        pipeline = BaseGenerationPipeline(
+            policy=DEFAULT_BASE_GENERATION_POLICY,
+            briefs=briefs,
+            providers={"google": fake_google, "openai": fake_openai},
+            evaluator=evaluator,
+            history_store=history_store,
+            staging_root=os.path.join(self.root, "runs"),
+            normalize=normalize_provider_image,  # the real normalizer, not a fake
+        )
+
+        result = pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=4))
+
+        self.assertEqual(len(result.accepted), 1)
+        self.assertGreaterEqual(fake_google.calls, 1)
+        self.assertGreaterEqual(fake_openai.calls, 1)
+
+        winner = result.accepted[0]
+        scene_id = winner.candidate.scene_brief_id
+
+        # --- Fake structural handoff: the real structural pipeline module is
+        # mocked (never actually invoked), but everything downstream of it
+        # (finalization, publication, reports) is the real production code. ---
+        edit_bbox = (700, 500, 900, 700)
+        structural_base = Image.new("RGB", DEFAULT_BASE_GENERATION_POLICY.master_size, (110, 120, 130))
+        structural_variant = _paste_patch(structural_base, edit_bbox, (200, 80, 80))
+        ground_truth = {"x": 50.0, "y": 50.0, "radius": 5.0, "bbox": edit_bbox}
+
+        def fake_generate_single_scene_difference(scene_spec, output_dir=None, policy=None, scheduler=None):
+            out = Path(output_dir)
+            out.mkdir(parents=True, exist_ok=True)
+            structural_base.save(out / f"{scene_id}_base.jpg", format="JPEG", quality=100)
+            structural_variant.save(out / f"{scene_id}_variant.jpg", format="JPEG", quality=100)
+            manifest_entry = {"id": scene_id, "diffs": [ground_truth], "title": scene_id}
+            log_entry = {"accepted": True, "ground_truth": ground_truth}
+            return True, manifest_entry, log_entry
+
+        with patch(
+            "unified_operation_pipeline.generate_single_scene_difference",
+            side_effect=fake_generate_single_scene_difference,
+        ):
+            finalized, log_entry = generate_structural_pair(
+                winner.candidate, {"id": scene_id, "title": scene_id}, os.path.join(self.root, "structural-staging")
+            )
+
+        self.assertIsNotNone(finalized)
+        self.assertTrue(log_entry["accepted"])
+
+        # --- Real atomic publication, into a temporary directory only. ---
+        levels_dir = os.path.join(self.root, "public-levels")
+        manifest_path = os.path.join(self.root, "manifest.json")
+        published_entry = publish_pair(
+            finalized, {"id": scene_id, "title": scene_id}, levels_dir, manifest_path
+        )
+
+        self.assertTrue(Path(levels_dir, Path(published_entry["baseImage"]).name).exists())
+        self.assertTrue(Path(levels_dir, Path(published_entry["variantImage"]).name).exists())
+        manifest = json.loads(Path(manifest_path).read_text())
+        self.assertEqual(len(manifest), 1)
+        self.assertEqual(manifest[0]["id"], scene_id)
+
+        # --- Real report generation. ---
+        store = RunStore.resume(result.run_id, root=os.path.join(self.root, "runs"))
+        json_report_path = write_json_report(store)
+        html_report_path = write_html_report(store)
+        self.assertTrue(json_report_path.exists())
+        self.assertTrue(html_report_path.exists())
+
+        # --- No real production path was ever touched. ---
+        self.assertFalse(Path(f"public/levels/{scene_id}_base.jpg").exists())
+        self.assertFalse(Path(f"public/levels/{scene_id}_variant.jpg").exists())
 
 
 if __name__ == "__main__":

@@ -383,12 +383,44 @@ def plan(
 
 @app.command()
 def generate(
-    config: str = typer.Option(..., "--config", help="Path to a run-config.json produced by plan."),
+    config: Optional[str] = typer.Option(
+        None, "--config", help="Path to a run-config.json produced by plan. Overrides every other option below."
+    ),
+    provider: str = typer.Option("mixed", "--provider", help="Provider mode. Ignored if --config is given."),
+    critic: str = typer.Option("auto", "--critic", help="Critic mode. Ignored if --config is given."),
+    count: int = typer.Option(10, help="Target completed pair count. Ignored if --config is given."),
+    seed: int = typer.Option(0, help="Deterministic scheduling seed. Ignored if --config is given."),
+    max_images: Optional[int] = typer.Option(None, help="Image ceiling override. Ignored if --config is given."),
+    max_spend: Optional[float] = typer.Option(
+        None, "--max-spend", help="Spend ceiling in USD. Ignored if --config is given."
+    ),
+    staging_root: str = typer.Option(RUN_ROOT_DEFAULT, help="Run staging root. Ignored if --config is given."),
+    keep_rejected: bool = typer.Option(
+        False, "--keep-rejected", help="Keep rejected candidate images for diagnosis."
+    ),
+    allow_provider_fallback: bool = typer.Option(
+        False, "--allow-provider-fallback", help="Narrow a mixed run to whichever provider is authenticated."
+    ),
     run_id: Optional[str] = typer.Option(None, help="Explicit run id (default: generated)."),
     yes: bool = typer.Option(False, "--yes", help="Confirm an unattended paid execution."),
 ):
-    """Execute a generation run from a saved configuration."""
-    run_config = load_run_config(config)
+    """Execute a generation run, either from a saved --config or directly from flags."""
+    if config:
+        run_config = load_run_config(config)
+    else:
+        answers = {
+            "provider_mode": provider,
+            "critic_mode": critic,
+            "count": count,
+            "seed": seed,
+            "max_images": max_images,
+            "max_spend_usd": max_spend,
+            "staging_root": staging_root,
+            "keep_rejected": keep_rejected,
+            "allow_provider_fallback": allow_provider_fallback,
+            "execution_mode": "execute",
+        }
+        run_config = build_run_config_from_answers(answers)
 
     try:
         validate_run_config(run_config, DEFAULT_BASE_GENERATION_POLICY)

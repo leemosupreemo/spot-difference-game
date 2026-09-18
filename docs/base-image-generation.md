@@ -109,6 +109,7 @@ same `RunConfig` through one shared function
 python3 scripts/generate_photo_batch.py plan --count 10 --provider mixed
 python3 scripts/generate_photo_batch.py generate --config run-config.json
 python3 scripts/generate_photo_batch.py generate --config run-config.json --yes
+python3 scripts/generate_photo_batch.py generate --provider google --count 1 --max-images 1 --keep-rejected --yes
 python3 scripts/generate_photo_batch.py resume RUN_ID
 python3 scripts/generate_photo_batch.py report RUN_ID --open
 python3 scripts/generate_photo_batch.py doctor
@@ -119,11 +120,17 @@ python3 scripts/generate_photo_batch.py history stats
 - **`plan`** selects a portfolio-balanced brief batch and writes a
   reproducible `run-config.json`. It never resolves credentials or calls a
   provider — safe to run with no authentication configured at all.
-- **`generate`** executes a run from a saved configuration. A dry-run
-  configuration (`execution_mode != "execute"`) always exits immediately
-  without touching credentials. An execute-mode configuration run
-  non-interactively (e.g. in CI) requires `--yes`; run interactively without
-  `--yes`, it shows the summary and asks for confirmation itself.
+- **`generate`** executes a run. Pass `--config run-config.json` to run
+  exactly what `plan` (or the wizard) wrote — every other flag is ignored
+  when `--config` is given. Without `--config`, it builds a `RunConfig`
+  directly from flags (`--provider`, `--critic`, `--count`, `--seed`,
+  `--max-images`, `--max-spend`, `--staging-root`, `--keep-rejected`,
+  `--allow-provider-fallback`) and always runs in execute mode — this is the
+  form the live smoke commands in §12 use. A dry-run `--config`
+  (`execution_mode != "execute"`) always exits immediately without touching
+  credentials. An execute-mode run invoked non-interactively (e.g. in CI)
+  requires `--yes`; run interactively without `--yes`, it shows the summary
+  and asks for confirmation itself.
 - **`resume RUN_ID`** continues an interrupted run from its ledger. Any
   candidate whose ledger state already reached `normalized` or further is
   never regenerated; the image budget is never double-counted for it either.
