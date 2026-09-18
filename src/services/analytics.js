@@ -381,16 +381,17 @@ export function trackStageCleared({
   }
 }
 
-export function trackRatingPromptShown({ visitNumber = 2 } = {}) {
+export function trackRatingPromptShown({ attemptNumber = 1, successfulRounds = 0 } = {}) {
   trackEvent("Rating Prompt Shown", {
-    visit_number: visitNumber
+    attempt_number: attemptNumber,
+    successful_rounds: successfulRounds
   });
 }
 
-export function trackRatingPromptAction({ action = "rate", visitNumber = 2 } = {}) {
+export function trackRatingPromptAction({ action = "rate", attemptNumber = 1 } = {}) {
   trackEvent("Rating Prompt Action", {
     action,
-    visit_number: visitNumber
+    attempt_number: attemptNumber
   });
   if (mixpanel?.people) {
     mixpanel.people.set({

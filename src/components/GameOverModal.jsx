@@ -4,7 +4,7 @@ import { sounds } from '../utils/audio';
 import { getSetNumber } from '../utils/setLeaderboards.js';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
-export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime, levelTitle, setId = null, themeId = 'find_the_sniper' }) {
+export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime, levelTitle, setId = null, themeId = 'find_the_sniper', isFirstAttempt = false }) {
   if (!isOpen) return null;
 
   const seconds = (elapsedTime / 1000).toFixed(2);
@@ -88,9 +88,25 @@ export default function GameOverModal({ isOpen, onClose, onRestart, elapsedTime,
         <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '8px', color: 'var(--accent-pink)', letterSpacing: '0.5px' }}>
           STAGE FAILED
         </h2>
-        <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '16px', fontWeight: 600 }}>
+        <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: isFirstAttempt ? '8px' : '16px', fontWeight: 600 }}>
           {isAbstract ? levelTitle : `Stage #${stageNumber}`}
         </p>
+
+        {isFirstAttempt && (
+          <div style={{
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            color: 'var(--accent-pink)',
+            background: 'rgba(255, 0, 127, 0.1)',
+            border: '1px solid rgba(255, 0, 127, 0.35)',
+            borderRadius: '10px',
+            padding: '7px 12px',
+            marginBottom: '16px',
+            letterSpacing: '0.3px'
+          }}>
+            1st Attempt marked as 'Failed' in records
+          </div>
+        )}
 
         {/* Performance Breakdown */}
         <div style={{

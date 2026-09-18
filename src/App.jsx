@@ -22,7 +22,7 @@ import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
 import { getInitialDebugMode } from './utils/debugMode';
-import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus } from './utils/curationStore';
+import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus, getEntryCurationStatus } from './utils/curationStore';
 import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted } from './services/analytics';
 import { parseIncomingChallenge } from './utils/challengeMetrics';
 import { syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
@@ -43,9 +43,19 @@ import {
   syncRemoteDailyQueue
 } from './services/dailyChallenge';
 import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress, restoreProgressFromCloud, clearAllLocalRecords } from './services/playerProgress';
+import { incrementSuccessfulRounds, getSuccessfulRounds, getSessionsPlayed, shouldShowRatingPrompt, recordRatingPromptShown } from './services/ratingPrompt';
 import { getSetNumber, checkAndUpdateDynamicSetRecord } from './utils/setLeaderboards.js';
 import { submitLeaderboardScore } from './services/leaderboardService.js';
 import ScreenshotHarness from './components/ScreenshotHarness.jsx';
+import SplashScreen from './components/SplashScreen.jsx';
+import { isMobileDevice } from './utils/mobileDevice.js';
+import {
+  isFirstAttemptForSet,
+  recordSetAttemptStarted,
+  clearActiveSetAttempt,
+  getActiveSetAttempt,
+  markSetFirstAttemptFailed
+} from './utils/setAttemptTracker.js';
 
 export default function App() {
   const screenshotModal = typeof window !== 'undefined'
@@ -56,12 +66,14 @@ export default function App() {
     return <ScreenshotHarness modalId={screenshotModal} />;
   }
 
+  const [showSplash, setShowSplash] = useState(() => isMobileDevice());
+
   const [levels, setLevels] = useState(() => {
     try {
       const allEntries = getAllPhotoPairEntries();
       const statusMap = getCuratedStatusMap();
       const unreviewed = allEntries.filter(entry => {
-        const statusVal = getLevelStatus(statusMap[entry.id])?.status;
+        const statusVal = getEntryCurationStatus(entry, statusMap)?.status;
         return !statusVal && statusVal !== 'dismissed';
       });
       if (unreviewed.length > 0) return unreviewed.slice(0, 5).map(createPhotoPairLevel);
@@ -75,7 +87,7 @@ export default function App() {
       const allEntries = getAllPhotoPairEntries();
       const statusMap = getCuratedStatusMap();
       const unreviewed = allEntries.filter(entry => {
-        const statusVal = getLevelStatus(statusMap[entry.id])?.status;
+        const statusVal = getEntryCurationStatus(entry, statusMap)?.status;
         return !statusVal && statusVal !== 'dismissed';
       });
       if (unreviewed.length > 0) return unreviewed[0].id;
@@ -149,6 +161,12 @@ export default function App() {
   const [revealAnswer, setRevealAnswer] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [ratingModalOpen, setRatingModalOpen] = useState(false);
+  const [ratingPromptAttemptNumber, setRatingPromptAttemptNumber] = useState(1);
+  // Set true the instant a stage/set is actually won; consumed (and cleared) the next
+  // time the player lands back on the menu, which is when the rating prompt may show.
+  const justWonRoundRef = useRef(false);
+  const activeSetAttemptRef = useRef(null);
+  const [isCurrentRunFirstAttempt, setIsCurrentRunFirstAttempt] = useState(false);
   const [confirmExitModalOpen, setConfirmExitModalOpen] = useState(false);
   const [diagnosticsModalOpen, setDiagnosticsModalOpen] = useState(false);
   const [debugModalOpen, setDebugModalOpen] = useState(false);
@@ -204,25 +222,22 @@ export default function App() {
       logApp('INFO', `[ChallengeReceived] Challenger: ${incomingChallenge.challengerName}, Target: ${incomingChallenge.targetTimeSec}s`);
     }
 
-    // Track launch count & trigger App Store rating prompt on second launch
+    // Track session/launch count, used as the "sessionsPlayed" input to the rating prompt.
     try {
       const storedVisits = localStorage.getItem('diff_hunter_launch_count');
       const count = (parseInt(storedVisits, 10) || 0) + 1;
       localStorage.setItem('diff_hunter_launch_count', String(count));
-
-      const ratingHandled = localStorage.getItem('diff_hunter_rating_handled');
-      if (count === 2 && !ratingHandled) {
-        const timer = setTimeout(() => {
-          setRatingModalOpen(true);
-          trackRatingPromptShown({ visitNumber: count });
-        }, 1200);
-        return () => clearTimeout(timer);
-      }
     } catch (_) {}
   }, [incomingChallenge]);
 
   // Restore set progress and attempt history from Cloud / Game Center on startup
   useEffect(() => {
+    // Interrupted 1st attempt recovery (e.g. app force quit / crash during 1st attempt)
+    const interruptedAttempt = getActiveSetAttempt();
+    if (interruptedAttempt) {
+      setDifficultyStats(prev => markSetFirstAttemptFailed(prev, interruptedAttempt));
+    }
+
     restoreProgressFromCloud(difficultyStats).then(syncedStats => {
       if (syncedStats && Object.keys(syncedStats).length > 0) {
         setDifficultyStats(syncedStats);
@@ -244,6 +259,26 @@ export default function App() {
 
     return () => {
       if (typeof unsubGc === 'function') unsubGc();
+    };
+  }, []);
+
+  // Listen for beforeunload / pagehide to mark an active first attempt as failed if player exits/closes app
+  useEffect(() => {
+    const handleAppExit = () => {
+      const active = getActiveSetAttempt();
+      if (active) {
+        try {
+          const raw = localStorage.getItem('diff_hunter_categorized_stats');
+          const parsed = raw ? JSON.parse(raw) : {};
+          markSetFirstAttemptFailed(parsed, active);
+        } catch {}
+      }
+    };
+    window.addEventListener('beforeunload', handleAppExit);
+    window.addEventListener('pagehide', handleAppExit);
+    return () => {
+      window.removeEventListener('beforeunload', handleAppExit);
+      window.removeEventListener('pagehide', handleAppExit);
     };
   }, []);
 
@@ -274,25 +309,61 @@ export default function App() {
   // Curated Image Decisions Store State
   const [curatedStatusMap, setCuratedStatusMap] = useState(() => getCuratedStatusMap());
 
-  const handleSetCuratedStatus = (levelId, status, meta) => {
-    let nextLevelIdToLoad = null;
-    if (debugMode && (status === 'dismissed' || status === 'approved')) {
-      const allActive = getAllPhotoPairEntries();
-      const currentIndex = allActive.findIndex(e => e.id === levelId);
-      if (currentIndex >= 0 && allActive.length > 1) {
-        if (status === 'dismissed') {
-          const remaining = allActive.filter(e => e.id !== levelId);
-          if (remaining.length > 0) {
-            const nextIndex = currentIndex % remaining.length;
-            nextLevelIdToLoad = remaining[nextIndex].id;
-          }
-        } else {
-          const nextIndex = (currentIndex + 1) % allActive.length;
-          nextLevelIdToLoad = allActive[nextIndex].id;
-        }
+  const isKeptStatus = (statusVal) => statusVal === 'approved' || statusVal === 'wrong_difficulty';
+
+  const isLevelCategorized = (entry, mapToUse = curatedStatusMap) => {
+    const statusObj = getEntryCurationStatus(entry, mapToUse);
+    const statusVal = statusObj?.status;
+    return Boolean(statusVal || statusObj?.packId || statusObj?.category || statusObj?.difficulty || statusObj?.suggestedDifficulty);
+  };
+
+  const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
+    const allEntries = getAllPhotoPairEntries();
+    const brandNew = [];
+
+    for (const entry of allEntries) {
+      const statusObj = getEntryCurationStatus(entry, mapToUse);
+      const statusVal = statusObj?.status;
+      if (statusVal === 'dismissed') continue;
+      if (skipKept && isKeptStatus(statusVal)) continue;
+
+      if (!isLevelCategorized(entry, mapToUse)) {
+        brandNew.push(entry);
       }
     }
 
+    return brandNew;
+  };
+
+  const getDebugCandidateEntries = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
+    const allEntries = getAllPhotoPairEntries();
+    const unreviewed = [];
+    const categorized = [];
+
+    for (const entry of allEntries) {
+      const statusObj = getEntryCurationStatus(entry, mapToUse);
+      const statusVal = statusObj?.status;
+      if (statusVal === 'dismissed') continue;
+      if (skipKept && isKeptStatus(statusVal)) continue;
+
+      if (!isLevelCategorized(entry, mapToUse)) {
+        unreviewed.push(entry);
+      } else {
+        categorized.push(entry);
+      }
+    }
+
+    // Non-categorized / brand new image sets prioritized strictly first
+    return [...unreviewed, ...categorized];
+  };
+
+  const effectiveDebugPool = useMemo(() => {
+    if (!debugMode || debugSourceMode !== 'premade') return [];
+    const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+    return pool.length > 0 ? pool : getAllPhotoPairEntries();
+  }, [debugMode, debugSourceMode, curatedStatusMap, skipKeptLevels]);
+
+  const handleSetCuratedStatus = (levelId, status, meta) => {
     const updated = setLevelCuratedStatus(levelId, status, meta);
     setCuratedStatusMap({ ...updated });
 
@@ -305,8 +376,21 @@ export default function App() {
       }).catch(() => {});
     } catch (_) {}
 
-    if (nextLevelIdToLoad) {
-      startLevel(nextLevelIdToLoad);
+    if (debugMode && debugSourceMode === 'premade') {
+      const newPool = getDebugCandidateEntries(updated, skipKeptLevels);
+      const poolToUse = newPool.length > 0 ? newPool : getAllPhotoPairEntries().filter(e => getLevelStatus(updated[e.id])?.status !== 'dismissed');
+
+      if (poolToUse.length > 0) {
+        const oldPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+        const oldIdx = oldPool.findIndex(e => e.id === levelId);
+        const nextIdx = oldIdx >= 0 ? oldIdx % poolToUse.length : 0;
+        const nextEntry = poolToUse[nextIdx];
+        if (nextEntry) {
+          const nextLevels = poolToUse.map(createPhotoPairLevel);
+          setLevels(nextLevels);
+          startLevel(nextEntry.id);
+        }
+      }
     }
   };
 
@@ -370,54 +454,6 @@ export default function App() {
     }
   };
 
-  const isKeptStatus = (statusVal) => statusVal === 'approved' || statusVal === 'wrong_difficulty';
-
-  const isLevelCategorized = (entry, mapToUse = curatedStatusMap) => {
-    const statusObj = getLevelStatus(mapToUse[entry.id]);
-    const statusVal = statusObj?.status;
-    return Boolean(statusVal || statusObj?.packId || statusObj?.category || statusObj?.difficulty || statusObj?.suggestedDifficulty);
-  };
-
-  const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
-    const allEntries = getAllPhotoPairEntries();
-    const brandNew = [];
-
-    for (const entry of allEntries) {
-      const statusObj = getLevelStatus(mapToUse[entry.id]);
-      const statusVal = statusObj?.status;
-      if (statusVal === 'dismissed') continue;
-      if (skipKept && isKeptStatus(statusVal)) continue;
-
-      if (!isLevelCategorized(entry, mapToUse)) {
-        brandNew.push(entry);
-      }
-    }
-
-    return brandNew;
-  };
-
-  const getDebugCandidateEntries = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
-    const allEntries = getAllPhotoPairEntries();
-    const unreviewed = [];
-    const categorized = [];
-
-    for (const entry of allEntries) {
-      const statusObj = getLevelStatus(mapToUse[entry.id]);
-      const statusVal = statusObj?.status;
-      if (statusVal === 'dismissed') continue;
-      if (skipKept && isKeptStatus(statusVal)) continue;
-
-      if (!isLevelCategorized(entry, mapToUse)) {
-        unreviewed.push(entry);
-      } else {
-        categorized.push(entry);
-      }
-    }
-
-    // Non-categorized / brand new image sets prioritized strictly first
-    return [...unreviewed, ...categorized];
-  };
-
   const toggleDebugMode = useCallback(() => {
     setDebugMode(prev => {
       const next = !prev;
@@ -467,20 +503,18 @@ export default function App() {
 
   useEffect(() => {
     if (debugMode && debugSourceMode === 'premade') {
-      const allActive = getAllPhotoPairEntries();
-      if (allActive.length > 0) {
-        const debugLevels = allActive.map(createPhotoPairLevel);
+      const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+      if (effectivePool.length > 0) {
+        const debugLevels = effectivePool.map(createPhotoPairLevel);
         setLevels(debugLevels);
-        const statusMap = getCuratedStatusMap();
-        const firstUnrated = allActive.find(e => !getLevelStatus(statusMap[e.id])?.status);
-        if (firstUnrated && (!currentLevelId || getLevelStatus(statusMap[currentLevelId])?.status)) {
-          setCurrentLevelId(firstUnrated.id);
-        } else if (!currentLevelId) {
-          setCurrentLevelId(debugLevels[0].id);
+        const isCurrentInPool = currentLevelId && effectivePool.some(e => e.id === currentLevelId);
+        if (!isCurrentInPool) {
+          setCurrentLevelId(effectivePool[0].id);
         }
       }
     }
-  }, [debugMode, debugSourceMode]);
+  }, [debugMode, debugSourceMode, skipKeptLevels]);
 
   const handleNextPair = async () => {
     sounds.playTap();
@@ -503,13 +537,14 @@ export default function App() {
       return;
     }
 
-    if (debugMode) {
-      const allActive = getAllPhotoPairEntries();
-      if (allActive.length > 0) {
-        const currentIndex = allActive.findIndex(e => e.id === currentLevelId);
-        const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % allActive.length : 0;
-        const nextEntry = allActive[nextIndex];
-        const nextBatch = allActive.map(createPhotoPairLevel);
+    if (debugMode && debugSourceMode === 'premade') {
+      const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+      if (effectivePool.length > 0) {
+        const currentIndex = effectivePool.findIndex(e => e.id === currentLevelId);
+        const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % effectivePool.length : 0;
+        const nextEntry = effectivePool[nextIndex];
+        const nextBatch = effectivePool.map(createPhotoPairLevel);
         setLevels(nextBatch);
         startLevel(nextEntry.id);
         return;
@@ -538,14 +573,15 @@ export default function App() {
       return;
     }
 
-    if (debugMode) {
-      const allActive = getAllPhotoPairEntries();
-      if (allActive.length > 0) {
-        const currentIndex = allActive.findIndex(e => e.id === currentLevelId);
-        const prevIndex = currentIndex >= 0 ? (currentIndex - 1 + allActive.length) % allActive.length : 0;
-        const prevEntry = allActive[prevIndex];
-        const prevBatch = allActive.map(createPhotoPairLevel);
-        setLevels(prevBatch);
+    if (debugMode && debugSourceMode === 'premade') {
+      const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+      if (effectivePool.length > 0) {
+        const currentIndex = effectivePool.findIndex(e => e.id === currentLevelId);
+        const prevIndex = currentIndex >= 0 ? (currentIndex - 1 + effectivePool.length) % effectivePool.length : 0;
+        const prevEntry = effectivePool[prevIndex];
+        const nextBatch = effectivePool.map(createPhotoPairLevel);
+        setLevels(nextBatch);
         startLevel(prevEntry.id);
         return;
       }
@@ -564,11 +600,10 @@ export default function App() {
       setLevels([procLevel]);
       startLevel(procLevel.id);
     } else {
-      const unreviewed = getUnlabeledPremadeLevels(curatedStatusMap, skipKeptLevels);
-      const fallbackPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-      const candidateEntries = unreviewed.length > 0 ? unreviewed : fallbackPool;
-      if (candidateEntries.length > 0) {
-        const debugLevels = candidateEntries.map(createPhotoPairLevel);
+      const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+      if (effectivePool.length > 0) {
+        const debugLevels = effectivePool.map(createPhotoPairLevel);
         setLevels(debugLevels);
         startLevel(debugLevels[0].id);
       }
@@ -649,6 +684,25 @@ export default function App() {
     }
   }, [view]);
 
+  // Rating prompt: only ever considered the moment the player lands back on the menu
+  // immediately after a win (never mid-game, never after a failure/GameOverModal).
+  // Delayed so it doesn't fight with the menu's own entrance transition.
+  useEffect(() => {
+    if (view !== 'menu' || !justWonRoundRef.current) return;
+    justWonRoundRef.current = false;
+
+    const sessionsPlayed = getSessionsPlayed();
+    if (!shouldShowRatingPrompt({ sessionsPlayed })) return;
+
+    const timer = setTimeout(() => {
+      const attemptNumber = recordRatingPromptShown({ sessionsPlayed });
+      setRatingPromptAttemptNumber(attemptNumber);
+      setRatingModalOpen(true);
+      trackRatingPromptShown({ attemptNumber, successfulRounds: getSuccessfulRounds() });
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [view]);
+
   // Timer Effect (millisecond precision)
   useEffect(() => {
     if (timerRunning && view === 'game') {
@@ -678,6 +732,26 @@ export default function App() {
     setScore(0);
     setMagnifierEnabled(false);
 
+    // Track whether this is a 1st attempt on a deterministic set
+    const isDeterministicPhotoSet = selectedTheme === 'find_the_sniper' && Boolean(photoSetId);
+    const isFirst = isDeterministicPhotoSet
+      ? isFirstAttemptForSet(difficultyStats, selectedDifficulty, photoSetId)
+      : false;
+    setIsCurrentRunFirstAttempt(isFirst);
+    if (isDeterministicPhotoSet) {
+      const attemptInfo = {
+        difficulty: selectedDifficulty,
+        themeId: selectedTheme,
+        setId: photoSetId,
+        stageKey: photoSetId,
+        isFirstAttempt: isFirst
+      };
+      activeSetAttemptRef.current = attemptInfo;
+      recordSetAttemptStarted(attemptInfo);
+    } else {
+      activeSetAttemptRef.current = null;
+    }
+
     // 1. ABSTRACT CATEGORY: ALWAYS generates procedural art images across 12 distinct art worlds
     trackGameStarted({ themeId: selectedTheme, difficulty: selectedDifficulty, mode: activeMode });
 
@@ -693,12 +767,16 @@ export default function App() {
     // 2. PHOTOGRAPHY CATEGORY: ALWAYS uses curated premade real-world photo pairs
     try {
       if (debugMode && debugSourceMode === 'premade') {
-        const allActive = getAllPhotoPairEntries();
-        if (allActive.length > 0) {
-          const debugLevels = allActive.slice(0, 5).map(createPhotoPairLevel);
-          logApp('INFO', `[StartGame:Debug] Launching 5 premade levels for set completion: ${debugLevels.map(l => l.id).join(', ')}`);
+        const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+        const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+        if (effectivePool.length > 0) {
+          const debugLevels = effectivePool.map(createPhotoPairLevel);
+          logApp('INFO', `[StartGame:Debug] Launching ${debugLevels.length} candidate levels for curation`);
           setLevels(debugLevels);
-          startLevel(debugLevels[0].id);
+          const startId = (currentLevelId && effectivePool.some(e => e.id === currentLevelId))
+            ? currentLevelId
+            : effectivePool[0].id;
+          startLevel(startId);
           setView('game');
           return;
         }
@@ -830,6 +908,14 @@ export default function App() {
         }, 350);
       } else {
         // FULL STAGE / SEQUENCE CLEAR!
+        // A "successful round" for the rating-prompt cheatsheet: a full stage/set win,
+        // the moment a results screen (VictoryModal / DailyVictoryModal) actually shows.
+        incrementSuccessfulRounds();
+        justWonRoundRef.current = true;
+        clearActiveSetAttempt();
+        activeSetAttemptRef.current = null;
+        setIsCurrentRunFirstAttempt(false);
+
         const cumulativeTime = stageTimesRef.current.slice(0, totalStageImages).reduce((sum, t) => sum + (t || 0), 0);
         setTotalStageTimeMs(cumulativeTime);
         const stageTotalScore = score + pointsEarned;
@@ -841,7 +927,7 @@ export default function App() {
         if (gameMode !== 'daily' && selectedTheme === 'find_the_sniper' && photoSetId) {
           const entryIds = levels.slice(0, totalStageImages).map(level => level.id);
           const priorSet = difficultyStats[selectedDifficulty]?.sets?.[photoSetId];
-          const isFirstSetCompletion = !priorSet?.firstTime;
+          const isFirstSetCompletion = !priorSet?.firstTime && !priorSet?.firstFailed;
           levels.slice(0, totalStageImages).forEach((level, index) => {
             saveImageProgress({
               imageId: level.id,
@@ -987,18 +1073,20 @@ export default function App() {
             fastestRepeat: null,
             fastestTime: null,
             clears: 0,
+            attempts: 0,
+            firstFailed: false,
             totalPoints: 0,
             ...(isDeterministicPhotoSet ? { setId: photoSetId, entryIds: stageEntryIds } : {})
           };
 
-          const isFirstTime = !setData.firstTime;
-          const newFirstTime = isFirstTime ? cumulativeTime : setData.firstTime;
+          const isFirstTime = !setData.firstTime && !setData.firstFailed;
+          const newFirstTime = isFirstTime ? cumulativeTime : (setData.firstTime || (setData.firstFailed ? 'failed' : null));
           const newFastestRepeat = isDeterministicPhotoSet
             ? (isFirstTime ? (setData.fastestRepeat || null) : (!setData.fastestRepeat || cumulativeTime < setData.fastestRepeat ? cumulativeTime : setData.fastestRepeat))
             : (!setData.fastestRepeat || cumulativeTime < setData.fastestRepeat ? cumulativeTime : setData.fastestRepeat);
           const newSetTotalPoints = (setData.totalPoints || 0) + stageTotalScore;
 
-          const previousBest = isFirstTime ? null : (setData.fastestTime || Math.min(...[setData.firstTime, setData.fastestRepeat].filter(Boolean)));
+          const previousBest = isFirstTime ? null : (setData.fastestTime || Math.min(...[setData.firstTime, setData.fastestRepeat].filter(t => typeof t === 'number' && t > 0)));
           const isPb = isDeterministicPhotoSet
             ? (isFirstTime || cumulativeTime < previousBest)
             : checkAndUpdateDynamicSetRecord(cumulativeTime).isNewRecord;
@@ -1006,7 +1094,7 @@ export default function App() {
           setLastSetCompletionInfo({
             setId: isDeterministicPhotoSet ? photoSetId : null,
             setNumber: isDeterministicPhotoSet ? getSetNumber(photoSetId) : null,
-            attemptNumber: isDeterministicPhotoSet ? (setData.clears + 1) : null,
+            attemptNumber: isDeterministicPhotoSet ? (Math.max(setData.attempts || 0, setData.clears || 0) + 1) : null,
             isPersonalBest: isPb
           });
 
@@ -1014,10 +1102,12 @@ export default function App() {
             title: `5-Image Stage (${selectedTheme === 'find_the_sniper' ? 'Photography' : 'Abstract'})`,
             packId: selectedTheme,
             ...(isDeterministicPhotoSet ? { setId: photoSetId, entryIds: stageEntryIds } : {}),
+            firstFailed: Boolean(setData.firstFailed || setData.firstTime === 'failed'),
             firstTime: newFirstTime,
             fastestRepeat: newFastestRepeat,
             fastestTime: Math.min(...[newFirstTime, newFastestRepeat].filter(time => typeof time === 'number' && time > 0)),
-            clears: setData.clears + 1,
+            clears: (setData.clears || 0) + 1,
+            attempts: (setData.attempts || 0) + 1,
             totalPoints: newSetTotalPoints,
             lastScore: stageTotalScore,
             bestScore: Math.max(setData.bestScore || 0, setData.lastScore || 0, stageTotalScore)
@@ -1026,8 +1116,8 @@ export default function App() {
           const updatedSets = { ...categoryData.sets, [stageKey]: updatedSetData };
           const setsClearedCount = Object.keys(updatedSets).length;
 
-          const allFirstTimes = Object.values(updatedSets).map(s => s.firstTime).filter(Boolean);
-          const allRepeats = Object.values(updatedSets).map(s => s.fastestRepeat).filter(Boolean);
+          const allFirstTimes = Object.values(updatedSets).map(s => s.firstTime).filter(t => typeof t === 'number' && t > 0);
+          const allRepeats = Object.values(updatedSets).map(s => s.fastestRepeat).filter(t => typeof t === 'number' && t > 0);
           const overallFirstTime = allFirstTimes.length > 0 ? Math.min(...allFirstTimes) : null;
           const overallRepeat = allRepeats.length > 0 ? Math.min(...allRepeats) : null;
 
@@ -1070,6 +1160,13 @@ export default function App() {
         try { sounds.playLose(); } catch (_) {}
         setTimerRunning(false);
         setRevealAnswer(true);
+
+        if (gameMode !== 'daily' && activeSetAttemptRef.current?.isFirstAttempt) {
+          const attempt = activeSetAttemptRef.current;
+          setDifficultyStats(prev => markSetFirstAttemptFailed(prev, attempt));
+          activeSetAttemptRef.current = null;
+          clearActiveSetAttempt();
+        }
 
         const totalHintsForDiff = selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2;
         trackImagePairCompleted({
@@ -1167,6 +1264,13 @@ export default function App() {
       });
       return;
     }
+    if (activeSetAttemptRef.current?.isFirstAttempt) {
+      const attempt = activeSetAttemptRef.current;
+      setDifficultyStats(prev => markSetFirstAttemptFailed(prev, attempt));
+      activeSetAttemptRef.current = null;
+      setIsCurrentRunFirstAttempt(false);
+      clearActiveSetAttempt();
+    }
     setView('menu');
   };
 
@@ -1212,6 +1316,9 @@ export default function App() {
 
   return (
     <div className="app-container">
+      {showSplash && (
+        <SplashScreen onFinish={() => setShowSplash(false)} />
+      )}
       <div className="app-content">
         {/* Persistent Top Header (Menu & Stats only; in game if debug) */}
         <Header
@@ -1298,8 +1405,8 @@ export default function App() {
               onToggleSourceMode={handleToggleDebugSourceMode}
               skipKeptLevels={skipKeptLevels}
               onToggleSkipKept={handleToggleSkipKept}
-              currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode && debugSourceMode === 'premade' ? (getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
-              totalStageImages={gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5))}
+              currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode && debugSourceMode === 'premade' ? (effectiveDebugPool.findIndex(e => e.id === currentLevelId) >= 0 ? effectiveDebugPool.findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
+              totalStageImages={gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? effectiveDebugPool.length : (levels.length || 5))}
               gameMode={gameMode}
             />
         )}
@@ -1313,8 +1420,8 @@ export default function App() {
             score={score}
             mode={activeMode}
             missCount={missCount}
-            currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode && debugSourceMode === 'premade' ? (getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) >= 0 ? getAllPhotoPairEntries().findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
-            totalStageImages={gameMode === 'daily' && !debugMode ? 3 : (gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? getAllPhotoPairEntries().length : (levels.length || 5)))}
+            currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode && debugSourceMode === 'premade' ? (effectiveDebugPool.findIndex(e => e.id === currentLevelId) >= 0 ? effectiveDebugPool.findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
+            totalStageImages={gameMode === 'daily' && !debugMode ? 3 : (gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? effectiveDebugPool.length : (levels.length || 5)))}
             selectedDifficulty={selectedDifficulty}
             onBack={handleRequestBack}
             debugMode={debugMode}
@@ -1412,6 +1519,7 @@ export default function App() {
         onClose={() => {
           setGameOverModalOpen(false);
           setRevealAnswer(false);
+          setIsCurrentRunFirstAttempt(false);
           setView('menu');
         }}
         onRestart={() => {
@@ -1424,6 +1532,7 @@ export default function App() {
         levelTitle={currentLevel?.title || 'Stage Set'}
         setId={photoSetId}
         themeId={selectedTheme}
+        isFirstAttempt={isCurrentRunFirstAttempt}
       />
 
       <HelpModal
@@ -1434,6 +1543,7 @@ export default function App() {
       <ConfirmExitModal
         isOpen={confirmExitModalOpen}
         isDaily={gameMode === 'daily'}
+        isFirstAttempt={gameMode !== 'daily' && isCurrentRunFirstAttempt}
         onConfirm={handleConfirmExit}
         onCancel={handleCancelExit}
       />
@@ -1441,14 +1551,16 @@ export default function App() {
       <RatingModal
         isOpen={ratingModalOpen}
         onClose={() => setRatingModalOpen(false)}
-        onOpenSupport={() => {
-          setRatingModalOpen(false);
-        }}
+        attemptNumber={ratingPromptAttemptNumber}
       />
 
       <DiagnosticsModal
         isOpen={diagnosticsModalOpen}
         onClose={() => setDiagnosticsModalOpen(false)}
+        onPreviewSplash={() => {
+          setDiagnosticsModalOpen(false);
+          setShowSplash(true);
+        }}
         currentLevel={currentLevel}
         selectedTheme={selectedTheme}
         selectedDifficulty={selectedDifficulty}

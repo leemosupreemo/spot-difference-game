@@ -27,8 +27,18 @@ from goldilocks_target_selector import GoldilocksTargetSelector
 from remove_target_selector import RemoveTargetSelector
 from add_target_selector import AddTargetSelector
 from reorder_target_selector import ReorderTargetSelector
-from perceptual_verification_engine import PerceptualVerificationEngine
+from perceptual_verification_engine import PerceptualVerificationEngine, LIMITS_BY_DIFFICULTY
 from sam_segment_recolor import PeerPaletteColorEngine, AdaptiveSpotabilityLoop
+from structural_mask_refiner import StructuralMaskRefiner
+from structural_quality import (
+    StructuralNaturalnessCritic,
+    score_structural_candidate,
+    select_candidate,
+)
+from generation_policy import (
+    MIXED_GENERATION_POLICY,
+    STRUCTURAL_ONLY_POLICY,
+)
 
 DEFAULT_TARGET_MIX = {
     "recolor": 0.25,
@@ -84,7 +94,123 @@ class OperationScheduler:
         best_op = max(priorities, key=priorities.get)
         return best_op
 
-def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="public/levels", difficulty="Medium"):
+
+def build_operation_queue(affordances, preferred_op, scheduler, policy):
+    allowed_affordances = {
+        operation: affordances[operation]
+        for operation in policy.allowed_operations
+        if operation in affordances
+    }
+    minimum_affordance = 0.0 if policy.selection_mode == "first_pass" else 0.25
+    viable = {
+        operation: score
+        for operation, score in allowed_affordances.items()
+        if score >= minimum_affordance
+    }
+    if not viable:
+        return [], "NoAllowedOperation"
+
+    allowed_preference = preferred_op if preferred_op in viable else None
+    if scheduler:
+        initial_op = scheduler.select_operation_for_scene(viable, allowed_preference)
+        if initial_op not in viable:
+            initial_op = max(viable, key=viable.get)
+    elif allowed_preference:
+        initial_op = allowed_preference
+    else:
+        initial_op = max(viable, key=viable.get)
+
+    queue = [initial_op]
+    if policy.allow_operation_fallback:
+        fallbacks = sorted(
+            (operation for operation in viable if operation != initial_op),
+            key=lambda operation: (
+                -viable[operation],
+                policy.allowed_operations.index(operation),
+            ),
+        )
+        queue.extend(fallbacks)
+    return queue, None
+
+
+def _source_sized_mask(mask, width, height):
+    normalized = (mask > 0).astype(np.uint8) * 255
+    if normalized.shape != (height, width):
+        normalized = cv2.resize(
+            normalized,
+            (width, height),
+            interpolation=cv2.INTER_NEAREST,
+        )
+    return normalized
+
+
+def _occupied_mask(raw_masks, width, height):
+    occupied = np.zeros((height, width), dtype=np.uint8)
+    for raw_mask in raw_masks:
+        occupied = cv2.bitwise_or(
+            occupied,
+            _source_sized_mask(raw_mask, width, height),
+        )
+    return occupied
+
+
+def _placed_add_mask(donor_mask, donor_bbox, slot_bbox, width, height):
+    dx1, dy1, dx2, dy2 = donor_bbox
+    sx1, sy1, _, _ = slot_bbox
+    crop = (donor_mask[dy1:dy2 + 1, dx1:dx2 + 1] > 0).astype(np.uint8) * 255
+    placed = np.zeros((height, width), dtype=np.uint8)
+    crop_h = min(crop.shape[0], height - sy1)
+    crop_w = min(crop.shape[1], width - sx1)
+    if crop_h > 0 and crop_w > 0:
+        placed[sy1:sy1 + crop_h, sx1:sx1 + crop_w] = crop[:crop_h, :crop_w]
+    return placed
+
+
+def _placed_reorder_mask(target_mask, target_bbox, mutation, width, height):
+    bx1, by1, bx2, by2 = target_bbox
+    crop = (target_mask[by1:by2 + 1, bx1:bx2 + 1] > 0).astype(np.uint8) * 255
+    crop_h, crop_w = crop.shape
+    rotation = cv2.getRotationMatrix2D(
+        (crop_w // 2, crop_h // 2),
+        mutation.get("angle", 0.0),
+        1.0,
+    )
+    rotated = cv2.warpAffine(
+        crop,
+        rotation,
+        (crop_w, crop_h),
+        flags=cv2.INTER_NEAREST,
+        borderMode=cv2.BORDER_CONSTANT,
+        borderValue=0,
+    )
+    new_x = int(bx1 + mutation.get("dx", 0))
+    new_y = int(by1 + mutation.get("dy", 0))
+    placed = np.zeros((height, width), dtype=np.uint8)
+    out_h = min(crop_h, height - new_y)
+    out_w = min(crop_w, width - new_x)
+    if new_x >= 0 and new_y >= 0 and out_h > 0 and out_w > 0:
+        placed[new_y:new_y + out_h, new_x:new_x + out_w] = rotated[:out_h, :out_w]
+    return placed
+
+
+def _difficulty_fit_score(ground_truth, difficulty):
+    limits = LIMITS_BY_DIFFICULTY.get(difficulty, LIMITS_BY_DIFFICULTY["Medium"])
+    area = ground_truth.get("metrics", {}).get("source_area_pct")
+    if area is None:
+        return 0.5
+    lower = limits["source_changed_area_min_pct"]
+    upper = limits["source_changed_area_max_pct"]
+    midpoint = (lower + upper) / 2.0
+    half_width = max(1e-5, (upper - lower) / 2.0)
+    return float(np.clip(1.0 - abs(float(area) - midpoint) / half_width, 0.0, 1.0))
+
+def generate_single_scene_difference(
+    scene_spec,
+    scheduler=None,
+    output_dir="public/levels",
+    difficulty="Medium",
+    policy=MIXED_GENERATION_POLICY,
+):
     """
     Authoritative single-scene generator with candidate iteration.
     Enforces strict operation routing without silent fallback.
@@ -99,7 +225,10 @@ def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="pub
         "image_path": image_path,
         "difficulty": difficulty,
         "accepted": False,
-        "rejection_reason": None
+        "rejection_reason": None,
+        "generation_policy": policy.name,
+        "allowed_operations": list(policy.allowed_operations),
+        "operations_attempted": [],
     }
 
     if not os.path.exists(image_path):
@@ -127,166 +256,389 @@ def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="pub
     log_entry["affordances"] = affordances
     log_entry["candidate_count"] = len(candidate_masks)
     log_entry["peer_group_count"] = len(peer_groups)
+    log_entry["candidate_attempt_count"] = 0
+    log_entry["passing_candidate_count"] = 0
+    log_entry["candidate_scores"] = []
+    log_entry["selected_candidate_score"] = None
 
-    # 2. Select Operation
+    # 2. Select Candidate Operations to Try
     preferred_op = scene_spec.get("preferred_op")
-    if scheduler:
-        chosen_op = scheduler.select_operation_for_scene(affordances, preferred_op)
-    else:
-        chosen_op = preferred_op if preferred_op in affordances else qa_res["recommended_operation"]
+    ops_to_try, routing_error = build_operation_queue(
+        affordances,
+        preferred_op,
+        scheduler,
+        policy,
+    )
+    if routing_error:
+        log_entry["rejection_reason"] = routing_error
+        log_entry["rejection_code"] = routing_error
+        return False, None, log_entry
 
-    log_entry["operation_selected"] = chosen_op
+    initial_op = ops_to_try[0]
 
     variant_bgr = None
     ground_truth = None
     op_success = False
     op_reason = ""
+    chosen_op = initial_op
+    collect_structural = policy.selection_mode == "best_score"
+    structural_candidates = []
+    occupied = _occupied_mask(raw_masks, w, h) if collect_structural else None
 
-    # 3. Execute Selected Operation with Candidate Iteration
-    if chosen_op == "recolor":
-        descriptors = [GoldilocksTargetSelector.extract_shape_descriptor(c["mask"]) for c in candidate_masks]
-        peer_counts = GoldilocksTargetSelector.find_visual_peers(descriptors)
-        for i, c in enumerate(candidate_masks):
-            c["peer_count"] = peer_counts[i]
-            frac, _, _ = GoldilocksTargetSelector.compute_recolorable_fraction(img_bgr, c["mask"])
-            c["recolorable_fraction"] = frac
-            c["baseline_salience"] = GoldilocksTargetSelector.compute_baseline_salience(img_bgr, c["mask"])
+    def record_structural_candidate(
+        operation,
+        var_img,
+        gt,
+        reason,
+        selector_score,
+        quality,
+        refinement_metrics,
+    ):
+        attempt_index = log_entry["candidate_attempt_count"] - 1
+        final_score, score_components = score_structural_candidate(
+            selector_score=selector_score,
+            naturalness_score=quality.score,
+            compactness_score=quality.metrics.get("compactness_score"),
+            difficulty_fit_score=_difficulty_fit_score(gt, difficulty),
+        )
+        record = {
+            "operation": operation,
+            "variant": var_img,
+            "ground_truth": gt,
+            "qa_summary": reason,
+            "selector_score": selector_score,
+            "naturalness_score": quality.score,
+            "compactness_score": quality.metrics.get("compactness_score"),
+            "difficulty_fit_score": _difficulty_fit_score(gt, difficulty),
+            "attempt_index": attempt_index,
+            "final_score": final_score,
+            "score_components": score_components,
+            "quality_metrics": quality.metrics,
+            "refinement_metrics": refinement_metrics,
+        }
+        structural_candidates.append(record)
+        log_entry["passing_candidate_count"] += 1
+        log_entry["candidate_scores"].append({
+            "operation": operation,
+            "attempt_index": attempt_index,
+            "final_score": final_score,
+            "components": score_components,
+        })
 
-        disp_scale_x = 700.0 / float(w)
-        disp_scale_y = 440.0 / float(h)
-        valid_recolor_cands = []
-        for c in candidate_masks:
-            if c["recolorable_fraction"] < 0.40 or c["peer_count"] < 1 or c["area_pct"] < 0.15 or c["area_pct"] > 0.75:
+    # 3. Execute Operations with Candidate Iteration and Fallback
+    for op in ops_to_try:
+        log_entry["operations_attempted"].append(op)
+        if op == "recolor":
+            descriptors = [GoldilocksTargetSelector.extract_shape_descriptor(c["mask"]) for c in candidate_masks]
+            peer_counts = GoldilocksTargetSelector.find_visual_peers(descriptors)
+            for i, c in enumerate(candidate_masks):
+                c["peer_count"] = peer_counts[i]
+                frac, _, _ = GoldilocksTargetSelector.compute_recolorable_fraction(img_bgr, c["mask"])
+                c["recolorable_fraction"] = frac
+                c["baseline_salience"] = GoldilocksTargetSelector.compute_baseline_salience(img_bgr, c["mask"])
+
+            disp_scale_x = 700.0 / float(w)
+            disp_scale_y = 440.0 / float(h)
+            valid_recolor_cands = []
+            for c in candidate_masks:
+                if c["recolorable_fraction"] < 0.40 or c["peer_count"] < 1 or c["area_pct"] < 0.15 or c["area_pct"] > 0.75:
+                    continue
+                bw = c["bbox"][2] - c["bbox"][0] + 1
+                bh = c["bbox"][3] - c["bbox"][1] + 1
+                d_short = min(bw * disp_scale_x, bh * disp_scale_y)
+                if 18.0 <= d_short <= 42.0:
+                    valid_recolor_cands.append(c)
+
+            if not valid_recolor_cands:
+                for c in candidate_masks:
+                    if c.get("recolorable_fraction", 0) >= 0.20 and 0.05 <= c.get("area_pct", 0) <= 2.5:
+                        valid_recolor_cands.append(c)
+
+            if not valid_recolor_cands:
+                op_reason = "Recolor: No suitable Goldilocks recolor candidates with peers and valid chroma."
                 continue
-            bw = c["bbox"][2] - c["bbox"][0] + 1
-            bh = c["bbox"][3] - c["bbox"][1] + 1
-            d_short = min(bw * disp_scale_x, bh * disp_scale_y)
-            if 18.0 <= d_short <= 42.0:
-                valid_recolor_cands.append(c)
 
-        if not valid_recolor_cands:
-            log_entry["rejection_reason"] = "Recolor: No suitable Goldilocks recolor candidates with peers and valid chroma."
-            if scheduler: scheduler.record_attempt(chosen_op, False)
-            return False, None, log_entry
+            valid_recolor_cands.sort(key=lambda x: x["peer_count"] * 10.0 + x["recolorable_fraction"] * 5.0, reverse=True)
 
-        valid_recolor_cands.sort(key=lambda x: x["peer_count"] * 10.0 + x["recolorable_fraction"] * 5.0, reverse=True)
+            for cand in valid_recolor_cands[:5]:
+                target_mask = cand["mask"]
+                target_bbox = cand["bbox"]
+                peer_masks = [c["mask"] for c in candidate_masks if c["idx"] != cand["idx"] and c["peer_count"] >= 1]
 
-        for cand in valid_recolor_cands[:5]:
-            target_mask = cand["mask"]
-            target_bbox = cand["bbox"]
-            peer_masks = [c["mask"] for c in candidate_masks if c["idx"] != cand["idx"] and c["peer_count"] >= 1]
+                target_delta_e = 24.0 if difficulty == "Medium" else (18.0 if difficulty == "Hard" else 30.0)
+                default_hue = scene_spec.get("hue_direction_deg", 50.0)
 
-            target_delta_e = 24.0 if difficulty == "Medium" else (18.0 if difficulty == "Hard" else 30.0)
-            default_hue = scene_spec.get("hue_direction_deg", 50.0)
+                var_candidate, actual_de, color_metrics = PeerPaletteColorEngine.shift_color_peer_relative(
+                    img_bgr, target_mask, peer_masks=peer_masks, target_delta_e=target_delta_e, default_hue_deg=default_hue
+                )
 
-            var_candidate, actual_de, color_metrics = PeerPaletteColorEngine.shift_color_peer_relative(
-                img_bgr, target_mask, peer_masks=peer_masks, target_delta_e=target_delta_e, default_hue_deg=default_hue
-            )
+                bx1, by1, bx2, by2 = target_bbox
+                pad = int(max(bx2 - bx1, by2 - by1) * 0.25)
+                rx1, ry1 = max(0, bx1 - pad), max(0, by1 - pad)
+                rx2, ry2 = min(w, bx2 + pad), min(h, by2 + pad)
+                clamped_var = img_bgr.copy()
+                clamped_var[ry1:ry2, rx1:rx2] = var_candidate[ry1:ry2, rx1:rx2]
 
-            bx1, by1, bx2, by2 = target_bbox
-            pad = int(max(bx2 - bx1, by2 - by1) * 0.25)
-            rx1, ry1 = max(0, bx1 - pad), max(0, by1 - pad)
-            rx2, ry2 = min(w, bx2 + pad), min(h, by2 + pad)
-            clamped_var = img_bgr.copy()
-            clamped_var[ry1:ry2, rx1:rx2] = var_candidate[ry1:ry2, rx1:rx2]
+                v_passed, v_metrics, v_reason, v_code = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
+                    img_bgr, clamped_var, target_bbox, operation="recolor", difficulty=difficulty
+                )
+                if v_passed:
+                    variant_bgr = clamped_var
+                    cx_pct = round(float(bx1 + bx2) / 2.0 / float(w) * 100.0, 1)
+                    cy_pct = round(float(by1 + by2) / 2.0 / float(h) * 100.0, 1)
+                    span_x = (bx2 - bx1 + 1) / float(w) * 100.0
+                    span_y = (by2 - by1 + 1) / float(h) * 100.0
+                    radius = round(max(4.5, min(7.5, max(span_x, span_y) / 2.0 + 1.2)), 1)
+                    ground_truth = {
+                        "x": cx_pct,
+                        "y": cy_pct,
+                        "radius": radius,
+                        "bbox": target_bbox,
+                        "metrics": {**v_metrics, **color_metrics}
+                    }
+                    op_success = True
+                    op_reason = v_reason
+                    chosen_op = "recolor"
+                    break
+                else:
+                    op_reason = f"Recolor QA Reject ({v_code}): {v_reason}"
 
-            v_passed, v_metrics, v_reason, v_code = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
-                img_bgr, clamped_var, target_bbox, operation="recolor", difficulty=difficulty
-            )
-            if v_passed:
-                variant_bgr = clamped_var
-                cx_pct = round(float(bx1 + bx2) / 2.0 / float(w) * 100.0, 1)
-                cy_pct = round(float(by1 + by2) / 2.0 / float(h) * 100.0, 1)
-                span_x = (bx2 - bx1 + 1) / float(w) * 100.0
-                span_y = (by2 - by1 + 1) / float(h) * 100.0
-                radius = round(max(4.5, min(7.5, max(span_x, span_y) / 2.0 + 1.2)), 1)
-                ground_truth = {
-                    "x": cx_pct,
-                    "y": cy_pct,
-                    "radius": radius,
-                    "bbox": target_bbox,
-                    "metrics": {**v_metrics, **color_metrics}
-                }
-                op_success = True
-                op_reason = v_reason
+            if op_success:
                 break
-            else:
-                op_reason = f"Recolor QA Reject ({v_code}): {v_reason}"
 
-    elif chosen_op == "remove":
-        best_cand, select_reason, all_cands = RemoveTargetSelector.select_best_remove_target(
-            img_bgr, candidate_masks, peer_groups, target_difficulty=difficulty
-        )
-        if not all_cands:
-            log_entry["rejection_reason"] = f"Remove: {select_reason}"
-            if scheduler: scheduler.record_attempt(chosen_op, False)
-            return False, None, log_entry
-
-        for cand_item in all_cands[:5]:
-            target_c = cand_item["candidate"]
-            passed, var_img, gt, reason = RemoveTargetSelector.execute_removal_and_qa(
-                img_bgr, target_c["mask"], target_c["bbox"], raw_masks, difficulty=difficulty
+        elif op == "remove":
+            best_cand, select_reason, all_cands = RemoveTargetSelector.select_best_remove_target(
+                img_bgr, candidate_masks, peer_groups, target_difficulty=difficulty
             )
-            if passed:
-                variant_bgr = var_img
-                ground_truth = gt
-                op_success = True
-                op_reason = reason
+            if not all_cands:
+                op_reason = f"Remove: {select_reason}"
+                continue
+
+            candidate_limit = policy.max_candidates_per_operation if collect_structural else 5
+            for cand_item in all_cands[:candidate_limit]:
+                target_c = cand_item["candidate"]
+                target_mask = target_c["mask"]
+                cleanup_mask = None
+                refinement_metrics = {}
+                if policy.refine_structural_masks:
+                    refined = StructuralMaskRefiner.refine(
+                        img_bgr,
+                        target_mask,
+                        target_c["bbox"],
+                    )
+                    target_mask = refined.object_mask
+                    cleanup_mask = refined.cleanup_mask
+                    refinement_metrics = refined.metrics
+                if collect_structural:
+                    log_entry["candidate_attempt_count"] += 1
+                passed, var_img, gt, reason = RemoveTargetSelector.execute_removal_and_qa(
+                    img_bgr,
+                    target_mask,
+                    target_c["bbox"],
+                    raw_masks,
+                    difficulty=difficulty,
+                    cleanup_mask=cleanup_mask,
+                )
+                if passed:
+                    if collect_structural:
+                        quality = StructuralNaturalnessCritic.evaluate(
+                            img_bgr,
+                            var_img,
+                            gt.get("bbox", target_c["bbox"]),
+                            operation="remove",
+                        )
+                        if quality.passed:
+                            record_structural_candidate(
+                                "remove",
+                                var_img,
+                                gt,
+                                reason,
+                                cand_item.get("score"),
+                                quality,
+                                refinement_metrics,
+                            )
+                        else:
+                            op_reason = quality.reason
+                            log_entry["last_rejection_code"] = quality.rejection_code
+                    else:
+                        variant_bgr = var_img
+                        ground_truth = gt
+                        op_success = True
+                        op_reason = reason
+                        chosen_op = "remove"
+                        break
+                else:
+                    op_reason = reason
+
+            if op_success and not collect_structural:
                 break
-            else:
-                op_reason = reason
 
-    elif chosen_op == "add":
-        best_pair, select_reason, all_pairs = AddTargetSelector.find_best_add_pair(
-            img_bgr, candidate_masks, peer_groups, raw_masks, target_difficulty=difficulty
-        )
-        if not all_pairs:
-            log_entry["rejection_reason"] = f"Add: {select_reason}"
-            if scheduler: scheduler.record_attempt(chosen_op, False)
-            return False, None, log_entry
-
-        for pair in all_pairs[:6]:
-            passed, var_img, gt, reason = AddTargetSelector.execute_add_and_qa(
-                img_bgr, pair["donor_bbox"], pair["slot_bbox"], pair["donor"]["mask"], difficulty=difficulty
+        elif op == "add":
+            best_pair, select_reason, all_pairs = AddTargetSelector.find_best_add_pair(
+                img_bgr, candidate_masks, peer_groups, raw_masks, target_difficulty=difficulty
             )
-            if passed:
-                variant_bgr = var_img
-                ground_truth = gt
-                op_success = True
-                op_reason = reason
+            if not all_pairs:
+                op_reason = f"Add: {select_reason}"
+                continue
+
+            candidate_limit = policy.max_candidates_per_operation if collect_structural else 6
+            for pair in all_pairs[:candidate_limit]:
+                donor_mask = pair["donor"]["mask"]
+                refinement_metrics = {}
+                if policy.refine_structural_masks:
+                    refined = StructuralMaskRefiner.refine(
+                        img_bgr,
+                        donor_mask,
+                        pair["donor_bbox"],
+                    )
+                    donor_mask = refined.object_mask
+                    refinement_metrics = refined.metrics
+                if collect_structural:
+                    log_entry["candidate_attempt_count"] += 1
+                passed, var_img, gt, reason = AddTargetSelector.execute_add_and_qa(
+                    img_bgr,
+                    pair["donor_bbox"],
+                    pair["slot_bbox"],
+                    donor_mask,
+                    difficulty=difficulty,
+                )
+                if passed:
+                    if collect_structural:
+                        placed_mask = _placed_add_mask(
+                            donor_mask,
+                            pair["donor_bbox"],
+                            pair["slot_bbox"],
+                            w,
+                            h,
+                        )
+                        quality = StructuralNaturalnessCritic.evaluate(
+                            img_bgr,
+                            var_img,
+                            gt.get("bbox", pair["slot_bbox"]),
+                            operation="add",
+                            object_mask=placed_mask,
+                            occupied_mask=occupied,
+                        )
+                        if quality.passed:
+                            record_structural_candidate(
+                                "add",
+                                var_img,
+                                gt,
+                                reason,
+                                pair.get("score"),
+                                quality,
+                                refinement_metrics,
+                            )
+                        else:
+                            op_reason = quality.reason
+                            log_entry["last_rejection_code"] = quality.rejection_code
+                    else:
+                        variant_bgr = var_img
+                        ground_truth = gt
+                        op_success = True
+                        op_reason = reason
+                        chosen_op = "add"
+                        break
+                else:
+                    op_reason = reason
+
+            if op_success and not collect_structural:
                 break
-            else:
-                op_reason = reason
 
-    elif chosen_op == "reorder":
-        best_target, select_reason, all_targets = ReorderTargetSelector.find_best_reorder_target(
-            img_bgr, candidate_masks, peer_groups, raw_masks, target_difficulty=difficulty
-        )
-        if not all_targets:
-            log_entry["rejection_reason"] = f"Reorder: {select_reason}"
-            if scheduler: scheduler.record_attempt(chosen_op, False)
-            return False, None, log_entry
-
-        for target_item in all_targets[:6]:
-            cand = target_item["candidate"]
-            passed, var_img, gt, reason = ReorderTargetSelector.execute_reorder_and_qa(
-                img_bgr, cand["mask"], cand["bbox"], target_item["best_mutation"], target_item["union_bbox"], raw_masks, difficulty=difficulty
+        elif op == "reorder":
+            best_target, select_reason, all_targets = ReorderTargetSelector.find_best_reorder_target(
+                img_bgr, candidate_masks, peer_groups, raw_masks, target_difficulty=difficulty
             )
-            if passed:
-                variant_bgr = var_img
-                ground_truth = gt
-                op_success = True
-                op_reason = reason
-                break
-            else:
-                op_reason = reason
+            if not all_targets:
+                op_reason = f"Reorder: {select_reason}"
+                continue
 
-    else:
-        log_entry["rejection_reason"] = f"Unknown operation: {chosen_op}"
-        return False, None, log_entry
+            candidate_limit = policy.max_candidates_per_operation if collect_structural else 6
+            for target_item in all_targets[:candidate_limit]:
+                cand = target_item["candidate"]
+                target_mask = cand["mask"]
+                cleanup_mask = None
+                refinement_metrics = {}
+                if policy.refine_structural_masks:
+                    refined = StructuralMaskRefiner.refine(
+                        img_bgr,
+                        target_mask,
+                        cand["bbox"],
+                    )
+                    target_mask = refined.object_mask
+                    cleanup_mask = refined.cleanup_mask
+                    refinement_metrics = refined.metrics
+                if collect_structural:
+                    log_entry["candidate_attempt_count"] += 1
+                passed, var_img, gt, reason = ReorderTargetSelector.execute_reorder_and_qa(
+                    img_bgr,
+                    target_mask,
+                    cand["bbox"],
+                    target_item["best_mutation"],
+                    target_item["union_bbox"],
+                    raw_masks,
+                    difficulty=difficulty,
+                    cleanup_mask=cleanup_mask,
+                )
+                if passed:
+                    if collect_structural:
+                        new_mask = _placed_reorder_mask(
+                            target_mask,
+                            cand["bbox"],
+                            target_item["best_mutation"],
+                            w,
+                            h,
+                        )
+                        quality = StructuralNaturalnessCritic.evaluate(
+                            img_bgr,
+                            var_img,
+                            gt.get("union_bbox", target_item["union_bbox"]),
+                            operation="reorder",
+                            occupied_mask=occupied,
+                            old_mask=target_mask,
+                            new_mask=new_mask,
+                        )
+                        if quality.passed:
+                            record_structural_candidate(
+                                "reorder",
+                                var_img,
+                                gt,
+                                reason,
+                                target_item.get("score"),
+                                quality,
+                                refinement_metrics,
+                            )
+                        else:
+                            op_reason = quality.reason
+                            log_entry["last_rejection_code"] = quality.rejection_code
+                    else:
+                        variant_bgr = var_img
+                        ground_truth = gt
+                        op_success = True
+                        op_reason = reason
+                        chosen_op = "reorder"
+                        break
+                else:
+                    op_reason = reason
+
+            if op_success and not collect_structural:
+                break
+
+    if collect_structural and structural_candidates:
+        selected = select_candidate(structural_candidates, policy.selection_mode)
+        variant_bgr = selected["variant"]
+        ground_truth = selected["ground_truth"]
+        chosen_op = selected["operation"]
+        op_reason = selected["qa_summary"]
+        op_success = True
+        log_entry["selected_candidate_score"] = selected["final_score"]
+
+    log_entry["operation_selected"] = chosen_op
 
     if not op_success:
         log_entry["rejection_reason"] = op_reason
+        if collect_structural:
+            log_entry["rejection_code"] = "NoStructuralCandidate"
         if scheduler: scheduler.record_attempt(chosen_op, False)
         return False, None, log_entry
 
@@ -336,7 +688,13 @@ def generate_single_scene_difference(scene_spec, scheduler=None, output_dir="pub
 
     return True, manifest_entry, log_entry
 
-def generate_batch(scenes, target_mix=None, output_dir="public/levels", manifest_path="public/levels/photo_pair_manifest.json"):
+def generate_batch(
+    scenes,
+    target_mix=None,
+    output_dir="public/levels",
+    manifest_path="public/levels/photo_pair_manifest.json",
+    policy=MIXED_GENERATION_POLICY,
+):
     """
     Central Authoritative Batch Generation Function.
     Iterates across candidate scenes, balances the 4 operations, and writes the manifest.
@@ -353,7 +711,11 @@ def generate_batch(scenes, target_mix=None, output_dir="public/levels", manifest
     for idx, scene_spec in enumerate(scenes):
         print(f"\n[{idx+1}/{len(scenes)}] Processing scene: {scene_spec['id']}...")
         success, entry, log_info = generate_single_scene_difference(
-            scene_spec, scheduler=scheduler, output_dir=output_dir, difficulty=scene_spec.get("difficulty", "Medium")
+            scene_spec,
+            scheduler=scheduler,
+            output_dir=output_dir,
+            difficulty=scene_spec.get("difficulty", "Medium"),
+            policy=policy,
         )
         attempt_logs.append(log_info)
 

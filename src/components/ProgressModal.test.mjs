@@ -132,3 +132,14 @@ test('ProgressModal detects offline mode and displays indicator banner with retr
   assert.match(source, /Retry/);
 });
 
+test('ProgressModal renders Failed in neon pink when a first attempt is marked failed', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Verify detection of first attempt failure
+  assert.match(source, /playerSet\?\.firstFailed \|\| playerSet\?\.firstTime === 'failed'/);
+  assert.match(source, /const firstTimeStr = isFirstFailed\s*\?\s*'Failed'/);
+
+  // Verify neon pink styling for failed status in set view and pack view
+  assert.match(source, /color:\s*isFirstFailed \? 'var\(--accent-pink\)' : 'var\(--accent-gold\)'/);
+});
+

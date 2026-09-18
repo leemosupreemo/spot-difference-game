@@ -8,16 +8,17 @@ import {
   parseSetSearch
 } from './setLeaderboards.js';
 
-test('ALL_PHOTO_SET_IDS contains 35 photo sets', () => {
-  assert.equal(ALL_PHOTO_SET_IDS.length, 35);
+test('ALL_PHOTO_SET_IDS contains 26 photo sets', () => {
+  assert.equal(ALL_PHOTO_SET_IDS.length, 26);
   assert.equal(ALL_PHOTO_SET_IDS[0], 'photo_set_001');
-  assert.equal(ALL_PHOTO_SET_IDS[34], 'photo_set_035');
+  assert.equal(ALL_PHOTO_SET_IDS[25], 'photo_set_026');
 });
 
 test('getSetNumber correctly parses set IDs', () => {
   assert.equal(getSetNumber('photo_set_001'), 1);
   assert.equal(getSetNumber('photo_set_007'), 7);
   assert.equal(getSetNumber('photo_set_035'), 35);
+  assert.equal(getSetNumber('photo_set_041'), 41);
   assert.equal(getSetNumber('set_3'), 3);
   assert.equal(getSetNumber('daily_set_12'), 12);
   assert.equal(getSetNumber('set4'), 4);

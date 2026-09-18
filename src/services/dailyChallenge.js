@@ -143,81 +143,91 @@ function createSeededRandom(seed) {
 }
 
 const DEFAULT_DAILY_QUEUE = {
-  updatedAt: '2026-09-10T22:35:00.000Z',
+  updatedAt: '2026-09-18T14:00:00.000Z',
   schedule: {
     '2026-09-09': [
-      'fresh_nature_pair_001',
-      'fresh_nature_pair_002',
-      'fresh_nature_pair_003'
+      'photo_set_001_01',
+      'photo_set_001_02',
+      'photo_set_001_03'
     ],
     '2026-09-10': [
-      'fresh_nature_pair_008',
-      'fresh_nature_pair_009',
-      'fresh_nature_pair_010'
+      'photo_set_001_04',
+      'photo_set_001_05',
+      'photo_set_002_01'
     ],
     '2026-09-11': [
-      'fresh_v6_pair_001',
-      'fresh_v6_pair_002',
-      'fresh_v6_pair_003'
+      'photo_set_002_02',
+      'photo_set_002_03',
+      'photo_set_002_04'
     ],
     '2026-09-12': [
-      'fresh_v6_pair_004',
-      'fresh_v6_pair_005',
-      'fresh_v6_pair_006'
+      'photo_set_002_05',
+      'photo_set_003_01',
+      'photo_set_003_02'
     ],
     '2026-09-13': [
-      'fresh_v6_pair_007',
-      'fresh_v6_pair_008',
-      'fresh_v6_pair_009'
+      'photo_set_003_03',
+      'photo_set_003_04',
+      'photo_set_003_05'
     ]
   },
   queue: [
     {
       setId: 'set_1',
       levels: [
-        'fresh_v6_pair_010',
-        'fresh_v6_pair_011',
-        'fresh_v6_pair_012'
+        'photo_set_004_01',
+        'photo_set_004_02',
+        'photo_set_004_03'
       ]
     },
     {
       setId: 'set_2',
       levels: [
-        'fresh_v6_pair_013',
-        'fresh_v6_pair_014',
-        'fresh_v6_pair_015'
+        'photo_set_004_04',
+        'photo_set_004_05',
+        'photo_set_005_01'
       ]
     },
     {
       setId: 'set_3',
       levels: [
-        'fresh_v6_pair_016',
-        'fresh_v6_pair_019',
-        'fresh_v6_pair_020'
+        'photo_set_005_02',
+        'photo_set_005_03',
+        'photo_set_005_04'
       ]
     },
     {
       setId: 'set_4',
       levels: [
-        'fresh_nature_pair_004',
-        'fresh_nature_pair_005',
-        'fresh_nature_pair_006'
+        'photo_set_005_05',
+        'photo_set_006_01',
+        'photo_set_006_02'
       ]
     },
     {
       setId: 'set_5',
       levels: [
-        'fresh_nature_pair_014',
-        'fresh_nature_pair_015',
-        'fresh_nature_pair_016'
+        'photo_set_006_03',
+        'photo_set_006_04',
+        'photo_set_006_05'
       ]
     },
     {
       setId: 'set_6',
       levels: [
-        'fresh_nature_pair_017',
-        'fresh_nature_pair_018',
-        'fresh_nature_pair_019'
+        'photo_set_007_01',
+        'photo_set_007_02',
+        'photo_set_007_03'
+      ]
+    },
+    {
+      setId: 'set_daily_modern_01',
+      label: 'Curator Highlights',
+      isLegacy: false,
+      levels: [
+        'daily_set_01_01',
+        'daily_set_06_01',
+        'daily_set_06_03'
       ]
     },
     {
@@ -225,9 +235,9 @@ const DEFAULT_DAILY_QUEUE = {
       label: 'Old (Legacy 640x480)',
       isLegacy: true,
       levels: [
-        'medium_workbench_001',
-        'photo_art_table_001',
-        'photo_potting_table_001'
+        'photo_set_008_01',
+        'photo_set_008_02',
+        'photo_set_008_03'
       ]
     },
     {
@@ -235,9 +245,9 @@ const DEFAULT_DAILY_QUEUE = {
       label: 'Old (Legacy 640x480)',
       isLegacy: true,
       levels: [
-        'photo_workbench_hardware_001',
-        'photo_watchmaker_bench_001',
-        'photo_bakers_table_001'
+        'photo_set_008_04',
+        'photo_set_008_05',
+        'photo_set_009_01'
       ]
     },
     {
@@ -245,9 +255,9 @@ const DEFAULT_DAILY_QUEUE = {
       label: 'Old (Legacy 640x480)',
       isLegacy: true,
       levels: [
-        'photo_electronics_bench_001',
-        'photo_antique_desk_001',
-        'photo_woodworking_bench_001'
+        'photo_set_009_02',
+        'photo_set_009_03',
+        'photo_set_009_04'
       ]
     },
     {
@@ -255,9 +265,9 @@ const DEFAULT_DAILY_QUEUE = {
       label: 'Old (Legacy 640x480)',
       isLegacy: true,
       levels: [
-        'photo_coffee_station_001',
-        'photo_repair_drawer_001',
-        'photo_bicycle_repair_001'
+        'photo_set_009_05',
+        'photo_set_010_01',
+        'photo_set_010_02'
       ]
     },
     {
@@ -265,59 +275,9 @@ const DEFAULT_DAILY_QUEUE = {
       label: 'Old (Legacy 640x480)',
       isLegacy: true,
       levels: [
-        'photo_woodworking_table_001',
-        'photo_watch_repair_001',
-        'medium_nursery_001'
-      ]
-    },
-    {
-      setId: 'set_legacy_6',
-      label: 'Old (Legacy 640x480)',
-      isLegacy: true,
-      levels: [
-        'hard_forest_001',
-        'medium_screw_tray_001',
-        'medium_tile_piece_001'
-      ]
-    },
-    {
-      setId: 'set_legacy_7',
-      label: 'Old (Legacy 640x480)',
-      isLegacy: true,
-      levels: [
-        'hard_wire_clip_001',
-        'photo_camping_table_001',
-        'photo_board_game_001'
-      ]
-    },
-    {
-      setId: 'set_legacy_8',
-      label: 'Old (Legacy 640x480)',
-      isLegacy: true,
-      levels: [
-        'photo_spice_table_001',
-        'photo_fishing_tackle_001',
-        'photo_camera_gear_001'
-      ]
-    },
-    {
-      setId: 'set_legacy_9',
-      label: 'Old (Legacy 640x480)',
-      isLegacy: true,
-      levels: [
-        'photo_artist_supply_001',
-        'photo_camping_gear_001',
-        'photo_sewing_table_001'
-      ]
-    },
-    {
-      setId: 'set_legacy_10',
-      label: 'Old (Legacy 640x480)',
-      isLegacy: true,
-      levels: [
-        'photo_map_restoration_001',
-        'photo_garden_potting_001',
-        'photo_game_night_001'
+        'photo_set_010_03',
+        'photo_set_010_04',
+        'photo_set_010_05'
       ]
     }
   ],
@@ -325,16 +285,21 @@ const DEFAULT_DAILY_QUEUE = {
 };
 
 export const LEGACY_LOW_RES_LEVEL_IDS = new Set([
-  'medium_nursery_001', 'medium_workbench_001', 'hard_forest_001',
+  'photo_set_008_01', 'photo_set_008_02', 'photo_set_008_03', 'photo_set_008_04', 'photo_set_008_05',
+  'photo_set_009_01', 'photo_set_009_02', 'photo_set_009_03', 'photo_set_009_04', 'photo_set_009_05',
+  'photo_set_010_01', 'photo_set_010_02', 'photo_set_010_03', 'photo_set_010_04', 'photo_set_010_05',
+  'photo_set_011_01', 'photo_set_011_02', 'photo_set_011_03', 'photo_set_011_04', 'photo_set_011_05',
+  'photo_set_012_01', 'photo_set_012_02', 'photo_set_012_03', 'photo_set_012_04', 'photo_set_012_05',
+  'photo_set_013_01', 'photo_set_013_02', 'photo_set_013_03', 'photo_set_013_04', 'photo_set_013_05',
+  'photo_set_029_01', 'photo_set_029_02', 'photo_set_029_03', 'photo_set_029_04', 'photo_set_029_05',
+  'photo_set_030_01', 'photo_set_030_02', 'photo_set_030_03', 'photo_set_030_04', 'photo_set_030_05',
+  'photo_set_031_01', 'photo_set_031_02', 'photo_set_031_03', 'photo_set_031_04', 'photo_set_031_05',
+  'photo_set_032_01', 'photo_set_032_02', 'photo_set_032_03', 'photo_set_032_04', 'photo_set_032_05',
+  'photo_set_033_01', 'photo_set_033_02', 'photo_set_033_03', 'photo_set_033_04', 'photo_set_033_05',
+  'photo_set_034_01', 'photo_set_034_02', 'photo_set_034_03', 'photo_set_034_04', 'photo_set_034_05',
   'medium_screw_tray_001', 'medium_tile_piece_001', 'hard_wire_clip_001',
-  'photo_workbench_hardware_001', 'photo_potting_table_001', 'photo_watchmaker_bench_001',
-  'photo_bakers_table_001', 'photo_electronics_bench_001', 'photo_antique_desk_001',
-  'photo_woodworking_bench_001', 'photo_coffee_station_001', 'photo_repair_drawer_001',
-  'photo_bicycle_repair_001', 'photo_woodworking_table_001', 'photo_watch_repair_001',
-  'photo_art_table_001', 'photo_camping_table_001', 'photo_board_game_001',
-  'photo_spice_table_001', 'photo_fishing_tackle_001', 'photo_camera_gear_001',
-  'photo_artist_supply_001', 'photo_camping_gear_001', 'photo_sewing_table_001',
-  'photo_map_restoration_001', 'photo_garden_potting_001', 'photo_game_night_001'
+  'photo_coffee_station_001', 'photo_art_table_001', 'photo_camping_table_001',
+  'photo_spice_table_001', 'photo_fishing_tackle_001'
 ]);
 
 /**

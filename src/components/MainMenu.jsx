@@ -9,6 +9,7 @@ import { trackCategorySelected } from '../services/analytics';
 import { hasCompletedFirstSet } from '../services/playerProgress';
 import TutorialBanner from './TutorialBanner';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
+import TronLightcycleField from './TronLightcycleField.jsx';
 
 // A representative real photo (Photography mode) and a deterministically seeded
 // procedural scene (Abstract mode) used as a dim, animated background hint for
@@ -41,9 +42,13 @@ export default function MainMenu({
       return null;
     }
   }, []);
-  const gameModeBgImage = selectedTheme === 'abstract_animated' ? abstractModeBg : photoModeBg;
-  // Bumped on every tap (even re-tapping the active mode) so the zoom/fade replays.
-  const [gameModeBgTick, setGameModeBgTick] = useState(0);
+  const cardBgImages = {
+    find_the_sniper: photoModeBg,
+    abstract_animated: abstractModeBg
+  };
+  // Per-card tick, bumped only on that card's own tap (even re-tapping the active
+  // mode) so its zoom/fade replays independently of the other card.
+  const [gameModeBgTicks, setGameModeBgTicks] = useState({});
 
   const themeDetails = {
     find_the_sniper: {
@@ -58,6 +63,7 @@ export default function MainMenu({
 
   return (
     <div className="menu-container page-fade-in">
+      <TronLightcycleField />
       <ModalAmbientParticles />
       {/* Incoming Challenge Banner (When launched from a friend's link) */}
       {incomingChallenge && (
@@ -139,23 +145,12 @@ export default function MainMenu({
 
       {/* Main Mode / Category Selection Card */}
       <div className="glass-panel" style={{
-        position: 'relative',
-        overflow: 'hidden',
         padding: '16px 18px',
         borderRadius: '18px',
         textAlign: 'left',
         boxSizing: 'border-box',
         marginBottom: '14px'
       }}>
-        {gameModeBgImage && (
-          <div className="game-mode-bg" aria-hidden="true">
-            <div
-              key={`${selectedTheme}-${gameModeBgTick}`}
-              className="game-mode-bg-image"
-              style={{ backgroundImage: `url(${gameModeBgImage})` }}
-            />
-          </div>
-        )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
           <Layers size={20} color="var(--accent-cyan)" />
           <h3 style={{ fontSize: '1rem', fontWeight: 900, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>
@@ -171,6 +166,8 @@ export default function MainMenu({
               badge: 'MODE',
               desc: ''
             };
+            const cardBgImage = cardBgImages[theme.id];
+            const cardBgTick = gameModeBgTicks[theme.id] || 0;
 
             return (
               <div
@@ -178,11 +175,13 @@ export default function MainMenu({
                 onClick={() => {
                   sounds.playTap();
                   setSelectedTheme(theme.id);
-                  setGameModeBgTick(tick => tick + 1);
+                  setGameModeBgTicks(prev => ({ ...prev, [theme.id]: (prev[theme.id] || 0) + 1 }));
                   trackCategorySelected(theme.id);
                 }}
                 className="glass-panel mode-card-item"
                 style={{
+                  position: 'relative',
+                  overflow: 'hidden',
                   padding: '14px 16px',
                   borderRadius: '14px',
                   cursor: 'pointer',
@@ -195,6 +194,15 @@ export default function MainMenu({
                   gap: '14px'
                 }}
               >
+                {cardBgImage && (
+                  <div className="game-mode-bg" aria-hidden="true">
+                    <div
+                      key={`${theme.id}-${cardBgTick}`}
+                      className="game-mode-bg-image"
+                      style={{ backgroundImage: `url(${cardBgImage})` }}
+                    />
+                  </div>
+                )}
                 <div style={{
                   padding: '10px',
                   borderRadius: '12px',

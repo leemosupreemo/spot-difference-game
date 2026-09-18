@@ -1,19 +1,29 @@
 {
-  "updatedAt": "2026-09-10T23:00:00.000Z",
+  "updatedAt": "2026-09-18T14:00:43.339Z",
   "schedule": {
     "2026-09-10": [
-      "fresh_nature_pair_008",
-      "fresh_nature_pair_009",
-      "fresh_nature_pair_010"
+      "photo_set_001_01",
+      "photo_set_001_02",
+      "photo_set_001_03"
     ]
   },
   "queue": [
     {
+      "setId": "set_daily_modern_01",
+      "label": "Curator Highlights",
+      "isLegacy": false,
+      "levels": [
+        "daily_set_01_01",
+        "daily_set_06_01",
+        "daily_set_06_03"
+      ]
+    },
+    {
       "setId": "set_5",
       "levels": [
-        "fresh_nature_pair_014",
-        "fresh_nature_pair_015",
-        "fresh_nature_pair_016"
+        "photo_set_001_05",
+        "photo_set_004_01",
+        "photo_set_015_04"
       ]
     },
     {
@@ -21,9 +31,9 @@
       "label": "Old (Legacy 640x480)",
       "isLegacy": true,
       "levels": [
-        "photo_workbench_hardware_001",
-        "photo_watchmaker_bench_001",
-        "photo_bakers_table_001"
+        "photo_set_008_04",
+        "photo_set_009_01",
+        "photo_set_009_02"
       ]
     },
     {
@@ -31,9 +41,9 @@
       "label": "Old (Legacy 640x480)",
       "isLegacy": true,
       "levels": [
-        "photo_electronics_bench_001",
-        "photo_antique_desk_001",
-        "photo_woodworking_bench_001"
+        "photo_set_009_03",
+        "photo_set_009_04",
+        "photo_set_010_01"
       ]
     },
     {
@@ -41,9 +51,9 @@
       "label": "Old (Legacy 640x480)",
       "isLegacy": true,
       "levels": [
-        "photo_woodworking_table_001",
-        "photo_watch_repair_001",
-        "medium_nursery_001"
+        "photo_set_011_01",
+        "photo_set_012_03",
+        "photo_set_008_01"
       ]
     },
     {
@@ -51,9 +61,9 @@
       "label": "Old (Legacy 640x480)",
       "isLegacy": true,
       "levels": [
-        "photo_artist_supply_001",
-        "photo_camping_gear_001",
-        "photo_sewing_table_001"
+        "photo_set_011_02",
+        "photo_set_011_03",
+        "photo_set_011_04"
       ]
     },
     {
@@ -61,9 +71,9 @@
       "label": "Old (Legacy 640x480)",
       "isLegacy": true,
       "levels": [
-        "photo_map_restoration_001",
-        "photo_garden_potting_001",
-        "photo_game_night_001"
+        "photo_set_011_05",
+        "photo_set_012_01",
+        "photo_set_012_02"
       ]
     }
   ],

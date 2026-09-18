@@ -166,7 +166,17 @@ class ReorderTargetSelector:
         return best, f"Selected optimal Reorder target (Score: {best['score']}/100, Peers: {best['peer_count']}, Mutation: {best['best_mutation']['type']})", evaluated_candidates
 
     @classmethod
-    def execute_reorder_and_qa(cls, image_bgr, target_mask, target_bbox, mutation, union_bbox, raw_sam_masks, difficulty="Medium"):
+    def execute_reorder_and_qa(
+        cls,
+        image_bgr,
+        target_mask,
+        target_bbox,
+        mutation,
+        union_bbox,
+        raw_sam_masks,
+        difficulty="Medium",
+        cleanup_mask=None,
+    ):
         """
         Executes structure-aware background reconstruction on vacated footprint, transforms object,
         composites with contact shadow, and verifies using PerceptualVerificationEngine.
@@ -181,8 +191,9 @@ class ReorderTargetSelector:
         area_pct = (np.sum(target_mask > 0) / float(total_pixels)) * 100.0
 
         # 1. Clean old footprint with BackgroundReconstructionRouter
+        reconstruction_mask = cleanup_mask if cleanup_mask is not None else target_mask
         base_reconstructed, _, _, err = BackgroundReconstructionRouter.reconstruct_background(
-            image_bgr, target_mask, raw_sam_masks, difficulty=difficulty
+            image_bgr, reconstruction_mask, raw_sam_masks, difficulty=difficulty
         )
 
         if base_reconstructed is None:

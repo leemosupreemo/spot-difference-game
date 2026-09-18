@@ -249,9 +249,17 @@ export function computeLeaderboardPayload(difficultyStats, playerName) {
         packFirstSums[packId] += setRecord.firstTime;
         packFirstCounts[packId] += 1;
         if (setId && (!bySetFirst[setId] || setRecord.firstTime < bySetFirst[setId])) bySetFirst[setId] = setRecord.firstTime;
+      } else if (setRecord.firstFailed || setRecord.firstTime === 'failed') {
+        if (setId && !bySetFirst[setId]) {
+          bySetFirst[setId] = 'failed';
+        }
       }
 
-      const repeatTime = setRecord.fastestRepeat || setRecord.bestCleanTime || setRecord.firstTime;
+      const repeatTime = typeof setRecord.fastestRepeat === 'number' && setRecord.fastestRepeat > 0
+        ? setRecord.fastestRepeat
+        : (typeof setRecord.bestCleanTime === 'number' && setRecord.bestCleanTime > 0
+          ? setRecord.bestCleanTime
+          : (typeof setRecord.firstTime === 'number' && setRecord.firstTime > 0 ? setRecord.firstTime : null));
       if (typeof repeatTime === 'number' && repeatTime > 0) {
         repeatSum += repeatTime;
         repeatCount += 1;
@@ -420,13 +428,19 @@ export function mergeDifficultyStats(localStats = {}, cloudStats = {}) {
         const firstTimes = [localSet.firstTime, cloudSet.firstTime].filter(t => typeof t === 'number' && t > 0);
         const repeatTimes = [localSet.fastestRepeat, cloudSet.fastestRepeat].filter(t => typeof t === 'number' && t > 0);
         const fastestTimes = [localSet.fastestTime, cloudSet.fastestTime, ...firstTimes, ...repeatTimes].filter(t => typeof t === 'number' && t > 0);
+        const isFirstFailed = Boolean(
+          localSet.firstFailed || cloudSet.firstFailed ||
+          localSet.firstTime === 'failed' || cloudSet.firstTime === 'failed'
+        );
 
         mergedSets[stageKey] = {
           ...cloudSet,
           ...localSet,
           clears: Math.max(localSet.clears || 0, cloudSet.clears || 0),
+          attempts: Math.max(localSet.attempts || 0, cloudSet.attempts || 0),
           totalPoints: Math.max(localSet.totalPoints || 0, cloudSet.totalPoints || 0),
-          firstTime: firstTimes.length > 0 ? Math.min(...firstTimes) : null,
+          firstFailed: isFirstFailed,
+          firstTime: firstTimes.length > 0 ? Math.min(...firstTimes) : (isFirstFailed ? 'failed' : null),
           fastestRepeat: repeatTimes.length > 0 ? Math.min(...repeatTimes) : null,
           fastestTime: fastestTimes.length > 0 ? Math.min(...fastestTimes) : null,
           lastScore: localSet.lastScore || cloudSet.lastScore || 0
@@ -817,16 +831,18 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
         const fastestTime = player.fastestTimeBySet?.[setId];
         const mostPoints = player.bySetPoints?.[setId]
           || (fastestTime ? Math.max(1200, Math.round(2500 - (fastestTime / 1000) * 35)) : null);
+        const isFirstFailed = player.bySetFirst?.[setId] === 'failed' || Boolean(player.firstFailed);
         return {
           ...player,
           firstTime,
           repeatTime,
           fastestTime,
           mostPoints,
-          effectiveTime: firstTime || repeatTime || 999999
+          firstFailed: isFirstFailed,
+          effectiveTime: (typeof firstTime === 'number' && firstTime > 0) ? firstTime : (repeatTime || 999999)
         };
       })
-      .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number');
+      .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number' || player.firstTime === 'failed' || player.firstFailed);
 
     const baseline = getDeterministicSetBaseline(setId);
     const existingUids = new Set(realPlayers.map(p => p.uid));
@@ -838,7 +854,17 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
     }
 
     return merged
-      .sort((a, b) => (a[metric] || a.fastestTime || 999999) - (b[metric] || b.fastestTime || 999999))
+      .sort((a, b) => {
+        const getSortVal = (p) => {
+          if (metric === 'firstTime') {
+            if (p.firstTime === 'failed' || p.firstFailed) return 999990;
+            return typeof p.firstTime === 'number' ? p.firstTime : 999999;
+          }
+          const val = p[metric] ?? p.fastestTime;
+          return typeof val === 'number' ? val : 999999;
+        };
+        return getSortVal(a) - getSortVal(b);
+      })
       .slice(0, 25);
   };
 
@@ -917,9 +943,10 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
             ...player,
             firstTime: player.bySetFirst?.[setId],
             repeatTime: player.bySetRepeat?.[setId],
-            fastestTime: player.fastestTimeBySet?.[setId]
+            fastestTime: player.fastestTimeBySet?.[setId],
+            firstFailed: player.bySetFirst?.[setId] === 'failed' || Boolean(player.firstFailed)
           }))
-          .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number');
+          .filter(player => typeof player.firstTime === 'number' || typeof player.repeatTime === 'number' || player.firstTime === 'failed' || player.firstFailed);
 
         const baseline = getDeterministicSetBaseline(setId);
         const existingUids = new Set(local.map(p => p.uid));
@@ -942,7 +969,14 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
           find_the_sniper: getFallbackListForPack('find_the_sniper'),
           abstract_animated: getFallbackListForPack('abstract_animated')
         },
-        bySetFirst: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.firstTime || 999999) - (b.firstTime || 999999)).slice(0, 25)])),
+        bySetFirst: Object.fromEntries(setIds.map(setId => [
+          setId,
+          getFallbackListForSet(setId).sort((a, b) => {
+            const valA = (a.firstTime === 'failed' || a.firstFailed) ? 999990 : (typeof a.firstTime === 'number' ? a.firstTime : 999999);
+            const valB = (b.firstTime === 'failed' || b.firstFailed) ? 999990 : (typeof b.firstTime === 'number' ? b.firstTime : 999999);
+            return valA - valB;
+          }).slice(0, 25)
+        ])),
         bySetRepeat: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.repeatTime || 999999) - (b.repeatTime || 999999)).slice(0, 25)])),
         bySetFastest: Object.fromEntries(setIds.map(setId => [setId, getFallbackListForSet(setId).sort((a, b) => (a.fastestTime || 999999) - (b.fastestTime || 999999)).slice(0, 25)])),
         fastestTimeBySet: localPlayerEntry.fastestTimeBySet,

@@ -267,3 +267,64 @@ test('keeps first and repeat Photo Set timing payloads independently ranked', ()
   assert.equal(payload.bySetFirst.photo_set_002, 8000);
   assert.equal(payload.bySetRepeat.photo_set_002, 11000);
 });
+
+test('registers failed first attempt in computeLeaderboardPayload without overwriting repeat time', () => {
+  const payload = computeLeaderboardPayload({
+    Medium: {
+      sets: {
+        photo_set_001: {
+          setId: 'photo_set_001',
+          packId: 'find_the_sniper',
+          firstFailed: true,
+          firstTime: 'failed',
+          fastestRepeat: 9500,
+          clears: 1,
+          attempts: 2
+        }
+      }
+    }
+  }, 'Tester');
+
+  assert.equal(payload.bySetFirst.photo_set_001, 'failed');
+  assert.equal(payload.bySetRepeat.photo_set_001, 9500);
+  assert.equal(payload.fastestTimeBySet.photo_set_001, 9500);
+});
+
+test('mergeDifficultyStats preserves firstFailed and firstTime failed across cloud and local', () => {
+  const localStats = {
+    Medium: {
+      sets: {
+        photo_set_005: {
+          setId: 'photo_set_005',
+          firstFailed: true,
+          firstTime: 'failed',
+          attempts: 1,
+          clears: 0
+        }
+      }
+    }
+  };
+
+  const cloudStats = {
+    Medium: {
+      sets: {
+        photo_set_005: {
+          setId: 'photo_set_005',
+          fastestRepeat: 8200,
+          clears: 1,
+          attempts: 1
+        }
+      }
+    }
+  };
+
+  const merged = mergeDifficultyStats(localStats, cloudStats);
+  const setRecord = merged.Medium.sets.photo_set_005;
+
+  assert.equal(setRecord.firstFailed, true);
+  assert.equal(setRecord.firstTime, 'failed');
+  assert.equal(setRecord.fastestRepeat, 8200);
+  assert.equal(setRecord.fastestTime, 8200);
+  assert.equal(setRecord.clears, 1);
+  assert.equal(setRecord.attempts, 1);
+});

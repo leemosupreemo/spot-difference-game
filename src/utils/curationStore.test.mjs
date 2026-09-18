@@ -5,7 +5,9 @@ import {
   resetCuratedStatusMap,
   pruneDismissedStatuses,
   createCuratedDataset,
-  serializeCuratedDataset
+  serializeCuratedDataset,
+  normalizeImageKey,
+  getEntryCurationStatus
 } from './curationStore.js';
 
 test('resets all curation decisions to an empty map', () => {
@@ -70,3 +72,52 @@ test('adds a category designation without replacing a curation decision', () => 
   assert.equal(updated.photo_one.pack, 'Abstract');
   assert.ok(updated.photo_one.updatedAt);
 });
+
+test('normalizes image paths to stable image keys', () => {
+  assert.equal(normalizeImageKey('levels/sample_scene_001_base.jpg'), 'sample_scene_001');
+  assert.equal(normalizeImageKey('/public/levels/sample_scene_001_variant.jpg?v=2'), 'sample_scene_001');
+  assert.equal(normalizeImageKey('https://example.com/images/scene_abc.PNG'), 'scene_abc');
+});
+
+test('getEntryCurationStatus falls back to sibling entry sharing the same base image', () => {
+  // Test entry with same image as another
+  const entryA = { id: 'test_sibling_a', baseImage: 'levels/fresh_shared_scene_base.jpg' };
+  const entryB = { id: 'test_sibling_b', baseImage: 'levels/fresh_shared_scene_base.jpg' };
+
+  const statusMap = {
+    test_sibling_a: { status: 'approved', packId: 'find_the_sniper' }
+  };
+
+  // Direct lookup on entryA
+  const statusA = getEntryCurationStatus(entryA, statusMap);
+  assert.equal(statusA?.status, 'approved');
+
+  // Direct lookup on an entry without sibling indexing falls back to null
+  const statusNonExistent = getEntryCurationStatus({ id: 'non_existent' }, statusMap);
+  assert.equal(statusNonExistent, null);
+});
+
+test('getEntryCurationStatus resolves status saved under legacy ID matching base image key', () => {
+  // photo_set_014_01 has baseImage 'levels/fresh_v7_marine_shells_002_base.jpg'
+  const entry = { id: 'photo_set_014_01', baseImage: 'levels/fresh_v7_marine_shells_002_base.jpg' };
+  const statusMap = {
+    fresh_v7_marine_shells_002: { status: 'approved', packId: 'find_the_sniper' }
+  };
+
+  const status = getEntryCurationStatus(entry, statusMap);
+  assert.ok(status);
+  assert.equal(status.status, 'approved');
+  assert.equal(status.packId, 'find_the_sniper');
+});
+
+test('getEntryCurationStatus resolves status saved under direct base image key', () => {
+  const entry = { id: 'photo_set_014_02', baseImage: 'levels/fresh_v7_apothecary_herbs_003_base.jpg' };
+  const statusMap = {
+    fresh_v7_apothecary_herbs_003: { status: 'wrong_difficulty', packId: 'find_the_sniper' }
+  };
+
+  const status = getEntryCurationStatus(entry, statusMap);
+  assert.ok(status);
+  assert.equal(status.status, 'wrong_difficulty');
+});
+

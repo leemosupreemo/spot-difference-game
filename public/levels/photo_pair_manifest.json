@@ -1,296 +1,6 @@
 [
   {
-    "id": "fresh_v7_marine_shells_002",
-    "title": "Marine Biologist Seashells & Sea Glass",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_marine_shells_002_base.jpg",
-    "variantImage": "levels/fresh_v7_marine_shells_002_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 73.8,
-        "radius": 8.2,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_001",
-    "sequence": 1
-  },
-  {
-    "id": "fresh_v7_apothecary_herbs_003",
-    "title": "Herbalist Apothecary Jars & Spices",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_apothecary_herbs_003_base.jpg",
-    "variantImage": "levels/fresh_v7_apothecary_herbs_003_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 34.6,
-        "y": 55.2,
-        "radius": 7.1,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_001",
-    "sequence": 2
-  },
-  {
-    "id": "fresh_v7_cobbler_leather_007",
-    "title": "Bespoke Cobbler Workshop & Brass Eyelets",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_cobbler_leather_007_base.jpg",
-    "variantImage": "levels/fresh_v7_cobbler_leather_007_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 97.6,
-        "y": 5.5,
-        "radius": 8.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_001",
-    "sequence": 3
-  },
-  {
-    "id": "fresh_v7_pottery_tools_011",
-    "title": "Ceramic Studio Apron & Glaze Tiles",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_pottery_tools_011_base.jpg",
-    "variantImage": "levels/fresh_v7_pottery_tools_011_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 52.7,
-        "y": 74.7,
-        "radius": 6.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_001",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_v7_bonsai_tools_012",
-    "title": "Bonsai Master Tool Roll & Copper Wire",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_bonsai_tools_012_base.jpg",
-    "variantImage": "levels/fresh_v7_bonsai_tools_012_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 71.3,
-        "y": 55.9,
-        "radius": 8.1,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_001",
-    "sequence": 5
-  },
-  {
-    "id": "fresh_v7_tabletop_rpg_004",
-    "title": "Tabletop RPG Miniatures & Polyhedral Dice",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_tabletop_rpg_004_base.jpg",
-    "variantImage": "levels/fresh_v7_tabletop_rpg_004_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 33.2,
-        "y": 84.7,
-        "radius": 7.4,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_002",
-    "sequence": 1
-  },
-  {
-    "id": "fresh_v7_tea_ceremony_006",
-    "title": "Traditional Japanese Matcha Tea Ceremony",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_tea_ceremony_006_base.jpg",
-    "variantImage": "levels/fresh_v7_tea_ceremony_006_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 46.9,
-        "radius": 6.0,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_002",
-    "sequence": 2
-  },
-  {
-    "id": "fresh_v7_cassette_tapes_013",
-    "title": "1980s Retro Audio Cassettes & Mixtapes",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_cassette_tapes_013_base.jpg",
-    "variantImage": "levels/fresh_v7_cassette_tapes_013_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 39.1,
-        "y": 26.1,
-        "radius": 6.0,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_002",
-    "sequence": 3
-  },
-  {
-    "id": "fresh_nature_pair_001",
-    "title": "Beachcomber Tidepool Finds (Nature 1)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_001_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_001_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 71.3,
-        "y": 10.1,
-        "radius": 4.8,
-        "description": "Single remove difference",
-        "hint": "Look closely near coordinates (71%, 10%)",
-        "operation": "remove"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_002",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_nature_pair_002",
-    "title": "Beachcomber Tidepool Finds (Nature 2)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_002_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_002_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 97.1,
-        "y": 20.6,
-        "radius": 4.8,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (97%, 21%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_002",
-    "sequence": 5
-  },
-  {
-    "id": "fresh_nature_pair_008",
+    "id": "photo_set_001_01",
     "title": "Botanical Succulents Greenhouse Grid (Nature 8)",
     "category": "Photography",
     "pack": "Find the Sniper",
@@ -315,11 +25,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_003",
+    "setId": "photo_set_001",
     "sequence": 1
   },
   {
-    "id": "fresh_nature_pair_009",
+    "id": "photo_set_001_02",
     "title": "Heirloom Spice Bazaar Botanical Seeds (Nature 9)",
     "category": "Photography",
     "pack": "Find the Sniper",
@@ -344,11 +54,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_003",
+    "setId": "photo_set_001",
     "sequence": 2
   },
   {
-    "id": "fresh_nature_pair_010",
+    "id": "photo_set_001_03",
     "title": "Nature Geodes & Agate Slices (Nature 10)",
     "category": "Photography",
     "pack": "Find the Sniper",
@@ -373,11 +83,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_003",
+    "setId": "photo_set_001",
     "sequence": 3
   },
   {
-    "id": "fresh_nature_pair_013",
+    "id": "photo_set_001_04",
     "title": "Outdoor Garden Seedlings & Plant Tags (Nature 13)",
     "category": "Photography",
     "pack": "Find the Sniper",
@@ -402,11 +112,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_003",
+    "setId": "photo_set_001",
     "sequence": 4
   },
   {
-    "id": "fresh_nature_pair_014",
+    "id": "photo_set_001_05",
     "title": "Playful Sugar Dusted Fruit Gummy Candies (Nature 14)",
     "category": "Photography",
     "pack": "Find the Sniper",
@@ -431,881 +141,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_003",
+    "setId": "photo_set_001",
     "sequence": 5
   },
   {
-    "id": "fresh_nature_pair_015",
-    "title": "Playful Sugar Dusted Fruit Gummy Candies (Nature 15)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_015_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_015_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 51.7,
-        "y": 14.1,
-        "radius": 5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (52%, 14%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_004",
-    "sequence": 1
-  },
-  {
-    "id": "fresh_nature_pair_016",
-    "title": "Playful Italian Tricolor Dry Pasta (Nature 16)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_016_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_016_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 61.8,
-        "y": 94.2,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (62%, 94%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_004",
-    "sequence": 2
-  },
-  {
-    "id": "fresh_nature_pair_020",
-    "title": "Playful Spilled Paperclips on Concrete (Nature 20)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_020_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_020_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 6.5,
-        "y": 29.8,
-        "radius": 7.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (7%, 29%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_004",
-    "sequence": 3
-  },
-  {
-    "id": "fresh_v6_pair_003",
-    "title": "Wooden Meeples & Polyhedral RPG Dice (Pair 3)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_003_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_003_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 25.9,
-        "y": 23.3,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (26%, 23%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_004",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_v6_pair_005",
-    "title": "Italian Tricolor Dry Pasta on Slate (Pair 5)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_005_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_005_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 61.8,
-        "y": 94.2,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (62%, 94%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_004",
-    "sequence": 5
-  },
-  {
-    "id": "fresh_v6_pair_007",
-    "title": "Intricate Antique Skeleton Keys on Leather (Pair 7)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_007_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_007_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 5.1,
-        "y": 29.7,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (5%, 30%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_005",
-    "sequence": 1
-  },
-  {
-    "id": "fresh_v6_pair_009",
-    "title": "Sugar Dusted Fruit Gummy Drops on Slate (Pair 9)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_009_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_009_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 4.3,
-        "y": 57.8,
-        "radius": 4.9,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (4%, 58%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_005",
-    "sequence": 2
-  },
-  {
-    "id": "fresh_v6_pair_010",
-    "title": "Sugar Dusted Fruit Gummy Drops on Slate (Pair 10)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_010_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_010_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 51.7,
-        "y": 14.1,
-        "radius": 5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (52%, 14%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_005",
-    "sequence": 3
-  },
-  {
-    "id": "fresh_v6_pair_012",
-    "title": "Silk Thread Spools & Safety Pins (Pair 12)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_012_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_012_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 67.8,
-        "y": 47.9,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (68%, 48%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_005",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_v6_pair_014",
-    "title": "Spilled Paperclips on Concrete (Pair 14)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_014_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_014_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 6.5,
-        "y": 29.8,
-        "radius": 7.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (7%, 29%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_005",
-    "sequence": 5
-  },
-  {
-    "id": "fresh_v6_pair_019",
-    "title": "Handcrafted Leathercraft Workshop (Pair 19)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_019_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_019_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 26,
-        "y": 86.2,
-        "radius": 6.8,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (26%, 86%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_006",
-    "sequence": 1
-  },
-  {
-    "id": "fresh_v6_pair_020",
-    "title": "Handcrafted Leathercraft Workshop (Pair 20)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_020_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_020_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 45.7,
-        "y": 41,
-        "radius": 4.6,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (46%, 41%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_006",
-    "sequence": 2
-  },
-  {
-    "id": "fresh_v5_boardgame_meeples_pair1",
-    "title": "Wooden Meeples & Polyhedral RPG Dice (Pair 1)",
-    "baseImage": "levels/fresh_v5_boardgame_meeples_pair1_base.jpg",
-    "variantImage": "levels/fresh_v5_boardgame_meeples_pair1_variant.jpg",
-    "category": "Photography",
-    "packId": "find_the_sniper",
-    "pack": "Find the Sniper",
-    "difficulty": "Medium",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 31,
-        "y": 64.3,
-        "radius": 4.8,
-        "description": "Object removed from scene",
-        "operation": "remove",
-        "hint": "Look closely near coordinates (31%, 64%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_006",
-    "sequence": 3
-  },
-  {
-    "id": "fresh_v4_pair_042",
-    "title": "Gourmet Cheese Board (Ramekin Recolor)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_042_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_042_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.1,
-        "y": 29.5,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (50%, 30%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_006",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_v4_pair_045",
-    "title": "Pyrite Crystal Cube on Slate",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_045_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_045_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 76.9,
-        "y": 35.9,
-        "radius": 5.8,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (77%, 36%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_006",
-    "sequence": 5
-  },
-  {
-    "id": "fresh_v4_pair_046",
-    "title": "Antique Ornate Key Escutcheon",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_046_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_046_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 5.7,
-        "y": 90.1,
-        "radius": 8.4,
-        "description": "Single reorder difference",
-        "hint": "Look closely near coordinates (6%, 90%)",
-        "operation": "reorder"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 1
-  },
-  {
-    "id": "fresh_v4_pair_049",
-    "title": "Millefiori Swirl Paperweight (Chroma)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_049_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_049_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 62.3,
-        "y": 7.6,
-        "radius": 5.1,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (62%, 8%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 2
-  },
-  {
-    "id": "fresh_v4_pair_052",
-    "title": "Fruit Hard Candies & Lozenges",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_052_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_052_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 92.8,
-        "y": 92.5,
-        "radius": 5.6,
-        "description": "Single reorder difference",
-        "hint": "Look closely near coordinates (94%, 92%)",
-        "operation": "reorder"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 3
-  },
-  {
-    "id": "fresh_v4_pair_053",
-    "title": "Natural Mineral Prisms & Agate",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_053_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_053_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 73.6,
-        "y": 17.4,
-        "radius": 6.5,
-        "description": "Single reorder difference",
-        "hint": "Look closely near coordinates (76%, 17%)",
-        "operation": "reorder"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_v4_pair_054",
-    "title": "Vintage Sulphide & Swirl Marbles",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_054_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_054_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 3.9,
-        "radius": 5.2,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (54%, 4%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 5
-  },
-  {
-    "id": "fresh_v4_pair_055",
-    "title": "Whole Nutmegs & Star Anise Seeds",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_055_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_055_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 71.9,
-        "y": 44.8,
-        "radius": 5.6,
-        "description": "Single reorder difference",
-        "hint": "Look closely near coordinates (75%, 45%)",
-        "operation": "reorder"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 1
-  },
-  {
-    "id": "fresh_v4_pair_056",
-    "title": "Carved Wooden Chess & Checkers",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_056_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_056_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 90.0,
-        "y": 79.7,
-        "radius": 5.8,
-        "description": "Single reorder difference",
-        "hint": "Look closely near coordinates (91%, 80%)",
-        "operation": "reorder"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 2
-  },
-  {
-    "id": "fresh_v4_pair_002",
-    "title": "Gourmet Cheese Board (Slate Substrate)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_002_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_002_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 94.8,
-        "y": 83.9,
-        "radius": 5.6,
-        "description": "Single remove difference",
-        "hint": "Look closely near coordinates (95%, 84%)",
-        "operation": "remove"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 3
-  },
-  {
-    "id": "fresh_v4_pair_004",
-    "title": "Artisanal Pasta Shapes Array",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_004_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_004_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 53.3,
-        "y": 58.1,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (53%, 58%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_v4_pair_008",
-    "title": "Porcelain Sometsuke Teacups",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_008_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_008_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 93,
-        "y": 80.4,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (93%, 80%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 5
-  },
-  {
-    "id": "fresh_v4_pair_012",
-    "title": "Foraged Forest Wild Mushrooms",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_012_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_012_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 30.8,
-        "y": 11,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (31%, 11%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 1
-  },
-  {
-    "id": "fresh_v4_pair_013",
-    "title": "Victorian Brass Drafting Dividers",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_013_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_013_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 87.7,
-        "y": 93.3,
-        "radius": 4.8,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (88%, 93%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 2
-  },
-  {
-    "id": "fresh_v4_pair_022",
-    "title": "Heirloom Spices & Seeds Array",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_022_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_022_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 58.2,
-        "y": 11,
-        "radius": 5.8,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (58%, 11%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 3
-  },
-  {
-    "id": "fresh_v4_pair_032",
-    "title": "Horologist Escapement Wheels & Gears",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_032_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_032_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 92.7,
-        "y": 77.2,
-        "radius": 6.6,
-        "description": "Single reorder difference",
-        "hint": "Look closely near coordinates (93%, 77%)",
-        "operation": "reorder"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_v4_pair_036",
-    "title": "Dense Circuit Board Inductors & Chips",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_036_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_036_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 60.0,
-        "y": 25.8,
-        "radius": 6.7,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (70%, 26%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 5
-  },
-  {
-    "id": "fresh_v4_pair_038",
+    "id": "photo_set_002_01",
     "title": "Tailor Silk Threads & Brass Thimbles",
     "category": "Photography",
     "pack": "Find the Sniper",
@@ -1317,7 +157,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 57.1,
         "radius": 8.1,
         "description": "Single reorder difference",
@@ -1330,11 +170,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
+    "setId": "photo_set_002",
     "sequence": 1
   },
   {
-    "id": "fresh_v4_pair_040",
+    "id": "photo_set_002_02",
     "title": "Patisserie French Macarons & Truffles",
     "category": "Photography",
     "pack": "Find the Sniper",
@@ -1346,7 +186,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 36.8,
         "radius": 7.7,
         "description": "Single recolor difference",
@@ -1359,11 +199,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
+    "setId": "photo_set_002",
     "sequence": 2
   },
   {
-    "id": "fresh_v3_ai_pasta_shapes_001",
+    "id": "photo_set_002_03",
     "title": "[AI Multi-Op] Artisan Dried Pasta Shapes Array",
     "category": "Photography",
     "pack": "Photography",
@@ -1386,11 +226,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
+    "setId": "photo_set_002",
     "sequence": 3
   },
   {
-    "id": "fresh_v3_ai_vintage_keys_003",
+    "id": "photo_set_002_04",
     "title": "[AI Multi-Op] Vintage Brass & Iron Skeleton Keys",
     "category": "Photography",
     "pack": "Photography",
@@ -1413,11 +253,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
+    "setId": "photo_set_002",
     "sequence": 4
   },
   {
-    "id": "fresh_v3_ai_japanese_teacups_005",
+    "id": "photo_set_002_05",
     "title": "[AI Multi-Op] Japanese Ceramic Teacups & Ochoko Grid",
     "category": "Photography",
     "pack": "Photography",
@@ -1440,11 +280,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
+    "setId": "photo_set_002",
     "sequence": 5
   },
   {
-    "id": "fresh_v3_ai_butterfly_specimens_006",
+    "id": "photo_set_003_01",
     "title": "[AI Multi-Op] Entomological Butterfly Specimens Showcase",
     "category": "Photography",
     "pack": "Photography",
@@ -1467,11 +307,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
+    "setId": "photo_set_003",
     "sequence": 1
   },
   {
-    "id": "fresh_v3_ai_glass_paperweights_008",
+    "id": "photo_set_003_02",
     "title": "[AI Multi-Op] Swirl Glass Paperweights & Cabochons",
     "category": "Photography",
     "pack": "Photography",
@@ -1494,11 +334,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
+    "setId": "photo_set_003",
     "sequence": 2
   },
   {
-    "id": "fresh_v3_ai_drafting_dividers_010",
+    "id": "photo_set_003_03",
     "title": "[AI Multi-Op] Victorian Brass Drafting Dividers & Compasses",
     "category": "Photography",
     "pack": "Photography",
@@ -1521,11 +361,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
+    "setId": "photo_set_003",
     "sequence": 3
   },
   {
-    "id": "fresh_v2_ai_ceramic_mosaic_tiles_002",
+    "id": "photo_set_003_04",
     "title": "[AI Multi-Op] Mediterranean Ceramic Mosaic Tiles",
     "category": "Photography",
     "pack": "Photography",
@@ -1548,11 +388,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
+    "setId": "photo_set_003",
     "sequence": 4
   },
   {
-    "id": "fresh_v2_ai_heirloom_spices_botanical_009",
+    "id": "photo_set_003_05",
     "title": "[AI Multi-Op] Heirloom Whole Spices & Dried Botanicals",
     "category": "Photography",
     "pack": "Photography",
@@ -1575,551 +415,11 @@
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
+    "setId": "photo_set_003",
     "sequence": 5
   },
   {
-    "id": "prod_v4_dense_boardgame",
-    "title": "[AI Multi-Op] Strategy Board Game Grid",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_boardgame_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_boardgame_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 53.6,
-        "radius": 8.0,
-        "hint": "Look closely near coordinates (48%, 54%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 1
-  },
-  {
-    "id": "prod_v4_dense_buttons",
-    "title": "[AI Multi-Op] Vintage Tailor Button Assortment",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_buttons_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_buttons_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 55.4,
-        "y": 80.9,
-        "radius": 6.5,
-        "hint": "Look closely near coordinates (60%, 81%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 2
-  },
-  {
-    "id": "prod_v4_dense_marbles",
-    "title": "[AI Multi-Op] Collector Glass Marble Collection",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_marbles_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_marbles_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 38.5,
-        "y": 44.1,
-        "radius": 8.7,
-        "hint": "Look closely near coordinates (34%, 44%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 3
-  },
-  {
-    "id": "prod_v4_dense_spices",
-    "title": "[AI Multi-Op] Whole Botanical Spice Assortment",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_spices_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_spices_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 71.9,
-        "y": 44.8,
-        "radius": 5.9,
-        "hint": "Look closely near coordinates (75%, 45%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 4
-  },
-  {
-    "id": "prod_v4_unique_gardening",
-    "title": "[AI Multi-Op] Botanist Potting & Plant Tag Bench",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_unique_gardening_base.jpg",
-    "variantImage": "/levels/prod_v4_unique_gardening_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 81.7,
-        "y": 86.6,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (86%, 87%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 5
-  },
-  {
-    "id": "prod_v4_unique_palette",
-    "title": "[AI Multi-Op] Painter Studio Oil Tube Palette",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_unique_palette_base.jpg",
-    "variantImage": "/levels/prod_v4_unique_palette_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 48.8,
-        "y": 26.5,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (36%, 27%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 1
-  },
-  {
-    "id": "prod_v4_ai_electronics",
-    "title": "[AI Multi-Op] Circuit Lab Capacitor PCB",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_electronics_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_electronics_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 60.0,
-        "y": 25.8,
-        "radius": 7.8,
-        "hint": "Look closely near coordinates (70%, 26%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 2
-  },
-  {
-    "id": "prod_v4_ai_mechanic",
-    "title": "[AI Multi-Op] Precision Mechanic Hardware Bench",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_mechanic_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_mechanic_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 70.4,
-        "y": 33.6,
-        "radius": 6.9,
-        "hint": "Look closely near coordinates (78%, 34%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 3
-  },
-  {
-    "id": "prod_v4_ai_expedition",
-    "title": "[AI Multi-Op] Expedition Camp Equipment Table",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_expedition_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_expedition_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 88.6,
-        "y": 37.5,
-        "radius": 6.9,
-        "hint": "Look closely near coordinates (92%, 38%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 4
-  },
-  {
-    "id": "prod_v4_ai_leathercraft",
-    "title": "[AI Multi-Op] Leather Artisan Waxed Spools",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_leathercraft_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_leathercraft_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 2.4,
-        "y": 93.8,
-        "radius": 9.5,
-        "hint": "Look closely near coordinates (2%, 94%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 5
-  },
-  {
-    "id": "prod_v4_ai_miniature",
-    "title": "[AI Multi-Op] Hobby Miniature Workstation",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_miniature_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_miniature_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 27.6,
-        "y": 63.3,
-        "radius": 8.3,
-        "hint": "Look closely near coordinates (21%, 63%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 1
-  },
-  {
-    "id": "prod_v4_var2_unique_miniatures",
-    "title": "[AI Multi-Op] Miniature Dropper Rack B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_miniatures_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_miniatures_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 50.2,
-        "radius": 9.1,
-        "hint": "Look closely near coordinates (50%, 50%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 2
-  },
-  {
-    "id": "prod_v4_var2_unique_palette",
-    "title": "[AI Multi-Op] Painter Oil Palette B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_palette_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_palette_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 15.4,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (61%, 15%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 3
-  },
-  {
-    "id": "prod_v4_var2_unique_seashells",
-    "title": "[AI Multi-Op] Marine Seashell Matrix B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_seashells_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_seashells_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 3.2,
-        "y": 15.2,
-        "radius": 6.2,
-        "hint": "Look closely near coordinates (3%, 15%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 4
-  },
-  {
-    "id": "prod_v4_var2_unique_sewing",
-    "title": "[AI Multi-Op] Wooden Thread Spools B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_sewing_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_sewing_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 91.6,
-        "radius": 6.7,
-        "hint": "Look closely near coordinates (50%, 92%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 5
-  },
-  {
-    "id": "prod_v4_var2_unique_woodworking",
-    "title": "[AI Multi-Op] Carpenter Tool Layout B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_woodworking_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_woodworking_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 37.1,
-        "y": 73.2,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (28%, 73%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 1
-  },
-  {
-    "id": "prod_v4_var2_ai_mechanic",
-    "title": "[AI Multi-Op] Precision Mechanic Bench B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_ai_mechanic_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_ai_mechanic_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 84.6,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (43%, 85%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 2
-  },
-  {
-    "id": "prod_v4_var2_ai_sewing",
-    "title": "[AI Multi-Op] Tailor Notions Box B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_ai_sewing_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_ai_sewing_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 23.5,
-        "y": 71.6,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (17%, 72%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 3
-  },
-  {
-    "id": "prod_v4_var2_ai_woodworking",
-    "title": "[AI Multi-Op] Joinery Bench Carpenter Pencils B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_ai_woodworking_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_ai_woodworking_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 13.1,
-        "y": 43.7,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (10%, 44%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 4
-  },
-  {
-    "id": "prod_v4_dense_succulents",
-    "title": "[AI Multi-Op] Greenhouse Potted Succulents Grid",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_succulents_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_succulents_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 38.6,
-        "y": 24.9,
-        "radius": 7.5,
-        "hint": "Look closely near coordinates (34%, 25%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 5
-  },
-  {
-    "id": "prod_v4_var2_dense_watch_parts",
+    "id": "photo_set_004_01",
     "title": "[AI Multi-Op] Horologist Escapement Parts Tray B",
     "category": "Photography",
     "pack": "Photography",
@@ -2131,7 +431,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 93.0,
+        "x": 93,
         "y": 77.7,
         "radius": 7.7,
         "hint": "Look closely near coordinates (94%, 78%)"
@@ -2142,11 +442,11 @@
       "height": 846
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
+    "setId": "photo_set_004",
     "sequence": 1
   },
   {
-    "id": "prod_v4_var2_unique_pencils",
+    "id": "photo_set_004_02",
     "title": "[AI Multi-Op] Artist Prismacolor Pencil Array B",
     "category": "Photography",
     "pack": "Photography",
@@ -2169,11 +469,11 @@
       "height": 846
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
+    "setId": "photo_set_004",
     "sequence": 2
   },
   {
-    "id": "pipe_v3_watchmaker_recolor_002",
+    "id": "photo_set_004_03",
     "title": "[AI Recolor] Horologist Tray Screwdriver Collar",
     "category": "Photography",
     "pack": "Photography",
@@ -2196,11 +496,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
+    "setId": "photo_set_004",
     "sequence": 3
   },
   {
-    "id": "pipe_v3_electronics_add_003",
+    "id": "photo_set_004_04",
     "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
     "category": "Photography",
     "pack": "Photography",
@@ -2212,7 +512,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 38.3,
         "radius": 6.7,
         "hint": "Look closely near coordinates (44%, 38%)"
@@ -2223,11 +523,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
+    "setId": "photo_set_004",
     "sequence": 4
   },
   {
-    "id": "goldilocks_pipe_v2_electronics_add_003",
+    "id": "photo_set_004_05",
     "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
     "category": "Photography",
     "pack": "Photography",
@@ -2239,7 +539,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 48.6,
         "radius": 6.7,
         "hint": "Look closely near coordinates (45%, 49%)"
@@ -2250,575 +550,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
+    "setId": "photo_set_004",
     "sequence": 5
   },
   {
-    "id": "goldilocks_pipe_v2_artist_recolor_005",
-    "title": "[AI Recolor] Fine Art Studio Oil Paint Tube Cap",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_artist_recolor_005_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_artist_recolor_005_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 32.9,
-        "radius": 8.3,
-        "hint": "Look closely near coordinates (38%, 33%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 1
-  },
-  {
-    "id": "goldilocks_pipe_v2_woodworking_recolor_006",
-    "title": "[AI Recolor] Woodworking Joinery Bench Carpenter Pencil",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_woodworking_recolor_006_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_woodworking_recolor_006_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 55.4,
-        "y": 84.6,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (67%, 85%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 2
-  },
-  {
-    "id": "goldilocks_pipe_v2_leathercraft_recolor_009",
-    "title": "[AI Recolor] Leather Artisan Bench Waxed Thread Spool",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_leathercraft_recolor_009_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_leathercraft_recolor_009_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 61.7,
-        "y": 22.5,
-        "radius": 7.3,
-        "hint": "Look closely near coordinates (71%, 23%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 3
-  },
-  {
-    "id": "goldilocks_pipe_v2_miniature_recolor_010",
-    "title": "[AI Recolor] Miniature Painter Desk Paint Dropper Cap",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_miniature_recolor_010_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_miniature_recolor_010_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 21.0,
-        "y": 36.4,
-        "radius": 8.9,
-        "hint": "Look closely near coordinates (16%, 36%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 4
-  },
-  {
-    "id": "hyper_dense_synth_pcb_002",
-    "title": "[High Complexity 66%] Analog Audio Synthesizer Circuit Matrix",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_synth_pcb_002_base.jpg",
-    "variantImage": "/levels/hyper_dense_synth_pcb_002_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 48.6,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (51%, 49%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1244,
-      "height": 933
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 5
-  },
-  {
-    "id": "dense_crowd_micro_circuitry_003",
-    "title": "[High Object Count] High-Density Microprocessor Component Trace",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/dense_crowd_micro_circuitry_003_base.jpg",
-    "variantImage": "/levels/dense_crowd_micro_circuitry_003_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 34.1,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (48%, 34%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1244,
-      "height": 933
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 1
-  },
-  {
-    "id": "photo_c_spices_004",
-    "title": "[Photorealistic] Artisanal Whole Spices & Star Anise",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_c_spices_004_base.jpg",
-    "variantImage": "/levels/photo_c_spices_004_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 27.1,
-        "y": 79.6,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (24%, 80%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1064,
-      "height": 798
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 2
-  },
-  {
-    "id": "photo_c_seeds_010",
-    "title": "[Photorealistic] Botanical Garden Seeds & Legumes",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_c_seeds_010_base.jpg",
-    "variantImage": "/levels/photo_c_seeds_010_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 81.8,
-        "y": 50.0,
-        "radius": 7.3,
-        "description": "Single sorting dish of botanical seeds shifted in warmth",
-        "hint": "Look closely near coordinates (82%, 30%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 3
-  },
-  {
-    "id": "photo_fresh_pencils_002",
-    "title": "[Photorealistic] 150 Artist Colored Pencils & Pastels",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_fresh_pencils_002_base.jpg",
-    "variantImage": "/levels/photo_fresh_pencils_002_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 34.5,
-        "y": 84.3,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (31%, 84%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 4
-  },
-  {
-    "id": "photo_fresh_crayons_003",
-    "title": "[Photorealistic] Vibrant Wax Crayons & Drawing Pastels",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_fresh_crayons_003_base.jpg",
-    "variantImage": "/levels/photo_fresh_crayons_003_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 91.3,
-        "y": 82.1,
-        "radius": 5.9,
-        "description": "Single wax crayon tip shifted in color",
-        "hint": "Look closely near coordinates (91%, 82%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 5
-  },
-  {
-    "id": "photo_fresh_watchmaker_008",
-    "title": "[Photorealistic] Horology Brass Escapements & Balance Wheels",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_fresh_watchmaker_008_base.jpg",
-    "variantImage": "/levels/photo_fresh_watchmaker_008_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 25.0,
-        "y": 51.4,
-        "radius": 7.0,
-        "hint": "Look closely near coordinates (19%, 51%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_019",
-    "sequence": 1
-  },
-  {
-    "id": "photo_fresh_stained_glass_009",
-    "title": "[Photorealistic] Leaded Cathedral Stained Glass Facets",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_fresh_stained_glass_009_base.jpg",
-    "variantImage": "/levels/photo_fresh_stained_glass_009_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 36.4,
-        "y": 83,
-        "radius": 10.2,
-        "hint": "Look closely near coordinates (36%, 83%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_019",
-    "sequence": 2
-  },
-  {
-    "id": "photo_unique_seashells_001",
-    "title": "[Photorealistic] Beachcomber Shells & Sea Glass",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_unique_seashells_001_base.jpg",
-    "variantImage": "/levels/photo_unique_seashells_001_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 61.9,
-        "y": 83.0,
-        "radius": 6.9,
-        "description": "Single sea glass pebble shifted from ocean emerald to cobalt azure",
-        "hint": "Look closely near coordinates (66%, 83%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_019",
-    "sequence": 3
-  },
-  {
-    "id": "photo_unique_gardening_004",
-    "title": "[Photorealistic] Greenhouse Botanical Potting Bench",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_unique_gardening_004_base.jpg",
-    "variantImage": "/levels/photo_unique_gardening_004_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 47.1,
-        "y": 29.4,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (35%, 29%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_019",
-    "sequence": 4
-  },
-  {
-    "id": "photo_unique_sewing_005",
-    "title": "[Photorealistic] Tailor Sewing Spools & Notions Table",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_unique_sewing_005_base.jpg",
-    "variantImage": "/levels/photo_unique_sewing_005_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 44.8,
-        "y": 79.3,
-        "radius": 6.7,
-        "hint": "Look closely near coordinates (33%, 79%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_019",
-    "sequence": 5
-  },
-  {
-    "id": "photo_unique_bakery_006",
-    "title": "[Photorealistic] Artisanal French Bakery Pastry Board",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_unique_bakery_006_base.jpg",
-    "variantImage": "/levels/photo_unique_bakery_006_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 36.9,
-        "radius": 9.1,
-        "description": "Single gourmet pastry macaron or berry garnish shifted in color",
-        "hint": "Look closely near coordinates (44%, 37%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 1
-  },
-  {
-    "id": "photo_marbles_calibrated_001",
-    "title": "[Calibrated] 200 Glass Cats-Eye & Swirl Marbles",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_marbles_calibrated_001_base.jpg",
-    "variantImage": "/levels/photo_marbles_calibrated_001_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 32.8,
-        "y": 77.8,
-        "radius": 6.7,
-        "description": "Single swirling glass marble shifted from emerald green to ocean turquoise",
-        "hint": "Look closely near coordinates (29%, 78%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 2
-  },
-  {
-    "id": "photo_buttons_calibrated_002",
-    "title": "[Calibrated] Vintage Button Compartment Tray",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_buttons_calibrated_002_base.jpg",
-    "variantImage": "/levels/photo_buttons_calibrated_002_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 73.5,
-        "y": 28.5,
-        "radius": 5.6,
-        "hint": "Look closely near coordinates (76%, 28%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 3
-  },
-  {
-    "id": "photo_boardgame_calibrated_003",
-    "title": "[Calibrated] Euro Board Game Meeples & Resource Cubes",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_boardgame_calibrated_003_base.jpg",
-    "variantImage": "/levels/photo_boardgame_calibrated_003_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 9.5,
-        "y": 46.3,
-        "radius": 5.6,
-        "hint": "Look closely near coordinates (9%, 46%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 4
-  },
-  {
-    "id": "photo_spices_calibrated_009",
-    "title": "[Calibrated] Artisanal Whole Spice Market Tray",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "/levels/photo_spices_calibrated_009_base.jpg",
-    "variantImage": "/levels/photo_spices_calibrated_009_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.6,
-        "y": 26.9,
-        "radius": 5.9,
-        "description": "Single whole spice pod shifted in warmth",
-        "hint": "Look closely near coordinates (61%, 27%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 5
-  },
-  {
-    "id": "photo_succulents_calibrated_010",
+    "id": "photo_set_005_01",
     "title": "[Calibrated] Greenhouse Miniature Succulent Rosettes",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -2831,7 +567,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 77.0,
+        "x": 77,
         "y": 63.1,
         "radius": 7.1,
         "description": "Single succulent rosette shifted from sage green to dusty rose",
@@ -2844,39 +580,40 @@
       "height": 846
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
+    "setId": "photo_set_005",
     "sequence": 1
   },
   {
-    "id": "photo_boardgame_recolor_003",
-    "title": "[Photorealistic] Euro Board Game Meeples & Resource Cubes",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
+    "id": "photo_set_005_02",
+    "title": "Tabletop RPG Dungeon Master Polyhedral Dice",
     "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
     "difficulty": "Medium",
+    "baseImage": "levels/photo_boardgame_recolor_003_base.jpg",
+    "variantImage": "levels/photo_boardgame_recolor_003_variant.jpg",
     "operation": "recolor",
-    "baseImage": "/levels/photo_boardgame_recolor_003_base.jpg",
-    "variantImage": "/levels/photo_boardgame_recolor_003_variant.jpg",
-    "totalDifferences": 1,
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
     "diffs": [
       {
         "id": 1,
-        "x": 9.6,
-        "y": 46.3,
-        "radius": 5.6,
-        "hint": "Look closely near coordinates (9%, 46%)"
+        "x": 53.3,
+        "y": 46.7,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
       }
     ],
-    "dimensions": {
-      "width": 1128,
-      "height": 846
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_021",
+    "setId": "photo_set_005",
     "sequence": 2
   },
   {
-    "id": "photo_succulents_recolor_010",
+    "id": "photo_set_005_03",
     "title": "[Photorealistic] Greenhouse Miniature Succulent Rosettes",
     "pack": "Photography",
     "packId": "find_the_sniper",
@@ -2902,11 +639,11 @@
       "height": 846
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
+    "setId": "photo_set_005",
     "sequence": 3
   },
   {
-    "id": "dense_ai_watchmaker_gear_add_002",
+    "id": "photo_set_005_04",
     "title": "[AI Dense Add] Watchmaker Parts Tray Extra Brass Gear",
     "category": "Photography",
     "pack": "Photography",
@@ -2918,7 +655,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 39.7,
         "radius": 6.7,
         "hint": "Look closely near coordinates (45%, 40%)"
@@ -2929,11 +666,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
+    "setId": "photo_set_005",
     "sequence": 4
   },
   {
-    "id": "dense_ai_artist_pastel_remove_007",
+    "id": "photo_set_005_05",
     "title": "[AI Dense Remove] Fine Art Studio Missing Pastel Stick",
     "category": "Photography",
     "pack": "Photography",
@@ -2945,9 +682,9 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 14.2,
-        "radius": 10.0,
+        "radius": 10,
         "description": "Single soft pastel stick missing from the wooden easel tray",
         "hint": "Look closely near coordinates (49%, 14%)"
       }
@@ -2957,11 +694,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
+    "setId": "photo_set_005",
     "sequence": 5
   },
   {
-    "id": "dense_ai_woodworking_chisel_recolor_008",
+    "id": "photo_set_006_01",
     "title": "[AI Dense Recolor] Woodworking Bench Chisel Brass Ferrule",
     "category": "Photography",
     "pack": "Photography",
@@ -2973,7 +710,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 6.5,
         "radius": 6.7,
         "hint": "Look closely near coordinates (46%, 6%)"
@@ -2984,11 +721,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
+    "setId": "photo_set_006",
     "sequence": 1
   },
   {
-    "id": "dense_ai_leather_punch_add_009",
+    "id": "photo_set_006_02",
     "title": "[AI Dense Add] Leather Artisan Bench Extra Punch Die",
     "category": "Photography",
     "pack": "Photography",
@@ -3000,7 +737,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 53.9,
         "radius": 6.7,
         "hint": "Look closely near coordinates (54%, 54%)"
@@ -3011,37 +748,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
+    "setId": "photo_set_006",
     "sequence": 2
   },
   {
-    "id": "goldilocks_hard_ai_woodworking_pencil_008",
-    "title": "[AI Hard] Woodworking Bench Carpenter Pencil Tip",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/goldilocks_hard_ai_woodworking_pencil_008_base.jpg",
-    "variantImage": "/levels/goldilocks_hard_ai_woodworking_pencil_008_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 6.5,
-        "radius": 6.7,
-        "hint": "Look closely near coordinates (46%, 6%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1024,
-      "height": 768
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_022",
-    "sequence": 3
-  },
-  {
-    "id": "goldilocks_hard_ai_expedition_toggle_010",
+    "id": "photo_set_006_03",
     "title": "[AI Hard] Expedition Table Paracord Lock Toggle",
     "category": "Photography",
     "pack": "Photography",
@@ -3053,7 +764,7 @@
       {
         "id": 1,
         "x": 73.8,
-        "y": 64.0,
+        "y": 64,
         "radius": 6.7,
         "hint": "Look closely near coordinates (80%, 64%)"
       }
@@ -3063,11 +774,11 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
-    "sequence": 4
+    "setId": "photo_set_006",
+    "sequence": 3
   },
   {
-    "id": "goldilocks_ai_sewing_notions_001",
+    "id": "photo_set_006_04",
     "title": "[AI Canvas] Tailor Notions Box Woven Thread Spool",
     "category": "Photography",
     "pack": "Photography",
@@ -3090,64 +801,2314 @@
       "height": 768
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
+    "setId": "photo_set_006",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_006_05",
+    "title": "Botanical Herbarium Pressed Flora & Petals",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/goldilocks_hard_ai_woodworking_pencil_008_base.jpg",
+    "variantImage": "levels/goldilocks_hard_ai_woodworking_pencil_008_variant.jpg",
+    "operation": "recolor",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.6,
+        "y": 42.8,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "setId": "photo_set_006",
     "sequence": 5
   },
   {
-    "id": "goldilocks_ai_leathercraft_005",
-    "title": "[AI Canvas] Leather Artisan Bench Waxed Thread Spool",
+    "id": "photo_set_007_01",
+    "title": "[Method 1: Workshop Inpainting] Leathercraft Workbench Awl",
     "category": "Photography",
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/goldilocks_ai_leathercraft_005_base.jpg",
-    "variantImage": "/levels/goldilocks_ai_leathercraft_005_variant.jpg",
+    "baseImage": "/levels/method1_photo_leathercraft_001_base.jpg",
+    "variantImage": "/levels/method1_photo_leathercraft_001_variant.jpg",
     "diffs": [
       {
         "id": 1,
-        "x": 75.1,
-        "y": 22.8,
-        "radius": 7.5,
-        "description": "Single waxed linen thread spool shifted in CIELAB (preserving thread twist)",
-        "hint": "Look closely near coordinates (81%, 23%)"
+        "x": 65.9,
+        "y": 44,
+        "radius": 9,
+        "hint": "Look closely near coordinates (66%, 44%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_007",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_007_02",
+    "title": "[Method 1: Workshop Inpainting] Circuit Repair Workbench",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method1_photo_electronics_001_base.jpg",
+    "variantImage": "/levels/method1_photo_electronics_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 57.5,
+        "y": 79.5,
+        "radius": 9,
+        "hint": "Look closely near coordinates (57%, 80%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_007",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_007_03",
+    "title": "[Method 2: Macro Diffusion] Miniature Painting Wet Palette",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/method2_macro_miniature_001_base.jpg",
+    "variantImage": "/levels/method2_macro_miniature_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 86.5,
+        "y": 23.9,
+        "radius": 9.2,
+        "hint": "Look closely near coordinates (86%, 24%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_007",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_007_04",
+    "title": "Horology Watch Escapement & Ruby Jewels",
+    "category": "Real Photo",
+    "difficulty": "Easy",
+    "packId": "find_the_sniper",
+    "baseImage": "/levels/ai_macro_watch_escapement_001_base.jpg",
+    "variantImage": "/levels/ai_macro_watch_escapement_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56,
+        "y": 56.3,
+        "radius": 10.1,
+        "hint": "Look closely near coordinates (56%, 56%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_007",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_007_05",
+    "title": "Master Stained Glass Solder & Cathedral Glass",
+    "category": "Real Photo",
+    "difficulty": "Medium",
+    "packId": "find_the_sniper",
+    "baseImage": "/levels/ai_macro_stained_glass_001_base.jpg",
+    "variantImage": "/levels/ai_macro_stained_glass_001_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56,
+        "y": 58.3,
+        "radius": 9,
+        "hint": "Look closely near coordinates (56%, 58%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_007",
+    "sequence": 5
+  },
+  {
+    "title": "Nursery Plant Tag",
+    "baseImage": "levels/photo-pairs/nursery/medium_nursery_001/base.jpg",
+    "variantImage": "levels/photo-pairs/nursery/medium_nursery_001/variant.jpg",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "id": "photo_set_008_01",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 63.8,
+        "y": 40.6,
+        "radius": 9,
+        "hint": "Look closely near coordinates (64%, 41%)"
+      }
+    ],
+    "category": "Greenhouse Clutter",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_008",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_008_02",
+    "variantImage": "levels/photo-pairs/workbench/medium_workbench_001/variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.7,
+        "y": 49.6,
+        "radius": 9,
+        "hint": "Look closely near coordinates (50%, 50%)"
+      }
+    ],
+    "category": "Workshop Clutter",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "baseImage": "levels/photo-pairs/workbench/medium_workbench_001/base.jpg",
+    "difficulty": "Medium",
+    "title": "Workbench Screwdriver",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_008",
+    "sequence": 2
+  },
+  {
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.3,
+        "y": 50.4,
+        "radius": 9,
+        "hint": "Look closely near coordinates (50%, 50%)"
+      }
+    ],
+    "title": "Forest Floor Camouflage",
+    "id": "photo_set_008_03",
+    "variantImage": "levels/photo-pairs/camouflage/hard_forest_001/variant.jpg",
+    "difficulty": "Hard",
+    "baseImage": "levels/photo-pairs/camouflage/hard_forest_001/base.jpg",
+    "category": "Extreme Hunter",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_008",
+    "sequence": 3
+  },
+  {
+    "pack": "Find the Sniper",
+    "difficulty": "Medium",
+    "title": "Workbench Hardware Ring",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.8,
+        "y": 28.1,
+        "radius": 9,
+        "hint": "Look closely near coordinates (92%, 28%)"
+      }
+    ],
+    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
+    "category": "Photography",
+    "variantImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/variant.jpg",
+    "packId": "find_the_sniper",
+    "id": "photo_set_008_04",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_008",
+    "sequence": 4
+  },
+  {
+    "diffs": [
+      {
+        "id": 1,
+        "x": 39.5,
+        "y": 11.4,
+        "radius": 9,
+        "hint": "Look closely near coordinates (40%, 11%)"
+      }
+    ],
+    "title": "Potting Table Succulent",
+    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
+    "category": "Photography",
+    "variantImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/variant.jpg",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "id": "photo_set_008_05",
+    "difficulty": "Medium",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_008",
+    "sequence": 5
+  },
+  {
+    "packId": "abstract_animated",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "variantImage": "levels/photo-pairs/photo-watchmaker-bench/variant.jpg",
+    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
+    "pack": "Find the Sniper",
+    "title": "Watchmaker Bench Gear",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 35.5,
+        "y": 62.5,
+        "radius": 9,
+        "hint": "Look closely near coordinates (35%, 63%)"
+      }
+    ],
+    "id": "photo_set_009_01",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_009",
+    "sequence": 1
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 16.9,
+        "y": 75.1,
+        "radius": 10.9,
+        "hint": "Look closely near coordinates (17%, 75%)"
+      }
+    ],
+    "title": "Bakers Table Cutter",
+    "pack": "Find the Sniper",
+    "category": "Photography",
+    "variantImage": "levels/photo-pairs/photo-bakers-table/variant.jpg",
+    "id": "photo_set_009_02",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_009",
+    "sequence": 2
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31.8,
+        "y": 84.1,
+        "radius": 9,
+        "hint": "Look closely near coordinates (32%, 84%)"
+      }
+    ],
+    "difficulty": "Medium",
+    "pack": "Find the Sniper",
+    "title": "Electronics Bench Resistor",
+    "packId": "find_the_sniper",
+    "id": "photo_set_009_03",
+    "category": "Photography",
+    "variantImage": "levels/photo-pairs/photo-electronics-bench/variant.jpg",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_009",
+    "sequence": 3
+  },
+  {
+    "diffs": [
+      {
+        "id": 1,
+        "x": 4.5,
+        "y": 79.6,
+        "radius": 9,
+        "hint": "Look closely near coordinates (4%, 80%)"
+      }
+    ],
+    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
+    "title": "Antique Desk Key",
+    "variantImage": "levels/photo-pairs/photo-antique-desk/variant.jpg",
+    "id": "photo_set_009_04",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_009",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_009_05",
+    "difficulty": "Hard",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 57.4,
+        "y": 46.2,
+        "radius": 9,
+        "hint": "Look closely near coordinates (57%, 46%)"
+      }
+    ],
+    "title": "Board Game Piece",
+    "pack": "Find the Sniper",
+    "variantImage": "levels/photo-pairs/photo-board-game/variant.jpg",
+    "category": "Photography",
+    "packId": "find_the_sniper",
+    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_009",
+    "sequence": 5
+  },
+  {
+    "packId": "find_the_sniper",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 60.6,
+        "y": 78,
+        "radius": 9,
+        "hint": "Look closely near coordinates (61%, 78%)"
+      }
+    ],
+    "difficulty": "Medium",
+    "variantImage": "levels/photo-pairs/photo-woodworking-bench/variant.jpg",
+    "category": "Photography",
+    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
+    "id": "photo_set_010_01",
+    "title": "Woodworking Bench Screw",
+    "pack": "Find the Sniper",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_010",
+    "sequence": 1
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
+    "id": "photo_set_010_02",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "variantImage": "levels/photo-pairs/photo-repair-drawer/variant.jpg",
+    "title": "Repair Drawer Washer",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 59.6,
+        "y": 72.8,
+        "radius": 9,
+        "hint": "Look closely near coordinates (60%, 73%)"
+      }
+    ],
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_010",
+    "sequence": 2
+  },
+  {
+    "difficulty": "Easy",
+    "variantImage": "levels/photo-pairs/photo-camera-gear/variant.jpg",
+    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
+    "packId": "find_the_sniper",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 35.1,
+        "y": 66.5,
+        "radius": 9,
+        "hint": "Look closely near coordinates (35%, 67%)"
+      }
+    ],
+    "category": "Photography",
+    "title": "Camera Gear Lens Cap",
+    "pack": "Find the Sniper",
+    "id": "photo_set_010_03",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_010",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_010_04",
+    "title": "Pottery Table Sponge",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 49.2,
+        "y": 30,
+        "radius": 11,
+        "hint": "Look closely near coordinates (49%, 30%)"
+      }
+    ],
+    "difficulty": "Easy",
+    "pack": "Find the Sniper",
+    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
+    "category": "Photography",
+    "variantImage": "levels/photo-pairs/photo-pottery-table/variant.jpg",
+    "packId": "find_the_sniper",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_010",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_010_05",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 92.1,
+        "y": 46.1,
+        "radius": 9,
+        "hint": "Look closely near coordinates (92%, 46%)"
+      }
+    ],
+    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
+    "pack": "Find the Sniper",
+    "variantImage": "levels/photo-pairs/photo-bicycle-repair/variant.jpg",
+    "difficulty": "Medium",
+    "category": "Photography",
+    "title": "Bicycle Repair Bolt",
+    "packId": "find_the_sniper",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_010",
+    "sequence": 5
+  },
+  {
+    "difficulty": "Medium",
+    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
+    "pack": "Find the Sniper",
+    "id": "photo_set_011_01",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.1,
+        "y": 14.2,
+        "radius": 9,
+        "hint": "Look closely near coordinates (52%, 14%)"
+      }
+    ],
+    "packId": "find_the_sniper",
+    "title": "Woodworking Screw",
+    "category": "Photography",
+    "variantImage": "levels/photo-pairs/photo-woodworking-table/variant.jpg",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_011",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_011_02",
+    "category": "Photography",
+    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
+    "title": "Artist Supply Paint",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 51.8,
+        "y": 53.2,
+        "radius": 9,
+        "hint": "Look closely near coordinates (52%, 53%)"
+      }
+    ],
+    "difficulty": "Easy",
+    "variantImage": "levels/photo-pairs/photo-artist-supply/variant.jpg",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_011",
+    "sequence": 2
+  },
+  {
+    "pack": "Find the Sniper",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55.8,
+        "y": 51.8,
+        "radius": 9,
+        "hint": "Look closely near coordinates (56%, 52%)"
+      }
+    ],
+    "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg",
+    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
+    "category": "Photography",
+    "id": "photo_set_011_03",
+    "title": "Camping Gear Carabiner",
+    "packId": "find_the_sniper",
+    "difficulty": "Easy",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_011",
+    "sequence": 3
+  },
+  {
+    "pack": "Find the Sniper",
+    "variantImage": "levels/photo-pairs/photo-sewing-table/variant.jpg",
+    "category": "Photography",
+    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
+    "difficulty": "Easy",
+    "id": "photo_set_011_04",
+    "title": "Sewing Table Button",
+    "packId": "find_the_sniper",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 84,
+        "y": 75.5,
+        "radius": 10.4,
+        "hint": "Look closely near coordinates (84%, 76%)"
+      }
+    ],
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_011",
+    "sequence": 4
+  },
+  {
+    "difficulty": "Easy",
+    "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
+    "id": "photo_set_011_05",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 7,
+        "y": 18.6,
+        "radius": 10.8,
+        "hint": "Look closely near coordinates (7%, 19%)"
+      }
+    ],
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "title": "Map Restoration Clip",
+    "category": "Photography",
+    "variantImage": "levels/photo-pairs/photo-map-restoration/variant.jpg",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_011",
+    "sequence": 5
+  },
+  {
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33.6,
+        "y": 53.1,
+        "radius": 9,
+        "hint": "Look closely near coordinates (34%, 53%)"
+      }
+    ],
+    "difficulty": "Easy",
+    "category": "Photography",
+    "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
+    "variantImage": "levels/photo-pairs/photo-garden-potting/variant.jpg",
+    "pack": "Find the Sniper",
+    "title": "Garden Potting Pot",
+    "packId": "find_the_sniper",
+    "id": "photo_set_012_01",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_012",
+    "sequence": 1
+  },
+  {
+    "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "difficulty": "Easy",
+    "variantImage": "levels/photo-pairs/photo-game-night/variant.jpg",
+    "packId": "find_the_sniper",
+    "title": "Game Night Token",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 29.6,
+        "y": 46.9,
+        "radius": 9,
+        "hint": "Look closely near coordinates (30%, 47%)"
+      }
+    ],
+    "id": "photo_set_012_02",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_012",
+    "sequence": 2
+  },
+  {
+    "variantImage": "levels/photo-pairs/photo-watch-repair/variant.jpg",
+    "title": "Watch Repair Gear",
+    "id": "photo_set_012_03",
+    "packId": "find_the_sniper",
+    "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 3.7,
+        "y": 63.5,
+        "radius": 8.1,
+        "hint": "Look closely near coordinates (4%, 63%)"
+      }
+    ],
+    "pack": "Find the Sniper",
+    "dimensions": {
+      "width": 640,
+      "height": 480
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_012",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_012_04",
+    "difficulty": "Easy",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 85.2,
+        "y": 66.3,
+        "radius": 9,
+        "hint": "Look closely near coordinates (85%, 66%)"
+      }
+    ],
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "category": "Bakery Clutter",
+    "baseImage": "levels/photo-pairs/ai-bakery-counter/base.jpg",
+    "variantImage": "levels/photo-pairs/ai-bakery-counter/variant.jpg",
+    "title": "Rustic Bakery Counter",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_012",
+    "sequence": 4
+  },
+  {
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.2,
+        "y": 78.6,
+        "radius": 9,
+        "hint": "Look closely near coordinates (43%, 79%)"
+      }
+    ],
+    "packId": "find_the_sniper",
+    "baseImage": "levels/photo-pairs/ai-greenhouse-potting/base.jpg",
+    "pack": "Find the Sniper",
+    "title": "Greenhouse Potting Bench",
+    "variantImage": "levels/photo-pairs/ai-greenhouse-potting/variant.jpg",
+    "difficulty": "Easy",
+    "category": "Botanical Garden",
+    "id": "photo_set_012_05",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_012",
+    "sequence": 5
+  },
+  {
+    "pack": "Find the Sniper",
+    "category": "Fine Art Studio",
+    "packId": "find_the_sniper",
+    "title": "Painter Studio Palette",
+    "baseImage": "levels/photo-pairs/ai-artist-easel/base.jpg",
+    "id": "photo_set_013_01",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 10.9,
+        "y": 71.2,
+        "radius": 9,
+        "hint": "Look closely near coordinates (11%, 71%)"
+      }
+    ],
+    "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg",
+    "difficulty": "Easy",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_013",
+    "sequence": 1
+  },
+  {
+    "difficulty": "Easy",
+    "category": "Espresso Station",
+    "packId": "find_the_sniper",
+    "pack": "Find the Sniper",
+    "id": "photo_set_013_02",
+    "title": "Artisanal Coffee Bar",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 10,
+        "y": 58.3,
+        "radius": 9,
+        "hint": "Look closely near coordinates (10%, 58%)"
+      }
+    ],
+    "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg",
+    "baseImage": "levels/photo-pairs/ai-coffee-bar/base.jpg",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_013",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_013_03",
+    "difficulty": "Easy",
+    "packId": "find_the_sniper",
+    "title": "Victorian Study Desk",
+    "baseImage": "levels/photo-pairs/ai-antique-study/base.jpg",
+    "pack": "Find the Sniper",
+    "category": "Antique Study",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 89.5,
+        "y": 59.2,
+        "radius": 9.2,
+        "hint": "Look closely near coordinates (90%, 59%)"
+      }
+    ],
+    "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_013",
+    "sequence": 3
+  },
+  {
+    "title": "Botanist Herbarium Desk",
+    "variantImage": "levels/photo-pairs/ai-botanist-herbarium/variant.jpg",
+    "baseImage": "levels/photo-pairs/ai-botanist-herbarium/base.jpg",
+    "category": "Botanical Garden",
+    "difficulty": "Hard",
+    "pack": "Find the Sniper",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.2,
+        "y": 50.9,
+        "radius": 4.6,
+        "hint": "Look closely near coordinates (52%, 51%)"
+      }
+    ],
+    "id": "photo_set_013_04",
+    "packId": "find_the_sniper",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_013",
+    "sequence": 4
+  },
+  {
+    "pack": "Find the Sniper",
+    "baseImage": "levels/photo-pairs/ai-cartography-desk/base.jpg",
+    "packId": "find_the_sniper",
+    "difficulty": "Easy",
+    "category": "Antique Study",
+    "title": "Maritime Cartography Desk",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 17.1,
+        "y": 56.6,
+        "radius": 9.7,
+        "hint": "Look closely near coordinates (17%, 57%)"
+      }
+    ],
+    "variantImage": "levels/photo-pairs/ai-cartography-desk/variant.jpg",
+    "id": "photo_set_013_05",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_013",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_014_01",
+    "title": "Marine Biologist Seashells & Sea Glass",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v7_marine_shells_002_base.jpg",
+    "variantImage": "levels/fresh_v7_marine_shells_002_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 73.8,
+        "radius": 8.2,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
       }
     ],
     "dimensions": {
       "width": 1024,
       "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_014",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_014_02",
+    "title": "Herbalist Apothecary Jars & Spices",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v7_apothecary_herbs_003_base.jpg",
+    "variantImage": "levels/fresh_v7_apothecary_herbs_003_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.6,
+        "y": 55.2,
+        "radius": 7.1,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_014",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_014_03",
+    "title": "Ceramic Studio Apron & Glaze Tiles",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v7_pottery_tools_011_base.jpg",
+    "variantImage": "levels/fresh_v7_pottery_tools_011_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 52.7,
+        "y": 74.7,
+        "radius": 6.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_014",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_014_04",
+    "title": "Bonsai Master Tool Roll & Copper Wire",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v7_bonsai_tools_012_base.jpg",
+    "variantImage": "levels/fresh_v7_bonsai_tools_012_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.3,
+        "y": 55.9,
+        "radius": 8.1,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_014",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_014_05",
+    "title": "Traditional Japanese Matcha Tea Ceremony",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v7_tea_ceremony_006_base.jpg",
+    "variantImage": "levels/fresh_v7_tea_ceremony_006_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 46.9,
+        "radius": 6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_014",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_015_01",
+    "title": "Artisan Venetian Millefiori Glass Marbles",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_002_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_002_variant.jpg",
+    "operation": "recolor",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 42.4,
+        "y": 46.4,
+        "radius": 5.3,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "setId": "photo_set_015",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_015_02",
+    "title": "1980s Retro Audio Cassettes & Mixtapes",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v7_cassette_tapes_013_base.jpg",
+    "variantImage": "levels/fresh_v7_cassette_tapes_013_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 39.1,
+        "y": 26.1,
+        "radius": 6,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_015",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_015_03",
+    "title": "Beachcomber Tidepool Finds (Nature 1)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_001_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_001_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.3,
+        "y": 10.1,
+        "radius": 4.8,
+        "description": "Single remove difference",
+        "hint": "Look closely near coordinates (71%, 10%)",
+        "operation": "remove"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_015",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_015_04",
+    "title": "Playful Italian Tricolor Dry Pasta (Nature 16)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_016_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_016_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.8,
+        "y": 94.2,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely near coordinates (62%, 94%)",
+        "operation": "add"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_015",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_015_05",
+    "title": "Playful Spilled Paperclips on Concrete (Nature 20)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_nature_pair_020_base.jpg",
+    "variantImage": "levels/fresh_nature_pair_020_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 6.5,
+        "y": 29.8,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely near coordinates (7%, 29%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_015",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_016_01",
+    "title": "Wooden Meeples & Polyhedral RPG Dice (Pair 3)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_003_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_003_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 25.9,
+        "y": 23.3,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely near coordinates (26%, 23%)",
+        "operation": "add"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_016",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_016_02",
+    "title": "Intricate Antique Skeleton Keys on Leather (Pair 7)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_007_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_007_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 5.1,
+        "y": 29.7,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely near coordinates (5%, 30%)",
+        "operation": "add"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_016",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_016_03",
+    "title": "Silk Thread Spools & Safety Pins (Pair 12)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_012_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_012_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 67.8,
+        "y": 47.9,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely near coordinates (68%, 48%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_016",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_016_04",
+    "title": "Handcrafted Leathercraft Workshop (Pair 19)",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v6_pair_019_base.jpg",
+    "variantImage": "levels/fresh_v6_pair_019_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 26,
+        "y": 86.2,
+        "radius": 6.8,
+        "description": "Single add difference",
+        "hint": "Look closely near coordinates (26%, 86%)",
+        "operation": "add"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_016",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_016_05",
+    "title": "Confectionery Artisan Gummy & Hard Candies",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_042_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_042_variant.jpg",
+    "operation": "recolor",
+    "dimensions": {
+      "width": 1264,
+      "height": 848
+    },
+    "aspectRatio": "4:3",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62.6,
+        "y": 51.5,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "setId": "photo_set_016",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_017_01",
+    "title": "Antique Ornate Key Escutcheon",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_046_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_046_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 5.7,
+        "y": 90.1,
+        "radius": 8.4,
+        "description": "Single reorder difference",
+        "hint": "Look closely near coordinates (6%, 90%)",
+        "operation": "reorder"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_017",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_017_02",
+    "title": "Fruit Hard Candies & Lozenges",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_052_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_052_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 92.8,
+        "y": 92.5,
+        "radius": 5.6,
+        "description": "Single reorder difference",
+        "hint": "Look closely near coordinates (94%, 92%)",
+        "operation": "reorder"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_017",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_017_03",
+    "title": "Natural Mineral Prisms & Agate",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_053_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_053_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 73.6,
+        "y": 17.4,
+        "radius": 6.5,
+        "description": "Single reorder difference",
+        "hint": "Look closely near coordinates (76%, 17%)",
+        "operation": "reorder"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_017",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_017_04",
+    "title": "Whole Nutmegs & Star Anise Seeds",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_055_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_055_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.9,
+        "y": 44.8,
+        "radius": 5.6,
+        "description": "Single reorder difference",
+        "hint": "Look closely near coordinates (75%, 45%)",
+        "operation": "reorder"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_017",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_017_05",
+    "title": "Carved Wooden Chess & Checkers",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_056_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_056_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 90,
+        "y": 79.7,
+        "radius": 5.8,
+        "description": "Single reorder difference",
+        "hint": "Look closely near coordinates (91%, 80%)",
+        "operation": "reorder"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_017",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_018_01",
+    "title": "Porcelain Sometsuke Teacups",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_008_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_008_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 93,
+        "y": 80.4,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely near coordinates (93%, 80%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_018",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_018_02",
+    "title": "Foraged Forest Wild Mushrooms",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_012_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_012_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 30.8,
+        "y": 11,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely near coordinates (31%, 11%)",
+        "operation": "add"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_018",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_018_03",
+    "title": "Heirloom Spices & Seeds Array",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_022_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_022_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.2,
+        "y": 11,
+        "radius": 5.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely near coordinates (58%, 11%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_018",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_018_04",
+    "title": "Horologist Escapement Wheels & Gears",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_032_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_032_variant.jpg",
+    "operation": "reorder",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 92.7,
+        "y": 77.2,
+        "radius": 6.6,
+        "description": "Single reorder difference",
+        "hint": "Look closely near coordinates (93%, 77%)",
+        "operation": "reorder"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_018",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_018_05",
+    "title": "Dense Circuit Board Inductors & Chips",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/fresh_v4_pair_036_base.jpg",
+    "variantImage": "levels/fresh_v4_pair_036_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 60,
+        "y": 25.8,
+        "radius": 6.7,
+        "description": "Single recolor difference",
+        "hint": "Look closely near coordinates (70%, 26%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_018",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_019_01",
+    "title": "[AI Multi-Op] Vintage Tailor Button Assortment",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_dense_buttons_base.jpg",
+    "variantImage": "/levels/prod_v4_dense_buttons_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55.4,
+        "y": 80.9,
+        "radius": 6.5,
+        "hint": "Look closely near coordinates (60%, 81%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_019",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_019_02",
+    "title": "[AI Multi-Op] Precision Mechanic Hardware Bench",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_mechanic_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_mechanic_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 70.4,
+        "y": 33.6,
+        "radius": 6.9,
+        "hint": "Look closely near coordinates (78%, 34%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_019",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_019_03",
+    "title": "[AI Multi-Op] Expedition Camp Equipment Table",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_expedition_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_expedition_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 88.6,
+        "y": 37.5,
+        "radius": 6.9,
+        "hint": "Look closely near coordinates (92%, 38%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_019",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_019_04",
+    "title": "[AI Multi-Op] Leather Artisan Waxed Spools",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_ai_leathercraft_base.jpg",
+    "variantImage": "/levels/prod_v4_ai_leathercraft_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 2.4,
+        "y": 93.8,
+        "radius": 9.5,
+        "hint": "Look closely near coordinates (2%, 94%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_019",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_019_05",
+    "title": "[AI Multi-Op] Painter Oil Palette B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_palette_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_palette_variant.jpg",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 15.4,
+        "radius": 10,
+        "hint": "Look closely near coordinates (61%, 15%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_019",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_020_01",
+    "title": "[AI Multi-Op] Marine Seashell Matrix B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_seashells_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_seashells_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 3.2,
+        "y": 15.2,
+        "radius": 6.2,
+        "hint": "Look closely near coordinates (3%, 15%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_020",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_020_02",
+    "title": "[AI Multi-Op] Wooden Thread Spools B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_sewing_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_sewing_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 91.6,
+        "radius": 6.7,
+        "hint": "Look closely near coordinates (50%, 92%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_020",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_020_03",
+    "title": "[AI Multi-Op] Carpenter Tool Layout B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_unique_woodworking_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_unique_woodworking_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 37.1,
+        "y": 73.2,
+        "radius": 10,
+        "hint": "Look closely near coordinates (28%, 73%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_020",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_020_04",
+    "title": "[AI Multi-Op] Tailor Notions Box B",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "/levels/prod_v4_var2_ai_sewing_base.jpg",
+    "variantImage": "/levels/prod_v4_var2_ai_sewing_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 23.5,
+        "y": 71.6,
+        "radius": 10,
+        "hint": "Look closely near coordinates (17%, 72%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_020",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_020_05",
+    "title": "Fine Carpenter Joinery Workbench & Planes",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/prod_v4_var2_ai_woodworking_base.jpg",
+    "variantImage": "levels/prod_v4_var2_ai_woodworking_variant.jpg",
+    "operation": "recolor",
+    "dimensions": {
+      "width": 1376,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.1,
+        "y": 39.5,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "setId": "photo_set_020",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_021_01",
+    "title": "[AI Recolor] Fine Art Studio Oil Paint Tube Cap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/goldilocks_pipe_v2_artist_recolor_005_base.jpg",
+    "variantImage": "/levels/goldilocks_pipe_v2_artist_recolor_005_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 32.9,
+        "radius": 8.3,
+        "hint": "Look closely near coordinates (38%, 33%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_021",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_021_02",
+    "title": "[AI Recolor] Woodworking Joinery Bench Carpenter Pencil",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/goldilocks_pipe_v2_woodworking_recolor_006_base.jpg",
+    "variantImage": "/levels/goldilocks_pipe_v2_woodworking_recolor_006_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 55.4,
+        "y": 84.6,
+        "radius": 10,
+        "hint": "Look closely near coordinates (67%, 85%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_021",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_021_03",
+    "title": "[AI Recolor] Miniature Painter Desk Paint Dropper Cap",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/goldilocks_pipe_v2_miniature_recolor_010_base.jpg",
+    "variantImage": "/levels/goldilocks_pipe_v2_miniature_recolor_010_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 21,
+        "y": 36.4,
+        "radius": 8.9,
+        "hint": "Look closely near coordinates (16%, 36%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_021",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_021_04",
+    "title": "[High Complexity 66%] Analog Audio Synthesizer Circuit Matrix",
+    "category": "Photography",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "difficulty": "Hard",
+    "baseImage": "/levels/hyper_dense_synth_pcb_002_base.jpg",
+    "variantImage": "/levels/hyper_dense_synth_pcb_002_variant.jpg",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 48.6,
+        "radius": 10,
+        "hint": "Look closely near coordinates (51%, 49%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1244,
+      "height": 933
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_021",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_021_05",
+    "title": "[Photorealistic] 150 Artist Colored Pencils & Pastels",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_pencils_002_base.jpg",
+    "variantImage": "/levels/photo_fresh_pencils_002_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 34.5,
+        "y": 84.3,
+        "radius": 10,
+        "hint": "Look closely near coordinates (31%, 84%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_021",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_022_01",
+    "title": "[Photorealistic] Vibrant Wax Crayons & Drawing Pastels",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_crayons_003_base.jpg",
+    "variantImage": "/levels/photo_fresh_crayons_003_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 91.3,
+        "y": 82.1,
+        "radius": 5.9,
+        "description": "Single wax crayon tip shifted in color",
+        "hint": "Look closely near coordinates (91%, 82%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_022",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_022_02",
+    "title": "[Photorealistic] Leaded Cathedral Stained Glass Facets",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_fresh_stained_glass_009_base.jpg",
+    "variantImage": "/levels/photo_fresh_stained_glass_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 36.4,
+        "y": 83,
+        "radius": 10.2,
+        "hint": "Look closely near coordinates (36%, 83%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_022",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_022_03",
+    "title": "[Photorealistic] Beachcomber Shells & Sea Glass",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_seashells_001_base.jpg",
+    "variantImage": "/levels/photo_unique_seashells_001_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 61.9,
+        "y": 83,
+        "radius": 6.9,
+        "description": "Single sea glass pebble shifted from ocean emerald to cobalt azure",
+        "hint": "Look closely near coordinates (66%, 83%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_022",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_022_04",
+    "title": "[Photorealistic] Tailor Sewing Spools & Notions Table",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_sewing_005_base.jpg",
+    "variantImage": "/levels/photo_unique_sewing_005_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.8,
+        "y": 79.3,
+        "radius": 6.7,
+        "hint": "Look closely near coordinates (33%, 79%)"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_022",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_022_05",
+    "title": "[Photorealistic] Artisanal French Bakery Pastry Board",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_unique_bakery_006_base.jpg",
+    "variantImage": "/levels/photo_unique_bakery_006_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50,
+        "y": 36.9,
+        "radius": 9.1,
+        "description": "Single gourmet pastry macaron or berry garnish shifted in color",
+        "hint": "Look closely near coordinates (44%, 37%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1024,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_022",
+    "sequence": 5
+  },
+  {
+    "id": "photo_set_023_01",
+    "title": "[Calibrated] 200 Glass Cats-Eye & Swirl Marbles",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_marbles_calibrated_001_base.jpg",
+    "variantImage": "/levels/photo_marbles_calibrated_001_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32.8,
+        "y": 77.8,
+        "radius": 6.7,
+        "description": "Single swirling glass marble shifted from emerald green to ocean turquoise",
+        "hint": "Look closely near coordinates (29%, 78%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
     "sequence": 1
   },
   {
-    "id": "goldilocks_ai_woodworking_bench_008",
-    "title": "[AI Canvas] Woodworking Bench Carpenter Pencil",
-    "category": "Photography",
+    "id": "photo_set_023_02",
+    "title": "[Calibrated] Euro Board Game Meeples & Resource Cubes",
     "pack": "Photography",
     "packId": "find_the_sniper",
+    "category": "Photography",
     "difficulty": "Medium",
-    "baseImage": "/levels/goldilocks_ai_woodworking_bench_008_base.jpg",
-    "variantImage": "/levels/goldilocks_ai_woodworking_bench_008_variant.jpg",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_boardgame_calibrated_003_base.jpg",
+    "variantImage": "/levels/photo_boardgame_calibrated_003_variant.jpg",
+    "totalDifferences": 1,
     "diffs": [
       {
         "id": 1,
-        "x": 52.7,
-        "y": 12.6,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (65%, 13%)"
+        "x": 9.5,
+        "y": 46.3,
+        "radius": 5.6,
+        "hint": "Look closely near coordinates (9%, 46%)"
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1128,
+      "height": 846
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
     "sequence": 2
   },
   {
-    "id": "goldilocks_ai_watchmaker_parts_002",
+    "id": "photo_set_023_03",
+    "title": "[Calibrated] Artisanal Whole Spice Market Tray",
+    "pack": "Photography",
+    "packId": "find_the_sniper",
+    "category": "Photography",
+    "difficulty": "Medium",
+    "operation": "recolor",
+    "baseImage": "/levels/photo_spices_calibrated_009_base.jpg",
+    "variantImage": "/levels/photo_spices_calibrated_009_variant.jpg",
+    "totalDifferences": 1,
+    "diffs": [
+      {
+        "id": 1,
+        "x": 56.6,
+        "y": 26.9,
+        "radius": 5.9,
+        "description": "Single whole spice pod shifted in warmth",
+        "hint": "Look closely near coordinates (61%, 27%)",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1128,
+      "height": 846
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_023",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_023_04",
     "title": "[AI Canvas] Horologist Parts Tray Precision Screwdriver Collar",
     "category": "Photography",
     "pack": "Photography",
@@ -3158,8 +3119,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
-        "y": 3.0,
+        "x": 50,
+        "y": 3,
         "radius": 6.9,
         "description": "Single precision screwdriver color collar shifted in CIELAB (preserving knurled grip)",
         "hint": "Look closely near coordinates (60%, 3%)"
@@ -3171,10 +3132,10 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
-    "sequence": 3
+    "sequence": 4
   },
   {
-    "id": "goldilocks_photo_artist_oil_pastels_004",
+    "id": "photo_set_023_05",
     "title": "[Photo] Fine Art Studio Oil Pastel Stick",
     "category": "Photography",
     "pack": "Photography",
@@ -3185,7 +3146,7 @@
     "diffs": [
       {
         "id": 1,
-        "x": 50.0,
+        "x": 50,
         "y": 3.5,
         "radius": 7.5,
         "description": "Single oil pastel paper wrapper shifted to deep violet in CIELAB",
@@ -3198,10 +3159,10 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
-    "sequence": 4
+    "sequence": 5
   },
   {
-    "id": "goldilocks_photo_tailor_notions_spool_006",
+    "id": "photo_set_024_01",
     "title": "[Photo] Tailor Notions Box Woven Thread Spool",
     "category": "Photography",
     "pack": "Photography",
@@ -3214,36 +3175,9 @@
         "id": 1,
         "x": 83.7,
         "y": 14.1,
-        "radius": 10.0,
+        "radius": 10,
         "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
         "hint": "Look closely near coordinates (86%, 14%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1420,
-      "height": 1065
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_023",
-    "sequence": 5
-  },
-  {
-    "id": "scene_tailor_notions_spool_008",
-    "title": "[Photo] Tailor Notions Box Woven Thread Spool",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/scene_tailor_notions_spool_008_base.jpg",
-    "variantImage": "/levels/scene_tailor_notions_spool_008_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 38.3,
-        "y": 71.2,
-        "radius": 9.0,
-        "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
-        "hint": "Look closely near coordinates (34%, 71%)"
       }
     ],
     "dimensions": {
@@ -3255,61 +3189,36 @@
     "sequence": 1
   },
   {
-    "id": "scene_master_workbench_utility_knife_009",
-    "title": "[Photo] Master Workbench Utility Knife Slide",
+    "id": "photo_set_024_02",
+    "title": "Vintage Tailor Buttons & Mother of Pearl",
     "category": "Photography",
-    "pack": "Photography",
+    "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/scene_master_workbench_utility_knife_009_base.jpg",
-    "variantImage": "/levels/scene_master_workbench_utility_knife_009_variant.jpg",
+    "baseImage": "levels/scene_tailor_notions_spool_008_base.jpg",
+    "variantImage": "levels/scene_tailor_notions_spool_008_variant.jpg",
+    "operation": "recolor",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
     "diffs": [
       {
         "id": 1,
-        "x": 36.5,
-        "y": 39.7,
-        "radius": 6.5,
-        "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
-        "hint": "Look closely near coordinates (32%, 40%)"
+        "x": 56.3,
+        "y": 51.4,
+        "radius": 5.1,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
       }
     ],
-    "dimensions": {
-      "width": 1420,
-      "height": 1065
-    },
-    "aspectRatio": "4:3",
     "setId": "photo_set_024",
     "sequence": 2
   },
   {
-    "id": "scene_electronics_motherboard_rail_007",
-    "title": "[Photo] Motherboard Power Rail Electrolytic Cap",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/scene_electronics_motherboard_rail_007_base.jpg",
-    "variantImage": "/levels/scene_electronics_motherboard_rail_007_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 58.5,
-        "y": 65.9,
-        "radius": 10.0,
-        "description": "Single radial capacitor sleeve tone shifted in CIELAB (preserving markings and lead solder)",
-        "hint": "Look closely near coordinates (63%, 66%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1420,
-      "height": 1065
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_024",
-    "sequence": 3
-  },
-  {
-    "id": "scene_tailor_pincushion_needle_019",
+    "id": "photo_set_024_03",
     "title": "[Photo] Tailor Notions Box Pearl Button Accent",
     "category": "Photography",
     "pack": "Photography",
@@ -3333,1355 +3242,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
-    "sequence": 4
-  },
-  {
-    "id": "adaptive_tailor_green_spool_001",
-    "title": "[Photo] Tailor Notions Box Green Thread Spool",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/adaptive_tailor_green_spool_001_base.jpg",
-    "variantImage": "/levels/adaptive_tailor_green_spool_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 38.4,
-        "y": 71.2,
-        "radius": 8.9,
-        "description": "Single thread spool wrap fibers tone shifted to golden ochre in CIELAB (preserving wound thread texture)",
-        "hint": "Look closely near coordinates (34%, 71%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1420,
-      "height": 1065
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_024",
-    "sequence": 5
-  },
-  {
-    "id": "adaptive_workshop_utility_knife_002",
-    "title": "[Photo] Master Workbench Utility Knife Slide",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/adaptive_workshop_utility_knife_002_base.jpg",
-    "variantImage": "/levels/adaptive_workshop_utility_knife_002_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 36.5,
-        "y": 39.7,
-        "radius": 6.5,
-        "description": "Single utility knife thumb slide lock button shifted to crimson in CIELAB",
-        "hint": "Look closely near coordinates (32%, 40%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1420,
-      "height": 1065
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_025",
-    "sequence": 1
-  },
-  {
-    "id": "adaptive_tailor_red_spool_004",
-    "title": "[Photo] Tailor Sewing Kit Crimson Thread Wrap",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/adaptive_tailor_red_spool_004_base.jpg",
-    "variantImage": "/levels/adaptive_tailor_red_spool_004_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 38.4,
-        "y": 71.2,
-        "radius": 8.9,
-        "description": "Single crimson thread spool fibers shifted to plum in CIELAB (preserving winding lines)",
-        "hint": "Look closely near coordinates (34%, 71%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1420,
-      "height": 1065
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_025",
-    "sequence": 2
-  },
-  {
-    "id": "adaptive_workshop_tape_measure_lock_008",
-    "title": "[Photo] Workshop Bench Measuring Tape Lock Slider",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/adaptive_workshop_tape_measure_lock_008_base.jpg",
-    "variantImage": "/levels/adaptive_workshop_tape_measure_lock_008_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 36.5,
-        "y": 39.7,
-        "radius": 6.5,
-        "description": "Single measuring tape lock button shifted to terracotta in CIELAB",
-        "hint": "Look closely near coordinates (32%, 40%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1420,
-      "height": 1065
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_025",
     "sequence": 3
-  },
-  {
-    "id": "hyper_synth_logic_board_002",
-    "title": "[Ultra-Complex] Analog Synthesizer Master Circuit Matrix",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/hyper_synth_logic_board_002_base.jpg",
-    "variantImage": "/levels/hyper_synth_logic_board_002_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 47.4,
-        "radius": 10.0,
-        "hint": "Look closely near coordinates (51%, 48%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1244,
-      "height": 933
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_025",
-    "sequence": 4
-  },
-  {
-    "id": "artisan_electronics_workbench_001",
-    "title": "[Artisan Studio] Precision Electronics Repair Workstation",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/artisan_electronics_workbench_001_base.jpg",
-    "variantImage": "/levels/artisan_electronics_workbench_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 46.5,
-        "y": 26.5,
-        "radius": 5.6,
-        "hint": "Look closely near coordinates (41%, 26%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1244,
-      "height": 933
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_025",
-    "sequence": 5
-  },
-  {
-    "id": "method1_photo_leathercraft_001",
-    "title": "[Method 1: Workshop Inpainting] Leathercraft Workbench Awl",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_leathercraft_001_base.jpg",
-    "variantImage": "/levels/method1_photo_leathercraft_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 65.9,
-        "y": 44,
-        "radius": 9,
-        "hint": "Look closely near coordinates (66%, 44%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_026",
-    "sequence": 1
-  },
-  {
-    "id": "method1_photo_electronics_001",
-    "title": "[Method 1: Workshop Inpainting] Circuit Repair Workbench",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_electronics_001_base.jpg",
-    "variantImage": "/levels/method1_photo_electronics_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 57.5,
-        "y": 79.5,
-        "radius": 9,
-        "hint": "Look closely near coordinates (57%, 80%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_026",
-    "sequence": 2
-  },
-  {
-    "id": "method2_macro_miniature_001",
-    "title": "[Method 2: Macro Diffusion] Miniature Painting Wet Palette",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "/levels/method2_macro_miniature_001_base.jpg",
-    "variantImage": "/levels/method2_macro_miniature_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 86.5,
-        "y": 23.9,
-        "radius": 9.2,
-        "hint": "Look closely near coordinates (86%, 24%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_026",
-    "sequence": 3
-  },
-  {
-    "id": "ai_macro_watch_escapement_001",
-    "title": "Horology Watch Escapement & Ruby Jewels",
-    "category": "Real Photo",
-    "difficulty": "Easy",
-    "packId": "find_the_sniper",
-    "baseImage": "/levels/ai_macro_watch_escapement_001_base.jpg",
-    "variantImage": "/levels/ai_macro_watch_escapement_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56,
-        "y": 56.3,
-        "radius": 10.1,
-        "hint": "Look closely near coordinates (56%, 56%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_026",
-    "sequence": 4
-  },
-  {
-    "id": "ai_macro_stained_glass_001",
-    "title": "Master Stained Glass Solder & Cathedral Glass",
-    "category": "Real Photo",
-    "difficulty": "Medium",
-    "packId": "find_the_sniper",
-    "baseImage": "/levels/ai_macro_stained_glass_001_base.jpg",
-    "variantImage": "/levels/ai_macro_stained_glass_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56,
-        "y": 58.3,
-        "radius": 9,
-        "hint": "Look closely near coordinates (56%, 58%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_026",
-    "sequence": 5
-  },
-  {
-    "baseImage": "levels/photo-pairs/ai_macro_woodcarver_001/original.png",
-    "category": "Photography",
-    "totalDifferences": 1,
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 43.8,
-        "y": 76.8,
-        "radius": 9,
-        "hint": "Look closely near coordinates (44%, 77%)"
-      }
-    ],
-    "variantImage": "levels/photo-pairs/ai_macro_woodcarver_001/variant.png",
-    "id": "ai_macro_woodcarver_001",
-    "originalImage": "levels/photo-pairs/ai_macro_woodcarver_001/original.png",
-    "title": "Artisan Woodcarver Chisel Rack",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_027",
-    "sequence": 1
-  },
-  {
-    "variantImage": "levels/photo-pairs/ai_macro_chef_knife_001/variant.png",
-    "title": "Culinary Herb & Prep Station",
-    "pack": "Find the Sniper",
-    "diffs": [
-      {
-        "y": 48.4,
-        "id": 1,
-        "hint": "Look closely near coordinates (56%, 48%)",
-        "x": 50.4,
-        "radius": 9.0
-      }
-    ],
-    "originalImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
-    "totalDifferences": 1,
-    "id": "ai_macro_chef_knife_001",
-    "baseImage": "levels/photo-pairs/ai_macro_chef_knife_001/original.png",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "packId": "find_the_sniper",
-    "dimensions": {
-      "width": 1064,
-      "height": 798
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_027",
-    "sequence": 2
-  },
-  {
-    "category": "Photography",
-    "baseImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56.0,
-        "y": 48.1,
-        "radius": 9.4,
-        "hint": "Look closely near coordinates (61%, 48%)"
-      }
-    ],
-    "id": "ai_macro_cartography_001",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "originalImage": "levels/photo-pairs/ai_macro_cartography_001/original.png",
-    "variantImage": "levels/photo-pairs/ai_macro_cartography_001/variant.png",
-    "totalDifferences": 1,
-    "title": "Vintage Cartographer Sea Chart",
-    "difficulty": "Medium",
-    "dimensions": {
-      "width": 1068,
-      "height": 801
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_027",
-    "sequence": 3
-  },
-  {
-    "baseImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/original.png",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/variant.png",
-    "id": "ai_macro_tea_ceremony_001",
-    "pack": "Find the Sniper",
-    "diffs": [
-      {
-        "y": 50.1,
-        "id": 1,
-        "hint": "Look closely near coordinates (68%, 54%)",
-        "x": 68.0,
-        "radius": 5.5
-      }
-    ],
-    "totalDifferences": 1,
-    "difficulty": "Hard",
-    "title": "Traditional Gongfu Tea Board",
-    "originalImage": "levels/photo-pairs/ai_macro_tea_ceremony_001/original.png",
-    "packId": "find_the_sniper",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_027",
-    "sequence": 4
-  },
-  {
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 46.7,
-        "y": 26.8,
-        "radius": 5.6,
-        "hint": "Look closely near coordinates (42%, 27%)"
-      }
-    ],
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/ai_macro_vintage_radio_001/variant.png",
-    "originalImage": "levels/photo-pairs/ai_macro_vintage_radio_001/original.png",
-    "pack": "Find the Sniper",
-    "title": "Vacuum Tube Audio Assembly",
-    "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/ai_macro_vintage_radio_001/original.png",
-    "id": "ai_macro_vintage_radio_001",
-    "difficulty": "Hard",
-    "dimensions": {
-      "width": 1064,
-      "height": 798
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_027",
-    "sequence": 5
-  },
-  {
-    "id": "ai_macro_sewing_notions_001",
-    "title": "Couture Tailor Notions Box",
-    "packId": "find_the_sniper",
-    "difficulty": "Easy",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/ai_macro_sewing_notions_001/variant.png",
-    "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
-    "diffs": [
-      {
-        "y": 47.8,
-        "id": 1,
-        "hint": "Look closely near coordinates (64%, 48%)",
-        "x": 54.3,
-        "radius": 10.0
-      }
-    ],
-    "originalImage": "levels/photo-pairs/ai_macro_sewing_notions_001/original.png",
-    "totalDifferences": 1,
-    "dimensions": {
-      "width": 948,
-      "height": 711
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_028",
-    "sequence": 1
-  },
-  {
-    "baseImage": "levels/photo-pairs/ai_macro_watchmaker_001/original.png",
-    "title": "Horology Watchmaker Tray",
-    "totalDifferences": 1,
-    "id": "ai_macro_watchmaker_001",
-    "variantImage": "levels/photo-pairs/ai_macro_watchmaker_001/variant.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 65.7,
-        "y": 30.8,
-        "radius": 7.3,
-        "hint": "Look closely near coordinates (66%, 31%)"
-      }
-    ],
-    "pack": "Find the Sniper",
-    "difficulty": "Medium",
-    "category": "Photography",
-    "originalImage": "levels/photo-pairs/ai_macro_watchmaker_001/original.png",
-    "packId": "find_the_sniper",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_028",
-    "sequence": 2
-  },
-  {
-    "variantImage": "levels/photo-pairs/ai_macro_botanist_001/variant.png",
-    "totalDifferences": 1,
-    "originalImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 37.1,
-        "y": 69.9,
-        "radius": 5,
-        "hint": "Look closely near coordinates (37%, 70%)"
-      }
-    ],
-    "baseImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "title": "Botanist Herbarium Study",
-    "pack": "Find the Sniper",
-    "category": "Photography",
-    "id": "ai_macro_botanist_001",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_028",
-    "sequence": 3
-  },
-  {
-    "variantImage": "levels/photo-pairs/ai_macro_machinist_001/variant.png",
-    "totalDifferences": 1,
-    "id": "ai_macro_machinist_001",
-    "pack": "Find the Sniper",
-    "diffs": [
-      {
-        "y": 74.8,
-        "id": 1,
-        "hint": "Look closely near coordinates (45%, 75%)",
-        "x": 45.5,
-        "radius": 7.5
-      }
-    ],
-    "difficulty": "Hard",
-    "title": "Machinist Precision Hardware Mat",
-    "originalImage": "levels/photo-pairs/ai_macro_machinist_001/original.png",
-    "category": "Photography",
-    "baseImage": "levels/photo-pairs/ai_macro_machinist_001/original.png",
-    "packId": "find_the_sniper",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_028",
-    "sequence": 4
-  },
-  {
-    "variantImage": "levels/photo-pairs/ai_macro_electronics_001/variant.png",
-    "originalImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
-    "category": "Photography",
-    "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 69.4,
-        "y": 29.9,
-        "radius": 8.9,
-        "hint": "Look closely near coordinates (69%, 30%)"
-      }
-    ],
-    "id": "ai_macro_electronics_001",
-    "pack": "Find the Sniper",
-    "title": "Audio Circuit Repair Workbench",
-    "totalDifferences": 1,
-    "difficulty": "Hard",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_028",
-    "sequence": 5
-  },
-  {
-    "title": "Nursery Plant Tag",
-    "baseImage": "levels/photo-pairs/nursery/medium_nursery_001/base.jpg",
-    "variantImage": "levels/photo-pairs/nursery/medium_nursery_001/variant.jpg",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "id": "medium_nursery_001",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 63.8,
-        "y": 40.6,
-        "radius": 9,
-        "hint": "Look closely near coordinates (64%, 41%)"
-      }
-    ],
-    "category": "Greenhouse Clutter",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_029",
-    "sequence": 1
-  },
-  {
-    "id": "medium_workbench_001",
-    "variantImage": "levels/photo-pairs/workbench/medium_workbench_001/variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 49.7,
-        "y": 49.6,
-        "radius": 9,
-        "hint": "Look closely near coordinates (50%, 50%)"
-      }
-    ],
-    "category": "Workshop Clutter",
-    "packId": "find_the_sniper",
-    "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/workbench/medium_workbench_001/base.jpg",
-    "difficulty": "Medium",
-    "title": "Workbench Screwdriver",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_029",
-    "sequence": 2
-  },
-  {
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.3,
-        "y": 50.4,
-        "radius": 9,
-        "hint": "Look closely near coordinates (50%, 50%)"
-      }
-    ],
-    "title": "Forest Floor Camouflage",
-    "id": "hard_forest_001",
-    "variantImage": "levels/photo-pairs/camouflage/hard_forest_001/variant.jpg",
-    "difficulty": "Hard",
-    "baseImage": "levels/photo-pairs/camouflage/hard_forest_001/base.jpg",
-    "category": "Extreme Hunter",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_029",
-    "sequence": 3
-  },
-  {
-    "pack": "Find the Sniper",
-    "difficulty": "Medium",
-    "title": "Workbench Hardware Ring",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 91.8,
-        "y": 28.1,
-        "radius": 9,
-        "hint": "Look closely near coordinates (92%, 28%)"
-      }
-    ],
-    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/variant.jpg",
-    "packId": "find_the_sniper",
-    "id": "photo_workbench_hardware_001",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_029",
-    "sequence": 4
-  },
-  {
-    "diffs": [
-      {
-        "id": 1,
-        "x": 39.5,
-        "y": 11.4,
-        "radius": 9,
-        "hint": "Look closely near coordinates (40%, 11%)"
-      }
-    ],
-    "title": "Potting Table Succulent",
-    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/variant.jpg",
-    "packId": "find_the_sniper",
-    "pack": "Find the Sniper",
-    "id": "photo_potting_table_001",
-    "difficulty": "Medium",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_029",
-    "sequence": 5
-  },
-  {
-    "packId": "abstract_animated",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "variantImage": "levels/photo-pairs/photo-watchmaker-bench/variant.jpg",
-    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
-    "pack": "Find the Sniper",
-    "title": "Watchmaker Bench Gear",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 35.5,
-        "y": 62.5,
-        "radius": 9,
-        "hint": "Look closely near coordinates (35%, 63%)"
-      }
-    ],
-    "id": "photo_watchmaker_bench_001",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_030",
-    "sequence": 1
-  },
-  {
-    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 16.9,
-        "y": 75.1,
-        "radius": 10.9,
-        "hint": "Look closely near coordinates (17%, 75%)"
-      }
-    ],
-    "title": "Bakers Table Cutter",
-    "pack": "Find the Sniper",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/photo-bakers-table/variant.jpg",
-    "id": "photo_bakers_table_001",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_030",
-    "sequence": 2
-  },
-  {
-    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 31.8,
-        "y": 84.1,
-        "radius": 9,
-        "hint": "Look closely near coordinates (32%, 84%)"
-      }
-    ],
-    "difficulty": "Medium",
-    "pack": "Find the Sniper",
-    "title": "Electronics Bench Resistor",
-    "packId": "find_the_sniper",
-    "id": "photo_electronics_bench_001",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/photo-electronics-bench/variant.jpg",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_030",
-    "sequence": 3
-  },
-  {
-    "diffs": [
-      {
-        "id": 1,
-        "x": 4.5,
-        "y": 79.6,
-        "radius": 9,
-        "hint": "Look closely near coordinates (4%, 80%)"
-      }
-    ],
-    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
-    "title": "Antique Desk Key",
-    "variantImage": "levels/photo-pairs/photo-antique-desk/variant.jpg",
-    "id": "photo_antique_desk_001",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_030",
-    "sequence": 4
-  },
-  {
-    "id": "photo_board_game_001",
-    "difficulty": "Hard",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 57.4,
-        "y": 46.2,
-        "radius": 9,
-        "hint": "Look closely near coordinates (57%, 46%)"
-      }
-    ],
-    "title": "Board Game Piece",
-    "pack": "Find the Sniper",
-    "variantImage": "levels/photo-pairs/photo-board-game/variant.jpg",
-    "category": "Photography",
-    "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_030",
-    "sequence": 5
-  },
-  {
-    "packId": "find_the_sniper",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 60.6,
-        "y": 78,
-        "radius": 9,
-        "hint": "Look closely near coordinates (61%, 78%)"
-      }
-    ],
-    "difficulty": "Medium",
-    "variantImage": "levels/photo-pairs/photo-woodworking-bench/variant.jpg",
-    "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
-    "id": "photo_woodworking_bench_001",
-    "title": "Woodworking Bench Screw",
-    "pack": "Find the Sniper",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_031",
-    "sequence": 1
-  },
-  {
-    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
-    "id": "photo_repair_drawer_001",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "packId": "find_the_sniper",
-    "pack": "Find the Sniper",
-    "variantImage": "levels/photo-pairs/photo-repair-drawer/variant.jpg",
-    "title": "Repair Drawer Washer",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 59.6,
-        "y": 72.8,
-        "radius": 9,
-        "hint": "Look closely near coordinates (60%, 73%)"
-      }
-    ],
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_031",
-    "sequence": 2
-  },
-  {
-    "difficulty": "Easy",
-    "variantImage": "levels/photo-pairs/photo-camera-gear/variant.jpg",
-    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
-    "packId": "find_the_sniper",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 35.1,
-        "y": 66.5,
-        "radius": 9,
-        "hint": "Look closely near coordinates (35%, 67%)"
-      }
-    ],
-    "category": "Photography",
-    "title": "Camera Gear Lens Cap",
-    "pack": "Find the Sniper",
-    "id": "photo_camera_gear_001",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_031",
-    "sequence": 3
-  },
-  {
-    "id": "photo_pottery_table_001",
-    "title": "Pottery Table Sponge",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 49.2,
-        "y": 30,
-        "radius": 11,
-        "hint": "Look closely near coordinates (49%, 30%)"
-      }
-    ],
-    "difficulty": "Easy",
-    "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/photo-pottery-table/variant.jpg",
-    "packId": "find_the_sniper",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_031",
-    "sequence": 4
-  },
-  {
-    "id": "photo_bicycle_repair_001",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 92.1,
-        "y": 46.1,
-        "radius": 9,
-        "hint": "Look closely near coordinates (92%, 46%)"
-      }
-    ],
-    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
-    "pack": "Find the Sniper",
-    "variantImage": "levels/photo-pairs/photo-bicycle-repair/variant.jpg",
-    "difficulty": "Medium",
-    "category": "Photography",
-    "title": "Bicycle Repair Bolt",
-    "packId": "find_the_sniper",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_031",
-    "sequence": 5
-  },
-  {
-    "difficulty": "Medium",
-    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
-    "pack": "Find the Sniper",
-    "id": "photo_woodworking_table_001",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 52.1,
-        "y": 14.2,
-        "radius": 9,
-        "hint": "Look closely near coordinates (52%, 14%)"
-      }
-    ],
-    "packId": "find_the_sniper",
-    "title": "Woodworking Screw",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/photo-woodworking-table/variant.jpg",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_032",
-    "sequence": 1
-  },
-  {
-    "id": "photo_artist_supply_001",
-    "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
-    "title": "Artist Supply Paint",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 51.8,
-        "y": 53.2,
-        "radius": 9,
-        "hint": "Look closely near coordinates (52%, 53%)"
-      }
-    ],
-    "difficulty": "Easy",
-    "variantImage": "levels/photo-pairs/photo-artist-supply/variant.jpg",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_032",
-    "sequence": 2
-  },
-  {
-    "pack": "Find the Sniper",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 55.8,
-        "y": 51.8,
-        "radius": 9,
-        "hint": "Look closely near coordinates (56%, 52%)"
-      }
-    ],
-    "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg",
-    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
-    "category": "Photography",
-    "id": "photo_camping_gear_001",
-    "title": "Camping Gear Carabiner",
-    "packId": "find_the_sniper",
-    "difficulty": "Easy",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_032",
-    "sequence": 3
-  },
-  {
-    "pack": "Find the Sniper",
-    "variantImage": "levels/photo-pairs/photo-sewing-table/variant.jpg",
-    "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
-    "difficulty": "Easy",
-    "id": "photo_sewing_table_001",
-    "title": "Sewing Table Button",
-    "packId": "find_the_sniper",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 84,
-        "y": 75.5,
-        "radius": 10.4,
-        "hint": "Look closely near coordinates (84%, 76%)"
-      }
-    ],
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_032",
-    "sequence": 4
-  },
-  {
-    "difficulty": "Easy",
-    "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
-    "id": "photo_map_restoration_001",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 7,
-        "y": 18.6,
-        "radius": 10.8,
-        "hint": "Look closely near coordinates (7%, 19%)"
-      }
-    ],
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "title": "Map Restoration Clip",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/photo-map-restoration/variant.jpg",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_032",
-    "sequence": 5
-  },
-  {
-    "diffs": [
-      {
-        "id": 1,
-        "x": 33.6,
-        "y": 53.1,
-        "radius": 9,
-        "hint": "Look closely near coordinates (34%, 53%)"
-      }
-    ],
-    "difficulty": "Easy",
-    "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
-    "variantImage": "levels/photo-pairs/photo-garden-potting/variant.jpg",
-    "pack": "Find the Sniper",
-    "title": "Garden Potting Pot",
-    "packId": "find_the_sniper",
-    "id": "photo_garden_potting_001",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_033",
-    "sequence": 1
-  },
-  {
-    "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "difficulty": "Easy",
-    "variantImage": "levels/photo-pairs/photo-game-night/variant.jpg",
-    "packId": "find_the_sniper",
-    "title": "Game Night Token",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 29.6,
-        "y": 46.9,
-        "radius": 9,
-        "hint": "Look closely near coordinates (30%, 47%)"
-      }
-    ],
-    "id": "photo_game_night_001",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_033",
-    "sequence": 2
-  },
-  {
-    "variantImage": "levels/photo-pairs/photo-watch-repair/variant.jpg",
-    "title": "Watch Repair Gear",
-    "id": "photo_watch_repair_001",
-    "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 3.7,
-        "y": 63.5,
-        "radius": 8.1,
-        "hint": "Look closely near coordinates (4%, 63%)"
-      }
-    ],
-    "pack": "Find the Sniper",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_033",
-    "sequence": 3
-  },
-  {
-    "id": "ai_bakery_counter_001",
-    "difficulty": "Easy",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 85.2,
-        "y": 66.3,
-        "radius": 9,
-        "hint": "Look closely near coordinates (85%, 66%)"
-      }
-    ],
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "category": "Bakery Clutter",
-    "baseImage": "levels/photo-pairs/ai-bakery-counter/base.jpg",
-    "variantImage": "levels/photo-pairs/ai-bakery-counter/variant.jpg",
-    "title": "Rustic Bakery Counter",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_033",
-    "sequence": 4
-  },
-  {
-    "diffs": [
-      {
-        "id": 1,
-        "x": 43.2,
-        "y": 78.6,
-        "radius": 9,
-        "hint": "Look closely near coordinates (43%, 79%)"
-      }
-    ],
-    "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/ai-greenhouse-potting/base.jpg",
-    "pack": "Find the Sniper",
-    "title": "Greenhouse Potting Bench",
-    "variantImage": "levels/photo-pairs/ai-greenhouse-potting/variant.jpg",
-    "difficulty": "Easy",
-    "category": "Botanical Garden",
-    "id": "ai_greenhouse_potting_001",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_033",
-    "sequence": 5
-  },
-  {
-    "pack": "Find the Sniper",
-    "category": "Fine Art Studio",
-    "packId": "find_the_sniper",
-    "title": "Painter Studio Palette",
-    "baseImage": "levels/photo-pairs/ai-artist-easel/base.jpg",
-    "id": "ai_artist_easel_001",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 10.9,
-        "y": 71.2,
-        "radius": 9,
-        "hint": "Look closely near coordinates (11%, 71%)"
-      }
-    ],
-    "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg",
-    "difficulty": "Easy",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_034",
-    "sequence": 1
-  },
-  {
-    "difficulty": "Easy",
-    "category": "Espresso Station",
-    "packId": "find_the_sniper",
-    "pack": "Find the Sniper",
-    "id": "ai_coffee_bar_001",
-    "title": "Artisanal Coffee Bar",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 10,
-        "y": 58.3,
-        "radius": 9,
-        "hint": "Look closely near coordinates (10%, 58%)"
-      }
-    ],
-    "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg",
-    "baseImage": "levels/photo-pairs/ai-coffee-bar/base.jpg",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_034",
-    "sequence": 2
-  },
-  {
-    "id": "ai_antique_study_001",
-    "difficulty": "Easy",
-    "packId": "find_the_sniper",
-    "title": "Victorian Study Desk",
-    "baseImage": "levels/photo-pairs/ai-antique-study/base.jpg",
-    "pack": "Find the Sniper",
-    "category": "Antique Study",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 89.5,
-        "y": 59.2,
-        "radius": 9.2,
-        "hint": "Look closely near coordinates (90%, 59%)"
-      }
-    ],
-    "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_034",
-    "sequence": 3
-  },
-  {
-    "title": "Botanist Herbarium Desk",
-    "variantImage": "levels/photo-pairs/ai-botanist-herbarium/variant.jpg",
-    "baseImage": "levels/photo-pairs/ai-botanist-herbarium/base.jpg",
-    "category": "Botanical Garden",
-    "difficulty": "Hard",
-    "pack": "Find the Sniper",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 52.2,
-        "y": 50.9,
-        "radius": 4.6,
-        "hint": "Look closely near coordinates (52%, 51%)"
-      }
-    ],
-    "id": "ai_botanist_herbarium_001",
-    "packId": "find_the_sniper",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_034",
-    "sequence": 4
-  },
-  {
-    "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/ai-cartography-desk/base.jpg",
-    "packId": "find_the_sniper",
-    "difficulty": "Easy",
-    "category": "Antique Study",
-    "title": "Maritime Cartography Desk",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 17.1,
-        "y": 56.6,
-        "radius": 9.7,
-        "hint": "Look closely near coordinates (17%, 57%)"
-      }
-    ],
-    "variantImage": "levels/photo-pairs/ai-cartography-desk/variant.jpg",
-    "id": "ai_cartography_desk_001",
-    "dimensions": {
-      "width": 1200,
-      "height": 896
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_034",
-    "sequence": 5
   },
   {
     "category": "Workshop Clutter",
@@ -4700,18 +3261,18 @@
     "packId": "find_the_sniper",
     "variantImage": "levels/photo-pairs/ai-locksmith-bench/variant.jpg",
     "pack": "Find the Sniper",
-    "id": "ai_locksmith_bench_001",
+    "id": "photo_set_024_04",
     "dimensions": {
       "width": 1200,
       "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_035",
-    "sequence": 1
+    "setId": "photo_set_024",
+    "sequence": 4
   },
   {
     "difficulty": "Hard",
-    "id": "photo_repair_hardware_002",
+    "id": "photo_set_024_05",
     "packId": "find_the_sniper",
     "diffs": [
       {
@@ -4732,8 +3293,8 @@
       "height": 480
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_035",
-    "sequence": 2
+    "setId": "photo_set_024",
+    "sequence": 5
   },
   {
     "category": "Game Night",
@@ -4751,66 +3312,365 @@
     "pack": "Find the Sniper",
     "baseImage": "levels/photo-pairs/photo-strategy-pieces-002/base.jpg",
     "variantImage": "levels/photo-pairs/photo-strategy-pieces-002/variant.jpg",
-    "id": "photo_strategy_pieces_002",
+    "id": "photo_set_025_01",
     "difficulty": "Hard",
     "dimensions": {
       "width": 640,
       "height": 480
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_035",
-    "sequence": 3
+    "setId": "photo_set_025",
+    "sequence": 1
   },
   {
-    "id": "fresh_artist_desk_flatlay_005",
-    "title": "[80+ Objects | 43% Clutter] Fine Art Watercolor Studio Knolling",
+    "id": "photo_set_025_02",
+    "title": "Entomology Butterfly Specimens",
     "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Hard",
-    "baseImage": "/levels/fresh_artist_desk_flatlay_005_base.jpg",
-    "variantImage": "/levels/fresh_artist_desk_flatlay_005_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.0,
-        "y": 50.4,
-        "radius": 5.6,
-        "hint": "Look closely near coordinates (48%, 50%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1244,
-      "height": 933
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_035",
-    "sequence": 4
-  },
-  {
-    "id": "fresh_photo_leathercraft_001",
-    "title": "Bespoke Leathercraft Saddle Stitch Tooling",
-    "category": "Photography",
-    "pack": "Photography",
+    "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_photo_leathercraft_001_base.jpg",
-    "variantImage": "/levels/fresh_photo_leathercraft_001_variant.jpg",
+    "baseImage": "levels/photo_set_036_02_base.jpg",
+    "variantImage": "levels/photo_set_036_02_variant.jpg",
+    "operation": "recolor",
     "diffs": [
       {
         "id": 1,
-        "x": 48.2,
-        "y": 50.0,
-        "radius": 6.3,
-        "hint": "Look closely near coordinates (48%, 54%)"
+        "x": 81.4,
+        "y": 36.4,
+        "radius": 6.1,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
       }
     ],
     "dimensions": {
       "width": 1200,
-      "height": 900
+      "height": 896
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_035",
+    "setId": "photo_set_025",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_025_03",
+    "title": "Antique Locksmith Skeleton Keys",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo_set_036_04_base.jpg",
+    "variantImage": "levels/photo_set_036_04_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 84.1,
+        "y": 76.7,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_025",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_025_04",
+    "title": "Specialty Coffee Roastery Tasting",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo_set_037_03_base.jpg",
+    "variantImage": "levels/photo_set_037_03_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 17.8,
+        "y": 56.8,
+        "radius": 4.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_025",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_025_05",
+    "title": "Tailor Haberdashery Wooden Spools",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo_set_037_04_base.jpg",
+    "variantImage": "levels/photo_set_037_04_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 35.3,
+        "y": 26.2,
+        "radius": 5.4,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_025",
     "sequence": 5
+  },
+  {
+    "id": "photo_set_026_01",
+    "title": "Woodcarver Chisel & Gouge Tools",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo_set_037_05_base.jpg",
+    "variantImage": "levels/photo_set_037_05_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 79.5,
+        "y": 82.4,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_026",
+    "sequence": 1
+  },
+  {
+    "id": "photo_set_026_02",
+    "title": "Calligraphy Wax Seal Impression Desk",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo_set_038_01_base.jpg",
+    "variantImage": "levels/photo_set_038_01_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31.3,
+        "y": 60.7,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_026",
+    "sequence": 2
+  },
+  {
+    "id": "photo_set_026_03",
+    "title": "Vintage Antique Cartography Exploration Map",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo_set_038_04_base.jpg",
+    "variantImage": "levels/photo_set_038_04_variant.jpg",
+    "operation": "recolor",
+    "dimensions": {
+      "width": 1200,
+      "height": 801
+    },
+    "aspectRatio": "4:3",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 71.2,
+        "y": 57.2,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "setId": "photo_set_026",
+    "sequence": 3
+  },
+  {
+    "id": "photo_set_026_04",
+    "title": "Embroidery Silk Floss Spools Grid",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo_set_041_01_base.jpg",
+    "variantImage": "levels/photo_set_041_01_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 4.7,
+        "y": 66.8,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "setId": "photo_set_026",
+    "sequence": 4
+  },
+  {
+    "id": "photo_set_026_05",
+    "title": "Polished Natural Gemstone Beads",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/photo_set_041_03_base.jpg",
+    "variantImage": "levels/photo_set_041_03_variant.jpg",
+    "operation": "recolor",
+    "dimensions": {
+      "width": 1200,
+      "height": 896
+    },
+    "aspectRatio": "4:3",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 50.3,
+        "y": 49,
+        "radius": 4.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "setId": "photo_set_026",
+    "sequence": 5
+  },
+  {
+    "id": "daily_set_01_01",
+    "title": "Farmers Market Fresh Citrus Leaf",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/daily_v8_01_citrus_base.jpg",
+    "variantImage": "levels/daily_v8_01_citrus_variant.jpg",
+    "operation": "recolor",
+    "dimensions": {
+      "width": 1600,
+      "height": 1067
+    },
+    "aspectRatio": "4:3",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 37.9,
+        "y": 54,
+        "radius": 5.8,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dailySet": "set_daily_modern_01",
+    "setId": null,
+    "sequence": null
+  },
+  {
+    "id": "daily_set_06_01",
+    "title": "Patisserie Gourmet Brioche Array",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/daily_v8_06_bakery_base.jpg",
+    "variantImage": "levels/daily_v8_06_bakery_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 44.3,
+        "y": 36.7,
+        "radius": 5.7,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1376,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "dailySet": "set_daily_modern_06",
+    "setId": null,
+    "sequence": null
+  },
+  {
+    "id": "daily_set_06_03",
+    "title": "Automotive Hardware Bench Array",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/daily_v8_06_mechanic_base.jpg",
+    "variantImage": "levels/daily_v8_06_mechanic_variant.jpg",
+    "operation": "recolor",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 74.7,
+        "y": 86.1,
+        "radius": 7.5,
+        "description": "Single recolor difference",
+        "hint": "Look closely for a recolor difference",
+        "operation": "recolor"
+      }
+    ],
+    "dimensions": {
+      "width": 1376,
+      "height": 768
+    },
+    "aspectRatio": "4:3",
+    "dailySet": "set_daily_modern_06",
+    "setId": null,
+    "sequence": null
   }
 ]

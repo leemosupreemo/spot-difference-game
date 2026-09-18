@@ -3,7 +3,7 @@ import { AlertCircle, X, Play } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
-export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily = false }) {
+export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily = false, isFirstAttempt = false }) {
   if (!isOpen) return null;
 
   return (
@@ -33,11 +33,11 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
           padding: '24px 20px',
           boxSizing: 'border-box',
           textAlign: 'center',
-          border: isDaily ? '1.5px solid rgba(255, 0, 127, 0.6)' : '1.5px solid rgba(0, 240, 255, 0.4)',
-          boxShadow: isDaily ? '0 0 35px rgba(255, 0, 127, 0.35)' : '0 0 35px rgba(0, 240, 255, 0.25)',
+          border: (isDaily || isFirstAttempt) ? '1.5px solid rgba(255, 0, 127, 0.6)' : '1.5px solid rgba(0, 240, 255, 0.4)',
+          boxShadow: (isDaily || isFirstAttempt) ? '0 0 35px rgba(255, 0, 127, 0.35)' : '0 0 35px rgba(0, 240, 255, 0.25)',
           borderRadius: '20px',
           position: 'relative',
-          '--modal-accent': isDaily ? 'var(--accent-pink)' : 'var(--accent-cyan)'
+          '--modal-accent': (isDaily || isFirstAttempt) ? 'var(--accent-pink)' : 'var(--accent-cyan)'
         }}
       >
         <ModalAmbientParticles />
@@ -71,24 +71,26 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: isDaily ? 'rgba(255, 0, 127, 0.15)' : 'rgba(0, 240, 255, 0.15)',
-          border: isDaily ? '1.5px solid var(--accent-pink)' : '1.5px solid var(--accent-cyan)',
+          background: (isDaily || isFirstAttempt) ? 'rgba(255, 0, 127, 0.15)' : 'rgba(0, 240, 255, 0.15)',
+          border: (isDaily || isFirstAttempt) ? '1.5px solid var(--accent-pink)' : '1.5px solid var(--accent-cyan)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           margin: '0 auto 14px auto',
-          boxShadow: isDaily ? '0 0 20px rgba(255, 0, 127, 0.4)' : '0 0 20px rgba(0, 240, 255, 0.35)'
+          boxShadow: (isDaily || isFirstAttempt) ? '0 0 20px rgba(255, 0, 127, 0.4)' : '0 0 20px rgba(0, 240, 255, 0.35)'
         }}>
-          <AlertCircle size={28} color={isDaily ? 'var(--accent-pink)' : 'var(--accent-cyan)'} />
+          <AlertCircle size={28} color={(isDaily || isFirstAttempt) ? 'var(--accent-pink)' : 'var(--accent-cyan)'} />
         </div>
 
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '8px', color: isDaily ? 'var(--accent-pink)' : '#fff', letterSpacing: '0.5px' }}>
-          {isDaily ? 'Forfeit Set of the Day?' : 'Quit Current Game?'}
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '8px', color: (isDaily || isFirstAttempt) ? 'var(--accent-pink)' : '#fff', letterSpacing: '0.5px' }}>
+          {isDaily ? 'Forfeit Set of the Day?' : (isFirstAttempt ? 'Abandon 1st Attempt?' : 'Quit Current Game?')}
         </h2>
-        <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '22px', lineHeight: 1.45 }}>
+        <p style={{ fontSize: '0.88rem', color: isFirstAttempt ? 'rgba(255, 255, 255, 0.85)' : 'var(--text-muted)', marginBottom: '22px', lineHeight: 1.45 }}>
           {isDaily
             ? "This will mark today's set as a failure."
-            : "Your current stage progress will be lost."}
+            : isFirstAttempt
+              ? "Quitting now counts as a failed 1st attempt and will be recorded as 'Failed' in records."
+              : "Your current stage progress will be lost."}
         </p>
 
         {/* Action Buttons */}

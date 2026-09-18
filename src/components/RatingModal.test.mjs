@@ -22,52 +22,89 @@ const appConfigPath = path.join(
   'appConfig.js'
 );
 
-test('RatingModal conforms to strict styling and layout specifications', () => {
+const ratingPromptPath = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '..',
+  'services',
+  'ratingPrompt.js'
+);
+
+test('RatingModal follows the cheatsheet copy and layout', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
-  // 1) No small description text under "Enjoying Diff Hunter?"
-  assert.doesNotMatch(source, /You're back for round two/);
-  assert.doesNotMatch(source, /If you're having fun spotting/);
+  // Title / body / CTAs exactly as specified
+  assert.match(source, /Enjoying the game\?/);
+  assert.match(source, /A quick rating really helps us out\./);
+  assert.match(source, />\s*Rate the Game\s*</);
+  assert.match(source, />\s*Maybe Later\s*</);
 
-  // 2) No "App Store Review" label on top
+  // No interactive star picker or feedback-routing left over from the old design
+  assert.doesNotMatch(source, /handleSelectRating/);
+  assert.doesNotMatch(source, /onOpenSupport/);
+  assert.doesNotMatch(source, /star - 0\.5/);
+  assert.doesNotMatch(source, />\s*Rate on App Store/);
   assert.doesNotMatch(source, /App Store Review/);
 
-  // 3) Top and bottom padding to prevent bleeding off screen
+  // Top and bottom padding to prevent bleeding off screen; standardized viewport cap
   assert.match(source, /paddingTop: 'max\(env\(safe-area-inset-top\)/);
   assert.match(source, /paddingBottom: 'max\(env\(safe-area-inset-bottom\)/);
-  // Standardized to the same dynamic viewport cap every other modal uses
   assert.match(source, /maxHeight: 'calc\(100dvh - 32px\)'/);
-
-  // 5) No "Rate on App Store" button
-  assert.doesNotMatch(source, />\s*Rate on App Store/);
 });
 
-test('RatingModal supports half-star selection and routes >= 4 to store and < 4 to support', () => {
+test('RatingModal rate action opens the store link and dismiss schedules a retry window', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
-  // 4) Half-star interactive selection & conditional routing
-  assert.match(source, /star - 0\.5/);
-  assert.match(source, /clipPath/);
-  assert.match(source, /rating >= 4\.0/);
-  assert.match(source, /onOpenSupport/);
+  assert.match(source, /getAppStoreReviewUrl/);
+  assert.match(source, /window\.open\(reviewUrl/);
+  assert.match(source, /diff_hunter_rating_handled', 'rated'/);
+  assert.match(source, /diff_hunter_rating_handled', 'dismissed'/);
+  assert.match(source, /import \{ recordRatingPromptDismissed \} from '\.\.\/services\/ratingPrompt'/);
+  assert.match(source, /recordRatingPromptDismissed\(\)/);
 });
 
 test('App Store review link is dynamically configurable post-launch via appConfig', () => {
   const configSource = fs.readFileSync(appConfigPath, 'utf8');
 
-  // 6) Dynamic OTA URL configuration
   assert.match(configSource, /getAppStoreReviewUrl/);
   assert.match(configSource, /setAppStoreReviewUrl/);
   assert.match(configSource, /syncRemoteAppConfig/);
   assert.match(configSource, /app_config/);
 });
 
-test('App.jsx tracks launch counts, connects support routing, and syncs remote config', () => {
+test('App.jsx shows the rating prompt only after a successful-round return to the menu', () => {
   const appSource = fs.readFileSync(appPath, 'utf8');
 
   assert.match(appSource, /RatingModal/);
   assert.match(appSource, /syncRemoteAppConfig/);
-  assert.match(appSource, /diff_hunter_launch_count/);
-  assert.match(appSource, /count === 2 && !ratingHandled/);
-  assert.match(appSource, /onOpenSupport/);
+
+  // Counts a "successful round" as a full stage/set win, not per launch
+  assert.match(appSource, /incrementSuccessfulRounds\(\)/);
+  assert.match(appSource, /justWonRoundRef\.current = true/);
+
+  // Gated on landing back on the menu after that win, never mid-game
+  assert.match(appSource, /if \(view !== 'menu' \|\| !justWonRoundRef\.current\) return;/);
+  assert.match(appSource, /shouldShowRatingPrompt\(/);
+
+  // The old "second launch" trigger is gone
+  assert.doesNotMatch(appSource, /count === 2 && !ratingHandled/);
+  assert.doesNotMatch(appSource, /onOpenSupport/);
+});
+
+test('ratingPrompt service implements the cheatsheet eligibility rules', () => {
+  const source = fs.readFileSync(ratingPromptPath, 'utf8');
+
+  assert.match(source, /export function incrementSuccessfulRounds/);
+  assert.match(source, /export function shouldShowRatingPrompt/);
+  assert.match(source, /export function recordRatingPromptShown/);
+  assert.match(source, /export function recordRatingPromptDismissed/);
+
+  // First attempt at >= 5 successful rounds
+  assert.match(source, /FIRST_ATTEMPT_ROUND_THRESHOLD = 5/);
+  // Retry only after 10-20 more rounds
+  assert.match(source, /RETRY_BONUS_ROUNDS_MIN = 10/);
+  assert.match(source, /RETRY_BONUS_ROUNDS_MAX = 20/);
+  // Caps at two attempts total
+  assert.match(source, /MAX_ATTEMPTS = 2/);
+  // Already-rated players are never prompted again
+  assert.match(source, /handledType === 'rated'/);
 });

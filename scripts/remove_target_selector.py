@@ -940,7 +940,15 @@ class RemoveTargetSelector:
         return best, f"Selected optimal Remove target (Score: {best['score']}/100, Coherence: {best['coh_score']}, Peers: {best['peer_count']}, Gap: {best['gap_penalty']})", evaluated_candidates
 
     @classmethod
-    def execute_removal_and_qa(cls, image_bgr, target_mask, target_bbox, raw_sam_masks, difficulty="Medium"):
+    def execute_removal_and_qa(
+        cls,
+        image_bgr,
+        target_mask,
+        target_bbox,
+        raw_sam_masks,
+        difficulty="Medium",
+        cleanup_mask=None,
+    ):
         """
         Executes structure-aware background reconstruction and runs RemovalNaturalnessCritic + PerceptualVerificationEngine.
         """
@@ -948,8 +956,9 @@ class RemoveTargetSelector:
         bx1, by1, bx2, by2 = target_bbox
 
         # 1. RECONSTRUCT BACKGROUND WITH STRUCTURE-AWARE ROUTER
+        reconstruction_mask = cleanup_mask if cleanup_mask is not None else target_mask
         clamped_variant, expanded_bbox, nat_metrics, err = BackgroundReconstructionRouter.reconstruct_background(
-            image_bgr, target_mask, raw_sam_masks, difficulty=difficulty
+            image_bgr, reconstruction_mask, raw_sam_masks, difficulty=difficulty
         )
 
         if clamped_variant is None:
