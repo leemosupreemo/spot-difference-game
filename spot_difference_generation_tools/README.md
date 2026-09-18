@@ -2,6 +2,16 @@
 
 This toolkit contains all scripts, generator engines, computer vision analyzers, and manifests used to create and curate spot-the-difference puzzle pairs.
 
+## Base image generation
+
+`scripts/generate_photo_batch.py` is the authoritative base-image generator:
+a guided wizard and scriptable CLI that selects portfolio-balanced scenes,
+generates candidates through Google and OpenAI, runs local and semantic
+quality gates and novelty checks, hands accepted bases to the structural
+add/remove/reorder pipeline, and atomically publishes finalized pairs. See
+[`docs/base-image-generation.md`](../docs/base-image-generation.md) for the
+full operator guide.
+
 ## 📁 File Manifest:
 
 1. **`sam_segment_recolor.py`**
