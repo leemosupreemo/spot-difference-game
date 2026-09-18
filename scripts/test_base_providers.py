@@ -1,5 +1,11 @@
+import base64
+import io
 import json
+import os
+import tempfile
 import unittest
+
+from PIL import Image
 
 from base_auth import (
     CredentialResolver,
@@ -8,6 +14,38 @@ from base_auth import (
     run_google_adc_login,
     store_provider_key,
 )
+from base_generation_policy import DEFAULT_BASE_GENERATION_POLICY
+from base_generation_types import ProviderImage, ProviderRequest
+from base_image_provider import (
+    FakeImageProvider,
+    GoogleImageProvider,
+    OpenAIImageProvider,
+    normalize_provider_image,
+)
+
+
+def make_png_bytes(size, color=(80, 120, 160), mode="RGB"):
+    image = Image.new(mode, size, color)
+    buffer = io.BytesIO()
+    image.save(buffer, format="PNG")
+    return buffer.getvalue()
+
+
+def make_b64_response(sizes_and_colors):
+    class Item:
+        def __init__(self, b64_json):
+            self.b64_json = b64_json
+
+    class Response:
+        def __init__(self, data, response_id="resp-1"):
+            self.data = data
+            self.id = response_id
+
+    items = [
+        Item(base64.b64encode(make_png_bytes(size, color)).decode("ascii"))
+        for size, color in sizes_and_colors
+    ]
+    return Response(items)
 
 
 class FakeKeyring:
@@ -193,6 +231,170 @@ class TestGoogleAdcLogin(unittest.TestCase):
 
         code = run_google_adc_login(runner=raising_runner)
         self.assertEqual(code, 127)
+
+
+class TestFakeImageProvider(unittest.TestCase):
+    def test_returns_whatever_the_responder_produces(self):
+        image = ProviderImage(
+            provider="google",
+            model="fake-model",
+            request_id="req-1",
+            native_size=(1536, 1152),
+            image_bytes=b"fake",
+        )
+        provider = FakeImageProvider(lambda request: [image])
+        request = ProviderRequest(
+            provider="google",
+            model="fake-model",
+            prompt="a scene",
+            scene_brief_id="forest_survey_table",
+            size=(1536, 1152),
+        )
+        self.assertEqual(provider.generate(request), [image])
+
+
+class TestOpenAIImageProvider(unittest.TestCase):
+    def test_generate_builds_request_and_decodes_response(self):
+        captured = {}
+
+        class FakeClient:
+            class images:
+                @staticmethod
+                def generate(**kwargs):
+                    captured.update(kwargs)
+                    return make_b64_response([((1536, 1152), (10, 20, 30))])
+
+        provider = OpenAIImageProvider(credential=None, client=FakeClient())
+        request = ProviderRequest(
+            provider="openai",
+            model="gpt-image-2.5-sunburst",
+            prompt="a photorealistic scene",
+            scene_brief_id="forest_survey_table",
+            size=(1536, 1152),
+            provider_options={"count": 2},
+        )
+
+        images = provider.generate(request)
+
+        self.assertEqual(captured["model"], "gpt-image-2.5-sunburst")
+        self.assertEqual(captured["size"], "1536x1152")
+        self.assertEqual(captured["quality"], "high")
+        self.assertEqual(captured["background"], "opaque")
+        self.assertEqual(captured["output_format"], "png")
+        self.assertEqual(captured["n"], 2)
+
+        self.assertEqual(len(images), 1)
+        self.assertEqual(images[0].provider, "openai")
+        self.assertEqual(images[0].native_size, (1536, 1152))
+        self.assertIsInstance(images[0].image_bytes, bytes)
+
+
+class TestGoogleImageProvider(unittest.TestCase):
+    def test_generate_builds_request_and_decodes_response(self):
+        captured = {}
+
+        class FakeInteractions:
+            @staticmethod
+            def create(**kwargs):
+                captured.update(kwargs)
+                return make_b64_response([((2400, 1792), (40, 50, 60))])
+
+        class FakeClient:
+            interactions = FakeInteractions()
+
+        provider = GoogleImageProvider(credential=None, client=FakeClient())
+        request = ProviderRequest(
+            provider="google",
+            model="gemini-3.1-flash-image",
+            prompt="a photorealistic scene",
+            scene_brief_id="forest_survey_table",
+            size=(1536, 1152),
+        )
+
+        images = provider.generate(request)
+
+        self.assertEqual(captured["model"], "gemini-3.1-flash-image")
+        self.assertEqual(captured["input"], "a photorealistic scene")
+        self.assertEqual(captured["response_format"]["aspect_ratio"], "4:3")
+        self.assertEqual(captured["response_format"]["image_size"], "2K")
+
+        self.assertEqual(len(images), 1)
+        self.assertEqual(images[0].provider, "google")
+        self.assertEqual(images[0].native_size, (2400, 1792))
+
+
+class TestNormalizeProviderImage(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.output_path = os.path.join(self.tmpdir.name, "candidate.png")
+        self.request = ProviderRequest(
+            provider="google",
+            model="gemini-3.1-flash-image",
+            prompt="a scene",
+            scene_brief_id="forest_survey_table",
+            size=(1536, 1152),
+        )
+
+    def test_openai_native_master_size_passes_through_unchanged(self):
+        image = ProviderImage(
+            provider="openai",
+            model="gpt-image-2.5-sunburst",
+            request_id="req-openai",
+            native_size=(1536, 1152),
+            image_bytes=make_png_bytes((1536, 1152)),
+        )
+        result = normalize_provider_image(
+            image, self.request, self.output_path, DEFAULT_BASE_GENERATION_POLICY
+        )
+        self.assertEqual(result.scene_brief_id, "forest_survey_table")
+        self.assertEqual(result.normalization_crop_fraction, 0.0)
+        with Image.open(result.master_path) as saved:
+            self.assertEqual(saved.size, (1536, 1152))
+            self.assertEqual(saved.mode, "RGB")
+
+    def test_google_2k_output_normalizes_to_exact_master(self):
+        image = ProviderImage(
+            provider="google",
+            model="gemini-3.1-flash-image",
+            request_id="req-google",
+            native_size=(2400, 1792),
+            image_bytes=make_png_bytes((2400, 1792)),
+        )
+        result = normalize_provider_image(
+            image, self.request, self.output_path, DEFAULT_BASE_GENERATION_POLICY
+        )
+        with Image.open(result.master_path) as saved:
+            self.assertEqual(saved.size, (1536, 1152))
+        self.assertLessEqual(result.normalization_crop_fraction, 0.005)
+        self.assertGreater(result.normalization_crop_fraction, 0.0)
+
+    def test_wide_provider_output_is_rejected_before_evaluation(self):
+        image = ProviderImage(
+            provider="google",
+            model="gemini-3.1-flash-image",
+            request_id="req-wide",
+            native_size=(1920, 1080),
+            image_bytes=make_png_bytes((1920, 1080)),
+        )
+        with self.assertRaisesRegex(ValueError, "NormalizationCropExceeded"):
+            normalize_provider_image(
+                image, self.request, self.output_path, DEFAULT_BASE_GENERATION_POLICY
+            )
+
+    def test_transparent_input_is_converted_to_opaque_rgb(self):
+        image = ProviderImage(
+            provider="openai",
+            model="gpt-image-2.5-sunburst",
+            request_id="req-alpha",
+            native_size=(1536, 1152),
+            image_bytes=make_png_bytes((1536, 1152), color=(10, 20, 30, 128), mode="RGBA"),
+        )
+        result = normalize_provider_image(
+            image, self.request, self.output_path, DEFAULT_BASE_GENERATION_POLICY
+        )
+        with Image.open(result.master_path) as saved:
+            self.assertEqual(saved.mode, "RGB")
 
 
 if __name__ == "__main__":
