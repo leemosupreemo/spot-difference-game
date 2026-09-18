@@ -1,8 +1,22 @@
+import json
+import os
+import tempfile
 import unittest
+from pathlib import Path
 
 from base_candidate_evaluator import BaseCandidateEvaluator, rank_candidates
+from base_generation_pipeline import BaseGenerationPipeline, ProviderCallError
 from base_generation_policy import DEFAULT_BASE_GENERATION_POLICY
-from base_generation_types import NormalizedCandidate, RunConfig, SceneBrief
+from base_generation_report import write_html_report, write_json_report
+from base_generation_types import (
+    CandidateEvaluation,
+    NormalizedCandidate,
+    ProviderImage,
+    RunConfig,
+    SceneBrief,
+    VisualCriticResult,
+)
+from base_run_store import AcceptedHistoryStore, RunStore
 from base_visual_critic import FakeVisualCritic
 
 SAMPLE_BRIEF = SceneBrief(
@@ -229,6 +243,457 @@ class TestRankCandidates(unittest.TestCase):
         winner_ab = rank_candidates([a, b])
         winner_ba = rank_candidates([b, a])
         self.assertEqual(winner_ab.candidate.request_id, winner_ba.candidate.request_id)
+
+
+PRIMARY_BRIEF = SceneBrief(
+    id="collection_primary",
+    scene_family="collection",
+    domain="d1",
+    setting="s1",
+    object_families=("a", "b", "c", "d"),
+    materials=("m1", "m2", "m3"),
+    layout="l1",
+    palette="p1",
+    density_target=(35, 70),
+    desired_operations=("add", "remove", "reorder"),
+)
+SPARE_BRIEF = SceneBrief(
+    id="collection_spare",
+    scene_family="collection",
+    domain="d2",
+    setting="s2",
+    object_families=("e", "f", "g", "h"),
+    materials=("m4", "m5", "m6"),
+    layout="l2",
+    palette="p2",
+    density_target=(35, 70),
+    desired_operations=("add", "remove", "reorder"),
+)
+
+
+class CountingFakeProvider:
+    def __init__(self, fail_kind=None, fail_times=0):
+        self.total_images = 0
+        self.requests = []
+        self._fail_kind = fail_kind
+        self._fail_times = fail_times
+        self._fail_count = 0
+
+    def calls_for(self, scene_brief_id):
+        return sum(1 for r in self.requests if r.scene_brief_id == scene_brief_id)
+
+    def generate(self, request):
+        self.requests.append(request)
+        if self._fail_kind and self._fail_count < self._fail_times:
+            self._fail_count += 1
+            raise ProviderCallError("simulated failure", self._fail_kind)
+        self.total_images += 1
+        image = ProviderImage(
+            provider=request.provider,
+            model=request.model,
+            request_id=f"req-{self.total_images}",
+            native_size=request.size,
+            image_bytes=b"fake",
+        )
+        return [image]
+
+
+class ScriptedEvaluator:
+    def __init__(self, decide):
+        self._decide = decide
+        self.calls = []
+
+    def evaluate(self, candidate, brief, history):
+        self.calls.append((candidate.provider, brief.id))
+        return self._decide(candidate, brief, history)
+
+
+def accept(candidate, rank_score=0.5, novelty_score=0.8):
+    critic = VisualCriticResult(
+        provider=candidate.provider,
+        model=candidate.model,
+        photorealism=9.0,
+        object_integrity=9.0,
+        scene_coherence=8.0,
+        visual_fun=7.0,
+        composition=7.0,
+    )
+    return CandidateEvaluation(
+        candidate=candidate,
+        passed_local_gates=True,
+        local_gate_failures=(),
+        critic=critic,
+        novelty_score=novelty_score,
+        rank_score=rank_score,
+        accepted=True,
+    )
+
+
+def reject(candidate, code="PhotorealismReject", reason="too fake"):
+    return CandidateEvaluation(
+        candidate=candidate,
+        passed_local_gates=True,
+        local_gate_failures=(),
+        critic=None,
+        novelty_score=None,
+        rank_score=None,
+        accepted=False,
+        rejection_reason=reason,
+        rejection_code=code,
+    )
+
+
+def fake_normalize(image, request, output_path, policy):
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+    Path(output_path).write_bytes(b"fake-normalized")
+    return NormalizedCandidate(
+        scene_brief_id=request.scene_brief_id,
+        provider=image.provider,
+        model=image.model,
+        request_id=image.request_id,
+        master_path=output_path,
+        size=policy.master_size,
+        normalization_crop_fraction=0.0,
+    )
+
+
+class PipelineTestCase(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.root = self.tmpdir.name
+
+    def make_pipeline(self, providers, evaluator, briefs, sleeper=None):
+        return BaseGenerationPipeline(
+            policy=DEFAULT_BASE_GENERATION_POLICY,
+            briefs=briefs,
+            providers=providers,
+            evaluator=evaluator,
+            history_store=AcceptedHistoryStore(path=os.path.join(self.root, "accepted.jsonl")),
+            staging_root=os.path.join(self.root, "runs"),
+            sleeper=sleeper or (lambda seconds: None),
+            normalize=fake_normalize,
+        )
+
+
+class TestRunStoreLedger(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.root = os.path.join(self.tmpdir.name, "runs")
+
+    def test_create_writes_atomic_run_json_and_empty_events(self):
+        RunStore.create(RunConfig(count=10), [PRIMARY_BRIEF], root=self.root, run_id="run-1")
+        run_json_path = Path(self.root) / "run-1" / "run.json"
+        self.assertTrue(run_json_path.exists())
+        payload = json.loads(run_json_path.read_text())
+        self.assertEqual(payload["run_id"], "run-1")
+        self.assertEqual(payload["plan"], ["collection_primary"])
+        self.assertTrue((Path(self.root) / "run-1" / "events.jsonl").exists())
+
+    def test_transition_must_start_in_planned_state(self):
+        RunStore.create(RunConfig(), [PRIMARY_BRIEF], root=self.root, run_id="run-2")
+        store = RunStore.resume("run-2", root=self.root)
+        with self.assertRaises(ValueError):
+            store.transition("cand-1", "generating")
+
+    def test_illegal_transition_is_rejected(self):
+        RunStore.create(RunConfig(), [PRIMARY_BRIEF], root=self.root, run_id="run-3")
+        store = RunStore.resume("run-3", root=self.root)
+        store.transition("cand-1", "planned")
+        with self.assertRaises(ValueError):
+            store.transition("cand-1", "normalized")
+
+    def test_resume_replays_events_into_current_state(self):
+        RunStore.create(RunConfig(), [PRIMARY_BRIEF], root=self.root, run_id="run-4")
+        store = RunStore.resume("run-4", root=self.root)
+        store.transition("cand-1", "planned")
+        store.transition("cand-1", "generating")
+        resumed = RunStore.resume("run-4", root=self.root)
+        self.assertEqual(resumed.state_of("cand-1"), "generating")
+
+    def test_resume_tolerates_malformed_trailing_event_line(self):
+        RunStore.create(RunConfig(), [PRIMARY_BRIEF], root=self.root, run_id="run-5")
+        store = RunStore.resume("run-5", root=self.root)
+        store.transition("cand-1", "planned")
+        with open(store.run_dir / "events.jsonl", "a", encoding="utf-8") as handle:
+            handle.write('{"item_id": "cand-1", "state": "gen')  # truncated/corrupt final line
+        resumed = RunStore.resume("run-5", root=self.root)
+        self.assertEqual(resumed.state_of("cand-1"), "planned")
+
+
+class TestAcceptedHistoryStore(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.path = os.path.join(self.tmpdir.name, "accepted.jsonl")
+
+    def test_append_and_recent_preserve_order_and_limit(self):
+        store = AcceptedHistoryStore(path=self.path)
+        for i in range(5):
+            store.append({"id": f"scene-{i}"})
+        recent = store.recent(limit=3)
+        self.assertEqual([r["id"] for r in recent], ["scene-2", "scene-3", "scene-4"])
+
+    def test_recent_tolerates_malformed_trailing_line(self):
+        store = AcceptedHistoryStore(path=self.path)
+        store.append({"id": "scene-0"})
+        with open(self.path, "a", encoding="utf-8") as handle:
+            handle.write('{"id": "broken')
+        recent = store.recent(limit=30)
+        self.assertEqual([r["id"] for r in recent], ["scene-0"])
+
+    def test_recent_returns_empty_list_when_file_missing(self):
+        store = AcceptedHistoryStore(path=self.path)
+        self.assertEqual(store.recent(), [])
+
+
+class TestReports(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.root = os.path.join(self.tmpdir.name, "runs")
+        RunStore.create(RunConfig(), [PRIMARY_BRIEF], root=self.root, run_id="run-report")
+        self.store = RunStore.resume("run-report", root=self.root)
+        self.store.transition(
+            "cand-1", "planned", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+        self.store.transition("cand-1", "generating", {})
+        self.store.transition("cand-1", "generated", {"model": "gemini-3.1-flash-image"})
+        self.store.transition("cand-1", "normalized", {"master_path": "candidates/cand-1.png"})
+        self.store.transition(
+            "cand-1",
+            "critic_rejected",
+            {
+                "rejection_reason": "<script>alert(1)</script>",
+                "master_path": "candidates/cand-1.png",
+            },
+        )
+
+    def test_write_json_report_includes_all_items(self):
+        path = write_json_report(self.store)
+        payload = json.loads(path.read_text())
+        self.assertEqual(payload["run_id"], "run-report")
+        self.assertEqual(len(payload["items"]), 1)
+        self.assertEqual(payload["items"][0]["state"], "critic_rejected")
+
+    def test_write_html_report_escapes_rejection_reason(self):
+        path = write_html_report(self.store)
+        html_text = path.read_text()
+        self.assertNotIn("<script>alert(1)</script>", html_text)
+        self.assertIn("&lt;script&gt;", html_text)
+
+
+class TestRetryClassification(PipelineTestCase):
+    def test_retries_transient_failures_up_to_twice_with_backoff(self):
+        sleeps = []
+        pipeline = self.make_pipeline({}, None, [PRIMARY_BRIEF], sleeper=sleeps.append)
+        calls = {"n": 0}
+
+        def flaky():
+            calls["n"] += 1
+            if calls["n"] < 3:
+                raise ProviderCallError("rate limited", "rate_limit")
+            return "ok"
+
+        result = pipeline._call_with_retry(flaky)
+        self.assertEqual(result, "ok")
+        self.assertEqual(calls["n"], 3)
+        self.assertEqual(sleeps, [1, 3])
+
+    def test_gives_up_after_two_retries(self):
+        sleeps = []
+        pipeline = self.make_pipeline({}, None, [PRIMARY_BRIEF], sleeper=sleeps.append)
+
+        def always_fails():
+            raise ProviderCallError("rate limited", "rate_limit")
+
+        with self.assertRaises(ProviderCallError):
+            pipeline._call_with_retry(always_fails)
+        self.assertEqual(sleeps, [1, 3])
+
+    def test_never_retries_non_retryable_failures(self):
+        sleeps = []
+        pipeline = self.make_pipeline({}, None, [PRIMARY_BRIEF], sleeper=sleeps.append)
+        calls = {"n": 0}
+
+        def fails_auth():
+            calls["n"] += 1
+            raise ProviderCallError("bad key", "authentication")
+
+        with self.assertRaises(ProviderCallError):
+            pipeline._call_with_retry(fails_auth)
+        self.assertEqual(calls["n"], 1)
+        self.assertEqual(sleeps, [])
+
+
+class TestStrongerProviderSelection(PipelineTestCase):
+    def test_prefers_higher_acceptance_ratio(self):
+        pipeline = self.make_pipeline(
+            {"google": CountingFakeProvider(), "openai": CountingFakeProvider()},
+            ScriptedEvaluator(lambda c, b, h: accept(c)),
+            [PRIMARY_BRIEF],
+        )
+        stats = {
+            "google": {"collection": {"accepted": 3, "attempted": 4}},
+            "openai": {"collection": {"accepted": 1, "attempted": 4}},
+        }
+        self.assertEqual(pipeline._stronger_provider(stats, "collection"), "google")
+        stats_reversed = {
+            "google": {"collection": {"accepted": 1, "attempted": 4}},
+            "openai": {"collection": {"accepted": 3, "attempted": 4}},
+        }
+        self.assertEqual(pipeline._stronger_provider(stats_reversed, "collection"), "openai")
+
+    def test_breaks_ties_toward_google(self):
+        pipeline = self.make_pipeline(
+            {"google": CountingFakeProvider(), "openai": CountingFakeProvider()},
+            ScriptedEvaluator(lambda c, b, h: accept(c)),
+            [PRIMARY_BRIEF],
+        )
+        stats = {
+            "google": {"collection": {"accepted": 0, "attempted": 0}},
+            "openai": {"collection": {"accepted": 0, "attempted": 0}},
+        }
+        self.assertEqual(pipeline._stronger_provider(stats, "collection"), "google")
+
+
+class TestPipelineRun(PipelineTestCase):
+    def _providers(self):
+        return {"google": CountingFakeProvider(), "openai": CountingFakeProvider()}
+
+    def test_mixed_mode_generates_one_candidate_from_each_provider_first(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+
+        result = pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=4))
+
+        self.assertEqual(len(result.accepted), 1)
+        called = sorted({provider for provider, _ in evaluator.calls})
+        self.assertEqual(called, ["google", "openai"])
+
+    def test_budget_is_checked_before_provider_call(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+
+        result = pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=1))
+
+        self.assertEqual(providers["google"].total_images + providers["openai"].total_images, 1)
+        self.assertEqual(result.stop_code, "GenerationBudgetReached")
+
+    def test_fresh_brief_substitution_when_all_candidates_for_a_brief_are_rejected(self):
+        providers = self._providers()
+
+        def decide(candidate, brief, history):
+            if brief.id == PRIMARY_BRIEF.id:
+                return reject(candidate)
+            return accept(candidate)
+
+        evaluator = ScriptedEvaluator(decide)
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF, SPARE_BRIEF])
+
+        # count=2 raises the image ceiling enough to cover primary's full 4-candidate
+        # exhaustion plus at least one spare-brief candidate.
+        result = pipeline.run(RunConfig(count=2, provider_mode="mixed", max_images=8))
+
+        self.assertEqual(len(result.accepted), 1)
+        self.assertEqual(result.accepted[0].candidate.scene_brief_id, SPARE_BRIEF.id)
+        self.assertTrue(any(brief_id == SPARE_BRIEF.id for _, brief_id in evaluator.calls))
+        self.assertTrue(any(brief_id == PRIMARY_BRIEF.id for _, brief_id in evaluator.calls))
+
+    def test_partial_completion_stops_without_relaxing_gates_when_budget_runs_out(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: reject(c))
+        # No spare brief available, so a run out of budget must end with zero acceptances.
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+
+        result = pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=2))
+
+        self.assertEqual(len(result.accepted), 0)
+        self.assertEqual(result.generated_image_count, 2)
+        self.assertEqual(result.stop_code, "GenerationBudgetReached")
+
+    def test_resume_does_not_repeat_completed_generation(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+
+        first_result = pipeline.run(
+            RunConfig(count=1, provider_mode="mixed", max_images=4), run_id="resume-run"
+        )
+        self.assertEqual(len(first_result.accepted), 1)
+        total_after_first_run = providers["google"].total_images + providers["openai"].total_images
+
+        second_result = pipeline.run(
+            RunConfig(count=1, provider_mode="mixed", max_images=4),
+            run_id="resume-run",
+            resume=True,
+        )
+        total_after_resume = providers["google"].total_images + providers["openai"].total_images
+
+        self.assertEqual(total_after_resume, total_after_first_run)
+        self.assertEqual(len(second_result.accepted), 0)  # nothing new selected on resume
+
+    def test_reload_or_generate_skips_a_candidate_already_marked_passing(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+        store = RunStore.create(
+            RunConfig(count=1), [PRIMARY_BRIEF], root=os.path.join(self.root, "runs"), run_id="manual-run"
+        )
+        store = RunStore.resume("manual-run", root=os.path.join(self.root, "runs"))
+
+        candidate_id = f"{PRIMARY_BRIEF.id}::google::0"
+        store.transition(
+            candidate_id, "planned", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+        store.transition(candidate_id, "generating", {})
+        store.transition(candidate_id, "generated", {"model": "gemini-3.1-flash-image"})
+        store.transition(
+            candidate_id,
+            "normalized",
+            {"master_path": "candidates/fake.png", "model": "gemini-3.1-flash-image"},
+        )
+        store.transition(candidate_id, "passing", {"master_path": "candidates/fake.png", "rank_score": 0.9})
+
+        result = pipeline._reload_or_generate(store, PRIMARY_BRIEF, "google", candidate_id, [])
+
+        self.assertIsNotNone(result)
+        self.assertEqual(providers["google"].total_images, 0)
+        self.assertTrue(result[1].accepted)
+        self.assertEqual(result[1].rank_score, 0.9)
+
+    def test_rejected_candidate_images_are_deleted_by_default(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c) if c.provider == "google" else reject(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+
+        result = pipeline.run(
+            RunConfig(count=1, provider_mode="mixed", max_images=4, keep_rejected=False)
+        )
+
+        store = RunStore.resume(result.run_id, root=os.path.join(self.root, "runs"))
+        rejected = [r for r in store.all_items().values() if r["state"] == "critic_rejected"]
+        self.assertTrue(rejected)
+        for record in rejected:
+            self.assertFalse(Path(record["data"]["master_path"]).exists())
+
+    def test_rejected_candidate_images_are_kept_with_keep_rejected_flag(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c) if c.provider == "google" else reject(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+
+        result = pipeline.run(
+            RunConfig(count=1, provider_mode="mixed", max_images=4, keep_rejected=True)
+        )
+
+        store = RunStore.resume(result.run_id, root=os.path.join(self.root, "runs"))
+        rejected = [r for r in store.all_items().values() if r["state"] == "critic_rejected"]
+        self.assertTrue(rejected)
+        for record in rejected:
+            self.assertTrue(Path(record["data"]["master_path"]).exists())
 
 
 if __name__ == "__main__":
