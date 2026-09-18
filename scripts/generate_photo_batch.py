@@ -19,11 +19,12 @@ from typing import Optional
 
 import typer
 from rich.console import Console
+from rich.live import Live
 from rich.table import Table
 
 from base_auth import CredentialResolver, remove_provider_key, run_google_adc_login, store_provider_key
 from base_generation_policy import DEFAULT_BASE_GENERATION_POLICY, validate_run_config
-from base_generation_pipeline import BaseGenerationPipeline
+from base_generation_pipeline import _DEFAULT_PROVIDER_MODELS, BaseGenerationPipeline
 from base_generation_report import write_html_report, write_json_report
 from base_generation_types import RunConfig
 from base_run_store import HISTORY_PATH_DEFAULT, RUN_ROOT_DEFAULT, AcceptedHistoryStore, RunStore
@@ -54,6 +55,14 @@ def format_portfolio_summary(counts: dict) -> str:
     return " / ".join(
         f"{counts[family]} {_PORTFOLIO_LABELS[family]}" for family in ("collection", "activity", "playful")
     )
+
+
+def _is_interactive() -> bool:
+    """Whether stdin is a real terminal. Indirected through this function
+    (rather than calling sys.stdin.isatty() inline) so tests can force the
+    interactive path without needing a real tty, since test runners replace
+    sys.stdin with a non-tty stream regardless of the input they feed it."""
+    return sys.stdin.isatty()
 
 
 def build_run_config_from_answers(answers: dict) -> RunConfig:
@@ -125,13 +134,24 @@ def resolve_providers_for_execution(config: RunConfig, resolver: CredentialResol
     return providers, effective_config, missing
 
 
+def _provider_models_line(config: RunConfig) -> str:
+    names = ("google", "openai") if config.provider_mode == "mixed" else (config.provider_mode,)
+    models = ", ".join(f"{name}={_DEFAULT_PROVIDER_MODELS.get(name, 'unknown')}" for name in names)
+    return f"Provider models: {models}"
+
+
 def _run_config_summary_lines(config: RunConfig) -> list:
     policy = DEFAULT_BASE_GENERATION_POLICY
     counts = policy.portfolio_counts(config.count)
+    spend_line = (
+        f"Spend ceiling: ${config.max_spend_usd:.2f}" if config.max_spend_usd is not None else "Spend ceiling: none"
+    )
     return [
         f"Target: {config.count} pairs ({format_portfolio_summary(counts)})",
         f"Provider mode: {config.provider_mode}  Critic mode: {resolve_critic_mode(config)}",
+        _provider_models_line(config),
         f"Image ceiling: {config.max_images}",
+        spend_line,
         f"Master size: {policy.master_size[0]}x{policy.master_size[1]}  "
         f"Production size: {policy.production_size[0]}x{policy.production_size[1]}",
         f"Staging: {config.staging_root}",
@@ -155,7 +175,7 @@ def _print_run_result(result) -> None:
     console.print(table)
 
 
-def _build_pipeline(briefs, providers, evaluator, staging_root) -> BaseGenerationPipeline:
+def _build_pipeline(briefs, providers, evaluator, staging_root, progress_callback=None) -> BaseGenerationPipeline:
     history_store = AcceptedHistoryStore(path=HISTORY_PATH_DEFAULT)
     return BaseGenerationPipeline(
         policy=DEFAULT_BASE_GENERATION_POLICY,
@@ -164,10 +184,11 @@ def _build_pipeline(briefs, providers, evaluator, staging_root) -> BaseGeneratio
         evaluator=evaluator,
         history_store=history_store,
         staging_root=staging_root,
+        progress_callback=progress_callback,
     )
 
 
-def _build_pipeline_for_execution(config: RunConfig) -> tuple:
+def _build_pipeline_for_execution(config: RunConfig, progress_callback=None) -> tuple:
     """Real wiring for an execute-mode run: resolves credentials, constructs
     live provider/critic adapters, and returns (pipeline, effective_config).
     Only ever called after a run has been explicitly confirmed."""
@@ -197,8 +218,52 @@ def _build_pipeline_for_execution(config: RunConfig) -> tuple:
 
     evaluator = BaseCandidateEvaluator(critic=critic, policy=DEFAULT_BASE_GENERATION_POLICY)
     briefs = load_scene_catalog(CATALOG_PATH)
-    pipeline = _build_pipeline(briefs, providers, evaluator, effective_config.staging_root)
+    pipeline = _build_pipeline(briefs, providers, evaluator, effective_config.staging_root, progress_callback)
     return pipeline, effective_config
+
+
+def _render_progress_table(state: dict) -> Table:
+    table = Table(title="Generation progress")
+    table.add_column("Metric")
+    table.add_column("Value")
+    table.add_row("Images generated", f"{state['generated']} / {state['max_images']}")
+    table.add_row("Accepted pairs", f"{state['accepted']} / {state['count']}")
+    table.add_row("Current brief", state["current_brief"])
+    table.add_row("Current provider", state["current_provider"])
+    table.add_row("Last rejection", state["rejection_code"])
+    return table
+
+
+def _execute_run(run_config: RunConfig, run_id: Optional[str] = None, resume: bool = False):
+    """Shared execution path for `generate` and `resume`, with a live Rich
+    progress display driven by the pipeline's progress_callback."""
+    state = {
+        "generated": 0,
+        "accepted": 0,
+        "max_images": run_config.max_images,
+        "count": run_config.count,
+        "current_brief": "-",
+        "current_provider": "-",
+        "rejection_code": "-",
+    }
+
+    def on_progress(event: dict) -> None:
+        state["generated"] = event["generated_image_count"]
+        state["accepted"] = event["accepted_count"]
+        state["current_brief"] = event["current_brief"] or "-"
+        state["current_provider"] = event["current_provider"] or "-"
+        state["rejection_code"] = event["rejection_code"] or ("accepted" if event["accepted"] else "-")
+        live.update(_render_progress_table(state))
+
+    pipeline, effective_config = _build_pipeline_for_execution(run_config, progress_callback=on_progress)
+    state["max_images"] = effective_config.max_images
+    state["count"] = effective_config.count
+
+    with Live(_render_progress_table(state), console=console, refresh_per_second=4):
+        result = pipeline.run(effective_config, run_id=run_id, resume=resume)
+
+    _print_run_result(result)
+    return result
 
 
 # --------------------------------------------------------------------------
@@ -213,40 +278,56 @@ def _run_interactive_wizard() -> dict:
     quality_preset = typer.prompt("Quality preset", default="production")
     default_ceiling = DEFAULT_BASE_GENERATION_POLICY.max_images_for_count(count)
     max_images = typer.prompt("Candidate ceiling (images)", default=default_ceiling, type=int)
+    spend_input = typer.prompt("Spend ceiling in USD (blank for none)", default="", show_default=False)
+    max_spend_usd = float(spend_input) if spend_input.strip() else None
     keep_rejected = typer.confirm("Keep rejected images for diagnosis?", default=False)
     staging_root = typer.prompt("Staging location", default=RUN_ROOT_DEFAULT)
-    execute_now = typer.confirm("Execute now (paid run)? (no = dry run)", default=False)
-    return {
+
+    answers = {
         "provider_mode": provider_mode,
         "count": count,
         "portfolio_preset": portfolio_preset,
         "quality_preset": quality_preset,
         "max_images": max_images,
+        "max_spend_usd": max_spend_usd,
         "keep_rejected": keep_rejected,
         "staging_root": staging_root,
-        "execution_mode": "execute" if execute_now else "dry_run",
+        "execution_mode": "dry_run",
     }
+
+    console.print("\n[bold]Run summary[/bold]")
+    _print_config_summary(build_run_config_from_answers(answers))
+
+    if typer.confirm("Execute now (paid run)? (no = dry run)", default=False):
+        console.print("\n[bold yellow]This will make real, billable provider API calls.[/bold yellow]")
+        _print_config_summary(build_run_config_from_answers({**answers, "execution_mode": "execute"}))
+        if typer.confirm("Confirm: proceed with this paid run now?", default=False):
+            answers["execution_mode"] = "execute"
+        else:
+            console.print("Kept as a dry-run configuration; nothing was generated.")
+
+    return answers
 
 
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context):
     if ctx.invoked_subcommand is not None:
         return
-    if not sys.stdin.isatty():
+    if not _is_interactive():
         console.print(ctx.get_help())
         raise typer.Exit(code=0)
 
     answers = _run_interactive_wizard()
     config = build_run_config_from_answers(answers)
-    _print_config_summary(config)
 
     config_path = Path(config.staging_root).parent / "run-config.json"
     write_run_config(config, config_path)
     console.print(f"Wrote {config_path}")
-    console.print(
-        f"Reproducible command: python3 scripts/generate_photo_batch.py generate "
-        f"--config {config_path} --yes"
-    )
+    console.print(f"Reproducible command: python3 scripts/generate_photo_batch.py generate --config {config_path}")
+    console.print("(add --yes to run that command unattended)")
+
+    if config.execution_mode == "execute":
+        _execute_run(config)
 
 
 # --------------------------------------------------------------------------
@@ -261,6 +342,7 @@ def plan(
     critic: str = typer.Option("auto", "--critic", help="Critic mode: auto, google, or openai."),
     seed: int = typer.Option(0, help="Deterministic scheduling seed."),
     max_images: Optional[int] = typer.Option(None, help="Override the generation image ceiling."),
+    max_spend: Optional[float] = typer.Option(None, "--max-spend", help="Spend ceiling in USD."),
     staging_root: str = typer.Option(RUN_ROOT_DEFAULT, help="Run staging root."),
     config_out: Optional[str] = typer.Option(
         None, "--config-out", help="Where to write the reproducible run-config.json."
@@ -273,6 +355,7 @@ def plan(
         "count": count,
         "seed": seed,
         "max_images": max_images,
+        "max_spend_usd": max_spend,
         "staging_root": staging_root,
     }
     config = build_run_config_from_answers(answers)
@@ -294,10 +377,8 @@ def plan(
     config_path = config_out or str(Path(config.staging_root) / "run-config.json")
     write_run_config(config, config_path)
     console.print(f"Wrote {config_path}")
-    console.print(
-        f"Reproducible command: python3 scripts/generate_photo_batch.py generate "
-        f"--config {config_path} --yes"
-    )
+    console.print(f"Reproducible command: python3 scripts/generate_photo_batch.py generate --config {config_path}")
+    console.print("(add --yes to run that command unattended)")
 
 
 @app.command()
@@ -320,7 +401,7 @@ def generate(
         _print_config_summary(run_config)
         raise typer.Exit(code=0)
 
-    interactive = sys.stdin.isatty()
+    interactive = _is_interactive()
     if not yes:
         if not interactive:
             console.print("Non-interactive execution requires --yes to confirm a paid run.")
@@ -330,9 +411,7 @@ def generate(
             console.print("Aborted.")
             raise typer.Exit(code=1)
 
-    pipeline, effective_config = _build_pipeline_for_execution(run_config)
-    result = pipeline.run(effective_config, run_id=run_id)
-    _print_run_result(result)
+    _execute_run(run_config, run_id=run_id)
 
 
 @app.command()
@@ -349,9 +428,7 @@ def resume(
     stored_config = json.loads(run_json_path.read_text(encoding="utf-8"))["config"]
     run_config = RunConfig(**stored_config)
 
-    pipeline, effective_config = _build_pipeline_for_execution(run_config)
-    result = pipeline.run(effective_config, run_id=run_id, resume=True)
-    _print_run_result(result)
+    _execute_run(run_config, run_id=run_id, resume=True)
 
 
 @app.command()

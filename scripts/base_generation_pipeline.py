@@ -13,7 +13,7 @@ can resume without regenerating completed candidates.
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Callable, Optional
 
 from base_generation_policy import validate_run_config
 from base_generation_types import CandidateEvaluation, NormalizedCandidate, ProviderRequest
@@ -88,6 +88,7 @@ class BaseGenerationPipeline:
         prompt_composer=compose_prompt,
         normalize=None,
         provider_models: Optional[dict] = None,
+        progress_callback: Optional[Callable[[dict], None]] = None,
     ):
         self._policy = policy
         self._briefs = list(briefs)
@@ -99,6 +100,25 @@ class BaseGenerationPipeline:
         self._prompt_composer = prompt_composer
         self._normalize = normalize or _lazy_normalize
         self._provider_models = provider_models or dict(_DEFAULT_PROVIDER_MODELS)
+        self._progress_callback = progress_callback or (lambda event: None)
+
+    def _emit_progress(self, *, budget, accepted_count, brief_id, provider_name, result) -> None:
+        rejection_code = None
+        accepted = False
+        if result is not None:
+            evaluation = result[1]
+            accepted = evaluation.accepted
+            rejection_code = evaluation.rejection_code
+        self._progress_callback(
+            {
+                "generated_image_count": budget.used,
+                "accepted_count": accepted_count,
+                "current_brief": brief_id,
+                "current_provider": provider_name,
+                "accepted": accepted,
+                "rejection_code": rejection_code,
+            }
+        )
 
     def _call_with_retry(self, fn):
         attempt = 0
@@ -416,6 +436,10 @@ class BaseGenerationPipeline:
                     evaluations.append(result)
                     if result[1].accepted:
                         provider_stats[provider_name][family]["accepted"] += 1
+                self._emit_progress(
+                    budget=budget, accepted_count=len(accepted), brief_id=brief.id,
+                    provider_name=provider_name, result=result,
+                )
 
             while (
                 stop_code is None
@@ -436,6 +460,10 @@ class BaseGenerationPipeline:
                     evaluations.append(result)
                     if result[1].accepted:
                         provider_stats[provider_name][family]["accepted"] += 1
+                self._emit_progress(
+                    budget=budget, accepted_count=len(accepted), brief_id=brief.id,
+                    provider_name=provider_name, result=result,
+                )
 
             accepted_pairs = [(cid, ev) for cid, ev in evaluations if ev.accepted]
             if accepted_pairs:
@@ -443,6 +471,16 @@ class BaseGenerationPipeline:
                 store.transition(winner_id, "selected", {"scene_brief_id": brief.id})
                 accepted.append(winner)
                 remaining_by_family[family] -= 1
+                self._progress_callback(
+                    {
+                        "generated_image_count": budget.used,
+                        "accepted_count": len(accepted),
+                        "current_brief": brief.id,
+                        "current_provider": None,
+                        "accepted": True,
+                        "rejection_code": None,
+                    }
+                )
             elif spare_by_family.get(family):
                 queue.append(spare_by_family[family].pop(0))
 

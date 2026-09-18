@@ -373,7 +373,7 @@ class PipelineTestCase(unittest.TestCase):
         self.addCleanup(self.tmpdir.cleanup)
         self.root = self.tmpdir.name
 
-    def make_pipeline(self, providers, evaluator, briefs, sleeper=None):
+    def make_pipeline(self, providers, evaluator, briefs, sleeper=None, progress_callback=None):
         return BaseGenerationPipeline(
             policy=DEFAULT_BASE_GENERATION_POLICY,
             briefs=briefs,
@@ -383,6 +383,7 @@ class PipelineTestCase(unittest.TestCase):
             staging_root=os.path.join(self.root, "runs"),
             sleeper=sleeper or (lambda seconds: None),
             normalize=fake_normalize,
+            progress_callback=progress_callback,
         )
 
 
@@ -571,6 +572,32 @@ class TestStrongerProviderSelection(PipelineTestCase):
 class TestPipelineRun(PipelineTestCase):
     def _providers(self):
         return {"google": CountingFakeProvider(), "openai": CountingFakeProvider()}
+
+    def test_progress_callback_receives_an_event_per_candidate_and_on_selection(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        events = []
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF], progress_callback=events.append)
+
+        pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=4))
+
+        self.assertGreaterEqual(len(events), 2)  # at least google + openai candidate events
+        for event in events:
+            self.assertIn("generated_image_count", event)
+            self.assertIn("accepted_count", event)
+            self.assertIn("current_brief", event)
+            self.assertIn("rejection_code", event)
+        self.assertTrue(any(event["accepted"] and event["current_provider"] is None for event in events))
+
+    def test_progress_callback_reports_rejection_code_for_a_rejected_candidate(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: reject(c, code="PhotorealismReject"))
+        events = []
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF], progress_callback=events.append)
+
+        pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=4))
+
+        self.assertTrue(any(event["rejection_code"] == "PhotorealismReject" for event in events))
 
     def test_mixed_mode_generates_one_candidate_from_each_provider_first(self):
         providers = self._providers()
@@ -1406,6 +1433,95 @@ class TestReportCommand(unittest.TestCase):
             expected_html = Path(staging_root) / "run-report-cli" / "report.html"
             self.assertTrue(expected_html.exists())
             self.assertEqual(opened[0], expected_html.resolve().as_uri())
+
+
+class TestConfigSummary(unittest.TestCase):
+    def test_summary_includes_provider_models_and_spend_ceiling(self):
+        config = build_run_config_from_answers({"provider_mode": "mixed", "max_spend_usd": 12.5})
+        lines = generate_photo_batch._run_config_summary_lines(config)
+        joined = "\n".join(lines)
+        self.assertIn("Provider models:", joined)
+        self.assertIn("google=", joined)
+        self.assertIn("openai=", joined)
+        self.assertIn("$12.50", joined)
+
+    def test_summary_reports_no_spend_ceiling_when_unset(self):
+        config = build_run_config_from_answers({})
+        joined = "\n".join(generate_photo_batch._run_config_summary_lines(config))
+        self.assertIn("Spend ceiling: none", joined)
+
+
+class TestPlanReproducibleCommand(unittest.TestCase):
+    def test_reproducible_command_never_hardcodes_yes(self):
+        runner = CliRunner()
+        with tempfile.TemporaryDirectory() as tmp:
+            result = runner.invoke(
+                app,
+                ["plan", "--count", "5", "--staging-root", os.path.join(tmp, "runs")],
+            )
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        for line in result.stdout.splitlines():
+            if line.startswith("Reproducible command:"):
+                self.assertNotIn("--yes", line)
+        self.assertIn("add --yes", result.stdout)
+
+
+class TestInteractiveWizard(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self._original_cwd = os.getcwd()
+        os.chdir(self.tmpdir.name)
+        self.addCleanup(os.chdir, self._original_cwd)
+        # CliRunner always replaces sys.stdin with a non-tty stream, even when
+        # fed scripted `input=`, so the wizard's interactivity check must be
+        # forced on to actually exercise the wizard path under test.
+        patcher = patch("generate_photo_batch._is_interactive", return_value=True)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def _wizard_input(self, execute="n", confirm_paid="n"):
+        return (
+            "mixed\n10\nbalanced_40_40_20\nproduction\n40\n\nn\n"
+            f".base-generation/runs\n{execute}\n{confirm_paid}\n"
+        )
+
+    def test_wizard_shows_summary_before_asking_to_execute_and_never_hardcodes_yes(self):
+        runner = CliRunner()
+        result = runner.invoke(app, [], input=self._wizard_input())
+
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        summary_index = result.stdout.find("Run summary")
+        execute_prompt_index = result.stdout.find("Execute now")
+        self.assertNotEqual(summary_index, -1)
+        self.assertNotEqual(execute_prompt_index, -1)
+        self.assertLess(summary_index, execute_prompt_index)
+        for line in result.stdout.splitlines():
+            if line.startswith("Reproducible command:"):
+                self.assertNotIn("--yes", line)
+
+    def test_declining_execute_never_runs_generation(self):
+        runner = CliRunner()
+        with patch("generate_photo_batch._execute_run") as fake_execute:
+            result = runner.invoke(app, [], input=self._wizard_input(execute="n"))
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        fake_execute.assert_not_called()
+
+    def test_declining_the_second_paid_confirmation_never_runs_generation(self):
+        runner = CliRunner()
+        with patch("generate_photo_batch._execute_run") as fake_execute:
+            result = runner.invoke(app, [], input=self._wizard_input(execute="y", confirm_paid="n"))
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        fake_execute.assert_not_called()
+
+    def test_confirming_both_prompts_runs_generation_exactly_once(self):
+        runner = CliRunner()
+        with patch("generate_photo_batch._execute_run") as fake_execute:
+            result = runner.invoke(app, [], input=self._wizard_input(execute="y", confirm_paid="y"))
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        fake_execute.assert_called_once()
+        called_config = fake_execute.call_args[0][0]
+        self.assertEqual(called_config.execution_mode, "execute")
 
 
 class TestWizardFlagEquivalence(unittest.TestCase):
