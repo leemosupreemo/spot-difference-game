@@ -3,6 +3,10 @@ import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
+
+import numpy as np
+from PIL import Image
 
 from base_candidate_evaluator import BaseCandidateEvaluator, rank_candidates
 from base_generation_pipeline import BaseGenerationPipeline, ProviderCallError, _Budget
@@ -16,8 +20,10 @@ from base_generation_types import (
     SceneBrief,
     VisualCriticResult,
 )
+from base_pair_publisher import generate_structural_pair, publish_pair
 from base_run_store import AcceptedHistoryStore, RunStore
 from base_visual_critic import FakeVisualCritic
+from image_pair_finalizer import finalize_pair
 
 SAMPLE_BRIEF = SceneBrief(
     id="forest_survey_table",
@@ -863,6 +869,251 @@ class TestPipelineRun(PipelineTestCase):
         self.assertTrue(rejected)
         for record in rejected:
             self.assertTrue(Path(record["data"]["master_path"]).exists())
+
+
+def _make_master(color=(120, 120, 120)):
+    return Image.new("RGB", DEFAULT_BASE_GENERATION_POLICY.master_size, color)
+
+
+def _paste_patch(image, bbox, color):
+    out = image.copy()
+    x1, y1, x2, y2 = bbox
+    out.paste(Image.new("RGB", (x2 - x1, y2 - y1), color), (x1, y1))
+    return out
+
+
+class TestImagePairFinalizer(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.output_dir = os.path.join(self.tmpdir.name, "finalized")
+        self.policy = DEFAULT_BASE_GENERATION_POLICY
+
+        self.base_path = os.path.join(self.tmpdir.name, "base.jpg")
+        self.variant_path = os.path.join(self.tmpdir.name, "variant.jpg")
+
+    def _write(self, image, path):
+        image.save(path, format="JPEG", quality=100)
+        return path
+
+    def test_finalized_pair_is_exact_production_size_and_declares_metadata(self):
+        base = _make_master()
+        bbox = (700, 500, 900, 700)
+        variant = _paste_patch(base, bbox, (200, 80, 80))
+        self._write(base, self.base_path)
+        self._write(variant, self.variant_path)
+        ground_truth = {"bbox": bbox}
+
+        pair = finalize_pair(
+            self.base_path, self.variant_path, ground_truth, self.output_dir, "scene-1", self.policy
+        )
+
+        with Image.open(pair.base_path) as img:
+            self.assertEqual(img.size, (1200, 900))
+        with Image.open(pair.variant_path) as img:
+            self.assertEqual(img.size, (1200, 900))
+        self.assertEqual(pair.dimensions, (1200, 900))
+        self.assertEqual(pair.aspect_ratio, "4:3")
+        self.assertEqual(pair.manifest_id, "scene-1")
+
+    def test_pair_dimension_mismatch_between_base_and_variant_is_rejected(self):
+        base = _make_master()
+        variant = Image.new("RGB", (1536, 1150), (120, 120, 120))
+        self._write(base, self.base_path)
+        self._write(variant, self.variant_path)
+
+        with self.assertRaisesRegex(ValueError, "PairDimensionMismatch"):
+            finalize_pair(
+                self.base_path, self.variant_path, {"bbox": (0, 0, 10, 10)},
+                self.output_dir, "scene-1", self.policy,
+            )
+
+    def test_non_master_size_input_is_rejected(self):
+        base = Image.new("RGB", (800, 600), (120, 120, 120))
+        variant = base.copy()
+        self._write(base, self.base_path)
+        self._write(variant, self.variant_path)
+
+        with self.assertRaisesRegex(ValueError, "PairDimensionMismatch"):
+            finalize_pair(
+                self.base_path, self.variant_path, {"bbox": (0, 0, 10, 10)},
+                self.output_dir, "scene-1", self.policy,
+            )
+
+    def test_difference_lost_after_downsample_is_rejected(self):
+        base = _make_master()
+        bbox = (700, 500, 704, 504)  # 4x4, low magnitude
+        variant = _paste_patch(base, bbox, (123, 123, 123))
+        self._write(base, self.base_path)
+        self._write(variant, self.variant_path)
+
+        with self.assertRaisesRegex(ValueError, "DifferenceLostAfterDownsample"):
+            finalize_pair(
+                self.base_path, self.variant_path, {"bbox": bbox},
+                self.output_dir, "scene-1", self.policy,
+            )
+
+    def test_outside_region_drift_is_rejected(self):
+        base = _make_master()
+        bbox = (700, 500, 900, 700)
+        variant = _paste_patch(base, bbox, (200, 80, 80))
+        variant = _paste_patch(variant, (100, 100, 300, 300), (10, 200, 10))  # unrelated drift
+        self._write(base, self.base_path)
+        self._write(variant, self.variant_path)
+
+        with self.assertRaisesRegex(ValueError, "OutsideRegionDrift"):
+            finalize_pair(
+                self.base_path, self.variant_path, {"bbox": bbox},
+                self.output_dir, "scene-1", self.policy,
+            )
+
+    def test_finalized_output_uses_identical_resize_for_both_images(self):
+        base = _make_master()
+        bbox = (700, 500, 900, 700)
+        variant = _paste_patch(base, bbox, (200, 80, 80))
+        self._write(base, self.base_path)
+        self._write(variant, self.variant_path)
+
+        pair = finalize_pair(
+            self.base_path, self.variant_path, {"bbox": bbox}, self.output_dir, "scene-1", self.policy
+        )
+
+        # Outside the declared region, base and variant must be pixel-identical --
+        # this can only hold if both received the same resize transform.
+        with Image.open(pair.base_path) as base_out, Image.open(pair.variant_path) as variant_out:
+            corner_a = base_out.crop((0, 0, 50, 50))
+            corner_b = variant_out.crop((0, 0, 50, 50))
+
+        self.assertLess(
+            float(np.abs(np.asarray(corner_a, dtype=np.float32) - np.asarray(corner_b, dtype=np.float32)).mean()),
+            1.5,
+        )
+
+
+class TestPublishPair(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.levels_dir = os.path.join(self.tmpdir.name, "levels")
+        self.manifest_path = os.path.join(self.tmpdir.name, "manifest.json")
+
+    def _make_finalized_pair(self, scene_id="scene-1", content=b"finalized-bytes"):
+        staging = Path(self.tmpdir.name) / "staging"
+        staging.mkdir(exist_ok=True)
+        base_path = staging / f"{scene_id}-base-src.jpg"
+        variant_path = staging / f"{scene_id}-variant-src.jpg"
+        base_path.write_bytes(content + b"-base")
+        variant_path.write_bytes(content + b"-variant")
+
+        from base_generation_types import FinalizedPair
+
+        return FinalizedPair(
+            scene_brief_id=scene_id,
+            base_path=str(base_path),
+            variant_path=str(variant_path),
+            dimensions=(1200, 900),
+            aspect_ratio="4:3",
+            manifest_id=scene_id,
+        )
+
+    def test_publish_pair_writes_digest_named_files_and_updates_manifest(self):
+        pair = self._make_finalized_pair()
+        entry = publish_pair(pair, {"title": "Scene One"}, self.levels_dir, self.manifest_path)
+
+        self.assertTrue(Path(self.levels_dir, Path(entry["baseImage"]).name).exists())
+        self.assertTrue(Path(self.levels_dir, Path(entry["variantImage"]).name).exists())
+        self.assertEqual(entry["dimensions"], {"width": 1200, "height": 900})
+        self.assertEqual(entry["aspectRatio"], "4:3")
+        self.assertEqual(entry["id"], "scene-1")
+
+        manifest = json.loads(Path(self.manifest_path).read_text())
+        self.assertEqual(len(manifest), 1)
+        self.assertEqual(manifest[0]["id"], "scene-1")
+
+    def test_manifest_failure_removes_newly_copied_assets(self):
+        pair = self._make_finalized_pair()
+
+        def failing_replace(src, dst):
+            raise OSError("simulated manifest replace failure")
+
+        with self.assertRaises(OSError):
+            publish_pair(pair, {"title": "Scene One"}, self.levels_dir, self.manifest_path, replace_fn=failing_replace)
+
+        self.assertEqual(list(Path(self.levels_dir).glob("*")), [])
+
+    def test_duplicate_scene_id_uses_new_asset_names_until_manifest_commit(self):
+        old_pair = self._make_finalized_pair(content=b"old-content")
+        old_entry = publish_pair(old_pair, {"title": "Original"}, self.levels_dir, self.manifest_path)
+
+        new_pair = self._make_finalized_pair(content=b"new-content")
+        new_entry = publish_pair(new_pair, {"title": "Replacement"}, self.levels_dir, self.manifest_path)
+
+        self.assertNotEqual(old_entry["baseImage"], new_entry["baseImage"])
+        self.assertTrue(Path(self.levels_dir, Path(old_entry["baseImage"]).name).exists())
+        self.assertTrue(Path(self.levels_dir, Path(old_entry["variantImage"]).name).exists())
+
+        manifest = json.loads(Path(self.manifest_path).read_text())
+        self.assertEqual(len(manifest), 1)  # replaced, not duplicated
+        self.assertEqual(manifest[0]["title"], "Replacement")
+
+
+class TestGenerateStructuralPair(unittest.TestCase):
+    def setUp(self):
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+        self.staging_dir = os.path.join(self.tmpdir.name, "staging")
+
+    def _candidate(self):
+        return make_candidate(request_id="req-structural", scene_brief_id="scene-1")
+
+    def test_success_path_finalizes_and_returns_log_entry(self):
+        bbox = (700, 500, 900, 700)
+        base = _make_master()
+        variant = _paste_patch(base, bbox, (200, 80, 80))
+        ground_truth = {"x": 50.0, "y": 50.0, "radius": 5.0, "bbox": bbox}
+
+        def fake_generate(scene_spec, output_dir=None, policy=None, scheduler=None):
+            out = Path(output_dir)
+            out.mkdir(parents=True, exist_ok=True)
+            scene_id = scene_spec["id"]
+            base.save(out / f"{scene_id}_base.jpg", format="JPEG", quality=100)
+            variant.save(out / f"{scene_id}_variant.jpg", format="JPEG", quality=100)
+            manifest_entry = {"id": scene_id, "diffs": [ground_truth]}
+            log_entry = {"accepted": True, "ground_truth": ground_truth}
+            return True, manifest_entry, log_entry
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            finalized, log_entry = generate_structural_pair(
+                self._candidate(), {"id": "scene-1"}, self.staging_dir
+            )
+
+        self.assertIsNotNone(finalized)
+        self.assertEqual(finalized.manifest_id, "scene-1")
+        with Image.open(finalized.base_path) as img:
+            self.assertEqual(img.size, (1200, 900))
+        self.assertTrue(log_entry["accepted"])
+
+    def test_failure_path_returns_none_and_log_entry(self):
+        def fake_generate(scene_spec, output_dir=None, policy=None, scheduler=None):
+            return False, None, {"accepted": False, "rejection_reason": "NoStructuralCandidate"}
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            finalized, log_entry = generate_structural_pair(
+                self._candidate(), {"id": "scene-1"}, self.staging_dir
+            )
+
+        self.assertIsNone(finalized)
+        self.assertEqual(log_entry["rejection_reason"], "NoStructuralCandidate")
+
+    def test_never_writes_to_public_levels(self):
+        # Regardless of success or failure, generate_structural_pair must only ever
+        # touch the isolated staging directory it was given.
+        def fake_generate(scene_spec, output_dir=None, policy=None, scheduler=None):
+            self.assertNotIn("public/levels", str(output_dir))
+            return False, None, {"accepted": False, "rejection_reason": "test"}
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            generate_structural_pair(self._candidate(), {"id": "scene-1"}, self.staging_dir)
 
 
 if __name__ == "__main__":
