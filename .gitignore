@@ -30,3 +30,6 @@ __pycache__/
 
 # Visual regression scratch output (candidate captures + diffs), not the committed baseline gallery
 screenshots/modals/.visual-check/
+
+# Managed base-image generation runtime staging, history, and run ledgers
+.base-generation/
