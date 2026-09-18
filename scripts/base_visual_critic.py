@@ -209,7 +209,9 @@ class GoogleVisualCritic:
             thinking={"enabled": False},
             input=[
                 {"type": "text", "text": _critic_prompt(brief)},
-                {"type": "image", "mime_type": "image/png", "data": image_b64, "detail": "high"},
+                # Google has no explicit image-detail parameter; sending the full-resolution
+                # image bytes is its documented equivalent of "high detail" (see ledger ruling).
+                {"type": "image", "mime_type": "image/png", "data": image_b64},
             ],
             response_format={"type": "json_object"},
         )

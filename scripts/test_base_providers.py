@@ -565,6 +565,32 @@ class TestGoogleVisualCritic(unittest.TestCase):
         self.assertEqual(result.model, DEFAULT_BASE_GENERATION_POLICY.default_google_critic_model)
         self.assertEqual(captured["model"], DEFAULT_BASE_GENERATION_POLICY.default_google_critic_model)
 
+    def test_never_sends_an_unsupported_detail_parameter(self):
+        # Google has no image-detail request field; full-resolution bytes are its
+        # documented equivalent of "high detail" (see ledger ruling). Inventing a
+        # "detail" key would silently be ignored or rejected by a real client.
+        captured = {}
+
+        class FakeResponse:
+            output_text = json.dumps(valid_critic_payload())
+
+        class FakeInteractions:
+            @staticmethod
+            def create(**kwargs):
+                captured.update(kwargs)
+                return FakeResponse()
+
+        class FakeClient:
+            interactions = FakeInteractions()
+
+        with tempfile.NamedTemporaryFile(suffix=".png") as tmp:
+            tmp.write(make_png_bytes((1536, 1152)))
+            tmp.flush()
+            GoogleVisualCritic(credential=None, client=FakeClient()).evaluate(tmp.name, SAMPLE_BRIEF)
+
+        image_part = next(part for part in captured["input"] if part.get("type") == "image")
+        self.assertNotIn("detail", image_part)
+
 
 if __name__ == "__main__":
     unittest.main()
