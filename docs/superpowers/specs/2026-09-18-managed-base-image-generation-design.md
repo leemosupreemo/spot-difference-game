@@ -201,7 +201,7 @@ A cost-balanced vision model analyzes each locally passing candidate and returns
 
 Photorealism and object integrity must each score at least 8/10. The candidate is rejected for malformed objects, duplicated fragments, impossible geometry, physically inconsistent shadows, fake readable text, logos, watermarks, or an obviously illustrated/CGI rendering style.
 
-The critic model is configurable. The default is `gpt-5.6-luna` through the Responses API with image detail set to `high`, reasoning effort set to `none`, and a strict structured-output schema. Current OpenAI model guidance identifies Luna as the cost-sensitive high-volume option, while current general models support image input. Model choice and image-detail settings are recorded per run.
+The critic is isolated behind Google and OpenAI adapters and accepts `auto`, `google`, or `openai` modes. `auto` uses a Google vision-capable Gemini model in Google-only generation, `gpt-5.6-luna` through the Responses API in OpenAI-only generation, and one explicitly recorded critic for the complete mixed run so candidates from both generators receive the same judge. Critic requests use high image detail and a strict structured-output schema. Model, provider, image-detail settings, and schema version are recorded per run. A provider-only generation mode therefore never requires credentials for the other provider merely to perform semantic QA.
 
 Reference:
 
@@ -419,6 +419,7 @@ No asset becomes production content until the complete base-and-variant pair pas
 - `scripts/base_image_provider.py`: common provider protocol, Google adapter, OpenAI adapter, provider-native normalization, and fake-test implementation.
 - `scripts/base_auth.py`: credential discovery, keychain access, Google ADC integration, and redacted status reporting.
 - `scripts/base_candidate_evaluator.py`: local CV, FastSAM, semantic critic, and novelty checks.
+- `scripts/base_visual_critic.py`: common critic protocol plus Google, OpenAI, and fake-test adapters.
 - `scripts/base_generation_pipeline.py`: adaptive scheduling, candidate selection, and run ledger.
 - `scripts/image_pair_finalizer.py`: paired resizing, encoding, and final-output validation.
 - `scripts/generate_photo_batch.py`: operator-facing orchestration CLI.
@@ -470,6 +471,7 @@ Unit tests cover:
 - Per-dimension 25% caps and recent-history cooldowns.
 - Deterministic prompt composition.
 - Google and OpenAI request construction and response decoding using fake providers.
+- Google, OpenAI, and automatic visual-critic routing using fake critics.
 - Credential-resolution precedence and secret redaction.
 - Interactive and flag-driven CLI configuration equivalence.
 - Candidate-budget enforcement before calls.
@@ -519,6 +521,7 @@ The implementation is complete when:
 - A dry run deterministically produces a valid 4/4/2 brief plan without network access.
 - Execute mode can generate multiple candidates through an isolated provider adapter.
 - Mixed, Google-only, and OpenAI-only provider modes use the same evaluation and ranking path.
+- Provider-only runs can complete semantic QA without credentials for the unselected provider.
 - Interactive Google login and secure local OpenAI key storage are available without writing secrets into the repository.
 - Dry-run and doctor commands make no paid generation calls.
 - Every accepted master passes local, semantic, and novelty gates.
