@@ -25,6 +25,10 @@ from base_run_store import AcceptedHistoryStore, RunStore
 from base_visual_critic import FakeVisualCritic
 from image_pair_finalizer import finalize_pair
 
+import generate_photo_batch
+from generate_photo_batch import app, build_run_config_from_answers, resolve_providers_for_execution
+from typer.testing import CliRunner
+
 SAMPLE_BRIEF = SceneBrief(
     id="forest_survey_table",
     scene_family="activity",
@@ -1114,6 +1118,319 @@ class TestGenerateStructuralPair(unittest.TestCase):
 
         with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
             generate_structural_pair(self._candidate(), {"id": "scene-1"}, self.staging_dir)
+
+
+class TestCliHelp(unittest.TestCase):
+    def test_help_lists_every_command(self):
+        runner = CliRunner()
+        result = runner.invoke(app, ["--help"])
+        self.assertEqual(result.exit_code, 0)
+        for command in ("plan", "generate", "resume", "report", "doctor", "auth", "catalog", "history"):
+            self.assertIn(command, result.stdout)
+
+
+class TestBuildRunConfigFromAnswers(unittest.TestCase):
+    def test_defaults_match_run_config_defaults(self):
+        self.assertEqual(build_run_config_from_answers({}), RunConfig())
+
+    def test_explicit_answers_are_applied(self):
+        config = build_run_config_from_answers(
+            {
+                "provider_mode": "google",
+                "critic_mode": "google",
+                "count": 5,
+                "seed": 3,
+                "max_images": 12,
+                "keep_rejected": True,
+                "staging_root": "/tmp/custom",
+                "execution_mode": "execute",
+            }
+        )
+        self.assertEqual(config.provider_mode, "google")
+        self.assertEqual(config.critic_mode, "google")
+        self.assertEqual(config.count, 5)
+        self.assertEqual(config.seed, 3)
+        self.assertEqual(config.max_images, 12)
+        self.assertTrue(config.keep_rejected)
+        self.assertEqual(config.staging_root, "/tmp/custom")
+        self.assertEqual(config.execution_mode, "execute")
+
+    def test_max_images_defaults_proportionally_to_count(self):
+        config = build_run_config_from_answers({"count": 5})
+        self.assertEqual(config.max_images, DEFAULT_BASE_GENERATION_POLICY.max_images_for_count(5))
+
+
+class TestConfigRoundTrip(unittest.TestCase):
+    def test_write_and_load_round_trips_exactly(self):
+        config = build_run_config_from_answers({"count": 7, "provider_mode": "openai"})
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "run-config.json"
+            generate_photo_batch.write_run_config(config, path)
+            loaded = generate_photo_batch.load_run_config(path)
+        self.assertEqual(config, loaded)
+
+
+class TestPlanCommand(unittest.TestCase):
+    def setUp(self):
+        self.runner = CliRunner()
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+
+    def test_plan_prints_exact_portfolio_slots_and_makes_no_network_call(self):
+        with patch("generate_photo_batch.CredentialResolver", side_effect=AssertionError("must not be called")):
+            result = self.runner.invoke(
+                app,
+                [
+                    "plan",
+                    "--count",
+                    "10",
+                    "--provider",
+                    "mixed",
+                    "--staging-root",
+                    os.path.join(self.tmpdir.name, "runs"),
+                ],
+            )
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertIn("4 collections / 4 activities / 2 playful", result.stdout)
+
+    def test_plan_writes_a_reproducible_config_file(self):
+        config_out = os.path.join(self.tmpdir.name, "run-config.json")
+        result = self.runner.invoke(
+            app,
+            [
+                "plan",
+                "--count",
+                "5",
+                "--provider",
+                "openai",
+                "--config-out",
+                config_out,
+                "--staging-root",
+                os.path.join(self.tmpdir.name, "runs"),
+            ],
+        )
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        loaded = generate_photo_batch.load_run_config(config_out)
+        self.assertEqual(loaded.count, 5)
+        self.assertEqual(loaded.provider_mode, "openai")
+
+    def test_plan_rejects_invalid_provider_mode(self):
+        result = self.runner.invoke(app, ["plan", "--provider", "dalle"])
+        self.assertNotEqual(result.exit_code, 0)
+        self.assertIn("Invalid configuration", result.stdout)
+
+
+class TestGenerateCommand(unittest.TestCase):
+    def setUp(self):
+        self.runner = CliRunner()
+        self.tmpdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmpdir.cleanup)
+
+    def _write_config(self, **overrides):
+        answers = {"execution_mode": "execute"}
+        answers.update(overrides)
+        config = build_run_config_from_answers(answers)
+        path = os.path.join(self.tmpdir.name, "run-config.json")
+        generate_photo_batch.write_run_config(config, path)
+        return path
+
+    def test_unattended_generate_requires_yes(self):
+        config_path = self._write_config()
+        result = self.runner.invoke(app, ["generate", "--config", config_path])
+        self.assertNotEqual(result.exit_code, 0)
+        self.assertIn("--yes", result.stdout)
+
+    def test_dry_run_config_never_requires_yes_or_touches_credentials(self):
+        config_path = self._write_config(execution_mode="dry_run")
+        with patch("generate_photo_batch.CredentialResolver", side_effect=AssertionError("must not be called")):
+            result = self.runner.invoke(app, ["generate", "--config", config_path])
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertIn("dry-run", result.stdout.lower())
+
+
+class TestResolveProvidersForExecution(unittest.TestCase):
+    class FakeProviderClass:
+        def __init__(self, credential):
+            self.credential = credential
+
+    class FakeResolver:
+        def __init__(self, google=None, openai=None):
+            self._google = google
+            self._openai = openai
+
+        def resolve_google(self):
+            return self._google
+
+        def resolve_openai(self):
+            return self._openai
+
+    def _classes(self):
+        return {"google": self.FakeProviderClass, "openai": self.FakeProviderClass}
+
+    def test_mixed_mode_requires_both_without_fallback(self):
+        resolver = self.FakeResolver(google="g-cred", openai=None)
+        config = RunConfig(provider_mode="mixed", allow_provider_fallback=False)
+        with self.assertRaises(ValueError):
+            resolve_providers_for_execution(config, resolver, self._classes())
+
+    def test_mixed_mode_narrows_to_single_provider_with_fallback(self):
+        resolver = self.FakeResolver(google="g-cred", openai=None)
+        config = RunConfig(provider_mode="mixed", allow_provider_fallback=True)
+        providers, effective_config, missing = resolve_providers_for_execution(config, resolver, self._classes())
+        self.assertEqual(list(providers.keys()), ["google"])
+        self.assertEqual(effective_config.provider_mode, "google")
+        self.assertEqual(missing, ["openai"])
+
+    def test_raises_when_fallback_leaves_no_provider(self):
+        resolver = self.FakeResolver(google=None, openai=None)
+        config = RunConfig(provider_mode="mixed", allow_provider_fallback=True)
+        with self.assertRaises(ValueError):
+            resolve_providers_for_execution(config, resolver, self._classes())
+
+    def test_single_provider_mode_unaffected_when_available(self):
+        resolver = self.FakeResolver(google="g-cred", openai=None)
+        config = RunConfig(provider_mode="google")
+        providers, effective_config, missing = resolve_providers_for_execution(config, resolver, self._classes())
+        self.assertEqual(list(providers.keys()), ["google"])
+        self.assertEqual(effective_config.provider_mode, "google")
+        self.assertEqual(missing, [])
+
+
+class TestDoctorCommand(unittest.TestCase):
+    def test_doctor_completes_without_generating_and_reports_checks(self):
+        runner = CliRunner()
+        result = runner.invoke(app, ["doctor"])
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        for label in ("Google credentials", "OpenAI credentials", "Catalog", "Disk space free"):
+            self.assertIn(label, result.stdout)
+
+
+class TestCatalogCommand(unittest.TestCase):
+    def test_catalog_validate_reports_ok(self):
+        runner = CliRunner()
+        result = runner.invoke(app, ["catalog", "validate"])
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertIn("OK", result.stdout)
+
+
+class TestHistoryCommand(unittest.TestCase):
+    def test_history_stats_runs_against_missing_history_file(self):
+        runner = CliRunner()
+        with patch("generate_photo_batch.HISTORY_PATH_DEFAULT", "/nonexistent/path/accepted.jsonl"):
+            result = runner.invoke(app, ["history", "stats"])
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertIn("Recent accepted scenes: 0", result.stdout)
+
+
+class TestAuthCommands(unittest.TestCase):
+    def test_auth_status_never_prints_raw_credential_value(self):
+        from base_auth import ResolvedCredential
+
+        runner = CliRunner()
+        secret_value = "sk-super-secret-value-should-never-appear"
+        fake_credential = ResolvedCredential(provider="openai", kind="environment", value=secret_value)
+
+        class FakeResolver:
+            def resolve_google(self):
+                return None
+
+            def resolve_openai(self):
+                return fake_credential
+
+        with patch("generate_photo_batch.CredentialResolver", return_value=FakeResolver()):
+            result = runner.invoke(app, ["auth", "status"])
+
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertNotIn(secret_value, result.stdout)
+        self.assertIn("openai", result.stdout)
+
+    def test_auth_login_delegates_to_run_google_adc_login(self):
+        runner = CliRunner()
+        calls = []
+
+        def fake_login():
+            calls.append("called")
+            return 0
+
+        with patch("generate_photo_batch.run_google_adc_login", side_effect=fake_login):
+            result = runner.invoke(app, ["auth", "login", "google"])
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertEqual(calls, ["called"])
+
+    def test_auth_login_rejects_openai(self):
+        runner = CliRunner()
+        result = runner.invoke(app, ["auth", "login", "openai"])
+        self.assertNotEqual(result.exit_code, 0)
+
+    def test_auth_set_key_stores_via_hidden_prompt(self):
+        runner = CliRunner()
+        captured = {}
+
+        def fake_store(provider, secret):
+            captured["provider"] = provider
+            captured["secret"] = secret
+
+        with patch("generate_photo_batch.store_provider_key", side_effect=fake_store):
+            result = runner.invoke(app, ["auth", "set-key", "openai"], input="my-secret-key\n")
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertEqual(captured["provider"], "openai")
+        self.assertEqual(captured["secret"], "my-secret-key")
+        self.assertNotIn("my-secret-key", result.stdout)
+
+    def test_auth_remove_delegates(self):
+        runner = CliRunner()
+        captured = {}
+
+        def fake_remove(provider):
+            captured["provider"] = provider
+
+        with patch("generate_photo_batch.remove_provider_key", side_effect=fake_remove):
+            result = runner.invoke(app, ["auth", "remove", "google"])
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertEqual(captured["provider"], "google")
+
+
+class TestReportCommand(unittest.TestCase):
+    def test_report_open_only_opens_the_generated_html_file(self):
+        runner = CliRunner()
+        with tempfile.TemporaryDirectory() as tmp:
+            staging_root = os.path.join(tmp, "runs")
+            RunStore.create(RunConfig(), [SAMPLE_BRIEF], root=staging_root, run_id="run-report-cli")
+
+            opened = []
+            with patch("generate_photo_batch.webbrowser.open", side_effect=lambda url: opened.append(url)):
+                result = runner.invoke(app, ["report", "run-report-cli", "--staging-root", staging_root, "--open"])
+
+            self.assertEqual(result.exit_code, 0, result.stdout)
+            self.assertEqual(len(opened), 1)
+            expected_html = Path(staging_root) / "run-report-cli" / "report.html"
+            self.assertTrue(expected_html.exists())
+            self.assertEqual(opened[0], expected_html.resolve().as_uri())
+
+
+class TestWizardFlagEquivalence(unittest.TestCase):
+    def test_wizard_answers_and_plan_flags_produce_equivalent_run_config(self):
+        wizard_answers = {
+            "provider_mode": "openai",
+            "count": 6,
+            "portfolio_preset": "balanced_40_40_20",
+            "quality_preset": "production",
+            "max_images": 24,
+            "keep_rejected": False,
+            "staging_root": ".base-generation/runs",
+            "execution_mode": "dry_run",
+        }
+        flag_answers = {
+            "provider_mode": "openai",
+            "critic_mode": "auto",
+            "count": 6,
+            "seed": 0,
+            "max_images": 24,
+            "staging_root": ".base-generation/runs",
+        }
+        self.assertEqual(
+            build_run_config_from_answers(wizard_answers), build_run_config_from_answers(flag_answers)
+        )
 
 
 if __name__ == "__main__":
