@@ -201,7 +201,7 @@ A cost-balanced vision model analyzes each locally passing candidate and returns
 
 Photorealism and object integrity must each score at least 8/10. The candidate is rejected for malformed objects, duplicated fragments, impossible geometry, physically inconsistent shadows, fake readable text, logos, watermarks, or an obviously illustrated/CGI rendering style.
 
-The critic is isolated behind Google and OpenAI adapters and accepts `auto`, `google`, or `openai` modes. `auto` uses a Google vision-capable Gemini model in Google-only generation, `gpt-5.6-luna` through the Responses API in OpenAI-only generation, and one explicitly recorded critic for the complete mixed run so candidates from both generators receive the same judge. Critic requests use high image detail and a strict structured-output schema. Model, provider, image-detail settings, and schema version are recorded per run. A provider-only generation mode therefore never requires credentials for the other provider merely to perform semantic QA.
+The critic is isolated behind Google and OpenAI adapters and accepts `auto`, `google`, or `openai` modes. `auto` uses `gemini-3.1-flash-lite` in Google-only generation, `gpt-5.6-luna` through the Responses API in OpenAI-only generation, and one explicitly recorded critic for the complete mixed run so candidates from both generators receive the same judge. Both defaults accept image input and support structured output. Critic requests use high image detail and a strict structured-output schema. Model, provider, image-detail settings, and schema version are recorded per run. A provider-only generation mode therefore never requires credentials for the other provider merely to perform semantic QA.
 
 Reference:
 
@@ -423,7 +423,7 @@ No asset becomes production content until the complete base-and-variant pair pas
 - `scripts/base_generation_pipeline.py`: adaptive scheduling, candidate selection, and run ledger.
 - `scripts/image_pair_finalizer.py`: paired resizing, encoding, and final-output validation.
 - `scripts/generate_photo_batch.py`: operator-facing orchestration CLI.
-- `scripts/base_generation_history.jsonl`: accepted-scene provenance and diversity history.
+- `.base-generation/history/accepted.jsonl`: append-only accepted-scene provenance and diversity history (runtime data, ignored by Git).
 - `scripts/test_base_generation_pipeline.py`: focused unit and integration tests.
 - `docs/base-image-generation.md`: operator guide.
 
