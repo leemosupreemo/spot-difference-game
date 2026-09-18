@@ -636,6 +636,54 @@ class TestPipelineRun(PipelineTestCase):
         self.assertEqual(total_after_resume, total_after_first_run)
         self.assertEqual(len(second_result.accepted), 0)  # nothing new selected on resume
 
+    def test_resume_does_not_reprocess_a_brief_that_already_has_a_selected_candidate(self):
+        # Regression: a family whose quota needs more than one brief could, on a
+        # second resume, re-pop an already-won brief from the rebuilt queue. Its
+        # already-"selected" candidate id short-circuits safely, but a *new*,
+        # never-before-seen candidate id under the same brief (e.g. the other
+        # provider's slot) would sail through untouched and could be selected as a
+        # second winner for a brief that already has one.
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        briefs = [PRIMARY_BRIEF, SPARE_BRIEF]
+        pipeline = self.make_pipeline(providers, evaluator, briefs)
+        run_root = os.path.join(self.root, "runs")
+
+        # count=5 gives this family a quota of 2, so after PRIMARY_BRIEF's slot is
+        # already filled, the family is still not satisfied and the run keeps going.
+        store = RunStore.create(RunConfig(count=5), briefs, root=run_root, run_id="multi-brief-resume")
+        store = RunStore.resume("multi-brief-resume", root=run_root)
+        winning_candidate_id = f"{PRIMARY_BRIEF.id}::google::0"
+        store.transition(
+            winning_candidate_id, "planned", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+        store.transition(winning_candidate_id, "generating", {})
+        store.transition(winning_candidate_id, "generated", {"model": "gemini-3.1-flash-image"})
+        store.transition(
+            winning_candidate_id,
+            "normalized",
+            {"master_path": "candidates/fake.png", "model": "gemini-3.1-flash-image"},
+        )
+        store.transition(
+            winning_candidate_id, "passing", {"master_path": "candidates/fake.png", "rank_score": 0.9}
+        )
+        store.transition(winning_candidate_id, "selected", {"scene_brief_id": PRIMARY_BRIEF.id})
+
+        result = pipeline.run(
+            RunConfig(count=5, provider_mode="mixed", max_images=20),
+            run_id="multi-brief-resume",
+            resume=True,
+        )
+
+        primary_wins_this_call = [
+            w for w in result.accepted if w.candidate.scene_brief_id == PRIMARY_BRIEF.id
+        ]
+        self.assertEqual(primary_wins_this_call, [])
+        self.assertEqual(
+            providers["google"].calls_for(PRIMARY_BRIEF.id) + providers["openai"].calls_for(PRIMARY_BRIEF.id),
+            0,
+        )
+
     def test_reload_or_generate_skips_a_candidate_already_marked_passing(self):
         providers = self._providers()
         evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))

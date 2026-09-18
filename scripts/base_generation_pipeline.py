@@ -326,13 +326,23 @@ class BaseGenerationPipeline:
             if path.exists():
                 path.unlink()
 
-    def _remaining_by_family_after_resume(self, store, quotas):
+    def _won_brief_ids(self, store) -> set:
+        """Briefs that already have a selected-or-later candidate. Reprocessing one of
+        these on a later resume would risk selecting a second winner for the same
+        brief (over-filling its portfolio slot) or reusing a stale retry id from an
+        abandoned "generated"-stuck candidate under that brief."""
+        return {
+            record["data"]["scene_brief_id"]
+            for record in store.all_items().values()
+            if record["state"] in ("selected", "finalized", "published")
+            and record["data"].get("scene_brief_id")
+        }
+
+    def _remaining_by_family_after_resume(self, store, quotas, won_brief_ids) -> dict:
         remaining = dict(quotas)
         brief_family = {brief.id: brief.scene_family for brief in self._briefs}
-        for record in store.all_items().values():
-            if record["state"] not in ("selected", "finalized", "published"):
-                continue
-            family = brief_family.get(record["data"].get("scene_brief_id"))
+        for brief_id in won_brief_ids:
+            family = brief_family.get(brief_id)
             if family and remaining.get(family, 0) > 0:
                 remaining[family] -= 1
         return remaining
@@ -350,7 +360,8 @@ class BaseGenerationPipeline:
             store = RunStore.create(config, plan, root=self._staging_root, run_id=run_id)
 
         quotas = self._policy.portfolio_counts(config.count)
-        remaining_by_family = self._remaining_by_family_after_resume(store, quotas)
+        won_brief_ids = self._won_brief_ids(store)
+        remaining_by_family = self._remaining_by_family_after_resume(store, quotas, won_brief_ids)
 
         used_brief_ids = {brief.id for brief in plan}
         spare_by_family = {
@@ -373,12 +384,16 @@ class BaseGenerationPipeline:
         budget = _Budget(config.max_images, already_used=already_used)
         accepted = []
         stop_code = None
-        queue = list(plan)
+        # A brief that already has a selected-or-later candidate from a prior run must
+        # never be reprocessed: doing so could select a second winner for the same
+        # brief, or reuse a stale retry id from an abandoned "generated"-stuck
+        # candidate under that brief.
+        queue = [brief for brief in plan if brief.id not in won_brief_ids]
 
         while queue and sum(remaining_by_family.values()) > 0:
             brief = queue.pop(0)
             family = brief.scene_family
-            if remaining_by_family.get(family, 0) <= 0:
+            if brief.id in won_brief_ids or remaining_by_family.get(family, 0) <= 0:
                 continue
 
             evaluations = []
