@@ -28,6 +28,18 @@ class BaseGenerationPolicy:
     min_structural_affordance: float = 0.45
     min_photorealism: float = 8.0
     min_object_integrity: float = 8.0
+    min_sharpness_uniformity: float = 0.25
+    min_edge_density: float = 0.02
+    max_foreground_object_fraction: float = 0.22
+    default_google_critic_model: str = "gemini-3.1-flash-lite"
+    default_openai_critic_model: str = "gpt-5.6-luna"
+    novelty_duplicate_hamming_distance: int = 6
+    recent_history_window: int = 30
+    rank_weight_editability: float = 0.35
+    rank_weight_novelty: float = 0.25
+    rank_weight_fun: float = 0.20
+    rank_weight_composition: float = 0.10
+    rank_weight_multi_operation: float = 0.10
 
     def portfolio_counts(self, count: int) -> dict[str, int]:
         """Largest-remainder allocation of the 40/40/20 portfolio split."""

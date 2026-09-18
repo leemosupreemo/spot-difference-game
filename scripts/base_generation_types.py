@@ -98,6 +98,7 @@ class CandidateEvaluation:
     rank_score: Optional[float]
     accepted: bool
     rejection_reason: Optional[str] = None
+    rejection_code: Optional[str] = None
 
 
 @dataclass(frozen=True)

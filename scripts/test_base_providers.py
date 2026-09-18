@@ -15,13 +15,48 @@ from base_auth import (
     store_provider_key,
 )
 from base_generation_policy import DEFAULT_BASE_GENERATION_POLICY
-from base_generation_types import ProviderImage, ProviderRequest
+from base_generation_types import ProviderImage, ProviderRequest, RunConfig, SceneBrief
 from base_image_provider import (
     FakeImageProvider,
     GoogleImageProvider,
     OpenAIImageProvider,
     normalize_provider_image,
 )
+from base_visual_critic import (
+    CriticSchemaError,
+    FakeVisualCritic,
+    GoogleVisualCritic,
+    OpenAIVisualCritic,
+    resolve_critic_mode,
+)
+
+SAMPLE_BRIEF = SceneBrief(
+    id="forest_survey_table",
+    scene_family="activity",
+    domain="field_science",
+    setting="a forest survey table",
+    object_families=("leaf samples", "sample jars", "magnifiers", "survey flags"),
+    materials=("glass", "paper", "wood", "botanical matter"),
+    layout="three_quarter_work_surface",
+    palette="moss_green_amber",
+    density_target=(35, 70),
+    desired_operations=("add", "remove", "reorder"),
+)
+
+
+def valid_critic_payload(**overrides):
+    payload = {
+        "photorealism": 9.0,
+        "object_integrity": 9.0,
+        "scene_coherence": 8.0,
+        "visual_fun": 7.0,
+        "composition": 7.5,
+        "artifact_flags": [],
+        "tags": ["field_science", "moss_green_amber"],
+        "reason": None,
+    }
+    payload.update(overrides)
+    return payload
 
 
 def make_png_bytes(size, color=(80, 120, 160), mode="RGB"):
@@ -395,6 +430,140 @@ class TestNormalizeProviderImage(unittest.TestCase):
         )
         with Image.open(result.master_path) as saved:
             self.assertEqual(saved.mode, "RGB")
+
+
+class TestResolveCriticMode(unittest.TestCase):
+    def test_auto_critic_does_not_require_other_provider(self):
+        self.assertEqual(resolve_critic_mode(RunConfig(provider_mode="google")), "google")
+        self.assertEqual(resolve_critic_mode(RunConfig(provider_mode="openai")), "openai")
+
+    def test_auto_critic_resolves_to_one_explicit_provider_for_mixed_runs(self):
+        resolved = resolve_critic_mode(RunConfig(provider_mode="mixed"))
+        self.assertIn(resolved, ("google", "openai"))
+        # Must be deterministic across repeated calls for the same config.
+        self.assertEqual(resolved, resolve_critic_mode(RunConfig(provider_mode="mixed")))
+
+    def test_explicit_critic_mode_overrides_provider_mode(self):
+        self.assertEqual(
+            resolve_critic_mode(RunConfig(provider_mode="google", critic_mode="openai")),
+            "openai",
+        )
+
+
+class TestFakeVisualCritic(unittest.TestCase):
+    def test_returns_configured_scores(self):
+        critic = FakeVisualCritic(photorealism=7.9, object_integrity=10.0)
+        result = critic.evaluate("candidate.png", SAMPLE_BRIEF)
+        self.assertEqual(result.photorealism, 7.9)
+        self.assertEqual(result.object_integrity, 10.0)
+
+
+class TestCriticSchemaParsing(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.NamedTemporaryFile(suffix=".png")
+        self.addCleanup(self._tmp.close)
+        self._tmp.write(make_png_bytes((1536, 1152)))
+        self._tmp.flush()
+        self.image_path = self._tmp.name
+
+    def _adapter_with_response(self, raw_text):
+        class FakeResponse:
+            output_text = raw_text
+
+        class FakeResponses:
+            @staticmethod
+            def create(**kwargs):
+                return FakeResponse()
+
+        class FakeClient:
+            responses = FakeResponses()
+
+        return OpenAIVisualCritic(credential=None, client=FakeClient())
+
+    def test_valid_response_parses_into_visual_critic_result(self):
+        adapter = self._adapter_with_response(json.dumps(valid_critic_payload()))
+        result = adapter.evaluate(self.image_path, SAMPLE_BRIEF)
+        self.assertEqual(result.photorealism, 9.0)
+        self.assertEqual(result.diversity_tags, ("field_science", "moss_green_amber"))
+        self.assertEqual(result.artifact_flags, ())
+
+    def test_response_missing_keys_is_rejected(self):
+        payload = valid_critic_payload()
+        del payload["object_integrity"]
+        adapter = self._adapter_with_response(json.dumps(payload))
+        with self.assertRaises(CriticSchemaError):
+            adapter.evaluate(self.image_path, SAMPLE_BRIEF)
+
+    def test_response_with_out_of_range_score_is_rejected(self):
+        adapter = self._adapter_with_response(json.dumps(valid_critic_payload(photorealism=15.0)))
+        with self.assertRaises(CriticSchemaError):
+            adapter.evaluate(self.image_path, SAMPLE_BRIEF)
+
+    def test_response_with_non_string_tags_is_rejected(self):
+        adapter = self._adapter_with_response(json.dumps(valid_critic_payload(tags=[1, 2])))
+        with self.assertRaises(CriticSchemaError):
+            adapter.evaluate(self.image_path, SAMPLE_BRIEF)
+
+    def test_malformed_json_is_rejected(self):
+        adapter = self._adapter_with_response("not json")
+        with self.assertRaises(CriticSchemaError):
+            adapter.evaluate(self.image_path, SAMPLE_BRIEF)
+
+
+class TestOpenAIVisualCritic(unittest.TestCase):
+    def test_evaluate_sends_high_detail_image_and_uses_default_model(self):
+        captured = {}
+
+        class FakeResponse:
+            output_text = json.dumps(valid_critic_payload())
+
+        class FakeResponses:
+            @staticmethod
+            def create(**kwargs):
+                captured.update(kwargs)
+                return FakeResponse()
+
+        class FakeClient:
+            responses = FakeResponses()
+
+        with tempfile.NamedTemporaryFile(suffix=".png") as tmp:
+            tmp.write(make_png_bytes((1536, 1152)))
+            tmp.flush()
+
+            adapter = OpenAIVisualCritic(credential=None, client=FakeClient())
+            result = adapter.evaluate(tmp.name, SAMPLE_BRIEF)
+
+        self.assertEqual(result.provider, "openai")
+        self.assertEqual(result.model, DEFAULT_BASE_GENERATION_POLICY.default_openai_critic_model)
+        self.assertEqual(captured["model"], DEFAULT_BASE_GENERATION_POLICY.default_openai_critic_model)
+
+
+class TestGoogleVisualCritic(unittest.TestCase):
+    def test_evaluate_sends_high_detail_image_and_uses_default_model(self):
+        captured = {}
+
+        class FakeResponse:
+            output_text = json.dumps(valid_critic_payload())
+
+        class FakeInteractions:
+            @staticmethod
+            def create(**kwargs):
+                captured.update(kwargs)
+                return FakeResponse()
+
+        class FakeClient:
+            interactions = FakeInteractions()
+
+        with tempfile.NamedTemporaryFile(suffix=".png") as tmp:
+            tmp.write(make_png_bytes((1536, 1152)))
+            tmp.flush()
+
+            adapter = GoogleVisualCritic(credential=None, client=FakeClient())
+            result = adapter.evaluate(tmp.name, SAMPLE_BRIEF)
+
+        self.assertEqual(result.provider, "google")
+        self.assertEqual(result.model, DEFAULT_BASE_GENERATION_POLICY.default_google_critic_model)
+        self.assertEqual(captured["model"], DEFAULT_BASE_GENERATION_POLICY.default_google_critic_model)
 
 
 if __name__ == "__main__":
