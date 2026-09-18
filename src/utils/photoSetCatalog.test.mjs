@@ -70,22 +70,22 @@ test('retained manifest entries have stable five-entry set metadata', () => {
     'utf8'
   ));
 
-  assert.equal(manifest.length, 175);
+  assert.equal(manifest.length, 133);
   assert.equal(new Set(manifest.map(entry => entry.id)).size, manifest.length);
   assert.deepEqual(
     manifest.slice(0, 6).map(({ id, setId, sequence }) => ({ id, setId, sequence })),
     [
-      { id: 'fresh_v7_marine_shells_002', setId: 'photo_set_001', sequence: 1 },
-      { id: 'fresh_v7_apothecary_herbs_003', setId: 'photo_set_001', sequence: 2 },
-      { id: 'fresh_v7_cobbler_leather_007', setId: 'photo_set_001', sequence: 3 },
-      { id: 'fresh_v7_pottery_tools_011', setId: 'photo_set_001', sequence: 4 },
-      { id: 'fresh_v7_bonsai_tools_012', setId: 'photo_set_001', sequence: 5 },
-      { id: 'fresh_v7_tabletop_rpg_004', setId: 'photo_set_002', sequence: 1 }
+      { id: 'photo_set_001_01', setId: 'photo_set_001', sequence: 1 },
+      { id: 'photo_set_001_02', setId: 'photo_set_001', sequence: 2 },
+      { id: 'photo_set_001_03', setId: 'photo_set_001', sequence: 3 },
+      { id: 'photo_set_001_04', setId: 'photo_set_001', sequence: 4 },
+      { id: 'photo_set_001_05', setId: 'photo_set_001', sequence: 5 },
+      { id: 'photo_set_002_01', setId: 'photo_set_002', sequence: 1 }
     ]
   );
 
   const catalog = getPhotoSetCatalog(manifest);
-  assert.equal(catalog.unassigned.length, 0);
-  assert.equal(catalog.sets.length, 35);
-  assert.equal(getCompletePhotoSets(manifest).length, 35);
+  assert.equal(catalog.unassigned.length, 3);
+  assert.equal(catalog.sets.length, 26);
+  assert.equal(getCompletePhotoSets(manifest).length, 26);
 });

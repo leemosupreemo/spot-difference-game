@@ -5,7 +5,7 @@
  * set ranking calculation (world 1st/2nd/3rd), and set search matching.
  */
 
-export const ALL_PHOTO_SET_IDS = Array.from({ length: 35 }, (_, i) => (
+export const ALL_PHOTO_SET_IDS = Array.from({ length: 26 }, (_, i) => (
   `photo_set_${String(i + 1).padStart(3, '0')}`
 ));
 

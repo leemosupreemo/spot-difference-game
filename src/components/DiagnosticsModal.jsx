@@ -9,6 +9,7 @@ import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 export default function DiagnosticsModal({
   isOpen,
   onClose,
+  onPreviewSplash,
   currentLevel,
   selectedTheme,
   selectedDifficulty,
@@ -309,6 +310,17 @@ export default function DiagnosticsModal({
               <Share2 size={15} />
               Share
             </button>
+
+            {onPreviewSplash && (
+              <button
+                onClick={() => { sounds.playTap(); onPreviewSplash(); }}
+                className="game-btn secondary"
+                style={{ padding: '6px 10px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '5px' }}
+                title="Preview Mobile Splash Screen"
+              >
+                📱 Splash
+              </button>
+            )}
 
             <button
               onClick={handleClear}

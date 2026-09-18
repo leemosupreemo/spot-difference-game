@@ -114,9 +114,9 @@ test("tracks full 5-image stage clearance", () => {
 
 test("tracks rating prompt impressions and user actions", () => {
   assert.doesNotThrow(() => {
-    trackRatingPromptShown({ visitNumber: 2 });
-    trackRatingPromptAction({ action: "rate", visitNumber: 2 });
-    trackRatingPromptAction({ action: "dismiss", visitNumber: 2 });
+    trackRatingPromptShown({ attemptNumber: 1, successfulRounds: 5 });
+    trackRatingPromptAction({ action: "rate", attemptNumber: 1 });
+    trackRatingPromptAction({ action: "dismiss", attemptNumber: 1 });
   });
 });
 

@@ -152,7 +152,7 @@ test('getTimeUntilNextDailyMs returns positive milliseconds and formatTimeUntilN
 test('getDailyQueue and setDailyQueue manage OTA queue data structure', () => {
   const customQueue = {
     schedule: {
-      '2026-11-20': ['fresh_nature_pair_001', 'fresh_nature_pair_002', 'fresh_nature_pair_003']
+      '2026-11-20': ['photo_set_002_05', 'photo_set_002_03', 'fresh_nature_pair_003']
     },
     queue: [
       { setId: 'set_1', levels: ['fresh_nature_pair_004', 'fresh_nature_pair_005', 'fresh_nature_pair_006'] }
@@ -162,7 +162,7 @@ test('getDailyQueue and setDailyQueue manage OTA queue data structure', () => {
 
   setDailyQueue(customQueue);
   const retrieved = getDailyQueue();
-  assert.deepEqual(retrieved.schedule['2026-11-20'], ['fresh_nature_pair_001', 'fresh_nature_pair_002', 'fresh_nature_pair_003']);
+  assert.deepEqual(retrieved.schedule['2026-11-20'], ['photo_set_002_05', 'photo_set_002_03', 'fresh_nature_pair_003']);
   assert.equal(retrieved.queue.length, 1);
 });
 
@@ -170,16 +170,16 @@ test('getDailySetForDate resolves explicitly scheduled OTA daily sets', () => {
   const scheduledDate = '2026-12-25';
   setDailyQueue({
     schedule: {
-      [scheduledDate]: ['fresh_nature_pair_014', 'fresh_nature_pair_015', 'fresh_nature_pair_016']
+      [scheduledDate]: ['photo_set_003_05', 'photo_set_004_01', 'photo_set_004_02']
     },
     queue: []
   });
 
   const levels = getDailySetForDate(scheduledDate);
   assert.equal(levels.length, 3);
-  assert.equal(levels[0].id, 'fresh_nature_pair_014');
-  assert.equal(levels[1].id, 'fresh_nature_pair_015');
-  assert.equal(levels[2].id, 'fresh_nature_pair_016');
+  assert.equal(levels[0].id, 'photo_set_003_05');
+  assert.equal(levels[1].id, 'photo_set_004_01');
+  assert.equal(levels[2].id, 'photo_set_004_02');
 });
 
 test('getDailySetForDate resolves from sequential OTA queue when unscheduled', () => {
@@ -187,15 +187,15 @@ test('getDailySetForDate resolves from sequential OTA queue when unscheduled', (
   setDailyQueue({
     schedule: {},
     queue: [
-      { setId: 'q1', levels: ['fresh_nature_pair_013', 'fresh_nature_pair_014', 'fresh_nature_pair_015'] }
+      { setId: 'q1', levels: ['photo_set_003_04', 'photo_set_003_05', 'photo_set_004_01'] }
     ]
   });
 
   const levels = getDailySetForDate(queuedDate);
   assert.equal(levels.length, 3);
-  assert.equal(levels[0].id, 'fresh_nature_pair_013');
-  assert.equal(levels[1].id, 'fresh_nature_pair_014');
-  assert.equal(levels[2].id, 'fresh_nature_pair_015');
+  assert.equal(levels[0].id, 'photo_set_003_04');
+  assert.equal(levels[1].id, 'photo_set_003_05');
+  assert.equal(levels[2].id, 'photo_set_004_01');
 });
 
 test('getDailyPlayerIdentifier resolves UID or Game Center prefix', () => {

@@ -88,3 +88,19 @@ test('refreshes Photo Set choices when remote levels sync without rebuilding', (
   assert.match(source, /setRemoteLevelsRevision/);
   assert.match(source, /getAllPhotoPairEntries\(\)\.filter/);
 });
+
+test('debug premade mode uses candidate pool and advances without repeating kept levels', () => {
+  const source = fs.readFileSync(appPath, 'utf8');
+
+  // Candidate pool resolution
+  assert.match(source, /getDebugCandidateEntries\(curatedStatusMap,\s*skipKeptLevels\)/);
+
+  // handleSetCuratedStatus advances within candidate pool
+  assert.match(source, /const newPool = getDebugCandidateEntries\(updated,\s*skipKeptLevels\)/);
+
+  // handleNextPair and handlePrevPair navigate within candidate pool
+  assert.match(source, /if \(debugMode && debugSourceMode === 'premade'\) \{[\s\S]*const pool = getDebugCandidateEntries/);
+
+  // DebugCuratorBar uses effectiveDebugPool for accurate image counting
+  assert.match(source, /totalStageImages=\{[\s\S]*effectiveDebugPool\.length/);
+});

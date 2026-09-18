@@ -1,119 +1,152 @@
 {
-  "exportedAt": "2026-08-24T20:53:38.892Z",
+  "exportedAt": "2026-09-18T14:00:43.337Z",
   "summary": {
-    "totalCurated": 288,
-    "approvedCount": 104,
-    "dismissedCount": 194,
+    "totalCurated": 417,
+    "approvedCount": 133,
+    "dismissedCount": 284,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
-    "medium_nursery_001",
-    "medium_workbench_001",
-    "hard_forest_001",
-    "photo_workbench_hardware_001",
-    "photo_potting_table_001",
-    "photo_watchmaker_bench_001",
-    "photo_electronics_bench_001",
-    "photo_antique_desk_001",
-    "photo_woodworking_bench_001",
-    "photo_coffee_station_001",
-    "photo_repair_drawer_001",
-    "photo_bicycle_repair_001",
-    "photo_woodworking_table_001",
-    "mass_abstract_001",
-    "photo_watch_repair_001",
-    "ai_botanist_herbarium_001",
-    "ai_macro_watchmaker_001",
-    "ai_macro_botanist_001",
-    "ai_macro_machinist_001",
-    "ai_macro_electronics_001",
-    "ai_macro_woodcarver_001",
-    "ai_macro_camera_optics_001",
-    "method1_photo_leathercraft_001",
-    "method1_photo_electronics_001",
-    "method2_macro_miniature_001",
-    "method1_photo_artist_cap_001",
-    "method2_macro_stained_glass_001",
-    "method1_photo_woodworking_screw_001",
-    "method1_photo_watchmaker_gear_001",
-    "easy_craft_001",
-    "medium_screw_tray_001",
-    "medium_tile_piece_001",
-    "hard_wire_clip_001",
-    "photo_bakers_table_001",
-    "photo_art_table_001",
-    "photo_camping_table_001",
-    "photo_board_game_001",
-    "photo_spice_table_001",
-    "photo_fishing_tackle_001",
-    "photo_camera_gear_001",
-    "photo_pottery_table_001",
-    "photo_artist_supply_001",
-    "photo_camping_gear_001",
-    "photo_sewing_table_001",
-    "photo_map_restoration_001",
-    "photo_garden_potting_001",
-    "photo_game_night_001",
-    "abstract_token_field_001",
-    "abstract_mechanical_maze_001",
-    "mass_abstract_002",
-    "mass_photo_102",
-    "ai_bakery_counter_001",
-    "ai_greenhouse_potting_001",
-    "ai_watchmaker_bench_001",
-    "ai_artist_easel_001",
-    "ai_coffee_bar_001",
-    "ai_antique_study_001",
-    "ai_cartography_desk_001",
-    "ai_locksmith_bench_001",
-    "photo_repair_hardware_002",
-    "photo_strategy_pieces_002",
-    "ai_macro_spice_bazaar_001",
-    "ai_macro_watch_escapement_001",
-    "ai_macro_stained_glass_001",
-    "semantic_tailor_pincushion_needle_003",
-    "adaptive_workshop_screwdriver_grip_003",
-    "adaptive_tailor_pearl_notion_005",
-    "adaptive_tailor_sewing_notion_amber_007",
-    "adaptive_tailor_crimson_thread_spool_009",
-    "scene_retro_gaming_cartridges_017",
-    "scene_workshop_tape_measure_slider_020",
-    "goldilocks_photo_camp_bushcraft_table_005",
-    "goldilocks_photo_retro_gaming_cartridges_008",
-    "goldilocks_ai_retro_gaming_004",
-    "goldilocks_ai_watchmaker_parts_010",
-    "unified_ai_expedition_remove_008",
-    "dense_ai_retro_cart_add_006",
-    "verified_m_ai_electronics_add_003",
-    "verified_m_ai_artist_recolor_005",
-    "photo_enamel_pins_recolor_008",
-    "photo_enamel_pins_calibrated_008",
-    "photo_fresh_crayons_003",
-    "photo_fresh_stained_glass_009",
-    "hyper_dense_cyber_circuit_008",
-    "dense_crowd_tailor_workbench_007",
-    "goldilocks_pipe_v2_retro_recolor_007",
-    "prod_v4_ai_artist",
-    "prod_v4_ai_retrogaming",
-    "prod_v4_var2_dense_boardgame",
-    "prod_v4_var2_dense_buttons",
-    "prod_v4_var2_dense_spices",
-    "prod_v4_var2_dense_succulents",
-    "prod_v4_var2_unique_bushcraft",
-    "pipe_v3_artist_recolor_006",
-    "pipe_v3_retro_reorder_007",
-    "fresh_ai_heirloom_spices_botanical_009",
-    "fresh_v2_ai_ceramic_mosaic_tiles_002",
-    "fresh_v2_ai_heirloom_spices_botanical_009",
-    "fresh_v3_ai_pasta_shapes_001",
-    "fresh_v3_ai_vintage_keys_003",
-    "fresh_v3_ai_japanese_teacups_005",
-    "fresh_v3_ai_butterfly_specimens_006",
-    "fresh_v3_ai_glass_paperweights_008",
-    "fresh_v3_ai_drafting_dividers_010"
+    "photo_set_001_01",
+    "photo_set_001_02",
+    "photo_set_001_03",
+    "photo_set_001_04",
+    "photo_set_001_05",
+    "photo_set_002_01",
+    "photo_set_002_02",
+    "photo_set_002_03",
+    "photo_set_002_04",
+    "photo_set_002_05",
+    "photo_set_003_01",
+    "photo_set_003_02",
+    "photo_set_003_03",
+    "photo_set_003_04",
+    "photo_set_003_05",
+    "photo_set_004_01",
+    "photo_set_004_02",
+    "photo_set_004_03",
+    "photo_set_004_04",
+    "photo_set_004_05",
+    "photo_set_005_01",
+    "photo_set_005_02",
+    "photo_set_005_03",
+    "photo_set_005_04",
+    "photo_set_005_05",
+    "photo_set_006_01",
+    "photo_set_006_02",
+    "photo_set_006_03",
+    "photo_set_006_04",
+    "photo_set_006_05",
+    "photo_set_007_01",
+    "photo_set_007_02",
+    "photo_set_007_03",
+    "photo_set_007_04",
+    "photo_set_007_05",
+    "photo_set_008_01",
+    "photo_set_008_02",
+    "photo_set_008_03",
+    "photo_set_008_04",
+    "photo_set_008_05",
+    "photo_set_009_01",
+    "photo_set_009_02",
+    "photo_set_009_03",
+    "photo_set_009_04",
+    "photo_set_009_05",
+    "photo_set_010_01",
+    "photo_set_010_02",
+    "photo_set_010_03",
+    "photo_set_010_04",
+    "photo_set_010_05",
+    "photo_set_011_01",
+    "photo_set_011_02",
+    "photo_set_011_03",
+    "photo_set_011_04",
+    "photo_set_011_05",
+    "photo_set_012_01",
+    "photo_set_012_02",
+    "photo_set_012_03",
+    "photo_set_012_04",
+    "photo_set_012_05",
+    "photo_set_013_01",
+    "photo_set_013_02",
+    "photo_set_013_03",
+    "photo_set_013_04",
+    "photo_set_013_05",
+    "photo_set_014_01",
+    "photo_set_014_02",
+    "photo_set_014_03",
+    "photo_set_014_04",
+    "photo_set_014_05",
+    "photo_set_015_01",
+    "photo_set_015_02",
+    "photo_set_015_03",
+    "photo_set_015_04",
+    "photo_set_015_05",
+    "photo_set_016_01",
+    "photo_set_016_02",
+    "photo_set_016_03",
+    "photo_set_016_04",
+    "photo_set_016_05",
+    "photo_set_017_01",
+    "photo_set_017_02",
+    "photo_set_017_03",
+    "photo_set_017_04",
+    "photo_set_017_05",
+    "photo_set_018_01",
+    "photo_set_018_02",
+    "photo_set_018_03",
+    "photo_set_018_04",
+    "photo_set_018_05",
+    "photo_set_019_01",
+    "photo_set_019_02",
+    "photo_set_019_03",
+    "photo_set_019_04",
+    "photo_set_019_05",
+    "photo_set_020_01",
+    "photo_set_020_02",
+    "photo_set_020_03",
+    "photo_set_020_04",
+    "photo_set_020_05",
+    "photo_set_021_01",
+    "photo_set_021_02",
+    "photo_set_021_03",
+    "photo_set_021_04",
+    "photo_set_021_05",
+    "photo_set_022_01",
+    "photo_set_022_02",
+    "photo_set_022_03",
+    "photo_set_022_04",
+    "photo_set_022_05",
+    "photo_set_023_01",
+    "photo_set_023_02",
+    "photo_set_023_03",
+    "photo_set_023_04",
+    "photo_set_023_05",
+    "photo_set_024_01",
+    "photo_set_024_02",
+    "photo_set_024_03",
+    "photo_set_024_04",
+    "photo_set_024_05",
+    "photo_set_025_01",
+    "photo_set_025_02",
+    "photo_set_025_03",
+    "photo_set_025_04",
+    "photo_set_025_05",
+    "photo_set_026_01",
+    "photo_set_026_02",
+    "photo_set_026_03",
+    "photo_set_026_04",
+    "photo_set_026_05",
+    "daily_set_01_01",
+    "daily_set_06_01",
+    "daily_set_06_03"
   ],
-  "wrongDifficultyLevelIds": [],
   "dismissedLevelIds": [
+    "photo_set_028_02",
+    "photo_set_028_03",
+    "photo_set_028_04",
+    "photo_set_028_05",
+    "photo_set_027_01",
     "semantic_workshop_screwdriver_grip_001",
     "semantic_workshop_pliers_sleeve_002",
     "semantic_tailor_thread_spool_001",
@@ -122,9 +155,9 @@
     "semantic_electronics_radial_capacitor_002",
     "semantic_gemstone_sapphire_facet_001",
     "semantic_gemstone_ruby_collar_002",
+    "semantic_workshop_tape_measure_button_003",
     "semantic_hardware_wire_insulation_001",
     "prod_toolpile_screwdriver_handle_001",
-    "semantic_workshop_tape_measure_button_003",
     "adaptive_workshop_hex_key_sleeve_006",
     "adaptive_workshop_screwdriver_grip_bronze_010",
     "semantic_workshop_hex_wrench_handle_004",
@@ -168,6 +201,7 @@
     "dense_ai_gardener_tag_recolor_010",
     "unified_ai_woodworking_recolor_006",
     "unified_ai_miniature_recolor_010",
+    "verified_m_ai_sewing_remove_001",
     "verified_m_ai_watchmaker_recolor_002",
     "verified_m_ai_gardener_remove_004",
     "verified_m_ai_woodworking_recolor_006",
@@ -252,7 +286,6 @@
     "dense_crowd_pottery_tools_008",
     "dense_crowd_knolling_tech_009",
     "dense_crowd_apothecary_herbs_010",
-    "verified_m_ai_sewing_remove_001",
     "goldilocks_pipe_v2_sewing_remove_001",
     "goldilocks_pipe_v2_watchmaker_recolor_002",
     "goldilocks_pipe_v2_gardener_remove_004",
@@ -287,15 +320,6 @@
     "pipe_v3_gardener_remove_005",
     "pipe_v3_expedition_remove_008",
     "pipe_v3_leathercraft_recolor_009",
-    "fresh_ai_confectionery_truffles_001",
-    "fresh_ai_ceramic_mosaic_tiles_002",
-    "fresh_ai_botanical_pressed_flora_003",
-    "fresh_ai_glass_marbles_millefiori_004",
-    "fresh_ai_succulents_greenhouse_grid_005",
-    "fresh_ai_marine_seashells_specimens_007",
-    "fresh_ai_stained_glass_jewels_008",
-    "fresh_ai_wooden_toy_figurines_010",
-    "fresh_ai_enamel_pins_collector_006",
     "fresh_v2_ai_confectionery_truffles_001",
     "fresh_v2_ai_botanical_pressed_flora_003",
     "fresh_v2_ai_glass_marbles_millefiori_004",
@@ -307,1475 +331,136 @@
     "fresh_v3_ai_minerals_geodes_002",
     "fresh_v3_ai_silk_spools_004",
     "fresh_v3_ai_ancient_coins_007",
-    "fresh_v3_ai_wild_mushrooms_009"
+    "fresh_v3_ai_wild_mushrooms_009",
+    "fresh_v7_cobbler_leather_007",
+    "photo_set_001_03",
+    "photo_set_002_01",
+    "photo_set_007_05",
+    "photo_set_012_01",
+    "photo_set_012_03",
+    "photo_set_012_04",
+    "photo_set_012_05",
+    "photo_set_013_01",
+    "photo_set_013_02",
+    "photo_set_014_01",
+    "photo_set_014_02",
+    "photo_set_015_02",
+    "photo_set_015_04",
+    "photo_set_017_03",
+    "photo_set_018_01",
+    "photo_set_018_02",
+    "photo_set_018_03",
+    "photo_set_019_01",
+    "photo_set_019_04",
+    "photo_set_020_03",
+    "photo_set_023_01",
+    "photo_set_023_02",
+    "photo_set_024_01",
+    "photo_set_024_03",
+    "photo_set_024_05",
+    "photo_set_025_01",
+    "photo_set_025_02",
+    "photo_set_025_03",
+    "photo_set_025_04",
+    "photo_set_025_05",
+    "photo_set_035_04",
+    "photo_set_035_05",
+    "photo_set_004_01",
+    "photo_set_004_04",
+    "photo_set_005_02",
+    "photo_set_005_03",
+    "photo_set_005_04",
+    "photo_set_006_02",
+    "photo_set_006_04",
+    "photo_set_006_05",
+    "photo_set_007_02",
+    "photo_set_008_03",
+    "photo_set_008_04",
+    "photo_set_009_02",
+    "photo_set_036_01",
+    "photo_set_036_03",
+    "photo_set_036_05",
+    "photo_set_037_01",
+    "photo_set_037_02",
+    "photo_set_038_02",
+    "photo_set_038_03",
+    "photo_set_038_05",
+    "photo_set_039_01",
+    "photo_set_039_02",
+    "photo_set_039_03",
+    "photo_set_039_04",
+    "photo_set_039_05",
+    "photo_set_040_01",
+    "photo_set_040_02",
+    "photo_set_040_03",
+    "photo_set_040_04",
+    "photo_set_040_05",
+    "photo_set_041_02",
+    "photo_set_041_04",
+    "photo_set_041_05",
+    "daily_custom_01",
+    "daily_custom_02",
+    "daily_set_01_02",
+    "daily_set_01_03",
+    "daily_set_02_01",
+    "daily_set_02_02",
+    "daily_set_02_03",
+    "daily_set_03_01",
+    "daily_set_03_02",
+    "daily_set_03_03",
+    "daily_set_04_01",
+    "daily_set_04_02",
+    "daily_set_04_03",
+    "daily_set_05_01",
+    "daily_set_05_02",
+    "daily_set_05_03",
+    "daily_set_06_02",
+    "daily_set_07_01",
+    "daily_set_07_02",
+    "daily_set_07_03",
+    "daily_set_08_01",
+    "daily_set_08_02",
+    "daily_set_08_03",
+    "photo_set_027_02",
+    "photo_set_027_03",
+    "photo_set_027_04",
+    "photo_set_027_05",
+    "photo_set_028_01"
   ],
-  "approvedLevels": [
-    {
-      "title": "Nursery Plant Tag",
-      "baseImage": "levels/photo-pairs/nursery/medium_nursery_001/base.jpg",
-      "variantImage": "levels/photo-pairs/nursery/medium_nursery_001/variant.jpg",
-      "pack": "Find the Sniper",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "id": "medium_nursery_001",
-      "diffs": [
-        {
-          "y": 45.6,
-          "id": 1,
-          "hint": "Scan the plant tags in the upper-right tray.",
-          "x": 58.8,
-          "radius": 8.5
-        }
-      ],
-      "category": "Greenhouse Clutter",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "medium_workbench_001",
-      "variantImage": "levels/photo-pairs/workbench/medium_workbench_001/variant.jpg",
-      "diffs": [
-        {
-          "y": 56.2,
-          "id": 1,
-          "hint": "Inspect the small screwdriver handle near the right-middle tools.",
-          "x": 50.6,
-          "radius": 8.5
-        }
-      ],
-      "category": "Workshop Clutter",
-      "packId": "find_the_sniper",
-      "pack": "Find the Sniper",
-      "baseImage": "levels/photo-pairs/workbench/medium_workbench_001/base.jpg",
-      "difficulty": "Medium",
-      "title": "Workbench Screwdriver",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "pack": "Find the Sniper",
-      "packId": "find_the_sniper",
-      "diffs": [
-        {
-          "y": 52.1,
-          "id": 1,
-          "hint": "Look for the camouflaged tiny figure near center-right.",
-          "x": 50.2,
-          "radius": 8.5
-        }
-      ],
-      "title": "Forest Floor Camouflage",
-      "id": "hard_forest_001",
-      "variantImage": "levels/photo-pairs/camouflage/hard_forest_001/variant.jpg",
-      "difficulty": "Hard",
-      "baseImage": "levels/photo-pairs/camouflage/hard_forest_001/base.jpg",
-      "category": "Extreme Hunter",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "pack": "Find the Sniper",
-      "difficulty": "Medium",
-      "title": "Workbench Hardware Ring",
-      "diffs": [
-        {
-          "y": 43.5,
-          "id": 1,
-          "hint": "Look just left of the blue screwdriver near the top edge.",
-          "x": 54.4,
-          "radius": 8.5
-        }
-      ],
-      "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/variant.jpg",
-      "packId": "find_the_sniper",
-      "id": "photo_workbench_hardware_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "diffs": [
-        {
-          "y": 49.4,
-          "id": 1,
-          "hint": "Check the small detached succulent just left of the twine bundle.",
-          "x": 54.9,
-          "radius": 8.5
-        }
-      ],
-      "title": "Potting Table Succulent",
-      "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/variant.jpg",
-      "packId": "find_the_sniper",
-      "pack": "Find the Sniper",
-      "id": "photo_potting_table_001",
-      "difficulty": "Medium",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "packId": "abstract_animated",
-      "category": "Photography",
-      "difficulty": "Medium",
-      "variantImage": "levels/photo-pairs/photo-watchmaker-bench/variant.jpg",
-      "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
-      "pack": "Find the Sniper",
-      "title": "Watchmaker Bench Gear",
-      "diffs": [
-        {
-          "y": 49.7,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 50.6,
-          "radius": 8.5
-        }
-      ],
-      "id": "photo_watchmaker_bench_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
-      "diffs": [
-        {
-          "y": 53.1,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 44.4,
-          "radius": 8.5
-        }
-      ],
-      "difficulty": "Medium",
-      "pack": "Find the Sniper",
-      "title": "Electronics Bench Resistor",
-      "packId": "find_the_sniper",
-      "id": "photo_electronics_bench_001",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/photo-electronics-bench/variant.jpg",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "diffs": [
-        {
-          "y": 53.5,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 45.3,
-          "radius": 8.5
-        }
-      ],
-      "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
-      "title": "Antique Desk Key",
-      "variantImage": "levels/photo-pairs/photo-antique-desk/variant.jpg",
-      "id": "photo_antique_desk_001",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "category": "Photography",
-      "pack": "Find the Sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "packId": "find_the_sniper",
-      "diffs": [
-        {
-          "y": 56.7,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 52.8,
-          "radius": 8.5
-        }
-      ],
-      "difficulty": "Medium",
-      "variantImage": "levels/photo-pairs/photo-woodworking-bench/variant.jpg",
-      "category": "Photography",
-      "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
-      "id": "photo_woodworking_bench_001",
-      "title": "Woodworking Bench Screw",
-      "pack": "Find the Sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "diffs": [
-        {
-          "y": 53,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 54.9,
-          "radius": 8.5
-        }
-      ],
-      "variantImage": "levels/photo-pairs/photo-coffee-station/variant.jpg",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "pack": "Find the Sniper",
-      "baseImage": "levels/photo-pairs/photo-coffee-station/base.jpg",
-      "title": "Coffee Station Scoop",
-      "category": "Photography",
-      "id": "photo_coffee_station_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
-      "id": "photo_repair_drawer_001",
-      "category": "Photography",
-      "difficulty": "Medium",
-      "packId": "find_the_sniper",
-      "pack": "Find the Sniper",
-      "variantImage": "levels/photo-pairs/photo-repair-drawer/variant.jpg",
-      "title": "Repair Drawer Washer",
-      "diffs": [
-        {
-          "y": 55.4,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 57.4,
-          "radius": 8.5
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "photo_bicycle_repair_001",
-      "diffs": [
-        {
-          "y": 49.9,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 57.2,
-          "radius": 8.5
-        }
-      ],
-      "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
-      "pack": "Find the Sniper",
-      "variantImage": "levels/photo-pairs/photo-bicycle-repair/variant.jpg",
-      "difficulty": "Medium",
-      "category": "Photography",
-      "title": "Bicycle Repair Bolt",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "difficulty": "Medium",
-      "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
-      "pack": "Find the Sniper",
-      "id": "photo_woodworking_table_001",
-      "diffs": [
-        {
-          "y": 51.5,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 51,
-          "radius": 8.5
-        }
-      ],
-      "packId": "find_the_sniper",
-      "title": "Woodworking Screw",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/photo-woodworking-table/variant.jpg",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/variant.jpg",
-      "difficulty": "Easy",
-      "packId": "abstract_animated",
-      "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_001/base.jpg",
-      "diffs": [
-        {
-          "y": 81.4,
-          "id": 1,
-          "hint": "Examine the region around (62%, 81%) carefully.",
-          "x": 61.8,
-          "radius": 4.3
-        }
-      ],
-      "pack": "Abstract Animated",
-      "id": "mass_abstract_001",
-      "category": "Generated Illustrated Abstract",
-      "title": "Generated Illustrated Abstract #1",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "variantImage": "levels/photo-pairs/photo-watch-repair/variant.jpg",
-      "title": "Watch Repair Gear",
-      "id": "photo_watch_repair_001",
-      "packId": "find_the_sniper",
-      "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
-      "category": "Photography",
-      "difficulty": "Medium",
-      "diffs": [
-        {
-          "y": 48.4,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 56.5,
-          "radius": 8.5
-        }
-      ],
-      "pack": "Find the Sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "title": "Botanist Herbarium Desk",
-      "variantImage": "levels/photo-pairs/ai-botanist-herbarium/variant.jpg",
-      "baseImage": "levels/photo-pairs/ai-botanist-herbarium/base.jpg",
-      "category": "Botanical Garden",
-      "difficulty": "Hard",
-      "pack": "Find the Sniper",
-      "diffs": [
-        {
-          "y": 53.6,
-          "id": 1,
-          "hint": "Inspect the pressed flower sheet on the right between the two flower stems.",
-          "x": 55.7,
-          "radius": 8.5
-        }
-      ],
-      "id": "ai_botanist_herbarium_001",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "baseImage": "levels/photo-pairs/ai_macro_watchmaker_001/original.png",
-      "title": "Horology Watchmaker Tray",
-      "totalDifferences": 1,
-      "id": "ai_macro_watchmaker_001",
-      "variantImage": "levels/photo-pairs/ai_macro_watchmaker_001/variant.png",
-      "diffs": [
-        {
-          "y": 49.8,
-          "id": 1,
-          "hint": "Look inside the small brass cleaning cup in the upper right section.",
-          "x": 50,
-          "radius": 8.5
-        }
-      ],
-      "pack": "Find the Sniper",
-      "difficulty": "Medium",
-      "category": "Photography",
-      "originalImage": "levels/photo-pairs/ai_macro_watchmaker_001/original.png",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "variantImage": "levels/photo-pairs/ai_macro_botanist_001/variant.png",
-      "totalDifferences": 1,
-      "originalImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
-      "diffs": [
-        {
-          "y": 50.2,
-          "id": 1,
-          "hint": "Examine the lower left margin of the center poppy illustration card.",
-          "x": 49.9,
-          "radius": 8.5
-        }
-      ],
-      "baseImage": "levels/photo-pairs/ai_macro_botanist_001/original.png",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "title": "Botanist Herbarium Study",
-      "pack": "Find the Sniper",
-      "category": "Photography",
-      "id": "ai_macro_botanist_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "variantImage": "levels/photo-pairs/ai_macro_machinist_001/variant.png",
-      "totalDifferences": 1,
-      "id": "ai_macro_machinist_001",
-      "pack": "Find the Sniper",
-      "diffs": [
-        {
-          "y": 49.9,
-          "id": 1,
-          "hint": "Count the row of copper ring washers beneath the ball bearings.",
-          "x": 50.1,
-          "radius": 8.5
-        }
-      ],
-      "difficulty": "Hard",
-      "title": "Machinist Precision Hardware Mat",
-      "originalImage": "levels/photo-pairs/ai_macro_machinist_001/original.png",
-      "category": "Photography",
-      "baseImage": "levels/photo-pairs/ai_macro_machinist_001/original.png",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "variantImage": "levels/photo-pairs/ai_macro_electronics_001/variant.png",
-      "originalImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
-      "category": "Photography",
-      "packId": "find_the_sniper",
-      "baseImage": "levels/photo-pairs/ai_macro_electronics_001/original.png",
-      "diffs": [
-        {
-          "y": 49.8,
-          "id": 1,
-          "hint": "Check the bat lever color on the miniature toggle switches.",
-          "x": 50,
-          "radius": 8.5
-        }
-      ],
-      "id": "ai_macro_electronics_001",
-      "pack": "Find the Sniper",
-      "title": "Audio Circuit Repair Workbench",
-      "totalDifferences": 1,
-      "difficulty": "Hard",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "baseImage": "levels/photo-pairs/ai_macro_woodcarver_001/original.png",
-      "category": "Photography",
-      "totalDifferences": 1,
-      "pack": "Find the Sniper",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "diffs": [
-        {
-          "y": 63.7,
-          "id": 1,
-          "hint": "Check the carved decorative relief piece next to the wooden spoon.",
-          "x": 50.4,
-          "radius": 8.5
-        }
-      ],
-      "variantImage": "levels/photo-pairs/ai_macro_woodcarver_001/variant.png",
-      "id": "ai_macro_woodcarver_001",
-      "originalImage": "levels/photo-pairs/ai_macro_woodcarver_001/original.png",
-      "title": "Artisan Woodcarver Chisel Rack",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "diffs": [
-        {
-          "y": 50,
-          "id": 1,
-          "hint": "Look at the spanner wrench tool near the aperture ring.",
-          "x": 49.8,
-          "radius": 8.5
-        }
-      ],
-      "difficulty": "Medium",
-      "totalDifferences": 1,
-      "baseImage": "levels/photo-pairs/ai_macro_camera_optics_001/original.png",
-      "title": "Camera Optics Workbench",
-      "variantImage": "levels/photo-pairs/ai_macro_camera_optics_001/variant.png",
-      "pack": "Find the Sniper",
-      "category": "Photography",
-      "packId": "find_the_sniper",
-      "id": "ai_macro_camera_optics_001",
-      "originalImage": "levels/photo-pairs/ai_macro_camera_optics_001/original.png",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "method1_photo_leathercraft_001",
-      "title": "[Method 1: Workshop Inpainting] Leathercraft Workbench Awl",
-      "category": "Photography",
-      "pack": "Photography",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "baseImage": "/levels/method1_photo_leathercraft_001_base.jpg",
-      "variantImage": "/levels/method1_photo_leathercraft_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 64.1,
-          "y": 42.6,
-          "radius": 8.5,
-          "description": "Stitching awl on the workbench",
-          "hint": "Look at the wooden tools on the right side of the cutting mat"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "method1_photo_electronics_001",
-      "title": "[Method 1: Workshop Inpainting] Circuit Repair Workbench",
-      "category": "Photography",
-      "pack": "Photography",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "baseImage": "/levels/method1_photo_electronics_001_base.jpg",
-      "variantImage": "/levels/method1_photo_electronics_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 55.5,
-          "y": 55.7,
-          "radius": 8.5,
-          "description": "Component resistor on the circuit board",
-          "hint": "Inspect the electronic components on the soldering mat"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "method2_macro_miniature_001",
-      "title": "[Method 2: Macro Diffusion] Miniature Painting Wet Palette",
-      "category": "Photography",
-      "pack": "Photography",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "baseImage": "/levels/method2_macro_miniature_001_base.jpg",
-      "variantImage": "/levels/method2_macro_miniature_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 57.2,
-          "y": 44,
-          "radius": 8.5,
-          "description": "Acrylic paint droplet on the wet palette",
-          "hint": "Notice the pigment bead on the wet palette surface"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "method1_photo_artist_cap_001",
-      "title": "[Method 1: Workshop Inpainting] Artist Studio Paint Tube Cap",
-      "category": "Photography",
-      "pack": "Photography",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "baseImage": "/levels/method1_photo_artist_cap_001_base.jpg",
-      "variantImage": "/levels/method1_photo_artist_cap_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 56.1,
-          "y": 52.2,
-          "radius": 8.5,
-          "description": "Oil paint tube cap on palette",
-          "hint": "Look near the brushes and pigment tubes"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "method2_macro_stained_glass_001",
-      "title": "[Method 2: Macro Diffusion] Stained Glass Cathedral Petal",
-      "category": "Photography",
-      "pack": "Photography",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "baseImage": "/levels/method2_macro_stained_glass_001_base.jpg",
-      "variantImage": "/levels/method2_macro_stained_glass_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 57,
-          "y": 45.2,
-          "radius": 8.5,
-          "description": "Stained glass color shift on central petal",
-          "hint": "Look closely at the central stained glass flower section"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "method1_photo_woodworking_screw_001",
-      "title": "[Method 1: Workshop Inpainting] Woodworking Bench Steel Screw",
-      "category": "Photography",
-      "pack": "Photography",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "baseImage": "/levels/method1_photo_woodworking_screw_001_base.jpg",
-      "variantImage": "/levels/method1_photo_woodworking_screw_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 52.8,
-          "y": 56.7,
-          "radius": 8.5,
-          "description": "Wood screw on cedar workbench",
-          "hint": "Look near the wood shavings and hand plane"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "method1_photo_watchmaker_gear_001",
-      "title": "[Method 1: Workshop Inpainting] Watchmaker Bench Brass Pinion",
-      "category": "Photography",
-      "pack": "Photography",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "baseImage": "/levels/method1_photo_watchmaker_gear_001_base.jpg",
-      "variantImage": "/levels/method1_photo_watchmaker_gear_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 50.6,
-          "y": 49.7,
-          "radius": 8.5,
-          "description": "Brass gear pinion in parts tray",
-          "hint": "Inspect the compartments of the watchmaker tray"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "category": "Craft Clutter",
-      "variantImage": "levels/photo-pairs/crafts/easy_craft_001/variant.jpg",
-      "packId": "find_the_sniper",
-      "difficulty": "Easy",
-      "pack": "Find the Sniper",
-      "diffs": [
-        {
-          "y": 61.3,
-          "id": 1,
-          "hint": "Look around the toy car on the left half of the desk.",
-          "x": 52.7,
-          "radius": 8.5
-        }
-      ],
-      "baseImage": "levels/photo-pairs/crafts/easy_craft_001/base.jpg",
-      "title": "Craft Desk Toy Car",
-      "id": "easy_craft_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "difficulty": "Easy",
-      "category": "Workshop Clutter",
-      "pack": "Abstract & Animated",
-      "id": "medium_screw_tray_001",
-      "title": "Screw Tray Missing Screw",
-      "baseImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/base.jpg",
-      "diffs": [
-        {
-          "y": 48.1,
-          "id": 1,
-          "hint": "Compare the small silver screw between the right-side hardware.",
-          "x": 66.9,
-          "radius": 4.2
-        }
-      ],
-      "variantImage": "levels/photo-pairs/screw-tray/medium_screw_tray_001/variant.jpg",
-      "packId": "abstract_animated",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "diffs": [
-        {
-          "y": 53.9,
-          "id": 1,
-          "hint": "Inspect the shifted orange tile fragment left of center.",
-          "x": 36.6,
-          "radius": 4.5
-        }
-      ],
-      "baseImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/base.jpg",
-      "title": "Mosaic Tile Shift",
-      "difficulty": "Hard",
-      "pack": "Abstract & Animated",
-      "variantImage": "levels/photo-pairs/tile-mosaic/medium_tile_piece_001/variant.jpg",
-      "category": "Pattern Clutter",
-      "packId": "abstract_animated",
-      "id": "medium_tile_piece_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "hard_wire_clip_001",
-      "baseImage": "levels/photo-pairs/wire-tangle/hard_wire_clip_001/base.jpg",
-      "category": "Workshop Clutter",
-      "packId": "abstract_animated",
-      "variantImage": "levels/photo-pairs/wire-tangle/hard_wire_clip_001/variant.jpg",
-      "diffs": [
-        {
-          "y": 57.2,
-          "id": 1,
-          "hint": "Compare the angle of the small clip in the lower-right wire tangle.",
-          "x": 73.6,
-          "radius": 4.2
-        }
-      ],
-      "difficulty": "Hard",
-      "title": "Wire Tangle Clip",
-      "pack": "Abstract & Animated",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
-      "packId": "find_the_sniper",
-      "difficulty": "Medium",
-      "diffs": [
-        {
-          "y": 49.2,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 52.9,
-          "radius": 8.5
-        }
-      ],
-      "title": "Bakers Table Cutter",
-      "pack": "Find the Sniper",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/photo-bakers-table/variant.jpg",
-      "id": "photo_bakers_table_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "title": "Artist Table Paint Tube",
-      "id": "photo_art_table_001",
-      "variantImage": "levels/photo-pairs/photo-art-table/variant.jpg",
-      "category": "Photography",
-      "baseImage": "levels/photo-pairs/photo-art-table/base.jpg",
-      "diffs": [
-        {
-          "y": 54.4,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 52.7,
-          "radius": 8.5
-        }
-      ],
-      "packId": "find_the_sniper",
-      "pack": "Find the Sniper",
-      "difficulty": "Hard",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "packId": "find_the_sniper",
-      "diffs": [
-        {
-          "y": 53.7,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 55.9,
-          "radius": 8.5
-        }
-      ],
-      "baseImage": "levels/photo-pairs/photo-camping-table/base.jpg",
-      "pack": "Find the Sniper",
-      "id": "photo_camping_table_001",
-      "category": "Photography",
-      "title": "Camping Table Carabiner",
-      "variantImage": "levels/photo-pairs/photo-camping-table/variant.jpg",
-      "difficulty": "Medium",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "photo_board_game_001",
-      "difficulty": "Hard",
-      "diffs": [
-        {
-          "y": 46.9,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 52,
-          "radius": 8.5
-        }
-      ],
-      "title": "Board Game Piece",
-      "pack": "Find the Sniper",
-      "variantImage": "levels/photo-pairs/photo-board-game/variant.jpg",
-      "category": "Photography",
-      "packId": "find_the_sniper",
-      "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "variantImage": "levels/photo-pairs/photo-spice-table/variant.jpg",
-      "diffs": [
-        {
-          "y": 40.4,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 52.4,
-          "radius": 8.5
-        }
-      ],
-      "difficulty": "Hard",
-      "title": "Spice Table Herb",
-      "packId": "find_the_sniper",
-      "baseImage": "levels/photo-pairs/photo-spice-table/base.jpg",
-      "id": "photo_spice_table_001",
-      "pack": "Find the Sniper",
-      "category": "Photography",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "title": "Fishing Tackle Float",
-      "pack": "Find the Sniper",
-      "diffs": [
-        {
-          "y": 54.2,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 54.5,
-          "radius": 8.5
-        }
-      ],
-      "id": "photo_fishing_tackle_001",
-      "baseImage": "levels/photo-pairs/photo-fishing-tackle/base.jpg",
-      "category": "Photography",
-      "difficulty": "Medium",
-      "packId": "find_the_sniper",
-      "variantImage": "levels/photo-pairs/photo-fishing-tackle/variant.jpg",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "difficulty": "Easy",
-      "variantImage": "levels/photo-pairs/photo-camera-gear/variant.jpg",
-      "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
-      "packId": "find_the_sniper",
-      "diffs": [
-        {
-          "y": 63.2,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 45.8,
-          "radius": 8.5
-        }
-      ],
-      "category": "Photography",
-      "title": "Camera Gear Lens Cap",
-      "pack": "Find the Sniper",
-      "id": "photo_camera_gear_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "photo_pottery_table_001",
-      "title": "Pottery Table Sponge",
-      "diffs": [
-        {
-          "y": 38.9,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 55.3,
-          "radius": 8.5
-        }
-      ],
-      "difficulty": "Easy",
-      "pack": "Find the Sniper",
-      "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/photo-pottery-table/variant.jpg",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "photo_artist_supply_001",
-      "category": "Photography",
-      "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
-      "title": "Artist Supply Paint",
-      "diffs": [
-        {
-          "y": 52.2,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 56.1,
-          "radius": 8.5
-        }
-      ],
-      "difficulty": "Easy",
-      "variantImage": "levels/photo-pairs/photo-artist-supply/variant.jpg",
-      "pack": "Find the Sniper",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "pack": "Find the Sniper",
-      "diffs": [
-        {
-          "y": 50.6,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 55.6,
-          "radius": 8.5
-        }
-      ],
-      "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg",
-      "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
-      "category": "Photography",
-      "id": "photo_camping_gear_001",
-      "title": "Camping Gear Carabiner",
-      "packId": "find_the_sniper",
-      "difficulty": "Easy",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "pack": "Find the Sniper",
-      "variantImage": "levels/photo-pairs/photo-sewing-table/variant.jpg",
-      "category": "Photography",
-      "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
-      "difficulty": "Easy",
-      "id": "photo_sewing_table_001",
-      "title": "Sewing Table Button",
-      "packId": "find_the_sniper",
-      "diffs": [
-        {
-          "y": 55.9,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 59.6,
-          "radius": 8.5
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "difficulty": "Easy",
-      "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
-      "id": "photo_map_restoration_001",
-      "diffs": [
-        {
-          "y": 47.4,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 44.4,
-          "radius": 8.5
-        }
-      ],
-      "pack": "Find the Sniper",
-      "packId": "find_the_sniper",
-      "title": "Map Restoration Clip",
-      "category": "Photography",
-      "variantImage": "levels/photo-pairs/photo-map-restoration/variant.jpg",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "diffs": [
-        {
-          "y": 49.3,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 40.7,
-          "radius": 8.5
-        }
-      ],
-      "difficulty": "Easy",
-      "category": "Photography",
-      "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
-      "variantImage": "levels/photo-pairs/photo-garden-potting/variant.jpg",
-      "pack": "Find the Sniper",
-      "title": "Garden Potting Pot",
-      "packId": "find_the_sniper",
-      "id": "photo_garden_potting_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
-      "category": "Photography",
-      "pack": "Find the Sniper",
-      "difficulty": "Easy",
-      "variantImage": "levels/photo-pairs/photo-game-night/variant.jpg",
-      "packId": "find_the_sniper",
-      "title": "Game Night Token",
-      "diffs": [
-        {
-          "y": 47.6,
-          "id": 1,
-          "hint": "Compare the small object in this area.",
-          "x": 47,
-          "radius": 8.5
-        }
-      ],
-      "id": "photo_game_night_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "difficulty": "Easy",
-      "id": "abstract_token_field_001",
-      "packId": "abstract_animated",
-      "diffs": [
-        {
-          "y": 44.5,
-          "id": 1,
-          "hint": "Compare the upright turquoise capsule just below center.",
-          "x": 50.7,
-          "radius": 8.5
-        }
-      ],
-      "pack": "Abstract Animated",
-      "variantImage": "levels/photo-pairs/abstract-token-field/abstract_token_field_001/variant.jpg",
-      "category": "Illustrated",
-      "title": "Floating Token Field",
-      "baseImage": "levels/photo-pairs/abstract-token-field/abstract_token_field_001/base.jpg",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "diffs": [
-        {
-          "y": 47.8,
-          "id": 1,
-          "hint": "Inspect the small purple connector slightly right of center.",
-          "x": 56.6,
-          "radius": 8.5
-        }
-      ],
-      "variantImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/variant.jpg",
-      "difficulty": "Hard",
-      "packId": "abstract_animated",
-      "baseImage": "levels/photo-pairs/abstract-mechanical-maze/abstract_mechanical_maze_001/base.jpg",
-      "title": "Mechanical Tile Maze",
-      "id": "abstract_mechanical_maze_001",
-      "pack": "Abstract Animated",
-      "category": "Illustrated",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "pack": "Abstract Animated",
-      "category": "Generated Illustrated Abstract",
-      "id": "mass_abstract_002",
-      "baseImage": "levels/photo-pairs/mass-abstract/mass_abstract_002/base.jpg",
-      "variantImage": "levels/photo-pairs/mass-abstract/mass_abstract_002/variant.jpg",
-      "title": "Generated Illustrated Abstract #2",
-      "difficulty": "Easy",
-      "diffs": [
-        {
-          "y": 39,
-          "id": 1,
-          "hint": "Examine the region around (45%, 38%) carefully.",
-          "x": 46.2,
-          "radius": 6
-        }
-      ],
-      "packId": "abstract_animated",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "difficulty": "Hard",
-      "category": "Photographic Detail",
-      "id": "mass_photo_102",
-      "title": "Photographic Detail 102",
-      "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
-      "variantImage": "levels/photo-pairs/mass-photo-real/mass_photo_102/variant.jpg",
-      "diffs": [
-        {
-          "y": 56,
-          "id": 1,
-          "hint": "Compare the small color detail in this area.",
-          "x": 45.2,
-          "radius": 4.2
-        }
-      ],
-      "pack": "Find the Sniper",
-      "packId": "find_the_sniper",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "ai_bakery_counter_001",
-      "difficulty": "Easy",
-      "diffs": [
-        {
-          "y": 65.8,
-          "id": 1,
-          "hint": "Check the silver powdered sugar shaker to the right of the rolling pin.",
-          "x": 80.2,
-          "radius": 8.5
-        }
-      ],
-      "pack": "Find the Sniper",
-      "packId": "find_the_sniper",
-      "category": "Bakery Clutter",
-      "baseImage": "levels/photo-pairs/ai-bakery-counter/base.jpg",
-      "variantImage": "levels/photo-pairs/ai-bakery-counter/variant.jpg",
-      "title": "Rustic Bakery Counter",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "diffs": [
-        {
-          "y": 71.8,
-          "id": 1,
-          "hint": "Look at the metal soil scoop resting on the wooden table.",
-          "x": 47.9,
-          "radius": 8.5
-        }
-      ],
-      "packId": "find_the_sniper",
-      "baseImage": "levels/photo-pairs/ai-greenhouse-potting/base.jpg",
-      "pack": "Find the Sniper",
-      "title": "Greenhouse Potting Bench",
-      "variantImage": "levels/photo-pairs/ai-greenhouse-potting/variant.jpg",
-      "difficulty": "Easy",
-      "category": "Botanical Garden",
-      "id": "ai_greenhouse_potting_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "category": "Horology Studio",
-      "id": "ai_watchmaker_bench_001",
-      "baseImage": "levels/photo-pairs/ai-watchmaker-bench/base.jpg",
-      "difficulty": "Easy",
-      "title": "Master Watchmaker Desk",
-      "packId": "find_the_sniper",
-      "pack": "Find the Sniper",
-      "variantImage": "levels/photo-pairs/ai-watchmaker-bench/variant.jpg",
-      "diffs": [
-        {
-          "y": 64.7,
-          "id": 1,
-          "hint": "Inspect the dark blue velvet pad in the lower-right corner.",
-          "x": 78.7,
-          "radius": 8.5
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "pack": "Find the Sniper",
-      "category": "Fine Art Studio",
-      "packId": "find_the_sniper",
-      "title": "Painter Studio Palette",
-      "baseImage": "levels/photo-pairs/ai-artist-easel/base.jpg",
-      "id": "ai_artist_easel_001",
-      "diffs": [
-        {
-          "y": 69.9,
-          "id": 1,
-          "hint": "Scan the bottom-left corner of the table for the cobalt blue paint tube.",
-          "x": 20.6,
-          "radius": 8.5
-        }
-      ],
-      "variantImage": "levels/photo-pairs/ai-artist-easel/variant.jpg",
-      "difficulty": "Easy",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "difficulty": "Easy",
-      "category": "Espresso Station",
-      "packId": "find_the_sniper",
-      "pack": "Find the Sniper",
-      "id": "ai_coffee_bar_001",
-      "title": "Artisanal Coffee Bar",
-      "diffs": [
-        {
-          "y": 60.6,
-          "id": 1,
-          "hint": "Check the wooden-handled barista brush to the left of the tamper.",
-          "x": 17.4,
-          "radius": 8.5
-        }
-      ],
-      "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg",
-      "baseImage": "levels/photo-pairs/ai-coffee-bar/base.jpg",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "ai_antique_study_001",
-      "difficulty": "Easy",
-      "packId": "find_the_sniper",
-      "title": "Victorian Study Desk",
-      "baseImage": "levels/photo-pairs/ai-antique-study/base.jpg",
-      "pack": "Find the Sniper",
-      "category": "Antique Study",
-      "diffs": [
-        {
-          "y": 50.9,
-          "id": 1,
-          "hint": "Look on the wooden desk surface below the brass desk clock.",
-          "x": 57.8,
-          "radius": 8.5
-        }
-      ],
-      "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "pack": "Find the Sniper",
-      "baseImage": "levels/photo-pairs/ai-cartography-desk/base.jpg",
-      "packId": "find_the_sniper",
-      "difficulty": "Easy",
-      "category": "Antique Study",
-      "title": "Maritime Cartography Desk",
-      "diffs": [
-        {
-          "y": 54.4,
-          "id": 1,
-          "hint": "Scan the lower-left table area immediately beside the black ink bottle.",
-          "x": 33.7,
-          "radius": 8.5
-        }
-      ],
-      "variantImage": "levels/photo-pairs/ai-cartography-desk/variant.jpg",
-      "id": "ai_cartography_desk_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "category": "Workshop Clutter",
-      "difficulty": "Hard",
-      "baseImage": "levels/photo-pairs/ai-locksmith-bench/base.jpg",
-      "title": "Master Locksmith Workbench",
-      "diffs": [
-        {
-          "y": 57.6,
-          "id": 1,
-          "hint": "Examine the tiny coil springs below the opened brass lock cylinder.",
-          "x": 40.6,
-          "radius": 8.5
-        }
-      ],
-      "packId": "find_the_sniper",
-      "variantImage": "levels/photo-pairs/ai-locksmith-bench/variant.jpg",
-      "pack": "Find the Sniper",
-      "id": "ai_locksmith_bench_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "difficulty": "Hard",
-      "id": "photo_repair_hardware_002",
-      "packId": "find_the_sniper",
-      "diffs": [
-        {
-          "y": 58,
-          "id": 1,
-          "hint": "Scan the brass washer compartment on the right side of the organizer.",
-          "x": 74.9,
-          "radius": 4.6
-        }
-      ],
-      "pack": "Find the Sniper",
-      "variantImage": "levels/photo-pairs/photo-repair-hardware-002/variant.jpg",
-      "baseImage": "levels/photo-pairs/photo-repair-hardware-002/base.jpg",
-      "title": "Precision Hardware Drawer",
-      "category": "Workshop Clutter",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "category": "Game Night",
-      "diffs": [
-        {
-          "y": 35.1,
-          "id": 1,
-          "hint": "Inspect the wooden resource token on the lower-right map tile.",
-          "x": 60.2,
-          "radius": 4.2
-        }
-      ],
-      "title": "Tabletop Strategy Board",
-      "packId": "find_the_sniper",
-      "pack": "Find the Sniper",
-      "baseImage": "levels/photo-pairs/photo-strategy-pieces-002/base.jpg",
-      "variantImage": "levels/photo-pairs/photo-strategy-pieces-002/variant.jpg",
-      "id": "photo_strategy_pieces_002",
-      "difficulty": "Hard",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "packId": "find_the_sniper",
-      "totalDifferences": 1,
-      "diffs": [
-        {
-          "y": 49.9,
-          "id": 1,
-          "hint": "Examine the star anise cluster near the cumin wooden bowl.",
-          "x": 49.9,
-          "radius": 8.5
-        }
-      ],
-      "baseImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/original.png",
-      "variantImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/variant.png",
-      "pack": "Find the Sniper",
-      "title": "Artisan Exotic Spice Board",
-      "difficulty": "Easy",
-      "category": "Photography",
-      "originalImage": "levels/photo-pairs/ai_macro_spice_bazaar_001/original.png",
-      "id": "ai_macro_spice_bazaar_001",
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "ai_macro_watch_escapement_001",
-      "title": "Horology Watch Escapement & Ruby Jewels",
-      "category": "Real Photo",
-      "difficulty": "Easy",
-      "packId": "find_the_sniper",
-      "baseImage": "/levels/ai_macro_watch_escapement_001_base.jpg",
-      "variantImage": "/levels/ai_macro_watch_escapement_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 58.4,
-          "y": 52.2,
-          "radius": 8.5,
-          "description": "Balance wheel shock cap ruby jewel changed from magenta to emerald green",
-          "hint": "Look at the shock jewel in the center of the balance wheel"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    },
-    {
-      "id": "ai_macro_stained_glass_001",
-      "title": "Master Stained Glass Solder & Cathedral Glass",
-      "category": "Real Photo",
-      "difficulty": "Medium",
-      "packId": "find_the_sniper",
-      "baseImage": "/levels/ai_macro_stained_glass_001_base.jpg",
-      "variantImage": "/levels/ai_macro_stained_glass_001_variant.jpg",
-      "diffs": [
-        {
-          "id": 1,
-          "x": 57,
-          "y": 45.2,
-          "radius": 8.5,
-          "description": "Cathedral glass petal to the right of soldering iron changed from ruby red to deep violet purple",
-          "hint": "Check the curved glass petal just to the right of the hot solder joint"
-        }
-      ],
-      "curationMeta": {
-        "status": "approved"
-      }
-    }
-  ],
-  "wrongDifficultyLevels": [],
-  "dismissedLevels": [],
   "rawStatusMap": {
-    "medium_nursery_001": {
+    "photo_set_029_01": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.890Z"
     },
-    "medium_workbench_001": {
+    "photo_set_029_02": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "hard_forest_001": {
+    "photo_set_029_03": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_workbench_hardware_001": {
+    "photo_set_029_04": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_potting_table_001": {
+    "photo_set_029_05": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_watchmaker_bench_001": {
+    "photo_set_030_01": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_electronics_bench_001": {
+    "photo_set_030_03": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_antique_desk_001": {
+    "photo_set_030_04": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_woodworking_bench_001": {
+    "photo_set_031_01": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -1783,15 +468,15 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_repair_drawer_001": {
+    "photo_set_031_02": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_bicycle_repair_001": {
+    "photo_set_031_05": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_woodworking_table_001": {
+    "photo_set_032_01": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -1799,50 +484,41 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_watch_repair_001": {
+    "photo_set_033_03": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_botanist_herbarium_001": {
+    "photo_set_034_04": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_macro_watchmaker_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
+    "photo_set_028_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
     },
-    "ai_macro_botanist_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
+    "photo_set_028_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
     },
-    "ai_macro_machinist_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
+    "photo_set_028_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
     },
-    "ai_macro_electronics_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
+    "photo_set_028_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
     },
-    "ai_macro_woodcarver_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
+    "photo_set_027_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
     },
     "ai_macro_camera_optics_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "method1_photo_leathercraft_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
-    "method1_photo_electronics_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
-    "method2_macro_miniature_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
+    "photo_set_026_01": "approved",
+    "photo_set_026_02": "approved",
+    "photo_set_026_03": "approved",
     "method1_photo_artist_cap_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
@@ -1875,7 +551,7 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_bakers_table_001": {
+    "photo_set_030_02": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -1887,7 +563,7 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_board_game_001": {
+    "photo_set_030_05": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -1899,35 +575,35 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_camera_gear_001": {
+    "photo_set_031_03": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_pottery_table_001": {
+    "photo_set_031_04": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_artist_supply_001": {
+    "photo_set_032_02": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_camping_gear_001": {
+    "photo_set_032_03": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_sewing_table_001": {
+    "photo_set_032_04": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_map_restoration_001": {
+    "photo_set_032_05": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_garden_potting_001": {
+    "photo_set_033_01": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_game_night_001": {
+    "photo_set_033_02": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -1947,11 +623,11 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_bakery_counter_001": {
+    "photo_set_033_04": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_greenhouse_potting_001": {
+    "photo_set_033_05": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -1959,31 +635,31 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_artist_easel_001": {
+    "photo_set_034_01": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_coffee_bar_001": {
+    "photo_set_034_02": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_antique_study_001": {
+    "photo_set_034_03": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_cartography_desk_001": {
+    "photo_set_034_05": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_locksmith_bench_001": {
+    "photo_set_035_01": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_repair_hardware_002": {
+    "photo_set_035_02": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_strategy_pieces_002": {
+    "photo_set_035_03": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
@@ -1991,14 +667,8 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "ai_macro_watch_escapement_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
-    "ai_macro_stained_glass_001": {
-      "status": "approved",
-      "updatedAt": "2026-08-24T20:53:38.892Z"
-    },
+    "photo_set_026_04": "approved",
+    "photo_set_026_05": "approved",
     "semantic_workshop_screwdriver_grip_001": {
       "status": "dismissed",
       "updatedAt": "2026-08-24T21:26:31.790Z"
@@ -2431,10 +1101,7 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:24:15.106Z"
     },
-    "photo_fresh_crayons_003": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:24:40.801Z"
-    },
+    "photo_set_018_05": "approved",
     "photo_fresh_typewriter_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:24:49.371Z"
@@ -2451,10 +1118,7 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:25:12.757Z"
     },
-    "photo_fresh_stained_glass_009": {
-      "status": "approved",
-      "updatedAt": "2026-08-25T06:25:41.538Z"
-    },
+    "photo_set_019_02": "approved",
     "photo_fresh_marbles_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:26:03.169Z"
@@ -2819,10 +1483,7 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:52:12.044Z"
     },
-    "fresh_v2_ai_ceramic_mosaic_tiles_002": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T17:52:21.431Z"
-    },
+    "photo_set_011_04": "approved",
     "fresh_v2_ai_botanical_pressed_flora_003": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:52:26.116Z"
@@ -2847,29 +1508,228 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:52:56.562Z"
     },
-    "fresh_v2_ai_heirloom_spices_botanical_009": {
-      "status": "approved",
-      "updatedAt": "2026-08-27T17:53:00.724Z"
-    },
+    "photo_set_011_05": "approved",
     "fresh_v2_ai_wooden_toy_figurines_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:53:07.768Z"
+    },
+    "photo_set_010_03": "approved",
+    "fresh_v3_ai_minerals_geodes_002": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T18:08:39.982Z"
+    },
+    "photo_set_010_04": "approved",
+    "fresh_v3_ai_silk_spools_004": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T18:08:56.254Z"
+    },
+    "photo_set_010_05": "approved",
+    "photo_set_011_01": "approved",
+    "fresh_v3_ai_ancient_coins_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T18:09:16.834Z"
+    },
+    "photo_set_011_02": "approved",
+    "fresh_v3_ai_wild_mushrooms_009": {
+      "status": "dismissed",
+      "updatedAt": "2026-08-27T18:09:28.615Z"
+    },
+    "photo_set_011_03": "approved",
+    "medium_nursery_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.890Z"
+    },
+    "medium_workbench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "hard_forest_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_workbench_hardware_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_potting_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_watchmaker_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_electronics_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_antique_desk_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_woodworking_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_repair_drawer_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_bicycle_repair_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_woodworking_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_watch_repair_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_botanist_herbarium_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_macro_watchmaker_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_macro_botanist_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_macro_machinist_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_macro_electronics_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_macro_woodcarver_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "method1_photo_leathercraft_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "method1_photo_electronics_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "method2_macro_miniature_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_bakers_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_board_game_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_camera_gear_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_pottery_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_artist_supply_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_camping_gear_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_sewing_table_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_map_restoration_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_garden_potting_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_game_night_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_bakery_counter_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_greenhouse_potting_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_artist_easel_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_coffee_bar_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_antique_study_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_cartography_desk_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_locksmith_bench_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_repair_hardware_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_strategy_pieces_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_macro_watch_escapement_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "ai_macro_stained_glass_001": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_fresh_crayons_003": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:24:40.801Z"
+    },
+    "photo_fresh_stained_glass_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:25:41.538Z"
+    },
+    "fresh_v2_ai_ceramic_mosaic_tiles_002": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T17:52:21.431Z"
+    },
+    "fresh_v2_ai_heirloom_spices_botanical_009": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T17:53:00.724Z"
     },
     "fresh_v3_ai_pasta_shapes_001": {
       "status": "approved",
       "updatedAt": "2026-08-27T18:08:31.479Z"
     },
-    "fresh_v3_ai_minerals_geodes_002": {
-      "status": "dismissed",
-      "updatedAt": "2026-08-27T18:08:39.982Z"
-    },
     "fresh_v3_ai_vintage_keys_003": {
       "status": "approved",
       "updatedAt": "2026-08-27T18:08:50.830Z"
-    },
-    "fresh_v3_ai_silk_spools_004": {
-      "status": "dismissed",
-      "updatedAt": "2026-08-27T18:08:56.254Z"
     },
     "fresh_v3_ai_japanese_teacups_005": {
       "status": "approved",
@@ -2879,21 +1739,383 @@
       "status": "approved",
       "updatedAt": "2026-08-27T18:09:11.500Z"
     },
-    "fresh_v3_ai_ancient_coins_007": {
-      "status": "dismissed",
-      "updatedAt": "2026-08-27T18:09:16.834Z"
-    },
     "fresh_v3_ai_glass_paperweights_008": {
       "status": "approved",
       "updatedAt": "2026-08-27T18:09:24.549Z"
     },
-    "fresh_v3_ai_wild_mushrooms_009": {
-      "status": "dismissed",
-      "updatedAt": "2026-08-27T18:09:28.615Z"
-    },
     "fresh_v3_ai_drafting_dividers_010": {
       "status": "approved",
       "updatedAt": "2026-08-27T18:09:33.740Z"
+    },
+    "fresh_v7_cobbler_leather_007": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T05:56:41.631Z"
+    },
+    "fresh_v7_pottery_tools_011": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T05:56:55.921Z"
+    },
+    "fresh_v7_bonsai_tools_012": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T05:56:58.790Z"
+    },
+    "photo_set_001_01": "approved",
+    "photo_set_001_03": "approved",
+    "photo_set_001_04": "approved",
+    "photo_set_001_05": "approved",
+    "photo_set_001_02": "approved",
+    "photo_set_002_01": "approved",
+    "photo_set_002_02": "approved",
+    "photo_set_002_04": "approved",
+    "photo_set_003_04": "approved",
+    "photo_set_007_03": "approved",
+    "photo_set_007_04": "approved",
+    "photo_set_007_05": "approved",
+    "photo_set_008_01": "approved",
+    "photo_set_008_02": "approved",
+    "photo_set_009_04": "approved",
+    "photo_set_009_05": "approved",
+    "photo_set_010_01": "approved",
+    "photo_set_010_02": "approved",
+    "photo_set_012_01": "approved",
+    "photo_set_012_02": "approved",
+    "photo_set_012_03": "approved",
+    "photo_set_012_04": "approved",
+    "photo_set_012_05": "approved",
+    "photo_set_013_01": "approved",
+    "photo_set_013_02": "approved",
+    "photo_set_013_03": "approved",
+    "photo_set_013_04": "approved",
+    "photo_set_013_05": "approved",
+    "photo_set_014_01": "approved",
+    "photo_set_014_02": "approved",
+    "photo_set_014_03": "approved",
+    "photo_set_014_04": "approved",
+    "photo_set_014_05": "approved",
+    "photo_set_015_01": "approved",
+    "photo_set_015_02": "approved",
+    "photo_set_015_03": "approved",
+    "photo_set_015_04": "approved",
+    "photo_set_015_05": "approved",
+    "photo_set_016_01": "approved",
+    "photo_set_016_02": "approved",
+    "photo_set_016_03": "approved",
+    "photo_set_016_04": "approved",
+    "photo_set_016_05": "approved",
+    "photo_set_017_01": "approved",
+    "photo_set_017_02": "approved",
+    "photo_set_017_03": "approved",
+    "photo_set_017_04": "approved",
+    "photo_set_017_05": "approved",
+    "photo_set_018_01": "approved",
+    "photo_set_018_02": "approved",
+    "photo_set_018_03": "approved",
+    "photo_set_018_04": "approved",
+    "photo_set_019_01": "approved",
+    "photo_set_019_03": "approved",
+    "photo_set_019_04": "approved",
+    "photo_set_019_05": "approved",
+    "photo_set_020_01": "approved",
+    "photo_set_020_02": "approved",
+    "photo_set_020_03": "approved",
+    "photo_set_020_04": "approved",
+    "photo_set_020_05": "approved",
+    "photo_set_021_01": "approved",
+    "photo_set_021_02": "approved",
+    "photo_set_021_03": "approved",
+    "photo_set_021_04": "approved",
+    "photo_set_021_05": "approved",
+    "photo_set_022_01": "approved",
+    "photo_set_022_02": "approved",
+    "photo_set_022_03": "approved",
+    "photo_set_022_04": "approved",
+    "photo_set_022_05": "approved",
+    "photo_set_023_01": "approved",
+    "photo_set_023_02": "approved",
+    "photo_set_023_03": "approved",
+    "photo_set_023_04": "approved",
+    "photo_set_023_05": "approved",
+    "photo_set_024_01": "approved",
+    "photo_set_024_02": "approved",
+    "photo_set_024_03": "approved",
+    "photo_set_024_04": "approved",
+    "photo_set_024_05": "approved",
+    "photo_set_025_01": "approved",
+    "photo_set_025_02": "approved",
+    "photo_set_025_03": "approved",
+    "photo_set_025_04": "approved",
+    "photo_set_025_05": "approved",
+    "photo_set_035_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:38:49.711Z"
+    },
+    "photo_set_035_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:39:00.004Z"
+    },
+    "photo_set_002_03": "approved",
+    "photo_set_002_05": "approved",
+    "photo_set_003_01": "approved",
+    "photo_set_003_02": "approved",
+    "photo_set_003_03": "approved",
+    "photo_set_003_05": "approved",
+    "photo_set_004_01": "approved",
+    "photo_set_004_02": "approved",
+    "photo_set_004_03": "approved",
+    "photo_set_004_04": "approved",
+    "photo_set_004_05": "approved",
+    "photo_set_005_01": "approved",
+    "photo_set_005_02": "approved",
+    "photo_set_005_03": "approved",
+    "photo_set_005_04": "approved",
+    "photo_set_005_05": "approved",
+    "photo_set_006_01": "approved",
+    "photo_set_006_02": "approved",
+    "photo_set_006_03": "approved",
+    "photo_set_006_04": "approved",
+    "photo_set_006_05": "approved",
+    "photo_set_007_01": "approved",
+    "photo_set_007_02": "approved",
+    "photo_set_008_03": "approved",
+    "photo_set_008_04": "approved",
+    "photo_set_008_05": "approved",
+    "photo_set_009_01": "approved",
+    "photo_set_009_02": "approved",
+    "photo_set_009_03": "approved",
+    "photo_set_036_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:42:04.382Z"
+    },
+    "photo_set_036_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:42:10.671Z"
+    },
+    "photo_set_036_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:42:15.188Z"
+    },
+    "photo_set_036_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:42:20.776Z"
+    },
+    "photo_set_036_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:42:23.847Z"
+    },
+    "photo_set_037_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:42:30.419Z"
+    },
+    "photo_set_037_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:42:35.272Z"
+    },
+    "photo_set_037_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:42:42.610Z"
+    },
+    "photo_set_037_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:42:47.164Z"
+    },
+    "photo_set_037_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:42:52.084Z"
+    },
+    "photo_set_038_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:42:56.670Z"
+    },
+    "photo_set_038_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:01.291Z"
+    },
+    "photo_set_038_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:06.128Z"
+    },
+    "photo_set_038_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:43:17.939Z"
+    },
+    "photo_set_038_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:20.875Z"
+    },
+    "photo_set_039_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:24.431Z"
+    },
+    "photo_set_039_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:25.799Z"
+    },
+    "photo_set_039_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:26.966Z"
+    },
+    "photo_set_039_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:27.998Z"
+    },
+    "photo_set_039_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:29.131Z"
+    },
+    "photo_set_040_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:30.131Z"
+    },
+    "photo_set_040_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:30.999Z"
+    },
+    "photo_set_040_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:32.019Z"
+    },
+    "photo_set_040_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:33.000Z"
+    },
+    "photo_set_040_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:35.019Z"
+    },
+    "photo_set_041_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:43:41.005Z"
+    },
+    "photo_set_041_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:45.959Z"
+    },
+    "photo_set_041_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:43:52.368Z"
+    },
+    "photo_set_041_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:43:57.785Z"
+    },
+    "photo_set_041_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:00.672Z"
+    },
+    "daily_custom_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:02.808Z"
+    },
+    "daily_custom_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:11.929Z"
+    },
+    "daily_set_01_01": "approved",
+    "daily_set_01_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:21.005Z"
+    },
+    "daily_set_01_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:23.456Z"
+    },
+    "daily_set_02_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:26.745Z"
+    },
+    "daily_set_02_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:36.048Z"
+    },
+    "daily_set_02_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:38.420Z"
+    },
+    "daily_set_03_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:41.121Z"
+    },
+    "daily_set_03_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:42.994Z"
+    },
+    "daily_set_03_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:44.990Z"
+    },
+    "daily_set_04_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:44:52.246Z"
+    },
+    "daily_set_04_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:04.574Z"
+    },
+    "daily_set_04_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:11.243Z"
+    },
+    "daily_set_05_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:13.928Z"
+    },
+    "daily_set_05_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:15.580Z"
+    },
+    "daily_set_05_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:21.070Z"
+    },
+    "daily_set_06_01": "approved",
+    "daily_set_06_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:29.557Z"
+    },
+    "daily_set_06_03": "approved",
+    "daily_set_07_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:35.879Z"
+    },
+    "daily_set_07_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:49.122Z"
+    },
+    "daily_set_07_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:53.124Z"
+    },
+    "daily_set_08_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:54.828Z"
+    },
+    "daily_set_08_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:45:57.665Z"
+    },
+    "daily_set_08_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:08.823Z"
+    },
+    "photo_set_027_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
+    },
+    "photo_set_027_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
+    },
+    "photo_set_027_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
+    },
+    "photo_set_027_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
+    },
+    "photo_set_028_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:46:25.866Z"
     }
   }
 }

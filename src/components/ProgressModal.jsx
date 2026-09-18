@@ -148,16 +148,20 @@ export default function ProgressModal({
     allSets.forEach(setObj => {
       const setPack = setObj.packId || 'find_the_sniper';
       if (setPack === packId || (packId === 'find_the_sniper' && (!setObj.packId || setObj.packId === 'find_the_sniper'))) {
-        const c = setObj.clears || 1;
+        const c = setObj.clears || 0;
         clears += c;
-        setCompletedCount += 1;
+        if (c > 0) {
+          setCompletedCount += 1;
+        }
         totalPoints += (setObj.totalPoints || 0);
 
-        if (setObj.firstTime && (!bestFirstTime || setObj.firstTime < bestFirstTime)) {
+        if (typeof setObj.firstTime === 'number' && setObj.firstTime > 0 && (!bestFirstTime || setObj.firstTime < bestFirstTime)) {
           bestFirstTime = setObj.firstTime;
         }
 
-        const rTime = setObj.fastestRepeat || setObj.firstTime;
+        const rTime = (typeof setObj.fastestRepeat === 'number' && setObj.fastestRepeat > 0)
+          ? setObj.fastestRepeat
+          : (typeof setObj.firstTime === 'number' && setObj.firstTime > 0 ? setObj.firstTime : null);
         if (rTime && (!bestRepeatTime || rTime < bestRepeatTime)) {
           bestRepeatTime = rTime;
         }
@@ -437,16 +441,24 @@ export default function ProgressModal({
                   ) : (
                     topLeaderboardEntries.slice(0, 25).map((entry, index) => {
                       const isMe = entry.isCurrentPlayer;
-                      const firstTimeMs = entry.firstTime || entry.avgFirstTimeByPack?.[selectedLeaderboardPack];
+                      const playerSet = isMe ? getPlayerSetStats(selectedLeaderboardSet) : null;
+                      const isFirstFailed = (isMe && (playerSet?.firstFailed || playerSet?.firstTime === 'failed'))
+                        || entry.firstTime === 'failed'
+                        || Boolean(entry.firstFailed);
+
+                      const firstTimeMs = (isMe && playerSet && typeof playerSet.firstTime === 'number')
+                        ? playerSet.firstTime
+                        : (typeof entry.firstTime === 'number' ? entry.firstTime : entry.avgFirstTimeByPack?.[selectedLeaderboardPack]);
                       const repeatTimeMs = entry.repeatTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
                       const fastestTimeMs = entry.fastestTime || entry.fastestTimeByPack?.[selectedLeaderboardPack];
 
-                      const firstTimeStr = typeof firstTimeMs === 'number' && firstTimeMs > 0 ? `${(firstTimeMs / 1000).toFixed(2)}s` : '--';
+                      const firstTimeStr = isFirstFailed
+                        ? 'Failed'
+                        : (typeof firstTimeMs === 'number' && firstTimeMs > 0 ? `${(firstTimeMs / 1000).toFixed(2)}s` : '--');
                       const overallTimeStr = typeof repeatTimeMs === 'number' && repeatTimeMs > 0 ? `${(repeatTimeMs / 1000).toFixed(2)}s` : '--';
                       const fastestTimeStr = typeof fastestTimeMs === 'number' && fastestTimeMs > 0 ? `${(fastestTimeMs / 1000).toFixed(2)}s` : '--';
                       const displayName = entry.playerName || `SPEEDRUNNER #${index + 1}`;
 
-                      const playerSet = isMe ? getPlayerSetStats(selectedLeaderboardSet) : null;
                       const effectiveMostPoints = playerSet?.bestScore
                         || playerSet?.lastScore
                         || (playerSet?.totalPoints && playerSet?.clears ? Math.round(playerSet.totalPoints / playerSet.clears) : null)
@@ -476,7 +488,7 @@ export default function ProgressModal({
                                 </div>
                                 <span style={{
                                   fontFamily: 'var(--font-mono)',
-                                  color: 'var(--accent-gold)',
+                                  color: isFirstFailed ? 'var(--accent-pink)' : 'var(--accent-gold)',
                                   fontWeight: 900,
                                   fontSize: '0.96rem'
                                 }}>
@@ -516,7 +528,7 @@ export default function ProgressModal({
                             padding: '12px 10px',
                             textAlign: 'center',
                             fontFamily: 'var(--font-mono)',
-                            color: 'var(--accent-gold)',
+                            color: isFirstFailed ? 'var(--accent-pink)' : 'var(--accent-gold)',
                             fontWeight: 900,
                             fontSize: '0.96rem',
                             background: isMe ? 'rgba(255, 183, 3, 0.22)' : 'rgba(255, 183, 3, 0.08)',
@@ -782,12 +794,13 @@ export default function ProgressModal({
           {/* Overall Summary Stat Cards */}
           {(() => {
             const allSets = getAllRecordedSets();
-            const totalClears = allSets.reduce((sum, s) => sum + (s.clears || 1), 0);
+            const totalClears = allSets.reduce((sum, s) => sum + (s.clears || 0), 0);
             const totalPoints = allSets.reduce((sum, s) => sum + (s.totalPoints || 0), 0);
             const avgPointsOverall = totalClears > 0 ? Math.round(totalPoints / totalClears) : 0;
             const bestOverallTimeMs = allSets.reduce((best, s) => {
               const t = s.firstTime;
-              return t && (!best || t < best) ? t : best;
+              const numericTime = typeof t === 'number' && t > 0 ? t : null;
+              return numericTime && (!best || numericTime < best) ? numericTime : best;
             }, null);
 
             return (

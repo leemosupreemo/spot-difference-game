@@ -170,7 +170,16 @@ export default function HelpModal({ isOpen, onClose }) {
         )}
 
         {/* Tab Content Area: fixed min-height so switching tabs doesn't resize the modal itself */}
-        <div style={{ overflowY: 'auto', paddingRight: '4px', marginBottom: '18px', flex: 1, minHeight: '300px' }}>
+        <div style={{
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          overscrollBehavior: 'contain',
+          paddingRight: '4px',
+          paddingBottom: '24px',
+          marginBottom: '14px',
+          flex: '1 1 auto',
+          minHeight: '260px'
+        }}>
           {showFullPolicy ? (
             /* FULL IN-APP PRIVACY POLICY DOCUMENT */
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--modal-gap-lg)', fontSize: '0.86rem', color: 'var(--text-main)', lineHeight: 1.5 }}>
@@ -350,7 +359,7 @@ export default function HelpModal({ isOpen, onClose }) {
             if (showFullPolicy) setShowFullPolicy(false);
             else onClose();
           }}
-          style={{ width: '100%', justifyContent: 'center', fontSize: '1.05rem', fontWeight: 900, padding: '12px', borderRadius: '14px' }}
+          style={{ width: '100%', justifyContent: 'center', fontSize: '1.05rem', fontWeight: 900, padding: '12px', borderRadius: '14px', flexShrink: 0 }}
         >
           {showFullPolicy ? 'Done Reading' : 'Got It!'}
         </button>

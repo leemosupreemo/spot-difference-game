@@ -1,57 +1,34 @@
-import React, { useState } from 'react';
-import { Star, X, Heart } from 'lucide-react';
+import React from 'react';
+import { Star, X } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { trackRatingPromptAction } from '../services/analytics';
 import { getAppStoreReviewUrl } from '../services/appConfig';
+import { recordRatingPromptDismissed } from '../services/ratingPrompt';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export default function RatingModal({
   isOpen,
   onClose,
-  onOpenSupport,
-  visitNumber = 2
+  attemptNumber = 1
 }) {
-  const [hoverRating, setHoverRating] = useState(null);
-  const [selectedRating, setSelectedRating] = useState(5);
-
   if (!isOpen) return null;
 
-  const currentDisplayRating = hoverRating !== null ? hoverRating : selectedRating;
+  const handleRate = () => {
+    sounds.playWin();
+    try {
+      localStorage.setItem('diff_hunter_rating_handled', 'rated');
+    } catch (_) {}
 
-  const handleSelectRating = (rating) => {
-    setSelectedRating(rating);
+    trackRatingPromptAction({ action: 'rate', attemptNumber });
 
-    if (rating >= 4.0) {
-      sounds.playWin();
-      try {
-        localStorage.setItem('diff_hunter_rating_handled', 'rated');
-        localStorage.setItem('diff_hunter_rating_score', String(rating));
-      } catch (_) {}
-
-      trackRatingPromptAction({ action: 'rate', rating, visitNumber });
-
-      const reviewUrl = getAppStoreReviewUrl();
-      try {
-        if (typeof window !== 'undefined') {
-          window.open(reviewUrl, '_blank', 'noopener,noreferrer');
-        }
-      } catch (_) {}
-
-      onClose();
-    } else {
-      sounds.playTap();
-      try {
-        localStorage.setItem('diff_hunter_rating_handled', 'feedback');
-        localStorage.setItem('diff_hunter_rating_score', String(rating));
-      } catch (_) {}
-
-      trackRatingPromptAction({ action: 'feedback', rating, visitNumber });
-      onClose();
-
-      if (typeof onOpenSupport === 'function') {
-        onOpenSupport(rating);
+    const reviewUrl = getAppStoreReviewUrl();
+    try {
+      if (typeof window !== 'undefined') {
+        window.open(reviewUrl, '_blank', 'noopener,noreferrer');
       }
-    }
+    } catch (_) {}
+
+    onClose();
   };
 
   const handleDismiss = (e) => {
@@ -62,8 +39,9 @@ export default function RatingModal({
     try {
       localStorage.setItem('diff_hunter_rating_handled', 'dismissed');
     } catch (_) {}
+    recordRatingPromptDismissed();
 
-    trackRatingPromptAction({ action: 'dismiss', visitNumber });
+    trackRatingPromptAction({ action: 'dismiss', attemptNumber });
     onClose();
   };
 
@@ -128,20 +106,22 @@ export default function RatingModal({
           <X size={18} />
         </button>
 
-        {/* Top Floating Heart Icon */}
+        {/* Compact 5-star visual (decorative, not interactive) */}
         <div style={{
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, rgba(255, 0, 127, 0.25), rgba(255, 183, 3, 0.3))',
-          border: '2px solid var(--accent-gold)',
           display: 'flex',
-          alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 14px auto',
-          boxShadow: '0 0 22px rgba(255, 183, 3, 0.45)'
-        }}>
-          <Heart size={28} color="var(--accent-pink)" fill="var(--accent-pink)" />
+          gap: '4px',
+          marginBottom: '14px'
+        }} aria-hidden="true">
+          {[1, 2, 3, 4, 5].map(star => (
+            <Star
+              key={star}
+              size={24}
+              color="var(--accent-gold)"
+              fill="var(--accent-gold)"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(255, 183, 3, 0.8))' }}
+            />
+          ))}
         </div>
 
         {/* Header Title */}
@@ -149,141 +129,60 @@ export default function RatingModal({
           fontSize: '1.4rem',
           fontWeight: 900,
           letterSpacing: '0.5px',
-          margin: '0 0 16px 0',
+          margin: '0 0 8px 0',
           background: 'linear-gradient(90deg, #ffffff, var(--accent-gold))',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
         }}>
-          Enjoying Diff Hunter?
+          Enjoying the game?
         </h2>
 
-        {/* Interactive 5-Star Row with Half-Star Selection */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: 'var(--modal-gap-sm)',
-          marginBottom: '22px',
-          background: 'rgba(0, 0, 0, 0.35)',
-          padding: '14px 12px',
-          borderRadius: '16px',
-          border: '1px solid rgba(255, 255, 255, 0.08)'
+        {/* Body Copy */}
+        <p style={{
+          margin: '0 0 22px 0',
+          fontSize: '0.92rem',
+          fontWeight: 600,
+          color: 'var(--text-muted)',
+          lineHeight: 1.4
         }}>
-          {[1, 2, 3, 4, 5].map((star) => {
-            const isFull = currentDisplayRating >= star;
-            const isHalf = !isFull && currentDisplayRating >= star - 0.5;
+          A quick rating really helps us out.
+        </p>
 
-            return (
-              <div
-                key={star}
-                style={{
-                  position: 'relative',
-                  width: '38px',
-                  height: '38px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                {/* Background Empty Star */}
-                <Star
-                  size={34}
-                  color="rgba(255, 255, 255, 0.25)"
-                  fill="none"
-                  style={{ pointerEvents: 'none' }}
-                />
+        {/* Primary CTA */}
+        <button
+          type="button"
+          className="glass-btn glass-btn-primary"
+          onClick={handleRate}
+          style={{
+            width: '100%',
+            justifyContent: 'center',
+            fontSize: '0.95rem',
+            fontWeight: 800,
+            padding: '12px 16px',
+            borderRadius: '12px',
+            marginBottom: '10px'
+          }}
+        >
+          Rate the Game
+        </button>
 
-                {/* Filled Star Overlay (Full or Half via clipPath) */}
-                {(isFull || isHalf) && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: 2,
-                      left: 2,
-                      width: '34px',
-                      height: '34px',
-                      clipPath: isHalf ? 'inset(0 50% 0 0)' : 'none',
-                      pointerEvents: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <Star
-                      size={34}
-                      color="var(--accent-gold)"
-                      fill="var(--accent-gold)"
-                      style={{
-                        filter: 'drop-shadow(0 0 10px rgba(255, 183, 3, 0.9))'
-                      }}
-                    />
-                  </div>
-                )}
-
-                {/* Left Half Click Target (star - 0.5) */}
-                <button
-                  type="button"
-                  onClick={() => handleSelectRating(star - 0.5)}
-                  onMouseEnter={() => setHoverRating(star - 0.5)}
-                  onMouseLeave={() => setHoverRating(null)}
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    width: '50%',
-                    height: '100%',
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    zIndex: 2,
-                    padding: 0
-                  }}
-                  aria-label={`${star - 0.5} Stars`}
-                />
-
-                {/* Right Half Click Target (star) */}
-                <button
-                  type="button"
-                  onClick={() => handleSelectRating(star)}
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(null)}
-                  style={{
-                    position: 'absolute',
-                    right: 0,
-                    top: 0,
-                    width: '50%',
-                    height: '100%',
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    zIndex: 2,
-                    padding: 0
-                  }}
-                  aria-label={`${star} Stars`}
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Action Button: Maybe Later only */}
-        <div>
-          <button
-            type="button"
-            className="glass-btn"
-            onClick={handleDismiss}
-            style={{
-              width: '100%',
-              justifyContent: 'center',
-              fontSize: '0.92rem',
-              fontWeight: 700,
-              padding: '10px 16px',
-              borderRadius: '12px',
-              color: 'var(--text-muted)'
-            }}
-          >
-            Maybe Later
-          </button>
-        </div>
+        {/* Secondary CTA */}
+        <button
+          type="button"
+          className="glass-btn"
+          onClick={handleDismiss}
+          style={{
+            width: '100%',
+            justifyContent: 'center',
+            fontSize: '0.88rem',
+            fontWeight: 700,
+            padding: '10px 16px',
+            borderRadius: '12px',
+            color: 'var(--text-muted)'
+          }}
+        >
+          Maybe Later
+        </button>
       </div>
     </div>
   );

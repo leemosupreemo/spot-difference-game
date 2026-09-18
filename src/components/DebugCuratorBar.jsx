@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ThumbsUp, ThumbsDown, RotateCcw, Download, ChevronRight, ChevronLeft, CheckCircle2, XCircle, HelpCircle, AlertTriangle, Camera, Sparkles, Terminal } from 'lucide-react';
 import { sounds } from '../utils/audio';
-import { getLevelStatus } from '../utils/curationStore';
+import { getLevelStatus, getEntryCurationStatus } from '../utils/curationStore';
 import CuratedExportModal from './CuratedExportModal';
 
 export default function DebugCuratorBar({
@@ -27,7 +27,7 @@ export default function DebugCuratorBar({
   if (!currentLevel) return null;
 
   const levelId = currentLevel.id;
-  const statusObj = getLevelStatus(curatedStatusMap[levelId]);
+  const statusObj = getEntryCurationStatus(currentLevel, curatedStatusMap);
   const currentStatus = statusObj?.status || null;
   const currentPackId = statusObj?.packId || currentLevel.packId || 'find_the_sniper';
 

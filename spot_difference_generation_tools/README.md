@@ -1,5 +1,9 @@
 # Spot the Difference Image Generation & Pipeline Toolkit
 
+> **Current production entry point:** Use `scripts/unified_operation_pipeline.py`. Historical pipeline copies have been removed to prevent accidental use of outdated generation behavior.
+
+For add/remove/reorder generation, policies, examples, scoring, rejection codes, and base-image guidance, see [`docs/structural-variant-generation.md`](../docs/structural-variant-generation.md).
+
 This toolkit contains all scripts, generator engines, computer vision analyzers, and manifests used to create and curate spot-the-difference puzzle pairs.
 
 ## 📁 File Manifest:

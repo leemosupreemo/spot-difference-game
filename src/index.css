@@ -1098,6 +1098,53 @@ button:active,
   to { opacity: 0.22; transform: scale(1); }
 }
 
+/* Tron-style lightcycle trails drifting behind the main menu: thin glowing bars that
+   sweep edge-to-edge on right angles only, each with its own speed/length/delay so
+   the loop never reads as a single fixed cycle. */
+.tron-lightcycle-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tron-lightcycle-trail {
+  position: absolute;
+  opacity: 0;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.tron-lightcycle-horizontal {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--trail-color) 70%, #fff 100%);
+  box-shadow: 0 0 8px var(--trail-color), 0 0 16px var(--trail-color);
+  animation-name: tronTrailMoveX;
+}
+
+.tron-lightcycle-vertical {
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--trail-color) 70%, #fff 100%);
+  box-shadow: 0 0 8px var(--trail-color), 0 0 16px var(--trail-color);
+  animation-name: tronTrailMoveY;
+}
+
+@keyframes tronTrailMoveX {
+  0% { left: -25%; opacity: 0; }
+  8% { opacity: 0.55; }
+  85% { opacity: 0.55; }
+  100% { left: 125%; opacity: 0; }
+}
+
+@keyframes tronTrailMoveY {
+  0% { top: -25%; opacity: 0; }
+  8% { opacity: 0.55; }
+  85% { opacity: 0.55; }
+  100% { top: 125%; opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   body {
     animation: none !important;
@@ -1123,5 +1170,9 @@ button:active,
     animation: none;
     opacity: 0.22;
     transform: scale(1);
+  }
+  .tron-lightcycle-trail {
+    animation: none;
+    display: none;
   }
 }

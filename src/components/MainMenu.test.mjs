@@ -77,21 +77,21 @@ test('index.css defines periodic sheen shimmer on start game button with ripples
   assert.doesNotMatch(css, /startBtnWavePulse/);
 });
 
-test('Game Mode card selection swaps a dim, zoom/fade background hint behind the mode cards', () => {
+test('Each Game Mode card shows its own dim, zoom/fade background hint, not the whole container', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
   // A real photo for Photography and a procedurally generated scene for Abstract,
   // neither pulled from the playable rotation.
   assert.match(source, /generateProceduralLevelPair\('abstract_animated', 'Medium', GAME_MODE_ABSTRACT_SEED\)/);
   assert.match(source, /resolveAssetUrl\(GAME_MODE_PHOTO_BG\)/);
-  assert.match(source, /selectedTheme === 'abstract_animated' \? abstractModeBg : photoModeBg/);
+  assert.match(source, /find_the_sniper: photoModeBg,\s*\n\s*abstract_animated: abstractModeBg/);
 
-  // Re-tapping a card (even the already-active one) replays the animation via a remount key.
-  assert.match(source, /setGameModeBgTick\(tick => tick \+ 1\)/);
-  assert.match(source, /key=\{`\$\{selectedTheme\}-\$\{gameModeBgTick\}`\}/);
+  // Each card tracks and replays its own animation independently on tap.
+  assert.match(source, /setGameModeBgTicks\(prev => \(\{ \.\.\.prev, \[theme\.id\]: \(prev\[theme\.id\] \|\| 0\) \+ 1 \}\)\)/);
+  assert.match(source, /key=\{`\$\{theme\.id\}-\$\{cardBgTick\}`\}/);
 
-  // Layer sits behind the card content and stays subtle, not a hero visual.
-  assert.match(source, /className="game-mode-bg"/);
+  // The bg layer renders inside each mode-card-item, not the outer Game Mode panel.
+  assert.match(source, /className="glass-panel mode-card-item"[\s\S]*?\{cardBgImage && \([\s\S]*?className="game-mode-bg"/);
 
   const cssPath = path.join(path.dirname(componentPath), '../index.css');
   const css = fs.readFileSync(cssPath, 'utf8');
