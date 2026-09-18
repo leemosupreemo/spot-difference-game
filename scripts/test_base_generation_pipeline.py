@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 from base_candidate_evaluator import BaseCandidateEvaluator, rank_candidates
-from base_generation_pipeline import BaseGenerationPipeline, ProviderCallError
+from base_generation_pipeline import BaseGenerationPipeline, ProviderCallError, _Budget
 from base_generation_policy import DEFAULT_BASE_GENERATION_POLICY
 from base_generation_report import write_html_report, write_json_report
 from base_generation_types import (
@@ -658,12 +658,133 @@ class TestPipelineRun(PipelineTestCase):
         )
         store.transition(candidate_id, "passing", {"master_path": "candidates/fake.png", "rank_score": 0.9})
 
-        result = pipeline._reload_or_generate(store, PRIMARY_BRIEF, "google", candidate_id, [])
+        result = pipeline._reload_or_generate(
+            store, PRIMARY_BRIEF, "google", candidate_id, [], _Budget(limit=40)
+        )
 
         self.assertIsNotNone(result)
         self.assertEqual(providers["google"].total_images, 0)
         self.assertTrue(result[1].accepted)
         self.assertEqual(result[1].rank_score, 0.9)
+
+    def test_reload_or_generate_resumes_a_candidate_stuck_at_planned_without_crashing(self):
+        # A crash right after the "planned" transition (before "generating") must not
+        # make the resumed attempt try an illegal "planned" -> "planned" self-transition.
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+        store = RunStore.create(
+            RunConfig(count=1), [PRIMARY_BRIEF], root=os.path.join(self.root, "runs"), run_id="stuck-planned"
+        )
+        store = RunStore.resume("stuck-planned", root=os.path.join(self.root, "runs"))
+
+        candidate_id = f"{PRIMARY_BRIEF.id}::google::0"
+        store.transition(
+            candidate_id, "planned", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+
+        result = pipeline._reload_or_generate(
+            store, PRIMARY_BRIEF, "google", candidate_id, [], _Budget(limit=40)
+        )
+
+        self.assertIsNotNone(result)
+        self.assertEqual(providers["google"].total_images, 1)
+        self.assertTrue(result[1].accepted)
+        self.assertEqual(store.state_of(candidate_id), "passing")
+
+    def test_reload_or_generate_resumes_a_candidate_stuck_at_generating_without_crashing(self):
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+        store = RunStore.create(
+            RunConfig(count=1),
+            [PRIMARY_BRIEF],
+            root=os.path.join(self.root, "runs"),
+            run_id="stuck-generating",
+        )
+        store = RunStore.resume("stuck-generating", root=os.path.join(self.root, "runs"))
+
+        candidate_id = f"{PRIMARY_BRIEF.id}::google::0"
+        store.transition(
+            candidate_id, "planned", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+        store.transition(
+            candidate_id, "generating", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+
+        result = pipeline._reload_or_generate(
+            store, PRIMARY_BRIEF, "google", candidate_id, [], _Budget(limit=40)
+        )
+
+        self.assertIsNotNone(result)
+        self.assertEqual(providers["google"].total_images, 1)
+        self.assertTrue(result[1].accepted)
+        self.assertEqual(store.state_of(candidate_id), "passing")
+
+    def test_reload_or_generate_abandons_and_retries_a_candidate_stuck_at_generated(self):
+        # No raw provider bytes survive a crash between "generated" and "normalized", so
+        # this id cannot resume in place; a fresh id must retry instead of crashing.
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+        store = RunStore.create(
+            RunConfig(count=1),
+            [PRIMARY_BRIEF],
+            root=os.path.join(self.root, "runs"),
+            run_id="stuck-generated",
+        )
+        store = RunStore.resume("stuck-generated", root=os.path.join(self.root, "runs"))
+
+        candidate_id = f"{PRIMARY_BRIEF.id}::google::0"
+        store.transition(
+            candidate_id, "planned", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+        store.transition(
+            candidate_id, "generating", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+        store.transition(candidate_id, "generated", {"model": "gemini-3.1-flash-image"})
+
+        result = pipeline._reload_or_generate(
+            store, PRIMARY_BRIEF, "google", candidate_id, [], _Budget(limit=40)
+        )
+
+        self.assertIsNotNone(result)
+        self.assertEqual(providers["google"].total_images, 1)
+        self.assertTrue(result[1].accepted)
+        self.assertEqual(store.state_of(candidate_id), "generated")  # abandoned in place
+        self.assertNotEqual(result[0], candidate_id)  # a new id retried the attempt
+
+    def test_adaptive_follow_up_does_not_double_count_budget_on_resume(self):
+        # Reproduces a brief that already used a follow-up (3rd) candidate before an
+        # interruption; resuming and reprocessing that brief must not silently spend a
+        # second unit of budget for a candidate that is skipped, not regenerated.
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: reject(c))
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF])
+        run_root = os.path.join(self.root, "runs")
+
+        store = RunStore.create(RunConfig(count=1), [PRIMARY_BRIEF], root=run_root, run_id="resume-followup")
+        store = RunStore.resume("resume-followup", root=run_root)
+        follow_up_id = f"{PRIMARY_BRIEF.id}::google::2"
+        store.transition(
+            follow_up_id, "planned", {"scene_brief_id": PRIMARY_BRIEF.id, "provider": "google"}
+        )
+        store.transition(follow_up_id, "generating", {})
+        store.transition(follow_up_id, "generated", {"model": "gemini-3.1-flash-image"})
+        store.transition(
+            follow_up_id,
+            "normalized",
+            {"master_path": "candidates/fake.png", "model": "gemini-3.1-flash-image"},
+        )
+        store.transition(follow_up_id, "critic_rejected", {"master_path": "candidates/fake.png"})
+
+        budget = _Budget(limit=4, already_used=1)
+        result = pipeline._reload_or_generate(
+            store, PRIMARY_BRIEF, "google", follow_up_id, [], budget
+        )
+
+        self.assertIsNone(result)  # already terminal; no provider call, no evaluation
+        self.assertEqual(budget.used, 1)  # unchanged -- this candidate never called the provider
 
     def test_rejected_candidate_images_are_deleted_by_default(self):
         providers = self._providers()

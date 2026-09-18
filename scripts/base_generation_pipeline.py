@@ -29,9 +29,11 @@ _DEFAULT_PROVIDER_MODELS = {
     "openai": "gpt-image-2.5-sunburst",
 }
 
-_INCOMPLETE_STATES = {"planned", "generating", "generated"}
+_RESUMABLE_STATES = {"planned", "generating"}
 _TERMINAL_REJECTED_STATES = {"locally_rejected", "critic_rejected", "novelty_rejected"}
 _ALREADY_HANDLED_STATES = {"selected", "structural_failed", "finalized", "published"}
+
+_BUDGET_EXHAUSTED = object()
 
 
 class ProviderCallError(Exception):
@@ -40,6 +42,28 @@ class ProviderCallError(Exception):
     def __init__(self, message: str, kind: str):
         super().__init__(message)
         self.kind = kind
+
+
+class _Budget:
+    """Tracks the image-generation budget against the single real point of
+    spend: the moment a provider is actually called. Checking and consuming
+    happen together so a resumed or retried candidate is counted exactly
+    once, no matter how many ledger states it passed through to get there.
+    """
+
+    def __init__(self, limit: int, already_used: int = 0):
+        self._limit = limit
+        self._used = already_used
+
+    @property
+    def used(self) -> int:
+        return self._used
+
+    def has_room(self) -> bool:
+        return self._used < self._limit
+
+    def consume(self) -> None:
+        self._used += 1
 
 
 @dataclass(frozen=True)
@@ -128,9 +152,16 @@ class BaseGenerationPipeline:
             data["rank_score"] = evaluation.rank_score
         return data
 
-    def _generate_and_evaluate(self, store, brief, provider_name, candidate_id, recent_history):
-        store.transition(candidate_id, "planned", {"scene_brief_id": brief.id, "provider": provider_name})
+    def _generate_and_evaluate(
+        self, store, brief, provider_name, candidate_id, recent_history, budget, resume_state=None
+    ):
+        """Run (or resume) one candidate from wherever its ledger left off.
 
+        `resume_state` is the candidate's already-persisted state, or None for
+        a brand-new candidate id. Each step below is skipped if the ledger
+        already recorded it, so re-entering after a crash never attempts an
+        illegal backward or repeated transition.
+        """
         prompt = self._prompt_composer(brief, self._policy)
         request = ProviderRequest(
             provider=provider_name,
@@ -140,7 +171,22 @@ class BaseGenerationPipeline:
             size=self._policy.master_size,
         )
 
-        store.transition(candidate_id, "generating", {"scene_brief_id": brief.id, "provider": provider_name})
+        if resume_state is None:
+            store.transition(candidate_id, "planned", {"scene_brief_id": brief.id, "provider": provider_name})
+            resume_state = "planned"
+
+        if resume_state == "planned":
+            store.transition(
+                candidate_id, "generating", {"scene_brief_id": brief.id, "provider": provider_name}
+            )
+            resume_state = "generating"
+
+        # resume_state == "generating" from here: the actual provider call, the one real
+        # point of spend, is checked and counted together so it can never be double-counted
+        # or skipped regardless of how this candidate got here.
+        if not budget.has_room():
+            return _BUDGET_EXHAUSTED
+        budget.consume()
 
         try:
             images = self._call_with_retry(lambda: self._providers[provider_name].generate(request))
@@ -207,11 +253,24 @@ class BaseGenerationPipeline:
             normalization_crop_fraction=0.0,
         )
 
-    def _reload_or_generate(self, store, brief, provider_name, candidate_id, recent_history):
+    def _reload_or_generate(self, store, brief, provider_name, candidate_id, recent_history, budget):
         state = store.state_of(candidate_id)
 
-        if state is None or state in _INCOMPLETE_STATES:
-            return self._generate_and_evaluate(store, brief, provider_name, candidate_id, recent_history)
+        if state is None or state in _RESUMABLE_STATES:
+            return self._generate_and_evaluate(
+                store, brief, provider_name, candidate_id, recent_history, budget, resume_state=state
+            )
+
+        if state == "generated":
+            # The provider call already succeeded, but the run was interrupted before
+            # normalization, and the raw provider bytes were never persisted to disk (only
+            # the normalized master is written). The ledger has no "generated -> generating"
+            # edge to retry in place, so this id is left as a harmless, permanently
+            # incomplete record and a fresh id retries the whole attempt from scratch.
+            retry_id = f"{candidate_id}-retry"
+            return self._generate_and_evaluate(
+                store, brief, provider_name, retry_id, recent_history, budget, resume_state=None
+            )
 
         if state in _TERMINAL_REJECTED_STATES or state in _ALREADY_HANDLED_STATES:
             return None  # already known-final; never regenerate a completed candidate
@@ -308,9 +367,10 @@ class BaseGenerationPipeline:
             for provider in ("google", "openai")
         }
 
-        generated_image_count = sum(
+        already_used = sum(
             1 for record in store.all_items().values() if record["state"] != "planned"
         )
+        budget = _Budget(config.max_images, already_used=already_used)
         accepted = []
         stop_code = None
         queue = list(plan)
@@ -331,15 +391,12 @@ class BaseGenerationPipeline:
                     break
                 candidate_id = f"{brief.id}::{provider_name}::{candidate_index}"
                 candidate_index += 1
-                is_new = store.state_of(candidate_id) is None
-                if is_new and generated_image_count >= config.max_images:
+                attempts += 1
+                result = self._reload_or_generate(store, brief, provider_name, candidate_id, recent_history, budget)
+                if result is _BUDGET_EXHAUSTED:
                     stop_code = "GenerationBudgetReached"
                     break
-                if is_new:
-                    generated_image_count += 1
-                attempts += 1
                 provider_stats[provider_name][family]["attempted"] += 1
-                result = self._reload_or_generate(store, brief, provider_name, candidate_id, recent_history)
                 if result is not None:
                     evaluations.append(result)
                     if result[1].accepted:
@@ -351,16 +408,15 @@ class BaseGenerationPipeline:
                 and not any(evaluation.accepted for _, evaluation in evaluations)
                 and config.provider_mode == "mixed"
             ):
-                if generated_image_count >= config.max_images:
-                    stop_code = "GenerationBudgetReached"
-                    break
                 provider_name = self._stronger_provider(provider_stats, family)
                 candidate_id = f"{brief.id}::{provider_name}::{candidate_index}"
                 candidate_index += 1
                 attempts += 1
-                generated_image_count += 1
+                result = self._reload_or_generate(store, brief, provider_name, candidate_id, recent_history, budget)
+                if result is _BUDGET_EXHAUSTED:
+                    stop_code = "GenerationBudgetReached"
+                    break
                 provider_stats[provider_name][family]["attempted"] += 1
-                result = self._reload_or_generate(store, brief, provider_name, candidate_id, recent_history)
                 if result is not None:
                     evaluations.append(result)
                     if result[1].accepted:
@@ -386,7 +442,7 @@ class BaseGenerationPipeline:
         return BatchRunResult(
             run_id=store.run_id,
             accepted=tuple(accepted),
-            generated_image_count=generated_image_count,
+            generated_image_count=budget.used,
             requested_count=config.count,
             stop_code=stop_code,
         )
