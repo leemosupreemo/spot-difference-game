@@ -101,6 +101,7 @@ test('debug premade mode uses candidate pool and advances without repeating kept
   // handleNextPair and handlePrevPair navigate within candidate pool
   assert.match(source, /if \(debugMode\) \{[\s\S]*const pool = getDebugCandidateEntries/);
 
-  // DebugCuratorBar uses effectiveDebugPool for accurate image counting
+  // TimerDisplay's stage counter still reflects the real debug candidate pool size
+  // (the DebugCuratorBar's own "IMAGE X OF Y" badge was removed as confusing/misleading)
   assert.match(source, /totalStageImages=\{[\s\S]*effectiveDebugPool\.length/);
 });

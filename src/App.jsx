@@ -1372,8 +1372,6 @@ export default function App() {
               onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
               skipKeptLevels={skipKeptLevels}
               onToggleSkipKept={handleToggleSkipKept}
-              currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode ? (effectiveDebugPool.findIndex(e => e.id === currentLevelId) >= 0 ? effectiveDebugPool.findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
-              totalStageImages={gameMode === 'daily' ? levels.length : (debugMode ? effectiveDebugPool.length : (levels.length || 5))}
               gameMode={gameMode}
             />
         )}

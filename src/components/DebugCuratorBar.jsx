@@ -15,8 +15,6 @@ export default function DebugCuratorBar({
   onOpenDiagnostics,
   skipKeptLevels = true,
   onToggleSkipKept,
-  currentStageIndex = 0,
-  totalStageImages = 5,
   gameMode = 'standard'
 }) {
   const [isExportOpen, setIsExportOpen] = useState(false);
@@ -166,21 +164,6 @@ export default function DebugCuratorBar({
                 {skipKeptLevels ? '⏩ Skip Kept: ON' : '⏸️ Skip Kept: OFF'}
               </button>
             )}
-
-            {/* Stage Progress Badge in Debug */}
-            <span style={{
-              fontSize: '0.75rem',
-              fontWeight: 900,
-              color: 'var(--accent-cyan)',
-              background: 'rgba(0, 240, 255, 0.12)',
-              padding: '4px 9px',
-              borderRadius: '8px',
-              border: '1px solid rgba(0, 240, 255, 0.4)',
-              letterSpacing: '0.4px',
-              lineHeight: 1.2
-            }}>
-              IMAGE {currentStageIndex + 1} OF {totalStageImages}
-            </span>
 
             {/* Current Status Pill */}
             <div style={{
