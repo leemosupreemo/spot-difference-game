@@ -353,10 +353,15 @@ class TestGoogleImageProvider(unittest.TestCase):
         self.assertEqual(captured["input"], "a photorealistic scene")
         self.assertEqual(captured["response_format"]["aspect_ratio"], "4:3")
         self.assertEqual(captured["response_format"]["image_size"], "2K")
+        # Google's real API rejects response_format.mime_type == "image/png"
+        # with a 400 ("Supported values: 'image/jpeg'") -- confirmed against
+        # the live API, not just documentation.
+        self.assertEqual(captured["response_format"]["mime_type"], "image/jpeg")
 
         self.assertEqual(len(images), 1)
         self.assertEqual(images[0].provider, "google")
         self.assertEqual(images[0].native_size, (2400, 1792))
+        self.assertEqual(images[0].content_type, "image/jpeg")
 
 
 class TestGoogleClientConstruction(unittest.TestCase):

@@ -30,7 +30,9 @@ class FakeImageProvider:
         return self._responder(request)
 
 
-def _decode_b64_images(response, provider: str, model: str) -> list[ProviderImage]:
+def _decode_b64_images(
+    response, provider: str, model: str, content_type: str = "image/png"
+) -> list[ProviderImage]:
     request_id = getattr(response, "id", "unknown")
     images = []
     for item in response.data:
@@ -44,6 +46,7 @@ def _decode_b64_images(response, provider: str, model: str) -> list[ProviderImag
                 request_id=request_id,
                 native_size=native_size,
                 image_bytes=image_bytes,
+                content_type=content_type,
             )
         )
     return images
@@ -99,12 +102,16 @@ class GoogleImageProvider:
             input=request.prompt,
             response_format={
                 "type": "image",
-                "mime_type": "image/png",
+                # Google's API only supports image/jpeg here (image/png is
+                # rejected with a 400). The canonical master is still always
+                # re-encoded to opaque PNG during normalization regardless of
+                # what raw format a provider returns.
+                "mime_type": "image/jpeg",
                 "aspect_ratio": "4:3",
                 "image_size": "2K",
             },
         )
-        return _decode_b64_images(response, "google", self._model)
+        return _decode_b64_images(response, "google", self._model, content_type="image/jpeg")
 
 
 def normalize_provider_image(
