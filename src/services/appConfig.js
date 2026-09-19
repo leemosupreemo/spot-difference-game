@@ -62,8 +62,10 @@ export function setSetOfTheDayEnabled(enabled) {
 
 /**
  * Returns whether Game Center integration (connection + button) is enabled.
- * Disabled by default -- on hold until enabled remotely once there are enough
- * players for leaderboards to feel populated.
+ * Disabled by default -- on hold until enabled via the Firestore
+ * app_config/global document once there are enough players for leaderboards
+ * to feel populated. That is the only channel that updates already-installed
+ * apps without a new App Store submission (see syncRemoteAppConfig).
  */
 export function isGameCenterEnabled() {
   if (inMemoryGameCenterEnabled !== null) {
@@ -146,10 +148,10 @@ export async function syncRemoteAppConfig() {
         setSetOfTheDayEnabled(config.enableSetOfTheDay);
         logApp('INFO', '[AppConfigSync] Loaded Set of the Day flag from static config:', config.enableSetOfTheDay);
       }
-      if (typeof config?.enableGameCenter === 'boolean') {
-        setGameCenterEnabled(config.enableGameCenter);
-        logApp('INFO', '[AppConfigSync] Loaded Game Center flag from static config:', config.enableGameCenter);
-      }
+      // enableGameCenter is intentionally not read here: this static file is
+      // bundled into the native app at build time, so it can't actually be
+      // flipped without a new App Store submission. Firestore (below) is the
+      // only channel that updates already-installed apps live.
     }
   } catch (_) {}
 
