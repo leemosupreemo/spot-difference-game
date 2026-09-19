@@ -10,16 +10,16 @@
     "diffs": [
       {
         "id": 1,
-        "x": 18.0,
-        "y": 92.2,
-        "radius": 5.1,
+        "x": 62.4,
+        "y": 8.0,
+        "radius": 4.5,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
         "operation": "add"
       }
     ],
     "baseImage": "levels/leaves_on_branch_1789795322252_v5_42bc7638db82_base.webp",
-    "variantImage": "levels/leaves_on_branch_1789795322252_v5_9e3f2d9a6b9c_variant.webp",
+    "variantImage": "levels/leaves_on_branch_1789795322252_v5_f74db427b510_variant.webp",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -37,16 +37,16 @@
     "diffs": [
       {
         "id": 1,
-        "x": 2.7,
-        "y": 79.3,
-        "radius": 4.5,
+        "x": 18.0,
+        "y": 92.2,
+        "radius": 5.1,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
         "operation": "add"
       }
     ],
     "baseImage": "levels/leaves_on_branch_1789795322252_v4_42bc7638db82_base.webp",
-    "variantImage": "levels/leaves_on_branch_1789795322252_v4_67f025d23020_variant.webp",
+    "variantImage": "levels/leaves_on_branch_1789795322252_v4_9e3f2d9a6b9c_variant.webp",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -64,8 +64,8 @@
     "diffs": [
       {
         "id": 1,
-        "x": 33.0,
-        "y": 59.0,
+        "x": 2.7,
+        "y": 79.3,
         "radius": 4.5,
         "description": "Single add difference",
         "hint": "Look closely for a add difference",
@@ -73,7 +73,7 @@
       }
     ],
     "baseImage": "levels/leaves_on_branch_1789795322252_v3_42bc7638db82_base.webp",
-    "variantImage": "levels/leaves_on_branch_1789795322252_v3_d953f90e8e9e_variant.webp",
+    "variantImage": "levels/leaves_on_branch_1789795322252_v3_67f025d23020_variant.webp",
     "dimensions": {
       "width": 1200,
       "height": 900

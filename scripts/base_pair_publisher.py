@@ -132,6 +132,31 @@ def generate_structural_pair(
     return finalized, log_entry
 
 
+def _select_diverse_candidates(ranked, count):
+    """Greedily pick up to `count` candidates from `ranked` (already sorted
+    best first), skipping any whose position is close enough to an
+    already-picked one that their hit-circles would overlap -- otherwise two
+    "different" review variants can turn out to be the same edit a couple of
+    pixels apart, wasting a review slot on a near-duplicate."""
+    selected = []
+    for item in ranked:
+        gt = item["ground_truth"]
+        radius = gt.get("radius", 0.0)
+        too_close = False
+        for picked in selected:
+            picked_gt = picked["ground_truth"]
+            picked_radius = picked_gt.get("radius", 0.0)
+            distance = ((gt["x"] - picked_gt["x"]) ** 2 + (gt["y"] - picked_gt["y"]) ** 2) ** 0.5
+            if distance < radius + picked_radius:
+                too_close = True
+                break
+        if not too_close:
+            selected.append(item)
+        if len(selected) >= count:
+            break
+    return selected
+
+
 def generate_structural_pair_variants(
     candidate, scene_spec: dict, staging_dir, count, policy=DEFAULT_BASE_GENERATION_POLICY, difficulty="Medium"
 ):
@@ -179,10 +204,11 @@ def generate_structural_pair_variants(
         return [], log_entry
 
     ranked = log_entry.get("ranked_candidates") or []
+    diverse = _select_diverse_candidates(ranked, count)
     finalized_dir = staging_dir / "finalized"
     variants = []
 
-    for index, item in enumerate(ranked[:count], start=1):
+    for index, item in enumerate(diverse, start=1):
         variant_id = f"{base_id}_v{index}"
         operation = item["operation"]
         ground_truth = item["ground_truth"]

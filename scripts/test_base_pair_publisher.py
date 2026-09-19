@@ -313,6 +313,27 @@ class TestGenerateStructuralPairVariants(unittest.TestCase):
         self.assertEqual(variants[0][1]["operation"], "add")
         self.assertIn("ranked_candidates", log_entry)
 
+    def test_skips_a_near_duplicate_in_favor_of_a_genuinely_distinct_candidate(self):
+        # c1 and c2 are ~2% apart with 5.0-radius hit-circles that overlap
+        # heavily (a near-duplicate edit); c3 is genuinely far away. With
+        # count=2 the result must be c1 + c3, not c1 + c2.
+        c1 = self._ranked_candidate((50, 100, 20, 70))
+        c2 = self._ranked_candidate((50, 100, 24, 74))
+        c3 = self._ranked_candidate((50, 100, 120, 170))
+        ranked = [c1, c2, c3]
+
+        def fake_generate(scene_spec, scheduler=None, output_dir="public/levels", difficulty="Medium", policy=None):
+            return True, {"id": scene_spec["id"]}, {"ranked_candidates": ranked}
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            variants, _log_entry = generate_structural_pair_variants(
+                self.candidate, {"id": "scene-1"}, self.tmp.name, count=2, policy=self.policy
+            )
+
+        self.assertEqual(len(variants), 2)
+        xs = [entry["diffs"][0]["x"] for _finalized, entry in variants]
+        self.assertEqual(xs, [c1["ground_truth"]["x"], c3["ground_truth"]["x"]])
+
     def test_fewer_passing_candidates_than_count_returns_what_exists(self):
         ranked = [self._ranked_candidate((50, 100, 20, 70))]
 
