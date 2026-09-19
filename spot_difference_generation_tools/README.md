@@ -8,10 +8,10 @@ This toolkit contains all scripts, generator engines, computer vision analyzers,
 
 ## Base image generation
 
-`scripts/generate_photo_batch.py ingest` takes a manually-sourced base image
-(no paid API calls), runs it through free local quality gates, hands it to
-the existing structural add/remove/reorder pipeline, and atomically
-publishes the finalized pair. See
+`scripts/generate_photo_batch.py` takes one or more manually-sourced base
+images (no paid API calls), runs each through free local quality gates,
+hands it to the existing structural add/remove/reorder pipeline, and
+atomically publishes the finalized pair. See
 [`docs/base-image-generation.md`](../docs/base-image-generation.md) for the
 full operator guide.
 

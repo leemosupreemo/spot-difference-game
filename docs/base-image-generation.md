@@ -1,14 +1,14 @@
 # Base Image Ingest — Operator Guide
 
-`scripts/generate_photo_batch.py ingest` is the entry point for turning a
-manually-sourced base image into a published spot-the-difference pair.
+`scripts/generate_photo_batch.py` is the entry point for turning manually-
+sourced base images into published spot-the-difference pairs.
 
 Base images are generated outside this tool -- by hand, with whatever image
 generator you have access to (there is no automated, paid provider call in
 this pipeline; the earlier automated Google/OpenAI batch generator was
 removed because it duplicated billable usage that free/bundled tools like
-Antigravity's own Gemini access already cover). You supply one image file at
-a time; the CLI normalizes it, runs free local technical quality checks,
+Antigravity's own Gemini access already cover). You supply the image file(s);
+the CLI normalizes each one, runs free local technical quality checks,
 generates the difference variant through the existing structural pipeline,
 and atomically publishes both images plus a manifest entry.
 
@@ -27,18 +27,51 @@ or credential-storage packages are needed.
 
 ## 2. Usage
 
+**One image, zero flags** — id and title are derived from the filename:
+
 ```bash
-python3 scripts/generate_photo_batch.py ingest /path/to/your/image.jpg --id fresh_v6_workbench_001
+python3 scripts/generate_photo_batch.py path/to/cozy_workbench.jpg
 ```
 
-Options:
+**One image, full control:**
+
+```bash
+python3 scripts/generate_photo_batch.py path/to/image.jpg --id fresh_v6_workbench_001 --title "Cozy Workbench" --difficulty Hard
+```
+
+**A whole folder of images in one call** — every `.jpg`/`.jpeg`/`.png`/`.webp`
+file directly inside the folder is ingested, each getting its own id derived
+from its filename (deduplicated against the manifest automatically if two
+files would slugify to the same id):
+
+```bash
+python3 scripts/generate_photo_batch.py path/to/folder-of-images/
+```
+
+**Several explicit files, or a mix of files and folders, in one call:**
+
+```bash
+python3 scripts/generate_photo_batch.py photo1.jpg photo2.jpg more-photos/
+```
+
+One rejected image never stops the rest of the batch -- each image is
+processed independently and a results table is printed at the end (file,
+scene id, Published/Rejected, and why). The command exits non-zero if any
+image in the batch was rejected, so it's still safe to script.
+
+There's no `ingest` subcommand to type — this is the CLI's only command, so
+Typer runs it directly.
+
+Options (all optional):
 
 | Flag | Default | Meaning |
 |---|---|---|
-| `--id` (required) | — | Unique scene id. Also used to derive the display title if `--title` is omitted. |
-| `--title` | derived from `--id` | Display title stored in the manifest. |
-| `--difficulty` | `Medium` | `Easy`, `Medium`, or `Hard`. |
-| `--keep-staging` | off | Keep the temporary staging directory (normalized master, raw structural output, finalized pair) instead of deleting it after the run. |
+| `--id` | derived from filename | Scene id. Only valid when ingesting a single image (multiple images always get filename-derived ids). |
+| `--title` | derived from filename/id | Display title stored in the manifest. Only valid for a single image. |
+| `--difficulty` | `Medium` | `Easy`, `Medium`, or `Hard`. Applies to every image in the batch. |
+| `--manifest` | `public/levels/photo_pair_manifest.json` | Manifest file to publish into. |
+| `--levels-dir` | `public/levels` | Directory to publish base/variant images into. |
+| `--keep-staging` | off | Keep each image's temporary staging directory (normalized master, raw structural output, finalized pair) instead of deleting it after the run. |
 
 ## 3. What happens, step by step
 

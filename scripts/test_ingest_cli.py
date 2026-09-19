@@ -1,3 +1,4 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,7 +8,66 @@ from PIL import Image
 from typer.testing import CliRunner
 
 from base_generation_types import FinalizedPair
-from generate_photo_batch import app, ingest_image
+from generate_photo_batch import (
+    app,
+    existing_manifest_ids,
+    ingest_image,
+    resolve_image_paths,
+    slugify,
+    unique_id,
+)
+
+
+def _make_source(path: Path, size=(1536, 1152), color=(100, 110, 120)):
+    Image.new("RGB", size, color).save(path)
+
+
+class TestSlugify(unittest.TestCase):
+    def test_lowercases_and_replaces_non_alphanumerics(self):
+        self.assertEqual(slugify("Fresh Workbench #12!"), "fresh_workbench_12")
+
+    def test_strips_leading_and_trailing_separators(self):
+        self.assertEqual(slugify("  --edge-- "), "edge")
+
+    def test_empty_input_falls_back_to_scene(self):
+        self.assertEqual(slugify("###"), "scene")
+
+
+class TestUniqueId(unittest.TestCase):
+    def test_returns_base_id_when_available(self):
+        self.assertEqual(unique_id("workbench", set()), "workbench")
+
+    def test_suffixes_on_collision(self):
+        self.assertEqual(unique_id("workbench", {"workbench"}), "workbench_2")
+        self.assertEqual(unique_id("workbench", {"workbench", "workbench_2"}), "workbench_3")
+
+
+class TestExistingManifestIds(unittest.TestCase):
+    def test_missing_manifest_returns_empty_set(self):
+        self.assertEqual(existing_manifest_ids("/nonexistent/manifest.json"), set())
+
+    def test_reads_ids_from_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest_path = Path(tmp) / "manifest.json"
+            manifest_path.write_text(json.dumps([{"id": "a"}, {"id": "b"}]))
+            self.assertEqual(existing_manifest_ids(manifest_path), {"a", "b"})
+
+
+class TestResolveImagePaths(unittest.TestCase):
+    def test_expands_a_directory_to_its_image_files_sorted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            _make_source(tmp_path / "b.jpg")
+            _make_source(tmp_path / "a.png")
+            (tmp_path / "notes.txt").write_text("skip me")
+
+            resolved = resolve_image_paths([str(tmp_path)])
+
+            self.assertEqual([p.name for p in resolved], ["a.png", "b.jpg"])
+
+    def test_passes_through_explicit_files_unexpanded(self):
+        resolved = resolve_image_paths(["one.jpg", "two.png"])
+        self.assertEqual([p.name for p in resolved], ["one.jpg", "two.png"])
 
 
 class TestIngestImage(unittest.TestCase):
@@ -15,7 +75,7 @@ class TestIngestImage(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.source = Path(self.tmp.name) / "source.png"
-        Image.new("RGB", (1536, 1152), (100, 110, 120)).save(self.source)
+        _make_source(self.source)
         self.staging_dir = Path(self.tmp.name) / "staging"
         self.staging_dir.mkdir()
 
@@ -74,10 +134,122 @@ class TestIngestImage(unittest.TestCase):
 
 
 class TestIngestCommand(unittest.TestCase):
-    def test_cli_reports_missing_file(self):
-        runner = CliRunner()
-        result = runner.invoke(app, ["ingest", "/nonexistent/image.png", "--id", "scene-1"])
+    def setUp(self):
+        self.runner = CliRunner()
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.tmp_path = Path(self.tmp.name)
+        self.levels_dir = self.tmp_path / "levels"
+        self.manifest_path = self.tmp_path / "manifest.json"
+
+    def _finalized_and_publish_patches(self, base_source):
+        finalized = FinalizedPair(
+            scene_brief_id="ignored",
+            base_path=str(base_source),
+            variant_path=str(base_source),
+            dimensions=(1200, 900),
+            aspect_ratio="4:3",
+            manifest_id="ignored",
+        )
+        return patch("generate_photo_batch.run_local_gates", return_value=(True, (), {})), patch(
+            "generate_photo_batch.generate_structural_pair",
+            return_value=(finalized, {"manifest_entry": {"id": "ignored", "title": "T"}}),
+        )
+
+    def test_missing_file_is_reported_without_crashing(self):
+        result = self.runner.invoke(app, ["/nonexistent/image.png"])
         self.assertNotEqual(result.exit_code, 0)
+        self.assertIn("Not found", result.stdout)
+
+    def test_id_flag_rejected_for_multiple_images(self):
+        source_a = self.tmp_path / "a.jpg"
+        source_b = self.tmp_path / "b.jpg"
+        _make_source(source_a)
+        _make_source(source_b)
+
+        result = self.runner.invoke(app, [str(source_a), str(source_b), "--id", "one-id-for-two"])
+
+        self.assertNotEqual(result.exit_code, 0)
+        self.assertIn("only apply to a single image", result.stdout)
+
+    def test_single_image_with_explicit_id_publishes_under_that_id(self):
+        source = self.tmp_path / "source.jpg"
+        _make_source(source)
+        gate_patch, structural_patch = self._finalized_and_publish_patches(source)
+
+        with gate_patch, structural_patch, patch(
+            "generate_photo_batch.publish_pair",
+            return_value={"id": "custom_id", "baseImage": "levels/a.jpg", "variantImage": "levels/b.jpg"},
+        ) as mocked_publish:
+            result = self.runner.invoke(
+                app,
+                [
+                    str(source),
+                    "--id",
+                    "custom_id",
+                    "--manifest",
+                    str(self.manifest_path),
+                    "--levels-dir",
+                    str(self.levels_dir),
+                ],
+            )
+
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertEqual(mocked_publish.call_args.args[0], mocked_publish.call_args.args[0])
+        self.assertIn("custom_id", result.stdout)
+
+    def test_directory_batch_ingest_derives_ids_from_filenames(self):
+        (self.tmp_path / "images").mkdir()
+        source_a = self.tmp_path / "images" / "Cozy Workbench.jpg"
+        source_b = self.tmp_path / "images" / "Cozy Workbench.png"
+        _make_source(source_a)
+        _make_source(source_b)
+        gate_patch, structural_patch = self._finalized_and_publish_patches(source_a)
+
+        with gate_patch, structural_patch, patch(
+            "generate_photo_batch.publish_pair",
+            return_value={"id": "x", "baseImage": "levels/a.jpg", "variantImage": "levels/b.jpg"},
+        ):
+            result = self.runner.invoke(
+                app,
+                [
+                    str(self.tmp_path / "images"),
+                    "--manifest",
+                    str(self.manifest_path),
+                    "--levels-dir",
+                    str(self.levels_dir),
+                ],
+            )
+
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertIn("cozy_workbench", result.stdout)
+        self.assertIn("cozy_workbench_2", result.stdout)
+
+    def test_one_rejection_does_not_stop_the_rest_of_a_batch(self):
+        good_source = self.tmp_path / "good.jpg"
+        _make_source(good_source)
+        bad_source = self.tmp_path / "missing.jpg"  # never created
+
+        gate_patch, structural_patch = self._finalized_and_publish_patches(good_source)
+        with gate_patch, structural_patch, patch(
+            "generate_photo_batch.publish_pair",
+            return_value={"id": "good", "baseImage": "levels/a.jpg", "variantImage": "levels/b.jpg"},
+        ):
+            result = self.runner.invoke(
+                app,
+                [
+                    str(good_source),
+                    str(bad_source),
+                    "--manifest",
+                    str(self.manifest_path),
+                    "--levels-dir",
+                    str(self.levels_dir),
+                ],
+            )
+
+        self.assertNotEqual(result.exit_code, 0)
+        self.assertIn("Published", result.stdout)
+        self.assertIn("Not found", result.stdout)
 
 
 if __name__ == "__main__":
