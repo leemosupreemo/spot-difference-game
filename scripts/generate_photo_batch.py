@@ -271,17 +271,63 @@ def _execute_run(run_config: RunConfig, run_id: Optional[str] = None, resume: bo
 # --------------------------------------------------------------------------
 
 
+def _prompt_choice(text: str, choices: list, default: str) -> str:
+    """Prompt for one of `choices`, listing them explicitly and re-asking
+    (with a friendly message, never a crash) until the answer is valid."""
+    choices_display = "/".join(choices)
+    while True:
+        value = typer.prompt(f"{text} [{choices_display}]", default=default)
+        if value in choices:
+            return value
+        console.print(f"[red]'{value}' isn't one of: {choices_display}. Try again.[/red]")
+
+
 def _run_interactive_wizard() -> dict:
-    provider_mode = typer.prompt("Provider mode (mixed/google/openai)", default="mixed")
-    count = typer.prompt("Target pair count", default=10, type=int)
-    portfolio_preset = typer.prompt("Portfolio preset", default="balanced_40_40_20")
-    quality_preset = typer.prompt("Quality preset", default="production")
+    console.print(
+        "\n[bold]Provider mode[/bold] -- mixed generates from both Google and OpenAI and "
+        "picks the stronger one per scene; google/openai use only that provider "
+        "(and need only that provider's credentials)."
+    )
+    provider_mode = _prompt_choice("Provider mode", ["mixed", "google", "openai"], default="mixed")
+
+    count = typer.prompt(
+        "Target pair count -- split 40% collections / 40% activities / 20% playful",
+        default=10,
+        type=int,
+    )
+
+    portfolio_preset = _prompt_choice(
+        "Portfolio preset (only one available today)", ["balanced_40_40_20"], default="balanced_40_40_20"
+    )
+    quality_preset = _prompt_choice(
+        "Quality preset (only one available today)", ["production"], default="production"
+    )
+
     default_ceiling = DEFAULT_BASE_GENERATION_POLICY.max_images_for_count(count)
-    max_images = typer.prompt("Candidate ceiling (images)", default=default_ceiling, type=int)
-    spend_input = typer.prompt("Spend ceiling in USD (blank for none)", default="", show_default=False)
+    max_images = typer.prompt(
+        f"Image ceiling -- hard cap on total images generated this run, checked before "
+        f"every provider call (this is the real safety limit; suggested default scales "
+        f"with your pair count)",
+        default=default_ceiling,
+        type=int,
+    )
+
+    spend_input = typer.prompt(
+        "Spend ceiling in USD, for your own tracking only -- NOT YET ENFORCED by the "
+        "pipeline; the image ceiling above is the only limit actually checked (blank for none)",
+        default="",
+        show_default=False,
+    )
     max_spend_usd = float(spend_input) if spend_input.strip() else None
-    keep_rejected = typer.confirm("Keep rejected images for diagnosis?", default=False)
-    staging_root = typer.prompt("Staging location", default=RUN_ROOT_DEFAULT)
+
+    keep_rejected = typer.confirm(
+        "Keep rejected candidate images on disk for diagnosis instead of deleting them?",
+        default=False,
+    )
+    staging_root = typer.prompt(
+        "Staging location -- local folder for run logs and candidates before publication",
+        default=RUN_ROOT_DEFAULT,
+    )
 
     answers = {
         "provider_mode": provider_mode,

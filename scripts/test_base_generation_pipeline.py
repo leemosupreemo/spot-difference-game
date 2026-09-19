@@ -1538,6 +1538,17 @@ class TestInteractiveWizard(unittest.TestCase):
             f".base-generation/runs\n{execute}\n{confirm_paid}\n"
         )
 
+    def test_invalid_provider_mode_answer_reprompts_instead_of_crashing(self):
+        runner = CliRunner()
+        # First answer is invalid; the wizard must re-ask, not raise.
+        input_with_typo = "bogus\n" + self._wizard_input()
+        result = runner.invoke(app, [], input=input_with_typo)
+
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertIsNone(result.exception)
+        self.assertIn("isn't one of", result.stdout)
+        self.assertIn("mixed/google/openai", result.stdout)
+
     def test_wizard_shows_summary_before_asking_to_execute_and_never_hardcodes_yes(self):
         runner = CliRunner()
         result = runner.invoke(app, [], input=self._wizard_input())
