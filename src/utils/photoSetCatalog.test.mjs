@@ -79,16 +79,16 @@ test('retained manifest entries have stable five-entry set metadata', () => {
       // published to the front of the manifest (base_pair_publisher.py
       // inserts at index 0) and have no setId/sequence -- they aren't part
       // of a photo set.
-      { id: 'leaves_on_branch_1789795322252_v5', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v4', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v3', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v2', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v1', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426_v5', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426_v4', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426_v3', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426_v2', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426_v1', setId: undefined, sequence: undefined },
+      { id: 'leaves_on_branch_1789795322252_v5', setId: undefined, sequence: undefined },
+      { id: 'leaves_on_branch_1789795322252_v4', setId: undefined, sequence: undefined },
+      { id: 'leaves_on_branch_1789795322252_v3', setId: undefined, sequence: undefined },
+      { id: 'leaves_on_branch_1789795322252_v2', setId: undefined, sequence: undefined },
+      { id: 'leaves_on_branch_1789795322252_v1', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426', setId: undefined, sequence: undefined },
       { id: 'leaves_on_branch_1789795322252', setId: undefined, sequence: undefined },
       { id: 'photo_set_001_01', setId: 'photo_set_001', sequence: 1 },

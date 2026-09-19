@@ -293,6 +293,7 @@ def generate_single_scene_difference(
         selector_score,
         quality,
         refinement_metrics,
+        source_object_key=None,
     ):
         attempt_index = log_entry["candidate_attempt_count"] - 1
         final_score, score_components = score_structural_candidate(
@@ -315,6 +316,12 @@ def generate_single_scene_difference(
             "score_components": score_components,
             "quality_metrics": quality.metrics,
             "refinement_metrics": refinement_metrics,
+            # Identifies which object in the *source* image this candidate
+            # manipulated (the donor for add, the target for remove/reorder).
+            # Lets a caller asking for several distinct candidates avoid
+            # returning the same object moved/duplicated to different spots
+            # as if it were several different options.
+            "source_object_key": tuple(source_object_key) if source_object_key is not None else None,
         }
         structural_candidates.append(record)
         log_entry["passing_candidate_count"] += 1
@@ -456,6 +463,7 @@ def generate_single_scene_difference(
                                 cand_item.get("score"),
                                 quality,
                                 refinement_metrics,
+                                source_object_key=target_c["bbox"],
                             )
                         else:
                             op_reason = quality.reason
@@ -528,6 +536,7 @@ def generate_single_scene_difference(
                                 pair.get("score"),
                                 quality,
                                 refinement_metrics,
+                                source_object_key=pair["donor_bbox"],
                             )
                         else:
                             op_reason = quality.reason
@@ -607,6 +616,7 @@ def generate_single_scene_difference(
                                 target_item.get("score"),
                                 quality,
                                 refinement_metrics,
+                                source_object_key=cand["bbox"],
                             )
                         else:
                             op_reason = quality.reason

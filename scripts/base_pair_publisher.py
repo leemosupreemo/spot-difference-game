@@ -132,28 +132,56 @@ def generate_structural_pair(
     return finalized, log_entry
 
 
+def _positions_overlap(item, picked):
+    gt, picked_gt = item["ground_truth"], picked["ground_truth"]
+    radius = gt.get("radius", 0.0)
+    picked_radius = picked_gt.get("radius", 0.0)
+    distance = ((gt["x"] - picked_gt["x"]) ** 2 + (gt["y"] - picked_gt["y"]) ** 2) ** 0.5
+    return distance < radius + picked_radius
+
+
 def _select_diverse_candidates(ranked, count):
     """Greedily pick up to `count` candidates from `ranked` (already sorted
-    best first), skipping any whose position is close enough to an
-    already-picked one that their hit-circles would overlap -- otherwise two
-    "different" review variants can turn out to be the same edit a couple of
-    pixels apart, wasting a review slot on a near-duplicate."""
+    best first).
+
+    Two things make a candidate "the same option" as one already picked,
+    either of which disqualifies it on the first pass:
+      - its position overlaps an already-picked one (two edits a couple of
+        pixels apart aren't meaningfully different to review), or
+      - it manipulates the same source object as an already-picked one (the
+        pipeline can rank "duplicate this button to position A" above
+        "...to position B" above "...to position C" for the same flawed
+        button -- that's one option repeated, not several).
+
+    A second pass fills any remaining slots by position alone, allowing a
+    repeated source object, so a real base image with genuinely few passing
+    candidates still returns as close to `count` as it actually has, rather
+    than being cut short by the diversity preference.
+    """
     selected = []
+    used_source_keys = set()
     for item in ranked:
-        gt = item["ground_truth"]
-        radius = gt.get("radius", 0.0)
-        too_close = False
-        for picked in selected:
-            picked_gt = picked["ground_truth"]
-            picked_radius = picked_gt.get("radius", 0.0)
-            distance = ((gt["x"] - picked_gt["x"]) ** 2 + (gt["y"] - picked_gt["y"]) ** 2) ** 0.5
-            if distance < radius + picked_radius:
-                too_close = True
-                break
-        if not too_close:
-            selected.append(item)
         if len(selected) >= count:
             break
+        source_key = item.get("source_object_key")
+        if source_key is not None and source_key in used_source_keys:
+            continue
+        if any(_positions_overlap(item, picked) for picked in selected):
+            continue
+        selected.append(item)
+        if source_key is not None:
+            used_source_keys.add(source_key)
+
+    if len(selected) < count:
+        for item in ranked:
+            if len(selected) >= count:
+                break
+            if any(item is picked for picked in selected):
+                continue
+            if any(_positions_overlap(item, picked) for picked in selected):
+                continue
+            selected.append(item)
+
     return selected
 
 

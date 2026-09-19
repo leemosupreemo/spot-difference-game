@@ -505,8 +505,14 @@ class TestStructuralOrchestration(unittest.TestCase):
         self.assertEqual(ranked[0]["final_score"], log["selected_candidate_score"])
         self.assertGreaterEqual(ranked[0]["final_score"], ranked[1]["final_score"])
         self.assertEqual(ranked[0]["ground_truth"]["x"], entry["diffs"][0]["x"])
-        # The two candidates are genuinely distinct edits (different slot).
+        # The two candidates are genuinely distinct edits (different slot)...
         self.assertNotEqual(ranked[0]["ground_truth"]["x"], ranked[1]["ground_truth"]["x"])
+        # ...but both duplicate the SAME donor object (self.pairs both use
+        # donor_bbox [20, 20, 40, 40]) -- source_object_key must reflect
+        # that sameness so a caller can tell "different position" apart
+        # from "genuinely different object".
+        self.assertEqual(ranked[0]["source_object_key"], ranked[1]["source_object_key"])
+        self.assertEqual(ranked[0]["source_object_key"], (20, 20, 40, 40))
 
     def test_mixed_mode_preserves_first_passing_candidate(self):
         scene = {

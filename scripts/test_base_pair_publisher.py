@@ -272,7 +272,7 @@ class TestGenerateStructuralPairVariants(unittest.TestCase):
             normalization_crop_fraction=0.0,
         )
 
-    def _ranked_candidate(self, region, operation="add"):
+    def _ranked_candidate(self, region, operation="add", source_object_key=None):
         variant = np.full((150, 200, 3), 100, dtype=np.uint8)
         y1, y2, x1, x2 = region
         variant[y1:y2, x1:x2] = 200
@@ -286,6 +286,7 @@ class TestGenerateStructuralPairVariants(unittest.TestCase):
                 "radius": 5.0,
             },
             "final_score": 1.0,
+            "source_object_key": source_object_key,
         }
 
     def test_publishes_up_to_count_distinct_variants_with_own_ids(self):
@@ -333,6 +334,51 @@ class TestGenerateStructuralPairVariants(unittest.TestCase):
         self.assertEqual(len(variants), 2)
         xs = [entry["diffs"][0]["x"] for _finalized, entry in variants]
         self.assertEqual(xs, [c1["ground_truth"]["x"], c3["ground_truth"]["x"]])
+
+    def test_prefers_a_different_donor_over_repositioning_the_same_one(self):
+        # Models the real pins_on_carpet case: the top 3 ranked candidates
+        # all duplicate the SAME flawed donor to different, well-separated
+        # slots, and a 4th, lower-ranked candidate uses a genuinely different
+        # donor. Requesting 2 variants must surface that different donor
+        # instead of two repositions of the same flawed one.
+        same_donor = "donor-A"
+        c1 = self._ranked_candidate((50, 100, 20, 70), source_object_key=same_donor)
+        c2 = self._ranked_candidate((50, 100, 80, 130), source_object_key=same_donor)
+        c3 = self._ranked_candidate((50, 100, 140, 190), source_object_key=same_donor)
+        c4 = self._ranked_candidate((10, 30, 20, 70), source_object_key="donor-B")
+        ranked = [c1, c2, c3, c4]
+
+        def fake_generate(scene_spec, scheduler=None, output_dir="public/levels", difficulty="Medium", policy=None):
+            return True, {"id": scene_spec["id"]}, {"ranked_candidates": ranked}
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            variants, _log_entry = generate_structural_pair_variants(
+                self.candidate, {"id": "scene-1"}, self.tmp.name, count=2, policy=self.policy
+            )
+
+        self.assertEqual(len(variants), 2)
+        xs = [entry["diffs"][0]["x"] for _finalized, entry in variants]
+        self.assertEqual(xs, [c1["ground_truth"]["x"], c4["ground_truth"]["x"]])
+
+    def test_falls_back_to_repeating_a_donor_when_no_other_distinct_one_exists(self):
+        # If every passing candidate duplicates the same donor (no other
+        # object in the scene produced a viable edit), the diversity
+        # preference must not cut the result short of `count` -- it's still
+        # better to show 2 repositions of one donor than fewer than asked.
+        same_donor = "donor-A"
+        c1 = self._ranked_candidate((50, 100, 20, 70), source_object_key=same_donor)
+        c2 = self._ranked_candidate((50, 100, 80, 130), source_object_key=same_donor)
+        ranked = [c1, c2]
+
+        def fake_generate(scene_spec, scheduler=None, output_dir="public/levels", difficulty="Medium", policy=None):
+            return True, {"id": scene_spec["id"]}, {"ranked_candidates": ranked}
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            variants, _log_entry = generate_structural_pair_variants(
+                self.candidate, {"id": "scene-1"}, self.tmp.name, count=2, policy=self.policy
+            )
+
+        self.assertEqual(len(variants), 2)
 
     def test_fewer_passing_candidates_than_count_returns_what_exists(self):
         ranked = [self._ranked_candidate((50, 100, 20, 70))]
