@@ -199,7 +199,13 @@ class GoogleVisualCritic:
     def _build_client(self):
         from google import genai  # lazy import; only needed for real API calls
 
-        return genai.Client(credentials=self._credential.value)
+        # An "adc" credential's value is a real, refreshable
+        # google.auth.credentials.Credentials object; "environment" and
+        # "keychain" credentials are plain API key strings. The SDK requires
+        # each kind under a different constructor argument.
+        if self._credential.kind == "adc":
+            return genai.Client(credentials=self._credential.value)
+        return genai.Client(api_key=self._credential.value)
 
     def evaluate(self, image_path: str, brief: SceneBrief) -> VisualCriticResult:
         client = self._client or self._build_client()

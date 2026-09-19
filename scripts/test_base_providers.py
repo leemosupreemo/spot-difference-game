@@ -4,6 +4,7 @@ import json
 import os
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from PIL import Image
 
@@ -356,6 +357,80 @@ class TestGoogleImageProvider(unittest.TestCase):
         self.assertEqual(len(images), 1)
         self.assertEqual(images[0].provider, "google")
         self.assertEqual(images[0].native_size, (2400, 1792))
+
+
+class TestGoogleClientConstruction(unittest.TestCase):
+    """Exercises the real _build_client() credential-routing logic. Every
+    other provider/critic test injects a fake client directly and never
+    calls _build_client() at all, which is exactly why a real bug here
+    (passing a plain API key string as `credentials=` instead of
+    `api_key=`) went undetected until an actual live run hit it."""
+
+    def _capture_client_kwargs(self):
+        captured = {}
+
+        class FakeGenaiClient:
+            def __init__(self, **kwargs):
+                captured.update(kwargs)
+
+        return captured, FakeGenaiClient
+
+    def test_image_provider_uses_api_key_for_a_keychain_credential(self):
+        credential = ResolvedCredential(provider="google", kind="keychain", value="my-api-key")
+        provider = GoogleImageProvider(credential=credential)
+        captured, fake_client_cls = self._capture_client_kwargs()
+
+        with patch("google.genai.Client", fake_client_cls):
+            provider._build_client()
+
+        self.assertEqual(captured.get("api_key"), "my-api-key")
+        self.assertNotIn("credentials", captured)
+
+    def test_image_provider_uses_api_key_for_an_environment_credential(self):
+        credential = ResolvedCredential(provider="google", kind="environment", value="env-api-key")
+        provider = GoogleImageProvider(credential=credential)
+        captured, fake_client_cls = self._capture_client_kwargs()
+
+        with patch("google.genai.Client", fake_client_cls):
+            provider._build_client()
+
+        self.assertEqual(captured.get("api_key"), "env-api-key")
+        self.assertNotIn("credentials", captured)
+
+    def test_image_provider_uses_credentials_object_for_an_adc_credential(self):
+        fake_adc_object = object()
+        credential = ResolvedCredential(provider="google", kind="adc", value=fake_adc_object)
+        provider = GoogleImageProvider(credential=credential)
+        captured, fake_client_cls = self._capture_client_kwargs()
+
+        with patch("google.genai.Client", fake_client_cls):
+            provider._build_client()
+
+        self.assertIs(captured.get("credentials"), fake_adc_object)
+        self.assertNotIn("api_key", captured)
+
+    def test_visual_critic_uses_api_key_for_a_keychain_credential(self):
+        credential = ResolvedCredential(provider="google", kind="keychain", value="my-api-key")
+        critic = GoogleVisualCritic(credential=credential)
+        captured, fake_client_cls = self._capture_client_kwargs()
+
+        with patch("google.genai.Client", fake_client_cls):
+            critic._build_client()
+
+        self.assertEqual(captured.get("api_key"), "my-api-key")
+        self.assertNotIn("credentials", captured)
+
+    def test_visual_critic_uses_credentials_object_for_an_adc_credential(self):
+        fake_adc_object = object()
+        credential = ResolvedCredential(provider="google", kind="adc", value=fake_adc_object)
+        critic = GoogleVisualCritic(credential=credential)
+        captured, fake_client_cls = self._capture_client_kwargs()
+
+        with patch("google.genai.Client", fake_client_cls):
+            critic._build_client()
+
+        self.assertIs(captured.get("credentials"), fake_adc_object)
+        self.assertNotIn("api_key", captured)
 
 
 class TestNormalizeProviderImage(unittest.TestCase):
