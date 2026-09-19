@@ -1,5 +1,59 @@
 [
   {
+    "id": "pins_on_carpet_1789795312426",
+    "title": "Pins on Carpet",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/pins_on_carpet_1789795312426_2d0bff20f0bd_base.jpg",
+    "variantImage": "levels/pins_on_carpet_1789795312426_f94f7d1b314f_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 75.4,
+        "y": 12.5,
+        "radius": 5.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "leaves_on_branch_1789795322252",
+    "title": "Leaves on Branch",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "baseImage": "levels/leaves_on_branch_1789795322252_aa3e886814ce_base.jpg",
+    "variantImage": "levels/leaves_on_branch_1789795322252_4199f18636d7_variant.jpg",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 85.3,
+        "y": 52.9,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
     "id": "photo_set_001_01",
     "title": "Botanical Succulents Greenhouse Grid (Nature 8)",
     "category": "Photography",

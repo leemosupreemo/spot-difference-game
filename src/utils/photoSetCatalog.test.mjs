@@ -70,11 +70,16 @@ test('retained manifest entries have stable five-entry set metadata', () => {
     'utf8'
   ));
 
-  assert.equal(manifest.length, 133);
+  assert.equal(manifest.length, 135);
   assert.equal(new Set(manifest.map(entry => entry.id)).size, manifest.length);
   assert.deepEqual(
-    manifest.slice(0, 6).map(({ id, setId, sequence }) => ({ id, setId, sequence })),
+    manifest.slice(0, 8).map(({ id, setId, sequence }) => ({ id, setId, sequence })),
     [
+      // Manually-ingested single levels are published to the front of the
+      // manifest (base_pair_publisher.py inserts at index 0) and have no
+      // setId/sequence -- they aren't part of a photo set.
+      { id: 'pins_on_carpet_1789795312426', setId: undefined, sequence: undefined },
+      { id: 'leaves_on_branch_1789795322252', setId: undefined, sequence: undefined },
       { id: 'photo_set_001_01', setId: 'photo_set_001', sequence: 1 },
       { id: 'photo_set_001_02', setId: 'photo_set_001', sequence: 2 },
       { id: 'photo_set_001_03', setId: 'photo_set_001', sequence: 3 },
@@ -85,7 +90,7 @@ test('retained manifest entries have stable five-entry set metadata', () => {
   );
 
   const catalog = getPhotoSetCatalog(manifest);
-  assert.equal(catalog.unassigned.length, 3);
+  assert.equal(catalog.unassigned.length, 5);
   assert.equal(catalog.sets.length, 26);
   assert.equal(getCompletePhotoSets(manifest).length, 26);
 });
