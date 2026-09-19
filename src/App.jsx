@@ -22,7 +22,7 @@ import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
 import { getInitialDebugMode } from './utils/debugMode';
-import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, resetCuratedStatusMap, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus, getEntryCurationStatus } from './utils/curationStore';
+import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus, getEntryCurationStatus } from './utils/curationStore';
 import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted } from './services/analytics';
 import { parseIncomingChallenge } from './utils/challengeMetrics';
 import { syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
@@ -185,7 +185,6 @@ export default function App() {
     }
   });
 
-  const [debugSourceMode, setDebugSourceMode] = useState('premade'); // 'premade' | 'procedural'
   const [skipKeptLevels, setSkipKeptLevels] = useState(() => {
     try {
       const saved = localStorage.getItem('diff_hunter_skip_kept');
@@ -358,10 +357,10 @@ export default function App() {
   };
 
   const effectiveDebugPool = useMemo(() => {
-    if (!debugMode || debugSourceMode !== 'premade') return [];
+    if (!debugMode) return [];
     const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
     return pool.length > 0 ? pool : getAllPhotoPairEntries();
-  }, [debugMode, debugSourceMode, curatedStatusMap, skipKeptLevels]);
+  }, [debugMode, curatedStatusMap, skipKeptLevels]);
 
   const handleSetCuratedStatus = (levelId, status, meta) => {
     const updated = setLevelCuratedStatus(levelId, status, meta);
@@ -376,7 +375,7 @@ export default function App() {
       }).catch(() => {});
     } catch (_) {}
 
-    if (debugMode && debugSourceMode === 'premade') {
+    if (debugMode) {
       const newPool = getDebugCandidateEntries(updated, skipKeptLevels);
       const poolToUse = newPool.length > 0 ? newPool : getAllPhotoPairEntries().filter(e => getLevelStatus(updated[e.id])?.status !== 'dismissed');
 
@@ -396,11 +395,6 @@ export default function App() {
 
   const handleSetCuratedCategory = (levelId, packId) => {
     const updated = setLevelCurationMeta(levelId, { packId });
-    setCuratedStatusMap({ ...updated });
-  };
-
-  const handleResetAllCurated = () => {
-    const updated = resetCuratedStatusMap();
     setCuratedStatusMap({ ...updated });
   };
 
@@ -502,7 +496,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (debugMode && debugSourceMode === 'premade') {
+    if (debugMode) {
       const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
       const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
       if (effectivePool.length > 0) {
@@ -514,7 +508,7 @@ export default function App() {
         }
       }
     }
-  }, [debugMode, debugSourceMode, skipKeptLevels]);
+  }, [debugMode, skipKeptLevels]);
 
   const handleNextPair = async () => {
     sounds.playTap();
@@ -530,14 +524,7 @@ export default function App() {
       return;
     }
 
-    if (debugMode && debugSourceMode === 'procedural') {
-      const procLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
-      setLevels([procLevel]);
-      startLevel(procLevel.id);
-      return;
-    }
-
-    if (debugMode && debugSourceMode === 'premade') {
+    if (debugMode) {
       const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
       const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
       if (effectivePool.length > 0) {
@@ -573,7 +560,7 @@ export default function App() {
       return;
     }
 
-    if (debugMode && debugSourceMode === 'premade') {
+    if (debugMode) {
       const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
       const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
       if (effectivePool.length > 0) {
@@ -590,23 +577,6 @@ export default function App() {
     const currentIndex = levels.findIndex(l => l.id === currentLevelId);
     if (currentIndex > 0) {
       startLevel(levels[currentIndex - 1].id);
-    }
-  };
-
-  const handleToggleDebugSourceMode = (newMode) => {
-    setDebugSourceMode(newMode);
-    if (newMode === 'procedural') {
-      const procLevel = generateProceduralLevelPair(selectedTheme, selectedDifficulty, Date.now());
-      setLevels([procLevel]);
-      startLevel(procLevel.id);
-    } else {
-      const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
-      if (effectivePool.length > 0) {
-        const debugLevels = effectivePool.map(createPhotoPairLevel);
-        setLevels(debugLevels);
-        startLevel(debugLevels[0].id);
-      }
     }
   };
 
@@ -755,7 +725,7 @@ export default function App() {
     // 1. ABSTRACT CATEGORY: ALWAYS generates procedural art images across 12 distinct art worlds
     trackGameStarted({ themeId: selectedTheme, difficulty: selectedDifficulty, mode: activeMode });
 
-    if (selectedTheme === 'abstract_animated' || (debugMode && debugSourceMode === 'procedural')) {
+    if (selectedTheme === 'abstract_animated') {
       const procLevels = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair('abstract_animated', selectedDifficulty, Date.now() + i * 1000));
       logApp('INFO', `[StartGame:AbstractProcedural] Launching 5 procedural levels: ${procLevels.map(l => l.id).join(', ')}`);
       setLevels(procLevels);
@@ -766,7 +736,7 @@ export default function App() {
 
     // 2. PHOTOGRAPHY CATEGORY: ALWAYS uses curated premade real-world photo pairs
     try {
-      if (debugMode && debugSourceMode === 'premade') {
+      if (debugMode) {
         const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
         const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
         if (effectivePool.length > 0) {
@@ -1396,17 +1366,14 @@ export default function App() {
               curatedStatusMap={curatedStatusMap}
               onSetStatus={handleSetCuratedStatus}
               onSetCategory={handleSetCuratedCategory}
-              onResetAll={handleResetAllCurated}
               onPruneDismissed={handlePruneDismissed}
               onNextPair={handleNextPair}
               onPrevPair={handlePrevPair}
               onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
-              debugSourceMode={debugSourceMode}
-              onToggleSourceMode={handleToggleDebugSourceMode}
               skipKeptLevels={skipKeptLevels}
               onToggleSkipKept={handleToggleSkipKept}
-              currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode && debugSourceMode === 'premade' ? (effectiveDebugPool.findIndex(e => e.id === currentLevelId) >= 0 ? effectiveDebugPool.findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
-              totalStageImages={gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? effectiveDebugPool.length : (levels.length || 5))}
+              currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode ? (effectiveDebugPool.findIndex(e => e.id === currentLevelId) >= 0 ? effectiveDebugPool.findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
+              totalStageImages={gameMode === 'daily' ? levels.length : (debugMode ? effectiveDebugPool.length : (levels.length || 5))}
               gameMode={gameMode}
             />
         )}
@@ -1420,8 +1387,8 @@ export default function App() {
             score={score}
             mode={activeMode}
             missCount={missCount}
-            currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode && debugSourceMode === 'premade' ? (effectiveDebugPool.findIndex(e => e.id === currentLevelId) >= 0 ? effectiveDebugPool.findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
-            totalStageImages={gameMode === 'daily' && !debugMode ? 3 : (gameMode === 'daily' ? levels.length : (debugMode && debugSourceMode === 'premade' ? effectiveDebugPool.length : (levels.length || 5)))}
+            currentStageIndex={gameMode === 'daily' ? (levels.findIndex(l => l.id === currentLevelId) >= 0 ? levels.findIndex(l => l.id === currentLevelId) : currentStageIndex) : (debugMode ? (effectiveDebugPool.findIndex(e => e.id === currentLevelId) >= 0 ? effectiveDebugPool.findIndex(e => e.id === currentLevelId) : currentStageIndex) : currentStageIndex)}
+            totalStageImages={gameMode === 'daily' && !debugMode ? 3 : (gameMode === 'daily' ? levels.length : (debugMode ? effectiveDebugPool.length : (levels.length || 5)))}
             selectedDifficulty={selectedDifficulty}
             onBack={handleRequestBack}
             debugMode={debugMode}

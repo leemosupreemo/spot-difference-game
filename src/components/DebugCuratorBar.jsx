@@ -9,13 +9,10 @@ export default function DebugCuratorBar({
   curatedStatusMap,
   onSetStatus,
   onSetCategory,
-  onResetAll,
   onPruneDismissed,
   onNextPair,
   onPrevPair,
   onOpenDiagnostics,
-  debugSourceMode = 'premade',
-  onToggleSourceMode,
   skipKeptLevels = true,
   onToggleSkipKept,
   currentStageIndex = 0,
@@ -127,43 +124,6 @@ export default function DebugCuratorBar({
             }} title={`${currentLevel.dailySource ? `[${currentLevel.dailySource}] ` : ''}${currentLevel.id} (${currentLevel.title})`}>
               {currentLevel.dailySource ? `[${currentLevel.dailySource}] ` : ''}{currentLevel.id}
             </span>
-
-            {/* Source Mode Toggle: Premade vs Procedural */}
-            <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.4)', borderRadius: '10px', padding: '2px', border: '1px solid var(--border-glass)' }}>
-              <button
-                onClick={() => { sounds.playTap(); onToggleSourceMode && onToggleSourceMode('premade'); }}
-                style={{
-                  padding: '4px 9px',
-                  fontSize: '0.75rem',
-                  fontWeight: 800,
-                  borderRadius: '8px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: debugSourceMode === 'premade' ? 'var(--accent-cyan)' : 'transparent',
-                  color: debugSourceMode === 'premade' ? '#000' : 'var(--text-muted)'
-                }}
-                title="Review premade photo manifest library"
-              >
-                🖼️ PREMADE
-              </button>
-
-              <button
-                onClick={() => { sounds.playTap(); onToggleSourceMode && onToggleSourceMode('procedural'); }}
-                style={{
-                  padding: '4px 9px',
-                  fontSize: '0.75rem',
-                  fontWeight: 800,
-                  borderRadius: '8px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: debugSourceMode === 'procedural' ? 'var(--accent-gold)' : 'transparent',
-                  color: debugSourceMode === 'procedural' ? '#000' : 'var(--text-muted)'
-                }}
-                title="Generate fresh procedural levels on-the-fly"
-              >
-                ⚡ PROCEDURAL
-              </button>
-            </div>
 
             {/* Skip Kept Toggle */}
             {onToggleSkipKept && (
@@ -313,22 +273,7 @@ export default function DebugCuratorBar({
           {/* Right: Summary Counts & Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>
-              👍 <span style={{ color: 'var(--accent-green)' }}>{approvedTotal}</span> | ⚠️ <span style={{ color: 'var(--accent-gold)' }}>{wrongDiffTotal}</span> | <button
-                onClick={() => { sounds.playTap(); onPruneDismissed && onPruneDismissed(); }}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--accent-pink)',
-                  fontWeight: 800,
-                  fontSize: '0.75rem',
-                  cursor: 'pointer',
-                  padding: 0,
-                  textDecoration: 'underline dotted'
-                }}
-                title="Tap to reset dismissed counter to 0"
-              >
-                👎 {dismissedTotal}
-              </button>
+              👍 <span style={{ color: 'var(--accent-green)' }}>{approvedTotal}</span> | ⚠️ <span style={{ color: 'var(--accent-gold)' }}>{wrongDiffTotal}</span> | 👎 <span style={{ color: 'var(--accent-pink)' }}>{dismissedTotal}</span>
             </div>
 
             {onOpenDiagnostics && (
@@ -361,15 +306,6 @@ export default function DebugCuratorBar({
                 ✂️ Prune Dismissed
               </button>
             )}
-
-            <button
-              onClick={onResetAll}
-              className="glass-btn"
-              style={{ padding: '5px 10px', fontSize: '0.78rem', borderRadius: '8px' }}
-              title="Reset every curation decision to pending"
-            >
-              <RotateCcw size={14} /> Reset all
-            </button>
 
             {onPrevPair && (
               <button

@@ -122,14 +122,7 @@ export function deleteLevelAssetsAndManifestEntries(levelIds = [], options = {})
 
   // Update manifests in public/levels/
   const manifestUpdates = [];
-  const levelManifestFiles = [
-    'photo_pair_manifest.json',
-    'curated_photo_levels.json',
-    'frequency_ssim_manifest.json',
-    'generated_level_pack.json',
-    'generated_levels.json',
-    'pipeline_manifest.json'
-  ];
+  const levelManifestFiles = ['photo_pair_manifest.json'];
 
   for (const manifestFileName of levelManifestFiles) {
     const filePath = path.join(projectRoot, 'public/levels', manifestFileName);

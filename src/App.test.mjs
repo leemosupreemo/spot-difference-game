@@ -99,7 +99,7 @@ test('debug premade mode uses candidate pool and advances without repeating kept
   assert.match(source, /const newPool = getDebugCandidateEntries\(updated,\s*skipKeptLevels\)/);
 
   // handleNextPair and handlePrevPair navigate within candidate pool
-  assert.match(source, /if \(debugMode && debugSourceMode === 'premade'\) \{[\s\S]*const pool = getDebugCandidateEntries/);
+  assert.match(source, /if \(debugMode\) \{[\s\S]*const pool = getDebugCandidateEntries/);
 
   // DebugCuratorBar uses effectiveDebugPool for accurate image counting
   assert.match(source, /totalStageImages=\{[\s\S]*effectiveDebugPool\.length/);
