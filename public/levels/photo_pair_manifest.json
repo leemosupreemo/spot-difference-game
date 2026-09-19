@@ -76,7 +76,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
@@ -105,7 +105,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
@@ -134,7 +134,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
@@ -162,8 +162,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
@@ -192,7 +192,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
@@ -220,8 +220,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
@@ -249,8 +249,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
@@ -277,7 +277,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
@@ -304,7 +304,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
@@ -331,7 +331,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
@@ -358,7 +358,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
@@ -385,7 +385,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
@@ -412,7 +412,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
@@ -439,7 +439,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
@@ -466,7 +466,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
@@ -492,8 +492,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
@@ -519,8 +519,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
@@ -546,8 +546,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
@@ -573,8 +573,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
@@ -600,8 +600,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
@@ -630,8 +630,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
@@ -648,8 +648,8 @@
     "variantImage": "levels/photo_boardgame_recolor_003_variant.jpg",
     "operation": "recolor",
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "diffs": [
@@ -689,8 +689,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
@@ -716,8 +716,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
@@ -744,8 +744,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
@@ -771,8 +771,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
@@ -798,8 +798,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
@@ -824,8 +824,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
@@ -851,8 +851,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
@@ -870,7 +870,7 @@
     "operation": "recolor",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "diffs": [
@@ -907,7 +907,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
@@ -933,7 +933,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
@@ -959,7 +959,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
@@ -984,7 +984,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
@@ -1009,7 +1009,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
@@ -1034,8 +1034,8 @@
     ],
     "category": "Greenhouse Clutter",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
@@ -1060,8 +1060,8 @@
     "difficulty": "Medium",
     "title": "Workbench Screwdriver",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
@@ -1112,8 +1112,8 @@
     "packId": "find_the_sniper",
     "id": "photo_set_008_04",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
@@ -1164,8 +1164,8 @@
     ],
     "id": "photo_set_009_01",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
@@ -1190,8 +1190,8 @@
     "variantImage": "levels/photo-pairs/photo-bakers-table/variant.jpg",
     "id": "photo_set_009_02",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
@@ -1242,8 +1242,8 @@
     "category": "Photography",
     "pack": "Find the Sniper",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
@@ -1294,8 +1294,8 @@
     "title": "Woodworking Bench Screw",
     "pack": "Find the Sniper",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
@@ -1320,8 +1320,8 @@
       }
     ],
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
@@ -1346,8 +1346,8 @@
     "pack": "Find the Sniper",
     "id": "photo_set_010_03",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
@@ -1372,8 +1372,8 @@
     "variantImage": "levels/photo-pairs/photo-pottery-table/variant.jpg",
     "packId": "find_the_sniper",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
@@ -1424,8 +1424,8 @@
     "category": "Photography",
     "variantImage": "levels/photo-pairs/photo-woodworking-table/variant.jpg",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
@@ -1450,8 +1450,8 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
@@ -1476,8 +1476,8 @@
     "packId": "find_the_sniper",
     "difficulty": "Easy",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
@@ -1502,8 +1502,8 @@
       }
     ],
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
@@ -1528,8 +1528,8 @@
     "category": "Photography",
     "variantImage": "levels/photo-pairs/photo-map-restoration/variant.jpg",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
@@ -1554,8 +1554,8 @@
     "packId": "find_the_sniper",
     "id": "photo_set_012_01",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
@@ -1580,8 +1580,8 @@
     ],
     "id": "photo_set_012_02",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
@@ -1606,8 +1606,8 @@
     ],
     "pack": "Find the Sniper",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
@@ -1633,7 +1633,7 @@
     "title": "Rustic Bakery Counter",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
@@ -1659,7 +1659,7 @@
     "id": "photo_set_012_05",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
@@ -1685,7 +1685,7 @@
     "difficulty": "Easy",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
@@ -1711,7 +1711,7 @@
     "baseImage": "levels/photo-pairs/ai-coffee-bar/base.jpg",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
@@ -1737,7 +1737,7 @@
     "variantImage": "levels/photo-pairs/ai-antique-study/variant.jpg",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
@@ -1763,7 +1763,7 @@
     "packId": "find_the_sniper",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
@@ -1789,7 +1789,7 @@
     "id": "photo_set_013_05",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
@@ -1817,8 +1817,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
@@ -1846,8 +1846,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
@@ -1875,8 +1875,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
@@ -1904,8 +1904,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
@@ -1933,8 +1933,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
@@ -1952,7 +1952,7 @@
     "operation": "recolor",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "diffs": [
@@ -1991,8 +1991,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
@@ -2021,7 +2021,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
@@ -2050,7 +2050,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
@@ -2079,7 +2079,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
@@ -2108,7 +2108,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
@@ -2137,7 +2137,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
@@ -2166,7 +2166,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
@@ -2195,7 +2195,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
@@ -2253,7 +2253,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
@@ -2281,8 +2281,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
@@ -2310,8 +2310,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
@@ -2339,8 +2339,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
@@ -2368,8 +2368,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
@@ -2398,7 +2398,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
@@ -2427,7 +2427,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
@@ -2456,7 +2456,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
@@ -2484,8 +2484,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
@@ -2513,8 +2513,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
@@ -2540,8 +2540,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
@@ -2567,8 +2567,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
@@ -2594,8 +2594,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
@@ -2621,8 +2621,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
@@ -2648,8 +2648,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
@@ -2675,8 +2675,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
@@ -2702,8 +2702,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
@@ -2729,8 +2729,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
@@ -2756,8 +2756,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
@@ -2812,8 +2812,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
@@ -2839,8 +2839,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
@@ -2866,8 +2866,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
@@ -2892,8 +2892,8 @@
       }
     ],
     "dimensions": {
-      "width": 1244,
-      "height": 933
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
@@ -2920,8 +2920,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
@@ -2979,7 +2979,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
@@ -3008,8 +3008,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
@@ -3036,8 +3036,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
@@ -3066,8 +3066,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
@@ -3096,8 +3096,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
@@ -3124,8 +3124,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
@@ -3154,8 +3154,8 @@
       }
     ],
     "dimensions": {
-      "width": 1128,
-      "height": 846
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
@@ -3181,8 +3181,8 @@
       }
     ],
     "dimensions": {
-      "width": 1024,
-      "height": 768
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
@@ -3208,8 +3208,8 @@
       }
     ],
     "dimensions": {
-      "width": 1420,
-      "height": 1065
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
@@ -3235,8 +3235,8 @@
       }
     ],
     "dimensions": {
-      "width": 1420,
-      "height": 1065
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
@@ -3254,7 +3254,7 @@
     "operation": "recolor",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "diffs": [
@@ -3291,8 +3291,8 @@
       }
     ],
     "dimensions": {
-      "width": 1420,
-      "height": 1065
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
@@ -3318,7 +3318,7 @@
     "id": "photo_set_024_04",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
@@ -3343,8 +3343,8 @@
     "title": "Precision Hardware Drawer",
     "category": "Workshop Clutter",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
@@ -3369,8 +3369,8 @@
     "id": "photo_set_025_01",
     "difficulty": "Hard",
     "dimensions": {
-      "width": 640,
-      "height": 480
+      "width": 1200,
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
@@ -3399,7 +3399,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
@@ -3428,7 +3428,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
@@ -3457,7 +3457,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
@@ -3486,7 +3486,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
@@ -3515,7 +3515,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_026",
@@ -3544,7 +3544,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_026",
@@ -3602,7 +3602,7 @@
     ],
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_026",
@@ -3620,7 +3620,7 @@
     "operation": "recolor",
     "dimensions": {
       "width": 1200,
-      "height": 896
+      "height": 900
     },
     "aspectRatio": "4:3",
     "diffs": [
