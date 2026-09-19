@@ -43,6 +43,13 @@ class TestFinalizePair(unittest.TestCase):
         self.assertTrue(Path(finalized.variant_path).exists())
         self.assertEqual(finalized.dimensions, (200, 150))
         self.assertEqual(finalized.manifest_id, "scene-1")
+        # WebP, not JPEG: comparable-or-better visual quality at a smaller
+        # size, and supported since iOS 14 (well within this app's iOS 15
+        # floor) -- unlike AVIF, which needs iOS 16.
+        self.assertEqual(Path(finalized.base_path).suffix, ".webp")
+        self.assertEqual(Path(finalized.variant_path).suffix, ".webp")
+        with Image.open(finalized.base_path) as saved:
+            self.assertEqual(saved.format, "WEBP")
 
     def test_dimension_mismatch_is_rejected(self):
         base = np.full((150, 200, 3), 100, dtype=np.uint8)
@@ -112,6 +119,28 @@ class TestPublishPair(unittest.TestCase):
         self.assertTrue((self.levels_dir / Path(entry["variantImage"]).name).exists())
         manifest = json.loads(self.manifest_path.read_text())
         self.assertEqual(manifest[0]["id"], "scene-1")
+
+    def test_publish_preserves_the_finalized_files_own_extension(self):
+        # publish_pair must not assume a format -- it publishes whatever
+        # finalize_pair actually produced (e.g. .webp), not a hardcoded .jpg.
+        webp_base = Path(self.tmp.name) / "staged_base.webp"
+        webp_variant = Path(self.tmp.name) / "staged_variant.webp"
+        webp_base.write_bytes(b"base-bytes")
+        webp_variant.write_bytes(b"variant-bytes")
+        pair = FinalizedPair(
+            scene_brief_id="scene-2",
+            base_path=str(webp_base),
+            variant_path=str(webp_variant),
+            dimensions=(1200, 900),
+            aspect_ratio="4:3",
+            manifest_id="scene-2",
+        )
+
+        entry = publish_pair(pair, {"title": "Scene Two"}, self.levels_dir, self.manifest_path)
+
+        self.assertTrue(entry["baseImage"].endswith(".webp"))
+        self.assertTrue(entry["variantImage"].endswith(".webp"))
+        self.assertTrue((self.levels_dir / Path(entry["baseImage"]).name).exists())
 
     def test_failed_manifest_replace_rolls_back_new_files(self):
         def failing_replace(src, dst):

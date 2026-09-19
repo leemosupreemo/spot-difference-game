@@ -56,8 +56,10 @@ def publish_pair(finalized_pair, manifest_entry: dict, levels_dir, manifest_path
     levels_dir.mkdir(parents=True, exist_ok=True)
 
     scene_id = finalized_pair.manifest_id
-    base_filename = f"{scene_id}_{_content_digest(finalized_pair.base_path)}_base.jpg"
-    variant_filename = f"{scene_id}_{_content_digest(finalized_pair.variant_path)}_variant.jpg"
+    base_ext = Path(finalized_pair.base_path).suffix
+    variant_ext = Path(finalized_pair.variant_path).suffix
+    base_filename = f"{scene_id}_{_content_digest(finalized_pair.base_path)}_base{base_ext}"
+    variant_filename = f"{scene_id}_{_content_digest(finalized_pair.variant_path)}_variant{variant_ext}"
     base_dest = levels_dir / base_filename
     variant_dest = levels_dir / variant_filename
 

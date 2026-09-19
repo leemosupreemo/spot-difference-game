@@ -102,8 +102,9 @@ Options (all optional):
    rejected with the pipeline's own reason (e.g. `NoStructuralCandidate`) and
    nothing is published.
 4. **Finalization** (`image_pair_finalizer.py`) — base and variant are
-   resized together to the canonical production size (1200x900, JPEG
-   quality 95, 4:4:4 chroma), and the declared difference region is
+   resized together to the canonical production size (1200x900, WebP
+   quality 85 -- supported in WKWebView since iOS 14, well within this app's
+   iOS 15 floor, unlike AVIF which needs iOS 16), and the declared difference region is
    re-verified to survive downsampling at both production size and a
    simulated 800x600 display size (`DifferenceLostAfterDownsample` if not),
    with every pixel outside that region required to stay aligned between

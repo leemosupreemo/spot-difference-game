@@ -24,7 +24,7 @@ MIN_DETECTABLE_REGION_DELTA = 4.0
 # Mean per-channel intensity delta (0-255 scale) tolerated everywhere outside
 # the declared difference region. Resizing both images with the identical
 # transform should leave this at essentially zero; a small allowance covers
-# JPEG re-encoding and resampling rounding.
+# lossy re-encoding and resampling rounding.
 MAX_OUTSIDE_REGION_DELTA = 1.5
 
 # Padding (in native-resolution pixels) added around the declared bbox before
@@ -128,10 +128,15 @@ def finalize_pair(base_path, variant_path, ground_truth, output_dir, scene_id, p
 
     output_dir_path = Path(output_dir)
     output_dir_path.mkdir(parents=True, exist_ok=True)
-    base_out = output_dir_path / f"{scene_id}_base.jpg"
-    variant_out = output_dir_path / f"{scene_id}_variant.jpg"
-    base_production.save(base_out, format="JPEG", quality=95, subsampling=0)
-    variant_production.save(variant_out, format="JPEG", quality=95, subsampling=0)
+    base_out = output_dir_path / f"{scene_id}_base.webp"
+    variant_out = output_dir_path / f"{scene_id}_variant.webp"
+    # WebP at quality 85 is comfortably smaller than the prior JPEG 95 output
+    # at equivalent-or-better visual quality, and has been supported in
+    # WKWebView (and therefore this app's minimum iOS 15 target) for years --
+    # unlike AVIF, which only decodes starting iOS 16. method=6 spends more
+    # encode time for better compression, fine for an infrequent manual publish.
+    base_production.save(base_out, format="WEBP", quality=85, method=6)
+    variant_production.save(variant_out, format="WEBP", quality=85, method=6)
 
     return FinalizedPair(
         scene_brief_id=scene_id,
