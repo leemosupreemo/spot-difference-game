@@ -577,7 +577,7 @@ class TestPipelineRun(PipelineTestCase):
     def _providers(self):
         return {"google": CountingFakeProvider(), "openai": CountingFakeProvider()}
 
-    def test_progress_callback_receives_an_event_per_candidate_and_on_selection(self):
+    def test_progress_callback_receives_a_done_event_per_candidate_and_on_selection(self):
         providers = self._providers()
         evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
         events = []
@@ -585,13 +585,14 @@ class TestPipelineRun(PipelineTestCase):
 
         pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=4))
 
-        self.assertGreaterEqual(len(events), 2)  # at least google + openai candidate events
-        for event in events:
+        done_events = [e for e in events if e["stage"] == "done"]
+        self.assertGreaterEqual(len(done_events), 2)  # at least google + openai candidate events
+        for event in done_events:
             self.assertIn("generated_image_count", event)
             self.assertIn("accepted_count", event)
             self.assertIn("current_brief", event)
             self.assertIn("rejection_code", event)
-        self.assertTrue(any(event["accepted"] and event["current_provider"] is None for event in events))
+        self.assertTrue(any(event["accepted"] and event["current_provider"] is None for event in done_events))
 
     def test_progress_callback_reports_rejection_code_for_a_rejected_candidate(self):
         providers = self._providers()
@@ -601,7 +602,28 @@ class TestPipelineRun(PipelineTestCase):
 
         pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=4))
 
-        self.assertTrue(any(event["rejection_code"] == "PhotorealismReject" for event in events))
+        done_events = [e for e in events if e["stage"] == "done"]
+        self.assertTrue(any(e["rejection_code"] == "PhotorealismReject" for e in done_events))
+
+    def test_progress_callback_emits_intermediate_stages_before_the_final_verdict(self):
+        # These are the events that matter most for live feedback: they fire
+        # before/during the slow provider and critic calls, not just after.
+        providers = self._providers()
+        evaluator = ScriptedEvaluator(lambda c, b, h: accept(c))
+        events = []
+        pipeline = self.make_pipeline(providers, evaluator, [PRIMARY_BRIEF], progress_callback=events.append)
+
+        pipeline.run(RunConfig(count=1, provider_mode="mixed", max_images=4))
+
+        stages_seen = [e["stage"] for e in events]
+        self.assertIn("generating", stages_seen)
+        self.assertIn("normalizing", stages_seen)
+        self.assertIn("evaluating", stages_seen)
+        # Each candidate's stages must be emitted in order, before its "done".
+        first_done_index = stages_seen.index("done")
+        self.assertIn("generating", stages_seen[:first_done_index])
+        self.assertIn("normalizing", stages_seen[:first_done_index])
+        self.assertIn("evaluating", stages_seen[:first_done_index])
 
     def test_mixed_mode_generates_one_candidate_from_each_provider_first(self):
         providers = self._providers()

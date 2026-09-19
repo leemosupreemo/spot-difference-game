@@ -102,6 +102,19 @@ class BaseGenerationPipeline:
         self._provider_models = provider_models or dict(_DEFAULT_PROVIDER_MODELS)
         self._progress_callback = progress_callback or (lambda event: None)
 
+    def _emit_stage(self, *, brief_id, provider_name, stage) -> None:
+        """A lightweight, in-progress checkpoint (no final verdict yet) --
+        emitted before/during the slow, real-network parts of one candidate's
+        lifecycle so a caller can show something is actually happening during
+        a long provider or critic call, not just after it finishes."""
+        self._progress_callback(
+            {
+                "stage": stage,
+                "current_brief": brief_id,
+                "current_provider": provider_name,
+            }
+        )
+
     def _emit_progress(self, *, budget, accepted_count, brief_id, provider_name, result) -> None:
         rejection_code = None
         accepted = False
@@ -111,6 +124,7 @@ class BaseGenerationPipeline:
             rejection_code = evaluation.rejection_code
         self._progress_callback(
             {
+                "stage": "done",
                 "generated_image_count": budget.used,
                 "accepted_count": accepted_count,
                 "current_brief": brief_id,
@@ -208,6 +222,8 @@ class BaseGenerationPipeline:
             return _BUDGET_EXHAUSTED
         budget.consume()
 
+        self._emit_stage(brief_id=brief.id, provider_name=provider_name, stage="generating")
+
         try:
             images = self._call_with_retry(lambda: self._providers[provider_name].generate(request))
         except ProviderCallError as exc:
@@ -228,6 +244,8 @@ class BaseGenerationPipeline:
             "generated",
             {"scene_brief_id": brief.id, "provider": provider_name, "model": image.model},
         )
+
+        self._emit_stage(brief_id=brief.id, provider_name=provider_name, stage="normalizing")
 
         output_path = str(self._candidates_dir(store) / f"{candidate_id}.png")
         try:
@@ -254,6 +272,8 @@ class BaseGenerationPipeline:
                 "master_path": normalized.master_path,
             },
         )
+
+        self._emit_stage(brief_id=brief.id, provider_name=provider_name, stage="evaluating")
 
         evaluation = self._evaluator.evaluate(normalized, brief, recent_history)
         ledger_state = (
@@ -473,6 +493,7 @@ class BaseGenerationPipeline:
                 remaining_by_family[family] -= 1
                 self._progress_callback(
                     {
+                        "stage": "done",
                         "generated_image_count": budget.used,
                         "accepted_count": len(accepted),
                         "current_brief": brief.id,

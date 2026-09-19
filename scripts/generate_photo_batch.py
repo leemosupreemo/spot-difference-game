@@ -19,7 +19,6 @@ from typing import Optional
 
 import typer
 from rich.console import Console
-from rich.live import Live
 from rich.table import Table
 
 from base_auth import CredentialResolver, remove_provider_key, run_google_adc_login, store_provider_key
@@ -222,46 +221,49 @@ def _build_pipeline_for_execution(config: RunConfig, progress_callback=None) -> 
     return pipeline, effective_config
 
 
-def _render_progress_table(state: dict) -> Table:
-    table = Table(title="Generation progress")
-    table.add_column("Metric")
-    table.add_column("Value")
-    table.add_row("Images generated", f"{state['generated']} / {state['max_images']}")
-    table.add_row("Accepted pairs", f"{state['accepted']} / {state['count']}")
-    table.add_row("Current brief", state["current_brief"])
-    table.add_row("Current provider", state["current_provider"])
-    table.add_row("Last rejection", state["rejection_code"])
-    return table
+_STAGE_LABELS = {
+    "generating": "Generating",
+    "normalizing": "Normalizing",
+    "evaluating": "Evaluating",
+}
 
 
 def _execute_run(run_config: RunConfig, run_id: Optional[str] = None, resume: bool = False):
-    """Shared execution path for `generate` and `resume`, with a live Rich
-    progress display driven by the pipeline's progress_callback."""
-    state = {
-        "generated": 0,
-        "accepted": 0,
-        "max_images": run_config.max_images,
-        "count": run_config.count,
-        "current_brief": "-",
-        "current_provider": "-",
-        "rejection_code": "-",
-    }
+    """Shared execution path for `generate` and `resume`. Prints one plain,
+    persistent log line per stage of every candidate as it happens -- not a
+    live-updating dashboard -- so progress is visible as real scrollback even
+    on terminals that don't render Rich's box-drawing UI cleanly, and so a
+    long provider or critic call never looks like the run has hung."""
+    state = {"generated": 0, "accepted": 0}
 
     def on_progress(event: dict) -> None:
-        state["generated"] = event["generated_image_count"]
-        state["accepted"] = event["accepted_count"]
-        state["current_brief"] = event["current_brief"] or "-"
-        state["current_provider"] = event["current_provider"] or "-"
-        state["rejection_code"] = event["rejection_code"] or ("accepted" if event["accepted"] else "-")
-        live.update(_render_progress_table(state))
+        stage = event.get("stage")
+        brief = event.get("current_brief") or "-"
+        provider = event.get("current_provider") or "-"
+
+        if stage in _STAGE_LABELS:
+            console.print(f"  [cyan]{_STAGE_LABELS[stage]}[/cyan] -- {brief} via {provider}...")
+            return
+
+        # stage == "done": a candidate reached a final verdict.
+        state["generated"] = event.get("generated_image_count", state["generated"])
+        state["accepted"] = event.get("accepted_count", state["accepted"])
+        progress_note = f"[dim]({state['generated']} images generated, {state['accepted']} pairs accepted)[/dim]"
+        if event.get("accepted"):
+            console.print(f"  [green]Accepted[/green] -- {brief} via {provider} {progress_note}")
+        else:
+            code = event.get("rejection_code") or "unknown"
+            console.print(f"  [red]Rejected[/red] ({code}) -- {brief} via {provider} {progress_note}")
 
     pipeline, effective_config = _build_pipeline_for_execution(run_config, progress_callback=on_progress)
-    state["max_images"] = effective_config.max_images
-    state["count"] = effective_config.count
+    console.print(
+        f"\n[bold]Starting generation[/bold] -- target {effective_config.count} pairs, "
+        f"image ceiling {effective_config.max_images}\n"
+    )
 
-    with Live(_render_progress_table(state), console=console, refresh_per_second=4):
-        result = pipeline.run(effective_config, run_id=run_id, resume=resume)
+    result = pipeline.run(effective_config, run_id=run_id, resume=resume)
 
+    console.print()
     _print_run_result(result)
     return result
 
