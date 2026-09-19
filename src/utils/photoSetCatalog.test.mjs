@@ -70,15 +70,25 @@ test('retained manifest entries have stable five-entry set metadata', () => {
     'utf8'
   ));
 
-  assert.equal(manifest.length, 145);
+  assert.equal(manifest.length, 155);
   assert.equal(new Set(manifest.map(entry => entry.id)).size, manifest.length);
   assert.deepEqual(
-    manifest.slice(0, 18).map(({ id, setId, sequence }) => ({ id, setId, sequence })),
+    manifest.slice(0, 28).map(({ id, setId, sequence }) => ({ id, setId, sequence })),
     [
       // Manually-ingested single levels (and their review variants) are
       // published to the front of the manifest (base_pair_publisher.py
       // inserts at index 0) and have no setId/sequence -- they aren't part
       // of a photo set.
+      { id: 'optical_fiber_constellation_1789824262569_v4', setId: undefined, sequence: undefined },
+      { id: 'optical_fiber_constellation_1789824262569_v3', setId: undefined, sequence: undefined },
+      { id: 'optical_fiber_constellation_1789824262569_v2', setId: undefined, sequence: undefined },
+      { id: 'optical_fiber_constellation_1789824262569_v1', setId: undefined, sequence: undefined },
+      { id: 'gemstone_velvet_starfield_1789824187839_v5', setId: undefined, sequence: undefined },
+      { id: 'gemstone_velvet_starfield_1789824187839_v4', setId: undefined, sequence: undefined },
+      { id: 'gemstone_velvet_starfield_1789824187839_v3', setId: undefined, sequence: undefined },
+      { id: 'gemstone_velvet_starfield_1789824187839_v2', setId: undefined, sequence: undefined },
+      { id: 'gemstone_velvet_starfield_1789824187839_v1', setId: undefined, sequence: undefined },
+      { id: 'deep_field_galaxies_1789824198055_v1', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426_v5', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426_v4', setId: undefined, sequence: undefined },
       { id: 'pins_on_carpet_1789795312426_v3', setId: undefined, sequence: undefined },
@@ -101,7 +111,7 @@ test('retained manifest entries have stable five-entry set metadata', () => {
   );
 
   const catalog = getPhotoSetCatalog(manifest);
-  assert.equal(catalog.unassigned.length, 15);
+  assert.equal(catalog.unassigned.length, 25);
   assert.equal(catalog.sets.length, 26);
   assert.equal(getCompletePhotoSets(manifest).length, 26);
 });

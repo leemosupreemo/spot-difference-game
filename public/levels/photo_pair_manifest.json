@@ -1,5 +1,275 @@
 [
   {
+    "id": "optical_fiber_constellation_1789824262569_v4",
+    "title": "Optical Fiber Constellation 1789824262569",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 43.0,
+        "y": 60.2,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/optical_fiber_constellation_1789824262569_v4_cfdec592b3ce_base.webp",
+    "variantImage": "levels/optical_fiber_constellation_1789824262569_v4_43f1b68dfc98_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "optical_fiber_constellation_1789824262569_v3",
+    "title": "Optical Fiber Constellation 1789824262569",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 31.2,
+        "y": 51.9,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/optical_fiber_constellation_1789824262569_v3_cfdec592b3ce_base.webp",
+    "variantImage": "levels/optical_fiber_constellation_1789824262569_v3_91d8e216e327_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "optical_fiber_constellation_1789824262569_v2",
+    "title": "Optical Fiber Constellation 1789824262569",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 22.7,
+        "y": 60.2,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/optical_fiber_constellation_1789824262569_v2_cfdec592b3ce_base.webp",
+    "variantImage": "levels/optical_fiber_constellation_1789824262569_v2_0afb08025078_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "optical_fiber_constellation_1789824262569_v1",
+    "title": "Optical Fiber Constellation 1789824262569",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 38.0,
+        "y": 68.4,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/optical_fiber_constellation_1789824262569_v1_cfdec592b3ce_base.webp",
+    "variantImage": "levels/optical_fiber_constellation_1789824262569_v1_22214b5bf92c_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "gemstone_velvet_starfield_1789824187839_v5",
+    "title": "Gemstone Velvet Starfield 1789824187839",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "remove",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 19.7,
+        "y": 53.8,
+        "radius": 4.9,
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
+      }
+    ],
+    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v5_a5657f6f7b85_base.webp",
+    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v5_b8c7cfaf1ea4_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "gemstone_velvet_starfield_1789824187839_v4",
+    "title": "Gemstone Velvet Starfield 1789824187839",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 60.8,
+        "y": 21.2,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v4_a5657f6f7b85_base.webp",
+    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v4_2baa9546df45_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "gemstone_velvet_starfield_1789824187839_v3",
+    "title": "Gemstone Velvet Starfield 1789824187839",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 32.7,
+        "y": 90.7,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v3_a5657f6f7b85_base.webp",
+    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v3_fc65b0861b6b_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "gemstone_velvet_starfield_1789824187839_v2",
+    "title": "Gemstone Velvet Starfield 1789824187839",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 22.0,
+        "y": 86.7,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v2_a5657f6f7b85_base.webp",
+    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v2_b5314cd95c94_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "gemstone_velvet_starfield_1789824187839_v1",
+    "title": "Gemstone Velvet Starfield 1789824187839",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 27.4,
+        "y": 10.4,
+        "radius": 4.7,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v1_a5657f6f7b85_base.webp",
+    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v1_25e64b6de2aa_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "deep_field_galaxies_1789824198055_v1",
+    "title": "Deep Field Galaxies 1789824198055",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 94.2,
+        "y": 48.8,
+        "radius": 5.7,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/deep_field_galaxies_1789824198055_v1_26ba7152a12c_base.webp",
+    "variantImage": "levels/deep_field_galaxies_1789824198055_v1_4e6be38d95c9_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
     "id": "pins_on_carpet_1789795312426_v5",
     "title": "Pins On Carpet 1789795312426",
     "category": "Photography",
