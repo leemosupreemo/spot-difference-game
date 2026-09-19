@@ -461,6 +461,53 @@ class TestStructuralOrchestration(unittest.TestCase):
         self.assertEqual(log["passing_candidate_count"], 2)
         self.assertGreater(log["selected_candidate_score"], 0.7)
 
+    def test_structural_mode_exposes_every_passing_candidate_ranked_best_first(self):
+        # Both candidates the run explores pass quality gates; the manifest
+        # only ever publishes the single winner, but log["ranked_candidates"]
+        # must still carry every one of them (best first) for a caller that
+        # wants to present several distinct edits of the same base image for
+        # human review, not just auto-publish the top-ranked pick.
+        scene = {
+            "id": "structural_ranked_candidates",
+            "title": "Ranked structural candidates",
+            "image_path": self.base_path,
+            "preferred_op": "add",
+        }
+
+        with (
+            patch(
+                "unified_operation_pipeline.SceneAffordanceRouter.evaluate_and_route_canvas",
+                return_value=self.router_result,
+            ),
+            patch(
+                "unified_operation_pipeline.AddTargetSelector.find_best_add_pair",
+                return_value=(self.pairs[0], "two pairs", self.pairs),
+            ),
+            patch(
+                "unified_operation_pipeline.AddTargetSelector.execute_add_and_qa",
+                side_effect=self._execute_add,
+            ),
+            patch(
+                "unified_operation_pipeline.PeerPaletteColorEngine.shift_color_peer_relative",
+                side_effect=AssertionError("structural mode invoked recolor"),
+            ),
+        ):
+            success, entry, log = generate_single_scene_difference(
+                scene,
+                output_dir=self.temp_dir.name,
+                policy=STRUCTURAL_ONLY_POLICY,
+            )
+
+        self.assertTrue(success, log)
+        ranked = log["ranked_candidates"]
+        self.assertEqual(len(ranked), 2)
+        # Best first, and it must be the same candidate that got published.
+        self.assertEqual(ranked[0]["final_score"], log["selected_candidate_score"])
+        self.assertGreaterEqual(ranked[0]["final_score"], ranked[1]["final_score"])
+        self.assertEqual(ranked[0]["ground_truth"]["x"], entry["diffs"][0]["x"])
+        # The two candidates are genuinely distinct edits (different slot).
+        self.assertNotEqual(ranked[0]["ground_truth"]["x"], ranked[1]["ground_truth"]["x"])
+
     def test_mixed_mode_preserves_first_passing_candidate(self):
         scene = {
             "id": "mixed_first_pass",

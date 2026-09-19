@@ -32,8 +32,8 @@ from sam_segment_recolor import PeerPaletteColorEngine, AdaptiveSpotabilityLoop
 from structural_mask_refiner import StructuralMaskRefiner
 from structural_quality import (
     StructuralNaturalnessCritic,
+    rank_structural_candidates,
     score_structural_candidate,
-    select_candidate,
 )
 from generation_policy import (
     MIXED_GENERATION_POLICY,
@@ -625,13 +625,20 @@ def generate_single_scene_difference(
                 break
 
     if collect_structural and structural_candidates:
-        selected = select_candidate(structural_candidates, policy.selection_mode)
+        # collect_structural is only ever true for selection_mode "best_score".
+        ranked = rank_structural_candidates(structural_candidates)
+        selected = ranked[0]
         variant_bgr = selected["variant"]
         ground_truth = selected["ground_truth"]
         chosen_op = selected["operation"]
         op_reason = selected["qa_summary"]
         op_success = True
         log_entry["selected_candidate_score"] = selected["final_score"]
+        # Every other candidate the run already computed and quality-passed,
+        # ranked best first -- available for callers that want more than one
+        # distinct edit of the same base image (e.g. presenting several for
+        # human review instead of only auto-publishing the single winner).
+        log_entry["ranked_candidates"] = ranked
 
     log_entry["operation_selected"] = chosen_op
 

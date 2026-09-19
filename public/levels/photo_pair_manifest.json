@@ -1,5 +1,275 @@
 [
   {
+    "id": "leaves_on_branch_1789795322252_v5",
+    "title": "Leaves On Branch 1789795322252",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 18.0,
+        "y": 92.2,
+        "radius": 5.1,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/leaves_on_branch_1789795322252_v5_42bc7638db82_base.webp",
+    "variantImage": "levels/leaves_on_branch_1789795322252_v5_9e3f2d9a6b9c_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "leaves_on_branch_1789795322252_v4",
+    "title": "Leaves On Branch 1789795322252",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 2.7,
+        "y": 79.3,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/leaves_on_branch_1789795322252_v4_42bc7638db82_base.webp",
+    "variantImage": "levels/leaves_on_branch_1789795322252_v4_67f025d23020_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "leaves_on_branch_1789795322252_v3",
+    "title": "Leaves On Branch 1789795322252",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33.0,
+        "y": 59.0,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/leaves_on_branch_1789795322252_v3_42bc7638db82_base.webp",
+    "variantImage": "levels/leaves_on_branch_1789795322252_v3_d953f90e8e9e_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "leaves_on_branch_1789795322252_v2",
+    "title": "Leaves On Branch 1789795322252",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 85.3,
+        "y": 52.9,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/leaves_on_branch_1789795322252_v2_42bc7638db82_base.webp",
+    "variantImage": "levels/leaves_on_branch_1789795322252_v2_6c26fd89b6a8_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "leaves_on_branch_1789795322252_v1",
+    "title": "Leaves On Branch 1789795322252",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 33.1,
+        "y": 60.9,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/leaves_on_branch_1789795322252_v1_42bc7638db82_base.webp",
+    "variantImage": "levels/leaves_on_branch_1789795322252_v1_628ddb102ddc_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "pins_on_carpet_1789795312426_v5",
+    "title": "Pins On Carpet 1789795312426",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 62.9,
+        "y": 9.8,
+        "radius": 5.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/pins_on_carpet_1789795312426_v5_682d14231fa3_base.webp",
+    "variantImage": "levels/pins_on_carpet_1789795312426_v5_2299a2bc8b1c_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "pins_on_carpet_1789795312426_v4",
+    "title": "Pins On Carpet 1789795312426",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 69.1,
+        "y": 9.8,
+        "radius": 5.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/pins_on_carpet_1789795312426_v4_682d14231fa3_base.webp",
+    "variantImage": "levels/pins_on_carpet_1789795312426_v4_dff522a6fd93_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "pins_on_carpet_1789795312426_v3",
+    "title": "Pins On Carpet 1789795312426",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 67.1,
+        "y": 9.8,
+        "radius": 5.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/pins_on_carpet_1789795312426_v3_682d14231fa3_base.webp",
+    "variantImage": "levels/pins_on_carpet_1789795312426_v3_5876851fea69_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "pins_on_carpet_1789795312426_v2",
+    "title": "Pins On Carpet 1789795312426",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 65.0,
+        "y": 9.8,
+        "radius": 5.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/pins_on_carpet_1789795312426_v2_682d14231fa3_base.webp",
+    "variantImage": "levels/pins_on_carpet_1789795312426_v2_3d5441e00776_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "pins_on_carpet_1789795312426_v1",
+    "title": "Pins On Carpet 1789795312426",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 75.4,
+        "y": 12.5,
+        "radius": 5.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/pins_on_carpet_1789795312426_v1_682d14231fa3_base.webp",
+    "variantImage": "levels/pins_on_carpet_1789795312426_v1_2bb004a3f0ac_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
     "id": "pins_on_carpet_1789795312426",
     "title": "Pins on Carpet",
     "category": "Photography",

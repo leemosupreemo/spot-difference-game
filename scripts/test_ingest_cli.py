@@ -12,6 +12,7 @@ from generate_photo_batch import (
     app,
     existing_manifest_ids,
     ingest_image,
+    ingest_image_variants,
     resolve_image_paths,
     slugify,
     unique_id,
@@ -133,6 +134,49 @@ class TestIngestImage(unittest.TestCase):
         mocked_publish.assert_called_once()
 
 
+class TestIngestImageVariants(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.source = Path(self.tmp.name) / "source.png"
+        _make_source(self.source)
+        self.staging_dir = Path(self.tmp.name) / "staging"
+        self.staging_dir.mkdir()
+
+    def test_rejects_missing_file(self):
+        with self.assertRaises(ValueError):
+            ingest_image_variants(str(Path(self.tmp.name) / "missing.png"), "scene-1", 5, staging_dir=self.staging_dir)
+
+    def test_structural_rejection_is_surfaced(self):
+        with patch("generate_photo_batch.run_local_gates", return_value=(True, (), {})), patch(
+            "generate_photo_batch.generate_structural_pair_variants",
+            return_value=([], {"rejection_reason": "no viable operation"}),
+        ):
+            with self.assertRaises(ValueError) as ctx:
+                ingest_image_variants(str(self.source), "scene-1", 5, staging_dir=self.staging_dir)
+            self.assertIn("no viable operation", str(ctx.exception))
+
+    def test_publishes_every_returned_variant(self):
+        finalized = FinalizedPair(
+            scene_brief_id="scene-1",
+            base_path=str(self.source),
+            variant_path=str(self.source),
+            dimensions=(1200, 900),
+            aspect_ratio="4:3",
+            manifest_id="scene-1_v1",
+        )
+        variants = [(finalized, {"id": f"scene-1_v{n}"}) for n in (1, 2, 3)]
+        published_entries = [{"id": f"scene-1_v{n}", "baseImage": "levels/a.jpg"} for n in (1, 2, 3)]
+
+        with patch("generate_photo_batch.run_local_gates", return_value=(True, (), {})), patch(
+            "generate_photo_batch.generate_structural_pair_variants", return_value=(variants, {})
+        ), patch("generate_photo_batch.publish_pair", side_effect=published_entries) as mocked_publish:
+            result = ingest_image_variants(str(self.source), "scene-1", 3, staging_dir=self.staging_dir)
+
+        self.assertEqual(mocked_publish.call_count, 3)
+        self.assertEqual([entry["id"] for entry in result], ["scene-1_v1", "scene-1_v2", "scene-1_v3"])
+
+
 class TestIngestCommand(unittest.TestCase):
     def setUp(self):
         self.runner = CliRunner()
@@ -224,6 +268,60 @@ class TestIngestCommand(unittest.TestCase):
         self.assertEqual(result.exit_code, 0, result.stdout)
         self.assertIn("cozy_workbench", result.stdout)
         self.assertIn("cozy_workbench_2", result.stdout)
+
+    def test_variants_flag_rejected_for_multiple_images(self):
+        source_a = self.tmp_path / "a.jpg"
+        source_b = self.tmp_path / "b.jpg"
+        _make_source(source_a)
+        _make_source(source_b)
+
+        result = self.runner.invoke(app, [str(source_a), str(source_b), "--variants", "3"])
+
+        self.assertNotEqual(result.exit_code, 0)
+        self.assertIn("only apply to a single image", result.stdout)
+
+    def test_variants_below_one_is_rejected(self):
+        source = self.tmp_path / "source.jpg"
+        _make_source(source)
+
+        result = self.runner.invoke(app, [str(source), "--variants", "0"])
+
+        self.assertNotEqual(result.exit_code, 0)
+        self.assertIn("must be at least 1", result.stdout)
+
+    def test_variants_flag_publishes_each_variant_as_its_own_row(self):
+        source = self.tmp_path / "source.jpg"
+        _make_source(source)
+        finalized = FinalizedPair(
+            scene_brief_id="ignored",
+            base_path=str(source),
+            variant_path=str(source),
+            dimensions=(1200, 900),
+            aspect_ratio="4:3",
+            manifest_id="ignored",
+        )
+        variants = [(finalized, {"id": f"source_v{n}"}) for n in (1, 2)]
+        published_entries = [{"id": f"source_v{n}", "baseImage": f"levels/source_v{n}_base.jpg"} for n in (1, 2)]
+
+        with patch("generate_photo_batch.run_local_gates", return_value=(True, (), {})), patch(
+            "generate_photo_batch.generate_structural_pair_variants", return_value=(variants, {})
+        ), patch("generate_photo_batch.publish_pair", side_effect=published_entries):
+            result = self.runner.invoke(
+                app,
+                [
+                    str(source),
+                    "--variants",
+                    "2",
+                    "--manifest",
+                    str(self.manifest_path),
+                    "--levels-dir",
+                    str(self.levels_dir),
+                ],
+            )
+
+        self.assertEqual(result.exit_code, 0, result.stdout)
+        self.assertIn("source_v1", result.stdout)
+        self.assertIn("source_v2", result.stdout)
 
     def test_one_rejection_does_not_stop_the_rest_of_a_batch(self):
         good_source = self.tmp_path / "good.jpg"

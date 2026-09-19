@@ -130,3 +130,89 @@ def generate_structural_pair(
     )
     log_entry["manifest_entry"] = manifest_entry
     return finalized, log_entry
+
+
+def generate_structural_pair_variants(
+    candidate, scene_spec: dict, staging_dir, count, policy=DEFAULT_BASE_GENERATION_POLICY, difficulty="Medium"
+):
+    """Like generate_structural_pair, but returns up to `count` distinct
+    structural edits of the same base image instead of only the single
+    best-scoring one. The pipeline already explores many candidate edits
+    (different donor objects, different placement positions) internally and
+    discards every one but the winner; this exposes the rest, ranked best
+    first, via log_entry["ranked_candidates"] -- useful for presenting
+    several real options for human review instead of auto-publishing
+    whichever one happened to score highest.
+
+    Each variant gets its own scene id (f"{base_id}_v{n}", 1-indexed) so
+    publishing them never collides with each other or with a pair already
+    published under the bare base id.
+
+    Returns (variants, log_entry) where `variants` is a list of
+    (FinalizedPair, manifest_entry) tuples, best first -- possibly shorter
+    than `count` if the pipeline found fewer distinct passing candidates, or
+    empty if it found none (log_entry then carries the rejection reason,
+    matching generate_structural_pair's failure shape).
+    """
+    import cv2
+    from PIL import Image
+
+    from generation_policy import STRUCTURAL_ONLY_POLICY
+    from unified_operation_pipeline import generate_single_scene_difference
+
+    staging_dir = Path(staging_dir)
+    raw_dir = staging_dir / "structural"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+
+    base_id = scene_spec.get("id") or candidate.scene_brief_id
+    full_spec = dict(scene_spec)
+    full_spec["id"] = base_id
+    full_spec["image_path"] = candidate.master_path
+
+    success, _manifest_entry, log_entry = generate_single_scene_difference(
+        full_spec,
+        output_dir=str(raw_dir),
+        difficulty=difficulty,
+        policy=STRUCTURAL_ONLY_POLICY,
+    )
+    if not success:
+        return [], log_entry
+
+    ranked = log_entry.get("ranked_candidates") or []
+    finalized_dir = staging_dir / "finalized"
+    variants = []
+
+    for index, item in enumerate(ranked[:count], start=1):
+        variant_id = f"{base_id}_v{index}"
+        operation = item["operation"]
+        ground_truth = item["ground_truth"]
+
+        variant_path = raw_dir / f"{variant_id}_variant.jpg"
+        variant_rgb = cv2.cvtColor(item["variant"], cv2.COLOR_BGR2RGB)
+        Image.fromarray(variant_rgb).save(variant_path, "JPEG", quality=100, subsampling=0)
+
+        finalized = finalize_pair(
+            candidate.master_path, str(variant_path), ground_truth, str(finalized_dir), variant_id, policy
+        )
+
+        manifest_entry = {
+            "id": variant_id,
+            "title": full_spec.get("title", f"Level {variant_id}"),
+            "category": "Photography",
+            "pack": "Find the Sniper",
+            "packId": "find_the_sniper",
+            "difficulty": difficulty,
+            "operation": operation,
+            "diffs": [{
+                "id": 1,
+                "x": ground_truth["x"],
+                "y": ground_truth["y"],
+                "radius": ground_truth["radius"],
+                "description": f"Single {operation} difference",
+                "hint": f"Look closely for a {operation} difference",
+                "operation": operation,
+            }],
+        }
+        variants.append((finalized, manifest_entry))
+
+    return variants, log_entry

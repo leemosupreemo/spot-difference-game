@@ -28,7 +28,7 @@ from rich.table import Table
 from base_candidate_evaluator import run_local_gates
 from base_generation_policy import DEFAULT_BASE_GENERATION_POLICY
 from base_image_normalizer import normalize_local_image
-from base_pair_publisher import generate_structural_pair, publish_pair
+from base_pair_publisher import generate_structural_pair, generate_structural_pair_variants, publish_pair
 
 DEFAULT_LEVELS_DIR = "public/levels"
 DEFAULT_MANIFEST_PATH = "public/levels/photo_pair_manifest.json"
@@ -117,6 +117,47 @@ def ingest_image(
     return publish_pair(finalized, manifest_entry, levels_dir, manifest_path)
 
 
+def ingest_image_variants(
+    image_path: str,
+    scene_id: str,
+    count: int,
+    title: Optional[str] = None,
+    difficulty: str = "Medium",
+    levels_dir: str = DEFAULT_LEVELS_DIR,
+    manifest_path: str = DEFAULT_MANIFEST_PATH,
+    staging_dir=None,
+) -> list:
+    """Like ingest_image, but publishes up to `count` distinct structural
+    edits of the same source photo -- each under its own id (f"{scene_id}_v{n}")
+    -- instead of only one, so several real options can be compared side by
+    side in debug review. Raises ValueError (same cases as ingest_image) if
+    no variant could be produced at all. Returns the list of published
+    manifest entries, best-ranked first; possibly fewer than `count` if the
+    structural pipeline found fewer distinct passing candidates."""
+    source = Path(image_path)
+    if not source.exists():
+        raise ValueError(f"Not found: {source}")
+    if difficulty not in VALID_DIFFICULTIES:
+        raise ValueError(f"difficulty must be one of {VALID_DIFFICULTIES}, got {difficulty!r}")
+
+    policy = DEFAULT_BASE_GENERATION_POLICY
+    master_path = Path(staging_dir) / "master.png"
+    candidate = normalize_local_image(source.read_bytes(), scene_id, str(master_path), policy)
+
+    passed, failures, _ = run_local_gates(str(master_path), policy)
+    if not passed:
+        raise ValueError("Rejected by local quality gates:\n" + "\n".join(f"  - {f}" for f in failures))
+
+    scene_spec = {"id": scene_id, "title": title or scene_id.replace("_", " ").title()}
+    variants, log_entry = generate_structural_pair_variants(
+        candidate, scene_spec, staging_dir, count=count, policy=policy, difficulty=difficulty
+    )
+    if not variants:
+        raise ValueError(f"Structural pipeline rejected the image: {log_entry.get('rejection_reason')}")
+
+    return [publish_pair(finalized, manifest_entry, levels_dir, manifest_path) for finalized, manifest_entry in variants]
+
+
 @app.command()
 def ingest(
     image_paths: List[str] = typer.Argument(
@@ -129,6 +170,12 @@ def ingest(
         None, "--title", help="Display title. Only valid with a single image; omit to auto-derive."
     ),
     difficulty: str = typer.Option("Medium", "--difficulty", help="Easy, Medium, or Hard."),
+    variants: int = typer.Option(
+        1,
+        "--variants",
+        help="Publish this many distinct structural edits of the same photo for review, "
+        "instead of just the single best-scoring one. Only valid with a single image.",
+    ),
     keep_staging: bool = typer.Option(
         False, "--keep-staging", help="Keep staging directories instead of deleting them."
     ),
@@ -136,19 +183,23 @@ def ingest(
     levels_dir: str = typer.Option(DEFAULT_LEVELS_DIR, "--levels-dir", help="Directory to publish images into."),
 ):
     """Normalize, gate, difference, and publish one or more manually-sourced
-    base images. Point it at a single file for full control (--id, --title),
-    or at several files / a whole folder for zero-flag batch import -- ids
-    are then derived from filenames and deduplicated against the manifest."""
+    base images. Point it at a single file for full control (--id, --title,
+    --variants), or at several files / a whole folder for zero-flag batch
+    import -- ids are then derived from filenames and deduplicated against
+    the manifest."""
     sources = resolve_image_paths(image_paths)
     if not sources:
         console.print("[red]No image files found.[/red]")
         raise typer.Exit(code=1)
 
-    if len(sources) > 1 and (scene_id or title):
+    if len(sources) > 1 and (scene_id or title or variants > 1):
         console.print(
-            "[red]--id/--title only apply to a single image. Omit them for batch ingest "
+            "[red]--id/--title/--variants only apply to a single image. Omit them for batch ingest "
             "(ids are derived from filenames) or pass exactly one image path.[/red]"
         )
+        raise typer.Exit(code=1)
+    if variants < 1:
+        console.print("[red]--variants must be at least 1.[/red]")
         raise typer.Exit(code=1)
 
     taken_ids = existing_manifest_ids(manifest)
@@ -164,16 +215,30 @@ def ingest(
 
         staging_dir = Path(tempfile.mkdtemp(prefix=f"ingest-{this_id}-"))
         try:
-            published = ingest_image(
-                str(source),
-                this_id,
-                title=this_title,
-                difficulty=difficulty,
-                levels_dir=levels_dir,
-                manifest_path=manifest,
-                staging_dir=staging_dir,
-            )
-            rows.append((source.name, this_id, "[green]Published[/green]", published["baseImage"]))
+            if variants > 1:
+                published_list = ingest_image_variants(
+                    str(source),
+                    this_id,
+                    variants,
+                    title=this_title,
+                    difficulty=difficulty,
+                    levels_dir=levels_dir,
+                    manifest_path=manifest,
+                    staging_dir=staging_dir,
+                )
+                for published in published_list:
+                    rows.append((source.name, published["id"], "[green]Published[/green]", published["baseImage"]))
+            else:
+                published = ingest_image(
+                    str(source),
+                    this_id,
+                    title=this_title,
+                    difficulty=difficulty,
+                    levels_dir=levels_dir,
+                    manifest_path=manifest,
+                    staging_dir=staging_dir,
+                )
+                rows.append((source.name, this_id, "[green]Published[/green]", published["baseImage"]))
         except ValueError as exc:
             rows.append((source.name, this_id, "[red]Rejected[/red]", str(exc).splitlines()[0]))
         finally:

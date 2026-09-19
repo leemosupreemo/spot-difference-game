@@ -9,7 +9,7 @@ from PIL import Image
 
 from base_generation_policy import BaseGenerationPolicy
 from base_generation_types import FinalizedPair, NormalizedCandidate
-from base_pair_publisher import generate_structural_pair, publish_pair
+from base_pair_publisher import generate_structural_pair, generate_structural_pair_variants, publish_pair
 from image_pair_finalizer import finalize_pair
 
 
@@ -253,6 +253,91 @@ class TestGenerateStructuralPair(unittest.TestCase):
             )
 
         self.assertEqual(seen["difficulty"], "Hard")
+
+
+class TestGenerateStructuralPairVariants(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.policy = BaseGenerationPolicy(master_size=(200, 150), production_size=(200, 150))
+        self.master_path = Path(self.tmp.name) / "master.png"
+        _save(self.master_path, np.full((150, 200, 3), 100, dtype=np.uint8))
+        self.candidate = NormalizedCandidate(
+            scene_brief_id="scene-1",
+            provider="manual",
+            model="manual-ingest",
+            request_id="scene-1",
+            master_path=str(self.master_path),
+            size=(200, 150),
+            normalization_crop_fraction=0.0,
+        )
+
+    def _ranked_candidate(self, region, operation="add"):
+        variant = np.full((150, 200, 3), 100, dtype=np.uint8)
+        y1, y2, x1, x2 = region
+        variant[y1:y2, x1:x2] = 200
+        return {
+            "operation": operation,
+            "variant": variant,
+            "ground_truth": {
+                "bbox": (x1, y1, x2, y2),
+                "x": round((x1 + x2) / 2 / 200 * 100, 1),
+                "y": round((y1 + y2) / 2 / 150 * 100, 1),
+                "radius": 5.0,
+            },
+            "final_score": 1.0,
+        }
+
+    def test_publishes_up_to_count_distinct_variants_with_own_ids(self):
+        ranked = [
+            self._ranked_candidate((50, 100, 20, 70)),
+            self._ranked_candidate((50, 100, 120, 170)),
+            self._ranked_candidate((10, 60, 20, 70), operation="remove"),
+        ]
+
+        def fake_generate(scene_spec, scheduler=None, output_dir="public/levels", difficulty="Medium", policy=None):
+            return True, {"id": scene_spec["id"]}, {"ranked_candidates": ranked}
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            variants, log_entry = generate_structural_pair_variants(
+                self.candidate, {"id": "scene-1", "title": "Scene One"}, self.tmp.name, count=2, policy=self.policy
+            )
+
+        self.assertEqual(len(variants), 2, "count=2 must cap the result even though 3 candidates passed")
+        ids = [entry["id"] for _finalized, entry in variants]
+        self.assertEqual(ids, ["scene-1_v1", "scene-1_v2"])
+        for finalized, entry in variants:
+            self.assertEqual(finalized.manifest_id, entry["id"])
+            self.assertTrue(Path(finalized.base_path).exists())
+            self.assertTrue(Path(finalized.variant_path).exists())
+        self.assertEqual(variants[0][1]["operation"], "add")
+        self.assertIn("ranked_candidates", log_entry)
+
+    def test_fewer_passing_candidates_than_count_returns_what_exists(self):
+        ranked = [self._ranked_candidate((50, 100, 20, 70))]
+
+        def fake_generate(scene_spec, scheduler=None, output_dir="public/levels", difficulty="Medium", policy=None):
+            return True, {"id": scene_spec["id"]}, {"ranked_candidates": ranked}
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            variants, _log_entry = generate_structural_pair_variants(
+                self.candidate, {"id": "scene-1"}, self.tmp.name, count=5, policy=self.policy
+            )
+
+        self.assertEqual(len(variants), 1)
+        self.assertEqual(variants[0][1]["id"], "scene-1_v1")
+
+    def test_structural_pipeline_rejection_returns_empty_list(self):
+        def fake_generate(scene_spec, scheduler=None, output_dir="public/levels", difficulty="Medium", policy=None):
+            return False, None, {"rejection_reason": "no viable operation"}
+
+        with patch("unified_operation_pipeline.generate_single_scene_difference", side_effect=fake_generate):
+            variants, log_entry = generate_structural_pair_variants(
+                self.candidate, {"id": "scene-1"}, self.tmp.name, count=5, policy=self.policy
+            )
+
+        self.assertEqual(variants, [])
+        self.assertEqual(log_entry["rejection_reason"], "no viable operation")
 
 
 if __name__ == "__main__":

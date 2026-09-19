@@ -43,14 +43,12 @@ def score_structural_candidate(
     return round(final_score, 4), {key: round(value, 4) for key, value in components.items()}
 
 
-def select_candidate(candidates, selection_mode):
-    if not candidates:
-        return None
-    if selection_mode == "first_pass":
-        return candidates[0]
-    if selection_mode != "best_score":
-        raise ValueError(f"Unknown selection mode: {selection_mode}")
-
+def rank_structural_candidates(candidates):
+    """Score every candidate and return them all, best first. Used by
+    select_candidate (best_score mode) and by callers that want more than
+    just the single winner -- e.g. presenting several distinct structural
+    edits of the same base image for human review instead of only the
+    top-ranked one."""
     scored = []
     for candidate in candidates:
         item = dict(candidate)
@@ -64,7 +62,18 @@ def select_candidate(candidates, selection_mode):
         item["score_components"] = components
         scored.append(item)
     scored.sort(key=lambda item: (-item["final_score"], item.get("attempt_index", 0)))
-    return scored[0]
+    return scored
+
+
+def select_candidate(candidates, selection_mode):
+    if not candidates:
+        return None
+    if selection_mode == "first_pass":
+        return candidates[0]
+    if selection_mode != "best_score":
+        raise ValueError(f"Unknown selection mode: {selection_mode}")
+
+    return rank_structural_candidates(candidates)[0]
 
 
 class StructuralNaturalnessCritic:
