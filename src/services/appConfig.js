@@ -24,6 +24,8 @@ const firebaseConfig = {
 let inMemoryAppStoreUrl = null;
 const STORAGE_KEY_FF_SET_OF_THE_DAY = 'diff_hunter_ff_set_of_the_day';
 let inMemorySetOfTheDayEnabled = null;
+const STORAGE_KEY_FF_GAME_CENTER = 'diff_hunter_ff_game_center';
+let inMemoryGameCenterEnabled = null;
 
 /**
  * Returns whether Set of the Day feature is enabled.
@@ -54,6 +56,41 @@ export function setSetOfTheDayEnabled(enabled) {
   try {
     if (typeof localStorage !== 'undefined' && localStorage.setItem) {
       localStorage.setItem(STORAGE_KEY_FF_SET_OF_THE_DAY, String(enabled));
+    }
+  } catch (_) {}
+}
+
+/**
+ * Returns whether Game Center integration (connection + button) is enabled.
+ * Disabled by default -- on hold until enabled remotely once there are enough
+ * players for leaderboards to feel populated.
+ */
+export function isGameCenterEnabled() {
+  if (inMemoryGameCenterEnabled !== null) {
+    return inMemoryGameCenterEnabled;
+  }
+
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem) {
+      const stored = localStorage.getItem(STORAGE_KEY_FF_GAME_CENTER);
+      if (stored !== null) {
+        inMemoryGameCenterEnabled = stored === 'true';
+        return inMemoryGameCenterEnabled;
+      }
+    }
+  } catch (_) {}
+
+  return false; // default disabled
+}
+
+/**
+ * Updates the Game Center feature flag.
+ */
+export function setGameCenterEnabled(enabled) {
+  inMemoryGameCenterEnabled = Boolean(enabled);
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.setItem) {
+      localStorage.setItem(STORAGE_KEY_FF_GAME_CENTER, String(enabled));
     }
   } catch (_) {}
 }
@@ -109,6 +146,10 @@ export async function syncRemoteAppConfig() {
         setSetOfTheDayEnabled(config.enableSetOfTheDay);
         logApp('INFO', '[AppConfigSync] Loaded Set of the Day flag from static config:', config.enableSetOfTheDay);
       }
+      if (typeof config?.enableGameCenter === 'boolean') {
+        setGameCenterEnabled(config.enableGameCenter);
+        logApp('INFO', '[AppConfigSync] Loaded Game Center flag from static config:', config.enableGameCenter);
+      }
     }
   } catch (_) {}
 
@@ -130,6 +171,11 @@ export async function syncRemoteAppConfig() {
       if (typeof remoteFlag === 'boolean') {
         setSetOfTheDayEnabled(remoteFlag);
         logApp('INFO', '[AppConfigSync] Synced Set of the Day flag from Firestore:', remoteFlag);
+      }
+      const remoteGameCenterFlag = data?.enableGameCenter ?? data?.enable_game_center;
+      if (typeof remoteGameCenterFlag === 'boolean') {
+        setGameCenterEnabled(remoteGameCenterFlag);
+        logApp('INFO', '[AppConfigSync] Synced Game Center flag from Firestore:', remoteGameCenterFlag);
       }
       if (remoteUrl) return remoteUrl;
     }

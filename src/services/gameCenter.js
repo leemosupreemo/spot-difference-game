@@ -3,6 +3,7 @@ import {
   GAME_CENTER_LEADERBOARDS,
   GAME_CENTER_ACHIEVEMENTS
 } from './gameCenterConfig.js';
+import { isGameCenterEnabled } from './appConfig.js';
 
 // Register native plugin with graceful fallback for web/non-iOS platforms
 const NativeGameCenter = registerPlugin('GameCenter', {
@@ -65,10 +66,13 @@ export function onGameCenterAuthChange(callback) {
 }
 
 /**
- * Check if running on native iOS.
+ * Check if Game Center is enabled and running on native iOS.
+ * The connection, button, and all leaderboard/achievement calls are gated
+ * behind the `enableGameCenter` feature flag (see appConfig.js) -- on hold
+ * until there are enough players for leaderboards to feel populated.
  */
 export function isGameCenterSupported() {
-  return Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios';
+  return isGameCenterEnabled() && Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios';
 }
 
 /**

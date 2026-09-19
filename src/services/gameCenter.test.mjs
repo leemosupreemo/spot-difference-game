@@ -14,6 +14,7 @@ import {
   openGameCenterAchievements
 } from './gameCenter.js';
 import { shouldMirrorDifficultyLeaderboard } from './gameCenter.js';
+import { setGameCenterEnabled } from './appConfig.js';
 
 test('getLeaderboardForDifficulty resolves corresponding Game Center leaderboard IDs', () => {
   assert.equal(getLeaderboardForDifficulty('Easy'), GAME_CENTER_LEADERBOARDS.GLOBAL_FASTEST);
@@ -64,4 +65,14 @@ test('deterministic Photo Set mirroring does not require a difficulty leaderboar
   assert.equal(shouldMirrorDifficultyLeaderboard('photo_set_007'), false);
   assert.equal(shouldMirrorDifficultyLeaderboard(''), true);
   assert.equal(shouldMirrorDifficultyLeaderboard(undefined), true);
+});
+
+test('isGameCenterSupported stays false off a native iOS platform even if the feature flag is enabled', () => {
+  setGameCenterEnabled(true);
+  assert.equal(isGameCenterSupported(), false); // platform check still gates it in this Node test env
+  setGameCenterEnabled(false);
+});
+
+test('isGameCenterSupported is false by default (feature flag disabled)', () => {
+  assert.equal(isGameCenterSupported(), false);
 });
