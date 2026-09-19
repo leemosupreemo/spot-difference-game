@@ -27,6 +27,7 @@ export default function DebugCuratorBar({
   const statusObj = getEntryCurationStatus(currentLevel, curatedStatusMap);
   const currentStatus = statusObj?.status || null;
   const currentPackId = statusObj?.packId || currentLevel.packId || 'find_the_sniper';
+  const isRemoteHosted = /^https?:\/\//i.test(currentLevel.baseImage || '');
 
   const handleApprove = () => {
     sounds.playWin();
@@ -109,6 +110,27 @@ export default function DebugCuratorBar({
                 gap: '4px'
               }}>
                 ⚠️ OLD (LEGACY 640×480)
+              </span>
+            )}
+
+            {/* Remote-Hosted Indicator */}
+            {isRemoteHosted && (
+              <span style={{
+                fontSize: '0.74rem',
+                fontWeight: 900,
+                color: '#d9b3ff',
+                background: 'rgba(187, 134, 252, 0.18)',
+                border: '1px solid rgba(187, 134, 252, 0.5)',
+                padding: '3px 8px',
+                borderRadius: '8px',
+                letterSpacing: '0.4px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+              title="Served from a remote URL (Firestore OTA pack), not bundled in the app build"
+              >
+                🌐 REMOTE
               </span>
             )}
 

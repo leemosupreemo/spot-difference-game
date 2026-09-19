@@ -24,3 +24,11 @@ test('provides explicit Photography and Abstract category controls', () => {
   assert.match(source, /Photography/);
   assert.match(source, /Abstract/);
 });
+
+test('flags remote-hosted (OTA pack) levels by their absolute-URL baseImage', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /const isRemoteHosted = .*currentLevel\.baseImage/);
+  assert.match(source, /\{isRemoteHosted && \(/);
+  assert.match(source, /REMOTE/);
+});
