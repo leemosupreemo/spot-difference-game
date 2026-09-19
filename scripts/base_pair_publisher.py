@@ -87,7 +87,9 @@ def publish_pair(finalized_pair, manifest_entry: dict, levels_dir, manifest_path
         raise
 
 
-def generate_structural_pair(candidate, scene_spec: dict, staging_dir, policy=DEFAULT_BASE_GENERATION_POLICY):
+def generate_structural_pair(
+    candidate, scene_spec: dict, staging_dir, policy=DEFAULT_BASE_GENERATION_POLICY, difficulty="Medium"
+):
     """Hand an accepted base-image candidate to the existing structural-only
     add/remove/reorder pipeline, then finalize the result to production size.
 
@@ -110,6 +112,7 @@ def generate_structural_pair(candidate, scene_spec: dict, staging_dir, policy=DE
     success, manifest_entry, log_entry = generate_single_scene_difference(
         full_spec,
         output_dir=str(raw_dir),
+        difficulty=difficulty,
         policy=STRUCTURAL_ONLY_POLICY,
     )
     if not success:

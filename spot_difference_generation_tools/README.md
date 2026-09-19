@@ -8,11 +8,10 @@ This toolkit contains all scripts, generator engines, computer vision analyzers,
 
 ## Base image generation
 
-`scripts/generate_photo_batch.py` is the authoritative base-image generator:
-a guided wizard and scriptable CLI that selects portfolio-balanced scenes,
-generates candidates through Google and OpenAI, runs local and semantic
-quality gates and novelty checks, hands accepted bases to the structural
-add/remove/reorder pipeline, and atomically publishes finalized pairs. See
+`scripts/generate_photo_batch.py ingest` takes a manually-sourced base image
+(no paid API calls), runs it through free local quality gates, hands it to
+the existing structural add/remove/reorder pipeline, and atomically
+publishes the finalized pair. See
 [`docs/base-image-generation.md`](../docs/base-image-generation.md) for the
 full operator guide.
 
