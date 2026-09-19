@@ -4,7 +4,6 @@ import {
   buildPhotoPairStage,
   clearPhotoPairManifestCache,
   createPhotoPairLevel,
-  applyCuratedPackOverrides,
   selectPhotoPairEntries,
   resolveAssetUrl,
   getAllPhotoPairEntries,
@@ -55,11 +54,17 @@ test('selects matching entries by pack and difficulty with no duplicates', () =>
     { ...entry, id: 'market_002' },
     { ...entry, id: 'easy_001', difficulty: 'Easy' }
   ];
+  const statusMap = {
+    market_001: { status: 'approved' },
+    market_002: { status: 'approved' },
+    easy_001: { status: 'approved' }
+  };
   const selected = selectPhotoPairEntries(entries, {
     packId: 'find_the_sniper',
     difficulty: 'Hard',
     count: 2,
-    seed: 1
+    seed: 1,
+    statusMap
   });
 
   assert.equal(selected.length, 2);
@@ -67,12 +72,12 @@ test('selects matching entries by pack and difficulty with no duplicates', () =>
   assert.deepEqual(selected.map(item => item.difficulty), ['Hard', 'Hard']);
 });
 
-test('prioritizes new non-designated images first before categorized ones', () => {
+test('excludes never-reviewed levels from live selection entirely', () => {
   const unreviewedEntry = { ...entry, id: 'unreviewed_001' };
-  const categorizedEntry = { ...entry, id: 'categorized_001' };
-  const entries = [categorizedEntry, unreviewedEntry];
+  const approvedEntry = { ...entry, id: 'approved_001' };
+  const entries = [unreviewedEntry, approvedEntry];
   const statusMap = {
-    categorized_001: { status: 'approved', packId: 'find_the_sniper' }
+    approved_001: { status: 'approved', packId: 'find_the_sniper' }
   };
 
   const selected = selectPhotoPairEntries(entries, {
@@ -83,20 +88,23 @@ test('prioritizes new non-designated images first before categorized ones', () =
     statusMap
   });
 
-  assert.equal(selected.length, 2);
-  assert.equal(selected[0].id, 'unreviewed_001', 'Non-designated image must come first');
-  assert.equal(selected[1].id, 'categorized_001', 'Categorized image must be deprioritized');
+  assert.equal(selected.length, 1, 'A level with no curation status must never reach live selection');
+  assert.equal(selected[0].id, 'approved_001');
 });
 
 test('uses a curator category designation when selecting a manifest entry', () => {
-  const reclassified = applyCuratedPackOverrides([entry], {
+  // selectPhotoPairEntries applies applyCuratedPackOverrides internally, so
+  // the same statusMap must be passed to it directly (not pre-applied) --
+  // it's also what makes the entry approved and therefore eligible at all.
+  const statusMap = {
     market_001: { status: 'approved', packId: 'abstract_animated', pack: 'Abstract' }
-  });
-  const selected = selectPhotoPairEntries(reclassified, {
+  };
+  const selected = selectPhotoPairEntries([entry], {
     packId: 'abstract_animated',
     difficulty: 'Hard',
     count: 1,
-    seed: 1
+    seed: 1,
+    statusMap
   });
 
   assert.equal(selected.length, 1);
@@ -162,6 +170,7 @@ test('builds a stage from a fetched manifest and loadable image pairs', async ()
       ok: true,
       json: async () => [entry]
     }),
+    curatedStatusMap: { market_001: { status: 'approved' } },
     imageFactory: () => ({
       set src(value) {
         this._src = value;
@@ -291,6 +300,10 @@ test('continues loading later candidates after an image pair fails', async () =>
       ok: true,
       json: async () => [badEntry, goodEntry]
     }),
+    curatedStatusMap: {
+      bad_market_001: { status: 'approved' },
+      good_market_001: { status: 'approved' }
+    },
     imageFactory: () => ({
       set src(value) {
         this._src = value;
@@ -336,10 +349,15 @@ test('selectPhotoPairEntries prioritizes full-frame 4:3 images over 16:9 widescr
 
   // Even if widescreen entry is placed first in input array
   const entries = [widescreenEntry, fullFrame43Entry];
+  const statusMap = {
+    widescreen_v7_001: { status: 'approved' },
+    fullframe_43_001: { status: 'approved' }
+  };
   const selected = selectPhotoPairEntries(entries, {
     packId: 'find_the_sniper',
     difficulty: 'Hard',
-    count: 2
+    count: 2,
+    statusMap
   });
 
   assert.equal(selected.length, 2);

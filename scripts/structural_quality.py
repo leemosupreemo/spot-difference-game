@@ -3,6 +3,15 @@ from dataclasses import dataclass
 import cv2
 import numpy as np
 
+# Fraction of an edit's changed pixels that may fall outside its intended
+# object mask before it's rejected outright as a visible shape/boundary
+# artifact (a stray leftover fragment attached to an otherwise-clean add,
+# for example). Calibrated against a real published defect: a small but
+# clearly visible protrusion attached to an added object measured
+# spill_fraction ~0.20, which the previous 0.25 ceiling let through; a
+# trivial few-pixel rounding fringe measures ~0.0, well clear of 0.15.
+MAX_SPILL_FRACTION = 0.15
+
 
 @dataclass(frozen=True)
 class StructuralQualityResult:
@@ -167,7 +176,7 @@ class StructuralNaturalnessCritic:
         if expected_mask is not None:
             allowed = cv2.dilate(expected_mask, np.ones((7, 7), np.uint8), iterations=1) > 0
             spill_fraction = float(np.sum((diff_mask > 0) & ~allowed)) / float(changed_pixels)
-            if spill_fraction > 0.25:
+            if spill_fraction > MAX_SPILL_FRACTION:
                 return cls._reject(
                     "StructuralBoundaryArtifact",
                     "Changed pixels extend well beyond the intended structural mask.",

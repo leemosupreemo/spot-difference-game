@@ -157,45 +157,35 @@ export function selectPhotoPairEntries(entries, {
   // 1: Full-frame 4:3 Legacy/Standard (e.g. 640x480)
   // 2: Non-4:3 Widescreen (e.g. 16:9 1376x768)
   const tiers = [
-    { unreviewedBrandNew: [], unreviewedOther: [], approvedMatching: [], approvedOther: [], otherCategorized: [] },
-    { unreviewedBrandNew: [], unreviewedOther: [], approvedMatching: [], approvedOther: [], otherCategorized: [] },
-    { unreviewedBrandNew: [], unreviewedOther: [], approvedMatching: [], approvedOther: [], otherCategorized: [] }
+    { approvedMatching: [], approvedOther: [] },
+    { approvedMatching: [], approvedOther: [] },
+    { approvedMatching: [], approvedOther: [] }
   ];
 
   for (const entry of effectiveEntries) {
     const statusVal = getLevelStatus(statusMap[entry.id]);
-    if (statusVal?.status === 'dismissed') continue;
+    // A level must be explicitly approved via curation/debug review before it
+    // can ever reach live gameplay -- a brand-new, never-reviewed level (no
+    // status at all) is excluded here, not merely deprioritized. It's still
+    // fully visible in debug mode's own selection (getDebugCandidateEntries
+    // in App.jsx), which is where that review is meant to happen.
+    if (statusVal?.status !== 'approved') continue;
 
     const packMatches = !packId || entry.packId === packId;
     if (!packMatches) continue;
 
-    const tierIndex = getEntryAspectBucket(entry);
-    const tier = tiers[tierIndex];
-    const isCategorized = Boolean(statusVal?.status || statusVal?.packId || statusVal?.category || statusVal?.difficulty || statusVal?.suggestedDifficulty);
-
-    if (!isCategorized) {
-      tier.unreviewedBrandNew.push(entry);
-    } else if (statusVal?.status === 'approved') {
-      const difficultyMatches = !difficulty || entry.difficulty === difficulty;
-      if (difficultyMatches) {
-        tier.approvedMatching.push(entry);
-      } else {
-        tier.approvedOther.push(entry);
-      }
-    } else if (statusVal?.status !== 'dismissed') {
-      tier.otherCategorized.push(entry);
+    const tier = tiers[getEntryAspectBucket(entry)];
+    const difficultyMatches = !difficulty || entry.difficulty === difficulty;
+    if (difficultyMatches) {
+      tier.approvedMatching.push(entry);
+    } else {
+      tier.approvedOther.push(entry);
     }
   }
 
   const prioritized = [];
   for (const tier of tiers) {
-    prioritized.push(
-      ...tier.unreviewedBrandNew,
-      ...tier.unreviewedOther,
-      ...tier.approvedMatching,
-      ...tier.approvedOther,
-      ...tier.otherCategorized
-    );
+    prioritized.push(...tier.approvedMatching, ...tier.approvedOther);
   }
 
   return prioritized.slice(0, count);

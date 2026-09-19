@@ -184,6 +184,31 @@ class TestStructuralQuality(unittest.TestCase):
         self.assertGreater(result.score, 0.5)
         self.assertGreater(result.metrics["boundary_delta_e"], 0.0)
 
+    def test_small_protrusion_attached_to_a_clean_add_is_rejected(self):
+        # Models a real published defect: an otherwise-clean added object
+        # with a small leftover fragment attached just outside its mask
+        # (spill_fraction ~0.20). This measured under the old 0.25 ceiling
+        # and shipped a visibly wrong silhouette; MAX_SPILL_FRACTION (0.15)
+        # exists specifically to catch this shape of defect.
+        base = textured_canvas(160, 160)
+        variant = base.copy()
+        object_mask = np.zeros((160, 160), dtype=np.uint8)
+        cv2.circle(object_mask, (80, 80), 10, 255, -1)
+        variant[object_mask > 0] = (35, 80, 180)
+        variant[95:103, 75:85] = (20, 30, 40)  # small protrusion just past the mask edge
+
+        result = StructuralNaturalnessCritic.evaluate(
+            base,
+            variant,
+            [65, 65, 105, 108],
+            operation="add",
+            object_mask=object_mask,
+            occupied_mask=np.zeros_like(object_mask),
+        )
+
+        self.assertFalse(result.passed)
+        self.assertEqual(result.rejection_code, "StructuralBoundaryArtifact")
+
     def test_changed_pixels_outside_object_boundary_are_rejected(self):
         base = textured_canvas(160, 160)
         variant = base.copy()
