@@ -105,6 +105,7 @@ export function subscribeToRemoteLevels(callback) {
  */
 export async function syncRemoteLevelPacks(timeoutMs = 3000) {
   if (!firebaseConfig.projectId || !firebaseConfig.apiKey) {
+    logApp('WARN', '[RemoteLevelSyncSkipped] No Firebase config -- returning cached levels only.');
     return getCachedRemoteLevels();
   }
 
@@ -112,6 +113,8 @@ export async function syncRemoteLevelPacks(timeoutMs = 3000) {
   if (typeof window === 'undefined' && !process.env?.FIRESTORE_EMULATOR_HOST) {
     return getCachedRemoteLevels();
   }
+
+  logApp('INFO', '[RemoteLevelSyncStart] Querying remote_level_packs...');
 
   try {
     const fetchTask = async () => {
@@ -121,6 +124,7 @@ export async function syncRemoteLevelPacks(timeoutMs = 3000) {
       if (!auth.currentUser) {
         try {
           await signInAnonymously(auth);
+          logApp('INFO', '[RemoteLevelAuth] Anonymous sign-in succeeded.');
         } catch (authErr) {
           logApp('WARN', '[RemoteLevelAuthWarn]', authErr?.message || authErr);
         }
@@ -131,6 +135,7 @@ export async function syncRemoteLevelPacks(timeoutMs = 3000) {
       // Fetch active published packs
       const q = query(packsRef, where('active', '==', true));
       const snapshot = await getDocs(q);
+      logApp('INFO', `[RemoteLevelSyncQuery] ${snapshot.size} active pack doc(s) matched.`);
 
       const remoteEntries = [];
       snapshot.forEach(docSnap => {
@@ -147,10 +152,14 @@ export async function syncRemoteLevelPacks(timeoutMs = 3000) {
         logApp('INFO', `[RemoteLevelSync] Successfully synced ${updated.length} remote levels from Firebase.`);
         return updated;
       }
+      logApp('INFO', '[RemoteLevelSyncEmpty] Query matched 0 packs or 0 levels -- using cached levels.');
       return getCachedRemoteLevels();
     };
 
-    const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(getCachedRemoteLevels()), timeoutMs));
+    const timeoutPromise = new Promise(resolve => setTimeout(() => {
+      logApp('WARN', `[RemoteLevelSyncTimeout] Exceeded ${timeoutMs}ms -- using cached levels for now (fetch keeps running in the background).`);
+      resolve(getCachedRemoteLevels());
+    }, timeoutMs));
     return await Promise.race([fetchTask(), timeoutPromise]);
   } catch (err) {
     logApp('INFO', '[RemoteLevelSyncOffline] Offline or no remote packs:', err?.message || err);
