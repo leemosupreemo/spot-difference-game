@@ -29,7 +29,9 @@ export default function MainMenu({
   bannerSlot = null,
   debugMode = false,
   tutorialAnimationEnabled = true,
-  onToggleTutorialAnimation = null
+  onToggleTutorialAnimation = null,
+  onRefreshRemotePacks = null,
+  remotePackSync = { status: 'idle', count: 0 }
 }) {
   const isSetCompleted = hasCompletedProp !== undefined ? hasCompletedProp : hasCompletedFirstSet();
   const isNative = typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform();
@@ -136,6 +138,40 @@ export default function MainMenu({
         >
           {tutorialAnimationEnabled ? '▶ Tutorial Animation: ON' : '⏸ Tutorial Animation: OFF'}
         </button>
+      )}
+
+      {debugMode && selectedTheme === 'find_the_sniper' && onRefreshRemotePacks && (
+        <div style={{ marginBottom: '10px' }}>
+          <button
+            type="button"
+            aria-label={remotePackSync.status === 'refreshing' ? 'Refreshing Remote Packs' : 'Refresh Remote Packs'}
+            disabled={remotePackSync.status === 'refreshing'}
+            onClick={onRefreshRemotePacks}
+            className="glass-btn"
+            style={{
+              width: '100%',
+              padding: '8px 12px',
+              justifyContent: 'center',
+              fontSize: '0.78rem',
+              fontWeight: 800,
+              color: remotePackSync.status === 'error' ? '#ff6b8a' : 'var(--accent-cyan)',
+              borderColor: remotePackSync.status === 'error' ? 'rgba(255, 107, 138, 0.5)' : 'rgba(0, 240, 255, 0.45)',
+              background: 'rgba(0, 240, 255, 0.08)'
+            }}
+          >
+            {remotePackSync.status === 'refreshing' ? '↻ REFRESHING REMOTE PACKS…' : '↻ REFRESH REMOTE PACKS'}
+          </button>
+          {remotePackSync.status === 'success' && (
+            <div style={{ marginTop: '5px', textAlign: 'center', fontSize: '0.72rem', color: 'var(--accent-green)', fontWeight: 800 }}>
+              {remotePackSync.count} remote levels loaded
+            </div>
+          )}
+          {remotePackSync.status === 'error' && (
+            <div role="alert" style={{ marginTop: '5px', textAlign: 'center', fontSize: '0.72rem', color: '#ff6b8a', fontWeight: 800 }}>
+              {remotePackSync.message || 'Remote refresh failed'}
+            </div>
+          )}
+        </div>
       )}
 
       {/* Tutorial graphic remains available in debug mode after the first set. */}

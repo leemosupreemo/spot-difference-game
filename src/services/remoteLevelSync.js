@@ -9,8 +9,7 @@
  */
 
 import { initializeApp, getApps } from 'firebase/app';
-import { getAuth, signInAnonymously } from 'firebase/auth';
-import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, getDocsFromServer, query, where } from 'firebase/firestore';
 import { validatePhotoPairManifest } from '../utils/photoPairManifest.js';
 import { logApp } from '../utils/logger.js';
 
@@ -27,6 +26,40 @@ const firebaseConfig = {
 
 const listeners = new Set();
 let inMemoryRemoteEntries = [];
+
+async function fetchRemoteLevelPacks({ forceServer = false } = {}) {
+  const app = getApps()[0] || initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const packsRef = collection(db, 'remote_level_packs');
+  const q = query(packsRef, where('active', '==', true));
+  const snapshot = await (forceServer ? getDocsFromServer(q) : getDocs(q));
+  logApp('INFO', `[RemoteLevelSyncQuery] ${snapshot.size} active pack doc(s) matched.`);
+
+  const remoteEntries = [];
+  snapshot.forEach(docSnap => {
+    const data = docSnap.data();
+    if (Array.isArray(data?.levels)) {
+      remoteEntries.push(...data.levels);
+    } else if (data?.id && data?.baseImage) {
+      remoteEntries.push(data);
+    }
+  });
+
+  if (remoteEntries.length > 0) {
+    const updated = saveCachedRemoteLevels(remoteEntries);
+    logApp('INFO', `[RemoteLevelSync] Successfully synced ${updated.length} remote levels from Firebase.`);
+    return updated;
+  }
+
+  logApp('INFO', '[RemoteLevelSyncEmpty] Query matched 0 packs or 0 levels -- using cached levels.');
+  return getCachedRemoteLevels();
+}
+
+function rejectAfter(timeoutMs, message) {
+  return new Promise((_, reject) => {
+    setTimeout(() => reject(new Error(message)), timeoutMs);
+  });
+}
 
 /**
  * Loads cached remote levels synchronously from localStorage.
@@ -117,53 +150,37 @@ export async function syncRemoteLevelPacks(timeoutMs = 3000) {
   logApp('INFO', '[RemoteLevelSyncStart] Querying remote_level_packs...');
 
   try {
-    const fetchTask = async () => {
-      const app = getApps()[0] || initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-
-      if (!auth.currentUser) {
-        try {
-          await signInAnonymously(auth);
-          logApp('INFO', '[RemoteLevelAuth] Anonymous sign-in succeeded.');
-        } catch (authErr) {
-          logApp('WARN', '[RemoteLevelAuthWarn]', authErr?.message || authErr);
-        }
-      }
-
-      const db = getFirestore(app);
-      const packsRef = collection(db, 'remote_level_packs');
-      // Fetch active published packs
-      const q = query(packsRef, where('active', '==', true));
-      const snapshot = await getDocs(q);
-      logApp('INFO', `[RemoteLevelSyncQuery] ${snapshot.size} active pack doc(s) matched.`);
-
-      const remoteEntries = [];
-      snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        if (Array.isArray(data?.levels)) {
-          remoteEntries.push(...data.levels);
-        } else if (data?.id && data?.baseImage) {
-          remoteEntries.push(data);
-        }
-      });
-
-      if (remoteEntries.length > 0) {
-        const updated = saveCachedRemoteLevels(remoteEntries);
-        logApp('INFO', `[RemoteLevelSync] Successfully synced ${updated.length} remote levels from Firebase.`);
-        return updated;
-      }
-      logApp('INFO', '[RemoteLevelSyncEmpty] Query matched 0 packs or 0 levels -- using cached levels.');
-      return getCachedRemoteLevels();
-    };
-
     const timeoutPromise = new Promise(resolve => setTimeout(() => {
       logApp('WARN', `[RemoteLevelSyncTimeout] Exceeded ${timeoutMs}ms -- using cached levels for now (fetch keeps running in the background).`);
       resolve(getCachedRemoteLevels());
     }, timeoutMs));
-    return await Promise.race([fetchTask(), timeoutPromise]);
+    return await Promise.race([fetchRemoteLevelPacks(), timeoutPromise]);
   } catch (err) {
     logApp('INFO', '[RemoteLevelSyncOffline] Offline or no remote packs:', err?.message || err);
   }
 
   return getCachedRemoteLevels();
+}
+
+/**
+ * Forces a fresh server read for the Debug curator UI.
+ * Unlike startup sync, failures reject so the UI can report them clearly.
+ */
+export async function refreshRemoteLevelPacks(timeoutMs = 15000) {
+  if (!firebaseConfig.projectId || !firebaseConfig.apiKey) {
+    throw new Error('Firebase configuration is unavailable.');
+  }
+
+  logApp('INFO', '[RemoteLevelRefreshStart] Forcing server refresh of remote_level_packs...');
+  try {
+    const levels = await Promise.race([
+      fetchRemoteLevelPacks({ forceServer: true }),
+      rejectAfter(timeoutMs, `Remote pack refresh exceeded ${timeoutMs}ms.`)
+    ]);
+    logApp('INFO', `[RemoteLevelRefreshComplete] ${levels.length} remote levels available.`);
+    return levels;
+  } catch (err) {
+    logApp('WARN', '[RemoteLevelRefreshError]', err?.message || err);
+    throw err;
+  }
 }

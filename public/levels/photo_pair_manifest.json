@@ -1,5 +1,59 @@
 [
   {
+    "id": "crystal_geode_starfield_1789847167950_v2",
+    "title": "Crystal Geode Starfield 1789847167950",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 96.0,
+        "y": 61.7,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/crystal_geode_starfield_1789847167950_v2_e6ea8d6d4bca_base.webp",
+    "variantImage": "levels/crystal_geode_starfield_1789847167950_v2_e51b250ed435_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "crystal_geode_starfield_1789847167950_v1",
+    "title": "Crystal Geode Starfield 1789847167950",
+    "category": "Photography",
+    "pack": "Find the Sniper",
+    "packId": "find_the_sniper",
+    "difficulty": "Medium",
+    "operation": "add",
+    "diffs": [
+      {
+        "id": 1,
+        "x": 58.6,
+        "y": 94.9,
+        "radius": 4.5,
+        "description": "Single add difference",
+        "hint": "Look closely for a add difference",
+        "operation": "add"
+      }
+    ],
+    "baseImage": "levels/crystal_geode_starfield_1789847167950_v1_e6ea8d6d4bca_base.webp",
+    "variantImage": "levels/crystal_geode_starfield_1789847167950_v1_076142bf3e05_variant.webp",
+    "dimensions": {
+      "width": 1200,
+      "height": 900
+    },
+    "aspectRatio": "4:3"
+  },
+  {
     "id": "optical_fiber_constellation_1789824262569_v4",
     "title": "Optical Fiber Constellation 1789824262569",
     "category": "Photography",

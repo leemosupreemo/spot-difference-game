@@ -25,7 +25,7 @@ import { getInitialDebugMode } from './utils/debugMode';
 import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus, getEntryCurationStatus } from './utils/curationStore';
 import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted } from './services/analytics';
 import { parseIncomingChallenge } from './utils/challengeMetrics';
-import { syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
+import { refreshRemoteLevelPacks, syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
 import { syncRemoteAppConfig } from './services/appConfig';
 import { initializeNotificationListeners, scheduleInstallNotifications } from './services/notificationService';
 import { initGameCenter, mirrorRoundToGameCenter, onGameCenterAuthChange } from './services/gameCenter';
@@ -115,6 +115,7 @@ export default function App() {
   }); // 'Easy' | 'Medium' | 'Hard'
 
   const [remoteLevelsRevision, setRemoteLevelsRevision] = useState(0);
+  const [remotePackSync, setRemotePackSync] = useState({ status: 'idle', count: 0 });
   const photoSetIds = useMemo(() => getCompletePhotoSets(
     getAllPhotoPairEntries().filter(entry => entry.packId === 'find_the_sniper')
   ).map(photoSet => photoSet.setId), [remoteLevelsRevision]);
@@ -291,6 +292,20 @@ export default function App() {
 
   // Refresh derived Photo Set choices as soon as a remote pack arrives.
   useEffect(() => subscribeToRemoteLevels(() => setRemoteLevelsRevision(revision => revision + 1)), []);
+
+  const handleRefreshRemotePacks = useCallback(async () => {
+    setRemotePackSync({ status: 'refreshing', count: 0 });
+    try {
+      const remoteLevels = await refreshRemoteLevelPacks();
+      setRemotePackSync({ status: 'success', count: remoteLevels.length });
+    } catch (err) {
+      setRemotePackSync({
+        status: 'error',
+        count: 0,
+        message: err?.message || 'Remote refresh failed'
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (photoSetIds.length > 0 && !photoSetIds.includes(photoSetId)) {
@@ -1331,6 +1346,8 @@ export default function App() {
             hasCompletedFirstSet={hasCompletedFirstSetState}
             tutorialAnimationEnabled={tutorialAnimationEnabled}
             onToggleTutorialAnimation={handleToggleTutorialAnimation}
+            onRefreshRemotePacks={handleRefreshRemotePacks}
+            remotePackSync={remotePackSync}
             bannerSlot={
               (!isDailyCompleted || debugMode) && (
                 <SetOfTheDayBanner
