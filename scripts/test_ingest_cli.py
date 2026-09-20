@@ -89,11 +89,12 @@ class TestIngestImage(unittest.TestCase):
             ingest_image(str(self.source), "scene-1", difficulty="Impossible", staging_dir=self.staging_dir)
 
     def test_local_gate_rejection_stops_before_structural_pipeline(self):
+        """With the second pass off, a gate rejection ends the image."""
         with patch(
             "generate_photo_batch.run_local_gates", return_value=(False, ("SomeReject: bad",), {})
         ), patch("generate_photo_batch.generate_structural_pair") as mocked_structural:
             with self.assertRaises(ValueError) as ctx:
-                ingest_image(str(self.source), "scene-1", staging_dir=self.staging_dir)
+                ingest_image(str(self.source), "scene-1", staging_dir=self.staging_dir, fallback="none")
             self.assertIn("SomeReject", str(ctx.exception))
             mocked_structural.assert_not_called()
 
@@ -103,7 +104,7 @@ class TestIngestImage(unittest.TestCase):
             return_value=(None, {"rejection_reason": "no viable operation"}),
         ):
             with self.assertRaises(ValueError) as ctx:
-                ingest_image(str(self.source), "scene-1", staging_dir=self.staging_dir)
+                ingest_image(str(self.source), "scene-1", staging_dir=self.staging_dir, fallback="none")
             self.assertIn("no viable operation", str(ctx.exception))
 
     def test_happy_path_publishes_and_returns_entry(self):
@@ -153,7 +154,7 @@ class TestIngestImageVariants(unittest.TestCase):
             return_value=([], {"rejection_reason": "no viable operation"}),
         ):
             with self.assertRaises(ValueError) as ctx:
-                ingest_image_variants(str(self.source), "scene-1", 5, staging_dir=self.staging_dir)
+                ingest_image_variants(str(self.source), "scene-1", 5, staging_dir=self.staging_dir, fallback="none")
             self.assertIn("no viable operation", str(ctx.exception))
 
     def test_publishes_every_returned_variant(self):

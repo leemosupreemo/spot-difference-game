@@ -97,7 +97,7 @@ def _extract_bbox(ground_truth: dict):
     return tuple(bbox)
 
 
-def finalize_pair(base_path, variant_path, ground_truth, output_dir, scene_id, policy) -> FinalizedPair:
+def finalize_pair(base_path, variant_path, ground_truth, output_dir, scene_id, policy, *, lossless=False) -> FinalizedPair:
     base_master = _load_master(base_path)
     variant_master = _load_master(variant_path)
 
@@ -135,8 +135,10 @@ def finalize_pair(base_path, variant_path, ground_truth, output_dir, scene_id, p
     # WKWebView (and therefore this app's minimum iOS 15 target) for years --
     # unlike AVIF, which only decodes starting iOS 16. method=6 spends more
     # encode time for better compression, fine for an infrequent manual publish.
-    base_production.save(base_out, format="WEBP", quality=85, method=6)
-    variant_production.save(variant_out, format="WEBP", quality=85, method=6)
+    # Dense starfields expose independent lossy encoder changes as unintended
+    # puzzle differences. Local fallbacks opt into lossless delivery.
+    base_production.save(base_out, format="WEBP", quality=85, method=6, lossless=lossless)
+    variant_production.save(variant_out, format="WEBP", quality=85, method=6, lossless=lossless)
 
     return FinalizedPair(
         scene_brief_id=scene_id,

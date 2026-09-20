@@ -51,6 +51,19 @@ class TestRunLocalGates(unittest.TestCase):
         self.assertFalse(passed)
         self.assertTrue(any(f.startswith("SharpnessUniformityReject") for f in failures))
 
+    def test_router_structural_early_exit_still_checks_source_quality(self):
+        from ingest_failure_report import classify_rejection
+
+        for metrics, code in [
+            ({"sharpness_uniformity": 0.23, "edge_density": 0.05, "largest_foreground_pct": 10}, "SharpnessUniformityReject"),
+            ({"sharpness_uniformity": 0.5, "edge_density": 0.05, "largest_foreground_pct": 24}, "HeroObjectReject"),
+        ]:
+            route = {"approved": False, "reason": "Universal Gate Fail: Too few objects (2 < 14).", "metrics": metrics}
+            passed, failures, _ = run_local_gates("unused.png", self.policy, route_canvas=lambda path: route)
+            self.assertFalse(passed)
+            self.assertTrue(any(f.startswith(code) for f in failures), failures)
+            self.assertEqual(classify_rejection(failures)["category"], "source_quality")
+
     def test_low_edge_density_is_rejected(self):
         route_result = _approved_route_result(
             metrics={"sharpness_uniformity": 0.5, "edge_density": 0.001, "largest_foreground_pct": 10.0}

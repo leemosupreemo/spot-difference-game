@@ -63,12 +63,12 @@ class SceneAffordanceRouter:
         model = FastSAM("FastSAM-s.pt")
         results = model(image_path, device="cpu", retina_masks=True, imgsz=1024, conf=0.20, iou=0.65, verbose=False)
         if not results or len(results) == 0 or results[0].masks is None:
-            return {"approved": False, "reason": "Universal Gate Fail: FastSAM found no objects."}
+            return {"approved": False, "reason": "Universal Gate Fail: FastSAM found no objects.",
+                    "raw_masks": [], "metrics": {"sharpness_uniformity": sharpness_uniformity,
+                    "edge_density": edge_density, "largest_foreground_pct": 0.0}}
 
         raw_masks = results[0].masks.data.cpu().numpy()
         object_count = len(raw_masks)
-        if object_count < 14:
-            return {"approved": False, "reason": f"Universal Gate Fail: Too few objects ({object_count} < 14)."}
 
         # 4. FILTER MASKS & IDENTIFY PEER GROUPS
         candidate_masks = []
@@ -138,6 +138,11 @@ class SceneAffordanceRouter:
                     crop = mask_resized[np.min(ys):np.max(ys)+1, np.min(xs):np.max(xs)+1]
                     resized_shape = cv2.resize(crop, (24, 24), interpolation=cv2.INTER_AREA).astype(np.float32) / 255.0
                     shape_descriptors.append(resized_shape.flatten())
+
+        if object_count < 14:
+            return {"approved": False, "reason": f"Universal Gate Fail: Too few objects ({object_count} < 14).",
+                    "raw_masks": raw_masks, "metrics": {"sharpness_uniformity": sharpness_uniformity,
+                    "edge_density": edge_density, "largest_foreground_pct": largest_foreground_pct}}
 
         if largest_foreground_pct > 26.0:
             return {

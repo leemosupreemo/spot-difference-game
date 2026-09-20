@@ -26,12 +26,15 @@ def run_local_gates(
     route_canvas = route_canvas or _default_route_canvas
     route_result = route_canvas(master_path)
 
-    if not route_result.get("approved", False):
+    route_approved = route_result.get("approved", False)
+    failures = []
+    if not route_approved:
         reason = route_result.get("reason", "local gate rejected the image")
-        return False, (f"LocalGateReject: {reason}",), route_result
+        failures.append(f"LocalGateReject: {reason}")
+        if "metrics" not in route_result:
+            return False, tuple(failures), route_result
 
     metrics = route_result.get("metrics", {})
-    failures = []
 
     checks = (
         (
@@ -79,6 +82,10 @@ def run_local_gates(
     )
 
     for failed, code, message in checks:
+        # A structural early exit still carries source-quality measurements.
+        # Do not let its first rejection hide a stricter policy quality gate.
+        if not route_approved and code not in {"SharpnessUniformityReject", "EdgeDensityReject", "HeroObjectReject"}:
+            continue
         if failed:
             failures.append(f"{code}: {message}")
 

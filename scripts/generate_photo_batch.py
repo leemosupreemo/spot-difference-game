@@ -18,6 +18,7 @@ import json
 import re
 import shutil
 import tempfile
+import traceback
 from pathlib import Path
 from typing import List, Optional
 
@@ -29,10 +30,13 @@ from base_candidate_evaluator import run_local_gates
 from base_generation_policy import DEFAULT_BASE_GENERATION_POLICY
 from base_image_normalizer import normalize_local_image
 from base_pair_publisher import generate_structural_pair, generate_structural_pair_variants, publish_pair
+from ingest_failure_report import IngestRejection, classify_rejection, rejection_record, write_ingest_report
+from local_masked_edits import accepted_boxes
 
 DEFAULT_LEVELS_DIR = "public/levels"
 DEFAULT_MANIFEST_PATH = "public/levels/photo_pair_manifest.json"
 VALID_DIFFICULTIES = ("Easy", "Medium", "Hard")
+VALID_FALLBACKS = ("auto", "none", "local-star", "local-segmented")
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
 
 console = Console()
@@ -80,6 +84,61 @@ def resolve_image_paths(inputs: List[str]) -> List[Path]:
     return resolved
 
 
+def _run_engine(engine, candidate, scene_spec, staging_dir, count, difficulty,
+                route_result, start_index, exclude_boxes):
+    if engine == "local-star":
+        from local_star_fallback import generate_star_variants
+
+        return generate_star_variants(candidate, scene_spec, staging_dir, count,
+                                      difficulty=difficulty, start_index=start_index,
+                                      exclude_boxes=exclude_boxes)
+    from local_segmented_fallback import generate_segmented_variants
+
+    # Segmented runs first under "auto" because an approved gate already paid
+    # for FastSAM; reusing those masks costs nothing.
+    return generate_segmented_variants(candidate, scene_spec, staging_dir, count,
+        difficulty=difficulty, raw_masks=(route_result or {}).get("raw_masks"),
+        start_index=start_index, exclude_boxes=exclude_boxes)
+
+
+def _local_fallback(candidate, scene_id, title, count, difficulty, staging_dir,
+                    levels_dir, manifest_path, fallback, rejection, route_result=None):
+    decision = classify_rejection(rejection.reasons)
+    if fallback == "none" or not decision["routes_to_fallback"]:
+        raise rejection
+
+    scene_spec = {"id": scene_id, "title": title or scene_id.replace("_", " ").title()}
+    engines = ("local-segmented", "local-star") if fallback == "auto" else (fallback,)
+    pairs, engine_logs, used_boxes = [], [], []
+    for engine in engines:
+        # Each engine only needs to cover the shortfall, continues the previous
+        # one's variant numbering so ids never collide, and skips objects an
+        # earlier engine already edited.
+        engine_pairs, engine_log = _run_engine(engine, candidate, scene_spec, staging_dir,
+                                               count - len(pairs), difficulty, route_result,
+                                               start_index=len(pairs) + 1,
+                                               exclude_boxes=tuple(used_boxes))
+        engine_logs.append(engine_log)
+        pairs.extend(engine_pairs)
+        used_boxes.extend(accepted_boxes(engine_log))
+        if len(pairs) >= count:
+            break
+
+    log = {"engines": engine_logs, "accepted_count": len(pairs),
+           "first_pass_stage": rejection.stage, "first_pass_reasons": list(rejection.reasons),
+           "first_pass_category": decision["category"]}
+    if not pairs:
+        codes = [entry["rejection_code"] for entry in engine_logs if entry.get("rejection_code")]
+        log["rejection_code"] = "+".join(codes) or "NoLocalCandidate"
+        log["rejection_reason"] = ("No local edit passed visibility, locality, and encoded-image "
+                                   f"checks ({', '.join(codes) or 'no engine produced a target'})")
+    (Path(staging_dir) / "fallback.json").write_text(json.dumps(log, indent=2), encoding="utf-8")
+    if not pairs:
+        raise IngestRejection(log["rejection_reason"], "local_fallback",
+                              (*rejection.reasons, f"{log['rejection_code']}: {log['rejection_reason']}"))
+    return [publish_pair(pair, entry, levels_dir, manifest_path) for pair, entry in pairs]
+
+
 def ingest_image(
     image_path: str,
     scene_id: str,
@@ -88,6 +147,7 @@ def ingest_image(
     levels_dir: str = DEFAULT_LEVELS_DIR,
     manifest_path: str = DEFAULT_MANIFEST_PATH,
     staging_dir=None,
+    fallback="auto",
 ) -> dict:
     """Pure ingest logic: normalize -> local gates -> structural pair ->
     publish. Raises ValueError with a human-readable message on any
@@ -97,21 +157,29 @@ def ingest_image(
         raise ValueError(f"Not found: {source}")
     if difficulty not in VALID_DIFFICULTIES:
         raise ValueError(f"difficulty must be one of {VALID_DIFFICULTIES}, got {difficulty!r}")
+    if fallback not in VALID_FALLBACKS:
+        raise ValueError(f"fallback must be one of {VALID_FALLBACKS}")
 
     policy = DEFAULT_BASE_GENERATION_POLICY
     master_path = Path(staging_dir) / "master.png"
     candidate = normalize_local_image(source.read_bytes(), scene_id, str(master_path), policy)
 
-    passed, failures, _ = run_local_gates(str(master_path), policy)
+    passed, failures, route_result = run_local_gates(str(master_path), policy)
     if not passed:
-        raise ValueError("Rejected by local quality gates:\n" + "\n".join(f"  - {f}" for f in failures))
+        rejection = IngestRejection("Rejected by local quality gates:\n" + "\n".join(f"  - {f}" for f in failures), "local_gates", failures)
+        return _local_fallback(candidate, scene_id, title, 1, difficulty, staging_dir,
+                               levels_dir, manifest_path, fallback, rejection, route_result)[0]
 
     scene_spec = {"id": scene_id, "title": title or scene_id.replace("_", " ").title()}
     finalized, log_entry = generate_structural_pair(
         candidate, scene_spec, staging_dir, policy=policy, difficulty=difficulty
     )
     if finalized is None:
-        raise ValueError(f"Structural pipeline rejected the image: {log_entry.get('rejection_reason')}")
+        reason = str(log_entry.get("rejection_reason") or "Unknown structural failure")
+        classified_reason = f"{log_entry['rejection_code']}: {reason}" if log_entry.get("rejection_code") else reason
+        rejection = IngestRejection(f"Structural pipeline rejected the image: {reason}", "structural", (classified_reason,))
+        return _local_fallback(candidate, scene_id, title, 1, difficulty, staging_dir,
+                               levels_dir, manifest_path, fallback, rejection, route_result)[0]
 
     manifest_entry = log_entry["manifest_entry"]
     return publish_pair(finalized, manifest_entry, levels_dir, manifest_path)
@@ -126,6 +194,7 @@ def ingest_image_variants(
     levels_dir: str = DEFAULT_LEVELS_DIR,
     manifest_path: str = DEFAULT_MANIFEST_PATH,
     staging_dir=None,
+    fallback="auto",
 ) -> list:
     """Like ingest_image, but publishes up to `count` distinct structural
     edits of the same source photo -- each under its own id (f"{scene_id}_v{n}")
@@ -139,21 +208,29 @@ def ingest_image_variants(
         raise ValueError(f"Not found: {source}")
     if difficulty not in VALID_DIFFICULTIES:
         raise ValueError(f"difficulty must be one of {VALID_DIFFICULTIES}, got {difficulty!r}")
+    if count < 1 or fallback not in VALID_FALLBACKS:
+        raise ValueError(f"count must be positive and fallback must be one of {VALID_FALLBACKS}")
 
     policy = DEFAULT_BASE_GENERATION_POLICY
     master_path = Path(staging_dir) / "master.png"
     candidate = normalize_local_image(source.read_bytes(), scene_id, str(master_path), policy)
 
-    passed, failures, _ = run_local_gates(str(master_path), policy)
+    passed, failures, route_result = run_local_gates(str(master_path), policy)
     if not passed:
-        raise ValueError("Rejected by local quality gates:\n" + "\n".join(f"  - {f}" for f in failures))
+        rejection = IngestRejection("Rejected by local quality gates:\n" + "\n".join(f"  - {f}" for f in failures), "local_gates", failures)
+        return _local_fallback(candidate, scene_id, title, count, difficulty, staging_dir,
+                               levels_dir, manifest_path, fallback, rejection, route_result)
 
     scene_spec = {"id": scene_id, "title": title or scene_id.replace("_", " ").title()}
     variants, log_entry = generate_structural_pair_variants(
         candidate, scene_spec, staging_dir, count=count, policy=policy, difficulty=difficulty
     )
     if not variants:
-        raise ValueError(f"Structural pipeline rejected the image: {log_entry.get('rejection_reason')}")
+        reason = str(log_entry.get("rejection_reason") or "Unknown structural failure")
+        classified_reason = f"{log_entry['rejection_code']}: {reason}" if log_entry.get("rejection_code") else reason
+        rejection = IngestRejection(f"Structural pipeline rejected the image: {reason}", "structural", (classified_reason,))
+        return _local_fallback(candidate, scene_id, title, count, difficulty, staging_dir,
+                               levels_dir, manifest_path, fallback, rejection, route_result)
 
     return [publish_pair(finalized, manifest_entry, levels_dir, manifest_path) for finalized, manifest_entry in variants]
 
@@ -181,6 +258,8 @@ def ingest(
     ),
     manifest: str = typer.Option(DEFAULT_MANIFEST_PATH, "--manifest", help="Manifest file to publish into."),
     levels_dir: str = typer.Option(DEFAULT_LEVELS_DIR, "--levels-dir", help="Directory to publish images into."),
+    report: Optional[str] = typer.Option(None, "--report", help="Save full outcomes and local fallback recommendations as JSON."),
+    fallback: str = typer.Option("auto", "--fallback", help="auto (segmented then star), local-star, local-segmented, or none: local masked edits for images the first pass rejects."),
 ):
     """Normalize, gate, difference, and publish one or more manually-sourced
     base images. Point it at a single file for full control (--id, --title,
@@ -201,12 +280,22 @@ def ingest(
     if variants < 1:
         console.print("[red]--variants must be at least 1.[/red]")
         raise typer.Exit(code=1)
+    if fallback not in VALID_FALLBACKS:
+        console.print(f"[red]--fallback must be one of {', '.join(VALID_FALLBACKS)}.[/red]")
+        raise typer.Exit(code=1)
+
+    if report and Path(report).resolve() in {Path(manifest).resolve(), *(p.resolve() for p in sources)}:
+        console.print("[red]--report must not overwrite a source image or the manifest.[/red]")
+        raise typer.Exit(code=1)
 
     taken_ids = existing_manifest_ids(manifest)
     rows = []
+    records = []
     for source in sources:
         if not source.exists():
             rows.append((source.name, "-", "[red]Rejected[/red]", "Not found"))
+            records.append(rejection_record(source, scene_id or slugify(source.stem), variants, difficulty,
+                                            ValueError(f"Not found: {source}")))
             continue
 
         this_id = scene_id or unique_id(slugify(source.stem), taken_ids)
@@ -225,6 +314,7 @@ def ingest(
                     levels_dir=levels_dir,
                     manifest_path=manifest,
                     staging_dir=staging_dir,
+                    fallback=fallback,
                 )
                 for published in published_list:
                     rows.append((source.name, published["id"], "[green]Published[/green]", published["baseImage"]))
@@ -237,13 +327,34 @@ def ingest(
                     levels_dir=levels_dir,
                     manifest_path=manifest,
                     staging_dir=staging_dir,
+                    fallback=fallback,
                 )
                 rows.append((source.name, this_id, "[green]Published[/green]", published["baseImage"]))
-        except ValueError as exc:
-            rows.append((source.name, this_id, "[red]Rejected[/red]", str(exc).splitlines()[0]))
+                published_list = [published]
+            records.append({"source": str(source.resolve()), "scene_id": this_id,
+                            "requested_variants": variants, "difficulty": difficulty,
+                            "status": "published", "published_ids": [entry["id"] for entry in published_list]})
+        # Catch broadly: an unexpected failure on one image must not abort the
+        # batch or discard the report for images already processed. Anything
+        # that is not a classified ValueError keeps its traceback in the record.
+        except Exception as exc:
+            record = rejection_record(source, this_id, variants, difficulty, exc)
+            if not isinstance(exc, ValueError):
+                record["status"] = "error"
+                record["traceback"] = traceback.format_exc()
+            records.append(record)
+            rows.append((source.name, this_id, "[red]Rejected[/red]",
+                         "; ".join(record["reasons"]) + " → " + record["fallback"]["next_step"]))
         finally:
+            fallback_log = staging_dir / "fallback.json"
+            if fallback_log.exists() and records and records[-1]["scene_id"] == this_id:
+                records[-1]["fallback_execution"] = json.loads(fallback_log.read_text(encoding="utf-8"))
             if not keep_staging:
                 shutil.rmtree(staging_dir, ignore_errors=True)
+
+    if report:
+        write_ingest_report(report, records)
+        console.print(f"Report saved: {report}", markup=False)
 
     table = Table(title="Ingest results")
     table.add_column("File")
