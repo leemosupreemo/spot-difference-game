@@ -23,7 +23,16 @@ import { isOnline } from '../services/networkService.js';
 import { getInitialDebugMode } from './debugMode.js';
 import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
 
-export function getAllPhotoPairEntries({ debugMode = getInitialDebugMode(), online = isOnline() } = {}) {
+/**
+ * @param includeDismissed  Debug-only. Dismissed levels are normally invisible
+ *   everywhere, which makes a dismissal impossible to revisit before its
+ *   artwork is deleted. This opens that door, and nothing else should use it.
+ */
+export function getAllPhotoPairEntries({
+  debugMode = getInitialDebugMode(),
+  online = isOnline(),
+  includeDismissed = false
+} = {}) {
   // Online-only sets need artwork from Hosting; offline they are withheld
   // whole, so a player never starts a set that cannot finish.
   // Daily-challenge levels are reserved: meeting one in regular play would
@@ -36,7 +45,7 @@ export function getAllPhotoPairEntries({ debugMode = getInitialDebugMode(), onli
 
   for (const entry of entries) {
     const statusVal = getLevelStatus(statusMap[entry.id])?.status;
-    if (statusVal === 'dismissed') continue;
+    if (statusVal === 'dismissed' && !includeDismissed) continue;
     // Machine-generated levels awaiting review are debug-only until approved.
     if (!isEntryPlayable(entry, statusMap, debugMode)) continue;
 

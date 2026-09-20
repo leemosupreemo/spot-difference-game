@@ -201,6 +201,7 @@ export default function App() {
     }
   });
 
+  const [reviewDismissedLevels, setReviewDismissedLevels] = useState(false);
   const [skipKeptLevels, setSkipKeptLevels] = useState(() => {
     try {
       const saved = localStorage.getItem('diff_hunter_skip_kept');
@@ -377,14 +378,22 @@ export default function App() {
     return brandNew;
   };
 
-  const getDebugCandidateEntries = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
-    const allEntries = getAllPhotoPairEntries();
+  const getDebugCandidateEntries = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels,
+                                    dismissedOnly = reviewDismissedLevels) => {
+    // Reviewing dismissals is the inverse of normal curation: show only what was
+    // rejected, so a decision can be reconsidered while the artwork still exists.
+    const allEntries = getAllPhotoPairEntries({ includeDismissed: dismissedOnly });
     const unreviewed = [];
     const categorized = [];
 
     for (const entry of allEntries) {
       const statusObj = getEntryCurationStatus(entry, mapToUse);
       const statusVal = statusObj?.status;
+      if (dismissedOnly) {
+        if (statusVal !== 'dismissed') continue;
+        categorized.push(entry);
+        continue;
+      }
       if (statusVal === 'dismissed') continue;
       if (skipKept && isKeptStatus(statusVal)) continue;
 
@@ -399,11 +408,22 @@ export default function App() {
     return [...unreviewed, ...categorized];
   };
 
+  // Dismissed levels whose artwork still exists -- the ones a reversal can
+  // still rescue. Once pruned they are gone, so the count is the window.
+  const dismissedAvailableCount = useMemo(() => {
+    if (!debugMode) return 0;
+    return getAllPhotoPairEntries({ includeDismissed: true }).filter(entry =>
+      getEntryCurationStatus(entry, curatedStatusMap)?.status === 'dismissed').length;
+  }, [debugMode, curatedStatusMap, remoteLevelsRevision]);
+
   const effectiveDebugPool = useMemo(() => {
     if (!debugMode) return [];
-    const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
+    const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels, reviewDismissedLevels);
+    // Reviewing dismissals must not silently fall back to the normal pool:
+    // an empty result means nothing was dismissed, which is worth seeing.
+    if (reviewDismissedLevels) return pool;
     return pool.length > 0 ? pool : getAllPhotoPairEntries();
-  }, [debugMode, curatedStatusMap, skipKeptLevels]);
+  }, [debugMode, curatedStatusMap, skipKeptLevels, reviewDismissedLevels]);
 
   const handleSetCuratedStatus = (levelId, status, meta) => {
     const updated = setLevelCuratedStatus(levelId, status, meta);
@@ -1384,6 +1404,9 @@ export default function App() {
             onToggleTutorialAnimation={handleToggleTutorialAnimation}
             onRefreshRemotePacks={handleRefreshRemotePacks}
             remotePackSync={remotePackSync}
+            reviewDismissedLevels={reviewDismissedLevels}
+            onToggleReviewDismissed={setReviewDismissedLevels}
+            dismissedCount={dismissedAvailableCount}
             simulatedOffline={simulatedOffline}
             onToggleSimulatedOffline={handleToggleSimulatedOffline}
             noticeSlot={

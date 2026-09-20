@@ -29,6 +29,9 @@ export default function MainMenu({
   hasCompletedFirstSet: hasCompletedProp,
   bannerSlot = null,
   noticeSlot = null,
+  reviewDismissedLevels = false,
+  onToggleReviewDismissed = null,
+  dismissedCount = 0,
   simulatedOffline = false,
   onToggleSimulatedOffline = null,
   debugMode = false,
@@ -275,6 +278,34 @@ export default function MainMenu({
             );
           })}
         </div>
+
+        {debugMode && (
+          <button
+            type="button"
+            aria-label="Review Dismissed Levels"
+            aria-pressed={reviewDismissedLevels}
+            onClick={() => onToggleReviewDismissed?.(!reviewDismissedLevels)}
+            disabled={!reviewDismissedLevels && dismissedCount === 0}
+            style={{
+              width: '100%',
+              marginBottom: '14px',
+              padding: '10px 12px',
+              borderRadius: '10px',
+              fontWeight: 900,
+              fontSize: '0.76rem',
+              letterSpacing: '0.5px',
+              cursor: (!reviewDismissedLevels && dismissedCount === 0) ? 'default' : 'pointer',
+              background: reviewDismissedLevels ? 'rgba(255, 176, 32, 0.18)' : 'rgba(10, 8, 28, 0.9)',
+              color: reviewDismissedLevels ? 'var(--accent-gold, #ffb020)' : 'var(--text-muted)',
+              border: `1px solid ${reviewDismissedLevels ? 'rgba(255, 176, 32, 0.55)' : 'var(--border-glass)'}`,
+              opacity: (!reviewDismissedLevels && dismissedCount === 0) ? 0.5 : 1
+            }}
+          >
+            {reviewDismissedLevels
+              ? '↩︎ REVIEWING DISMISSED — TAP TO EXIT'
+              : `🗑 REVIEW DISMISSED (${dismissedCount})`}
+          </button>
+        )}
 
         {debugMode && (
           <button
