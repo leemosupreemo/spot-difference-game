@@ -71,6 +71,8 @@ test('daily victory keeps failure details compact and exposes a top-three leader
   assert.match(source, /className="daily-victory-results-grid"/);
   assert.match(source, /aria-label="Share daily result"/);
   assert.match(source, /aria-label="Share daily result"[\s\S]*?width:\s*['"]40px['"]/);
+  assert.match(source, /margin:\s*['"]-12px 0 14px 0['"]/);
+  assert.match(source, /paddingRight:\s*['"]40px['"]/);
 });
 
 test('daily success replaces rank and inline leaderboard with a link beside the hero time', () => {

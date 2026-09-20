@@ -451,7 +451,7 @@ export default function DailyVictoryModal({
             </h2>
           </div>
         ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)', margin: '0 0 14px 0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)', margin: '-12px 0 14px 0', paddingRight: '40px', minHeight: '40px' }}>
             <button
               onClick={handleShare}
               aria-label="Share daily result"
