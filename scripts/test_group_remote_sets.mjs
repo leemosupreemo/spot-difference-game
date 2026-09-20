@@ -153,3 +153,41 @@ test('allocation never places the same level id twice', async () => {
   assert.equal(new Set(placed).size, placed.length, 'a level id must appear in one set only');
   assert.equal(placed.length, levels.length);
 });
+
+test('packing that would repeat a photo falls back to spreading', async () => {
+  const { allocateSets, baseKey } = await import('./group_remote_sets.mjs');
+  // The real shape that exposed this: 34 levels from 10 photos, several with
+  // five variants. Fullest-first packing strands a large group; spreading does
+  // not, and a repeated photograph costs more than an untidy tail.
+  const levels = [];
+  const sizes = [5, 5, 5, 5, 4, 3, 3, 2, 1, 1];
+  sizes.forEach((n, g) => {
+    for (let i = 0; i < n; i++) levels.push({ id: `g${g}_${i}`, baseImage: `levels/photo_${g}_base.webp` });
+  });
+  assert.equal(levels.length, 34);
+
+  const sets = allocateSets(levels, 5);
+  const repeats = sets.reduce((t, s) => t + (s.length - new Set(s.map(baseKey)).size), 0);
+  assert.equal(repeats, 0, 'no set may show the same photograph twice');
+  assert.equal(sets.flat().length, 34, 'and no level may be dropped');
+});
+
+test('a regroup keeps levels still awaiting review', async () => {
+  // A review batch is deliberately unreviewed. Keeping only approved levels
+  // would delete it mid-review.
+  const source = await import('node:fs')
+    .then(fs => fs.readFileSync(new URL('./group_remote_sets.mjs', import.meta.url), 'utf8'));
+  assert.match(source, /if \(recorded === 'dismissed'\) return null;/);
+  assert.match(source, /return \{ \.\.\.level, curationStatus: 'pending' \};/);
+  assert.doesNotMatch(source, /all\.filter\(l => statusOf\(official\[l\.id\]\) === 'approved'\)/,
+    'keeping only approved levels destroys an in-flight review batch');
+});
+
+test('an approved level is stamped approved, not left pending', async () => {
+  // The gate reads the level's own curationStatus. A level approved in the
+  // record but still marked pending stays invisible in production for good.
+  const source = await import('node:fs')
+    .then(fs => fs.readFileSync(new URL('./group_remote_sets.mjs', import.meta.url), 'utf8'));
+  assert.match(source, /recorded === 'approved' \|\| recorded === 'wrong_difficulty'/);
+  assert.match(source, /return \{ \.\.\.level, curationStatus: 'approved' \};/);
+});

@@ -62,34 +62,44 @@ export function allocateSets(approved, setSize = SET_SIZE) {
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(level);
   }
-
-  const buckets = Array.from({ length: setCount }, () => ({ levels: [], bases: new Set() }));
   const ordered = [...groups.values()].sort((a, b) => b.length - a.length);
-  const overflow = [];
 
-  for (const group of ordered) {
-    for (const level of group) {
-      const key = baseKey(level);
-      // Fullest-first that can still accept this photo. Spreading by emptiest
-      // balances the sets and leaves two of them one short, so placeholders end
-      // up scattered; packing concentrates the shortfall in a single trailing
-      // set, which is what an incomplete set should look like.
-      const target = buckets
-        .filter(b => b.levels.length < setSize && !b.bases.has(key))
-        .sort((a, b) => b.levels.length - a.levels.length)[0];
-      if (!target) { overflow.push(level); continue; }
-      target.levels.push(level);
-      target.bases.add(key);
+  // Packing fullest-first keeps the shortfall in one trailing set, which is
+  // what an incomplete set should look like. But it can dead-end: a large group
+  // arrives to find every set that could take it already full. Spreading avoids
+  // that and costs a tidy tail, so try packing first and fall back only when it
+  // actually produces a repeat.
+  const attempt = (preferFullest) => {
+    const buckets = Array.from({ length: setCount }, () => ({ levels: [], bases: new Set() }));
+    const overflow = [];
+    for (const group of ordered) {
+      for (const level of group) {
+        const key = baseKey(level);
+        const open = buckets.filter(b => b.levels.length < setSize && !b.bases.has(key));
+        open.sort((a, b) => preferFullest
+          ? b.levels.length - a.levels.length
+          : a.levels.length - b.levels.length);
+        const target = open[0];
+        if (!target) { overflow.push(level); continue; }
+        target.levels.push(level);
+        target.bases.add(key);
+      }
     }
-  }
-  // Anything that could not be placed without repeating a photo still has to
-  // go somewhere; it lands in the emptiest set and is reported by the caller.
-  for (const level of overflow) {
-    const target = buckets.filter(b => b.levels.length < setSize)
-      .sort((a, b) => b.levels.length - a.levels.length)[0];
-    if (target) { target.levels.push(level); target.bases.add(baseKey(level)); }
-  }
-  return buckets.map(b => b.levels).filter(levels => levels.length > 0);
+    for (const level of overflow) {
+      const target = buckets.filter(b => b.levels.length < setSize)
+        .sort((a, b) => b.levels.length - a.levels.length)[0];
+      if (target) { target.levels.push(level); target.bases.add(baseKey(level)); }
+    }
+    const sets = buckets.map(b => b.levels).filter(levels => levels.length > 0);
+    const repeats = sets.reduce((total, levels) =>
+      total + (levels.length - new Set(levels.map(baseKey)).size), 0);
+    return { sets, repeats };
+  };
+
+  const packed = attempt(true);
+  if (packed.repeats === 0) return packed.sets;
+  const spread = attempt(false);
+  return spread.repeats < packed.repeats ? spread.sets : packed.sets;
 }
 
 /** Split approved levels into fives, padding the last set with placeholders. */
@@ -136,13 +146,32 @@ async function main() {
     }
   });
 
-  const approved = all.filter(l => statusOf(official[l.id]) === 'approved');
-  const dropped = all.filter(l => statusOf(official[l.id]) !== 'approved');
+  // Keep anything not rejected, and stamp each level with the decision the
+  // curation record actually holds.
+  //
+  // Keeping only approved levels would delete a review batch that is still
+  // being judged -- the candidates are deliberately unreviewed, so a regroup
+  // would treat them as unwanted and remove them mid-review.
+  //
+  // Stamping matters because the gate reads the level's own curationStatus, not
+  // the record. A level approved in the record but still carrying 'pending'
+  // from when it was published for review stays invisible in production for
+  // good, which is exactly what happened to the one duplicate keeper.
+  const decide = (level) => {
+    const recorded = statusOf(official[level.id]);
+    if (recorded === 'dismissed') return null;
+    if (recorded === 'approved' || recorded === 'wrong_difficulty') {
+      return { ...level, curationStatus: 'approved' };
+    }
+    return { ...level, curationStatus: 'pending' };
+  };
+  const approved = all.map(decide).filter(Boolean);
+  const dropped = all.filter(l => statusOf(official[l.id]) === 'dismissed');
   const sets = buildRemoteSets(approved);
 
   console.log(`published levels : ${all.length}`);
-  console.log(`  approved       : ${approved.length}`);
-  console.log(`  dropped        : ${dropped.length} (not approved)`);
+  console.log(`  kept           : ${approved.length} (approved or awaiting review)`);
+  console.log(`  dropped        : ${dropped.length} (dismissed)`);
   console.log(`sets of ${SET_SIZE}       : ${sets.length}`);
   for (const set of sets) {
     const pad = SET_SIZE - set.realCount;

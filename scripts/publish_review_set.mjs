@@ -21,6 +21,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import { getFirestore, collection, getDocs, doc, setDoc } from 'firebase/firestore';
 import { createPlaceholderEntry, REMOTE_SET_PREFIX } from '../src/utils/remoteSetPolicy.js';
+import { allocateSets, baseKey } from './group_remote_sets.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SET_SIZE = 5;
@@ -54,28 +55,37 @@ export function findIdCollisions(entries, existingIds) {
   return entries.map(e => e.id).filter(id => taken.has(id));
 }
 
-export function buildReviewSet(entries, setId, host, makePlaceholder = createPlaceholderEntry) {
-  if (entries.length > SET_SIZE) {
-    throw new Error(`A review set holds at most ${SET_SIZE} candidates, got ${entries.length}`);
-  }
+/**
+ * Split a batch into review sets, spreading each photograph across them.
+ *
+ * A batch is usually several variants of the same few photographs, so chunking
+ * it in order would put one picture five times in a single set. The same
+ * allocator the live regroup uses keeps a photo to at most one slot per set.
+ */
+export function buildReviewSets(entries, firstSetNumber, host, makePlaceholder = createPlaceholderEntry) {
   const ids = entries.map(e => e.id);
   if (new Set(ids).size !== ids.length) {
     throw new Error('Review batch contains repeated level ids');
   }
-  // Normalise both sides so exactly one separator lands between them.
   const absolute = (ref) => `${host.replace(/\/+$/, '')}/${String(ref).split('?')[0].replace(/^\/+/, '')}`;
-  const levels = entries.map((entry, index) => ({
-    ...entry,
-    setId,
-    sequence: index + 1,
-    curationStatus: 'pending',
-    baseImage: absolute(entry.baseImage),
-    variantImage: absolute(entry.variantImage)
-  }));
-  while (levels.length < SET_SIZE) {
-    levels.push(makePlaceholder({ setId, sequence: levels.length + 1 }));
-  }
-  return levels;
+
+  const groups = allocateSets(entries, SET_SIZE).sort((a, b) => b.length - a.length);
+  return groups.map((group, index) => {
+    const setId = `${REMOTE_SET_PREFIX}${String(firstSetNumber + index).padStart(3, '0')}`;
+    const levels = group.map((entry, i) => ({
+      ...entry,
+      setId,
+      sequence: i + 1,
+      curationStatus: 'pending',
+      baseImage: absolute(entry.baseImage),
+      variantImage: absolute(entry.variantImage)
+    }));
+    while (levels.length < SET_SIZE) {
+      levels.push(makePlaceholder({ setId, sequence: levels.length + 1 }));
+    }
+    const bases = levels.filter(l => !l.isPlaceholder).map(baseKey);
+    return { setId, levels, realCount: group.length, repeats: bases.length - new Set(bases).size };
+  });
 }
 
 async function main() {
@@ -116,28 +126,33 @@ async function main() {
     process.exit(1);
   }
 
-  const setId = nextSetId(existing);
-  const levels = buildReviewSet(entries, setId, host);
-  const packId = `remote_set_pack_${setId.slice(REMOTE_SET_PREFIX.length)}`;
+  const firstNumber = Number(nextSetId(existing).slice(REMOTE_SET_PREFIX.length));
+  const sets = buildReviewSets(entries, firstNumber, host);
 
   console.log(`candidates : ${entries.length}`);
-  console.log(`set        : ${setId}  (${levels.filter(l => l.isPlaceholder).length} placeholder)`);
-  console.log(`pack       : ${packId}`);
-  levels.filter(l => !l.isPlaceholder).forEach(l =>
-    console.log(`   ${l.variantCode}  ${l.id}  ${l.operation}`));
+  console.log(`review sets: ${sets.length}`);
+  for (const set of sets) {
+    const pad = SET_SIZE - set.realCount;
+    console.log(`  ${set.setId}: ${set.realCount} real${pad ? ` + ${pad} placeholder` : ''}`
+      + (set.repeats ? `  ** ${set.repeats} repeated photo(s)` : ''));
+  }
 
   if (!apply) { console.log('\nDry run. Re-run with --apply to write.'); process.exit(0); }
 
-  await setDoc(doc(db, 'remote_level_packs', packId), {
-    packId,
-    title: `Review Batch ${setId.slice(REMOTE_SET_PREFIX.length)}`,
-    active: true,
-    publishedAt: new Date().toISOString(),
-    setId,
-    levelCount: levels.length,
-    levels
-  });
-  console.log(`\nPublished ${packId}. Pending levels are visible in debug mode only.`);
+  for (const set of sets) {
+    const packId = `remote_set_pack_${set.setId.slice(REMOTE_SET_PREFIX.length)}`;
+    await setDoc(doc(db, 'remote_level_packs', packId), {
+      packId,
+      title: `Review Batch ${set.setId.slice(REMOTE_SET_PREFIX.length)}`,
+      active: true,
+      publishedAt: new Date().toISOString(),
+      setId: set.setId,
+      levelCount: set.levels.length,
+      levels: set.levels
+    });
+    console.log(`published ${packId} (${set.realCount} real)`);
+  }
+  console.log('\nPending levels are visible in debug mode only.');
   process.exit(0);
 }
 
