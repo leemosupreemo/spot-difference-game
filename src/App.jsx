@@ -18,7 +18,8 @@ import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
 import { generateProceduralLevelPair } from './utils/proceduralGenerator';
 import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
 import { getCompletePhotoSets } from './utils/photoSetCatalog';
-import { countsAsAttempt, selectableSetIds } from './utils/remoteSetPolicy.js';
+import OfflineSetNotice from './components/OfflineSetNotice.jsx';
+import { countsAsAttempt, selectableSetIds, isRemoteSetId } from './utils/remoteSetPolicy.js';
 import { isOnline, subscribeNetworkStatus } from './services/networkService.js';
 import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
@@ -316,11 +317,24 @@ export default function App() {
     }
   }, []);
 
+  const [switchedOffRemoteSet, setSwitchedOffRemoteSet] = useState(false);
   useEffect(() => {
     if (photoSetIds.length > 0 && !photoSetIds.includes(photoSetId)) {
+      // Losing an online-only set to a dropped connection is the one case worth
+      // explaining: the player had a set and it vanished. Any other correction
+      // (a set pruned, a first run with nothing saved) needs no apology.
+      if (isRemoteSetId(photoSetId) && !networkOnline) {
+        logApp('INFO', `[PhotoSet:OfflineSwitch] ${photoSetId} unavailable offline -- moving to ${photoSetIds[0]}`);
+        setSwitchedOffRemoteSet(true);
+      }
       setPhotoSetId(photoSetIds[0]);
     }
-  }, [photoSetIds, photoSetId]);
+  }, [photoSetIds, photoSetId, networkOnline]);
+
+  // Reconnecting restores the sets, so the explanation retires itself.
+  useEffect(() => {
+    if (networkOnline) setSwitchedOffRemoteSet(false);
+  }, [networkOnline]);
 
   const handleToggleSkipKept = (val) => {
     setSkipKeptLevels(val);
@@ -1365,6 +1379,12 @@ export default function App() {
             onToggleTutorialAnimation={handleToggleTutorialAnimation}
             onRefreshRemotePacks={handleRefreshRemotePacks}
             remotePackSync={remotePackSync}
+            noticeSlot={
+              <OfflineSetNotice
+                visible={switchedOffRemoteSet}
+                onDismiss={() => setSwitchedOffRemoteSet(false)}
+              />
+            }
             bannerSlot={
               (!isDailyCompleted || debugMode) && (
                 <SetOfTheDayBanner

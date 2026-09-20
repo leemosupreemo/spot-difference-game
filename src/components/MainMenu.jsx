@@ -27,6 +27,7 @@ export default function MainMenu({
   incomingChallenge = null,
   hasCompletedFirstSet: hasCompletedProp,
   bannerSlot = null,
+  noticeSlot = null,
   debugMode = false,
   tutorialAnimationEnabled = true,
   onToggleTutorialAnimation = null,
@@ -117,6 +118,7 @@ export default function MainMenu({
         </div>
       )}
 
+      {noticeSlot}
       {bannerSlot}
 
       {debugMode && onToggleTutorialAnimation && (
