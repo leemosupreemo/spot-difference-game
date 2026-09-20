@@ -17,11 +17,15 @@ export function resolveAssetUrl(url) {
 
 import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
 import { isEntryPlayable, describePendingFilter } from './pendingLevelGate.js';
+import { selectableEntries, isPlaceholderEntry } from './remoteSetPolicy.js';
+import { isOnline } from '../services/networkService.js';
 import { getInitialDebugMode } from './debugMode.js';
 import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
 
-export function getAllPhotoPairEntries({ debugMode = getInitialDebugMode() } = {}) {
-  const entries = loadManifest();
+export function getAllPhotoPairEntries({ debugMode = getInitialDebugMode(), online = isOnline() } = {}) {
+  // Online-only sets need artwork from Hosting; offline they are withheld
+  // whole, so a player never starts a set that cannot finish.
+  const entries = selectableEntries(loadManifest(), { online });
   const statusMap = getCuratedStatusMap();
   const unratedCropped = [];
   const otherUnrated = [];
@@ -129,6 +133,12 @@ export function createPhotoPairLevel(entry, preloadedImages = null) {
     id: entry.id,
     title: entry.title,
     packId: entry.packId,
+    setId: entry.setId,
+    sequence: entry.sequence,
+    // Carried through so the canvas can explain itself and the run is not
+    // recorded as a real attempt at the set.
+    isPlaceholder: Boolean(entry.isPlaceholder),
+    placeholderMessage: entry.placeholderMessage,
     category: entry.category || entry.pack,
     difficulty: entry.difficulty,
     totalDifferences: 1,
@@ -204,7 +214,8 @@ export async function buildPhotoPairStage({
   fetchImpl = null,
   imageFactory = null,
   curatedStatusMap = null,
-  debugMode = getInitialDebugMode()
+  debugMode = getInitialDebugMode(),
+  online = isOnline()
 } = {}) {
   const hasRequestedSet = setId !== undefined;
   const requestedSetId = typeof setId === 'string' ? setId.trim() : '';
@@ -228,6 +239,8 @@ export async function buildPhotoPairStage({
     if (!allEntries) {
       allEntries = loadManifest();
     }
+    allEntries = selectableEntries(allEntries, { online });
+
     const statusMap = curatedStatusMap || getCuratedStatusMap();
     const activeEntries = allEntries.filter(entry => {
       const statusVal = getLevelStatus(statusMap[entry.id])?.status;
@@ -263,6 +276,11 @@ export async function buildPhotoPairStage({
 
       for (const entry of candidates) {
         if (stage.length >= count) break;
+        if (isPlaceholderEntry(entry)) {
+          // Nothing to fetch: the slot renders its own explanation.
+          stage.push(createPhotoPairLevel(entry));
+          continue;
+        }
         if (imageFactory) {
           try {
             const baseImg = imageFactory();

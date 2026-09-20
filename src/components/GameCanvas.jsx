@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { PLACEHOLDER_MESSAGE, PLACEHOLDER_HINT } from '../utils/remoteSetPolicy.js';
 import { sounds } from '../utils/audio';
 import { logApp, auditDOMState } from '../utils/logger';
 import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
@@ -333,6 +334,22 @@ export default function GameCanvas({
 
   const leftBgUrl = isPhoto ? resolveAssetUrl(level?.baseImage) : canvasUrls.left;
   const rightBgUrl = isPhoto ? resolveAssetUrl(level?.variantImage) : canvasUrls.right;
+
+  // A slot with no artwork behind it: either a set awaiting new images, or a
+  // level whose artwork failed to load. Say so, rather than rendering two blank
+  // frames the player would hunt through.
+  if (level?.isPlaceholder) {
+    return (
+      <div className="placeholder-level" role="status">
+        <div className="placeholder-level-icon" aria-hidden="true">🖼️</div>
+        <p className="placeholder-level-message">
+          {level.placeholderMessage || PLACEHOLDER_MESSAGE}
+        </p>
+        <p className="placeholder-level-hint">{PLACEHOLDER_HINT}</p>
+        <p className="placeholder-level-note">This round won't count against you.</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{

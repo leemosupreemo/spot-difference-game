@@ -435,3 +435,87 @@ test('approving a pending level in debug is what promotes it', async () => {
   assert.equal(isEntryPlayable(entry, { promote_me: 'approved' }, false), true,
     'approved in debug: now live');
 });
+
+test('offline withholds online-only sets from both selection paths', async () => {
+  const mk = (id, setId, sequence) => ({
+    id, title: id, category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', operation: 'recolor',
+    setId, sequence,
+    baseImage: `https://host/levels/${id}_base.webp`,
+    variantImage: `https://host/levels/${id}_variant.webp`,
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5, operation: 'recolor' }]
+  });
+  const manifest = [
+    ...[1, 2, 3, 4, 5].map(n => mk(`bundled_${n}`, 'photo_set_900', n)),
+    ...[1, 2, 3, 4, 5].map(n => mk(`remote_${n}`, 'remote_set_900', n))
+  ];
+  const fetchImpl = async () => ({ ok: true, json: async () => manifest });
+  const imageFactory = () => {
+    const img = {};
+    setTimeout(() => img.onload && img.onload(), 0);
+    return img;
+  };
+  const approved = Object.fromEntries(manifest.map(e => [e.id, 'approved']));
+
+  const ids = async (setId, online) => {
+    const stage = await buildPhotoPairStage({
+      fetchImpl, imageFactory, curatedStatusMap: approved,
+      debugMode: false, online, setId, count: 5, seed: 1
+    });
+    return stage.map(l => l.id);
+  };
+
+  // Set path: the online-only set is unavailable offline, the bundled one works.
+  assert.equal((await ids('remote_set_900', false)).length, 0,
+    'an online-only set must not start while offline');
+  assert.equal((await ids('remote_set_900', true)).length, 5);
+  assert.equal((await ids('photo_set_900', false)).length, 5,
+    'a bundled set must still work offline');
+
+  // Non-set path: it ignores setId entirely, so it needs the same filter or
+  // remote levels leak into a stage that cannot load.
+  const loose = await buildPhotoPairStage({
+    fetchImpl, imageFactory, curatedStatusMap: approved,
+    debugMode: false, online: false, count: 5, seed: 1
+  });
+  assert.ok(!loose.some(l => String(l.id).startsWith('remote_')),
+    'offline stage must contain no online-only levels');
+});
+
+test('a placeholder slot is served without any image request', async () => {
+  const placeholder = {
+    id: 'remote_set_901_placeholder_05', title: 'Coming soon', category: 'Photography',
+    pack: 'Find the Sniper', packId: 'find_the_sniper', difficulty: 'Medium',
+    setId: 'remote_set_901', sequence: 5, isPlaceholder: true,
+    placeholderMessage: 'Sorry, this image could not be loaded.', diffs: []
+  };
+  const real = (n) => ({
+    id: `r_${n}`, title: `r${n}`, category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', setId: 'remote_set_901', sequence: n,
+    baseImage: `https://host/${n}_base.webp`, variantImage: `https://host/${n}_variant.webp`,
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5, operation: 'recolor' }]
+  });
+  const manifest = [real(1), real(2), real(3), real(4), placeholder];
+  const requested = [];
+  const imageFactory = () => {
+    const img = {};
+    Object.defineProperty(img, 'src', {
+      set(value) { requested.push(value); setTimeout(() => img.onload && img.onload(), 0); }
+    });
+    return img;
+  };
+  const stage = await buildPhotoPairStage({
+    fetchImpl: async () => ({ ok: true, json: async () => manifest }),
+    imageFactory,
+    curatedStatusMap: Object.fromEntries(manifest.map(e => [e.id, 'approved'])),
+    debugMode: false, online: true, setId: 'remote_set_901', count: 5, seed: 1
+  });
+
+  assert.equal(stage.length, 5, 'the padded set is still a complete five');
+  const slot = stage.find(l => l.isPlaceholder);
+  assert.ok(slot, 'the placeholder must survive into the stage');
+  assert.deepEqual(slot.diffs, [], 'nothing to find in a placeholder');
+  assert.ok(!requested.some(u => String(u).includes('placeholder')),
+    'a placeholder must never trigger an image request');
+  assert.equal(requested.length, 8, 'only the four real levels are fetched');
+});

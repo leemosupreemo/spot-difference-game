@@ -1186,3 +1186,51 @@ button:active,
     display: none;
   }
 }
+
+/* Placeholder shown in place of a level whose artwork is unavailable: a set
+   still awaiting new images, or artwork that failed to load. It replaces the
+   canvas entirely -- two blank frames would read as an unusually hard puzzle. */
+.placeholder-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  box-sizing: border-box;
+  min-height: 320px;
+  text-align: center;
+  border: 2px dashed var(--border-glass);
+  border-radius: var(--radius-md);
+  background: rgba(10, 12, 24, 0.55);
+}
+
+.placeholder-level-icon {
+  font-size: 40px;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.placeholder-level-message {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  max-width: 34ch;
+}
+
+.placeholder-level-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted, #9aa3c0);
+  max-width: 38ch;
+}
+
+.placeholder-level-note {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+}

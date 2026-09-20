@@ -34,6 +34,16 @@ export function isValidPhotoPairEntry(entry) {
   if (!isNonEmptyString(entry.pack || entry.packId || entry.category)) return false;
   if (!isNonEmptyString(entry.packId || entry.pack || entry.category)) return false;
   if (!DIFFICULTIES.has(entry.difficulty)) return false;
+
+  // A placeholder holds a slot in a set whose artwork does not exist yet. It is
+  // a valid entry precisely because it has no images and nothing to find -- the
+  // canvas renders an explanation instead. Requiring assets here would stop the
+  // set ever reaching five and the set would never be offered at all.
+  if (entry.isPlaceholder === true) {
+    return entry.baseImage === undefined && entry.variantImage === undefined
+      && Array.isArray(entry.diffs) && entry.diffs.length === 0;
+  }
+
   if (!isAssetPath(entry.baseImage) || !isAssetPath(entry.variantImage)) return false;
   if (!Array.isArray(entry.diffs) || entry.diffs.length !== 1) return false;
   return isValidDiff(entry.diffs[0]);

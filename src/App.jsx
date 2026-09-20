@@ -18,6 +18,8 @@ import { LEVELS as INITIAL_LEVELS } from './utils/canvasLevels';
 import { generateProceduralLevelPair } from './utils/proceduralGenerator';
 import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
 import { getCompletePhotoSets } from './utils/photoSetCatalog';
+import { countsAsAttempt, selectableSetIds } from './utils/remoteSetPolicy.js';
+import { isOnline, subscribeNetworkStatus } from './services/networkService.js';
 import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
@@ -116,9 +118,16 @@ export default function App() {
 
   const [remoteLevelsRevision, setRemoteLevelsRevision] = useState(0);
   const [remotePackSync, setRemotePackSync] = useState({ status: 'idle', count: 0 });
-  const photoSetIds = useMemo(() => getCompletePhotoSets(
-    getAllPhotoPairEntries().filter(entry => entry.packId === 'find_the_sniper')
-  ).map(photoSet => photoSet.setId), [remoteLevelsRevision]);
+  const [networkOnline, setNetworkOnline] = useState(() => isOnline());
+  useEffect(() => subscribeNetworkStatus(setNetworkOnline), []);
+  // Online-only sets are withheld while offline: their artwork lives on
+  // Hosting, so offering them would start a set that cannot finish.
+  const photoSetIds = useMemo(() => selectableSetIds(
+    getCompletePhotoSets(
+      getAllPhotoPairEntries({ online: networkOnline }).filter(entry => entry.packId === 'find_the_sniper')
+    ).map(photoSet => photoSet.setId),
+    { online: networkOnline }
+  ), [remoteLevelsRevision, networkOnline]);
   const [photoSetId, setPhotoSetId] = useState(() => {
     try {
       const savedSetId = localStorage.getItem('diff_hunter_photo_set_id');
@@ -782,6 +791,14 @@ export default function App() {
       });
       if (stageList && stageList.length > 0) {
         logApp('INFO', `[StartGame:PhotoStageBuilt] Launching 5 photo levels: ${stageList.map(l => l.id).join(', ')}`);
+        // A stage carrying a placeholder is not a fair run at the set's
+        // content, so it must not consume the player's first attempt.
+        if (!countsAsAttempt(stageList)) {
+          logApp('INFO', `[StartGame:PlaceholderStage] ${photoSetId} has unavailable artwork -- not recording an attempt`);
+          setIsCurrentRunFirstAttempt(false);
+          activeSetAttemptRef.current = null;
+          clearActiveSetAttempt();
+        }
         setLevels(stageList);
         startLevel(stageList[0].id);
         setView('game');
