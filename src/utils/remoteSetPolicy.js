@@ -129,3 +129,43 @@ export function formatSetLabel(setId) {
   }
   return number ? `Set ${number}` : setId;
 }
+
+/**
+ * Daily-challenge-only levels.
+ *
+ * The daily challenge must never serve a level the player can also meet in
+ * regular Photography, or "today's challenge" is something they may already
+ * have solved. Reserving them by set id keeps the rule in the data, the same
+ * way `remote_set_` marks online-only content.
+ *
+ * Both halves matter. Regular play must exclude these, AND the daily picker
+ * must draw only from them -- its fallback otherwise chooses at random from the
+ * whole manifest, which puts the overlap straight back.
+ */
+export const DAILY_SET_PREFIX = 'daily_set_';
+
+export function isDailySetId(setId) {
+  return typeof setId === 'string' && setId.startsWith(DAILY_SET_PREFIX);
+}
+
+/** A level reserved for the daily challenge, by set or by explicit flag. */
+export function isDailyOnlyEntry(entry) {
+  if (!entry) return false;
+  if (entry.dailyOnly === true) return true;
+  if (isDailySetId(entry.setId)) return true;
+  // Levels named for the daily challenge but never given a set predate the
+  // namespace; honour their intent rather than leaking them into regular play.
+  return typeof entry.id === 'string' && entry.id.startsWith(DAILY_SET_PREFIX) && !entry.setId;
+}
+
+/** Levels regular Photography may serve. */
+export function regularPlayEntries(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries.filter(entry => !isDailyOnlyEntry(entry));
+}
+
+/** Levels the daily challenge may serve. */
+export function dailyPoolEntries(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries.filter(isDailyOnlyEntry);
+}

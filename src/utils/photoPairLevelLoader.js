@@ -17,7 +17,7 @@ export function resolveAssetUrl(url) {
 
 import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
 import { isEntryPlayable, describePendingFilter } from './pendingLevelGate.js';
-import { selectableEntries, isPlaceholderEntry } from './remoteSetPolicy.js';
+import { selectableEntries, isPlaceholderEntry, regularPlayEntries } from './remoteSetPolicy.js';
 import { separateAdjacentDuplicates, hasAdjacentRepeat } from './stageOrdering.js';
 import { isOnline } from '../services/networkService.js';
 import { getInitialDebugMode } from './debugMode.js';
@@ -26,7 +26,9 @@ import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
 export function getAllPhotoPairEntries({ debugMode = getInitialDebugMode(), online = isOnline() } = {}) {
   // Online-only sets need artwork from Hosting; offline they are withheld
   // whole, so a player never starts a set that cannot finish.
-  const entries = selectableEntries(loadManifest(), { online });
+  // Daily-challenge levels are reserved: meeting one in regular play would
+  // mean today's challenge is something the player already solved.
+  const entries = regularPlayEntries(selectableEntries(loadManifest(), { online }));
   const statusMap = getCuratedStatusMap();
   const unratedCropped = [];
   const otherUnrated = [];
@@ -240,7 +242,7 @@ export async function buildPhotoPairStage({
     if (!allEntries) {
       allEntries = loadManifest();
     }
-    allEntries = selectableEntries(allEntries, { online });
+    allEntries = regularPlayEntries(selectableEntries(allEntries, { online }));
 
     const statusMap = curatedStatusMap || getCuratedStatusMap();
     const activeEntries = allEntries.filter(entry => {

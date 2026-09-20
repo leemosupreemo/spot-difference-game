@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T14:00:43.339Z",
+  "updatedAt": "2026-09-20T00:00:00.000Z",
   "schedule": {
     "2026-09-10": [
       "photo_set_001_01",
@@ -16,64 +16,6 @@
         "daily_set_01_01",
         "daily_set_06_01",
         "daily_set_06_03"
-      ]
-    },
-    {
-      "setId": "set_5",
-      "levels": [
-        "photo_set_001_05",
-        "photo_set_004_01",
-        "photo_set_015_04"
-      ]
-    },
-    {
-      "setId": "set_legacy_2",
-      "label": "Old (Legacy 640x480)",
-      "isLegacy": true,
-      "levels": [
-        "photo_set_008_04",
-        "photo_set_009_01",
-        "photo_set_009_02"
-      ]
-    },
-    {
-      "setId": "set_legacy_3",
-      "label": "Old (Legacy 640x480)",
-      "isLegacy": true,
-      "levels": [
-        "photo_set_009_03",
-        "photo_set_009_04",
-        "photo_set_010_01"
-      ]
-    },
-    {
-      "setId": "set_legacy_5",
-      "label": "Old (Legacy 640x480)",
-      "isLegacy": true,
-      "levels": [
-        "photo_set_011_01",
-        "photo_set_012_03",
-        "photo_set_008_01"
-      ]
-    },
-    {
-      "setId": "set_legacy_9",
-      "label": "Old (Legacy 640x480)",
-      "isLegacy": true,
-      "levels": [
-        "photo_set_011_02",
-        "photo_set_011_03",
-        "photo_set_011_04"
-      ]
-    },
-    {
-      "setId": "set_legacy_10",
-      "label": "Old (Legacy 640x480)",
-      "isLegacy": true,
-      "levels": [
-        "photo_set_011_05",
-        "photo_set_012_01",
-        "photo_set_012_02"
       ]
     }
   ],

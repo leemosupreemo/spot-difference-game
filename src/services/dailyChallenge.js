@@ -1,4 +1,5 @@
 import { initializeApp, getApps } from 'firebase/app';
+import { dailyPoolEntries } from '../utils/remoteSetPolicy.js';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import {
   getFirestore,
@@ -503,20 +504,22 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
 
   let chosenIds = dailySets[dateStr];
   if (!chosenIds || !Array.isArray(chosenIds) || chosenIds.length < 3) {
-    const usedSet = new Set(usedQueue);
-    let available = allEntries.filter(entry => {
+    // Draw only from levels reserved for the daily challenge. Without this the
+    // fallback picks at random from the whole manifest, which is how daily
+    // levels came to duplicate the regular Photography sets in the first place.
+    const dailyPool = dailyPoolEntries(allEntries);
+    const eligible = (entry) => {
       if (LEGACY_LOW_RES_LEVEL_IDS.has(entry.id)) return false;
-      if (entry.id.startsWith('medium_') || entry.id.startsWith('hard_')) return false;
-      return !usedSet.has(entry.id);
-    });
+      return !(entry.id.startsWith('medium_') || entry.id.startsWith('hard_'));
+    };
+    const usedSet = new Set(usedQueue);
+    let available = dailyPool.filter(entry => eligible(entry) && !usedSet.has(entry.id));
 
     if (available.length < 3) {
+      // Every reserved level has been used: start the rotation over rather
+      // than borrowing from regular play.
       usedQueue = [];
-      available = allEntries.filter(entry => {
-        if (LEGACY_LOW_RES_LEVEL_IDS.has(entry.id)) return false;
-        if (entry.id.startsWith('medium_') || entry.id.startsWith('hard_')) return false;
-        return true;
-      });
+      available = dailyPool.filter(eligible);
     }
 
     const rng = createSeededRandom(hashString(dateStr));
@@ -855,6 +858,60 @@ export function formatTimeUntilNextDaily() {
     return `${hours}h ${minutes}m`;
   }
   return `${minutes}m ${seconds}s`;
+}
+
+/**
+ * Clears every daily-challenge record: which sets were assigned to which dates,
+ * which levels the rotation has spent, and the player's per-day results.
+ *
+ * Needed when the daily pool itself changes. Assignments are cached per date,
+ * so a day already decided would keep serving levels that are no longer
+ * reserved for the daily challenge -- the very overlap the pool split removes.
+ *
+ * Returns the number of stored records cleared.
+ */
+export function resetAllDailyProgress() {
+  let cleared = 0;
+  const drop = (key) => {
+    try {
+      if (typeof localStorage !== 'undefined' && localStorage.getItem(key) !== null) {
+        localStorage.removeItem(key);
+        cleared += 1;
+      }
+    } catch (_) {}
+    if (memoryStore.delete(key)) cleared += 1;
+  };
+
+  drop(STORAGE_KEY_DAILY_SETS);
+  drop(STORAGE_KEY_DAILY_USED_QUEUE);
+
+  // Per-date records are keyed by date, so they have to be swept by prefix.
+  // Enumerated through length/key(), the standard Storage API: Object.keys on
+  // a Storage object is not dependable outside a plain browser window.
+  try {
+    if (typeof localStorage !== 'undefined' && typeof localStorage.key === 'function') {
+      const keys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && (key.startsWith(STORAGE_KEY_DAILY_PLAYER_PREFIX)
+            || key.startsWith(STORAGE_KEY_DAILY_LEADERBOARD_PREFIX))) {
+          keys.push(key);
+        }
+      }
+      for (const key of keys) {
+        localStorage.removeItem(key);
+        cleared += 1;
+      }
+    }
+  } catch (_) {}
+  for (const key of [...memoryStore.keys()]) {
+    if (key.startsWith(STORAGE_KEY_DAILY_PLAYER_PREFIX)
+        || key.startsWith(STORAGE_KEY_DAILY_LEADERBOARD_PREFIX)) {
+      memoryStore.delete(key);
+      cleared += 1;
+    }
+  }
+  return cleared;
 }
 
 /**

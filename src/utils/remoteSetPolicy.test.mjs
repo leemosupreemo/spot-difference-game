@@ -104,3 +104,31 @@ test('unknown or malformed set ids degrade to something printable', () => {
   assert.equal(formatSetLabel(undefined), 'Photo Set');
   assert.equal(formatSetLabel(null), 'Photo Set');
 });
+
+test('daily-only levels are reserved by set id, flag, or legacy naming', async () => {
+  const { isDailyOnlyEntry } = await import('./remoteSetPolicy.js');
+  assert.equal(isDailyOnlyEntry({ id: 'x', setId: 'daily_set_001' }), true);
+  assert.equal(isDailyOnlyEntry({ id: 'x', dailyOnly: true }), true);
+  // Predates the namespace: named for daily, never given a set.
+  assert.equal(isDailyOnlyEntry({ id: 'daily_set_01_01' }), true);
+  assert.equal(isDailyOnlyEntry({ id: 'photo_set_001_01', setId: 'photo_set_001' }), false);
+  assert.equal(isDailyOnlyEntry({ id: 'x', setId: 'remote_set_001' }), false);
+  assert.equal(isDailyOnlyEntry(null), false);
+});
+
+test('the two pools are complementary, so nothing is served by both', async () => {
+  const { regularPlayEntries, dailyPoolEntries } = await import('./remoteSetPolicy.js');
+  const entries = [
+    { id: 'a', setId: 'photo_set_001' },
+    { id: 'b', setId: 'remote_set_001' },
+    { id: 'daily_set_01_01' },
+    { id: 'd', setId: 'daily_set_001' }
+  ];
+  const regular = regularPlayEntries(entries).map(e => e.id);
+  const daily = dailyPoolEntries(entries).map(e => e.id);
+  assert.deepEqual(regular, ['a', 'b']);
+  assert.deepEqual(daily, ['daily_set_01_01', 'd']);
+  assert.equal(regular.filter(id => daily.includes(id)).length, 0,
+    'a level must never be available to both modes');
+  assert.equal(regular.length + daily.length, entries.length, 'and none may be lost');
+});
