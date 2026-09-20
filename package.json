@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "node --test src/**/*.test.mjs functions/**/*.test.mjs scripts/*.test.mjs && npm run test:ui && python3 scripts/test_pipeline_unit_suite.py && python3 scripts/test_structural_generation.py && python3 scripts/test_base_image_normalizer.py && python3 scripts/test_base_candidate_evaluator.py && python3 scripts/test_base_pair_publisher.py && python3 scripts/test_ingest_cli.py && python3 scripts/test_variant_code.py && python3 scripts/test_backfill_variant_codes.py && python3 scripts/test_ingest_failure_report.py && python3 scripts/test_local_masked_edits.py && python3 scripts/test_local_star_fallback.py && python3 scripts/test_local_segmented_fallback.py && python3 scripts/test_dedupe_base_images.py && node --test scripts/test_stage_remote_assets.mjs && node --test scripts/test_group_remote_sets.mjs && node --test scripts/test_repair_remote_pack_base_urls.mjs",
+    "test": "node --test src/**/*.test.mjs functions/**/*.test.mjs scripts/*.test.mjs && npm run test:ui && python3 scripts/test_pipeline_unit_suite.py && python3 scripts/test_structural_generation.py && python3 scripts/test_base_image_normalizer.py && python3 scripts/test_base_candidate_evaluator.py && python3 scripts/test_base_pair_publisher.py && python3 scripts/test_ingest_cli.py && python3 scripts/test_variant_code.py && python3 scripts/test_backfill_variant_codes.py && python3 scripts/test_ingest_failure_report.py && python3 scripts/test_local_masked_edits.py && python3 scripts/test_local_star_fallback.py && python3 scripts/test_local_segmented_fallback.py && python3 scripts/test_dedupe_base_images.py && node --test scripts/test_stage_remote_assets.mjs && node --test scripts/test_group_remote_sets.mjs && node --test scripts/test_repair_remote_pack_base_urls.mjs && node --test scripts/test_audit_published_levels.mjs",
     "test:functions": "node --test functions/**/*.test.mjs",
     "test:watch": "node --test --watch src/**/*.test.mjs",
     "prune:dismissed": "node scripts/prune_dismissed_levels.mjs",
@@ -14,14 +14,15 @@
     "lint": "oxlint",
     "distribute:firebase": "bash scripts/distribute_ios.sh",
     "distribute:appstore": "bash scripts/distribute_appstore.sh",
-    "deploy:web": "vite build && npm run stage:remote && firebase deploy --only hosting",
+    "deploy:web": "vite build && npm run stage:remote && firebase deploy --only hosting && npm run audit:levels",
     "deploy:dev": "VITE_IS_DEV_CHANNEL=true vite build && npm run stage:remote && firebase hosting:channel:deploy dev --only diff-hunter --expires 30d",
     "queue:daily": "node scripts/manage_daily_queue.mjs",
     "preview": "vite preview",
     "test:ui": "vitest run src/**/*.test.jsx",
     "test:screenshots": "node scripts/capture_modal_screenshots.mjs",
     "test:visual": "node scripts/capture_modal_screenshots.mjs --check",
-    "stage:remote": "node scripts/stage_remote_assets.mjs"
+    "stage:remote": "node scripts/stage_remote_assets.mjs",
+    "audit:levels": "node scripts/audit_published_levels.mjs"
   },
   "dependencies": {
     "@capacitor/core": "^8.5.0",
