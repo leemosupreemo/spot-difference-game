@@ -1,660 +1,12 @@
 [
   {
-    "id": "crystal_geode_starfield_1789847167950_v2",
-    "title": "Crystal Geode Starfield 1789847167950",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 96.0,
-        "y": 61.7,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/crystal_geode_starfield_1789847167950_v2_e6ea8d6d4bca_base.webp",
-    "variantImage": "levels/crystal_geode_starfield_1789847167950_v2_e51b250ed435_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "crystal_geode_starfield_1789847167950_v1",
-    "title": "Crystal Geode Starfield 1789847167950",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 58.6,
-        "y": 94.9,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/crystal_geode_starfield_1789847167950_v1_e6ea8d6d4bca_base.webp",
-    "variantImage": "levels/crystal_geode_starfield_1789847167950_v1_076142bf3e05_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "optical_fiber_constellation_1789824262569_v4",
-    "title": "Optical Fiber Constellation 1789824262569",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 43.0,
-        "y": 60.2,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/optical_fiber_constellation_1789824262569_v4_cfdec592b3ce_base.webp",
-    "variantImage": "levels/optical_fiber_constellation_1789824262569_v4_43f1b68dfc98_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "optical_fiber_constellation_1789824262569_v3",
-    "title": "Optical Fiber Constellation 1789824262569",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 31.2,
-        "y": 51.9,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/optical_fiber_constellation_1789824262569_v3_cfdec592b3ce_base.webp",
-    "variantImage": "levels/optical_fiber_constellation_1789824262569_v3_91d8e216e327_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "optical_fiber_constellation_1789824262569_v2",
-    "title": "Optical Fiber Constellation 1789824262569",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 22.7,
-        "y": 60.2,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/optical_fiber_constellation_1789824262569_v2_cfdec592b3ce_base.webp",
-    "variantImage": "levels/optical_fiber_constellation_1789824262569_v2_0afb08025078_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "optical_fiber_constellation_1789824262569_v1",
-    "title": "Optical Fiber Constellation 1789824262569",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 38.0,
-        "y": 68.4,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/optical_fiber_constellation_1789824262569_v1_cfdec592b3ce_base.webp",
-    "variantImage": "levels/optical_fiber_constellation_1789824262569_v1_22214b5bf92c_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "gemstone_velvet_starfield_1789824187839_v5",
-    "title": "Gemstone Velvet Starfield 1789824187839",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 19.7,
-        "y": 53.8,
-        "radius": 4.9,
-        "description": "Single remove difference",
-        "hint": "Look closely for a remove difference",
-        "operation": "remove"
-      }
-    ],
-    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v5_a5657f6f7b85_base.webp",
-    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v5_b8c7cfaf1ea4_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "gemstone_velvet_starfield_1789824187839_v4",
-    "title": "Gemstone Velvet Starfield 1789824187839",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 60.8,
-        "y": 21.2,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v4_a5657f6f7b85_base.webp",
-    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v4_2baa9546df45_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "gemstone_velvet_starfield_1789824187839_v3",
-    "title": "Gemstone Velvet Starfield 1789824187839",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 32.7,
-        "y": 90.7,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v3_a5657f6f7b85_base.webp",
-    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v3_fc65b0861b6b_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "gemstone_velvet_starfield_1789824187839_v2",
-    "title": "Gemstone Velvet Starfield 1789824187839",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 22.0,
-        "y": 86.7,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v2_a5657f6f7b85_base.webp",
-    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v2_b5314cd95c94_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "gemstone_velvet_starfield_1789824187839_v1",
-    "title": "Gemstone Velvet Starfield 1789824187839",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 27.4,
-        "y": 10.4,
-        "radius": 4.7,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/gemstone_velvet_starfield_1789824187839_v1_a5657f6f7b85_base.webp",
-    "variantImage": "levels/gemstone_velvet_starfield_1789824187839_v1_25e64b6de2aa_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "deep_field_galaxies_1789824198055_v1",
-    "title": "Deep Field Galaxies 1789824198055",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 94.2,
-        "y": 48.8,
-        "radius": 5.7,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/deep_field_galaxies_1789824198055_v1_26ba7152a12c_base.webp",
-    "variantImage": "levels/deep_field_galaxies_1789824198055_v1_4e6be38d95c9_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "pins_on_carpet_1789795312426_v5",
-    "title": "Pins On Carpet 1789795312426",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 79.2,
-        "y": 72.4,
-        "radius": 5.2,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/pins_on_carpet_1789795312426_v5_682d14231fa3_base.webp",
-    "variantImage": "levels/pins_on_carpet_1789795312426_v5_924db79d6b79_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "pins_on_carpet_1789795312426_v4",
-    "title": "Pins On Carpet 1789795312426",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 62.9,
-        "y": 9.8,
-        "radius": 5.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/pins_on_carpet_1789795312426_v4_682d14231fa3_base.webp",
-    "variantImage": "levels/pins_on_carpet_1789795312426_v4_2299a2bc8b1c_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "pins_on_carpet_1789795312426_v3",
-    "title": "Pins On Carpet 1789795312426",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 89.2,
-        "y": 85.5,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/pins_on_carpet_1789795312426_v3_682d14231fa3_base.webp",
-    "variantImage": "levels/pins_on_carpet_1789795312426_v3_02d770303739_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "pins_on_carpet_1789795312426_v2",
-    "title": "Pins On Carpet 1789795312426",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 79.2,
-        "y": 87.7,
-        "radius": 5.2,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/pins_on_carpet_1789795312426_v2_682d14231fa3_base.webp",
-    "variantImage": "levels/pins_on_carpet_1789795312426_v2_9c485434d1ce_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "pins_on_carpet_1789795312426_v1",
-    "title": "Pins On Carpet 1789795312426",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 75.4,
-        "y": 12.5,
-        "radius": 5.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/pins_on_carpet_1789795312426_v1_682d14231fa3_base.webp",
-    "variantImage": "levels/pins_on_carpet_1789795312426_v1_2bb004a3f0ac_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "leaves_on_branch_1789795322252_v5",
-    "title": "Leaves On Branch 1789795322252",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 62.4,
-        "y": 8.0,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/leaves_on_branch_1789795322252_v5_42bc7638db82_base.webp",
-    "variantImage": "levels/leaves_on_branch_1789795322252_v5_f74db427b510_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "leaves_on_branch_1789795322252_v4",
-    "title": "Leaves On Branch 1789795322252",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 18.0,
-        "y": 92.2,
-        "radius": 5.1,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/leaves_on_branch_1789795322252_v4_42bc7638db82_base.webp",
-    "variantImage": "levels/leaves_on_branch_1789795322252_v4_9e3f2d9a6b9c_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "leaves_on_branch_1789795322252_v3",
-    "title": "Leaves On Branch 1789795322252",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 2.7,
-        "y": 79.3,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/leaves_on_branch_1789795322252_v3_42bc7638db82_base.webp",
-    "variantImage": "levels/leaves_on_branch_1789795322252_v3_67f025d23020_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "leaves_on_branch_1789795322252_v2",
-    "title": "Leaves On Branch 1789795322252",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 85.3,
-        "y": 52.9,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/leaves_on_branch_1789795322252_v2_42bc7638db82_base.webp",
-    "variantImage": "levels/leaves_on_branch_1789795322252_v2_6c26fd89b6a8_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "leaves_on_branch_1789795322252_v1",
-    "title": "Leaves On Branch 1789795322252",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 33.1,
-        "y": 60.9,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "baseImage": "levels/leaves_on_branch_1789795322252_v1_42bc7638db82_base.webp",
-    "variantImage": "levels/leaves_on_branch_1789795322252_v1_628ddb102ddc_variant.webp",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "pins_on_carpet_1789795312426",
-    "title": "Pins on Carpet",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/pins_on_carpet_1789795312426_2d0bff20f0bd_base.jpg",
-    "variantImage": "levels/pins_on_carpet_1789795312426_f94f7d1b314f_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 75.4,
-        "y": 12.5,
-        "radius": 5.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
-    "id": "leaves_on_branch_1789795322252",
-    "title": "Leaves on Branch",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/leaves_on_branch_1789795322252_aa3e886814ce_base.jpg",
-    "variantImage": "levels/leaves_on_branch_1789795322252_4199f18636d7_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 85.3,
-        "y": 52.9,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3"
-  },
-  {
     "id": "photo_set_001_01",
     "title": "Botanical Succulents Greenhouse Grid (Nature 8)",
     "category": "Photography",
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_008_base.jpg",
+    "baseImage": "levels/2a28a86924a7_base.jpg",
     "variantImage": "levels/fresh_nature_pair_008_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -674,7 +26,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_001_02",
@@ -683,7 +36,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_009_base.jpg",
+    "baseImage": "levels/7a997892ec4d_base.jpg",
     "variantImage": "levels/fresh_nature_pair_009_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -703,7 +56,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_001_03",
@@ -712,7 +66,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_010_base.jpg",
+    "baseImage": "levels/2f73c7f5024f_base.jpg",
     "variantImage": "levels/fresh_nature_pair_010_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -732,7 +86,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_001_04",
@@ -741,7 +96,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_013_base.jpg",
+    "baseImage": "levels/6cc10e91f6bd_base.jpg",
     "variantImage": "levels/fresh_nature_pair_013_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -761,7 +116,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_001_05",
@@ -770,7 +126,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_014_base.jpg",
+    "baseImage": "levels/0449cfdb7b28_base.jpg",
     "variantImage": "levels/fresh_nature_pair_014_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -790,7 +146,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_002_01",
@@ -799,7 +156,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_038_base.jpg",
+    "baseImage": "levels/fc84baa18401_base.jpg",
     "variantImage": "levels/fresh_v4_pair_038_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -819,7 +176,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_002_02",
@@ -828,7 +186,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_040_base.jpg",
+    "baseImage": "levels/a0a4d896ac5f_base.jpg",
     "variantImage": "levels/fresh_v4_pair_040_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -848,7 +206,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_002_03",
@@ -857,7 +216,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_pasta_shapes_001_base.jpg",
+    "baseImage": "levels/2fa784f08808_base.jpg",
     "variantImage": "/levels/fresh_v3_ai_pasta_shapes_001_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -875,7 +234,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_002_04",
@@ -884,7 +244,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_vintage_keys_003_base.jpg",
+    "baseImage": "levels/ff1e6102535e_base.jpg",
     "variantImage": "/levels/fresh_v3_ai_vintage_keys_003_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -902,7 +262,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_002_05",
@@ -911,7 +272,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_japanese_teacups_005_base.jpg",
+    "baseImage": "levels/88d3d436a793_base.jpg",
     "variantImage": "/levels/fresh_v3_ai_japanese_teacups_005_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -929,7 +290,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_003_01",
@@ -938,7 +300,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_butterfly_specimens_006_base.jpg",
+    "baseImage": "levels/258c8824ca62_base.jpg",
     "variantImage": "/levels/fresh_v3_ai_butterfly_specimens_006_variant.jpg",
     "operation": "remove",
     "diffs": [
@@ -956,7 +318,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-REM"
   },
   {
     "id": "photo_set_003_02",
@@ -965,7 +328,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_glass_paperweights_008_base.jpg",
+    "baseImage": "levels/cca35dfa07ae_base.jpg",
     "variantImage": "/levels/fresh_v3_ai_glass_paperweights_008_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -983,7 +346,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_003_03",
@@ -992,7 +356,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v3_ai_drafting_dividers_010_base.jpg",
+    "baseImage": "levels/89982ff57cc8_base.jpg",
     "variantImage": "/levels/fresh_v3_ai_drafting_dividers_010_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -1010,7 +374,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_003_04",
@@ -1019,7 +384,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_ceramic_mosaic_tiles_002_base.jpg",
+    "baseImage": "levels/8f567ce10d2c_base.jpg",
     "variantImage": "/levels/fresh_v2_ai_ceramic_mosaic_tiles_002_variant.jpg",
     "operation": "remove",
     "diffs": [
@@ -1037,7 +402,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-REM"
   },
   {
     "id": "photo_set_003_05",
@@ -1046,7 +412,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/fresh_v2_ai_heirloom_spices_botanical_009_base.jpg",
+    "baseImage": "levels/78f0bea654e3_base.jpg",
     "variantImage": "/levels/fresh_v2_ai_heirloom_spices_botanical_009_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -1064,7 +430,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_004_01",
@@ -1073,7 +440,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_dense_watch_parts_base.jpg",
+    "baseImage": "levels/191f5c71749d_base.jpg",
     "variantImage": "/levels/prod_v4_var2_dense_watch_parts_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -1091,7 +458,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_004_02",
@@ -1100,7 +468,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_pencils_base.jpg",
+    "baseImage": "levels/3f8bbfc60b36_base.jpg",
     "variantImage": "/levels/prod_v4_var2_unique_pencils_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -1118,7 +486,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_004_03",
@@ -1127,7 +496,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/pipe_v3_watchmaker_recolor_002_base.jpg",
+    "baseImage": "levels/12be75c963f4_base.jpg",
     "variantImage": "/levels/pipe_v3_watchmaker_recolor_002_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -1145,7 +514,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_004_04",
@@ -1154,7 +524,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/pipe_v3_electronics_add_003_base.jpg",
+    "baseImage": "levels/8d4395ee49d2_base.jpg",
     "variantImage": "/levels/pipe_v3_electronics_add_003_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -1172,7 +542,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_004_05",
@@ -1182,7 +553,7 @@
     "packId": "find_the_sniper",
     "difficulty": "Medium",
     "operation": "add",
-    "baseImage": "/levels/goldilocks_pipe_v2_electronics_add_003_base.jpg",
+    "baseImage": "levels/c845fb878647_base.jpg",
     "variantImage": "/levels/goldilocks_pipe_v2_electronics_add_003_variant.jpg",
     "diffs": [
       {
@@ -1199,7 +570,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_005_01",
@@ -1209,7 +581,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_succulents_calibrated_010_base.jpg",
+    "baseImage": "levels/6a555061d355_base.jpg",
     "variantImage": "/levels/photo_succulents_calibrated_010_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -1229,7 +601,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_005_02",
@@ -1238,7 +611,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_boardgame_recolor_003_base.jpg",
+    "baseImage": "levels/6fedd084dc95_base.jpg",
     "variantImage": "levels/photo_boardgame_recolor_003_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -1258,7 +631,8 @@
       }
     ],
     "setId": "photo_set_005",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_005_03",
@@ -1268,7 +642,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_succulents_recolor_010_base.jpg",
+    "baseImage": "levels/2e22012e84c0_base.jpg",
     "variantImage": "/levels/photo_succulents_recolor_010_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -1288,7 +662,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_005_04",
@@ -1298,7 +673,7 @@
     "packId": "find_the_sniper",
     "difficulty": "Hard",
     "operation": "add",
-    "baseImage": "/levels/dense_ai_watchmaker_gear_add_002_base.jpg",
+    "baseImage": "levels/4952d4676e61_base.jpg",
     "variantImage": "/levels/dense_ai_watchmaker_gear_add_002_variant.jpg",
     "diffs": [
       {
@@ -1315,7 +690,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_005_05",
@@ -1325,7 +701,7 @@
     "packId": "find_the_sniper",
     "difficulty": "Hard",
     "operation": "remove",
-    "baseImage": "/levels/dense_ai_artist_pastel_remove_007_base.jpg",
+    "baseImage": "levels/d51ef1c25fac_base.jpg",
     "variantImage": "/levels/dense_ai_artist_pastel_remove_007_variant.jpg",
     "diffs": [
       {
@@ -1343,7 +719,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-REM"
   },
   {
     "id": "photo_set_006_01",
@@ -1353,7 +730,7 @@
     "packId": "find_the_sniper",
     "difficulty": "Hard",
     "operation": "recolor",
-    "baseImage": "/levels/dense_ai_woodworking_chisel_recolor_008_base.jpg",
+    "baseImage": "levels/b9ac7b656762_base.jpg",
     "variantImage": "/levels/dense_ai_woodworking_chisel_recolor_008_variant.jpg",
     "diffs": [
       {
@@ -1370,7 +747,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_006_02",
@@ -1380,7 +758,7 @@
     "packId": "find_the_sniper",
     "difficulty": "Hard",
     "operation": "add",
-    "baseImage": "/levels/dense_ai_leather_punch_add_009_base.jpg",
+    "baseImage": "levels/ef92ebb75fe4_base.jpg",
     "variantImage": "/levels/dense_ai_leather_punch_add_009_variant.jpg",
     "diffs": [
       {
@@ -1397,7 +775,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_006_03",
@@ -1406,7 +785,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Hard",
-    "baseImage": "/levels/goldilocks_hard_ai_expedition_toggle_010_base.jpg",
+    "baseImage": "levels/a943339d7442_base.jpg",
     "variantImage": "/levels/goldilocks_hard_ai_expedition_toggle_010_variant.jpg",
     "diffs": [
       {
@@ -1423,7 +802,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_006_04",
@@ -1432,7 +812,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/goldilocks_ai_sewing_notions_001_base.jpg",
+    "baseImage": "levels/4f45d9d382e8_base.jpg",
     "variantImage": "/levels/goldilocks_ai_sewing_notions_001_variant.jpg",
     "diffs": [
       {
@@ -1450,7 +830,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_006_05",
@@ -1459,7 +840,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/goldilocks_hard_ai_woodworking_pencil_008_base.jpg",
+    "baseImage": "levels/564981c74583_base.jpg",
     "variantImage": "levels/goldilocks_hard_ai_woodworking_pencil_008_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -1479,7 +860,8 @@
       }
     ],
     "setId": "photo_set_006",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_007_01",
@@ -1488,7 +870,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_leathercraft_001_base.jpg",
+    "baseImage": "levels/40915d078af3_base.jpg",
     "variantImage": "/levels/method1_photo_leathercraft_001_variant.jpg",
     "diffs": [
       {
@@ -1505,7 +887,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_007_02",
@@ -1514,7 +897,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/method1_photo_electronics_001_base.jpg",
+    "baseImage": "levels/f04c9cea07e4_base.jpg",
     "variantImage": "/levels/method1_photo_electronics_001_variant.jpg",
     "diffs": [
       {
@@ -1531,7 +914,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_007_03",
@@ -1540,7 +924,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/method2_macro_miniature_001_base.jpg",
+    "baseImage": "levels/303fef93e45e_base.jpg",
     "variantImage": "/levels/method2_macro_miniature_001_variant.jpg",
     "diffs": [
       {
@@ -1557,7 +941,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_007_04",
@@ -1565,7 +950,7 @@
     "category": "Real Photo",
     "difficulty": "Easy",
     "packId": "find_the_sniper",
-    "baseImage": "/levels/ai_macro_watch_escapement_001_base.jpg",
+    "baseImage": "levels/223b3264c151_base.jpg",
     "variantImage": "/levels/ai_macro_watch_escapement_001_variant.jpg",
     "diffs": [
       {
@@ -1582,7 +967,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_007_05",
@@ -1590,7 +976,7 @@
     "category": "Real Photo",
     "difficulty": "Medium",
     "packId": "find_the_sniper",
-    "baseImage": "/levels/ai_macro_stained_glass_001_base.jpg",
+    "baseImage": "levels/9c7ca148b335_base.jpg",
     "variantImage": "/levels/ai_macro_stained_glass_001_variant.jpg",
     "diffs": [
       {
@@ -1607,11 +993,12 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "title": "Nursery Plant Tag",
-    "baseImage": "levels/photo-pairs/nursery/medium_nursery_001/base.jpg",
+    "baseImage": "levels/photo-pairs/nursery/medium_nursery_001/a22bb085767f_base.jpg",
     "variantImage": "levels/photo-pairs/nursery/medium_nursery_001/variant.jpg",
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
@@ -1633,7 +1020,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_008_02",
@@ -1650,7 +1038,7 @@
     "category": "Workshop Clutter",
     "packId": "find_the_sniper",
     "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/workbench/medium_workbench_001/base.jpg",
+    "baseImage": "levels/photo-pairs/workbench/medium_workbench_001/612b6a34e050_base.jpg",
     "difficulty": "Medium",
     "title": "Workbench Screwdriver",
     "dimensions": {
@@ -1659,7 +1047,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "???-???"
   },
   {
     "pack": "Find the Sniper",
@@ -1677,7 +1066,7 @@
     "id": "photo_set_008_03",
     "variantImage": "levels/photo-pairs/camouflage/hard_forest_001/variant.jpg",
     "difficulty": "Hard",
-    "baseImage": "levels/photo-pairs/camouflage/hard_forest_001/base.jpg",
+    "baseImage": "levels/photo-pairs/camouflage/hard_forest_001/c47fd3eeb225_base.jpg",
     "category": "Extreme Hunter",
     "dimensions": {
       "width": 640,
@@ -1685,7 +1074,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "pack": "Find the Sniper",
@@ -1700,7 +1090,7 @@
         "hint": "Look closely near coordinates (92%, 28%)"
       }
     ],
-    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/9f6427b4c86a_base.jpg",
     "category": "Photography",
     "variantImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/variant.jpg",
     "packId": "find_the_sniper",
@@ -1711,7 +1101,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "diffs": [
@@ -1724,7 +1115,7 @@
       }
     ],
     "title": "Potting Table Succulent",
-    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/24499bd75548_base.jpg",
     "category": "Photography",
     "variantImage": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/variant.jpg",
     "packId": "find_the_sniper",
@@ -1737,14 +1128,15 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "packId": "abstract_animated",
     "category": "Photography",
     "difficulty": "Medium",
     "variantImage": "levels/photo-pairs/photo-watchmaker-bench/variant.jpg",
-    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-watchmaker-bench/8072653c206f_base.jpg",
     "pack": "Find the Sniper",
     "title": "Watchmaker Bench Gear",
     "diffs": [
@@ -1763,10 +1155,11 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-bakers-table/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-bakers-table/c3892638bc7d_base.jpg",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
     "diffs": [
@@ -1789,10 +1182,11 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "???-???"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-electronics-bench/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-electronics-bench/a66f42272821_base.jpg",
     "diffs": [
       {
         "id": 1,
@@ -1815,7 +1209,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "diffs": [
@@ -1827,7 +1222,7 @@
         "hint": "Look closely near coordinates (4%, 80%)"
       }
     ],
-    "baseImage": "levels/photo-pairs/photo-antique-desk/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-antique-desk/3a98c0983bff_base.jpg",
     "title": "Antique Desk Key",
     "variantImage": "levels/photo-pairs/photo-antique-desk/variant.jpg",
     "id": "photo_set_009_04",
@@ -1841,7 +1236,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_009_05",
@@ -1860,14 +1256,15 @@
     "variantImage": "levels/photo-pairs/photo-board-game/variant.jpg",
     "category": "Photography",
     "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/photo-board-game/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-board-game/11ab8d831522_base.jpg",
     "dimensions": {
       "width": 640,
       "height": 480
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "packId": "find_the_sniper",
@@ -1883,7 +1280,7 @@
     "difficulty": "Medium",
     "variantImage": "levels/photo-pairs/photo-woodworking-bench/variant.jpg",
     "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-woodworking-bench/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-woodworking-bench/98635191db71_base.jpg",
     "id": "photo_set_010_01",
     "title": "Woodworking Bench Screw",
     "pack": "Find the Sniper",
@@ -1893,10 +1290,11 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-repair-drawer/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-repair-drawer/49ec079e2ca1_base.jpg",
     "id": "photo_set_010_02",
     "category": "Photography",
     "difficulty": "Medium",
@@ -1919,12 +1317,13 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "???-???"
   },
   {
     "difficulty": "Easy",
     "variantImage": "levels/photo-pairs/photo-camera-gear/variant.jpg",
-    "baseImage": "levels/photo-pairs/photo-camera-gear/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-camera-gear/d8599cc3bcc1_base.jpg",
     "packId": "find_the_sniper",
     "diffs": [
       {
@@ -1945,7 +1344,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_010_04",
@@ -1961,7 +1361,7 @@
     ],
     "difficulty": "Easy",
     "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/photo-pottery-table/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-pottery-table/6171cf197574_base.jpg",
     "category": "Photography",
     "variantImage": "levels/photo-pairs/photo-pottery-table/variant.jpg",
     "packId": "find_the_sniper",
@@ -1971,7 +1371,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_010_05",
@@ -1984,7 +1385,7 @@
         "hint": "Look closely near coordinates (92%, 46%)"
       }
     ],
-    "baseImage": "levels/photo-pairs/photo-bicycle-repair/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-bicycle-repair/ca5d5a11786a_base.jpg",
     "pack": "Find the Sniper",
     "variantImage": "levels/photo-pairs/photo-bicycle-repair/variant.jpg",
     "difficulty": "Medium",
@@ -1997,11 +1398,12 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "difficulty": "Medium",
-    "baseImage": "levels/photo-pairs/photo-woodworking-table/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-woodworking-table/dbb29ee85300_base.jpg",
     "pack": "Find the Sniper",
     "id": "photo_set_011_01",
     "diffs": [
@@ -2023,12 +1425,13 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_011_02",
     "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-artist-supply/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-artist-supply/6c8f81f1cee0_base.jpg",
     "title": "Artist Supply Paint",
     "diffs": [
       {
@@ -2049,7 +1452,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "???-???"
   },
   {
     "pack": "Find the Sniper",
@@ -2063,7 +1467,7 @@
       }
     ],
     "variantImage": "levels/photo-pairs/photo-camping-gear/variant.jpg",
-    "baseImage": "levels/photo-pairs/photo-camping-gear/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-camping-gear/b616ee311d33_base.jpg",
     "category": "Photography",
     "id": "photo_set_011_03",
     "title": "Camping Gear Carabiner",
@@ -2075,13 +1479,14 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "pack": "Find the Sniper",
     "variantImage": "levels/photo-pairs/photo-sewing-table/variant.jpg",
     "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-sewing-table/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-sewing-table/78c73d97f15e_base.jpg",
     "difficulty": "Easy",
     "id": "photo_set_011_04",
     "title": "Sewing Table Button",
@@ -2101,11 +1506,12 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "difficulty": "Easy",
-    "baseImage": "levels/photo-pairs/photo-map-restoration/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-map-restoration/81e07ac28778_base.jpg",
     "id": "photo_set_011_05",
     "diffs": [
       {
@@ -2127,7 +1533,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "diffs": [
@@ -2141,7 +1548,7 @@
     ],
     "difficulty": "Easy",
     "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-garden-potting/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-garden-potting/4a1b3bb5d3f5_base.jpg",
     "variantImage": "levels/photo-pairs/photo-garden-potting/variant.jpg",
     "pack": "Find the Sniper",
     "title": "Garden Potting Pot",
@@ -2153,10 +1560,11 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
-    "baseImage": "levels/photo-pairs/photo-game-night/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-game-night/aa2ca3ce722e_base.jpg",
     "category": "Photography",
     "pack": "Find the Sniper",
     "difficulty": "Easy",
@@ -2179,14 +1587,15 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "???-???"
   },
   {
     "variantImage": "levels/photo-pairs/photo-watch-repair/variant.jpg",
     "title": "Watch Repair Gear",
     "id": "photo_set_012_03",
     "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/photo-watch-repair/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-watch-repair/986f070b813b_base.jpg",
     "category": "Photography",
     "difficulty": "Medium",
     "diffs": [
@@ -2205,7 +1614,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_012_04",
@@ -2222,7 +1632,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "category": "Bakery Clutter",
-    "baseImage": "levels/photo-pairs/ai-bakery-counter/base.jpg",
+    "baseImage": "levels/photo-pairs/ai-bakery-counter/d480599acfa5_base.jpg",
     "variantImage": "levels/photo-pairs/ai-bakery-counter/variant.jpg",
     "title": "Rustic Bakery Counter",
     "dimensions": {
@@ -2231,7 +1641,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "diffs": [
@@ -2244,7 +1655,7 @@
       }
     ],
     "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/ai-greenhouse-potting/base.jpg",
+    "baseImage": "levels/photo-pairs/ai-greenhouse-potting/5fde6906debe_base.jpg",
     "pack": "Find the Sniper",
     "title": "Greenhouse Potting Bench",
     "variantImage": "levels/photo-pairs/ai-greenhouse-potting/variant.jpg",
@@ -2257,14 +1668,15 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "pack": "Find the Sniper",
     "category": "Fine Art Studio",
     "packId": "find_the_sniper",
     "title": "Painter Studio Palette",
-    "baseImage": "levels/photo-pairs/ai-artist-easel/base.jpg",
+    "baseImage": "levels/photo-pairs/ai-artist-easel/84541fa6fe24_base.jpg",
     "id": "photo_set_013_01",
     "diffs": [
       {
@@ -2283,7 +1695,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
     "difficulty": "Easy",
@@ -2302,21 +1715,22 @@
       }
     ],
     "variantImage": "levels/photo-pairs/ai-coffee-bar/variant.jpg",
-    "baseImage": "levels/photo-pairs/ai-coffee-bar/base.jpg",
+    "baseImage": "levels/photo-pairs/ai-coffee-bar/1ea573c77403_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_013_03",
     "difficulty": "Easy",
     "packId": "find_the_sniper",
     "title": "Victorian Study Desk",
-    "baseImage": "levels/photo-pairs/ai-antique-study/base.jpg",
+    "baseImage": "levels/photo-pairs/ai-antique-study/01f1ee94287d_base.jpg",
     "pack": "Find the Sniper",
     "category": "Antique Study",
     "diffs": [
@@ -2335,12 +1749,13 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "title": "Botanist Herbarium Desk",
     "variantImage": "levels/photo-pairs/ai-botanist-herbarium/variant.jpg",
-    "baseImage": "levels/photo-pairs/ai-botanist-herbarium/base.jpg",
+    "baseImage": "levels/photo-pairs/ai-botanist-herbarium/2f7bf4adfbf6_base.jpg",
     "category": "Botanical Garden",
     "difficulty": "Hard",
     "pack": "Find the Sniper",
@@ -2361,11 +1776,12 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/ai-cartography-desk/base.jpg",
+    "baseImage": "levels/photo-pairs/ai-cartography-desk/f3bdacea6eb5_base.jpg",
     "packId": "find_the_sniper",
     "difficulty": "Easy",
     "category": "Antique Study",
@@ -2387,7 +1803,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_014_01",
@@ -2396,7 +1813,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_marine_shells_002_base.jpg",
+    "baseImage": "levels/97f2ba33fda9_base.jpg",
     "variantImage": "levels/fresh_v7_marine_shells_002_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2416,7 +1833,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_014_02",
@@ -2425,7 +1843,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_apothecary_herbs_003_base.jpg",
+    "baseImage": "levels/56cc122a17a0_base.jpg",
     "variantImage": "levels/fresh_v7_apothecary_herbs_003_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2445,7 +1863,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_014_03",
@@ -2454,7 +1873,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_pottery_tools_011_base.jpg",
+    "baseImage": "levels/3e2cc15f2b07_base.jpg",
     "variantImage": "levels/fresh_v7_pottery_tools_011_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2474,7 +1893,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_014_04",
@@ -2483,7 +1903,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_bonsai_tools_012_base.jpg",
+    "baseImage": "levels/ddf590b4dbb7_base.jpg",
     "variantImage": "levels/fresh_v7_bonsai_tools_012_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2503,7 +1923,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_014_05",
@@ -2512,7 +1933,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_tea_ceremony_006_base.jpg",
+    "baseImage": "levels/9ce8c7b6d645_base.jpg",
     "variantImage": "levels/fresh_v7_tea_ceremony_006_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2532,7 +1953,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_015_01",
@@ -2541,7 +1963,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_002_base.jpg",
+    "baseImage": "levels/0491120cb22c_base.jpg",
     "variantImage": "levels/fresh_nature_pair_002_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -2561,7 +1983,8 @@
       }
     ],
     "setId": "photo_set_015",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_015_02",
@@ -2570,7 +1993,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v7_cassette_tapes_013_base.jpg",
+    "baseImage": "levels/abc1b07f9475_base.jpg",
     "variantImage": "levels/fresh_v7_cassette_tapes_013_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2590,7 +2013,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_015_03",
@@ -2599,7 +2023,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_001_base.jpg",
+    "baseImage": "levels/6be39d9e1fd8_base.jpg",
     "variantImage": "levels/fresh_nature_pair_001_variant.jpg",
     "operation": "remove",
     "diffs": [
@@ -2619,7 +2043,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-REM"
   },
   {
     "id": "photo_set_015_04",
@@ -2628,7 +2053,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_016_base.jpg",
+    "baseImage": "levels/81c16b94464d_base.jpg",
     "variantImage": "levels/fresh_nature_pair_016_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -2648,7 +2073,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_015_05",
@@ -2657,7 +2083,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_nature_pair_020_base.jpg",
+    "baseImage": "levels/8803ac7100d6_base.jpg",
     "variantImage": "levels/fresh_nature_pair_020_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2677,7 +2103,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_016_01",
@@ -2686,7 +2113,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_003_base.jpg",
+    "baseImage": "levels/8bf5183fcc5a_base.jpg",
     "variantImage": "levels/fresh_v6_pair_003_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -2706,7 +2133,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_016_02",
@@ -2715,7 +2143,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_007_base.jpg",
+    "baseImage": "levels/798a7dd51d00_base.jpg",
     "variantImage": "levels/fresh_v6_pair_007_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -2735,7 +2163,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_016_03",
@@ -2744,7 +2173,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_012_base.jpg",
+    "baseImage": "levels/730649667953_base.jpg",
     "variantImage": "levels/fresh_v6_pair_012_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2764,7 +2193,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_016_04",
@@ -2773,7 +2203,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v6_pair_019_base.jpg",
+    "baseImage": "levels/c23d23723778_base.jpg",
     "variantImage": "levels/fresh_v6_pair_019_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -2793,7 +2223,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_016_05",
@@ -2802,7 +2233,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_042_base.jpg",
+    "baseImage": "levels/ba7786af937c_base.jpg",
     "variantImage": "levels/fresh_v4_pair_042_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -2822,7 +2253,8 @@
       }
     ],
     "setId": "photo_set_016",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_017_01",
@@ -2831,7 +2263,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_046_base.jpg",
+    "baseImage": "levels/311971e3bc95_base.jpg",
     "variantImage": "levels/fresh_v4_pair_046_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -2851,7 +2283,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_017_02",
@@ -2860,7 +2293,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_052_base.jpg",
+    "baseImage": "levels/37aebee3101b_base.jpg",
     "variantImage": "levels/fresh_v4_pair_052_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -2880,7 +2313,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_017_03",
@@ -2889,7 +2323,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_053_base.jpg",
+    "baseImage": "levels/57a58bf12d1e_base.jpg",
     "variantImage": "levels/fresh_v4_pair_053_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -2909,7 +2343,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_017_04",
@@ -2918,7 +2353,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_055_base.jpg",
+    "baseImage": "levels/cf9875bcd8da_base.jpg",
     "variantImage": "levels/fresh_v4_pair_055_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -2938,7 +2373,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_017_05",
@@ -2947,7 +2383,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_056_base.jpg",
+    "baseImage": "levels/3887e12afe3c_base.jpg",
     "variantImage": "levels/fresh_v4_pair_056_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -2967,7 +2403,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_018_01",
@@ -2976,7 +2413,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_008_base.jpg",
+    "baseImage": "levels/6ffffcd610ed_base.jpg",
     "variantImage": "levels/fresh_v4_pair_008_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -2996,7 +2433,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_018_02",
@@ -3005,7 +2443,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_012_base.jpg",
+    "baseImage": "levels/9fb9cfb091e5_base.jpg",
     "variantImage": "levels/fresh_v4_pair_012_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -3025,7 +2463,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_018_03",
@@ -3034,7 +2473,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_022_base.jpg",
+    "baseImage": "levels/e4078f0a6fe6_base.jpg",
     "variantImage": "levels/fresh_v4_pair_022_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -3054,7 +2493,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_018_04",
@@ -3063,7 +2503,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_032_base.jpg",
+    "baseImage": "levels/72d118471c78_base.jpg",
     "variantImage": "levels/fresh_v4_pair_032_variant.jpg",
     "operation": "reorder",
     "diffs": [
@@ -3083,7 +2523,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_018_05",
@@ -3092,7 +2533,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fresh_v4_pair_036_base.jpg",
+    "baseImage": "levels/ac00db097041_base.jpg",
     "variantImage": "levels/fresh_v4_pair_036_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -3112,7 +2553,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_019_01",
@@ -3121,7 +2563,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_dense_buttons_base.jpg",
+    "baseImage": "levels/12b6b358171e_base.jpg",
     "variantImage": "/levels/prod_v4_dense_buttons_variant.jpg",
     "operation": "remove",
     "diffs": [
@@ -3139,7 +2581,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-REM"
   },
   {
     "id": "photo_set_019_02",
@@ -3148,7 +2591,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_mechanic_base.jpg",
+    "baseImage": "levels/4cff74d97a0c_base.jpg",
     "variantImage": "/levels/prod_v4_ai_mechanic_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -3166,7 +2609,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_019_03",
@@ -3175,7 +2619,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_expedition_base.jpg",
+    "baseImage": "levels/cdffff8cdcaf_base.jpg",
     "variantImage": "/levels/prod_v4_ai_expedition_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -3193,7 +2637,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_019_04",
@@ -3202,7 +2647,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_ai_leathercraft_base.jpg",
+    "baseImage": "levels/9ea628311263_base.jpg",
     "variantImage": "/levels/prod_v4_ai_leathercraft_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -3220,7 +2665,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_019_05",
@@ -3229,7 +2675,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_palette_base.jpg",
+    "baseImage": "levels/5587f8de42b6_base.jpg",
     "variantImage": "/levels/prod_v4_var2_unique_palette_variant.jpg",
     "operation": "remove",
     "diffs": [
@@ -3247,7 +2693,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-REM"
   },
   {
     "id": "photo_set_020_01",
@@ -3256,7 +2703,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_seashells_base.jpg",
+    "baseImage": "levels/029fbcb9051a_base.jpg",
     "variantImage": "/levels/prod_v4_var2_unique_seashells_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -3274,7 +2721,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_020_02",
@@ -3283,7 +2731,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_sewing_base.jpg",
+    "baseImage": "levels/d5cc4fa884a7_base.jpg",
     "variantImage": "/levels/prod_v4_var2_unique_sewing_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -3301,7 +2749,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_020_03",
@@ -3310,7 +2759,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_unique_woodworking_base.jpg",
+    "baseImage": "levels/92d32b050ea0_base.jpg",
     "variantImage": "/levels/prod_v4_var2_unique_woodworking_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -3328,7 +2777,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_020_04",
@@ -3337,7 +2787,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/prod_v4_var2_ai_sewing_base.jpg",
+    "baseImage": "levels/4c9e67b95d2f_base.jpg",
     "variantImage": "/levels/prod_v4_var2_ai_sewing_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -3355,7 +2805,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_020_05",
@@ -3364,7 +2815,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/prod_v4_var2_ai_woodworking_base.jpg",
+    "baseImage": "levels/ebec8ec74de9_base.jpg",
     "variantImage": "levels/prod_v4_var2_ai_woodworking_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -3384,7 +2835,8 @@
       }
     ],
     "setId": "photo_set_020",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_021_01",
@@ -3394,7 +2846,7 @@
     "packId": "find_the_sniper",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_artist_recolor_005_base.jpg",
+    "baseImage": "levels/0086d006bc88_base.jpg",
     "variantImage": "/levels/goldilocks_pipe_v2_artist_recolor_005_variant.jpg",
     "diffs": [
       {
@@ -3411,7 +2863,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_021_02",
@@ -3421,7 +2874,7 @@
     "packId": "find_the_sniper",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_woodworking_recolor_006_base.jpg",
+    "baseImage": "levels/550eab2677ab_base.jpg",
     "variantImage": "/levels/goldilocks_pipe_v2_woodworking_recolor_006_variant.jpg",
     "diffs": [
       {
@@ -3438,7 +2891,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_021_03",
@@ -3448,7 +2902,7 @@
     "packId": "find_the_sniper",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/goldilocks_pipe_v2_miniature_recolor_010_base.jpg",
+    "baseImage": "levels/270f5608cc23_base.jpg",
     "variantImage": "/levels/goldilocks_pipe_v2_miniature_recolor_010_variant.jpg",
     "diffs": [
       {
@@ -3465,7 +2919,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_021_04",
@@ -3474,7 +2929,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Hard",
-    "baseImage": "/levels/hyper_dense_synth_pcb_002_base.jpg",
+    "baseImage": "levels/0825967813ea_base.jpg",
     "variantImage": "/levels/hyper_dense_synth_pcb_002_variant.jpg",
     "diffs": [
       {
@@ -3491,7 +2946,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_021_05",
@@ -3501,7 +2957,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_fresh_pencils_002_base.jpg",
+    "baseImage": "levels/48cfeb798984_base.jpg",
     "variantImage": "/levels/photo_fresh_pencils_002_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3519,7 +2975,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_022_01",
@@ -3529,7 +2986,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_fresh_crayons_003_base.jpg",
+    "baseImage": "levels/357f9ec603cb_base.jpg",
     "variantImage": "/levels/photo_fresh_crayons_003_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3549,7 +3006,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_022_02",
@@ -3559,7 +3017,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_fresh_stained_glass_009_base.jpg",
+    "baseImage": "levels/f1639c250bdc_base.jpg",
     "variantImage": "/levels/photo_fresh_stained_glass_009_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3577,7 +3035,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_022_03",
@@ -3587,7 +3046,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_unique_seashells_001_base.jpg",
+    "baseImage": "levels/bcffd42bb6ee_base.jpg",
     "variantImage": "/levels/photo_unique_seashells_001_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3607,7 +3066,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_022_04",
@@ -3617,7 +3077,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_unique_sewing_005_base.jpg",
+    "baseImage": "levels/36706f37bd89_base.jpg",
     "variantImage": "/levels/photo_unique_sewing_005_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3635,7 +3095,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_022_05",
@@ -3645,7 +3106,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_unique_bakery_006_base.jpg",
+    "baseImage": "levels/dacccbe7cc29_base.jpg",
     "variantImage": "/levels/photo_unique_bakery_006_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3665,7 +3126,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_023_01",
@@ -3675,7 +3137,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_marbles_calibrated_001_base.jpg",
+    "baseImage": "levels/1135f8054c61_base.jpg",
     "variantImage": "/levels/photo_marbles_calibrated_001_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3695,7 +3157,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_023_02",
@@ -3705,7 +3168,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_boardgame_calibrated_003_base.jpg",
+    "baseImage": "levels/332ac1fba773_base.jpg",
     "variantImage": "/levels/photo_boardgame_calibrated_003_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3723,7 +3186,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_023_03",
@@ -3733,7 +3197,7 @@
     "category": "Photography",
     "difficulty": "Medium",
     "operation": "recolor",
-    "baseImage": "/levels/photo_spices_calibrated_009_base.jpg",
+    "baseImage": "levels/37bb13514b3a_base.jpg",
     "variantImage": "/levels/photo_spices_calibrated_009_variant.jpg",
     "totalDifferences": 1,
     "diffs": [
@@ -3753,7 +3217,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_023_04",
@@ -3762,7 +3227,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/goldilocks_ai_watchmaker_parts_002_base.jpg",
+    "baseImage": "levels/d23ac56dc6a4_base.jpg",
     "variantImage": "/levels/goldilocks_ai_watchmaker_parts_002_variant.jpg",
     "diffs": [
       {
@@ -3780,7 +3245,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_023_05",
@@ -3789,7 +3255,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/goldilocks_photo_artist_oil_pastels_004_base.jpg",
+    "baseImage": "levels/19b7a96e5a60_base.jpg",
     "variantImage": "/levels/goldilocks_photo_artist_oil_pastels_004_variant.jpg",
     "diffs": [
       {
@@ -3807,7 +3273,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_023",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_024_01",
@@ -3816,7 +3283,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/goldilocks_photo_tailor_notions_spool_006_base.jpg",
+    "baseImage": "levels/25a5350582bf_base.jpg",
     "variantImage": "/levels/goldilocks_photo_tailor_notions_spool_006_variant.jpg",
     "diffs": [
       {
@@ -3834,7 +3301,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_024_02",
@@ -3843,7 +3311,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/scene_tailor_notions_spool_008_base.jpg",
+    "baseImage": "levels/bdbfedf807fc_base.jpg",
     "variantImage": "levels/scene_tailor_notions_spool_008_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -3863,7 +3331,8 @@
       }
     ],
     "setId": "photo_set_024",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_024_03",
@@ -3872,7 +3341,7 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "/levels/scene_tailor_pincushion_needle_019_base.jpg",
+    "baseImage": "levels/21b1b2a435da_base.jpg",
     "variantImage": "/levels/scene_tailor_pincushion_needle_019_variant.jpg",
     "diffs": [
       {
@@ -3890,12 +3359,13 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "???-???"
   },
   {
     "category": "Workshop Clutter",
     "difficulty": "Hard",
-    "baseImage": "levels/photo-pairs/ai-locksmith-bench/base.jpg",
+    "baseImage": "levels/photo-pairs/ai-locksmith-bench/aa53155cf57e_base.jpg",
     "title": "Master Locksmith Workbench",
     "diffs": [
       {
@@ -3916,7 +3386,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "???-???"
   },
   {
     "difficulty": "Hard",
@@ -3933,7 +3404,7 @@
     ],
     "pack": "Find the Sniper",
     "variantImage": "levels/photo-pairs/photo-repair-hardware-002/variant.jpg",
-    "baseImage": "levels/photo-pairs/photo-repair-hardware-002/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-repair-hardware-002/44a4ef9c63ca_base.jpg",
     "title": "Precision Hardware Drawer",
     "category": "Workshop Clutter",
     "dimensions": {
@@ -3942,7 +3413,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_024",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "???-???"
   },
   {
     "category": "Game Night",
@@ -3958,7 +3430,7 @@
     "title": "Tabletop Strategy Board",
     "packId": "find_the_sniper",
     "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/photo-strategy-pieces-002/base.jpg",
+    "baseImage": "levels/photo-pairs/photo-strategy-pieces-002/24435614b14e_base.jpg",
     "variantImage": "levels/photo-pairs/photo-strategy-pieces-002/variant.jpg",
     "id": "photo_set_025_01",
     "difficulty": "Hard",
@@ -3968,7 +3440,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "???-???"
   },
   {
     "id": "photo_set_025_02",
@@ -3977,7 +3450,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_036_02_base.jpg",
+    "baseImage": "levels/2ef79002ac79_base.jpg",
     "variantImage": "levels/photo_set_036_02_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -3997,7 +3470,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_025_03",
@@ -4006,7 +3480,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_036_04_base.jpg",
+    "baseImage": "levels/352879af2dbe_base.jpg",
     "variantImage": "levels/photo_set_036_04_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -4026,7 +3500,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_025_04",
@@ -4035,7 +3510,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_037_03_base.jpg",
+    "baseImage": "levels/ca23c7152c0e_base.jpg",
     "variantImage": "levels/photo_set_037_03_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -4055,7 +3530,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_025_05",
@@ -4064,7 +3540,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_037_04_base.jpg",
+    "baseImage": "levels/4f7821e8b2e4_base.jpg",
     "variantImage": "levels/photo_set_037_04_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -4084,7 +3560,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_025",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_026_01",
@@ -4093,7 +3570,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_037_05_base.jpg",
+    "baseImage": "levels/29263c26afff_base.jpg",
     "variantImage": "levels/photo_set_037_05_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -4113,7 +3590,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_026",
-    "sequence": 1
+    "sequence": 1,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_026_02",
@@ -4122,7 +3600,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_038_01_base.jpg",
+    "baseImage": "levels/13db4947d918_base.jpg",
     "variantImage": "levels/photo_set_038_01_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -4142,7 +3620,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_026",
-    "sequence": 2
+    "sequence": 2,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_026_03",
@@ -4151,7 +3630,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_038_04_base.jpg",
+    "baseImage": "levels/9ba4d5d3d7f5_base.jpg",
     "variantImage": "levels/photo_set_038_04_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -4171,7 +3650,8 @@
       }
     ],
     "setId": "photo_set_026",
-    "sequence": 3
+    "sequence": 3,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_026_04",
@@ -4180,7 +3660,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_041_01_base.jpg",
+    "baseImage": "levels/fce7bf008f8d_base.jpg",
     "variantImage": "levels/photo_set_041_01_variant.jpg",
     "operation": "add",
     "diffs": [
@@ -4200,7 +3680,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_026",
-    "sequence": 4
+    "sequence": 4,
+    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_026_05",
@@ -4209,7 +3690,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/photo_set_041_03_base.jpg",
+    "baseImage": "levels/fef6293cfbba_base.jpg",
     "variantImage": "levels/photo_set_041_03_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -4229,7 +3710,8 @@
       }
     ],
     "setId": "photo_set_026",
-    "sequence": 5
+    "sequence": 5,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "daily_set_01_01",
@@ -4238,7 +3720,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/daily_v8_01_citrus_base.jpg",
+    "baseImage": "levels/d1b2f49af41d_base.jpg",
     "variantImage": "levels/daily_v8_01_citrus_variant.jpg",
     "operation": "recolor",
     "dimensions": {
@@ -4259,7 +3741,8 @@
     ],
     "dailySet": "set_daily_modern_01",
     "setId": null,
-    "sequence": null
+    "sequence": null,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "daily_set_06_01",
@@ -4268,7 +3751,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/daily_v8_06_bakery_base.jpg",
+    "baseImage": "levels/6399f1d595ef_base.jpg",
     "variantImage": "levels/daily_v8_06_bakery_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -4289,7 +3772,8 @@
     "aspectRatio": "4:3",
     "dailySet": "set_daily_modern_06",
     "setId": null,
-    "sequence": null
+    "sequence": null,
+    "variantCode": "STR-CLR"
   },
   {
     "id": "daily_set_06_03",
@@ -4298,7 +3782,7 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/daily_v8_06_mechanic_base.jpg",
+    "baseImage": "levels/d0016bf53521_base.jpg",
     "variantImage": "levels/daily_v8_06_mechanic_variant.jpg",
     "operation": "recolor",
     "diffs": [
@@ -4319,6 +3803,7 @@
     "aspectRatio": "4:3",
     "dailySet": "set_daily_modern_06",
     "setId": null,
-    "sequence": null
+    "sequence": null,
+    "variantCode": "STR-CLR"
   }
 ]
