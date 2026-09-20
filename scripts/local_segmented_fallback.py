@@ -91,7 +91,7 @@ def load_local_masks(image_path, weights=DEFAULT_WEIGHTS):
 def generate_segmented_variants(candidate, scene_spec, staging_dir, count,
                                 policy=DEFAULT_BASE_GENERATION_POLICY, difficulty="Medium",
                                 raw_masks=None, weights=DEFAULT_WEIGHTS, start_index=1,
-                                exclude_boxes=()):
+                                exclude_boxes=(), operation="recolor"):
     if count < 1 or difficulty not in ("Easy", "Medium", "Hard"):
         raise ValueError("Invalid count or difficulty")
     base = cv2.imread(candidate.master_path)
@@ -109,7 +109,8 @@ def generate_segmented_variants(candidate, scene_spec, staging_dir, count,
     targets, rejected = filter_foreground_targets(base, proposed)
     pairs, log = generate_recolor_variants(candidate, scene_spec, staging_dir, count, targets,
                                          policy=policy, difficulty=difficulty, method="local_segmented",
-                                         start_index=start_index, exclude_boxes=exclude_boxes)
+                                         start_index=start_index, exclude_boxes=exclude_boxes,
+                                         operation=operation)
     log["mask_source"] = mask_source
     log["proposed_target_count"] = len(proposed)
     log["mask_rejections"] = rejected

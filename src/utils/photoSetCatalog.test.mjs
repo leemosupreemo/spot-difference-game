@@ -73,37 +73,42 @@ test('retained manifest entries have stable five-entry set metadata', () => {
   assert.equal(new Set(manifest.map(entry => entry.id)).size, manifest.length,
     'every entry must have a unique id');
 
-  // The 26 five-entry photo sets are what this guards. Individual levels move
-  // between bundled and remote delivery as packs are published, so counting the
-  // whole manifest churns; the sets themselves must never lose an entry or have
-  // their sequencing disturbed.
+  // Curation removes levels and the sets are rebuilt from the survivors, so the
+  // number of sets legitimately moves. Asserting an exact count just churns;
+  // what must hold is that every set is well-formed and nothing is half-placed.
   const catalog = getPhotoSetCatalog(manifest);
-  assert.equal(catalog.sets.length, 26);
-  assert.equal(getCompletePhotoSets(manifest).length, 26);
+  assert.ok(catalog.sets.length >= 15,
+    `only ${catalog.sets.length} sets survive -- suspiciously few`);
+  assert.equal(getCompletePhotoSets(manifest).length, catalog.sets.length,
+    'every set must be complete; a partial set can never be served');
+
   assert.deepEqual(
     catalog.sets.map(set => set.setId).sort(),
-    Array.from({ length: 26 }, (_, i) => `photo_set_${String(i + 1).padStart(3, '0')}`),
-    'set ids must stay contiguous -- a gap means a set lost its entries'
+    Array.from({ length: catalog.sets.length },
+      (_, i) => `photo_set_${String(i + 1).padStart(3, '0')}`),
+    'set ids must stay contiguous from 001 -- a gap means a set lost its entries'
   );
 
   for (const set of catalog.sets) {
-    assert.equal(set.entries.length, 5, `${set.setId} must keep five entries`);
+    assert.equal(set.entries.length, 5, `${set.setId} must hold five entries`);
     assert.deepEqual(set.entries.map(entry => entry.sequence), [1, 2, 3, 4, 5],
       `${set.setId} must stay sequenced 1-5`);
     assert.ok(set.entries.every(entry => entry.setId === set.setId));
+    // Two levels from one photograph in a set is a repeat however it is ordered.
+    const bases = set.entries.map(entry =>
+      String(entry.baseImage || '').split('/').pop());
+    assert.equal(new Set(bases).size, bases.length,
+      `${set.setId} shows the same photograph twice`);
   }
-  assert.equal(catalog.sets.reduce((n, set) => n + set.entries.length, 0), 130);
 
-  // Everything else is a standalone level: manual ingests, approved fallback
-  // levels, pending candidates. None may claim set membership, or it could be
+  // Everything else is a standalone level: leftovers, daily-reserved levels,
+  // approved fallback levels. None may claim set membership, or it could be
   // pulled into a set and change what a player is served.
   for (const entry of catalog.unassigned) {
     assert.ok(!entry.setId && !entry.sequence,
       `${entry.id} is unassigned and must carry no set metadata`);
   }
 
-  // A fallback level only reaches the manifest once reviewed, and always
-  // carries the code describing how it was produced.
   const fallbackLevels = manifest.filter(entry =>
     String(entry.generationMethod || '').startsWith('local_'));
   assert.ok(fallbackLevels.every(entry =>

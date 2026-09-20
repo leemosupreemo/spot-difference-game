@@ -45,7 +45,10 @@ export function getAllPhotoPairEntries({
 
   for (const entry of entries) {
     const statusVal = getLevelStatus(statusMap[entry.id])?.status;
-    if (statusVal === 'dismissed' && !includeDismissed) continue;
+    // A placeholder is a structural slot, not content: there is no artwork to
+    // judge. Honouring a dismissal on one would quietly drop its set below five
+    // and take the whole set out of play.
+    if (statusVal === 'dismissed' && !includeDismissed && !isPlaceholderEntry(entry)) continue;
     // Machine-generated levels awaiting review are debug-only until approved.
     if (!isEntryPlayable(entry, statusMap, debugMode)) continue;
 

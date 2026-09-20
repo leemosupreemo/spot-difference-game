@@ -23,6 +23,10 @@ OPERATION_CODES = {
     "remove": "REM",
     "reorder": "MOV",
     "recolor": "CLR",
+    # A local duplicate: an existing object's own pixels copied elsewhere in
+    # the same image. Distinct from the structural "add", which composes a
+    # donor object from the scene's segmentation.
+    "duplicate": "DUP",
 }
 
 

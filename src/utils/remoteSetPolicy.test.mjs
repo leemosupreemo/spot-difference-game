@@ -132,3 +132,12 @@ test('the two pools are complementary, so nothing is served by both', async () =
     'a level must never be available to both modes');
   assert.equal(regular.length + daily.length, entries.length, 'and none may be lost');
 });
+
+test('a dismissed placeholder must not take its whole set out of play', async () => {
+  const loader = await import('node:fs').then(fs =>
+    fs.readFileSync(new URL('./photoPairLevelLoader.js', import.meta.url), 'utf8'));
+  // A placeholder is a slot marker with no artwork to judge, so a curation
+  // decision about one is meaningless -- but honouring it would drop the set
+  // below five entries and stop it being offered at all.
+  assert.match(loader, /!isPlaceholderEntry\(entry\)/);
+});

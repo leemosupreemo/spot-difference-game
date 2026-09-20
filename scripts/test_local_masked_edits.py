@@ -63,3 +63,53 @@ class HardCompositeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FeatherWindowingTests(unittest.TestCase):
+    """The windowed distance transform must be an optimisation, not a change."""
+
+    @staticmethod
+    def _reference(original, generated, mask, feather=5):
+        binary = (np.asarray(mask) > 0).astype(np.uint8)
+        weight = np.clip(cv2.distanceTransform(binary, cv2.DIST_L2, 3) / feather, 0, 1)[:, :, None]
+        blended = np.rint(original * (1 - weight) + generated * weight)
+        result = original.copy()
+        result[binary > 0] = np.clip(blended[binary > 0], 0, 255).astype(np.uint8)
+        return result
+
+    def _case(self, mask):
+        rng = np.random.default_rng(7)
+        original = rng.integers(0, 256, (240, 320, 3), dtype=np.uint8)
+        generated = rng.integers(0, 256, (240, 320, 3), dtype=np.uint8)
+        np.testing.assert_array_equal(
+            hard_composite(original, generated, mask),
+            self._reference(original, generated, mask),
+            err_msg="windowed feather must match a full-frame transform exactly"
+        )
+
+    def test_matches_full_frame_for_a_small_interior_mask(self):
+        mask = np.zeros((240, 320), np.uint8)
+        cv2.circle(mask, (160, 120), 18, 255, -1)
+        self._case(mask)
+
+    def test_matches_full_frame_for_a_mask_touching_the_border(self):
+        # The window clips at the frame edge, exactly as the full transform does.
+        mask = np.zeros((240, 320), np.uint8)
+        mask[0:30, 0:30] = 255
+        self._case(mask)
+
+    def test_matches_full_frame_for_two_separate_blobs(self):
+        mask = np.zeros((240, 320), np.uint8)
+        cv2.circle(mask, (40, 40), 12, 255, -1)
+        cv2.circle(mask, (280, 200), 12, 255, -1)
+        self._case(mask)
+
+    def test_matches_full_frame_for_a_full_mask(self):
+        self._case(np.full((240, 320), 255, np.uint8))
+
+    def test_an_empty_mask_changes_nothing(self):
+        rng = np.random.default_rng(3)
+        original = rng.integers(0, 256, (120, 160, 3), dtype=np.uint8)
+        generated = rng.integers(0, 256, (120, 160, 3), dtype=np.uint8)
+        out = hard_composite(original, generated, np.zeros((120, 160), np.uint8))
+        np.testing.assert_array_equal(out, original)

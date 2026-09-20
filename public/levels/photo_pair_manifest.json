@@ -60,36 +60,6 @@
     "variantCode": "STR-CLR"
   },
   {
-    "id": "photo_set_001_03",
-    "title": "Nature Geodes & Agate Slices (Nature 10)",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/2f73c7f5024f_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_010_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 30.1,
-        "y": 22.4,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely near coordinates (30%, 23%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_001",
-    "sequence": 3,
-    "variantCode": "STR-CLR"
-  },
-  {
     "id": "photo_set_001_04",
     "title": "Outdoor Garden Seedlings & Plant Tags (Nature 13)",
     "category": "Photography",
@@ -116,7 +86,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -146,38 +116,8 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-ADD"
-  },
-  {
-    "id": "photo_set_002_01",
-    "title": "Tailor Silk Threads & Brass Thimbles",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/fc84baa18401_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_038_variant.jpg",
-    "operation": "reorder",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50,
-        "y": 57.1,
-        "radius": 8.1,
-        "description": "Single reorder difference",
-        "hint": "Look closely near coordinates (55%, 57%)",
-        "operation": "reorder"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_002",
-    "sequence": 1,
-    "variantCode": "STR-MOV"
   },
   {
     "id": "photo_set_002_02",
@@ -205,8 +145,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_002",
-    "sequence": 2,
+    "setId": "photo_set_001",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -234,7 +174,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
-    "sequence": 3,
+    "sequence": 1,
     "variantCode": "STR-CLR"
   },
   {
@@ -262,7 +202,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
-    "sequence": 4,
+    "sequence": 2,
     "variantCode": "STR-ADD"
   },
   {
@@ -290,7 +230,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
-    "sequence": 5,
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -317,8 +257,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_003",
-    "sequence": 1,
+    "setId": "photo_set_002",
+    "sequence": 4,
     "variantCode": "STR-REM"
   },
   {
@@ -345,8 +285,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_003",
-    "sequence": 2,
+    "setId": "photo_set_002",
+    "sequence": 5,
     "variantCode": "STR-MOV"
   },
   {
@@ -374,7 +314,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
-    "sequence": 3,
+    "sequence": 1,
     "variantCode": "STR-CLR"
   },
   {
@@ -402,7 +342,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
-    "sequence": 4,
+    "sequence": 2,
     "variantCode": "STR-REM"
   },
   {
@@ -430,7 +370,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
-    "sequence": 5,
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -457,8 +397,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_004",
-    "sequence": 1,
+    "setId": "photo_set_003",
+    "sequence": 4,
     "variantCode": "STR-MOV"
   },
   {
@@ -485,8 +425,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_004",
-    "sequence": 2,
+    "setId": "photo_set_003",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -514,7 +454,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 3,
+    "sequence": 1,
     "variantCode": "STR-CLR"
   },
   {
@@ -542,7 +482,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 4,
+    "sequence": 2,
     "variantCode": "STR-ADD"
   },
   {
@@ -570,7 +510,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 5,
+    "sequence": 3,
     "variantCode": "STR-ADD"
   },
   {
@@ -600,8 +540,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_005",
-    "sequence": 1,
+    "setId": "photo_set_004",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -630,8 +570,8 @@
         "operation": "recolor"
       }
     ],
-    "setId": "photo_set_005",
-    "sequence": 2,
+    "setId": "photo_set_004",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -662,7 +602,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 3,
+    "sequence": 1,
     "variantCode": "STR-CLR"
   },
   {
@@ -690,7 +630,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 4,
+    "sequence": 2,
     "variantCode": "STR-ADD"
   },
   {
@@ -719,7 +659,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 5,
+    "sequence": 3,
     "variantCode": "STR-REM"
   },
   {
@@ -746,8 +686,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_006",
-    "sequence": 1,
+    "setId": "photo_set_005",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -774,8 +714,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_006",
-    "sequence": 2,
+    "setId": "photo_set_005",
+    "sequence": 5,
     "variantCode": "STR-ADD"
   },
   {
@@ -802,7 +742,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 3,
+    "sequence": 1,
     "variantCode": "???-???"
   },
   {
@@ -830,7 +770,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 4,
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -860,7 +800,7 @@
       }
     ],
     "setId": "photo_set_006",
-    "sequence": 5,
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -886,35 +826,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 1,
-    "variantCode": "???-???"
-  },
-  {
-    "id": "photo_set_007_02",
-    "title": "[Method 1: Workshop Inpainting] Circuit Repair Workbench",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/f04c9cea07e4_base.jpg",
-    "variantImage": "/levels/method1_photo_electronics_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 57.5,
-        "y": 79.5,
-        "radius": 9,
-        "hint": "Look closely near coordinates (57%, 80%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 2,
+    "setId": "photo_set_006",
+    "sequence": 4,
     "variantCode": "???-???"
   },
   {
@@ -940,8 +853,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 3,
+    "setId": "photo_set_006",
+    "sequence": 5,
     "variantCode": "???-???"
   },
   {
@@ -967,33 +880,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 4,
-    "variantCode": "???-???"
-  },
-  {
-    "id": "photo_set_007_05",
-    "title": "Master Stained Glass Solder & Cathedral Glass",
-    "category": "Real Photo",
-    "difficulty": "Medium",
-    "packId": "find_the_sniper",
-    "baseImage": "levels/9c7ca148b335_base.jpg",
-    "variantImage": "/levels/ai_macro_stained_glass_001_variant.jpg",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 56,
-        "y": 58.3,
-        "radius": 9,
-        "hint": "Look closely near coordinates (56%, 58%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 5,
+    "sequence": 1,
     "variantCode": "???-???"
   },
   {
@@ -1019,8 +906,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 1,
+    "setId": "photo_set_007",
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -1046,62 +933,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 2,
-    "variantCode": "???-???"
-  },
-  {
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 50.3,
-        "y": 50.4,
-        "radius": 9,
-        "hint": "Look closely near coordinates (50%, 50%)"
-      }
-    ],
-    "title": "Forest Floor Camouflage",
-    "id": "photo_set_008_03",
-    "variantImage": "levels/photo-pairs/camouflage/hard_forest_001/variant.jpg",
-    "difficulty": "Hard",
-    "baseImage": "levels/photo-pairs/camouflage/hard_forest_001/c47fd3eeb225_base.jpg",
-    "category": "Extreme Hunter",
-    "dimensions": {
-      "width": 640,
-      "height": 480
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_008",
+    "setId": "photo_set_007",
     "sequence": 3,
-    "variantCode": "???-???"
-  },
-  {
-    "pack": "Find the Sniper",
-    "difficulty": "Medium",
-    "title": "Workbench Hardware Ring",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 91.8,
-        "y": 28.1,
-        "radius": 9,
-        "hint": "Look closely near coordinates (92%, 28%)"
-      }
-    ],
-    "baseImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/9f6427b4c86a_base.jpg",
-    "category": "Photography",
-    "variantImage": "levels/photo-pairs/photo-workbench-hardware/photo_workbench_hardware_001/variant.jpg",
-    "packId": "find_the_sniper",
-    "id": "photo_set_008_04",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 4,
     "variantCode": "???-???"
   },
   {
@@ -1127,8 +960,8 @@
       "height": 480
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 5,
+    "setId": "photo_set_007",
+    "sequence": 4,
     "variantCode": "???-???"
   },
   {
@@ -1154,8 +987,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 1,
+    "setId": "photo_set_007",
+    "sequence": 5,
     "variantCode": "???-???"
   },
   {
@@ -1181,8 +1014,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 2,
+    "setId": "photo_set_008",
+    "sequence": 1,
     "variantCode": "???-???"
   },
   {
@@ -1208,8 +1041,8 @@
       "height": 480
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 3,
+    "setId": "photo_set_008",
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -1235,8 +1068,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 4,
+    "setId": "photo_set_008",
+    "sequence": 3,
     "variantCode": "???-???"
   },
   {
@@ -1262,8 +1095,8 @@
       "height": 480
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 5,
+    "setId": "photo_set_008",
+    "sequence": 4,
     "variantCode": "???-???"
   },
   {
@@ -1289,8 +1122,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
-    "sequence": 1,
+    "setId": "photo_set_008",
+    "sequence": 5,
     "variantCode": "???-???"
   },
   {
@@ -1316,8 +1149,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
-    "sequence": 2,
+    "setId": "photo_set_009",
+    "sequence": 1,
     "variantCode": "???-???"
   },
   {
@@ -1343,8 +1176,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
-    "sequence": 3,
+    "setId": "photo_set_009",
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -1370,8 +1203,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
-    "sequence": 4,
+    "setId": "photo_set_009",
+    "sequence": 3,
     "variantCode": "???-???"
   },
   {
@@ -1397,8 +1230,8 @@
       "height": 480
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
-    "sequence": 5,
+    "setId": "photo_set_009",
+    "sequence": 4,
     "variantCode": "???-???"
   },
   {
@@ -1424,8 +1257,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
-    "sequence": 1,
+    "setId": "photo_set_009",
+    "sequence": 5,
     "variantCode": "???-???"
   },
   {
@@ -1451,8 +1284,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
-    "sequence": 2,
+    "setId": "photo_set_010",
+    "sequence": 1,
     "variantCode": "???-???"
   },
   {
@@ -1478,8 +1311,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
-    "sequence": 3,
+    "setId": "photo_set_010",
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -1505,8 +1338,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
-    "sequence": 4,
+    "setId": "photo_set_010",
+    "sequence": 3,
     "variantCode": "???-???"
   },
   {
@@ -1532,35 +1365,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
-    "sequence": 5,
-    "variantCode": "???-???"
-  },
-  {
-    "diffs": [
-      {
-        "id": 1,
-        "x": 33.6,
-        "y": 53.1,
-        "radius": 9,
-        "hint": "Look closely near coordinates (34%, 53%)"
-      }
-    ],
-    "difficulty": "Easy",
-    "category": "Photography",
-    "baseImage": "levels/photo-pairs/photo-garden-potting/4a1b3bb5d3f5_base.jpg",
-    "variantImage": "levels/photo-pairs/photo-garden-potting/variant.jpg",
-    "pack": "Find the Sniper",
-    "title": "Garden Potting Pot",
-    "packId": "find_the_sniper",
-    "id": "photo_set_012_01",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 1,
+    "setId": "photo_set_010",
+    "sequence": 4,
     "variantCode": "???-???"
   },
   {
@@ -1586,35 +1392,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 2,
-    "variantCode": "???-???"
-  },
-  {
-    "variantImage": "levels/photo-pairs/photo-watch-repair/variant.jpg",
-    "title": "Watch Repair Gear",
-    "id": "photo_set_012_03",
-    "packId": "find_the_sniper",
-    "baseImage": "levels/photo-pairs/photo-watch-repair/986f070b813b_base.jpg",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 3.7,
-        "y": 63.5,
-        "radius": 8.1,
-        "hint": "Look closely near coordinates (4%, 63%)"
-      }
-    ],
-    "pack": "Find the Sniper",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 3,
+    "setId": "photo_set_010",
+    "sequence": 5,
     "variantCode": "???-???"
   },
   {
@@ -1640,8 +1419,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 4,
+    "setId": "photo_set_011",
+    "sequence": 1,
     "variantCode": "???-???"
   },
   {
@@ -1667,8 +1446,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 5,
+    "setId": "photo_set_011",
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -1694,8 +1473,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 1,
+    "setId": "photo_set_011",
+    "sequence": 3,
     "variantCode": "???-???"
   },
   {
@@ -1721,8 +1500,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 2,
+    "setId": "photo_set_011",
+    "sequence": 4,
     "variantCode": "???-???"
   },
   {
@@ -1748,8 +1527,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 3,
+    "setId": "photo_set_011",
+    "sequence": 5,
     "variantCode": "???-???"
   },
   {
@@ -1775,8 +1554,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 4,
+    "setId": "photo_set_012",
+    "sequence": 1,
     "variantCode": "???-???"
   },
   {
@@ -1802,8 +1581,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 5,
+    "setId": "photo_set_012",
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -1832,8 +1611,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 1,
+    "setId": "photo_set_012",
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -1862,8 +1641,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 2,
+    "setId": "photo_set_012",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -1892,8 +1671,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 3,
+    "setId": "photo_set_012",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -1922,8 +1701,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 4,
+    "setId": "photo_set_013",
+    "sequence": 1,
     "variantCode": "STR-CLR"
   },
   {
@@ -1952,8 +1731,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 5,
+    "setId": "photo_set_013",
+    "sequence": 2,
     "variantCode": "STR-CLR"
   },
   {
@@ -1982,8 +1761,8 @@
         "operation": "recolor"
       }
     ],
-    "setId": "photo_set_015",
-    "sequence": 1,
+    "setId": "photo_set_013",
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -2012,8 +1791,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 2,
+    "setId": "photo_set_013",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -2042,8 +1821,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 3,
+    "setId": "photo_set_013",
+    "sequence": 5,
     "variantCode": "STR-REM"
   },
   {
@@ -2072,8 +1851,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 4,
+    "setId": "photo_set_014",
+    "sequence": 1,
     "variantCode": "STR-ADD"
   },
   {
@@ -2102,8 +1881,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 5,
+    "setId": "photo_set_014",
+    "sequence": 2,
     "variantCode": "STR-CLR"
   },
   {
@@ -2132,8 +1911,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
-    "sequence": 1,
+    "setId": "photo_set_014",
+    "sequence": 3,
     "variantCode": "STR-ADD"
   },
   {
@@ -2162,8 +1941,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
-    "sequence": 2,
+    "setId": "photo_set_014",
+    "sequence": 4,
     "variantCode": "STR-ADD"
   },
   {
@@ -2192,8 +1971,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
-    "sequence": 3,
+    "setId": "photo_set_014",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -2222,8 +2001,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
-    "sequence": 4,
+    "setId": "photo_set_015",
+    "sequence": 1,
     "variantCode": "STR-ADD"
   },
   {
@@ -2252,8 +2031,8 @@
         "operation": "recolor"
       }
     ],
-    "setId": "photo_set_016",
-    "sequence": 5,
+    "setId": "photo_set_015",
+    "sequence": 2,
     "variantCode": "STR-CLR"
   },
   {
@@ -2282,8 +2061,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 1,
+    "setId": "photo_set_015",
+    "sequence": 3,
     "variantCode": "STR-MOV"
   },
   {
@@ -2312,8 +2091,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 2,
+    "setId": "photo_set_015",
+    "sequence": 4,
     "variantCode": "STR-MOV"
   },
   {
@@ -2342,8 +2121,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 3,
+    "setId": "photo_set_015",
+    "sequence": 5,
     "variantCode": "STR-MOV"
   },
   {
@@ -2372,8 +2151,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 4,
+    "setId": "photo_set_016",
+    "sequence": 1,
     "variantCode": "STR-MOV"
   },
   {
@@ -2402,8 +2181,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 5,
+    "setId": "photo_set_016",
+    "sequence": 2,
     "variantCode": "STR-MOV"
   },
   {
@@ -2432,39 +2211,9 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 1,
+    "setId": "photo_set_016",
+    "sequence": 3,
     "variantCode": "STR-CLR"
-  },
-  {
-    "id": "photo_set_018_02",
-    "title": "Foraged Forest Wild Mushrooms",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/9fb9cfb091e5_base.jpg",
-    "variantImage": "levels/fresh_v4_pair_012_variant.jpg",
-    "operation": "add",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 30.8,
-        "y": 11,
-        "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely near coordinates (31%, 11%)",
-        "operation": "add"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 2,
-    "variantCode": "STR-ADD"
   },
   {
     "id": "photo_set_018_03",
@@ -2492,8 +2241,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 3,
+    "setId": "photo_set_016",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -2522,8 +2271,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 4,
+    "setId": "photo_set_016",
+    "sequence": 5,
     "variantCode": "STR-MOV"
   },
   {
@@ -2552,37 +2301,9 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 5,
-    "variantCode": "STR-CLR"
-  },
-  {
-    "id": "photo_set_019_01",
-    "title": "[AI Multi-Op] Vintage Tailor Button Assortment",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/12b6b358171e_base.jpg",
-    "variantImage": "/levels/prod_v4_dense_buttons_variant.jpg",
-    "operation": "remove",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 55.4,
-        "y": 80.9,
-        "radius": 6.5,
-        "hint": "Look closely near coordinates (60%, 81%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_019",
+    "setId": "photo_set_017",
     "sequence": 1,
-    "variantCode": "STR-REM"
+    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_019_02",
@@ -2608,7 +2329,7 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_019",
+    "setId": "photo_set_017",
     "sequence": 2,
     "variantCode": "STR-ADD"
   },
@@ -2636,37 +2357,9 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_019",
+    "setId": "photo_set_017",
     "sequence": 3,
     "variantCode": "STR-ADD"
-  },
-  {
-    "id": "photo_set_019_04",
-    "title": "[AI Multi-Op] Leather Artisan Waxed Spools",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/9ea628311263_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_leathercraft_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 2.4,
-        "y": 93.8,
-        "radius": 9.5,
-        "hint": "Look closely near coordinates (2%, 94%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_019",
-    "sequence": 4,
-    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_019_05",
@@ -2692,8 +2385,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_019",
-    "sequence": 5,
+    "setId": "photo_set_017",
+    "sequence": 4,
     "variantCode": "STR-REM"
   },
   {
@@ -2720,8 +2413,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 1,
+    "setId": "photo_set_017",
+    "sequence": 5,
     "variantCode": "STR-ADD"
   },
   {
@@ -2748,37 +2441,9 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 2,
+    "setId": "photo_set_018",
+    "sequence": 1,
     "variantCode": "STR-ADD"
-  },
-  {
-    "id": "photo_set_020_03",
-    "title": "[AI Multi-Op] Carpenter Tool Layout B",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/92d32b050ea0_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_woodworking_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 37.1,
-        "y": 73.2,
-        "radius": 10,
-        "hint": "Look closely near coordinates (28%, 73%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 3,
-    "variantCode": "STR-CLR"
   },
   {
     "id": "photo_set_020_04",
@@ -2804,8 +2469,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 4,
+    "setId": "photo_set_018",
+    "sequence": 2,
     "variantCode": "STR-CLR"
   },
   {
@@ -2834,8 +2499,8 @@
         "operation": "recolor"
       }
     ],
-    "setId": "photo_set_020",
-    "sequence": 5,
+    "setId": "photo_set_018",
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -2862,8 +2527,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
-    "sequence": 1,
+    "setId": "photo_set_018",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -2890,8 +2555,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
-    "sequence": 2,
+    "setId": "photo_set_018",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -2918,8 +2583,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
-    "sequence": 3,
+    "setId": "photo_set_019",
+    "sequence": 1,
     "variantCode": "STR-CLR"
   },
   {
@@ -2945,8 +2610,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
-    "sequence": 4,
+    "setId": "photo_set_019",
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -2974,8 +2639,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
-    "sequence": 5,
+    "setId": "photo_set_019",
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -3005,8 +2670,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
-    "sequence": 1,
+    "setId": "photo_set_019",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -3034,8 +2699,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
-    "sequence": 2,
+    "setId": "photo_set_019",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -3065,8 +2730,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
-    "sequence": 3,
+    "setId": "photo_set_020",
+    "sequence": 1,
     "variantCode": "STR-CLR"
   },
   {
@@ -3094,8 +2759,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
-    "sequence": 4,
+    "setId": "photo_set_020",
+    "sequence": 2,
     "variantCode": "STR-CLR"
   },
   {
@@ -3125,39 +2790,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
-    "sequence": 5,
-    "variantCode": "STR-CLR"
-  },
-  {
-    "id": "photo_set_023_01",
-    "title": "[Calibrated] 200 Glass Cats-Eye & Swirl Marbles",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "category": "Photography",
-    "difficulty": "Medium",
-    "operation": "recolor",
-    "baseImage": "levels/1135f8054c61_base.jpg",
-    "variantImage": "/levels/photo_marbles_calibrated_001_variant.jpg",
-    "totalDifferences": 1,
-    "diffs": [
-      {
-        "id": 1,
-        "x": 32.8,
-        "y": 77.8,
-        "radius": 6.7,
-        "description": "Single swirling glass marble shifted from emerald green to ocean turquoise",
-        "hint": "Look closely near coordinates (29%, 78%)",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_023",
-    "sequence": 1,
+    "setId": "photo_set_020",
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -3185,8 +2819,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_023",
-    "sequence": 2,
+    "setId": "photo_set_020",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -3216,8 +2850,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_023",
-    "sequence": 3,
+    "setId": "photo_set_020",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -3244,8 +2878,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_023",
-    "sequence": 4,
+    "setId": "photo_set_021",
+    "sequence": 1,
     "variantCode": "???-???"
   },
   {
@@ -3272,8 +2906,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_023",
-    "sequence": 5,
+    "setId": "photo_set_021",
+    "sequence": 2,
     "variantCode": "???-???"
   },
   {
@@ -3300,8 +2934,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_024",
-    "sequence": 1,
+    "setId": "photo_set_021",
+    "sequence": 3,
     "variantCode": "???-???"
   },
   {
@@ -3330,8 +2964,8 @@
         "operation": "recolor"
       }
     ],
-    "setId": "photo_set_024",
-    "sequence": 2,
+    "setId": "photo_set_021",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -3358,8 +2992,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_024",
-    "sequence": 3,
+    "setId": "photo_set_021",
+    "sequence": 5,
     "variantCode": "???-???"
   },
   {
@@ -3385,61 +3019,7 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_024",
-    "sequence": 4,
-    "variantCode": "???-???"
-  },
-  {
-    "difficulty": "Hard",
-    "id": "photo_set_024_05",
-    "packId": "find_the_sniper",
-    "diffs": [
-      {
-        "y": 58,
-        "id": 1,
-        "hint": "Look closely near coordinates (75%, 58%)",
-        "x": 74.7,
-        "radius": 5.8
-      }
-    ],
-    "pack": "Find the Sniper",
-    "variantImage": "levels/photo-pairs/photo-repair-hardware-002/variant.jpg",
-    "baseImage": "levels/photo-pairs/photo-repair-hardware-002/44a4ef9c63ca_base.jpg",
-    "title": "Precision Hardware Drawer",
-    "category": "Workshop Clutter",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_024",
-    "sequence": 5,
-    "variantCode": "???-???"
-  },
-  {
-    "category": "Game Night",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 60.3,
-        "y": 35.1,
-        "radius": 5,
-        "hint": "Look closely near coordinates (60%, 35%)"
-      }
-    ],
-    "title": "Tabletop Strategy Board",
-    "packId": "find_the_sniper",
-    "pack": "Find the Sniper",
-    "baseImage": "levels/photo-pairs/photo-strategy-pieces-002/24435614b14e_base.jpg",
-    "variantImage": "levels/photo-pairs/photo-strategy-pieces-002/variant.jpg",
-    "id": "photo_set_025_01",
-    "difficulty": "Hard",
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_025",
+    "setId": "photo_set_022",
     "sequence": 1,
     "variantCode": "???-???"
   },
@@ -3469,38 +3049,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_025",
+    "setId": "photo_set_022",
     "sequence": 2,
-    "variantCode": "STR-CLR"
-  },
-  {
-    "id": "photo_set_025_03",
-    "title": "Antique Locksmith Skeleton Keys",
-    "category": "Photography",
-    "pack": "Find the Sniper",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/352879af2dbe_base.jpg",
-    "variantImage": "levels/photo_set_036_04_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 84.1,
-        "y": 76.7,
-        "radius": 4.5,
-        "description": "Single recolor difference",
-        "hint": "Look closely for a recolor difference",
-        "operation": "recolor"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_025",
-    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -3529,8 +3079,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_025",
-    "sequence": 4,
+    "setId": "photo_set_022",
+    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -3559,8 +3109,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_025",
-    "sequence": 5,
+    "setId": "photo_set_022",
+    "sequence": 4,
     "variantCode": "STR-CLR"
   },
   {
@@ -3589,8 +3139,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_026",
-    "sequence": 1,
+    "setId": "photo_set_022",
+    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {
@@ -3619,8 +3169,6 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_026",
-    "sequence": 2,
     "variantCode": "STR-CLR"
   },
   {
@@ -3649,8 +3197,6 @@
         "operation": "recolor"
       }
     ],
-    "setId": "photo_set_026",
-    "sequence": 3,
     "variantCode": "STR-CLR"
   },
   {
@@ -3679,8 +3225,6 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_026",
-    "sequence": 4,
     "variantCode": "STR-ADD"
   },
   {
@@ -3709,8 +3253,6 @@
         "operation": "recolor"
       }
     ],
-    "setId": "photo_set_026",
-    "sequence": 5,
     "variantCode": "STR-CLR"
   },
   {

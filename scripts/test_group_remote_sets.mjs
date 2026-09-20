@@ -122,3 +122,15 @@ test('a group too large to spread is reported rather than hidden', async () => {
   assert.ok(sets.some(s => s.repeatedBases > 0),
     'an impossible pool must surface the repetition, not swallow it');
 });
+
+test('packs from a larger previous allocation must not survive a shrink', async () => {
+  // The regroup writes 001..005 when five sets remain. A previous run's 006 and
+  // 007 are not overwritten, so unless they are deleted they keep serving
+  // levels that have just been dismissed.
+  const source = await import('node:fs')
+    .then(fs => fs.readFileSync(new URL('./group_remote_sets.mjs', import.meta.url), 'utf8'));
+  assert.match(source, /writtenPackIds\.add\(packId\)/);
+  assert.match(source, /if \(writtenPackIds\.has\(packId\)\) continue;/);
+  assert.doesNotMatch(source, /if \(packId\.startsWith\(PACK_PREFIX\)\) continue;/,
+    'same-prefix packs must not be skipped when deciding what to remove');
+});

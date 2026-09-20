@@ -12,6 +12,8 @@ class VariantCodeTests(unittest.TestCase):
             ("structural", "recolor"): "STR-CLR",
             ("local_star", "recolor"): "LST-CLR",
             ("local_segmented", "recolor"): "LSG-CLR",
+            ("local_star", "duplicate"): "LST-DUP",
+            ("local_segmented", "duplicate"): "LSG-DUP",
         }
         for (method, operation), expected in cases.items():
             entry = {"generationMethod": method, "operation": operation}

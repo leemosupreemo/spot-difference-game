@@ -84,21 +84,32 @@ def resolve_image_paths(inputs: List[str]) -> List[Path]:
     return resolved
 
 
+# Each pass is an (engine, operation) pair. Recolor runs first because it is
+# the cheapest and most reliable; duplication then adds a different KIND of
+# puzzle from the same detected targets, so a set is not five hue shifts.
+AUTO_PASSES = (
+    ("local-segmented", "recolor"),
+    ("local-star", "recolor"),
+    ("local-star", "duplicate"),
+    ("local-segmented", "duplicate"),
+)
+
+
 def _run_engine(engine, candidate, scene_spec, staging_dir, count, difficulty,
-                route_result, start_index, exclude_boxes):
+                route_result, start_index, exclude_boxes, operation="recolor"):
     if engine == "local-star":
         from local_star_fallback import generate_star_variants
 
         return generate_star_variants(candidate, scene_spec, staging_dir, count,
                                       difficulty=difficulty, start_index=start_index,
-                                      exclude_boxes=exclude_boxes)
+                                      exclude_boxes=exclude_boxes, operation=operation)
     from local_segmented_fallback import generate_segmented_variants
 
     # Segmented runs first under "auto" because an approved gate already paid
     # for FastSAM; reusing those masks costs nothing.
     return generate_segmented_variants(candidate, scene_spec, staging_dir, count,
         difficulty=difficulty, raw_masks=(route_result or {}).get("raw_masks"),
-        start_index=start_index, exclude_boxes=exclude_boxes)
+        start_index=start_index, exclude_boxes=exclude_boxes, operation=operation)
 
 
 def _local_fallback(candidate, scene_id, title, count, difficulty, staging_dir,
@@ -108,16 +119,17 @@ def _local_fallback(candidate, scene_id, title, count, difficulty, staging_dir,
         raise rejection
 
     scene_spec = {"id": scene_id, "title": title or scene_id.replace("_", " ").title()}
-    engines = ("local-segmented", "local-star") if fallback == "auto" else (fallback,)
+    passes = AUTO_PASSES if fallback == "auto" else ((fallback, "recolor"), (fallback, "duplicate"))
     pairs, engine_logs, used_boxes = [], [], []
-    for engine in engines:
+    for engine, operation in passes:
         # Each engine only needs to cover the shortfall, continues the previous
         # one's variant numbering so ids never collide, and skips objects an
         # earlier engine already edited.
         engine_pairs, engine_log = _run_engine(engine, candidate, scene_spec, staging_dir,
                                                count - len(pairs), difficulty, route_result,
                                                start_index=len(pairs) + 1,
-                                               exclude_boxes=tuple(used_boxes))
+                                               exclude_boxes=tuple(used_boxes),
+                                               operation=operation)
         engine_logs.append(engine_log)
         pairs.extend(engine_pairs)
         used_boxes.extend(accepted_boxes(engine_log))

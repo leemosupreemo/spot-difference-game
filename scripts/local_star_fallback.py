@@ -57,9 +57,10 @@ def detect_star_targets(image, max_targets=24):
 
 def generate_star_variants(candidate, scene_spec, staging_dir, count,
                            policy=DEFAULT_BASE_GENERATION_POLICY, difficulty="Medium",
-                           start_index=1, exclude_boxes=()):
+                           start_index=1, exclude_boxes=(), operation="recolor"):
     base = cv2.imread(candidate.master_path)
     targets = detect_star_targets(base)
     return generate_recolor_variants(candidate, scene_spec, staging_dir, count, targets,
                                      policy=policy, difficulty=difficulty, method="local_star",
-                                     start_index=start_index, exclude_boxes=exclude_boxes)
+                                     start_index=start_index, exclude_boxes=exclude_boxes,
+                                         operation=operation)

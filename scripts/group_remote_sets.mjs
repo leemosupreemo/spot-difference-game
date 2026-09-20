@@ -144,8 +144,10 @@ async function main() {
 
   if (!apply) { console.log('\nDry run. Re-run with --apply to write.'); process.exit(0); }
 
+  const writtenPackIds = new Set();
   for (const set of sets) {
     const packId = `${PACK_PREFIX}${set.setId.slice(REMOTE_SET_PREFIX.length)}`;
+    writtenPackIds.add(packId);
     await setDoc(doc(db, 'remote_level_packs', packId), {
       packId,
       title: `Remote Set ${set.setId.slice(REMOTE_SET_PREFIX.length)}`,
@@ -157,8 +159,12 @@ async function main() {
     });
     console.log(`wrote ${packId} (${set.levels.length} levels)`);
   }
+  // Remove every pack this run did not just write, including higher-numbered
+  // ones from a previous, larger allocation. Skipping same-prefix packs assumed
+  // they would be overwritten, which is only true while the set count grows --
+  // when it shrinks the leftovers keep serving levels that were just dismissed.
   for (const packId of existingPackIds) {
-    if (packId.startsWith(PACK_PREFIX)) continue;
+    if (writtenPackIds.has(packId)) continue;
     await deleteDoc(doc(db, 'remote_level_packs', packId));
     console.log(`removed superseded pack ${packId}`);
   }

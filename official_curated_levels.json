@@ -1,9 +1,9 @@
 {
-  "exportedAt": "2026-09-20T02:44:39.561Z",
+  "exportedAt": "2026-09-20T19:11:27.392Z",
   "summary": {
-    "totalCurated": 624,
-    "approvedCount": 308,
-    "dismissedCount": 316,
+    "totalCurated": 628,
+    "approvedCount": 292,
+    "dismissedCount": 336,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -51,7 +51,7 @@
     "fresh_v3_ai_vintage_keys_003",
     "fresh_v7_bonsai_tools_012",
     "fresh_v7_pottery_tools_011",
-    "gemstone_velvet_starfield_1789824187839_v1",
+    "gemstone_velvet_starfield_1789824187839_v3",
     "gemstone_velvet_starfield_1789824187839_v4",
     "gemstone_velvet_starfield_1789824187839_v5",
     "goldilocks_ai_retro_gaming_004",
@@ -62,9 +62,9 @@
     "hard_forest_001",
     "hard_wire_clip_001",
     "hyper_dense_cyber_circuit_008",
-    "leaves_on_branch_1789795322252",
     "leaves_on_branch_1789795322252_v1",
-    "leaves_on_branch_1789795322252_v2",
+    "leaves_on_branch_1789795322252_v4",
+    "leaves_on_branch_1789795322252_v5",
     "mass_abstract_001",
     "mass_abstract_002",
     "mass_photo_102",
@@ -109,10 +109,8 @@
     "photo_repair_hardware_002",
     "photo_set_001_01",
     "photo_set_001_02",
-    "photo_set_001_03",
     "photo_set_001_04",
     "photo_set_001_05",
-    "photo_set_002_01",
     "photo_set_002_02",
     "photo_set_002_03",
     "photo_set_002_04",
@@ -138,14 +136,10 @@
     "photo_set_006_04",
     "photo_set_006_05",
     "photo_set_007_01",
-    "photo_set_007_02",
     "photo_set_007_03",
     "photo_set_007_04",
-    "photo_set_007_05",
     "photo_set_008_01",
     "photo_set_008_02",
-    "photo_set_008_03",
-    "photo_set_008_04",
     "photo_set_008_05",
     "photo_set_009_01",
     "photo_set_009_02",
@@ -162,9 +156,7 @@
     "photo_set_011_03",
     "photo_set_011_04",
     "photo_set_011_05",
-    "photo_set_012_01",
     "photo_set_012_02",
-    "photo_set_012_03",
     "photo_set_012_04",
     "photo_set_012_05",
     "photo_set_013_01",
@@ -193,18 +185,14 @@
     "photo_set_017_04",
     "photo_set_017_05",
     "photo_set_018_01",
-    "photo_set_018_02",
     "photo_set_018_03",
     "photo_set_018_04",
     "photo_set_018_05",
-    "photo_set_019_01",
     "photo_set_019_02",
     "photo_set_019_03",
-    "photo_set_019_04",
     "photo_set_019_05",
     "photo_set_020_01",
     "photo_set_020_02",
-    "photo_set_020_03",
     "photo_set_020_04",
     "photo_set_020_05",
     "photo_set_021_01",
@@ -217,7 +205,6 @@
     "photo_set_022_03",
     "photo_set_022_04",
     "photo_set_022_05",
-    "photo_set_023_01",
     "photo_set_023_02",
     "photo_set_023_03",
     "photo_set_023_04",
@@ -226,10 +213,7 @@
     "photo_set_024_02",
     "photo_set_024_03",
     "photo_set_024_04",
-    "photo_set_024_05",
-    "photo_set_025_01",
     "photo_set_025_02",
-    "photo_set_025_03",
     "photo_set_025_04",
     "photo_set_025_05",
     "photo_set_026_01",
@@ -288,7 +272,6 @@
     "photo_woodworking_table_001",
     "photo_workbench_hardware_001",
     "pins_on_carpet_1789795312426_v3",
-    "pins_on_carpet_1789795312426_v5",
     "pipe_v3_artist_recolor_006",
     "pipe_v3_retro_reorder_007",
     "planetary_nebula_shell_1789824253218_v3",
@@ -304,6 +287,7 @@
     "scene_retro_gaming_cartridges_017",
     "scene_workshop_tape_measure_slider_020",
     "semantic_tailor_pincushion_needle_003",
+    "spilled_toy_box_1789795347626_dup1",
     "spilled_toy_box_1789795347626_v1",
     "stellar_nursery_pillars_1789824271983_v5",
     "supernova_remnant_filaments_1789824235802_v3",
@@ -420,8 +404,8 @@
     "fresh_v7_cobbler_leather_007",
     "fresh_vintage_curio_shop_003",
     "fresh_vintage_study_typewriter_019",
+    "gemstone_velvet_starfield_1789824187839_v1",
     "gemstone_velvet_starfield_1789824187839_v2",
-    "gemstone_velvet_starfield_1789824187839_v3",
     "globular_cluster_stars_1789824178454_v1",
     "globular_cluster_stars_1789824178454_v2",
     "globular_cluster_stars_1789824178454_v3",
@@ -455,9 +439,9 @@
     "hyper_dense_machinist_parts_004",
     "hyper_dense_motherboard_ic_001",
     "hyper_dense_sewing_notions_010",
+    "leaves_on_branch_1789795322252",
+    "leaves_on_branch_1789795322252_v2",
     "leaves_on_branch_1789795322252_v3",
-    "leaves_on_branch_1789795322252_v4",
-    "leaves_on_branch_1789795322252_v5",
     "liquid_ink_nebula_1789824216586_v1",
     "liquid_ink_nebula_1789824216586_v2",
     "liquid_ink_nebula_1789824216586_v3",
@@ -470,6 +454,8 @@
     "molecular_cloud_complex_1789824226023_v4",
     "molecular_cloud_complex_1789824226023_v5",
     "newbase_watchmaker_micro_tweezers_004",
+    "open_cluster_pleiades_1789824243741_dup1",
+    "open_cluster_pleiades_1789824243741_dup2",
     "open_cluster_pleiades_1789824243741_v1",
     "open_cluster_pleiades_1789824243741_v3",
     "open_cluster_pleiades_1789824243741_v4",
@@ -496,6 +482,22 @@
     "photo_hardware_calibrated_005",
     "photo_hardware_recolor_005",
     "photo_marbles_recolor_001",
+    "photo_set_001_03",
+    "photo_set_002_01",
+    "photo_set_007_02",
+    "photo_set_007_05",
+    "photo_set_008_03",
+    "photo_set_008_04",
+    "photo_set_012_01",
+    "photo_set_012_03",
+    "photo_set_018_02",
+    "photo_set_019_01",
+    "photo_set_019_04",
+    "photo_set_020_03",
+    "photo_set_023_01",
+    "photo_set_024_05",
+    "photo_set_025_01",
+    "photo_set_025_03",
     "photo_set_027_01",
     "photo_set_027_02",
     "photo_set_027_03",
@@ -542,6 +544,7 @@
     "pins_on_carpet_1789795312426_v1",
     "pins_on_carpet_1789795312426_v2",
     "pins_on_carpet_1789795312426_v4",
+    "pins_on_carpet_1789795312426_v5",
     "pipe_v3_expedition_remove_008",
     "pipe_v3_gardener_remove_005",
     "pipe_v3_leathercraft_recolor_009",
@@ -603,6 +606,7 @@
     "spilled_craft_beads_1789795339046_v3",
     "spilled_craft_beads_1789795339046_v4",
     "spilled_craft_beads_1789795339046_v5",
+    "spilled_toy_box_1789795347626_dup2",
     "spilled_toy_box_1789795347626_v2",
     "spilled_toy_box_1789795347626_v3",
     "spilled_toy_box_1789795347626_v4",
@@ -723,9 +727,18 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_set_026_01": "approved",
-    "photo_set_026_02": "approved",
-    "photo_set_026_03": "approved",
+    "photo_set_026_01": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_set_026_02": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_set_026_03": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
     "method1_photo_artist_cap_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
@@ -874,8 +887,14 @@
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.892Z"
     },
-    "photo_set_026_04": "approved",
-    "photo_set_026_05": "approved",
+    "photo_set_026_04": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
+    "photo_set_026_05": {
+      "status": "approved",
+      "updatedAt": "2026-08-24T20:53:38.892Z"
+    },
     "semantic_workshop_screwdriver_grip_001": {
       "status": "dismissed",
       "updatedAt": "2026-08-24T21:26:31.790Z"
@@ -1308,7 +1327,10 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:24:15.106Z"
     },
-    "photo_set_018_05": "approved",
+    "photo_set_018_05": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:24:40.801Z"
+    },
     "photo_fresh_typewriter_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:24:49.371Z"
@@ -1325,7 +1347,10 @@
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:25:12.757Z"
     },
-    "photo_set_019_02": "approved",
+    "photo_set_019_02": {
+      "status": "approved",
+      "updatedAt": "2026-08-25T06:25:41.538Z"
+    },
     "photo_fresh_marbles_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-25T06:26:03.169Z"
@@ -1690,7 +1715,10 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:52:12.044Z"
     },
-    "photo_set_011_04": "approved",
+    "photo_set_011_04": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T17:52:21.431Z"
+    },
     "fresh_v2_ai_botanical_pressed_flora_003": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:52:26.116Z"
@@ -1715,33 +1743,54 @@
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:52:56.562Z"
     },
-    "photo_set_011_05": "approved",
+    "photo_set_011_05": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T17:53:00.724Z"
+    },
     "fresh_v2_ai_wooden_toy_figurines_010": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T17:53:07.768Z"
     },
-    "photo_set_010_03": "approved",
+    "photo_set_010_03": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:08:31.479Z"
+    },
     "fresh_v3_ai_minerals_geodes_002": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T18:08:39.982Z"
     },
-    "photo_set_010_04": "approved",
+    "photo_set_010_04": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:08:50.830Z"
+    },
     "fresh_v3_ai_silk_spools_004": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T18:08:56.254Z"
     },
-    "photo_set_010_05": "approved",
-    "photo_set_011_01": "approved",
+    "photo_set_010_05": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:09:01.473Z"
+    },
+    "photo_set_011_01": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:09:11.500Z"
+    },
     "fresh_v3_ai_ancient_coins_007": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T18:09:16.834Z"
     },
-    "photo_set_011_02": "approved",
+    "photo_set_011_02": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:09:24.549Z"
+    },
     "fresh_v3_ai_wild_mushrooms_009": {
       "status": "dismissed",
       "updatedAt": "2026-08-27T18:09:28.615Z"
     },
-    "photo_set_011_03": "approved",
+    "photo_set_011_03": {
+      "status": "approved",
+      "updatedAt": "2026-08-27T18:09:33.740Z"
+    },
     "medium_nursery_001": {
       "status": "approved",
       "updatedAt": "2026-08-24T20:53:38.890Z"
@@ -1966,92 +2015,350 @@
       "status": "approved",
       "updatedAt": "2026-09-18T05:56:58.790Z"
     },
-    "photo_set_001_01": "approved",
-    "photo_set_001_03": "approved",
-    "photo_set_001_04": "approved",
-    "photo_set_001_05": "approved",
-    "photo_set_001_02": "approved",
-    "photo_set_002_01": "approved",
-    "photo_set_002_02": "approved",
-    "photo_set_002_04": "approved",
-    "photo_set_003_04": "approved",
-    "photo_set_007_03": "approved",
-    "photo_set_007_04": "approved",
-    "photo_set_007_05": "approved",
-    "photo_set_008_01": "approved",
-    "photo_set_008_02": "approved",
-    "photo_set_009_04": "approved",
-    "photo_set_009_05": "approved",
-    "photo_set_010_01": "approved",
-    "photo_set_010_02": "approved",
-    "photo_set_012_01": "approved",
-    "photo_set_012_02": "approved",
-    "photo_set_012_03": "approved",
-    "photo_set_012_04": "approved",
-    "photo_set_012_05": "approved",
-    "photo_set_013_01": "approved",
-    "photo_set_013_02": "approved",
-    "photo_set_013_03": "approved",
-    "photo_set_013_04": "approved",
-    "photo_set_013_05": "approved",
-    "photo_set_014_01": "approved",
-    "photo_set_014_02": "approved",
-    "photo_set_014_03": "approved",
-    "photo_set_014_04": "approved",
-    "photo_set_014_05": "approved",
-    "photo_set_015_01": "approved",
-    "photo_set_015_02": "approved",
-    "photo_set_015_03": "approved",
-    "photo_set_015_04": "approved",
-    "photo_set_015_05": "approved",
-    "photo_set_016_01": "approved",
-    "photo_set_016_02": "approved",
-    "photo_set_016_03": "approved",
-    "photo_set_016_04": "approved",
-    "photo_set_016_05": "approved",
-    "photo_set_017_01": "approved",
-    "photo_set_017_02": "approved",
-    "photo_set_017_03": "approved",
-    "photo_set_017_04": "approved",
-    "photo_set_017_05": "approved",
-    "photo_set_018_01": "approved",
-    "photo_set_018_02": "approved",
-    "photo_set_018_03": "approved",
-    "photo_set_018_04": "approved",
-    "photo_set_019_01": "approved",
-    "photo_set_019_03": "approved",
-    "photo_set_019_04": "approved",
-    "photo_set_019_05": "approved",
-    "photo_set_020_01": "approved",
-    "photo_set_020_02": "approved",
-    "photo_set_020_03": "approved",
-    "photo_set_020_04": "approved",
-    "photo_set_020_05": "approved",
-    "photo_set_021_01": "approved",
-    "photo_set_021_02": "approved",
-    "photo_set_021_03": "approved",
-    "photo_set_021_04": "approved",
-    "photo_set_021_05": "approved",
-    "photo_set_022_01": "approved",
-    "photo_set_022_02": "approved",
-    "photo_set_022_03": "approved",
-    "photo_set_022_04": "approved",
-    "photo_set_022_05": "approved",
-    "photo_set_023_01": "approved",
-    "photo_set_023_02": "approved",
-    "photo_set_023_03": "approved",
-    "photo_set_023_04": "approved",
-    "photo_set_023_05": "approved",
-    "photo_set_024_01": "approved",
-    "photo_set_024_02": "approved",
-    "photo_set_024_03": "approved",
-    "photo_set_024_04": "approved",
-    "photo_set_024_05": "approved",
-    "photo_set_025_01": "approved",
-    "photo_set_025_02": "approved",
-    "photo_set_025_03": "approved",
-    "photo_set_025_04": "approved",
-    "photo_set_025_05": "approved",
+    "photo_set_001_01": {
+      "updatedAt": "2026-09-19T12:08:20.776Z",
+      "status": "approved"
+    },
+    "photo_set_001_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T19:05:12.582Z"
+    },
+    "photo_set_001_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T05:56:55.921Z"
+    },
+    "photo_set_001_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T05:56:58.790Z"
+    },
+    "photo_set_001_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:29:39.517Z"
+    },
+    "photo_set_002_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T19:05:28.709Z"
+    },
+    "photo_set_002_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:29:52.112Z"
+    },
+    "photo_set_002_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:29:55.163Z"
+    },
+    "photo_set_003_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:30:05.022Z"
+    },
+    "photo_set_007_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:30:12.828Z"
+    },
+    "photo_set_007_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:30:18.147Z"
+    },
+    "photo_set_007_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:30:23.902Z"
+    },
+    "photo_set_008_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:30:31.307Z"
+    },
+    "photo_set_008_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:30:46.004Z"
+    },
+    "photo_set_009_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:30:52.541Z"
+    },
+    "photo_set_009_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:30:57.429Z"
+    },
+    "photo_set_010_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:31:03.181Z"
+    },
+    "photo_set_010_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:31:07.119Z"
+    },
+    "photo_set_012_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:31:18.945Z"
+    },
+    "photo_set_012_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:31:30.170Z"
+    },
+    "photo_set_012_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:31:35.705Z"
+    },
+    "photo_set_012_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:07:26.900Z"
+    },
+    "photo_set_012_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:07:36.291Z"
+    },
+    "photo_set_013_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:07:40.294Z"
+    },
+    "photo_set_013_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:07:45.130Z"
+    },
+    "photo_set_013_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:32:15.437Z"
+    },
+    "photo_set_013_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:32:19.624Z"
+    },
+    "photo_set_013_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:32:28.097Z"
+    },
+    "photo_set_014_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:07:50.603Z"
+    },
+    "photo_set_014_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:07:58.893Z"
+    },
+    "photo_set_014_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:33:06.209Z"
+    },
+    "photo_set_014_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:33:11.415Z"
+    },
+    "photo_set_014_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:33:21.204Z"
+    },
+    "photo_set_015_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:33:26.209Z"
+    },
+    "photo_set_015_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:08:01.044Z"
+    },
+    "photo_set_015_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:33:39.203Z"
+    },
+    "photo_set_015_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:08:07.282Z"
+    },
+    "photo_set_015_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:33:47.476Z"
+    },
+    "photo_set_016_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:33:54.281Z"
+    },
+    "photo_set_016_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:33:59.501Z"
+    },
+    "photo_set_016_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:34:03.689Z"
+    },
+    "photo_set_016_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:34:06.940Z"
+    },
+    "photo_set_016_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:34:11.010Z"
+    },
+    "photo_set_017_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:34:15.398Z"
+    },
+    "photo_set_017_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:34:20.036Z"
+    },
+    "photo_set_017_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:08:11.118Z"
+    },
+    "photo_set_017_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:34:33.310Z"
+    },
+    "photo_set_017_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:34:40.666Z"
+    },
+    "photo_set_018_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:08:17.138Z"
+    },
+    "photo_set_018_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:34:51.642Z"
+    },
+    "photo_set_018_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:08:29.698Z"
+    },
+    "photo_set_018_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:35:03.220Z"
+    },
+    "photo_set_019_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:35:13.625Z"
+    },
+    "photo_set_019_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:35:24.085Z"
+    },
+    "photo_set_019_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:35:34.044Z"
+    },
+    "photo_set_019_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:35:41.814Z"
+    },
+    "photo_set_020_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:35:44.935Z"
+    },
+    "photo_set_020_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:35:55.078Z"
+    },
+    "photo_set_020_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:36:05.566Z"
+    },
+    "photo_set_020_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:36:12.605Z"
+    },
+    "photo_set_020_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:36:18.479Z"
+    },
+    "photo_set_021_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:36:22.296Z"
+    },
+    "photo_set_021_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:36:26.283Z"
+    },
+    "photo_set_021_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:36:30.219Z"
+    },
+    "photo_set_021_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:36:34.674Z"
+    },
+    "photo_set_021_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:36:40.778Z"
+    },
+    "photo_set_022_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:36:47.700Z"
+    },
+    "photo_set_022_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:37:04.664Z"
+    },
+    "photo_set_022_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:37:08.951Z"
+    },
+    "photo_set_022_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:37:17.305Z"
+    },
+    "photo_set_022_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:37:23.511Z"
+    },
+    "photo_set_023_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:37:25.530Z"
+    },
+    "photo_set_023_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:09:15.084Z"
+    },
+    "photo_set_023_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:37:35.521Z"
+    },
+    "photo_set_023_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:37:51.183Z"
+    },
+    "photo_set_023_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:37:55.519Z"
+    },
+    "photo_set_024_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:09:20.505Z"
+    },
+    "photo_set_024_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:38:03.675Z"
+    },
+    "photo_set_024_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:09:29.495Z"
+    },
+    "photo_set_024_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:38:12.065Z"
+    },
+    "photo_set_024_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:38:15.837Z"
+    },
+    "photo_set_025_01": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:38:20.155Z"
+    },
+    "photo_set_025_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:09:53.246Z"
+    },
+    "photo_set_025_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:38:25.630Z"
+    },
+    "photo_set_025_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:10:07.090Z"
+    },
+    "photo_set_025_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:10:13.928Z"
+    },
     "photo_set_035_04": {
       "status": "dismissed",
       "updatedAt": "2026-09-18T13:38:49.711Z"
@@ -2060,35 +2367,122 @@
       "status": "dismissed",
       "updatedAt": "2026-09-18T13:39:00.004Z"
     },
-    "photo_set_002_03": "approved",
-    "photo_set_002_05": "approved",
-    "photo_set_003_01": "approved",
-    "photo_set_003_02": "approved",
-    "photo_set_003_03": "approved",
-    "photo_set_003_05": "approved",
-    "photo_set_004_01": "approved",
-    "photo_set_004_02": "approved",
-    "photo_set_004_03": "approved",
-    "photo_set_004_04": "approved",
-    "photo_set_004_05": "approved",
-    "photo_set_005_01": "approved",
-    "photo_set_005_02": "approved",
-    "photo_set_005_03": "approved",
-    "photo_set_005_04": "approved",
-    "photo_set_005_05": "approved",
-    "photo_set_006_01": "approved",
-    "photo_set_006_02": "approved",
-    "photo_set_006_03": "approved",
-    "photo_set_006_04": "approved",
-    "photo_set_006_05": "approved",
-    "photo_set_007_01": "approved",
-    "photo_set_007_02": "approved",
-    "photo_set_008_03": "approved",
-    "photo_set_008_04": "approved",
-    "photo_set_008_05": "approved",
-    "photo_set_009_01": "approved",
-    "photo_set_009_02": "approved",
-    "photo_set_009_03": "approved",
+    "photo_set_002_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:39:10.360Z"
+    },
+    "photo_set_002_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:39:16.618Z"
+    },
+    "photo_set_003_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:39:21.702Z"
+    },
+    "photo_set_003_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:39:25.440Z"
+    },
+    "photo_set_003_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:39:28.108Z"
+    },
+    "photo_set_003_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:39:34.113Z"
+    },
+    "photo_set_004_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:05:43.257Z"
+    },
+    "photo_set_004_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:39:45.808Z"
+    },
+    "photo_set_004_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:39:49.844Z"
+    },
+    "photo_set_004_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:06:02.436Z"
+    },
+    "photo_set_004_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:40:00.843Z"
+    },
+    "photo_set_005_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:40:05.294Z"
+    },
+    "photo_set_005_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:06:10.642Z"
+    },
+    "photo_set_005_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:06:14.447Z"
+    },
+    "photo_set_005_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:06:20.535Z"
+    },
+    "photo_set_005_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:40:31.159Z"
+    },
+    "photo_set_006_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:40:36.446Z"
+    },
+    "photo_set_006_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:06:24.721Z"
+    },
+    "photo_set_006_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:40:54.543Z"
+    },
+    "photo_set_006_04": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:06:32.793Z"
+    },
+    "photo_set_006_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:06:36.713Z"
+    },
+    "photo_set_007_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:41:17.078Z"
+    },
+    "photo_set_007_02": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:41:22.783Z"
+    },
+    "photo_set_008_03": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:41:29.553Z"
+    },
+    "photo_set_008_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-18T13:41:32.624Z"
+    },
+    "photo_set_008_05": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:41:38.213Z"
+    },
+    "photo_set_009_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:41:46.149Z"
+    },
+    "photo_set_009_02": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:07:07.669Z"
+    },
+    "photo_set_009_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:41:58.578Z"
+    },
     "photo_set_036_01": {
       "status": "dismissed",
       "updatedAt": "2026-09-18T13:42:04.382Z"
@@ -2217,7 +2611,10 @@
       "status": "dismissed",
       "updatedAt": "2026-09-18T13:44:11.929Z"
     },
-    "daily_set_01_01": "approved",
+    "daily_set_01_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:44:17.000Z"
+    },
     "daily_set_01_02": {
       "status": "dismissed",
       "updatedAt": "2026-09-18T13:44:21.005Z"
@@ -2274,12 +2671,18 @@
       "status": "dismissed",
       "updatedAt": "2026-09-18T13:45:21.070Z"
     },
-    "daily_set_06_01": "approved",
+    "daily_set_06_01": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:45:24.071Z"
+    },
     "daily_set_06_02": {
       "status": "dismissed",
       "updatedAt": "2026-09-18T13:45:29.557Z"
     },
-    "daily_set_06_03": "approved",
+    "daily_set_06_03": {
+      "status": "approved",
+      "updatedAt": "2026-09-18T13:45:33.960Z"
+    },
     "daily_set_07_01": {
       "status": "dismissed",
       "updatedAt": "2026-09-18T13:45:35.879Z"
@@ -2334,91 +2737,91 @@
     },
     "optical_fiber_constellation_1789824262569_v4": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:34:39.812Z"
+      "updatedAt": "2026-09-19T19:42:29.334Z"
     },
     "optical_fiber_constellation_1789824262569_v3": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:35:25.072Z"
+      "updatedAt": "2026-09-19T19:42:34.123Z"
     },
     "optical_fiber_constellation_1789824262569_v2": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:35:48.384Z"
+      "updatedAt": "2026-09-19T19:42:39.909Z"
     },
     "optical_fiber_constellation_1789824262569_v1": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:36:04.524Z"
+      "updatedAt": "2026-09-19T19:42:44.896Z"
     },
     "gemstone_velvet_starfield_1789824187839_v5": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:36:30.654Z"
+      "updatedAt": "2026-09-19T19:42:58.590Z"
     },
     "gemstone_velvet_starfield_1789824187839_v4": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:36:36.835Z"
+      "updatedAt": "2026-09-19T19:43:03.226Z"
     },
     "gemstone_velvet_starfield_1789824187839_v3": {
-      "status": "dismissed",
-      "updatedAt": "2026-09-20T02:36:41.801Z"
+      "status": "approved",
+      "updatedAt": "2026-09-19T19:43:10.765Z"
     },
     "gemstone_velvet_starfield_1789824187839_v2": {
       "status": "dismissed",
-      "updatedAt": "2026-09-20T02:36:49.249Z"
+      "updatedAt": "2026-09-19T19:43:15.390Z"
     },
     "gemstone_velvet_starfield_1789824187839_v1": {
-      "status": "approved",
-      "updatedAt": "2026-09-20T02:36:53.715Z"
+      "status": "dismissed",
+      "updatedAt": "2026-09-19T19:43:21.040Z"
     },
     "deep_field_galaxies_1789824198055_v1": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:36:58.397Z"
+      "updatedAt": "2026-09-19T19:43:33.017Z"
     },
     "pins_on_carpet_1789795312426_v5": {
-      "status": "approved",
-      "updatedAt": "2026-09-20T02:37:08.267Z"
+      "status": "dismissed",
+      "updatedAt": "2026-09-19T13:00:59.915Z"
     },
     "pins_on_carpet_1789795312426_v4": {
       "status": "dismissed",
-      "updatedAt": "2026-09-20T02:37:23.815Z"
+      "updatedAt": "2026-09-19T13:01:01.850Z"
     },
     "pins_on_carpet_1789795312426_v3": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:37:31.381Z"
+      "updatedAt": "2026-09-20T19:10:24.922Z"
     },
     "pins_on_carpet_1789795312426_v2": {
       "status": "dismissed",
-      "updatedAt": "2026-09-20T02:37:35.417Z"
+      "updatedAt": "2026-09-19T13:01:04.652Z"
     },
     "pins_on_carpet_1789795312426_v1": {
       "status": "dismissed",
-      "updatedAt": "2026-09-20T02:37:43.690Z"
+      "updatedAt": "2026-09-19T13:01:06.504Z"
     },
     "leaves_on_branch_1789795322252_v5": {
-      "status": "dismissed",
-      "updatedAt": "2026-09-20T02:37:50.469Z"
+      "status": "approved",
+      "updatedAt": "2026-09-19T13:00:11.462Z"
     },
     "leaves_on_branch_1789795322252_v4": {
-      "status": "dismissed",
-      "updatedAt": "2026-09-20T02:37:54.025Z"
+      "status": "approved",
+      "updatedAt": "2026-09-19T13:00:31.508Z"
     },
     "leaves_on_branch_1789795322252_v3": {
       "status": "dismissed",
-      "updatedAt": "2026-09-20T02:37:59.149Z"
+      "updatedAt": "2026-09-19T13:00:41.920Z"
     },
     "leaves_on_branch_1789795322252_v2": {
-      "status": "approved",
-      "updatedAt": "2026-09-20T02:38:10.436Z"
+      "status": "dismissed",
+      "updatedAt": "2026-09-19T13:00:48.471Z"
     },
     "leaves_on_branch_1789795322252_v1": {
       "status": "approved",
-      "updatedAt": "2026-09-20T02:38:17.516Z"
+      "updatedAt": "2026-09-19T13:00:54.710Z"
     },
     "pins_on_carpet_1789795312426": {
       "status": "dismissed",
-      "updatedAt": "2026-09-20T02:38:21.634Z"
+      "updatedAt": "2026-09-19T11:31:44.307Z"
     },
     "leaves_on_branch_1789795322252": {
-      "status": "approved",
-      "updatedAt": "2026-09-20T02:38:26.734Z"
+      "status": "dismissed",
+      "updatedAt": "2026-09-19T11:31:56.712Z"
     },
     "tarantula_nebula_web_1789847150865_v5": {
       "status": "approved",
@@ -2731,6 +3134,22 @@
     "aurora_cosmic_bands_1789847159154_v1": {
       "status": "approved",
       "updatedAt": "2026-09-20T02:44:29.183Z"
+    },
+    "open_cluster_pleiades_1789824243741_dup2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T18:49:10.711Z"
+    },
+    "open_cluster_pleiades_1789824243741_dup1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T18:49:29.590Z"
+    },
+    "spilled_toy_box_1789795347626_dup2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T18:49:45.569Z"
+    },
+    "spilled_toy_box_1789795347626_dup1": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T18:49:58.164Z"
     }
   }
 }

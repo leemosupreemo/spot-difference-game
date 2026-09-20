@@ -9,7 +9,10 @@ const loader = fs.readFileSync(new URL('../utils/photoPairLevelLoader.js', impor
 test('dismissed levels stay hidden unless explicitly asked for', () => {
   // The default must not change: dismissed levels are invisible everywhere.
   assert.match(loader, /includeDismissed = false/);
-  assert.match(loader, /if \(statusVal === 'dismissed' && !includeDismissed\) continue;/);
+  // Placeholders are exempt: they are structural slots with no artwork to
+  // judge, and honouring a dismissal on one would break its set.
+  assert.match(loader,
+    /if \(statusVal === 'dismissed' && !includeDismissed && !isPlaceholderEntry\(entry\)\) continue;/);
 });
 
 test('review mode shows only what was dismissed', () => {
