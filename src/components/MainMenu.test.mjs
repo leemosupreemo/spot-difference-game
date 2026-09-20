@@ -99,3 +99,11 @@ test('Each Game Mode card shows its own dim, zoom/fade background hint, not the 
   assert.match(css, /to \{ opacity: 0\.22; transform: scale\(1\); \}/);
   assert.match(css, /\.game-mode-bg-image \{[\s\S]*?animation: none;[\s\S]*?\}/);
 });
+
+test('the debug set picker names sets by id, not list position', () => {
+  const source = fs.readFileSync(new URL('./MainMenu.jsx', import.meta.url), 'utf8');
+  assert.match(source, /formatSetLabel\(availableSetId\)/);
+  // A positional label renames every set after an offline-filtered gap, and
+  // makes remote_set_001 indistinguishable from photo_set_001.
+  assert.doesNotMatch(source, /Photo Set \$\{index \+ 1\}/);
+});

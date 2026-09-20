@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { formatSetLabel } from '../utils/remoteSetPolicy.js';
 import { Play, Layers, Sparkles, Camera, Swords, Smartphone } from 'lucide-react';
 import { Capacitor } from '@capacitor/core';
 import { sounds } from '../utils/audio';
@@ -293,9 +294,9 @@ export default function MainMenu({
                 fontWeight: 800
               }}
             >
-              {photoSetIds.map((availableSetId, index) => (
+              {photoSetIds.map((availableSetId) => (
                 <option key={availableSetId} value={availableSetId}>
-                  {`Photo Set ${index + 1}`}
+                  {formatSetLabel(availableSetId)}
                 </option>
               ))}
             </select>

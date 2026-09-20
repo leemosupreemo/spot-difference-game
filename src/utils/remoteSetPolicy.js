@@ -108,3 +108,24 @@ export function countsAsAttempt(stageLevels) {
   if (!Array.isArray(stageLevels) || stageLevels.length === 0) return false;
   return !stageLevels.some(isPlaceholderEntry);
 }
+
+/**
+ * Human label for a set id.
+ *
+ * Derived from the id rather than a list position: offline filtering removes
+ * online-only sets, so a positional label like `Set ${index + 1}` renames every
+ * set after the gap and makes two different sets share a name. `remote_set_001`
+ * and `photo_set_001` both contain "1", so the namespace has to appear too.
+ */
+export function formatSetLabel(setId) {
+  if (typeof setId !== 'string' || !setId) return 'Photo Set';
+  const digits = setId.match(/(\d+)/);
+  const number = digits ? parseInt(digits[1], 10) : null;
+  if (isRemoteSetId(setId)) {
+    return number ? `Remote Set ${number}` : 'Remote Set';
+  }
+  if (setId.startsWith('photo_set_')) {
+    return number ? `Photo Set ${number}` : 'Photo Set';
+  }
+  return number ? `Set ${number}` : setId;
+}

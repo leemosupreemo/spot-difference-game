@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   isRemoteSetId, isRemoteEntry, isPlaceholderEntry, createPlaceholderEntry,
   toPlaceholder, selectableEntries, selectableSetIds, countsAsAttempt,
-  REMOTE_SET_PREFIX
+  REMOTE_SET_PREFIX, formatSetLabel
 } from './remoteSetPolicy.js';
 
 const bundled = { id: 'a', setId: 'photo_set_001', sequence: 1 };
@@ -82,4 +82,25 @@ test('an empty or missing stage is never a countable attempt', () => {
 
 test('the prefix is the single source of truth', () => {
   assert.equal(isRemoteSetId(`${REMOTE_SET_PREFIX}042`), true);
+});
+
+test('set labels come from the id, not a list position', () => {
+  // Offline filtering removes online-only sets, so a positional label renames
+  // every set after the gap. The id is stable; the position is not.
+  assert.equal(formatSetLabel('photo_set_007'), 'Photo Set 7');
+  assert.equal(formatSetLabel('photo_set_026'), 'Photo Set 26');
+  assert.equal(formatSetLabel('remote_set_001'), 'Remote Set 1');
+  assert.equal(formatSetLabel('remote_set_006'), 'Remote Set 6');
+});
+
+test('a remote set is never confusable with the bundled set of the same number', () => {
+  assert.notEqual(formatSetLabel('remote_set_001'), formatSetLabel('photo_set_001'));
+});
+
+test('unknown or malformed set ids degrade to something printable', () => {
+  assert.equal(formatSetLabel('custom_thing_12'), 'Set 12');
+  assert.equal(formatSetLabel('no_digits_here'), 'no_digits_here');
+  assert.equal(formatSetLabel(''), 'Photo Set');
+  assert.equal(formatSetLabel(undefined), 'Photo Set');
+  assert.equal(formatSetLabel(null), 'Photo Set');
 });
