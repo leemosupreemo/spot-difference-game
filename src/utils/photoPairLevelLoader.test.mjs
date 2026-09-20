@@ -519,3 +519,36 @@ test('a placeholder slot is served without any image request', async () => {
     'a placeholder must never trigger an image request');
   assert.equal(requested.length, 8, 'only the four real levels are fetched');
 });
+
+test('a stage never serves two levels from the same photo back to back', async () => {
+  const { hasAdjacentRepeat } = await import('./stageOrdering.js');
+  const mk = (id, base, sequence) => ({
+    id, title: id, category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', operation: 'recolor',
+    setId: 'photo_set_950', sequence,
+    baseImage: `levels/${base}_base.webp`,
+    variantImage: `levels/${id}_variant.webp`,
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5, operation: 'recolor' }]
+  });
+  // Three of five share one photo and arrive consecutively -- the worst case
+  // that is still separable.
+  const manifest = [
+    mk('t1', 'tar', 1), mk('t2', 'tar', 2), mk('t3', 'tar', 3),
+    mk('s1', 'solo_a', 4), mk('s2', 'solo_b', 5)
+  ];
+  const imageFactory = () => {
+    const img = {};
+    setTimeout(() => img.onload && img.onload(), 0);
+    return img;
+  };
+  const stage = await buildPhotoPairStage({
+    fetchImpl: async () => ({ ok: true, json: async () => manifest }),
+    imageFactory,
+    curatedStatusMap: Object.fromEntries(manifest.map(e => [e.id, 'approved'])),
+    debugMode: false, online: true, setId: 'photo_set_950', count: 5, seed: 1
+  });
+
+  assert.equal(stage.length, 5, 'every level is still served');
+  assert.equal(hasAdjacentRepeat(stage), false, 'same-photo levels must be spaced apart');
+  assert.deepEqual(stage.map(l => l.id).sort(), ['s1', 's2', 't1', 't2', 't3']);
+});

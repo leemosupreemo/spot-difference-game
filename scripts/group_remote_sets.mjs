@@ -34,19 +34,79 @@ const firebaseConfig = {
 
 const statusOf = (value) => (typeof value === 'string' ? value : value?.status);
 
+/** The base image a level is built on -- two levels sharing one are near-twins. */
+export function baseKey(level) {
+  return String(level?.baseImage || '').split('?')[0].split('/').pop() || level?.id || '';
+}
+
+/**
+ * Deal levels into sets so no set shows the same photo twice.
+ *
+ * Chunking the approved list in order groups a photo's variants together,
+ * because that is the order they were generated in -- four views of one
+ * starfield landed in a single set. A player then sees the same picture four
+ * times out of five, and no amount of reordering within the set can fix it.
+ *
+ * Largest photo groups are placed first, each into the emptiest set that does
+ * not already hold that photo. A group can only be spread this way while it is
+ * no larger than the number of sets, so that condition is checked and reported
+ * rather than silently producing a repetitive set.
+ */
+export function allocateSets(approved, setSize = SET_SIZE) {
+  if (approved.length === 0) return [];
+  const setCount = Math.ceil(approved.length / setSize);
+
+  const groups = new Map();
+  for (const level of approved) {
+    const key = baseKey(level);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(level);
+  }
+
+  const buckets = Array.from({ length: setCount }, () => ({ levels: [], bases: new Set() }));
+  const ordered = [...groups.values()].sort((a, b) => b.length - a.length);
+  const overflow = [];
+
+  for (const group of ordered) {
+    for (const level of group) {
+      const key = baseKey(level);
+      // Fullest-first that can still accept this photo. Spreading by emptiest
+      // balances the sets and leaves two of them one short, so placeholders end
+      // up scattered; packing concentrates the shortfall in a single trailing
+      // set, which is what an incomplete set should look like.
+      const target = buckets
+        .filter(b => b.levels.length < setSize && !b.bases.has(key))
+        .sort((a, b) => b.levels.length - a.levels.length)[0];
+      if (!target) { overflow.push(level); continue; }
+      target.levels.push(level);
+      target.bases.add(key);
+    }
+  }
+  // Anything that could not be placed without repeating a photo still has to
+  // go somewhere; it lands in the emptiest set and is reported by the caller.
+  for (const level of overflow) {
+    const target = buckets.filter(b => b.levels.length < setSize)
+      .sort((a, b) => b.levels.length - a.levels.length)[0];
+    if (target) { target.levels.push(level); target.bases.add(baseKey(level)); }
+  }
+  return buckets.map(b => b.levels).filter(levels => levels.length > 0);
+}
+
 /** Split approved levels into fives, padding the last set with placeholders. */
 export function buildRemoteSets(approved, setSize = SET_SIZE, makePlaceholder = createPlaceholderEntry) {
-  const sets = [];
-  for (let i = 0; i < approved.length; i += setSize) {
-    const setId = `${REMOTE_SET_PREFIX}${String(sets.length + 1).padStart(3, '0')}`;
-    const slice = approved.slice(i, i + setSize);
-    const levels = slice.map((level, index) => ({ ...level, setId, sequence: index + 1 }));
+  const allocated = allocateSets(approved, setSize);
+  // Fullest sets first, so the padded one is last and keeps the highest number.
+  allocated.sort((a, b) => b.length - a.length);
+  return allocated.map((slice, index) => {
+    const setId = `${REMOTE_SET_PREFIX}${String(index + 1).padStart(3, '0')}`;
+    const levels = slice.map((level, i) => ({ ...level, setId, sequence: i + 1 }));
     while (levels.length < setSize) {
       levels.push(makePlaceholder({ setId, sequence: levels.length + 1 }));
     }
-    sets.push({ setId, levels, realCount: slice.length });
-  }
-  return sets;
+    const repeats = levels.length - new Set(levels.filter(l => !l.isPlaceholder).map(baseKey)).size
+                    - levels.filter(l => l.isPlaceholder).length;
+    return { setId, levels, realCount: slice.length, repeatedBases: repeats };
+  });
 }
 
 async function main() {
@@ -77,7 +137,8 @@ async function main() {
   console.log(`sets of ${SET_SIZE}       : ${sets.length}`);
   for (const set of sets) {
     const pad = SET_SIZE - set.realCount;
-    console.log(`  ${set.setId}: ${set.realCount} real${pad ? ` + ${pad} placeholder` : ''}`);
+    const warn = set.repeatedBases > 0 ? `  ** ${set.repeatedBases} repeated base image(s)` : '';
+    console.log(`  ${set.setId}: ${set.realCount} real${pad ? ` + ${pad} placeholder` : ''}${warn}`);
   }
   console.log(`replacing packs  : ${existingPackIds.join(', ')}`);
 

@@ -18,6 +18,7 @@ export function resolveAssetUrl(url) {
 import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
 import { isEntryPlayable, describePendingFilter } from './pendingLevelGate.js';
 import { selectableEntries, isPlaceholderEntry } from './remoteSetPolicy.js';
+import { separateAdjacentDuplicates, hasAdjacentRepeat } from './stageOrdering.js';
 import { isOnline } from '../services/networkService.js';
 import { getInitialDebugMode } from './debugMode.js';
 import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
@@ -308,6 +309,16 @@ export async function buildPhotoPairStage({
       if (hasRequestedSet && stage.length !== count) {
         logApp('WARN', `[BuildStage] Requested photo set could not be loaded completely: ${requestedSetId}`);
         return [];
+      }
+
+      // Two levels from the same photograph back to back read as a repeat.
+      // Sets are composed to avoid it; this covers the non-set path and any
+      // pack published later.
+      if (hasAdjacentRepeat(stage)) {
+        const spaced = separateAdjacentDuplicates(stage);
+        logApp('INFO', `[BuildStage] Spaced same-photo levels apart${hasAdjacentRepeat(spaced) ? ' (pool cannot fully separate)' : ''}`);
+        stage.length = 0;
+        stage.push(...spaced);
       }
 
       while (stage.length < count) {

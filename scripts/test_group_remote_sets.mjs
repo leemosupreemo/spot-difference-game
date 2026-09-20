@@ -19,6 +19,7 @@ test('every level carries its set id and a 1-5 sequence', () => {
 });
 
 test('a short final set is padded so it is still a complete five', () => {
+  // All 28 share no base image here, so allocation packs them 5,5,5,5,5,3.
   const sets = buildRemoteSets(levels(28));
   assert.equal(sets.length, 6);
   const last = sets[5];
@@ -55,4 +56,69 @@ test('the original entries are not mutated', () => {
   const source = levels(3);
   buildRemoteSets(source);
   assert.ok(source.every(l => !('setId' in l) && !('sequence' in l)));
+});
+
+// --- spreading allocation -----------------------------------------------
+
+const withBase = (id, base) => ({ id, baseImage: `levels/${base}_base.webp` });
+
+test('variants of one photo are spread across sets, never stacked', async () => {
+  const { allocateSets, baseKey } = await import('./group_remote_sets.mjs');
+  // The shape that caused the bug: four views of one photo arriving together.
+  const levels = [
+    ...[1, 2, 3, 4].map(n => withBase(`tarantula_v${n}`, 'tarantula')),
+    ...[1, 2, 3, 4].map(n => withBase(`fiber_v${n}`, 'fiber')),
+    ...[1, 2, 3].map(n => withBase(`gem_v${n}`, 'gem')),
+    ...Array.from({ length: 14 }, (_, i) => withBase(`solo_${i}`, `solo_${i}`))
+  ];
+  const sets = allocateSets(levels, 5);
+  for (const set of sets) {
+    const bases = set.map(baseKey);
+    assert.equal(new Set(bases).size, bases.length,
+      `a set repeated a photo: ${bases.join(', ')}`);
+  }
+  assert.equal(sets.flat().length, levels.length, 'no level may be dropped');
+});
+
+test('the real 28-level shape yields sets with no repeated photo', async () => {
+  const { allocateSets, baseKey } = await import('./group_remote_sets.mjs');
+  // Group sizes measured from the live pool: 4,4,3,2,2,2,2 then nine singles.
+  const sizes = [4, 4, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const levels = sizes.flatMap((n, g) =>
+    Array.from({ length: n }, (_, i) => withBase(`g${g}_v${i}`, `photo_${g}`)));
+  assert.equal(levels.length, 28);
+
+  const sets = allocateSets(levels, 5);
+  assert.equal(sets.length, 6);
+  for (const set of sets) {
+    assert.equal(new Set(set.map(baseKey)).size, set.length);
+  }
+});
+
+test('buildRemoteSets pads the smallest set and reports repeats', async () => {
+  const { buildRemoteSets } = await import('./group_remote_sets.mjs');
+  const sizes = [4, 4, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const levels = sizes.flatMap((n, g) =>
+    Array.from({ length: n }, (_, i) => withBase(`g${g}_v${i}`, `photo_${g}`)));
+  const sets = buildRemoteSets(levels);
+
+  assert.ok(sets.every(s => s.levels.length === 5));
+  assert.ok(sets.every(s => s.repeatedBases === 0), 'no set may repeat a photo');
+  // The padded set sorts last, so earlier set numbers stay full.
+  assert.equal(sets[sets.length - 1].realCount, 3);
+  assert.ok(sets.slice(0, -1).every(s => s.realCount === 5));
+  assert.deepEqual(sets.map(s => s.setId),
+    ['001', '002', '003', '004', '005', '006'].map(n => `remote_set_${n}`));
+});
+
+test('a group too large to spread is reported rather than hidden', async () => {
+  const { buildRemoteSets } = await import('./group_remote_sets.mjs');
+  // Six copies of one photo but only two sets: repetition is unavoidable.
+  const levels = [
+    ...Array.from({ length: 6 }, (_, i) => withBase(`same_${i}`, 'same')),
+    ...Array.from({ length: 4 }, (_, i) => withBase(`other_${i}`, `other_${i}`))
+  ];
+  const sets = buildRemoteSets(levels);
+  assert.ok(sets.some(s => s.repeatedBases > 0),
+    'an impossible pool must surface the repetition, not swallow it');
 });
