@@ -10,9 +10,12 @@
  * failed on device while the identical query returned in under a second from
  * Node.
  *
- * `experimentalAutoDetectLongPolling` probes the connection and falls back to
- * long polling when the stream does not establish, so the same code works in a
- * browser and in the native shell.
+ * Auto-detection was tried first and did not help on device: the probe itself
+ * has to wait for the stream to fail, which can outlast the caller's timeout,
+ * so the request is abandoned before the fallback ever engages. Long polling is
+ * therefore forced rather than detected. It costs a little latency in a normal
+ * browser and works everywhere, which is the right trade for an infrequent
+ * background sync.
  *
  * This has to be the only place Firestore is started. `initializeFirestore`
  * throws once `getFirestore` has run against the same app, so scattered
@@ -36,7 +39,7 @@ export function getFirestoreClient(app) {
 
   let db;
   try {
-    db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
+    db = initializeFirestore(app, { experimentalForceLongPolling: true });
   } catch (_) {
     // Firestore was already started for this app -- by an earlier call here in
     // another bundle chunk, or by a direct getFirestore somewhere. Use what

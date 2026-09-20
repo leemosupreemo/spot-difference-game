@@ -45,7 +45,10 @@ test('a missing app is refused rather than producing a broken handle', () => {
 
 test('long-polling auto-detection is actually requested', () => {
   const source = fs.readFileSync(path.join(here, 'firestoreClient.js'), 'utf8');
-  assert.match(source, /experimentalAutoDetectLongPolling:\s*true/);
+  // Forced, not auto-detected: detection waits for the stream to fail, which
+  // outlasted the caller's timeout on device.
+  assert.match(source, /experimentalForceLongPolling:\s*true/);
+  assert.doesNotMatch(source, /experimentalAutoDetectLongPolling:\s*true/);
   assert.match(source, /initializeFirestore\(app,/);
 });
 

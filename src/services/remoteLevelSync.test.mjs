@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {
   getCachedRemoteLevels,
   saveCachedRemoteLevels,
@@ -95,4 +96,22 @@ test('subscribeToRemoteLevels notifies subscribers when remote levels change', (
 test('syncRemoteLevelPacks runs safely in test/offline environment', async () => {
   const result = await syncRemoteLevelPacks();
   assert.ok(Array.isArray(result));
+});
+
+test('sync timeouts allow for long polling, which is slower to establish', () => {
+  const source = fs.readFileSync(new URL('./remoteLevelSync.js', import.meta.url), 'utf8');
+  const startup = source.match(/syncRemoteLevelPacks\(timeoutMs = (\d+)\)/);
+  const refresh = source.match(/refreshRemoteLevelPacks\(timeoutMs = (\d+)\)/);
+  assert.ok(startup && refresh);
+  // The old 3s startup budget expired before a device sync could ever finish.
+  assert.ok(Number(startup[1]) >= 10000, `startup budget too tight: ${startup[1]}ms`);
+  assert.ok(Number(refresh[1]) >= 30000, `refresh budget too tight: ${refresh[1]}ms`);
+});
+
+test('the underlying request reports its own outcome, not just the race', () => {
+  // A racing timeout hides whether the request failed or was merely slow.
+  const source = fs.readFileSync(new URL('./remoteLevelSync.js', import.meta.url), 'utf8');
+  assert.match(source, /RemoteLevelSyncSettled/);
+  assert.match(source, /RemoteLevelSyncFailed/);
+  assert.match(source, /RemoteLevelRefreshRejected/);
 });

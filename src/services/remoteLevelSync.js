@@ -137,7 +137,9 @@ export function subscribeToRemoteLevels(callback) {
  * Asynchronously fetches and syncs published level packs from Firebase Firestore.
  * Collection: 'remote_level_packs'
  */
-export async function syncRemoteLevelPacks(timeoutMs = 3000) {
+// Long polling needs longer to establish than a WebChannel stream, and the old
+// 3s budget expired before a device sync could ever finish.
+export async function syncRemoteLevelPacks(timeoutMs = 12000) {
   if (!firebaseConfig.projectId || !firebaseConfig.apiKey) {
     logApp('WARN', '[RemoteLevelSyncSkipped] No Firebase config -- returning cached levels only.');
     return getCachedRemoteLevels();
@@ -155,7 +157,14 @@ export async function syncRemoteLevelPacks(timeoutMs = 3000) {
       logApp('WARN', `[RemoteLevelSyncTimeout] Exceeded ${timeoutMs}ms -- using cached levels for now (fetch keeps running in the background).`);
       resolve(getCachedRemoteLevels());
     }, timeoutMs));
-    return await Promise.race([fetchRemoteLevelPacks(), timeoutPromise]);
+    const fetchPromise = fetchRemoteLevelPacks();
+    // The race hides the request's own outcome, so a real failure looks
+    // identical to a slow one. Report it either way, even after the timeout.
+    fetchPromise.then(
+      levels => logApp('INFO', `[RemoteLevelSyncSettled] Server returned ${levels?.length ?? 0} level(s).`),
+      err => logApp('WARN', `[RemoteLevelSyncFailed] ${err?.code || ''} ${err?.message || err}`)
+    );
+    return await Promise.race([fetchPromise, timeoutPromise]);
   } catch (err) {
     logApp('INFO', '[RemoteLevelSyncOffline] Offline or no remote packs:', err?.message || err);
   }
@@ -167,15 +176,18 @@ export async function syncRemoteLevelPacks(timeoutMs = 3000) {
  * Forces a fresh server read for the Debug curator UI.
  * Unlike startup sync, failures reject so the UI can report them clearly.
  */
-export async function refreshRemoteLevelPacks(timeoutMs = 15000) {
+export async function refreshRemoteLevelPacks(timeoutMs = 45000) {
   if (!firebaseConfig.projectId || !firebaseConfig.apiKey) {
     throw new Error('Firebase configuration is unavailable.');
   }
 
   logApp('INFO', '[RemoteLevelRefreshStart] Forcing server refresh of remote_level_packs...');
   try {
+    const serverFetch = fetchRemoteLevelPacks({ forceServer: true });
+    serverFetch.catch(err =>
+      logApp('WARN', `[RemoteLevelRefreshRejected] ${err?.code || ''} ${err?.message || err}`));
     const levels = await Promise.race([
-      fetchRemoteLevelPacks({ forceServer: true }),
+      serverFetch,
       rejectAfter(timeoutMs, `Remote pack refresh exceeded ${timeoutMs}ms.`)
     ]);
     logApp('INFO', `[RemoteLevelRefreshComplete] ${levels.length} remote levels available.`);
