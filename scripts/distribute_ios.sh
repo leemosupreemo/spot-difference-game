@@ -80,7 +80,29 @@ echo "----------------------------------------------------"
 echo "🔢 Build Number: $BUILD_NUMBER"
 
 echo "📦 1. Building Vite web bundle and syncing Capacitor iOS native project..."
-(cd "$ROOT_DIR" && VITE_IS_DEV_CHANNEL="${VITE_IS_DEV_CHANNEL:-false}" VITE_FORCE_DEBUG="${VITE_FORCE_DEBUG:-false}" npm run build && npx cap sync ios)
+(cd "$ROOT_DIR" && VITE_IS_DEV_CHANNEL="${VITE_IS_DEV_CHANNEL:-false}" VITE_FORCE_DEBUG="${VITE_FORCE_DEBUG:-false}" npm run build)
+
+# Remote-pack-only assets live outside public/ so they never enter dist/ and so
+# cap sync cannot bundle them. `vite build` empties dist/, which normally clears
+# anything a previous `npm run deploy:web` staged -- this fails loudly if that
+# ever stops being true, rather than silently shipping ~40MB of unused images.
+if [[ -d "$ROOT_DIR/remote-levels" ]]; then
+  leaked=0
+  while IFS= read -r -d '' asset; do
+    rel="${asset#"$ROOT_DIR/remote-levels/"}"
+    if [[ -e "$ROOT_DIR/dist/$rel" ]]; then
+      echo "❌ Remote-only asset present in dist/: $rel"
+      leaked=$((leaked + 1))
+    fi
+  done < <(find "$ROOT_DIR/remote-levels" -type f -print0)
+  if (( leaked > 0 )); then
+    echo "❌ $leaked remote-only asset(s) would be bundled into the app. Re-run after a clean build."
+    exit 1
+  fi
+  echo "✅ No remote-only assets in dist/ -- they stay out of the native bundle."
+fi
+
+(cd "$ROOT_DIR" && npx cap sync ios)
 
 if [[ -n "${KEYCHAIN_PASSWORD:-}" ]]; then
   echo "🔐 2. Unlocking login keychain for codesign..."
