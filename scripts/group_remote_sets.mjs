@@ -122,9 +122,18 @@ async function main() {
 
   const existingPackIds = [];
   const all = [];
+  // Collect by id. A level can legitimately appear in more than one pack --
+  // a superseded pack that has not been deleted yet, or an overlapping publish
+  // -- and reading it twice would allocate the same level into two sets, which
+  // publishes it twice under one id.
+  const seenIds = new Set();
   snapshot.forEach(docSnap => {
     existingPackIds.push(docSnap.id);
-    for (const level of docSnap.data().levels || []) all.push(level);
+    for (const level of docSnap.data().levels || []) {
+      if (!level?.id || seenIds.has(level.id)) continue;
+      seenIds.add(level.id);
+      all.push(level);
+    }
   });
 
   const approved = all.filter(l => statusOf(official[l.id]) === 'approved');

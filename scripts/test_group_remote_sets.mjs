@@ -134,3 +134,22 @@ test('packs from a larger previous allocation must not survive a shrink', async 
   assert.doesNotMatch(source, /if \(packId\.startsWith\(PACK_PREFIX\)\) continue;/,
     'same-prefix packs must not be skipped when deciding what to remove');
 });
+
+test('a level present in two packs is collected once, not allocated twice', async () => {
+  const source = await import('node:fs')
+    .then(fs => fs.readFileSync(new URL('./group_remote_sets.mjs', import.meta.url), 'utf8'));
+  // A superseded pack lingering alongside its replacement means the same level
+  // is read twice; allocating both copies publishes one id in two sets.
+  assert.match(source, /const seenIds = new Set\(\)/);
+  assert.match(source, /if \(!level\?\.id \|\| seenIds\.has\(level\.id\)\) continue;/);
+});
+
+test('allocation never places the same level id twice', async () => {
+  const { allocateSets } = await import('./group_remote_sets.mjs');
+  const levels = Array.from({ length: 23 }, (_, i) => ({
+    id: `lvl_${i}`, baseImage: `levels/photo_${i % 6}_base.webp`
+  }));
+  const placed = allocateSets(levels, 5).flat().map(l => l.id);
+  assert.equal(new Set(placed).size, placed.length, 'a level id must appear in one set only');
+  assert.equal(placed.length, levels.length);
+});
