@@ -1,9 +1,9 @@
 {
-  "exportedAt": "2026-09-20T19:11:27.392Z",
+  "exportedAt": "2026-09-20T20:03:40.826Z",
   "summary": {
-    "totalCurated": 628,
-    "approvedCount": 292,
-    "dismissedCount": 336,
+    "totalCurated": 662,
+    "approvedCount": 309,
+    "dismissedCount": 353,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -51,6 +51,23 @@
     "fresh_v3_ai_vintage_keys_003",
     "fresh_v7_bonsai_tools_012",
     "fresh_v7_pottery_tools_011",
+    "fresh_v8_apothecary_board_010_base_v2",
+    "fresh_v8_apothecary_board_010_base_v3",
+    "fresh_v8_cartography_desk_001_base_v1",
+    "fresh_v8_chocolatier_slab_005_base_v2",
+    "fresh_v8_chocolatier_slab_005_base_v3",
+    "fresh_v8_chocolatier_slab_005_base_v4",
+    "fresh_v8_chocolatier_slab_005_base_v5",
+    "fresh_v8_drafting_table_007_base_v1",
+    "fresh_v8_electronics_bench_003_base_v2",
+    "fresh_v8_fossil_sandstone_008_base_v1",
+    "fresh_v8_fossil_sandstone_008_base_v2",
+    "fresh_v8_tabletop_rpg_006_base_v1",
+    "fresh_v8_tabletop_rpg_006_base_v2",
+    "fresh_v8_tabletop_rpg_006_base_v3",
+    "fresh_v8_tailor_sewing_009_base_v3",
+    "fresh_v8_tailor_sewing_009_base_v4",
+    "fresh_v8_tailor_sewing_009_base_v5",
     "gemstone_velvet_starfield_1789824187839_v3",
     "gemstone_velvet_starfield_1789824187839_v4",
     "gemstone_velvet_starfield_1789824187839_v5",
@@ -402,6 +419,23 @@
     "fresh_v3_ai_silk_spools_004",
     "fresh_v3_ai_wild_mushrooms_009",
     "fresh_v7_cobbler_leather_007",
+    "fresh_v8_apothecary_board_010_base_v1",
+    "fresh_v8_cartography_desk_001_base_v2",
+    "fresh_v8_chocolatier_slab_005_base_v1",
+    "fresh_v8_drafting_table_007_base_v2",
+    "fresh_v8_drafting_table_007_base_v3",
+    "fresh_v8_drafting_table_007_base_v4",
+    "fresh_v8_drafting_table_007_base_v5",
+    "fresh_v8_electronics_bench_003_base_v1",
+    "fresh_v8_fossil_sandstone_008_base_v3",
+    "fresh_v8_japanese_bento_004_base_v1",
+    "fresh_v8_tabletop_rpg_006_base_v4",
+    "fresh_v8_tabletop_rpg_006_base_v5",
+    "fresh_v8_tailor_sewing_009_base_v1",
+    "fresh_v8_tailor_sewing_009_base_v2",
+    "fresh_v8_watchmaker_bench_002_base_v1",
+    "fresh_v8_watchmaker_bench_002_base_v2",
+    "fresh_v8_watchmaker_bench_002_base_v3",
     "fresh_vintage_curio_shop_003",
     "fresh_vintage_study_typewriter_019",
     "gemstone_velvet_starfield_1789824187839_v1",
@@ -3150,6 +3184,142 @@
     "spilled_toy_box_1789795347626_dup1": {
       "status": "approved",
       "updatedAt": "2026-09-20T18:49:58.164Z"
+    },
+    "fresh_v8_tailor_sewing_009_base_v5": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:59:11.354Z"
+    },
+    "fresh_v8_tabletop_rpg_006_base_v3": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:59:17.808Z"
+    },
+    "fresh_v8_drafting_table_007_base_v1": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:59:29.184Z"
+    },
+    "fresh_v8_watchmaker_bench_002_base_v2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T19:59:36.440Z"
+    },
+    "fresh_v8_apothecary_board_010_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T19:59:40.110Z"
+    },
+    "fresh_v8_tailor_sewing_009_base_v4": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:59:44.829Z"
+    },
+    "fresh_v8_tabletop_rpg_006_base_v2": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:59:50.234Z"
+    },
+    "fresh_v8_chocolatier_slab_005_base_v5": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T19:59:57.075Z"
+    },
+    "fresh_v8_watchmaker_bench_002_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:00:02.810Z"
+    },
+    "fresh_v8_electronics_bench_003_base_v2": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:00:09.666Z"
+    },
+    "fresh_v8_tailor_sewing_009_base_v3": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:00:17.740Z"
+    },
+    "fresh_v8_tabletop_rpg_006_base_v1": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:00:22.244Z"
+    },
+    "fresh_v8_chocolatier_slab_005_base_v4": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:01:02.525Z"
+    },
+    "fresh_v8_fossil_sandstone_008_base_v3": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:01:10.366Z"
+    },
+    "fresh_v8_electronics_bench_003_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:01:13.283Z"
+    },
+    "fresh_v8_tailor_sewing_009_base_v2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:01:16.202Z"
+    },
+    "fresh_v8_drafting_table_007_base_v5": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:01:20.075Z"
+    },
+    "fresh_v8_chocolatier_slab_005_base_v3": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:01:25.710Z"
+    },
+    "fresh_v8_fossil_sandstone_008_base_v2": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:02:13.816Z"
+    },
+    "fresh_v8_cartography_desk_001_base_v2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:02:19.587Z"
+    },
+    "fresh_v8_tailor_sewing_009_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:02:25.558Z"
+    },
+    "fresh_v8_drafting_table_007_base_v4": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:02:27.911Z"
+    },
+    "fresh_v8_chocolatier_slab_005_base_v2": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:02:32.365Z"
+    },
+    "fresh_v8_fossil_sandstone_008_base_v1": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:02:38.136Z"
+    },
+    "fresh_v8_cartography_desk_001_base_v1": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:02:43.425Z"
+    },
+    "fresh_v8_tabletop_rpg_006_base_v5": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:02:46.426Z"
+    },
+    "fresh_v8_drafting_table_007_base_v3": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:03:00.119Z"
+    },
+    "fresh_v8_chocolatier_slab_005_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:03:04.939Z"
+    },
+    "fresh_v8_apothecary_board_010_base_v3": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:03:12.429Z"
+    },
+    "fresh_v8_japanese_bento_004_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:03:14.915Z"
+    },
+    "fresh_v8_tabletop_rpg_006_base_v4": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:03:18.535Z"
+    },
+    "fresh_v8_drafting_table_007_base_v2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:03:22.938Z"
+    },
+    "fresh_v8_watchmaker_bench_002_base_v3": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-20T20:03:26.189Z"
+    },
+    "fresh_v8_apothecary_board_010_base_v2": {
+      "status": "approved",
+      "updatedAt": "2026-09-20T20:03:31.579Z"
     }
   }
 }
