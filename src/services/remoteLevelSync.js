@@ -9,7 +9,8 @@
  */
 
 import { initializeApp, getApps } from 'firebase/app';
-import { getFirestore, collection, getDocs, getDocsFromServer, query, where } from 'firebase/firestore';
+import { getFirestoreClient } from './firestoreClient.js';
+import { collection, getDocs, getDocsFromServer, query, where } from 'firebase/firestore';
 import { validatePhotoPairManifest } from '../utils/photoPairManifest.js';
 import { logApp } from '../utils/logger.js';
 
@@ -29,7 +30,7 @@ let inMemoryRemoteEntries = [];
 
 async function fetchRemoteLevelPacks({ forceServer = false } = {}) {
   const app = getApps()[0] || initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  const db = getFirestoreClient(app);
   const packsRef = collection(db, 'remote_level_packs');
   const q = query(packsRef, where('active', '==', true));
   const snapshot = await (forceServer ? getDocsFromServer(q) : getDocs(q));

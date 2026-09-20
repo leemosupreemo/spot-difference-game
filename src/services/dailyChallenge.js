@@ -1,8 +1,8 @@
 import { initializeApp, getApps } from 'firebase/app';
+import { getFirestoreClient } from './firestoreClient.js';
 import { dailyPoolEntries } from '../utils/remoteSetPolicy.js';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import {
-  getFirestore,
   doc,
   getDoc,
   setDoc,
@@ -380,7 +380,7 @@ export async function syncRemoteDailyQueue() {
   if (firebaseConfig.projectId && firebaseConfig.apiKey) {
     try {
       const app = getApps()[0] || initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+      const db = getFirestoreClient(app);
       const queueDocRef = doc(db, 'daily_challenge', 'queue');
       const docSnap = await getDoc(queueDocRef);
 
@@ -1161,7 +1161,7 @@ export async function getDailyPlayer() {
         const credential = auth.currentUser
           ? { user: auth.currentUser }
           : await signInAnonymously(auth);
-        const db = getFirestore(app);
+        const db = getFirestoreClient(app);
         return { uid: credential.user.uid, db };
       } catch (err) {
         logApp('WARN', '[DailyChallenge] Firebase anonymous auth warning:', err?.message || err);

@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app';
-import { doc, getFirestore, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { getFirestoreClient } from './firestoreClient.js';
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { firebaseConfig, getCurrentPlayerId } from './authService.js';
 import { getSavedPlayerName } from './playerProgress.js';
@@ -36,7 +37,7 @@ function getLeaderboardDb() {
   if (typeof window === 'undefined' || isScreenshotHarnessMode()) return null;
   try {
     const app = getApps()[0] || initializeApp(firebaseConfig);
-    return getFirestore(app);
+    return getFirestoreClient(app);
   } catch (err) {
     console.warn('Leaderboard Firestore init error:', err?.message || err);
     return null;

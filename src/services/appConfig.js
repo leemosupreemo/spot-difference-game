@@ -6,7 +6,8 @@
  */
 
 import { initializeApp, getApps } from 'firebase/app';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getFirestoreClient } from './firestoreClient.js';
+import { doc, getDoc } from 'firebase/firestore';
 import { logApp } from '../utils/logger.js';
 
 export const DEFAULT_APP_STORE_URL = 'https://apps.apple.com/app/id6740888200?action=write-review';
@@ -158,7 +159,7 @@ export async function syncRemoteAppConfig() {
   // 2. Try Firebase Firestore document 'app_config/global'
   try {
     const app = getApps()[0] || initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    const db = getFirestoreClient(app);
     const configDocRef = doc(db, 'app_config', 'global');
     const docSnap = await getDoc(configDocRef);
 

@@ -1,6 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app';
+import { getFirestoreClient } from './firestoreClient.js';
 import { getAuth, signInAnonymously } from 'firebase/auth';
-import { doc, getFirestore, setDoc, collection, getDocs, getDoc, query, where, limit } from 'firebase/firestore';
+import { doc, setDoc, collection, getDocs, getDoc, query, where, limit } from 'firebase/firestore';
 import { ALL_PHOTO_SET_IDS, getDeterministicSetBaseline } from '../utils/setLeaderboards.js';
 import { getGameCenterPlayer } from './gameCenter.js';
 import { submitLeaderboardScore } from './leaderboardService.js';
@@ -33,7 +34,7 @@ async function getPlayer() {
         const app = getApps()[0] || initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const credential = auth.currentUser ? { user: auth.currentUser } : await signInAnonymously(auth);
-        return { uid: credential.user.uid, db: getFirestore(app) };
+        return { uid: credential.user.uid, db: getFirestoreClient(app) };
       } catch (err) {
         console.warn('Firebase initialization warning:', err?.message || err);
         return null;
