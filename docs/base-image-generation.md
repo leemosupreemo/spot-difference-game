@@ -100,6 +100,39 @@ never automatically suitable for a puzzle.
 - Invalid inputs: `repair_input`. Unrecognized codes: `inspect_failure`.
 - When several gates fail, the most serious category names the `next_step`.
 
+### Provisioning the LaMa inpainting checkpoint
+
+`remove` and `reorder` both depend on reconstructing the background where an
+object was; reorder has to vacate the original position, which is a removal.
+Instrumenting three workbench images showed every one of 34 reorder attempts
+rejected with "Background reconstruction failed on vacate", and remove
+candidates rejected for boundary discontinuity, texture mismatch and local
+blur. `add`, which needs no reconstruction, passed 30 of 31.
+
+LaMa is an optional local engine for that step. Its checkpoint is **not** in the
+repository and is never downloaded during generation -- a run's behaviour must
+not depend on whether a 200MB file happened to appear. Provision it explicitly:
+
+```bash
+mkdir -p models
+curl -L -o models/big-lama.pt \
+  https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt
+```
+
+Set `DIFF_HUNTER_LAMA_WEIGHTS` to keep it elsewhere. Without it,
+`scripts/local_inpaint.py` reports `LocalInpaintingUnavailable` and the existing
+reconstruction pathways are used unchanged.
+
+The model runs on a window around the fill rather than the whole frame: a full
+1536x1152 pass takes about 77 seconds on CPU against about 4 seconds windowed,
+and at a dozen candidates per operation the difference is half an hour per image
+versus a minute. Only masked pixels change either way.
+
+Better filling is necessary for removal, not sufficient. A region good enough to
+recolour is not necessarily a whole, removable object, so the existing boundary,
+texture and naturalness checks still judge the result and a curator still
+reviews it.
+
 ### Which failures reach the second pass
 
 Every image whose normalized master exists gets a second pass. The pipeline is

@@ -30,3 +30,6 @@ __pycache__/
 
 # Visual regression scratch output (candidate captures + diffs), not the committed baseline gallery
 screenshots/modals/.visual-check/
+
+# Provisioned model weights: large, downloaded explicitly, never committed.
+models/*.pt
