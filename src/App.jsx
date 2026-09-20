@@ -20,7 +20,7 @@ import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, remo
 import { getCompletePhotoSets } from './utils/photoSetCatalog';
 import OfflineSetNotice from './components/OfflineSetNotice.jsx';
 import { countsAsAttempt, selectableSetIds, isRemoteSetId } from './utils/remoteSetPolicy.js';
-import { isOnline, subscribeNetworkStatus } from './services/networkService.js';
+import { isOnline, subscribeNetworkStatus, setSimulatedOffline, isSimulatedOffline } from './services/networkService.js';
 import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
@@ -120,6 +120,11 @@ export default function App() {
   const [remoteLevelsRevision, setRemoteLevelsRevision] = useState(0);
   const [remotePackSync, setRemotePackSync] = useState({ status: 'idle', count: 0 });
   const [networkOnline, setNetworkOnline] = useState(() => isOnline());
+  const [simulatedOffline, setSimulatedOfflineState] = useState(() => isSimulatedOffline());
+  const handleToggleSimulatedOffline = useCallback((next) => {
+    setSimulatedOfflineState(setSimulatedOffline(next));
+    setNetworkOnline(isOnline());
+  }, []);
   useEffect(() => subscribeNetworkStatus(setNetworkOnline), []);
   // Online-only sets are withheld while offline: their artwork lives on
   // Hosting, so offering them would start a set that cannot finish.
@@ -1379,6 +1384,8 @@ export default function App() {
             onToggleTutorialAnimation={handleToggleTutorialAnimation}
             onRefreshRemotePacks={handleRefreshRemotePacks}
             remotePackSync={remotePackSync}
+            simulatedOffline={simulatedOffline}
+            onToggleSimulatedOffline={handleToggleSimulatedOffline}
             noticeSlot={
               <OfflineSetNotice
                 visible={switchedOffRemoteSet}

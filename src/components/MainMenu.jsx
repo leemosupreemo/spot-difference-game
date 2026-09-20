@@ -29,6 +29,8 @@ export default function MainMenu({
   hasCompletedFirstSet: hasCompletedProp,
   bannerSlot = null,
   noticeSlot = null,
+  simulatedOffline = false,
+  onToggleSimulatedOffline = null,
   debugMode = false,
   tutorialAnimationEnabled = true,
   onToggleTutorialAnimation = null,
@@ -273,6 +275,30 @@ export default function MainMenu({
             );
           })}
         </div>
+
+        {debugMode && (
+          <button
+            type="button"
+            aria-label="Simulate Offline"
+            aria-pressed={simulatedOffline}
+            onClick={() => onToggleSimulatedOffline?.(!simulatedOffline)}
+            style={{
+              width: '100%',
+              marginBottom: '14px',
+              padding: '10px 12px',
+              borderRadius: '10px',
+              fontWeight: 900,
+              fontSize: '0.76rem',
+              letterSpacing: '0.5px',
+              cursor: 'pointer',
+              background: simulatedOffline ? 'rgba(255, 107, 138, 0.18)' : 'rgba(10, 8, 28, 0.9)',
+              color: simulatedOffline ? '#ff6b8a' : 'var(--text-muted)',
+              border: `1px solid ${simulatedOffline ? 'rgba(255, 107, 138, 0.55)' : 'var(--border-glass)'}`
+            }}
+          >
+            {simulatedOffline ? '📴 SIMULATING OFFLINE — TAP TO RESTORE' : '📡 SIMULATE OFFLINE'}
+          </button>
+        )}
 
         {debugMode && selectedTheme === 'find_the_sniper' && (
           <label style={{ display: 'block', marginBottom: '14px' }}>

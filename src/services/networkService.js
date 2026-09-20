@@ -5,12 +5,63 @@
  */
 
 import { isScreenshotHarnessMode } from '../utils/screenshotMode.js';
+import { getInitialDebugMode } from '../utils/debugMode.js';
 
 export const STORAGE_KEY_PENDING_QUEUE = 'diff_hunter_pending_leaderboard_queue';
+export const STORAGE_KEY_SIMULATED_OFFLINE = 'diff_hunter_debug_simulated_offline';
 
 let mockOnlineState = null;
 let currentConfirmedOnline = null;
 const activeListeners = new Set();
+
+/**
+ * Debug-only offline simulation.
+ *
+ * DevTools can throttle a browser to offline, but the native app has no such
+ * control -- and that is exactly where online-only sets need testing, because
+ * navigator.onLine is unreliable in a WebView. This forces the whole app to
+ * believe it is offline, persisted so it survives a reload.
+ *
+ * It is honoured only while debug mode is on, so a stale flag can never strand
+ * a real player offline.
+ */
+let simulatedOffline = (() => {
+  try {
+    return globalThis.localStorage?.getItem(STORAGE_KEY_SIMULATED_OFFLINE) === 'true';
+  } catch (_) {
+    return false;
+  }
+})();
+
+function debugModeActive() {
+  try {
+    return getInitialDebugMode();
+  } catch (_) {
+    return false;
+  }
+}
+
+export function isSimulatedOffline() {
+  return simulatedOffline && debugModeActive();
+}
+
+export function setSimulatedOffline(enabled) {
+  simulatedOffline = Boolean(enabled);
+  try {
+    if (simulatedOffline) {
+      globalThis.localStorage?.setItem(STORAGE_KEY_SIMULATED_OFFLINE, 'true');
+    } else {
+      globalThis.localStorage?.removeItem(STORAGE_KEY_SIMULATED_OFFLINE);
+      // Leaving the simulation must not assert a connection that may not exist.
+      currentConfirmedOnline = null;
+    }
+  } catch (_) {}
+  const next = isOnline();
+  for (const cb of activeListeners) {
+    try { cb(next); } catch (_) {}
+  }
+  return isSimulatedOffline();
+}
 
 /**
  * For unit testing: override online status.
@@ -25,6 +76,8 @@ export function _setMockOnlineStateForTesting(state) {
  */
 export function recordNetworkSuccess() {
   if (mockOnlineState !== null) return;
+  // A real request succeeding must not cancel the simulation.
+  if (isSimulatedOffline()) return;
   currentConfirmedOnline = true;
   for (const cb of activeListeners) {
     try { cb(true); } catch (_) {}
@@ -37,6 +90,8 @@ export function recordNetworkSuccess() {
  */
 export async function checkConnectivity() {
   if (mockOnlineState !== null) return mockOnlineState;
+  // The active probe would otherwise immediately undo the simulation.
+  if (isSimulatedOffline()) return false;
   if (isScreenshotHarnessMode()) return isOnline();
   if (typeof fetch !== 'function') return isOnline();
 
@@ -63,6 +118,7 @@ export async function checkConnectivity() {
  */
 export function isOnline() {
   if (mockOnlineState !== null) return mockOnlineState;
+  if (isSimulatedOffline()) return false;
   if (currentConfirmedOnline !== null) return currentConfirmedOnline;
   if (typeof navigator !== 'undefined' && typeof navigator.onLine === 'boolean') {
     return navigator.onLine;
