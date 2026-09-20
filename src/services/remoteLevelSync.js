@@ -13,6 +13,7 @@ import { getFirestoreClient } from './firestoreClient.js';
 import { collection, getDocs, getDocsFromServer, query, where } from 'firebase/firestore';
 import { validatePhotoPairManifest } from '../utils/photoPairManifest.js';
 import { logApp } from '../utils/logger.js';
+import { listCollection } from './firestoreRest.js';
 
 const REMOTE_LEVELS_STORAGE_KEY = 'diff_hunter_remote_levels';
 
@@ -28,23 +29,56 @@ const firebaseConfig = {
 const listeners = new Set();
 let inMemoryRemoteEntries = [];
 
-async function fetchRemoteLevelPacks({ forceServer = false } = {}) {
+/**
+ * Read the packs over plain HTTPS.
+ *
+ * Preferred over the SDK because this is a public, read-only fetch that needs
+ * none of the SDK's machinery -- and because the SDK cannot reach the backend
+ * from inside the app's WebView. When it cannot connect it does not fail; it
+ * treats the backend as temporarily unreachable and retries indefinitely, so
+ * the promise never settles and no timeout or transport setting helps. REST
+ * returns in well under a second and reports a real error when it cannot.
+ */
+async function fetchPacksOverRest() {
+  const docs = await listCollection('remote_level_packs', {
+    projectId: firebaseConfig.projectId,
+    apiKey: firebaseConfig.apiKey,
+    timeoutMs: 10000
+  });
+  return docs.filter(doc => doc?.active === true);
+}
+
+async function fetchPacksOverSdk({ forceServer }) {
   const app = getApps()[0] || initializeApp(firebaseConfig);
   const db = getFirestoreClient(app);
   const packsRef = collection(db, 'remote_level_packs');
   const q = query(packsRef, where('active', '==', true));
   const snapshot = await (forceServer ? getDocsFromServer(q) : getDocs(q));
-  logApp('INFO', `[RemoteLevelSyncQuery] ${snapshot.size} active pack doc(s) matched.`);
+  const packs = [];
+  snapshot.forEach(docSnap => packs.push({ id: docSnap.id, ...docSnap.data() }));
+  return packs;
+}
+
+async function fetchRemoteLevelPacks({ forceServer = false } = {}) {
+  let packs;
+  try {
+    packs = await fetchPacksOverRest();
+    logApp('INFO', `[RemoteLevelSyncQuery] REST returned ${packs.length} active pack doc(s).`);
+  } catch (restErr) {
+    // Fall back to the SDK: it may succeed where REST is blocked, and it can
+    // answer from its offline cache.
+    logApp('WARN', `[RemoteLevelSyncRestFailed] ${restErr?.message || restErr} -- trying the SDK.`);
+    packs = await fetchPacksOverSdk({ forceServer });
+  }
 
   const remoteEntries = [];
-  snapshot.forEach(docSnap => {
-    const data = docSnap.data();
+  for (const data of packs) {
     if (Array.isArray(data?.levels)) {
       remoteEntries.push(...data.levels);
     } else if (data?.id && data?.baseImage) {
       remoteEntries.push(data);
     }
-  });
+  }
 
   if (remoteEntries.length > 0) {
     const updated = saveCachedRemoteLevels(remoteEntries);
