@@ -8,11 +8,45 @@ import officialCuratedData from '../../official_curated_levels.json' with { type
 import photoPairManifestData from '../../public/levels/photo_pair_manifest.json' with { type: 'json' };
 import { NEWLY_CROPPED_LEVEL_IDS } from '../data/newlyCroppedIds.js';
 
-export function normalizeImageKey(pathOrUrl) {
+const IMAGE_SUFFIX = /(_base|_variant)?\.(jpe?g|png|webp)$/i;
+
+function cleanImagePath(pathOrUrl) {
   if (!pathOrUrl || typeof pathOrUrl !== 'string') return '';
-  const clean = pathOrUrl.split('?')[0].split('#')[0];
-  const filename = clean.split('/').pop() || '';
-  return filename.toLowerCase().replace(/(_base|_variant)?\.(jpe?g|png|webp)$/i, '');
+  let clean = pathOrUrl.split('?')[0].split('#')[0];
+  // An absolute URL contributes its path, never its host.
+  const protocol = clean.indexOf('://');
+  if (protocol !== -1) {
+    const afterHost = clean.indexOf('/', protocol + 3);
+    clean = afterHost === -1 ? '' : clean.slice(afterHost);
+  }
+  return clean.replace(/^\/+/, '').replace(/^\.\//, '');
+}
+
+/**
+ * Stable curation key for an image path.
+ *
+ * Keeps the directory, not just the filename. Legacy pairs live in per-scene
+ * folders and are all named base.jpg / variant.jpg, so a filename-only key
+ * collapsed 33 unrelated levels onto the single key "base" and made them
+ * siblings of each other -- curating one silently curated all 33.
+ */
+export function normalizeImageKey(pathOrUrl) {
+  return cleanImagePath(pathOrUrl).toLowerCase().replace(IMAGE_SUFFIX, '');
+}
+
+/**
+ * The pre-path filename-only key. Read-only compatibility: decisions already
+ * saved in a player's localStorage are keyed this way and must keep resolving.
+ * Never used to build sibling groups, so it cannot revive the 33-way collision.
+ */
+export function legacyImageKey(pathOrUrl) {
+  const filename = cleanImagePath(pathOrUrl).split('/').pop() || '';
+  return filename.toLowerCase().replace(IMAGE_SUFFIX, '');
+}
+
+/** "base"/"variant" alone identify nothing -- that was the collision. */
+function isDegenerateLegacyKey(key) {
+  return !key || key === 'base' || key === 'variant';
 }
 
 // Build bidirectional indexes: level ID <-> image base key and image base key <-> level IDs
@@ -22,7 +56,12 @@ const IMAGE_KEY_TO_IDS = new Map();
 if (Array.isArray(photoPairManifestData)) {
   for (const item of photoPairManifestData) {
     if (!item?.id) continue;
-    const imgKey = normalizeImageKey(item.baseImage || item.variantImage || item.id);
+    // Key on the variant image: it is unique per level by construction, while
+    // base images are deduplicated on disk and shared across every variant of
+    // one photo. Keying on the base would make those variants siblings, and
+    // approving one would propagate to the rest (setLevelCuratedStatus writes
+    // to every sibling) -- promoting levels no curator ever looked at.
+    const imgKey = normalizeImageKey(item.variantImage || item.baseImage || item.id);
     if (imgKey) {
       ID_TO_IMAGE_KEY.set(item.id, imgKey);
       if (!IMAGE_KEY_TO_IDS.has(imgKey)) {
@@ -38,7 +77,7 @@ export function getImageKeyForLevel(levelOrId) {
   if (typeof levelOrId === 'string') {
     return ID_TO_IMAGE_KEY.get(levelOrId) || normalizeImageKey(levelOrId);
   }
-  const fromObj = levelOrId.baseImage || levelOrId.variantImage;
+  const fromObj = levelOrId.variantImage || levelOrId.baseImage;
   return normalizeImageKey(fromObj) || ID_TO_IMAGE_KEY.get(levelOrId.id) || normalizeImageKey(levelOrId.id);
 }
 
@@ -185,13 +224,28 @@ export function getEntryCurationStatus(levelOrId, statusMap = getCuratedStatusMa
     }
   }
 
-  // 2. Direct image key lookup
+  // 2. Direct image key lookup, then the pre-path key so decisions a player
+  //    already saved keep resolving after the key format changed.
+  const isUsable = (value) => {
+    const status = getLevelStatus(value);
+    return (status?.status || status?.packId || status?.category
+      || status?.difficulty || status?.suggestedDifficulty) ? status : null;
+  };
+
   const imgKey = getImageKeyForLevel(levelOrId);
   if (imgKey && statusMap[imgKey]) {
-    const byKey = getLevelStatus(statusMap[imgKey]);
-    if (byKey?.status || byKey?.packId || byKey?.category || byKey?.difficulty || byKey?.suggestedDifficulty) {
-      return byKey;
-    }
+    const byKey = isUsable(statusMap[imgKey]);
+    if (byKey) return byKey;
+  }
+
+  const candidatePaths = typeof levelOrId === 'string'
+    ? [ID_TO_IMAGE_KEY.get(levelOrId)]
+    : [levelOrId?.variantImage, levelOrId?.baseImage];
+  for (const candidate of candidatePaths) {
+    const legacy = legacyImageKey(candidate);
+    if (isDegenerateLegacyKey(legacy) || !statusMap[legacy]) continue;
+    const byLegacy = isUsable(statusMap[legacy]);
+    if (byLegacy) return byLegacy;
   }
 
   // 3. Sibling level lookup sharing the same base scene

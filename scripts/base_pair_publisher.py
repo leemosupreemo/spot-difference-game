@@ -17,6 +17,8 @@ from pathlib import Path
 from base_generation_policy import DEFAULT_BASE_GENERATION_POLICY
 from image_pair_finalizer import finalize_pair
 
+from variant_code import variant_code
+
 _DIGEST_LENGTH = 12
 
 
@@ -58,15 +60,27 @@ def publish_pair(finalized_pair, manifest_entry: dict, levels_dir, manifest_path
     scene_id = finalized_pair.manifest_id
     base_ext = Path(finalized_pair.base_path).suffix
     variant_ext = Path(finalized_pair.variant_path).suffix
-    base_filename = f"{scene_id}_{_content_digest(finalized_pair.base_path)}_base{base_ext}"
-    variant_filename = f"{scene_id}_{_content_digest(finalized_pair.variant_path)}_variant{variant_ext}"
+    # The code goes in the asset filename (internal, derived) but never in the
+    # scene id, which is an external handle carried in shared challenge URLs.
+    code = variant_code(manifest_entry)
+    # The base image is content-addressed: every variant of one photo shares the
+    # identical base, so naming it by digest alone stores it once instead of
+    # once per variant. It deliberately carries no scene id and no variant code
+    # -- under "auto" one photo's variants can come from different engines, and
+    # a code in the name would split one file back into several.
+    base_filename = f"{_content_digest(finalized_pair.base_path)}_base{base_ext}"
+    variant_filename = f"{scene_id}_{code}_{_content_digest(finalized_pair.variant_path)}_variant{variant_ext}"
     base_dest = levels_dir / base_filename
     variant_dest = levels_dir / variant_filename
 
+    # A shared base may already be on disk from an earlier variant of the same
+    # photo. Only roll back files this call actually created, or a failure here
+    # would delete a base that already-published entries point at.
     newly_created = []
     try:
-        _atomic_copy_into_place(finalized_pair.base_path, base_dest)
-        newly_created.append(base_dest)
+        if not base_dest.exists():
+            _atomic_copy_into_place(finalized_pair.base_path, base_dest)
+            newly_created.append(base_dest)
         _atomic_copy_into_place(finalized_pair.variant_path, variant_dest)
         newly_created.append(variant_dest)
 
@@ -77,6 +91,7 @@ def publish_pair(finalized_pair, manifest_entry: dict, levels_dir, manifest_path
         entry["variantImage"] = f"levels/{variant_filename}"
         entry["dimensions"] = {"width": width, "height": height}
         entry["aspectRatio"] = finalized_pair.aspect_ratio
+        entry["variantCode"] = code
 
         _replace_manifest_entry(manifest_path, scene_id, entry, replace_fn=replace_fn)
         return entry

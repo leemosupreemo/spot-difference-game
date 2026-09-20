@@ -409,3 +409,125 @@ class TestGenerateStructuralPairVariants(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class VariantCodeInPublishTests(unittest.TestCase):
+    """The shorthand rides on assets and manifest fields, never on the scene id."""
+
+    def _publish(self, tmp, entry):
+        from PIL import Image
+
+        staging = Path(tmp) / "staging"
+        staging.mkdir(parents=True, exist_ok=True)
+        base, variant = staging / "b.webp", staging / "v.webp"
+        Image.new("RGB", (1200, 900), (10, 20, 30)).save(base)
+        Image.new("RGB", (1200, 900), (10, 20, 31)).save(variant)
+        finalized = FinalizedPair(
+            scene_brief_id="scene", manifest_id=entry["id"],
+            base_path=str(base), variant_path=str(variant),
+            dimensions=(1200, 900), aspect_ratio="4 / 3",
+        )
+        return publish_pair(finalized, entry, Path(tmp) / "levels", Path(tmp) / "manifest.json")
+
+    def test_code_lands_in_field_and_filenames_but_not_the_id(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entry = {"id": "starfield_v1", "operation": "recolor",
+                     "generationMethod": "local_star", "diffs": []}
+            published = self._publish(tmp, entry)
+            self.assertEqual(published["variantCode"], "LST-CLR")
+            self.assertIn("LST-CLR", published["variantImage"])
+            # The base is content-addressed and shared between variants, so it
+            # carries neither the scene id nor the code.
+            self.assertNotIn("LST-CLR", published["baseImage"])
+            self.assertNotIn("starfield_v1", published["baseImage"])
+            # The id is an external handle (shared challenge URLs) -- untouched.
+            self.assertEqual(published["id"], "starfield_v1")
+
+    def test_structural_entry_without_method_still_gets_a_complete_code(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            published = self._publish(tmp, {"id": "legacy_v1", "operation": "add", "diffs": []})
+            self.assertEqual(published["variantCode"], "STR-ADD")
+
+    def test_unknown_metadata_is_marked_not_guessed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            published = self._publish(tmp, {"id": "mystery_v1", "diffs": []})
+            self.assertEqual(published["variantCode"], "???-???")
+
+
+class SharedBaseImageTests(unittest.TestCase):
+    """Variants of one photo store the identical base exactly once."""
+
+    def _finalize(self, tmp, scene_id, base_bytes, variant_bytes):
+        from PIL import Image
+
+        staging = Path(tmp) / f"staging_{scene_id}"
+        staging.mkdir(parents=True, exist_ok=True)
+        base, variant = staging / "b.webp", staging / "v.webp"
+        Image.new("RGB", (1200, 900), base_bytes).save(base)
+        Image.new("RGB", (1200, 900), variant_bytes).save(variant)
+        return FinalizedPair(
+            scene_brief_id="scene", manifest_id=scene_id,
+            base_path=str(base), variant_path=str(variant),
+            dimensions=(1200, 900), aspect_ratio="4 / 3",
+        )
+
+    def test_identical_bases_are_stored_once_and_shared(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            levels, manifest = Path(tmp) / "levels", Path(tmp) / "manifest.json"
+            published = []
+            for index in range(1, 4):
+                entry = {"id": f"photo_v{index}", "operation": "recolor",
+                         "generationMethod": "local_star", "diffs": []}
+                pair = self._finalize(tmp, f"photo_v{index}", (10, 20, 30), (10, 20, 30 + index))
+                published.append(publish_pair(pair, entry, levels, manifest))
+
+            base_paths = {entry["baseImage"] for entry in published}
+            self.assertEqual(len(base_paths), 1, "one photo must yield one base file")
+            variant_paths = {entry["variantImage"] for entry in published}
+            self.assertEqual(len(variant_paths), 3, "each variant keeps its own file")
+
+            on_disk = sorted(path.name for path in levels.iterdir())
+            self.assertEqual(len([n for n in on_disk if n.endswith("_base.webp")]), 1)
+            self.assertEqual(len([n for n in on_disk if n.endswith("_variant.webp")]), 3)
+
+    def test_different_engines_still_share_one_base(self):
+        # Under "auto" a photo's variants can come from two engines. The base is
+        # identical, so the differing variant codes must not split the file.
+        with tempfile.TemporaryDirectory() as tmp:
+            levels, manifest = Path(tmp) / "levels", Path(tmp) / "manifest.json"
+            first = publish_pair(
+                self._finalize(tmp, "photo_v1", (10, 20, 30), (10, 20, 31)),
+                {"id": "photo_v1", "operation": "recolor", "generationMethod": "local_segmented", "diffs": []},
+                levels, manifest)
+            second = publish_pair(
+                self._finalize(tmp, "photo_v2", (10, 20, 30), (10, 20, 32)),
+                {"id": "photo_v2", "operation": "recolor", "generationMethod": "local_star", "diffs": []},
+                levels, manifest)
+            self.assertEqual(first["baseImage"], second["baseImage"])
+            self.assertEqual(first["variantCode"], "LSG-CLR")
+            self.assertEqual(second["variantCode"], "LST-CLR")
+
+    def test_a_failed_publish_never_deletes_a_shared_base(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            levels, manifest = Path(tmp) / "levels", Path(tmp) / "manifest.json"
+            first = publish_pair(
+                self._finalize(tmp, "photo_v1", (10, 20, 30), (10, 20, 31)),
+                {"id": "photo_v1", "operation": "recolor", "generationMethod": "local_star", "diffs": []},
+                levels, manifest)
+            shared_base = Path(tmp) / first["baseImage"].replace("levels/", "levels/")
+            shared_base = levels / Path(first["baseImage"]).name
+            self.assertTrue(shared_base.exists())
+
+            def explode(*args, **kwargs):
+                raise OSError("manifest write failed")
+
+            with self.assertRaises(OSError):
+                publish_pair(
+                    self._finalize(tmp, "photo_v2", (10, 20, 30), (10, 20, 32)),
+                    {"id": "photo_v2", "operation": "recolor", "generationMethod": "local_star", "diffs": []},
+                    levels, manifest, replace_fn=explode)
+
+            self.assertTrue(shared_base.exists(),
+                "rollback deleted a base image the first entry still points at")
+            surviving = json.loads(manifest.read_text())
+            self.assertEqual([e["id"] for e in surviving], ["photo_v1"])

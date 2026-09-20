@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import path from 'node:path';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { isValidPhotoPairEntry } from './photoPairManifest.js';
 
@@ -10,8 +11,17 @@ const execFileAsync = promisify(execFile);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const SCRIPT_PATH = path.resolve(__dirname, '../../scripts/add_image_pair.mjs');
-const BASE_IMG = path.resolve(__dirname, '../../public/levels/fresh_nature_pair_001_base.jpg');
-const VAR_IMG = path.resolve(__dirname, '../../public/levels/fresh_nature_pair_001_variant.jpg');
+// Base images are content-addressed and shared between variants, so this
+// fixture reads the pair's base path from the manifest rather than assuming a
+// filename derived from the variant's.
+const MANIFEST = JSON.parse(readFileSync(
+  path.resolve(__dirname, '../../public/levels/photo_pair_manifest.json'), 'utf8'));
+const FIXTURE = MANIFEST.find(entry =>
+  (entry.variantImage || '').includes('fresh_nature_pair_001_variant'));
+const resolveLevelAsset = (ref) =>
+  path.resolve(__dirname, '../../public', String(ref).replace(/^\/+/, ''));
+const BASE_IMG = resolveLevelAsset(FIXTURE.baseImage);
+const VAR_IMG = resolveLevelAsset(FIXTURE.variantImage);
 
 test('add_image_pair.mjs dry-run analyzes diff and produces a valid manifest entry', async () => {
   const { stdout } = await execFileAsync('node', [

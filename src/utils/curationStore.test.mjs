@@ -7,7 +7,9 @@ import {
   createCuratedDataset,
   serializeCuratedDataset,
   normalizeImageKey,
-  getEntryCurationStatus
+  getEntryCurationStatus,
+  getImageKeyForLevel,
+  legacyImageKey
 } from './curationStore.js';
 
 test('resets all curation decisions to an empty map', () => {
@@ -74,9 +76,34 @@ test('adds a category designation without replacing a curation decision', () => 
 });
 
 test('normalizes image paths to stable image keys', () => {
-  assert.equal(normalizeImageKey('levels/sample_scene_001_base.jpg'), 'sample_scene_001');
-  assert.equal(normalizeImageKey('/public/levels/sample_scene_001_variant.jpg?v=2'), 'sample_scene_001');
-  assert.equal(normalizeImageKey('https://example.com/images/scene_abc.PNG'), 'scene_abc');
+  // Keys now include the directory so same-named files in different folders
+  // stay distinct; the _base/_variant suffix and URL noise still drop out.
+  assert.equal(normalizeImageKey('levels/sample_scene_001_base.jpg'), 'levels/sample_scene_001');
+  assert.equal(normalizeImageKey('/public/levels/sample_scene_001_variant.jpg?v=2'),
+    'public/levels/sample_scene_001');
+  // An absolute URL contributes its path, never its host.
+  assert.equal(normalizeImageKey('https://example.com/images/scene_abc.PNG'), 'images/scene_abc');
+  assert.equal(normalizeImageKey('https://cdn.other.com/images/scene_abc.png'), 'images/scene_abc',
+    'the same asset served from two hosts is one level');
+});
+
+test('legacyImageKey reproduces the pre-path format for saved decisions', () => {
+  assert.equal(legacyImageKey('levels/sample_scene_001_base.jpg'), 'sample_scene_001');
+  assert.equal(legacyImageKey('/public/levels/sample_scene_001_variant.jpg?v=2'), 'sample_scene_001');
+  assert.equal(legacyImageKey('https://example.com/images/scene_abc.PNG'), 'scene_abc');
+});
+
+test('a degenerate legacy key never resurrects the 33-level collision', () => {
+  // These entries live in different folders but are all named base.jpg, so the
+  // old format gave them the single key "base". A status stored under that key
+  // must not resolve for any of them.
+  const nursery = { id: 'photo_set_008_01', baseImage: 'levels/photo-pairs/nursery/x/base.jpg',
+                    variantImage: 'levels/photo-pairs/nursery/x/variant.jpg' };
+  const workbench = { id: 'photo_set_008_02', baseImage: 'levels/photo-pairs/workbench/y/base.jpg',
+                      variantImage: 'levels/photo-pairs/workbench/y/variant.jpg' };
+  const statusMap = { base: { status: 'approved' }, variant: { status: 'approved' } };
+  assert.equal(getEntryCurationStatus(nursery, statusMap), null);
+  assert.equal(getEntryCurationStatus(workbench, statusMap), null);
 });
 
 test('getEntryCurationStatus falls back to sibling entry sharing the same base image', () => {
@@ -121,3 +148,33 @@ test('getEntryCurationStatus resolves status saved under direct base image key',
   assert.equal(status.status, 'wrong_difficulty');
 });
 
+
+test('normalizeImageKey keeps the directory so same-named files stay distinct', () => {
+  // Legacy pairs are all named base.jpg/variant.jpg inside a per-scene folder.
+  const a = normalizeImageKey('levels/photo-pairs/nursery/medium_nursery_001/variant.jpg');
+  const b = normalizeImageKey('levels/photo-pairs/workbench/medium_workbench_001/variant.jpg');
+  assert.notEqual(a, b, 'levels in different folders must not share a curation key');
+  assert.equal(a, 'levels/photo-pairs/nursery/medium_nursery_001/variant');
+});
+
+test('normalizeImageKey is stable across leading-slash and ./ spellings', () => {
+  const canonical = normalizeImageKey('levels/a/variant.webp');
+  assert.equal(normalizeImageKey('/levels/a/variant.webp'), canonical);
+  assert.equal(normalizeImageKey('./levels/a/variant.webp'), canonical);
+  assert.equal(normalizeImageKey('levels/a/variant.webp?v=2'), canonical);
+});
+
+test('variants sharing one deduplicated base image are not siblings', () => {
+  // After base deduplication every variant of a photo points at the SAME base
+  // file. Curation identity must come from the variant, which stays unique,
+  // or approving one variant would promote its unreviewed siblings.
+  const sharedBase = 'levels/66fb05cd97c9_base.webp';
+  const v1 = { id: 'photo_v1', baseImage: sharedBase, variantImage: 'levels/photo_v1_aaa_variant.webp' };
+  const v2 = { id: 'photo_v2', baseImage: sharedBase, variantImage: 'levels/photo_v2_bbb_variant.webp' };
+  assert.notEqual(getImageKeyForLevel(v1), getImageKeyForLevel(v2),
+    'two variants of one photo must have different curation keys');
+});
+
+test('a level with only a base image still resolves a key', () => {
+  assert.equal(getImageKeyForLevel({ id: 'x', baseImage: 'levels/x_base.webp' }), 'levels/x');
+});
