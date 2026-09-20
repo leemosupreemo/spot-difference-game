@@ -375,3 +375,63 @@ test('createPhotoPairLevel retains dimensions and aspectRatio properties', () =>
   assert.deepEqual(level.dimensions, { width: 1200, height: 896 });
   assert.equal(level.aspectRatio, '4:3');
 });
+
+test('pending levels never reach production through the requested-set path', async () => {
+  // The default stage path already requires an explicit 'approved' status
+  // (selectPhotoPairEntries). The requested-set path does not, so it is the
+  // one that could serve an unreviewed level. Both must now be gated.
+  const mk = (id, sequence, extra = {}) => ({
+    id, title: id, category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', operation: 'recolor',
+    setId: 'gate_set_1', sequence,
+    baseImage: `levels/${id}_base.webp`, variantImage: `levels/${id}_variant.webp`,
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5, operation: 'recolor' }], ...extra
+  });
+  // Five entries make one complete set; four are pending review.
+  const manifest = [
+    mk('setgate_1', 1, { curationStatus: 'pending' }),
+    mk('setgate_2', 2, { curationStatus: 'pending' }),
+    mk('setgate_3', 3, { curationStatus: 'pending' }),
+    mk('setgate_4', 4, { curationStatus: 'pending' }),
+    mk('setgate_5', 5)
+  ];
+  const fetchImpl = async () => ({ ok: true, json: async () => manifest });
+  const imageFactory = () => {
+    const img = {};
+    setTimeout(() => img.onload && img.onload(), 0);
+    return img;
+  };
+
+  const { getPhotoSetCatalog } = await import('./photoSetCatalog.js');
+  const setId = getPhotoSetCatalog(manifest, { setSize: 5 }).sets[0]?.setId;
+  assert.ok(setId, 'fixture should form one complete set');
+
+  const stageIds = async (statusMap, debugMode) => {
+    const stage = await buildPhotoPairStage({
+      fetchImpl, imageFactory, curatedStatusMap: statusMap, debugMode,
+      setId, count: 5, seed: 1
+    });
+    return stage.map(level => level.id);
+  };
+
+  // Production: the set is no longer complete once pending entries are hidden,
+  // so nothing is served -- and critically no pending level is served.
+  const prod = await stageIds({}, false);
+  for (const id of ['setgate_1', 'setgate_2', 'setgate_3', 'setgate_4']) {
+    assert.ok(!prod.includes(id), `pending level ${id} leaked into production via the set path`);
+  }
+
+  // Debug: the reviewer can play the whole set to judge it.
+  const debug = await stageIds({}, true);
+  assert.equal(debug.length, 5, 'debug mode must expose the full pending set for review');
+});
+
+test('approving a pending level in debug is what promotes it', async () => {
+  const entry = { id: 'promote_me', curationStatus: 'pending' };
+  const { isEntryPlayable } = await import('./pendingLevelGate.js');
+
+  assert.equal(isEntryPlayable(entry, {}, false), false, 'unreviewed: hidden in production');
+  assert.equal(isEntryPlayable(entry, {}, true), true, 'unreviewed: visible in debug');
+  assert.equal(isEntryPlayable(entry, { promote_me: 'approved' }, false), true,
+    'approved in debug: now live');
+});

@@ -70,50 +70,43 @@ test('retained manifest entries have stable five-entry set metadata', () => {
     'utf8'
   ));
 
-  assert.equal(manifest.length, 157);
-  assert.equal(new Set(manifest.map(entry => entry.id)).size, manifest.length);
-  assert.deepEqual(
-    manifest.slice(0, 30).map(({ id, setId, sequence }) => ({ id, setId, sequence })),
-    [
-      // Manually-ingested single levels (and their review variants) are
-      // published to the front of the manifest (base_pair_publisher.py
-      // inserts at index 0) and have no setId/sequence -- they aren't part
-      // of a photo set.
-      { id: 'crystal_geode_starfield_1789847167950_v2', setId: undefined, sequence: undefined },
-      { id: 'crystal_geode_starfield_1789847167950_v1', setId: undefined, sequence: undefined },
-      { id: 'optical_fiber_constellation_1789824262569_v4', setId: undefined, sequence: undefined },
-      { id: 'optical_fiber_constellation_1789824262569_v3', setId: undefined, sequence: undefined },
-      { id: 'optical_fiber_constellation_1789824262569_v2', setId: undefined, sequence: undefined },
-      { id: 'optical_fiber_constellation_1789824262569_v1', setId: undefined, sequence: undefined },
-      { id: 'gemstone_velvet_starfield_1789824187839_v5', setId: undefined, sequence: undefined },
-      { id: 'gemstone_velvet_starfield_1789824187839_v4', setId: undefined, sequence: undefined },
-      { id: 'gemstone_velvet_starfield_1789824187839_v3', setId: undefined, sequence: undefined },
-      { id: 'gemstone_velvet_starfield_1789824187839_v2', setId: undefined, sequence: undefined },
-      { id: 'gemstone_velvet_starfield_1789824187839_v1', setId: undefined, sequence: undefined },
-      { id: 'deep_field_galaxies_1789824198055_v1', setId: undefined, sequence: undefined },
-      { id: 'pins_on_carpet_1789795312426_v5', setId: undefined, sequence: undefined },
-      { id: 'pins_on_carpet_1789795312426_v4', setId: undefined, sequence: undefined },
-      { id: 'pins_on_carpet_1789795312426_v3', setId: undefined, sequence: undefined },
-      { id: 'pins_on_carpet_1789795312426_v2', setId: undefined, sequence: undefined },
-      { id: 'pins_on_carpet_1789795312426_v1', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v5', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v4', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v3', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v2', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252_v1', setId: undefined, sequence: undefined },
-      { id: 'pins_on_carpet_1789795312426', setId: undefined, sequence: undefined },
-      { id: 'leaves_on_branch_1789795322252', setId: undefined, sequence: undefined },
-      { id: 'photo_set_001_01', setId: 'photo_set_001', sequence: 1 },
-      { id: 'photo_set_001_02', setId: 'photo_set_001', sequence: 2 },
-      { id: 'photo_set_001_03', setId: 'photo_set_001', sequence: 3 },
-      { id: 'photo_set_001_04', setId: 'photo_set_001', sequence: 4 },
-      { id: 'photo_set_001_05', setId: 'photo_set_001', sequence: 5 },
-      { id: 'photo_set_002_01', setId: 'photo_set_002', sequence: 1 }
-    ]
-  );
+  assert.equal(new Set(manifest.map(entry => entry.id)).size, manifest.length,
+    'every entry must have a unique id');
 
+  // The 26 five-entry photo sets are what this guards. Individual levels move
+  // between bundled and remote delivery as packs are published, so counting the
+  // whole manifest churns; the sets themselves must never lose an entry or have
+  // their sequencing disturbed.
   const catalog = getPhotoSetCatalog(manifest);
-  assert.equal(catalog.unassigned.length, 27);
   assert.equal(catalog.sets.length, 26);
   assert.equal(getCompletePhotoSets(manifest).length, 26);
+  assert.deepEqual(
+    catalog.sets.map(set => set.setId).sort(),
+    Array.from({ length: 26 }, (_, i) => `photo_set_${String(i + 1).padStart(3, '0')}`),
+    'set ids must stay contiguous -- a gap means a set lost its entries'
+  );
+
+  for (const set of catalog.sets) {
+    assert.equal(set.entries.length, 5, `${set.setId} must keep five entries`);
+    assert.deepEqual(set.entries.map(entry => entry.sequence), [1, 2, 3, 4, 5],
+      `${set.setId} must stay sequenced 1-5`);
+    assert.ok(set.entries.every(entry => entry.setId === set.setId));
+  }
+  assert.equal(catalog.sets.reduce((n, set) => n + set.entries.length, 0), 130);
+
+  // Everything else is a standalone level: manual ingests, approved fallback
+  // levels, pending candidates. None may claim set membership, or it could be
+  // pulled into a set and change what a player is served.
+  for (const entry of catalog.unassigned) {
+    assert.ok(!entry.setId && !entry.sequence,
+      `${entry.id} is unassigned and must carry no set metadata`);
+  }
+
+  // A fallback level only reaches the manifest once reviewed, and always
+  // carries the code describing how it was produced.
+  const fallbackLevels = manifest.filter(entry =>
+    String(entry.generationMethod || '').startsWith('local_'));
+  assert.ok(fallbackLevels.every(entry =>
+    entry.variantCode && entry.curationStatus === 'approved'),
+    'a fallback level in the manifest must be reviewed and carry its variant code');
 });

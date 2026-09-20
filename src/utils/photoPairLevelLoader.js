@@ -16,9 +16,11 @@ export function resolveAssetUrl(url) {
 }
 
 import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
+import { isEntryPlayable, describePendingFilter } from './pendingLevelGate.js';
+import { getInitialDebugMode } from './debugMode.js';
 import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
 
-export function getAllPhotoPairEntries() {
+export function getAllPhotoPairEntries({ debugMode = getInitialDebugMode() } = {}) {
   const entries = loadManifest();
   const statusMap = getCuratedStatusMap();
   const unratedCropped = [];
@@ -28,6 +30,8 @@ export function getAllPhotoPairEntries() {
   for (const entry of entries) {
     const statusVal = getLevelStatus(statusMap[entry.id])?.status;
     if (statusVal === 'dismissed') continue;
+    // Machine-generated levels awaiting review are debug-only until approved.
+    if (!isEntryPlayable(entry, statusMap, debugMode)) continue;
 
     if (!statusVal) {
       if (NEWLY_CROPPED_LEVEL_IDS_SET.has(entry.id)) {
@@ -199,7 +203,8 @@ export async function buildPhotoPairStage({
   seed = Date.now(),
   fetchImpl = null,
   imageFactory = null,
-  curatedStatusMap = null
+  curatedStatusMap = null,
+  debugMode = getInitialDebugMode()
 } = {}) {
   const hasRequestedSet = setId !== undefined;
   const requestedSetId = typeof setId === 'string' ? setId.trim() : '';
@@ -226,9 +231,16 @@ export async function buildPhotoPairStage({
     const statusMap = curatedStatusMap || getCuratedStatusMap();
     const activeEntries = allEntries.filter(entry => {
       const statusVal = getLevelStatus(statusMap[entry.id])?.status;
-      return statusVal !== 'dismissed';
+      if (statusVal === 'dismissed') return false;
+      // Pending means "a human should look at this", not "ready to play".
+      // Outside debug it stays hidden until a curator approves it.
+      return isEntryPlayable(entry, statusMap, debugMode);
     });
 
+    const gate = describePendingFilter(allEntries, statusMap, debugMode);
+    if (gate.pending > 0) {
+      logApp('INFO', `[BuildStage] Pending-review gate: ${gate.pendingApproved}/${gate.pending} approved, ${gate.pendingHidden} hidden (debug=${gate.debugMode})`);
+    }
     logApp('INFO', `[BuildStage] Total active manifest entries: ${activeEntries.length} (from ${allEntries.length} raw entries)`);
 
     if (activeEntries && activeEntries.length > 0) {
