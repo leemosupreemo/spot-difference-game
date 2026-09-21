@@ -6,6 +6,13 @@ import {
   serializeCuratedDataset
 } from '../utils/curationStore';
 import { PHOTO_PACKS } from '../data/photoPacks';
+import { getEntryCurationStatus, getCuratedStatusMap } from '../utils/curationStore';
+import { getAllPhotoPairEntries } from '../utils/photoPairLevelLoader';
+import { getCachedRemoteLevels } from '../services/remoteLevelSync';
+import { isPlaceholderEntry } from '../utils/remoteSetPolicy.js';
+import { buildPoolDiagnostics } from '../utils/poolDiagnostics.js';
+import { getInitialDebugMode } from '../utils/debugMode';
+import photoPairManifestData from '../../public/levels/photo_pair_manifest.json' with { type: 'json' };
 import { sounds } from '../utils/audio';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
@@ -28,7 +35,27 @@ async function copyText(text) {
 
 export default function CuratedExportModal({ isOpen, onClose }) {
   const [statusMessage, setStatusMessage] = useState('');
-  const dataset = exportCuratedDataset(PHOTO_PACKS);
+  // The queue as THIS DEVICE sees it. Levels have twice been published,
+  // verified reachable against the live data, and still never offered for
+  // review -- a gap only the device can explain.
+  let poolDiagnostics = null;
+  try {
+    const statusMap = getCuratedStatusMap();
+    poolDiagnostics = buildPoolDiagnostics({
+      entries: getAllPhotoPairEntries({ includeDismissed: true }),
+      statusMap,
+      resolveStatus: (entry) => getEntryCurationStatus(entry, statusMap),
+      remoteCachedCount: getCachedRemoteLevels().length,
+      bundledCount: Array.isArray(photoPairManifestData) ? photoPairManifestData.length : 0,
+      online: typeof navigator === 'undefined' ? true : navigator.onLine !== false,
+      debugMode: getInitialDebugMode(),
+      isPlaceholder: isPlaceholderEntry
+    });
+  } catch (err) {
+    poolDiagnostics = { error: String(err?.message || err) };
+  }
+
+  const dataset = { ...exportCuratedDataset(PHOTO_PACKS), poolDiagnostics };
   const exportText = serializeCuratedDataset(dataset);
   const approvedIdsText = dataset.approvedLevelIds.length
     ? dataset.approvedLevelIds.join(', ')
