@@ -451,25 +451,31 @@ export default function DailyVictoryModal({
             </h2>
           </div>
         ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)', margin: '-12px 0 14px 0', paddingRight: '40px', minHeight: '40px' }}>
-            <button
-              onClick={handleShare}
-              aria-label="Share daily result"
-              title="Share result"
-              className="glass-btn"
-              style={{ width: '40px', height: '40px', padding: 0, justifyContent: 'center', borderRadius: '12px', flexShrink: 0 }}
-            >
-              <Share2 size={20} />
-            </button>
-            <button
-              onClick={() => { sounds.playTap(); commitAbandonedRecordName(); if (onOpenLeaderboard) onOpenLeaderboard(); }}
-              aria-label="View daily leaderboard"
-              title="View daily leaderboard"
-              className="glass-btn"
-              style={{ width: '40px', height: '40px', padding: 0, justifyContent: 'center', borderRadius: '12px', flexShrink: 0 }}
-            >
-              <Trophy size={20} color="var(--accent-gold)" />
-            </button>
+          // Three columns with equal outer tracks centre the title on the modal
+          // rather than on the space left over beside the icons. The icon track
+          // keeps its content width when the modal is narrow, so the title
+          // shifts instead of wrapping.
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: 'var(--modal-gap-sm)', margin: '-12px 0 14px 0', minHeight: '40px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--modal-gap-sm)' }}>
+              <button
+                onClick={handleShare}
+                aria-label="Share daily result"
+                title="Share result"
+                className="glass-btn"
+                style={{ width: '40px', height: '40px', padding: 0, justifyContent: 'center', borderRadius: '12px', flexShrink: 0 }}
+              >
+                <Share2 size={20} />
+              </button>
+              <button
+                onClick={() => { sounds.playTap(); commitAbandonedRecordName(); if (onOpenLeaderboard) onOpenLeaderboard(); }}
+                aria-label="View daily leaderboard"
+                title="View daily leaderboard"
+                className="glass-btn"
+                style={{ width: '40px', height: '40px', padding: 0, justifyContent: 'center', borderRadius: '12px', flexShrink: 0 }}
+              >
+                <Trophy size={20} color="var(--accent-gold)" />
+              </button>
+            </div>
             <h2
               style={{
                 fontSize: '0.92rem',
@@ -477,11 +483,13 @@ export default function DailyVictoryModal({
                 color: 'var(--accent-pink)',
                 letterSpacing: '0.4px',
                 margin: 0,
-                lineHeight: 1.2
+                lineHeight: 1.2,
+                textAlign: 'center'
               }}
             >
               {isForfeit ? 'DAILY CHALLENGE FORFEITED' : 'DAILY CHALLENGE RUN ENDED'}
             </h2>
+            <div aria-hidden="true" />
           </div>
         )}
 

@@ -72,7 +72,10 @@ test('daily victory keeps failure details compact and exposes a top-three leader
   assert.match(source, /aria-label="Share daily result"/);
   assert.match(source, /aria-label="Share daily result"[\s\S]*?width:\s*['"]40px['"]/);
   assert.match(source, /margin:\s*['"]-12px 0 14px 0['"]/);
-  assert.match(source, /paddingRight:\s*['"]40px['"]/);
+  // The header used to reserve its right-hand clearance with paddingRight;
+  // the third grid track does that now, and DailyForfeitHeader.test.jsx owns
+  // the centring it exists for.
+  assert.match(source, /gridTemplateColumns:\s*['"]1fr auto 1fr['"]/);
 });
 
 test('daily success replaces rank and inline leaderboard with a link beside the hero time', () => {
