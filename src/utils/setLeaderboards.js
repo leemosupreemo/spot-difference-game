@@ -43,6 +43,14 @@ export function getDeterministicSetBaseline(setId) {
   // Realistic base completion times for 5-image set: ~16.5s to 22.5s
   const baseTimeMs = 16500 + (seed % 6000);
 
+  // These point totals are tied to the speed-scoring curve: they were chosen to
+  // sit just under what a strong real run scores at these times. When the
+  // opening value moved from 500 to 1250 they had to move with it, or every
+  // rival became beatable by more than double and the ranks stopped meaning
+  // anything. setLeaderboards.test.mjs pins them against calculateSpeedPoints
+  // so a future change to scoring fails loudly here instead of quietly
+  // trivialising the boards.
+
   return [
     {
       uid: `bot_1_${cleanId}`,
@@ -50,7 +58,7 @@ export function getDeterministicSetBaseline(setId) {
       firstTime: baseTimeMs + 1400,
       repeatTime: baseTimeMs,
       fastestTime: baseTimeMs,
-      mostPoints: 2450 + (seed % 45),
+      mostPoints: 6125 + (seed % 113),
       stars: 3,
       isCurrentPlayer: false
     },
@@ -60,7 +68,7 @@ export function getDeterministicSetBaseline(setId) {
       firstTime: baseTimeMs + 2900,
       repeatTime: baseTimeMs + 1650,
       fastestTime: baseTimeMs + 1650,
-      mostPoints: 2380 + (seed % 40),
+      mostPoints: 5950 + (seed % 100),
       stars: 3,
       isCurrentPlayer: false
     },
@@ -70,7 +78,7 @@ export function getDeterministicSetBaseline(setId) {
       firstTime: baseTimeMs + 4800,
       repeatTime: baseTimeMs + 3300,
       fastestTime: baseTimeMs + 3300,
-      mostPoints: 2260 + (seed % 35),
+      mostPoints: 5650 + (seed % 88),
       stars: 2,
       isCurrentPlayer: false
     },
@@ -80,7 +88,7 @@ export function getDeterministicSetBaseline(setId) {
       firstTime: baseTimeMs + 7100,
       repeatTime: baseTimeMs + 5100,
       fastestTime: baseTimeMs + 5100,
-      mostPoints: 2090 + (seed % 30),
+      mostPoints: 5225 + (seed % 75),
       stars: 2,
       isCurrentPlayer: false
     },
@@ -90,7 +98,7 @@ export function getDeterministicSetBaseline(setId) {
       firstTime: baseTimeMs + 9600,
       repeatTime: baseTimeMs + 7200,
       fastestTime: baseTimeMs + 7200,
-      mostPoints: 1920 + (seed % 25),
+      mostPoints: 4800 + (seed % 63),
       stars: 1,
       isCurrentPlayer: false
     }
