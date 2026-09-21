@@ -125,3 +125,11 @@ test('defines subtle pressed shrink state for mode cards, start game button, and
   const menuSource = fs.readFileSync(new URL('./MainMenu.jsx', import.meta.url), 'utf8');
   assert.match(menuSource, /className="glass-panel mode-card-item"[\s\S]*?role="button"/);
 });
+
+test('MainMenu exposes a debug button to test local notifications when debugMode is active', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /triggerTestNotification/);
+  assert.match(source, /debugMode && \(/);
+  assert.match(source, /TEST NOTIFICATION/);
+});

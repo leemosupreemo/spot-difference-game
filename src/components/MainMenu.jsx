@@ -8,6 +8,7 @@ import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 import { logApp, auditDOMState } from '../utils/logger';
 import { trackCategorySelected, trackMainMenuViewed } from '../services/analytics';
 import { hasCompletedFirstSet } from '../services/playerProgress';
+import { triggerTestNotification } from '../services/notificationService.js';
 import TutorialBanner from './TutorialBanner';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 import TronLightcycleField from './TronLightcycleField.jsx';
@@ -58,6 +59,7 @@ export default function MainMenu({
   // Per-card tick, bumped only on that card's own tap (even re-tapping the active
   // mode) so its zoom/fade replays independently of the other card.
   const [gameModeBgTicks, setGameModeBgTicks] = useState({});
+  const [testNotifMsg, setTestNotifMsg] = useState(null);
 
   useEffect(() => {
     trackMainMenuViewed({ selectedTheme });
@@ -343,6 +345,35 @@ export default function MainMenu({
             }}
           >
             {simulatedOffline ? '📴 SIMULATING OFFLINE — TAP TO RESTORE' : '📡 SIMULATE OFFLINE'}
+          </button>
+        )}
+
+        {debugMode && (
+          <button
+            type="button"
+            aria-label="Test Notification"
+            onClick={async () => {
+              sounds.playTap();
+              setTestNotifMsg('SCHEDULING...');
+              const res = await triggerTestNotification({ delaySeconds: 3 });
+              setTestNotifMsg(res.success ? '🔔 SCHEDULED (3S) — MINIMIZE APP NOW' : `❌ ${res.message || 'FAILED'}`);
+              setTimeout(() => setTestNotifMsg(null), 4000);
+            }}
+            style={{
+              width: '100%',
+              marginBottom: '14px',
+              padding: '10px 12px',
+              borderRadius: '10px',
+              fontWeight: 900,
+              fontSize: '0.76rem',
+              letterSpacing: '0.5px',
+              cursor: 'pointer',
+              background: 'rgba(0, 240, 255, 0.12)',
+              color: 'var(--accent-cyan)',
+              border: '1px solid rgba(0, 240, 255, 0.35)'
+            }}
+          >
+            {testNotifMsg || '🔔 TEST NOTIFICATION (3S DELAY)'}
           </button>
         )}
 
