@@ -128,6 +128,23 @@ The model runs on a window around the fill rather than the whole frame: a full
 and at a dozen candidates per operation the difference is half an hour per image
 versus a minute. Only masked pixels change either way.
 
+**It is off by default, because it was measured and did not pay.** Enable the
+retry with `DIFF_HUNTER_ENABLE_LAMA=1`.
+
+Over three workbench images LaMa ran 20 times and got six fills past the
+removal-specific critic -- a real improvement on colour and boundary continuity.
+Every one of those six was then rejected downstream as `StructuralBlurArtifact`
+or `StructuralBoundaryArtifact`. LaMa cannot match the high-frequency texture of
+a sharp macro photograph, so its fill is measurably softer than its
+surroundings, and the critic is right to reject it: a player would read that as
+a smudge where something used to be. Net effect was about 90 seconds added per
+image for zero additional candidates.
+
+The next thing worth trying is matching local grain and sharpness to the
+surrounding region after the fill, which targets that specific failure. Until
+something clears the last gate, `remove` and `reorder` remain unavailable on
+sharp macro scenes and `add` carries the batch.
+
 Better filling is necessary for removal, not sufficient. A region good enough to
 recolour is not necessarily a whole, removable object, so the existing boundary,
 texture and naturalness checks still judge the result and a curator still

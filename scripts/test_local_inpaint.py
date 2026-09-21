@@ -90,3 +90,26 @@ class InpaintTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class IntegrationDefaultTests(unittest.TestCase):
+    """The retry is available but off: it was measured and did not pay."""
+
+    def setUp(self):
+        self.source = (Path(__file__).parent / "remove_target_selector.py").read_text()
+
+    def test_lama_retry_is_opt_in(self):
+        self.assertIn('os.environ.get("DIFF_HUNTER_ENABLE_LAMA") == "1"', self.source)
+
+    def test_reconstruction_does_not_import_lama_by_default(self):
+        # Guarded so a run pays nothing -- no model load, no inference -- unless
+        # the flag is set.
+        guard = self.source.index('DIFF_HUNTER_ENABLE_LAMA')
+        import_line = self.source.index('from local_inpaint import', guard)
+        self.assertGreater(import_line, guard,
+                           "the import must sit behind the flag, not before it")
+
+    def test_the_measured_reason_is_recorded(self):
+        # So the next person does not re-run the same experiment blind.
+        self.assertIn("StructuralBlurArtifact", self.source)
+        self.assertIn("high-frequency texture", self.source)

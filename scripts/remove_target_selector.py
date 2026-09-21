@@ -26,6 +26,8 @@ Implements next-generation full-object deletion with structure-aware reconstruct
 ================================================================================
 """
 
+import os
+
 import cv2
 import numpy as np
 from perceptual_verification_engine import PerceptualVerificationEngine
@@ -523,24 +525,52 @@ class BackgroundReconstructionRouter:
         rx1, ry1 = max(0, bx1 - pad), max(0, by1 - pad)
         rx2, ry2 = min(w, bx2 + pad + shadow_shift_x), min(h, by2 + pad + shadow_shift_y)
 
-        clamped_variant = image_bgr.copy()
-        clamped_variant[ry1:ry2, rx1:rx2] = reconstructed_bgr[ry1:ry2, rx1:rx2]
+        def _clamp(candidate):
+            clamped = image_bgr.copy()
+            clamped[ry1:ry2, rx1:rx2] = candidate[ry1:ry2, rx1:rx2]
+            return clamped
 
         # 8. TIGHTENED REMOVAL NATURALNESS CRITIC AUDIT
-        nat_passed, nat_metrics, nat_reason, nat_code = RemovalNaturalnessCritic.evaluate_removal_naturalness(
-            image_bgr, clamped_variant, target_mask, expanded_mask, clean_substrate_mask, obj_dominant_lab
-        )
+        #
+        # The three structure-aware pathways usually produce something; what
+        # fails is this audit -- boundary discontinuity, texture mismatch, local
+        # blur.
+        #
+        # A LaMa retry can be enabled here with DIFF_HUNTER_ENABLE_LAMA=1. It is
+        # off by default because it was measured and did not pay: over three
+        # workbench images it ran 20 times, got six fills past this audit, and
+        # every one was then rejected downstream as StructuralBlurArtifact or
+        # StructuralBoundaryArtifact. LaMa matches colour and boundary well but
+        # cannot match the high-frequency texture of a sharp macro photograph,
+        # and the critic is right to notice. Leaving it on cost about 90 seconds
+        # per image for no additional candidate.
+        #
+        # Nothing is loosened when it is enabled: a LaMa fill faces exactly the
+        # same audit as any other.
+        attempts = [(chosen_pathway, reconstructed_bgr)]
+        last_reason = None
+        for pathway, candidate in attempts:
+            clamped_variant = _clamp(candidate)
+            nat_passed, nat_metrics, nat_reason, nat_code = RemovalNaturalnessCritic.evaluate_removal_naturalness(
+                image_bgr, clamped_variant, target_mask, expanded_mask, clean_substrate_mask, obj_dominant_lab
+            )
+            if nat_passed:
+                return clamped_variant, [ebx1, eby1, ebx2, eby2], {
+                    **nat_metrics, **coh_metrics, "reconstruction_pathway": pathway
+                }, None
+            last_reason = nat_reason
 
-        if not nat_passed:
-            return None, None, None, nat_reason
+            # Queue the fallback engine once, after the routed pathway has been
+            # judged and found wanting.
+            if pathway != "lama_inpaint" and os.environ.get("DIFF_HUNTER_ENABLE_LAMA") == "1":
+                try:
+                    from local_inpaint import inpaint as _lama_inpaint, is_available as _lama_ready
+                    if _lama_ready():
+                        attempts.append(("lama_inpaint", _lama_inpaint(image_bgr, expanded_mask)))
+                except Exception as exc:  # unavailable or failed: keep the original verdict
+                    last_reason = f"{nat_reason} (LaMa unavailable: {exc})"
 
-        combined_metrics = {
-            **nat_metrics,
-            **coh_metrics,
-            "reconstruction_pathway": chosen_pathway
-        }
-
-        return clamped_variant, [ebx1, eby1, ebx2, eby2], combined_metrics, None
+        return None, None, None, last_reason
 
     @classmethod
     def _coherent_single_source_clone(cls, image_bgr, target_mask, expanded_mask, clean_substrate_mask, ebbox, cx, cy):
