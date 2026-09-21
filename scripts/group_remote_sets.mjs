@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
-import { createPlaceholderEntry, REMOTE_SET_PREFIX } from '../src/utils/remoteSetPolicy.js';
+import { createPlaceholderEntry, REMOTE_SET_PREFIX, isPlaceholderEntry } from '../src/utils/remoteSetPolicy.js';
 import { photoKeyOf } from '../src/utils/photoIdentity.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -110,12 +110,13 @@ export function allocateSets(approved, setSize = SET_SIZE) {
 }
 
 /** Split approved levels into fives, padding the last set with placeholders. */
-export function buildRemoteSets(approved, setSize = SET_SIZE, makePlaceholder = createPlaceholderEntry) {
+export function buildRemoteSets(approved, setSize = SET_SIZE, makePlaceholder = createPlaceholderEntry,
+                                firstNumber = 1) {
   const allocated = allocateSets(approved, setSize);
   // Fullest sets first, so the padded one is last and keeps the highest number.
   allocated.sort((a, b) => b.length - a.length);
   return allocated.map((slice, index) => {
-    const setId = `${REMOTE_SET_PREFIX}${String(index + 1).padStart(3, '0')}`;
+    const setId = `${REMOTE_SET_PREFIX}${String(firstNumber + index).padStart(3, '0')}`;
     const levels = slice.map((level, i) => ({ ...level, setId, sequence: i + 1 }));
     while (levels.length < setSize) {
       levels.push(makePlaceholder({ setId, sequence: levels.length + 1 }));
@@ -149,6 +150,11 @@ async function main() {
     for (const level of docSnap.data().levels || []) {
       if (!level?.id || seenIds.has(level.id)) continue;
       seenIds.add(level.id);
+      // A placeholder is padding for the set it was made for, not content.
+      // Carrying one forward lets it be dealt into a different set as though it
+      // were a level, keeping a stale id and occupying a seat real artwork
+      // should have; each set gets fresh padding below.
+      if (isPlaceholderEntry(level)) continue;
       all.push(level);
     }
   });
@@ -172,12 +178,26 @@ async function main() {
     }
     return { ...level, curationStatus: 'pending' };
   };
-  const approved = all.map(decide).filter(Boolean);
+  const kept = all.map(decide).filter(Boolean);
   const dropped = all.filter(l => statusOf(official[l.id]) === 'dismissed');
-  const sets = buildRemoteSets(approved);
+
+  // Awaiting-review levels get their own sets at the end, never a seat in a
+  // live one.
+  //
+  // The pending gate hides them outside debug, so a set holding four approved
+  // levels and one pending is FIVE in debug and FOUR in production -- and a set
+  // of four cannot be started at all. Mixing them cost five of thirteen live
+  // sets, and nothing caught it because every check ran in a mode where the
+  // pending level was visible.
+  const live = kept.filter(level => level.curationStatus === 'approved');
+  const review = kept.filter(level => level.curationStatus !== 'approved');
+  const liveSets = buildRemoteSets(live);
+  const reviewSets = buildRemoteSets(review, SET_SIZE, createPlaceholderEntry, liveSets.length + 1);
+  const sets = [...liveSets, ...reviewSets];
 
   console.log(`published levels : ${all.length}`);
-  console.log(`  kept           : ${approved.length} (approved or awaiting review)`);
+  console.log(`  live           : ${live.length} (approved, playable in production)`);
+  console.log(`  in review      : ${review.length} (pending, debug only -- kept in their own sets)`);
   console.log(`  dropped        : ${dropped.length} (dismissed)`);
   console.log(`sets of ${SET_SIZE}       : ${sets.length}`);
   for (const set of sets) {

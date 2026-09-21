@@ -113,6 +113,27 @@ export function auditLevels({ bundled = [], remote = [], dismissedIds = new Set(
     }
   }
 
+  // 5a. A set must be startable in PRODUCTION, not just in debug.
+  //
+  // The pending gate hides awaiting-review levels outside debug mode, so a set
+  // holding four approved levels and one pending holds five in debug and four
+  // in production -- and a set of four cannot be started at all. Every check
+  // here used to count entries without regard to that gate, so five of thirteen
+  // live sets were unstartable for players while every audit passed.
+  //
+  // A set that is entirely in review is fine: it is a review batch, invisible
+  // rather than broken. A MIX is the failure.
+  for (const [setId, entries] of sets) {
+    const real = entries.filter(e => !isPlaceholderEntry(e));
+    if (real.length === 0) continue;
+    const pending = real.filter(e => e.curationStatus === 'pending');
+    if (pending.length === 0 || pending.length === real.length) continue;
+    fail('mixed-review-set',
+      `${setId} mixes ${real.length - pending.length} live level(s) with ${pending.length}`
+      + ` awaiting review, so it holds ${entries.length - pending.length} in production`
+      + ` and cannot be started: ${pending.map(e => e.id).join(', ')}`);
+  }
+
   // 5b. A photograph may be flipped at most once.
   //
   // Flipping swaps a pair so an `add` reads as a `remove`, which puts the

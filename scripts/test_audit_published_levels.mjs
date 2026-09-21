@@ -201,3 +201,30 @@ test('a level with no derivable photograph is reported', async () => {
   const findings = auditLevels({ remote: levels });
   assert.ok(findings.some(f => f.check === 'missing-photo-key'));
 });
+
+test('a set mixing live and awaiting-review levels is reported', async () => {
+  const { auditLevels } = await import('./audit_published_levels.mjs');
+  // Four approved plus one pending: five entries in debug, four in production,
+  // and a set of four cannot be started. This is what broke five live sets.
+  const levels = fiveOf('remote_set_910', ['m/a','m/b','m/c','m/d','m/e']);
+  levels[4].curationStatus = 'pending';
+  const findings = auditLevels({ remote: levels });
+  const hit = findings.find(f => f.check === 'mixed-review-set');
+  assert.ok(hit, 'a mixed set must be reported');
+  assert.match(hit.detail, /cannot be started/);
+});
+
+test('a set entirely in review is a batch, not a broken set', async () => {
+  const { auditLevels } = await import('./audit_published_levels.mjs');
+  const levels = fiveOf('remote_set_911', ['n/a','n/b','n/c','n/d','n/e']);
+  levels.forEach(l => { l.curationStatus = 'pending'; });
+  const findings = auditLevels({ remote: levels });
+  assert.ok(!findings.some(f => f.check === 'mixed-review-set'));
+});
+
+test('a fully live set passes', async () => {
+  const { auditLevels } = await import('./audit_published_levels.mjs');
+  const levels = fiveOf('remote_set_912', ['o/a','o/b','o/c','o/d','o/e']);
+  const findings = auditLevels({ remote: levels });
+  assert.ok(!findings.some(f => f.check === 'mixed-review-set'));
+});

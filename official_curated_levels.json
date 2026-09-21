@@ -2,8 +2,8 @@
   "exportedAt": "2026-09-20T20:03:40.826Z",
   "summary": {
     "totalCurated": 662,
-    "approvedCount": 319,
-    "dismissedCount": 391,
+    "approvedCount": 320,
+    "dismissedCount": 398,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -325,7 +325,8 @@
     "fresh_v9_bookbinder_tools_004_base_v2",
     "fresh_v9_vintage_buttons_014_base_v1",
     "fresh_v9_bookbinder_tools_004_base_v1",
-    "fresh_v9_philatelist_stamps_005_base_v2"
+    "fresh_v9_philatelist_stamps_005_base_v2",
+    "fresh_v9_mosaic_tile_008_base_v1"
   ],
   "dismissedLevelIds": [
     "photo_set_028_02",
@@ -718,7 +719,14 @@
     "fresh_v9_stained_glass_002_base_v2",
     "fresh_v9_silk_floss_012_base_v1",
     "fresh_v9_locksmith_keys_003_base_v1",
-    "fresh_v9_stained_glass_002_base_v1"
+    "fresh_v9_stained_glass_002_base_v1",
+    "fresh_v9_fly_fishing_001_base_v2",
+    "fresh_v9_philatelist_stamps_005_base_v1",
+    "fresh_v9_fly_fishing_001_base_v1",
+    "fresh_v9_drafting_dividers_013_base_v2",
+    "fresh_v9_darkroom_photo_009_base_v2",
+    "fresh_v9_drafting_dividers_013_base_v1",
+    "fresh_v9_darkroom_photo_009_base_v1"
   ],
   "rawStatusMap": {
     "photo_set_029_01": {
@@ -3560,6 +3568,38 @@
     "fresh_v9_philatelist_stamps_005_base_v2": {
       "status": "approved",
       "updatedAt": "2026-09-21T01:14:42.007Z"
+    },
+    "fresh_v9_fly_fishing_001_base_v2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-21T05:03:49.560Z"
+    },
+    "fresh_v9_philatelist_stamps_005_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-21T05:03:54.113Z"
+    },
+    "fresh_v9_fly_fishing_001_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-21T05:04:00.503Z"
+    },
+    "fresh_v9_drafting_dividers_013_base_v2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-21T05:04:08.138Z"
+    },
+    "fresh_v9_darkroom_photo_009_base_v2": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-21T05:04:14.026Z"
+    },
+    "fresh_v9_drafting_dividers_013_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-21T05:04:18.533Z"
+    },
+    "fresh_v9_darkroom_photo_009_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-21T05:04:25.985Z"
+    },
+    "fresh_v9_mosaic_tile_008_base_v1": {
+      "status": "approved",
+      "updatedAt": "2026-09-21T05:04:32.743Z"
     }
   }
 }
