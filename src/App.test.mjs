@@ -86,7 +86,7 @@ test('refreshes Photo Set choices when remote levels sync without rebuilding', (
   const source = fs.readFileSync(appPath, 'utf8');
   assert.match(source, /subscribeToRemoteLevels/);
   assert.match(source, /setRemoteLevelsRevision/);
-  assert.match(source, /getAllPhotoPairEntries\(\)\.filter/);
+  assert.match(source, /getAllPhotoPairEntries\([^)]*\)\.filter/);
 });
 
 test('debug premade mode uses candidate pool and advances without repeating kept levels', () => {

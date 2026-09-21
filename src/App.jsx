@@ -141,14 +141,18 @@ function GameApp() {
     setNetworkOnline(isOnline());
   }, []);
   useEffect(() => subscribeNetworkStatus(setNetworkOnline), []);
+
+  // Debug Flag (Always enabled on dev branch/URLs unless explicitly specified otherwise)
+  const [debugMode, setDebugMode] = useState(() => getInitialDebugMode());
+
   // Online-only sets are withheld while offline: their artwork lives on
   // Hosting, so offering them would start a set that cannot finish.
   const photoSetIds = useMemo(() => selectableSetIds(
     getCompletePhotoSets(
-      getAllPhotoPairEntries({ online: networkOnline }).filter(entry => entry.packId === 'find_the_sniper')
+      getAllPhotoPairEntries({ online: networkOnline, debugMode }).filter(entry => entry.packId === 'find_the_sniper')
     ).map(photoSet => photoSet.setId),
     { online: networkOnline }
-  ), [remoteLevelsRevision, networkOnline]);
+  ), [remoteLevelsRevision, networkOnline, debugMode]);
   const [photoSetId, setPhotoSetId] = useState(() => {
     try {
       const savedSetId = localStorage.getItem('diff_hunter_photo_set_id');
@@ -205,8 +209,6 @@ function GameApp() {
   const [selectedStatsSetId, setSelectedStatsSetId] = useState('');
   const [lastSetCompletionInfo, setLastSetCompletionInfo] = useState(null);
 
-  // Debug Flag (Always enabled on dev branch/URLs unless explicitly specified otherwise)
-  const [debugMode, setDebugMode] = useState(() => getInitialDebugMode());
 
   const [tutorialAnimationEnabled, setTutorialAnimationEnabled] = useState(() => {
     try {
@@ -350,6 +352,9 @@ function GameApp() {
         setSwitchedOffRemoteSet(true);
       }
       setPhotoSetId(photoSetIds[0]);
+      try {
+        localStorage.setItem('diff_hunter_photo_set_id', photoSetIds[0]);
+      } catch {}
     }
   }, [photoSetIds, photoSetId, networkOnline]);
 
@@ -838,38 +843,105 @@ function GameApp() {
         }
       }
 
+      let activePhotoSetId = photoSetId;
       if (!photoSetId || !photoSetIds.includes(photoSetId)) {
-        logApp('WARN', '[StartGame:PhotoSetUnavailable] No valid Photography set is selected');
-        return;
+        logApp('WARN', '[StartGame:PhotoSetUnavailable] No valid Photography set is selected; recovering to first available set');
+        activePhotoSetId = photoSetIds[0] || 'photo_set_001';
+        setPhotoSetId(activePhotoSetId);
+        try {
+          localStorage.setItem('diff_hunter_photo_set_id', activePhotoSetId);
+        } catch {}
       }
 
-      const stageList = await buildPhotoPairStage({
+      let stageList = await buildPhotoPairStage({
         packId: 'find_the_sniper',
         setId: photoSetId,
         difficulty: selectedDifficulty,
         count: 5,
         seed: Date.now(),
-        curatedStatusMap
+        curatedStatusMap,
+        debugMode
       });
+
+      // If the requested photo set could not be loaded, try alternative complete sets
+      if (!stageList || stageList.length === 0) {
+        logApp('WARN', `[StartGame:PhotoSetUnavailable] Photo set could not be loaded: ${photoSetId}; trying alternative sets`);
+        const fallbackOptions = [activePhotoSetId, ...photoSetIds.filter(id => id !== photoSetId && id !== activePhotoSetId)];
+        for (const candidateSetId of fallbackOptions) {
+          if (!candidateSetId) continue;
+          stageList = await buildPhotoPairStage({
+            packId: 'find_the_sniper',
+            setId: candidateSetId,
+            difficulty: selectedDifficulty,
+            count: 5,
+            seed: Date.now(),
+            curatedStatusMap,
+            debugMode
+          });
+          if (stageList && stageList.length > 0) {
+            activePhotoSetId = candidateSetId;
+            setPhotoSetId(candidateSetId);
+            try {
+              localStorage.setItem('diff_hunter_photo_set_id', candidateSetId);
+            } catch {}
+            break;
+          }
+        }
+      }
+
+      // If all specific sets failed, fall back to the general photography pool without setId
+      if (!stageList || stageList.length === 0) {
+        logApp('WARN', '[StartGame:PhotoPoolFallback] Falling back to general photography pool');
+        stageList = await buildPhotoPairStage({
+          packId: 'find_the_sniper',
+          difficulty: selectedDifficulty,
+          count: 5,
+          seed: Date.now(),
+          curatedStatusMap,
+          debugMode
+        });
+      }
+
       if (stageList && stageList.length > 0) {
         logApp('INFO', `[StartGame:PhotoStageBuilt] Launching 5 photo levels: ${stageList.map(l => l.id).join(', ')}`);
+        const effectiveSetId = stageList[0]?.setId || activePhotoSetId;
         // A stage carrying a placeholder is not a fair run at the set's
         // content, so it must not consume the player's first attempt.
         if (!countsAsAttempt(stageList)) {
-          logApp('INFO', `[StartGame:PlaceholderStage] ${photoSetId} has unavailable artwork -- not recording an attempt`);
+          logApp('INFO', `[StartGame:PlaceholderStage] ${effectiveSetId} has unavailable artwork -- not recording an attempt`);
           setIsCurrentRunFirstAttempt(false);
           activeSetAttemptRef.current = null;
           clearActiveSetAttempt();
+        } else if (effectiveSetId) {
+          const isFirst = isFirstAttemptForSet(difficultyStats, selectedDifficulty, effectiveSetId);
+          setIsCurrentRunFirstAttempt(isFirst);
+          const attemptInfo = {
+            difficulty: selectedDifficulty,
+            themeId: selectedTheme,
+            setId: effectiveSetId,
+            stageKey: effectiveSetId,
+            isFirstAttempt: isFirst
+          };
+          activeSetAttemptRef.current = attemptInfo;
+          recordSetAttemptStarted(attemptInfo);
         }
         setLevels(stageList);
         startLevel(stageList[0].id);
         setView('game');
         return;
       }
-      logApp('WARN', `[StartGame:PhotoSetUnavailable] Photo set could not be loaded: ${photoSetId}`);
     } catch (err) {
       logApp('ERROR', `[StartGame:Error] ${err?.message || err}`);
     }
+
+    // Ultimate emergency safety net: ensure game always launches and never traps user on menu
+    const emergencyStage = [0, 1, 2, 3, 4].map(i =>
+      generateProceduralLevelPair('find_the_sniper', selectedDifficulty, Date.now() + i * 1000)
+    );
+    logApp('INFO', '[StartGame:PhotoEmergencyRecovery] Launching procedural photo levels fallback');
+    setLevels(emergencyStage);
+    startLevel(emergencyStage[0].id);
+    setView('game');
   };
 
   // Launch Set of the Day (3-image sequence from unrepeated daily queue)
