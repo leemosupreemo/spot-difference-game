@@ -104,3 +104,49 @@ test('unassigned levels are audited but not treated as a set', () => {
                    lvl('b', { setId: undefined, sequence: undefined })];
   assert.deepEqual(auditLevels({ bundled }), []);
 });
+
+test('artwork that belongs to no level is reported', () => {
+  // Generated base images keep landing in the assets directory unreferenced,
+  // where they ship in the bundle and deploy to Hosting for nothing.
+  const bundled = set('photo_set_001', ['a', 'b', 'c', 'd', 'e']);
+  const assetFiles = [
+    { name: 'public/levels/a_base.webp', bytes: 100 },
+    { name: 'public/levels/a_variant.webp', bytes: 100 },
+    { name: 'public/levels/fresh_v9_coins_020_base.jpg', bytes: 1_200_000 }
+  ];
+  const found = auditLevels({ bundled, assetFiles });
+  const stray = found.find(f => f.check === 'unreferenced-asset');
+  assert.ok(stray, 'an unreferenced image must be reported');
+  assert.equal(stray.level, 'warning', 'waste, not breakage: a deploy should not fail');
+  assert.match(stray.detail, /fresh_v9_coins_020_base\.jpg/);
+  assert.match(stray.detail, /1\.2 MB/);
+});
+
+test('referenced artwork is not mistaken for a stray', () => {
+  const bundled = set('photo_set_001', ['a', 'b', 'c', 'd', 'e']);
+  const assetFiles = bundled.flatMap(l => [
+    { name: `public/levels/${l.id}_base.webp`, bytes: 10 },
+    { name: `public/levels/${l.id}_variant.webp`, bytes: 10 }
+  ]);
+  assert.deepEqual(auditLevels({ bundled, assetFiles }), []);
+});
+
+test('remote artwork is matched by filename, not by directory', () => {
+  // Remote levels reference absolute Hosting URLs while the file lives under
+  // remote-levels/; matching on the full path would call every one a stray.
+  const remote = [1, 2, 3, 4, 5].map(n => ({
+    id: `r${n}`, setId: 'remote_set_001', sequence: n,
+    baseImage: `https://host.web.app/levels/b${n}_base.webp`,
+    variantImage: `https://host.web.app/levels/r${n}_variant.webp`
+  }));
+  const assetFiles = remote.flatMap((l, i) => [
+    { name: `remote-levels/levels/b${i + 1}_base.webp`, bytes: 10 },
+    { name: `remote-levels/levels/r${i + 1}_variant.webp`, bytes: 10 }
+  ]);
+  assert.deepEqual(auditLevels({ remote, assetFiles }), []);
+});
+
+test('no asset listing means no stray findings', () => {
+  const bundled = set('photo_set_001', ['a', 'b', 'c', 'd', 'e']);
+  assert.deepEqual(auditLevels({ bundled }), []);
+});

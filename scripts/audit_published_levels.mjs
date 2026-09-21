@@ -36,7 +36,8 @@ const firebaseConfig = {
 const fileName = (ref) => String(ref || '').split('?')[0].split('/').pop() || '';
 
 /** Findings are {level, check, detail}; level is 'error' or 'warning'. */
-export function auditLevels({ bundled = [], remote = [], dismissedIds = new Set(), hashes = new Map() }) {
+export function auditLevels({ bundled = [], remote = [], dismissedIds = new Set(),
+                              hashes = new Map(), assetFiles = [] }) {
   const findings = [];
   const fail = (check, detail) => findings.push({ level: 'error', check, detail });
   const warn = (check, detail) => findings.push({ level: 'warning', check, detail });
@@ -130,7 +131,49 @@ export function auditLevels({ bundled = [], remote = [], dismissedIds = new Set(
     }
   }
 
+  // 9. Artwork nothing points at.
+  //
+  // Newly generated base images keep being dropped straight into the assets
+  // directory, where they are deployed to Hosting and bundled into the app
+  // without any level referencing them -- 22.6MB one batch, 11MB the one
+  // before. Every other check here looks at levels that exist, so none of them
+  // can see a file that belongs to no level. A warning rather than an error:
+  // it is waste, not breakage, and a deploy should not fail over it.
+  const referenced = new Set();
+  for (const entry of all) {
+    for (const ref of [entry.baseImage, entry.variantImage]) {
+      const name = fileName(ref);
+      if (name) referenced.add(name);
+    }
+  }
+  const strays = assetFiles.filter(file => !referenced.has(fileName(file.name)));
+  if (strays.length > 0) {
+    const megabytes = strays.reduce((total, file) => total + (file.bytes || 0), 0) / 1e6;
+    warn('unreferenced-asset',
+      `${strays.length} file(s) in the asset directories belong to no level`
+      + ` (${megabytes.toFixed(1)} MB): ${strays.slice(0, 5).map(f => f.name).join(', ')}`
+      + (strays.length > 5 ? ', …' : ''));
+  }
+
   return findings;
+}
+
+const IMAGE_SUFFIX = /\.(jpe?g|png|webp)$/i;
+
+/** Image files present in the asset directories, with sizes. */
+function listAssetFiles() {
+  const files = [];
+  for (const dir of [path.join(ROOT, 'public/levels'), path.join(ROOT, 'remote-levels/levels')]) {
+    if (!fs.existsSync(dir)) continue;
+    for (const name of fs.readdirSync(dir)) {
+      const file = path.join(dir, name);
+      const stat = fs.statSync(file);
+      // Only artwork: the manifest and other bookkeeping live here too.
+      if (!stat.isFile() || !IMAGE_SUFFIX.test(name)) continue;
+      files.push({ name: path.relative(ROOT, file), bytes: stat.size });
+    }
+  }
+  return files;
 }
 
 function hashLocalAssets() {
@@ -156,7 +199,11 @@ async function main() {
   const dismissedIds = new Set(Object.entries(curated.rawStatusMap || {})
     .filter(([, value]) => statusOf(value) === 'dismissed').map(([key]) => key));
 
-  const findings = auditLevels({ bundled, remote, dismissedIds, hashes: hashLocalAssets() });
+  const findings = auditLevels({
+    bundled, remote, dismissedIds,
+    hashes: hashLocalAssets(),
+    assetFiles: listAssetFiles()
+  });
 
   console.log(`bundled ${bundled.length} · remote ${remote.length} · dismissed on record ${dismissedIds.size}`);
   const errors = findings.filter(f => f.level === 'error');
