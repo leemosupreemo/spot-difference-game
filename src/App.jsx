@@ -794,7 +794,12 @@ export default function App() {
     }
 
     // 1. ABSTRACT CATEGORY: ALWAYS generates procedural art images across 12 distinct art worlds
-    trackGameStarted({ themeId: selectedTheme, difficulty: selectedDifficulty, mode: activeMode });
+    trackGameStarted({
+      themeId: selectedTheme,
+      setId: selectedTheme === 'find_the_sniper' ? photoSetId : null,
+      difficulty: selectedDifficulty,
+      mode: activeMode
+    });
 
     if (selectedTheme === 'abstract_animated') {
       const procLevels = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair('abstract_animated', selectedDifficulty, Date.now() + i * 1000));

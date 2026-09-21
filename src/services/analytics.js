@@ -395,6 +395,9 @@ export function trackStageCleared({
 }) {
   const categoryType = selectedTheme === "abstract_animated" ? "abstract_generated" : "photorealistic";
   const categoryName = categoryType === "abstract_generated" ? "Abstract" : "Photography";
+  if (setId && !sessionStats.setsCleared.includes(setId)) {
+    sessionStats.setsCleared.push(setId);
+  }
   const totalUniqueCompleted = getStoredUniqueCompletedIds().size;
 
   trackEvent("Stage Set Cleared", {
@@ -414,6 +417,12 @@ export function trackStageCleared({
 
   if (mixpanel?.people) {
     mixpanel.people.increment("Total Stages Cleared", 1);
+    if (setId) {
+      mixpanel.people.set_once({
+        "First Set Cleared": setId,
+        "First Set Cleared Category": categoryName
+      });
+    }
   }
 }
 
