@@ -86,6 +86,7 @@ test('App.jsx shows the rating prompt only after a successful-round return to th
 
   // Gated on landing back on the menu after that win, never mid-game
   assert.match(appSource, /if \(view !== 'menu' \|\| !justWonRoundRef\.current\) return;/);
+  assert.match(appSource, /isRatingPromptPlatformSupported\(\)/);
   assert.match(appSource, /shouldShowRatingPrompt\(/);
 
   // The old "second launch" trigger is gone

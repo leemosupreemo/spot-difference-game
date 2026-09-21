@@ -8,7 +8,8 @@ import {
   shouldShowRatingPrompt,
   recordRatingPromptShown,
   recordRatingPromptDismissed,
-  resetRatingPromptState
+  resetRatingPromptState,
+  isRatingPromptPlatformSupported
 } from './ratingPrompt.js';
 
 function freshStorage() {
@@ -97,6 +98,16 @@ test('getSessionsPlayed reads the shared launch-count key', () => {
   globalThis.localStorage = freshStorage();
   localStorage.setItem('diff_hunter_launch_count', '7');
   assert.equal(getSessionsPlayed(), 7);
+});
+
+test('shouldShowRatingPrompt rejects non-native web environments when isNative is false or enforcePlatform is set', () => {
+  globalThis.localStorage = freshStorage();
+  for (let i = 0; i < 5; i++) incrementSuccessfulRounds();
+
+  // In non-native web runtime, isRatingPromptPlatformSupported returns false
+  assert.equal(isRatingPromptPlatformSupported(), false);
+  assert.equal(shouldShowRatingPrompt({ isNative: false }), false);
+  assert.equal(shouldShowRatingPrompt({ enforcePlatform: true }), false);
 });
 
 test('resetRatingPromptState clears all rating prompt tracking keys', () => {

@@ -10,6 +10,8 @@
 // screen — VictoryModal or DailyVictoryModal on a win — is actually shown),
 // not each individual image pair within a stage.
 
+import { Capacitor } from '@capacitor/core';
+
 const KEY_SUCCESSFUL_ROUNDS = 'diff_hunter_successful_rounds';
 const KEY_SESSIONS_PLAYED = 'diff_hunter_launch_count';
 const KEY_ATTEMPTS = 'diff_hunter_rating_prompt_attempts';
@@ -70,10 +72,27 @@ function getHandledType() {
 }
 
 /**
+ * Returns true if the current environment is native iOS / iPadOS where App Store ratings apply.
+ * Returns false on Web (desktop browsers, mobile Safari on web, etc.).
+ */
+export function isRatingPromptPlatformSupported() {
+  try {
+    if (typeof Capacitor !== 'undefined' && typeof Capacitor.isNativePlatform === 'function') {
+      return Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios';
+    }
+  } catch (_) {}
+  return false;
+}
+
+/**
  * Pure eligibility check against currently persisted rating-prompt state.
- * @param {{ successfulRounds?: number, sessionsPlayed?: number }} [overrides]
+ * @param {{ successfulRounds?: number, sessionsPlayed?: number, isNative?: boolean, enforcePlatform?: boolean }} [overrides]
  */
 export function shouldShowRatingPrompt(overrides = {}) {
+  // If explicitly specified in overrides, respect native platform requirements
+  if (overrides.isNative !== undefined && !overrides.isNative) return false;
+  if (overrides.enforcePlatform && !isRatingPromptPlatformSupported()) return false;
+
   const rounds = overrides.successfulRounds ?? getSuccessfulRounds();
   const sessions = overrides.sessionsPlayed ?? getSessionsPlayed();
   const attempts = getRatingPromptAttempts();

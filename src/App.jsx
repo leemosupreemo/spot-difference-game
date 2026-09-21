@@ -57,7 +57,7 @@ import {
   pruneDismissedStatuses,
   saveCuratedStatusMap
 } from './utils/curationStore';
-import { incrementSuccessfulRounds, getSuccessfulRounds, getSessionsPlayed, shouldShowRatingPrompt, recordRatingPromptShown, resetRatingPromptState } from './services/ratingPrompt';
+import { incrementSuccessfulRounds, getSuccessfulRounds, getSessionsPlayed, shouldShowRatingPrompt, recordRatingPromptShown, resetRatingPromptState, isRatingPromptPlatformSupported } from './services/ratingPrompt';
 import { getSetNumber, checkAndUpdateDynamicSetRecord } from './utils/setLeaderboards.js';
 import { submitLeaderboardScore } from './services/leaderboardService.js';
 import ScreenshotHarness from './components/ScreenshotHarness.jsx';
@@ -731,12 +731,15 @@ function GameApp() {
     }
   }, [view]);
 
-  // Rating prompt: only ever considered the moment the player lands back on the menu
-  // immediately after a win (never mid-game, never after a failure/GameOverModal).
+  // Rating prompt: only ever considered on native iOS (iPhone & iPadOS), never on web.
+  // Prompted only the moment the player lands back on the menu immediately after a win (never mid-game, never after a loss/forfeit).
   // Delayed so it doesn't fight with the menu's own entrance transition.
   useEffect(() => {
     if (view !== 'menu' || !justWonRoundRef.current) return;
     justWonRoundRef.current = false;
+
+    // Only prompt on native iOS & iPadOS where the App Store review sheet applies; never on web
+    if (!isRatingPromptPlatformSupported()) return;
 
     const sessionsPlayed = getSessionsPlayed();
     if (!shouldShowRatingPrompt({ sessionsPlayed })) return;
@@ -744,6 +747,7 @@ function GameApp() {
     const timer = setTimeout(() => {
       const attemptNumber = recordRatingPromptShown({ sessionsPlayed });
       setRatingPromptAttemptNumber(attemptNumber);
+      setRatingModalInitialStep('prompt');
       setRatingModalOpen(true);
       trackRatingPromptShown({ attemptNumber, successfulRounds: getSuccessfulRounds() });
     }, 1500);
