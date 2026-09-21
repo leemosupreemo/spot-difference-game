@@ -26,6 +26,7 @@ import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
 import { getInitialDebugMode } from './utils/debugMode';
 import { chooseDebugStartId } from './utils/debugCursor';
+import { buildDebugPool } from './utils/debugPool.js';
 import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackStageFailed, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted, trackHelpTapped, trackDailyChallengeStarted, trackDailyChallengeCompleted } from './services/analytics';
 import { parseIncomingChallenge } from './utils/challengeMetrics';
 import { refreshRemoteLevelPacks, syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
@@ -402,33 +403,14 @@ function GameApp() {
     // the one pool whose entire job is reviewing them could be built as though
     // debug were off, hiding every pending level from the curator.
     const allEntries = getAllPhotoPairEntries({ includeDismissed: dismissedOnly, debugMode });
-    const unreviewed = [];
-    const categorized = [];
-
-    for (const entry of allEntries) {
-      // A placeholder is an empty slot, not artwork. It has no curationStatus,
-      // so it reads as unreviewed and is offered for a decision that means
-      // nothing -- and dismissing one would shorten its set.
-      if (isPlaceholderEntry(entry)) continue;
-      const statusObj = getEntryCurationStatus(entry, mapToUse);
-      const statusVal = statusObj?.status;
-      if (dismissedOnly) {
-        if (statusVal !== 'dismissed') continue;
-        categorized.push(entry);
-        continue;
-      }
-      if (statusVal === 'dismissed') continue;
-      if (skipKept && isKeptStatus(statusVal)) continue;
-
-      if (!isLevelCategorized(entry, mapToUse)) {
-        unreviewed.push(entry);
-      } else {
-        categorized.push(entry);
-      }
-    }
-
-    // Non-categorized / brand new image sets prioritized strictly first
-    return [...unreviewed, ...categorized];
+    // The ordering rule itself lives in debugPool.js, where it can be tested.
+    return buildDebugPool({
+      entries: allEntries,
+      resolveStatus: (entry) => getEntryCurationStatus(entry, mapToUse),
+      skipKept,
+      dismissedOnly,
+      isPlaceholder: isPlaceholderEntry
+    });
   };
 
   // Dismissed levels whose artwork still exists -- the ones a reversal can

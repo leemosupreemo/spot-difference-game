@@ -20,6 +20,7 @@ const STORAGE_KEY_NOTIFS_REQUESTED = 'diff_hunter_notifications_requested';
 
 export const NOTIFICATION_ID_WELCOME = 1001;
 export const NOTIFICATION_ID_RETENTION = 1002;
+export const NOTIFICATION_ID_TEST = 9999;
 
 let isListenerRegistered = false;
 
@@ -158,3 +159,64 @@ export async function scheduleInstallNotifications(force = false) {
     return false;
   }
 }
+
+/**
+ * Triggers a test notification for debugging on native iOS or web.
+ *
+ * @param {Object} [options]
+ * @param {number} [options.delaySeconds=3] - Seconds to delay before firing notification
+ * @param {string} [options.type='welcome'] - 'welcome' or 'retention'
+ * @returns {Promise<{ success: boolean, native: boolean, message: string }>}
+ */
+export async function triggerTestNotification({ delaySeconds = 3, type = 'welcome' } = {}) {
+  const isNative = Capacitor.isNativePlatform();
+
+  if (!isNative) {
+    const msg = `Browser environment: Test notification simulated (${delaySeconds}s delay).`;
+    logApp('INFO', `[Notifications] ${msg}`);
+    return { success: true, native: false, message: msg };
+  }
+
+  try {
+    let permStatus = await LocalNotifications.checkPermissions();
+    if (permStatus.display !== 'granted') {
+      permStatus = await LocalNotifications.requestPermissions();
+    }
+
+    const isGranted = permStatus.display === 'granted';
+    trackNotificationPermissionResult({ status: permStatus.display, granted: isGranted });
+
+    if (!isGranted) {
+      const msg = `Notification permission ${permStatus.display}. Please enable notifications in iOS Settings.`;
+      logApp('WARN', `[Notifications] ${msg}`);
+      return { success: false, native: true, message: msg };
+    }
+
+    const fireAt = new Date(Date.now() + Math.max(1, delaySeconds) * 1000);
+    const isRetention = type === 'retention';
+
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          id: NOTIFICATION_ID_TEST,
+          title: isRetention ? '🎯 Leaderboard Challenge! [TEST]' : '👀 Spot the difference? [TEST]',
+          body: isRetention
+            ? 'Players are climbing the ranks. Jump back in and see if you can reach the top of the leaderboard!'
+            : 'Think you can beat your fastest time? Fresh photo pairs are waiting in Diff Hunter!',
+          schedule: { at: fireAt },
+          sound: 'beep.wav',
+          extra: { type: 'test_debug', source: 'debug_button' }
+        }
+      ]
+    });
+
+    const msg = `Test notification scheduled in ${delaySeconds}s (${fireAt.toLocaleTimeString()}). Lock or minimize app to see the iOS banner!`;
+    logApp('INFO', `[Notifications] ${msg}`);
+    return { success: true, native: true, message: msg };
+  } catch (err) {
+    console.warn('[Notifications] Error scheduling test notification:', err);
+    logApp('ERROR', `[Notifications] Test notification error: ${err?.message || err}`);
+    return { success: false, native: true, message: err?.message || 'Failed to schedule test notification' };
+  }
+}
+

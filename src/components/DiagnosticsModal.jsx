@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Terminal, Copy, Check, Share2, Trash2, X } from 'lucide-react';
+import { Terminal, Copy, Check, Share2, Trash2, X, Bell } from 'lucide-react';
 import { getAppLogs, clearAppLogs, subscribeAppLogs, logApp } from '../utils/logger';
 import { getCuratedStatusMap, getLevelStatus } from '../utils/curationStore';
 import { getAllPhotoPairEntries, selectPhotoPairEntries } from '../utils/photoPairLevelLoader';
+import { triggerTestNotification } from '../services/notificationService.js';
 import { sounds } from '../utils/audio';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
@@ -20,6 +21,7 @@ export default function DiagnosticsModal({
   const [logs, setLogs] = useState(() => getAppLogs());
   const [copied, setCopied] = useState(false);
   const [filterText, setFilterText] = useState('');
+  const [testNotifStatus, setTestNotifStatus] = useState('');
 
   useEffect(() => {
     if (!isOpen) return;
@@ -160,6 +162,18 @@ export default function DiagnosticsModal({
     sounds.playTap();
     clearAppLogs();
     setLogs([]);
+  };
+
+  const handleTestNotification = async () => {
+    sounds.playTap();
+    setTestNotifStatus('Scheduling...');
+    const result = await triggerTestNotification({ delaySeconds: 3 });
+    if (result.success) {
+      setTestNotifStatus('Scheduled (3s)!');
+    } else {
+      setTestNotifStatus('Error: ' + (result.message || 'Failed'));
+    }
+    setTimeout(() => setTestNotifStatus(''), 4000);
   };
 
   const filteredLogs = filterText
@@ -321,6 +335,25 @@ export default function DiagnosticsModal({
                 📱 Splash
               </button>
             )}
+
+            <button
+              onClick={handleTestNotification}
+              className="game-btn secondary"
+              style={{
+                padding: '6px 10px',
+                fontSize: '0.8rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                color: testNotifStatus ? 'var(--accent-cyan)' : 'inherit',
+                borderColor: testNotifStatus ? 'var(--accent-cyan)' : undefined
+              }}
+              title="Schedule a test notification in 3s (lock/minimize app to test banner)"
+              aria-label="Test Notification"
+            >
+              <Bell size={15} />
+              {testNotifStatus || 'Test Notif (3s)'}
+            </button>
 
             <button
               onClick={handleClear}

@@ -191,3 +191,46 @@ test('an approved level is stamped approved, not left pending', async () => {
   assert.match(source, /recorded === 'approved' \|\| recorded === 'wrong_difficulty'/);
   assert.match(source, /return \{ \.\.\.level, curationStatus: 'approved' \};/);
 });
+
+test('awaiting-review levels are kept out of live sets', async () => {
+  const { partitionByReviewState } = await import('./group_remote_sets.mjs');
+  const levels = [
+    { id: 'a', curationStatus: 'approved' },
+    { id: 'b', curationStatus: 'pending' },
+    { id: 'c', curationStatus: 'approved' },
+    { id: 'd' }
+  ];
+  const { live, review } = partitionByReviewState(levels);
+  assert.deepEqual(live.map(l => l.id), ['a', 'c']);
+  // Anything not explicitly approved is held back -- a level with no status is
+  // not a level a player should meet.
+  assert.deepEqual(review.map(l => l.id), ['b', 'd']);
+});
+
+test('a set of approved levels is startable in production, a mixed one is not', async () => {
+  const { partitionByReviewState, buildRemoteSets } = await import('./group_remote_sets.mjs');
+  const mk = (id, status) => ({ id, baseImage: `levels/${id}_base.jpg`, curationStatus: status });
+  const kept = [
+    ...Array.from({ length: 4 }, (_, i) => mk(`ok${i}`, 'approved')),
+    mk('waiting', 'pending')
+  ];
+
+  // Grouped together, the one pending level would leave this set holding four
+  // in production. Split first and the live set is whole.
+  const { live, review } = partitionByReviewState(kept);
+  const liveSets = buildRemoteSets(live);
+  for (const set of liveSets) {
+    const visible = set.levels.filter(l => l.curationStatus === 'pending').length;
+    assert.equal(visible, 0, `${set.setId} must hold no level awaiting review`);
+  }
+  const reviewSets = buildRemoteSets(review, 5, undefined, liveSets.length + 1);
+  assert.ok(reviewSets.length > 0, 'the review batch still gets its own set');
+  assert.notEqual(reviewSets[0].setId, liveSets[0].setId, 'and it is numbered after the live sets');
+});
+
+test('a placeholder is never carried into the next grouping', async () => {
+  const { isPublishableLevel } = await import('./group_remote_sets.mjs');
+  assert.equal(isPublishableLevel({ id: 'real', baseImage: 'levels/a_base.jpg' }), true);
+  assert.equal(isPublishableLevel({ id: 'remote_set_004_placeholder_05', isPlaceholder: true }), false);
+  assert.equal(isPublishableLevel({}), false);
+});

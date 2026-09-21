@@ -127,6 +127,35 @@ export function buildRemoteSets(approved, setSize = SET_SIZE, makePlaceholder = 
   });
 }
 
+/**
+ * A level worth carrying into the next grouping.
+ *
+ * Placeholders are padding for the set they were made for, not content.
+ * Carrying one forward lets it be dealt into a different set as though it were
+ * a level, keeping a stale id and taking a seat real artwork should have.
+ */
+export function isPublishableLevel(level) {
+  return Boolean(level?.id) && !isPlaceholderEntry(level);
+}
+
+/**
+ * Separate levels that players may see from levels still awaiting review.
+ *
+ * The pending gate hides awaiting-review levels outside debug, so a set holding
+ * four approved levels and one pending holds five in debug and four in
+ * production -- and a set of four cannot be started. Mixing them cost five of
+ * thirteen live sets. Keeping them apart means a live set is never short and a
+ * review batch stays whole and debug-only.
+ */
+export function partitionByReviewState(levels = []) {
+  const live = [];
+  const review = [];
+  for (const level of levels) {
+    (level?.curationStatus === 'approved' ? live : review).push(level);
+  }
+  return { live, review };
+}
+
 async function main() {
   const apply = process.argv.includes('--apply');
   const official = JSON.parse(fs.readFileSync(path.join(ROOT, 'official_curated_levels.json'), 'utf8')).rawStatusMap;
@@ -154,7 +183,7 @@ async function main() {
       // Carrying one forward lets it be dealt into a different set as though it
       // were a level, keeping a stale id and occupying a seat real artwork
       // should have; each set gets fresh padding below.
-      if (isPlaceholderEntry(level)) continue;
+      if (!isPublishableLevel(level)) continue;
       all.push(level);
     }
   });
@@ -189,8 +218,7 @@ async function main() {
   // of four cannot be started at all. Mixing them cost five of thirteen live
   // sets, and nothing caught it because every check ran in a mode where the
   // pending level was visible.
-  const live = kept.filter(level => level.curationStatus === 'approved');
-  const review = kept.filter(level => level.curationStatus !== 'approved');
+  const { live, review } = partitionByReviewState(kept);
   const liveSets = buildRemoteSets(live);
   const reviewSets = buildRemoteSets(review, SET_SIZE, createPlaceholderEntry, liveSets.length + 1);
   const sets = [...liveSets, ...reviewSets];

@@ -15,14 +15,26 @@ test('dismissed levels stay hidden unless explicitly asked for', () => {
     /if \(statusVal === 'dismissed' && !includeDismissed && !isPlaceholderEntry\(entry\)\) continue;/);
 });
 
-test('review mode shows only what was dismissed', () => {
+test('review mode shows only what was dismissed', async () => {
   // Reviewing dismissals is the inverse of curation -- a pool mixing them with
   // live levels would make it impossible to tell what is being reconsidered.
-  assert.match(app, /if \(dismissedOnly\) \{[\s\S]*?if \(statusVal !== 'dismissed'\) continue;/);
-  // Matches the option, not the exact call spelling: the same call also has to
-  // pass the live debugMode, and pinning the literal text made a correct fix
-  // look like a regression.
+  //
+  // Asserted against the rule itself rather than App's source: this used to
+  // pin the shape of an inline loop, so extracting that loop into a tested
+  // module read as a regression.
+  const { buildDebugPool } = await import('../utils/debugPool.js');
+  const status = { gone: { status: 'dismissed' }, kept: { status: 'approved' } };
+  const pool = buildDebugPool({
+    entries: [{ id: 'gone' }, { id: 'kept' }, { id: 'fresh' }],
+    resolveStatus: (entry) => status[entry.id] || null,
+    dismissedOnly: true
+  });
+  assert.deepEqual(pool.map(entry => entry.id), ['gone']);
+
+  // App must still ask the loader for dismissed entries, and with the live
+  // debug flag -- matched on the options, not the call's exact spelling.
   assert.match(app, /getAllPhotoPairEntries\(\{[^}]*includeDismissed: dismissedOnly/);
+  assert.match(app, /getAllPhotoPairEntries\(\{[^}]*debugMode/);
 });
 
 test('an empty dismissed pool is not papered over with the normal pool', () => {
