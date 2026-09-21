@@ -1319,7 +1319,6 @@ function GameApp() {
       if (next >= 3) {
         try { sounds.playLose(); } catch (_) {}
         setTimerRunning(false);
-        setRevealAnswer(true);
 
         if (gameMode !== 'daily' && activeSetAttemptRef.current?.isFirstAttempt) {
           const attempt = activeSetAttemptRef.current;
@@ -1358,36 +1357,34 @@ function GameApp() {
           reason: 'three_strikes'
         });
 
-        // Spotlight correct answer for 2.5s before opening modal
-        setTimeout(() => {
-          if (gameMode === 'daily') {
-            recordDailyChallengeFailureRemote({
-              stageIndex: currentStageIndex
-            }).catch(() => {});
-            setIsDailyCompleted(true);
-            const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
-            trackDailyChallengeCompleted({
-              date: getTodayDateString(),
-              totalTimeMs: cumulativeTime,
-              stars: 0,
-              position: null,
-              isNewRecord: false,
-              isFailed: true
-            });
-            setDailyVictoryData({
-              isOpen: true,
-              totalTimeMs: cumulativeTime,
-              position: null,
-              totalPlayers: null,
-              stars: 0,
-              isNewRecord: false,
-              isFailed: true,
-              stageIndex: currentStageIndex
-            });
-          } else {
-            setGameOverModalOpen(true);
-          }
-        }, 2500);
+        // Go straight to fail modal without revealing answer or pausing
+        if (gameMode === 'daily') {
+          recordDailyChallengeFailureRemote({
+            stageIndex: currentStageIndex
+          }).catch(() => {});
+          setIsDailyCompleted(true);
+          const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
+          trackDailyChallengeCompleted({
+            date: getTodayDateString(),
+            totalTimeMs: cumulativeTime,
+            stars: 0,
+            position: null,
+            isNewRecord: false,
+            isFailed: true
+          });
+          setDailyVictoryData({
+            isOpen: true,
+            totalTimeMs: cumulativeTime,
+            position: null,
+            totalPlayers: null,
+            stars: 0,
+            isNewRecord: false,
+            isFailed: true,
+            stageIndex: currentStageIndex
+          });
+        } else {
+          setGameOverModalOpen(true);
+        }
       }
       return next;
     });

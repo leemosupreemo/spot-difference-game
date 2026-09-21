@@ -102,7 +102,10 @@ export class MusicController {
         window.removeEventListener('touchstart', unlock);
       }
       if (this.isPlaying && !this.muted && this.audio && this.audio.paused && !this.isWaitingForNext) {
-        this.audio.play().catch(() => {});
+        const playPromise = this.audio.play();
+        if (playPromise !== undefined && typeof playPromise?.catch === 'function') {
+          playPromise.catch(() => {});
+        }
       }
     };
 
@@ -152,9 +155,12 @@ export class MusicController {
       if (this.isWaitingForNext) {
         // Still in 15s pause countdown, let timer handle it
       } else if (this.audio && this.audio.paused) {
-        this.audio.play().catch((err) => {
-          console.warn('[MusicController] Resume failed upon unmute:', err);
-        });
+        const playPromise = this.audio.play();
+        if (playPromise !== undefined && typeof playPromise?.catch === 'function') {
+          playPromise.catch((err) => {
+            console.warn('[MusicController] Resume failed upon unmute:', err);
+          });
+        }
       } else if (this.queue.length === 0) {
         this.start();
       }

@@ -29,6 +29,11 @@ beforeEach(() => {
       dispatchEvent: vi.fn()
     }));
   }
+  if (typeof window !== 'undefined' && window.HTMLMediaElement) {
+    window.HTMLMediaElement.prototype.play = vi.fn().mockResolvedValue(undefined);
+    window.HTMLMediaElement.prototype.pause = vi.fn();
+    window.HTMLMediaElement.prototype.load = vi.fn();
+  }
 });
 
 afterEach(() => {
@@ -83,4 +88,46 @@ test('clicking START GAME in non-debug mode with invalid/stale photoSetId recove
   await waitFor(() => {
     expect(screen.queryByText(/START GAME/i)).toBeNull();
   }, { timeout: 3000 });
+});
+
+test('failing via 3 misses goes straight to fail modal without showing answer spotlight or delay', async () => {
+  localStorage.setItem('diff_hunter_debug', 'false');
+  const { container } = render(
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  );
+
+  fireEvent.click(screen.getByText(/START GAME/i));
+  await waitFor(() => {
+    expect(screen.queryByText(/START GAME/i)).toBeNull();
+  });
+
+  const canvas = container.querySelector('.canvas-card');
+  expect(canvas).toBeTruthy();
+  canvas.getBoundingClientRect = () => ({
+    left: 0,
+    top: 0,
+    width: 400,
+    height: 300,
+    right: 400,
+    bottom: 300,
+    x: 0,
+    y: 0,
+    toJSON: () => {}
+  });
+
+  const tap = () => {
+    fireEvent.pointerDown(canvas, { clientX: 200, clientY: 150 });
+    fireEvent.pointerUp(canvas, { clientX: 200, clientY: 150 });
+  };
+  tap();
+  tap();
+  tap();
+
+  // Answer is NOT revealed on canvas
+  expect(container.querySelector('.reveal-marker')).toBeNull();
+
+  // Fail modal is shown immediately
+  expect(screen.getByText(/STAGE FAILED/i)).toBeTruthy();
 });

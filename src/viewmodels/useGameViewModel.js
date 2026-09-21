@@ -390,7 +390,6 @@ export function useGameViewModel() {
     if (nextMisses >= 3) {
       sounds.playLose();
       setTimerRunning(false);
-      setRevealAnswer(true);
 
       trackImagePairCompleted({
         result: 'lose',
@@ -405,9 +404,7 @@ export function useGameViewModel() {
         stageIndex: currentPairIndex
       });
 
-      setTimeout(() => {
-        setGameOver(true);
-      }, 2500);
+      setGameOver(true);
     }
   };
 
