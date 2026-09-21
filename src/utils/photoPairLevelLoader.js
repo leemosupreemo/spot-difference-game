@@ -31,13 +31,19 @@ import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
 export function getAllPhotoPairEntries({
   debugMode = getInitialDebugMode(),
   online = isOnline(),
-  includeDismissed = false
+  includeDismissed = false,
+  includeDailyOnly = false
 } = {}) {
   // Online-only sets need artwork from Hosting; offline they are withheld
   // whole, so a player never starts a set that cannot finish.
-  // Daily-challenge levels are reserved: meeting one in regular play would
-  // mean today's challenge is something the player already solved.
-  const entries = regularPlayEntries(selectableEntries(loadManifest(), { online }));
+  //
+  // Daily-challenge levels are reserved: meeting one in regular play would mean
+  // today's challenge is something the player already solved. The daily
+  // challenge itself must opt back in via includeDailyOnly -- it resolves its
+  // own levels through here, and withholding them left it unable to find a
+  // single one, so Set of the Day could not start at all.
+  const selectable = selectableEntries(loadManifest(), { online });
+  const entries = includeDailyOnly ? selectable : regularPlayEntries(selectable);
   const statusMap = getCuratedStatusMap();
   const unratedCropped = [];
   const otherUnrated = [];

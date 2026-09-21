@@ -653,3 +653,40 @@ test('a pair that fails to load is replaced by the next candidate', async () => 
     assert.ok(!stage.some(level => level.id === id), `${id} should not be seated`);
   }
 });
+
+// --- the daily challenge must be able to find its own levels ---------------
+
+test('daily-reserved levels are withheld from regular play but available on request', async () => {
+  const { getAllPhotoPairEntries } = await import('./photoPairLevelLoader.js');
+  const regular = getAllPhotoPairEntries();
+  const withDaily = getAllPhotoPairEntries({ includeDailyOnly: true });
+  const dailyIds = withDaily.filter(e => String(e.id).startsWith('daily_set_')).map(e => e.id);
+
+  assert.ok(dailyIds.length > 0, 'the manifest should carry daily-reserved levels');
+  for (const id of dailyIds) {
+    assert.ok(!regular.some(e => e.id === id), `${id} must stay out of regular play`);
+  }
+});
+
+test('every level the daily queue schedules can actually be resolved', async () => {
+  // Set of the Day resolves its ids against getAllPhotoPairEntries. When that
+  // filtered daily-reserved levels out, none of them resolved and the
+  // challenge could not start -- the reservation broke the thing it protects.
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+  const url = await import('node:url');
+  const root = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..', '..');
+  const queue = JSON.parse(fs.readFileSync(path.join(root, 'public/daily-queue.json'), 'utf8'));
+
+  const needed = [...new Set([
+    ...(queue.queue || []).flatMap(set => set.levels || []),
+    ...Object.values(queue.schedule || {}).flat()
+  ])].filter(id => typeof id === 'string');
+
+  const { getAllPhotoPairEntries } = await import('./photoPairLevelLoader.js');
+  const available = new Set(getAllPhotoPairEntries({ includeDailyOnly: true }).map(e => e.id));
+  const custom = new Set((queue.customLevels || []).map(l => l.id || l));
+
+  const missing = needed.filter(id => !available.has(id) && !custom.has(id));
+  assert.deepEqual(missing, [], `daily queue references levels that cannot be resolved: ${missing.join(', ')}`);
+});

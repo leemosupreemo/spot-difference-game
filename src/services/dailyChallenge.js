@@ -429,7 +429,8 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
     }
   }
 
-  const allEntries = getAllPhotoPairEntries();
+  // Daily-reserved levels are exactly what this needs, so ask for them.
+  const allEntries = getAllPhotoPairEntries({ includeDailyOnly: true });
   const entryMap = new Map(allEntries.map(e => [e.id, e]));
 
   // Incorporate any remote OTA custom levels from daily queue into entryMap
@@ -583,7 +584,8 @@ function decorateDailyLevels(levels, dateStr) {
  */
 export function getAllDailyChallengePoolLevels() {
   const remoteQueue = getDailyQueue();
-  const allEntries = getAllPhotoPairEntries();
+  // Daily-reserved levels are exactly what this needs, so ask for them.
+  const allEntries = getAllPhotoPairEntries({ includeDailyOnly: true });
   const entryMap = new Map(allEntries.map(e => [e.id, e]));
 
   if (Array.isArray(remoteQueue.customLevels)) {

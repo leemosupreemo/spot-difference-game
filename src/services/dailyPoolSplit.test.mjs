@@ -31,9 +31,27 @@ test('the daily picker cannot fall back onto regular levels', () => {
     'the fallback must draw from the reserved pool, never the whole manifest');
 });
 
-test('regular play filters the reserved levels out', () => {
+test('regular play filters the reserved levels out, and the daily path does not', async () => {
+  // This used to assert the loader's SOURCE TEXT, which passed happily while
+  // Set of the Day could not start at all: the reservation was applied to the
+  // daily challenge's own lookup too, so none of its levels resolved. Assert
+  // the behaviour on both sides instead.
+  globalThis.localStorage = globalThis.localStorage || {
+    getItem: () => null, setItem: () => {}, removeItem: () => {}, key: () => null, length: 0
+  };
+  const { getAllPhotoPairEntries } = await import('../utils/photoPairLevelLoader.js?daily-split');
+  const { isDailyOnlyEntry } = await import('../utils/remoteSetPolicy.js');
+
+  const regular = getAllPhotoPairEntries();
+  assert.equal(regular.filter(isDailyOnlyEntry).length, 0,
+    'regular play must never serve a daily-reserved level');
+
+  const withDaily = getAllPhotoPairEntries({ includeDailyOnly: true });
+  assert.ok(withDaily.filter(isDailyOnlyEntry).length > 0,
+    'the daily challenge must be able to see its own levels');
+
+  // And the stage builder still reserves them.
   const loader = fs.readFileSync(new URL('../utils/photoPairLevelLoader.js', import.meta.url), 'utf8');
-  assert.match(loader, /regularPlayEntries\(selectableEntries\(loadManifest\(\), \{ online \}\)\)/);
   assert.match(loader, /allEntries = regularPlayEntries\(selectableEntries\(allEntries, \{ online \}\)\)/);
 });
 
