@@ -19,6 +19,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { createPlaceholderEntry, REMOTE_SET_PREFIX } from '../src/utils/remoteSetPolicy.js';
+import { photoKeyOf } from '../src/utils/photoIdentity.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -34,9 +35,15 @@ const firebaseConfig = {
 
 const statusOf = (value) => (typeof value === 'string' ? value : value?.status);
 
-/** The base image a level is built on -- two levels sharing one are near-twins. */
+/**
+ * The photograph a level is built on -- two levels sharing one are near-twins.
+ *
+ * Read from the recorded `photoKey` rather than the base image's filename: a
+ * flipped pair holds a unique variant file in its base slot, so naming the
+ * photograph after that slot would stop it grouping with its own siblings.
+ */
 export function baseKey(level) {
-  return String(level?.baseImage || '').split('?')[0].split('/').pop() || level?.id || '';
+  return photoKeyOf(level) || level?.id || '';
 }
 
 /**

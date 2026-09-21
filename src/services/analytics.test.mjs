@@ -25,6 +25,7 @@ import {
   trackDailyChallengeCompleted,
   trackHelpTapped,
   trackHelpTabSwitched,
+  trackAppError,
   identifyPlayer,
   resetAnalyticsUser
 } from "./analytics.js";
@@ -297,5 +298,7 @@ test("tracks main menu view, daily challenge funnel, and help interactions witho
 
     trackHelpTapped({ source: "header", view: "menu" });
     trackHelpTabSwitched({ tab: "privacy" });
+    trackAppError({ errorMessage: "Canvas context lost", errorName: "RenderError" });
   });
 });
+

@@ -4,6 +4,9 @@ import './index.css'
 import App from './App.jsx'
 import { ErrorBoundary } from './components/ErrorBoundary.jsx'
 import DeviceSimulatorHarness from './components/DeviceSimulatorHarness.jsx'
+import { initSentry } from './services/sentry.js'
+
+initSentry();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

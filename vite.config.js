@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { deleteLevelAssetsAndManifestEntries } from './scripts/curationLevelPruner.mjs';
 
 function curationPrunerPlugin() {
@@ -82,7 +83,23 @@ function curationPrunerPlugin() {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), curationPrunerPlugin()],
+  plugins: [
+    react(),
+    curationPrunerPlugin(),
+    process.env.SENTRY_AUTH_TOKEN
+      ? sentryVitePlugin({
+          org: process.env.SENTRY_ORG,
+          project: process.env.SENTRY_PROJECT,
+          authToken: process.env.SENTRY_AUTH_TOKEN,
+          sourcemaps: {
+            assets: './dist/**'
+          }
+        })
+      : null
+  ].filter(Boolean),
+  build: {
+    sourcemap: true,
+  },
   server: {
     allowedHosts: true,
   },

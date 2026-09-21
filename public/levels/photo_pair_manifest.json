@@ -27,7 +27,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/2a28a86924a7"
   },
   {
     "id": "photo_set_001_02",
@@ -57,7 +58,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 2,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/7a997892ec4d"
   },
   {
     "id": "photo_set_001_04",
@@ -87,7 +89,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/6cc10e91f6bd"
   },
   {
     "id": "photo_set_001_05",
@@ -96,18 +99,18 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/0449cfdb7b28_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_014_variant.jpg",
-    "operation": "add",
+    "baseImage": "levels/fresh_nature_pair_014_variant.jpg",
+    "variantImage": "levels/0449cfdb7b28_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
         "x": 4.3,
         "y": 57.8,
         "radius": 4.9,
-        "description": "Single add difference",
+        "description": "Single remove difference",
         "hint": "Look closely near coordinates (4%, 58%)",
-        "operation": "add"
+        "operation": "remove"
       }
     ],
     "dimensions": {
@@ -117,7 +120,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 4,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/0449cfdb7b28",
+    "flipped": true
   },
   {
     "id": "photo_set_002_02",
@@ -147,7 +152,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_001",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/a0a4d896ac5f"
   },
   {
     "id": "photo_set_002_03",
@@ -175,7 +181,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/2fa784f08808"
   },
   {
     "id": "photo_set_002_04",
@@ -184,9 +191,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/ff1e6102535e_base.jpg",
-    "variantImage": "/levels/fresh_v3_ai_vintage_keys_003_variant.jpg",
-    "operation": "add",
+    "baseImage": "/levels/fresh_v3_ai_vintage_keys_003_variant.jpg",
+    "variantImage": "levels/ff1e6102535e_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
@@ -203,7 +210,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
     "sequence": 2,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/ff1e6102535e",
+    "flipped": true
   },
   {
     "id": "photo_set_002_05",
@@ -231,7 +240,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/88d3d436a793"
   },
   {
     "id": "photo_set_003_01",
@@ -259,7 +269,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
     "sequence": 4,
-    "variantCode": "STR-REM"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/258c8824ca62"
   },
   {
     "id": "photo_set_003_02",
@@ -287,7 +298,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_002",
     "sequence": 5,
-    "variantCode": "STR-MOV"
+    "variantCode": "STR-MOV",
+    "photoKey": "levels/cca35dfa07ae"
   },
   {
     "id": "photo_set_003_03",
@@ -315,7 +327,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/89982ff57cc8"
   },
   {
     "id": "photo_set_003_04",
@@ -343,7 +356,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
     "sequence": 2,
-    "variantCode": "STR-REM"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/8f567ce10d2c"
   },
   {
     "id": "photo_set_003_05",
@@ -371,7 +385,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/78f0bea654e3"
   },
   {
     "id": "photo_set_004_01",
@@ -399,7 +414,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
     "sequence": 4,
-    "variantCode": "STR-MOV"
+    "variantCode": "STR-MOV",
+    "photoKey": "levels/191f5c71749d"
   },
   {
     "id": "photo_set_004_02",
@@ -427,7 +443,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_003",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/3f8bbfc60b36"
   },
   {
     "id": "photo_set_004_03",
@@ -455,7 +472,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/12be75c963f4"
   },
   {
     "id": "photo_set_004_04",
@@ -464,9 +482,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/8d4395ee49d2_base.jpg",
-    "variantImage": "/levels/pipe_v3_electronics_add_003_variant.jpg",
-    "operation": "add",
+    "baseImage": "/levels/pipe_v3_electronics_add_003_variant.jpg",
+    "variantImage": "levels/8d4395ee49d2_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
@@ -483,7 +501,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
     "sequence": 2,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/8d4395ee49d2",
+    "flipped": true
   },
   {
     "id": "photo_set_004_05",
@@ -492,9 +512,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "operation": "add",
-    "baseImage": "levels/c845fb878647_base.jpg",
-    "variantImage": "/levels/goldilocks_pipe_v2_electronics_add_003_variant.jpg",
+    "operation": "remove",
+    "baseImage": "/levels/goldilocks_pipe_v2_electronics_add_003_variant.jpg",
+    "variantImage": "levels/c845fb878647_base.jpg",
     "diffs": [
       {
         "id": 1,
@@ -511,7 +531,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
     "sequence": 3,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/c845fb878647",
+    "flipped": true
   },
   {
     "id": "photo_set_005_01",
@@ -542,7 +564,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/6a555061d355"
   },
   {
     "id": "photo_set_005_02",
@@ -572,7 +595,8 @@
     ],
     "setId": "photo_set_004",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/6fedd084dc95"
   },
   {
     "id": "photo_set_005_03",
@@ -603,7 +627,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/2e22012e84c0"
   },
   {
     "id": "photo_set_005_04",
@@ -612,9 +637,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Hard",
-    "operation": "add",
-    "baseImage": "levels/4952d4676e61_base.jpg",
-    "variantImage": "/levels/dense_ai_watchmaker_gear_add_002_variant.jpg",
+    "operation": "remove",
+    "baseImage": "/levels/dense_ai_watchmaker_gear_add_002_variant.jpg",
+    "variantImage": "levels/4952d4676e61_base.jpg",
     "diffs": [
       {
         "id": 1,
@@ -631,7 +656,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
     "sequence": 2,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/4952d4676e61",
+    "flipped": true
   },
   {
     "id": "photo_set_005_05",
@@ -660,7 +687,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
     "sequence": 3,
-    "variantCode": "STR-REM"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/d51ef1c25fac"
   },
   {
     "id": "photo_set_006_01",
@@ -688,7 +716,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/b9ac7b656762"
   },
   {
     "id": "photo_set_006_02",
@@ -697,9 +726,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Hard",
-    "operation": "add",
-    "baseImage": "levels/ef92ebb75fe4_base.jpg",
-    "variantImage": "/levels/dense_ai_leather_punch_add_009_variant.jpg",
+    "operation": "remove",
+    "baseImage": "/levels/dense_ai_leather_punch_add_009_variant.jpg",
+    "variantImage": "levels/ef92ebb75fe4_base.jpg",
     "diffs": [
       {
         "id": 1,
@@ -716,7 +745,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
     "sequence": 5,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/ef92ebb75fe4",
+    "flipped": true
   },
   {
     "id": "photo_set_006_03",
@@ -743,7 +774,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/a943339d7442"
   },
   {
     "id": "photo_set_006_04",
@@ -771,7 +803,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/4f45d9d382e8"
   },
   {
     "id": "photo_set_006_05",
@@ -801,7 +834,8 @@
     ],
     "setId": "photo_set_006",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/564981c74583"
   },
   {
     "id": "photo_set_007_01",
@@ -828,7 +862,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
     "sequence": 4,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/40915d078af3"
   },
   {
     "id": "photo_set_007_03",
@@ -855,7 +890,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
     "sequence": 5,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/303fef93e45e"
   },
   {
     "id": "photo_set_007_04",
@@ -881,7 +917,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/223b3264c151"
   },
   {
     "title": "Nursery Plant Tag",
@@ -908,7 +945,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/nursery/medium_nursery_001/a22bb085767f"
   },
   {
     "id": "photo_set_008_02",
@@ -935,7 +973,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
     "sequence": 3,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/workbench/medium_workbench_001/612b6a34e050"
   },
   {
     "diffs": [
@@ -962,7 +1001,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
     "sequence": 4,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/24499bd75548"
   },
   {
     "packId": "abstract_animated",
@@ -989,7 +1029,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
     "sequence": 5,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-watchmaker-bench/8072653c206f"
   },
   {
     "baseImage": "levels/photo-pairs/photo-bakers-table/c3892638bc7d_base.jpg",
@@ -1016,7 +1057,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-bakers-table/c3892638bc7d"
   },
   {
     "baseImage": "levels/photo-pairs/photo-electronics-bench/a66f42272821_base.jpg",
@@ -1043,7 +1085,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-electronics-bench/a66f42272821"
   },
   {
     "diffs": [
@@ -1070,7 +1113,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
     "sequence": 3,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-antique-desk/3a98c0983bff"
   },
   {
     "id": "photo_set_009_05",
@@ -1097,7 +1141,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
     "sequence": 4,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-board-game/11ab8d831522"
   },
   {
     "packId": "find_the_sniper",
@@ -1124,7 +1169,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
     "sequence": 5,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-woodworking-bench/98635191db71"
   },
   {
     "baseImage": "levels/photo-pairs/photo-repair-drawer/49ec079e2ca1_base.jpg",
@@ -1151,7 +1197,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-repair-drawer/49ec079e2ca1"
   },
   {
     "difficulty": "Easy",
@@ -1178,7 +1225,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-camera-gear/d8599cc3bcc1"
   },
   {
     "id": "photo_set_010_04",
@@ -1205,7 +1253,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
     "sequence": 3,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-pottery-table/6171cf197574"
   },
   {
     "id": "photo_set_010_05",
@@ -1232,7 +1281,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
     "sequence": 4,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-bicycle-repair/ca5d5a11786a"
   },
   {
     "difficulty": "Medium",
@@ -1259,7 +1309,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
     "sequence": 5,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-woodworking-table/dbb29ee85300"
   },
   {
     "id": "photo_set_011_02",
@@ -1286,7 +1337,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-artist-supply/6c8f81f1cee0"
   },
   {
     "pack": "Find the Sniper",
@@ -1313,7 +1365,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-camping-gear/b616ee311d33"
   },
   {
     "pack": "Find the Sniper",
@@ -1340,7 +1393,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
     "sequence": 3,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-sewing-table/78c73d97f15e"
   },
   {
     "difficulty": "Easy",
@@ -1367,7 +1421,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
     "sequence": 4,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-map-restoration/81e07ac28778"
   },
   {
     "baseImage": "levels/photo-pairs/photo-game-night/aa2ca3ce722e_base.jpg",
@@ -1394,7 +1449,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
     "sequence": 5,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/photo-game-night/aa2ca3ce722e"
   },
   {
     "id": "photo_set_012_04",
@@ -1421,7 +1477,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/ai-bakery-counter/d480599acfa5"
   },
   {
     "diffs": [
@@ -1448,7 +1505,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/ai-greenhouse-potting/5fde6906debe"
   },
   {
     "pack": "Find the Sniper",
@@ -1475,7 +1533,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
     "sequence": 3,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/ai-artist-easel/84541fa6fe24"
   },
   {
     "difficulty": "Easy",
@@ -1502,7 +1561,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
     "sequence": 4,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/ai-coffee-bar/1ea573c77403"
   },
   {
     "id": "photo_set_013_03",
@@ -1529,7 +1589,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
     "sequence": 5,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/ai-antique-study/01f1ee94287d"
   },
   {
     "title": "Botanist Herbarium Desk",
@@ -1556,7 +1617,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/ai-botanist-herbarium/2f7bf4adfbf6"
   },
   {
     "pack": "Find the Sniper",
@@ -1583,7 +1645,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/ai-cartography-desk/f3bdacea6eb5"
   },
   {
     "id": "photo_set_014_01",
@@ -1613,7 +1676,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/97f2ba33fda9"
   },
   {
     "id": "photo_set_014_02",
@@ -1643,7 +1707,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/56cc122a17a0"
   },
   {
     "id": "photo_set_014_03",
@@ -1673,7 +1738,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/3e2cc15f2b07"
   },
   {
     "id": "photo_set_014_04",
@@ -1703,7 +1769,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/ddf590b4dbb7"
   },
   {
     "id": "photo_set_014_05",
@@ -1733,7 +1800,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 2,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/9ce8c7b6d645"
   },
   {
     "id": "photo_set_015_01",
@@ -1763,7 +1831,8 @@
     ],
     "setId": "photo_set_013",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/0491120cb22c"
   },
   {
     "id": "photo_set_015_02",
@@ -1793,7 +1862,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/abc1b07f9475"
   },
   {
     "id": "photo_set_015_03",
@@ -1823,7 +1893,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
     "sequence": 5,
-    "variantCode": "STR-REM"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/6be39d9e1fd8"
   },
   {
     "id": "photo_set_015_04",
@@ -1832,18 +1903,18 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/81c16b94464d_base.jpg",
-    "variantImage": "levels/fresh_nature_pair_016_variant.jpg",
-    "operation": "add",
+    "baseImage": "levels/fresh_nature_pair_016_variant.jpg",
+    "variantImage": "levels/81c16b94464d_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
         "x": 61.8,
         "y": 94.2,
         "radius": 4.5,
-        "description": "Single add difference",
+        "description": "Single remove difference",
         "hint": "Look closely near coordinates (62%, 94%)",
-        "operation": "add"
+        "operation": "remove"
       }
     ],
     "dimensions": {
@@ -1853,7 +1924,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 1,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/81c16b94464d",
+    "flipped": true
   },
   {
     "id": "photo_set_015_05",
@@ -1883,7 +1956,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 2,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/8803ac7100d6"
   },
   {
     "id": "photo_set_016_01",
@@ -1892,18 +1966,18 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/8bf5183fcc5a_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_003_variant.jpg",
-    "operation": "add",
+    "baseImage": "levels/fresh_v6_pair_003_variant.jpg",
+    "variantImage": "levels/8bf5183fcc5a_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
         "x": 25.9,
         "y": 23.3,
         "radius": 4.5,
-        "description": "Single add difference",
+        "description": "Single remove difference",
         "hint": "Look closely near coordinates (26%, 23%)",
-        "operation": "add"
+        "operation": "remove"
       }
     ],
     "dimensions": {
@@ -1913,7 +1987,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 3,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/8bf5183fcc5a",
+    "flipped": true
   },
   {
     "id": "photo_set_016_02",
@@ -1922,18 +1998,18 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/798a7dd51d00_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_007_variant.jpg",
-    "operation": "add",
+    "baseImage": "levels/fresh_v6_pair_007_variant.jpg",
+    "variantImage": "levels/798a7dd51d00_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
         "x": 5.1,
         "y": 29.7,
         "radius": 4.5,
-        "description": "Single add difference",
+        "description": "Single remove difference",
         "hint": "Look closely near coordinates (5%, 30%)",
-        "operation": "add"
+        "operation": "remove"
       }
     ],
     "dimensions": {
@@ -1943,7 +2019,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 4,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/798a7dd51d00",
+    "flipped": true
   },
   {
     "id": "photo_set_016_03",
@@ -1973,7 +2051,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/730649667953"
   },
   {
     "id": "photo_set_016_04",
@@ -1982,18 +2061,18 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/c23d23723778_base.jpg",
-    "variantImage": "levels/fresh_v6_pair_019_variant.jpg",
-    "operation": "add",
+    "baseImage": "levels/fresh_v6_pair_019_variant.jpg",
+    "variantImage": "levels/c23d23723778_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
         "x": 26,
         "y": 86.2,
         "radius": 6.8,
-        "description": "Single add difference",
+        "description": "Single remove difference",
         "hint": "Look closely near coordinates (26%, 86%)",
-        "operation": "add"
+        "operation": "remove"
       }
     ],
     "dimensions": {
@@ -2003,7 +2082,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 1,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/c23d23723778",
+    "flipped": true
   },
   {
     "id": "photo_set_016_05",
@@ -2033,7 +2114,8 @@
     ],
     "setId": "photo_set_015",
     "sequence": 2,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/ba7786af937c"
   },
   {
     "id": "photo_set_017_01",
@@ -2063,7 +2145,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 3,
-    "variantCode": "STR-MOV"
+    "variantCode": "STR-MOV",
+    "photoKey": "levels/311971e3bc95"
   },
   {
     "id": "photo_set_017_02",
@@ -2093,7 +2176,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 4,
-    "variantCode": "STR-MOV"
+    "variantCode": "STR-MOV",
+    "photoKey": "levels/37aebee3101b"
   },
   {
     "id": "photo_set_017_03",
@@ -2123,7 +2207,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
     "sequence": 5,
-    "variantCode": "STR-MOV"
+    "variantCode": "STR-MOV",
+    "photoKey": "levels/57a58bf12d1e"
   },
   {
     "id": "photo_set_017_04",
@@ -2153,7 +2238,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 1,
-    "variantCode": "STR-MOV"
+    "variantCode": "STR-MOV",
+    "photoKey": "levels/cf9875bcd8da"
   },
   {
     "id": "photo_set_017_05",
@@ -2183,7 +2269,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 2,
-    "variantCode": "STR-MOV"
+    "variantCode": "STR-MOV",
+    "photoKey": "levels/3887e12afe3c"
   },
   {
     "id": "photo_set_018_01",
@@ -2213,7 +2300,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/6ffffcd610ed"
   },
   {
     "id": "photo_set_018_03",
@@ -2243,7 +2331,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/e4078f0a6fe6"
   },
   {
     "id": "photo_set_018_04",
@@ -2273,7 +2362,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
     "sequence": 5,
-    "variantCode": "STR-MOV"
+    "variantCode": "STR-MOV",
+    "photoKey": "levels/72d118471c78"
   },
   {
     "id": "photo_set_018_05",
@@ -2303,7 +2393,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/ac00db097041"
   },
   {
     "id": "photo_set_019_02",
@@ -2312,9 +2403,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/4cff74d97a0c_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_mechanic_variant.jpg",
-    "operation": "add",
+    "baseImage": "/levels/prod_v4_ai_mechanic_variant.jpg",
+    "variantImage": "levels/4cff74d97a0c_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
@@ -2331,7 +2422,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 2,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/4cff74d97a0c",
+    "flipped": true
   },
   {
     "id": "photo_set_019_03",
@@ -2340,9 +2433,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/cdffff8cdcaf_base.jpg",
-    "variantImage": "/levels/prod_v4_ai_expedition_variant.jpg",
-    "operation": "add",
+    "baseImage": "/levels/prod_v4_ai_expedition_variant.jpg",
+    "variantImage": "levels/cdffff8cdcaf_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
@@ -2359,7 +2452,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 3,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/cdffff8cdcaf",
+    "flipped": true
   },
   {
     "id": "photo_set_019_05",
@@ -2387,7 +2482,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 4,
-    "variantCode": "STR-REM"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/5587f8de42b6"
   },
   {
     "id": "photo_set_020_01",
@@ -2396,9 +2492,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/029fbcb9051a_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_seashells_variant.jpg",
-    "operation": "add",
+    "baseImage": "/levels/prod_v4_var2_unique_seashells_variant.jpg",
+    "variantImage": "levels/029fbcb9051a_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
@@ -2415,7 +2511,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
     "sequence": 5,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/029fbcb9051a",
+    "flipped": true
   },
   {
     "id": "photo_set_020_02",
@@ -2424,9 +2522,9 @@
     "pack": "Photography",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/d5cc4fa884a7_base.jpg",
-    "variantImage": "/levels/prod_v4_var2_unique_sewing_variant.jpg",
-    "operation": "add",
+    "baseImage": "/levels/prod_v4_var2_unique_sewing_variant.jpg",
+    "variantImage": "levels/d5cc4fa884a7_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
@@ -2443,7 +2541,9 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
     "sequence": 1,
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/d5cc4fa884a7",
+    "flipped": true
   },
   {
     "id": "photo_set_020_04",
@@ -2471,7 +2571,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
     "sequence": 2,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/4c9e67b95d2f"
   },
   {
     "id": "photo_set_020_05",
@@ -2501,7 +2602,8 @@
     ],
     "setId": "photo_set_018",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/ebec8ec74de9"
   },
   {
     "id": "photo_set_021_01",
@@ -2529,7 +2631,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/0086d006bc88"
   },
   {
     "id": "photo_set_021_02",
@@ -2557,7 +2660,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/550eab2677ab"
   },
   {
     "id": "photo_set_021_03",
@@ -2585,7 +2689,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/270f5608cc23"
   },
   {
     "id": "photo_set_021_04",
@@ -2612,7 +2717,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/0825967813ea"
   },
   {
     "id": "photo_set_021_05",
@@ -2641,7 +2747,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/48cfeb798984"
   },
   {
     "id": "photo_set_022_01",
@@ -2672,7 +2779,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/357f9ec603cb"
   },
   {
     "id": "photo_set_022_02",
@@ -2701,7 +2809,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/f1639c250bdc"
   },
   {
     "id": "photo_set_022_03",
@@ -2732,7 +2841,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 1,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/bcffd42bb6ee"
   },
   {
     "id": "photo_set_022_04",
@@ -2761,7 +2871,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 2,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/36706f37bd89"
   },
   {
     "id": "photo_set_022_05",
@@ -2792,7 +2903,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/dacccbe7cc29"
   },
   {
     "id": "photo_set_023_02",
@@ -2821,7 +2933,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/332ac1fba773"
   },
   {
     "id": "photo_set_023_03",
@@ -2852,7 +2965,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/37bb13514b3a"
   },
   {
     "id": "photo_set_023_04",
@@ -2880,7 +2994,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/d23ac56dc6a4"
   },
   {
     "id": "photo_set_023_05",
@@ -2908,7 +3023,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 2,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/19b7a96e5a60"
   },
   {
     "id": "photo_set_024_01",
@@ -2936,7 +3052,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 3,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/25a5350582bf"
   },
   {
     "id": "photo_set_024_02",
@@ -2966,7 +3083,8 @@
     ],
     "setId": "photo_set_021",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/bdbfedf807fc"
   },
   {
     "id": "photo_set_024_03",
@@ -2994,7 +3112,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
     "sequence": 5,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/21b1b2a435da"
   },
   {
     "category": "Workshop Clutter",
@@ -3021,7 +3140,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 1,
-    "variantCode": "???-???"
+    "variantCode": "???-???",
+    "photoKey": "levels/photo-pairs/ai-locksmith-bench/aa53155cf57e"
   },
   {
     "id": "photo_set_025_02",
@@ -3051,7 +3171,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 2,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/2ef79002ac79"
   },
   {
     "id": "photo_set_025_04",
@@ -3081,7 +3202,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 3,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/ca23c7152c0e"
   },
   {
     "id": "photo_set_025_05",
@@ -3111,7 +3233,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 4,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/4f7821e8b2e4"
   },
   {
     "id": "photo_set_026_01",
@@ -3141,7 +3264,8 @@
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
     "sequence": 5,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/29263c26afff"
   },
   {
     "id": "photo_set_026_02",
@@ -3169,7 +3293,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/13db4947d918"
   },
   {
     "id": "photo_set_026_03",
@@ -3197,7 +3322,8 @@
         "operation": "recolor"
       }
     ],
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/9ba4d5d3d7f5"
   },
   {
     "id": "photo_set_026_04",
@@ -3206,18 +3332,18 @@
     "pack": "Find the Sniper",
     "packId": "find_the_sniper",
     "difficulty": "Medium",
-    "baseImage": "levels/fce7bf008f8d_base.jpg",
-    "variantImage": "levels/photo_set_041_01_variant.jpg",
-    "operation": "add",
+    "baseImage": "levels/photo_set_041_01_variant.jpg",
+    "variantImage": "levels/fce7bf008f8d_base.jpg",
+    "operation": "remove",
     "diffs": [
       {
         "id": 1,
         "x": 4.7,
         "y": 66.8,
         "radius": 4.5,
-        "description": "Single add difference",
-        "hint": "Look closely for a add difference",
-        "operation": "add"
+        "description": "Single remove difference",
+        "hint": "Look closely for a remove difference",
+        "operation": "remove"
       }
     ],
     "dimensions": {
@@ -3225,7 +3351,9 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "variantCode": "STR-ADD"
+    "variantCode": "STR-REM",
+    "photoKey": "levels/fce7bf008f8d",
+    "flipped": true
   },
   {
     "id": "photo_set_026_05",
@@ -3253,7 +3381,8 @@
         "operation": "recolor"
       }
     ],
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/fef6293cfbba"
   },
   {
     "id": "daily_set_01_01",
@@ -3284,7 +3413,8 @@
     "dailySet": "set_daily_modern_01",
     "setId": null,
     "sequence": null,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/d1b2f49af41d"
   },
   {
     "id": "daily_set_06_01",
@@ -3315,7 +3445,8 @@
     "dailySet": "set_daily_modern_06",
     "setId": null,
     "sequence": null,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/6399f1d595ef"
   },
   {
     "id": "daily_set_06_03",
@@ -3346,6 +3477,7 @@
     "dailySet": "set_daily_modern_06",
     "setId": null,
     "sequence": null,
-    "variantCode": "STR-CLR"
+    "variantCode": "STR-CLR",
+    "photoKey": "levels/d0016bf53521"
   }
 ]

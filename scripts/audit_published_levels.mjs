@@ -23,6 +23,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { listCollection } from '../src/services/firestoreRest.js';
 import { isPlaceholderEntry, isDailyOnlyEntry } from '../src/utils/remoteSetPolicy.js';
+import { photoKeyOf, isFlipped } from '../src/utils/photoIdentity.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -103,9 +104,40 @@ export function auditLevels({ bundled = [], remote = [], dismissedIds = new Set(
     if (JSON.stringify(sequences) !== JSON.stringify(expected)) {
       fail('bad-sequence', `${setId} sequences are ${sequences.join(',')}`);
     }
-    const bases = entries.filter(e => !isPlaceholderEntry(e)).map(e => fileName(e.baseImage));
-    if (new Set(bases).size !== bases.length) {
+    // Identity comes from the recorded photoKey, not the base slot: a flipped
+    // pair holds a unique variant file there and would look like a photograph
+    // of its own.
+    const photos = entries.filter(e => !isPlaceholderEntry(e)).map(e => photoKeyOf(e));
+    if (new Set(photos).size !== photos.length) {
       fail('repeated-photo', `${setId} shows the same photograph more than once`);
+    }
+  }
+
+  // 5b. A photograph may be flipped at most once.
+  //
+  // Flipping swaps a pair so an `add` reads as a `remove`, which puts the
+  // shared base photograph into the variant slot. Flip two levels built on one
+  // photograph and both end up serving that same picture as their variant --
+  // different puzzles, but the right-hand panel repeats. Capping it at one keeps
+  // the duplicate-variant-image check below meaningful instead of forcing it to
+  // make an exception.
+  const flipsPerPhoto = new Map();
+  for (const entry of playable) {
+    if (!isFlipped(entry)) continue;
+    const key = photoKeyOf(entry);
+    if (!flipsPerPhoto.has(key)) flipsPerPhoto.set(key, []);
+    flipsPerPhoto.get(key).push(entry.id);
+  }
+  for (const [key, ids] of flipsPerPhoto) {
+    if (ids.length > 1) {
+      fail('photo-flipped-twice', `${key} is flipped on ${ids.length} levels: ${ids.join(', ')}`);
+    }
+  }
+
+  // 5c. Every level needs a photograph identity, or set composition is blind.
+  for (const entry of playable) {
+    if (!photoKeyOf(entry)) {
+      fail('missing-photo-key', `${entry.id} has no photoKey and none can be derived`);
     }
   }
 

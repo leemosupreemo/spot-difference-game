@@ -150,3 +150,54 @@ test('no asset listing means no stray findings', () => {
   const bundled = set('photo_set_001', ['a', 'b', 'c', 'd', 'e']);
   assert.deepEqual(auditLevels({ bundled }), []);
 });
+
+// --- photograph identity survives a flip ---------------------------------
+
+const photoLevel = (id, setId, sequence, photoKey, extra = {}) => ({
+  id, setId, sequence, photoKey,
+  baseImage: `levels/${id}_a.webp`,
+  variantImage: `levels/${id}_b.webp`,
+  ...extra
+});
+
+const fiveOf = (setId, keys) => keys.map((k, i) => photoLevel(`${setId}_${i + 1}`, setId, i + 1, k));
+
+test('a flipped level still counts as its own photograph in a set', async () => {
+  const { auditLevels } = await import('./audit_published_levels.mjs');
+  // Two levels of photo A in one set: one flipped, one not. Before photoKey the
+  // flipped one pointed at a unique variant file in its base slot and this went
+  // unnoticed.
+  const levels = fiveOf('remote_set_900', ['p/a', 'p/b', 'p/c', 'p/d', 'p/e']);
+  levels[1].photoKey = 'p/a';
+  levels[1].flipped = true;
+  const findings = auditLevels({ remote: levels });
+  assert.ok(findings.some(f => f.check === 'repeated-photo'),
+    'the same photograph twice in one set must be reported even when one is flipped');
+});
+
+test('one photograph may only be flipped once', async () => {
+  const { auditLevels } = await import('./audit_published_levels.mjs');
+  const a = fiveOf('remote_set_901', ['q/a', 'q/b', 'q/c', 'q/d', 'q/e']);
+  const b = fiveOf('remote_set_902', ['q/f', 'q/g', 'q/h', 'q/i', 'q/j']);
+  a[0].flipped = true;
+  b[0].flipped = true;
+  b[0].photoKey = 'q/a';   // same photograph as a[0], flipped in another set
+  const findings = auditLevels({ remote: [...a, ...b] });
+  assert.ok(findings.some(f => f.check === 'photo-flipped-twice'),
+    'flipping one photograph on two levels repeats the right-hand panel');
+
+  // One flip of that photograph is fine.
+  b[0].flipped = false;
+  assert.ok(!auditLevels({ remote: [...a, ...b] })
+    .some(f => f.check === 'photo-flipped-twice'));
+});
+
+test('a level with no derivable photograph is reported', async () => {
+  const { auditLevels } = await import('./audit_published_levels.mjs');
+  const levels = fiveOf('remote_set_903', ['r/a', 'r/b', 'r/c', 'r/d', 'r/e']);
+  delete levels[2].photoKey;
+  levels[2].baseImage = '';
+  levels[2].variantImage = '';
+  const findings = auditLevels({ remote: levels });
+  assert.ok(findings.some(f => f.check === 'missing-photo-key'));
+});

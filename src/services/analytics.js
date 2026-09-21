@@ -806,3 +806,13 @@ export function trackHelpTabSwitched({ tab = "rules" } = {}) {
     tab
   });
 }
+
+/**
+ * Tracks when an unhandled application error is caught by the ErrorBoundary.
+ */
+export function trackAppError({ errorMessage = "Unknown Error", errorName = "Error" } = {}) {
+  trackEvent("App Error", {
+    error_message: errorMessage,
+    error_name: errorName
+  });
+}

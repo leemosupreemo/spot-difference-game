@@ -1,4 +1,6 @@
 import React from 'react';
+import { captureError } from '../services/sentry.js';
+import { trackAppError } from '../services/analytics.js';
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -12,6 +14,17 @@ export class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     console.error('[ErrorBoundary] Caught runtime error:', error, errorInfo);
+    try {
+      captureError(error, {
+        componentStack: errorInfo?.componentStack
+      });
+    } catch (_) {}
+    try {
+      trackAppError({
+        errorMessage: error?.message || String(error),
+        errorName: error?.name || 'Error'
+      });
+    } catch (_) {}
   }
 
   render() {

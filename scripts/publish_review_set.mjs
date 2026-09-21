@@ -22,6 +22,7 @@ import { getAuth, signInAnonymously } from 'firebase/auth';
 import { getFirestore, collection, getDocs, doc, setDoc } from 'firebase/firestore';
 import { createPlaceholderEntry, REMOTE_SET_PREFIX } from '../src/utils/remoteSetPolicy.js';
 import { allocateSets, baseKey } from './group_remote_sets.mjs';
+import { derivePhotoKey } from '../src/utils/photoIdentity.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SET_SIZE = 5;
@@ -77,6 +78,12 @@ export function buildReviewSets(entries, firstSetNumber, host, makePlaceholder =
       setId,
       sequence: i + 1,
       curationStatus: 'pending',
+      // Stamped at publish rather than left to a later backfill: set composition
+      // and the flip tool both identify a photograph by this key, and a level
+      // published without one is an error the audit has to catch after the fact.
+      // Derived before the paths are made absolute -- the key ignores the host
+      // either way, but this keeps it identical to the bundled form.
+      photoKey: entry.photoKey || derivePhotoKey(entry),
       baseImage: absolute(entry.baseImage),
       variantImage: absolute(entry.variantImage)
     }));
