@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ArrowLeft, Send } from 'lucide-react';
+import { X, Send } from 'lucide-react';
 import { Capacitor } from '@capacitor/core';
 import { sounds } from '../utils/audio';
 import { trackRatingPromptAction } from '../services/analytics';
@@ -256,38 +256,29 @@ export default function RatingModal({
         )}
 
         {step === 'feedback' && (
-          <div style={{ textAlign: 'left', paddingTop: '4px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-              <button
-                type="button"
-                onClick={() => { sounds.playTap(); setStep('prompt'); }}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid var(--border-glass)',
-                  color: 'var(--text-muted)',
-                  cursor: 'pointer',
-                  padding: '6px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                aria-label="Back"
-              >
-                <ArrowLeft size={16} />
-              </button>
-              <h2 style={{
-                fontSize: '1.4rem',
-                fontWeight: 900,
-                letterSpacing: '0.5px',
-                margin: 0,
-                color: '#fff'
-              }}>
-                How can we improve?
-              </h2>
-            </div>
+          <div>
+            {/* Centered Header Title aligned with close 'X' button */}
+            <h2 style={{
+              fontSize: '1.4rem',
+              fontWeight: 900,
+              letterSpacing: '0.5px',
+              margin: '-6px 36px 12px 36px',
+              textAlign: 'center',
+              background: 'linear-gradient(90deg, #ffffff, var(--accent-cyan))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>
+              How can we improve?
+            </h2>
 
-            <p style={{ margin: '0 0 14px 0', fontSize: '0.86rem', color: 'var(--text-muted)', lineHeight: 1.45 }}>
+            <p style={{
+              margin: '0 0 16px 0',
+              fontSize: '0.88rem',
+              color: 'var(--text-muted)',
+              lineHeight: 1.45,
+              textAlign: 'center',
+              padding: '0 4px'
+            }}>
               Tell us what felt off or share any ideas. Your feedback gets sent directly to our team at <span style={{ color: 'var(--accent-cyan)', fontWeight: 700 }}>{SUPPORT_EMAIL}</span>.
             </p>
 
