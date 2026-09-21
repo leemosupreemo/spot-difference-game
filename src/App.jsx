@@ -25,8 +25,8 @@ import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
 import { getInitialDebugMode } from './utils/debugMode';
-import { getCuratedStatusMap, setLevelCuratedStatus, setLevelCurationMeta, pruneDismissedStatuses, saveCuratedStatusMap, getLevelStatus, getEntryCurationStatus } from './utils/curationStore';
-import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted } from './services/analytics';
+import { chooseDebugStartId } from './utils/debugCursor';
+import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackStageFailed, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted, trackHelpTapped, trackDailyChallengeStarted, trackDailyChallengeCompleted } from './services/analytics';
 import { parseIncomingChallenge } from './utils/challengeMetrics';
 import { refreshRemoteLevelPacks, syncRemoteLevelPacks, subscribeToRemoteLevels } from './services/remoteLevelSync';
 import { syncRemoteAppConfig } from './services/appConfig';
@@ -36,6 +36,7 @@ import SetOfTheDayBanner from './components/SetOfTheDayBanner';
 import DailyVictoryModal from './components/DailyVictoryModal';
 import {
   getDailySetForDate,
+  getTodayDateString,
   recordDailyChallengeCompletion,
   recordDailyChallengeCompletionRemote,
   recordDailyChallengeFailureRemote,
@@ -565,9 +566,16 @@ export default function App() {
       if (effectivePool.length > 0) {
         const debugLevels = effectivePool.map(createPhotoPairLevel);
         setLevels(debugLevels);
-        const isCurrentInPool = currentLevelId && effectivePool.some(e => e.id === currentLevelId);
-        if (!isCurrentInPool) {
-          setCurrentLevelId(effectivePool[0].id);
+        // Resume only onto a level that still needs a decision. Staying on a
+        // judged one strands everything unjudged behind the cursor, because
+        // "next pair" only ever walks forward through the pool.
+        const startId = chooseDebugStartId(
+          effectivePool,
+          currentLevelId,
+          entry => isLevelCategorized(entry, curatedStatusMap)
+        );
+        if (startId && startId !== currentLevelId) {
+          setCurrentLevelId(startId);
         }
       }
     }
@@ -902,6 +910,10 @@ export default function App() {
       mode: activeMode,
       totalLevelsInStage: dailyLevels.length
     });
+    trackDailyChallengeStarted({
+      date: getTodayDateString(),
+      levelsCount: dailyLevels.length
+    });
     logApp('INFO', `[DailyChallenge] Launching ${dailyLevels.length}-image daily sequence: ${dailyLevels.map(l => l.id).join(', ')}`);
   };
 
@@ -925,10 +937,14 @@ export default function App() {
       stageTimesRef.current[currentStageIndex] = elapsedTime;
 
       const totalHintsForDiff = selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2;
+      const currentPhotoSetId = (selectedTheme === 'find_the_sniper' ? photoSetId : null) || currentLevel?.setId || (gameMode === 'daily' ? (levels?.dailySetId || 'daily_set') : null);
       trackImagePairCompleted({
         result: 'win',
         level: currentLevel,
         selectedTheme,
+        setId: currentPhotoSetId,
+        isFirstAttempt: isCurrentRunFirstAttempt,
+        gameMode,
         elapsedTimeMs: elapsedTime,
         missCount,
         hintsUsed: Math.max(0, totalHintsForDiff - hintsLeft),
@@ -1036,17 +1052,29 @@ export default function App() {
             stars: dailyResult.stars
           }).catch(() => {});
 
+          const dailySetId = levels?.dailySetId || dailyResult?.setId || 'daily_set_1';
           trackStageCleared({
             selectedTheme: 'daily_challenge',
+            setId: dailySetId,
             selectedDifficulty: 'Medium',
             totalStageTimeMs: cumulativeTime,
             totalStageScore: stageTotalScore,
-            imagesInStageCount: 3
+            imagesInStageCount: 3,
+            isFirstAttempt: true,
+            gameMode: 'daily'
+          });
+
+          trackDailyChallengeCompleted({
+            date: getTodayDateString(),
+            totalTimeMs: cumulativeTime,
+            stars: dailyResult.stars,
+            position: dailyResult.position,
+            isNewRecord: dailyResult.isNewRecord,
+            isFailed: false
           });
 
           logApp('INFO', `[DailyChallengeCleared] Time: ${cumulativeTime}ms, Rank: #${dailyResult.position}, Stars: ${dailyResult.stars}`);
 
-          const dailySetId = levels?.dailySetId || dailyResult?.setId || 'daily_set_1';
           const dailySetNum = getSetNumber(dailySetId) || 1;
 
           setTimeout(() => {
@@ -1070,12 +1098,16 @@ export default function App() {
         markFirstSetCompleted();
         setHasCompletedFirstSetState(true);
 
+        const currentPhotoSetId = (selectedTheme === 'find_the_sniper' ? photoSetId : null) || (levels?.[0]?.setId) || null;
         trackStageCleared({
           selectedTheme,
+          setId: currentPhotoSetId,
           selectedDifficulty,
           totalStageTimeMs: cumulativeTime,
           totalStageScore: stageTotalScore,
-          imagesInStageCount: totalStageImages
+          imagesInStageCount: totalStageImages,
+          isFirstAttempt: isCurrentRunFirstAttempt,
+          gameMode
         });
 
         // Trigger lifecycle notification scheduling (+2hr welcome, +5day retention).
@@ -1209,16 +1241,34 @@ export default function App() {
           clearActiveSetAttempt();
         }
 
+        const currentPhotoSetId = (selectedTheme === 'find_the_sniper' ? photoSetId : null) || currentLevel?.setId || (gameMode === 'daily' ? (levels?.dailySetId || 'daily_set') : null);
         const totalHintsForDiff = selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2;
         trackImagePairCompleted({
           result: 'lose',
           level: currentLevel,
           selectedTheme,
+          setId: currentPhotoSetId,
+          isFirstAttempt: isCurrentRunFirstAttempt,
+          gameMode,
           elapsedTimeMs: elapsedTime,
           missCount: 3,
           hintsUsed: Math.max(0, totalHintsForDiff - hintsLeft),
           scoreEarned: 0,
           stageIndex: currentStageIndex
+        });
+
+        const cumulativeTimeToLoss = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
+        trackStageFailed({
+          selectedTheme: gameMode === 'daily' ? 'daily_challenge' : selectedTheme,
+          setId: currentPhotoSetId,
+          selectedDifficulty,
+          totalStageTimeMs: cumulativeTimeToLoss,
+          stageIndexFailed: currentStageIndex,
+          failedLevelId: currentLevel?.id,
+          imagesInStageCount: gameMode === 'daily' ? 3 : (levels.length > 0 ? levels.length : 5),
+          isFirstAttempt: isCurrentRunFirstAttempt,
+          gameMode,
+          reason: 'three_strikes'
         });
 
         // Spotlight correct answer for 2.5s before opening modal
@@ -1229,6 +1279,14 @@ export default function App() {
             }).catch(() => {});
             setIsDailyCompleted(true);
             const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
+            trackDailyChallengeCompleted({
+              date: getTodayDateString(),
+              totalTimeMs: cumulativeTime,
+              stars: 0,
+              position: null,
+              isNewRecord: false,
+              isFailed: true
+            });
             setDailyVictoryData({
               isOpen: true,
               totalTimeMs: cumulativeTime,
@@ -1292,6 +1350,44 @@ export default function App() {
       }
       try { sounds.playLose(); } catch (_) {}
       const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
+      const dailySetId = levels?.dailySetId || 'daily_set';
+
+      trackImagePairCompleted({
+        result: 'abandoned',
+        level: currentLevel,
+        selectedTheme: 'daily_challenge',
+        setId: dailySetId,
+        isFirstAttempt: true,
+        gameMode: 'daily',
+        elapsedTimeMs: elapsedTime,
+        missCount,
+        hintsUsed: Math.max(0, 3 - hintsLeft),
+        scoreEarned: 0,
+        stageIndex: currentStageIndex
+      });
+
+      trackStageFailed({
+        selectedTheme: 'daily_challenge',
+        setId: dailySetId,
+        selectedDifficulty: 'Medium',
+        totalStageTimeMs: cumulativeTime,
+        stageIndexFailed: currentStageIndex,
+        failedLevelId: currentLevel?.id,
+        imagesInStageCount: 3,
+        isFirstAttempt: true,
+        gameMode: 'daily',
+        reason: 'abandoned'
+      });
+
+      trackDailyChallengeCompleted({
+        date: getTodayDateString(),
+        totalTimeMs: cumulativeTime,
+        stars: 0,
+        position: null,
+        isNewRecord: false,
+        isFailed: true
+      });
+
       setDailyVictoryData({
         isOpen: true,
         totalTimeMs: cumulativeTime,
@@ -1305,6 +1401,40 @@ export default function App() {
       });
       return;
     }
+
+    if (view === 'game') {
+      const currentPhotoSetId = (selectedTheme === 'find_the_sniper' ? photoSetId : null) || currentLevel?.setId || null;
+      const totalHintsForDiff = selectedDifficulty === 'Easy' ? 4 : selectedDifficulty === 'Medium' ? 3 : 2;
+      const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
+
+      trackImagePairCompleted({
+        result: 'abandoned',
+        level: currentLevel,
+        selectedTheme,
+        setId: currentPhotoSetId,
+        isFirstAttempt: isCurrentRunFirstAttempt,
+        gameMode,
+        elapsedTimeMs: elapsedTime,
+        missCount,
+        hintsUsed: Math.max(0, totalHintsForDiff - hintsLeft),
+        scoreEarned: 0,
+        stageIndex: currentStageIndex
+      });
+
+      trackStageFailed({
+        selectedTheme,
+        setId: currentPhotoSetId,
+        selectedDifficulty,
+        totalStageTimeMs: cumulativeTime,
+        stageIndexFailed: currentStageIndex,
+        failedLevelId: currentLevel?.id,
+        imagesInStageCount: levels.length > 0 ? levels.length : 5,
+        isFirstAttempt: isCurrentRunFirstAttempt,
+        gameMode,
+        reason: 'abandoned'
+      });
+    }
+
     if (activeSetAttemptRef.current?.isFirstAttempt) {
       const attempt = activeSetAttemptRef.current;
       setDifficultyStats(prev => markSetFirstAttemptFailed(prev, attempt));
@@ -1369,7 +1499,10 @@ export default function App() {
           setMuted={handleToggleMute}
           onOpenLeaderboard={handleOpenLeaderboard}
           onOpenProgress={handleOpenProgress}
-          onOpenHelp={() => setHelpModalOpen(true)}
+          onOpenHelp={() => {
+            trackHelpTapped({ source: 'header', view });
+            setHelpModalOpen(true);
+          }}
           onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
           onToggleDebug={toggleDebugMode}
           debugMode={debugMode}
@@ -1397,7 +1530,10 @@ export default function App() {
             onOpenCreator={handleOpenCreator}
             debugMode={debugMode}
             onToggleDebug={toggleDebugMode}
-            onOpenHelp={() => setHelpModalOpen(true)}
+            onOpenHelp={() => {
+              trackHelpTapped({ source: 'menu', view });
+              setHelpModalOpen(true);
+            }}
             onOpenShareChallenge={() => setShareChallengeModalOpen(true)}
             hasCompletedFirstSet={hasCompletedFirstSetState}
             tutorialAnimationEnabled={tutorialAnimationEnabled}
