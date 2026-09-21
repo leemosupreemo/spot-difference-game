@@ -159,6 +159,32 @@ button:active,
   transition: transform 0.08s ease, filter 0.08s ease;
 }
 
+/* Rating Modal Split Choice Buttons */
+.rating-choice-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.rating-choice-btn:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.rating-choice-btn:active {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: scale(0.97) !important;
+}
+
+.rating-choice-left {
+  border-bottom-left-radius: 24px;
+}
+
+.rating-choice-right {
+  border-bottom-right-radius: 24px;
+}
+
 .glass-btn {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border-glass);

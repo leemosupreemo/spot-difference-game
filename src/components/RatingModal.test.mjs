@@ -29,21 +29,15 @@ const ratingPromptPath = path.join(
   'ratingPrompt.js'
 );
 
-test('RatingModal follows the cheatsheet copy and layout', () => {
+test('RatingModal displays emoji choices ("Could be better" vs "Enjoying it") and personalized copy', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
-  // Title / body / CTAs exactly as specified
-  assert.match(source, /Enjoying the game\?/);
-  assert.match(source, /A quick rating really helps us out\./);
-  assert.match(source, />\s*Rate the Game\s*</);
-  assert.match(source, />\s*Maybe Later\s*</);
-
-  // No interactive star picker or feedback-routing left over from the old design
-  assert.doesNotMatch(source, /handleSelectRating/);
-  assert.doesNotMatch(source, /onOpenSupport/);
-  assert.doesNotMatch(source, /star - 0\.5/);
-  assert.doesNotMatch(source, />\s*Rate on App Store/);
-  assert.doesNotMatch(source, /App Store Review/);
+  // Title / emoji choices / prompt copy
+  assert.match(source, /Enjoying Diff Hunter\?/);
+  assert.match(source, /Could be better/);
+  assert.match(source, /Enjoying it/);
+  assert.match(source, /🙁/);
+  assert.match(source, /😍/);
 
   // Top and bottom padding to prevent bleeding off screen; standardized viewport cap
   assert.match(source, /paddingTop: 'max\(env\(safe-area-inset-top\)/);
@@ -51,15 +45,24 @@ test('RatingModal follows the cheatsheet copy and layout', () => {
   assert.match(source, /maxHeight: 'calc\(100dvh - 32px\)'/);
 });
 
-test('RatingModal rate action opens the store link and dismiss schedules a retry window', () => {
+test('RatingModal routes "Enjoying it" to the store review link and "Could be better" to support email feedback', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
+  // Rate path
   assert.match(source, /getAppStoreReviewUrl/);
   assert.match(source, /window\.open\(reviewUrl/);
   assert.match(source, /diff_hunter_rating_handled', 'rated'/);
+
+  // Dismiss path
   assert.match(source, /diff_hunter_rating_handled', 'dismissed'/);
   assert.match(source, /import \{ recordRatingPromptDismissed \} from '\.\.\/services\/ratingPrompt'/);
   assert.match(source, /recordRatingPromptDismissed\(\)/);
+
+  // Feedback path with support email and filterable title prefix
+  assert.match(source, /support@thejauntcompany\.com/);
+  assert.match(source, /\[Diff Hunter Feedback\]/);
+  assert.match(source, /mailto:\$\{SUPPORT_EMAIL\}\?subject=/);
+  assert.match(source, /diff_hunter_rating_handled', 'feedback'/);
 });
 
 test('App Store review link is dynamically configurable post-launch via appConfig', () => {

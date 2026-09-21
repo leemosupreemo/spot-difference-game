@@ -1,19 +1,38 @@
-import React from 'react';
-import { Star, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, ArrowLeft, Send } from 'lucide-react';
+import { Capacitor } from '@capacitor/core';
 import { sounds } from '../utils/audio';
 import { trackRatingPromptAction } from '../services/analytics';
 import { getAppStoreReviewUrl } from '../services/appConfig';
 import { recordRatingPromptDismissed } from '../services/ratingPrompt';
+import { getSavedPlayerName } from '../services/playerProgress';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
+
+export const SUPPORT_EMAIL = 'support@thejauntcompany.com';
+export const FEEDBACK_SUBJECT_PREFIX = '[Diff Hunter Feedback]';
 
 export default function RatingModal({
   isOpen,
   onClose,
-  attemptNumber = 1
+  attemptNumber = 1,
+  playerName: propPlayerName
 }) {
+  const [step, setStep] = useState('prompt'); // 'prompt' | 'feedback' | 'thankyou'
+  const [feedbackText, setFeedbackText] = useState('');
+
+  useEffect(() => {
+    if (isOpen) {
+      setStep('prompt');
+      setFeedbackText('');
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
-  const handleRate = () => {
+  const rawName = propPlayerName || getSavedPlayerName();
+  const playerName = rawName && rawName.trim() ? rawName.trim() : 'Hunter';
+
+  const handleEnjoyingIt = () => {
     sounds.playWin();
     try {
       localStorage.setItem('diff_hunter_rating_handled', 'rated');
@@ -29,6 +48,55 @@ export default function RatingModal({
     } catch (_) {}
 
     onClose();
+  };
+
+  const handleCouldBeBetter = () => {
+    sounds.playTap();
+    setStep('feedback');
+  };
+
+  const handleSendFeedback = () => {
+    sounds.playWin();
+    try {
+      localStorage.setItem('diff_hunter_rating_handled', 'feedback');
+    } catch (_) {}
+
+    trackRatingPromptAction({ action: 'feedback', attemptNumber, feedback: feedbackText });
+
+    const isNative = typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform();
+    const subject = `${FEEDBACK_SUBJECT_PREFIX} Player Feedback - ${playerName}`;
+    const bodyLines = [
+      feedbackText.trim() || '(No feedback comment written)',
+      '',
+      '--- DIAGNOSTICS ---',
+      `Player: ${playerName}`,
+      `App: Diff Hunter`,
+      `Platform: ${isNative ? 'iOS Native' : 'Web'}`,
+      `Attempt: ${attemptNumber}`,
+      `Date: ${new Date().toISOString()}`
+    ];
+    const mailtoUrl = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+
+    try {
+      if (typeof window !== 'undefined') {
+        const link = document.createElement('a');
+        link.href = mailtoUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    } catch (_) {
+      if (typeof window !== 'undefined') {
+        window.location.href = mailtoUrl;
+      }
+    }
+
+    setStep('thankyou');
+    setTimeout(() => {
+      onClose();
+    }, 2200);
   };
 
   const handleDismiss = (e) => {
@@ -76,10 +144,10 @@ export default function RatingModal({
           position: 'relative',
           textAlign: 'center',
           borderRadius: '24px',
-          border: '2px solid rgba(255, 183, 3, 0.4)',
-          boxShadow: '0 0 45px rgba(255, 183, 3, 0.25), 0 20px 50px rgba(0, 0, 0, 0.7)',
+          border: '2px solid rgba(0, 240, 255, 0.35)',
+          boxShadow: '0 0 45px rgba(0, 240, 255, 0.2), 0 20px 50px rgba(0, 0, 0, 0.7)',
           boxSizing: 'border-box',
-          '--modal-accent': 'var(--accent-gold)'
+          '--modal-accent': 'var(--accent-cyan)'
         }}
       >
         <ModalAmbientParticles />
@@ -106,83 +174,213 @@ export default function RatingModal({
           <X size={18} />
         </button>
 
-        {/* Compact 5-star visual (decorative, not interactive) */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '4px',
-          marginBottom: '14px'
-        }} aria-hidden="true">
-          {[1, 2, 3, 4, 5].map(star => (
-            <Star
-              key={star}
-              size={24}
-              color="var(--accent-gold)"
-              fill="var(--accent-gold)"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(255, 183, 3, 0.8))' }}
+        {step === 'prompt' && (
+          <div>
+            {/* Header Title */}
+            <h2 style={{
+              fontSize: '1.4rem',
+              fontWeight: 900,
+              letterSpacing: '0.5px',
+              margin: '6px 0 10px 0',
+              background: 'linear-gradient(90deg, #ffffff, var(--accent-cyan))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>
+              Enjoying Diff Hunter?
+            </h2>
+
+            {/* Body Copy */}
+            <p style={{
+              margin: '0 0 24px 0',
+              fontSize: '0.94rem',
+              fontWeight: 600,
+              color: 'var(--text-muted)',
+              lineHeight: 1.45,
+              padding: '0 8px'
+            }}>
+              {playerName ? `${playerName}, we'd love to know if you're enjoying Diff Hunter!` : "We'd love to know if you're enjoying Diff Hunter!"}
+            </p>
+
+            {/* 2-Column Split: Could be better vs Enjoying it */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+              margin: '0 -20px -24px -20px',
+              borderRadius: '0 0 24px 24px',
+              overflow: 'hidden'
+            }}>
+              <button
+                type="button"
+                className="rating-choice-btn rating-choice-left"
+                onClick={handleCouldBeBetter}
+                style={{
+                  borderRight: '1px solid rgba(255, 255, 255, 0.12)',
+                  padding: '24px 12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px'
+                }}
+                aria-label="Could be better"
+              >
+                <span style={{ fontSize: '2.5rem', lineHeight: 1 }} role="img" aria-label="Unhappy face">🙁</span>
+                <span style={{ fontSize: '0.94rem', fontWeight: 800, color: 'var(--text-muted)' }}>
+                  Could be better
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className="rating-choice-btn rating-choice-right"
+                onClick={handleEnjoyingIt}
+                style={{
+                  padding: '24px 12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px'
+                }}
+                aria-label="Enjoying it"
+              >
+                <span style={{ fontSize: '2.5rem', lineHeight: 1 }} role="img" aria-label="Heart eyes face">😍</span>
+                <span style={{ fontSize: '0.94rem', fontWeight: 800, color: 'var(--accent-cyan)' }}>
+                  Enjoying it
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {step === 'feedback' && (
+          <div style={{ textAlign: 'left', paddingTop: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+              <button
+                type="button"
+                onClick={() => { sounds.playTap(); setStep('prompt'); }}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid var(--border-glass)',
+                  color: 'var(--text-muted)',
+                  cursor: 'pointer',
+                  padding: '6px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                aria-label="Back"
+              >
+                <ArrowLeft size={16} />
+              </button>
+              <h2 style={{
+                fontSize: '1.4rem',
+                fontWeight: 900,
+                letterSpacing: '0.5px',
+                margin: 0,
+                color: '#fff'
+              }}>
+                How can we improve?
+              </h2>
+            </div>
+
+            <p style={{ margin: '0 0 14px 0', fontSize: '0.86rem', color: 'var(--text-muted)', lineHeight: 1.45 }}>
+              Tell us what felt off or share any ideas. Your feedback gets sent directly to our team at <span style={{ color: 'var(--accent-cyan)', fontWeight: 700 }}>{SUPPORT_EMAIL}</span>.
+            </p>
+
+            <textarea
+              value={feedbackText}
+              onChange={(e) => setFeedbackText(e.target.value)}
+              placeholder="Tell us what could be better, report a puzzle issue, or share any suggestions..."
+              style={{
+                width: '100%',
+                minHeight: '110px',
+                padding: '12px',
+                borderRadius: '14px',
+                background: 'rgba(0, 0, 0, 0.45)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                color: '#fff',
+                fontSize: '0.88rem',
+                lineHeight: 1.45,
+                resize: 'vertical',
+                boxSizing: 'border-box',
+                marginBottom: '16px',
+                fontFamily: 'inherit'
+              }}
+              autoFocus
             />
-          ))}
-        </div>
 
-        {/* Header Title */}
-        <h2 style={{
-          fontSize: '1.4rem',
-          fontWeight: 900,
-          letterSpacing: '0.5px',
-          margin: '0 0 8px 0',
-          background: 'linear-gradient(90deg, #ffffff, var(--accent-gold))',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent'
-        }}>
-          Enjoying the game?
-        </h2>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                type="button"
+                className="glass-btn glass-btn-primary"
+                onClick={handleSendFeedback}
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  fontSize: '0.92rem',
+                  fontWeight: 800,
+                  padding: '12px',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                <Send size={16} />
+                Send Feedback
+              </button>
+              <button
+                type="button"
+                className="glass-btn"
+                onClick={handleDismiss}
+                style={{
+                  padding: '12px 16px',
+                  borderRadius: '12px',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  color: 'var(--text-muted)'
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
 
-        {/* Body Copy */}
-        <p style={{
-          margin: '0 0 22px 0',
-          fontSize: '0.92rem',
-          fontWeight: 600,
-          color: 'var(--text-muted)',
-          lineHeight: 1.4
-        }}>
-          A quick rating really helps us out.
-        </p>
-
-        {/* Primary CTA */}
-        <button
-          type="button"
-          className="glass-btn glass-btn-primary"
-          onClick={handleRate}
-          style={{
-            width: '100%',
-            justifyContent: 'center',
-            fontSize: '0.95rem',
-            fontWeight: 800,
-            padding: '12px 16px',
-            borderRadius: '12px',
-            marginBottom: '10px'
-          }}
-        >
-          Rate the Game
-        </button>
-
-        {/* Secondary CTA */}
-        <button
-          type="button"
-          className="glass-btn"
-          onClick={handleDismiss}
-          style={{
-            width: '100%',
-            justifyContent: 'center',
-            fontSize: '0.88rem',
-            fontWeight: 700,
-            padding: '10px 16px',
-            borderRadius: '12px',
-            color: 'var(--text-muted)'
-          }}
-        >
-          Maybe Later
-        </button>
+        {step === 'thankyou' && (
+          <div style={{ padding: '16px 0', textAlign: 'center' }}>
+            <div style={{ fontSize: '2.8rem', marginBottom: '10px' }} role="img" aria-label="Mailbox">💌</div>
+            <h2 style={{
+              fontSize: '1.4rem',
+              fontWeight: 900,
+              color: '#fff',
+              margin: '0 0 8px 0',
+              letterSpacing: '0.5px'
+            }}>
+              Thank You!
+            </h2>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: '0 0 16px 0', lineHeight: 1.45 }}>
+              We appreciate your input. It helps us make Diff Hunter better for everyone!
+            </p>
+            <button
+              type="button"
+              className="glass-btn glass-btn-primary"
+              onClick={onClose}
+              style={{
+                padding: '8px 24px',
+                borderRadius: '12px',
+                fontSize: '0.88rem',
+                fontWeight: 800,
+                margin: '0 auto'
+              }}
+            >
+              Done
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -37,11 +37,14 @@ test('first attempt is not eligible before 5 successful rounds', () => {
   assert.equal(shouldShowRatingPrompt(), true);
 });
 
-test('never proactively re-prompts once the player has rated', () => {
+test('never proactively re-prompts once the player has rated or submitted feedback', () => {
   globalThis.localStorage = freshStorage();
   for (let i = 0; i < 5; i++) incrementSuccessfulRounds();
   localStorage.setItem('diff_hunter_rating_handled', 'rated');
   recordRatingPromptShown();
+  assert.equal(shouldShowRatingPrompt(), false);
+
+  localStorage.setItem('diff_hunter_rating_handled', 'feedback');
   assert.equal(shouldShowRatingPrompt(), false);
 });
 

@@ -79,8 +79,8 @@ export function shouldShowRatingPrompt(overrides = {}) {
   const attempts = getRatingPromptAttempts();
   const handledType = getHandledType();
 
-  // Already rated: never proactively prompt again.
-  if (handledType === 'rated') return false;
+  // Already rated or submitted feedback: never proactively prompt again.
+  if (handledType === 'rated' || handledType === 'feedback') return false;
   if (attempts >= MAX_ATTEMPTS) return false;
 
   if (attempts === 0) {
