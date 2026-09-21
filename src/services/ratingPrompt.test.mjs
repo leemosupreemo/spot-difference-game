@@ -7,7 +7,8 @@ import {
   getRatingPromptAttempts,
   shouldShowRatingPrompt,
   recordRatingPromptShown,
-  recordRatingPromptDismissed
+  recordRatingPromptDismissed,
+  resetRatingPromptState
 } from './ratingPrompt.js';
 
 function freshStorage() {
@@ -93,4 +94,15 @@ test('getSessionsPlayed reads the shared launch-count key', () => {
   globalThis.localStorage = freshStorage();
   localStorage.setItem('diff_hunter_launch_count', '7');
   assert.equal(getSessionsPlayed(), 7);
+});
+
+test('resetRatingPromptState clears all rating prompt tracking keys', () => {
+  globalThis.localStorage = freshStorage();
+  incrementSuccessfulRounds();
+  recordRatingPromptShown();
+  localStorage.setItem('diff_hunter_rating_handled', 'rated');
+  resetRatingPromptState();
+  assert.equal(getSuccessfulRounds(), 0);
+  assert.equal(getRatingPromptAttempts(), 0);
+  assert.equal(shouldShowRatingPrompt(), false);
 });

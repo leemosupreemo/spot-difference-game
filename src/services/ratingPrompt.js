@@ -121,3 +121,18 @@ export function getLastRatingPromptDate() {
     return null;
   }
 }
+
+/** Resets all rating prompt state (useful for debug/testing or account reset). */
+export function resetRatingPromptState() {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(KEY_SUCCESSFUL_ROUNDS);
+      localStorage.removeItem(KEY_ATTEMPTS);
+      localStorage.removeItem(KEY_HANDLED_TYPE);
+      localStorage.removeItem(KEY_RETRY_AFTER_ROUNDS);
+      localStorage.removeItem(KEY_LAST_PROMPT_SESSION);
+      localStorage.removeItem(KEY_LAST_PROMPT_DATE);
+    }
+  } catch (_) {}
+}
+

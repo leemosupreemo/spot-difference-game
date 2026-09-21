@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Terminal, Copy, Check, Share2, Trash2, X, Bell } from 'lucide-react';
+import { Terminal, Copy, Check, Share2, Trash2, X, Bell, Star } from 'lucide-react';
 import { getAppLogs, clearAppLogs, subscribeAppLogs, logApp } from '../utils/logger';
 import { getCuratedStatusMap, getLevelStatus } from '../utils/curationStore';
 import { getAllPhotoPairEntries, selectPhotoPairEntries } from '../utils/photoPairLevelLoader';
@@ -11,6 +11,7 @@ export default function DiagnosticsModal({
   isOpen,
   onClose,
   onPreviewSplash,
+  onPreviewRating,
   currentLevel,
   selectedTheme,
   selectedDifficulty,
@@ -333,6 +334,26 @@ export default function DiagnosticsModal({
                 title="Preview Mobile Splash Screen"
               >
                 📱 Splash
+              </button>
+            )}
+
+            {onPreviewRating && (
+              <button
+                onClick={() => { sounds.playTap(); onPreviewRating(); }}
+                className="game-btn secondary"
+                style={{
+                  padding: '6px 10px',
+                  fontSize: '0.8rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  color: 'var(--accent-gold, #ffb020)'
+                }}
+                title="Preview In-App Rating Prompt Modal"
+                aria-label="Preview Rating Prompt"
+              >
+                <Star size={15} fill="var(--accent-gold, #ffb020)" />
+                Rating
               </button>
             )}
 

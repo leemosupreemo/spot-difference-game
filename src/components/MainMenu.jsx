@@ -39,7 +39,8 @@ export default function MainMenu({
   tutorialAnimationEnabled = true,
   onToggleTutorialAnimation = null,
   onRefreshRemotePacks = null,
-  remotePackSync = { status: 'idle', count: 0 }
+  remotePackSync = { status: 'idle', count: 0 },
+  onTriggerRatingPrompt = null
 }) {
   const isSetCompleted = hasCompletedProp !== undefined ? hasCompletedProp : hasCompletedFirstSet();
   const isNative = typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform();
@@ -374,6 +375,32 @@ export default function MainMenu({
             }}
           >
             {testNotifMsg || '🔔 TEST NOTIFICATION (3S DELAY)'}
+          </button>
+        )}
+
+        {debugMode && onTriggerRatingPrompt && (
+          <button
+            type="button"
+            aria-label="Test App Rating Prompt"
+            onClick={() => {
+              sounds.playTap();
+              onTriggerRatingPrompt();
+            }}
+            style={{
+              width: '100%',
+              marginBottom: '14px',
+              padding: '10px 12px',
+              borderRadius: '10px',
+              fontWeight: 900,
+              fontSize: '0.76rem',
+              letterSpacing: '0.5px',
+              cursor: 'pointer',
+              background: 'rgba(255, 183, 3, 0.12)',
+              color: 'var(--accent-gold, #ffb020)',
+              border: '1px solid rgba(255, 183, 3, 0.4)'
+            }}
+          >
+            ⭐ TEST APP RATING PROMPT
           </button>
         )}
 

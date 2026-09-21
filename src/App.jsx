@@ -57,7 +57,7 @@ import {
   pruneDismissedStatuses,
   saveCuratedStatusMap
 } from './utils/curationStore';
-import { incrementSuccessfulRounds, getSuccessfulRounds, getSessionsPlayed, shouldShowRatingPrompt, recordRatingPromptShown } from './services/ratingPrompt';
+import { incrementSuccessfulRounds, getSuccessfulRounds, getSessionsPlayed, shouldShowRatingPrompt, recordRatingPromptShown, resetRatingPromptState } from './services/ratingPrompt';
 import { getSetNumber, checkAndUpdateDynamicSetRecord } from './utils/setLeaderboards.js';
 import { submitLeaderboardScore } from './services/leaderboardService.js';
 import ScreenshotHarness from './components/ScreenshotHarness.jsx';
@@ -553,6 +553,7 @@ function GameApp() {
     if (!confirmed) return;
 
     clearAllLocalRecords();
+    resetRatingPromptState();
     setDifficultyStats({
       Easy: { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} },
       Medium: { setsCleared: 0, fastestFirstTimeOverall: null, fastestRepeatOverall: null, sets: {} },
@@ -1553,6 +1554,7 @@ function GameApp() {
             dismissedCount={dismissedAvailableCount}
             simulatedOffline={simulatedOffline}
             onToggleSimulatedOffline={handleToggleSimulatedOffline}
+            onTriggerRatingPrompt={() => setRatingModalOpen(true)}
             noticeSlot={
               <OfflineSetNotice
                 visible={switchedOffRemoteSet}
@@ -1753,6 +1755,10 @@ function GameApp() {
         onPreviewSplash={() => {
           setDiagnosticsModalOpen(false);
           setShowSplash(true);
+        }}
+        onPreviewRating={() => {
+          setDiagnosticsModalOpen(false);
+          setRatingModalOpen(true);
         }}
         currentLevel={currentLevel}
         selectedTheme={selectedTheme}
