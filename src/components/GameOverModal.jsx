@@ -44,7 +44,8 @@ export default function GameOverModal({
 
   return (
     <div
-      onClick={() => { sounds.playTap(); onClose(); }}
+      data-testid="game-over-backdrop"
+      onClick={(e) => e.stopPropagation()}
       style={{
         position: 'fixed',
         inset: 0,
@@ -102,25 +103,29 @@ export default function GameOverModal({
               setIsDropdownOpen(prev => !prev);
             }}
             style={{
-              background: isDropdownOpen ? 'rgba(255, 0, 127, 0.25)' : 'rgba(255,255,255,0.08)',
-              border: isDropdownOpen ? '1px solid var(--accent-pink)' : '1px solid var(--border-glass)',
-              color: isDropdownOpen ? 'var(--accent-pink)' : 'var(--text-muted)',
-              borderRadius: '50%',
-              width: '32px',
-              height: '32px',
+              background: isDropdownOpen
+                ? 'var(--accent-cyan)'
+                : 'linear-gradient(135deg, rgba(0, 240, 255, 0.22), rgba(0, 140, 255, 0.12))',
+              border: '1.5px solid var(--accent-cyan)',
+              color: isDropdownOpen ? '#050714' : 'var(--accent-cyan)',
+              borderRadius: '12px',
+              width: '38px',
+              height: '38px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: isDropdownOpen ? '0 0 12px rgba(255, 0, 127, 0.5)' : 'none',
-              transition: 'all 0.15s ease'
+              boxShadow: isDropdownOpen
+                ? '0 0 20px rgba(0, 240, 255, 0.7)'
+                : '0 0 14px rgba(0, 240, 255, 0.4)',
+              transition: 'all 0.18s ease'
             }}
             title="Repeat Set"
             aria-label="Repeat Set"
             aria-expanded={isDropdownOpen}
             aria-haspopup="listbox"
           >
-            <RotateCcw size={16} />
+            <RotateCcw size={18} strokeWidth={2.4} color={isDropdownOpen ? '#050714' : 'var(--accent-cyan)'} />
           </button>
 
           {/* Dropdown Menu of Attempted Sets */}
@@ -132,20 +137,20 @@ export default function GameOverModal({
               onClick={(e) => e.stopPropagation()}
               style={{
                 position: 'absolute',
-                top: '38px',
+                top: '44px',
                 left: 0,
-                background: 'rgba(15, 11, 26, 0.98)',
+                background: 'rgba(10, 14, 28, 0.98)',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
-                border: '1.5px solid var(--accent-pink)',
+                border: '1.5px solid var(--accent-cyan)',
                 borderRadius: '14px',
                 padding: '8px',
                 width: 'max-content',
-                minWidth: '200px',
+                minWidth: '210px',
                 maxWidth: '280px',
                 maxHeight: '240px',
                 overflowY: 'auto',
-                boxShadow: '0 12px 36px rgba(0,0,0,0.85), 0 0 20px rgba(255, 0, 127, 0.35)',
+                boxShadow: '0 12px 36px rgba(0,0,0,0.85), 0 0 20px rgba(0, 240, 255, 0.35)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '5px',
@@ -156,11 +161,11 @@ export default function GameOverModal({
               <div style={{
                 fontSize: '0.7rem',
                 fontWeight: 900,
-                color: 'var(--text-muted)',
+                color: 'var(--accent-cyan)',
                 letterSpacing: '0.5px',
                 textTransform: 'uppercase',
                 padding: '2px 6px 4px 6px',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                borderBottom: '1px solid rgba(0, 240, 255, 0.15)',
                 marginBottom: '2px'
               }}>
                 Choose Set to Repeat
@@ -203,16 +208,22 @@ export default function GameOverModal({
                       gap: '8px'
                     }}
                     onMouseEnter={(e) => {
-                      if (!isFailedSet) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
+                      if (!isFailedSet) {
+                        e.currentTarget.style.background = 'rgba(0, 240, 255, 0.15)';
+                        e.currentTarget.style.borderColor = 'var(--accent-cyan)';
+                      }
                     }}
                     onMouseLeave={(e) => {
-                      if (!isFailedSet) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                      if (!isFailedSet) {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                      }
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
                       <RotateCcw
                         size={13}
-                        color={isFailedSet ? 'var(--accent-pink)' : 'var(--text-muted)'}
+                        color={isFailedSet ? 'var(--accent-pink)' : 'var(--accent-cyan)'}
                         style={{ flexShrink: 0 }}
                       />
                       <span style={{

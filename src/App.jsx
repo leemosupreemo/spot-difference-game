@@ -842,7 +842,7 @@ function GameApp() {
 
     // 2. PHOTOGRAPHY CATEGORY: ALWAYS uses curated premade real-world photo pairs
     try {
-      if (debugMode) {
+      if (debugMode && !overrideSetId) {
         const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
         const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries({ debugMode });
         if (effectivePool.length > 0) {
@@ -858,14 +858,16 @@ function GameApp() {
         }
       }
 
-      let activePhotoSetId = targetPhotoSetId;
+      let activePhotoSetId = targetPhotoSetId || photoSetId;
       if (!photoSetId || !photoSetIds.includes(photoSetId)) {
-        logApp('WARN', '[StartGame:PhotoSetUnavailable] No valid Photography set is selected; recovering to first available set');
-        activePhotoSetId = photoSetIds[0] || 'photo_set_001';
-        setPhotoSetId(activePhotoSetId);
-        try {
-          localStorage.setItem('diff_hunter_photo_set_id', activePhotoSetId);
-        } catch {}
+        if (!targetPhotoSetId) {
+          logApp('WARN', '[StartGame:PhotoSetUnavailable] No valid Photography set is selected; recovering to first available set');
+          activePhotoSetId = photoSetIds[0] || 'photo_set_001';
+          setPhotoSetId(activePhotoSetId);
+          try {
+            localStorage.setItem('diff_hunter_photo_set_id', activePhotoSetId);
+          } catch {}
+        }
       } else if (targetPhotoSetId) {
         activePhotoSetId = targetPhotoSetId;
       }
@@ -963,14 +965,15 @@ function GameApp() {
 
   const handleNextStage = useCallback(() => {
     if (selectedTheme === 'find_the_sniper' && photoSetIds.length > 0) {
-      const currentIndex = photoSetIds.indexOf(photoSetId);
+      const currentEffectiveSetId = currentLevel?.setId || photoSetId;
+      const currentIndex = photoSetIds.indexOf(currentEffectiveSetId);
       const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % photoSetIds.length : 0;
       const nextSetId = photoSetIds[nextIndex];
       handleStartGame(nextSetId);
     } else {
       handleStartGame();
     }
-  }, [selectedTheme, photoSetIds, photoSetId, handleStartGame]);
+  }, [selectedTheme, photoSetIds, photoSetId, currentLevel, handleStartGame]);
 
   // Launch Set of the Day (3-image sequence from unrepeated daily queue)
   const handleStartDailyChallenge = () => {
@@ -1826,7 +1829,8 @@ function GameApp() {
         onRestart={(chosenSetId) => {
           setGameOverModalOpen(false);
           setRevealAnswer(false);
-          handleStartGame(chosenSetId);
+          const targetRestartSetId = chosenSetId || currentLevel?.setId || photoSetId || 'photo_set_001';
+          handleStartGame(targetRestartSetId);
         }}
         onNextStage={() => {
           setGameOverModalOpen(false);
@@ -1841,7 +1845,7 @@ function GameApp() {
         elapsedTime={elapsedTime}
         missCount={missCount}
         levelTitle={currentLevel?.title || 'Stage Set'}
-        setId={photoSetId}
+        setId={currentLevel?.setId || photoSetId || 'photo_set_001'}
         themeId={selectedTheme}
         isFirstAttempt={isCurrentRunFirstAttempt}
         difficultyStats={difficultyStats}

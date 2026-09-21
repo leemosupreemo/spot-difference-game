@@ -105,3 +105,26 @@ test('tapping failed set in dropdown calls onRestart with the failed set id', ()
   fireEvent.click(screen.getByText(/Photo Set 4/i));
   expect(onRestart).toHaveBeenCalledWith('photo_set_004');
 });
+
+test('repeat button has prominent blue styling and backdrop clicks do not close the modal', () => {
+  const onClose = vi.fn();
+  const onRestart = vi.fn();
+
+  render(
+    <GameOverModal
+      isOpen={true}
+      onClose={onClose}
+      onRestart={onRestart}
+      elapsedTime={5000}
+      setId="photo_set_001"
+    />
+  );
+
+  const redoBtn = screen.getByRole('button', { name: /repeat set/i });
+  expect(redoBtn.style.border).toContain('var(--accent-cyan)');
+
+  // Clicking backdrop does NOT dismiss the modal
+  const backdrop = screen.getByTestId('game-over-backdrop');
+  fireEvent.click(backdrop);
+  expect(onClose).not.toHaveBeenCalled();
+});
