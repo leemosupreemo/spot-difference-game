@@ -16,6 +16,7 @@ import {
   getDailyPlayerStatus,
   getTodayDateString
 } from '../services/dailyChallenge';
+import { trackDailyChallengeClicked } from '../services/analytics.js';
 import { getSetNumber } from '../utils/setLeaderboards.js';
 
 export default function ProgressModal({
@@ -587,6 +588,7 @@ export default function ProgressModal({
                 <button
                   onClick={() => {
                     sounds.playTap();
+                    trackDailyChallengeClicked({ source: 'progress_modal', date: getTodayDateString() });
                     onStartDaily();
                   }}
                   className="glass-btn glass-btn-primary"

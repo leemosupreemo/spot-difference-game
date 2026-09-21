@@ -11,7 +11,9 @@ let sessionStats = {
   levelsPlayed: 0,
   wins: 0,
   losses: 0,
-  categoriesPlayed: new Set()
+  categoriesPlayed: new Set(),
+  setsPlayed: [],
+  setsCleared: []
 };
 
 function getIsoWeek(date = new Date()) {
@@ -184,12 +186,21 @@ function setupSessionDurationTracking() {
         levels_played: sessionStats.levelsPlayed,
         wins: sessionStats.wins,
         losses: sessionStats.losses,
-        categories_played: Array.from(sessionStats.categoriesPlayed)
+        categories_played: Array.from(sessionStats.categoriesPlayed),
+        sets_played: [...sessionStats.setsPlayed],
+        sets_cleared: [...sessionStats.setsCleared],
+        set_combination: sessionStats.setsCleared.join(" + ")
       });
 
       if (mixpanel?.people) {
         mixpanel.people.increment("Total Time Played Sec", durationSec);
         mixpanel.people.increment("Total Sessions", 1);
+        if (sessionStats.setsCleared.length > 0) {
+          mixpanel.people.set_once({
+            "First Session Sets Combination": sessionStats.setsCleared.join(" + "),
+            "First Session Sets Cleared Count": sessionStats.setsCleared.length
+          });
+        }
       }
     }
     sessionStartTime = Date.now();
@@ -263,15 +274,19 @@ export function trackCategorySelected(themeId) {
   });
 }
 
-export function trackGameStarted({ themeId, difficulty = "Medium", mode = "classic" }) {
+export function trackGameStarted({ themeId, setId = null, difficulty = "Medium", mode = "classic" }) {
   const categoryType = themeId === "abstract_animated" ? "abstract_generated" : "photorealistic";
   const categoryName = themeId === "abstract_animated" ? "Abstract" : "Photography";
 
   sessionStats.levelsPlayed += 1;
   sessionStats.categoriesPlayed.add(categoryType);
+  if (setId && !sessionStats.setsPlayed.includes(setId)) {
+    sessionStats.setsPlayed.push(setId);
+  }
 
   trackEvent("Game Started", {
     theme_id: themeId,
+    set_id: setId || null,
     category_name: categoryName,
     category_type: categoryType,
     difficulty,
@@ -282,6 +297,12 @@ export function trackGameStarted({ themeId, difficulty = "Medium", mode = "class
     const propName = categoryType === "photorealistic" ? "Photorealistic Games Started" : "Abstract Games Started";
     mixpanel.people.increment(propName, 1);
     mixpanel.people.set({ "Last Selected Category": categoryName });
+    if (setId) {
+      mixpanel.people.set_once({
+        "First Set Played": setId,
+        "First Set Played Category": categoryName
+      });
+    }
   }
 }
 
@@ -289,6 +310,9 @@ export function trackImagePairCompleted({
   result = "win",
   level,
   selectedTheme,
+  setId = null,
+  isFirstAttempt = false,
+  gameMode = "standard",
   elapsedTimeMs = 0,
   missCount = 0,
   hintsUsed = 0,
@@ -305,7 +329,7 @@ export function trackImagePairCompleted({
   const isWin = result === "win";
   if (isWin) {
     sessionStats.wins += 1;
-  } else {
+  } else if (result === "lose") {
     sessionStats.losses += 1;
   }
 
@@ -321,15 +345,21 @@ export function trackImagePairCompleted({
   }
 
   const totalUniqueCompleted = uniqueSet.size;
+  const eventName = isWin
+    ? "Image Pair Completed"
+    : (result === "abandoned" ? "Image Pair Abandoned" : "Image Pair Failed");
 
-  trackEvent(isWin ? "Image Pair Completed" : "Image Pair Failed", {
+  trackEvent(eventName, {
     result,
     level_id: levelId,
     level_title: level?.title || "",
+    set_id: setId || level?.setId || null,
     pack_id: packId,
     category_name: categoryName,
     category_type: categoryType,
+    game_mode: gameMode,
     operation: level?.operation || "unknown",
+    is_first_attempt: Boolean(isFirstAttempt),
     is_unique_first_time: isUniqueFirstTime,
     total_unique_completed: totalUniqueCompleted,
     elapsed_time_sec: Math.round(elapsedTimeMs / 1000),
@@ -347,7 +377,7 @@ export function trackImagePairCompleted({
         mixpanel.people.set({ "Total Unique Pairs Completed": totalUniqueCompleted });
         mixpanel.people.increment("Unique Pairs Completed Count", 1);
       }
-    } else {
+    } else if (result === "lose") {
       mixpanel.people.increment("Total Image Pairs Lost", 1);
     }
   }
@@ -355,10 +385,13 @@ export function trackImagePairCompleted({
 
 export function trackStageCleared({
   selectedTheme,
+  setId = null,
   selectedDifficulty = "Medium",
   totalStageTimeMs = 0,
   totalStageScore = 0,
-  imagesInStageCount = 5
+  imagesInStageCount = 5,
+  isFirstAttempt = false,
+  gameMode = "standard"
 }) {
   const categoryType = selectedTheme === "abstract_animated" ? "abstract_generated" : "photorealistic";
   const categoryName = categoryType === "abstract_generated" ? "Abstract" : "Photography";
@@ -366,9 +399,12 @@ export function trackStageCleared({
 
   trackEvent("Stage Set Cleared", {
     theme_id: selectedTheme,
+    set_id: setId || null,
     category_name: categoryName,
     category_type: categoryType,
     difficulty: selectedDifficulty,
+    game_mode: gameMode,
+    is_first_attempt: Boolean(isFirstAttempt),
     total_stage_time_sec: Math.round(totalStageTimeMs / 1000),
     total_stage_time_ms: totalStageTimeMs,
     total_stage_score: totalStageScore,
@@ -378,6 +414,46 @@ export function trackStageCleared({
 
   if (mixpanel?.people) {
     mixpanel.people.increment("Total Stages Cleared", 1);
+  }
+}
+
+export function trackStageFailed({
+  selectedTheme,
+  setId = null,
+  selectedDifficulty = "Medium",
+  totalStageTimeMs = 0,
+  stageIndexFailed = 0,
+  failedLevelId = null,
+  imagesInStageCount = 5,
+  isFirstAttempt = false,
+  gameMode = "standard",
+  reason = "three_strikes"
+}) {
+  const packId = selectedTheme || "find_the_sniper";
+  const categoryType = (packId === "abstract_animated" || selectedTheme === "abstract_animated")
+    ? "abstract_generated"
+    : "photorealistic";
+  const categoryName = categoryType === "abstract_generated" ? "Abstract" : "Photography";
+
+  const eventName = reason === "abandoned" ? "Stage Set Abandoned" : "Stage Set Failed";
+  trackEvent(eventName, {
+    theme_id: selectedTheme,
+    set_id: setId || null,
+    category_name: categoryName,
+    category_type: categoryType,
+    difficulty: selectedDifficulty,
+    game_mode: gameMode,
+    stage_index_failed: stageIndexFailed,
+    failed_level_id: failedLevelId || "unknown",
+    reason,
+    is_first_attempt: Boolean(isFirstAttempt),
+    total_stage_time_sec: Math.round(totalStageTimeMs / 1000),
+    total_stage_time_ms: totalStageTimeMs,
+    images_in_stage_count: imagesInStageCount
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.increment("Total Stage Sets Failed", 1);
   }
 }
 
@@ -612,5 +688,112 @@ export function trackNotificationClicked({
   }
 }
 
+/**
+ * Tracks when the Main Menu is viewed / loaded.
+ */
+export function trackMainMenuViewed({ selectedTheme = "find_the_sniper" } = {}) {
+  const categoryName = selectedTheme === "abstract_animated" ? "Abstract" : "Photography";
+  trackEvent("Main Menu Viewed", {
+    selected_theme: selectedTheme,
+    selected_category: categoryName
+  });
+}
 
+/**
+ * Tracks when the Daily Challenge / Set of the Day banner is shown to the user.
+ */
+export function trackDailyChallengeImpression({
+  date = getTodayDateString(),
+  timeToBeatSec = null,
+  hasAttempted = false,
+  isCompleted = false
+} = {}) {
+  trackEvent("Daily Challenge Banner Impressed", {
+    date,
+    time_to_beat_sec: timeToBeatSec,
+    has_attempted: Boolean(hasAttempted),
+    is_completed: Boolean(isCompleted)
+  });
+}
 
+/**
+ * Tracks when the user clicks or taps to play the Daily Challenge.
+ */
+export function trackDailyChallengeClicked({
+  source = "main_banner",
+  date = getTodayDateString(),
+  isAttempted = false
+} = {}) {
+  trackEvent("Daily Challenge Clicked", {
+    source,
+    date,
+    is_attempted: Boolean(isAttempted)
+  });
+}
+
+/**
+ * Tracks when the Daily Challenge game loop actually launches.
+ */
+export function trackDailyChallengeStarted({
+  date = getTodayDateString(),
+  levelsCount = 3
+} = {}) {
+  trackEvent("Daily Challenge Started", {
+    date,
+    levels_count: levelsCount
+  });
+}
+
+/**
+ * Tracks the completion (win or fail) of the Daily Challenge.
+ */
+export function trackDailyChallengeCompleted({
+  date = getTodayDateString(),
+  totalTimeMs = 0,
+  stars = 3,
+  position = null,
+  isNewRecord = false,
+  isFailed = false
+} = {}) {
+  const totalTimeSec = Number((Math.max(0, totalTimeMs) / 1000).toFixed(2));
+  trackEvent("Daily Challenge Completed", {
+    date,
+    total_time_sec: totalTimeSec,
+    total_time_ms: totalTimeMs,
+    stars,
+    position,
+    is_new_record: Boolean(isNewRecord),
+    is_failed: Boolean(isFailed),
+    result: isFailed ? "failed" : "completed"
+  });
+
+  if (mixpanel?.people) {
+    if (!isFailed) {
+      mixpanel.people.increment("Daily Challenges Completed", 1);
+      mixpanel.people.set({ "Last Daily Challenge Cleared Date": date });
+    }
+  }
+}
+
+/**
+ * Tracks when the Help button is tapped.
+ */
+export function trackHelpTapped({ source = "header", view = "menu" } = {}) {
+  trackEvent("Help Button Tapped", {
+    source,
+    view
+  });
+
+  if (mixpanel?.people) {
+    mixpanel.people.increment("Total Help Taps", 1);
+  }
+}
+
+/**
+ * Tracks when a user switches tabs or views sections in HelpModal.
+ */
+export function trackHelpTabSwitched({ tab = "rules" } = {}) {
+  trackEvent("Help Tab Switched", {
+    tab
+  });
+}

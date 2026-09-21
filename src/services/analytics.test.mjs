@@ -6,6 +6,7 @@ import {
   trackGameStarted,
   trackImagePairCompleted,
   trackStageCleared,
+  trackStageFailed,
   trackRatingPromptShown,
   trackRatingPromptAction,
   trackResultScreenViewed,
@@ -17,6 +18,13 @@ import {
   trackNotificationScheduled,
   trackNotificationPermissionResult,
   trackNotificationClicked,
+  trackMainMenuViewed,
+  trackDailyChallengeImpression,
+  trackDailyChallengeClicked,
+  trackDailyChallengeStarted,
+  trackDailyChallengeCompleted,
+  trackHelpTapped,
+  trackHelpTabSwitched,
   identifyPlayer,
   resetAnalyticsUser
 } from "./analytics.js";
@@ -91,11 +99,31 @@ test("tracks image pair win and loss with unique completion metrics", () => {
       result: "lose",
       level: mockLevel,
       selectedTheme: "find_the_sniper",
+      setId: "photo_set_001",
+      isFirstAttempt: true,
+      gameMode: "standard",
       elapsedTimeMs: 12000,
       missCount: 3,
       hintsUsed: 2,
       scoreEarned: 0,
       stageIndex: 2
+    });
+  });
+
+  // 4. Abandoned / Quit
+  assert.doesNotThrow(() => {
+    trackImagePairCompleted({
+      result: "abandoned",
+      level: mockLevel,
+      selectedTheme: "find_the_sniper",
+      setId: "photo_set_001",
+      isFirstAttempt: false,
+      gameMode: "standard",
+      elapsedTimeMs: 8500,
+      missCount: 1,
+      hintsUsed: 0,
+      scoreEarned: 0,
+      stageIndex: 1
     });
   });
 });
@@ -104,10 +132,43 @@ test("tracks full 5-image stage clearance", () => {
   assert.doesNotThrow(() => {
     trackStageCleared({
       selectedTheme: "find_the_sniper",
+      setId: "photo_set_001",
       selectedDifficulty: "Medium",
       totalStageTimeMs: 18500,
       totalStageScore: 2150,
-      imagesInStageCount: 5
+      imagesInStageCount: 5,
+      isFirstAttempt: true,
+      gameMode: "standard"
+    });
+  });
+});
+
+test("tracks stage set failures and forfeits properly", () => {
+  assert.doesNotThrow(() => {
+    trackStageFailed({
+      selectedTheme: "find_the_sniper",
+      setId: "photo_set_001",
+      selectedDifficulty: "Medium",
+      totalStageTimeMs: 14000,
+      stageIndexFailed: 2,
+      failedLevelId: "test_photo_level_001",
+      imagesInStageCount: 5,
+      isFirstAttempt: true,
+      gameMode: "standard",
+      reason: "three_strikes"
+    });
+
+    trackStageFailed({
+      selectedTheme: "find_the_sniper",
+      setId: "photo_set_001",
+      selectedDifficulty: "Medium",
+      totalStageTimeMs: 7000,
+      stageIndexFailed: 1,
+      failedLevelId: "test_photo_level_001",
+      imagesInStageCount: 5,
+      isFirstAttempt: false,
+      gameMode: "standard",
+      reason: "abandoned"
     });
   });
 });
@@ -193,4 +254,48 @@ test("identifies player and resets user without throwing", () => {
   });
 });
 
+test("tracks main menu view, daily challenge funnel, and help interactions without throwing", () => {
+  assert.doesNotThrow(() => {
+    trackMainMenuViewed({ selectedTheme: "find_the_sniper" });
+    trackMainMenuViewed({ selectedTheme: "abstract_animated" });
 
+    trackDailyChallengeImpression({
+      date: "2026-09-20",
+      timeToBeatSec: 15.5,
+      hasAttempted: false,
+      isCompleted: false
+    });
+
+    trackDailyChallengeClicked({
+      source: "main_banner",
+      date: "2026-09-20",
+      isAttempted: false
+    });
+
+    trackDailyChallengeStarted({
+      date: "2026-09-20",
+      levelsCount: 3
+    });
+
+    trackDailyChallengeCompleted({
+      date: "2026-09-20",
+      totalTimeMs: 14200,
+      stars: 3,
+      position: 1,
+      isNewRecord: true,
+      isFailed: false
+    });
+
+    trackDailyChallengeCompleted({
+      date: "2026-09-20",
+      totalTimeMs: 12000,
+      stars: 0,
+      position: null,
+      isNewRecord: false,
+      isFailed: true
+    });
+
+    trackHelpTapped({ source: "header", view: "menu" });
+    trackHelpTabSwitched({ tab: "privacy" });
+  });
+});

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, Timer, X, Shield, ExternalLink, HelpCircle, CheckCircle2, FileText, ArrowLeft } from 'lucide-react';
 import { sounds } from '../utils/audio';
+import { trackHelpTabSwitched } from '../services/analytics';
 import CompareDemoAnimation from './CompareDemoAnimation';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
@@ -88,7 +89,11 @@ export default function HelpModal({ isOpen, onClose }) {
         {!showFullPolicy ? (
           <div style={{ display: 'flex', gap: 'var(--modal-gap-sm)', marginBottom: '16px' }}>
             <button
-              onClick={() => { sounds.playTap(); setActiveTab('rules'); }}
+              onClick={() => {
+                sounds.playTap();
+                setActiveTab('rules');
+                trackHelpTabSwitched({ tab: 'rules' });
+              }}
               style={{
                 flex: 1,
                 padding: '8px 14px',
@@ -109,7 +114,11 @@ export default function HelpModal({ isOpen, onClose }) {
             </button>
 
             <button
-              onClick={() => { sounds.playTap(); setActiveTab('privacy'); }}
+              onClick={() => {
+                sounds.playTap();
+                setActiveTab('privacy');
+                trackHelpTabSwitched({ tab: 'privacy' });
+              }}
               style={{
                 flex: 1,
                 padding: '8px 14px',

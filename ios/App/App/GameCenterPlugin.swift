@@ -25,7 +25,6 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
 
     override public func load() {
         super.load()
-        setupSilentAuth()
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleAppDidBecomeActive),
@@ -39,6 +38,7 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
     }
 
     @objc private func handleAppDidBecomeActive() {
+        guard hasConfiguredAuthHandler else { return }
         let isAuth = GKLocalPlayer.local.isAuthenticated
         let playerData = self.playerDictionary()
         self.notifyListeners("gameCenterAuthChanged", data: [
@@ -162,6 +162,12 @@ public class GameCenterPlugin: CAPPlugin, CAPBridgedPlugin, GKGameCenterControll
                 "isAuthenticated": true,
                 "player": playerDictionary()
             ])
+            return
+        }
+
+        if !hasConfiguredAuthHandler {
+            pendingAuthCalls.append(call)
+            setupSilentAuth()
             return
         }
 

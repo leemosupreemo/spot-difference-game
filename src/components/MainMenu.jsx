@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { formatSetLabel } from '../utils/remoteSetPolicy.js';
 import { Play, Layers, Sparkles, Camera, Swords, Smartphone } from 'lucide-react';
 import { Capacitor } from '@capacitor/core';
@@ -6,7 +6,7 @@ import { sounds } from '../utils/audio';
 import { SCENE_THEMES, generateProceduralLevelPair } from '../utils/proceduralGenerator';
 import { resolveAssetUrl } from '../utils/photoPairLevelLoader';
 import { logApp, auditDOMState } from '../utils/logger';
-import { trackCategorySelected } from '../services/analytics';
+import { trackCategorySelected, trackMainMenuViewed } from '../services/analytics';
 import { hasCompletedFirstSet } from '../services/playerProgress';
 import TutorialBanner from './TutorialBanner';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
@@ -58,6 +58,10 @@ export default function MainMenu({
   // Per-card tick, bumped only on that card's own tap (even re-tapping the active
   // mode) so its zoom/fade replays independently of the other card.
   const [gameModeBgTicks, setGameModeBgTicks] = useState({});
+
+  useEffect(() => {
+    trackMainMenuViewed({ selectedTheme });
+  }, []);
 
   const themeDetails = {
     find_the_sniper: {

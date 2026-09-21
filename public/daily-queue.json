@@ -1,12 +1,6 @@
 {
-  "updatedAt": "2026-09-20T00:00:00.000Z",
-  "schedule": {
-    "2026-09-10": [
-      "photo_set_001_01",
-      "photo_set_001_02",
-      "photo_set_001_03"
-    ]
-  },
+  "updatedAt": "2026-09-21T01:41:25.147Z",
+  "schedule": {},
   "queue": [
     {
       "setId": "set_daily_modern_01",

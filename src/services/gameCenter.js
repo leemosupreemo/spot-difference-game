@@ -27,9 +27,13 @@ let authState = {
 
 const listeners = new Set();
 
-// Register listener for native Game Center authentication events (iOS only)
-if (isGameCenterSupported() && typeof NativeGameCenter.addListener === 'function') {
+let isListenerRegistered = false;
+function ensureAuthListener() {
+  if (isListenerRegistered || !isGameCenterSupported() || typeof NativeGameCenter.addListener !== 'function') {
+    return;
+  }
   try {
+    isListenerRegistered = true;
     NativeGameCenter.addListener('gameCenterAuthChanged', (data) => {
       authState = {
         isInitialized: true,
@@ -59,6 +63,7 @@ function notifyListeners() {
  * @returns {() => void} unsubscribe function
  */
 export function onGameCenterAuthChange(callback) {
+  ensureAuthListener();
   listeners.add(callback);
   // Send immediate state
   callback({ ...authState });
@@ -85,6 +90,8 @@ export async function initGameCenter() {
     notifyListeners();
     return authState;
   }
+
+  ensureAuthListener();
 
   try {
     const authPromise = NativeGameCenter.authenticate();

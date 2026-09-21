@@ -135,7 +135,7 @@ export async function scheduleInstallNotifications(force = false) {
         {
           id: NOTIFICATION_ID_RETENTION,
           title: '🎯 Leaderboard Challenge!',
-          body: 'Players are climbing the ranks. Jump back in and see if you can reach the Top 5% speed!',
+          body: 'Players are climbing the ranks. Jump back in and see if you can reach the top of the leaderboard!',
           schedule: { at: fiveDaysLater },
           sound: 'beep.wav',
           extra: { type: 'retention_5day' }

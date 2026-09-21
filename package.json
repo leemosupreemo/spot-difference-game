@@ -22,7 +22,8 @@
     "test:screenshots": "node scripts/capture_modal_screenshots.mjs",
     "test:visual": "node scripts/capture_modal_screenshots.mjs --check",
     "stage:remote": "node scripts/stage_remote_assets.mjs",
-    "audit:levels": "node scripts/audit_published_levels.mjs"
+    "audit:levels": "node scripts/audit_published_levels.mjs",
+    "dashboard": "node scripts/generate_dashboard.mjs"
   },
   "dependencies": {
     "@capacitor/core": "^8.5.0",

@@ -9,6 +9,10 @@ import {
   getDailyLeaderboard,
   fetchDailyLeaderboard
 } from '../services/dailyChallenge.js';
+import {
+  trackDailyChallengeImpression,
+  trackDailyChallengeClicked
+} from '../services/analytics.js';
 
 export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard, forceShow = false, debugMode = false, onResetDaily = null }) {
   const [enabled, setEnabled] = useState(isSetOfTheDayEnabled());
@@ -42,6 +46,19 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
     }).catch(() => {});
   }, []);
 
+  useEffect(() => {
+    if (!enabled) return;
+    const isAtt = Boolean(playerStatus.completed || playerStatus.attempted || playerStatus.failed);
+    if (!forceShow && !debugMode && !playerStatus.completed && isAtt) return;
+
+    trackDailyChallengeImpression({
+      date: getTodayDateString(),
+      timeToBeatSec: timeToBeatMs ? Number((timeToBeatMs / 1000).toFixed(1)) : null,
+      hasAttempted: isAtt,
+      isCompleted: Boolean(playerStatus.completed)
+    });
+  }, [enabled, forceShow, debugMode, playerStatus.completed, playerStatus.attempted, playerStatus.failed, timeToBeatMs]);
+
   // Do not continue showing after a player attempts or completes it (always show in debug mode)
   const isAttempted = Boolean(playerStatus.completed || playerStatus.attempted || playerStatus.failed);
   if (!enabled || (!forceShow && !debugMode && !playerStatus.completed && isAttempted)) return null;
@@ -61,6 +78,11 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
 
   const handleClick = (e) => {
     e.stopPropagation();
+    trackDailyChallengeClicked({
+      source: 'main_banner',
+      date: getTodayDateString(),
+      isAttempted
+    });
     if (isAttempted && !debugMode) {
       sounds.playTap();
       if (onOpenDailyLeaderboard) onOpenDailyLeaderboard();
