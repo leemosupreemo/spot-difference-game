@@ -71,6 +71,8 @@ test('ProgressModal provides set dropdown filter, defaults to the general board,
   assert.match(progressModalSource, /aria-label="Photo Set leaderboard"/);
   // Dropdown includes a clearly-labeled default entry for the overall Top 25 board
   assert.match(progressModalSource, /<option value="">General Leaderboard \(Top 25\)<\/option>/);
+  // Sets in dropdown are formatted with formatSetLabel
+  assert.match(progressModalSource, /formatSetLabel\(setId\)/);
   // Falls back to the general board ('') rather than auto-selecting the first specific set
   assert.match(progressModalSource, /setSelectedLeaderboardSet\(current => current && availableSets\.includes\(current\) \? current : ''\)/);
   assert.doesNotMatch(progressModalSource, /placeholder="Search Set #/);

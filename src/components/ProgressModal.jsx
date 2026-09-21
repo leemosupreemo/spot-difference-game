@@ -18,6 +18,7 @@ import {
 } from '../services/dailyChallenge';
 import { trackDailyChallengeClicked } from '../services/analytics.js';
 import { getSetNumber } from '../utils/setLeaderboards.js';
+import { formatSetLabel } from '../utils/remoteSetPolicy.js';
 
 export default function ProgressModal({
   isOpen,
@@ -310,11 +311,13 @@ export default function ProgressModal({
                   }}
                 >
                   <option value="">General Leaderboard (Top 25)</option>
-                  {Object.keys(leaderboardData.bySetFirst).map(setId => (
-                    <option key={setId} value={setId}>
-                      {`Set ${getSetNumber(setId)}: ${setId.replace(/_/g, ' ')}`}
-                    </option>
-                  ))}
+                  {Object.keys(leaderboardData.bySetFirst)
+                    .sort((a, b) => getSetNumber(a) - getSetNumber(b))
+                    .map(setId => (
+                      <option key={setId} value={setId}>
+                        {formatSetLabel(setId)}
+                      </option>
+                    ))}
                 </select>
                 <ChevronDown
                   size={16}

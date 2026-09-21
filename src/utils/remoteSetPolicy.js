@@ -22,6 +22,8 @@
  * ================================================================================
  */
 
+import { getSetNumber } from './setLeaderboards.js';
+
 /** Sets whose artwork lives on Hosting rather than in the app bundle. */
 export const REMOTE_SET_PREFIX = 'remote_set_';
 
@@ -114,17 +116,16 @@ export function countsAsAttempt(stageLevels) {
  *
  * Derived from the id rather than a list position: offline filtering removes
  * online-only sets, so a positional label like `Set ${index + 1}` renames every
- * set after the gap and makes two different sets share a name. `remote_set_001`
- * and `photo_set_001` both contain "1", so the namespace has to appear too.
+ * set after the gap and makes two different sets share a name.
+ * Remote sets continue numbering seamlessly after bundled sets (e.g. Photo Set 27)
+ * without separating them from regular sets or labeling them "Remote" to the user,
+ * while preventing number collisions.
  */
 export function formatSetLabel(setId) {
   if (typeof setId !== 'string' || !setId) return 'Photo Set';
   const digits = setId.match(/(\d+)/);
-  const number = digits ? parseInt(digits[1], 10) : null;
-  if (isRemoteSetId(setId)) {
-    return number ? `Remote Set ${number}` : 'Remote Set';
-  }
-  if (setId.startsWith('photo_set_')) {
+  const number = digits ? getSetNumber(setId) : null;
+  if (isRemoteSetId(setId) || setId.startsWith('photo_set_')) {
     return number ? `Photo Set ${number}` : 'Photo Set';
   }
   return number ? `Set ${number}` : setId;

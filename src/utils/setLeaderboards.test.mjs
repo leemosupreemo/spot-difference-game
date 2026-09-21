@@ -18,6 +18,9 @@ test('ALL_PHOTO_SET_IDS contains 26 photo sets', () => {
 test('getSetNumber correctly parses set IDs', () => {
   assert.equal(getSetNumber('photo_set_001'), 1);
   assert.equal(getSetNumber('photo_set_007'), 7);
+  assert.equal(getSetNumber('photo_set_026'), 26);
+  assert.equal(getSetNumber('remote_set_001'), 27);
+  assert.equal(getSetNumber('remote_set_006'), 32);
   assert.equal(getSetNumber('photo_set_035'), 35);
   assert.equal(getSetNumber('photo_set_041'), 41);
   assert.equal(getSetNumber('set_3'), 3);

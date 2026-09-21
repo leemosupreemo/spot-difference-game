@@ -89,12 +89,15 @@ test('set labels come from the id, not a list position', () => {
   // every set after the gap. The id is stable; the position is not.
   assert.equal(formatSetLabel('photo_set_007'), 'Photo Set 7');
   assert.equal(formatSetLabel('photo_set_026'), 'Photo Set 26');
-  assert.equal(formatSetLabel('remote_set_001'), 'Remote Set 1');
-  assert.equal(formatSetLabel('remote_set_006'), 'Remote Set 6');
+  assert.equal(formatSetLabel('remote_set_001'), 'Photo Set 27');
+  assert.equal(formatSetLabel('remote_set_006'), 'Photo Set 32');
 });
 
 test('a remote set is never confusable with the bundled set of the same number', () => {
   assert.notEqual(formatSetLabel('remote_set_001'), formatSetLabel('photo_set_001'));
+  assert.equal(formatSetLabel('remote_set_001'), 'Photo Set 27');
+  assert.equal(formatSetLabel('photo_set_001'), 'Photo Set 1');
+  assert.doesNotMatch(formatSetLabel('remote_set_001'), /Remote/i);
 });
 
 test('unknown or malformed set ids degrade to something printable', () => {

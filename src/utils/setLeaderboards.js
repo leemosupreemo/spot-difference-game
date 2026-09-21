@@ -27,7 +27,11 @@ export function getSetNumber(setId) {
   if (!setId || typeof setId !== 'string') return 1;
   const match = setId.match(/(\d+)/);
   if (match) {
-    return parseInt(match[1], 10);
+    const num = parseInt(match[1], 10);
+    if (setId.startsWith('remote_set_')) {
+      return ALL_PHOTO_SET_IDS.length + num;
+    }
+    return num;
   }
   const idx = ALL_PHOTO_SET_IDS.indexOf(setId);
   return idx >= 0 ? idx + 1 : 1;
