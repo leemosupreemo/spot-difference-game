@@ -19,7 +19,10 @@ test('review mode shows only what was dismissed', () => {
   // Reviewing dismissals is the inverse of curation -- a pool mixing them with
   // live levels would make it impossible to tell what is being reconsidered.
   assert.match(app, /if \(dismissedOnly\) \{[\s\S]*?if \(statusVal !== 'dismissed'\) continue;/);
-  assert.match(app, /getAllPhotoPairEntries\(\{ includeDismissed: dismissedOnly \}\)/);
+  // Matches the option, not the exact call spelling: the same call also has to
+  // pass the live debugMode, and pinning the literal text made a correct fix
+  // look like a regression.
+  assert.match(app, /getAllPhotoPairEntries\(\{[^}]*includeDismissed: dismissedOnly/);
 });
 
 test('an empty dismissed pool is not papered over with the normal pool', () => {

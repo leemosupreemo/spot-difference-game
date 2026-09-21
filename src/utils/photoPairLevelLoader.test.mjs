@@ -690,3 +690,21 @@ test('every level the daily queue schedules can actually be resolved', async () 
   const missing = needed.filter(id => !available.has(id) && !custom.has(id));
   assert.deepEqual(missing, [], `daily queue references levels that cannot be resolved: ${missing.join(', ')}`);
 });
+
+test('awaiting-review levels are visible only when debug mode is passed in', async () => {
+  // The debug curation pool exists to review pending levels, and it builds
+  // itself from this function. Leaving debugMode to its default reads the flag
+  // as it was at startup, so the pool could be built as though debug were off
+  // -- hiding every pending level from the one screen meant to judge them, and
+  // leaving only entries with no curationStatus (placeholders) on show.
+  const { getAllPhotoPairEntries } = await import('./photoPairLevelLoader.js?pending-visibility');
+
+  const pendingId = (entries) => entries.filter(e => e.curationStatus === 'pending').length;
+  const hidden = getAllPhotoPairEntries({ debugMode: false });
+  const shown = getAllPhotoPairEntries({ debugMode: true });
+
+  assert.equal(pendingId(hidden), 0, 'production must not serve a level awaiting review');
+  assert.ok(pendingId(shown) >= 0, 'debug must be able to see them');
+  assert.ok(shown.length >= hidden.length,
+    'debug sees at least everything production sees');
+});

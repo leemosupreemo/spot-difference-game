@@ -19,7 +19,7 @@ import { generateProceduralLevelPair } from './utils/proceduralGenerator';
 import { buildPhotoPairStage, getAllPhotoPairEntries, createPhotoPairLevel, removeManifestEntriesById } from './utils/photoPairLevelLoader';
 import { getCompletePhotoSets } from './utils/photoSetCatalog';
 import OfflineSetNotice from './components/OfflineSetNotice.jsx';
-import { countsAsAttempt, selectableSetIds, isRemoteSetId } from './utils/remoteSetPolicy.js';
+import { countsAsAttempt, selectableSetIds, isRemoteSetId, isPlaceholderEntry } from './utils/remoteSetPolicy.js';
 import { isOnline, subscribeNetworkStatus, setSimulatedOffline, isSimulatedOffline } from './services/networkService.js';
 import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
@@ -375,7 +375,7 @@ function GameApp() {
   };
 
   const getUnlabeledPremadeLevels = (mapToUse = curatedStatusMap, skipKept = skipKeptLevels) => {
-    const allEntries = getAllPhotoPairEntries();
+    const allEntries = getAllPhotoPairEntries({ debugMode });
     const brandNew = [];
 
     for (const entry of allEntries) {
@@ -396,11 +396,20 @@ function GameApp() {
                                     dismissedOnly = reviewDismissedLevels) => {
     // Reviewing dismissals is the inverse of normal curation: show only what was
     // rejected, so a decision can be reconsidered while the artwork still exists.
-    const allEntries = getAllPhotoPairEntries({ includeDismissed: dismissedOnly });
+    // debugMode is passed explicitly rather than left to getInitialDebugMode().
+    // That default reads the flag as it was at startup, and the pending gate
+    // uses it to decide whether awaiting-review levels are visible at all -- so
+    // the one pool whose entire job is reviewing them could be built as though
+    // debug were off, hiding every pending level from the curator.
+    const allEntries = getAllPhotoPairEntries({ includeDismissed: dismissedOnly, debugMode });
     const unreviewed = [];
     const categorized = [];
 
     for (const entry of allEntries) {
+      // A placeholder is an empty slot, not artwork. It has no curationStatus,
+      // so it reads as unreviewed and is offered for a decision that means
+      // nothing -- and dismissing one would shorten its set.
+      if (isPlaceholderEntry(entry)) continue;
       const statusObj = getEntryCurationStatus(entry, mapToUse);
       const statusVal = statusObj?.status;
       if (dismissedOnly) {
@@ -426,7 +435,7 @@ function GameApp() {
   // still rescue. Once pruned they are gone, so the count is the window.
   const dismissedAvailableCount = useMemo(() => {
     if (!debugMode) return 0;
-    return getAllPhotoPairEntries({ includeDismissed: true }).filter(entry =>
+    return getAllPhotoPairEntries({ includeDismissed: true, debugMode }).filter(entry =>
       getEntryCurationStatus(entry, curatedStatusMap)?.status === 'dismissed').length;
   }, [debugMode, curatedStatusMap, remoteLevelsRevision]);
 
@@ -436,7 +445,7 @@ function GameApp() {
     // Reviewing dismissals must not silently fall back to the normal pool:
     // an empty result means nothing was dismissed, which is worth seeing.
     if (reviewDismissedLevels) return pool;
-    return pool.length > 0 ? pool : getAllPhotoPairEntries();
+    return pool.length > 0 ? pool : getAllPhotoPairEntries({ debugMode });
   }, [debugMode, curatedStatusMap, skipKeptLevels, reviewDismissedLevels]);
 
   const handleSetCuratedStatus = (levelId, status, meta) => {
@@ -454,7 +463,7 @@ function GameApp() {
 
     if (debugMode) {
       const newPool = getDebugCandidateEntries(updated, skipKeptLevels);
-      const poolToUse = newPool.length > 0 ? newPool : getAllPhotoPairEntries().filter(e => getLevelStatus(updated[e.id])?.status !== 'dismissed');
+      const poolToUse = newPool.length > 0 ? newPool : getAllPhotoPairEntries({ debugMode }).filter(e => getLevelStatus(updated[e.id])?.status !== 'dismissed');
 
       if (poolToUse.length > 0) {
         const oldPool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
@@ -575,7 +584,7 @@ function GameApp() {
   useEffect(() => {
     if (debugMode) {
       const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries({ debugMode });
       if (effectivePool.length > 0) {
         const debugLevels = effectivePool.map(createPhotoPairLevel);
         setLevels(debugLevels);
@@ -610,7 +619,7 @@ function GameApp() {
 
     if (debugMode) {
       const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries({ debugMode });
       if (effectivePool.length > 0) {
         const currentIndex = effectivePool.findIndex(e => e.id === currentLevelId);
         const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % effectivePool.length : 0;
@@ -646,7 +655,7 @@ function GameApp() {
 
     if (debugMode) {
       const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+      const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries({ debugMode });
       if (effectivePool.length > 0) {
         const currentIndex = effectivePool.findIndex(e => e.id === currentLevelId);
         const prevIndex = currentIndex >= 0 ? (currentIndex - 1 + effectivePool.length) % effectivePool.length : 0;
@@ -827,7 +836,7 @@ function GameApp() {
     try {
       if (debugMode) {
         const pool = getDebugCandidateEntries(curatedStatusMap, skipKeptLevels);
-        const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries();
+        const effectivePool = pool.length > 0 ? pool : getAllPhotoPairEntries({ debugMode });
         if (effectivePool.length > 0) {
           const debugLevels = effectivePool.map(createPhotoPairLevel);
           logApp('INFO', `[StartGame:Debug] Launching ${debugLevels.length} candidate levels for curation`);
