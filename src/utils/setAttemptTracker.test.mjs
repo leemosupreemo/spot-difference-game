@@ -3,7 +3,10 @@ import test from 'node:test';
 import {
   isFirstAttemptForSet,
   markSetFirstAttemptFailed,
-  STORAGE_KEY_ACTIVE_FIRST_ATTEMPT
+  STORAGE_KEY_ACTIVE_FIRST_ATTEMPT,
+  STORAGE_KEY_ATTEMPTED_SETS,
+  markSetAttempted,
+  getAttemptedSetIds
 } from './setAttemptTracker.js';
 
 test('isFirstAttemptForSet returns true when set has never been attempted', () => {
@@ -94,3 +97,57 @@ test('markSetFirstAttemptFailed preserves existing successful first time without
   assert.equal(updated.Medium.sets.photo_set_001.firstTime, 16200);
   assert.equal(updated.Medium.sets.photo_set_001.firstFailed, undefined);
 });
+
+test('getAttemptedSetIds places currently failed set on top followed by other attempted sets sorted', () => {
+  const stats = {
+    Medium: {
+      sets: {
+        photo_set_005: { setId: 'photo_set_005', clears: 1 },
+        photo_set_002: { setId: 'photo_set_002', clears: 1 }
+      }
+    },
+    Easy: {
+      sets: {
+        photo_set_001: { setId: 'photo_set_001', clears: 0, firstFailed: true }
+      }
+    }
+  };
+
+  // Failed set is photo_set_003
+  const result = getAttemptedSetIds(stats, 'photo_set_003');
+  assert.equal(result[0], 'photo_set_003', 'Failed set must be on top');
+  assert.deepEqual(result, ['photo_set_003', 'photo_set_001', 'photo_set_002', 'photo_set_005']);
+});
+
+test('getAttemptedSetIds works when no previous sets have been attempted', () => {
+  const result = getAttemptedSetIds({}, 'photo_set_007');
+  assert.deepEqual(result, ['photo_set_007']);
+});
+
+function freshStorage() {
+  const map = new Map();
+  return {
+    getItem: (k) => (map.has(k) ? map.get(k) : null),
+    setItem: (k, v) => map.set(k, String(v)),
+    removeItem: (k) => map.delete(k),
+    clear: () => map.clear(),
+    key: (i) => Array.from(map.keys())[i] ?? null,
+    get length() { return map.size; }
+  };
+}
+
+test('markSetAttempted persists to localStorage and is included in getAttemptedSetIds', () => {
+  const orig = globalThis.localStorage;
+  globalThis.localStorage = freshStorage();
+  try {
+    markSetAttempted('photo_set_012');
+    markSetAttempted('photo_set_004');
+
+    const result = getAttemptedSetIds({}, 'photo_set_012');
+    assert.equal(result[0], 'photo_set_012', 'Failed set on top');
+    assert.ok(result.includes('photo_set_004'));
+  } finally {
+    globalThis.localStorage = orig;
+  }
+});
+

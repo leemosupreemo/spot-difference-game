@@ -1,6 +1,106 @@
 import { saveLeaderboardStats } from '../services/playerProgress.js';
+import { getSetNumber } from './setLeaderboards.js';
 
 export const STORAGE_KEY_ACTIVE_FIRST_ATTEMPT = 'diff_hunter_active_first_attempt';
+export const STORAGE_KEY_ATTEMPTED_SETS = 'diff_hunter_attempted_sets';
+
+function getStorage() {
+  if (typeof window !== 'undefined' && window.localStorage) return window.localStorage;
+  if (typeof localStorage !== 'undefined') return localStorage;
+  return null;
+}
+
+/**
+ * Records that a specific set has been attempted by the player.
+ * Persists to localStorage so the set is remembered across sessions.
+ *
+ * @param {string} setId
+ */
+export function markSetAttempted(setId) {
+  if (!setId || typeof setId !== 'string') return;
+  const trimmed = setId.trim();
+  if (!trimmed || trimmed.startsWith('stage_')) return;
+  const storage = getStorage();
+  if (!storage) return;
+  try {
+    const raw = storage.getItem(STORAGE_KEY_ATTEMPTED_SETS);
+    const list = raw ? JSON.parse(raw) : [];
+    if (Array.isArray(list) && !list.includes(trimmed)) {
+      list.push(trimmed);
+      storage.setItem(STORAGE_KEY_ATTEMPTED_SETS, JSON.stringify(list));
+    }
+  } catch {}
+}
+
+/**
+ * Gathers all set IDs ever attempted by the player.
+ * If currentSetId is provided, it is guaranteed to be placed at the very top (highlighted on top),
+ * and the remaining attempted sets are sorted by set number.
+ *
+ * @param {object} difficultyStats - Categorized difficulty stats
+ * @param {string} [currentSetId] - Optional currently active or failed set
+ * @returns {string[]}
+ */
+export function getAttemptedSetIds(difficultyStats = {}, currentSetId = null) {
+  const attempted = new Set();
+  const currentKey = currentSetId && typeof currentSetId === 'string' && !currentSetId.startsWith('stage_')
+    ? currentSetId.trim()
+    : null;
+
+  if (currentKey) {
+    attempted.add(currentKey);
+  }
+
+  const storage = getStorage();
+  if (storage) {
+    try {
+      const raw = storage.getItem(STORAGE_KEY_ATTEMPTED_SETS);
+      if (raw) {
+        const stored = JSON.parse(raw);
+        if (Array.isArray(stored)) {
+          stored.forEach(id => {
+            if (id && typeof id === 'string' && !id.startsWith('stage_')) {
+              attempted.add(id.trim());
+            }
+          });
+        }
+      }
+    } catch {}
+  }
+
+  if (difficultyStats && typeof difficultyStats === 'object') {
+    Object.values(difficultyStats).forEach(category => {
+      if (category?.sets && typeof category.sets === 'object') {
+        Object.entries(category.sets).forEach(([key, record]) => {
+          const id = record?.setId || key;
+          if (id && typeof id === 'string' && !id.startsWith('stage_')) {
+            attempted.add(id.trim());
+          }
+        });
+      }
+    });
+  }
+
+  const list = Array.from(attempted);
+  if (currentKey) {
+    const others = list
+      .filter(id => id !== currentKey)
+      .sort((a, b) => {
+        const numA = getSetNumber(a);
+        const numB = getSetNumber(b);
+        if (numA !== numB) return numA - numB;
+        return a.localeCompare(b);
+      });
+    return [currentKey, ...others];
+  }
+
+  return list.sort((a, b) => {
+    const numA = getSetNumber(a);
+    const numB = getSetNumber(b);
+    if (numA !== numB) return numA - numB;
+    return a.localeCompare(b);
+  });
+}
 
 /**
  * Checks if the upcoming or current playthrough is the player's first attempt on a set.
@@ -30,13 +130,17 @@ export function isFirstAttemptForSet(difficultyStats, difficulty, stageKey) {
  * so that app termination or crashes count as a failed first attempt.
  */
 export function recordSetAttemptStarted({ difficulty, themeId, setId, stageKey, isFirstAttempt }) {
+  const targetId = setId || stageKey;
+  if (targetId) {
+    markSetAttempted(targetId);
+  }
   if (!isFirstAttempt || typeof window === 'undefined') return;
   try {
     const payload = {
       difficulty: difficulty || 'Medium',
       themeId: themeId || 'find_the_sniper',
-      setId: setId || stageKey,
-      stageKey: stageKey || setId,
+      setId: targetId,
+      stageKey: targetId,
       startedAt: Date.now()
     };
     window.localStorage?.setItem(STORAGE_KEY_ACTIVE_FIRST_ATTEMPT, JSON.stringify(payload));
@@ -98,6 +202,7 @@ export function markSetFirstAttemptFailed(prevStats = {}, { difficulty, themeId,
 
   // If the first attempt was already recorded with a valid time in the past, do not overwrite it.
   if (typeof existing.firstTime === 'number' && existing.firstTime > 0) {
+    markSetAttempted(key);
     clearActiveSetAttempt();
     return prevStats;
   }
@@ -132,6 +237,7 @@ export function markSetFirstAttemptFailed(prevStats = {}, { difficulty, themeId,
     }
   };
 
+  markSetAttempted(key);
   clearActiveSetAttempt();
 
   try {

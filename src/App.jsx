@@ -68,7 +68,8 @@ import {
   recordSetAttemptStarted,
   clearActiveSetAttempt,
   getActiveSetAttempt,
-  markSetFirstAttemptFailed
+  markSetFirstAttemptFailed,
+  markSetAttempted
 } from './utils/setAttemptTracker.js';
 
 export default function App() {
@@ -778,9 +779,9 @@ function GameApp() {
   const [totalStageTimeMs, setTotalStageTimeMs] = useState(0);
 
   // Handle Game Launch from Main Menu
-  const handleStartGame = async () => {
+  const handleStartGame = async (overrideSetId = null) => {
     setVictoryModalOpen(false);
-    logApp('INFO', `[StartGameClicked] Theme: ${selectedTheme}, Diff: ${selectedDifficulty}, DebugMode: ${debugMode}`);
+    logApp('INFO', `[StartGameClicked] Theme: ${selectedTheme}, Diff: ${selectedDifficulty}, DebugMode: ${debugMode}, OverrideSetId: ${overrideSetId}`);
     setGameMode('standard');
     setCurrentStageIndex(0);
     stageTimesRef.current = [];
@@ -788,35 +789,49 @@ function GameApp() {
     setScore(0);
     setMagnifierEnabled(false);
 
+    let effectiveTheme = selectedTheme;
+    let targetPhotoSetId = photoSetId;
+
+    if (overrideSetId) {
+      targetPhotoSetId = overrideSetId;
+      effectiveTheme = 'find_the_sniper';
+      setSelectedTheme('find_the_sniper');
+      setPhotoSetId(overrideSetId);
+      try {
+        localStorage.setItem('diff_hunter_photo_set_id', overrideSetId);
+      } catch {}
+    }
+
     // Track whether this is a 1st attempt on a deterministic set
-    const isDeterministicPhotoSet = selectedTheme === 'find_the_sniper' && Boolean(photoSetId);
+    const isDeterministicPhotoSet = effectiveTheme === 'find_the_sniper' && Boolean(targetPhotoSetId);
     const isFirst = isDeterministicPhotoSet
-      ? isFirstAttemptForSet(difficultyStats, selectedDifficulty, photoSetId)
+      ? isFirstAttemptForSet(difficultyStats, selectedDifficulty, targetPhotoSetId)
       : false;
     setIsCurrentRunFirstAttempt(isFirst);
     if (isDeterministicPhotoSet) {
       const attemptInfo = {
         difficulty: selectedDifficulty,
-        themeId: selectedTheme,
-        setId: photoSetId,
-        stageKey: photoSetId,
+        themeId: effectiveTheme,
+        setId: targetPhotoSetId,
+        stageKey: targetPhotoSetId,
         isFirstAttempt: isFirst
       };
       activeSetAttemptRef.current = attemptInfo;
       recordSetAttemptStarted(attemptInfo);
+      markSetAttempted(targetPhotoSetId);
     } else {
       activeSetAttemptRef.current = null;
     }
 
     // 1. ABSTRACT CATEGORY: ALWAYS generates procedural art images across 12 distinct art worlds
     trackGameStarted({
-      themeId: selectedTheme,
-      setId: selectedTheme === 'find_the_sniper' ? photoSetId : null,
+      themeId: effectiveTheme,
+      setId: effectiveTheme === 'find_the_sniper' ? targetPhotoSetId : null,
       difficulty: selectedDifficulty,
       mode: activeMode
     });
 
-    if (selectedTheme === 'abstract_animated') {
+    if (effectiveTheme === 'abstract_animated') {
       const procLevels = [0, 1, 2, 3, 4].map(i => generateProceduralLevelPair('abstract_animated', selectedDifficulty, Date.now() + i * 1000));
       logApp('INFO', `[StartGame:AbstractProcedural] Launching 5 procedural levels: ${procLevels.map(l => l.id).join(', ')}`);
       setLevels(procLevels);
@@ -843,7 +858,7 @@ function GameApp() {
         }
       }
 
-      let activePhotoSetId = photoSetId;
+      let activePhotoSetId = targetPhotoSetId;
       if (!photoSetId || !photoSetIds.includes(photoSetId)) {
         logApp('WARN', '[StartGame:PhotoSetUnavailable] No valid Photography set is selected; recovering to first available set');
         activePhotoSetId = photoSetIds[0] || 'photo_set_001';
@@ -851,11 +866,13 @@ function GameApp() {
         try {
           localStorage.setItem('diff_hunter_photo_set_id', activePhotoSetId);
         } catch {}
+      } else if (targetPhotoSetId) {
+        activePhotoSetId = targetPhotoSetId;
       }
 
       let stageList = await buildPhotoPairStage({
         packId: 'find_the_sniper',
-        setId: photoSetId,
+        setId: activePhotoSetId, // setId: photoSetId
         difficulty: selectedDifficulty,
         count: 5,
         seed: Date.now(),
@@ -865,8 +882,8 @@ function GameApp() {
 
       // If the requested photo set could not be loaded, try alternative complete sets
       if (!stageList || stageList.length === 0) {
-        logApp('WARN', `[StartGame:PhotoSetUnavailable] Photo set could not be loaded: ${photoSetId}; trying alternative sets`);
-        const fallbackOptions = [activePhotoSetId, ...photoSetIds.filter(id => id !== photoSetId && id !== activePhotoSetId)];
+        logApp('WARN', `[StartGame:PhotoSetUnavailable] Photo set could not be loaded: ${activePhotoSetId}; trying alternative sets`);
+        const fallbackOptions = [activePhotoSetId, ...photoSetIds.filter(id => id !== activePhotoSetId)];
         for (const candidateSetId of fallbackOptions) {
           if (!candidateSetId) continue;
           stageList = await buildPhotoPairStage({
@@ -943,6 +960,17 @@ function GameApp() {
     startLevel(emergencyStage[0].id);
     setView('game');
   };
+
+  const handleNextStage = useCallback(() => {
+    if (selectedTheme === 'find_the_sniper' && photoSetIds.length > 0) {
+      const currentIndex = photoSetIds.indexOf(photoSetId);
+      const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % photoSetIds.length : 0;
+      const nextSetId = photoSetIds[nextIndex];
+      handleStartGame(nextSetId);
+    } else {
+      handleStartGame();
+    }
+  }, [selectedTheme, photoSetIds, photoSetId, handleStartGame]);
 
   // Launch Set of the Day (3-image sequence from unrepeated daily queue)
   const handleStartDailyChallenge = () => {
@@ -1744,7 +1772,7 @@ function GameApp() {
             handleOpenLeaderboard();
           }
         }}
-        onNextLevel={handleStartGame}
+        onNextLevel={handleNextStage}
         onRestart={handleStartGame}
         onReturnToMenu={() => {
           setVictoryModalOpen(false);
@@ -1795,10 +1823,20 @@ function GameApp() {
           setIsCurrentRunFirstAttempt(false);
           setView('menu');
         }}
-        onRestart={() => {
+        onRestart={(chosenSetId) => {
           setGameOverModalOpen(false);
           setRevealAnswer(false);
-          handleStartGame();
+          handleStartGame(chosenSetId);
+        }}
+        onNextStage={() => {
+          setGameOverModalOpen(false);
+          setRevealAnswer(false);
+          handleNextStage();
+        }}
+        onNextLevel={() => {
+          setGameOverModalOpen(false);
+          setRevealAnswer(false);
+          handleNextStage();
         }}
         elapsedTime={elapsedTime}
         missCount={missCount}
@@ -1806,6 +1844,7 @@ function GameApp() {
         setId={photoSetId}
         themeId={selectedTheme}
         isFirstAttempt={isCurrentRunFirstAttempt}
+        difficultyStats={difficultyStats}
       />
 
       <HelpModal

@@ -105,7 +105,8 @@ const LOCAL_RECORD_KEYS = [
   'diff_hunter_pending_leaderboard_queue',
   'diff_hunter_daily_sets',
   'diff_hunter_daily_queue_used',
-  'diff_hunter_daily_remote_queue'
+  'diff_hunter_daily_remote_queue',
+  'diff_hunter_attempted_sets'
 ];
 
 // Per-day/dynamic prefixes for locally stored progress/scores.
