@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { flipEntry, flipEligibility, flipsPerPhoto, selectFlips } from './flip_pair_orientation.mjs';
+import { flipEntry, flipEligibility, flipsPerPhoto, selectFlips, selectUnflips, unflipEligibility } from './flip_pair_orientation.mjs';
 
 const addEntry = (id, base, variant) => ({
   id,
@@ -118,4 +118,33 @@ test('selection only takes the operation asked for', () => {
   ];
   assert.deepEqual(selectFlips(entries), ['an_add']);
   assert.deepEqual(selectFlips(entries, { from: 'remove' }), ['a_remove']);
+});
+
+test('restoring picks only levels that are currently flipped', () => {
+  const plain = addEntry('plain', 'a_base.jpg', 'a_variant.jpg');
+  const already = flipEntry(addEntry('already', 'b_base.jpg', 'b_variant.jpg'));
+  assert.deepEqual(selectUnflips([plain, already]), ['already']);
+  assert.equal(unflipEligibility(plain).ok, false);
+  assert.equal(unflipEligibility(already).ok, true);
+});
+
+test('restoring returns the entry to exactly its original form', () => {
+  const original = addEntry('a', 'a_base.jpg', 'a_variant.jpg');
+  assert.deepEqual(flipEntry(flipEntry(original)), original);
+});
+
+test('the one-flip-per-photo tally counts levels outside the chosen pool', () => {
+  // A photograph with one variant bundled and one remote. Flipping is narrowed
+  // to the remote side, but the bundled sibling is already flipped -- so the
+  // remote one must still be refused.
+  const bundledSibling = flipEntry(addEntry('bundled_v1', 'shared_base.jpg', 'v1_variant.jpg'));
+  const remoteSibling = addEntry('remote_v2', 'shared_base.jpg', 'v2_variant.jpg');
+  const published = [bundledSibling, remoteSibling];
+  assert.deepEqual(
+    selectFlips([remoteSibling], { published }),
+    [],
+    'a flip already published elsewhere must still block its sibling'
+  );
+  // Without the full picture it would wrongly be allowed.
+  assert.deepEqual(selectFlips([remoteSibling]), ['remote_v2']);
 });

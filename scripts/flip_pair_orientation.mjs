@@ -134,13 +134,39 @@ export function flipEntry(entry) {
 }
 
 /**
+ * Why this level may or may not be put BACK to its original orientation.
+ *
+ * Restoring is always safe -- it returns the pair to how it was generated -- so
+ * the only requirement is that it is currently flipped.
+ */
+export function unflipEligibility(entry) {
+  if (!entry || isPlaceholderEntry(entry)) return { ok: false, reason: 'placeholder' };
+  if (!isFlipped(entry)) return { ok: false, reason: 'not flipped' };
+  const op = operationOf(entry);
+  return { ok: true, reason: `${op} -> ${MIRROR[op]} (restored)` };
+}
+
+/** Choose which flipped levels to restore. */
+export function selectUnflips(entries, { limit = Infinity } = {}) {
+  const chosen = [];
+  for (const entry of entries) {
+    if (chosen.length >= limit) break;
+    if (unflipEligibility(entry).ok) chosen.push(entry.id);
+  }
+  return chosen;
+}
+
+/**
  * Choose which levels to flip, at most one per photograph.
  *
  * The running tally counts picks made in this pass as well as flips already
  * published, so a single run can never select two variants of one photograph.
  */
-export function selectFlips(entries, { limit = Infinity, from = 'add' } = {}) {
-  const tally = flipsPerPhoto(entries);
+export function selectFlips(entries, { limit = Infinity, from = 'add', published = null } = {}) {
+  // The one-flip-per-photograph tally must count every published level, not
+  // just the ones being chosen from: a photograph's variants can straddle the
+  // bundled/remote line, and a narrowed choice must still see the whole picture.
+  const tally = flipsPerPhoto(published || entries);
   const chosen = [];
   for (const entry of entries) {
     if (chosen.length >= limit) break;
@@ -162,6 +188,9 @@ async function main() {
   const limit = limitArg !== -1 ? Number(process.argv[limitArg + 1]) : Infinity;
   const fromArg = process.argv.indexOf('--from');
   const from = fromArg !== -1 ? process.argv[fromArg + 1] : 'add';
+  const unflip = process.argv.includes('--unflip');
+  const poolArg = process.argv.indexOf('--pool');
+  const pool = poolArg !== -1 ? process.argv[poolArg + 1] : null;
 
   const manifestPath = path.join(ROOT, 'public/levels/photo_pair_manifest.json');
   const bundled = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
@@ -179,10 +208,19 @@ async function main() {
   // Eligibility is judged against EVERYTHING published, because a base photo
   // can be shared across the bundled/remote boundary.
   const all = [...bundled, ...remote];
-  const ids = new Set(selectFlips(all, { limit, from }));
+  // Eligibility is always judged against EVERYTHING published, because one
+  // photograph can have variants on both sides of the bundled/remote line.
+  // Only the CHOICE is narrowed by --pool.
+  const inPool = (entry) => !pool
+    || (pool === 'bundled' ? bundled.includes(entry) : remote.includes(entry));
+  const candidates = all.filter(inPool);
+  const ids = new Set(unflip
+    ? selectUnflips(candidates, { limit })
+    : selectFlips(candidates, { limit, from, published: all }));
 
-  console.log(`published levels : ${all.length}`);
-  console.log(`flipping         : ${ids.size}  (${from} -> ${MIRROR[from]})`);
+  console.log(`published levels : ${all.length}${pool ? `  (choosing from ${pool}: ${candidates.length})` : ''}`);
+  console.log(`${unflip ? 'restoring' : 'flipping '}        : ${ids.size}`
+    + (unflip ? '  (back to original orientation)' : `  (${from} -> ${MIRROR[from]})`));
 
   let bundledFlips = 0;
   const nextBundled = bundled.map(entry => {
