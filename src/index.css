@@ -336,6 +336,38 @@ button:active,
   filter: brightness(1.18) contrast(1.03);
 }
 
+/* Level Pair Transition Refresh Blink:
+   When advancing to a new level/pair, both left and right images (including identical
+   base images across consecutive pairs) execute a brief, crisp shutter refresh blink
+   matching the natural reload effect of changing images. */
+@-webkit-keyframes imageRefreshBlink {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes imageRefreshBlink {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.image-refresh-blink {
+  animation: imageRefreshBlink 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Target & Hit Markers */
 .hit-marker {
   position: absolute;
@@ -1184,6 +1216,9 @@ button:active,
   .tron-lightcycle-trail {
     animation: none;
     display: none;
+  }
+  .image-refresh-blink {
+    animation: none !important;
   }
 }
 

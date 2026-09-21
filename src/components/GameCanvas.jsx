@@ -380,7 +380,7 @@ export default function GameCanvas({
               key={`${level.id}-base`}
               src={resolveAssetUrl(level.baseImage)}
               alt={level.title || 'Original Scene'}
-              className="canvas-element"
+              className="canvas-element image-refresh-blink"
               draggable={false}
               style={{
                 position: 'absolute',
@@ -499,7 +499,7 @@ export default function GameCanvas({
               key={`${level.id}-variant`}
               src={resolveAssetUrl(level.variantImage)}
               alt={level.title || 'Modified Scene'}
-              className="canvas-element"
+              className="canvas-element image-refresh-blink"
               draggable={false}
               style={{
                 position: 'absolute',

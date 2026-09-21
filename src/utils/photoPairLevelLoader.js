@@ -220,6 +220,36 @@ export function selectPhotoPairEntries(entries, {
   return prioritized.slice(0, count);
 }
 
+/**
+ * Build one stage level, waiting for its image pair when there is one to fetch.
+ *
+ * Resolves to null when the artwork will not load, so the caller can draw
+ * another candidate in its place rather than seat a level that cannot render.
+ * A placeholder has no artwork at all -- the slot renders its own explanation.
+ */
+async function preloadStageEntry(entry, imageFactory) {
+  if (isPlaceholderEntry(entry) || !imageFactory) return createPhotoPairLevel(entry);
+
+  const baseImg = imageFactory();
+  const varImg = imageFactory();
+  try {
+    await new Promise((resolve, reject) => {
+      let loaded = 0;
+      const onLoad = () => { loaded++; if (loaded === 2) resolve(); };
+      baseImg.onload = onLoad;
+      varImg.onload = onLoad;
+      baseImg.onerror = reject;
+      varImg.onerror = reject;
+      baseImg.src = entry.baseImage;
+      varImg.src = entry.variantImage;
+    });
+  } catch (e) {
+    logApp('WARN', `[BuildStage] Failed to preload images for ${entry.id}: ${e?.message}`);
+    return null;
+  }
+  return createPhotoPairLevel(entry, { base: baseImg, variant: varImg });
+}
+
 export async function buildPhotoPairStage({
   packId = 'find_the_sniper',
   setId,
@@ -287,36 +317,26 @@ export async function buildPhotoPairStage({
       } else {
         candidates = selectPhotoPairEntries(activeEntries, { packId, difficulty, count: activeEntries.length, seed, statusMap });
       }
+      // Preload a stage's pairs together rather than one after another. Loaded
+      // sequentially, a five-level set is ten images fetched one round trip
+      // after the next -- unnoticeable when every file is on disk, slow once
+      // the set comes from Hosting, which is where new levels now live.
+      //
+      // Only `count` levels are wanted but `candidates` can be the entire
+      // manifest, so this draws in waves: take as many as are still missing,
+      // load those together, and draw again only to replace the ones that
+      // failed. The result is the same levels the sequential loop produced --
+      // the first `count` candidates whose artwork loads, in candidate order.
       const stage = [];
-
-      for (const entry of candidates) {
-        if (stage.length >= count) break;
-        if (isPlaceholderEntry(entry)) {
-          // Nothing to fetch: the slot renders its own explanation.
-          stage.push(createPhotoPairLevel(entry));
-          continue;
-        }
-        if (imageFactory) {
-          try {
-            const baseImg = imageFactory();
-            const varImg = imageFactory();
-            await new Promise((resolve, reject) => {
-              let loaded = 0;
-              const onLoad = () => { loaded++; if (loaded === 2) resolve(); };
-              baseImg.onload = onLoad;
-              varImg.onload = onLoad;
-              baseImg.onerror = reject;
-              varImg.onerror = reject;
-              baseImg.src = entry.baseImage;
-              varImg.src = entry.variantImage;
-            });
-            stage.push(createPhotoPairLevel(entry, { base: baseImg, variant: varImg }));
-          } catch (e) {
-            logApp('WARN', `[BuildStage] Failed to preload images for ${entry.id}: ${e?.message}`);
-            continue;
-          }
-        } else {
-          stage.push(createPhotoPairLevel(entry));
+      let cursor = 0;
+      while (stage.length < count && cursor < candidates.length) {
+        const wave = candidates.slice(cursor, cursor + (count - stage.length));
+        cursor += wave.length;
+        const loaded = await Promise.all(
+          wave.map(entry => preloadStageEntry(entry, imageFactory))
+        );
+        for (const level of loaded) {
+          if (level) stage.push(level);
         }
       }
 

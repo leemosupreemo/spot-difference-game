@@ -552,3 +552,104 @@ test('a stage never serves two levels from the same photo back to back', async (
   assert.equal(hasAdjacentRepeat(stage), false, 'same-photo levels must be spaced apart');
   assert.deepEqual(stage.map(l => l.id).sort(), ['s1', 's2', 't1', 't2', 't3']);
 });
+
+// --- stage preloading is concurrent -------------------------------------
+// A five-level set is ten images. Fetched one after another that is ten
+// round trips before play starts, which is what remote sets now pay.
+
+const preloadEntry = (id, sequence) => ({
+  id,
+  title: `Preload ${id}`,
+  category: 'Photography',
+  packId: 'find_the_sniper',
+  setId: 'photo_set_preload',
+  sequence,
+  difficulty: 'Medium',
+  baseImage: `levels/${id}_base.jpg`,
+  variantImage: `levels/${id}_variant.jpg`,
+  diffs: [{ id: 1, x: 50, y: 50, radius: 5 }]
+});
+
+/**
+ * An image whose load is deferred until the test releases it, so a stage can
+ * only finish if every pair was in flight at the same time.
+ */
+function gatedImageFactory() {
+  const pending = [];
+  const factory = () => {
+    const img = {};
+    Object.defineProperty(img, 'src', {
+      set(value) {
+        this._src = value;
+        pending.push(() => this.onload?.());
+      },
+      get() { return this._src; }
+    });
+    return img;
+  };
+  return { factory, pending };
+}
+
+test('a stage preloads all of its pairs concurrently', async () => {
+  clearPhotoPairManifestCache();
+  const manifest = [1, 2, 3, 4, 5].map(n => preloadEntry(`preload_00${n}`, n));
+  const approved = Object.fromEntries(manifest.map(e => [e.id, { status: 'approved' }]));
+  const { factory, pending } = gatedImageFactory();
+
+  const stagePromise = buildPhotoPairStage({
+    fetchImpl: async () => ({ ok: true, json: async () => manifest }),
+    imageFactory: factory,
+    curatedStatusMap: approved,
+    setId: 'photo_set_preload',
+    count: 5,
+    seed: 1
+  });
+
+  // Let the loader start every request it intends to make.
+  await new Promise(resolve => setTimeout(resolve, 0));
+
+  // Sequentially only the first pair would be in flight. All five must be.
+  assert.equal(pending.length, 10,
+    `expected 10 images in flight at once, saw ${pending.length}`);
+
+  pending.forEach(release => release());
+  const stage = await stagePromise;
+  assert.equal(stage.length, 5);
+  assert.deepEqual(stage.map(l => l.id), manifest.map(e => e.id));
+});
+
+test('a pair that fails to load is replaced by the next candidate', async () => {
+  clearPhotoPairManifestCache();
+  // Seven candidates for a five-level stage; two of them never load.
+  const manifest = [1, 2, 3, 4, 5, 6, 7].map(n => preloadEntry(`fallible_00${n}`, n));
+  const approved = Object.fromEntries(manifest.map(e => [e.id, { status: 'approved' }]));
+  const broken = new Set(['fallible_002', 'fallible_004']);
+
+  const imageFactory = () => {
+    const img = {};
+    Object.defineProperty(img, 'src', {
+      set(value) {
+        this._src = value;
+        const fails = [...broken].some(id => value.includes(id));
+        queueMicrotask(() => (fails ? img.onerror?.(new Error('boom')) : img.onload?.()));
+      },
+      get() { return this._src; }
+    });
+    return img;
+  };
+
+  const stage = await buildPhotoPairStage({
+    fetchImpl: async () => ({ ok: true, json: async () => manifest }),
+    imageFactory,
+    curatedStatusMap: approved,
+    packId: 'find_the_sniper',
+    difficulty: 'Medium',
+    count: 5,
+    seed: 1
+  });
+
+  assert.equal(stage.length, 5);
+  for (const id of broken) {
+    assert.ok(!stage.some(level => level.id === id), `${id} should not be seated`);
+  }
+});
