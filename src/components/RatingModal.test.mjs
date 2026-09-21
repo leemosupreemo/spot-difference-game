@@ -121,3 +121,11 @@ test('App.jsx provides debug rating prompt triggers to MainMenu and DiagnosticsM
   assert.match(appSource, /setRatingModalOpen\(true\)/);
   assert.match(appSource, /onPreviewRating=\{/);
 });
+
+test('RatingModal feedback step has centered title and left-aligned subtitle', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /How can we improve\?/);
+  assert.match(source, /textAlign:\s*'center'[\s\S]*How can we improve\?/);
+  assert.match(source, /textAlign:\s*'left'[\s\S]*Tell us what felt off/);
+});
+

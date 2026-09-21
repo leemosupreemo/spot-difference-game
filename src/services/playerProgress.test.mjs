@@ -168,6 +168,17 @@ test('fetchLeaderboards ranks by avg first time as primary anchor with all 3 met
   assert.ok(top1.fastestTime);
 });
 
+test('fetchLeaderboards includes additional dynamic/remote set IDs even with zero recorded plays', async () => {
+  const remoteSetId = 'remote_set_099';
+  const data = await fetchLeaderboards({}, [remoteSetId]);
+  assert.ok(data.bySetFirst[remoteSetId], 'remote set should exist in bySetFirst');
+  assert.ok(data.bySetRepeat[remoteSetId], 'remote set should exist in bySetRepeat');
+  assert.ok(data.bySetFastest[remoteSetId], 'remote set should exist in bySetFastest');
+  assert.ok(data.bySetFirst[remoteSetId].length >= 3, 'remote set should have deterministic baseline bot times');
+  assert.equal(data.bySetFirst[remoteSetId][0].uid, `bot_1_${remoteSetId}`);
+  assert.equal(data.bySetFirst[remoteSetId][0].playerName, 'PixelSniper_Pro');
+});
+
 test('tracks first set completion lifecycle', () => {
   _resetFirstSetCompletedForTesting();
   assert.equal(hasCompletedFirstSet(), false);

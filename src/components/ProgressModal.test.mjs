@@ -151,4 +151,11 @@ test('ProgressModal row highlight requires an active record on the board', () =>
   assert.match(source, /const hasRecord = isSetView/);
 });
 
+test('ProgressModal accepts photoSetIds and passes them to fetchLeaderboards', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /photoSetIds\s*=\s*\[\]/);
+  assert.match(source, /fetchLeaderboards\(difficultyStats,\s*photoSetIds\)/);
+});
+
+
 

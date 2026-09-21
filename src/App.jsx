@@ -1592,6 +1592,7 @@ function GameApp() {
             initialSetId={selectedStatsSetId}
             debugMode={debugMode}
             onResetLocalRecords={handleResetLocalRecords}
+            photoSetIds={photoSetIds}
           />
         ) : view === 'creator' ? (
           <CustomLevelMaker onSaveCustomLevel={handleSaveCustomLevel} />

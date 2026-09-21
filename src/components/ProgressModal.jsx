@@ -29,7 +29,8 @@ export default function ProgressModal({
   initialTab = 'leaderboards',
   initialSetId = '',
   debugMode = false,
-  forceOffline = false
+  forceOffline = false,
+  photoSetIds = []
 }) {
   const [mainView, setMainView] = useState(initialTab); // 'leaderboards' | 'daily' | 'progress'
   const [selectedLeaderboardPack, setSelectedLeaderboardPack] = useState('find_the_sniper'); // 'find_the_sniper' | 'abstract_animated'
@@ -60,7 +61,7 @@ export default function ProgressModal({
     checkConnectivity().then(online => {
       setNetworkOnline(online);
     }).catch(() => {});
-    fetchLeaderboards(difficultyStats)
+    fetchLeaderboards(difficultyStats, photoSetIds)
       .then(data => {
         setLeaderboardData(data);
       })
@@ -86,7 +87,7 @@ export default function ProgressModal({
       }
       hasSetInitialTabRef.current = true;
       setLoadingLeaderboard(true);
-      fetchLeaderboards(difficultyStats)
+      fetchLeaderboards(difficultyStats, photoSetIds)
         .then(data => {
           setLeaderboardData(data);
           const availableSets = Object.keys(data?.bySetFirst || {});
@@ -114,7 +115,7 @@ export default function ProgressModal({
     } else {
       hasSetInitialTabRef.current = false;
     }
-  }, [isOpen, difficultyStats]);
+  }, [isOpen, difficultyStats, photoSetIds]);
 
   if (!isOpen) return null;
 

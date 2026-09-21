@@ -2,7 +2,7 @@ import { initializeApp, getApps } from 'firebase/app';
 import { getFirestoreClient } from './firestoreClient.js';
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import { doc, setDoc, collection, getDocs, getDoc, query, where, limit } from 'firebase/firestore';
-import { ALL_PHOTO_SET_IDS, getDeterministicSetBaseline } from '../utils/setLeaderboards.js';
+import { ALL_PHOTO_SET_IDS, getDeterministicSetBaseline, getSetNumber } from '../utils/setLeaderboards.js';
 import { getGameCenterPlayer } from './gameCenter.js';
 import { submitLeaderboardScore } from './leaderboardService.js';
 import { recordNetworkSuccess } from './networkService.js';
@@ -728,7 +728,7 @@ const fallbackEntries = [
   { uid: 'demo_24', playerName: 'EchoStrike', avgFirstTimeByPack: { find_the_sniper: 55200, abstract_animated: 61200 }, avgRepeatTimeByPack: { find_the_sniper: 49800, abstract_animated: 56600 }, fastestTimeByPack: { find_the_sniper: 17500, abstract_animated: 19900 }, totalSetsCleared: 1, isCurrentPlayer: false }
 ];
 
-export async function fetchLeaderboards(localDifficultyStats = {}) {
+export async function fetchLeaderboards(localDifficultyStats = {}, additionalSetIds = []) {
   const fetchPromise = (async () => {
     const localPayload = computeLeaderboardPayload(localDifficultyStats, getSavedPlayerName());
     const localPlayerEntry = {
@@ -871,8 +871,14 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
 
   const setIds = [...new Set([
     ...ALL_PHOTO_SET_IDS,
+    ...additionalSetIds,
     ...combinedList.flatMap(player => Object.keys(player.bySetFirst || {}))
-  ])];
+  ])].sort((a, b) => {
+    const numA = getSetNumber(a);
+    const numB = getSetNumber(b);
+    if (numA !== numB) return numA - numB;
+    return a.localeCompare(b);
+  });
 
     return {
       isCloud,
@@ -936,8 +942,14 @@ export async function fetchLeaderboards(localDifficultyStats = {}) {
 
       const setIds = [...new Set([
         ...ALL_PHOTO_SET_IDS,
+        ...additionalSetIds,
         ...(localPayload.bySetFirst ? Object.keys(localPayload.bySetFirst) : [])
-      ])];
+      ])].sort((a, b) => {
+        const numA = getSetNumber(a);
+        const numB = getSetNumber(b);
+        if (numA !== numB) return numA - numB;
+        return a.localeCompare(b);
+      });
       const getFallbackListForSet = (setId) => {
         const local = [localPlayerEntry, ...fallbackEntries]
           .map(player => ({

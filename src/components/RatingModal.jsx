@@ -276,7 +276,7 @@ export default function RatingModal({
               fontSize: '0.88rem',
               color: 'var(--text-muted)',
               lineHeight: 1.45,
-              textAlign: 'center',
+              textAlign: 'left',
               padding: '0 4px'
             }}>
               Tell us what felt off or share any ideas. Your feedback gets sent directly to our team at <span style={{ color: 'var(--accent-cyan)', fontWeight: 700 }}>{SUPPORT_EMAIL}</span>.
