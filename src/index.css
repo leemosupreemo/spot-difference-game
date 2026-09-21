@@ -124,8 +124,38 @@ body {
    response the Help button already had, on both touch and mouse. */
 button:active,
 [role="button"]:active {
-  transform: scale(0.94) !important;
-  filter: brightness(0.85);
+  transform: scale(0.96) !important;
+  filter: brightness(0.88);
+  transition: transform 0.08s ease, filter 0.08s ease;
+}
+
+/* Set of the Day Banner - subtle pressed state matching Help button feel */
+.set-of-day-banner-card {
+  transition: transform 0.12s ease, box-shadow 0.2s ease;
+}
+
+.set-of-day-banner-card:active,
+.set-of-day-banner-container [role="button"]:active {
+  transform: scale(0.985) !important;
+  filter: brightness(0.92);
+  transition: transform 0.08s ease, filter 0.08s ease;
+}
+
+/* Game Mode Cards (Photography & Abstract) - tactile pressed state */
+.mode-card-item {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.12s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.mode-card-item:hover {
+  transform: translateY(-2px);
+}
+
+.mode-card-item:active {
+  transform: scale(0.975) !important;
+  filter: brightness(0.92);
   transition: transform 0.08s ease, filter 0.08s ease;
 }
 
@@ -215,15 +245,20 @@ button:active,
   margin: 0 auto;
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
-  transform: none !important;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
 }
 
 .start-game-btn:hover,
-.start-game-btn:focus,
+.start-game-btn:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 240, 255, 0.45) !important;
+}
+
 .start-game-btn:active {
-  transform: none !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+  transform: scale(0.975) !important;
+  filter: brightness(0.92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+  transition: transform 0.08s ease, filter 0.08s ease;
 }
 
 /* Periodic Sheen on Start Game Button */

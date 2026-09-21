@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/capacitor';
 import * as SentryReact from '@sentry/react';
+import { Capacitor } from '@capacitor/core';
 import { logApp } from '../utils/logger.js';
 
 let isSentryInitialized = false;
@@ -28,23 +29,37 @@ export function initSentry() {
 
   try {
     const isDev = Boolean(env.DEV);
+    const isNative = typeof Capacitor !== 'undefined' && typeof Capacitor.isNativePlatform === 'function' && Capacitor.isNativePlatform();
+    const isPluginAvailable = typeof Capacitor !== 'undefined' && typeof Capacitor.isPluginAvailable === 'function' && Capacitor.isPluginAvailable('SentryCapacitor');
+    const enableNative = Boolean(isNative && isPluginAvailable);
+
+    const integrations = [
+      SentryReact.browserTracingIntegration(),
+    ];
+
+    // Replay integration is only supported on desktop/standard web browser contexts.
+    // WKWebView in Capacitor iOS should not run browser replay.
+    if (!isNative && typeof SentryReact.replayIntegration === 'function') {
+      integrations.push(
+        SentryReact.replayIntegration({
+          maskAllText: false,
+          blockAllMedia: false
+        })
+      );
+    }
 
     Sentry.init({
       dsn,
       environment: env.MODE || (isDev ? 'development' : 'production'),
       release: `diff-hunter@${env.VITE_APP_VERSION || '1.0.0'}`,
-      integrations: [
-        SentryReact.browserTracingIntegration(),
-        SentryReact.replayIntegration({
-          maskAllText: false,
-          blockAllMedia: false
-        })
-      ],
+      enableNative,
+      enableNativeNagger: false,
+      integrations,
       // Performance Monitoring: Sample 100% in dev, 20% in production
       tracesSampleRate: isDev ? 1.0 : 0.2,
-      // Session Replay: 100% on error, 10% on general sessions in production
-      replaysSessionSampleRate: isDev ? 0.0 : 0.1,
-      replaysOnErrorSampleRate: 1.0,
+      // Session Replay: Only on web
+      replaysSessionSampleRate: isDev ? 0.0 : (isNative ? 0.0 : 0.1),
+      replaysOnErrorSampleRate: isNative ? 0.0 : 1.0,
       // Filter out noisy browser extension or third-party iframe errors
       ignoreErrors: [
         'ResizeObserver loop limit exceeded',
@@ -61,7 +76,7 @@ export function initSentry() {
     }, SentryReact.init);
 
     isSentryInitialized = true;
-    logApp('INFO', '[Sentry] Initialized successfully.');
+    logApp('INFO', `[Sentry] Initialized successfully. (native: ${enableNative})`);
   } catch (err) {
     console.error('[Sentry] Initialization error:', err);
   }

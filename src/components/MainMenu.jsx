@@ -227,6 +227,18 @@ export default function MainMenu({
                   trackCategorySelected(theme.id);
                 }}
                 className="glass-panel mode-card-item"
+                role="button"
+                tabIndex={0}
+                aria-label={`${theme.title} Mode`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    sounds.playTap();
+                    setSelectedTheme(theme.id);
+                    setGameModeBgTicks(prev => ({ ...prev, [theme.id]: (prev[theme.id] || 0) + 1 }));
+                    trackCategorySelected(theme.id);
+                  }
+                }}
                 style={{
                   position: 'relative',
                   overflow: 'hidden',
@@ -236,7 +248,6 @@ export default function MainMenu({
                   border: isSelected ? '2px solid var(--accent-cyan)' : '1px solid var(--border-glass)',
                   boxShadow: isSelected ? '0 0 16px rgba(0, 240, 255, 0.3)' : 'none',
                   background: isSelected ? 'rgba(0, 240, 255, 0.12)' : 'rgba(255, 255, 255, 0.04)',
-                  transition: 'all 0.18s ease',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px'

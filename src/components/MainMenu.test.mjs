@@ -107,3 +107,21 @@ test('the debug set picker names sets by id, not list position', () => {
   // makes remote_set_001 indistinguishable from photo_set_001.
   assert.doesNotMatch(source, /Photo Set \$\{index \+ 1\}/);
 });
+
+test('defines subtle pressed shrink state for mode cards, start game button, and set of the day banner', () => {
+  const cssPath = path.join(path.dirname(componentPath), '../index.css');
+  const css = fs.readFileSync(cssPath, 'utf8');
+
+  // Mode cards (Photo and Abstract) have tactile pressed shrink state
+  assert.match(css, /\.mode-card-item:active\s*\{[\s\S]*?transform:\s*scale\(0\.975\)\s*!important/);
+
+  // Start game button has subtle pressed shrink state
+  assert.match(css, /\.start-game-btn:active\s*\{[\s\S]*?transform:\s*scale\(0\.975\)\s*!important/);
+
+  // Set of the Day banner has subtle pressed state matching help button feel
+  assert.match(css, /\.set-of-day-banner-card:active[\s\S]*?transform:\s*scale\(0\.985\)\s*!important/);
+
+  // MainMenu mode cards have role="button"
+  const menuSource = fs.readFileSync(new URL('./MainMenu.jsx', import.meta.url), 'utf8');
+  assert.match(menuSource, /className="glass-panel mode-card-item"[\s\S]*?role="button"/);
+});

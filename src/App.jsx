@@ -46,7 +46,16 @@ import {
   resetDailyPlayerStatus,
   syncRemoteDailyQueue
 } from './services/dailyChallenge';
-import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress, restoreProgressFromCloud, clearAllLocalRecords } from './services/playerProgress';
+import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress, saveLeaderboardStats, restoreProgressFromCloud, clearAllLocalRecords } from './services/playerProgress';
+import {
+  getCuratedStatusMap,
+  getEntryCurationStatus,
+  getLevelStatus,
+  setLevelCuratedStatus,
+  setLevelCurationMeta,
+  pruneDismissedStatuses,
+  saveCuratedStatusMap
+} from './utils/curationStore';
 import { incrementSuccessfulRounds, getSuccessfulRounds, getSessionsPlayed, shouldShowRatingPrompt, recordRatingPromptShown } from './services/ratingPrompt';
 import { getSetNumber, checkAndUpdateDynamicSetRecord } from './utils/setLeaderboards.js';
 import { submitLeaderboardScore } from './services/leaderboardService.js';
@@ -70,6 +79,10 @@ export default function App() {
     return <ScreenshotHarness modalId={screenshotModal} />;
   }
 
+  return <GameApp />;
+}
+
+function GameApp() {
   const [showSplash, setShowSplash] = useState(() => isMobileDevice());
 
   const [levels, setLevels] = useState(() => {
@@ -1539,7 +1552,6 @@ export default function App() {
               trackHelpTapped({ source: 'menu', view });
               setHelpModalOpen(true);
             }}
-            onOpenShareChallenge={() => setShareChallengeModalOpen(true)}
             hasCompletedFirstSet={hasCompletedFirstSetState}
             tutorialAnimationEnabled={tutorialAnimationEnabled}
             onToggleTutorialAnimation={handleToggleTutorialAnimation}

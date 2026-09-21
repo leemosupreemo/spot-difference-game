@@ -116,6 +116,7 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
         role="button"
         tabIndex={0}
         aria-label="Set of the Day Challenge"
+        className="set-of-day-banner-card"
         style={{
           position: 'relative',
           display: 'flex',

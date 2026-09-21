@@ -441,17 +441,24 @@ export default function ProgressModal({
                     </tr>
                   ) : (
                     topLeaderboardEntries.slice(0, 25).map((entry, index) => {
-                      const isMe = entry.isCurrentPlayer;
-                      const playerSet = isMe ? getPlayerSetStats(selectedLeaderboardSet) : null;
-                      const isFirstFailed = (isMe && (playerSet?.firstFailed || playerSet?.firstTime === 'failed'))
+                      const isLocal = Boolean(entry.isCurrentPlayer);
+                      const playerSet = isLocal ? getPlayerSetStats(selectedLeaderboardSet) : null;
+                      const isFirstFailed = (isLocal && (playerSet?.firstFailed || playerSet?.firstTime === 'failed'))
                         || entry.firstTime === 'failed'
                         || Boolean(entry.firstFailed);
 
-                      const firstTimeMs = (isMe && playerSet && typeof playerSet.firstTime === 'number')
+                      const firstTimeMs = (isLocal && playerSet && typeof playerSet.firstTime === 'number')
                         ? playerSet.firstTime
                         : (typeof entry.firstTime === 'number' ? entry.firstTime : entry.avgFirstTimeByPack?.[selectedLeaderboardPack]);
                       const repeatTimeMs = entry.repeatTime || entry.avgRepeatTimeByPack?.[selectedLeaderboardPack] || entry.avgTimesByPack?.[selectedLeaderboardPack];
                       const fastestTimeMs = entry.fastestTime || entry.fastestTimeByPack?.[selectedLeaderboardPack];
+
+                      // Only highlight row as "YOU" if the player actually has a recorded time, score, or attempt
+                      const hasRecord = isSetView
+                        ? Boolean(playerSet?.clears || playerSet?.bestScore || isFirstFailed || typeof firstTimeMs === 'number' || typeof repeatTimeMs === 'number')
+                        : Boolean(entry.clears || entry.totalSetsCleared || (typeof firstTimeMs === 'number' && firstTimeMs > 0) || (typeof repeatTimeMs === 'number' && repeatTimeMs > 0) || (typeof fastestTimeMs === 'number' && fastestTimeMs > 0));
+
+                      const isMe = isLocal && hasRecord;
 
                       const firstTimeStr = isFirstFailed
                         ? 'Failed'

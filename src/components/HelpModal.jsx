@@ -184,8 +184,7 @@ export default function HelpModal({ isOpen, onClose }) {
           WebkitOverflowScrolling: 'touch',
           overscrollBehavior: 'contain',
           paddingRight: '4px',
-          paddingBottom: '24px',
-          marginBottom: '14px',
+          paddingBottom: '8px',
           flex: '1 1 auto',
           minHeight: '260px'
         }}>
@@ -359,19 +358,6 @@ export default function HelpModal({ isOpen, onClose }) {
             </div>
           )}
         </div>
-
-        {/* Action Button */}
-        <button
-          className="glass-btn glass-btn-primary"
-          onClick={() => {
-            sounds.playTap();
-            if (showFullPolicy) setShowFullPolicy(false);
-            else onClose();
-          }}
-          style={{ width: '100%', justifyContent: 'center', fontSize: '1.05rem', fontWeight: 900, padding: '12px', borderRadius: '14px', flexShrink: 0 }}
-        >
-          {showFullPolicy ? 'Done Reading' : 'Got It!'}
-        </button>
       </div>
     </div>
   );

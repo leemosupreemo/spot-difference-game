@@ -143,3 +143,12 @@ test('ProgressModal renders Failed in neon pink when a first attempt is marked f
   assert.match(source, /color:\s*isFirstFailed \? 'var\(--accent-pink\)' : 'var\(--accent-gold\)'/);
 });
 
+test('ProgressModal row highlight requires an active record on the board', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Must guard isMe by hasRecord so unplayed sets or unranked players are never highlighted
+  assert.match(source, /const isMe = isLocal && hasRecord;/);
+  assert.match(source, /const hasRecord = isSetView/);
+});
+
+

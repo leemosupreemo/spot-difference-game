@@ -31,3 +31,15 @@ test('HelpModal How to Play rules focus on tap the difference without original/m
   assert.match(source, /Speedrun Timer/);
   assert.doesNotMatch(source, /clear the stage/i);
 });
+
+test('HelpModal does not render a bottom action button that bleeds off the card bounds', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Should have the top close X button
+  assert.match(source, /aria-label="Close"/);
+
+  // Must not have bottom action button or 'Got It!' / 'Done Reading'
+  assert.doesNotMatch(source, /Got It!/);
+  assert.doesNotMatch(source, /Done Reading/);
+  assert.doesNotMatch(source, /glass-btn-primary/);
+});
