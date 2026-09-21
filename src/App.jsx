@@ -192,6 +192,7 @@ function GameApp() {
   const [revealAnswer, setRevealAnswer] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
   const [ratingModalOpen, setRatingModalOpen] = useState(false);
+  const [ratingModalInitialStep, setRatingModalInitialStep] = useState('prompt');
   const [ratingPromptAttemptNumber, setRatingPromptAttemptNumber] = useState(1);
   // Set true the instant a stage/set is actually won; consumed (and cleared) the next
   // time the player lands back on the menu, which is when the rating prompt may show.
@@ -1554,7 +1555,10 @@ function GameApp() {
             dismissedCount={dismissedAvailableCount}
             simulatedOffline={simulatedOffline}
             onToggleSimulatedOffline={handleToggleSimulatedOffline}
-            onTriggerRatingPrompt={() => setRatingModalOpen(true)}
+            onTriggerRatingPrompt={(step = 'prompt') => {
+              setRatingModalInitialStep(step);
+              setRatingModalOpen(true);
+            }}
             noticeSlot={
               <OfflineSetNotice
                 visible={switchedOffRemoteSet}
@@ -1747,6 +1751,7 @@ function GameApp() {
         isOpen={ratingModalOpen}
         onClose={() => setRatingModalOpen(false)}
         attemptNumber={ratingPromptAttemptNumber}
+        initialStep={ratingModalInitialStep}
       />
 
       <DiagnosticsModal
@@ -1756,7 +1761,8 @@ function GameApp() {
           setDiagnosticsModalOpen(false);
           setShowSplash(true);
         }}
-        onPreviewRating={() => {
+        onPreviewRating={(step = 'prompt') => {
+          setRatingModalInitialStep(step);
           setDiagnosticsModalOpen(false);
           setRatingModalOpen(true);
         }}

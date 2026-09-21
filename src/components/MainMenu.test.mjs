@@ -134,10 +134,11 @@ test('MainMenu exposes a debug button to test local notifications when debugMode
   assert.match(source, /TEST NOTIFICATION/);
 });
 
-test('MainMenu exposes a debug button to test the app rating prompt when debugMode is active', () => {
+test('MainMenu exposes debug buttons to test the app rating prompt and feedback form when debugMode is active', () => {
   const source = fs.readFileSync(componentPath, 'utf8');
 
   assert.match(source, /onTriggerRatingPrompt/);
   assert.match(source, /debugMode && onTriggerRatingPrompt/);
-  assert.match(source, /TEST APP RATING PROMPT/);
+  assert.match(source, /RATING PROMPT/);
+  assert.match(source, /FEEDBACK FORM/);
 });

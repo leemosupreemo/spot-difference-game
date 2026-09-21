@@ -15,17 +15,18 @@ export default function RatingModal({
   isOpen,
   onClose,
   attemptNumber = 1,
-  playerName: propPlayerName
+  playerName: propPlayerName,
+  initialStep = 'prompt'
 }) {
-  const [step, setStep] = useState('prompt'); // 'prompt' | 'feedback' | 'thankyou'
+  const [step, setStep] = useState(initialStep); // 'prompt' | 'feedback' | 'thankyou'
   const [feedbackText, setFeedbackText] = useState('');
 
   useEffect(() => {
     if (isOpen) {
-      setStep('prompt');
+      setStep(initialStep);
       setFeedbackText('');
     }
-  }, [isOpen]);
+  }, [isOpen, initialStep]);
 
   if (!isOpen) return null;
 

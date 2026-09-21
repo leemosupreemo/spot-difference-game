@@ -379,29 +379,53 @@ export default function MainMenu({
         )}
 
         {debugMode && onTriggerRatingPrompt && (
-          <button
-            type="button"
-            aria-label="Test App Rating Prompt"
-            onClick={() => {
-              sounds.playTap();
-              onTriggerRatingPrompt();
-            }}
-            style={{
-              width: '100%',
-              marginBottom: '14px',
-              padding: '10px 12px',
-              borderRadius: '10px',
-              fontWeight: 900,
-              fontSize: '0.76rem',
-              letterSpacing: '0.5px',
-              cursor: 'pointer',
-              background: 'rgba(255, 183, 3, 0.12)',
-              color: 'var(--accent-gold, #ffb020)',
-              border: '1px solid rgba(255, 183, 3, 0.4)'
-            }}
-          >
-            ⭐ TEST APP RATING PROMPT
-          </button>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '14px' }}>
+            <button
+              type="button"
+              aria-label="Test App Rating Prompt"
+              onClick={() => {
+                sounds.playTap();
+                onTriggerRatingPrompt('prompt');
+              }}
+              style={{
+                padding: '10px 8px',
+                borderRadius: '10px',
+                fontWeight: 900,
+                fontSize: '0.74rem',
+                letterSpacing: '0.5px',
+                cursor: 'pointer',
+                background: 'rgba(255, 183, 3, 0.12)',
+                color: 'var(--accent-gold, #ffb020)',
+                border: '1px solid rgba(255, 183, 3, 0.4)',
+                textAlign: 'center'
+              }}
+            >
+              ⭐ RATING PROMPT
+            </button>
+
+            <button
+              type="button"
+              aria-label="Test Feedback Form"
+              onClick={() => {
+                sounds.playTap();
+                onTriggerRatingPrompt('feedback');
+              }}
+              style={{
+                padding: '10px 8px',
+                borderRadius: '10px',
+                fontWeight: 900,
+                fontSize: '0.74rem',
+                letterSpacing: '0.5px',
+                cursor: 'pointer',
+                background: 'rgba(0, 240, 255, 0.12)',
+                color: 'var(--accent-cyan)',
+                border: '1px solid rgba(0, 240, 255, 0.35)',
+                textAlign: 'center'
+              }}
+            >
+              📝 FEEDBACK FORM
+            </button>
+          </div>
         )}
 
         {debugMode && selectedTheme === 'find_the_sniper' && (

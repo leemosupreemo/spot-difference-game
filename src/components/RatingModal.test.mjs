@@ -115,6 +115,8 @@ test('ratingPrompt service implements the cheatsheet eligibility rules', () => {
 test('App.jsx provides debug rating prompt triggers to MainMenu and DiagnosticsModal', () => {
   const appSource = fs.readFileSync(appPath, 'utf8');
 
-  assert.match(appSource, /onTriggerRatingPrompt=\{\(\) => setRatingModalOpen\(true\)\}/);
-  assert.match(appSource, /onPreviewRating=\{\(\) => \{\s*setDiagnosticsModalOpen\(false\);\s*setRatingModalOpen\(true\);\s*\}\}/);
+  assert.match(appSource, /onTriggerRatingPrompt=\{/);
+  assert.match(appSource, /setRatingModalInitialStep/);
+  assert.match(appSource, /setRatingModalOpen\(true\)/);
+  assert.match(appSource, /onPreviewRating=\{/);
 });
