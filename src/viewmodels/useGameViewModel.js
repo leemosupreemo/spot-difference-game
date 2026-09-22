@@ -264,7 +264,7 @@ export function useGameViewModel() {
         setTimeout(() => {
           setCurrentPairIndex(prev => prev + 1);
           setFoundDiffs([]);
-        }, 450);
+        }, 1850);
       } else {
         setTimerRunning(false);
         
@@ -374,7 +374,7 @@ export function useGameViewModel() {
 
         setTimeout(() => {
           setVictoryModalOpen(true);
-        }, 400);
+        }, 1900);
       }
     }
   };

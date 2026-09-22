@@ -604,21 +604,22 @@ export default function VictoryModal({
           </div>
 
           {/* Underneath centered: Star Rating. Outline stays static; only the gold fill pops in, per star. */}
-          <div role="img" aria-label={`${displayStars} out of 3 stars`} style={{ display: 'flex', justifyContent: 'center', gap: 'var(--modal-gap-sm)', marginBottom: '14px' }}>
+          <div role="img" aria-label={`${displayStars} out of 3 stars`} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 'var(--modal-gap-sm)', marginBottom: '14px', padding: '6px 0', overflow: 'visible' }}>
             {[1, 2, 3].map(starNum => {
               const active = starNum <= displayStars;
               return (
-                <div key={starNum} style={{ position: 'relative', width: '30px', height: '30px' }}>
+                <div key={starNum} style={{ position: 'relative', width: '30px', height: '30px', overflow: 'visible' }}>
                   <Star size={30} fill="none" color="rgba(255, 255, 255, 0.25)" />
                   {active && (
-                    <div style={{ position: 'absolute', inset: '-10px', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                    <div style={{ position: 'absolute', inset: '-16px', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', overflow: 'visible' }}>
                       <Star
                         size={30}
                         fill="var(--accent-gold)"
                         color="var(--accent-gold)"
                         style={{
-                          filter: 'drop-shadow(0 0 14px rgba(255, 183, 3, 0.95))',
-                          animation: `starFillPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${(starNum - 1) * 0.65}s both`
+                          filter: 'drop-shadow(0 0 6px rgba(255, 183, 3, 0.85))',
+                          animation: `starFillPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${(starNum - 1) * 0.65}s both`,
+                          overflow: 'visible'
                         }}
                       />
                     </div>

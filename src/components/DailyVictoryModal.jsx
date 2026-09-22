@@ -511,21 +511,22 @@ export default function DailyVictoryModal({
 
         {/* Stars Awarded (Only on Success). Outline stays static; only the gold fill pops in, per star. */}
         {!isFailed && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--modal-gap-sm)', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 'var(--modal-gap-sm)', marginBottom: '8px', padding: '6px 0', overflow: 'visible' }}>
             {[1, 2, 3].map((starIndex) => {
               const isEarned = starIndex <= stars;
               return (
-                <div key={starIndex} style={{ position: 'relative', width: '36px', height: '36px' }}>
+                <div key={starIndex} style={{ position: 'relative', width: '36px', height: '36px', overflow: 'visible' }}>
                   <Star size={36} color="rgba(255, 255, 255, 0.2)" fill="none" />
                   {isEarned && (
-                    <div style={{ position: 'absolute', inset: '-10px', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                    <div style={{ position: 'absolute', inset: '-16px', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', overflow: 'visible' }}>
                       <Star
                         size={36}
                         color="var(--accent-gold)"
                         fill="var(--accent-gold)"
                         style={{
-                          filter: 'drop-shadow(0 0 12px rgba(255, 183, 3, 0.7))',
-                          animation: `starFillPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${(starIndex - 1) * 0.65}s both`
+                          filter: 'drop-shadow(0 0 6px rgba(255, 183, 3, 0.85))',
+                          animation: `starFillPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${(starIndex - 1) * 0.65}s both`,
+                          overflow: 'visible'
                         }}
                       />
                     </div>

@@ -1,9 +1,9 @@
 {
-  "exportedAt": "2026-09-20T20:03:40.826Z",
+  "exportedAt": "2026-09-22T06:07:47.579Z",
   "summary": {
-    "totalCurated": 662,
-    "approvedCount": 320,
-    "dismissedCount": 398,
+    "totalCurated": 724,
+    "approvedCount": 321,
+    "dismissedCount": 403,
     "wrongDifficultyCount": 0
   },
   "approvedLevelIds": [
@@ -241,7 +241,6 @@
     "photo_set_003_05",
     "photo_set_004_01",
     "photo_set_004_02",
-    "photo_set_004_03",
     "photo_set_004_04",
     "photo_set_004_05",
     "photo_set_005_01",
@@ -326,7 +325,9 @@
     "fresh_v9_vintage_buttons_014_base_v1",
     "fresh_v9_bookbinder_tools_004_base_v1",
     "fresh_v9_philatelist_stamps_005_base_v2",
-    "fresh_v9_mosaic_tile_008_base_v1"
+    "fresh_v9_mosaic_tile_008_base_v1",
+    "fresh_v9_enamel_pins_019_base_v1",
+    "fresh_v9_bushcraft_gear_007_base_v1"
   ],
   "dismissedLevelIds": [
     "photo_set_028_02",
@@ -535,6 +536,7 @@
     "photo_set_025_03",
     "photo_set_035_04",
     "photo_set_035_05",
+    "photo_set_004_03",
     "photo_set_007_02",
     "photo_set_008_03",
     "photo_set_008_04",
@@ -726,7 +728,11 @@
     "fresh_v9_drafting_dividers_013_base_v2",
     "fresh_v9_darkroom_photo_009_base_v2",
     "fresh_v9_drafting_dividers_013_base_v1",
-    "fresh_v9_darkroom_photo_009_base_v1"
+    "fresh_v9_darkroom_photo_009_base_v1",
+    "fresh_v9_colored_pencils_011_base_v1",
+    "fresh_v9_cobbler_tools_010_base_v1",
+    "remote_set_011_placeholder_04",
+    "remote_set_011_placeholder_05"
   ],
   "rawStatusMap": {
     "photo_set_029_01": {
@@ -2490,8 +2496,8 @@
       "updatedAt": "2026-09-18T13:39:45.808Z"
     },
     "photo_set_004_03": {
-      "status": "approved",
-      "updatedAt": "2026-09-18T13:39:49.844Z"
+      "status": "dismissed",
+      "updatedAt": "2026-09-22T06:07:40.808Z"
     },
     "photo_set_004_04": {
       "status": "approved",
@@ -3600,6 +3606,30 @@
     "fresh_v9_mosaic_tile_008_base_v1": {
       "status": "approved",
       "updatedAt": "2026-09-21T05:04:32.743Z"
+    },
+    "fresh_v9_colored_pencils_011_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-22T04:57:16.235Z"
+    },
+    "fresh_v9_enamel_pins_019_base_v1": {
+      "status": "approved",
+      "updatedAt": "2026-09-22T04:57:20.317Z"
+    },
+    "fresh_v9_cobbler_tools_010_base_v1": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-22T04:57:23.903Z"
+    },
+    "fresh_v9_bushcraft_gear_007_base_v1": {
+      "status": "approved",
+      "updatedAt": "2026-09-22T04:57:27.473Z"
+    },
+    "remote_set_011_placeholder_04": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-22T04:57:29.508Z"
+    },
+    "remote_set_011_placeholder_05": {
+      "status": "dismissed",
+      "updatedAt": "2026-09-22T04:57:30.595Z"
     }
   }
 }

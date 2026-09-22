@@ -445,35 +445,6 @@
     "photoKey": "levels/3f8bbfc60b36"
   },
   {
-    "id": "photo_set_004_03",
-    "title": "[AI Recolor] Horologist Tray Screwdriver Collar",
-    "category": "Photography",
-    "pack": "Photography",
-    "packId": "find_the_sniper",
-    "difficulty": "Medium",
-    "baseImage": "levels/12be75c963f4_base.jpg",
-    "variantImage": "/levels/pipe_v3_watchmaker_recolor_002_variant.jpg",
-    "operation": "recolor",
-    "diffs": [
-      {
-        "id": 1,
-        "x": 35.1,
-        "y": 61.7,
-        "radius": 9.3,
-        "hint": "Look closely near coordinates (26%, 62%)"
-      }
-    ],
-    "dimensions": {
-      "width": 1200,
-      "height": 900
-    },
-    "aspectRatio": "4:3",
-    "setId": "photo_set_004",
-    "sequence": 1,
-    "variantCode": "STR-CLR",
-    "photoKey": "levels/12be75c963f4"
-  },
-  {
     "id": "photo_set_004_04",
     "title": "[AI Add] Electronics Antistatic Bench Extra Capacitor",
     "category": "Photography",
@@ -498,7 +469,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-ADD",
     "photoKey": "levels/8d4395ee49d2"
   },
@@ -527,7 +498,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-ADD",
     "photoKey": "levels/c845fb878647"
   },
@@ -559,7 +530,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_004",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/6a555061d355"
   },
@@ -590,7 +561,7 @@
       }
     ],
     "setId": "photo_set_004",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-CLR",
     "photoKey": "levels/6fedd084dc95"
   },
@@ -621,8 +592,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_005",
-    "sequence": 1,
+    "setId": "photo_set_004",
+    "sequence": 5,
     "variantCode": "STR-CLR",
     "photoKey": "levels/2e22012e84c0"
   },
@@ -651,7 +622,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-ADD",
     "photoKey": "levels/4952d4676e61"
   },
@@ -681,7 +652,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-REM",
     "photoKey": "levels/d51ef1c25fac"
   },
@@ -710,7 +681,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/b9ac7b656762"
   },
@@ -739,7 +710,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_005",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-ADD",
     "photoKey": "levels/ef92ebb75fe4"
   },
@@ -766,8 +737,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_006",
-    "sequence": 1,
+    "setId": "photo_set_005",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/a943339d7442"
   },
@@ -796,7 +767,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/4f45d9d382e8"
   },
@@ -827,7 +798,7 @@
       }
     ],
     "setId": "photo_set_006",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-CLR",
     "photoKey": "levels/564981c74583"
   },
@@ -855,7 +826,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "???-???",
     "photoKey": "levels/40915d078af3"
   },
@@ -883,7 +854,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_006",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "???-???",
     "photoKey": "levels/303fef93e45e"
   },
@@ -909,8 +880,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_007",
-    "sequence": 1,
+    "setId": "photo_set_006",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/223b3264c151"
   },
@@ -938,7 +909,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/nursery/medium_nursery_001/a22bb085767f"
   },
@@ -966,7 +937,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/workbench/medium_workbench_001/612b6a34e050"
   },
@@ -994,7 +965,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-potting-table/photo_potting_table_001/24499bd75548"
   },
@@ -1022,7 +993,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_007",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-watchmaker-bench/8072653c206f"
   },
@@ -1049,8 +1020,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_008",
-    "sequence": 1,
+    "setId": "photo_set_007",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-bakers-table/c3892638bc7d"
   },
@@ -1078,7 +1049,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-electronics-bench/a66f42272821"
   },
@@ -1106,7 +1077,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-antique-desk/3a98c0983bff"
   },
@@ -1134,7 +1105,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-board-game/11ab8d831522"
   },
@@ -1162,7 +1133,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_008",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-woodworking-bench/98635191db71"
   },
@@ -1189,8 +1160,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_009",
-    "sequence": 1,
+    "setId": "photo_set_008",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-repair-drawer/49ec079e2ca1"
   },
@@ -1218,7 +1189,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-camera-gear/d8599cc3bcc1"
   },
@@ -1246,7 +1217,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-pottery-table/6171cf197574"
   },
@@ -1274,7 +1245,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-bicycle-repair/ca5d5a11786a"
   },
@@ -1302,7 +1273,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_009",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-woodworking-table/dbb29ee85300"
   },
@@ -1329,8 +1300,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_010",
-    "sequence": 1,
+    "setId": "photo_set_009",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-artist-supply/6c8f81f1cee0"
   },
@@ -1358,7 +1329,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-camping-gear/b616ee311d33"
   },
@@ -1386,7 +1357,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-sewing-table/78c73d97f15e"
   },
@@ -1414,7 +1385,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-map-restoration/81e07ac28778"
   },
@@ -1442,7 +1413,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_010",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/photo-game-night/aa2ca3ce722e"
   },
@@ -1469,8 +1440,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_011",
-    "sequence": 1,
+    "setId": "photo_set_010",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/ai-bakery-counter/d480599acfa5"
   },
@@ -1498,7 +1469,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/ai-greenhouse-potting/5fde6906debe"
   },
@@ -1526,7 +1497,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/ai-artist-easel/84541fa6fe24"
   },
@@ -1554,7 +1525,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/ai-coffee-bar/1ea573c77403"
   },
@@ -1582,7 +1553,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_011",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/ai-antique-study/01f1ee94287d"
   },
@@ -1609,8 +1580,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_012",
-    "sequence": 1,
+    "setId": "photo_set_011",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/ai-botanist-herbarium/2f7bf4adfbf6"
   },
@@ -1638,7 +1609,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/ai-cartography-desk/f3bdacea6eb5"
   },
@@ -1669,7 +1640,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-CLR",
     "photoKey": "levels/97f2ba33fda9"
   },
@@ -1700,7 +1671,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/56cc122a17a0"
   },
@@ -1731,7 +1702,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_012",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-CLR",
     "photoKey": "levels/3e2cc15f2b07"
   },
@@ -1761,8 +1732,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_013",
-    "sequence": 1,
+    "setId": "photo_set_012",
+    "sequence": 5,
     "variantCode": "STR-CLR",
     "photoKey": "levels/ddf590b4dbb7"
   },
@@ -1793,7 +1764,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-CLR",
     "photoKey": "levels/9ce8c7b6d645"
   },
@@ -1824,7 +1795,7 @@
       }
     ],
     "setId": "photo_set_013",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-CLR",
     "photoKey": "levels/0491120cb22c"
   },
@@ -1855,7 +1826,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/abc1b07f9475"
   },
@@ -1886,7 +1857,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_013",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-REM",
     "photoKey": "levels/6be39d9e1fd8"
   },
@@ -1916,8 +1887,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_014",
-    "sequence": 1,
+    "setId": "photo_set_013",
+    "sequence": 5,
     "variantCode": "STR-ADD",
     "photoKey": "levels/81c16b94464d"
   },
@@ -1948,7 +1919,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-CLR",
     "photoKey": "levels/8803ac7100d6"
   },
@@ -1979,7 +1950,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-ADD",
     "photoKey": "levels/8bf5183fcc5a"
   },
@@ -2010,7 +1981,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-REM",
     "photoKey": "levels/798a7dd51d00",
     "flipped": true
@@ -2042,7 +2013,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_014",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-CLR",
     "photoKey": "levels/730649667953"
   },
@@ -2072,8 +2043,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_015",
-    "sequence": 1,
+    "setId": "photo_set_014",
+    "sequence": 5,
     "variantCode": "STR-REM",
     "photoKey": "levels/c23d23723778",
     "flipped": true
@@ -2105,7 +2076,7 @@
       }
     ],
     "setId": "photo_set_015",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-CLR",
     "photoKey": "levels/ba7786af937c"
   },
@@ -2136,7 +2107,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-MOV",
     "photoKey": "levels/311971e3bc95"
   },
@@ -2167,7 +2138,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-MOV",
     "photoKey": "levels/37aebee3101b"
   },
@@ -2198,7 +2169,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_015",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-MOV",
     "photoKey": "levels/57a58bf12d1e"
   },
@@ -2228,8 +2199,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_016",
-    "sequence": 1,
+    "setId": "photo_set_015",
+    "sequence": 5,
     "variantCode": "STR-MOV",
     "photoKey": "levels/cf9875bcd8da"
   },
@@ -2260,7 +2231,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-MOV",
     "photoKey": "levels/3887e12afe3c"
   },
@@ -2291,7 +2262,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-CLR",
     "photoKey": "levels/6ffffcd610ed"
   },
@@ -2322,7 +2293,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/e4078f0a6fe6"
   },
@@ -2353,7 +2324,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_016",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-MOV",
     "photoKey": "levels/72d118471c78"
   },
@@ -2383,8 +2354,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_017",
-    "sequence": 1,
+    "setId": "photo_set_016",
+    "sequence": 5,
     "variantCode": "STR-CLR",
     "photoKey": "levels/ac00db097041"
   },
@@ -2413,7 +2384,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-REM",
     "photoKey": "levels/4cff74d97a0c",
     "flipped": true
@@ -2443,7 +2414,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-REM",
     "photoKey": "levels/cdffff8cdcaf",
     "flipped": true
@@ -2473,7 +2444,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-REM",
     "photoKey": "levels/5587f8de42b6"
   },
@@ -2502,7 +2473,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_017",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-REM",
     "photoKey": "levels/029fbcb9051a",
     "flipped": true
@@ -2531,8 +2502,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_018",
-    "sequence": 1,
+    "setId": "photo_set_017",
+    "sequence": 5,
     "variantCode": "STR-REM",
     "photoKey": "levels/d5cc4fa884a7",
     "flipped": true
@@ -2562,7 +2533,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-CLR",
     "photoKey": "levels/4c9e67b95d2f"
   },
@@ -2593,7 +2564,7 @@
       }
     ],
     "setId": "photo_set_018",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-CLR",
     "photoKey": "levels/ebec8ec74de9"
   },
@@ -2622,7 +2593,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/0086d006bc88"
   },
@@ -2651,7 +2622,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_018",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-CLR",
     "photoKey": "levels/550eab2677ab"
   },
@@ -2679,8 +2650,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_019",
-    "sequence": 1,
+    "setId": "photo_set_018",
+    "sequence": 5,
     "variantCode": "STR-CLR",
     "photoKey": "levels/270f5608cc23"
   },
@@ -2708,7 +2679,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/0825967813ea"
   },
@@ -2738,7 +2709,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-CLR",
     "photoKey": "levels/48cfeb798984"
   },
@@ -2770,7 +2741,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/357f9ec603cb"
   },
@@ -2800,7 +2771,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_019",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-CLR",
     "photoKey": "levels/f1639c250bdc"
   },
@@ -2831,8 +2802,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_020",
-    "sequence": 1,
+    "setId": "photo_set_019",
+    "sequence": 5,
     "variantCode": "STR-CLR",
     "photoKey": "levels/bcffd42bb6ee"
   },
@@ -2862,7 +2833,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-CLR",
     "photoKey": "levels/36706f37bd89"
   },
@@ -2894,7 +2865,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-CLR",
     "photoKey": "levels/dacccbe7cc29"
   },
@@ -2924,7 +2895,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/332ac1fba773"
   },
@@ -2956,7 +2927,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_020",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-CLR",
     "photoKey": "levels/37bb13514b3a"
   },
@@ -2984,8 +2955,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_021",
-    "sequence": 1,
+    "setId": "photo_set_020",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/d23ac56dc6a4"
   },
@@ -3014,7 +2985,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "???-???",
     "photoKey": "levels/19b7a96e5a60"
   },
@@ -3043,7 +3014,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "???-???",
     "photoKey": "levels/25a5350582bf"
   },
@@ -3074,7 +3045,7 @@
       }
     ],
     "setId": "photo_set_021",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/bdbfedf807fc"
   },
@@ -3103,7 +3074,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_021",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "???-???",
     "photoKey": "levels/21b1b2a435da"
   },
@@ -3130,8 +3101,8 @@
       "height": 900
     },
     "aspectRatio": "4:3",
-    "setId": "photo_set_022",
-    "sequence": 1,
+    "setId": "photo_set_021",
+    "sequence": 5,
     "variantCode": "???-???",
     "photoKey": "levels/photo-pairs/ai-locksmith-bench/aa53155cf57e"
   },
@@ -3162,7 +3133,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 2,
+    "sequence": 1,
     "variantCode": "STR-CLR",
     "photoKey": "levels/2ef79002ac79"
   },
@@ -3193,7 +3164,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 3,
+    "sequence": 2,
     "variantCode": "STR-CLR",
     "photoKey": "levels/ca23c7152c0e"
   },
@@ -3224,7 +3195,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 4,
+    "sequence": 3,
     "variantCode": "STR-CLR",
     "photoKey": "levels/4f7821e8b2e4"
   },
@@ -3255,7 +3226,7 @@
     },
     "aspectRatio": "4:3",
     "setId": "photo_set_022",
-    "sequence": 5,
+    "sequence": 4,
     "variantCode": "STR-CLR",
     "photoKey": "levels/29263c26afff"
   },
@@ -3286,7 +3257,9 @@
     },
     "aspectRatio": "4:3",
     "variantCode": "STR-CLR",
-    "photoKey": "levels/13db4947d918"
+    "photoKey": "levels/13db4947d918",
+    "setId": "photo_set_022",
+    "sequence": 5
   },
   {
     "id": "photo_set_026_03",

@@ -1080,7 +1080,7 @@ function GameApp() {
           if (nextLevel) {
             startLevel(nextLevel.id);
           }
-        }, 350);
+        }, 1850);
       } else {
         // FULL STAGE / SEQUENCE CLEAR!
         // A "successful round" for the rating-prompt cheatsheet: a full stage/set win,
@@ -1209,7 +1209,7 @@ function GameApp() {
               isFailed: false,
               stageIndex: 2
             });
-          }, 500);
+          }, 2000);
           return;
         }
 
@@ -1337,7 +1337,7 @@ function GameApp() {
 
         setTimeout(() => {
           setVictoryModalOpen(true);
-        }, 500);
+        }, 2000);
       }
     }
   };

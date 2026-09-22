@@ -270,7 +270,7 @@ export default function GameCanvas({
 
   // Handle pointer up (only intentional quick taps trigger guesses)
   const handlePointerUp = (e, containerRef) => {
-    if (!containerRef.current || !level || revealAnswer) return;
+    if (!containerRef.current || !level || revealAnswer || (foundDiffs && foundDiffs.length >= (level.totalDifferences || 1))) return;
 
     const start = pointerStartRef.current;
     const duration = Date.now() - start.time;
