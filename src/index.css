@@ -827,6 +827,18 @@ button:active,
   80% { transform: translateX(2px); }
 }
 
+/* The HUD has to out-rank the artwork, because the "+5s" penalty callout drifts
+   down past the panel's bottom edge and over the top of the canvas.
+   `.glass-panel`'s backdrop-filter makes this panel a stacking context, so the
+   badge's own z-index is scoped inside it -- and a static, z-index: auto panel
+   paints below the positioned `.canvas-card` and its `z-index: 1` image, which
+   swallowed the badge whole. Staying under 20 keeps the hit/miss markers and the
+   hint radar (z-index 45) above the HUD, as they were. */
+.game-hud-bar {
+  position: relative;
+  z-index: 10;
+}
+
 .timer-penalty-badge {
   position: absolute;
   top: 100%;
@@ -834,8 +846,16 @@ button:active,
   font-family: var(--font-mono);
   font-size: 0.92rem;
   font-weight: 900;
+  line-height: 1;
+  /* The callout drifts down over the artwork, so it carries its own dark chip --
+     pink glow alone disappears against a busy, brightly coloured level. */
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(8, 6, 18, 0.88);
+  border: 1px solid rgba(255, 0, 127, 0.6);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 14px rgba(255, 0, 127, 0.35);
   color: var(--accent-pink);
-  text-shadow: 0 0 10px rgba(255, 0, 127, 0.85);
+  text-shadow: 0 0 8px rgba(255, 0, 127, 0.7);
   white-space: nowrap;
   pointer-events: none;
   z-index: 5;

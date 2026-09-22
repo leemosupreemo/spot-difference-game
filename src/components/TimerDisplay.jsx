@@ -77,7 +77,7 @@ export default function TimerDisplay({
       padding: '0 4px',
       boxSizing: 'border-box'
     }}>
-      <div className="glass-panel" style={{
+      <div className="glass-panel game-hud-bar" style={{
         padding: '8px 14px',
         width: '100%',
         borderRadius: '16px',
