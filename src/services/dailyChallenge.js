@@ -14,6 +14,8 @@ import {
   serverTimestamp
 } from 'firebase/firestore';
 import { getAllPhotoPairEntries, createPhotoPairLevel } from '../utils/photoPairLevelLoader.js';
+import { hasAdjacentRepeat, separateAdjacentDuplicates } from '../utils/stageOrdering.js';
+import { photoKeyOf } from '../utils/photoIdentity.js';
 import { getSavedPlayerName, savePlayerName } from './playerProgress.js';
 import { getGameCenterPlayer } from './gameCenter.js';
 import { logApp } from '../utils/logger.js';
@@ -452,9 +454,12 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
       .map(createPhotoPairLevel);
 
     if (scheduledLevels.length === 3) {
-      dailySets[dateStr] = scheduledLevels.map(l => l.id);
+      const spaced = hasAdjacentRepeat(scheduledLevels)
+        ? separateAdjacentDuplicates(scheduledLevels)
+        : scheduledLevels;
+      dailySets[dateStr] = spaced.map(l => l.id);
       storageSet(STORAGE_KEY_DAILY_SETS, JSON.stringify(dailySets));
-      return decorateDailyLevels(scheduledLevels, dateStr);
+      return decorateDailyLevels(spaced, dateStr);
     }
   }
 
@@ -491,9 +496,12 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
         });
 
       if (levels.length === 3) {
-        dailySets[dateStr] = chosenIds;
+        const spaced = hasAdjacentRepeat(levels)
+          ? separateAdjacentDuplicates(levels)
+          : levels;
+        dailySets[dateStr] = spaced.map(l => l.id);
         storageSet(STORAGE_KEY_DAILY_SETS, JSON.stringify(dailySets));
-        return decorateDailyLevels(levels, dateStr);
+        return decorateDailyLevels(spaced, dateStr);
       }
     }
   }
@@ -531,7 +539,27 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
 
-    chosenIds = pool.slice(0, 3).map(e => e.id);
+    // Pick 3 entries ensuring distinct photo identities if available
+    const picked = [];
+    const pickedPhotos = new Set();
+    for (const entry of pool) {
+      const pKey = photoKeyOf(entry) || entry.id;
+      if (!pickedPhotos.has(pKey)) {
+        picked.push(entry);
+        pickedPhotos.add(pKey);
+        if (picked.length === 3) break;
+      }
+    }
+    if (picked.length < 3) {
+      for (const entry of pool) {
+        if (!picked.includes(entry)) {
+          picked.push(entry);
+          if (picked.length === 3) break;
+        }
+      }
+    }
+
+    chosenIds = picked.map(e => e.id);
     usedQueue = Array.from(new Set([...usedQueue, ...chosenIds]));
     dailySets[dateStr] = chosenIds;
 
@@ -554,7 +582,11 @@ export function getDailySetForDate(dateStr = getTodayDateString()) {
       return level;
     });
 
-  return decorateDailyLevels(levels, dateStr);
+  const spaced = hasAdjacentRepeat(levels)
+    ? separateAdjacentDuplicates(levels)
+    : levels;
+
+  return decorateDailyLevels(spaced, dateStr);
 }
 
 /**

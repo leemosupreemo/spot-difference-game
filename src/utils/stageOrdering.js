@@ -13,10 +13,15 @@
  * from one photo -- is placed as well as it can be rather than rejected.
  */
 
+import { photoKeyOf, imagePathKey } from './photoIdentity.js';
+
 /** The base image behind a level; two levels sharing one are near-twins. */
 export function baseImageKey(level) {
+  if (!level) return '';
+  const photoKey = photoKeyOf(level);
+  if (photoKey) return photoKey;
   const source = level?.baseImage || level?.id || '';
-  return String(source).split('?')[0].split('/').pop() || '';
+  return imagePathKey(source) || String(source).split('?')[0].split('/').pop() || '';
 }
 
 /** Is any pair of neighbours built on the same base image? */

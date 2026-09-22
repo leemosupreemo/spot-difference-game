@@ -18,7 +18,8 @@ export function resolveAssetUrl(url) {
 import { getCuratedStatusMap, getLevelStatus } from './curationStore.js';
 import { isEntryPlayable, describePendingFilter } from './pendingLevelGate.js';
 import { selectableEntries, isPlaceholderEntry, regularPlayEntries } from './remoteSetPolicy.js';
-import { separateAdjacentDuplicates, hasAdjacentRepeat } from './stageOrdering.js';
+import { separateAdjacentDuplicates, hasAdjacentRepeat, baseImageKey } from './stageOrdering.js';
+import { photoKeyOf } from './photoIdentity.js';
 import { isOnline } from '../services/networkService.js';
 import { getInitialDebugMode } from './debugMode.js';
 import { NEWLY_CROPPED_LEVEL_IDS_SET } from '../data/newlyCroppedIds.js';
@@ -167,6 +168,8 @@ export function createPhotoPairLevel(entry, preloadedImages = null) {
     accentColor: entry.difficulty === 'Hard' ? '#ff007f' : '#00f0ff',
     baseImage: entry.baseImage,
     variantImage: entry.variantImage,
+    photoKey: entry.photoKey || photoKeyOf(entry),
+    flipped: Boolean(entry.flipped),
     diffs: entry.diffs,
     dimensions: entry.dimensions || null,
     aspectRatio: entry.aspectRatio || (entry.dimensions ? `${entry.dimensions.width} / ${entry.dimensions.height}` : '4 / 3'),
@@ -355,7 +358,19 @@ export async function buildPhotoPairStage({
       // Sets are composed to avoid it; this covers the non-set path and any
       // pack published later.
       if (hasAdjacentRepeat(stage)) {
-        const spaced = separateAdjacentDuplicates(stage);
+        let spaced = separateAdjacentDuplicates(stage);
+        if (hasAdjacentRepeat(spaced) && !hasRequestedSet && cursor < candidates.length) {
+          while (hasAdjacentRepeat(spaced) && cursor < candidates.length) {
+            const repeatIdx = spaced.findIndex((lvl, idx) => idx > 0 && baseImageKey(lvl) === baseImageKey(spaced[idx - 1]));
+            if (repeatIdx === -1) break;
+            const nextEntry = candidates[cursor++];
+            const nextLevel = await preloadStageEntry(nextEntry, imageFactory);
+            if (nextLevel) {
+              spaced.splice(repeatIdx, 1, nextLevel);
+              spaced = separateAdjacentDuplicates(spaced);
+            }
+          }
+        }
         logApp('INFO', `[BuildStage] Spaced same-photo levels apart${hasAdjacentRepeat(spaced) ? ' (pool cannot fully separate)' : ''}`);
         stage.length = 0;
         stage.push(...spaced);

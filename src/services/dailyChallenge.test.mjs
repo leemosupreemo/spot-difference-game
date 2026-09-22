@@ -26,6 +26,7 @@ import {
   resetDailyQueueToDefault,
   resetDailyPlayerStatus
 } from './dailyChallenge.js';
+import { hasAdjacentRepeat, baseImageKey } from '../utils/stageOrdering.js';
 
 test('daily set identity is stable and preserves ordered entry IDs', () => {
   resetDailyQueueToDefault();
@@ -322,6 +323,27 @@ test('getTodayDateString rolls over daily set at 4:00 AM Eastern (1:00 AM Pacifi
   // 1:05 AM PT on Sept 11 (4:05 AM ET) -> rolls over to Sept 11 challenge for Pacific
   const newDayPT = new Date('2026-09-11T01:05:00-07:00');
   assert.equal(getTodayDateString(newDayPT), '2026-09-11');
+});
+
+test('getDailySetForDate spaces apart adjacent duplicate base images in scheduled queue', () => {
+  const testDate = '2026-11-20';
+  // Create schedule where entry 0 and 1 share the exact same photo/baseImage
+  setDailyQueue({
+    schedule: {
+      [testDate]: [
+        { id: 'custom_a1', baseImage: 'levels/dupphoto_base.webp', variantImage: 'levels/custom_a1_v.webp', diffs: [{ id: 1, x: 50, y: 50, radius: 5 }] },
+        { id: 'custom_a2', baseImage: 'levels/dupphoto_base.webp', variantImage: 'levels/custom_a2_v.webp', diffs: [{ id: 1, x: 50, y: 50, radius: 5 }] },
+        { id: 'custom_b1', baseImage: 'levels/otherphoto_base.webp', variantImage: 'levels/custom_b1_v.webp', diffs: [{ id: 1, x: 50, y: 50, radius: 5 }] }
+      ]
+    },
+    queue: []
+  });
+
+  const levels = getDailySetForDate(testDate);
+  assert.equal(levels.length, 3);
+  assert.equal(hasAdjacentRepeat(levels), false, 'identical base images must not be adjacent');
+  assert.notEqual(baseImageKey(levels[0]), baseImageKey(levels[1]));
+  assert.notEqual(baseImageKey(levels[1]), baseImageKey(levels[2]));
 });
 
 

@@ -365,15 +365,19 @@ test('selectPhotoPairEntries prioritizes full-frame 4:3 images over 16:9 widescr
   assert.equal(selected[1].id, 'widescreen_v7_001', '16:9 widescreen photo must be placed second');
 });
 
-test('createPhotoPairLevel retains dimensions and aspectRatio properties', () => {
+test('createPhotoPairLevel retains dimensions, aspectRatio, photoKey, and flipped properties', () => {
   const customEntry = {
     ...entry,
+    photoKey: 'levels/custom_photo_stem',
+    flipped: true,
     dimensions: { width: 1200, height: 896 },
     aspectRatio: '4:3'
   };
   const level = createPhotoPairLevel(customEntry);
   assert.deepEqual(level.dimensions, { width: 1200, height: 896 });
   assert.equal(level.aspectRatio, '4:3');
+  assert.equal(level.photoKey, 'levels/custom_photo_stem');
+  assert.equal(level.flipped, true);
 });
 
 test('pending levels never reach production through the requested-set path', async () => {
@@ -551,6 +555,72 @@ test('a stage never serves two levels from the same photo back to back', async (
   assert.equal(stage.length, 5, 'every level is still served');
   assert.equal(hasAdjacentRepeat(stage), false, 'same-photo levels must be spaced apart');
   assert.deepEqual(stage.map(l => l.id).sort(), ['s1', 's2', 't1', 't2', 't3']);
+});
+
+test('a stage spaces apart flipped variants sharing the same photo', async () => {
+  const { hasAdjacentRepeat, baseImageKey } = await import('./stageOrdering.js');
+  // Two levels share photo 'nebula', but one is flipped (so its baseImage is the variant URL)
+  const unflipped = {
+    id: 'nebula_v1', title: 'Nebula 1', category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', operation: 'add',
+    setId: 'photo_set_flip_test', sequence: 1,
+    baseImage: 'levels/nebula_base.webp', variantImage: 'levels/nebula_var1.webp',
+    photoKey: 'levels/nebula', flipped: false,
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5 }]
+  };
+  const flipped = {
+    id: 'nebula_v2', title: 'Nebula 2', category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', operation: 'remove',
+    setId: 'photo_set_flip_test', sequence: 2,
+    baseImage: 'levels/nebula_var2.webp', variantImage: 'levels/nebula_base.webp',
+    photoKey: 'levels/nebula', flipped: true,
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5 }]
+  };
+  const other1 = {
+    id: 'other_1', title: 'Other 1', category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', operation: 'recolor',
+    setId: 'photo_set_flip_test', sequence: 3,
+    baseImage: 'levels/other1_base.webp', variantImage: 'levels/other1_var.webp',
+    photoKey: 'levels/other1',
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5 }]
+  };
+  const other2 = {
+    id: 'other_2', title: 'Other 2', category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', operation: 'recolor',
+    setId: 'photo_set_flip_test', sequence: 4,
+    baseImage: 'levels/other2_base.webp', variantImage: 'levels/other2_var.webp',
+    photoKey: 'levels/other2',
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5 }]
+  };
+  const other3 = {
+    id: 'other_3', title: 'Other 3', category: 'Photography', pack: 'Find the Sniper',
+    packId: 'find_the_sniper', difficulty: 'Medium', operation: 'recolor',
+    setId: 'photo_set_flip_test', sequence: 5,
+    baseImage: 'levels/other3_base.webp', variantImage: 'levels/other3_var.webp',
+    photoKey: 'levels/other3',
+    diffs: [{ id: 1, x: 50, y: 50, radius: 5 }]
+  };
+
+  const manifest = [unflipped, flipped, other1, other2, other3];
+  const imageFactory = () => {
+    const img = {};
+    setTimeout(() => img.onload && img.onload(), 0);
+    return img;
+  };
+  const stage = await buildPhotoPairStage({
+    fetchImpl: async () => ({ ok: true, json: async () => manifest }),
+    imageFactory,
+    curatedStatusMap: Object.fromEntries(manifest.map(e => [e.id, 'approved'])),
+    debugMode: false, online: true, setId: 'photo_set_flip_test', count: 5, seed: 1
+  });
+
+  assert.equal(stage.length, 5);
+  assert.equal(hasAdjacentRepeat(stage), false, 'flipped duplicate must be spaced apart');
+  // Check that unflipped and flipped are never adjacent
+  for (let i = 1; i < stage.length; i++) {
+    assert.notEqual(baseImageKey(stage[i]), baseImageKey(stage[i - 1]),
+      `adjacent pair at ${i-1} and ${i} must not share base image key`);
+  }
 });
 
 // --- stage preloading is concurrent -------------------------------------

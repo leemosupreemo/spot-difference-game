@@ -7,11 +7,29 @@ import {
 const lvl = (id, base) => ({ id, baseImage: `levels/${base}_base.webp` });
 
 test('levels are twinned by base image, not by id', () => {
-  assert.equal(baseImageKey(lvl('a_v1', 'shared')), 'shared_base.webp');
+  assert.equal(baseImageKey(lvl('a_v1', 'shared')), 'levels/shared');
   assert.equal(baseImageKey(lvl('a_v1', 'shared')), baseImageKey(lvl('a_v2', 'shared')));
   assert.notEqual(baseImageKey(lvl('a', 'one')), baseImageKey(lvl('b', 'two')));
   assert.equal(baseImageKey({ id: 'no_image' }), 'no_image');
   assert.equal(baseImageKey(null), '');
+});
+
+test('levels match across flipped variants, photoKey, and remote URLs', () => {
+  // A flipped level has the variant image in baseImage and the original photo in variantImage
+  const original = { id: 'orig', baseImage: 'https://host.com/levels/gem_base.webp', variantImage: 'https://host.com/levels/gem_var.webp' };
+  const flipped = { id: 'flipped', baseImage: 'https://host.com/levels/gem_var.webp', variantImage: 'https://host.com/levels/gem_base.webp', flipped: true };
+  assert.equal(baseImageKey(original), 'levels/gem');
+  assert.equal(baseImageKey(flipped), 'levels/gem');
+  assert.equal(baseImageKey(original), baseImageKey(flipped));
+
+  // Explicit photoKey takes precedence
+  const stamped = { id: 'stamped', photoKey: 'levels/custom_photo_123', baseImage: 'levels/other.webp' };
+  assert.equal(baseImageKey(stamped), 'levels/custom_photo_123');
+
+  // Legacy paths in distinct scene directories do not collide on "base"
+  const leg1 = { id: 'l1', baseImage: 'levels/find_the_sniper/01/base.jpg' };
+  const leg2 = { id: 'l2', baseImage: 'levels/find_the_sniper/02/base.jpg' };
+  assert.notEqual(baseImageKey(leg1), baseImageKey(leg2));
 });
 
 test('separates the shape that prompted this: four of five from one photo', () => {
