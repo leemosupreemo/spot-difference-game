@@ -48,7 +48,45 @@ export function isDevEnvironment() {
   return false;
 }
 
+/**
+ * Whether this build permits debug mode at all.
+ *
+ * This is deliberately a build-time decision. Every runtime route in -- the
+ * triple-tap on the logo, ?debug=1, the diff_hunter_debug localStorage key -- is
+ * reachable by anyone holding the app, so the gate has to live somewhere a player
+ * cannot get at: the bundle itself. App Store builds and production web ship with
+ * this false and have no way in, whatever they tap or type.
+ *
+ * Internal channels opt in explicitly:
+ *   VITE_ENABLE_DEBUG=true   Firebase App Distribution builds for testers
+ *   VITE_IS_DEV_CHANNEL=true the dev hosting channel
+ *   VITE_FORCE_DEBUG=true    a build that starts already in debug mode
+ *   import.meta.env.DEV      the Vite dev server
+ */
+export function debugFeaturesEnabled() {
+  try {
+    const env = typeof import.meta !== 'undefined' ? import.meta.env : undefined;
+
+    // No import.meta.env means this is not a bundled build at all -- the Node
+    // test runner, where suites exercise debug-only behaviour by mocking
+    // window.location. Every build the player can install is a Vite build and
+    // always has env, so this branch cannot be reached from a shipped app.
+    if (!env) return true;
+
+    if (env.VITE_ENABLE_DEBUG === 'true') return true;
+    if (env.VITE_IS_DEV_CHANNEL === 'true') return true;
+    if (env.VITE_FORCE_DEBUG === 'true') return true;
+    if (env.DEV === true || env.MODE === 'development') return true;
+  } catch (_) {}
+
+  return false;
+}
+
 export function getInitialDebugMode() {
+  // Checked before anything else: a URL parameter or a stale localStorage value
+  // must not be able to reopen this in a build that shipped without it.
+  if (!debugFeaturesEnabled()) return false;
+
   try {
     // Release builds intended for internal testing can force debug on. This
     // takes precedence over stale localStorage opt-outs from older builds.

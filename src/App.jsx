@@ -24,7 +24,7 @@ import { isOnline, subscribeNetworkStatus, setSimulatedOffline, isSimulatedOffli
 import { sounds, music } from './utils/audio';
 import { calculateSpeedPoints } from './utils/scoring';
 import { logApp } from './utils/logger';
-import { getInitialDebugMode } from './utils/debugMode';
+import { getInitialDebugMode, debugFeaturesEnabled } from './utils/debugMode';
 import { chooseDebugStartId } from './utils/debugCursor';
 import { buildDebugPool } from './utils/debugPool.js';
 import { initAnalytics, trackGameStarted, trackImagePairCompleted, trackStageCleared, trackStageFailed, trackRatingPromptShown, trackChallengeReceived, trackChallengeMatchCompleted, trackHelpTapped, trackDailyChallengeStarted, trackDailyChallengeCompleted } from './services/analytics';
@@ -524,6 +524,9 @@ function GameApp() {
   };
 
   const toggleDebugMode = useCallback(() => {
+    // Defence in depth: the toggle is not wired up at all in a build without debug
+    // features, but refuse here too so no future caller can reintroduce the hole.
+    if (!debugFeaturesEnabled()) return;
     setDebugMode(prev => {
       const next = !prev;
       try {
@@ -1619,7 +1622,7 @@ function GameApp() {
             setHelpModalOpen(true);
           }}
           onOpenDiagnostics={() => setDiagnosticsModalOpen(true)}
-          onToggleDebug={toggleDebugMode}
+          onToggleDebug={debugFeaturesEnabled() ? toggleDebugMode : null}
           debugMode={debugMode}
         />
 
@@ -1644,7 +1647,7 @@ function GameApp() {
             }}
             onOpenCreator={handleOpenCreator}
             debugMode={debugMode}
-            onToggleDebug={toggleDebugMode}
+            onToggleDebug={debugFeaturesEnabled() ? toggleDebugMode : null}
             onOpenHelp={() => {
               trackHelpTapped({ source: 'menu', view });
               setHelpModalOpen(true);

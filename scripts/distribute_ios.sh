@@ -80,7 +80,10 @@ echo "----------------------------------------------------"
 echo "🔢 Build Number: $BUILD_NUMBER"
 
 echo "📦 1. Building Vite web bundle and syncing Capacitor iOS native project..."
-(cd "$ROOT_DIR" && VITE_IS_DEV_CHANNEL="${VITE_IS_DEV_CHANNEL:-false}" VITE_FORCE_DEBUG="${VITE_FORCE_DEBUG:-false}" npm run build)
+# VITE_ENABLE_DEBUG keeps the triple-tap-the-logo debug toggle available to
+# internal testers. The App Store script deliberately does not set it, so public
+# builds have no way into debug mode at all.
+(cd "$ROOT_DIR" && VITE_IS_DEV_CHANNEL="${VITE_IS_DEV_CHANNEL:-false}" VITE_FORCE_DEBUG="${VITE_FORCE_DEBUG:-false}" VITE_ENABLE_DEBUG="${VITE_ENABLE_DEBUG:-true}" npm run build)
 
 # Remote-pack-only assets live outside public/ so they never enter dist/ and so
 # cap sync cannot bundle them. `vite build` empties dist/, which normally clears
