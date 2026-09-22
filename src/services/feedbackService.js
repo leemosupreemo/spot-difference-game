@@ -8,6 +8,19 @@ import { Capacitor } from '@capacitor/core';
 export const SUPPORT_EMAIL = 'support@thejauntcompany.com';
 export const FEEDBACK_SUBJECT_PREFIX = '[Diff Hunter Feedback]';
 
+/* Every network hop here is bounded. The Send button awaits this function, so an
+   unbounded await freezes it on "Sending..." with no way out -- which is exactly
+   what happened on a device with degraded connectivity. */
+const SUBMIT_TIMEOUT_MS = 8000;
+
+export function withTimeout(promise, ms, label) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
 let functionsInstance = null;
 function getFirebaseFunctions() {
   if (typeof window === 'undefined') return null;
@@ -58,7 +71,10 @@ export async function submitPlayerFeedback({
   const deliveryReport = {
     cloudFunction: false,
     firestore: false,
-    email: false
+    email: false,
+    // Handed to the SDK but not yet acknowledged by the server. Not lost: the
+    // queued write flushes on its own once the device is back online.
+    queued: false
   };
 
   // 1. Attempt serverless submission via Firebase Cloud Function (Resend email delivery)
@@ -66,12 +82,16 @@ export async function submitPlayerFeedback({
   if (functions) {
     try {
       const callSubmitFeedback = httpsCallable(functions, 'submitFeedback');
-      const response = await callSubmitFeedback({
+      const call = callSubmitFeedback({
         playerName: cleanName,
         feedbackText: cleanComment,
         platform,
         attemptNumber: Number(attemptNumber) || 1
       });
+      // Keeps a late rejection from surfacing as an unhandled rejection once the
+      // race below has already moved on.
+      call.catch(() => {});
+      const response = await withTimeout(call, SUBMIT_TIMEOUT_MS, 'Cloud Function submitFeedback');
 
       if (response?.data?.success) {
         deliveryReport.cloudFunction = true;
@@ -93,13 +113,23 @@ export async function submitPlayerFeedback({
     const db = getFirestoreClient(app);
     if (db) {
       const feedbackCol = collection(db, 'feedback');
-      await addDoc(feedbackCol, {
+      // addDoc settles only once the server acknowledges the write. Offline, the
+      // SDK queues it locally and the promise stays pending forever -- so this one
+      // has to be raced, not simply awaited.
+      const write = addDoc(feedbackCol, {
         ...payload,
         createdAt: serverTimestamp(),
         status: 'new',
         clientFallback: true
       });
-      deliveryReport.firestore = true;
+      write.catch(() => {});
+      try {
+        await withTimeout(write, SUBMIT_TIMEOUT_MS, 'Firestore feedback write');
+        deliveryReport.firestore = true;
+      } catch (timeoutErr) {
+        deliveryReport.queued = true;
+        console.warn('[FeedbackService]', timeoutErr?.message || timeoutErr);
+      }
     }
   } catch (err) {
     console.warn('[FeedbackService] Direct Firestore fallback write failed:', err?.message || err);
