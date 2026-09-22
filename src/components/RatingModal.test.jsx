@@ -36,7 +36,7 @@ async function send(report) {
 test('a delivered submission thanks the player', async () => {
   await send({ success: true, cloudFunction: true, firestore: true, email: true, queued: false });
   await waitFor(() => expect(screen.getByText(/thank you/i)).toBeTruthy());
-  expect(screen.getByText('We will review your feedback as soon as we can.')).toBeTruthy();
+  expect(screen.getByText('We will review your message as soon as we can.')).toBeTruthy();
   expect(screen.queryByRole('button', { name: /try again/i })).toBeNull();
 });
 

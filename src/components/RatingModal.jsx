@@ -385,7 +385,7 @@ export default function RatingModal({
                 ? "We couldn't reach our servers just now. Your message is still here \u2014 try again, or come back to it later."
                 : (deliveryState === 'queued'
                   ? "Saved. We'll send it automatically as soon as you're back online."
-                  : 'We will review your feedback as soon as we can.')}
+                  : 'We will review your message as soon as we can.')}
             </p>
             <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
               {deliveryState === 'failed' && (
