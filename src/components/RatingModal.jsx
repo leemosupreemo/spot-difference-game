@@ -96,17 +96,15 @@ export default function RatingModal({
     setDeliveryState(outcome);
 
     if (outcome === 'failed') {
-      // Stay put and keep their text: closing here would throw away what they wrote.
       sounds.playError();
-      setStep('thankyou');
-      return;
+    } else {
+      sounds.playWin();
     }
 
-    sounds.playWin();
+    // The status takes over this same modal and stays until the player dismisses it.
+    // It used to close itself after 2.2s, which read as a separate popup flashing by --
+    // and on a failure it also threw away what they had written.
     setStep('thankyou');
-    setTimeout(() => {
-      onClose();
-    }, 2200);
   };
 
   const handleRetryFeedback = () => {
@@ -338,7 +336,9 @@ export default function RatingModal({
                   cursor: isSubmitting ? 'default' : 'pointer'
                 }}
               >
-                <Send size={16} style={{ animation: isSubmitting ? 'pulse 1s infinite' : 'none' }} />
+                {isSubmitting
+                  ? <span className="btn-spinner" aria-hidden="true" />
+                  : <Send size={16} />}
                 {isSubmitting ? 'Sending…' : 'Send Feedback'}
               </button>
               <button

@@ -10,8 +10,17 @@ export const FEEDBACK_SUBJECT_PREFIX = '[Diff Hunter Feedback]';
 
 /* Every network hop here is bounded. The Send button awaits this function, so an
    unbounded await freezes it on "Sending..." with no way out -- which is exactly
-   what happened on a device with degraded connectivity. */
+   what happened on a device with degraded connectivity.
+
+   The budget is shared across the whole submission rather than applied per hop:
+   the Firestore fallback runs only after the Cloud Function call has failed, so
+   a per-hop bound would stack into twice the wait with the player watching a
+   spinner the entire time. */
 const SUBMIT_TIMEOUT_MS = 8000;
+/* Whatever the budget's state, the fallback write still gets a real chance to
+   land -- without this it could inherit a near-zero deadline and always report
+   `queued` on a slow-but-working connection. */
+const MIN_HOP_MS = 1500;
 
 export function withTimeout(promise, ms, label) {
   let timer;
@@ -68,6 +77,9 @@ export async function submitPlayerFeedback({
     createdAtIso: timestamp
   };
 
+  const deadline = Date.now() + SUBMIT_TIMEOUT_MS;
+  const remainingBudget = () => Math.max(MIN_HOP_MS, deadline - Date.now());
+
   const deliveryReport = {
     cloudFunction: false,
     firestore: false,
@@ -91,7 +103,7 @@ export async function submitPlayerFeedback({
       // Keeps a late rejection from surfacing as an unhandled rejection once the
       // race below has already moved on.
       call.catch(() => {});
-      const response = await withTimeout(call, SUBMIT_TIMEOUT_MS, 'Cloud Function submitFeedback');
+      const response = await withTimeout(call, remainingBudget(), 'Cloud Function submitFeedback');
 
       if (response?.data?.success) {
         deliveryReport.cloudFunction = true;
@@ -124,7 +136,7 @@ export async function submitPlayerFeedback({
       });
       write.catch(() => {});
       try {
-        await withTimeout(write, SUBMIT_TIMEOUT_MS, 'Firestore feedback write');
+        await withTimeout(write, remainingBudget(), 'Firestore feedback write');
         deliveryReport.firestore = true;
       } catch (timeoutErr) {
         deliveryReport.queued = true;

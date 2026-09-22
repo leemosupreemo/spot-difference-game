@@ -68,3 +68,43 @@ test('a thrown submission is treated as a failure, not a success', async () => {
 
   await waitFor(() => expect(screen.getByText(/couldn't send/i)).toBeTruthy());
 });
+
+test('the send button shows a spinner while the submission is in flight', async () => {
+  let release;
+  submitPlayerFeedback.mockReturnValue(new Promise(resolve => { release = resolve; }));
+
+  const { container } = render(<RatingModal isOpen={true} onClose={vi.fn()} initialStep="feedback" />);
+  fireEvent.change(screen.getByRole('textbox'), { target: { value: 'thoughts' } });
+  fireEvent.click(screen.getByRole('button', { name: /send feedback/i }));
+
+  await waitFor(() => expect(container.querySelector('.btn-spinner')).toBeTruthy());
+  expect(screen.getByRole('button', { name: /sending/i }).disabled).toBe(true);
+
+  release({ success: true, cloudFunction: true, firestore: true, email: true, queued: false });
+  await waitFor(() => expect(container.querySelector('.btn-spinner')).toBeNull());
+});
+
+/*
+ * The status used to close itself 2.2s later, which read as a separate popup
+ * flashing past rather than the modal simply changing what it says.
+ */
+test('the status replaces the form in place and does not close itself', async () => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+  const onClose = vi.fn();
+  submitPlayerFeedback.mockResolvedValue({ success: true, cloudFunction: true, firestore: true, email: true, queued: false });
+
+  render(<RatingModal isOpen={true} onClose={onClose} initialStep="feedback" />);
+  fireEvent.change(screen.getByRole('textbox'), { target: { value: 'thoughts' } });
+  fireEvent.click(screen.getByRole('button', { name: /send feedback/i }));
+
+  await waitFor(() => expect(screen.getByText(/thank you/i)).toBeTruthy());
+  // The form it replaced is gone, not stacked underneath.
+  expect(screen.queryByRole('textbox')).toBeNull();
+
+  vi.advanceTimersByTime(5000);
+  expect(onClose).not.toHaveBeenCalled();
+
+  fireEvent.click(screen.getByRole('button', { name: /done/i }));
+  expect(onClose).toHaveBeenCalled();
+  vi.useRealTimers();
+});
