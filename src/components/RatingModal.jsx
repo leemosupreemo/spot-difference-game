@@ -6,6 +6,7 @@ import { trackRatingPromptAction } from '../services/analytics';
 import { getAppStoreReviewUrl } from '../services/appConfig';
 import { recordRatingPromptDismissed } from '../services/ratingPrompt';
 import { getSavedPlayerName } from '../services/playerProgress';
+import { submitPlayerFeedback } from '../services/feedbackService';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export const SUPPORT_EMAIL = 'support@thejauntcompany.com';
@@ -20,6 +21,7 @@ export default function RatingModal({
 }) {
   const [step, setStep] = useState(initialStep); // 'prompt' | 'feedback' | 'thankyou'
   const [feedbackText, setFeedbackText] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -56,48 +58,33 @@ export default function RatingModal({
     setStep('feedback');
   };
 
-  const handleSendFeedback = () => {
-    sounds.playWin();
+  const handleSendFeedback = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    sounds.playTap();
+
     try {
       localStorage.setItem('diff_hunter_rating_handled', 'feedback');
     } catch (_) {}
 
     trackRatingPromptAction({ action: 'feedback', attemptNumber, feedback: feedbackText });
 
-    const isNative = typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform();
-    const subject = `${FEEDBACK_SUBJECT_PREFIX} Player Feedback - ${playerName}`;
-    const bodyLines = [
-      feedbackText.trim() || '(No feedback comment written)',
-      '',
-      '--- DIAGNOSTICS ---',
-      `Player: ${playerName}`,
-      `App: Diff Hunter`,
-      `Platform: ${isNative ? 'iOS Native' : 'Web'}`,
-      `Attempt: ${attemptNumber}`,
-      `Date: ${new Date().toISOString()}`
-    ];
-    const mailtoUrl = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-
     try {
-      if (typeof window !== 'undefined') {
-        const link = document.createElement('a');
-        link.href = mailtoUrl;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-    } catch (_) {
-      if (typeof window !== 'undefined') {
-        window.location.href = mailtoUrl;
-      }
+      await submitPlayerFeedback({
+        playerName,
+        feedbackText,
+        attemptNumber
+      });
+    } catch (err) {
+      console.warn('Feedback submission warning:', err);
+    } finally {
+      sounds.playWin();
+      setIsSubmitting(false);
+      setStep('thankyou');
+      setTimeout(() => {
+        onClose();
+      }, 2200);
     }
-
-    setStep('thankyou');
-    setTimeout(() => {
-      onClose();
-    }, 2200);
   };
 
   const handleDismiss = (e) => {
@@ -301,7 +288,6 @@ export default function RatingModal({
                 marginBottom: '16px',
                 fontFamily: 'inherit'
               }}
-              autoFocus
             />
 
             <div style={{ display: 'flex', gap: '10px' }}>
@@ -309,6 +295,7 @@ export default function RatingModal({
                 type="button"
                 className="glass-btn glass-btn-primary"
                 onClick={handleSendFeedback}
+                disabled={isSubmitting}
                 style={{
                   flex: 1,
                   justifyContent: 'center',
@@ -318,11 +305,13 @@ export default function RatingModal({
                   borderRadius: '12px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px'
+                  gap: '8px',
+                  opacity: isSubmitting ? 0.75 : 1,
+                  cursor: isSubmitting ? 'default' : 'pointer'
                 }}
               >
-                <Send size={16} />
-                Send Feedback
+                <Send size={16} style={{ animation: isSubmitting ? 'pulse 1s infinite' : 'none' }} />
+                {isSubmitting ? 'Sending…' : 'Send Feedback'}
               </button>
               <button
                 type="button"

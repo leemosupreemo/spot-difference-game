@@ -58,10 +58,12 @@ test('RatingModal routes "Enjoying it" to the store review link and "Could be be
   assert.match(source, /import \{ recordRatingPromptDismissed \} from '\.\.\/services\/ratingPrompt'/);
   assert.match(source, /recordRatingPromptDismissed\(\)/);
 
-  // Feedback path with support email and filterable title prefix
+  // Feedback path with support email and direct submission without opening mail app
   assert.match(source, /support@thejauntcompany\.com/);
   assert.match(source, /\[Diff Hunter Feedback\]/);
-  assert.match(source, /mailto:\$\{SUPPORT_EMAIL\}\?subject=/);
+  assert.match(source, /submitPlayerFeedback/);
+  assert.doesNotMatch(source, /mailto:/);
+  assert.doesNotMatch(source, /autoFocus/);
   assert.match(source, /diff_hunter_rating_handled', 'feedback'/);
 });
 
