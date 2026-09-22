@@ -4,6 +4,7 @@ import { getFunctions, httpsCallable } from 'firebase/functions';
 import { getFirestoreClient } from './firestoreClient.js';
 import { firebaseConfig, getCurrentPlayerId } from './authService.js';
 import { APP_VERSION } from './appConfig.js';
+import { logApp } from '../utils/logger.js';
 import { Capacitor } from '@capacitor/core';
 
 export const SUPPORT_EMAIL = 'support@thejauntcompany.com';
@@ -94,8 +95,13 @@ export async function submitPlayerFeedback({
     queued: false
   };
 
+  logApp('INFO', `[FeedbackSubmitStart] platform=${platform} chars=${cleanComment.length} budget=${SUBMIT_TIMEOUT_MS}ms`);
+
   // 1. Attempt serverless submission via Firebase Cloud Function (Resend email delivery)
   const functions = getFirebaseFunctions();
+  if (!functions) {
+    logApp('WARN', '[FeedbackCloudFunctionUnavailable] Functions SDK did not initialise.');
+  }
   if (functions) {
     try {
       const callSubmitFeedback = httpsCallable(functions, 'submitFeedback');
@@ -110,6 +116,7 @@ export async function submitPlayerFeedback({
       call.catch(() => {});
       const response = await withTimeout(call, Math.min(CALL_TIMEOUT_MS, remainingBudget()), 'Cloud Function submitFeedback');
 
+      logApp('INFO', `[FeedbackCloudFunctionOk] id=${response?.data?.id || 'unknown'}`);
       if (response?.data?.success) {
         deliveryReport.cloudFunction = true;
         deliveryReport.firestore = true;
@@ -122,7 +129,9 @@ export async function submitPlayerFeedback({
         };
       }
     } catch (err) {
-      console.warn('[FeedbackService] Cloud Function submission failed, falling back to direct Firestore:', err?.message || err);
+      // The reason matters: a timeout, a CORS rejection and an internal error all
+      // end up here, and only the log can tell them apart on a device.
+      logApp('WARN', `[FeedbackCloudFunctionFailed] code=${err?.code || 'none'} msg=${err?.message || err}`);
     }
   }
 
@@ -142,17 +151,22 @@ export async function submitPlayerFeedback({
         clientFallback: true
       });
       write.catch(() => {});
+      const writeBudget = remainingBudget();
+      logApp('INFO', `[FeedbackFirestoreWriteStart] budget=${writeBudget}ms`);
       try {
-        await withTimeout(write, remainingBudget(), 'Firestore feedback write');
+        const ref = await withTimeout(write, writeBudget, 'Firestore feedback write');
         deliveryReport.firestore = true;
+        logApp('INFO', `[FeedbackFirestoreWriteOk] id=${ref?.id || 'unknown'}`);
       } catch (timeoutErr) {
         deliveryReport.queued = true;
-        console.warn('[FeedbackService]', timeoutErr?.message || timeoutErr);
+        logApp('WARN', `[FeedbackFirestoreQueued] ${timeoutErr?.message || timeoutErr}`);
       }
     }
   } catch (err) {
-    console.warn('[FeedbackService] Direct Firestore fallback write failed:', err?.message || err);
+    logApp('WARN', `[FeedbackFirestoreFailed] code=${err?.code || 'none'} msg=${err?.message || err}`);
   }
+
+  logApp('INFO', `[FeedbackOutcome] cloudFunction=${deliveryReport.cloudFunction} firestore=${deliveryReport.firestore} queued=${deliveryReport.queued}`);
 
   return {
     success: true,
