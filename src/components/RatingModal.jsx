@@ -319,10 +319,28 @@ export default function RatingModal({
                 lineHeight: 1.45,
                 resize: 'vertical',
                 boxSizing: 'border-box',
-                marginBottom: '16px',
+                marginBottom: hasFeedbackText ? '16px' : '8px',
                 fontFamily: 'inherit'
               }}
             />
+
+            {/* The button's title attribute only surfaces on hover, so on a phone a
+                disabled Send would sit there unexplained. This says the same thing
+                where a touch device can actually see it. */}
+            {!hasFeedbackText && (
+              <p
+                id="feedback-empty-hint"
+                style={{
+                  fontSize: '0.78rem',
+                  color: 'var(--text-muted)',
+                  textAlign: 'left',
+                  margin: '0 4px 12px 4px',
+                  lineHeight: 1.4
+                }}
+              >
+                Write something above to send.
+              </p>
+            )}
 
             <div style={{ display: 'flex', gap: '10px' }}>
               <button
@@ -331,6 +349,7 @@ export default function RatingModal({
                 onClick={handleSendFeedback}
                 disabled={isSubmitting || !hasFeedbackText}
                 title={hasFeedbackText ? undefined : 'Write something in the field above before sending.'}
+                aria-describedby={hasFeedbackText ? undefined : 'feedback-empty-hint'}
                 style={{
                   flex: 1,
                   justifyContent: 'center',

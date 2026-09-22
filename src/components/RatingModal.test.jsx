@@ -132,6 +132,12 @@ test('send is disabled until something is written, and says why', async () => {
   expect(button.disabled).toBe(true);
   expect(button.title).toBe('Write something in the field above before sending.');
 
+  // A title only appears on hover, which a touch device never does, so the reason
+  // has to be on screen as well.
+  const hint = screen.getByText('Write something above to send.');
+  expect(hint).toBeTruthy();
+  expect(button.getAttribute('aria-describedby')).toBe(hint.id);
+
   // Whitespace alone is not feedback.
   fireEvent.change(screen.getByRole('textbox'), { target: { value: '   \n  ' } });
   expect(screen.getByRole('button', { name: /send feedback/i }).disabled).toBe(true);
@@ -140,6 +146,8 @@ test('send is disabled until something is written, and says why', async () => {
   const enabled = screen.getByRole('button', { name: /send feedback/i });
   expect(enabled.disabled).toBe(false);
   expect(enabled.title).toBe('');
+  // The hint has served its purpose and should not linger.
+  expect(screen.queryByText('Write something above to send.')).toBeNull();
 });
 
 test('an empty submission never reaches the service', async () => {
