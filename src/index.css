@@ -867,6 +867,56 @@ button:active,
   animation: timerPenaltyShake 0.4s ease-out;
 }
 
+/* Hunter Tag field on the victory screens. The leaderboard slot is only offered
+   at this moment, so the field pulses gold to pull the eye to it before the
+   player dismisses the modal. Border and shadow live here rather than inline so
+   the pulse is not fighting an inline style for precedence. */
+.hunter-tag-input {
+  border: 1.5px solid var(--accent-gold);
+  animation: hunterTagGlow 1.8s ease-in-out infinite alternate;
+}
+
+.hunter-tag-input::placeholder {
+  color: rgba(255, 183, 3, 0.6);
+  font-weight: 700;
+}
+
+/* Once they are typing, the pull is unnecessary -- hold a steady brighter ring
+   instead of pulsing under the cursor. */
+.hunter-tag-input:focus {
+  animation: none;
+  border-color: #ffd970;
+  box-shadow:
+    0 0 0 2px rgba(255, 183, 3, 0.35),
+    0 0 22px rgba(255, 183, 3, 0.55),
+    inset 0 0 14px rgba(255, 183, 3, 0.15);
+}
+
+/* A rejected tag has to read as an error, so gold gives way to pink. */
+.hunter-tag-input.is-rejected,
+.hunter-tag-input.is-rejected:focus {
+  border-color: var(--accent-pink);
+  animation: none;
+  box-shadow:
+    0 0 0 2px rgba(255, 0, 127, 0.3),
+    0 0 18px rgba(255, 0, 127, 0.5);
+}
+
+@keyframes hunterTagGlow {
+  0% {
+    box-shadow:
+      0 0 0 1px rgba(255, 183, 3, 0.2),
+      0 0 10px rgba(255, 183, 3, 0.35),
+      inset 0 0 10px rgba(255, 183, 3, 0.1);
+  }
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 183, 3, 0.45),
+      0 0 26px rgba(255, 183, 3, 0.75),
+      inset 0 0 16px rgba(255, 183, 3, 0.2);
+  }
+}
+
 /* Miss Red Circle Marker */
 .miss-marker {
   position: absolute;
@@ -1452,6 +1502,10 @@ button:active,
   .hint-radar::after {
     animation: none;
     opacity: 0.55;
+  }
+  .hunter-tag-input {
+    animation: none;
+    box-shadow: 0 0 0 1px rgba(255, 183, 3, 0.4), 0 0 18px rgba(255, 183, 3, 0.5);
   }
   .mode-card-item:hover {
     transform: none;

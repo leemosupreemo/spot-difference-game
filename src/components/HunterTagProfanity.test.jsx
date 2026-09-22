@@ -371,3 +371,46 @@ test('DailyVictoryModal quitting a fresh record with an empty field submits a ra
   expect(updateDailyPlayerName).toHaveBeenCalledWith('RandoBot_1234');
   expect(onClose).toHaveBeenCalled();
 });
+
+/*
+ * The gold pulse is what draws the eye to the one action the victory screen
+ * offers on a deadline. The rejected variant has to swap it for pink, or an
+ * error would still read as an invitation.
+ */
+test('the Hunter Tag field carries the gold glow class, and swaps it for the rejected style', () => {
+  render(
+    <VictoryModal
+      isOpen
+      elapsedTime={35000}
+      score={1500}
+      setId="photo_set_001"
+      setNumber={1}
+      onClose={vi.fn()}
+      onRestart={vi.fn()}
+      onNextLevel={vi.fn()}
+    />
+  );
+
+  const input = screen.getByPlaceholderText('Enter name');
+  expect(input.className).toContain('hunter-tag-input');
+  expect(input.className).not.toContain('is-rejected');
+
+  fireEvent.change(input, { target: { value: 'fuckboy' } });
+  fireEvent.click(screen.getByRole('button', { name: /save/i }));
+
+  expect(screen.getByPlaceholderText('Enter name').className).toContain('is-rejected');
+});
+
+test('the daily victory Hunter Tag field carries the same glow class', () => {
+  render(
+    <DailyVictoryModal
+      isOpen
+      elapsedTime={35000}
+      score={1500}
+      onClose={vi.fn()}
+      onRestart={vi.fn()}
+    />
+  );
+
+  expect(screen.getByPlaceholderText('Enter name').className).toContain('hunter-tag-input');
+});

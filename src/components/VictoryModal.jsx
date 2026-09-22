@@ -735,10 +735,10 @@ export default function VictoryModal({
                           onChange={(e) => { setCustomPlayerName(e.target.value); setNameRejected(false); }}
                           maxLength={18}
                           placeholder="Enter name"
+                          className={`hunter-tag-input${nameRejected ? ' is-rejected' : ''}`}
                           style={{
                             flex: 1,
                             background: 'rgba(0, 0, 0, 0.65)',
-                            border: nameRejected ? '1px solid var(--accent-pink)' : '1px solid rgba(255, 183, 3, 0.5)',
                             color: '#fff',
                             borderRadius: '8px',
                             padding: '6px 10px',
