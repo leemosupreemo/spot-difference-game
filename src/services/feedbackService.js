@@ -16,7 +16,7 @@ export const FEEDBACK_SUBJECT_PREFIX = '[Diff Hunter Feedback]';
    the Firestore fallback runs only after the Cloud Function call has failed, so
    a per-hop bound would stack into twice the wait with the player watching a
    spinner the entire time. */
-const SUBMIT_TIMEOUT_MS = 8000;
+const SUBMIT_TIMEOUT_MS = 5000;
 /* Whatever the budget's state, the fallback write still gets a real chance to
    land -- without this it could inherit a near-zero deadline and always report
    `queued` on a slow-but-working connection. */
