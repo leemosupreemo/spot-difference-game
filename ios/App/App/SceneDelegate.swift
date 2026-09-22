@@ -2,9 +2,17 @@ import UIKit
 import Capacitor
 
 class MainViewController: CAPBridgeViewController {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        webView?.scrollView.alwaysBounceHorizontal = false
+        webView?.scrollView.showsHorizontalScrollIndicator = false
+    }
+
     override open func capacitorDidLoad() {
         super.capacitorDidLoad()
         bridge?.registerPluginInstance(GameCenterPlugin())
+        webView?.scrollView.alwaysBounceHorizontal = false
+        webView?.scrollView.showsHorizontalScrollIndicator = false
     }
 }
 
