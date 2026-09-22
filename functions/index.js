@@ -1,4 +1,5 @@
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { initializeApp, getApps } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 
@@ -276,67 +277,106 @@ export const submitFeedback = onCall(
       status: 'new'
     });
 
-    // 2. Dispatch email via Resend API
-    const resendApiKey = process.env.RESEND_API_KEY;
-    let emailSent = false;
-    let emailError = null;
-
-    if (resendApiKey) {
-      const primaryTarget = 'support@thejauntcompany.com';
-      const fallbackTarget = 'enmeskin@gmail.com';
-
-      const emailPayload = {
-        from: 'Diff Hunter <onboarding@resend.dev>',
-        to: [primaryTarget],
-        subject: `[Diff Hunter Feedback] Player Feedback - ${cleanName}`,
-        text: `Player: ${cleanName}\nPlatform: ${cleanPlatform}\nAttempt: ${attemptNumber || 1}\nDate: ${dateStr}\n\nFeedback:\n${cleanText}`
-      };
-
-      try {
-        let res = await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${resendApiKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(emailPayload)
-        });
-
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({}));
-          // If Resend trial only permits sending to account owner email, fallback
-          if (res.status === 403 && errData.message && errData.message.includes('own email address')) {
-            console.log('[submitFeedback] Domain unverified on Resend, falling back to account owner email:', fallbackTarget);
-            emailPayload.to = [fallbackTarget];
-            emailPayload.subject = `[Diff Hunter Feedback] (Forward to Support) - ${cleanName}`;
-            res = await fetch('https://api.resend.com/emails', {
-              method: 'POST',
-              headers: {
-                'Authorization': `Bearer ${resendApiKey}`,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(emailPayload)
-            });
-          }
-        }
-
-        if (res.ok) {
-          emailSent = true;
-        } else {
-          emailError = await res.text();
-          console.warn('[submitFeedback] Resend API error:', emailError);
-        }
-      } catch (err) {
-        emailError = err?.message || String(err);
-        console.warn('[submitFeedback] Resend fetch error:', emailError);
-      }
-    }
-
+    // The email is not sent from here. sendFeedbackEmail below fires on the
+    // document itself, so feedback that reaches Firestore by any route gets
+    // mailed -- including the client's direct-write fallback, which used to
+    // store feedback and silently never email it.
     return {
       success: true,
       id: docRef.id,
-      emailSent,
-      emailError
+      emailDeferred: true
     };
   }
 );
+
+export const FEEDBACK_PRIMARY_TARGET = 'support@thejauntcompany.com';
+/* Resend refuses arbitrary recipients until the sending domain is verified, so
+   until thejauntcompany.com is set up the mail is redirected to the account
+   owner rather than dropped. */
+export const FEEDBACK_FALLBACK_TARGET = 'enmeskin@gmail.com';
+
+async function postToResend(apiKey, payload) {
+  return fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+}
+
+export async function dispatchFeedbackEmail(feedback) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return { emailSent: false, emailError: 'RESEND_API_KEY is not configured', target: null };
+  }
+
+  const name = String(feedback.playerName || 'Hunter');
+  const payload = {
+    from: 'Diff Hunter <onboarding@resend.dev>',
+    to: [FEEDBACK_PRIMARY_TARGET],
+    subject: `[Diff Hunter Feedback] Player Feedback - ${name}`,
+    text: [
+      `Player: ${name}`,
+      `Platform: ${feedback.platform || 'unknown'}`,
+      `App version: ${feedback.appVersion || 'unknown'}`,
+      `Attempt: ${feedback.attemptNumber || 1}`,
+      `Date: ${feedback.createdAtIso || new Date().toISOString()}`,
+      '',
+      'Feedback:',
+      String(feedback.feedbackText || '')
+    ].join('\n')
+  };
+
+  try {
+    let res = await postToResend(apiKey, payload);
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      if (res.status === 403 && errData.message && errData.message.includes('own email address')) {
+        console.log('[feedbackEmail] Domain unverified on Resend, falling back to account owner email:', FEEDBACK_FALLBACK_TARGET);
+        payload.to = [FEEDBACK_FALLBACK_TARGET];
+        payload.subject = `[Diff Hunter Feedback] (Forward to Support) - ${name}`;
+        res = await postToResend(apiKey, payload);
+      }
+    }
+
+    if (res.ok) {
+      return { emailSent: true, emailError: null, target: payload.to[0] };
+    }
+
+    const emailError = await res.text();
+    console.warn('[feedbackEmail] Resend API error:', emailError);
+    return { emailSent: false, emailError, target: payload.to[0] };
+  } catch (err) {
+    const emailError = err?.message || String(err);
+    console.warn('[feedbackEmail] Resend fetch error:', emailError);
+    return { emailSent: false, emailError, target: payload.to[0] };
+  }
+}
+
+/* Triggering on the document rather than on the request is the point: the client
+   falls back to writing `feedback` directly whenever the callable cannot be
+   reached, and a queued offline write can land long after the app has closed.
+   Both now get mailed. */
+export const sendFeedbackEmail = onDocumentCreated('feedback/{feedbackId}', async (event) => {
+  const snapshot = event.data;
+  if (!snapshot) return;
+
+  const feedback = snapshot.data() || {};
+  // Trigger delivery is at-least-once, so a retry must not send twice.
+  if (feedback.emailStatus) {
+    console.log('[feedbackEmail] Already handled, skipping:', snapshot.id);
+    return;
+  }
+
+  const result = await dispatchFeedbackEmail(feedback);
+
+  await snapshot.ref.update({
+    emailStatus: result.emailSent ? 'sent' : 'failed',
+    emailTarget: result.target,
+    emailError: result.emailError,
+    emailProcessedAt: FieldValue.serverTimestamp()
+  });
+});

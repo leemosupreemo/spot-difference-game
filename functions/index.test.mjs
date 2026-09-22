@@ -4,6 +4,9 @@ import {
   evaluateQualification,
   validateSubmissionInput,
   containsProfanity,
+  dispatchFeedbackEmail,
+  FEEDBACK_PRIMARY_TARGET,
+  FEEDBACK_FALLBACK_TARGET,
   LEADERBOARD_LIMITS
 } from './index.js';
 
@@ -167,3 +170,89 @@ test('submitFeedback is exported as a Cloud Function', async () => {
   assert.equal(typeof submitFeedback, 'function');
 });
 
+
+/*
+ * Email dispatch moved out of the submitFeedback callable and onto a Firestore
+ * trigger. The callable was the only thing that sent mail, so whenever the client
+ * could not reach it and fell back to writing the document directly, the feedback
+ * was stored and silently never emailed.
+ */
+const FEEDBACK = {
+  playerName: 'SpeedHunter',
+  platform: 'iOS Native',
+  appVersion: '1.1.0',
+  attemptNumber: 2,
+  feedbackText: 'the timer felt fast',
+  createdAtIso: '2026-09-22T06:30:31.000Z'
+};
+
+function stubFetch(responses) {
+  const calls = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (url, options) => {
+    calls.push({ url, body: JSON.parse(options.body) });
+    const next = responses.shift();
+    return {
+      ok: next.ok,
+      status: next.status ?? (next.ok ? 200 : 500),
+      json: async () => next.json ?? {},
+      text: async () => next.text ?? ''
+    };
+  };
+  return { calls, restore: () => { globalThis.fetch = originalFetch; } };
+}
+
+test('dispatchFeedbackEmail sends to the support address and reports the target', async (t) => {
+  process.env.RESEND_API_KEY = 'test-key';
+  const { calls, restore } = stubFetch([{ ok: true }]);
+  t.after(restore);
+
+  const result = await dispatchFeedbackEmail(FEEDBACK);
+
+  assert.equal(result.emailSent, true);
+  assert.equal(result.emailError, null);
+  assert.equal(result.target, FEEDBACK_PRIMARY_TARGET);
+  assert.equal(calls.length, 1);
+  assert.deepEqual(calls[0].body.to, [FEEDBACK_PRIMARY_TARGET]);
+  // The body has to carry enough to triage without opening Firestore.
+  assert.match(calls[0].body.text, /the timer felt fast/);
+  assert.match(calls[0].body.text, /1\.1\.0/);
+});
+
+test('dispatchFeedbackEmail retries to the account owner when the domain is unverified', async (t) => {
+  process.env.RESEND_API_KEY = 'test-key';
+  const { calls, restore } = stubFetch([
+    { ok: false, status: 403, json: { message: 'You can only send testing emails to your own email address' } },
+    { ok: true }
+  ]);
+  t.after(restore);
+
+  const result = await dispatchFeedbackEmail(FEEDBACK);
+
+  assert.equal(result.emailSent, true);
+  assert.equal(result.target, FEEDBACK_FALLBACK_TARGET);
+  assert.equal(calls.length, 2);
+  assert.deepEqual(calls[1].body.to, [FEEDBACK_FALLBACK_TARGET]);
+});
+
+test('dispatchFeedbackEmail reports a genuine failure rather than claiming success', async (t) => {
+  process.env.RESEND_API_KEY = 'test-key';
+  const { restore } = stubFetch([{ ok: false, status: 500, text: 'upstream exploded' }]);
+  t.after(restore);
+
+  const result = await dispatchFeedbackEmail(FEEDBACK);
+
+  assert.equal(result.emailSent, false);
+  assert.equal(result.emailError, 'upstream exploded');
+});
+
+test('dispatchFeedbackEmail reports a missing API key instead of throwing', async (t) => {
+  const previous = process.env.RESEND_API_KEY;
+  delete process.env.RESEND_API_KEY;
+  t.after(() => { if (previous !== undefined) process.env.RESEND_API_KEY = previous; });
+
+  const result = await dispatchFeedbackEmail(FEEDBACK);
+
+  assert.equal(result.emailSent, false);
+  assert.match(result.emailError, /RESEND_API_KEY/);
+});

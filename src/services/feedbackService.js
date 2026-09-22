@@ -108,8 +108,10 @@ export async function submitPlayerFeedback({
 
       if (response?.data?.success) {
         deliveryReport.cloudFunction = true;
-        deliveryReport.email = !!response.data.emailSent;
         deliveryReport.firestore = true;
+        // The email goes out from the sendFeedbackEmail Firestore trigger, after
+        // this response has already returned, so the client cannot observe it.
+        deliveryReport.email = false;
         return {
           success: true,
           ...deliveryReport
