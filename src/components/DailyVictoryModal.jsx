@@ -13,6 +13,7 @@ import {
 import { recordLocalShareEvent } from '../utils/challengeMetrics.js';
 import { getSetNumber } from '../utils/setLeaderboards.js';
 import ShareChallengeModal from './ShareChallengeModal.jsx';
+import { isNativeSharing, shareChallengeResultDirectly } from '../utils/nativeShare.js';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 import HunterTagRejectionNotice from './HunterTagRejectionNotice.jsx';
 
@@ -309,9 +310,24 @@ export default function DailyVictoryModal({
 
   const totalSecStr = (totalTimeMs / 1000).toFixed(2);
 
-  const handleShare = () => {
+  const handleShare = async () => {
     sounds.playTap();
-    setShareModalOpen(true);
+    if (isNativeSharing()) {
+      try {
+        await shareChallengeResultDirectly({
+          elapsedTime: totalTimeMs,
+          isPersonalBest: isNewRecord,
+          difficulty: 'Daily',
+          themeId: 'daily_challenge',
+          levelTitle: 'Set of the Day'
+        });
+      } catch (err) {
+        console.warn('[DailyVictoryModal] Direct native share failed, falling back to modal:', err);
+        setShareModalOpen(true);
+      }
+    } else {
+      setShareModalOpen(true);
+    }
   };
 
   const handleClose = () => {

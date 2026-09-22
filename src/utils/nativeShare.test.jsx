@@ -2,7 +2,7 @@
 import { beforeEach, expect, test, vi } from 'vitest';
 import { Share } from '@capacitor/share';
 import { Filesystem } from '@capacitor/filesystem';
-import { shareNativeResult } from './nativeShare.js';
+import { shareNativeResult, shareChallengeResultDirectly } from './nativeShare.js';
 vi.mock('@capacitor/share', () => ({ Share: { share: vi.fn() } }));
 vi.mock('@capacitor/filesystem', () => ({ Directory: { Cache: 'CACHE' }, Filesystem: { writeFile: vi.fn(), deleteFile: vi.fn() } }));
 beforeEach(() => {
@@ -25,4 +25,19 @@ test('native cancellation is not reported as a successful share', async () => {
 test('native failures propagate so the sheet can offer a link fallback', async () => {
   Share.share.mockRejectedValue(new Error('Sharing unavailable'));
   await expect(shareNativeResult({ text: 'Result' })).rejects.toThrow('Sharing unavailable');
+});
+test('shareChallengeResultDirectly compiles challenge text, link, and invokes native share', async () => {
+  const result = await shareChallengeResultDirectly({
+    elapsedTime: 4200,
+    isPersonalBest: true,
+    difficulty: 'Medium',
+    themeId: 'find_the_sniper',
+    levelTitle: 'Kitchen Set'
+  });
+  expect(result.success).toBe(true);
+  expect(Share.share).toHaveBeenCalledWith(expect.objectContaining({
+    title: 'Diff Hunter Result',
+    text: expect.stringContaining('4.20 seconds'),
+    url: expect.stringContaining('challenge=1')
+  }));
 });

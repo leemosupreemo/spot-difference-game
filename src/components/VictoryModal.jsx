@@ -11,6 +11,7 @@ import { containsProfanity } from '../utils/profanityFilter.js';
 import { submitLeaderboardScore } from '../services/leaderboardService.js';
 import { isOnline, subscribeNetworkStatus } from '../services/networkService.js';
 import ShareChallengeModal from './ShareChallengeModal';
+import { isNativeSharing, shareChallengeResultDirectly } from '../utils/nativeShare.js';
 import HunterTagRejectionNotice from './HunterTagRejectionNotice.jsx';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
@@ -455,16 +456,32 @@ export default function VictoryModal({
     action?.();
   };
 
-  const handleOpenShare = () => {
+  const handleOpenShare = async () => {
     sounds.playTap();
-    trackChallengeShareClicked({
-      source: isPersonalBest ? 'victory_modal_pb_cta' : 'victory_modal_cta',
-      elapsedTimeMs: elapsedTime,
-      isPersonalBest,
-      difficulty,
-      themeId
-    });
-    setShareModalOpen(true);
+    if (isNativeSharing()) {
+      try {
+        await shareChallengeResultDirectly({
+          elapsedTime,
+          isPersonalBest: Boolean(isPersonalBest || isNewRecord),
+          difficulty,
+          themeId,
+          levelTitle: titleText,
+          levelId: level?.id || ''
+        });
+      } catch (err) {
+        console.warn('[VictoryModal] Direct native share failed, falling back to modal:', err);
+        setShareModalOpen(true);
+      }
+    } else {
+      trackChallengeShareClicked({
+        source: isPersonalBest ? 'victory_modal_pb_cta' : 'victory_modal_cta',
+        elapsedTimeMs: elapsedTime,
+        isPersonalBest,
+        difficulty,
+        themeId
+      });
+      setShareModalOpen(true);
+    }
   };
 
   return (
