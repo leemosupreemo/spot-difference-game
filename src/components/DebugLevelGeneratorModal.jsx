@@ -115,7 +115,7 @@ export default function DebugLevelGeneratorModal({ isOpen, onClose, onInjectLeve
       style={{
         position: 'fixed',
         inset: 0,
-        background: 'rgba(5, 6, 12, 0.88)',
+        background: 'transparent',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',

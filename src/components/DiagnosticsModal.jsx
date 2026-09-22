@@ -188,7 +188,7 @@ export default function DiagnosticsModal({
         position: 'fixed',
         inset: 0,
         zIndex: 20000, // debug-overlay tier: must clear DeviceSimulatorHarness's chrome (up to z:10000)
-        background: 'rgba(0, 0, 0, 0.88)',
+        background: 'transparent',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',

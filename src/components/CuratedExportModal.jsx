@@ -106,7 +106,7 @@ export default function CuratedExportModal({ isOpen, onClose }) {
       position: 'fixed',
       inset: 0,
       zIndex: 200,
-      background: 'rgba(5, 6, 12, 0.9)',
+      background: 'transparent',
       backdropFilter: 'blur(16px)',
       WebkitBackdropFilter: 'blur(16px)',
       display: 'flex',

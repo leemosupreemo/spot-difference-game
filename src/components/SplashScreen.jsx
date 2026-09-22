@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 
 /**
  * Mobile Splash / Launch Screen
@@ -64,7 +65,7 @@ export default function SplashScreen({
   const isJauntVisible = stage === 'jaunt-co' || stage === 'fade-out';
   const isFading = stage === 'fade-out';
 
-  return (
+  const splashContent = (
     <div
       role="region"
       aria-label="Diff Hunter by The Jaunt Co."
@@ -72,8 +73,16 @@ export default function SplashScreen({
       onTouchStart={handleSkip}
       style={{
         position: 'fixed',
-        inset: 0,
-        zIndex: 999999,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100vw',
+        minWidth: '100vw',
+        height: '100dvh',
+        minHeight: '100%',
+        margin: 0,
+        zIndex: 9999999,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -199,4 +208,10 @@ export default function SplashScreen({
       </div>
     </div>
   );
+
+  if (typeof document !== 'undefined' && document.body) {
+    return createPortal(splashContent, document.body);
+  }
+
+  return splashContent;
 }

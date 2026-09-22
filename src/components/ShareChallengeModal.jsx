@@ -134,7 +134,7 @@ export default function ShareChallengeModal({
   ];
 
   return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.88)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'transparent', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
       <div role="dialog" aria-modal="true" aria-labelledby="share-result-title" className="glass-panel modal-split-card" onClick={event => event.stopPropagation()} style={{ width: '100%', maxWidth: '440px', padding: '20px', borderRadius: '22px', maxHeight: 'calc(100dvh - 32px)', overflowY: 'auto', boxSizing: 'border-box', background: '#111827', position: 'relative', '--modal-accent': 'var(--accent-cyan)' }}>
         <ModalAmbientParticles />
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>

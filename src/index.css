@@ -83,8 +83,6 @@ body {
   width: 100%;
   max-width: 100%;
   min-height: 100%;
-  overflow-x: clip;
-  overflow-x: hidden;
   touch-action: pan-y;
 }
 
@@ -93,8 +91,6 @@ body {
   max-width: 100%;
   min-height: 100%;
   position: relative;
-  overflow-x: clip;
-  overflow-x: hidden;
   touch-action: pan-y;
 }
 

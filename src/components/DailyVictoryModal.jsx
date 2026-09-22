@@ -348,7 +348,7 @@ export default function DailyVictoryModal({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '16px',
-        backgroundColor: 'rgba(0, 0, 0, 0.88)',
+        backgroundColor: 'transparent',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         animation: 'fadeIn 0.25s ease-out'

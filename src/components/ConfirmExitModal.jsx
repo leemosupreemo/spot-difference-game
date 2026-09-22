@@ -13,7 +13,7 @@ export default function ConfirmExitModal({ isOpen, onConfirm, onCancel, isDaily 
         position: 'fixed',
         inset: 0,
         zIndex: 100,
-        background: 'rgba(0,0,0,0.88)',
+        background: 'transparent',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
