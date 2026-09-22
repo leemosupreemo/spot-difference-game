@@ -22,11 +22,16 @@ export default function RatingModal({
   const [step, setStep] = useState(initialStep); // 'prompt' | 'feedback' | 'thankyou'
   const [feedbackText, setFeedbackText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // 'sent'   -- the server has it
+  // 'queued' -- handed to the Firestore SDK, flushes when the device reconnects
+  // 'failed' -- nothing landed anywhere, so the player's words would be lost
+  const [deliveryState, setDeliveryState] = useState('sent');
 
   useEffect(() => {
     if (isOpen) {
       setStep(initialStep);
       setFeedbackText('');
+      setDeliveryState('sent');
     }
   }, [isOpen, initialStep]);
 
@@ -69,22 +74,45 @@ export default function RatingModal({
 
     trackRatingPromptAction({ action: 'feedback', attemptNumber, feedback: feedbackText });
 
+    // submitPlayerFeedback resolves `success: true` even when nothing landed, so the
+    // outcome has to come from the delivery report, not from `success`.
+    let outcome = 'failed';
     try {
-      await submitPlayerFeedback({
+      const report = await submitPlayerFeedback({
         playerName,
         feedbackText,
         attemptNumber
       });
+      if (report?.cloudFunction || report?.firestore) {
+        outcome = 'sent';
+      } else if (report?.queued) {
+        outcome = 'queued';
+      }
     } catch (err) {
       console.warn('Feedback submission warning:', err);
-    } finally {
-      sounds.playWin();
-      setIsSubmitting(false);
-      setStep('thankyou');
-      setTimeout(() => {
-        onClose();
-      }, 2200);
     }
+
+    setIsSubmitting(false);
+    setDeliveryState(outcome);
+
+    if (outcome === 'failed') {
+      // Stay put and keep their text: closing here would throw away what they wrote.
+      sounds.playError();
+      setStep('thankyou');
+      return;
+    }
+
+    sounds.playWin();
+    setStep('thankyou');
+    setTimeout(() => {
+      onClose();
+    }, 2200);
+  };
+
+  const handleRetryFeedback = () => {
+    sounds.playTap();
+    setDeliveryState('sent');
+    setStep('feedback');
   };
 
   const handleDismiss = (e) => {
@@ -333,33 +361,60 @@ export default function RatingModal({
 
         {step === 'thankyou' && (
           <div style={{ padding: '16px 0', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.8rem', marginBottom: '10px' }} role="img" aria-label="Mailbox">💌</div>
+            <div
+              style={{ fontSize: '2.8rem', marginBottom: '10px' }}
+              role="img"
+              aria-label={deliveryState === 'failed' ? 'Warning' : (deliveryState === 'queued' ? 'Outbox tray' : 'Mailbox')}
+            >
+              {deliveryState === 'failed' ? '📡' : (deliveryState === 'queued' ? '📥' : '💌')}
+            </div>
             <h2 style={{
               fontSize: '1.4rem',
               fontWeight: 900,
-              color: '#fff',
+              color: deliveryState === 'failed' ? 'var(--accent-gold)' : '#fff',
               margin: '0 0 8px 0',
               letterSpacing: '0.5px'
             }}>
-              Thank You!
+              {deliveryState === 'failed' ? "Couldn't Send" : 'Thank You!'}
             </h2>
             <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: '0 0 16px 0', lineHeight: 1.45 }}>
-              We appreciate your input. It helps us make Diff Hunter better for everyone!
+              {deliveryState === 'failed'
+                ? "We couldn't reach our servers just now. Your message is still here \u2014 try again, or come back to it later."
+                : (deliveryState === 'queued'
+                  ? "Saved. We'll send it automatically as soon as you're back online."
+                  : 'We appreciate your input. It helps us make Diff Hunter better for everyone!')}
             </p>
-            <button
-              type="button"
-              className="glass-btn glass-btn-primary"
-              onClick={onClose}
-              style={{
-                padding: '8px 24px',
-                borderRadius: '12px',
-                fontSize: '0.88rem',
-                fontWeight: 800,
-                margin: '0 auto'
-              }}
-            >
-              Done
-            </button>
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+              {deliveryState === 'failed' && (
+                <button
+                  type="button"
+                  className="glass-btn glass-btn-primary"
+                  onClick={handleRetryFeedback}
+                  style={{
+                    padding: '8px 24px',
+                    borderRadius: '12px',
+                    fontSize: '0.88rem',
+                    fontWeight: 800
+                  }}
+                >
+                  Try Again
+                </button>
+              )}
+              <button
+                type="button"
+                className={deliveryState === 'failed' ? 'glass-btn' : 'glass-btn glass-btn-primary'}
+                onClick={onClose}
+                style={{
+                  padding: '8px 24px',
+                  borderRadius: '12px',
+                  fontSize: '0.88rem',
+                  fontWeight: 800,
+                  margin: deliveryState === 'failed' ? 0 : '0 auto'
+                }}
+              >
+                {deliveryState === 'failed' ? 'Not Now' : 'Done'}
+              </button>
+            </div>
           </div>
         )}
       </div>
