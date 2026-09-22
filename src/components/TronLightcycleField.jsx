@@ -28,7 +28,7 @@ export default function TronLightcycleField() {
             className={`tron-lightcycle-trail tron-lightcycle-${trail.axis}`}
             style={{
               [isVertical ? 'left' : 'top']: trail.offset,
-              [isVertical ? 'height' : 'width']: `${trail.length}px`,
+              '--trail-length': `${trail.length}px`,
               '--trail-color': trail.color,
               animationDuration: `${trail.duration}s`,
               animationDelay: `${trail.delay}s`

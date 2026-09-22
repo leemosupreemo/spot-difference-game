@@ -173,6 +173,13 @@ button:active,
   transition: transform 0.08s ease, filter 0.08s ease;
 }
 
+/* Counter-scale the mode background layer so the card's press-in doesn't read as
+   a zoom-out right before the background's grow animation replays. */
+.mode-card-item:active .game-mode-bg {
+  transform: scale(1.025641);
+  transition: transform 0.08s ease;
+}
+
 /* Rating Modal Split Choice Buttons */
 .rating-choice-btn {
   background: transparent;
@@ -1193,6 +1200,8 @@ button:active,
   border-radius: inherit;
   pointer-events: none;
   z-index: 0;
+  transform: scale(1);
+  transition: transform 0.12s ease;
 }
 
 .game-mode-bg ~ * {
@@ -1234,6 +1243,9 @@ button:active,
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  /* Own compositing layer: WebKit otherwise paints the body's animated
+     background-attachment: fixed gradient on top of this backdrop. */
+  transform: translateZ(0);
 }
 
 #device-simulator-screen .homescreen-backdrop {
@@ -1263,39 +1275,56 @@ button:active,
   z-index: 0;
 }
 
+/* Each trail spans the full field and paints its bar as a sized, non-repeating
+   gradient parked at the far edge, so the sweep can run on transform/opacity alone.
+   Animating left/top instead leaves the trails in the non-composited paint layer,
+   where WebKit hides them behind the body's composited fixed-background layer. */
 .tron-lightcycle-trail {
   position: absolute;
   opacity: 0;
+  background-repeat: no-repeat;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  filter: drop-shadow(0 0 6px var(--trail-color)) drop-shadow(0 0 12px var(--trail-color));
 }
 
 .tron-lightcycle-horizontal {
+  left: 0;
+  width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--trail-color) 70%, #fff 100%);
-  box-shadow: 0 0 8px var(--trail-color), 0 0 16px var(--trail-color);
+  background-image: linear-gradient(90deg, transparent, var(--trail-color) 70%, #fff 100%);
+  background-size: var(--trail-length) 100%;
+  background-position: 100% 0;
   animation-name: tronTrailMoveX;
 }
 
 .tron-lightcycle-vertical {
+  top: 0;
+  height: 100%;
   width: 2px;
-  background: linear-gradient(180deg, transparent, var(--trail-color) 70%, #fff 100%);
-  box-shadow: 0 0 8px var(--trail-color), 0 0 16px var(--trail-color);
+  background-image: linear-gradient(180deg, transparent, var(--trail-color) 70%, #fff 100%);
+  background-size: 100% var(--trail-length);
+  background-position: 0 100%;
   animation-name: tronTrailMoveY;
 }
 
+/* -100% parks the bar just past the near edge; +var(--trail-length) carries it just
+   past the far one. */
 @keyframes tronTrailMoveX {
-  0% { left: -25%; opacity: 0; }
+  0% { transform: translate3d(-100%, 0, 0); opacity: 0; }
   8% { opacity: 0.55; }
   85% { opacity: 0.55; }
-  100% { left: 125%; opacity: 0; }
+  100% { transform: translate3d(var(--trail-length), 0, 0); opacity: 0; }
 }
 
 @keyframes tronTrailMoveY {
-  0% { top: -25%; opacity: 0; }
+  0% { transform: translate3d(0, -100%, 0); opacity: 0; }
   8% { opacity: 0.55; }
   85% { opacity: 0.55; }
-  100% { top: 125%; opacity: 0; }
+  100% { transform: translate3d(0, var(--trail-length), 0); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
