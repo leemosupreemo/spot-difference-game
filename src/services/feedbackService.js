@@ -17,11 +17,15 @@ export const FEEDBACK_SUBJECT_PREFIX = '[Diff Hunter Feedback]';
    the Firestore fallback runs only after the Cloud Function call has failed, so
    a per-hop bound would stack into twice the wait with the player watching a
    spinner the entire time. */
-const SUBMIT_TIMEOUT_MS = 5000;
-/* Whatever the budget's state, the fallback write still gets a real chance to
-   land -- without this it could inherit a near-zero deadline and always report
-   `queued` on a slow-but-working connection. */
-const MIN_HOP_MS = 1500;
+const SUBMIT_TIMEOUT_MS = 10000;
+/* The callable is capped well under the overall budget so it cannot eat the whole
+   thing and leave the write no room -- on a device where the Cloud Function is
+   unreachable, it is the write that still has a real chance of landing. */
+const CALL_TIMEOUT_MS = 5000;
+/* firestoreClient forces experimentalForceLongPolling, which is slower by design
+   than WebChannel. A tight floor here reported `queued` for writes that simply
+   had not finished yet, on connections that were working fine. */
+const MIN_HOP_MS = 4000;
 
 export function withTimeout(promise, ms, label) {
   let timer;
@@ -104,7 +108,7 @@ export async function submitPlayerFeedback({
       // Keeps a late rejection from surfacing as an unhandled rejection once the
       // race below has already moved on.
       call.catch(() => {});
-      const response = await withTimeout(call, remainingBudget(), 'Cloud Function submitFeedback');
+      const response = await withTimeout(call, Math.min(CALL_TIMEOUT_MS, remainingBudget()), 'Cloud Function submitFeedback');
 
       if (response?.data?.success) {
         deliveryReport.cloudFunction = true;

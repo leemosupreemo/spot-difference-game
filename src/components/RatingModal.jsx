@@ -7,6 +7,7 @@ import { getAppStoreReviewUrl } from '../services/appConfig';
 import { recordRatingPromptDismissed } from '../services/ratingPrompt';
 import { getSavedPlayerName } from '../services/playerProgress';
 import { submitPlayerFeedback } from '../services/feedbackService';
+import { isOnline } from '../services/networkService';
 import ModalAmbientParticles from './ModalAmbientParticles.jsx';
 
 export const SUPPORT_EMAIL = 'support@thejauntcompany.com';
@@ -26,12 +27,16 @@ export default function RatingModal({
   // 'queued' -- handed to the Firestore SDK, flushes when the device reconnects
   // 'failed' -- nothing landed anywhere, so the player's words would be lost
   const [deliveryState, setDeliveryState] = useState('sent');
+  // A write that misses its deadline looks identical whether the device is offline
+  // or merely slow, so the copy must not assert offline without checking.
+  const [queuedWhileOffline, setQueuedWhileOffline] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setStep(initialStep);
       setFeedbackText('');
       setDeliveryState('sent');
+      setQueuedWhileOffline(false);
     }
   }, [isOpen, initialStep]);
 
@@ -96,6 +101,7 @@ export default function RatingModal({
 
     setIsSubmitting(false);
     setDeliveryState(outcome);
+    if (outcome === 'queued') setQueuedWhileOffline(!isOnline());
 
     if (outcome === 'failed') {
       sounds.playError();
@@ -384,7 +390,9 @@ export default function RatingModal({
               {deliveryState === 'failed'
                 ? "We couldn't reach our servers just now. Your message is still here \u2014 try again, or come back to it later."
                 : (deliveryState === 'queued'
-                  ? "Saved. We'll send it automatically as soon as you're back online."
+                  ? (queuedWhileOffline
+                    ? "Saved. We'll send it automatically as soon as you're back online."
+                    : "Saved. We're still finishing the send \u2014 it will complete on its own.")
                   : 'We will review your message as soon as we can.')}
             </p>
             <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>

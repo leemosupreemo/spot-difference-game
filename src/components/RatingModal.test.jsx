@@ -21,10 +21,12 @@ vi.mock('../services/analytics', () => ({ trackRatingPromptAction: vi.fn() }));
 vi.mock('../services/appConfig', () => ({ getAppStoreReviewUrl: () => 'https://example.test' }));
 vi.mock('../services/ratingPrompt', () => ({ recordRatingPromptDismissed: vi.fn() }));
 vi.mock('../services/playerProgress', () => ({ getSavedPlayerName: () => 'Hunter' }));
+const online = vi.fn(() => true);
+vi.mock('../services/networkService', () => ({ isOnline: () => online() }));
 
 const { default: RatingModal } = await import('./RatingModal.jsx');
 
-afterEach(() => { cleanup(); submitPlayerFeedback.mockReset(); });
+afterEach(() => { cleanup(); submitPlayerFeedback.mockReset(); online.mockReturnValue(true); });
 
 async function send(report) {
   submitPlayerFeedback.mockResolvedValue(report);
@@ -40,10 +42,23 @@ test('a delivered submission thanks the player', async () => {
   expect(screen.queryByRole('button', { name: /try again/i })).toBeNull();
 });
 
-test('a queued submission says it will send once back online', async () => {
+test('a queued submission only blames the connection when the device is offline', async () => {
+  online.mockReturnValue(false);
   await send({ success: true, cloudFunction: false, firestore: false, email: false, queued: true });
   await waitFor(() => expect(screen.getByText(/back online/i)).toBeTruthy());
   expect(screen.queryByRole('button', { name: /try again/i })).toBeNull();
+});
+
+/*
+ * A write can miss its deadline on a perfectly good connection -- Firestore is on
+ * forced long polling, which is slow by design. Telling someone on fast wifi that
+ * they are offline is simply wrong.
+ */
+test('a queued submission while online does not claim the device is offline', async () => {
+  online.mockReturnValue(true);
+  await send({ success: true, cloudFunction: false, firestore: false, email: false, queued: true });
+  await waitFor(() => expect(screen.getByText(/still finishing the send/i)).toBeTruthy());
+  expect(screen.queryByText(/back online/i)).toBeNull();
 });
 
 test('a failed submission says so and offers a retry', async () => {
