@@ -1829,7 +1829,9 @@ function GameApp() {
         onRestart={(chosenSetId) => {
           setGameOverModalOpen(false);
           setRevealAnswer(false);
-          const targetRestartSetId = chosenSetId || currentLevel?.setId || photoSetId || 'photo_set_001';
+          const targetRestartSetId = typeof chosenSetId === 'string' && chosenSetId.trim()
+            ? chosenSetId.trim()
+            : (currentLevel?.setId || photoSetId || 'photo_set_001');
           handleStartGame(targetRestartSetId);
         }}
         onNextStage={() => {

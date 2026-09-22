@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { RotateCcw, Skull, X, ArrowRight } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { getSetNumber } from '../utils/setLeaderboards.js';
@@ -23,6 +23,7 @@ export default function GameOverModal({
   if (!isOpen) return null;
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -30,16 +31,48 @@ export default function GameOverModal({
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+
+    const handleOutsideInteraction = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('pointerdown', handleOutsideInteraction, true);
+    document.addEventListener('touchstart', handleOutsideInteraction, true);
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsideInteraction, true);
+      document.removeEventListener('touchstart', handleOutsideInteraction, true);
+    };
+  }, [isDropdownOpen]);
+
+  const handleSelectSet = (targetSetId, event) => {
+    if (event) {
+      event.stopPropagation();
+    }
+    sounds.playTap();
+    setIsDropdownOpen(false);
+    onRestart?.(targetSetId);
+  };
+
   const seconds = (elapsedTime / 1000).toFixed(2);
   const isAbstract = themeId === 'abstract_animated';
   const stageNumber = getSetNumber(setId);
 
   const attemptedList = useMemo(() => {
+    let list;
     if (Array.isArray(attemptedSets) && attemptedSets.length > 0) {
       const others = attemptedSets.filter(id => id !== setId);
-      return setId ? [setId, ...others] : attemptedSets;
+      list = setId ? [setId, ...others] : attemptedSets;
+    } else {
+      list = getAttemptedSetIds(difficultyStats, setId);
     }
-    return getAttemptedSetIds(difficultyStats, setId);
+    if ((!list || list.length === 0) && setId) {
+      return [setId];
+    }
+    return list || [];
   }, [attemptedSets, difficultyStats, setId]);
 
   return (
@@ -59,43 +92,29 @@ export default function GameOverModal({
         padding: '16px'
       }}
     >
-      {/* Transparent click catcher for dropdown outside clicks */}
-      {isDropdownOpen && (
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsDropdownOpen(false);
-          }}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 105,
-            background: 'transparent'
-          }}
-        />
-      )}
-
       <div
         className="glass-panel modal-split-card"
         onClick={(e) => e.stopPropagation()}
         style={{
-        maxWidth: '440px',
-        width: '94%',
-        maxHeight: 'calc(100dvh - 32px)',
-        overflowY: 'auto',
-        padding: '20px 18px',
-        boxSizing: 'border-box',
-        textAlign: 'center',
-        border: '2px solid var(--accent-pink)',
-        boxShadow: '0 0 40px rgba(255, 0, 127, 0.45)',
-        borderRadius: '20px',
-        position: 'relative',
-        '--modal-accent': 'var(--accent-pink)'
-      }}>
+          maxWidth: '440px',
+          width: '94%',
+          maxHeight: 'calc(100dvh - 32px)',
+          overflowY: isDropdownOpen ? 'visible' : 'auto',
+          padding: '20px 18px',
+          boxSizing: 'border-box',
+          textAlign: 'center',
+          border: '2px solid var(--accent-pink)',
+          boxShadow: '0 0 40px rgba(255, 0, 127, 0.45)',
+          borderRadius: '20px',
+          position: 'relative',
+          zIndex: 20,
+          '--modal-accent': 'var(--accent-pink)'
+        }}
+      >
         <ModalAmbientParticles />
 
         {/* Top Left Redo / Repeat Button with Attempted Sets Dropdown */}
-        <div style={{ position: 'absolute', top: 12, left: 12, zIndex: 110 }}>
+        <div ref={dropdownRef} style={{ position: 'absolute', top: 12, left: 12, zIndex: 110 }}>
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -118,7 +137,8 @@ export default function GameOverModal({
               boxShadow: isDropdownOpen
                 ? '0 0 20px rgba(0, 240, 255, 0.7)'
                 : '0 0 14px rgba(0, 240, 255, 0.4)',
-              transition: 'all 0.18s ease'
+              transition: 'all 0.18s ease',
+              touchAction: 'manipulation'
             }}
             title="Repeat Set"
             aria-label="Repeat Set"
@@ -150,6 +170,7 @@ export default function GameOverModal({
                 maxWidth: '280px',
                 maxHeight: '240px',
                 overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch',
                 boxShadow: '0 12px 36px rgba(0,0,0,0.85), 0 0 20px rgba(0, 240, 255, 0.35)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -166,7 +187,8 @@ export default function GameOverModal({
                 textTransform: 'uppercase',
                 padding: '2px 6px 4px 6px',
                 borderBottom: '1px solid rgba(0, 240, 255, 0.15)',
-                marginBottom: '2px'
+                marginBottom: '2px',
+                userSelect: 'none'
               }}>
                 Choose Set to Repeat
               </div>
@@ -180,11 +202,8 @@ export default function GameOverModal({
                 return (
                   <button
                     key={targetSetId || idx}
-                    onClick={() => {
-                      sounds.playTap();
-                      setIsDropdownOpen(false);
-                      onRestart(targetSetId);
-                    }}
+                    type="button"
+                    onClick={(e) => handleSelectSet(targetSetId, e)}
                     style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -205,7 +224,9 @@ export default function GameOverModal({
                       textAlign: 'left',
                       boxShadow: isFailedSet ? '0 0 10px rgba(255, 0, 127, 0.35)' : 'none',
                       transition: 'background 0.15s ease, transform 0.1s ease',
-                      gap: '8px'
+                      gap: '8px',
+                      touchAction: 'manipulation',
+                      WebkitTapHighlightColor: 'rgba(0, 240, 255, 0.2)'
                     }}
                     onMouseEnter={(e) => {
                       if (!isFailedSet) {

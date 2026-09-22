@@ -128,3 +128,33 @@ test('repeat button has prominent blue styling and backdrop clicks do not close 
   fireEvent.click(backdrop);
   expect(onClose).not.toHaveBeenCalled();
 });
+
+test('outside pointerdown closes dropdown without any fixed click catcher overlay blocking touches', () => {
+  render(
+    <GameOverModal
+      isOpen={true}
+      onClose={() => {}}
+      onRestart={() => {}}
+      elapsedTime={4000}
+      setId="photo_set_001"
+      attemptedSets={['photo_set_001', 'photo_set_002']}
+    />
+  );
+
+  const redoBtn = screen.getByRole('button', { name: /repeat set/i });
+  fireEvent.click(redoBtn);
+
+  // Dropdown is open
+  expect(screen.getByRole('listbox', { name: /attempted sets/i })).toBeTruthy();
+
+  // Ensure there is NO fixed transparent click-catcher overlay rendered
+  const backdrop = screen.getByTestId('game-over-backdrop');
+  const transparentFixedOverlays = Array.from(backdrop.querySelectorAll('div')).filter(el => {
+    return el.style.position === 'fixed' && el.style.background === 'transparent';
+  });
+  expect(transparentFixedOverlays.length).toBe(0);
+
+  // Pointerdown outside dropdown closes the dropdown
+  fireEvent.pointerDown(document.body);
+  expect(screen.queryByRole('listbox', { name: /attempted sets/i })).toBeNull();
+});
