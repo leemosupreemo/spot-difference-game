@@ -90,10 +90,22 @@ async function fetchRemoteLevelPacks({ forceServer = false } = {}) {
   return getCachedRemoteLevels();
 }
 
-function rejectAfter(timeoutMs, message) {
-  return new Promise((_, reject) => {
-    setTimeout(() => reject(new Error(message)), timeoutMs);
+/*
+ * A deadline whose timer can be cancelled once the race is over.
+ *
+ * Promise.race settles on the winner but does nothing about the loser's timer,
+ * which goes on to fire regardless. In syncRemoteLevelPacks that meant a sync
+ * finishing in under a second still logged "[RemoteLevelSyncTimeout] Exceeded
+ * 12000ms" twelve seconds later -- in every session, whatever had happened. The
+ * warning read as evidence of a slow connection while actually being evidence of
+ * nothing at all.
+ */
+function deadline(timeoutMs, onElapsed) {
+  let timer;
+  const promise = new Promise((resolve, reject) => {
+    timer = setTimeout(() => onElapsed(resolve, reject), timeoutMs);
   });
+  return { promise, cancel: () => clearTimeout(timer) };
 }
 
 /**
@@ -186,11 +198,12 @@ export async function syncRemoteLevelPacks(timeoutMs = 12000) {
 
   logApp('INFO', '[RemoteLevelSyncStart] Querying remote_level_packs...');
 
+  const timeout = deadline(timeoutMs, resolve => {
+    logApp('WARN', `[RemoteLevelSyncTimeout] Exceeded ${timeoutMs}ms -- using cached levels for now (fetch keeps running in the background).`);
+    resolve(getCachedRemoteLevels());
+  });
+
   try {
-    const timeoutPromise = new Promise(resolve => setTimeout(() => {
-      logApp('WARN', `[RemoteLevelSyncTimeout] Exceeded ${timeoutMs}ms -- using cached levels for now (fetch keeps running in the background).`);
-      resolve(getCachedRemoteLevels());
-    }, timeoutMs));
     const fetchPromise = fetchRemoteLevelPacks();
     // The race hides the request's own outcome, so a real failure looks
     // identical to a slow one. Report it either way, even after the timeout.
@@ -198,9 +211,11 @@ export async function syncRemoteLevelPacks(timeoutMs = 12000) {
       levels => logApp('INFO', `[RemoteLevelSyncSettled] Server returned ${levels?.length ?? 0} level(s).`),
       err => logApp('WARN', `[RemoteLevelSyncFailed] ${err?.code || ''} ${err?.message || err}`)
     );
-    return await Promise.race([fetchPromise, timeoutPromise]);
+    return await Promise.race([fetchPromise, timeout.promise]);
   } catch (err) {
     logApp('INFO', '[RemoteLevelSyncOffline] Offline or no remote packs:', err?.message || err);
+  } finally {
+    timeout.cancel();
   }
 
   return getCachedRemoteLevels();
@@ -220,12 +235,15 @@ export async function refreshRemoteLevelPacks(timeoutMs = 45000) {
     const serverFetch = fetchRemoteLevelPacks({ forceServer: true });
     serverFetch.catch(err =>
       logApp('WARN', `[RemoteLevelRefreshRejected] ${err?.code || ''} ${err?.message || err}`));
-    const levels = await Promise.race([
-      serverFetch,
-      rejectAfter(timeoutMs, `Remote pack refresh exceeded ${timeoutMs}ms.`)
-    ]);
-    logApp('INFO', `[RemoteLevelRefreshComplete] ${levels.length} remote levels available.`);
-    return levels;
+    const timeout = deadline(timeoutMs, (_resolve, reject) =>
+      reject(new Error(`Remote pack refresh exceeded ${timeoutMs}ms.`)));
+    try {
+      const levels = await Promise.race([serverFetch, timeout.promise]);
+      logApp('INFO', `[RemoteLevelRefreshComplete] ${levels.length} remote levels available.`);
+      return levels;
+    } finally {
+      timeout.cancel();
+    }
   } catch (err) {
     logApp('WARN', '[RemoteLevelRefreshError]', err?.message || err);
     throw err;

@@ -24,6 +24,12 @@ const snapshot = {
 const getDocs = vi.fn(async () => snapshot);
 const getDocsFromServer = vi.fn(async () => snapshot);
 
+const logged = [];
+vi.mock('../utils/logger.js', () => ({
+  logApp: (level, ...args) => { logged.push(`${level} ${args.join(' ')}`); },
+  auditDOMState: () => {}
+}));
+
 vi.mock('firebase/app', () => ({
   getApps: () => [{}],
   initializeApp: () => ({})
@@ -74,6 +80,7 @@ const remoteSync = await import('./remoteLevelSync.js');
 
 describe('remote level synchronization in a browser', () => {
   beforeEach(() => {
+    logged.length = 0;
     remoteSync.clearCachedRemoteLevels();
     getDocs.mockClear();
     getDocsFromServer.mockClear();
@@ -113,5 +120,40 @@ describe('remote level synchronization in a browser', () => {
 
     expect(levels.map(level => level.id)).toEqual(['remote_refresh_001']);
     expect(getDocsFromServer).toHaveBeenCalled();
+  });
+});
+
+/*
+ * Promise.race settles on the winner and leaves the loser's timer running, so a
+ * sync that finished in milliseconds still logged "Exceeded 12000ms" twelve
+ * seconds later. The warning turned up in every diagnostics report regardless of
+ * what had actually happened, and reading it as evidence of a slow connection
+ * sent a real investigation down the wrong path.
+ */
+describe('the sync timeout warning', () => {
+  test('is not logged after a sync that already succeeded', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+
+    const levels = await remoteSync.syncRemoteLevelPacks(50);
+    expect(levels.map(level => level.id)).toEqual(['remote_refresh_001']);
+
+    // Well past the deadline the cancelled timer would have fired on.
+    await vi.advanceTimersByTimeAsync(5000);
+
+    expect(logged.filter(line => line.includes('RemoteLevelSyncTimeout'))).toEqual([]);
+    vi.useRealTimers();
+  });
+
+  test('is still logged when the fetch really does outlast the deadline', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    restFetch.mockImplementationOnce(() => new Promise(() => {}));
+    getDocs.mockImplementationOnce(() => new Promise(() => {}));
+
+    const pending = remoteSync.syncRemoteLevelPacks(50);
+    await vi.advanceTimersByTimeAsync(200);
+    await pending;
+
+    expect(logged.some(line => line.includes('RemoteLevelSyncTimeout'))).toBe(true);
+    vi.useRealTimers();
   });
 });
