@@ -27,6 +27,27 @@ export default function GameCanvas({
   const [canvasUrls, setCanvasUrls] = useState({ left: '', right: '' });
   const [cardAspectRatio, setCardAspectRatio] = useState('4 / 3');
 
+  // Miss markers and speed popups clear themselves on per-item timers (1.8s / 2.2s).
+  // Failing a level and continuing straight to the next set beats those timers, which
+  // left the previous set's "-1" hearts floating over fresh artwork. Clearing them in
+  // an effect would be a frame too late -- they would paint once against the new image
+  // first -- so the reset happens during the render that swaps the level in.
+  const overlayTimersRef = useRef([]);
+  const [renderedLevelId, setRenderedLevelId] = useState(level?.id ?? null);
+
+  if ((level?.id ?? null) !== renderedLevelId) {
+    setRenderedLevelId(level?.id ?? null);
+    overlayTimersRef.current.forEach(clearTimeout);
+    overlayTimersRef.current = [];
+    setMisses([]);
+    setSpeedPopups([]);
+  }
+
+  useEffect(() => () => {
+    overlayTimersRef.current.forEach(clearTimeout);
+    overlayTimersRef.current = [];
+  }, []);
+
   // Releasing (mouse up / touch end) outside either image's bounds turns zoom mode off.
   // This only fires on release itself, not while merely dragging outside — a drag that starts
   // inside an image and stays inside, or comes back inside before release, must not disable zoom.
@@ -300,9 +321,9 @@ export default function GameCanvas({
           text: `+${pointsEarned} PTS`
         };
         setSpeedPopups(prev => [...prev, newPopup]);
-        setTimeout(() => {
+        overlayTimersRef.current.push(setTimeout(() => {
           setSpeedPopups(prev => prev.filter(p => p.id !== newPopup.id));
-        }, 2200);
+        }, 2200));
 
         onDiffFound(diff.id);
       }
@@ -322,9 +343,9 @@ export default function GameCanvas({
       const missId = Date.now() + Math.random();
       const newMiss = { id: missId, x: clickXPercent, y: clickYPercent };
       setMisses(prev => [...prev, newMiss]);
-      setTimeout(() => {
+      overlayTimersRef.current.push(setTimeout(() => {
         setMisses(prev => prev.filter(m => m.id !== missId));
-      }, 1800);
+      }, 1800));
     }
   };
 
