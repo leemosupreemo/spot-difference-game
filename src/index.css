@@ -254,11 +254,11 @@ button:active,
 }
 
 .rating-choice-left {
-  border-bottom-left-radius: 24px;
+  border-bottom-left-radius: 22px;
 }
 
 .rating-choice-right {
-  border-bottom-right-radius: 24px;
+  border-bottom-right-radius: 22px;
 }
 
 .glass-btn {
@@ -784,9 +784,11 @@ button:active,
 /* Modal Split-Meet Card */
 .modal-split-card {
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
   box-sizing: border-box;
   animation: pageFadeIn 0.66s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 
 /* Modal shutters now peel the same direction as the full-screen curtains above:
@@ -1354,6 +1356,8 @@ button:active,
   background:
     radial-gradient(circle at 50% 45%, rgba(0, 240, 255, 0.08), transparent 48%),
     linear-gradient(180deg, rgba(3, 12, 28, 0.08), rgba(0, 0, 0, 0.24));
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 
 .modal-ambient-particles ~ * {

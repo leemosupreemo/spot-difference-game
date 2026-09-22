@@ -162,10 +162,13 @@ export default function RatingModal({
           width: '100%',
           maxHeight: 'calc(100dvh - 32px)',
           overflowY: 'auto',
+          overflowX: 'hidden',
           padding: '24px 20px',
           position: 'relative',
           textAlign: 'center',
           borderRadius: '24px',
+          WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+          maskImage: 'radial-gradient(white, black)',
           border: '2px solid rgba(0, 240, 255, 0.35)',
           boxShadow: '0 0 45px rgba(0, 240, 255, 0.2), 0 20px 50px rgba(0, 0, 0, 0.7)',
           boxSizing: 'border-box',
@@ -229,8 +232,10 @@ export default function RatingModal({
               gridTemplateColumns: '1fr 1fr',
               borderTop: '1px solid rgba(255, 255, 255, 0.12)',
               margin: '0 -20px -24px -20px',
-              borderRadius: '0 0 24px 24px',
-              overflow: 'hidden'
+              borderRadius: '0 0 22px 22px',
+              overflow: 'hidden',
+              WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+              maskImage: 'radial-gradient(white, black)'
             }}>
               <button
                 type="button"
