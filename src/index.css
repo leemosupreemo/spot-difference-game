@@ -914,15 +914,30 @@ button:active,
   100% { opacity: 0; transform: translate(-50%, -125%) scale(0.9); }
 }
 
-/* Hint Radar Ring */
+/* Hint Radar Ring: a solid, always-visible core ring with two dashed pings
+   sweeping out of it on opposite halves of the cycle. The core never animates to
+   zero opacity -- a ring that spends most of its cycle faded out is easy to miss
+   on a busy level, which is the one moment the player has asked for help. */
 .hint-radar {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 64px;
-  height: 64px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
-  border: 3px dashed var(--accent-gold);
-  animation: radarExpand 1.5s infinite linear;
+  border: 4px solid var(--accent-gold);
+  /* Glow sits in the rim, not the middle: a filled disc would hide the very
+     difference it is pointing at. */
+  background: radial-gradient(circle,
+    rgba(255, 183, 3, 0) 52%,
+    rgba(255, 183, 3, 0.26) 78%,
+    rgba(255, 183, 3, 0) 100%);
+  /* The 2px black ring keeps the gold readable over bright artwork. */
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, 0.55),
+    0 0 20px rgba(255, 183, 3, 0.95),
+    0 0 42px rgba(255, 183, 3, 0.55),
+    inset 0 0 18px rgba(255, 183, 3, 0.4);
+  animation: hintRadarPulse 1s infinite alternate ease-in-out;
   pointer-events: none;
   /* A difference near an edge puts most of this circle outside the artwork.
      `.canvas-card` is `overflow: visible` so it bleeds; this z-index has to
@@ -931,16 +946,34 @@ button:active,
   z-index: 45;
 }
 
-@keyframes radarExpand {
+.hint-radar::before,
+.hint-radar::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 3px dashed var(--accent-gold);
+  animation: hintRadarPing 1.5s infinite linear;
+}
+
+/* Half a cycle behind, so a ping is always on its way out. */
+.hint-radar::after {
+  animation-delay: 0.75s;
+}
+
+@keyframes hintRadarPulse {
+  0% { transform: translate(-50%, -50%) scale(0.95); }
+  100% { transform: translate(-50%, -50%) scale(1.07); }
+}
+
+@keyframes hintRadarPing {
   0% {
-    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
-    opacity: 1;
-    box-shadow: 0 0 10px var(--accent-gold);
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.9;
   }
   100% {
-    transform: translate(-50%, -50%) scale(1.6) rotate(180deg);
+    transform: scale(1.9) rotate(180deg);
     opacity: 0;
-    box-shadow: 0 0 30px var(--accent-gold);
   }
 }
 
@@ -1398,6 +1431,15 @@ button:active,
     animation: none;
     opacity: 0.22;
     transform: scale(1);
+  }
+  .hint-radar {
+    animation: none;
+    transform: translate(-50%, -50%);
+  }
+  .hint-radar::before,
+  .hint-radar::after {
+    animation: none;
+    opacity: 0.55;
   }
   .mode-card-item:hover {
     transform: none;

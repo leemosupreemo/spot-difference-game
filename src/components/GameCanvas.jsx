@@ -420,8 +420,7 @@ export default function GameCanvas({
                 className="hint-radar"
                 style={{
                   left: `${diff.x}%`,
-                  top: `${diff.y}%`,
-                  zIndex: 8
+                  top: `${diff.y}%`
                 }}
               />
             );
@@ -539,8 +538,7 @@ export default function GameCanvas({
                 className="hint-radar"
                 style={{
                   left: `${diff.x}%`,
-                  top: `${diff.y}%`,
-                  zIndex: 8
+                  top: `${diff.y}%`
                 }}
               />
             );
