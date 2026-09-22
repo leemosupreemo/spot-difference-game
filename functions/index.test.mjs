@@ -4,6 +4,7 @@ import {
   evaluateQualification,
   validateSubmissionInput,
   containsProfanity,
+  buildFeedbackDoc,
   dispatchFeedbackEmail,
   FEEDBACK_PRIMARY_TARGET,
   FEEDBACK_FALLBACK_TARGET,
@@ -255,4 +256,41 @@ test('dispatchFeedbackEmail reports a missing API key instead of throwing', asyn
 
   assert.equal(result.emailSent, false);
   assert.match(result.emailError, /RESEND_API_KEY/);
+});
+
+/*
+ * submitFeedbackForm takes a form-encoded body so the request needs no CORS
+ * preflight; in Capacitor the preflight never completes and the request is never
+ * sent at all. Both routes have to produce the same document, because
+ * sendFeedbackEmail reads these fields to build the email.
+ */
+test('buildFeedbackDoc requires actual feedback text', () => {
+  assert.equal(buildFeedbackDoc({ feedbackText: '' }), null);
+  assert.equal(buildFeedbackDoc({ feedbackText: '   \n ' }), null);
+  assert.equal(buildFeedbackDoc({}), null);
+});
+
+test('buildFeedbackDoc fills defaults and carries what the email needs', () => {
+  const doc = buildFeedbackDoc({ feedbackText: '  the timer felt fast  ' });
+
+  assert.equal(doc.feedbackText, 'the timer felt fast');
+  assert.equal(doc.playerId, 'anonymous');
+  assert.equal(doc.playerName, 'Hunter');
+  assert.equal(doc.platform, 'unknown');
+  assert.equal(doc.attemptNumber, 1);
+  assert.equal(doc.status, 'new');
+  assert.equal(doc.targetEmail, FEEDBACK_PRIMARY_TARGET);
+});
+
+test('buildFeedbackDoc coerces form-encoded strings and caps runaway input', () => {
+  // A form body arrives as strings, so attemptNumber must not stay "3".
+  const doc = buildFeedbackDoc({
+    feedbackText: 'x'.repeat(5000),
+    playerName: 'y'.repeat(100),
+    attemptNumber: '3'
+  });
+
+  assert.equal(doc.attemptNumber, 3);
+  assert.equal(doc.feedbackText.length, 3000);
+  assert.equal(doc.playerName.length, 32);
 });

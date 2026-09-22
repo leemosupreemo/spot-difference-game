@@ -1,6 +1,5 @@
 import { getApps, initializeApp } from 'firebase/app';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { getFunctions, httpsCallable } from 'firebase/functions';
 import { getFirestoreClient } from './firestoreClient.js';
 import { firebaseConfig, getCurrentPlayerId } from './authService.js';
 import { APP_VERSION } from './appConfig.js';
@@ -36,19 +35,13 @@ export function withTimeout(promise, ms, label) {
   return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
-let functionsInstance = null;
-function getFirebaseFunctions() {
-  if (typeof window === 'undefined') return null;
-  if (!functionsInstance) {
-    try {
-      const app = getApps()[0] || initializeApp(firebaseConfig);
-      functionsInstance = getFunctions(app);
-    } catch (err) {
-      console.warn('[FeedbackService] Firebase Functions init warning:', err?.message || err);
-    }
-  }
-  return functionsInstance;
-}
+/* In Capacitor the WebView's origin is capacitor://localhost, so a JSON POST needs
+   a CORS preflight -- and on iOS that preflight does not complete. The browser
+   then never sends the request, which is why the backend logged no invocation at
+   all for feedback that the player watched fail. A form-encoded body is a "simple
+   request" under CORS: no preflight, so it goes straight out. */
+const FEEDBACK_ENDPOINT =
+  `https://us-central1-${firebaseConfig.projectId}.cloudfunctions.net/submitFeedbackForm`;
 
 /**
  * Submits player feedback directly in the background without opening a local mail client.
@@ -97,42 +90,44 @@ export async function submitPlayerFeedback({
 
   logApp('INFO', `[FeedbackSubmitStart] platform=${platform} chars=${cleanComment.length} budget=${SUBMIT_TIMEOUT_MS}ms`);
 
-  // 1. Attempt serverless submission via Firebase Cloud Function (Resend email delivery)
-  const functions = getFirebaseFunctions();
-  if (!functions) {
-    logApp('WARN', '[FeedbackCloudFunctionUnavailable] Functions SDK did not initialise.');
-  }
-  if (functions) {
-    try {
-      const callSubmitFeedback = httpsCallable(functions, 'submitFeedback');
-      const call = callSubmitFeedback({
-        playerName: cleanName,
-        feedbackText: cleanComment,
-        platform,
-        attemptNumber: Number(attemptNumber) || 1
-      });
-      // Keeps a late rejection from surfacing as an unhandled rejection once the
-      // race below has already moved on.
-      call.catch(() => {});
-      const response = await withTimeout(call, Math.min(CALL_TIMEOUT_MS, remainingBudget()), 'Cloud Function submitFeedback');
+  // 1. Form-encoded POST to the feedback endpoint. Deliberately no explicit
+  // Content-Type: URLSearchParams sets a CORS-safelisted one, and setting
+  // application/json here would reinstate the preflight this exists to avoid.
+  try {
+    const params = new URLSearchParams({
+      playerId,
+      playerName: cleanName,
+      feedbackText: cleanComment,
+      platform,
+      attemptNumber: String(Number(attemptNumber) || 1),
+      appVersion: APP_VERSION
+    });
 
-      logApp('INFO', `[FeedbackCloudFunctionOk] id=${response?.data?.id || 'unknown'}`);
-      if (response?.data?.success) {
-        deliveryReport.cloudFunction = true;
-        deliveryReport.firestore = true;
-        // The email goes out from the sendFeedbackEmail Firestore trigger, after
-        // this response has already returned, so the client cannot observe it.
-        deliveryReport.email = false;
-        return {
-          success: true,
-          ...deliveryReport
-        };
-      }
-    } catch (err) {
-      // The reason matters: a timeout, a CORS rejection and an internal error all
-      // end up here, and only the log can tell them apart on a device.
-      logApp('WARN', `[FeedbackCloudFunctionFailed] code=${err?.code || 'none'} msg=${err?.message || err}`);
+    const post = fetch(FEEDBACK_ENDPOINT, { method: 'POST', body: params });
+    post.catch(() => {});
+    const response = await withTimeout(
+      post, Math.min(CALL_TIMEOUT_MS, remainingBudget()), 'Feedback endpoint'
+    );
+    const data = await response.json().catch(() => ({}));
+
+    if (response.ok && data?.success) {
+      deliveryReport.cloudFunction = true;
+      deliveryReport.firestore = true;
+      // The email goes out from the sendFeedbackEmail Firestore trigger, after
+      // this response has already returned, so the client cannot observe it.
+      deliveryReport.email = false;
+      logApp('INFO', `[FeedbackEndpointOk] id=${data.id || 'unknown'}`);
+      return {
+        success: true,
+        ...deliveryReport
+      };
     }
+
+    logApp('WARN', `[FeedbackEndpointRejected] status=${response.status} error=${data?.error || 'none'}`);
+  } catch (err) {
+    // The reason matters: a timeout, a CORS rejection and a network error all end
+    // up here, and only the log can tell them apart on a device.
+    logApp('WARN', `[FeedbackEndpointFailed] ${err?.message || err}`);
   }
 
   // 2. Direct client fallback write to Firestore `feedback` collection

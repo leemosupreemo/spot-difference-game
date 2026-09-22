@@ -1,4 +1,4 @@
-import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import { initializeApp, getApps } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
@@ -249,6 +249,71 @@ export const submitLeaderboardScore = onCall(
  * Trusted HTTPS Callable Cloud Function for player feedback submission.
  * Saves to Firestore collection 'feedback' and dispatches email via Resend.
  */
+/*
+ * Shared shape for a feedback document, whatever route it arrived by. The
+ * sendFeedbackEmail trigger reads these fields, so they have to match.
+ */
+export function buildFeedbackDoc({ playerId, playerName, feedbackText, platform, attemptNumber, appVersion }) {
+  const cleanText = String(feedbackText || '').trim();
+  if (!cleanText) return null;
+
+  return {
+    playerId: playerId || 'anonymous',
+    playerName: String(playerName || 'Hunter').slice(0, 32),
+    feedbackText: cleanText.slice(0, 3000),
+    platform: String(platform || 'unknown').slice(0, 32),
+    appVersion: String(appVersion || 'unknown').slice(0, 16),
+    attemptNumber: Number(attemptNumber) || 1,
+    targetEmail: FEEDBACK_PRIMARY_TARGET,
+    createdAt: FieldValue.serverTimestamp(),
+    createdAtIso: new Date().toISOString(),
+    status: 'new'
+  };
+}
+
+/*
+ * A form-encoded sibling of the callable below, and the route the app actually
+ * uses. In Capacitor the WebView's origin is capacitor://localhost, so a JSON
+ * POST needs a CORS preflight -- and on iOS that preflight does not complete, so
+ * the browser never sends the request and the server sees nothing at all. A
+ * form-encoded body is a "simple request" under CORS: no preflight, so it goes
+ * straight out. The callable is kept because builds already in testers' hands
+ * still call it.
+ */
+export const submitFeedbackForm = onRequest({ cors: true }, async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(405).json({ success: false, error: 'POST required' });
+    return;
+  }
+
+  // firebase-functions body-parses form encoding for us; guard anyway so a JSON
+  // caller is not silently dropped.
+  const body = (typeof req.body === 'object' && req.body) || {};
+  const doc = buildFeedbackDoc({
+    playerId: body.playerId,
+    playerName: body.playerName,
+    feedbackText: body.feedbackText,
+    platform: body.platform,
+    attemptNumber: body.attemptNumber,
+    appVersion: body.appVersion
+  });
+
+  if (!doc) {
+    res.status(400).json({ success: false, error: 'Feedback text is required' });
+    return;
+  }
+
+  try {
+    const ref = await db.collection('feedback').add(doc);
+    console.log('[submitFeedbackForm] stored', ref.id, 'platform', doc.platform);
+    // sendFeedbackEmail fires on the document and does the mailing.
+    res.status(200).json({ success: true, id: ref.id, emailDeferred: true });
+  } catch (err) {
+    console.error('[submitFeedbackForm] write failed:', err?.message || err);
+    res.status(500).json({ success: false, error: 'Could not store feedback' });
+  }
+});
+
 export const submitFeedback = onCall(
   { cors: true },
   async (request) => {
