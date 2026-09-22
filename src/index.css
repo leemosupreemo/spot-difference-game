@@ -180,18 +180,17 @@ button:active,
   transition: transform 0.08s ease;
 }
 
-/* Pointer-only: the mode background leans in while the cursor is over the card.
-   Gated on a real hover-capable pointer so touch devices don't strand a card in
-   the zoomed state after a tap. */
+/* Pointer-only: the whole card grows under the cursor. Gated on a real
+   hover-capable pointer so a tap on a touch device can't strand a card enlarged. */
 @media (hover: hover) and (pointer: fine) {
-  .mode-card-item:hover .game-mode-bg {
-    transform: scale(1.08);
+  .mode-card-item:hover {
+    transform: translateY(-2px) scale(1.03);
   }
 
-  /* 1.08 x the press compensation above, so clicking a hovered card keeps growing
-     from the hover zoom instead of snapping back down to it. */
+  /* 1.03 / 0.975: holds the background at its hovered size through the press, so
+     the card frame presses in without the artwork shrinking with it. */
   .mode-card-item:hover:active .game-mode-bg {
-    transform: scale(1.108);
+    transform: scale(1.05641);
     transition: transform 0.08s ease;
   }
 }
@@ -1228,7 +1227,7 @@ button:active,
   pointer-events: none;
   z-index: 0;
   transform: scale(1);
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.12s ease;
 }
 
 .game-mode-bg ~ * {
@@ -1380,8 +1379,8 @@ button:active,
     opacity: 0.22;
     transform: scale(1);
   }
-  .mode-card-item:hover .game-mode-bg {
-    transform: scale(1);
+  .mode-card-item:hover {
+    transform: none;
   }
   .mode-card-item:hover:active .game-mode-bg {
     transform: scale(1.025641);
