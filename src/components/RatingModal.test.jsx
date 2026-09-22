@@ -109,3 +109,29 @@ test('the status replaces the form in place and does not close itself', async ()
   expect(onClose).toHaveBeenCalled();
   vi.useRealTimers();
 });
+
+test('send is disabled until something is written, and says why', async () => {
+  render(<RatingModal isOpen={true} onClose={vi.fn()} initialStep="feedback" />);
+
+  const button = screen.getByRole('button', { name: /send feedback/i });
+  expect(button.disabled).toBe(true);
+  expect(button.title).toBe('Write something in the field above before sending.');
+
+  // Whitespace alone is not feedback.
+  fireEvent.change(screen.getByRole('textbox'), { target: { value: '   \n  ' } });
+  expect(screen.getByRole('button', { name: /send feedback/i }).disabled).toBe(true);
+
+  fireEvent.change(screen.getByRole('textbox'), { target: { value: 'the timer felt fast' } });
+  const enabled = screen.getByRole('button', { name: /send feedback/i });
+  expect(enabled.disabled).toBe(false);
+  expect(enabled.title).toBe('');
+});
+
+test('an empty submission never reaches the service', async () => {
+  render(<RatingModal isOpen={true} onClose={vi.fn()} initialStep="feedback" />);
+
+  fireEvent.click(screen.getByRole('button', { name: /send feedback/i }));
+
+  expect(submitPlayerFeedback).not.toHaveBeenCalled();
+  expect(screen.getByRole('textbox')).toBeTruthy();
+});

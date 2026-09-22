@@ -63,8 +63,10 @@ export default function RatingModal({
     setStep('feedback');
   };
 
+  const hasFeedbackText = feedbackText.trim().length > 0;
+
   const handleSendFeedback = async () => {
-    if (isSubmitting) return;
+    if (isSubmitting || !hasFeedbackText) return;
     setIsSubmitting(true);
     sounds.playTap();
 
@@ -321,7 +323,8 @@ export default function RatingModal({
                 type="button"
                 className="glass-btn glass-btn-primary"
                 onClick={handleSendFeedback}
-                disabled={isSubmitting}
+                disabled={isSubmitting || !hasFeedbackText}
+                title={hasFeedbackText ? undefined : 'Write something in the field above before sending.'}
                 style={{
                   flex: 1,
                   justifyContent: 'center',
@@ -332,8 +335,8 @@ export default function RatingModal({
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
-                  opacity: isSubmitting ? 0.75 : 1,
-                  cursor: isSubmitting ? 'default' : 'pointer'
+                  opacity: (isSubmitting || !hasFeedbackText) ? 0.55 : 1,
+                  cursor: (isSubmitting || !hasFeedbackText) ? 'default' : 'pointer'
                 }}
               >
                 {isSubmitting
