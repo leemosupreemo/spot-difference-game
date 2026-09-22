@@ -423,6 +423,7 @@ export default function DeviceSimulatorHarness({ children }) {
 
           {/* Device Screen Container with CSS Safe Area simulation */}
           <div
+            id="device-simulator-screen"
             style={{
               width: '100%',
               height: '100%',

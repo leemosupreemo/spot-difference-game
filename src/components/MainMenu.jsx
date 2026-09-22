@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { formatSetLabel } from '../utils/remoteSetPolicy.js';
 import { Play, Layers, Sparkles, Camera, Swords, Smartphone } from 'lucide-react';
 import { Capacitor } from '@capacitor/core';
@@ -77,10 +78,19 @@ export default function MainMenu({
     }
   };
 
+  const portalTarget = (typeof document !== 'undefined' && document.getElementById('device-simulator-screen'))
+    || (typeof document !== 'undefined' ? document.body : null);
+
   return (
-    <div className="menu-container page-fade-in">
-      <TronLightcycleField />
-      <ModalAmbientParticles />
+    <>
+      {portalTarget && createPortal(
+        <div className="homescreen-backdrop" aria-hidden="true">
+          <TronLightcycleField />
+          <ModalAmbientParticles />
+        </div>,
+        portalTarget
+      )}
+      <div className="menu-container page-fade-in">
       {/* Incoming Challenge Banner (When launched from a friend's link) */}
       {incomingChallenge && (
         <div style={{
@@ -520,5 +530,6 @@ export default function MainMenu({
         </div>
       )}
     </div>
+    </>
   );
 }

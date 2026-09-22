@@ -121,7 +121,9 @@ if (typeof window !== 'undefined') {
   };
 
   setTimeout(() => {
-    logApp('INIT', `[AppInit] Screen: ${window.innerWidth}x${window.innerHeight} @ ${window.devicePixelRatio}x | UA: ${navigator.userAgent}`);
-    auditDOMState('StartupAudit');
+    if (typeof window !== 'undefined') {
+      logApp('INIT', `[AppInit] Screen: ${window.innerWidth}x${window.innerHeight} @ ${window.devicePixelRatio}x | UA: ${navigator.userAgent}`);
+      auditDOMState('StartupAudit');
+    }
   }, 100);
 }
