@@ -1,5 +1,6 @@
 import { getApps, initializeApp } from 'firebase/app';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { getFirestoreClient } from './firestoreClient.js';
 import { firebaseConfig, getCurrentPlayerId } from './authService.js';
 import { Capacitor } from '@capacitor/core';
@@ -7,14 +8,29 @@ import { Capacitor } from '@capacitor/core';
 export const SUPPORT_EMAIL = 'support@thejauntcompany.com';
 export const FEEDBACK_SUBJECT_PREFIX = '[Diff Hunter Feedback]';
 
+let functionsInstance = null;
+function getFirebaseFunctions() {
+  if (typeof window === 'undefined') return null;
+  if (!functionsInstance) {
+    try {
+      const app = getApps()[0] || initializeApp(firebaseConfig);
+      functionsInstance = getFunctions(app);
+    } catch (err) {
+      console.warn('[FeedbackService] Firebase Functions init warning:', err?.message || err);
+    }
+  }
+  return functionsInstance;
+}
+
 /**
  * Submits player feedback directly in the background without opening a local mail client.
  * 
- * Multi-tier delivery:
- * 1. Persists the feedback document directly to Firebase Firestore (`feedback` collection).
- * 2. Dispatches a direct HTTP background email delivery request to FormSubmit / configured endpoint
- *    targeting support@thejauntcompany.com.
- * 3. Never triggers mailto: or leaves the app.
+ * Strategy:
+ * 1. Invokes the trusted `submitFeedback` Firebase Cloud Function, which dispatches
+ *    an email via Resend and writes to Firestore.
+ * 2. If the Cloud Function is unavailable, falls back to direct client write to the
+ *    Firestore `feedback` collection so feedback is never lost.
+ * 3. Never triggers mailto: or leaves the in-app modal.
  */
 export async function submitPlayerFeedback({
   playerName,
@@ -28,7 +44,7 @@ export async function submitPlayerFeedback({
   const playerId = getCurrentPlayerId() || 'anonymous';
   const timestamp = new Date().toISOString();
 
-  const feedbackData = {
+  const payload = {
     playerId,
     playerName: cleanName,
     feedbackText: cleanComment,
@@ -40,55 +56,53 @@ export async function submitPlayerFeedback({
   };
 
   const deliveryReport = {
+    cloudFunction: false,
     firestore: false,
     email: false
   };
 
-  // 1. Direct write to Firebase Firestore collection 'feedback'
+  // 1. Attempt serverless submission via Firebase Cloud Function (Resend email delivery)
+  const functions = getFirebaseFunctions();
+  if (functions) {
+    try {
+      const callSubmitFeedback = httpsCallable(functions, 'submitFeedback');
+      const response = await callSubmitFeedback({
+        playerName: cleanName,
+        feedbackText: cleanComment,
+        platform,
+        attemptNumber: Number(attemptNumber) || 1
+      });
+
+      if (response?.data?.success) {
+        deliveryReport.cloudFunction = true;
+        deliveryReport.email = !!response.data.emailSent;
+        deliveryReport.firestore = true;
+        return {
+          success: true,
+          ...deliveryReport
+        };
+      }
+    } catch (err) {
+      console.warn('[FeedbackService] Cloud Function submission failed, falling back to direct Firestore:', err?.message || err);
+    }
+  }
+
+  // 2. Direct client fallback write to Firestore `feedback` collection
   try {
     const app = getApps()[0] || initializeApp(firebaseConfig);
     const db = getFirestoreClient(app);
     if (db) {
       const feedbackCol = collection(db, 'feedback');
       await addDoc(feedbackCol, {
-        ...feedbackData,
+        ...payload,
         createdAt: serverTimestamp(),
-        status: 'new'
+        status: 'new',
+        clientFallback: true
       });
       deliveryReport.firestore = true;
     }
   } catch (err) {
-    console.warn('[FeedbackService] Firestore save warning:', err?.message || err);
-  }
-
-  // 2. Direct HTTP email dispatch (FormSubmit.co or custom webhook)
-  const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
-  const endpoint = env.VITE_FEEDBACK_ENDPOINT || `https://formsubmit.co/ajax/${SUPPORT_EMAIL}`;
-
-  try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        _subject: `${FEEDBACK_SUBJECT_PREFIX} Player Feedback - ${cleanName}`,
-        name: cleanName,
-        message: cleanComment,
-        platform,
-        attempt: attemptNumber,
-        playerId,
-        date: timestamp,
-        _template: 'table'
-      })
-    });
-
-    if (response && response.ok) {
-      deliveryReport.email = true;
-    }
-  } catch (err) {
-    console.warn('[FeedbackService] Background email dispatch warning:', err?.message || err);
+    console.warn('[FeedbackService] Direct Firestore fallback write failed:', err?.message || err);
   }
 
   return {

@@ -161,3 +161,9 @@ test('evaluateQualification deduplicates player and preserves only their fastest
   assert.equal(fastRes.updatedEntries.filter(e => e.playerId === 'hero_uid').length, 1);
   assert.equal(fastRes.updatedEntries[0].score, 10000);
 });
+
+test('submitFeedback is exported as a Cloud Function', async () => {
+  const { submitFeedback } = await import('./index.js');
+  assert.equal(typeof submitFeedback, 'function');
+});
+

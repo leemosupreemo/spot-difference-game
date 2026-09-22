@@ -243,3 +243,100 @@ export const submitLeaderboardScore = onCall(
     });
   }
 );
+
+/**
+ * Trusted HTTPS Callable Cloud Function for player feedback submission.
+ * Saves to Firestore collection 'feedback' and dispatches email via Resend.
+ */
+export const submitFeedback = onCall(
+  { cors: true },
+  async (request) => {
+    const auth = request.auth;
+    const { playerName, feedbackText, platform, attemptNumber } = request.data || {};
+
+    const cleanText = String(feedbackText || '').trim();
+    if (!cleanText) {
+      throw new HttpsError('invalid-argument', 'Feedback text is required');
+    }
+
+    const cleanName = String(playerName || 'Hunter').slice(0, 32);
+    const cleanPlatform = String(platform || 'unknown').slice(0, 32);
+    const dateStr = new Date().toISOString();
+
+    // 1. Record in Firestore 'feedback' collection
+    const docRef = await db.collection('feedback').add({
+      playerId: auth?.uid || 'anonymous',
+      playerName: cleanName,
+      feedbackText: cleanText.slice(0, 3000),
+      platform: cleanPlatform,
+      attemptNumber: Number(attemptNumber) || 1,
+      targetEmail: 'support@thejauntcompany.com',
+      createdAt: FieldValue.serverTimestamp(),
+      createdAtIso: dateStr,
+      status: 'new'
+    });
+
+    // 2. Dispatch email via Resend API
+    const resendApiKey = process.env.RESEND_API_KEY;
+    let emailSent = false;
+    let emailError = null;
+
+    if (resendApiKey) {
+      const primaryTarget = 'support@thejauntcompany.com';
+      const fallbackTarget = 'enmeskin@gmail.com';
+
+      const emailPayload = {
+        from: 'Diff Hunter <onboarding@resend.dev>',
+        to: [primaryTarget],
+        subject: `[Diff Hunter Feedback] Player Feedback - ${cleanName}`,
+        text: `Player: ${cleanName}\nPlatform: ${cleanPlatform}\nAttempt: ${attemptNumber || 1}\nDate: ${dateStr}\n\nFeedback:\n${cleanText}`
+      };
+
+      try {
+        let res = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(emailPayload)
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          // If Resend trial only permits sending to account owner email, fallback
+          if (res.status === 403 && errData.message && errData.message.includes('own email address')) {
+            console.log('[submitFeedback] Domain unverified on Resend, falling back to account owner email:', fallbackTarget);
+            emailPayload.to = [fallbackTarget];
+            emailPayload.subject = `[Diff Hunter Feedback] (Forward to Support) - ${cleanName}`;
+            res = await fetch('https://api.resend.com/emails', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${resendApiKey}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(emailPayload)
+            });
+          }
+        }
+
+        if (res.ok) {
+          emailSent = true;
+        } else {
+          emailError = await res.text();
+          console.warn('[submitFeedback] Resend API error:', emailError);
+        }
+      } catch (err) {
+        emailError = err?.message || String(err);
+        console.warn('[submitFeedback] Resend fetch error:', emailError);
+      }
+    }
+
+    return {
+      success: true,
+      id: docRef.id,
+      emailSent,
+      emailError
+    };
+  }
+);
