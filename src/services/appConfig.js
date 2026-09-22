@@ -10,6 +10,13 @@ import { getFirestoreClient } from './firestoreClient.js';
 import { doc, getDoc } from 'firebase/firestore';
 import { logApp } from '../utils/logger.js';
 
+/* Single source of truth for the shipped version. Kept in step with
+   MARKETING_VERSION in ios/App/App.xcodeproj/project.pbxproj and versionName in
+   android/app/build.gradle -- there is no runtime API to read it from, since
+   @capacitor/app is not a dependency. package.json stays at 0.0.0 and is not
+   the app's version. */
+export const APP_VERSION = '1.1.0';
+
 export const DEFAULT_APP_STORE_URL = 'https://apps.apple.com/app/id6740888200?action=write-review';
 const STORAGE_KEY_APP_STORE_URL = 'diff_hunter_app_store_url';
 

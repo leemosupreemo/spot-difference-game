@@ -3,6 +3,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { getFirestoreClient } from './firestoreClient.js';
 import { firebaseConfig, getCurrentPlayerId } from './authService.js';
+import { APP_VERSION } from './appConfig.js';
 import { Capacitor } from '@capacitor/core';
 
 export const SUPPORT_EMAIL = 'support@thejauntcompany.com';
@@ -73,7 +74,7 @@ export async function submitPlayerFeedback({
     platform,
     attemptNumber: Number(attemptNumber) || 1,
     targetEmail: SUPPORT_EMAIL,
-    appVersion: '1.4.0',
+    appVersion: APP_VERSION,
     createdAtIso: timestamp
   };
 
