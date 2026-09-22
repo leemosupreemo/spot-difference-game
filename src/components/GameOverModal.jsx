@@ -113,169 +113,171 @@ export default function GameOverModal({
       >
         <ModalAmbientParticles />
 
-        {/* Top Left Redo / Repeat Button with Attempted Sets Dropdown */}
-        <div ref={dropdownRef} style={{ position: 'absolute', top: 12, left: 12, zIndex: 110 }}>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              sounds.playTap();
-              setIsDropdownOpen(prev => !prev);
-            }}
-            style={{
-              background: isDropdownOpen
-                ? 'var(--accent-cyan)'
-                : 'linear-gradient(135deg, rgba(0, 240, 255, 0.22), rgba(0, 140, 255, 0.12))',
-              border: '1.5px solid var(--accent-cyan)',
-              color: isDropdownOpen ? '#050714' : 'var(--accent-cyan)',
-              borderRadius: '12px',
-              width: '38px',
-              height: '38px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: isDropdownOpen
-                ? '0 0 20px rgba(0, 240, 255, 0.7)'
-                : '0 0 14px rgba(0, 240, 255, 0.4)',
-              transition: 'all 0.18s ease',
-              touchAction: 'manipulation'
-            }}
-            title="Repeat Set"
-            aria-label="Repeat Set"
-            aria-expanded={isDropdownOpen}
-            aria-haspopup="listbox"
-          >
-            <RotateCcw size={18} strokeWidth={2.4} color={isDropdownOpen ? '#050714' : 'var(--accent-cyan)'} />
-          </button>
-
-          {/* Dropdown Menu of Attempted Sets */}
-          {isDropdownOpen && (
-            <div
-              className="glass-panel"
-              role="listbox"
-              aria-label="Attempted Sets to Repeat"
-              onClick={(e) => e.stopPropagation()}
-              style={{
-                position: 'absolute',
-                top: '44px',
-                left: 0,
-                background: 'rgba(10, 14, 28, 0.98)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1.5px solid var(--accent-cyan)',
-                borderRadius: '14px',
-                padding: '8px',
-                width: 'max-content',
-                minWidth: '210px',
-                maxWidth: '280px',
-                maxHeight: '240px',
-                overflowY: 'auto',
-                WebkitOverflowScrolling: 'touch',
-                boxShadow: '0 12px 36px rgba(0,0,0,0.85), 0 0 20px rgba(0, 240, 255, 0.35)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '5px',
-                textAlign: 'left',
-                zIndex: 120
+        {/* Top Left Redo / Repeat Button with Attempted Sets Dropdown (Photography only; dynamic abstract mode has no set repeat) */}
+        {!isAbstract && (
+          <div ref={dropdownRef} style={{ position: 'absolute', top: 12, left: 12, zIndex: 110 }}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                sounds.playTap();
+                setIsDropdownOpen(prev => !prev);
               }}
+              style={{
+                background: isDropdownOpen
+                  ? 'var(--accent-cyan)'
+                  : 'linear-gradient(135deg, rgba(0, 240, 255, 0.22), rgba(0, 140, 255, 0.12))',
+                border: '1.5px solid var(--accent-cyan)',
+                color: isDropdownOpen ? '#050714' : 'var(--accent-cyan)',
+                borderRadius: '12px',
+                width: '38px',
+                height: '38px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: isDropdownOpen
+                  ? '0 0 20px rgba(0, 240, 255, 0.7)'
+                  : '0 0 14px rgba(0, 240, 255, 0.4)',
+                transition: 'all 0.18s ease',
+                touchAction: 'manipulation'
+              }}
+              title="Repeat Set"
+              aria-label="Repeat Set"
+              aria-expanded={isDropdownOpen}
+              aria-haspopup="listbox"
             >
-              <div style={{
-                fontSize: '0.7rem',
-                fontWeight: 900,
-                color: 'var(--accent-cyan)',
-                letterSpacing: '0.5px',
-                textTransform: 'uppercase',
-                padding: '2px 6px 4px 6px',
-                borderBottom: '1px solid rgba(0, 240, 255, 0.15)',
-                marginBottom: '2px',
-                userSelect: 'none'
-              }}>
-                Choose Set to Repeat
+              <RotateCcw size={18} strokeWidth={2.4} color={isDropdownOpen ? '#050714' : 'var(--accent-cyan)'} />
+            </button>
+
+            {/* Dropdown Menu of Attempted Sets */}
+            {isDropdownOpen && (
+              <div
+                className="glass-panel"
+                role="listbox"
+                aria-label="Attempted Sets to Repeat"
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  position: 'absolute',
+                  top: '44px',
+                  left: 0,
+                  background: 'rgba(10, 14, 28, 0.98)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  border: '1.5px solid var(--accent-cyan)',
+                  borderRadius: '14px',
+                  padding: '8px',
+                  width: 'max-content',
+                  minWidth: '210px',
+                  maxWidth: '280px',
+                  maxHeight: '240px',
+                  overflowY: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  boxShadow: '0 12px 36px rgba(0,0,0,0.85), 0 0 20px rgba(0, 240, 255, 0.35)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '5px',
+                  textAlign: 'left',
+                  zIndex: 120
+                }}
+              >
+                <div style={{
+                  fontSize: '0.7rem',
+                  fontWeight: 900,
+                  color: 'var(--accent-cyan)',
+                  letterSpacing: '0.5px',
+                  textTransform: 'uppercase',
+                  padding: '2px 6px 4px 6px',
+                  borderBottom: '1px solid rgba(0, 240, 255, 0.15)',
+                  marginBottom: '2px',
+                  userSelect: 'none'
+                }}>
+                  Choose Set to Repeat
+                </div>
+
+                {attemptedList.map((targetSetId, idx) => {
+                  const isFailedSet = targetSetId === setId || (idx === 0 && Boolean(setId));
+                  const label = isAbstract && targetSetId === setId
+                    ? (levelTitle || 'Abstract Stage')
+                    : formatSetLabel(targetSetId);
+
+                  return (
+                    <button
+                      key={targetSetId || idx}
+                      type="button"
+                      onClick={(e) => handleSelectSet(targetSetId, e)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        width: '100%',
+                        padding: '8px 10px',
+                        borderRadius: '10px',
+                        background: isFailedSet
+                          ? 'linear-gradient(90deg, rgba(255, 0, 127, 0.28), rgba(255, 0, 127, 0.12))'
+                          : 'rgba(255, 255, 255, 0.05)',
+                        border: isFailedSet
+                          ? '1.5px solid var(--accent-pink)'
+                          : '1px solid rgba(255, 255, 255, 0.08)',
+                        color: isFailedSet ? '#fff' : 'var(--text-main, #eee)',
+                        fontWeight: isFailedSet ? 900 : 700,
+                        fontSize: '0.84rem',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        boxShadow: isFailedSet ? '0 0 10px rgba(255, 0, 127, 0.35)' : 'none',
+                        transition: 'background 0.15s ease, transform 0.1s ease',
+                        gap: '8px',
+                        touchAction: 'manipulation',
+                        WebkitTapHighlightColor: 'rgba(0, 240, 255, 0.2)'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isFailedSet) {
+                          e.currentTarget.style.background = 'rgba(0, 240, 255, 0.15)';
+                          e.currentTarget.style.borderColor = 'var(--accent-cyan)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isFailedSet) {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                        }
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+                        <RotateCcw
+                          size={13}
+                          color={isFailedSet ? 'var(--accent-pink)' : 'var(--accent-cyan)'}
+                          style={{ flexShrink: 0 }}
+                        />
+                        <span style={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap'
+                        }}>
+                          {label}
+                        </span>
+                      </div>
+
+                      {isFailedSet && (
+                        <span style={{
+                          fontSize: '0.62rem',
+                          fontWeight: 900,
+                          letterSpacing: '0.4px',
+                          background: 'var(--accent-pink)',
+                          color: '#000',
+                          borderRadius: '6px',
+                          padding: '2px 5px',
+                          flexShrink: 0
+                        }}>
+                          FAILED
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
-
-              {attemptedList.map((targetSetId, idx) => {
-                const isFailedSet = targetSetId === setId || (idx === 0 && Boolean(setId));
-                const label = isAbstract && targetSetId === setId
-                  ? (levelTitle || 'Abstract Stage')
-                  : formatSetLabel(targetSetId);
-
-                return (
-                  <button
-                    key={targetSetId || idx}
-                    type="button"
-                    onClick={(e) => handleSelectSet(targetSetId, e)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      width: '100%',
-                      padding: '8px 10px',
-                      borderRadius: '10px',
-                      background: isFailedSet
-                        ? 'linear-gradient(90deg, rgba(255, 0, 127, 0.28), rgba(255, 0, 127, 0.12))'
-                        : 'rgba(255, 255, 255, 0.05)',
-                      border: isFailedSet
-                        ? '1.5px solid var(--accent-pink)'
-                        : '1px solid rgba(255, 255, 255, 0.08)',
-                      color: isFailedSet ? '#fff' : 'var(--text-main, #eee)',
-                      fontWeight: isFailedSet ? 900 : 700,
-                      fontSize: '0.84rem',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      boxShadow: isFailedSet ? '0 0 10px rgba(255, 0, 127, 0.35)' : 'none',
-                      transition: 'background 0.15s ease, transform 0.1s ease',
-                      gap: '8px',
-                      touchAction: 'manipulation',
-                      WebkitTapHighlightColor: 'rgba(0, 240, 255, 0.2)'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isFailedSet) {
-                        e.currentTarget.style.background = 'rgba(0, 240, 255, 0.15)';
-                        e.currentTarget.style.borderColor = 'var(--accent-cyan)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isFailedSet) {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                      }
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
-                      <RotateCcw
-                        size={13}
-                        color={isFailedSet ? 'var(--accent-pink)' : 'var(--accent-cyan)'}
-                        style={{ flexShrink: 0 }}
-                      />
-                      <span style={{
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
-                      }}>
-                        {label}
-                      </span>
-                    </div>
-
-                    {isFailedSet && (
-                      <span style={{
-                        fontSize: '0.62rem',
-                        fontWeight: 900,
-                        letterSpacing: '0.4px',
-                        background: 'var(--accent-pink)',
-                        color: '#000',
-                        borderRadius: '6px',
-                        padding: '2px 5px',
-                        flexShrink: 0
-                      }}>
-                        FAILED
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
 
         {/* Top Right Close "X" Button */}
         <button

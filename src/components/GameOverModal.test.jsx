@@ -158,3 +158,20 @@ test('outside pointerdown closes dropdown without any fixed click catcher overla
   fireEvent.pointerDown(document.body);
   expect(screen.queryByRole('listbox', { name: /attempted sets/i })).toBeNull();
 });
+
+test('does not render repeat button on fail modal when in abstract mode', () => {
+  render(
+    <GameOverModal
+      isOpen={true}
+      onClose={() => {}}
+      onRestart={() => {}}
+      elapsedTime={6000}
+      themeId="abstract_animated"
+      levelTitle="Neon Dream"
+    />
+  );
+
+  // In abstract mode, dynamic levels have no repeat sets, so the top-left repeat button should not be present
+  const redoBtn = screen.queryByRole('button', { name: /repeat set/i });
+  expect(redoBtn).toBeNull();
+});

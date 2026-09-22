@@ -1192,13 +1192,22 @@ button:active,
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transform: scale(1.12);
-  animation: gameModeBgZoomFadeIn 0.6s ease-out forwards;
+  transform: scale(1);
+  animation: gameModeBgZoomFadeIn 2.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes gameModeBgZoomFadeIn {
-  from { opacity: 0; transform: scale(1.12); }
-  to { opacity: 0.22; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  20% {
+    opacity: 0.22;
+  }
+  100% {
+    opacity: 0.22;
+    transform: scale(1.12);
+  }
 }
 
 /* Tron-style lightcycle trails drifting behind the main menu: thin glowing bars that

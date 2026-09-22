@@ -96,7 +96,8 @@ test('Each Game Mode card shows its own dim, zoom/fade background hint, not the 
   const cssPath = path.join(path.dirname(componentPath), '../index.css');
   const css = fs.readFileSync(cssPath, 'utf8');
   assert.match(css, /@keyframes gameModeBgZoomFadeIn/);
-  assert.match(css, /to \{ opacity: 0\.22; transform: scale\(1\); \}/);
+  assert.match(css, /transform: scale\(1\);/);
+  assert.match(css, /transform: scale\(1\.12\);/);
   assert.match(css, /\.game-mode-bg-image \{[\s\S]*?animation: none;[\s\S]*?\}/);
 });
 
