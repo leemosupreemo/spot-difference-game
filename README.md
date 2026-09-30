@@ -1,16 +1,52 @@
-# React + Vite
+# Diff Hunter
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A high-performance Spot-the-Difference game built with React, Vite, Capacitor, and Firebase.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Directory & App Bundle Structure
 
-## React Compiler
+To easily identify what is packaged into the live game versus what is kept for offline tools and marketing, directories follow a strict naming convention:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 📦 Core App Directories (Included in iOS Bundle / Web Build)
+Folders without an underscore prefix are part of the core game build:
 
-## Expanding the Oxlint configuration
+| Directory | Platform | Description |
+| :--- | :--- | :--- |
+| **`src/`** | Web & iOS | Core React game code, viewmodels, audio, and UI components (compiled into `dist/assets/`). |
+| **`public/`** | Web & iOS | Static assets copied directly into the app bundle (offline starter levels in `public/levels/`, music in `public/music/`, app icons). |
+| **`ios/`** | iOS Native | Native Xcode project shell, CocoaPods, Apple Game Center, and StoreKit configs. |
+| **`android/`** | Android Native | Native Android Studio shell and gradle configurations. |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+---
+
+### 🚫 Non-App Directories (Prefixed with `_` — Never Bundled or Deployed)
+Folders prefixed with an underscore (`_`) are excluded from app bundles and web deployments:
+
+| Directory | Git Status | Purpose |
+| :--- | :---: | :--- |
+| **`_marketing/`** | Tracked | Social media campaigns, promotional videos, and variant image packs (e.g. `_marketing/social_media/ocean_series/`). |
+| **`_design/`** | Tracked | Master high-resolution app icon templates (`_design/app-icon-master.png`). |
+| **`_docs/`** | Tracked | Architecture notes, design documents, and developer guides. |
+| **`_staging/`** | Ignored | Local working scratchpad for batch level generation before publishing. |
+
+---
+
+### 🛠 Tooling, Backend, and Hosted-Only Directories
+
+| Directory | Target | Purpose |
+| :--- | :--- | :--- |
+| **`scripts/`** | Local / CI | Python and Node.js level generation pipelines, QA gates, and build automations. |
+| **`functions/`** | Cloud Backend | Firebase Cloud Functions for global leaderboards and player verification. |
+| **`remote-levels/`** | Web CDN Only | Extended level packs served over HTTPS (kept out of native app binary to minimize download size). |
+| **`screenshots/`** | Local / QA | App Store display screenshots and automated visual regression test baselines. |
+
+---
+
+## Verifying the iOS App Bundle
+
+To view the exact files and byte counts bundled into the native iOS app:
+
+```bash
+du -sh ios/App/App/public/*
+```

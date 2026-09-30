@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Normalizes and verifies 20 ocean/underwater base images into staging/ocean_underwater_bases/.
+Normalizes and verifies 20 ocean/underwater base images into _staging/ocean_underwater_bases/.
 Produces:
   - High-res canonical production images (1200x900)
   - Master images (1536x1152)
@@ -143,7 +143,7 @@ OCEAN_BASES = [
 ]
 
 def main():
-    out_dir = Path("staging/ocean_underwater_bases")
+    out_dir = Path("_staging/ocean_underwater_bases")
     out_dir.mkdir(parents=True, exist_ok=True)
     masters_dir = out_dir / "masters_1536x1152"
     masters_dir.mkdir(parents=True, exist_ok=True)

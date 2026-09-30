@@ -4,7 +4,7 @@
     "index": 1,
     "title": "Vibrant Shallow Coral Reef Lagoon",
     "description": "Dense coral reef floor with clownfish, sea anemones, blue tangs, sea stars, brain coral, and sea urchins.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_01_coral_reef_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_01_coral_reef_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -13,7 +13,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_01_coral_reef_var1",
-        "image": "marketing/social_media/ocean_series/ocean_01_coral_reef_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_01_coral_reef_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -28,7 +28,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_01_coral_reef_var2",
-        "image": "marketing/social_media/ocean_series/ocean_01_coral_reef_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_01_coral_reef_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -48,7 +48,7 @@
     "index": 2,
     "title": "Sunken Galleon Pirate Treasure",
     "description": "Gold Spanish doubloons, silver pieces of eight, emeralds, pearl necklaces, antique compass, and encrusted bottles.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_02_pirate_treasure_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_02_pirate_treasure_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -57,7 +57,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_02_pirate_treasure_var1",
-        "image": "marketing/social_media/ocean_series/ocean_02_pirate_treasure_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_02_pirate_treasure_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -72,7 +72,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_02_pirate_treasure_var2",
-        "image": "marketing/social_media/ocean_series/ocean_02_pirate_treasure_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_02_pirate_treasure_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -92,7 +92,7 @@
     "index": 3,
     "title": "Pacific Rocky Tidepool Life",
     "description": "Purple ochre sea stars, green anemones, hermit crabs, acorn barnacles, limpets, and sea glass pebbles in tidal water.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_03_rocky_tidepool_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_03_rocky_tidepool_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -101,7 +101,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_03_rocky_tidepool_var1",
-        "image": "marketing/social_media/ocean_series/ocean_03_rocky_tidepool_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_03_rocky_tidepool_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -116,7 +116,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_03_rocky_tidepool_var2",
-        "image": "marketing/social_media/ocean_series/ocean_03_rocky_tidepool_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_03_rocky_tidepool_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -136,7 +136,7 @@
     "index": 4,
     "title": "Abyssal Deep-Sea Bioluminescence",
     "description": "Translucent glowing hydromedusae, neon nudibranchs, lanternfish, phosphorescent sea pens, and electric brittle stars.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_04_deep_bioluminescence_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_04_deep_bioluminescence_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -145,7 +145,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_04_deep_bioluminescence_var1",
-        "image": "marketing/social_media/ocean_series/ocean_04_deep_bioluminescence_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_04_deep_bioluminescence_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -160,7 +160,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_04_deep_bioluminescence_var2",
-        "image": "marketing/social_media/ocean_series/ocean_04_deep_bioluminescence_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_04_deep_bioluminescence_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -180,7 +180,7 @@
     "index": 5,
     "title": "Exotic Seashells & Polished Sea Glass Knolling",
     "description": "Dense knolling arrangement of auger shells, nautilus sections, cockles, sand dollars, sea glass, and sea urchin tests.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_05_shells_and_seaglass_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_05_shells_and_seaglass_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -189,7 +189,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_05_shells_and_seaglass_var1",
-        "image": "marketing/social_media/ocean_series/ocean_05_shells_and_seaglass_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_05_shells_and_seaglass_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -204,7 +204,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_05_shells_and_seaglass_var2",
-        "image": "marketing/social_media/ocean_series/ocean_05_shells_and_seaglass_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_05_shells_and_seaglass_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -224,7 +224,7 @@
     "index": 6,
     "title": "Sunken Shipwreck Navigational Antiquities",
     "description": "18th-century brass dividers, pocket sextant, copper rivets, bronze trade coins, and blue-pattern porcelain shards on sea sand.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_06_shipwreck_artifacts_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_06_shipwreck_artifacts_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -233,7 +233,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_06_shipwreck_artifacts_var1",
-        "image": "marketing/social_media/ocean_series/ocean_06_shipwreck_artifacts_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_06_shipwreck_artifacts_var1_variant.jpg",
         "operation": "remove",
         "variantCode": "STR-REM",
         "diff": {
@@ -248,7 +248,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_06_shipwreck_artifacts_var2",
-        "image": "marketing/social_media/ocean_series/ocean_06_shipwreck_artifacts_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_06_shipwreck_artifacts_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -268,7 +268,7 @@
     "index": 7,
     "title": "Dwarf Seahorse Seagrass Meadow",
     "description": "Yellow and green dwarf seahorses clinging to turtle grass blades, with pipefish, boxfish, and painted scallop shells.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_07_seagrass_meadow_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_07_seagrass_meadow_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -277,7 +277,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_07_seagrass_meadow_var1",
-        "image": "marketing/social_media/ocean_series/ocean_07_seagrass_meadow_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_07_seagrass_meadow_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -292,7 +292,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_07_seagrass_meadow_var2",
-        "image": "marketing/social_media/ocean_series/ocean_07_seagrass_meadow_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_07_seagrass_meadow_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -312,7 +312,7 @@
     "index": 8,
     "title": "Iridescent Abalone Shells & Baroque Pearls",
     "description": "Paua abalone shells, loose baroque pearls, operculum eye shells, purple sea fans, and miniature porcelain crabs.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_08_abalone_and_pearls_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_08_abalone_and_pearls_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -321,7 +321,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_08_abalone_and_pearls_var1",
-        "image": "marketing/social_media/ocean_series/ocean_08_abalone_and_pearls_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_08_abalone_and_pearls_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -336,7 +336,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_08_abalone_and_pearls_var2",
-        "image": "marketing/social_media/ocean_series/ocean_08_abalone_and_pearls_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_08_abalone_and_pearls_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -356,7 +356,7 @@
     "index": 9,
     "title": "Marine Biologist Specimen Sorting Tray",
     "description": "Organized tray with preserved sea stars, sea urchin tests, diverse marine bivalves, brass calipers, and magnifying loupe.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_09_marine_biology_tray_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_09_marine_biology_tray_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -365,7 +365,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_09_marine_biology_tray_var1",
-        "image": "marketing/social_media/ocean_series/ocean_09_marine_biology_tray_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_09_marine_biology_tray_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -380,7 +380,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_09_marine_biology_tray_var2",
-        "image": "marketing/social_media/ocean_series/ocean_09_marine_biology_tray_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_09_marine_biology_tray_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -400,7 +400,7 @@
     "index": 10,
     "title": "Kelp Forest Canopy & Benthic Invertebrates",
     "description": "Cluster of red and purple sea urchins, orange bat stars, turban snail shells, decorator crabs, and coralline algae.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_10_kelp_forest_floor_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_10_kelp_forest_floor_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -409,7 +409,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_10_kelp_forest_floor_var1",
-        "image": "marketing/social_media/ocean_series/ocean_10_kelp_forest_floor_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_10_kelp_forest_floor_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -424,7 +424,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_10_kelp_forest_floor_var2",
-        "image": "marketing/social_media/ocean_series/ocean_10_kelp_forest_floor_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_10_kelp_forest_floor_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -444,7 +444,7 @@
     "index": 11,
     "title": "Octopus Den Treasure Hoard",
     "description": "Curious collection of shiny bivalves, sea agates, crab carapaces, sea urchin tests, sea glass marbles, and ceramic shards.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_11_octopus_garden_hoard_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_11_octopus_garden_hoard_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -453,7 +453,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_11_octopus_garden_hoard_var1",
-        "image": "marketing/social_media/ocean_series/ocean_11_octopus_garden_hoard_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_11_octopus_garden_hoard_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -468,7 +468,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_11_octopus_garden_hoard_var2",
-        "image": "marketing/social_media/ocean_series/ocean_11_octopus_garden_hoard_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_11_octopus_garden_hoard_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -488,7 +488,7 @@
     "index": 12,
     "title": "Sunken Greco-Roman Mediterranean Antiquities",
     "description": "Terracotta amphora handles, weathered bronze coins, clay oil lamps, glass perfume unguentaria, and red sea anemones.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_12_sunken_roman_relics_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_12_sunken_roman_relics_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -497,7 +497,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_12_sunken_roman_relics_var1",
-        "image": "marketing/social_media/ocean_series/ocean_12_sunken_roman_relics_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_12_sunken_roman_relics_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -512,7 +512,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_12_sunken_roman_relics_var2",
-        "image": "marketing/social_media/ocean_series/ocean_12_sunken_roman_relics_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_12_sunken_roman_relics_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -532,7 +532,7 @@
     "index": 13,
     "title": "Neon Nudibranch & Sea Slug Community",
     "description": "Diverse colorful sea slugs with electric blue, orange, polka dot, and striped mantles crawling on sponge and reef.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_13_nudibranch_coral_garden_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_13_nudibranch_coral_garden_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -541,7 +541,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_13_nudibranch_coral_garden_var1",
-        "image": "marketing/social_media/ocean_series/ocean_13_nudibranch_coral_garden_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_13_nudibranch_coral_garden_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -556,7 +556,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_13_nudibranch_coral_garden_var2",
-        "image": "marketing/social_media/ocean_series/ocean_13_nudibranch_coral_garden_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_13_nudibranch_coral_garden_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -576,7 +576,7 @@
     "index": 14,
     "title": "Intertidal Basalt Rock Shelf Marine Array",
     "description": "Dark volcanic rock shelf with purple sea urchins, orange sea stars, cobalt sea glass, limpets, and periwinkles.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_14_ocean_tidepool_shelf_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_14_ocean_tidepool_shelf_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -585,7 +585,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_14_ocean_tidepool_shelf_var1",
-        "image": "marketing/social_media/ocean_series/ocean_14_ocean_tidepool_shelf_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_14_ocean_tidepool_shelf_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -600,7 +600,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_14_ocean_tidepool_shelf_var2",
-        "image": "marketing/social_media/ocean_series/ocean_14_ocean_tidepool_shelf_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_14_ocean_tidepool_shelf_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -620,7 +620,7 @@
     "index": 15,
     "title": "Marine Biologist Shell & Nautilus Mandala",
     "description": "Concentric arrangement of nautilus sections, tiger cowries, spiral augers, sea glass, and starfish on fine sand.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_15_marine_shell_mandala_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_15_marine_shell_mandala_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -629,7 +629,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_15_marine_shell_mandala_var1",
-        "image": "marketing/social_media/ocean_series/ocean_15_marine_shell_mandala_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_15_marine_shell_mandala_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -644,7 +644,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_15_marine_shell_mandala_var2",
-        "image": "marketing/social_media/ocean_series/ocean_15_marine_shell_mandala_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_15_marine_shell_mandala_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -664,7 +664,7 @@
     "index": 16,
     "title": "Beachcomber Flotsam, Sea Glass & Sand Dollars",
     "description": "Parallel knolling rows of sea glass shards, smooth stones, spiral shells, mini starfish, sand dollars, and wave-smoothed driftwood.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_16_beachcomber_driftwood_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_16_beachcomber_driftwood_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -673,7 +673,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_16_beachcomber_driftwood_var1",
-        "image": "marketing/social_media/ocean_series/ocean_16_beachcomber_driftwood_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_16_beachcomber_driftwood_var1_variant.jpg",
         "operation": "remove",
         "variantCode": "STR-REM",
         "diff": {
@@ -688,7 +688,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_16_beachcomber_driftwood_var2",
-        "image": "marketing/social_media/ocean_series/ocean_16_beachcomber_driftwood_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_16_beachcomber_driftwood_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -708,7 +708,7 @@
     "index": 17,
     "title": "Marine Lab Coral & Invertebrate Sample Tray",
     "description": "Stainless steel laboratory dissection tray with brain coral specimens, sea fans, sea glass, shells, calipers, and field notes.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_17_marine_sample_tray_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_17_marine_sample_tray_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -717,7 +717,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_17_marine_sample_tray_var1",
-        "image": "marketing/social_media/ocean_series/ocean_17_marine_sample_tray_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_17_marine_sample_tray_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -732,7 +732,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_17_marine_sample_tray_var2",
-        "image": "marketing/social_media/ocean_series/ocean_17_marine_sample_tray_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_17_marine_sample_tray_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -752,7 +752,7 @@
     "index": 18,
     "title": "Prehistoric Marine Paleontology Fossils",
     "description": "Curated tray of prehistoric marine life: Megalodon shark teeth, spiral ammonite fossils, trilobites, and brass measuring calipers.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_18_marine_paleontology_fossils_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_18_marine_paleontology_fossils_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -761,7 +761,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_18_marine_paleontology_fossils_var1",
-        "image": "marketing/social_media/ocean_series/ocean_18_marine_paleontology_fossils_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_18_marine_paleontology_fossils_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -797,7 +797,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_18_marine_paleontology_fossils_var2",
-        "image": "marketing/social_media/ocean_series/ocean_18_marine_paleontology_fossils_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_18_marine_paleontology_fossils_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -817,7 +817,7 @@
     "index": 19,
     "title": "Maritime Celestial Navigation Instruments",
     "description": "Solid brass Troughton sextant, celestial star globe dial, nautical compass rose, brass dividers, telescope, and bubble levels.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_19_nautical_navigation_tools_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_19_nautical_navigation_tools_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -826,7 +826,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_19_nautical_navigation_tools_var1",
-        "image": "marketing/social_media/ocean_series/ocean_19_nautical_navigation_tools_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_19_nautical_navigation_tools_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -862,7 +862,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_19_nautical_navigation_tools_var2",
-        "image": "marketing/social_media/ocean_series/ocean_19_nautical_navigation_tools_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_19_nautical_navigation_tools_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {
@@ -882,7 +882,7 @@
     "index": 20,
     "title": "Sunken Mediterranean Ancient Coins & Seals",
     "description": "Slate sea floor scatter of ancient Greek & Roman marine silver tetradrachms with Pegasus and sea owls, and imperial bronze coins.",
-    "baseImage": "marketing/social_media/ocean_series/ocean_20_sunken_ancient_coins_base.jpg",
+    "baseImage": "_marketing/social_media/ocean_series/ocean_20_sunken_ancient_coins_base.jpg",
     "dimensions": {
       "width": 1200,
       "height": 900
@@ -891,7 +891,7 @@
     "variants": {
       "variant1_object_change": {
         "id": "ocean_20_sunken_ancient_coins_var1",
-        "image": "marketing/social_media/ocean_series/ocean_20_sunken_ancient_coins_var1_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_20_sunken_ancient_coins_var1_variant.jpg",
         "operation": "add",
         "variantCode": "STR-ADD",
         "diff": {
@@ -906,7 +906,7 @@
       },
       "variant2_color_change": {
         "id": "ocean_20_sunken_ancient_coins_var2",
-        "image": "marketing/social_media/ocean_series/ocean_20_sunken_ancient_coins_var2_variant.jpg",
+        "image": "_marketing/social_media/ocean_series/ocean_20_sunken_ancient_coins_var2_variant.jpg",
         "operation": "recolor",
         "variantCode": "STR-CLR",
         "diff": {

@@ -38,4 +38,4 @@ models/*.pt
 # Generation inputs staged for a batch: large source photographs that the
 # pipeline reads, not artwork the app ships. Same reasoning as models/*.pt --
 # provisioned explicitly, regenerable, never committed.
-staging/
+_staging/

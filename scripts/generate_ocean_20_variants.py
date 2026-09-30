@@ -5,8 +5,8 @@ Generate 2 Distinct Verified Variants for Each of the 20 Ocean Base Canvases:
              (with bounded-object duplication fallback for tight mandala patterns)
 - Variant 2: Color change (Recolor) using RECOLOR_ONLY_POLICY
 
-Outputs are saved to staging/ocean_underwater_bases/ alongside the base canvases,
-with an authoritative manifest saved to staging/ocean_underwater_bases/ocean_variants_manifest.json.
+Outputs are saved to _staging/ocean_underwater_bases/ alongside the base canvases,
+with an authoritative manifest saved to _staging/ocean_underwater_bases/ocean_variants_manifest.json.
 """
 
 import os
@@ -76,8 +76,8 @@ def fallback_structural_add(base_id, title, img_path, out_dir, difficulty="Mediu
                     "pack": "Find the Sniper",
                     "packId": "find_the_sniper",
                     "difficulty": "Medium",
-                    "baseImage": f"staging/ocean_underwater_bases/{base_id}_base.jpg",
-                    "variantImage": f"staging/ocean_underwater_bases/{v_filename}",
+                    "baseImage": f"_staging/ocean_underwater_bases/{base_id}_base.jpg",
+                    "variantImage": f"_staging/ocean_underwater_bases/{v_filename}",
                     "operation": "add",
                     "generationMethod": "structural",
                     "variantType": "structural",
@@ -128,8 +128,8 @@ def fallback_duplicate_add(base_id, title, img_path, out_dir):
                         "pack": "Find the Sniper",
                         "packId": "find_the_sniper",
                         "difficulty": "Medium",
-                        "baseImage": f"staging/ocean_underwater_bases/{base_id}_base.jpg",
-                        "variantImage": f"staging/ocean_underwater_bases/{v_filename}",
+                        "baseImage": f"_staging/ocean_underwater_bases/{base_id}_base.jpg",
+                        "variantImage": f"_staging/ocean_underwater_bases/{v_filename}",
                         "operation": "add",
                         "generationMethod": "structural",
                         "variantType": "structural",
@@ -152,7 +152,7 @@ def fallback_duplicate_add(base_id, title, img_path, out_dir):
     return None
 
 def main():
-    bases_manifest_path = Path("staging/ocean_underwater_bases/ocean_bases_manifest.json")
+    bases_manifest_path = Path("_staging/ocean_underwater_bases/ocean_bases_manifest.json")
     if not bases_manifest_path.exists():
         print(f"❌ Base manifest not found at {bases_manifest_path}")
         sys.exit(1)
@@ -160,7 +160,7 @@ def main():
     with open(bases_manifest_path, "r") as f:
         bases = json.load(f)
 
-    out_dir = Path("staging/ocean_underwater_bases")
+    out_dir = Path("_staging/ocean_underwater_bases")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"🌊 Generating 2 Variants for Each of the {len(bases)} Ocean Bases...")
@@ -208,8 +208,8 @@ def main():
             v1_res["dimensions"] = {"width": 1200, "height": 900}
             v1_res["aspectRatio"] = "4:3"
             v1_res["baseId"] = base_id
-            v1_res["baseImage"] = f"staging/ocean_underwater_bases/{base_id}_base.jpg"
-            v1_res["variantImage"] = f"staging/ocean_underwater_bases/{v1_id}_variant.jpg"
+            v1_res["baseImage"] = f"_staging/ocean_underwater_bases/{base_id}_base.jpg"
+            v1_res["variantImage"] = f"_staging/ocean_underwater_bases/{v1_id}_variant.jpg"
             v1_res["variantType"] = "structural"
             v1_res["generationMethod"] = "structural"
             v1_res["variantCode"] = variant_code(v1_res)
@@ -261,8 +261,8 @@ def main():
             v2_res["dimensions"] = {"width": 1200, "height": 900}
             v2_res["aspectRatio"] = "4:3"
             v2_res["baseId"] = base_id
-            v2_res["baseImage"] = f"staging/ocean_underwater_bases/{base_id}_base.jpg"
-            v2_res["variantImage"] = f"staging/ocean_underwater_bases/{v2_id}_variant.jpg"
+            v2_res["baseImage"] = f"_staging/ocean_underwater_bases/{base_id}_base.jpg"
+            v2_res["variantImage"] = f"_staging/ocean_underwater_bases/{v2_id}_variant.jpg"
             v2_res["variantType"] = "color_change"
             v2_res["generationMethod"] = "structural"
             v2_res["variantCode"] = variant_code(v2_res)

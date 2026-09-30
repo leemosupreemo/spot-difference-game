@@ -18,7 +18,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT   = Path(__file__).resolve().parent.parent
-MASTER = ROOT / "design" / "app-icon-master.png"
+MASTER = ROOT / "_design" / "app-icon-master.png"
 
 # iOS requires a 1024 icon with NO alpha channel.
 IOS = {"ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png": 1024}

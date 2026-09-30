@@ -25,16 +25,16 @@ Complete answer coordinates, hints, operations, and bounding boxes are indexed i
   "id": "ocean_01_coral_reef",
   "index": 1,
   "title": "Vibrant Shallow Coral Reef Lagoon",
-  "baseImage": "marketing/social_media/ocean_series/ocean_01_coral_reef_base.jpg",
+  "baseImage": "_marketing/social_media/ocean_series/ocean_01_coral_reef_base.jpg",
   "variants": {
     "variant1_object_change": {
-      "image": "marketing/social_media/ocean_series/ocean_01_coral_reef_var1_variant.jpg",
+      "image": "_marketing/social_media/ocean_series/ocean_01_coral_reef_var1_variant.jpg",
       "operation": "add",
       "variantCode": "STR-ADD",
       "diff": { "x": 40.7, "y": 7.1, "radius": 5.4 }
     },
     "variant2_color_change": {
-      "image": "marketing/social_media/ocean_series/ocean_01_coral_reef_var2_variant.jpg",
+      "image": "_marketing/social_media/ocean_series/ocean_01_coral_reef_var2_variant.jpg",
       "operation": "recolor",
       "variantCode": "STR-CLR",
       "diff": { "x": 97.1, "y": 5.6, "radius": 4.9 }
