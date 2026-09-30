@@ -24,7 +24,10 @@ import {
   calculateRatingByStandardDeviation,
   getAllDailyChallengePoolLevels,
   resetDailyQueueToDefault,
-  resetDailyPlayerStatus
+  resetDailyPlayerStatus,
+  getDailyCalendarMonth,
+  isDailyChallengeCompleted,
+  DAILY_CHALLENGE_EPOCH_DATE
 } from './dailyChallenge.js';
 import { hasAdjacentRepeat, baseImageKey } from '../utils/stageOrdering.js';
 
@@ -345,5 +348,48 @@ test('getDailySetForDate spaces apart adjacent duplicate base images in schedule
   assert.notEqual(baseImageKey(levels[0]), baseImageKey(levels[1]));
   assert.notEqual(baseImageKey(levels[1]), baseImageKey(levels[2]));
 });
+
+test('getDailyCalendarMonth correctly tags completed, uncompleted active, and future days', () => {
+  const simulatedToday = '2026-09-20';
+
+  // Mark 2026-09-10 as completed
+  recordDailyChallengeCompletion({
+    dateStr: '2026-09-10',
+    totalTimeMs: 25000,
+    playerName: 'CalendarTester'
+  });
+  assert.equal(isDailyChallengeCompleted('2026-09-10'), true);
+  assert.equal(isDailyChallengeCompleted('2026-09-11'), false);
+
+  const cal = getDailyCalendarMonth(2026, 9, simulatedToday);
+  assert.equal(cal.year, 2026);
+  assert.equal(cal.month, 9);
+  assert.equal(cal.daysInMonth, 30);
+  assert.equal(typeof cal.startDayOfWeek, 'number');
+
+  // Sept 10 is completed -> isCompleted: true, isActive: false
+  const day10 = cal.days.find(d => d.dateStr === '2026-09-10');
+  assert.ok(day10);
+  assert.equal(day10.isCompleted, true);
+  assert.equal(day10.isActive, false);
+
+  // Sept 11 is past and uncompleted -> isCompleted: false, isActive: true (playable)
+  const day11 = cal.days.find(d => d.dateStr === '2026-09-11');
+  assert.ok(day11);
+  assert.equal(day11.isCompleted, false);
+  assert.equal(day11.isFuture, false);
+  assert.equal(day11.isActive, true);
+
+  // Sept 25 is future -> isFuture: true, isActive: false (locked)
+  const day25 = cal.days.find(d => d.dateStr === '2026-09-25');
+  assert.ok(day25);
+  assert.equal(day25.isFuture, true);
+  assert.equal(day25.isActive, false);
+
+  // Navigation bounds
+  assert.equal(cal.canGoPrev, false); // Sept 2026 is epoch month
+  assert.equal(cal.canGoNext, false); // Sept 2026 is today's month
+});
+
 
 

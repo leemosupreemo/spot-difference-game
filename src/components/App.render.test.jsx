@@ -4,6 +4,7 @@ import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import { cleanup, render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from '../App.jsx';
 import { ErrorBoundary } from './ErrorBoundary.jsx';
+import { recordDailyChallengeCompletion, getTodayDateString, resetDailyPlayerStatus } from '../services/dailyChallenge.js';
 
 let storage = new Map();
 
@@ -131,3 +132,37 @@ test('failing via 3 misses goes straight to fail modal without showing answer sp
   // Fail modal is shown immediately
   expect(screen.getByText(/STAGE FAILED/i)).toBeTruthy();
 });
+
+test('when daily challenge is completed, banner stays on menu with calendar CTA and opens calendar modal', async () => {
+  localStorage.setItem('diff_hunter_debug', 'false');
+  const today = getTodayDateString();
+  resetDailyPlayerStatus(today);
+  recordDailyChallengeCompletion({
+    dateStr: today,
+    totalTimeMs: 25000,
+    playerName: 'DailyChampion'
+  });
+
+  render(
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  );
+
+  // Banner should still be visible on main menu
+  const banner = screen.getByLabelText(/Set of the Day Challenge/i);
+  expect(banner).toBeDefined();
+
+  // Calendar CTA button should be rendered
+  const calendarCta = screen.getByLabelText(/Play previous daily challenges/i);
+  expect(calendarCta).toBeDefined();
+
+  // Clicking calendar CTA opens the Daily Calendar Modal
+  fireEvent.click(calendarCta);
+
+  await waitFor(() => {
+    expect(screen.getByText('PAST CHALLENGES')).toBeDefined();
+    expect(screen.getByText(/Play uncompleted sets • Unranked/i)).toBeDefined();
+  });
+});
+

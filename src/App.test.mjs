@@ -54,17 +54,20 @@ test('Photo Mode offers only complete Photography sets and blocks an invalid sel
   assert.match(source, /if \(!photoSetId \|\| !photoSetIds\.includes\(photoSetId\)\)/);
 });
 
-test('App.jsx gates SetOfTheDayBanner behind !isDailyCompleted and routes daily failure to DailyVictoryModal', () => {
+test('App.jsx gates SetOfTheDayBanner, keeps visible when completed, and routes daily failure to DailyVictoryModal', () => {
   const source = fs.readFileSync(appPath, 'utf8');
 
-  // Gated banner (always shows in debug mode)
-  assert.match(source, /\{\s*\(\s*!isDailyCompleted \|\| debugMode\s*\) && \(\s*<SetOfTheDayBanner/);
+  // Gated banner (keeps visible when completed or in debug mode)
+  assert.match(source, /\{\s*\(\s*!isDailyCompleted \|\| isDailySuccessCompleted \|\| debugMode\s*\) && \(\s*<SetOfTheDayBanner/);
   assert.match(source, /setIsDailyCompleted\(true\)/);
+  assert.match(source, /onOpenDailyCalendar=\{handleOpenDailyCalendar\}/);
+  assert.match(source, /<DailyCalendarModal/);
 
   // Daily failure routes to DailyVictoryModal instead of GameOverModal
   assert.match(source, /if \(gameMode === 'daily'\) \{/);
   assert.match(source, /isFailed:\s*true/);
   assert.match(source, /isFailed=\{dailyVictoryData\?\.isFailed\}/);
+  assert.match(source, /if \(!isArchiveRun\) \{[\s\S]*recordDailyChallengeCompletionRemote/);
 });
 
 test('debug daily mode uses the three-image queue set and reaches the daily victory path', () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Flame, Trophy, ChevronRight, Star } from 'lucide-react';
+import { Flame, Trophy, ChevronRight, Star, Calendar } from 'lucide-react';
 import { sounds } from '../utils/audio.js';
 import { isSetOfTheDayEnabled } from '../services/appConfig.js';
 import {
@@ -14,7 +14,14 @@ import {
   trackDailyChallengeClicked
 } from '../services/analytics.js';
 
-export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard, forceShow = false, debugMode = false, onResetDaily = null }) {
+export default function SetOfTheDayBanner({
+  onStartDaily,
+  onOpenDailyLeaderboard,
+  onOpenDailyCalendar,
+  forceShow = false,
+  debugMode = false,
+  onResetDaily = null
+}) {
   const [enabled, setEnabled] = useState(isSetOfTheDayEnabled());
   const [timeToBeatMs, setTimeToBeatMs] = useState(null);
   const [topTimes, setTopTimes] = useState([]);
@@ -83,6 +90,15 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
       date: getTodayDateString(),
       isAttempted
     });
+    if (playerStatus.completed) {
+      sounds.playTap();
+      if (onOpenDailyCalendar) {
+        onOpenDailyCalendar();
+      } else if (onOpenDailyLeaderboard) {
+        onOpenDailyLeaderboard();
+      }
+      return;
+    }
     if (isAttempted && !debugMode) {
       sounds.playTap();
       if (onOpenDailyLeaderboard) onOpenDailyLeaderboard();
@@ -276,24 +292,64 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
             </div>
           </div>
 
-          <div
-            style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: isHovered
-                ? 'linear-gradient(135deg, #33f3ff, #1a82ff)'
-                : 'linear-gradient(135deg, var(--accent-cyan), #0072ff)',
-              boxShadow: '0 4px 20px rgba(0, 240, 255, 0.4)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#000',
-              transition: 'all 0.15s ease'
-            }}
-          >
-            <ChevronRight size={22} strokeWidth={3} />
-          </div>
+          {playerStatus.completed ? (
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                sounds.playTap();
+                if (onOpenDailyCalendar) {
+                  onOpenDailyCalendar();
+                } else if (onOpenDailyLeaderboard) {
+                  onOpenDailyLeaderboard();
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label="Play previous daily challenges"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '7px 12px',
+                borderRadius: '12px',
+                background: isHovered
+                  ? 'linear-gradient(135deg, rgba(0, 240, 255, 0.35), rgba(255, 0, 127, 0.35))'
+                  : 'linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 0, 127, 0.2))',
+                border: '1.5px solid var(--accent-cyan)',
+                color: '#ffffff',
+                fontSize: '0.8rem',
+                fontWeight: 800,
+                boxShadow: isHovered
+                  ? '0 0 16px rgba(0, 240, 255, 0.5)'
+                  : '0 0 8px rgba(0, 240, 255, 0.25)',
+                transition: 'all 0.15s ease',
+                cursor: 'pointer'
+              }}
+            >
+              <Calendar size={15} color="var(--accent-cyan)" />
+              <span>Past Days</span>
+              <ChevronRight size={15} />
+            </div>
+          ) : (
+            <div
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: isHovered
+                  ? 'linear-gradient(135deg, #33f3ff, #1a82ff)'
+                  : 'linear-gradient(135deg, var(--accent-cyan), #0072ff)',
+                boxShadow: '0 4px 20px rgba(0, 240, 255, 0.4)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#000',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <ChevronRight size={22} strokeWidth={3} />
+            </div>
+          )}
         </div>
       </div>
     </div>

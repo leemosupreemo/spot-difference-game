@@ -35,6 +35,7 @@ import { initializeNotificationListeners, scheduleInstallNotifications } from '.
 import { initGameCenter, mirrorRoundToGameCenter, onGameCenterAuthChange } from './services/gameCenter';
 import SetOfTheDayBanner from './components/SetOfTheDayBanner';
 import DailyVictoryModal from './components/DailyVictoryModal';
+import DailyCalendarModal from './components/DailyCalendarModal';
 import {
   getDailySetForDate,
   getTodayDateString,
@@ -552,6 +553,7 @@ function GameApp() {
   const handleResetDailyChallenge = useCallback(() => {
     resetDailyPlayerStatus();
     setIsDailyCompleted(false);
+    setIsDailySuccessCompleted(false);
     sounds.playWin();
     logApp('INFO', '[DailyChallenge] Player daily status reset via debug/test controls');
   }, []);
@@ -693,6 +695,15 @@ function GameApp() {
       return false;
     }
   });
+  const [isDailySuccessCompleted, setIsDailySuccessCompleted] = useState(() => {
+    try {
+      const status = getDailyPlayerStatus();
+      return Boolean(status?.completed);
+    } catch (_) {
+      return false;
+    }
+  });
+  const [isDailyCalendarOpen, setIsDailyCalendarOpen] = useState(false);
 
   const rawLevel = levels.find(l => l.id === currentLevelId) || levels[0];
 
@@ -978,31 +989,53 @@ function GameApp() {
     }
   }, [selectedTheme, photoSetIds, photoSetId, currentLevel, handleStartGame]);
 
-  // Launch Set of the Day (3-image sequence from unrepeated daily queue)
-  const handleStartDailyChallenge = () => {
-    sounds.playTap();
-    if (!canAttemptDaily() && !debugMode) {
-      logApp('INFO', '[DailyChallenge] Daily challenge already attempted today');
-      return;
-    }
-    // Ensure debug runs use the latest OTA/Firebase queue before resolving the set.
-    if (debugMode) {
-      syncRemoteDailyQueue().catch(() => {});
-    }
+  const handleOpenDailyCalendar = useCallback(() => {
+    setIsDailyCalendarOpen(true);
+  }, []);
 
-    // Start session locally & remotely
-    startDailyChallengeSession().then(session => {
-      if (session && !session.allowed && !debugMode) {
-        logApp('INFO', '[DailyChallenge] Remote attempt already exists for today');
+  const handleSelectDailyCalendarDate = useCallback((dateStr) => {
+    setIsDailyCalendarOpen(false);
+    if (view === 'stats') {
+      setView('menu');
+    }
+    const isArchive = Boolean(dateStr && dateStr !== getTodayDateString());
+    handleStartDailyChallenge(dateStr, { isArchive });
+  }, [view]);
+
+  // Launch Set of the Day (3-image sequence from unrepeated daily queue)
+  const handleStartDailyChallenge = (targetDateStr = null, { isArchive = false } = {}) => {
+    sounds.playTap();
+    const effectiveDate = targetDateStr || getTodayDateString();
+    const isArchiveRun = Boolean(isArchive || (targetDateStr && targetDateStr !== getTodayDateString()));
+
+    if (!isArchiveRun) {
+      if (!canAttemptDaily() && !debugMode) {
+        logApp('INFO', '[DailyChallenge] Daily challenge already attempted today');
+        return;
+      }
+      // Ensure debug runs use the latest OTA/Firebase queue before resolving the set.
+      if (debugMode) {
+        syncRemoteDailyQueue().catch(() => {});
+      }
+
+      // Start session locally & remotely
+      startDailyChallengeSession().then(session => {
+        if (session && !session.allowed && !debugMode) {
+          logApp('INFO', '[DailyChallenge] Remote attempt already exists for today');
+          setIsDailyCompleted(true);
+        }
+      }).catch(() => {});
+
+      if (!debugMode) {
         setIsDailyCompleted(true);
       }
-    }).catch(() => {});
-
-    if (!debugMode) {
-      setIsDailyCompleted(true);
     }
+
     let dailyLevels;
-    if (debugMode) {
+    if (targetDateStr) {
+      logApp('INFO', `[StartDailyChallenge:Archive] Requesting past daily set for ${targetDateStr}`);
+      dailyLevels = getDailySetForDate(targetDateStr);
+    } else if (debugMode) {
       logApp('INFO', '[StartDailyChallenge:Debug] Requesting three-image daily queue set');
       dailyLevels = getDailySetForDate();
     } else {
@@ -1014,6 +1047,9 @@ function GameApp() {
       logApp('WARN', '[DailyChallenge] No daily levels found in catalog');
       return;
     }
+
+    dailyLevels.isArchive = isArchiveRun;
+    dailyLevels.dateStr = effectiveDate;
 
     setGameMode('daily');
     setCurrentStageIndex(0);
@@ -1032,10 +1068,11 @@ function GameApp() {
       totalLevelsInStage: dailyLevels.length
     });
     trackDailyChallengeStarted({
-      date: getTodayDateString(),
-      levelsCount: dailyLevels.length
+      date: effectiveDate,
+      levelsCount: dailyLevels.length,
+      isArchive: isArchiveRun
     });
-    logApp('INFO', `[DailyChallenge] Launching ${dailyLevels.length}-image daily sequence: ${dailyLevels.map(l => l.id).join(', ')}`);
+    logApp('INFO', `[DailyChallenge] Launching ${dailyLevels.length}-image daily sequence for ${effectiveDate} (archive: ${isArchiveRun}): ${dailyLevels.map(l => l.id).join(', ')}`);
   };
 
   // Difference Found Handler
@@ -1137,9 +1174,14 @@ function GameApp() {
 
         // Daily Challenge Mode (3 Images Sequence) Completion
         if (gameMode === 'daily') {
-          markFirstSetCompleted();
-          setHasCompletedFirstSetState(true);
-          setIsDailyCompleted(true);
+          const isArchiveRun = Boolean(levels?.isArchive);
+
+          if (!isArchiveRun) {
+            markFirstSetCompleted();
+            setHasCompletedFirstSetState(true);
+            setIsDailyCompleted(true);
+            setIsDailySuccessCompleted(true);
+          }
 
           const dailyResult = recordDailyChallengeCompletion({
             dateStr: levels?.dateStr,
@@ -1148,30 +1190,32 @@ function GameApp() {
             entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id)
           });
 
-          // Sync completion to Firestore live daily leaderboard asynchronously
-          recordDailyChallengeCompletionRemote({
-            dateStr: levels?.dateStr,
-            setId: levels?.dailySetId,
-            entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id),
-            totalTimeMs: cumulativeTime
-          }).then(remoteResult => {
-            if (remoteResult) {
-              setDailyVictoryData(prev => prev ? {
-                ...prev,
-                position: remoteResult.position,
-                totalPlayers: remoteResult.totalPlayers
-              } : null);
-            }
-          }).catch(() => {});
+          if (!isArchiveRun) {
+            // Sync completion to Firestore live daily leaderboard asynchronously only for ranked runs
+            recordDailyChallengeCompletionRemote({
+              dateStr: levels?.dateStr,
+              setId: levels?.dailySetId,
+              entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id),
+              totalTimeMs: cumulativeTime
+            }).then(remoteResult => {
+              if (remoteResult) {
+                setDailyVictoryData(prev => prev ? {
+                  ...prev,
+                  position: remoteResult.position,
+                  totalPlayers: remoteResult.totalPlayers
+                } : null);
+              }
+            }).catch(() => {});
 
-          // Mirror to Game Center if signed in
-          mirrorRoundToGameCenter({
-            elapsedTimeMs: cumulativeTime,
-            difficulty: 'Medium',
-            isPersonalBest: dailyResult.isNewRecord,
-            score: stageTotalScore,
-            stars: dailyResult.stars
-          }).catch(() => {});
+            // Mirror to Game Center if signed in
+            mirrorRoundToGameCenter({
+              elapsedTimeMs: cumulativeTime,
+              difficulty: 'Medium',
+              isPersonalBest: dailyResult.isNewRecord,
+              score: stageTotalScore,
+              stars: dailyResult.stars
+            }).catch(() => {});
+          }
 
           const dailySetId = levels?.dailySetId || dailyResult?.setId || 'daily_set_1';
           trackStageCleared({
@@ -1186,15 +1230,16 @@ function GameApp() {
           });
 
           trackDailyChallengeCompleted({
-            date: getTodayDateString(),
+            date: levels?.dateStr || getTodayDateString(),
             totalTimeMs: cumulativeTime,
             stars: dailyResult.stars,
-            position: dailyResult.position,
-            isNewRecord: dailyResult.isNewRecord,
-            isFailed: false
+            position: isArchiveRun ? null : dailyResult.position,
+            isNewRecord: isArchiveRun ? false : dailyResult.isNewRecord,
+            isFailed: false,
+            isArchive: isArchiveRun
           });
 
-          logApp('INFO', `[DailyChallengeCleared] Time: ${cumulativeTime}ms, Rank: #${dailyResult.position}, Stars: ${dailyResult.stars}`);
+          logApp('INFO', `[DailyChallengeCleared] Time: ${cumulativeTime}ms, Rank: #${dailyResult.position}, Stars: ${dailyResult.stars}, Archive: ${isArchiveRun}`);
 
           const dailySetNum = getSetNumber(dailySetId) || 1;
 
@@ -1205,12 +1250,14 @@ function GameApp() {
               score: stageTotalScore || score,
               setId: dailySetId,
               setNumber: dailySetNum,
-              position: dailyResult.position,
-              totalPlayers: dailyResult.totalPlayers,
+              position: isArchiveRun ? null : dailyResult.position,
+              totalPlayers: isArchiveRun ? null : dailyResult.totalPlayers,
               stars: dailyResult.stars,
-              isNewRecord: dailyResult.isNewRecord,
+              isNewRecord: isArchiveRun ? false : dailyResult.isNewRecord,
               isFailed: false,
-              stageIndex: 2
+              stageIndex: 2,
+              isArchive: isArchiveRun,
+              dateStr: levels?.dateStr
             });
           }, 2000);
           return;
@@ -1393,18 +1440,22 @@ function GameApp() {
 
         // Go straight to fail modal without revealing answer or pausing
         if (gameMode === 'daily') {
-          recordDailyChallengeFailureRemote({
-            stageIndex: currentStageIndex
-          }).catch(() => {});
-          setIsDailyCompleted(true);
+          const isArchiveRun = Boolean(levels?.isArchive);
+          if (!isArchiveRun) {
+            recordDailyChallengeFailureRemote({
+              stageIndex: currentStageIndex
+            }).catch(() => {});
+            setIsDailyCompleted(true);
+          }
           const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
           trackDailyChallengeCompleted({
-            date: getTodayDateString(),
+            date: levels?.dateStr || getTodayDateString(),
             totalTimeMs: cumulativeTime,
             stars: 0,
             position: null,
             isNewRecord: false,
-            isFailed: true
+            isFailed: true,
+            isArchive: isArchiveRun
           });
           setDailyVictoryData({
             isOpen: true,
@@ -1414,7 +1465,9 @@ function GameApp() {
             stars: 0,
             isNewRecord: false,
             isFailed: true,
-            stageIndex: currentStageIndex
+            stageIndex: currentStageIndex,
+            isArchive: isArchiveRun,
+            dateStr: levels?.dateStr
           });
         } else {
           setGameOverModalOpen(true);
@@ -1462,9 +1515,12 @@ function GameApp() {
     setTimerRunning(false);
     setMagnifierEnabled(false);
     if (gameMode === 'daily') {
-      if (!debugMode) {
-        recordDailyChallengeFailureRemote({ stageIndex: currentStageIndex }).catch(() => {});
-        setIsDailyCompleted(true);
+      const isArchiveRun = Boolean(levels?.isArchive);
+      if (!isArchiveRun) {
+        if (!debugMode) {
+          recordDailyChallengeFailureRemote({ stageIndex: currentStageIndex }).catch(() => {});
+          setIsDailyCompleted(true);
+        }
       }
       try { sounds.playLose(); } catch (_) {}
       const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
@@ -1498,12 +1554,13 @@ function GameApp() {
       });
 
       trackDailyChallengeCompleted({
-        date: getTodayDateString(),
+        date: levels?.dateStr || getTodayDateString(),
         totalTimeMs: cumulativeTime,
         stars: 0,
         position: null,
         isNewRecord: false,
-        isFailed: true
+        isFailed: true,
+        isArchive: isArchiveRun
       });
 
       setDailyVictoryData({
@@ -1515,7 +1572,9 @@ function GameApp() {
         isNewRecord: false,
         isFailed: true,
         isForfeit: true,
-        stageIndex: currentStageIndex
+        stageIndex: currentStageIndex,
+        isArchive: isArchiveRun,
+        dateStr: levels?.dateStr
       });
       return;
     }
@@ -1673,10 +1732,11 @@ function GameApp() {
               />
             }
             bannerSlot={
-              (!isDailyCompleted || debugMode) && (
+              (!isDailyCompleted || isDailySuccessCompleted || debugMode) && (
                 <SetOfTheDayBanner
                   onStartDaily={handleStartDailyChallenge}
                   onOpenDailyLeaderboard={handleOpenDailyLeaderboard}
+                  onOpenDailyCalendar={handleOpenDailyCalendar}
                   onResetDaily={handleResetDailyChallenge}
                   forceShow={debugMode}
                   debugMode={debugMode}
@@ -1690,6 +1750,7 @@ function GameApp() {
             onClose={() => setView('menu')}
             difficultyStats={difficultyStats}
             onStartDaily={handleStartDailyChallenge}
+            onOpenDailyCalendar={handleOpenDailyCalendar}
             onResetDaily={handleResetDailyChallenge}
             initialTab={statsInitialTab}
             initialSetId={selectedStatsSetId}
@@ -1800,6 +1861,8 @@ function GameApp() {
           isNewRecord={dailyVictoryData?.isNewRecord}
           isFailed={dailyVictoryData?.isFailed}
           isForfeit={dailyVictoryData?.isForfeit}
+          isArchive={Boolean(dailyVictoryData?.isArchive)}
+          dateStr={dailyVictoryData?.dateStr}
           onOpenLeaderboard={() => {
             const targetSetId = dailyVictoryData?.setId;
             setDailyVictoryData(null);
@@ -1820,6 +1883,14 @@ function GameApp() {
           }}
         />
       )}
+
+      {/* Daily Challenge Archive Calendar Modal */}
+      <DailyCalendarModal
+        isOpen={isDailyCalendarOpen}
+        onClose={() => setIsDailyCalendarOpen(false)}
+        onSelectDate={handleSelectDailyCalendarDate}
+        todayDateStr={getTodayDateString()}
+      />
 
       <GameOverModal
         isOpen={gameOverModalOpen}

@@ -999,6 +999,90 @@ export function getDailyPlayerStatus(dateStr = getTodayDateString()) {
   return { completed: false, attempted: false, failed: false };
 }
 
+export const DAILY_CHALLENGE_EPOCH_DATE = '2026-09-01';
+
+/**
+ * Checks whether the daily challenge for a given date has been completed.
+ * @param {string} [dateStr]
+ * @returns {boolean}
+ */
+export function isDailyChallengeCompleted(dateStr = getTodayDateString()) {
+  return Boolean(getDailyPlayerStatus(dateStr).completed);
+}
+
+/**
+ * Computes calendar month data for daily challenge archive navigation.
+ * Evaluates completion and playable active status per day.
+ *
+ * @param {number} [year]
+ * @param {number} [month] - 1-12
+ * @param {string} [todayDateStr] - YYYY-MM-DD
+ * @returns {{
+ *   year: number,
+ *   month: number,
+ *   daysInMonth: number,
+ *   startDayOfWeek: number,
+ *   days: Array<Object>,
+ *   canGoPrev: boolean,
+ *   canGoNext: boolean
+ * }}
+ */
+export function getDailyCalendarMonth(year, month, todayDateStr = getTodayDateString()) {
+  const parts = todayDateStr.split('-').map(Number);
+  const targetYear = typeof year === 'number' && !Number.isNaN(year) ? year : (parts[0] || 2026);
+  const targetMonth = typeof month === 'number' && !Number.isNaN(month) ? month : (parts[1] || 9);
+
+  const daysInMonth = new Date(targetYear, targetMonth, 0).getDate();
+  const startDayOfWeek = new Date(targetYear, targetMonth - 1, 1).getDay();
+
+  const [epochYear, epochMonth] = DAILY_CHALLENGE_EPOCH_DATE.split('-').map(Number);
+  const [todayYear, todayMonth] = parts;
+
+  const canGoPrev = targetYear > epochYear || (targetYear === epochYear && targetMonth > epochMonth);
+  const canGoNext = targetYear < todayYear || (targetYear === todayYear && targetMonth < todayMonth);
+
+  const days = [];
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dayStr = String(d).padStart(2, '0');
+    const monthStr = String(targetMonth).padStart(2, '0');
+    const dateStr = `${targetYear}-${monthStr}-${dayStr}`;
+
+    const isToday = (dateStr === todayDateStr);
+    const isFuture = (dateStr > todayDateStr);
+    const isPast = (dateStr < todayDateStr);
+    const status = getDailyPlayerStatus(dateStr);
+    const isCompleted = Boolean(status.completed);
+    const isAttempted = Boolean(status.attempted || status.failed);
+
+    // Only dates that the player has not completed yet are active (and not future)
+    const isActive = !isFuture && !isCompleted;
+
+    days.push({
+      dateStr,
+      dayNumber: d,
+      isToday,
+      isFuture,
+      isPast,
+      isCompleted,
+      isAttempted,
+      isActive,
+      stars: status.stars || 0,
+      totalTimeMs: status.totalTimeMs || null
+    });
+  }
+
+  return {
+    year: targetYear,
+    month: targetMonth,
+    daysInMonth,
+    startDayOfWeek,
+    days,
+    canGoPrev,
+    canGoNext
+  };
+}
+
+
 /**
  * Checks whether the player can attempt the daily challenge for a given date.
  * Once attempted, completed, or failed, it cannot be re-attempted until the next refresh.

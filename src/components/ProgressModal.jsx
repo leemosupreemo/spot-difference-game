@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer, Flame, Star, Play, WifiOff, RefreshCw, ChevronDown } from 'lucide-react';
+import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer, Flame, Star, Play, WifiOff, RefreshCw, ChevronDown, Calendar } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { fetchLeaderboards } from '../services/playerProgress';
 import { isOnline, subscribeNetworkStatus, checkConnectivity } from '../services/networkService';
@@ -25,6 +25,7 @@ export default function ProgressModal({
   onClose: _onClose,
   difficultyStats,
   onStartDaily,
+  onOpenDailyCalendar,
   onResetDaily = null,
   onResetLocalRecords = null,
   initialTab = 'leaderboards',
@@ -641,28 +642,54 @@ export default function ProgressModal({
                 </div>
               </div>
 
-              {debugMode && onResetDaily && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 <button
                   onClick={() => {
-                    sounds.playWin();
-                    onResetDaily();
-                    setDailyStatus({ completed: false, attempted: false, failed: false });
+                    sounds.playTap();
+                    if (onOpenDailyCalendar) onOpenDailyCalendar();
                   }}
                   className="glass-btn"
                   style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
                     padding: '8px 14px',
                     borderRadius: '10px',
-                    fontSize: '0.85rem',
+                    fontSize: '0.82rem',
                     fontWeight: 800,
-                    color: 'var(--accent-pink)',
-                    borderColor: 'var(--accent-pink)',
-                    background: 'rgba(255, 0, 127, 0.2)',
+                    color: 'var(--accent-cyan)',
+                    borderColor: 'var(--accent-cyan)',
+                    background: 'rgba(0, 240, 255, 0.15)',
                     cursor: 'pointer'
                   }}
                 >
-                  🔄 Reset Attempt (Debug)
+                  <Calendar size={15} />
+                  <span>Past Challenges</span>
                 </button>
-              )}
+
+                {debugMode && onResetDaily && (
+                  <button
+                    onClick={() => {
+                      sounds.playWin();
+                      onResetDaily();
+                      setDailyStatus({ completed: false, attempted: false, failed: false });
+                    }}
+                    className="glass-btn"
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: '10px',
+                      fontSize: '0.85rem',
+                      fontWeight: 800,
+                      color: 'var(--accent-pink)',
+                      borderColor: 'var(--accent-pink)',
+                      background: 'rgba(255, 0, 127, 0.2)',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    🔄 Reset Attempt (Debug)
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
@@ -692,7 +719,31 @@ export default function ProgressModal({
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => {
+                    sounds.playTap();
+                    if (onOpenDailyCalendar) onOpenDailyCalendar();
+                  }}
+                  className="glass-btn"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '6px 12px',
+                    borderRadius: '10px',
+                    fontSize: '0.8rem',
+                    fontWeight: 800,
+                    color: 'var(--accent-cyan)',
+                    borderColor: 'var(--accent-cyan)',
+                    background: 'rgba(0, 240, 255, 0.15)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Calendar size={14} />
+                  <span>Past Challenges</span>
+                </button>
+
                 <div style={{ display: 'flex', gap: '3px' }}>
                   {[1, 2, 3].map(s => (
                     <Star

@@ -33,3 +33,12 @@ test('banner card does not apply translateY on hover so it does not shift up int
   assert.doesNotMatch(source, /translateY\(-/);
 });
 
+test('banner exposes past challenges calendar CTA when playerStatus.completed is true', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  assert.match(source, /onOpenDailyCalendar/);
+  assert.match(source, /playerStatus\.completed \? \([\s\S]*?Past Days/);
+  assert.match(source, /if \(onOpenDailyCalendar\) \{[\s\S]*onOpenDailyCalendar\(\)/);
+});
+
+

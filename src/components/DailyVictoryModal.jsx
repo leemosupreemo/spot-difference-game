@@ -26,6 +26,8 @@ export default function DailyVictoryModal({
   isNewRecord = false,
   isFailed = false,
   isForfeit = false,
+  isArchive = false,
+  dateStr = null,
   setId = 'set_1',
   setNumber = null,
   forceOffline = false,
@@ -36,9 +38,17 @@ export default function DailyVictoryModal({
   const [leaderboardEntries, setLeaderboardEntries] = useState([]);
 
   const displaySetNumber = setNumber || getSetNumber(setId) || 1;
-  const isLeaderboardRecord = Boolean(!isFailed && (position === 1 || position === 2 || position === 3));
+  const isLeaderboardRecord = Boolean(!isArchive && !isFailed && (position === 1 || position === 2 || position === 3));
 
   const worldTitleConfig = React.useMemo(() => {
+    if (isArchive) {
+      return {
+        title: isFailed ? 'Archive Challenge Ended' : 'Past Challenge Cleared!',
+        trophyColor: null,
+        trophyGlow: null,
+        gradient: 'linear-gradient(90deg, #FFFFFF 0%, #00F0FF 100%)'
+      };
+    }
     if (!isFailed) {
       if (position === 1) {
         return {
@@ -71,7 +81,7 @@ export default function DailyVictoryModal({
       trophyGlow: null,
       gradient: 'linear-gradient(90deg, #fff, var(--accent-gold))'
     };
-  }, [isFailed, position]);
+  }, [isArchive, isFailed, position]);
 
   const recordBadgeText = React.useMemo(() => {
     if (isFailed) return null;
@@ -169,16 +179,18 @@ export default function DailyVictoryModal({
   useEffect(() => {
     if (isOpen) {
       try {
-        const entries = getDailyLeaderboard();
+        const entries = getDailyLeaderboard(dateStr || undefined);
         setLeaderboardEntries(entries || []);
       } catch (_) {}
 
-      // Fetch live global leaderboard from Firestore asynchronously
-      fetchDailyLeaderboard().then(remoteEntries => {
-        if (remoteEntries && remoteEntries.length > 0) {
-          setLeaderboardEntries(remoteEntries);
-        }
-      }).catch(() => {});
+      // Fetch live global leaderboard from Firestore asynchronously (ranked daily runs only)
+      if (!isArchive) {
+        fetchDailyLeaderboard(dateStr || undefined).then(remoteEntries => {
+          if (remoteEntries && remoteEntries.length > 0) {
+            setLeaderboardEntries(remoteEntries);
+          }
+        }).catch(() => {});
+      }
 
       // Record result screen view for share rate conversion funnel
       recordLocalShareEvent('view');
@@ -465,6 +477,26 @@ export default function DailyVictoryModal({
                 {worldTitleConfig.title}
               </span>
             </h2>
+
+            {isArchive && (
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '3px 10px',
+                borderRadius: '8px',
+                background: 'rgba(0, 240, 255, 0.15)',
+                border: '1px solid rgba(0, 240, 255, 0.35)',
+                color: 'var(--accent-cyan)',
+                fontSize: '0.72rem',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.8px',
+                margin: '6px auto 0 auto'
+              }}>
+                <span>Unranked Archive Run</span>
+              </div>
+            )}
           </div>
         ) : (
           // Three columns with equal outer tracks centre the title on the modal

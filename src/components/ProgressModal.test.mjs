@@ -157,5 +157,13 @@ test('ProgressModal accepts photoSetIds and passes them to fetchLeaderboards', (
   assert.match(source, /fetchLeaderboards\(difficultyStats,\s*photoSetIds\)/);
 });
 
+test('ProgressModal provides past challenges calendar button under daily run ended container', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /onOpenDailyCalendar/);
+  assert.match(source, /DAILY RUN ENDED[\s\S]*?Past Challenges/);
+  assert.match(source, /if \(onOpenDailyCalendar\) onOpenDailyCalendar\(\)/);
+});
+
+
 
 

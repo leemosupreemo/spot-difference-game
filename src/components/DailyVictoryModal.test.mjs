@@ -95,3 +95,13 @@ test('daily failure footer has no leaderboard button beside main menu, which tak
   assert.match(source, /Main Menu/);
   assert.match(source, /width:\s*['"]100%['"]/);
 });
+
+test('DailyVictoryModal supports unranked archive runs without submitting to leaderboards', () => {
+  const source = fs.readFileSync(dailyModalPath, 'utf8');
+
+  assert.match(source, /isArchive\s*=\s*false/);
+  assert.match(source, /isLeaderboardRecord\s*=\s*Boolean\(!isArchive/);
+  assert.match(source, /Unranked Archive Run/);
+  assert.match(source, /if \(!isArchive\) \{[\s\S]*fetchDailyLeaderboard/);
+});
+
