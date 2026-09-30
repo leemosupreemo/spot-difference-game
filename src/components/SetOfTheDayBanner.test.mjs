@@ -25,3 +25,11 @@ test('completed daily banner stays visible and shows the top time with no tap to
   assert.match(source, /border-color: rgba\(0, 240, 255/);
 });
 
+test('banner card does not apply translateY on hover so it does not shift up into header', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+
+  // Verify transform is not applied conditionally on isHovered (e.g. translateY(-2px))
+  assert.doesNotMatch(source, /transform:\s*isHovered/);
+  assert.doesNotMatch(source, /translateY\(-/);
+});
+

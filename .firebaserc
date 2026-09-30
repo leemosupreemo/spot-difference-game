@@ -9,6 +9,13 @@
           "diff-hunter-progress-20260810"
         ]
       }
+    },
+    "thirteen-a5760": {
+      "hosting": {
+        "diff-hunter": [
+          "diffhunter"
+        ]
+      }
     }
   },
   "etags": {}

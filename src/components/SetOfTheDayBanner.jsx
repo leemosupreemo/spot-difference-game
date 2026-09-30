@@ -134,7 +134,6 @@ export default function SetOfTheDayBanner({ onStartDaily, onOpenDailyLeaderboard
           boxShadow: isHovered
             ? '0 0 28px rgba(255, 0, 127, 0.4), 0 0 16px rgba(255, 183, 3, 0.35)'
             : '0 6px 20px rgba(0, 0, 0, 0.35), 0 0 16px rgba(255, 0, 127, 0.2)',
-          transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
           transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
