@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
-import { Calendar, ChevronLeft, ChevronRight, X, Check, Lock, Info, Flame } from 'lucide-react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Calendar, ChevronLeft, ChevronRight, X, Check, Lock, Info } from 'lucide-react';
 import { sounds } from '../utils/audio.js';
-import { getDailyCalendarMonth, getTodayDateString } from '../services/dailyChallenge.js';
+import { getDailyCalendarMonth, getTodayDateString, syncDailyProgressFromFirestore } from '../services/dailyChallenge.js';
 
 const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -23,11 +23,25 @@ export default function DailyCalendarModal({
 
   const [currentYear, setCurrentYear] = useState(todayYear);
   const [currentMonth, setCurrentMonth] = useState(todayMonth); // 1-12
+  const [localSyncKey, setLocalSyncKey] = useState(0);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    let active = true;
+    syncDailyProgressFromFirestore().then(completions => {
+      if (active && completions && Object.keys(completions).length > 0) {
+        setLocalSyncKey(k => k + 1);
+      }
+    }).catch(() => {});
+    return () => { active = false; };
+  }, [isOpen]);
 
   const monthData = useMemo(() => {
     if (!isOpen) return { days: [], canGoPrev: false, canGoNext: false, startDayOfWeek: 0 };
-    return getDailyCalendarMonth(currentYear, currentMonth, todayDateStr);
-  }, [isOpen, currentYear, currentMonth, todayDateStr, refreshKey]);
+    // Consume refresh/sync keys so monthData recalculates whenever sync or completion happens
+    const _syncRevision = refreshKey + localSyncKey;
+    return getDailyCalendarMonth(currentYear, currentMonth, todayDateStr, _syncRevision);
+  }, [isOpen, currentYear, currentMonth, todayDateStr, refreshKey, localSyncKey]);
 
   if (!isOpen) return null;
 
@@ -272,7 +286,7 @@ export default function DailyCalendarModal({
               <button
                 key={day.dateStr}
                 onClick={() => handleDateClick(day)}
-                disabled={!isActive}
+                disabled={!isActive || isCompleted}
                 aria-label={`Date ${day.dateStr}${isCompleted ? ' completed' : isActive ? ' available to play' : ' locked'}`}
                 style={{
                   position: 'relative',

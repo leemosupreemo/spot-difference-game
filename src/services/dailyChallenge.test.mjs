@@ -27,7 +27,9 @@ import {
   resetDailyPlayerStatus,
   getDailyCalendarMonth,
   isDailyChallengeCompleted,
-  DAILY_CHALLENGE_EPOCH_DATE
+  DAILY_CHALLENGE_EPOCH_DATE,
+  syncDailyProgressFromFirestore,
+  isDailyChallengeCompletedRemote
 } from './dailyChallenge.js';
 import { hasAdjacentRepeat, baseImageKey } from '../utils/stageOrdering.js';
 
@@ -389,6 +391,59 @@ test('getDailyCalendarMonth correctly tags completed, uncompleted active, and fu
   // Navigation bounds
   assert.equal(cal.canGoPrev, false); // Sept 2026 is epoch month
   assert.equal(cal.canGoNext, false); // Sept 2026 is today's month
+});
+
+test('startDailyChallengeSession blocks archive run if already completed', async () => {
+  const archiveDate = '2026-09-12';
+  resetDailyPlayerStatus(archiveDate);
+
+  // Uncompleted archive date is allowed
+  const session1 = await startDailyChallengeSession({ dateStr: archiveDate, isArchive: true });
+  assert.equal(session1.allowed, true);
+
+  // Mark as completed
+  recordDailyChallengeCompletion({
+    dateStr: archiveDate,
+    totalTimeMs: 24000
+  });
+
+  // Completed archive date is blocked
+  const session2 = await startDailyChallengeSession({ dateStr: archiveDate, isArchive: true });
+  assert.equal(session2.allowed, false);
+  assert.equal(session2.status, 'completed');
+});
+
+test('recordDailyChallengeCompletionRemote handles archive completion without throwing', async () => {
+  const archiveDate = '2026-09-13';
+  resetDailyPlayerStatus(archiveDate);
+
+  const res = await recordDailyChallengeCompletionRemote({
+    dateStr: archiveDate,
+    totalTimeMs: 25000,
+    isArchive: true
+  });
+  assert.ok(res);
+  assert.equal(res.totalTimeMs, 25000);
+  assert.equal(isDailyChallengeCompleted(archiveDate), true);
+});
+
+test('syncDailyProgressFromFirestore and isDailyChallengeCompletedRemote handle offline gracefully', async () => {
+  const checkDate = '2026-09-14';
+  resetDailyPlayerStatus(checkDate);
+
+  const isCompletedBefore = await isDailyChallengeCompletedRemote(checkDate);
+  assert.equal(isCompletedBefore, false);
+
+  const synced = await syncDailyProgressFromFirestore();
+  assert.ok(synced);
+
+  recordDailyChallengeCompletion({
+    dateStr: checkDate,
+    totalTimeMs: 22000
+  });
+
+  const isCompletedAfter = await isDailyChallengeCompletedRemote(checkDate);
+  assert.equal(isCompletedAfter, true);
 });
 
 

@@ -16,6 +16,7 @@ import {
 } from 'firebase/auth';
 import { isGameCenterSupported, isGameCenterAuthenticated } from './gameCenter.js';
 import { restoreProgressFromCloud, savePlayerName, getSavedPlayerName } from './playerProgress.js';
+import { syncDailyProgressFromFirestore } from './dailyChallenge.js';
 
 const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
 
@@ -107,6 +108,7 @@ export function initAuth() {
       // Automatically restore cloud progress onto this device
       try {
         await restoreProgressFromCloud();
+        await syncDailyProgressFromFirestore();
       } catch (_) {}
     } else {
       // Keep session alive anonymously

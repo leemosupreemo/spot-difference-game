@@ -46,7 +46,9 @@ import {
   canAttemptDaily,
   getDailyPlayerStatus,
   resetDailyPlayerStatus,
-  syncRemoteDailyQueue
+  syncRemoteDailyQueue,
+  syncDailyProgressFromFirestore,
+  isDailyChallengeCompletedRemote
 } from './services/dailyChallenge';
 import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress, saveLeaderboardStats, restoreProgressFromCloud, clearAllLocalRecords } from './services/playerProgress';
 import {
@@ -245,6 +247,17 @@ function GameApp() {
     syncRemoteLevelPacks().catch(() => {});
     syncRemoteAppConfig().catch(() => {});
     syncRemoteDailyQueue().catch(() => {});
+    syncDailyProgressFromFirestore().then(completions => {
+      if (completions && Object.keys(completions).length > 0) {
+        setDailyCalendarRefreshKey(k => k + 1);
+        const todayStr = getTodayDateString();
+        if (completions[todayStr]?.completed) {
+          setIsDailyCompleted(true);
+          setIsDailySuccessCompleted(true);
+          setDailyStats(getDailyPlayerStatus(todayStr));
+        }
+      }
+    }).catch(() => {});
     music.start();
 
     // If launched via Challenge Link, track reception
@@ -993,16 +1006,33 @@ function GameApp() {
 
   const handleOpenDailyCalendar = useCallback(() => {
     setIsDailyCalendarOpen(true);
+    syncDailyProgressFromFirestore().then(completions => {
+      if (completions && Object.keys(completions).length > 0) {
+        setDailyCalendarRefreshKey(k => k + 1);
+      }
+    }).catch(() => {});
   }, []);
 
-  const handleSelectDailyCalendarDate = useCallback((dateStr) => {
+  const handleSelectDailyCalendarDate = useCallback(async (dateStr) => {
     setIsDailyCalendarOpen(false);
     if (view === 'stats') {
       setView('menu');
     }
     const isArchive = Boolean(dateStr && dateStr !== getTodayDateString());
+    if (isArchive) {
+      if (getDailyPlayerStatus(dateStr).completed && !debugMode) {
+        logApp('INFO', `[DailyChallenge:Archive] Past challenge for ${dateStr} is already completed`);
+        return;
+      }
+      const remoteCompleted = await isDailyChallengeCompletedRemote(dateStr);
+      if (remoteCompleted && !debugMode) {
+        logApp('INFO', `[DailyChallenge:Archive] Remote check confirms ${dateStr} is already completed`);
+        setDailyCalendarRefreshKey(k => k + 1);
+        return;
+      }
+    }
     handleStartDailyChallenge(dateStr, { isArchive });
-  }, [view]);
+  }, [view, debugMode]);
 
   // Launch Set of the Day (3-image sequence from unrepeated daily queue)
   const handleStartDailyChallenge = (targetDateStr = null, { isArchive = false } = {}) => {
@@ -1016,6 +1046,12 @@ function GameApp() {
         logApp('INFO', `[DailyChallenge:Archive] Past challenge for ${effectiveDate} is already completed`);
         return;
       }
+      startDailyChallengeSession({ dateStr: effectiveDate, isArchive: true }).then(session => {
+        if (session && !session.allowed && !debugMode) {
+          logApp('INFO', `[DailyChallenge:Archive] Remote check confirms ${effectiveDate} is already completed`);
+          setDailyCalendarRefreshKey(k => k + 1);
+        }
+      }).catch(() => {});
     }
 
     if (!isArchiveRun) {
@@ -1204,23 +1240,24 @@ function GameApp() {
           });
           setDailyCalendarRefreshKey(prev => prev + 1);
 
-          if (!isArchiveRun) {
-            // Sync completion to Firestore live daily leaderboard asynchronously only for ranked runs
-            recordDailyChallengeCompletionRemote({
-              dateStr: completedDateStr,
-              setId: levels?.dailySetId || `daily_${completedDateStr}`,
-              entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id),
-              totalTimeMs: cumulativeTime
-            }).then(remoteResult => {
-              if (remoteResult) {
-                setDailyVictoryData(prev => prev ? {
-                  ...prev,
-                  position: remoteResult.position,
-                  totalPlayers: remoteResult.totalPlayers
-                } : null);
-              }
-            }).catch(() => {});
+          // Sync completion to Firestore asynchronously for both live ranked runs and past archive runs
+          recordDailyChallengeCompletionRemote({
+            dateStr: completedDateStr,
+            setId: levels?.dailySetId || `daily_${completedDateStr}`,
+            entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id),
+            totalTimeMs: cumulativeTime,
+            isArchive: isArchiveRun
+          }).then(remoteResult => {
+            if (remoteResult && !isArchiveRun) {
+              setDailyVictoryData(prev => prev ? {
+                ...prev,
+                position: remoteResult.position,
+                totalPlayers: remoteResult.totalPlayers
+              } : null);
+            }
+          }).catch(() => {});
 
+          if (!isArchiveRun) {
             // Mirror to Game Center if signed in
             mirrorRoundToGameCenter({
               elapsedTimeMs: cumulativeTime,

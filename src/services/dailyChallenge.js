@@ -9,6 +9,7 @@ import {
   collection,
   getDocs,
   query,
+  where,
   orderBy,
   limit,
   serverTimestamp
@@ -1311,10 +1312,28 @@ export function getDailyPlayerIdentifier(uid) {
  * Prevents multiple attempts across reinstalls / browsers if linked.
  * @param {Object} [params]
  * @param {string} [params.dateStr]
+ * @param {boolean} [params.isArchive]
  * @returns {Promise<{ allowed: boolean, uid?: string, status?: string, isRemote: boolean }>}
  */
-export async function startDailyChallengeSession({ dateStr = getTodayDateString() } = {}) {
-  // Always register local attempt immediately for zero-lag UI
+export async function startDailyChallengeSession({ dateStr = getTodayDateString(), isArchive = false } = {}) {
+  // Archive runs: do not enforce the single-attempt in_progress lock, but verify if already completed
+  if (isArchive) {
+    const isCompleted = isDailyChallengeCompleted(dateStr);
+    if (isCompleted) {
+      return { allowed: false, status: 'completed', isRemote: false };
+    }
+    const player = await getDailyPlayer();
+    if (player) {
+      const isRemoteCompleted = await isDailyChallengeCompletedRemote(dateStr);
+      if (isRemoteCompleted) {
+        return { allowed: false, status: 'completed', isRemote: true };
+      }
+      return { allowed: true, uid: player.uid, isRemote: true };
+    }
+    return { allowed: true, uid: null, isRemote: false };
+  }
+
+  // Live today's ranked challenge: always register local attempt immediately for zero-lag UI
   recordDailyChallengeAttempt(dateStr);
 
   const player = await getDailyPlayer();
@@ -1355,11 +1374,200 @@ export async function startDailyChallengeSession({ dateStr = getTodayDateString(
 }
 
 /**
- * Completes the Set of the Day, updates local stats, and syncs to Firestore global leaderboard.
+ * Checks if a daily challenge has already been completed in Firestore or local storage.
+ * @param {string} [dateStr]
+ * @returns {Promise<boolean>}
+ */
+export async function isDailyChallengeCompletedRemote(dateStr = getTodayDateString()) {
+  if (isDailyChallengeCompleted(dateStr)) return true;
+
+  const player = await getDailyPlayer();
+  if (!player) return false;
+
+  try {
+    // 1. Check user-specific completions collection: players/{uid}/daily_completions/{dateStr}
+    const completionRef = doc(player.db, 'players', player.uid, 'daily_completions', dateStr);
+    const snap = await getDoc(completionRef);
+    if (snap.exists()) {
+      const data = snap.data();
+      if (data && (data.completed || data.status === 'completed')) {
+        const storageKey = `${STORAGE_KEY_DAILY_PLAYER_PREFIX}${dateStr}`;
+        const local = getDailyPlayerStatus(dateStr);
+        storageSet(storageKey, JSON.stringify({
+          ...local,
+          ...data,
+          completed: true,
+          attempted: true,
+          failed: false
+        }));
+        return true;
+      }
+    }
+
+    // 2. Check daily_attempts collection
+    const effectiveId = getDailyPlayerIdentifier(player.uid);
+    const attemptDocId = `${dateStr}_${effectiveId}`;
+    const attemptRef = doc(player.db, 'daily_attempts', attemptDocId);
+    const attemptSnap = await getDoc(attemptRef);
+    if (attemptSnap.exists()) {
+      const data = attemptSnap.data();
+      if (data && (data.completed || data.status === 'completed')) {
+        const storageKey = `${STORAGE_KEY_DAILY_PLAYER_PREFIX}${dateStr}`;
+        const local = getDailyPlayerStatus(dateStr);
+        storageSet(storageKey, JSON.stringify({
+          ...local,
+          ...data,
+          completed: true,
+          attempted: true,
+          failed: false
+        }));
+        return true;
+      }
+    }
+  } catch (err) {
+    logApp('WARN', '[DailyChallenge] Error checking completion remote:', err?.message || err);
+  }
+
+  return false;
+}
+
+/**
+ * Syncs completed daily challenges from Firestore down to local storage.
+ * Reads players/{uid}/daily_completions and daily_attempts where uid == player.uid.
+ * Also uploads any completed challenges stored only locally to ensure durability.
+ * @returns {Promise<Record<string, Object>>}
+ */
+export async function syncDailyProgressFromFirestore() {
+  const player = await getDailyPlayer();
+  if (!player) return {};
+
+  const effectiveId = getDailyPlayerIdentifier(player.uid);
+  const syncedCompletions = {};
+
+  // 1. Fetch from players/{uid}/daily_completions
+  try {
+    const completionsCol = collection(player.db, 'players', player.uid, 'daily_completions');
+    const completionsSnap = await getDocs(completionsCol);
+    completionsSnap.forEach(docSnap => {
+      const data = docSnap.data();
+      if (data && (data.completed || data.status === 'completed')) {
+        const dateStr = data.dateStr || docSnap.id;
+        if (dateStr) {
+          syncedCompletions[dateStr] = {
+            completed: true,
+            attempted: true,
+            failed: false,
+            totalTimeMs: data.totalTimeMs || null,
+            stars: data.stars || 1,
+            dateStr,
+            setId: data.setId || `daily_${dateStr}`,
+            entryIds: data.entryIds || []
+          };
+        }
+      }
+    });
+  } catch (err) {
+    logApp('WARN', '[DailyChallenge] Error syncing players daily_completions:', err?.message || err);
+  }
+
+  // 2. Also fetch from daily_attempts where uid == player.uid
+  try {
+    const attemptsCol = collection(player.db, 'daily_attempts');
+    const q = query(attemptsCol, where('uid', '==', player.uid));
+    const attemptsSnap = await getDocs(q);
+    attemptsSnap.forEach(docSnap => {
+      const data = docSnap.data();
+      if (data && (data.completed || data.status === 'completed')) {
+        const dateStr = data.dateStr || docSnap.id.split('_')[0];
+        if (dateStr && !syncedCompletions[dateStr]) {
+          syncedCompletions[dateStr] = {
+            completed: true,
+            attempted: true,
+            failed: false,
+            totalTimeMs: data.totalTimeMs || null,
+            stars: data.stars || 1,
+            dateStr,
+            setId: data.setId || `daily_${dateStr}`,
+            entryIds: data.entryIds || []
+          };
+        }
+      }
+    });
+  } catch (err) {
+    logApp('WARN', '[DailyChallenge] Error syncing daily_attempts:', err?.message || err);
+  }
+
+  // 3. Update local storage with all completed challenges found in Firestore
+  Object.entries(syncedCompletions).forEach(([dateStr, remoteData]) => {
+    const storageKey = `${STORAGE_KEY_DAILY_PLAYER_PREFIX}${dateStr}`;
+    const local = getDailyPlayerStatus(dateStr);
+    if (!local.completed) {
+      const merged = {
+        ...local,
+        ...remoteData,
+        completed: true,
+        attempted: true,
+        failed: false
+      };
+      storageSet(storageKey, JSON.stringify(merged));
+    }
+  });
+
+  // 4. Bi-directional backfill: upload any local completions that were missing in Firestore
+  try {
+    const allLocalDates = [];
+    if (typeof localStorage !== 'undefined' && typeof localStorage.key === 'function') {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(STORAGE_KEY_DAILY_PLAYER_PREFIX)) {
+          allLocalDates.push(key.slice(STORAGE_KEY_DAILY_PLAYER_PREFIX.length));
+        }
+      }
+    }
+    for (const key of memoryStore.keys()) {
+      if (key && key.startsWith(STORAGE_KEY_DAILY_PLAYER_PREFIX)) {
+        allLocalDates.push(key.slice(STORAGE_KEY_DAILY_PLAYER_PREFIX.length));
+      }
+    }
+    const uniqueLocalDates = Array.from(new Set(allLocalDates));
+    for (const dateStr of uniqueLocalDates) {
+      const local = getDailyPlayerStatus(dateStr);
+      if (local && local.completed && !syncedCompletions[dateStr]) {
+        const completionRef = doc(player.db, 'players', player.uid, 'daily_completions', dateStr);
+        setDoc(completionRef, {
+          uid: player.uid,
+          effectiveId,
+          dateStr,
+          setId: local.setId || `daily_${dateStr}`,
+          entryIds: local.entryIds || [],
+          status: 'completed',
+          completed: true,
+          totalTimeMs: local.totalTimeMs || 0,
+          stars: local.stars || 1,
+          isArchive: dateStr !== getTodayDateString(),
+          completedAt: serverTimestamp()
+        }, { merge: true }).catch(() => {});
+        syncedCompletions[dateStr] = local;
+      }
+    }
+  } catch (err) {
+    logApp('WARN', '[DailyChallenge] Local-to-Firestore upload sync warning:', err?.message || err);
+  }
+
+  return syncedCompletions;
+}
+
+/**
+ * Completes the Set of the Day, updates local stats, and syncs to Firestore.
+ * Saves to daily_attempts and players/{uid}/daily_completions.
+ * Ranked live runs also sync to global leaderboards; archive runs remain unranked.
  * @param {Object} params
  * @param {string} [params.dateStr]
  * @param {number} params.totalTimeMs
  * @param {string} [params.playerName]
+ * @param {string} [params.setId]
+ * @param {Array<string>} [params.entryIds]
+ * @param {boolean} [params.isArchive]
  * @returns {Promise<Object>}
  */
 export async function recordDailyChallengeCompletionRemote({
@@ -1367,7 +1575,8 @@ export async function recordDailyChallengeCompletionRemote({
   totalTimeMs,
   playerName = '',
   setId = `daily_${dateStr}`,
-  entryIds = []
+  entryIds = [],
+  isArchive = false
 }) {
   const localResult = recordDailyChallengeCompletion({ dateStr, totalTimeMs, playerName, setId, entryIds });
 
@@ -1385,6 +1594,7 @@ export async function recordDailyChallengeCompletionRemote({
       const attemptDocId = `${dateStr}_${effectiveId}`;
       const attemptRef = doc(player.db, 'daily_attempts', attemptDocId);
 
+      // Save to daily_attempts
       await setDoc(attemptRef, {
         uid: player.uid,
         effectiveId,
@@ -1392,31 +1602,51 @@ export async function recordDailyChallengeCompletionRemote({
         setId: localResult.setId,
         entryIds: localResult.entryIds,
         status: 'completed',
+        completed: true,
         totalTimeMs,
         stars: localResult.stars,
+        isArchive: Boolean(isArchive),
         completedAt: serverTimestamp()
       }, { merge: true });
 
-      const leaderboardRef = doc(player.db, 'daily_leaderboard', dateStr, 'entries', player.uid);
-      await setDoc(leaderboardRef, {
+      // Save to player's dedicated daily_completions subcollection
+      const completionRef = doc(player.db, 'players', player.uid, 'daily_completions', dateStr);
+      await setDoc(completionRef, {
         uid: player.uid,
-        playerName: effectivePlayerName,
+        effectiveId,
+        dateStr,
+        setId: localResult.setId,
+        entryIds: localResult.entryIds,
+        status: 'completed',
+        completed: true,
         totalTimeMs,
         stars: localResult.stars,
-        completedAt: Date.now()
-      });
+        isArchive: Boolean(isArchive),
+        completedAt: serverTimestamp()
+      }, { merge: true });
 
-      // Refetch live global leaderboard
-      await fetchDailyLeaderboard(dateStr);
+      if (!isArchive) {
+        const leaderboardRef = doc(player.db, 'daily_leaderboard', dateStr, 'entries', player.uid);
+        await setDoc(leaderboardRef, {
+          uid: player.uid,
+          playerName: effectivePlayerName,
+          totalTimeMs,
+          stars: localResult.stars,
+          completedAt: Date.now()
+        });
 
-      // Record score into durable daily leaderboard (Top 5)
-      submitLeaderboardScore({
-        boardType: 'daily',
-        boardId: dateStr,
-        score: totalTimeMs,
-        metric: 'elapsedMs',
-        displayName: effectivePlayerName
-      }).catch(() => {});
+        // Refetch live global leaderboard
+        await fetchDailyLeaderboard(dateStr);
+
+        // Record score into durable daily leaderboard (Top 5)
+        submitLeaderboardScore({
+          boardType: 'daily',
+          boardId: dateStr,
+          score: totalTimeMs,
+          metric: 'elapsedMs',
+          displayName: effectivePlayerName
+        }).catch(() => {});
+      }
     }
   } catch (err) {
     logApp('WARN', '[DailyChallenge] Remote completion sync warning:', err?.message || err);
