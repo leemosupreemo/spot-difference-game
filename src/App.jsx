@@ -48,7 +48,8 @@ import {
   resetDailyPlayerStatus,
   syncRemoteDailyQueue,
   syncDailyProgressFromFirestore,
-  isDailyChallengeCompletedRemote
+  isDailyChallengeCompletedRemote,
+  isDailyChallengeAttemptedRemote
 } from './services/dailyChallenge';
 import { hasCompletedFirstSet, markFirstSetCompleted, saveImageProgress, saveLeaderboardStats, restoreProgressFromCloud, clearAllLocalRecords } from './services/playerProgress';
 import {
@@ -1019,14 +1020,15 @@ function GameApp() {
       setView('menu');
     }
     const isArchive = Boolean(dateStr && dateStr !== getTodayDateString());
-    if (isArchive) {
-      if (getDailyPlayerStatus(dateStr).completed && !debugMode) {
-        logApp('INFO', `[DailyChallenge:Archive] Past challenge for ${dateStr} is already completed`);
+    if (!debugMode) {
+      if (!canAttemptDaily(dateStr)) {
+        logApp('INFO', `[DailyChallenge] Challenge for ${dateStr} has already been attempted or completed locally`);
+        setDailyCalendarRefreshKey(k => k + 1);
         return;
       }
-      const remoteCompleted = await isDailyChallengeCompletedRemote(dateStr);
-      if (remoteCompleted && !debugMode) {
-        logApp('INFO', `[DailyChallenge:Archive] Remote check confirms ${dateStr} is already completed`);
+      const remoteAttempted = await isDailyChallengeAttemptedRemote(dateStr);
+      if (remoteAttempted) {
+        logApp('INFO', `[DailyChallenge] Remote check confirms ${dateStr} has already been attempted or completed`);
         setDailyCalendarRefreshKey(k => k + 1);
         return;
       }
@@ -1040,25 +1042,19 @@ function GameApp() {
     const effectiveDate = targetDateStr || getTodayDateString();
     const isArchiveRun = Boolean(isArchive || (targetDateStr && targetDateStr !== getTodayDateString()));
 
+    if (!canAttemptDaily(effectiveDate) && !debugMode) {
+      logApp('INFO', `[DailyChallenge] Challenge for ${effectiveDate} has already been attempted or completed`);
+      return;
+    }
+
     if (isArchiveRun) {
-      const archiveStatus = getDailyPlayerStatus(effectiveDate);
-      if (archiveStatus.completed && !debugMode) {
-        logApp('INFO', `[DailyChallenge:Archive] Past challenge for ${effectiveDate} is already completed`);
-        return;
-      }
       startDailyChallengeSession({ dateStr: effectiveDate, isArchive: true }).then(session => {
         if (session && !session.allowed && !debugMode) {
-          logApp('INFO', `[DailyChallenge:Archive] Remote check confirms ${effectiveDate} is already completed`);
+          logApp('INFO', `[DailyChallenge:Archive] Remote check confirms ${effectiveDate} is already attempted`);
           setDailyCalendarRefreshKey(k => k + 1);
         }
       }).catch(() => {});
-    }
-
-    if (!isArchiveRun) {
-      if (!canAttemptDaily() && !debugMode) {
-        logApp('INFO', '[DailyChallenge] Daily challenge already attempted today');
-        return;
-      }
+    } else {
       // Ensure debug runs use the latest OTA/Firebase queue before resolving the set.
       if (debugMode) {
         syncRemoteDailyQueue().catch(() => {});
@@ -1492,15 +1488,21 @@ function GameApp() {
         // Go straight to fail modal without revealing answer or pausing
         if (gameMode === 'daily') {
           const isArchiveRun = Boolean(levels?.isArchive);
-          if (!isArchiveRun) {
+          const effectiveDate = levels?.dateStr || getTodayDateString();
+          if (!debugMode) {
             recordDailyChallengeFailureRemote({
-              stageIndex: currentStageIndex
+              dateStr: effectiveDate,
+              stageIndex: currentStageIndex,
+              isArchive: isArchiveRun
             }).catch(() => {});
-            setIsDailyCompleted(true);
+            if (!isArchiveRun) {
+              setIsDailyCompleted(true);
+            }
+            setDailyCalendarRefreshKey(k => k + 1);
           }
           const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
           trackDailyChallengeCompleted({
-            date: levels?.dateStr || getTodayDateString(),
+            date: effectiveDate,
             totalTimeMs: cumulativeTime,
             stars: 0,
             position: null,
@@ -1518,7 +1520,7 @@ function GameApp() {
             isFailed: true,
             stageIndex: currentStageIndex,
             isArchive: isArchiveRun,
-            dateStr: levels?.dateStr
+            dateStr: effectiveDate
           });
         } else {
           setGameOverModalOpen(true);
@@ -1567,11 +1569,17 @@ function GameApp() {
     setMagnifierEnabled(false);
     if (gameMode === 'daily') {
       const isArchiveRun = Boolean(levels?.isArchive);
-      if (!isArchiveRun) {
-        if (!debugMode) {
-          recordDailyChallengeFailureRemote({ stageIndex: currentStageIndex }).catch(() => {});
+      const effectiveDate = levels?.dateStr || getTodayDateString();
+      if (!debugMode) {
+        recordDailyChallengeFailureRemote({
+          dateStr: effectiveDate,
+          stageIndex: currentStageIndex,
+          isArchive: isArchiveRun
+        }).catch(() => {});
+        if (!isArchiveRun) {
           setIsDailyCompleted(true);
         }
+        setDailyCalendarRefreshKey(k => k + 1);
       }
       try { sounds.playLose(); } catch (_) {}
       const cumulativeTime = stageTimesRef.current.slice(0, currentStageIndex).reduce((sum, t) => sum + (t || 0), 0) + elapsedTime;
@@ -1605,7 +1613,7 @@ function GameApp() {
       });
 
       trackDailyChallengeCompleted({
-        date: levels?.dateStr || getTodayDateString(),
+        date: effectiveDate,
         totalTimeMs: cumulativeTime,
         stars: 0,
         position: null,
@@ -1625,7 +1633,7 @@ function GameApp() {
         isForfeit: true,
         stageIndex: currentStageIndex,
         isArchive: isArchiveRun,
-        dateStr: levels?.dateStr
+        dateStr: effectiveDate
       });
       return;
     }

@@ -446,5 +446,51 @@ test('syncDailyProgressFromFirestore and isDailyChallengeCompletedRemote handle 
   assert.equal(isCompletedAfter, true);
 });
 
+test('startDailyChallengeSession blocks archive run if already attempted or failed', async () => {
+  const attemptedDate = '2026-09-15';
+  resetDailyPlayerStatus(attemptedDate);
+
+  // First start registers attempt and is allowed
+  const s1 = await startDailyChallengeSession({ dateStr: attemptedDate, isArchive: true });
+  assert.equal(s1.allowed, true);
+
+  // Subsequent attempt is blocked even without completing
+  const s2 = await startDailyChallengeSession({ dateStr: attemptedDate, isArchive: true });
+  assert.equal(s2.allowed, false);
+  assert.equal(s2.status, 'attempted');
+
+  // Failed archive date is also blocked
+  const failedDate = '2026-09-16';
+  resetDailyPlayerStatus(failedDate);
+  recordDailyChallengeFailure({ dateStr: failedDate, stageIndex: 1 });
+  const s3 = await startDailyChallengeSession({ dateStr: failedDate, isArchive: true });
+  assert.equal(s3.allowed, false);
+  assert.equal(s3.status, 'failed');
+});
+
+test('getDailyCalendarMonth tags attempted and failed past days as locked and inactive', () => {
+  const simulatedToday = '2026-09-20';
+  const failedDate = '2026-09-05';
+  const attemptedDate = '2026-09-06';
+
+  resetDailyPlayerStatus(failedDate);
+  resetDailyPlayerStatus(attemptedDate);
+
+  recordDailyChallengeFailure({ dateStr: failedDate, stageIndex: 0 });
+  recordDailyChallengeAttempt(attemptedDate);
+
+  const cal = getDailyCalendarMonth(2026, 9, simulatedToday);
+  const day5 = cal.days.find(d => d.dateStr === failedDate);
+  const day6 = cal.days.find(d => d.dateStr === attemptedDate);
+
+  assert.ok(day5);
+  assert.equal(day5.isAttempted, true);
+  assert.equal(day5.isActive, false);
+
+  assert.ok(day6);
+  assert.equal(day6.isAttempted, true);
+  assert.equal(day6.isActive, false);
+});
+
 
 

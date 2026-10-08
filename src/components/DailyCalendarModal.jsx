@@ -70,7 +70,7 @@ export default function DailyCalendarModal({
   };
 
   const handleDateClick = (day) => {
-    if (!day.isActive || day.isCompleted) return;
+    if (!day.isActive || day.isCompleted || day.isAttempted) return;
     try { sounds.playTap(); } catch (_) {}
     if (onSelectDate) {
       onSelectDate(day.dateStr);
@@ -258,6 +258,7 @@ export default function DailyCalendarModal({
           {/* Month Days */}
           {monthData.days.map((day) => {
             const isCompleted = day.isCompleted;
+            const isAttempted = day.isAttempted;
             const isFuture = day.isFuture;
             const isActive = day.isActive;
             const isToday = day.isToday;
@@ -271,6 +272,10 @@ export default function DailyCalendarModal({
               bg = 'rgba(0, 255, 135, 0.12)';
               borderColor = 'rgba(0, 255, 135, 0.35)';
               textColor = 'var(--accent-green)';
+            } else if (isAttempted) {
+              bg = 'rgba(255, 68, 68, 0.08)';
+              borderColor = 'rgba(255, 68, 68, 0.35)';
+              textColor = 'rgba(255, 255, 255, 0.45)';
             } else if (isActive) {
               bg = 'linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(121, 40, 202, 0.18))';
               borderColor = 'rgba(0, 240, 255, 0.6)';
@@ -286,8 +291,8 @@ export default function DailyCalendarModal({
               <button
                 key={day.dateStr}
                 onClick={() => handleDateClick(day)}
-                disabled={!isActive || isCompleted}
-                aria-label={`Date ${day.dateStr}${isCompleted ? ' completed' : isActive ? ' available to play' : ' locked'}`}
+                disabled={!isActive || isCompleted || isAttempted}
+                aria-label={`Date ${day.dateStr}${isCompleted ? ' completed' : isAttempted ? ' attempted - locked' : isActive ? ' available to play' : ' locked'}`}
                 style={{
                   position: 'relative',
                   height: '46px',
@@ -302,7 +307,7 @@ export default function DailyCalendarModal({
                   justifyContent: 'center',
                   padding: '2px',
                   cursor: isActive ? 'pointer' : 'default',
-                  opacity: isFuture ? 0.4 : 1,
+                  opacity: isFuture ? 0.4 : isAttempted ? 0.65 : 1,
                   transition: 'all 0.15s ease'
                 }}
               >
@@ -327,6 +332,8 @@ export default function DailyCalendarModal({
                 >
                   {isCompleted ? (
                     <Check size={13} color="var(--accent-green)" strokeWidth={3} />
+                  ) : isAttempted ? (
+                    <Lock size={11} color="rgba(255, 68, 68, 0.7)" />
                   ) : isActive ? (
                     <span
                       style={{
@@ -339,9 +346,9 @@ export default function DailyCalendarModal({
                     >
                       PLAY
                     </span>
-                  ) : isFuture ? (
+                  ) : (
                     <Lock size={10} color="rgba(255, 255, 255, 0.3)" />
-                  ) : null}
+                  )}
                 </div>
 
                 {isToday && (
