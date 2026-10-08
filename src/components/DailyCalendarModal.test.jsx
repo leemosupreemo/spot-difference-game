@@ -135,7 +135,7 @@ test('DailyCalendarModal re-reads completion status and disables date after comp
   expect(onSelectDate).not.toHaveBeenCalled();
 });
 
-test('DailyCalendarModal displays attempted and failed past dates as locked and blocks clicks', () => {
+test('DailyCalendarModal displays attempted and failed past dates with checkmark as completed and blocks clicks', () => {
   // Mark Sept 12 as failed (attempted)
   recordDailyChallengeFailure({
     dateStr: '2026-09-12',
@@ -158,16 +158,16 @@ test('DailyCalendarModal displays attempted and failed past dates as locked and 
     />
   );
 
-  // Day 12 (failed) should be marked attempted - locked and disabled
-  const day12Btn = screen.getByLabelText('Date 2026-09-12 attempted - locked');
+  // Day 12 (failed) should be marked completed and disabled
+  const day12Btn = screen.getByLabelText('Date 2026-09-12 completed');
   expect(day12Btn).toBeDefined();
   expect(day12Btn.disabled).toBe(true);
 
   fireEvent.click(day12Btn);
   expect(onSelectDate).not.toHaveBeenCalled();
 
-  // Day 13 (attempted) should be marked attempted - locked and disabled
-  const day13Btn = screen.getByLabelText('Date 2026-09-13 attempted - locked');
+  // Day 13 (attempted) should be marked completed and disabled
+  const day13Btn = screen.getByLabelText('Date 2026-09-13 completed');
   expect(day13Btn).toBeDefined();
   expect(day13Btn.disabled).toBe(true);
 
