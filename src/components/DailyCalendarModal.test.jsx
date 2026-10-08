@@ -70,3 +70,60 @@ test('DailyCalendarModal renders calendar and only enables uncompleted dates', (
   expect(day25Btn).toBeDefined();
   expect(day25Btn.disabled).toBe(true);
 });
+
+test('DailyCalendarModal re-reads completion status and disables date after completion', () => {
+  const onSelectDate = vi.fn();
+  const onClose = vi.fn();
+
+  const { rerender } = render(
+    <DailyCalendarModal
+      isOpen={true}
+      onClose={onClose}
+      onSelectDate={onSelectDate}
+      todayDateStr="2026-09-20"
+      refreshKey={0}
+    />
+  );
+
+  // Day 11 is available initially
+  const day11BtnInitial = screen.getByLabelText('Date 2026-09-11 available to play');
+  expect(day11BtnInitial.disabled).toBe(false);
+
+  // Close calendar to simulate entering gameplay
+  rerender(
+    <DailyCalendarModal
+      isOpen={false}
+      onClose={onClose}
+      onSelectDate={onSelectDate}
+      todayDateStr="2026-09-20"
+      refreshKey={0}
+    />
+  );
+
+  // Complete Sept 11
+  recordDailyChallengeCompletion({
+    dateStr: '2026-09-11',
+    totalTimeMs: 19000,
+    playerName: 'Tester'
+  });
+
+  // Re-open calendar with incremented refreshKey
+  rerender(
+    <DailyCalendarModal
+      isOpen={true}
+      onClose={onClose}
+      onSelectDate={onSelectDate}
+      todayDateStr="2026-09-20"
+      refreshKey={1}
+    />
+  );
+
+  // Day 11 should now be completed and disabled
+  const day11BtnUpdated = screen.getByLabelText('Date 2026-09-11 completed');
+  expect(day11BtnUpdated).toBeDefined();
+  expect(day11BtnUpdated.disabled).toBe(true);
+
+  // Clicking it does not trigger onSelectDate
+  fireEvent.click(day11BtnUpdated);
+  expect(onSelectDate).not.toHaveBeenCalled();
+});

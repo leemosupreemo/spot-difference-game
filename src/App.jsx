@@ -704,6 +704,8 @@ function GameApp() {
     }
   });
   const [isDailyCalendarOpen, setIsDailyCalendarOpen] = useState(false);
+  const [dailyCalendarRefreshKey, setDailyCalendarRefreshKey] = useState(0);
+  const activeDailyDateRef = useRef(null);
 
   const rawLevel = levels.find(l => l.id === currentLevelId) || levels[0];
 
@@ -1008,6 +1010,14 @@ function GameApp() {
     const effectiveDate = targetDateStr || getTodayDateString();
     const isArchiveRun = Boolean(isArchive || (targetDateStr && targetDateStr !== getTodayDateString()));
 
+    if (isArchiveRun) {
+      const archiveStatus = getDailyPlayerStatus(effectiveDate);
+      if (archiveStatus.completed && !debugMode) {
+        logApp('INFO', `[DailyChallenge:Archive] Past challenge for ${effectiveDate} is already completed`);
+        return;
+      }
+    }
+
     if (!isArchiveRun) {
       if (!canAttemptDaily() && !debugMode) {
         logApp('INFO', '[DailyChallenge] Daily challenge already attempted today');
@@ -1030,6 +1040,8 @@ function GameApp() {
         setIsDailyCompleted(true);
       }
     }
+
+    activeDailyDateRef.current = effectiveDate;
 
     let dailyLevels;
     if (targetDateStr) {
@@ -1175,6 +1187,7 @@ function GameApp() {
         // Daily Challenge Mode (3 Images Sequence) Completion
         if (gameMode === 'daily') {
           const isArchiveRun = Boolean(levels?.isArchive);
+          const completedDateStr = levels?.dateStr || levels?.[0]?.dateStr || activeDailyDateRef.current || getTodayDateString();
 
           if (!isArchiveRun) {
             markFirstSetCompleted();
@@ -1184,17 +1197,18 @@ function GameApp() {
           }
 
           const dailyResult = recordDailyChallengeCompletion({
-            dateStr: levels?.dateStr,
+            dateStr: completedDateStr,
             totalTimeMs: cumulativeTime,
-            setId: levels?.dailySetId,
+            setId: levels?.dailySetId || `daily_${completedDateStr}`,
             entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id)
           });
+          setDailyCalendarRefreshKey(prev => prev + 1);
 
           if (!isArchiveRun) {
             // Sync completion to Firestore live daily leaderboard asynchronously only for ranked runs
             recordDailyChallengeCompletionRemote({
-              dateStr: levels?.dateStr,
-              setId: levels?.dailySetId,
+              dateStr: completedDateStr,
+              setId: levels?.dailySetId || `daily_${completedDateStr}`,
               entryIds: levels?.entryIds || levels.slice(0, 3).map(level => level.id),
               totalTimeMs: cumulativeTime
             }).then(remoteResult => {
@@ -1217,7 +1231,7 @@ function GameApp() {
             }).catch(() => {});
           }
 
-          const dailySetId = levels?.dailySetId || dailyResult?.setId || 'daily_set_1';
+          const dailySetId = levels?.dailySetId || dailyResult?.setId || `daily_${completedDateStr}`;
           trackStageCleared({
             selectedTheme: 'daily_challenge',
             setId: dailySetId,
@@ -1230,7 +1244,7 @@ function GameApp() {
           });
 
           trackDailyChallengeCompleted({
-            date: levels?.dateStr || getTodayDateString(),
+            date: completedDateStr,
             totalTimeMs: cumulativeTime,
             stars: dailyResult.stars,
             position: isArchiveRun ? null : dailyResult.position,
@@ -1239,7 +1253,7 @@ function GameApp() {
             isArchive: isArchiveRun
           });
 
-          logApp('INFO', `[DailyChallengeCleared] Time: ${cumulativeTime}ms, Rank: #${dailyResult.position}, Stars: ${dailyResult.stars}, Archive: ${isArchiveRun}`);
+          logApp('INFO', `[DailyChallengeCleared] Date: ${completedDateStr}, Time: ${cumulativeTime}ms, Rank: #${dailyResult.position}, Stars: ${dailyResult.stars}, Archive: ${isArchiveRun}`);
 
           const dailySetNum = getSetNumber(dailySetId) || 1;
 
@@ -1257,7 +1271,7 @@ function GameApp() {
               isFailed: false,
               stageIndex: 2,
               isArchive: isArchiveRun,
-              dateStr: levels?.dateStr
+              dateStr: completedDateStr
             });
           }, 2000);
           return;
@@ -1890,6 +1904,7 @@ function GameApp() {
         onClose={() => setIsDailyCalendarOpen(false)}
         onSelectDate={handleSelectDailyCalendarDate}
         todayDateStr={getTodayDateString()}
+        refreshKey={dailyCalendarRefreshKey}
       />
 
       <GameOverModal

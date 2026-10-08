@@ -14,7 +14,8 @@ export default function DailyCalendarModal({
   isOpen,
   onClose,
   onSelectDate,
-  todayDateStr = getTodayDateString()
+  todayDateStr = getTodayDateString(),
+  refreshKey = 0
 }) {
   const [todayYear, todayMonth] = useMemo(() => {
     return todayDateStr.split('-').map(Number);
@@ -24,14 +25,15 @@ export default function DailyCalendarModal({
   const [currentMonth, setCurrentMonth] = useState(todayMonth); // 1-12
 
   const monthData = useMemo(() => {
+    if (!isOpen) return { days: [], canGoPrev: false, canGoNext: false, startDayOfWeek: 0 };
     return getDailyCalendarMonth(currentYear, currentMonth, todayDateStr);
-  }, [currentYear, currentMonth, todayDateStr]);
+  }, [isOpen, currentYear, currentMonth, todayDateStr, refreshKey]);
 
   if (!isOpen) return null;
 
   const handlePrevMonth = (e) => {
     e.stopPropagation();
-    if (!monthData.canGoPrev) return;
+    if (!monthData?.canGoPrev) return;
     try { sounds.playTap(); } catch (_) {}
     if (currentMonth === 1) {
       setCurrentYear(prev => prev - 1);
@@ -43,7 +45,7 @@ export default function DailyCalendarModal({
 
   const handleNextMonth = (e) => {
     e.stopPropagation();
-    if (!monthData.canGoNext) return;
+    if (!monthData?.canGoNext) return;
     try { sounds.playTap(); } catch (_) {}
     if (currentMonth === 12) {
       setCurrentYear(prev => prev + 1);
@@ -54,7 +56,7 @@ export default function DailyCalendarModal({
   };
 
   const handleDateClick = (day) => {
-    if (!day.isActive) return;
+    if (!day.isActive || day.isCompleted) return;
     try { sounds.playTap(); } catch (_) {}
     if (onSelectDate) {
       onSelectDate(day.dateStr);
