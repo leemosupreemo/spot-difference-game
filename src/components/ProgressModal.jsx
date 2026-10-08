@@ -579,8 +579,36 @@ export default function ProgressModal({
               </div>
             </div>
 
-            {/* Time to beat badge & Play CTA */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {/* Header Actions: Past Challenges Calendar, Time to beat badge & Play CTA */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => {
+                  sounds.playTap();
+                  if (onOpenDailyCalendar) onOpenDailyCalendar();
+                }}
+                className="glass-btn"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '7px 12px',
+                  borderRadius: '12px',
+                  fontSize: '0.82rem',
+                  fontWeight: 800,
+                  color: 'var(--accent-cyan)',
+                  borderColor: 'rgba(0, 240, 255, 0.45)',
+                  background: 'rgba(0, 240, 255, 0.12)',
+                  boxShadow: '0 0 10px rgba(0, 240, 255, 0.2)',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap'
+                }}
+                aria-label="Open past daily challenges calendar"
+                title="Past Daily Challenges"
+              >
+                <Calendar size={15} color="var(--accent-cyan)" />
+                <span>Past Challenges</span>
+              </button>
+
               <div style={{
                 background: 'rgba(0, 0, 0, 0.5)',
                 border: '1px solid rgba(255, 183, 3, 0.4)',

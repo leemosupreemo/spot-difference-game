@@ -164,6 +164,11 @@ test('ProgressModal provides past challenges calendar button under daily run end
   assert.match(source, /if \(onOpenDailyCalendar\) onOpenDailyCalendar\(\)/);
 });
 
+test('ProgressModal provides past challenges calendar button in Daily Challenge header', () => {
+  const source = fs.readFileSync(componentPath, 'utf8');
+  assert.match(source, /SET OF THE DAY LEADERBOARD[\s\S]*?Past Challenges[\s\S]*?Time to Beat/);
+});
+
 
 
 
