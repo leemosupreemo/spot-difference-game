@@ -1,0 +1,59 @@
+================================================================================
+DIFF HUNTER - GOOGLE PLAY STORE METADATA & LISTING COPY
+================================================================================
+
+1. APP NAME (Max 30 characters)
+--------------------------------------------------------------------------------
+Diff Hunter
+(11 / 30 characters)
+
+
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Find subtle differences in handcrafted photographic and stylized puzzle scenes!
+(79 / 80 characters)
+
+
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Put your observation skills to the ultimate test with Diff Hunter — the premier spot-the-difference puzzle game designed for true detail seekers!
+
+Explore breathtaking photographic vistas, vibrant stylized scenes, and intricate macro compositions. Every single puzzle pair in Diff Hunter is handcrafted, curated, and verified with 100% solvability guarantees — no random pixel artifacts or unfair invisible differences.
+
+KEY FEATURES:
+
+✨ DAILY CHALLENGE & STREAKS
+Every midnight, a brand-new exclusive Daily Challenge unlocks worldwide. Complete it on your first attempt to earn bonus stars, protect your daily streak, and unlock the past daily challenge calendar.
+
+🔍 PRECISION PINCH & ZOOM
+Take full control with seamless pinch-to-zoom and pan navigation. Inspect tiny background details, nuanced color variations, and hidden textures with crystal-clear precision.
+
+🏆 LIVE GLOBAL LEADERBOARDS
+Compete against players across the globe on Firestore-powered leaderboards. Race for the fastest completion times and climb the ranks from Bronze to Master Hunter.
+
+🎨 DIVERSE VISUAL STYLES
+• Architectural & Urban Landscapes
+• Dramatic Wildlife & Nature Photography
+• Vivid Minimalist & Stylized Vector Art
+• Complex Dense Macro Compositions
+
+🧘 RELAXING YET CHALLENGING GAMEPLAY
+Play at your own pace without punishing timers, or race the clock in Daily Challenge mode to climb the global leaderboard. Clean cyberpunk aesthetics, tactile haptic feedback, and a distraction-free glassmorphic interface keep you immersed.
+
+🔒 PRIVACY & TRANSPARENCY
+No intrusive tracking or predatory mechanics. Your progress syncs smoothly, and you can play offline whenever you want.
+
+Can you spot them all? Download Diff Hunter today and sharpen your eyes!
+--------------------------------------------------------------------------------
+(1,980 / 4,000 characters)
+
+
+4. CATEGORY & CONTENT RATING
+--------------------------------------------------------------------------------
+Category: Games / Puzzle
+Content Rating: Everyone (IARC)
+Target Age: 13+ and Everyone
+Contains Ads: No
+In-App Purchases: No
+Privacy Policy URL: https://diff-hunter-test.web.app/privacy-policy.html
+================================================================================

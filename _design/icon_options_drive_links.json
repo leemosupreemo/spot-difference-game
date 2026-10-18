@@ -1,0 +1,72 @@
+[
+  {
+    "key": "all_icon_candidates_grid",
+    "title": "3x3 Master Comparison Grid",
+    "filename": "DiffHunter_Icons_3x3_Comparison_Grid.png",
+    "fileUrl": "https://drive.google.com/file/d/1mJp4bwJHywo_7W4H-LCzA-iNiclnSR4V/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "A1_cyber_reticle",
+    "title": "Option A1: Cyber Reticle (Hunter Target Lock)",
+    "filename": "DiffHunter_Icon_A1_Cyber_Reticle.png",
+    "fileUrl": "https://drive.google.com/file/d/18bvJxczowXO04sSpjH1x8A4vnKSElU1t/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "A2_split_reticle",
+    "title": "Option A2: Split Reticle (Dual-Tone Comparison)",
+    "filename": "DiffHunter_Icon_A2_Split_Reticle.png",
+    "fileUrl": "https://drive.google.com/file/d/1FlPaSnTOw7u1OWwRZmOkya0VP79TCAML/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "A3_diamond_reticle",
+    "title": "Option A3: Diamond Reticle (45\u00b0 Precision)",
+    "filename": "DiffHunter_Icon_A3_Diamond_Reticle.png",
+    "fileUrl": "https://drive.google.com/file/d/19DkQe4Z-0XGT9eiRq3SQCc1OyVpHBweq/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "B1_delta_neon",
+    "title": "Option B1: Neon Delta (Mathematical Difference)",
+    "filename": "DiffHunter_Icon_B1_Neon_Delta.png",
+    "fileUrl": "https://drive.google.com/file/d/15PKDg1kNWpANh3IGih_O4UsPq8OltEZc/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "B2_dh_monogram",
+    "title": "Option B2: DH Monogram (Cyber Brand Mark)",
+    "filename": "DiffHunter_Icon_B2_DH_Monogram.png",
+    "fileUrl": "https://drive.google.com/file/d/1tjR1w0fwjAohR6Im0p2PGHebsKYvAfsg/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "B3_delta_crosshair",
+    "title": "Option B3: Delta + Target Reticle Fusion",
+    "filename": "DiffHunter_Icon_B3_Delta_Target_Fusion.png",
+    "fileUrl": "https://drive.google.com/file/d/1XO00xUtDFlOKu6Ge1obLUxrOg1mSboD2/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "C1_magnifier_lens",
+    "title": "Option C1: Finder Loupe (Magnifying Lens)",
+    "filename": "DiffHunter_Icon_C1_Finder_Loupe.png",
+    "fileUrl": "https://drive.google.com/file/d/1WX6IC963Sw8N6ZLGxDu_eVzn3Vgk8VE3/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "C2_radar_scanner",
+    "title": "Option C2: Difference Radar Scanner",
+    "filename": "DiffHunter_Icon_C2_Radar_Scanner.png",
+    "fileUrl": "https://drive.google.com/file/d/1y0n4uwwdcjag-d-GJo9XgaJFiPEqBijc/view?usp=drivesdk",
+    "status": "success"
+  },
+  {
+    "key": "C3_aperture_ring",
+    "title": "Option C3: Focus Aperture Iris (Camera Optics)",
+    "filename": "DiffHunter_Icon_C3_Focus_Aperture_Iris.png",
+    "fileUrl": "https://drive.google.com/file/d/1yJAwuMljUU_PemBiNTXJvYaGjULtQxjn/view?usp=drivesdk",
+    "status": "success"
+  }
+]

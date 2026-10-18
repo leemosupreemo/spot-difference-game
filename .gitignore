@@ -39,3 +39,10 @@ models/*.pt
 # pipeline reads, not artwork the app ships. Same reasoning as models/*.pt --
 # provisioned explicitly, regenerable, never committed.
 _staging/
+
+# Android Keystores & signing keys
+*.keystore
+*.jks
+
+# Local credentials (sourced by distribute_* scripts) -- never commit
+.secrets/

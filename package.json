@@ -14,6 +14,7 @@
     "lint": "oxlint",
     "distribute:firebase": "bash scripts/distribute_ios.sh",
     "distribute:appstore": "bash scripts/distribute_appstore.sh",
+    "distribute:android": "bash scripts/distribute_android.sh",
     "deploy:web": "vite build && npm run stage:remote && firebase deploy --only hosting && npm run audit:levels",
     "deploy:dev": "VITE_IS_DEV_CHANNEL=true vite build && npm run stage:remote && firebase hosting:channel:deploy dev --only diff-hunter --expires 30d",
     "queue:daily": "node scripts/manage_daily_queue.mjs",

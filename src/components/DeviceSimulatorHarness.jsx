@@ -72,6 +72,39 @@ const PRESET_DEVICES = [
     safeArea: { top: 24, bottom: 20, left: 0, right: 0 },
     icon: Tablet,
     description: 'Large 13" iPad Pro workstation (1024x1366)'
+  },
+  {
+    id: 'pixel-8',
+    name: 'Google Pixel 8 / 9',
+    category: 'phone',
+    landscapeWidth: 915,
+    landscapeHeight: 412,
+    pixelRatio: 2.625,
+    safeArea: { top: 0, bottom: 16, left: 24, right: 24 },
+    icon: Smartphone,
+    description: 'Standard Android flagship (412x915)'
+  },
+  {
+    id: 'galaxy-ultra',
+    name: 'Samsung Galaxy Ultra',
+    category: 'phone',
+    landscapeWidth: 960,
+    landscapeHeight: 412,
+    pixelRatio: 3,
+    safeArea: { top: 0, bottom: 16, left: 28, right: 28 },
+    icon: Smartphone,
+    description: 'Wide Android 20:9 form factor (412x960)'
+  },
+  {
+    id: 'android-tablet',
+    name: 'Android Tablet 10"',
+    category: 'tablet',
+    landscapeWidth: 1280,
+    landscapeHeight: 800,
+    pixelRatio: 1.5,
+    safeArea: { top: 16, bottom: 16, left: 0, right: 0 },
+    icon: Tablet,
+    description: '16:10 Android tablet standard (800x1280)'
   }
 ];
 

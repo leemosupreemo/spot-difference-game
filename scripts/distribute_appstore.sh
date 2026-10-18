@@ -91,6 +91,16 @@ if [[ -n "${KEYCHAIN_PASSWORD:-}" ]]; then
   fi
 fi
 
+AUTH_FLAGS=()
+if [[ -n "${ASC_KEY_ID:-}" && -n "${ASC_ISSUER_ID:-}" && -n "${ASC_KEY_PATH:-}" ]]; then
+  echo "🔑 Using App Store Connect API Key (ID: $ASC_KEY_ID)..."
+  AUTH_FLAGS=(
+    -authenticationKeyPath "$ASC_KEY_PATH"
+    -authenticationKeyID "$ASC_KEY_ID"
+    -authenticationKeyIssuerID "$ASC_ISSUER_ID"
+  )
+fi
+
 mkdir -p "$EXPORT_PATH"
 
 echo "🏗️  3. Archiving Xcode app project for App Store (Build #${BUILD_NUMBER})..."
@@ -103,6 +113,7 @@ archive_cmd=(
   DEVELOPMENT_TEAM="$DEVELOPMENT_TEAM"
   CURRENT_PROJECT_VERSION="$BUILD_NUMBER"
   -allowProvisioningUpdates
+  "${AUTH_FLAGS[@]}"
 )
 
 if ! "${archive_cmd[@]}"; then
@@ -122,6 +133,7 @@ if [[ "$UPLOAD_TO_STORE" == true ]]; then
     -exportOptionsPlist "$EXPORT_OPTIONS_PLIST"
     -exportPath "$EXPORT_PATH"
     -allowProvisioningUpdates
+    "${AUTH_FLAGS[@]}"
   )
 
   if "${export_cmd[@]}"; then
