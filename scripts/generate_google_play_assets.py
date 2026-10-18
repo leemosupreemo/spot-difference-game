@@ -268,7 +268,7 @@ Content Rating: Everyone (IARC)
 Target Age: 13+ and Everyone
 Contains Ads: No
 In-App Purchases: No
-Privacy Policy URL: https://diff-hunter-test.web.app/privacy-policy.html
+Privacy Policy URL: https://diffhunter.online/privacy-policy.html
 ================================================================================
 """
     out_file = OUTPUT_DIR / "store_listing_copy.txt"

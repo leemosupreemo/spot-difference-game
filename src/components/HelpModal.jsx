@@ -13,7 +13,7 @@ export default function HelpModal({ isOpen, onClose }) {
 
   const handleOpenExternal = () => {
     sounds.playTap();
-    const url = 'https://diff-hunter-test.web.app/privacy-policy.html';
+    const url = 'https://diffhunter.online/privacy-policy.html';
     try {
       if (typeof window !== 'undefined') {
         window.open(url, '_blank', 'noopener,noreferrer');
@@ -190,99 +190,12 @@ export default function HelpModal({ isOpen, onClose }) {
           minHeight: '260px'
         }}>
           {showFullPolicy ? (
-            /* FULL IN-APP PRIVACY POLICY DOCUMENT */
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--modal-gap-lg)', fontSize: '0.86rem', color: 'var(--text-main)', lineHeight: 1.5 }}>
-              <div>
-                <span style={{
-                  display: 'inline-block',
-                  fontSize: '0.72rem',
-                  fontWeight: 800,
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  color: 'var(--accent-cyan)',
-                  background: 'rgba(0, 240, 255, 0.12)',
-                  border: '1px solid rgba(0, 240, 255, 0.3)',
-                  padding: '3px 8px',
-                  borderRadius: '12px',
-                  marginBottom: '6px'
-                }}>
-                  Legal & Privacy
-                </span>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: 900, margin: '4px 0 2px 0', letterSpacing: '0.5px', color: '#fff' }}>
-                  Diff Hunter Privacy Policy
-                </h2>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
-                  Effective Date: August 27, 2026 | Version 1.0
-                </div>
-                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                  Thank you for playing <strong style={{ color: '#fff' }}>Diff Hunter</strong>. We are committed to protecting your privacy. This policy explains what information is collected, how it is used, and how your privacy is safeguarded.
-                </p>
-              </div>
-
-              <div style={{ background: 'rgba(0, 240, 255, 0.08)', padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(0, 240, 255, 0.25)' }}>
-                <strong style={{ color: 'var(--accent-cyan)', display: 'block', marginBottom: '3px', fontSize: '0.84rem' }}>
-                  🔒 Privacy-First Commitment
-                </strong>
-                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-main)' }}>
-                  Diff Hunter does not require an account, does not collect personal identifiers (name, email, phone, location), and never sells your data or shares it with advertising data brokers.
-                </p>
-              </div>
-
-              <div>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--accent-pink)', margin: '0 0 6px 0' }}>
-                  1. Information We Collect
-                </h3>
-                <p style={{ margin: '0 0 6px 0', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-                  We only collect anonymous technical and gameplay data to ensure the game works reliably:
-                </p>
-                <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                  <li><strong>Gameplay Statistics:</strong> Levels played, puzzle completion times, victory/loss counts, hints used, and game mode selections.</li>
-                  <li><strong>Device Diagnostics:</strong> Device type, screen resolution, OS version, and crash logs.</li>
-                  <li><strong>Anonymous Identifier:</strong> An auto-generated random ID stored locally for high scores and optional leaderboards.</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--accent-pink)', margin: '0 0 6px 0' }}>
-                  2. Information We Do NOT Collect
-                </h3>
-                <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                  <li>No names, email addresses, phone numbers, or personal contacts.</li>
-                  <li>No GPS location data.</li>
-                  <li>No camera, microphone, or photo library access.</li>
-                  <li>No payment card or financial details.</li>
-                  <li>Zero advertising tracking identifiers (IDFA).</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--accent-pink)', margin: '0 0 6px 0' }}>
-                  3. Analytics & Infrastructure
-                </h3>
-                <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                  <li><strong>Mixpanel:</strong> Pseudonymized aggregate analytics for difficulty balancing.</li>
-                  <li><strong>Firebase:</strong> Anonymous authentication for cloud scores and leaderboard rankings.</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--accent-pink)', margin: '0 0 6px 0' }}>
-                  4. Children's Privacy (COPPA Compliant)
-                </h3>
-                <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                  Diff Hunter is designed for all ages (rated 4+). We do not knowingly collect any personally identifiable information from children under the age of 13.
-                </p>
-              </div>
-
-              <div>
-                <h3 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--accent-pink)', margin: '0 0 6px 0' }}>
-                  5. Contact Us
-                </h3>
-                <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                  Support Email: <span style={{ color: 'var(--accent-cyan)' }}>support@thejauntcompany.com</span>
-                </p>
-              </div>
-            </div>
+            /* Single source of truth: the same page published as the Play Store policy URL, bundled in the app so it works offline */
+            <iframe
+              src={`${import.meta.env.BASE_URL}privacy-policy.html`}
+              title="Diff Hunter Privacy Policy"
+              style={{ width: '100%', height: '100%', minHeight: '420px', border: 'none', borderRadius: '12px', background: '#090a10' }}
+            />
           ) : activeTab === 'rules' ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--modal-gap-lg)', fontSize: '0.88rem', color: 'var(--text-main)' }}>
               <div style={{ display: 'flex', gap: 'var(--modal-gap-md)', alignItems: 'flex-start' }}>
