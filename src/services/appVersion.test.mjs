@@ -30,7 +30,7 @@ test('the iOS marketing version matches APP_VERSION on every build configuration
 });
 
 test('the Android versionName matches APP_VERSION', () => {
-  const match = read('android/app/build.gradle').match(/versionName\s+"([^"]+)"/);
+  const match = read('android/app/build.gradle').match(/versionName\b[^\n]*"(\d+\.\d+\.\d+)"/);
 
   assert.ok(match, 'expected versionName in android/app/build.gradle');
   assert.equal(match[1], APP_VERSION,

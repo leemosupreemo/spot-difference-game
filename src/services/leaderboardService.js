@@ -3,6 +3,7 @@ import { getFirestoreClient } from './firestoreClient.js';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { firebaseConfig, getCurrentPlayerId } from './authService.js';
+import { APP_VERSION } from './appConfig.js';
 import { getSavedPlayerName } from './playerProgress.js';
 import { getDeterministicSetBaseline } from '../utils/setLeaderboards.js';
 import { generateDefaultDailyBaseline } from './dailyChallenge.js';
@@ -23,7 +24,6 @@ export const LEADERBOARD_LIMITS = {
 };
 
 const STORAGE_PREFIX = 'diff_hunter_lb_';
-const APP_VERSION = '1.4.0';
 
 function getPlatform() {
   if (typeof window === 'undefined') return 'web';

@@ -92,13 +92,15 @@ export default defineConfig({
           project: process.env.SENTRY_PROJECT,
           authToken: process.env.SENTRY_AUTH_TOKEN,
           sourcemaps: {
-            assets: './dist/**'
+            assets: './dist/**',
+            filesToDeleteAfterUpload: './dist/**/*.map'
           }
         })
       : null
   ].filter(Boolean),
   build: {
-    sourcemap: true,
+    // Maps go to Sentry only, never into dist/ (and so never into the native apps or hosting).
+    sourcemap: process.env.SENTRY_AUTH_TOKEN ? 'hidden' : false,
   },
   server: {
     allowedHosts: true,
