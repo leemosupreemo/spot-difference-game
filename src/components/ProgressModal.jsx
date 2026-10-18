@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer, Flame, Star, Play, WifiOff, RefreshCw, ChevronDown, Calendar } from 'lucide-react';
+import { CheckCircle2, Globe, Award, Zap, Trophy, Target, Timer, Flame, Star, WifiOff, RefreshCw, ChevronDown, ChevronRight, Calendar } from 'lucide-react';
 import { sounds } from '../utils/audio';
 import { fetchLeaderboards } from '../services/playerProgress';
 import { isOnline, subscribeNetworkStatus, checkConnectivity } from '../services/networkService';
@@ -580,7 +580,7 @@ export default function ProgressModal({
             </div>
 
             {/* Header Actions: Past Challenges Calendar, Time to beat badge & Play CTA */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px 18px', flexWrap: 'wrap' }}>
               <button
                 onClick={() => {
                   sounds.playTap();
@@ -609,17 +609,28 @@ export default function ProgressModal({
                 <span>Past Challenges</span>
               </button>
 
-              <div style={{
-                background: 'rgba(0, 0, 0, 0.5)',
-                border: '1px solid rgba(255, 183, 3, 0.4)',
-                borderRadius: '12px',
-                padding: '6px 14px',
-                textAlign: 'right'
-              }}>
-                <div style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--accent-gold)', textTransform: 'uppercase' }}>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{
+                  fontSize: '0.66rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.8px',
+                  color: 'var(--accent-gold)',
+                  textTransform: 'uppercase',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  gap: '4px'
+                }}>
+                  <Trophy size={11} color="var(--accent-gold)" />
                   Time to Beat
                 </div>
-                <div style={{ fontSize: '1.15rem', fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#fff' }}>
+                <div style={{
+                  fontSize: '1.2rem',
+                  fontWeight: 900,
+                  fontFamily: 'var(--font-mono)',
+                  color: '#ffffff',
+                  textShadow: '0 0 10px rgba(0, 240, 255, 0.6)'
+                }}>
                   {dailyTimeToBeat ? `${(dailyTimeToBeat / 1000).toFixed(1)}s` : '--'}
                 </div>
               </div>
@@ -631,17 +642,24 @@ export default function ProgressModal({
                     trackDailyChallengeClicked({ source: 'progress_modal', date: getTodayDateString() });
                     onStartDaily();
                   }}
-                  className="glass-btn glass-btn-primary"
+                  aria-label="Play set"
+                  title="Play Set"
                   style={{
-                    padding: '8px 16px',
-                    borderRadius: '12px',
-                    fontWeight: 900,
-                    fontSize: '0.9rem',
-                    gap: '6px',
-                    cursor: 'pointer'
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    border: 'none',
+                    background: 'linear-gradient(135deg, var(--accent-cyan), #0072ff)',
+                    boxShadow: '0 4px 20px rgba(0, 240, 255, 0.4)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#000',
+                    cursor: 'pointer',
+                    padding: 0
                   }}
                 >
-                  <Play size={14} fill="#000" /> Play Set
+                  <ChevronRight size={22} strokeWidth={3} />
                 </button>
               )}
             </div>
