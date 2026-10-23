@@ -51,6 +51,19 @@ def print_status():
     print("DIFF HUNTER PIPELINE STATUS DASHBOARD")
     print("=" * 80)
 
+    # Input Folders Staged
+    def count_inputs(sub: str) -> int:
+        p = Path(f"_pipeline_io/inputs/{sub}")
+        if not p.exists():
+            return 0
+        return len([f for f in p.iterdir() if f.suffix.lower() in (".jpg", ".jpeg", ".png") and not f.name.startswith(".")])
+
+    in_soc, in_dai, in_reg = count_inputs("social"), count_inputs("daily"), count_inputs("regular")
+    print("\n[Input Drop Folders (_pipeline_io/inputs/)]")
+    print(f"  📁 inputs/daily/   : {in_dai} image(s) staged {'(Ready for batch of 3!)' if in_dai >= 3 else '(Drop 3 images here or use --source)'}")
+    print(f"  📁 inputs/regular/ : {in_reg} image(s) staged {'(Ready for batch of 5!)' if in_reg >= 5 else '(Drop 5 images here or use --source)'}")
+    print(f"  📁 inputs/social/  : {in_soc} image(s) staged")
+
     # 1. Social Media Status
     social_batches = sorted([d.name for d in SOCIAL_ROOT.iterdir() if d.is_dir() and not d.name.startswith(".")])
     print("\n[Pipeline 1: Social Media]")

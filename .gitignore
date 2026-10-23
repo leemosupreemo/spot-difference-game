@@ -62,6 +62,13 @@ _staging/
 # Marketing convenience symlink
 marketing
 
+# Pipeline I/O raw media files (drop folders & scratch outputs)
+_pipeline_io/**/*.jpg
+_pipeline_io/**/*.jpeg
+_pipeline_io/**/*.png
+_pipeline_io/**/*.webp
+_pipeline_io/**/bases/
+
 # Codex local configuration
 .codex/
 # Claude Flow runtime data

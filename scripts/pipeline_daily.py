@@ -48,7 +48,7 @@ import small_object_editor as E
 from perceptual_verification_engine import PerceptualVerificationEngine
 from stock_image_provider import get_stock_candidates, crop_to_aspect, resolve_base_images
 from variant_code import variant_code
-from generate_small_structural_variants import process_scene
+from generate_small_structural_variants import process_scene, _review_crop
 
 # Paths
 PUBLIC_LEVELS = Path("public/levels")
@@ -217,10 +217,29 @@ def run_daily_pipeline(
     updated_manifest = manifest + filtered_new
     MANIFEST_PATH.write_text(json.dumps(updated_manifest, indent=2), encoding="utf-8")
 
+    # Generate side-by-side review comparison crops in _pipeline_io/outputs/daily/
+    io_output_dir = Path("_pipeline_io/outputs/daily") / set_id
+    io_review_dir = io_output_dir / "_review"
+    io_review_dir.mkdir(parents=True, exist_ok=True)
+    for l in generated_levels:
+        b_p = Path("public") / l["baseImage"]
+        v_p = Path("public") / l["variantImage"]
+        if b_p.exists() and v_p.exists():
+            im_a = cv2.imread(str(b_p))
+            im_b = cv2.imread(str(v_p))
+            diff = l["diffs"][0]
+            cx = diff["x"] / 100.0 * CANVAS_W
+            cy = diff["y"] / 100.0 * CANVAS_H
+            rad = max(25, int(diff["radius"] / 100.0 * CANVAS_W * 1.5))
+            bbox = (int(cx - rad), int(cy - rad), int(cx + rad), int(cy + rad))
+            _review_crop(im_a, im_b, bbox, io_review_dir / f"{l['id']}_{l['operation']}.jpg")
+    (io_output_dir / "set_manifest.json").write_text(json.dumps(generated_levels, indent=2), encoding="utf-8")
+
     print("\n" + "=" * 80)
     print(f"🎉 Daily Challenge Batch {set_id} created successfully!")
     print(f"   Total Levels:    {len(generated_levels)} (Batch of {DAILY_SET_SIZE})")
     print(f"   Curation Status: pending (Visible in In-Game Review: ?review=1)")
+    print(f"   Review Crops:    {io_review_dir}")
     print(f"   Daily Queue:     Run with --approve --set-id {set_id} to publish to daily queue")
     print("=" * 80)
     return generated_levels
