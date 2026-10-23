@@ -45,7 +45,7 @@ sys.path.insert(0, str(SCRIPT_DIR))
 
 import small_object_editor as E
 from perceptual_verification_engine import PerceptualVerificationEngine
-from stock_image_provider import get_stock_candidates, crop_to_aspect
+from stock_image_provider import get_stock_candidates, crop_to_aspect, resolve_base_images
 from variant_code import variant_code
 from generate_small_structural_variants import process_scene
 
@@ -153,6 +153,7 @@ def run_regular_pipeline(
     set_id: str = None,
     difficulty: str = "Medium",
     allow_recolor: bool = False,
+    images: list = None,
 ) -> List[Dict]:
     """Runs the Regular Set generation pipeline in batches of 5."""
     if count % REGULAR_SET_SIZE != 0:
@@ -170,24 +171,16 @@ def run_regular_pipeline(
     print(f"Source: {source} | Canvas: {CANVAS_W}x{CANVAS_H} (4:3) | Allow Recolor: {allow_recolor} | Status: pending")
     print("=" * 80)
 
-    # 1. Fetch base images
-    bases = []
-    if source == "stock":
-        print(f"\n[1/3] Sourcing {count} high-resolution 4:3 stock images...")
-        stock_dir = REGULAR_DIR / "stock_bases"
-        bases = get_stock_candidates(stock_dir, CANVAS_W, CANVAS_H, limit=count)
-    else:
-        print(f"\n[1/3] Sourcing {count} 4:3 AI base images...")
-        existing = sorted(glob.glob("public/levels/*_base.jpg"))
-        for f in existing[:count]:
-            p = Path(f)
-            im = Image.open(p)
-            if im.size != (CANVAS_W, CANVAS_H):
-                im = crop_to_aspect(im, CANVAS_W, CANVAS_H)
-                dest = REGULAR_DIR / f"{p.stem}.jpg"
-                im.save(dest, "JPEG", quality=92)
-                f = str(dest)
-            bases.append({"id": p.stem, "title": p.stem.title(), "path": f})
+    # 1. Resolve source base images
+    print(f"\n[1/3] Resolving {count} base images ({CANVAS_W}x{CANVAS_H})...")
+    bases = resolve_base_images(
+        source=source,
+        target_w=CANVAS_W,
+        target_h=CANVAS_H,
+        count=count,
+        dest_dir=REGULAR_DIR / "bases",
+        explicit_paths=images,
+    )
 
     if len(bases) < count:
         print(f"❌ Error: Required {count} distinct bases, but only found {len(bases)}. Aborting.")
@@ -257,7 +250,8 @@ def approve_regular_batch(set_id: str) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--source", default="ai", choices=["ai", "stock"], help="Base image source")
+    parser.add_argument("--source", default="ai", help="Base image source: 'ai', 'stock', or path to file/folder")
+    parser.add_argument("--images", nargs="+", default=None, help="Explicit list of base image file paths")
     parser.add_argument("--count", type=int, default=5, help="Number of levels (multiple of 5)")
     parser.add_argument("--set-id", default=None, help="Target setId (e.g. photo_set_025)")
     parser.add_argument("--difficulty", default="Medium", choices=["Easy", "Medium", "Hard"], help="Difficulty")
@@ -272,7 +266,7 @@ def main():
         ok = approve_regular_batch(args.set_id)
         sys.exit(0 if ok else 1)
     else:
-        run_regular_pipeline(source=args.source, count=args.count, set_id=args.set_id, difficulty=args.difficulty, allow_recolor=args.allow_recolor)
+        run_regular_pipeline(source=args.source, count=args.count, set_id=args.set_id, difficulty=args.difficulty, allow_recolor=args.allow_recolor, images=args.images)
 
 
 if __name__ == "__main__":

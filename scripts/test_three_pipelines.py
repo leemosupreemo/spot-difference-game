@@ -24,7 +24,7 @@ sys.path.insert(0, str(SCRIPT_DIR))
 
 from pipeline_daily import validate_daily_batch, next_daily_set_id
 from pipeline_regular import validate_regular_batch, next_regular_set_id
-from stock_image_provider import validate_image_criteria, crop_to_aspect
+from stock_image_provider import validate_image_criteria, crop_to_aspect, resolve_base_images
 import small_object_editor as E
 
 
@@ -160,6 +160,40 @@ class TestThreePipelines(unittest.TestCase):
 
         next_r = next_regular_set_id(manifest)
         self.assertEqual(next_r, "photo_set_003")
+
+    def test_resolve_base_images_with_explicit_inputs(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_p = Path(tmp_dir)
+            # Create two test images
+            im1 = Image.new("RGB", (1000, 800), (100, 150, 200))
+            im2 = Image.new("RGB", (1400, 1000), (200, 100, 50))
+            f1 = tmp_p / "scene_a.jpg"
+            f2 = tmp_p / "scene_b.jpg"
+            im1.save(f1)
+            im2.save(f2)
+
+            # Test directory resolution
+            out_bases = resolve_base_images(
+                source=str(tmp_p),
+                target_w=1200,
+                target_h=900,
+                count=2,
+                dest_dir=tmp_p / "out",
+            )
+            self.assertEqual(len(out_bases), 2)
+            self.assertTrue(Path(out_bases[0]["path"]).exists())
+            self.assertEqual(out_bases[0]["dimensions"], {"width": 1200, "height": 900})
+
+            # Test explicit files list
+            explicit_bases = resolve_base_images(
+                target_w=848,
+                target_h=1264,
+                count=1,
+                dest_dir=tmp_p / "out_explicit",
+                explicit_paths=[str(f1)],
+            )
+            self.assertEqual(len(explicit_bases), 1)
+            self.assertEqual(explicit_bases[0]["dimensions"], {"width": 848, "height": 1264})
 
 
 if __name__ == "__main__":

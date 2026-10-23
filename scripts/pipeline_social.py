@@ -40,7 +40,7 @@ sys.path.insert(0, str(SCRIPT_DIR))
 
 import small_object_editor as E
 from perceptual_verification_engine import PerceptualVerificationEngine
-from stock_image_provider import get_stock_candidates, crop_to_aspect
+from stock_image_provider import get_stock_candidates, crop_to_aspect, resolve_base_images
 from variant_code import variant_code
 from generate_small_structural_variants import process_scene, is_text_or_typography, _diff_from_bbox, _bbox, _far_enough, _review_crop
 
@@ -81,6 +81,7 @@ def run_social_pipeline(
     variants_per_scene: int = 4,
     limit: int = 5,
     allow_recolor: bool = False,
+    images: list = None,
 ) -> Path:
     """Runs the complete social media variant generation pipeline."""
     target_w, target_h = ASPECT_DIMENSIONS.get(aspect, (848, 1264))
@@ -96,42 +97,15 @@ def run_social_pipeline(
     print("=" * 80)
 
     # 1. Resolve source base images
-    bases = []
-    if source == "stock":
-        print(f"\n[1/3] Preparing stock base images ({target_w}x{target_h})...")
-        stock_dir = out_dir / "stock_bases"
-        candidates = get_stock_candidates(stock_dir, target_w, target_h, limit=limit)
-        bases = candidates
-    elif source == "ai":
-        print(f"\n[1/3] Sourcing AI base images...")
-        ai_existing = sorted(glob.glob("_marketing/social_media/social_15_base_batch/*.jpg"))
-        # Exclude existing variants
-        ai_bases = [f for f in ai_existing if "_var" not in f and "_alt" not in f]
-        for f in ai_bases[:limit]:
-            p = Path(f)
-            # Ensure exact target size
-            im = Image.open(p)
-            if im.size != (target_w, target_h):
-                im = crop_to_aspect(im, target_w, target_h)
-                norm_path = out_dir / f"{p.stem}_base.jpg"
-                im.save(norm_path, "JPEG", quality=95)
-                f = str(norm_path)
-            bases.append({
-                "id": p.stem,
-                "title": p.stem.replace("_", " ").title(),
-                "path": f,
-                "dimensions": {"width": target_w, "height": target_h},
-            })
-    else:
-        # Custom directory or file
-        p = Path(source)
-        if p.is_dir():
-            files = sorted(glob.glob(str(p / "*.jpg")) + glob.glob(str(p / "*.png")))
-            for f in files[:limit]:
-                stem = Path(f).stem
-                bases.append({"id": stem, "title": stem.title(), "path": f})
-        elif p.is_file():
-            bases.append({"id": p.stem, "title": p.stem.title(), "path": str(p)})
+    print(f"\n[1/3] Resolving base images ({target_w}x{target_h})...")
+    bases = resolve_base_images(
+        source=source,
+        target_w=target_w,
+        target_h=target_h,
+        count=limit,
+        dest_dir=out_dir / "bases",
+        explicit_paths=images,
+    )
 
     if not bases:
         print("✗ No valid base images found. Aborting.")
@@ -181,7 +155,8 @@ def run_social_pipeline(
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--source", default="ai", choices=["ai", "stock"], help="Source of base images (ai, stock, or path)")
+    parser.add_argument("--source", default="ai", help="Base image source: 'ai', 'stock', or path to file/folder")
+    parser.add_argument("--images", nargs="+", default=None, help="Explicit list of base image file paths")
     parser.add_argument("--batch-name", default="social_launch_batch", help="Name of output batch directory")
     parser.add_argument("--aspect", default="2:3", choices=["2:3", "4:5"], help="Aspect ratio (2:3 or 4:5)")
     parser.add_argument("--variants-per-scene", type=int, default=4, help="Target variants per scene")
@@ -196,6 +171,7 @@ def main():
         variants_per_scene=args.variants_per_scene,
         limit=args.limit,
         allow_recolor=args.allow_recolor,
+        images=args.images,
     )
 
 

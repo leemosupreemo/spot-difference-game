@@ -99,7 +99,8 @@ def main():
 
     # Social Subcommand
     p_soc = subparsers.add_parser("social", help="Run Social Media Pipeline (2:3 or 4:5)")
-    p_soc.add_argument("--source", default="ai", choices=["ai", "stock"], help="Image source (ai or stock)")
+    p_soc.add_argument("--source", default="ai", help="Image source: 'ai', 'stock', or path to file/folder")
+    p_soc.add_argument("--images", nargs="+", default=None, help="Explicit list of base image file paths")
     p_soc.add_argument("--batch-name", default="social_batch", help="Output batch folder name")
     p_soc.add_argument("--aspect", default="2:3", choices=["2:3", "4:5"], help="Aspect ratio")
     p_soc.add_argument("--variants-per-scene", type=int, default=4, help="Target variants per image")
@@ -108,7 +109,8 @@ def main():
 
     # Daily Subcommand
     p_dai = subparsers.add_parser("daily", help="Run Daily Challenge Pipeline (Batch of 3)")
-    p_dai.add_argument("--source", default="ai", choices=["ai", "stock"], help="Image source (ai or stock)")
+    p_dai.add_argument("--source", default="ai", help="Image source: 'ai', 'stock', or path to file/folder")
+    p_dai.add_argument("--images", nargs="+", default=None, help="Explicit list of base image file paths")
     p_dai.add_argument("--count", type=int, default=3, help="Number of levels (multiple of 3)")
     p_dai.add_argument("--set-id", default=None, help="Target setId (e.g. daily_set_001)")
     p_dai.add_argument("--allow-recolor", action="store_true", help="Include subtle object recoloring in operations")
@@ -120,7 +122,8 @@ def main():
 
     # Regular Subcommand
     p_reg = subparsers.add_parser("regular", help="Run Regular Set Pipeline (Batch of 5)")
-    p_reg.add_argument("--source", default="ai", choices=["ai", "stock"], help="Image source (ai or stock)")
+    p_reg.add_argument("--source", default="ai", help="Image source: 'ai', 'stock', or path to file/folder")
+    p_reg.add_argument("--images", nargs="+", default=None, help="Explicit list of base image file paths")
     p_reg.add_argument("--count", type=int, default=5, help="Number of levels (multiple of 5)")
     p_reg.add_argument("--set-id", default=None, help="Target setId (e.g. photo_set_025)")
     p_reg.add_argument("--difficulty", default="Medium", choices=["Easy", "Medium", "Hard"], help="Difficulty level")
@@ -142,13 +145,14 @@ def main():
             variants_per_scene=args.variants_per_scene,
             limit=args.limit,
             allow_recolor=args.allow_recolor,
+            images=args.images,
         )
     elif args.command == "daily":
-        run_daily_pipeline(source=args.source, count=args.count, set_id=args.set_id, allow_recolor=args.allow_recolor)
+        run_daily_pipeline(source=args.source, count=args.count, set_id=args.set_id, allow_recolor=args.allow_recolor, images=args.images)
     elif args.command == "approve-daily":
         approve_daily_batch(args.set_id, push_to_firebase=args.push)
     elif args.command == "regular":
-        run_regular_pipeline(source=args.source, count=args.count, set_id=args.set_id, difficulty=args.difficulty, allow_recolor=args.allow_recolor)
+        run_regular_pipeline(source=args.source, count=args.count, set_id=args.set_id, difficulty=args.difficulty, allow_recolor=args.allow_recolor, images=args.images)
     elif args.command == "approve-regular":
         approve_regular_batch(args.set_id)
 

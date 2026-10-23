@@ -205,3 +205,89 @@ def get_stock_candidates(
             "dimensions": {"width": target_w, "height": target_h},
         })
     return candidates
+
+
+def resolve_base_images(
+    source: str = "ai",
+    target_w: int = 1200,
+    target_h: int = 900,
+    count: int = 5,
+    dest_dir: Optional[Path] = None,
+    explicit_paths: Optional[List[str]] = None,
+) -> List[Dict]:
+    """Resolves and normalizes base images for any pipeline from:
+       1. explicit_paths: a list of image files or directories passed via CLI/code
+       2. source as a direct file path (e.g. 'my_photo.jpg')
+       3. source as a direct folder path (e.g. '/path/to/my_bases/')
+       4. source == 'stock': downloads/uses curated stock images matching categories
+       5. source == 'ai': loads pre-generated local AI base images
+    """
+    if dest_dir is None:
+        dest_dir = Path("build/normalized_bases")
+    dest_dir = Path(dest_dir)
+    dest_dir.mkdir(parents=True, exist_ok=True)
+
+    collected_paths: List[Path] = []
+
+    # 1. Check explicit paths
+    if explicit_paths:
+        for p_str in explicit_paths:
+            p = Path(p_str)
+            if p.is_dir():
+                for ext in ("*.jpg", "*.jpeg", "*.png", "*.JPG", "*.PNG"):
+                    collected_paths.extend(sorted(p.glob(ext)))
+            elif p.is_file():
+                collected_paths.append(p)
+
+    # 2. Check source as a direct path on disk
+    elif source not in ("ai", "stock"):
+        p = Path(source)
+        if p.is_dir():
+            for ext in ("*.jpg", "*.jpeg", "*.png", "*.JPG", "*.PNG"):
+                collected_paths.extend(sorted(p.glob(ext)))
+        elif p.is_file():
+            collected_paths.append(p)
+        else:
+            print(f"   [Base Warning] Path does not exist: {source}")
+
+    # 3. Stock option
+    elif source == "stock":
+        return get_stock_candidates(dest_dir / "stock", target_w, target_h, limit=count)
+
+    # 4. Preset AI option
+    elif source == "ai":
+        import glob
+        # Try photography bases first (for in-game), then social batch
+        candidates = sorted(glob.glob("public/levels/*_base.jpg"))
+        if not candidates or target_h > target_w:  # portrait
+            candidates = sorted(glob.glob("_marketing/social_media/social_15_base_batch/*.jpg"))
+            candidates = [f for f in candidates if "_var" not in f and "_alt" not in f]
+        for c in candidates:
+            collected_paths.append(Path(c))
+
+    # Normalize collected paths to target dimensions
+    resolved = []
+    seen_stems = set()
+    for p in collected_paths:
+        if len(resolved) >= count:
+            break
+        if not p.exists() or p.stem in seen_stems:
+            continue
+        try:
+            im = Image.open(p).convert("RGB")
+            seen_stems.add(p.stem)
+            dest_file = dest_dir / f"{p.stem}_{target_w}x{target_h}.jpg"
+            if not dest_file.exists():
+                norm_im = crop_to_aspect(im, target_w, target_h)
+                norm_im.save(dest_file, "JPEG", quality=95)
+            resolved.append({
+                "id": p.stem,
+                "title": p.stem.replace("_", " ").title(),
+                "path": str(dest_file),
+                "dimensions": {"width": target_w, "height": target_h},
+            })
+        except Exception as err:
+            print(f"   [Base Warning] Failed normalizing {p}: {err}")
+
+    return resolved
+
