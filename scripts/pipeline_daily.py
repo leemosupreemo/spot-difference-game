@@ -105,10 +105,11 @@ def generate_daily_level(
     set_id: str,
     sequence: int,
     out_dir: Path,
+    allow_recolor: bool = False,
 ) -> Optional[Dict]:
     """Generates a single Gold Standard daily challenge level."""
     rng = np.random.default_rng(sequence * 17)
-    variants = process_scene(model, base_info, out_dir, rng)
+    variants = process_scene(model, base_info, out_dir, rng, allow_recolor=allow_recolor)
     if not variants:
         return None
 
@@ -152,6 +153,7 @@ def run_daily_pipeline(
     source: str = "ai",
     count: int = 3,
     set_id: str = None,
+    allow_recolor: bool = False,
 ) -> List[Dict]:
     """Runs the Daily Challenge generation pipeline in batches of 3."""
     if count % DAILY_SET_SIZE != 0:
@@ -166,7 +168,7 @@ def run_daily_pipeline(
 
     print("=" * 80)
     print(f"DAILY CHALLENGE PIPELINE: {set_id} ({count} levels)")
-    print(f"Source: {source} | Canvas: {CANVAS_W}x{CANVAS_H} (4:3) | Status: pending (debug-only)")
+    print(f"Source: {source} | Canvas: {CANVAS_W}x{CANVAS_H} (4:3) | Allow Recolor: {allow_recolor} | Status: pending")
     print("=" * 80)
 
     # 1. Fetch base images
@@ -200,7 +202,7 @@ def run_daily_pipeline(
 
     for seq, base in enumerate(bases[:count], 1):
         print(f"   -> Generating Part {seq}/{count}: {base['title']}...")
-        level_entry = generate_daily_level(base, model, set_id, seq, DAILY_DIR)
+        level_entry = generate_daily_level(base, model, set_id, seq, DAILY_DIR, allow_recolor=allow_recolor)
         if level_entry:
             generated_levels.append(level_entry)
             print(f"   ✓ Part {seq} generated: {level_entry['id']} ({level_entry['variantCode']})")
@@ -282,6 +284,7 @@ def main():
     parser.add_argument("--source", default="ai", choices=["ai", "stock"], help="Base image source")
     parser.add_argument("--count", type=int, default=3, help="Number of levels (multiple of 3)")
     parser.add_argument("--set-id", default=None, help="Target setId (e.g. daily_set_001)")
+    parser.add_argument("--allow-recolor", action="store_true", help="Include subtle object recoloring in operations")
     parser.add_argument("--approve", action="store_true", help="Approve and promote a pending daily set to the queue")
     parser.add_argument("--push", action="store_true", help="Push approved queue to Firebase")
     args = parser.parse_args()
@@ -293,7 +296,7 @@ def main():
         ok = approve_daily_batch(args.set_id, push_to_firebase=args.push)
         sys.exit(0 if ok else 1)
     else:
-        run_daily_pipeline(source=args.source, count=args.count, set_id=args.set_id)
+        run_daily_pipeline(source=args.source, count=args.count, set_id=args.set_id, allow_recolor=args.allow_recolor)
 
 
 if __name__ == "__main__":

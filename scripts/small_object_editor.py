@@ -260,3 +260,27 @@ def move_object(img_bgr, mask, occupancy, rng):
     out = np.clip(out, 0, 255).astype(np.uint8)
     union = ((fill_mask > 0) | (dest_zone > 0)).astype(np.uint8)
     return out, fill_mask, union, (dx, dy)
+
+
+def recolor_object(img_bgr, mask, rng, shift_deg=None):
+    """Subtly rotates the hue of an isolated small object in LAB color space, preserving lightness and texture."""
+    if shift_deg is None:
+        shift_deg = float(rng.choice([60, 90, 120, -60, -90, -120]))
+
+    lab = cv2.cvtColor(img_bgr.astype(np.float32) / 255.0, cv2.COLOR_BGR2LAB)
+    theta = np.deg2rad(shift_deg)
+    a, b = lab[:, :, 1].copy(), lab[:, :, 2].copy()
+    lab[:, :, 1] = a * np.cos(theta) - b * np.sin(theta)
+    lab[:, :, 2] = a * np.sin(theta) + b * np.cos(theta)
+    recolored = np.clip(cv2.cvtColor(lab, cv2.COLOR_LAB2BGR) * 255.0, 0, 255).astype(np.uint8)
+
+    mask_u8 = (mask > 0).astype(np.uint8)
+    dist = cv2.distanceTransform(mask_u8, cv2.DIST_L2, 3)
+    alpha = np.clip(dist / 2.0, 0.0, 1.0)[:, :, None]
+
+    result = img_bgr.copy()
+    result[mask_u8 > 0] = np.clip(
+        img_bgr[mask_u8 > 0] * (1.0 - alpha[mask_u8 > 0]) + recolored[mask_u8 > 0] * alpha[mask_u8 > 0],
+        0, 255
+    ).astype(np.uint8)
+    return result, mask_u8

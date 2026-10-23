@@ -104,12 +104,14 @@ def main():
     p_soc.add_argument("--aspect", default="2:3", choices=["2:3", "4:5"], help="Aspect ratio")
     p_soc.add_argument("--variants-per-scene", type=int, default=4, help="Target variants per image")
     p_soc.add_argument("--limit", type=int, default=3, help="Max base images to process")
+    p_soc.add_argument("--allow-recolor", action="store_true", help="Include subtle object recoloring in operations")
 
     # Daily Subcommand
     p_dai = subparsers.add_parser("daily", help="Run Daily Challenge Pipeline (Batch of 3)")
     p_dai.add_argument("--source", default="ai", choices=["ai", "stock"], help="Image source (ai or stock)")
     p_dai.add_argument("--count", type=int, default=3, help="Number of levels (multiple of 3)")
     p_dai.add_argument("--set-id", default=None, help="Target setId (e.g. daily_set_001)")
+    p_dai.add_argument("--allow-recolor", action="store_true", help="Include subtle object recoloring in operations")
 
     # Approve Daily Subcommand
     p_app_d = subparsers.add_parser("approve-daily", help="Approve and queue a pending 3-pack daily set")
@@ -122,6 +124,7 @@ def main():
     p_reg.add_argument("--count", type=int, default=5, help="Number of levels (multiple of 5)")
     p_reg.add_argument("--set-id", default=None, help="Target setId (e.g. photo_set_025)")
     p_reg.add_argument("--difficulty", default="Medium", choices=["Easy", "Medium", "Hard"], help="Difficulty level")
+    p_reg.add_argument("--allow-recolor", action="store_true", help="Include subtle object recoloring in operations")
 
     # Approve Regular Subcommand
     p_app_r = subparsers.add_parser("approve-regular", help="Approve and promote a pending 5-pack regular set")
@@ -138,13 +141,14 @@ def main():
             aspect=args.aspect,
             variants_per_scene=args.variants_per_scene,
             limit=args.limit,
+            allow_recolor=args.allow_recolor,
         )
     elif args.command == "daily":
-        run_daily_pipeline(source=args.source, count=args.count, set_id=args.set_id)
+        run_daily_pipeline(source=args.source, count=args.count, set_id=args.set_id, allow_recolor=args.allow_recolor)
     elif args.command == "approve-daily":
         approve_daily_batch(args.set_id, push_to_firebase=args.push)
     elif args.command == "regular":
-        run_regular_pipeline(source=args.source, count=args.count, set_id=args.set_id, difficulty=args.difficulty)
+        run_regular_pipeline(source=args.source, count=args.count, set_id=args.set_id, difficulty=args.difficulty, allow_recolor=args.allow_recolor)
     elif args.command == "approve-regular":
         approve_regular_batch(args.set_id)
 

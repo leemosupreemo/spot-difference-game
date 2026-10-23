@@ -64,10 +64,11 @@ def generate_scene_variants(
     review_dir: Path,
     variants_per_scene: int = 4,
     aspect_ratio: str = "2:3",
+    allow_recolor: bool = False,
 ) -> List[Dict]:
     """Generates small structural variants for a single social scene."""
     rng = np.random.default_rng(11)
-    variants = process_scene(model, base_info, out_dir, rng)
+    variants = process_scene(model, base_info, out_dir, rng, allow_recolor=allow_recolor)
     for v in variants:
         v["aspectRatio"] = aspect_ratio
     return variants[:variants_per_scene]
@@ -79,6 +80,7 @@ def run_social_pipeline(
     aspect: str = "2:3",
     variants_per_scene: int = 4,
     limit: int = 5,
+    allow_recolor: bool = False,
 ) -> Path:
     """Runs the complete social media variant generation pipeline."""
     target_w, target_h = ASPECT_DIMENSIONS.get(aspect, (848, 1264))
@@ -151,6 +153,7 @@ def run_social_pipeline(
             review_dir,
             variants_per_scene=variants_per_scene,
             aspect_ratio=aspect,
+            allow_recolor=allow_recolor,
         )
         all_variants.extend(scene_variants)
 
@@ -183,6 +186,7 @@ def main():
     parser.add_argument("--aspect", default="2:3", choices=["2:3", "4:5"], help="Aspect ratio (2:3 or 4:5)")
     parser.add_argument("--variants-per-scene", type=int, default=4, help="Target variants per scene")
     parser.add_argument("--limit", type=int, default=3, help="Max base images to process")
+    parser.add_argument("--allow-recolor", action="store_true", help="Include subtle object recoloring in operations")
     args = parser.parse_args()
 
     run_social_pipeline(
@@ -191,6 +195,7 @@ def main():
         aspect=args.aspect,
         variants_per_scene=args.variants_per_scene,
         limit=args.limit,
+        allow_recolor=args.allow_recolor,
     )
 
 

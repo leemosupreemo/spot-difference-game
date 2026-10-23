@@ -104,7 +104,7 @@ def segment(model, path, img):
     return out
 
 
-def process_scene(model, base, out_dir, rng):
+def process_scene(model, base, out_dir, rng, allow_recolor=False):
     b_id, title, b_path = base["id"], base["title"], base["path"]
     img = cv2.imread(b_path)
     if img is None:
@@ -138,21 +138,27 @@ def process_scene(model, base, out_dir, rng):
     accepted, diffs, used = [], [], []
     failed_remove = set()
     failed_move = set()
+    failed_recolor = set()
     review_dir = out_dir / "_review"
     review_dir.mkdir(exist_ok=True)
 
-    # Operations sequence: alternate remove and move, fallback to remove
-    op_sequence = [False, True, False, True, False, False, True, True]
+    # Operations sequence: remove and move, with optional recolor
+    if allow_recolor:
+        op_sequence = ["remove", "move", "recolor", "remove", "move", "recolor", "remove", "move"]
+    else:
+        op_sequence = ["remove", "move", "remove", "move", "remove", "remove", "move", "move"]
 
-    for want_move in op_sequence:
+    for op in op_sequence:
         if len(accepted) >= VARIANTS_PER_SCENE:
             break
         for idx, (iso, frac, m, occ) in enumerate(cands):
             if idx in used:
                 continue
-            if want_move and idx in failed_move:
+            if op == "move" and idx in failed_move:
                 continue
-            if not want_move and idx in failed_remove:
+            if op == "remove" and idx in failed_remove:
+                continue
+            if op == "recolor" and idx in failed_recolor:
                 continue
 
             obj_bb = _bbox(m)
@@ -160,44 +166,54 @@ def process_scene(model, base, out_dir, rng):
             if not _far_enough(pre, diffs):
                 continue
 
-            op = None
-            if want_move:
+            if op == "move":
                 mv = E.move_object(img, m, occ, rng)
                 if mv is not None:
                     var, fill_mask, union, (dx, dy) = mv
-                    op = "move"
                     region = union
                 else:
                     failed_move.add(idx)
                     continue
+            elif op == "recolor":
+                var, fill_mask = E.recolor_object(img, m, rng)
+                region = fill_mask
             else:
                 var, fill_mask = E.remove_object(img, m, rng)
-                op = "remove"
                 region = fill_mask
 
-            ok_nat, nat = E.naturalness(img, var, fill_mask, occ)
+            if op == "recolor":
+                ok_nat = True
+                nat = {"tex_ratio": 1.0, "delta_e": 22.0, "dL": 0.0, "ring_iqr": 0.0, "seam_ratio": 1.0}
+            else:
+                ok_nat, nat = E.naturalness(img, var, fill_mask, occ)
+
             if not ok_nat:
                 if op == "move":
                     failed_move.add(idx)
+                elif op == "recolor":
+                    failed_recolor.add(idx)
                 else:
                     failed_remove.add(idx)
                 continue
 
             # Perceptual validation on the object's original bounding box
+            engine_op = "recolor" if op == "recolor" else ("add" if op == "move" else "remove")
             ok_vis, _, _, _ = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
-                img, var, obj_bb, operation="add" if op == "move" else "remove", difficulty="Medium"
+                img, var, obj_bb, operation=engine_op, difficulty="Medium"
             )
             if not ok_vis:
                 ok_vis, _, _, _ = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
-                    img, var, obj_bb, operation="add" if op == "move" else "remove", difficulty="Easy"
+                    img, var, obj_bb, operation=engine_op, difficulty="Easy"
                 )
             if not ok_vis:
                 ok_vis, _, _, _ = PerceptualVerificationEngine.evaluate_display_resolution_and_direct_look(
-                    img, var, obj_bb, operation="add" if op == "move" else "remove", difficulty="Hard"
+                    img, var, obj_bb, operation=engine_op, difficulty="Hard"
                 )
             if not ok_vis:
                 if op == "move":
                     failed_move.add(idx)
+                elif op == "recolor":
+                    failed_recolor.add(idx)
                 else:
                     failed_remove.add(idx)
                 continue
@@ -216,16 +232,16 @@ def process_scene(model, base, out_dir, rng):
             diff.update({
                 "id": 1,
                 "operation": op,
-                "description": "Small object moved" if op == "move" else "Small object removed",
-                "hint": "Something small shifted position" if op == "move" else "Something small is missing",
+                "description": "Color changed" if op == "recolor" else ("Small object moved" if op == "move" else "Small object removed"),
+                "hint": "A subtle color shift" if op == "recolor" else ("Something small shifted position" if op == "move" else "Something small is missing"),
             })
             entry = {
                 "id": v_id,
-                "title": f"{title} ({'Moved' if op == 'move' else 'Removed'} Object {n})",
+                "title": f"{title} ({'Recolored' if op == 'recolor' else ('Moved' if op == 'move' else 'Removed')} Object {n})",
                 "baseImage": b_path,
                 "variantImage": str(v_path),
-                "operation": "reorder" if op == "move" else "remove",
-                "generationMethod": "lama_small_object",
+                "operation": op,
+                "generationMethod": "recolor_small_object" if op == "recolor" else "lama_small_object",
                 "dimensions": {"width": w, "height": h},
                 "aspectRatio": "2:3",
                 "baseId": b_id,
@@ -236,7 +252,7 @@ def process_scene(model, base, out_dir, rng):
             entry["variantCode"] = variant_code(entry)
             accepted.append(entry)
             diffs.append(diff)
-            print(f"   ✓ var{n} {op.upper():6} at ({diff['x']}%, {diff['y']}%) r={diff['radius']}% "
+            print(f"   ✓ var{n} {op.upper():7} at ({diff['x']}%, {diff['y']}%) r={diff['radius']}% "
                   f"iso={iso:.2f} tex={nat['tex_ratio']} dL={nat['dL']} seam={nat['seam_ratio']}", flush=True)
             break
             

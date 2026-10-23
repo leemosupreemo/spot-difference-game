@@ -102,10 +102,11 @@ def generate_regular_level(
     sequence: int,
     out_dir: Path,
     difficulty: str = "Medium",
+    allow_recolor: bool = False,
 ) -> Optional[Dict]:
     """Generates a single Gold Standard regular set level."""
     rng = np.random.default_rng(sequence * 23)
-    variants = process_scene(model, base_info, out_dir, rng)
+    variants = process_scene(model, base_info, out_dir, rng, allow_recolor=allow_recolor)
     if not variants:
         return None
 
@@ -151,6 +152,7 @@ def run_regular_pipeline(
     count: int = 5,
     set_id: str = None,
     difficulty: str = "Medium",
+    allow_recolor: bool = False,
 ) -> List[Dict]:
     """Runs the Regular Set generation pipeline in batches of 5."""
     if count % REGULAR_SET_SIZE != 0:
@@ -165,7 +167,7 @@ def run_regular_pipeline(
 
     print("=" * 80)
     print(f"REGULAR SET PIPELINE: {set_id} ({count} levels)")
-    print(f"Source: {source} | Canvas: {CANVAS_W}x{CANVAS_H} (4:3) | Status: pending (debug-only)")
+    print(f"Source: {source} | Canvas: {CANVAS_W}x{CANVAS_H} (4:3) | Allow Recolor: {allow_recolor} | Status: pending")
     print("=" * 80)
 
     # 1. Fetch base images
@@ -198,7 +200,7 @@ def run_regular_pipeline(
 
     for seq, base in enumerate(bases[:count], 1):
         print(f"   -> Generating Part {seq}/{count}: {base['title']}...")
-        level_entry = generate_regular_level(base, model, set_id, seq, REGULAR_DIR, difficulty=difficulty)
+        level_entry = generate_regular_level(base, model, set_id, seq, REGULAR_DIR, difficulty=difficulty, allow_recolor=allow_recolor)
         if level_entry:
             generated_levels.append(level_entry)
             print(f"   ✓ Part {seq} generated: {level_entry['id']} ({level_entry['variantCode']})")
@@ -259,6 +261,7 @@ def main():
     parser.add_argument("--count", type=int, default=5, help="Number of levels (multiple of 5)")
     parser.add_argument("--set-id", default=None, help="Target setId (e.g. photo_set_025)")
     parser.add_argument("--difficulty", default="Medium", choices=["Easy", "Medium", "Hard"], help="Difficulty")
+    parser.add_argument("--allow-recolor", action="store_true", help="Include subtle object recoloring in operations")
     parser.add_argument("--approve", action="store_true", help="Approve and promote a pending set to live gameplay")
     args = parser.parse_args()
 
@@ -269,7 +272,7 @@ def main():
         ok = approve_regular_batch(args.set_id)
         sys.exit(0 if ok else 1)
     else:
-        run_regular_pipeline(source=args.source, count=args.count, set_id=args.set_id, difficulty=args.difficulty)
+        run_regular_pipeline(source=args.source, count=args.count, set_id=args.set_id, difficulty=args.difficulty, allow_recolor=args.allow_recolor)
 
 
 if __name__ == "__main__":

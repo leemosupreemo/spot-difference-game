@@ -25,9 +25,25 @@ sys.path.insert(0, str(SCRIPT_DIR))
 from pipeline_daily import validate_daily_batch, next_daily_set_id
 from pipeline_regular import validate_regular_batch, next_regular_set_id
 from stock_image_provider import validate_image_criteria, crop_to_aspect
+import small_object_editor as E
 
 
 class TestThreePipelines(unittest.TestCase):
+
+    def test_recolor_object_functionality(self):
+        # Create small test patch with chroma/color
+        img = np.zeros((100, 100, 3), dtype=np.uint8)
+        img[:, :] = (180, 80, 40)
+        mask = np.zeros((100, 100), dtype=np.uint8)
+        mask[30:70, 30:70] = 1
+        rng = np.random.default_rng(42)
+        recolored, mask_out = E.recolor_object(img, mask, rng, shift_deg=90)
+        self.assertEqual(recolored.shape, img.shape)
+        # Verify inside mask changed color significantly
+        diff = np.abs(recolored.astype(float) - img.astype(float))
+        self.assertGreater(diff[50, 50].sum(), 20.0)
+        # Verify outside mask is unchanged
+        self.assertEqual(diff[10, 10].sum(), 0.0)
 
     def test_daily_batch_validation_enforces_multiple_of_three(self):
         # 1 level -> FAIL
