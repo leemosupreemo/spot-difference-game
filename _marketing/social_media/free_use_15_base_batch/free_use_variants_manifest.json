@@ -1,0 +1,274 @@
+[
+  {
+    "id": "free_02_arch_bookshop_var1",
+    "title": "Vintage Bookshop Exterior (Removed Object 1)",
+    "baseImage": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_base.jpg",
+    "variantImage": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "free_02_arch_bookshop",
+    "isolation": 0.93,
+    "naturalness": {
+      "tex_ratio": 1.02,
+      "delta_e": 26.4,
+      "dL": 26.0,
+      "ring_iqr": 125.0,
+      "seam_ratio": 1.24
+    },
+    "diffs": [
+      {
+        "x": 36.3,
+        "y": 25.9,
+        "radius": 6.2,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "free_02_arch_bookshop_var2",
+    "title": "Vintage Bookshop Exterior (Removed Object 2)",
+    "baseImage": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_base.jpg",
+    "variantImage": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_var2_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "free_02_arch_bookshop",
+    "isolation": 0.81,
+    "naturalness": {
+      "tex_ratio": 0.79,
+      "delta_e": 23.0,
+      "dL": 23.0,
+      "ring_iqr": 112.0,
+      "seam_ratio": 0.7
+    },
+    "diffs": [
+      {
+        "x": 84.8,
+        "y": 27.3,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "free_02_arch_bookshop_var3",
+    "title": "Vintage Bookshop Exterior (Removed Object 3)",
+    "baseImage": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_base.jpg",
+    "variantImage": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "free_02_arch_bookshop",
+    "isolation": 0.72,
+    "naturalness": {
+      "tex_ratio": 1.05,
+      "delta_e": 33.1,
+      "dL": 33.0,
+      "ring_iqr": 135.0,
+      "seam_ratio": 1.29
+    },
+    "diffs": [
+      {
+        "x": 46.8,
+        "y": 33.1,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "free_02_arch_bookshop_var4",
+    "title": "Vintage Bookshop Exterior (Removed Object 4)",
+    "baseImage": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_base.jpg",
+    "variantImage": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_var4_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "free_02_arch_bookshop",
+    "isolation": 0.67,
+    "naturalness": {
+      "tex_ratio": 0.83,
+      "delta_e": 53.4,
+      "dL": 53.0,
+      "ring_iqr": 168.0,
+      "seam_ratio": 0.64
+    },
+    "diffs": [
+      {
+        "x": 54.3,
+        "y": 47.7,
+        "radius": 7.7,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "free_07_col_spices_var1",
+    "title": "Organized Heirloom Spice Bowls (Removed Object 1)",
+    "baseImage": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_base.jpg",
+    "variantImage": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "free_07_col_spices",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 0.93,
+      "delta_e": 25.3,
+      "dL": 25.0,
+      "ring_iqr": 108.0,
+      "seam_ratio": 0.96
+    },
+    "diffs": [
+      {
+        "x": 77.5,
+        "y": 70.1,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "free_07_col_spices_var2",
+    "title": "Organized Heirloom Spice Bowls (Moved Object 2)",
+    "baseImage": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_base.jpg",
+    "variantImage": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_var2_variant.jpg",
+    "operation": "reorder",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "free_07_col_spices",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 0.8,
+      "delta_e": 2.0,
+      "dL": 2.0,
+      "ring_iqr": 6.0,
+      "seam_ratio": 0.58
+    },
+    "diffs": [
+      {
+        "x": 9.0,
+        "y": 31.2,
+        "radius": 4.1,
+        "id": 1,
+        "operation": "move",
+        "description": "Small object moved",
+        "hint": "Something small shifted position"
+      }
+    ],
+    "variantCode": "???-MOV"
+  },
+  {
+    "id": "free_07_col_spices_var3",
+    "title": "Organized Heirloom Spice Bowls (Removed Object 3)",
+    "baseImage": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_base.jpg",
+    "variantImage": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "free_07_col_spices",
+    "isolation": 0.96,
+    "naturalness": {
+      "tex_ratio": 0.83,
+      "delta_e": 5.4,
+      "dL": 3.0,
+      "ring_iqr": 55.0,
+      "seam_ratio": 0.97
+    },
+    "diffs": [
+      {
+        "x": 81.2,
+        "y": 13.6,
+        "radius": 4.1,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "free_07_col_spices_var4",
+    "title": "Organized Heirloom Spice Bowls (Moved Object 4)",
+    "baseImage": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_base.jpg",
+    "variantImage": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_var4_variant.jpg",
+    "operation": "reorder",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "free_07_col_spices",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 1.36,
+      "delta_e": 5.1,
+      "dL": 5.0,
+      "ring_iqr": 6.0,
+      "seam_ratio": 1.03
+    },
+    "diffs": [
+      {
+        "x": 88.6,
+        "y": 36.7,
+        "radius": 6.0,
+        "id": 1,
+        "operation": "move",
+        "description": "Small object moved",
+        "hint": "Something small shifted position"
+      }
+    ],
+    "variantCode": "???-MOV"
+  }
+]

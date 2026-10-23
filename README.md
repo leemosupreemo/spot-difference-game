@@ -2,6 +2,21 @@
 
 A high-performance Spot-the-Difference game built with React, Vite, Capacitor, and Firebase.
 
+## Ruflo Setup
+
+Choose one installation option:
+
+```bash
+# One-line install (recommended)
+curl -fsSL https://cdn.jsdelivr.net/gh/ruvnet/claude-flow@main/scripts/install.sh | bash
+
+# Or full setup with MCP + diagnostics
+curl -fsSL https://cdn.jsdelivr.net/gh/ruvnet/claude-flow@main/scripts/install.sh | bash -s -- --full
+
+# Or via npx
+npx ruflo@alpha init --wizard
+```
+
 ---
 
 ## Directory & App Bundle Structure

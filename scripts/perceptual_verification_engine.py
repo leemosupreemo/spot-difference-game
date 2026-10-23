@@ -75,17 +75,18 @@ class PerceptualVerificationEngine:
         
         limits = LIMITS_BY_DIFFICULTY.get(difficulty, LIMITS_BY_DIFFICULTY["Medium"])
 
-        # 1. DISPLAY RESOLUTION SIMULATION (700 x 440)
-        disp_base = cv2.resize(base_bgr, (cls.GAME_DISPLAY_WIDTH, cls.GAME_DISPLAY_HEIGHT), interpolation=cv2.INTER_AREA)
-        disp_var = cv2.resize(variant_bgr, (cls.GAME_DISPLAY_WIDTH, cls.GAME_DISPLAY_HEIGHT), interpolation=cv2.INTER_AREA)
+        # 1. DISPLAY RESOLUTION SIMULATION (Uniform aspect-ratio scaling to 700px box)
+        scale = 700.0 / float(max(src_w, src_h))
+        disp_w = max(1, int(round(src_w * scale)))
+        disp_h = max(1, int(round(src_h * scale)))
+        disp_base = cv2.resize(base_bgr, (disp_w, disp_h), interpolation=cv2.INTER_AREA)
+        disp_var = cv2.resize(variant_bgr, (disp_w, disp_h), interpolation=cv2.INTER_AREA)
 
         # Scale bbox to display coordinates
-        scale_x = cls.GAME_DISPLAY_WIDTH / float(src_w)
-        scale_y = cls.GAME_DISPLAY_HEIGHT / float(src_h)
-        dbx1 = int(bx1 * scale_x)
-        dby1 = int(by1 * scale_y)
-        dbx2 = int(bx2 * scale_x)
-        dby2 = int(by2 * scale_y)
+        dbx1 = int(round(bx1 * scale))
+        dby1 = int(round(by1 * scale))
+        dbx2 = int(round(bx2 * scale))
+        dby2 = int(round(by2 * scale))
         dbw = max(1, dbx2 - dbx1 + 1)
         dbh = max(1, dby2 - dby1 + 1)
         short_side = min(dbw, dbh)

@@ -1,0 +1,1124 @@
+[
+  {
+    "id": "01_arch_parisian_bakery_var1",
+    "title": "Pastel Parisian Bakery (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/01_arch_parisian_bakery.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/01_arch_parisian_bakery_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "01_arch_parisian_bakery",
+    "isolation": 0.95,
+    "naturalness": {
+      "tex_ratio": 0.85,
+      "delta_e": 1.4,
+      "dL": 0.0,
+      "ring_iqr": 40.0,
+      "seam_ratio": 1.17
+    },
+    "diffs": [
+      {
+        "x": 22.3,
+        "y": 53.2,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "01_arch_parisian_bakery_var2",
+    "title": "Pastel Parisian Bakery (Moved Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/01_arch_parisian_bakery.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/01_arch_parisian_bakery_var2_variant.jpg",
+    "operation": "reorder",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "01_arch_parisian_bakery",
+    "isolation": 0.96,
+    "naturalness": {
+      "tex_ratio": 0.65,
+      "delta_e": 3.0,
+      "dL": 2.0,
+      "ring_iqr": 41.0,
+      "seam_ratio": 0.84
+    },
+    "diffs": [
+      {
+        "x": 9.7,
+        "y": 48.7,
+        "radius": 8.0,
+        "id": 1,
+        "operation": "move",
+        "description": "Small object moved",
+        "hint": "Something small shifted position"
+      }
+    ],
+    "variantCode": "???-MOV"
+  },
+  {
+    "id": "01_arch_parisian_bakery_var3",
+    "title": "Pastel Parisian Bakery (Removed Object 3)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/01_arch_parisian_bakery.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/01_arch_parisian_bakery_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "01_arch_parisian_bakery",
+    "isolation": 0.91,
+    "naturalness": {
+      "tex_ratio": 0.9,
+      "delta_e": 24.2,
+      "dL": 19.0,
+      "ring_iqr": 94.0,
+      "seam_ratio": 1.39
+    },
+    "diffs": [
+      {
+        "x": 50.1,
+        "y": 56.4,
+        "radius": 4.4,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "03_arch_venetian_house_var1",
+    "title": "Venetian Waterfront House (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/03_arch_venetian_house.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/03_arch_venetian_house_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "03_arch_venetian_house",
+    "isolation": 0.79,
+    "naturalness": {
+      "tex_ratio": 1.08,
+      "delta_e": 6.1,
+      "dL": 6.0,
+      "ring_iqr": 28.0,
+      "seam_ratio": 1.38
+    },
+    "diffs": [
+      {
+        "x": 66.1,
+        "y": 58.0,
+        "radius": 8.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "03_arch_venetian_house_var2",
+    "title": "Venetian Waterfront House (Removed Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/03_arch_venetian_house.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/03_arch_venetian_house_var2_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "03_arch_venetian_house",
+    "isolation": 0.61,
+    "naturalness": {
+      "tex_ratio": 0.98,
+      "delta_e": 20.1,
+      "dL": 17.0,
+      "ring_iqr": 56.0,
+      "seam_ratio": 0.68
+    },
+    "diffs": [
+      {
+        "x": 19.6,
+        "y": 74.0,
+        "radius": 7.8,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "03_arch_venetian_house_var3",
+    "title": "Venetian Waterfront House (Removed Object 3)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/03_arch_venetian_house.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/03_arch_venetian_house_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "03_arch_venetian_house",
+    "isolation": 0.61,
+    "naturalness": {
+      "tex_ratio": 0.7,
+      "delta_e": 19.0,
+      "dL": 19.0,
+      "ring_iqr": 102.0,
+      "seam_ratio": 0.68
+    },
+    "diffs": [
+      {
+        "x": 47.0,
+        "y": 69.3,
+        "radius": 5.4,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "03_arch_venetian_house_var4",
+    "title": "Venetian Waterfront House (Removed Object 4)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/03_arch_venetian_house.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/03_arch_venetian_house_var4_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "03_arch_venetian_house",
+    "isolation": 0.63,
+    "naturalness": {
+      "tex_ratio": 1.34,
+      "delta_e": 24.6,
+      "dL": 7.0,
+      "ring_iqr": 103.0,
+      "seam_ratio": 1.2
+    },
+    "diffs": [
+      {
+        "x": 92.6,
+        "y": 74.0,
+        "radius": 8.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "04_arch_art_deco_cinema_var1",
+    "title": "Art Deco Cinema Entrance (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/04_arch_art_deco_cinema.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/04_arch_art_deco_cinema_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "04_arch_art_deco_cinema",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 1.06,
+      "delta_e": 10.3,
+      "dL": 9.0,
+      "ring_iqr": 56.0,
+      "seam_ratio": 1.01
+    },
+    "diffs": [
+      {
+        "x": 77.1,
+        "y": 55.9,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "04_arch_art_deco_cinema_var2",
+    "title": "Art Deco Cinema Entrance (Moved Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/04_arch_art_deco_cinema.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/04_arch_art_deco_cinema_var2_variant.jpg",
+    "operation": "reorder",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "04_arch_art_deco_cinema",
+    "isolation": 0.9,
+    "naturalness": {
+      "tex_ratio": 1.27,
+      "delta_e": 2.4,
+      "dL": 1.0,
+      "ring_iqr": 19.0,
+      "seam_ratio": 0.71
+    },
+    "diffs": [
+      {
+        "x": 27.9,
+        "y": 82.2,
+        "radius": 8.0,
+        "id": 1,
+        "operation": "move",
+        "description": "Small object moved",
+        "hint": "Something small shifted position"
+      }
+    ],
+    "variantCode": "???-MOV"
+  },
+  {
+    "id": "04_arch_art_deco_cinema_var3",
+    "title": "Art Deco Cinema Entrance (Removed Object 3)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/04_arch_art_deco_cinema.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/04_arch_art_deco_cinema_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "04_arch_art_deco_cinema",
+    "isolation": 0.97,
+    "naturalness": {
+      "tex_ratio": 0.8,
+      "delta_e": 5.1,
+      "dL": 3.0,
+      "ring_iqr": 59.0,
+      "seam_ratio": 0.94
+    },
+    "diffs": [
+      {
+        "x": 23.3,
+        "y": 55.9,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "04_arch_art_deco_cinema_var4",
+    "title": "Art Deco Cinema Entrance (Moved Object 4)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/04_arch_art_deco_cinema.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/04_arch_art_deco_cinema_var4_variant.jpg",
+    "operation": "reorder",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "04_arch_art_deco_cinema",
+    "isolation": 0.77,
+    "naturalness": {
+      "tex_ratio": 0.99,
+      "delta_e": 25.6,
+      "dL": 18.0,
+      "ring_iqr": 51.0,
+      "seam_ratio": 1.26
+    },
+    "diffs": [
+      {
+        "x": 74.4,
+        "y": 14.0,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "move",
+        "description": "Small object moved",
+        "hint": "Something small shifted position"
+      }
+    ],
+    "variantCode": "???-MOV"
+  },
+  {
+    "id": "06_col_candy_macaron_wall_var1",
+    "title": "Candy and Macaron Display Wall (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/06_col_candy_macaron_wall.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/06_col_candy_macaron_wall_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "06_col_candy_macaron_wall",
+    "isolation": 0.59,
+    "naturalness": {
+      "tex_ratio": 1.01,
+      "delta_e": 22.6,
+      "dL": 7.0,
+      "ring_iqr": 59.0,
+      "seam_ratio": 0.81
+    },
+    "diffs": [
+      {
+        "x": 76.9,
+        "y": 88.7,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "06_col_candy_macaron_wall_var2",
+    "title": "Candy and Macaron Display Wall (Removed Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/06_col_candy_macaron_wall.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/06_col_candy_macaron_wall_var2_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "06_col_candy_macaron_wall",
+    "isolation": 0.64,
+    "naturalness": {
+      "tex_ratio": 0.99,
+      "delta_e": 21.4,
+      "dL": 4.0,
+      "ring_iqr": 58.0,
+      "seam_ratio": 0.89
+    },
+    "diffs": [
+      {
+        "x": 47.2,
+        "y": 88.6,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "07_col_botanist_herbarium_var1",
+    "title": "Botanist Herbarium Grid (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/07_col_botanist_herbarium.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/07_col_botanist_herbarium_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "07_col_botanist_herbarium",
+    "isolation": 0.86,
+    "naturalness": {
+      "tex_ratio": 0.95,
+      "delta_e": 3.2,
+      "dL": 3.0,
+      "ring_iqr": 166.0,
+      "seam_ratio": 0.81
+    },
+    "diffs": [
+      {
+        "x": 15.1,
+        "y": 63.1,
+        "radius": 6.4,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "07_col_botanist_herbarium_var2",
+    "title": "Botanist Herbarium Grid (Removed Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/07_col_botanist_herbarium.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/07_col_botanist_herbarium_var2_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "07_col_botanist_herbarium",
+    "isolation": 0.79,
+    "naturalness": {
+      "tex_ratio": 0.83,
+      "delta_e": 22.5,
+      "dL": 20.0,
+      "ring_iqr": 97.0,
+      "seam_ratio": 0.83
+    },
+    "diffs": [
+      {
+        "x": 43.9,
+        "y": 36.8,
+        "radius": 6.1,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "07_col_botanist_herbarium_var3",
+    "title": "Botanist Herbarium Grid (Removed Object 3)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/07_col_botanist_herbarium.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/07_col_botanist_herbarium_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "07_col_botanist_herbarium",
+    "isolation": 0.78,
+    "naturalness": {
+      "tex_ratio": 1.0,
+      "delta_e": 19.9,
+      "dL": 18.0,
+      "ring_iqr": 91.0,
+      "seam_ratio": 1.02
+    },
+    "diffs": [
+      {
+        "x": 15.4,
+        "y": 36.9,
+        "radius": 6.7,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "07_col_botanist_herbarium_var4",
+    "title": "Botanist Herbarium Grid (Removed Object 4)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/07_col_botanist_herbarium.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/07_col_botanist_herbarium_var4_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "07_col_botanist_herbarium",
+    "isolation": 0.75,
+    "naturalness": {
+      "tex_ratio": 0.87,
+      "delta_e": 22.2,
+      "dL": 21.0,
+      "ring_iqr": 94.0,
+      "seam_ratio": 0.81
+    },
+    "diffs": [
+      {
+        "x": 85.4,
+        "y": 36.7,
+        "radius": 6.3,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "08_col_vintage_buttons_var1",
+    "title": "Vintage Buttons and Notions (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/08_col_vintage_buttons.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/08_col_vintage_buttons_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "08_col_vintage_buttons",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 0.76,
+      "delta_e": 16.2,
+      "dL": 16.0,
+      "ring_iqr": 49.0,
+      "seam_ratio": 0.72
+    },
+    "diffs": [
+      {
+        "x": 63.0,
+        "y": 50.8,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "08_col_vintage_buttons_var2",
+    "title": "Vintage Buttons and Notions (Removed Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/08_col_vintage_buttons.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/08_col_vintage_buttons_var2_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "08_col_vintage_buttons",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 0.94,
+      "delta_e": 25.6,
+      "dL": 24.0,
+      "ring_iqr": 121.0,
+      "seam_ratio": 0.51
+    },
+    "diffs": [
+      {
+        "x": 73.7,
+        "y": 51.1,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "08_col_vintage_buttons_var3",
+    "title": "Vintage Buttons and Notions (Removed Object 3)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/08_col_vintage_buttons.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/08_col_vintage_buttons_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "08_col_vintage_buttons",
+    "isolation": 0.96,
+    "naturalness": {
+      "tex_ratio": 0.71,
+      "delta_e": 18.1,
+      "dL": 18.0,
+      "ring_iqr": 55.0,
+      "seam_ratio": 0.88
+    },
+    "diffs": [
+      {
+        "x": 15.2,
+        "y": 82.8,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "08_col_vintage_buttons_var4",
+    "title": "Vintage Buttons and Notions (Removed Object 4)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/08_col_vintage_buttons.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/08_col_vintage_buttons_var4_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "08_col_vintage_buttons",
+    "isolation": 0.84,
+    "naturalness": {
+      "tex_ratio": 0.94,
+      "delta_e": 6.5,
+      "dL": 5.0,
+      "ring_iqr": 68.0,
+      "seam_ratio": 0.77
+    },
+    "diffs": [
+      {
+        "x": 73.8,
+        "y": 27.3,
+        "radius": 4.4,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "09_food_mediterranean_brunch_var1",
+    "title": "Mediterranean Shakshuka Brunch (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/09_food_mediterranean_brunch.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/09_food_mediterranean_brunch_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "09_food_mediterranean_brunch",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 0.76,
+      "delta_e": 12.9,
+      "dL": 3.0,
+      "ring_iqr": 91.0,
+      "seam_ratio": 1.05
+    },
+    "diffs": [
+      {
+        "x": 30.8,
+        "y": 45.7,
+        "radius": 4.0,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "09_food_mediterranean_brunch_var2",
+    "title": "Mediterranean Shakshuka Brunch (Removed Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/09_food_mediterranean_brunch.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/09_food_mediterranean_brunch_var2_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "09_food_mediterranean_brunch",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 1.24,
+      "delta_e": 31.4,
+      "dL": 24.0,
+      "ring_iqr": 127.0,
+      "seam_ratio": 1.0
+    },
+    "diffs": [
+      {
+        "x": 46.2,
+        "y": 35.0,
+        "radius": 4.2,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "09_food_mediterranean_brunch_var3",
+    "title": "Mediterranean Shakshuka Brunch (Removed Object 3)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/09_food_mediterranean_brunch.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/09_food_mediterranean_brunch_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "09_food_mediterranean_brunch",
+    "isolation": 0.99,
+    "naturalness": {
+      "tex_ratio": 0.7,
+      "delta_e": 37.7,
+      "dL": 37.0,
+      "ring_iqr": 105.0,
+      "seam_ratio": 0.79
+    },
+    "diffs": [
+      {
+        "x": 53.4,
+        "y": 78.8,
+        "radius": 7.2,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "09_food_mediterranean_brunch_var4",
+    "title": "Mediterranean Shakshuka Brunch (Removed Object 4)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/09_food_mediterranean_brunch.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/09_food_mediterranean_brunch_var4_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "09_food_mediterranean_brunch",
+    "isolation": 0.87,
+    "naturalness": {
+      "tex_ratio": 1.39,
+      "delta_e": 32.0,
+      "dL": 19.0,
+      "ring_iqr": 117.0,
+      "seam_ratio": 1.39
+    },
+    "diffs": [
+      {
+        "x": 58.7,
+        "y": 35.5,
+        "radius": 4.7,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "10_food_french_patisserie_var1",
+    "title": "Artisan French Patisserie Board (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/10_food_french_patisserie.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/10_food_french_patisserie_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "10_food_french_patisserie",
+    "isolation": 0.84,
+    "naturalness": {
+      "tex_ratio": 1.0,
+      "delta_e": 18.3,
+      "dL": 18.0,
+      "ring_iqr": 53.0,
+      "seam_ratio": 0.92
+    },
+    "diffs": [
+      {
+        "x": 45.8,
+        "y": 41.7,
+        "radius": 5.2,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "10_food_french_patisserie_var2",
+    "title": "Artisan French Patisserie Board (Moved Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/10_food_french_patisserie.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/10_food_french_patisserie_var2_variant.jpg",
+    "operation": "reorder",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "10_food_french_patisserie",
+    "isolation": 0.79,
+    "naturalness": {
+      "tex_ratio": 0.82,
+      "delta_e": 8.3,
+      "dL": 8.0,
+      "ring_iqr": 16.0,
+      "seam_ratio": 1.14
+    },
+    "diffs": [
+      {
+        "x": 23.8,
+        "y": 84.2,
+        "radius": 6.4,
+        "id": 1,
+        "operation": "move",
+        "description": "Small object moved",
+        "hint": "Something small shifted position"
+      }
+    ],
+    "variantCode": "???-MOV"
+  },
+  {
+    "id": "10_food_french_patisserie_var3",
+    "title": "Artisan French Patisserie Board (Removed Object 3)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/10_food_french_patisserie.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/10_food_french_patisserie_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "10_food_french_patisserie",
+    "isolation": 0.72,
+    "naturalness": {
+      "tex_ratio": 0.74,
+      "delta_e": 13.2,
+      "dL": 13.0,
+      "ring_iqr": 36.0,
+      "seam_ratio": 0.84
+    },
+    "diffs": [
+      {
+        "x": 45.6,
+        "y": 85.2,
+        "radius": 5.3,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "10_food_french_patisserie_var4",
+    "title": "Artisan French Patisserie Board (Removed Object 4)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/10_food_french_patisserie.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/10_food_french_patisserie_var4_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "10_food_french_patisserie",
+    "isolation": 0.64,
+    "naturalness": {
+      "tex_ratio": 1.0,
+      "delta_e": 4.2,
+      "dL": 4.0,
+      "ring_iqr": 30.0,
+      "seam_ratio": 1.07
+    },
+    "diffs": [
+      {
+        "x": 14.1,
+        "y": 13.5,
+        "radius": 5.4,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "13_geom_stained_glass_var1",
+    "title": "Geometric Stained Glass Rosette (Removed Object 1)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/13_geom_stained_glass.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/13_geom_stained_glass_var1_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "13_geom_stained_glass",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 0.92,
+      "delta_e": 2.2,
+      "dL": 0.0,
+      "ring_iqr": 26.0,
+      "seam_ratio": 0.66
+    },
+    "diffs": [
+      {
+        "x": 91.2,
+        "y": 59.6,
+        "radius": 5.9,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "13_geom_stained_glass_var2",
+    "title": "Geometric Stained Glass Rosette (Moved Object 2)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/13_geom_stained_glass.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/13_geom_stained_glass_var2_variant.jpg",
+    "operation": "reorder",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "13_geom_stained_glass",
+    "isolation": 1.0,
+    "naturalness": {
+      "tex_ratio": 1.18,
+      "delta_e": 5.0,
+      "dL": 4.0,
+      "ring_iqr": 24.0,
+      "seam_ratio": 1.03
+    },
+    "diffs": [
+      {
+        "x": 28.8,
+        "y": 63.2,
+        "radius": 4.4,
+        "id": 1,
+        "operation": "move",
+        "description": "Small object moved",
+        "hint": "Something small shifted position"
+      }
+    ],
+    "variantCode": "???-MOV"
+  },
+  {
+    "id": "13_geom_stained_glass_var3",
+    "title": "Geometric Stained Glass Rosette (Removed Object 3)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/13_geom_stained_glass.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/13_geom_stained_glass_var3_variant.jpg",
+    "operation": "remove",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "13_geom_stained_glass",
+    "isolation": 0.96,
+    "naturalness": {
+      "tex_ratio": 1.04,
+      "delta_e": 1.4,
+      "dL": 1.0,
+      "ring_iqr": 16.0,
+      "seam_ratio": 0.85
+    },
+    "diffs": [
+      {
+        "x": 38.3,
+        "y": 40.4,
+        "radius": 7.3,
+        "id": 1,
+        "operation": "remove",
+        "description": "Small object removed",
+        "hint": "Something small is missing"
+      }
+    ],
+    "variantCode": "???-REM"
+  },
+  {
+    "id": "13_geom_stained_glass_var4",
+    "title": "Geometric Stained Glass Rosette (Moved Object 4)",
+    "baseImage": "_marketing/social_media/social_15_base_batch/13_geom_stained_glass.jpg",
+    "variantImage": "_marketing/social_media/social_15_base_batch/13_geom_stained_glass_var4_variant.jpg",
+    "operation": "reorder",
+    "generationMethod": "lama_small_object",
+    "dimensions": {
+      "width": 848,
+      "height": 1264
+    },
+    "aspectRatio": "2:3",
+    "baseId": "13_geom_stained_glass",
+    "isolation": 0.96,
+    "naturalness": {
+      "tex_ratio": 0.78,
+      "delta_e": 3.3,
+      "dL": 3.0,
+      "ring_iqr": 24.0,
+      "seam_ratio": 0.58
+    },
+    "diffs": [
+      {
+        "x": 57.0,
+        "y": 18.9,
+        "radius": 6.1,
+        "id": 1,
+        "operation": "move",
+        "description": "Small object moved",
+        "hint": "Something small shifted position"
+      }
+    ],
+    "variantCode": "???-MOV"
+  }
+]
