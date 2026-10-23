@@ -31,7 +31,8 @@
         "hint": "Something small is missing"
       }
     ],
-    "variantCode": "???-REM"
+    "variantCode": "???-REM",
+    "diffMap": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_diff_map.jpg"
   },
   {
     "id": "free_02_arch_bookshop_var2",
@@ -65,7 +66,8 @@
         "hint": "Something small is missing"
       }
     ],
-    "variantCode": "???-REM"
+    "variantCode": "???-REM",
+    "diffMap": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_diff_map.jpg"
   },
   {
     "id": "free_02_arch_bookshop_var3",
@@ -99,7 +101,8 @@
         "hint": "Something small is missing"
       }
     ],
-    "variantCode": "???-REM"
+    "variantCode": "???-REM",
+    "diffMap": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_diff_map.jpg"
   },
   {
     "id": "free_02_arch_bookshop_var4",
@@ -133,7 +136,8 @@
         "hint": "Something small is missing"
       }
     ],
-    "variantCode": "???-REM"
+    "variantCode": "???-REM",
+    "diffMap": "_marketing/social_media/free_use_15_base_batch/free_02_arch_bookshop_diff_map.jpg"
   },
   {
     "id": "free_07_col_spices_var1",
@@ -167,7 +171,8 @@
         "hint": "Something small is missing"
       }
     ],
-    "variantCode": "???-REM"
+    "variantCode": "???-REM",
+    "diffMap": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_diff_map.jpg"
   },
   {
     "id": "free_07_col_spices_var2",
@@ -201,7 +206,8 @@
         "hint": "Something small shifted position"
       }
     ],
-    "variantCode": "???-MOV"
+    "variantCode": "???-MOV",
+    "diffMap": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_diff_map.jpg"
   },
   {
     "id": "free_07_col_spices_var3",
@@ -235,7 +241,8 @@
         "hint": "Something small is missing"
       }
     ],
-    "variantCode": "???-REM"
+    "variantCode": "???-REM",
+    "diffMap": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_diff_map.jpg"
   },
   {
     "id": "free_07_col_spices_var4",
@@ -269,6 +276,7 @@
         "hint": "Something small shifted position"
       }
     ],
-    "variantCode": "???-MOV"
+    "variantCode": "???-MOV",
+    "diffMap": "_marketing/social_media/free_use_15_base_batch/free_07_col_spices_diff_map.jpg"
   }
 ]

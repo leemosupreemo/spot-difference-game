@@ -17,8 +17,9 @@ import os
 import sys
 import json
 import glob
+import shutil
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 import cv2
 import numpy as np
 from ultralytics import FastSAM
@@ -29,8 +30,8 @@ import small_object_editor as E  # noqa: E402
 from perceptual_verification_engine import PerceptualVerificationEngine  # noqa: E402
 from variant_code import variant_code  # noqa: E402
 
-MIN_AREA, MAX_AREA = 0.0006, 0.0038
-MIN_ISOLATION = 0.55
+MIN_AREA, MAX_AREA = 0.0006, 0.0075
+MIN_ISOLATION = 0.60
 VARIANTS_PER_SCENE = 4
 MIN_SEPARATION_PCT = 10.0
 
@@ -104,6 +105,93 @@ def segment(model, path, img):
     return out
 
 
+def render_diff_map(base_path, variants, out_path):
+    """
+    Renders an annotated diff map highlighting all accepted variant differences
+    on the base canvas with high-visibility contrasting rings, callout badges, and header.
+    """
+    if not variants or not os.path.exists(base_path):
+        return None
+    try:
+        img = Image.open(base_path).convert("RGBA")
+        overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(overlay)
+        w, h = img.size
+
+        colors = [
+            (239, 68, 68),   # Red
+            (59, 130, 246),  # Blue
+            (34, 197, 94),   # Green
+            (234, 179, 8),   # Amber
+            (168, 85, 247),  # Purple
+        ]
+
+        font_size = max(18, int(h * 0.016))
+        font_path = "/System/Library/Fonts/HelveticaNeue.ttc"
+        try:
+            font_bold = ImageFont.truetype(font_path, size=font_size, index=1)
+        except Exception:
+            try:
+                font_bold = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial.ttf", size=font_size)
+            except Exception:
+                font_bold = ImageFont.load_default()
+
+        for i, v in enumerate(variants):
+            if not v.get("diffs"):
+                continue
+            diff = v["diffs"][0]
+            col = colors[i % len(colors)]
+            cx = int(diff["x"] / 100.0 * w)
+            cy = int(diff["y"] / 100.0 * h)
+            r = max(24, int(diff.get("radius", 4.0) / 100.0 * min(w, h)))
+
+            # Dark outer halo for contrast against any background
+            for dr in range(6, 0, -2):
+                draw.ellipse([cx - r - dr, cy - r - dr, cx + r + dr, cy + r + dr], outline=(0, 0, 0, 160), width=3)
+            # High-visibility colored ring
+            draw.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(*col, 240), width=4)
+            draw.ellipse([cx - 4, cy - 4, cx + 4, cy + 4], fill=(*col, 255))
+
+            op_name = diff.get("operation", "diff").upper()
+            badge_txt = f"Var {i+1}: {op_name}"
+
+            bbox = draw.textbbox((0, 0), badge_txt, font=font_bold)
+            tw = bbox[2] - bbox[0]
+            th = bbox[3] - bbox[1]
+
+            bx = cx - tw // 2 - 10
+            by = cy - r - th - 20
+            if by < 10:
+                by = cy + r + 15
+            if bx < 10:
+                bx = 10
+            if bx + tw + 20 > w - 10:
+                bx = w - tw - 30
+
+            pad_x = 10
+            pad_y = 5
+            draw.rounded_rectangle([bx, by, bx + tw + pad_x*2, by + th + pad_y*2], radius=8, fill=(15, 23, 42, 220), outline=(*col, 255), width=2)
+            draw.text((bx + pad_x, by + pad_y - 2), badge_txt, fill=(255, 255, 255), font=font_bold)
+
+        # Header badge at top
+        title_base = variants[0]["title"].split(" (")[0]
+        title_text = f"{title_base} · {len(variants)} Differences"
+        b_head = draw.textbbox((0, 0), title_text, font=font_bold)
+        hw = b_head[2] - b_head[0]
+        hh = b_head[3] - b_head[1]
+        hx = (w - hw) // 2 - 16
+        hy = 16
+        draw.rounded_rectangle([hx, hy, hx + hw + 32, hy + hh + 16], radius=12, fill=(15, 23, 42, 230), outline=(56, 189, 248, 220), width=2)
+        draw.text((hx + 16, hy + 8), title_text, fill=(255, 255, 255), font=font_bold)
+
+        combined = Image.alpha_composite(img, overlay).convert("RGB")
+        combined.save(out_path, "JPEG", quality=95)
+        return str(out_path)
+    except Exception as e:
+        print(f"   [warn] diff map generation failed: {e}", flush=True)
+        return None
+
+
 def process_scene(model, base, out_dir, rng, allow_recolor=False):
     b_id, title, b_path = base["id"], base["title"], base["path"]
     img = cv2.imread(b_path)
@@ -114,9 +202,34 @@ def process_scene(model, base, out_dir, rng, allow_recolor=False):
     area = float(h * w)
     all_masks = segment(model, b_path, img)
 
+    # Filter out candidate masks that are internal sub-fragments of larger single objects
+    mask_areas = [m.sum() for m in all_masks]
+    mask_bbs = [_bbox(m) for m in all_masks]
+    is_subfragment = [False] * len(all_masks)
+    for i in range(len(all_masks)):
+        area_i = mask_areas[i]
+        frac_i = area_i / area
+        if frac_i > 0.02:
+            continue
+        x1_i, y1_i, x2_i, y2_i = mask_bbs[i]
+        for j in range(len(all_masks)):
+            if i == j:
+                continue
+            area_j = mask_areas[j]
+            frac_j = area_j / area
+            if area_j > 1.6 * area_i and frac_j < 0.08:
+                x1_j, y1_j, x2_j, y2_j = mask_bbs[j]
+                if x1_i >= x1_j - 6 and y1_i >= y1_j - 6 and x2_i <= x2_j + 6 and y2_i <= y2_j + 6:
+                    overlap = np.logical_and(all_masks[i], all_masks[j]).sum()
+                    if overlap / area_i >= 0.75:
+                        is_subfragment[i] = True
+                        break
+
     cands = []
-    for m in all_masks:
-        frac = m.sum() / area
+    for i, m in enumerate(all_masks):
+        if is_subfragment[i]:
+            continue
+        frac = mask_areas[i] / area
         if not (MIN_AREA <= frac <= MAX_AREA):
             continue
         bb = _bbox(m)
@@ -257,13 +370,24 @@ def process_scene(model, base, out_dir, rng, allow_recolor=False):
             break
             
     print(f"   --> {len(accepted)}/{VARIANTS_PER_SCENE} variants", flush=True)
+    if accepted:
+        diff_map_path = out_dir / f"{b_id}_diff_map.jpg"
+        render_diff_map(b_path, accepted, diff_map_path)
+        shutil.copy2(diff_map_path, review_dir / f"{b_id}_diff_map.jpg")
+        for entry in accepted:
+            entry["diffMap"] = str(diff_map_path)
     return accepted
 
 
 def process_batch(bases, model, out_dir, manifest_name, seed=11):
     out_dir = Path(out_dir)
     # Remove stale variants from earlier runs
-    for stale in glob.glob(str(out_dir / "*_var*_variant.jpg")) + glob.glob(str(out_dir / "*_alt.jpg")):
+    for stale in (
+        glob.glob(str(out_dir / "*_var*_variant.jpg"))
+        + glob.glob(str(out_dir / "*_alt.jpg"))
+        + glob.glob(str(out_dir / "*_diff_map.jpg"))
+        + glob.glob(str(out_dir / "*_base.jpg"))
+    ):
         try:
             os.remove(stale)
         except OSError:
